@@ -316,19 +316,19 @@ nom du contrôleur et enfin ``index.html.twig`` est le template :
 
         Hello <?php echo $view->escape($name) ?>!
 
-Let's step through the Twig template line-by-line:
+Analysons maintenant le template Twig ligne par ligne :
 
-* *line 2*: The ``extends`` token defines a parent template. The template
-  explicitly defines a layout file inside of which it will be placed.
+* *Ligne 2* : Le symbole ``extends`` définit un template parent. Le template
+  définit explicitement un fichier layout dans lequel il sera inséré.
 
-* *line 4*: The ``block`` token says that everything inside should be placed
-  inside a block called ``body``. As we'll see, it's the responsibility
-  of the parent template (``layout.html.twig``) to ultimately render the
-  block called ``body``.
+* *Ligne 4* : Le symbole ``block`` indique que tout ce qui est à l'intérieur doit
+  être placé à l'intérieur d'un bloc appelé ``body``. Comme nous le voyons, c'est
+  en définitive la responsabilité du template parent (``layout.html.twig``) de rendre
+  le bloc ``body``.
 
-The parent template, ``::layout.html.twig``, is missing both the bundle and controller
-portions of its name (hence the double colon (``::``) at the beginning). This
-means that the template lives outside of the bundles and in the ``app`` directory:
+Le nom de fichier du template parent, ``::layout.html.twig``, est exempté des portions
+du nom de bundle et contrôleur (remarquez les deux points (``::``) au début). Ceci
+signifie que le template se site en dehors du bundle et dans le répertoire ``app``.
 
 .. configuration-block::
 
@@ -360,18 +360,18 @@ means that the template lives outside of the bundles and in the ``app`` director
             </body>
         </html>
 
-The base template file defines the HTML layout and renders the ``body`` block
-that we defined in the ``index.html.twig`` template. It also renders a ``title``
-block, which we could choose to define in the ``index.html.twig`` template.
-Since we did not define the ``title`` block in the child template, it defaults
-to "Hello Application".
+Le fichier du template de base définit le layout HTML en rend le bloc ``body``
+que nous avons défini dans le template ``index.html.twig``. Il rend également 
+un bloc ``title``, que nous pouvons choisir de définir dans le template 
+``index.html.twig``. Si nous ne définissons pas le bloc ``title`` dans le template
+enfant, il aura pour valeur par défaut ``Hello Application``.
 
-Templates are a powerful way to render and organize the content for your
-page and can be HTML markup, CSS code, or anything else that the controller
-may need to return. But the templating engine is simply a means to an end.
-The goal is that each controller returns a ``Response`` object. Templates
-are a powerful, but optional, tool for creating the content of a ``Response``
-object.
+Les templates sont une façon puissante de rendre et d'organiser le contenu
+pour votre page et peuvent être des layouts HTML, codes CSS, ou n'importe
+quoi d'autre que le contrôleur peut avoir besoin de retourner à l'utilisateur.
+Le moteur de templates n'est qu'une façon d'arrive à sa fin. Le but de chaque
+contrôleur est de renvoyer un objet ``Response``. Le moteur de templates est
+un outil puissant, bien qu'optionnel, pour créer le contenu de l'objet ``Response``.
 
 .. index::
    single: Directory Structure
