@@ -1,30 +1,31 @@
-The Architecture
-================
+L'Architecture
+==============
 
-You are my hero! Who would have thought that you would still be here after the
-first three parts? Your efforts will be well rewarded soon. The first three
-parts didn't look too deeply at the architecture of the framework. Because it
-makes Symfony2 stand apart from the framework crowd, let's dive into the
-architecture now.
+Vous êtes mon héros! Qui aurait pensé que vous seriez encore là après les trois
+premières parties? Vos efforts seront récompensés dans un instant.
 
-Understanding the Directory Structure
--------------------------------------
+Les trois premières parties n'explorent pas trop profondément l'architecture du
+framework. Comme Symfony2 se distingue de la nuée des frameworks, nous allons
+nous y atteler dès maintenant.
 
-The directory structure of a Symfony2 :term:`application` is rather flexible,
-but the directory structure of the *Standard Edition* distribution reflects
-the typical and recommended structure of a Symfony2 application:
+Comprendre l'arborescence
+-------------------------
 
-* ``app/``:    The application configuration;
-* ``src/``:    The project's PHP code;
-* ``vendor/``: The third-party dependencies;
-* ``web/``:    The web root directory.
+L'arborescence d'une :term:`application` Symfony2 est plutôt flexible mais
+celle de la distribution *Standard Edition* reflète la structure typique et 
+recommandée d'une application Symfony2:
 
-The Web Directory
+* ``app/``:    La configuration de l'application;
+* ``src/``:    Le code PHP du projet;
+* ``vendor/``: Les librairies tierces;
+* ``web/``:    Le répertoire Web racine.
+
+Le répertoire Web
 ~~~~~~~~~~~~~~~~~
 
-The web root directory is the home of all public and static files like images,
-stylesheets, and JavaScript files. It is also where each :term:`front controller`
-lives::
+Le répertoire Web racine est l'endroit ou se situent tous les fichiers statiques
+et publics comme les images, les feuilles de styles et les fichiers javascript. 
+C'est aussi ici que se situeront les :term:`contrôleurs frontaux`::
 
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php';
@@ -35,29 +36,29 @@ lives::
     $kernel = new AppKernel('prod', false);
     $kernel->handle(Request::createFromGlobals())->send();
 
-The kernel first requires the ``bootstrap.php`` file, which bootstraps the
-framework and registers the autoloader (see below).
+Le noyau (kernel) requiert d'abord le fichier ``bootstrap.php``, qui amorce le
+framework et l'autoloader (voir ci-dessous).
 
-Like any front controller, ``app.php`` uses a Kernel Class, ``AppKernel``, to
-bootstrap the application.
+Comme tout contrôleur frontal, ``app.php`` utilise une classe Kernel ``AppKernel``
+pour amorcer une application.
 
 .. _the-app-dir:
 
-The Application Directory
+Le répertoire Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``AppKernel`` class is the main entry point of the application
-configuration and as such, it is stored in the ``app/`` directory.
+La classe ``AppKernel`` est le point d'entrée principal de la configuration de
+l'application et, en tant que tel, il est placé dans le répertoire ``app/``.
 
-This class must implement two methods:
+Cette classe doit implémenter deux méthodes:
 
-* ``registerBundles()`` must return an array of all bundles needed to run the
-  application;
+* ``registerBundles()`` doit retourner un tableau de tous les Bundles nécessaires au 
+  fonctionnement de l'application;
 
-* ``registerContainerConfiguration()`` loads the application configuration
-  (more on this later).
+* ``registerContainerConfiguration()`` charge la configuration de l'application
+  (cette partie sera détaillée ultérieurement);
 
-PHP autoloading can be configured via ``app/autoload.php``::
+L'autoloading PHP peut être configuré via ``app/autoload.php``::
 
     // app/autoload.php
     use Symfony\Component\ClassLoader\UniversalClassLoader;
@@ -81,38 +82,40 @@ PHP autoloading can be configured via ``app/autoload.php``::
     ));
     $loader->register();
 
-The :class:`Symfony\\Component\\ClassLoader\\UniversalClassLoader` is used to
-autoload files that respect either the technical interoperability `standards`_
-for PHP 5.3 namespaces or the PEAR naming `convention`_ for classes. As you
-can see here, all dependencies are stored under the ``vendor/`` directory, but
-this is just a convention. You can store them wherever you want, globally on
-your server or locally in your projects.
+La :class:`Symfony\\Component\\ClassLoader\\UniversalClassLoader` est utilisée 
+pour charger automatiquement les fichiers qui respectent les `standards`_ 
+d'interopérabilité technique pour les namespace PHP 5.3, ou les `conventions`_ 
+de nommage PEAR pour les classes. Comme vous pouvez le voir ici, toutes les 
+dépendances sont stockées dans le répertoire ``vendor/``, mais ce n'est juste
+qu'une convention. Vous pouvez les stocker où vous le souhaitez, sur votre 
+serveur ou au sein même de vos projets.
+
 
 .. note::
 
-    If you want to learn more about the flexibility of the Symfony2
-    autoloader, read the ":doc:`/cookbook/tools/autoloader`" recipe in the
-    cookbook.
+    Si vous voulez en savoir plus sur la flexibilité de l'autoloader de Symfony2,
+    lisez l'article ":doc:`/cookbook/tools/autoloader`" dans le cookbook.
 
-Understanding the Bundle System
--------------------------------
+Comprendre le système de Bundles
+--------------------------------
 
-This section introduces one of the greatest and most powerful features of
-Symfony2, the :term:`bundle` system.
+Cette section présente une des plus géniales et puissantes fonctionnalités de
+Symfony2, le système de :term:`Bundles`.
 
-A bundle is kind of like a plugin in other software. So why is it called
-*bundle* and not *plugin*? Because *everything* is a bundle in Symfony2, from
-the core framework features to the code you write for your application.
-Bundles are first-class citizens in Symfony2. This gives you the flexibility
-to use pre-built features packaged in third-party bundles or to distribute
-your own bundles. It makes it easy to pick and choose which features to enable
-in your application and optimize them the way you want.
+Un bundle est une sorte de plugin comme on en trouve dans d'autres logiciels. 
+Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin*? Parce que *tout* est
+un Bundle dans Symfony2, des fonctionnalités du noyau du framework au code que
+vous écrirez pour votre application. Les bundles sont les citoyens de premier 
+rang pour Symfony2. Ils vous donnent la flexibilité d'utiliser des fonctionnalités
+pré-construites dans des bundles tiers ou de distribuer vos propres Bundles. 
+Ils facilitent la synergie et le choix des fonctionnalités à activer pour votre 
+application. et les optimisent de la manière que vous désirez.
 
-Registering a Bundle
-~~~~~~~~~~~~~~~~~~~~
+Définir un Bundle
+~~~~~~~~~~~~~~~~~
 
-An application is made up of bundles as defined in the ``registerBundles()``
-method of the ``AppKernel`` class::
+Une application est constituée de Bundles définis dans la méthode
+``registerBundles()`` de la classe ``AppKernel``::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -138,16 +141,15 @@ method of the ``AppKernel`` class::
         return $bundles;
     }
 
-In addition to the ``AcmeDemoBundle`` that we have already talked about, notice
-that the kernel also enables the ``FrameworkBundle``, ``DoctrineBundle``,
-``SwiftmailerBundle``, and ``AsseticBundle`` bundles. They are all part of
-the core framework.
+En plus de du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
+noyau active aussi les bundles ``FrameworkBundle``, ``DoctrineBundle``,
+``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous intégrés au framework.
 
-Configuring a Bundle
+Configurer un Bundle
 ~~~~~~~~~~~~~~~~~~~~
 
-Each bundle can be customized via configuration files written in YAML, XML, or
-PHP. Have a look at the default configuration:
+Chaque Bundle peut être personnalisé via des fichiers de configuration écrits en
+YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
 
 .. code-block:: yaml
 
@@ -206,14 +208,14 @@ PHP. Have a look at the default configuration:
         secure_controllers:  true
         secure_all_services: false
 
-Each entry like ``framework`` defines the configuration for a specific bundle.
-For example, ``framework`` configures the ``FrameworkBundle`` while ``swiftmailer``
-configures the ``SwiftmailerBundle``.
+Chaque entrée, comme ``framework``, définit la configuration pour un
+bundle donné. Par exemple, ``framework`` configure le bundle ``FrameworkBundle``,
+tandis que ``swiftmailer`` configure le bundle ``SwiftmailerBundle``.
 
-Each :term:`environment` can override the default configuration by providing a
-specific configuration file. For example, the ``dev`` environment loads the
-``config_dev.yml`` file, which loads the main configuration (i.e. ``config.yml``)
-and then modifies it to add some debugging tools:
+Chaque :term:`environnement` peut surcharger la configuration par défaut en
+apportant un fichier de configuration spécifique. Par exemple, l'environnement
+``dev`` charge le fichier ``config_dev.yml`` qui va charger la configuration
+principale (i.e. ``config.yml``) puis la modifier pour ajouter des outils de debug:
 
 .. code-block:: yaml
 
@@ -237,92 +239,104 @@ and then modifies it to add some debugging tools:
     assetic:
         use_controller: true
 
-Extending a Bundle
-~~~~~~~~~~~~~~~~~~
+Etendre un Bundle
+~~~~~~~~~~~~~~~~~
+
+En plus d'être une façon sympathique d'organiser et de configurer votre code,
+les bundles peuvent étendre d'autres bundles. L'héritage entre bundle vous permet
+de surcharger n'importe quel bundle pour personnaliser ses contrôleurs, ses templates,
+ou n'importe lequel de ses fichiers.
+
 
 In addition to being a nice way to organize and configure your code, a bundle
 can extend another bundle. Bundle inheritance allows you to override any existing
 bundle in order to customize its controllers, templates, or any of its files.
-This is where the logical names come in handy, because they abstract where
-the resource is actually stored.
+C'est ici que les noms logiques se revèlent pratiques car ils font abstraction de
+l'endroit ou est stockée la ressource.
 
-When you want to reference a file from a bundle, use this notation:
-``@BUNDLE_NAME/path/to/file``; Symfony2 will resolve ``@BUNDLE_NAME``
-to the real path to the bundle. For instance, the logical path
-``@AcmeDemoBundle/Controller/DemoController.php`` would be converted to
+Quand vous voulez faire référence à un fichier depuis un bundle, utilisez cette
+notation:
+``@BUNDLE_NAME/path/to/file``; Symfony2 remplacera ``@BUNDLE_NAME`` par le chemin
+du bundle. A titre d'exemple, le chemin logique
+``@AcmeDemoBundle/Controller/DemoController.php`` sera transformé en
 ``src/Acme/DemoBundle/Controller/DemoController.php``.
 
-For controllers, you need to reference method names using the format
-``BUNDLE_NAME:CONTROLLER_NAME:ACTION_NAME``. For instance,
-``AcmeDemoBundle:Welcome:index`` maps to the ``indexAction`` method from the
-``Acme\DemoBundle\Controller\WelcomeController`` class.
+Pour les contrôleurs, vous aurez besoin de référencer les noms de méthode en 
+utilisant le format suivant ``NOM_DU_BUNDLE_NAME:NOM_DU_CONTROLEUR:NOM_DE_ACTION``.
+Par exemple, ``AcmeDemoBundle:Welcome:index`` référencera la méthode ``indexAction``
+de la classe ``Acme\DemoBundle\Controller\WelcomeController``.
 
-For templates, the logical name ``AcmeDemoBundle:Welcome:index.html.twig`` is
-converted to the file path ``src/Acme/DemoBundle/Resources/views/Welcome/index.html.twig``.
-Templates become even more interesting when you realize they don't need to be
-stored on the filesystem. You can easily store them in a database table for
-instance.
+Pour les templates, le nom logique ``AcmeDemoBundle:Welcome:index.html.twig``
+mènera vers le fichier ``src/Acme/DemoBundle/Resources/views/Welcome/index.html.twig``.
+Les templates deviennent encore plus intéressants quand on réalise qu'ils n'ont 
+pas besoin d'être stockés sur le système de fichiers. Vous pouvez par exemple les
+stocker dans une base de données.
 
-Do you understand now why Symfony2 is so flexible? Share your bundles between
-applications, store them locally or globally, your choice.
+Vous comprenez maintenant pourquoi Symfony2 est si flexible? Partagez vos
+Bundles entre applications, stockez-les localement ou globalement, c'est vous
+qui décidez.
 
 .. _using-vendors:
 
-Using Vendors
--------------
+Utilisation de librairies externes (Vendors)
+--------------------------------------------
 
-Odds are that your application will depend on third-party libraries. Those
-should be stored in the ``vendor/`` directory. This directory already contains
-the Symfony2 libraries, the SwiftMailer library, the Doctrine ORM, the Twig
-templating system, and some other third party libraries and bundles.
+Il y a de fortes probabilités que votre application dépende de librairies tierces.
+Celles-ci doivent être stockées dans le répertoire ``vendor/``. Ce
+répertoire contient déjà les librairies de Symfony2, la librairie SwiftMailer,
+l'ORM Doctrine, le système de template Twig et d'autres librairies et bundles.
 
-Understanding the Cache and Logs
---------------------------------
+Comprendre le Cache et les Logs
+-------------------------------
 
-Symfony2 is probably one of the fastest full-stack frameworks around. But how
-can it be so fast if it parses and interprets tens of YAML and XML files for
-each request? The speed is partly due to its cache system. The application
-configuration is only parsed for the very first request and then compiled down
-to plain PHP code stored in the ``app/cache/`` directory. In the development
-environment, Symfony2 is smart enough to flush the cache when you change a
-file. But in the production environment, it is your responsibility to clear
-the cache when you update your code or change its configuration.
+Symfony2 est probablement l'un des plus rapides framework full-stack existant.
+Mais comment peut-il être si rapide s'il analyse et interprète des dizaines de
+fichiers YAML et XML à chaque requête? Cette rapidité est en partie due à son
+système de cache. La configuration de l'application est uniquement analysée
+lors de la première requête, puis compilée en PHP pur stocké dans le répertoire
+``app/cache/`` de l'application. Dans l'environnement de développement, Symfony2 est
+assez intelligent pour vider le cache lorsque vous modifiez un fichier. Mais
+dans l'environnement de production, il est de votre ressort de vider le
+cache lorsque vous mettez à jour votre code ou modifiez sa configuration.
 
-When developing a web application, things can go wrong in many ways. The log
-files in the ``app/logs/`` directory tell you everything about the requests
-and help you fix the problem quickly.
+Quand vous développez une application Web, les choses peuvent mal tourner, et 
+ce de multiples façons. Le fichier log dans le répertoire ``app/logs/`` de votre 
+application vous dira tout concernant les requêtes et vous aidera à résoudre 
+vos soucis rapidement.
 
-Using the Command Line Interface
---------------------------------
+Utiliser l'Interface en Ligne de Commande (CLI)
+--------------------------------------
 
-Each application comes with a command line interface tool (``app/console``)
-that helps you maintain your application. It provides commands that boost your
-productivity by automating tedious and repetitive tasks.
+Chaque application est fournie avec une interface en ligne de commandes
+(``app/console``) qui vous aidera à maintenir votre application. Cette interface
+met à votre disposition des commandes qui augmentent votre productivité en
+automatisant les tâches fastidieuses et répétitives.
 
-Run it without any arguments to learn more about its capabilities:
+Lancez-la sans aucun argument pour en apprendre plus sur ses possibilités:
 
 .. code-block:: bash
 
     $ php app/console
 
-The ``--help`` option helps you discover the usage of a command:
+L'option ``--help`` vous renseignera sur une commande précise:
 
 .. code-block:: bash
 
     $ php app/console router:debug --help
 
-Final Thoughts
---------------
+Le mot de la fin
+----------------
 
-Call me crazy, but after reading this part, you should be comfortable with
-moving things around and making Symfony2 work for you. Everything in Symfony2
-is designed to get out of your way. So, feel free to rename and move directories
-around as you see fit.
+Vous pouvez trouver ça insensé mais après avoir lu cette partie, vous
+devriez être suffisament à l'aise pour faire vos premières griffes et laisser
+Symfony2 travailler pour vous. Tout est fait dans Symfony2 pour que vous traciez
+votre voie. Alors, n'hésitez pas à renommer et déplacer des répertoires comme
+bon vous semble.
 
-And that's all for the quick tour. From testing to sending emails, you still
-need to learn a lot to become a Symfony2 master. Ready to dig into these
-topics now? Look no further - go to the official :doc:`/book/index` and pick
-any topic you want.
+C'en est tout pour ce quick tour. Des tests à l'envoi d'e-mails, vous
+avez encore besoin d'en apprendre beaucoup pour devenir un expert Symfony2. Prêt
+à plonger dans ces thèmes maintenant? Ne cherchez plus, consultez le
+:doc:`/book/index` et choisissez le sujet qui vous intéresse
 
 .. _standards:               http://groups.google.com/group/php-standards/web/psr-0-final-proposal
 .. _convention:              http://pear.php.net/
