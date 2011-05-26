@@ -41,7 +41,7 @@ effectuer les deux étapes citées plus haut.
 
 .. note::
 
-   Ce tutoriel suppose que vous ayiez déjà téléchargé et configuré
+   Ce tutoriel suppose que vous ayez déjà téléchargé et configuré
    Symfony2 sur votre serveur web. L'URL ci-dessus suppose que ``localhost``
    pointe vers le répertoire ``web`` de votre nouveau projet Symfony2.
    Pour des instructions détaillées à ce sujet, rendez vous dans la section
@@ -71,6 +71,7 @@ Ensuite, assurez-vous que le namespace ``Acme`` soit bien ajouté au fichier
 
         $loader->registerNamespaces(array(
              'Acme' => __DIR__.'/../src',
+             // ...
         ));
 
 Pour terminer, initialisez le bundle en l'ajoutant à la méthode ``registerBundles``
@@ -208,8 +209,8 @@ Quand une URI comme ``/hello/Jean`` is traitée par l'application, la route
 ``hello`` est correspondante et le contrôleur ``AcmeStudyBundle:Hello/index``
 est excécuté par le framework. L'étape suivante est de créer ce contrôleur.
 
-En réalité, un contrôleur n'est rien d'autres qu'une méthode PHP que vous créez
-et que Symfony exécute. C'est à cet endroit que le code propore à l'application
+En réalité, un contrôleur n'est rien d'autre qu'une méthode PHP que vous créez
+et que Symfony exécute. C'est à cet endroit que le code propre à l'application
 utilisera les informations de la requête afin de construire et préparer la 
 ressource demandée par la requête. Excepté dans certains situations avancées, 
 le résultat final d'un contrôleur sera toujours le même :
@@ -250,7 +251,7 @@ Une troisième étape optionelle dans ce processus est de créer un template.
 Créez le Template
 ~~~~~~~~~~~~~~~~~
 
-Les templates vous permettent de déplace toute la présentation (ex: code HTML)
+Les templates vous permettent de déplacer toute la présentation (ex: code HTML)
 dans un fichier séparé et de réutiliser différentes portions d'un gabarit.
 A la place d'écrire le code HTML dans le contrôleur, utilisez plutôt un template::
 
