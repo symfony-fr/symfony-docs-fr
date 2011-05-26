@@ -1,77 +1,80 @@
 .. index::
    single: Page creation
 
-Creating Pages in Symfony2
-==========================
+La création de pages avec Symfony2
+==================================
 
-Creating a new page in Symfony2 is a simple two-step process:
+Créer des pages avec Symfony2 se fait en simplement deux étapes:
 
-* *Create a route*: A route defines the URI (e.g. ``/about``) for your
-  page and specifies a controller (a PHP function) that Symfony2 should
-  execute when the URI of an incoming request matches the route pattern;
+* *Créez une route*: Une route définit l'URI (ex: ``/apropos``) pour votre
+  page et spécifie un contrôleur (une fonction PHP) que Symfony2 devrait
+  exécuter quand l'URI d'une requête HTTP correspond à une route que vous 
+  avez défini.
 
-* *Create a controller*: A controller is a PHP function that takes the incoming
-  request and transforms it into a Symfony2 ``Response`` object.
+* *Créez un contrôleur*: Un contrôleur est une fonction PHP qui traitera la 
+  requête HTTP et la transformera en un objet ``Réponse`` Symfony2.
 
-We love this simple approach because it matches the way that the Web works.
-Every interaction on the Web is initiated by an HTTP request. The job of
-your application is simply to interpret the request and return the appropriate
-HTTP response. Symfony2 follows this philosophy and provides you with tools
-and conventions to keep your application organized as it grows in users and
-complexity.
+Nous aimons cette approche simplissime car elle correspond à la façon dont 
+fonctionne le Web. Chaque interaction sur le Web est initiée par une requête
+HTTP. Le but de votre application est simplement d'interpréter cette requête 
+et de lui retourner une réponse HTTP appropriée. Symfony2 suit cette philosophie 
+et vous fournit des outils et conventions pour garder votre application organisée
+tout en pouvant devenir plus complexe et fréquentée.
 
 .. index::
    single: Page creation; Example
 
-The "Hello Symfony!" Page
+La page "Hello Symfony !"
 -------------------------
 
-Let's start with a spin off of the classic "Hello World!" application. When
-we're finished, the user will be able to get a personal greeting by going
-to the following URL:
+Commençons avec une application traditionnelle "Hello World !". Quand nous
+aurons terminé, l'utilisateur sera capable de reçevoir un message de 
+salutation personnalisé en se rendant à l'URL suivante :
 
 .. code-block:: text
 
-    http://localhost/app_dev.php/hello/Symfony
+   http://localhost/app_dev.php/hello/Symfony
 
-In reality, you'll be able to replace ``Symfony`` with any other name to be
-greeted. To create the page, we'll go through the simple two-step process.
+En réalité, vous serez capables de pouvoir remplacer ``Symfony`` par n'importe
+quel autre nom qui doit être salué. Afin de créer cette page, nous allons 
+effectuer les deux étapes citées plus haut.
 
 .. note::
 
-    The tutorial assumes that you've already downloaded Symfony2 and configured
-    your webserver. The above URL assumes that ``localhost`` points to the
-    ``web`` directory of your new Symfony2 project. For detailed information
-    on this process, see the :doc:`Installing Symfony2</book/installation>`.
+   Ce tutoriel suppose que vous ayiez déjà téléchargé et configuré
+   Symfony2 sur votre serveur web. L'URL ci-dessus suppose que ``localhost``
+   pointe vers le répertoire ``web`` de votre nouveau projet Symfony2.
+   Pour des instructions détaillées à ce sujet, rendez vous dans la section
+   respective de la documentation :doc:`Installez Symfony2</book/installation>`.
 
-Create the Bundle
+
+Créez le  Bundle
 ~~~~~~~~~~~~~~~~~
 
-Before you begin, you'll need to create a *bundle*. In Symfony2, a bundle
-is like a plugin, except that all of the code in your application will live
-inside a bundle.
+Avant de commencer, vous devez créer un *bundle*. Dans Symfony2, un bundle
+est comme un plugin, excepté le fait que tout le code de votre application
+siègera dans un bundle.
 
-A bundle is nothing more than a directory (with a PHP namespace) that houses
-everything related to a specific feature (see :ref:`page-creation-bundles`).
-To create a bundle called ``AcmeStudyBundle`` (a play bundle that you'll
-build in this chapter), run the following command:
+Un bundle n'est rien d'autre qu'un répertoire (avec un namespace PHP) qui
+abrite tout ce qui est relatif à une fonctionnalité spécifique (voyez :ref:`page-creation-bundles`).
+Afin de créer un bundle nommé ``AcmeStudyBundle`` (un bundle fictif que vous 
+créerez dans ce chapitre), lancez la commande suivante :
 
 .. code-block:: text
 
-    php app/console init:bundle "Acme\StudyBundle" src
+   php app/console init:bundle "Acme\StudyBundle" src
 
-Next, be sure that the ``Acme`` namespace is loaded by adding the following
-to the ``app/autoload.php`` file (see the :ref:`Autoloading sidebar<autoloading-introduction-sidebar>`):
+Ensuite, assurez-vous que le namespace ``Acme`` soit bien ajouté au fichier
+``app/autoload.php`` (voyez :ref:`Autoloading sidebar<autoloading-introduction-sidebar>`):
 
 .. code-block:: php
 
         $loader->registerNamespaces(array(
-            'Acme' => __DIR__.'/../src',
-            // ...
+             'Acme' => __DIR__.'/../src',
         ));
 
-Finally, initialize the bundle by adding it to the ``registerBundles`` method
-of the ``AppKernel`` class:
+Pour terminer, initialisez le bundle en l'ajoutant à la méthode ``registerBundles``
+de la classe ``AppKernel`` :
 
 .. code-block:: php
 
@@ -88,15 +91,16 @@ of the ``AppKernel`` class:
         return $bundles;
     }
 
-Now that you have a bundle setup, you can begin building your application
-inside the bundle.
+Maintenant que votre bundle est mis en place, vous pouvez commencer à
+construire votre application à l'intérieur du bundle.
 
-Create the Route
-~~~~~~~~~~~~~~~~
+Créez la Route
+~~~~~~~~~~~~~~
 
-By default, the routing configuration file in a Symfony2 application is
-located at ``app/config/routing.yml``. Like all configuration in Symfony2,
-you can also choose to use XML or PHP out of the box to configure routes:
+Dans une application Symfony2, le fichier de configuration des routes
+se trouve par défaut dans ``app/config/routing.yml``. Comme toute
+configuration dans Symfony2, vous pouvez également choisir d'utiliser
+des fichiers XML ou PHP afin de configurer vos routes :
 
 .. configuration-block::
 
@@ -140,11 +144,11 @@ you can also choose to use XML or PHP out of the box to configure routes:
 
         return $collection;
 
-The first few lines of the routing configuration file define which code to
-call when the user requests the "``/``" resource (the homepage) and serves
-as an example of routing configuration you may see in this file. More interesting
-is the last part, which imports another routing configuration file located
-inside the ``AcmeStudyBundle``:
+Les premières lignes d'un fichier de configuration de routage définit quel
+code appeler quand l'utilisateur demande la ressource "``/``" (la page d'accueil)
+et servent d'exemple de configurations de routage que vous pouvez trouver dans ces
+fichiers. La dernière partie est plus intéressante, elle importe un autre fichier
+de configuration qui se trouve dans le ``AcmeStudyBundle`` :
 
 .. configuration-block::
 
@@ -182,33 +186,34 @@ inside the ``AcmeStudyBundle``:
 
         return $collection;
 
-The routing consists of two basic pieces: the ``pattern``, which is the URI
-that will match this route, and a ``defaults`` array, which specifies the
-controller that should be executed. The placeholder syntax in the pattern
-(``{name}``) is a wildcard. It means that ``/hello/Ryan``, ``/hello/Fabien``
-or any other similar URI will match this route. The ``{name}`` placeholder
-parameter will also be passed to our controller so that we can use its value
-to personally greet the user.
+Le routage est constitué de deux parties principales: le ``motif``, qui est
+l'URI correspondante à cette route, et un array ``par défaut``, qui spécifie
+le contrôleur qui devra être exécuté. La syntaxe pour le paramètre dans le 
+motif (``{name}``) est un joker. Cela signifier que ``hello/Jean``, ``hello/Bernard``
+ou n'importe quelle URI similaire correspondra à cette route. Le paramètre ``{name}``
+sera également passé à notre contrôleur afin que nous puissions utiliser la valeur
+afin de saluer l'utilisateur.
 
 .. note::
 
-  The routing system has many more great features for creating flexible
-  and powerful URI structures in your application. For more details, see
-  the chapter all about :doc:`Routing </book/routing>`.
+   Le système de routage dispose de beaucoup d'autres fonctionnalités
+   qui vous permettront de créer des structures d'URI puissantes et flexibles
+   dans votre application. Pour plus de détails, lisez le chapitre dédié
+   aux routes :doc:`Routing </book/routing>`.  
 
-Create the Controller
-~~~~~~~~~~~~~~~~~~~~~
+Créez le Contrôleur
+~~~~~~~~~~~~~~~~~~~
 
-When a URI such as ``/hello/Ryan`` is handled by the application, the ``hello``
-route is matched and the ``AcmeStudyBundle:Hello:index`` controller is executed
-by the framework. The second step of the page-creation process is to create
-this controller.
+Quand une URI comme ``/hello/Jean`` is traitée par l'application, la route
+``hello`` est correspondante et le contrôleur ``AcmeStudyBundle:Hello/index``
+est excécuté par le framework. L'étape suivante est de créer ce contrôleur.
 
-In reality, a controller is nothing more than a PHP method that you create
-and Symfony executes. This is where the custom application code uses information
-from the request to build and prepare the resource being requested. Except
-in some advanced cases, the end product of a controller is always the same:
-a Symfony2 ``Response`` object::
+En réalité, un contrôleur n'est rien d'autres qu'une méthode PHP que vous créez
+et que Symfony exécute. C'est à cet endroit que le code propore à l'application
+utilisera les informations de la requête afin de construire et préparer la 
+ressource demandée par la requête. Excepté dans certains situations avancées, 
+le résultat final d'un contrôleur sera toujours le même :
+un objet ``Réponse`` Symfony2 ::
 
     // src/Acme/StudyBundle/Controller/HelloController.php
 
@@ -223,30 +228,32 @@ a Symfony2 ``Response`` object::
         }
     }
 
-The controller is simple: it creates a new ``Response`` object, whose first
-argument is the content that should be used for the response (a small HTML
-page in this case).
+Le contrôleur est simple: il crée un nouvel objet ``Response``, qui a pour 
+premier argument le contenu qui doit être renvoyé par la réponse (une petite
+page HTML dans ce cas-ci).
 
-Congratulations! After creating only a route and a controller, you already
-have a fully-functional page! If you've setup everything correctly, your
-application should greet you::
 
-    http://localhost/app_dev.php/hello/Ryan
+Félicitations ! Après avoir n'avoir créé qu'une route et un contrôleur, vous
+avez une page pleinement fonctionnelle ! Si vous avez tout effectué correctement,
+votre application devrait vous saluer::
 
-An optional, but common, third step in the process is to create a template.
+    http://localhost/app_dev.php/hello/Christophe
+
+Une troisième étape optionelle dans ce processus est de créer un template.
 
 .. note::
 
-   Controllers are the main entry point for your code and a key ingredient
-   when creating pages. Much more information can be found in the
-   :doc:`Controller Chapter </book/controller>`.
+   Les contrôleurs sont le point central de votre code et un élément clé
+   pendant la création de pages. Plus d'informations peuvent être trouvées
+   dans le :doc:`Chapitre Contrôleurs </book/controller>`.
 
-Create the Template
-~~~~~~~~~~~~~~~~~~~
+Créez le Template
+~~~~~~~~~~~~~~~~~
 
-Templates allows us to move all of the presentation (e.g. HTML code) into
-a separate file and reuse different portions of the page layout. Instead
-of writing the HTML inside the controller, use a template instead::
+Les templates vous permettent de déplace toute la présentation (ex: code HTML)
+dans un fichier séparé et de réutiliser différentes portions d'un gabarit.
+A la place d'écrire le code HTML dans le contrôleur, utilisez plutôt un template::
+
 
     // src/Acme/StudyBundle/Controller/HelloController.php
 
@@ -267,26 +274,27 @@ of writing the HTML inside the controller, use a template instead::
 
 .. note::
 
-   In order to use the ``render()`` method, you must extend the
-   :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller` class, which
-   adds shortcuts for tasks that are common inside controllers.
+   Afin d'utiliser la méthode ``render()``, vous devez étendre la classe 
+   :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`, qui
+   contient des raccourcis pour des tâches fréquemment utilisées.
 
-The ``render()`` method creates a ``Response`` object filled with the content
-of the given, rendered template. Like any other controller, you will ultimately
-return that ``Response`` object.
+La méthode ``render()`` crée un objet ``Réponse`` qui contient le contenu
+d'un template rendu. Comme tout autre contrôleur, vous retournerez cet objet
+``Réponse``.
 
-Notice that there are two different examples for rendering the template.
-By default, Symfony2 supports two different templating languages: classic
-PHP templates and the succinct but powerful `Twig`_ templates. Don't be alarmed
-- you're free to choose either or even both in the same project.
+Notez qu'il y a deux différents exemples afin de rendre un template.
+Par défaut, Symfony2 supporte deux différents langages de templates :
+les templates classiques PHP et les succints mais puissants templates ``Twig``.
+Ne paniquez pas, vous êtes libres de choisir de choisir celui que vous désirez
+voire même les deux.
 
-The controller renders the ``AcmeStudyBundle:Hello:index.html.twig`` template,
-which uses the following naming convention:
+Le contrôleur rend le template ``AcmeStudyBundle:Hello:index.html.twig``,
+qui suit la convention de nommage :
 
 *BundleName*:*ControllerName*:*TemplateName*
 
-In this case, ``AcmeStudyBundle`` is the bundle name, ``Hello`` is the
-controller, and ``index.html.twig`` the template:
+Dans ce cas, ``AcmeStudyBundle`` est le nom de bundle, ``Hello`` est le
+nom du contrôleur et enfin ``index.html.twig`` est le template :
 
 .. configuration-block::
 
@@ -499,8 +507,8 @@ But what exactly is a :term:`bundle`?
 
 .. _page-creation-bundles:
 
-The Bundle System
------------------
+Le Système de Bundles
+---------------------
 
 A bundle is similar to a plugin in other software, but even better. The key
 difference is that *everything* is a bundle in Symfony2, including both the
