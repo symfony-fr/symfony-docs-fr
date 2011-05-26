@@ -12,12 +12,12 @@ Créer des pages avec Symfony2 se fait en simplement deux étapes:
   avez défini.
 
 * *Créez un contrôleur*: Un contrôleur est une fonction PHP qui traitera la 
-  requête HTTP et la transformera en un objet ``Réponse`` Symfony2.
+  requête HTTP et la transformera en un objet ``Response`` Symfony2.
 
 Nous aimons cette approche simplissime car elle correspond à la façon dont 
 fonctionne le Web. Chaque interaction sur le Web est initiée par une requête
 HTTP. Le but de votre application est simplement d'interpréter cette requête 
-et de lui retourner une réponse HTTP appropriée. Symfony2 suit cette philosophie 
+et de lui retourner une Response HTTP appropriée. Symfony2 suit cette philosophie 
 et vous fournit des outils et conventions pour garder votre application organisée
 tout en pouvant devenir plus complexe et fréquentée.
 
@@ -213,7 +213,7 @@ et que Symfony exécute. C'est à cet endroit que le code propore à l'applicati
 utilisera les informations de la requête afin de construire et préparer la 
 ressource demandée par la requête. Excepté dans certains situations avancées, 
 le résultat final d'un contrôleur sera toujours le même :
-un objet ``Réponse`` Symfony2 ::
+un objet ``Response`` Symfony2 ::
 
     // src/Acme/StudyBundle/Controller/HelloController.php
 
@@ -229,7 +229,7 @@ un objet ``Réponse`` Symfony2 ::
     }
 
 Le contrôleur est simple: il crée un nouvel objet ``Response``, qui a pour 
-premier argument le contenu qui doit être renvoyé par la réponse (une petite
+premier argument le contenu qui doit être renvoyé par la Response (une petite
 page HTML dans ce cas-ci).
 
 
@@ -278,9 +278,9 @@ A la place d'écrire le code HTML dans le contrôleur, utilisez plutôt un templ
    :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`, qui
    contient des raccourcis pour des tâches fréquemment utilisées.
 
-La méthode ``render()`` crée un objet ``Réponse`` qui contient le contenu
+La méthode ``render()`` crée un objet ``Response`` qui contient le contenu
 d'un template rendu. Comme tout autre contrôleur, vous retournerez cet objet
-``Réponse``.
+``Response``.
 
 Notez qu'il y a deux différents exemples afin de rendre un template.
 Par défaut, Symfony2 supporte deux différents langages de templates :
