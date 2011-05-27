@@ -2,7 +2,7 @@
 * :doc:`When flat PHP meets Symfony </book/from_flat_php_to_symfony2>`
 
 * :doc:`Installing and Configuring Symfony </book/installation>`
-* :doc:`The Basics of Page Creation </book/page_creation>`
+* :doc:`La création de pages avec Symfony2 </book/page_creation>`
 
 * :doc:`Controllers </book/controller>`
 * :doc:`Routing </book/routing>`
