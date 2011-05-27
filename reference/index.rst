@@ -6,6 +6,7 @@ Reference Documents
 
     dic_tags
     YAML
+    configuration/framework
     configuration/doctrine
     configuration/twig
     configuration/monolog
@@ -13,5 +14,6 @@ Reference Documents
     constraints
     forms/types
     forms/twig_reference
+    requirements
 
 .. include:: map.rst.inc

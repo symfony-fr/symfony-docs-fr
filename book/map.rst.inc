@@ -1,5 +1,7 @@
 * :doc:`Symfony2 Fundamentals </book/http_fundamentals>`
 * :doc:`When flat PHP meets Symfony </book/from_flat_php_to_symfony2>`
+
+* :doc:`Installing and Configuring Symfony </book/installation>`
 * :doc:`The Basics of Page Creation </book/page_creation>`
 
 * :doc:`Controllers </book/controller>`
@@ -11,7 +13,7 @@
 
   * :doc:`Introduction to the Model </book/doctrine/model>` |
   * :doc:`DBAL </book/doctrine/dbal>` |
-  * :doc:`ORM </book/doctrine/orm>` |
+  * :doc:`ORM </book/doctrine/orm>`
 
 * :doc:`Validation </book/validation>`
 * :doc:`Forms </book/forms>`
