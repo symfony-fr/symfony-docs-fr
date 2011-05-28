@@ -165,7 +165,7 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
         form:            true
         csrf_protection: true
         router:          { resource: "%kernel.root_dir%/config/routing.yml" }
-        validation:      { annotations: true }
+        validation:      { enable_annotations: true }
         templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
         session:
             default_locale: %locale%
