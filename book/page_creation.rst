@@ -375,31 +375,30 @@ object.
 .. index::
    single: Directory Structure
 
-The Directory Structure
------------------------
+La structure des répertoires
+----------------------------
 
-After just a few short sections, you already understand the philosophy behind
-creating and rendering pages in Symfony2. You've also already begun to see
-how Symfony2 projects are structured and organized. By the end of this section,
-you'll know where to find and put different types of files and why.
+Après seulement quelques courtes sections, vous comprenez déjà la philosophie derrière la création et le rendu de pages dans Symfony2. 
+Vous avez déjà commencé à voir commet les projets Symfony2 sont structurés et organisés. 
+A la fin de cette section, vous saurez où trouver et mettre les différents types de fichiers et pourquoi.
 
-Though perfectly flexible, by default, each Symfony :term:`application` has
-the same basic and recommended directory structure:
+Malgré le fait que ce soit tout à fait flexible, chaque :term:`application` 
+a par défaut la même structure de répertoires basique mais recommandée:
 
-* ``app/``: This directory contains the application configuration;
+* ``app/``: Ce répertoire contient la configuration de l'application;
 
-* ``src/``: All the project PHP code is stored under this directory;
+* ``src/``: Tout le code PHP du projet est stocké ici;
 
-* ``vendor/``: Any vendor libraries are placed here by convention;
+* ``vendor/``: ar convention, toutes les librairies tierces (additionnelles) sont placées ici;
 
-* ``web/``: This is the web root directory and contains any publicly accessible files;
+* ``web/``: Le répertoire racine web qui contient tous les fichiers publiquement accessibles;
 
-The Web Directory
+Le répertoire Web
 ~~~~~~~~~~~~~~~~~
 
-The web root directory is the home of all public and static files such as
-images, stylesheets, and JavaScript files. It is also where each
-:term:`front controller` lives::
+Le répertoire web contient tous les fichiers publics et statiques tels que les images, les feuilles de style et les javascripts. 
+Il contient également le
+:term:`front controller` ::
 
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php';
@@ -410,100 +409,81 @@ images, stylesheets, and JavaScript files. It is also where each
     $kernel = new AppKernel('prod', false);
     $kernel->handle(Request::createFromGlobals())->send();
 
-The front controller file (``app.php`` in this example) is the actual PHP
-file that's executed when using a Symfony2 application and its job is to
-use a Kernel class, ``AppKernel``, to bootstrap the application.
+Le fichier du contrôleur frontal (``app.php`` dans cet exemple) est le fichier exécuté lorsqu'on appelle une application Symfony2. 
+Son job est d'utiliser une classe Kernel, ``AppKernel``, pour lancer (amorcer, bootstrapper) l'application.
 
 .. tip::
-
-   Having a front controller means different and more flexible URLs than
-   are used in a typical flat PHP application. When using a front controller,
-   URLs are formatted in the following way:
+	
+   
+   avoir un front contrôler signifie des URL différentes et plus flexibles que dans une application en pur php. 
+   Lorsqu'on utilise un front contrôler, les URL sont formatée comme suit:
 
        http://localhost/app.php/hello/Ryan
 
-   The front controller, ``app.php``, is executed and the URI ``/hello/Ryan``
-   is routed internally using the routing configuration. By using Apache
-   ``mod_rewrite`` rules, you can force the ``app.php`` file to be executed without
-   needing to specify it in the URL::
+   Le contrôlleur frontal, ``app.php``, est exécuté et l'URI ``/hello/Ryan``
+   est routée en interne en se basant sur la configuration du routage. En utilisant les règles du module Apache
+   ``mod_rewrite``, vous pouvez forceer le script ``app.php`` à être exécuté sans
+   avoir besoin de le mentionner dans l'URL ::
 
     http://localhost/hello/Ryan
 
-Though front controllers are essential in handling every request, you'll
-rarely need to modify or even think about them. We'll mention them again
-briefly in the `Environments`_ section.
+Les contrôleurs frontaux sont essentiels pour traiter chaque requête. 
+Cepeandant, vous aurez rarement besoin de les modifier ou même d'y penser. 
+Nous en reparlerons dans la section `Environments`_ .
 
-The Application (``app``) Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Le répertoire de l'application (``app``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As you saw in the front controller, the ``AppKernel`` class is the main entry
-point of the application and is responsible for all configuration. As such,
-it is stored in the ``app/`` directory.
+Comme nous l'avons vu dans le contrôleur frontal, la classe ``AppKernel`` est le point d'entrée principal de l'application et est chargée de toute la configuration. 
+De ce fait, elle est stockée dans le répertoire ``app/``.
 
-This class must implement three methods that define everything that Symfony
-needs to know about your application. You don't even need to worry about
-these methods when starting - Symfony fills them in for you with sensible
-defaults.
+Cette classe doit implémenter trois méthodes  qui définissent tout ce dont Symfony a besoin de savoir à propos de votre application.
+Vous n'avez pas à vous soucier de ces méthodes en commençant - Symfony les complète pour vous avec de valeurs par défaut.
+*``registerBundles()``: renvoit un tableau de tous les bundles dont l'application a besoin pour fonctionner (voir le [Système de Bundles]);
 
-* ``registerBundles()``: Returns an array of all bundles needed to run the
-  application (see `The Bundle System`_);
+*``registerCoontainerConfiguration()``: Charge le fichier de ressources de l'application principal (voir la section `Configuration de l'Application`_]
 
-* ``registerContainerConfiguration()``: Loads the main application configuration
-  resource file (see the `Application Configuration`_ section);
+*``registerRootDir()``: renvoie le répertoire racine de l'application (``app/``, par défaut)
 
-* ``registerRootDir()``: Returns the root app directory (defaults to ``app/``).
-
-In day-to-day development, you'll mostly use the ``app/`` directory to modify
-configuration and routing files in the ``app/config/`` directory (see
-`Application Configuration`_). It also contains the application cache
-directory (``app/cache``), a logging directory (``app/logs``) and a directory
-for application-level resource files (``app/Resources``). You'll learn more
-about each of these directories in later chapters.
+Dans le développement au quotidien, vous utiliserez principalement le répertoire ``app/` 
+pour modifier les fichiers de configuration et de routage dans le répertoire ``app/config`` (voir `Configuration de l'application`_). 
+``app/`` contient également le répertoire de cache de l'application (``app/cache``), le répertoire des logs (``app/logs``) 
+et un répertoire pour les ressources communes à l'application entière (``app/Resources``). 
+Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
 
 .. _autoloading-introduction-sidebar:
 
 .. sidebar:: Autoloading
-
-    When bootstrapping, a special file - ``app/autoload.php`` - is included.
-    This file is responsible for autoloading all the files stored in the
-    ``src/`` and ``vendor/`` directories.
-
-    Because of the autoloader, you never need to worry about using ``include``
-    or ``require`` statements. Instead, Symfony2 uses the namespace of a class
-    to determine its location and automatically includes the file on your
-    behalf the instant you need a class::
+Au démarrage de l'application, un fichier spécial - ``app/autoload.php`` - est inclus. Ce fichier s'occupe du chargement automatique de tous les fichiers dans les répertoires ``src/`` et ``vendor/``.
+Grace à l'autoloader, vous n'avez jamais à vous soucier d'utiliser les instructions ``include`` ou ``require``. Symfony2 se base sur l'espace de nom d'une classe pour déterminer son emplacement et l'inclure automatiquement le fichier à votre place à l'instant où vous avez besoin de votre classe::
     
         $loader->registerNamespaces(array(
             'Acme' => __DIR__.'/../src',
             // ...
         ));
     
-    With this configuration, Symfony2 will look inside the ``src`` directory
-    for any class in the ``Acme`` namespace (your pretend company's namespace).
-    For autoloading to work, the class name and path to the file must follow
-    the same pattern:
+    Avec cette configuration, Symfony2 va rechercher toutes les classes de l'espace de nom ``Acme`` (le nom de votre fausse société)  dans le répertoire ``src/``.
+Pour que le chargement automatique fonctionne, le nom de la classe et le chemin du fichier doivent avoir une structure similaire::
 
     .. code-block:: text
 
-        Class Name:
+        Nom de classe:
             Acme\StudyBundle\Controller\HelloController
-        Path:
+        Chemin:
             src/Acme/StudyBundle/Controller/HelloController.php
 
-    The ``app/autoload.php`` configures the autoloader to look for different
-    PHP namespaces in different directories and can be customized as necessary.
-    For more information on autoloading, see :doc:`How to autoload Classes</cookbook/tools/autoloader>`.
+    ``app/autoload.php`` configure le chargeur automatique pour chercher différents espaces de nom dans différents répertoires 
+   	et peut être personnalisé si nécessaire. 
+	Pour plus d'informations sur le chargement automatique, voir :doc: `Comment charger automatiquement des classes</cookbook/tools/autoloader>`.
 
-The Source (``src``) Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Le répertoire des sources (``src/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Put simply, the ``src/`` directory contains all of the actual PHP code that
-runs the application. In fact, when developing, the vast majority of work
-will likely be done inside this directory. By default, the ``src/`` directory
-is empty. When you begin development, you'll begin to populate the directory
-with *bundles* that contain your application code.
+Pour faire simple, le répertoire ``src/`` contient tout le code php qui fait tourner l'application. 
+En fait en développant, le plus gros du travail sera faire à l'intérieur de ce répertoire. Ce répertoire est vide par défaut. 
+Quand vous commencez le développement, vous êtes amené à peupler ce répertoire avec les *bundles* qui contiennent le code de votre application.
 
-But what exactly is a :term:`bundle`?
+Mais qu'est-ce au juste qu'un :term:`bundle`?
 
 .. _page-creation-bundles:
 
