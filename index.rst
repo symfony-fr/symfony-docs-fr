@@ -1,10 +1,12 @@
-Symfony2 Documentation
+../Commentaire à supprimer
+
+Documentation Symfony2
 ======================
 
 Quick Tour
 ----------
 
-Get started fast with the Symfony2 :doc:`Quick Tour <quick_tour/index>`:
+Démarrez dès maintenant avec le :doc:`Quick Tour <quick_tour/index>` Symfony2:
 
 .. toctree::
     :hidden:
@@ -16,48 +18,48 @@ Get started fast with the Symfony2 :doc:`Quick Tour <quick_tour/index>`:
 * :doc:`quick_tour/the_controller` >
 * :doc:`quick_tour/the_architecture`
 
-Book
-----
+../Book
+../----
 
-Dive into Symfony2 with the topical guides:
+../Plongez dans Symfony2 grâce aux guides thématiques:
 
 .. toctree::
-    :hidden:
+../    :hidden:
 
-    book/index
+../    book/index
 
 .. include:: book/map.rst.inc
 
-Cookbook
---------
+../Cookbook
+../--------
 
 .. toctree::
-    :hidden:
+../    :hidden:
 
-    cookbook/index
+../    cookbook/index
 
-Read the :doc:`Cookbook </cookbook/index>`.
+../Lisez le :doc:`Cookbook </cookbook/index>`.
 
-Reference Documents
--------------------
+../Documents de référence
+../----------------------
 
-Get answers quickly with reference documents:
+../Obtenez une réponse rapidement avec les documents de référence:
 
 .. toctree::
-    :hidden:
+../    :hidden:
 
-    reference/index
+../    reference/index
 
 .. include:: reference/map.rst.inc
 
-Contributing
-------------
+../Contribuer
+../------------
 
-Contribute to Symfony2:
+../Contribuer à Symfony2:
 
 .. toctree::
-    :hidden:
+../    :hidden:
 
-    contributing/index
+../    contributing/index
 
 .. include:: contributing/map.rst.inc
