@@ -490,7 +490,7 @@ incidentally, acts quite a bit like the Symfony2 templating engine:
     function list_action()
     {
         $posts = get_all_posts();
-        $html = render_template('templates/list.php');
+        $html = render_template('templates/list.php', array('posts' => $posts));
 
         return new Response($html);
     }
@@ -498,9 +498,7 @@ incidentally, acts quite a bit like the Symfony2 templating engine:
     function show_action($id)
     {
         $post = get_post_by_id($id);
-        $html = render_template('templates/show.php', array(
-            'post' => $post,
-        ));
+        $html = render_template('templates/show.php', array('post' => $post));
 
         return new Response($html);
     }
@@ -554,7 +552,7 @@ them for you. Here's the same sample application, now built in Symfony2:
         public function listAction()
         {
             $blogs = $this->get('doctrine')->getEntityManager()
-                ->createQuery('SELECT b FROM AcmeBlog:Blog b')
+                ->createQuery('SELECT b FROM AcmeBlogBundle:Blog b')
                 ->execute();
 
             return $this->render('AcmeBlogBundle:Blog:list.html.php', array('blogs' => $blogs));
@@ -562,10 +560,15 @@ them for you. Here's the same sample application, now built in Symfony2:
 
         public function showAction($id)
         {
-            $blog = $this->get('doctrine')->getEntityManager()
-                ->createQuery('SELECT b FROM AcmeBlog:Blog b WHERE id = :id')
-                ->setParameter('id', $id)
-                ->getSingleResult();
+            $blog = $this->get('doctrine')
+                ->getEntityManager()
+                ->getRepository('AcmeBlogBundle:Blog')
+                ->find($id);
+            
+            if (!$blog) {
+                // cause the 404 page not found to be displayed
+                throw $this->createNotFoundException();
+            }
 
             return $this->render('AcmeBlogBundle:Blog:show.html.php', array('blog' => $blog));
         }
