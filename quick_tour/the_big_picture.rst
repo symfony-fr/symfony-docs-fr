@@ -228,12 +228,11 @@ Maintenant, jetez un oeil à la fin de la configuration de routage:
         type:     annotation
         prefix:   /demo
 
-Symfony2 peut lire 
-Symfony2 can read the routing information from different resources written in
-YAML, XML, PHP, or even embedded in PHP annotations. Here, the resource
-*logical name* is ``@AcmeDemoBundle/Controller/DemoController.php`` and refers
-to the ``src/Acme/DemoBundle/Controller/DemoController.php`` file. In this
-file, routes are defined as annotations on action methods::
+Symfony2 peut lire les informations de routage écrites en YAML, XML, PHP ou même
+grâce aux annotations. Ici, le *nom logique* de la ressource est 
+``@AcmeDemoBundle/Controller/DemoController.php`` et fait référence au fichier
+``src/Acme/DemoBundle/Controller/DemoController.php``. Dans ce fichiers, les
+routes sont définies par des annotations des méthodes action::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -253,37 +252,38 @@ file, routes are defined as annotations on action methods::
         // ...
     }
 
-The ``@Route()`` annotation defines a new route with a pattern of
-``/hello/{name}`` that executes the ``helloAction`` method when matched. A
-string enclosed in curly brackets like ``{name}`` is called a placeholder. As
-you can see, its value can be retrieved through the ``$name`` method argument.
+L'annotation ``@Route()`` définit une nouvelle route avec le masque ``/hello/{name}``
+qui, lorsqu'elle sera reconnue, éxécutera la méthode ``helloAction``. Une chaine
+de caractères entre accolades comme ``{name}`` est une variable réservée. Comme
+vous pouvez le voir, sa valteur peut être récupérée par l'argument ``$name`` de
+la méthode.
 
 .. note::
 
-    Even if annotations are not natively supported by PHP, you use them
-    extensively in Symfony2 as a convenient way to configure the framework
-    behavior and keep the configuration next to the code.
+    Même si les annotations ne sont pas nativement supportées par PHP, vous les
+    verrez très souvent dans Symfony2. C'est une manière très pratique de
+    configurer le comportement du framework et de conserver la configuration près
+    du code.
 
-If you take a closer look at the action code, you can see that instead of
-rendering a template like before, it just returns an array of parameters. The
-``@Template()`` annotation tells Symfony to render the template for you,
-passing in each variable of the array to the template. The name of the
-template that's rendered follows the name of the controller. So, in this
-example, the ``AcmeDemoBundle:Demo:hello.html.twig`` template is rendered
-(located at ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``).
+Si vous regardez de plus près le code de l'action, vous verrez qu'au lieu de rendre
+directement un template comme nous l'avons vu plus haut, la méthode retourne juste
+un tableau de paramètres. L'annotation ``@Template()`` dit à Symfony de rendre le
+template pour vous en passant chaque variable du tableau au template. Le nom du
+template qui est retourné dépend du nom du contrôleur. Donc, dans notre exemple,
+le template ``AcmeDemoBundle:Demo:hello.html.twig`` est retourné (il est situé
+dans le dossier ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``).
 
 .. tip::
 
-    The ``@Route()`` and ``@Template()`` annotations are more powerful than
-    the simple examples shown in this tutorial. Learn more about "`annotations
-    in controllers`_" in the official documentation.
+    Les annotations ``@Route()`` et ``@Template()`` sont plus puissante que les
+    simples exemples décrits dans ce tutoriel. Apprenez en plus sur "`les annotations
+    dans les contrôleurs`_" dans la documentation officielle.
 
 Templates
 ~~~~~~~~~
 
-The controller renders the
-``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig`` template (or
-``AcmeDemoBundle:Demo:hello.html.twig`` if you use the logical name):
+Le contrôleur rend le template ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``
+(ou ``AcmeDemoBundle:Demo:hello.html.twig`` si vous utilisez le nom logique):
 
 .. code-block:: jinja
 
@@ -296,24 +296,26 @@ The controller renders the
         <h1>Hello {{ name }}!</h1>
     {% endblock %}
 
-By default, Symfony2 uses `Twig`_ as its template engine but you can also use
-traditional PHP templates if you choose. The next chapter will introduce how
-templates work in Symfony2.
+Par défaut, Symfony2 utilise `Twig`_ comme moteur de template mais vous pouvez
+aussi utilisez les templates traditionnels en PHP si vous préférez. Le prochain
+chapitre introduira le fonctionnement des templates dans Symfony2.
 
 Bundles
 ~~~~~~~
 
-You might have wondered why the :term:`bundle` word is used in many names we
-have seen so far. All the code you write for your application is organized in
-bundles. In Symfony2 speak, a bundle is a structured set of files (PHP files,
-stylesheets, JavaScripts, images, ...) that implements a single feature (a
-blog, a forum, ...) and which can be easily shared with other developers. As
-of now, we have manipulated one bundle, ``AcmeDemoBundle``. You will learn
-more about bundles in the last chapter of this tutorial.
+Vous vous êtes surement demandé pourquoi le mot :term:`bundle` est utilisez dans
+la plupart des noms que nous avons vus précédemment. Tout le code que vous écrivez
+dans votre application est organisé en bundles. En jargon Symfony2, un bundle est
+un ensemble structuré de fichiers (PHP, feuilles de styles, javascript, images, ...)
+qui implémente une fonctionnalité unique (un blog, un forum, ...) et qui peut être
+facilement partagé avec d'autres développeurs. Jusqu'à maintenant, nous avons
+manipulé un seul bundle, ``AcmeDemoBundle``. Vous en saurez plus sur les bundles
+dans le dernier chapitre de ce tutoriel.
 
-Working with Environments
--------------------------
+Travailler avec les Environnements
+----------------------------------
 
+Maintenant que vous comprenez mieux le fonctionnement de Symfony2, 
 Now that you have a better understanding of how Symfony2 works, have a closer
 look at the bottom of the page; you will notice a small bar with the Symfony2
 logo. This is called the "Web Debug Toolbar" and it is the developer's best
@@ -378,7 +380,6 @@ View".
 
 .. _Symfony2 Standard Edition:      http://symfony.com/download
 .. _Symfony en 5 minutes:           http://symfony.com/symfony-in-five-minutes
-.. _Separation of Concerns:         http://en.wikipedia.org/wiki/Separation_of_concerns
 .. _YAML:                           http://www.yaml.org/
-.. _annotations in controllers:     http://bundles.symfony-reloaded.org/frameworkextrabundle/
+.. _les annotations dans les contrôleurs:     http://bundles.symfony-reloaded.org/frameworkextrabundle/
 .. _Twig:                           http://www.twig-project.org/
