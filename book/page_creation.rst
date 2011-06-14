@@ -380,7 +380,7 @@ La structure des répertoires
 ----------------------------
 
 Après seulement quelques courtes sections, vous comprenez déjà la philosophie derrière la création et le rendu de pages dans Symfony2. 
-Vous avez déjà commencé à voir commet les projets Symfony2 sont structurés et organisés. 
+Vous avez déjà commencé à voir comment les projets Symfony2 sont structurés et organisés. 
 A la fin de cette section, vous saurez où trouver et mettre les différents types de fichiers et pourquoi.
 
 Malgré le fait que ce soit tout à fait flexible, chaque :term:`application` 
@@ -390,7 +390,7 @@ a par défaut la même structure de répertoires basique mais recommandée:
 
 * ``src/``: Tout le code PHP du projet est stocké ici;
 
-* ``vendor/``: ar convention, toutes les librairies tierces (additionnelles) sont placées ici;
+* ``vendor/``: par convention, toutes les librairies tierces (additionnelles) sont placées ici;
 
 * ``web/``: Le répertoire racine web qui contient tous les fichiers publiquement accessibles;
 
@@ -399,7 +399,7 @@ Le répertoire Web
 
 Le répertoire web contient tous les fichiers publics et statiques tels que les images, les feuilles de style et les javascripts. 
 Il contient également le
-:term:`front controller` ::
+:term:`front controller` (contrôleur frontal) ::
 
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php';
@@ -411,26 +411,27 @@ Il contient également le
     $kernel->handle(Request::createFromGlobals())->send();
 
 Le fichier du contrôleur frontal (``app.php`` dans cet exemple) est le fichier exécuté lorsqu'on appelle une application Symfony2. 
-Son job est d'utiliser une classe Kernel, ``AppKernel``, pour lancer (amorcer, bootstrapper) l'application.
+Son job est d'utiliser une classe Kernel, ``AppKernel``, pour initialiser l'application (bootstrap).
 
 .. tip::
 	
    
-   avoir un front contrôler signifie des URL différentes et plus flexibles que dans une application en pur php. 
-   Lorsqu'on utilise un front contrôler, les URL sont formatée comme suit:
+   Avoir un contrôleur frontal signifie des URL différentes et plus flexibles que dans une application en pur php. 
+   Lorsqu'on utilise un contrôleur frontal, les URL sont formatée comme suit:
 
        http://localhost/app.php/hello/Ryan
 
-   Le contrôlleur frontal, ``app.php``, est exécuté et l'URI ``/hello/Ryan``
-   est routée en interne en se basant sur la configuration du routage. En utilisant les règles du module Apache
-   ``mod_rewrite``, vous pouvez forceer le script ``app.php`` à être exécuté sans
+   Le contrôleur frontal, ``app.php``, est exécuté et l'URI ``/hello/Ryan``
+   est traitée par l'application en se basant sur la configuration du routage. 
+   En utilisant les règles du module Apache ``mod_rewrite``, 
+   vous pouvez forcer le script ``app.php`` à être exécuté sans
    avoir besoin de le mentionner dans l'URL ::
 
     http://localhost/hello/Ryan
 
 Les contrôleurs frontaux sont essentiels pour traiter chaque requête. 
-Cepeandant, vous aurez rarement besoin de les modifier ou même d'y penser. 
-Nous en reparlerons dans la section `Environments`_ .
+Cependant, vous aurez rarement besoin de les modifier ou même d'y penser. 
+Nous en reparlerons dans la section `Environnements`_ .
 
 Le répertoire de l'application (``app``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -438,18 +439,20 @@ Le répertoire de l'application (``app``)
 Comme nous l'avons vu dans le contrôleur frontal, la classe ``AppKernel`` est le point d'entrée principal de l'application et est chargée de toute la configuration. 
 De ce fait, elle est stockée dans le répertoire ``app/``.
 
-Cette classe doit implémenter trois méthodes  qui définissent tout ce dont Symfony a besoin de savoir à propos de votre application.
+Cette classe doit implémenter trois méthodes qui définissent tout ce dont Symfony a besoin de savoir à propos de votre application.
 Vous n'avez pas à vous soucier de ces méthodes en commençant - Symfony les complète pour vous avec de valeurs par défaut.
-*``registerBundles()``: renvoit un tableau de tous les bundles dont l'application a besoin pour fonctionner (voir le [Système de Bundles]);
 
-*``registerCoontainerConfiguration()``: Charge le fichier de ressources de l'application principal (voir la section `Configuration de l'Application`_]
+*``registerBundles()``: renvoit un tableau de tous les bundles dont l'application a besoin pour fonctionner (voir le `Système de Bundles`_);
+
+*``registerCoontainerConfiguration()``: Charge le fichier de ressources de l'application principal (voir la section `Configuration de l'Application`_)
 
 *``registerRootDir()``: renvoie le répertoire racine de l'application (``app/``, par défaut)
 
-Dans le développement au quotidien, vous utiliserez principalement le répertoire ``app/` 
-pour modifier les fichiers de configuration et de routage dans le répertoire ``app/config`` (voir `Configuration de l'application`_). 
+Dans le développement au quotidien, vous utiliserez principalement le répertoire ``app/`` 
+pour modifier les fichiers de configuration et de routage dans le répertoire ``app/config`` (voir `Configuration de l'Application`_). 
 ``app/`` contient également le répertoire de cache de l'application (``app/cache``), le répertoire des logs (``app/logs``) 
-et un répertoire pour les ressources communes à l'application entière (``app/Resources``). 
+et un répertoire pour les ressources communes à l'application entière (``app/Resources``).
+ 
 Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
 
 .. _autoloading-introduction-sidebar:
@@ -463,7 +466,8 @@ Grace à l'autoloader, vous n'avez jamais à vous soucier d'utiliser les instruc
             // ...
         ));
     
-    Avec cette configuration, Symfony2 va rechercher toutes les classes de l'espace de nom ``Acme`` (le nom de votre fausse société)  dans le répertoire ``src/``.
+
+Avec cette configuration, Symfony2 va rechercher toutes les classes de l'espace de nom ``Acme`` (le nom de votre fausse société)  dans le répertoire ``src/``.
 Pour que le chargement automatique fonctionne, le nom de la classe et le chemin du fichier doivent avoir une structure similaire::
 
     .. code-block:: text
@@ -473,9 +477,9 @@ Pour que le chargement automatique fonctionne, le nom de la classe et le chemin 
         Chemin:
             src/Acme/StudyBundle/Controller/HelloController.php
 
-    ``app/autoload.php`` configure le chargeur automatique pour chercher différents espaces de nom dans différents répertoires 
-   	et peut être personnalisé si nécessaire. 
-	Pour plus d'informations sur le chargement automatique, voir :doc: `Comment charger automatiquement des classes</cookbook/tools/autoloader>`.
+``app/autoload.php`` configure le chargeur automatique pour chercher différents espaces de nom dans différents répertoires 
+et peut être personnalisé si nécessaire. 
+Pour plus d'informations sur le chargement automatique, voir :doc: `Comment charger automatiquement des classes</cookbook/tools/autoloader>`.
 
 Le répertoire des sources (``src/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -747,8 +751,8 @@ options of each feature.
 
 .. _environments-summary:
 
-Environments
-------------
+Environnements
+--------------
 
 An application can run in various environments. The different environments
 share the same PHP code (apart from the front controller), but can have completely
@@ -796,8 +800,8 @@ cached files and allow them to rebuild::
 .. index::
    single: Environments; Configuration
 
-Environment Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuration de l'environnement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``AppKernel`` class is responsible for actually loading the configuration
 file of your choice::
