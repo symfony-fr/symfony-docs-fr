@@ -246,11 +246,6 @@ En plus d'être une façon sympathique d'organiser et de configurer votre code,
 les bundles peuvent étendre d'autres bundles. L'héritage entre bundle vous permet
 de surcharger n'importe quel bundle pour personnaliser ses contrôleurs, ses templates,
 ou n'importe lequel de ses fichiers.
-
-
-In addition to being a nice way to organize and configure your code, a bundle
-can extend another bundle. Bundle inheritance allows you to override any existing
-bundle in order to customize its controllers, templates, or any of its files.
 C'est ici que les noms logiques se revèlent pratiques car ils font abstraction de
 l'endroit ou est stockée la ressource.
 

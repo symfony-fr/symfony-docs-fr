@@ -1,17 +1,18 @@
-The Controller
-==============
+Le Contrôleur
+=============
 
-Still with us after the first two parts? You are already becoming a Symfony2
-addict! Without further ado, let's discover what controllers can do for you.
+Toujours avec nous après ces deux premières parties? Vous êtes déjà un
+inconditionnel de Symfony2! Sans plus tarder, nous allons voir ce que les
+contrôleurs peuvent faire pour vous.
 
-Using Formats
--------------
+Utiliser les formats
+--------------------
 
-Nowadays, a web application should be able to deliver more than just HTML
-pages. From XML for RSS feeds or Web Services, to JSON for Ajax requests,
-there are plenty of different formats to choose from. Supporting those formats
-in Symfony2 is straightforward. Tweak the route by adding a default value of
-``xml`` for the ``_format`` variable::
+De nos jours, une application Web doit être en mesure de livrer plus que de
+simples fichiers HTML. Du XML pour les flux RSS ou des Web Services, du JSON
+pour les requêtes Ajax,... Bref, il y a beaucoup de formats différents à choisir.
+Manipuler ces formats dans Symfony2 est simple. Modifiez ``routing.yml`` et
+ajoutez un ``_format`` avec une valeur d'attribut ``xml``::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,8 +27,8 @@ in Symfony2 is straightforward. Tweak the route by adding a default value of
         return array('name' => $name);
     }
 
-By using the request format (as defined by the ``_format`` value), Symfony2
-automatically selects the right template, here ``hello.xml.twig``:
+En utilisant le format (défini par la valeur ``_format``) dans la requête, Symfony2
+choisira automatiquement le bon template, ici ``hello.xml.twig``:
 
 .. code-block:: xml+php
 
@@ -36,10 +37,10 @@ automatically selects the right template, here ``hello.xml.twig``:
         <name>{{ name }}</name>
     </hello>
 
-That's all there is to it. For standard formats, Symfony2 will also
-automatically choose the best ``Content-Type`` header for the response. If
-you want to support different formats for a single action, use the ``{_format}``
-placeholder in the route pattern instead::
+C'est tout ce qu'il y a à faire. Pour les formats standards, Symfony2 choisira
+automatiquement le meilleur en-tête ``Content-Type`` pour la réponse. Si vous
+voulez prendre en charge des formats différents pour une seule action, utilisez
+l'emplacement ``{_format}`` dans le pattern à la place::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -54,39 +55,40 @@ placeholder in the route pattern instead::
         return array('name' => $name);
     }
 
-The controller will now be called for URLs like ``/demo/hello/Fabien.xml`` or
-``/demo/hello/Fabien.json``.
+Le contrôleur sera désormais appelé par des URLs comme ``/demo/hello/Fabien.xml``
+ou ``/demo/hello/Fabien.json``.
 
-The ``requirements`` entry defines regular expressions that placeholders must
-match. In this example, if you try to request the ``/demo/hello/Fabien.js``
-resource, you will get a 404 HTTP error, as it does not match the ``_format``
-requirement.
+L'entrée ``requirements`` définit les expressions régulières qui doivent
+correspondre à des emplacements réservés. Dans cet exemple, si vous essayez de
+demander la ressource ``/hello/Fabien.js``, vous obtiendrez une erreur HTTP 404,
+car elle ne correspond pas à l'exigence ``_format``.
 
-Redirecting and Forwarding
---------------------------
+Redirections et Renvois
+-----------------------
 
-If you want to redirect the user to another page, use the ``redirect()``
-method::
+Si vous voulez rediriger un utilisateur vers une autre page, utilisez la méthode
+``redirect()``::
 
     return $this->redirect($this->generateUrl('_demo_hello', array('name' => 'Lucas')));
 
-The ``generateUrl()`` is the same method as the ``path()`` function we used in
-templates. It takes the route name and an array of parameters as arguments and
-returns the associated friendly URL.
+La méthode ``generateUrl()`` est la même que la méthode ``path()`` que nous
+avions utilisée dans les templates. Elle prend le nom de la route et un tableau
+de paramètres comme arguments et retourne la jolie adresse qui
+convient.
 
-You can also easily forward the action to another one with the ``forward()``
-method. Internally, Symfony makes a "sub-request", and returns the ``Response``
-object from that sub-request::
+Vous pouvez facilement renvoyer une action vers une autre avec la méthode
+``forward()``. En interne, Symfony crée une "sous-requête", et retourne l'objet
+``Response``de cette sous-requête::
 
     $response = $this->forward('AcmeDemoBundle:Hello:fancy', array('name' => $name, 'color' => 'green'));
 
     // do something with the response or return it directly
 
-Getting information from the Request
-------------------------------------
+Obtenir des informations de la requête
+--------------------------------------
 
-Besides the values of the routing placeholders, the controller also has access
-to the ``Request`` object::
+En plus des paramètres venant des routes, le contrôleur peut également accéder
+à l'objet ``Request``::
 
     $request = $this->get('request');
 
@@ -98,8 +100,7 @@ to the ``Request`` object::
 
     $request->request->get('page'); // get a $_POST parameter
 
-In a template, you can also access the ``Request`` object via the
-``app.request`` variable:
+Dans un template, vous pouvez accéder à l'objet ``Request`` via la variable ``app.request``:
 
 .. code-block:: html+jinja
 
@@ -107,45 +108,45 @@ In a template, you can also access the ``Request`` object via the
 
     {{ app.request.parameter('page') }}
 
-Persisting Data in the Session
-------------------------------
+Persister les données en session
+--------------------------------
 
-Even if the HTTP protocol is stateless, Symfony2 provides a nice session object
-that represents the client (be it a real person using a browser, a bot, or a
-web service). Between two requests, Symfony2 stores the attributes in a cookie
-by using native PHP sessions.
+Même si le protocole HTTP est "stateless", Symfony2 fournit un objet session
+très pratique qui représente le client (une personne physique qui utilise un
+navigateur, un robot ou un web service). Entre deux requêtes, Symfony2 stocke les
+attributs dans un cookie en utilisant les sessions PHP natives.
 
-Storing and retrieving information from the session can be easily achieved
-from any controller::
+Stocker et retrouver les informations en session peut être fait très facilement
+dans un contrôleur::
 
     $session = $this->get('request')->getSession();
 
-    // store an attribute for reuse during a later user request
+    // stocke un attribut pour une future requête
     $session->set('foo', 'bar');
 
-    // in another controller for another request
+    // dans un autre contrôleur et une autre requête
     $foo = $session->get('foo');
 
-    // set the user locale
+    // définit la locale de l'utilisateur
     $session->setLocale('fr');
 
-You can also store small messages that will only be available for the very
-next request::
+Vous pouvez aussi stocker de courts messages qui ne seront disponibles que pour
+la prochaine requête::
 
-    // store a message for the very next request (in a controller)
+    // stocke un message pour la prochaine requête (dans un contrôleur)
     $session->setFlash('notice', 'Congratulations, your action succeeded!');
 
-    // display the message back in the next request (in a template)
+    // affiche le message lors de la requêtes suivante (dans un template)
     {{ app.session.flash('notice') }}
 
-This is useful when you need to set a success message before redirecting
-the user to another page (which will then show the message).
+C'est utile quand vous avez besoin d'afficher un message de succès avant de
+rediriger l'utilisateur vers une autre page (qui affichera alors le message).
 
-Securing Resources
-------------------
+Sécuriser les ressources
+------------------------
 
-The Symfony Standard Edition comes with a simple security configuration that
-fits most common needs:
+La Symfony Standard Edition est fournie avec une configuration de sécurité simple
+qui suffit à la plupart des besoins:
 
 .. code-block:: yaml
 
@@ -178,23 +179,24 @@ fits most common needs:
                     path:   /demo/secured/logout
                     target: /demo/
 
-This configuration requires users to log in for any URL starting with
-``/demo/secured/`` and defines two valid users: ``user`` and ``admin``.
-Moreover, the ``admin`` user has a ``ROLE_ADMIN`` role, which includes the
-``ROLE_USER`` role as well (see the ``role_hierarchy`` setting).
+Cette configuration requiert que les utilisateurs soient connectés pour toute URL
+commençant par ``/demo/secured/`` et définit deux utilisateurs valides : ``user``
+et ``admin``.
+De plus, l'utilisateur ``admin`` a le rôle ``ROLE_ADMIN``, qui inclut aussi le rôle
+``ROLE_USER`` (regardez le paramètre ``role_hierarchy``).
 
 .. tip::
+    
+    Pour des raisons de lisibilié, les mots de passe sont stockés en clair dans
+    cette configuration, mais vous pouvez utiliser un algorithme en modifiant la
+    section ``encoders``.
 
-    For readability, passwords are stored in clear text in this simple
-    configuration, but you can use any hashing algorithm by tweaking the
-    ``encoders`` section.
+Aller à l'URL ``http://localhost/Symfony/web/app_dev.php/demo/secured/hello``
+vous redirigera automatiquement au formulaire d'authentification car la ressource
+est protégée par un ``firewall``.
 
-Going to the ``http://localhost/Symfony/web/app_dev.php/demo/secured/hello``
-URL will automatically redirect you to the login form because this resource is
-protected by a ``firewall``.
-
-You can also force the action to require a given role by using the ``@Secure``
-annotation on the controller::
+Vous pouvez aussi forcer l'action à exiger un rôle donné en utilisant l'annotation
+``@Secure`` du contrôleur::
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -210,26 +212,26 @@ annotation on the controller::
         return array('name' => $name);
     }
 
-Now, log in as ``user`` (who does *not* have the ``ROLE_ADMIN`` role) and
-from the secured hello page, click on the "Hello resource secured" link.
-Symfony2 should return a 403 HTTP status code, indicating that the user
-is "forbidden" from accessing that resource.
+Maintenant, connecté en tant que ``user`` (qui n'a *pas* le rôle ``ROLE_ADMIN``)
+et depuis la page  sécurisée "hello" cliquez sur le lien "ressource sécurisée Hello".
+Symfony2 devrait retourner un code HTTP 403, indiquant que la ressource est "interdite"
+à cet utilisateur.
 
 .. note::
 
-    The Symfony2 security layer is very flexible and comes with many different
-    user providers (like one for the Doctrine ORM) and authentication providers
-    (like HTTP basic, HTTP digest, or X509 certificates). Read the
-    ":doc:`/book/security`" chapter of the book for more information
-    on how to use and configure them.
+    La couche de sécurité de Symfony2 est très flexible et est livré avec différents
+    fournisseurs (par exemple un pour l'ORM Doctrine) et des fournisseurs 
+    d'authentification (comme HTTP basic, HTTP digest, ou le certificat X509).
+    Lisez le chapitre ":doc:`/book/security`" pour avoir plus d'information sur
+    leur configuration ou leur utilisation.
 
-Caching Resources
------------------
+Cacher les ressources
+---------------------
 
-As soon as your website starts to generate more traffic, you will want to
-avoid generating the same resource again and again. Symfony2 uses HTTP cache
-headers to manage resources cache. For simple caching strategies, use the
-convenient ``@Cache()`` annotation::
+Dès que votre site commencera à générer du trafic, vous voudrez éviter de générer
+les ressources encore et encore. Symfony2 utilise le cache HTTP pour gérer la mise
+en cache des ressources. Pour une stratégie de mise en cache basique, utilisez
+l'annotation ``@Cache()``::
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -245,25 +247,28 @@ convenient ``@Cache()`` annotation::
         return array('name' => $name);
     }
 
-In this example, the resource will be cached for a day. But you can also use
-validation instead of expiration or a combination of both if that fits your
-needs better.
+Dans cet exemple, la ressource peut être mise en cache pour une journée. Mais vous
+pouvez également utiliser la validation plutôt que l'expiration ou une combinaison
+des deux si cela correspond mieux à vos besoins.
 
-Resource caching is managed by the Symfony2 built-in reverse proxy. But because 
-caching is managed using regular HTTP cache headers, you can replace the 
-built-in reverse proxy with Varnish or Squid and easily scale your application.
+La mise en cache des ressources est gérée par le reverse proxy inclu dans Symfony2.
+Mais, puisque la mise en cache est gérée par des entêtes HTTP classiques, vous
+pouvez remplacer le reverse proxy Symfony par Varnish ou Squid et l'adapter
+facilement à votre application.
 
 .. note::
 
-    But what if you cannot cache whole pages? Symfony2 still has the solution
-    via Edge Side Includes (ESI), which are supported natively. Learn more by
-    reading the ":doc:`/book/http_cache`" chapter of the book.
+    Mais si jamais vous ne pouvez pas cacher vos pages en entier? Symfony2 a
+    la solution via les Edge Side Includes (ESI), qui sont supportés nativement.
+    Lisez le chapitre ":doc:`/book/http_cache`" pour en savoir plus.
 
-Final Thoughts
+Un dernier mot
 --------------
 
-That's all there is to it, and I'm not even sure we have spent the full
-10 minutes. We briefly introduced bundles in the first part, and all the
-features we've learned about so far are part of the core framework bundle.
-But thanks to bundles, everything in Symfony2 can be extended or replaced.
-That's the topic of the next part of this tutorial.
+C'est tout ce qu'il y a à faire et je ne suis même pas sûr que nous avons passé
+les 10 minutes que l'on s'était allouées. Nous avons brièvement présenté les 
+Bundles dans la première partie et toutes les caractéristiques que nous avons 
+apprises jusqu'à maintenant font partie du "core framework Bundle".
+Mais grâce aux Bundles, tout peut être étendu ou remplacé dans Symfony2.
+C'est le thème de la prochaine partie de ce tutoriel.
+

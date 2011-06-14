@@ -1,5 +1,5 @@
-Introduction
-============
+Vue d'ensemble
+==============
 
 Commencez à utiliser Symfony2 en 10 minutes! Ce tutoriel vous guide à travers
 quelques-uns des concepts les plus importants de Symfony2. Il explique
@@ -98,7 +98,7 @@ Symfony2 (remplacez *Fabien* par votre prénom):
 
 Que se passe t-il ici? Décortiquons cette URL:
 
-* ``app_dev.php``: C'est un :term:`contrôleur frontal`. C'est l'unique point
+* ``app_dev.php``: C'est un :term:`contrôleur frontal<front controller>`. C'est l'unique point
   d'entrée de votre application et cela prend en charge toutes les requêtes.
 
 * ``/demo/hello/Fabien``: C'est le *chemin virtuel* vers la ressource à laquelle
@@ -315,46 +315,46 @@ dans le dernier chapitre de ce tutoriel.
 Travailler avec les Environnements
 ----------------------------------
 
-Maintenant que vous comprenez mieux le fonctionnement de Symfony2, 
-Now that you have a better understanding of how Symfony2 works, have a closer
-look at the bottom of the page; you will notice a small bar with the Symfony2
-logo. This is called the "Web Debug Toolbar" and it is the developer's best
-friend. But this is only the tip of the iceberg; click on the weird hexadecimal
-number to reveal yet another very useful Symfony2 debugging tool: the profiler.
+Maintenant que vous comprenez mieux le fonctionnement de Symfony2, regardons de
+plus près le bas de la page; vous verrez une petite barre avec le logo Symfony2.
+On l'appelle la "Web Debug Toolbar" et c'est le meilleur ami du développeur. Mais
+il s'agit seulement de la partie émergée de l'iceberg. Cliquez sur le nombre
+hexadécimal pour révéler un nouvel outil Symfony2 très utile : le profiler.
 
-Of course, you won't want to show these tools when you deploy your application
-to production. That's why you will find another front controller in the
-``web/`` directory (``app.php``), which is optimized for the production environment:
+Bien évidemment, vous ne voulez pas voir ces ouils lorsque vous déploierez votre
+application sur le serveur de production. C'est pourquoi vous trouverez un autre
+contrôleur dans le répertoire``web/`` (``app.php``), qui est optimisé pour 
+l'environnement de production:
 
 .. code-block:: text
 
     http://localhost/Symfony/web/app.php/demo/hello/Fabien
 
-And if you use Apache with ``mod_rewrite`` enabled, you can even omit the
-``app.php`` part of the URL:
+Et si vous utilisez Apache avec le ``mod_rewrite`` activé, vous pouvez omettre
+la partie ``app.php`` dans l'URL:
 
 .. code-block:: text
 
     http://localhost/Symfony/web/demo/hello/Fabien
 
-Last but not least, on the production servers, you should point your web root
-directory to the ``web/`` directory to secure your installation and have an
-even better looking URL:
+Enfin, sur le serveur de production, vous devriez faire pointer le répertoire 
+racine web vers le répertoire ``web/`` pour sécuriser votre installation et avoir 
+des URLs plus propres:
 
 .. code-block:: text
 
     http://localhost/demo/hello/Fabien
 
-To make you application respond faster, Symfony2 maintains a cache under the
-``app/cache/`` directory. In the development environment (``app_dev.php``),
-this cache is flushed automatically whenever you make changes to any code or
-configuration. But that's not the case in the production environment
-(``app.php``) where performance is key. That's why you should always use
-the development environment when developing your application.
+Pour que votre application répondre plus rapidement, Symfony2 met en cache certains
+dossiers dans le répertoire ``app/cache/``. En environnement de développement 
+(``app_dev.php``), le cache est vidé automatiquement lorsque vous apportez une
+modification au code ou à un fichier de configuration. Mais ce n'est pas le cas
+en environnement de production (``app.php``) où les performances prévalent. C'est
+pourquoi vous devriez toujours utiliser l'environnement de développement pour
+développer vos applications.
 
-Different :term:`environments<environment>` of a given application differ
-only in their configuration. In fact, a configuration can inherit from another
-one:
+Différents :term:`environnements<environment>` d'une application donnée ne diffèrent
+que par leur configuration. En fait, une configuration peut hériter d'une autre:
 
 .. code-block:: yaml
 
@@ -366,17 +366,17 @@ one:
         toolbar: true
         intercept_redirects: false
 
-The ``dev`` environment (defined in ``config_dev.yml``) inherits from the
-global ``config.yml`` file and extends it by enabling the web debug toolbar.
+L'environnement ``dev`` (défini dans ``config_dev.yml``) hérite du fichier global
+``config.yml`` et l'étend en activant la web debug toolbar.
 
-Final Thoughts
---------------
+Derniers mots
+-------------
 
-Congratulations! You've had your first taste of Symfony2 code. That wasn't so
-hard, was it? There's a lot more to explore, but you should already see how
-Symfony2 makes it really easy to implement web sites better and faster. If you
-are eager to learn more about Symfony2, dive into the next section: "The
-View".
+Félicitations! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
+terrible, n'est-ce pas? Il y a encore beaucoup à explorer et vous devrier déjà
+comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement. 
+Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 
+suivante: "La vue".
 
 .. _Symfony2 Standard Edition:      http://symfony.com/download
 .. _Symfony en 5 minutes:           http://symfony.com/symfony-in-five-minutes
