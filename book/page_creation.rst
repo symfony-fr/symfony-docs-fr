@@ -57,12 +57,12 @@ siègera dans un bundle.
 
 Un bundle n'est rien d'autre qu'un répertoire (avec un namespace PHP) qui
 abrite tout ce qui est relatif à une fonctionnalité spécifique (voyez :ref:`page-creation-bundles`).
-Afin de créer un bundle nommé ``AcmeStudyBundle`` (un bundle fictif que vous 
+Afin de créer un bundle nommé ``AcmeHelloBundle`` (un bundle fictif que vous 
 créerez dans ce chapitre), lancez la commande suivante :
 
 .. code-block:: text
 
-   php app/console init:bundle "Acme\StudyBundle" src
+   php app/console init:bundle Acme/HelloBundle src
 
 Ensuite, assurez-vous que le namespace ``Acme`` soit bien ajouté au fichier
 ``app/autoload.php`` (voyez :ref:`Autoloading sidebar<autoloading-introduction-sidebar>`):
@@ -84,7 +84,7 @@ de la classe ``AppKernel`` :
     {
         $bundles = array(
             // ...
-            new Acme\StudyBundle\AcmeStudyBundle(),
+            new Acme\HelloBundle\AcmeHelloBundle(),
         );
         
         // ...
@@ -113,7 +113,7 @@ des fichiers XML ou PHP afin de configurer vos routes :
             defaults: { _controller: FrameworkBundle:Default:index }
 
         hello:
-            resource: "@AcmeStudyBundle/Resources/config/routing.yml"
+            resource: "@AcmeHelloBundle/Resources/config/routing.yml"
 
     .. code-block:: xml
 
@@ -128,7 +128,7 @@ des fichiers XML ou PHP afin de configurer vos routes :
                 <default key="_controller">FrameworkBundle:Default:index</default>
             </route>
 
-            <import resource="@AcmeStudyBundle/Resources/config/routing.xml" />
+            <import resource="@AcmeHelloBundle/Resources/config/routing.xml" />
         </routes>
 
     .. code-block:: php
@@ -141,7 +141,7 @@ des fichiers XML ou PHP afin de configurer vos routes :
         $collection->add('homepage', new Route('/', array(
             '_controller' => 'FrameworkBundle:Default:index',
         )));
-        $collection->addCollection($loader->import("@AcmeStudyBundle/Resources/config/routing.php"));
+        $collection->addCollection($loader->import("@AcmeHelloBundle/Resources/config/routing.php"));
 
         return $collection;
 
@@ -149,20 +149,20 @@ Les premières lignes d'un fichier de configuration de routage définit quel
 code appeler quand l'utilisateur demande la ressource "``/``" (la page d'accueil)
 et servent d'exemple de configurations de routage que vous pouvez trouver dans ces
 fichiers. La dernière partie est plus intéressante, elle importe un autre fichier
-de configuration qui se trouve dans le ``AcmeStudyBundle`` :
+de configuration qui se trouve dans le ``AcmeHelloBundle`` :
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/StudyBundle/Resources/config/routing.yml
+        # src/Acme/HelloBundle/Resources/config/routing.yml
         hello:
             pattern:  /hello/{name}
-            defaults: { _controller: AcmeStudyBundle:Hello:index }
+            defaults: { _controller: AcmeHelloBundle:Hello:index }
 
     .. code-block:: xml
 
-        <!-- src/Acme/StudyBundle/Resources/config/routing.xml -->
+        <!-- src/Acme/HelloBundle/Resources/config/routing.xml -->
         <?xml version="1.0" encoding="UTF-8" ?>
 
         <routes xmlns="http://symfony.com/schema/routing"
@@ -170,19 +170,19 @@ de configuration qui se trouve dans le ``AcmeStudyBundle`` :
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
             <route id="hello" pattern="/hello/{name}">
-                <default key="_controller">AcmeStudyBundle:Hello:index</default>
+                <default key="_controller">AcmeHelloBundle:Hello:index</default>
             </route>
         </routes>
 
     .. code-block:: php
 
-        // src/Acme/StudyBundle/Resources/config/routing.php
+        // src/Acme/HelloBundle/Resources/config/routing.php
         use Symfony\Component\Routing\RouteCollection;
         use Symfony\Component\Routing\Route;
 
         $collection = new RouteCollection();
         $collection->add('hello', new Route('/hello/{name}', array(
-            '_controller' => 'AcmeStudyBundle:Hello:index',
+            '_controller' => 'AcmeHelloBundle:Hello:index',
         )));
 
         return $collection;
@@ -206,7 +206,7 @@ Créez le Contrôleur
 ~~~~~~~~~~~~~~~~~~~
 
 Quand une URI comme ``/hello/Jean`` is traitée par l'application, la route
-``hello`` est correspondante et le contrôleur ``AcmeStudyBundle:Hello/index``
+``hello`` est correspondante et le contrôleur ``AcmeHelloBundle:Hello/index``
 est excécuté par le framework. L'étape suivante est de créer ce contrôleur.
 
 En réalité, un contrôleur n'est rien d'autre qu'une méthode PHP que vous créez
@@ -216,9 +216,9 @@ ressource demandée par la requête. Excepté dans certains situations avancées
 le résultat final d'un contrôleur sera toujours le même :
 un objet ``Response`` Symfony2 ::
 
-    // src/Acme/StudyBundle/Controller/HelloController.php
+    // src/Acme/HelloBundle/Controller/HelloController.php
 
-    namespace Acme\StudyBundle\Controller;
+    namespace Acme\HelloBundle\Controller;
     use Symfony\Component\HttpFoundation\Response;
 
     class HelloController
@@ -238,7 +238,7 @@ Félicitations ! Après avoir n'avoir créé qu'une route et un contrôleur, vou
 avez une page pleinement fonctionnelle ! Si vous avez tout effectué correctement,
 votre application devrait vous saluer::
 
-    http://localhost/app_dev.php/hello/Christophe
+    http://localhost/app_dev.php/hello/Fabien
 
 Une troisième étape optionelle dans ce processus est de créer un template.
 
@@ -253,12 +253,15 @@ Créez le Template
 
 Les templates vous permettent de déplacer toute la présentation (ex: code HTML)
 dans un fichier séparé et de réutiliser différentes portions d'un gabarit.
-A la place d'écrire le code HTML dans le contrôleur, utilisez plutôt un template::
+A la place d'écrire le code HTML dans le contrôleur, utilisez plutôt un template:
 
+.. code-block:: php	
+    :linenos:
 
-    // src/Acme/StudyBundle/Controller/HelloController.php
+	
+    // src/Acme/HelloBundle/Controller/HelloController.php
 
-    namespace Acme\StudyBundle\Controller;
+    namespace Acme\HelloBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -266,18 +269,21 @@ A la place d'écrire le code HTML dans le contrôleur, utilisez plutôt un templ
     {
         public function indexAction($name)
         {
-            return $this->render('AcmeStudyBundle:Hello:index.html.twig', array('name' => $name));
+            return $this->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
             // render a PHP template instead
-            // return $this->render('AcmeStudyBundle:Hello:index.html.php', array('name' => $name));
+            // return $this->render('AcmeHelloBundle:Hello:index.html.php', array('name' => $name));
         }
     }
 
 .. note::
 
-   Afin d'utiliser la méthode ``render()``, vous devez étendre la classe 
-   :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`, qui
-   contient des raccourcis pour des tâches fréquemment utilisées.
+   Afin d'utiliser la méthode ``render()``, votre contrôleur doit étendre la classe
+   `Symfony\Bundle\FrameworkBundle\Controller\Controller`` (API 
+   docs: :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`), qui
+   ajoute des raccourcis pour des tâches fréquemment utilisées dans les contrôleurs.
+   Dans l'exemple ci-dessus, c'est ce qui est fait en ajoutant la ligne ``use``
+   et en étendant la classe ``Controller`` à la ligne 6.
 
 La méthode ``render()`` crée un objet ``Response`` qui contient le contenu
 d'un template rendu. Comme tout autre contrôleur, vous retournerez cet objet
@@ -289,12 +295,12 @@ les templates classiques PHP et les succints mais puissants templates ``Twig``.
 Ne paniquez pas, vous êtes libres de choisir de choisir celui que vous désirez
 voire même les deux.
 
-Le contrôleur rend le template ``AcmeStudyBundle:Hello:index.html.twig``,
+Le contrôleur rend le template ``AcmeHelloBundle:Hello:index.html.twig``,
 qui suit la convention de nommage :
 
 *BundleName*:*ControllerName*:*TemplateName*
 
-Dans ce cas, ``AcmeStudyBundle`` est le nom de bundle, ``Hello`` est le
+Dans ce cas, ``AcmeHelloBundle`` est le nom de bundle, ``Hello`` est le
 nom du contrôleur et enfin ``index.html.twig`` est le template :
 
 .. configuration-block::
@@ -302,7 +308,7 @@ nom du contrôleur et enfin ``index.html.twig`` est le template :
     .. code-block:: jinja
        :linenos:
 
-        {# src/Acme/StudyBundle/Resources/views/Hello/index.html.twig #}
+        {# src/Acme/HelloBundle/Resources/views/Hello/index.html.twig #}
         {% extends '::layout.html.twig' %}
 
         {% block body %}
@@ -311,7 +317,7 @@ nom du contrôleur et enfin ``index.html.twig`` est le template :
 
     .. code-block:: php
 
-        <!-- src/Acme/StudyBundle/Resources/views/Hello/index.html.php -->
+        <!-- src/Acme/HelloBundle/Resources/views/Hello/index.html.php -->
         <?php $view->extend('::layout.html.php') ?>
 
         Hello <?php echo $view->escape($name) ?>!
@@ -473,9 +479,9 @@ Pour que le chargement automatique fonctionne, le nom de la classe et le chemin 
     .. code-block:: text
 
         Nom de classe:
-            Acme\StudyBundle\Controller\HelloController
+            Acme\HelloBundle\Controller\HelloController
         Chemin:
-            src/Acme/StudyBundle/Controller/HelloController.php
+            src/Acme/HelloBundle/Controller/HelloController.php
 
 ``app/autoload.php`` configure le chargeur automatique pour chercher différents espaces de nom dans différents répertoires 
 et peut être personnalisé si nécessaire. 
@@ -534,7 +540,7 @@ method of the ``AppKernel`` class::
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 
             // register your bundles
-            new Acme\StudyBundle\AcmeStudyBundle(),
+            new Acme\HelloBundle\AcmeHelloBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -550,7 +556,7 @@ are used by your application (including the core Symfony bundles).
 .. tip::
 
    A bundle can live *anywhere* as long as it can be autoloaded by Symfony2.
-   For example, if ``AcmeStudyBundle`` lives inside the ``src/Acme``
+   For example, if ``AcmeHelloBundle`` lives inside the ``src/Acme``
    directory, be sure that the ``Acme`` namespace has been added to the
    ``app/autoload.php`` file and mapped to the ``src`` directory.
 
@@ -604,7 +610,7 @@ be used.
 And as easy as this is, Symfony also provides a command-line interface for
 generating a basic bundle skeleton::
 
-    php app/console init:bundle "Acme\TestBundle" src
+    php app/console init:bundle Acme/TestBundle src
 
 The bundle skeleton generates with a basic controller, template and routing
 resource that can be customized. We'll talk more about Symfony2's command-line
@@ -620,7 +626,7 @@ Bundle Directory Structure
 
 The directory structure of a bundle is simple and flexible. By default, the
 bundle system follows a set of conventions that help to keep code consistent
-between all Symfony2 bundles. Let's take a look at ``AcmeStudyoverBundle``, as it
+between all Symfony2 bundles. Let's take a look at ``AcmeHelloBundle``, as it
 contains some of the most common elements of a bundle:
 
 * *Controller/* contains the controllers of the bundle (e.g. ``HelloController.php``);
@@ -659,11 +665,11 @@ format you prefer:
 
         # app/config/config.yml
         framework:
-            charset:         UTF-8
             secret:          xxxxxxxxxx
-            form:            true
-            csrf_protection: true
+            charset:         UTF-8
             router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+            csrf_protection: true
+            form:            true
             validation:      { enable_annotations: true }
             templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
             session:
@@ -676,31 +682,39 @@ format you prefer:
             debug:            %kernel.debug%
             strict_variables: %kernel.debug%
 
+       # ...
+
+
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <framework:config charset="UTF-8" error-handler="null" cache-warmer="false" secret="xxxxxxxxxx">
-            <framework:router resource="%kernel.root_dir%/config/routing.xml" cache-warmer="true" />
+        <framework:config charset="UTF-8" secret="xxxxxxxxxx">
+            <framework:router resource="%kernel.root_dir%/config/routing.xml" />
+	    <framework:csrf-protection />
+            <framework:form />            
             <framework:validation annotations="true" />
-            <framework:session default-locale="en" lifetime="3600" auto-start="true" />
-            <framework:templating assets-version="SomeVersionScheme" cache-warmer="true">
+            <framework:templating assets-version="SomeVersionScheme">
                 <framework:engine id="twig" />
             </framework:templating>
             <framework:form />
             <framework:csrf-protection />
+	    <framework:session default-locale="en" lifetime="3600" auto-start="true" />
         </framework:config>
 
         <!-- Twig Configuration -->
-        <twig:config debug="%kernel.debug%" strict-variables="%kernel.debug%" cache-warmer="true" />
+        <twig:config debug="%kernel.debug%" strict-variables="%kernel.debug%" />
+
+	<!-- ... -->
+
 
     .. code-block:: php
 
         $container->loadFromExtension('framework', array(
-            'charset'         => 'UTF-8',
             'secret'          => 'xxxxxxxxxx',
-            'form'            => array(),
-            'csrf-protection' => array(),
+            'charset'         => 'UTF-8',
             'router'          => array('resource' => '%kernel.root_dir%/config/routing.php'),
+	    'csrf-protection' => array(),
+            'form'            => array(),
             'validation'      => array('annotations' => true),
             'templating'      => array(
                 'engines' => array('twig'),
@@ -718,6 +732,8 @@ format you prefer:
             'debug'            => '%kernel.debug%',
             'strict_variables' => '%kernel.debug%',
         ));
+
+        // ...
 
 .. note::
 

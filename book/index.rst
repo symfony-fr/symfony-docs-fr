@@ -8,10 +8,10 @@ Book
     from_flat_php_to_symfony2
     installation
     page_creation
-    doctrine/index
     controller
     routing
     templating
+    doctrine
     testing
     validation
     forms
@@ -20,7 +20,7 @@ Book
     translation
     bundles
     service_container
-    internals/index
+    internals
     stable_api
 
 .. include:: map.rst.inc

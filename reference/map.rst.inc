@@ -5,9 +5,10 @@
   * :doc:`SecurityBundle (security) </reference/configuration/security>`
   * :doc:`SwiftMailerBundle (swiftmailer) </reference/configuration/swiftmailer>`
   * :doc:`TwigBundle (twig) </reference/configuration/twig>`
-  * :doc:`WebProfilerBundle (web_profiler) </reference/configuration/web_profiler>`
   * :doc:`MonologBundle (monolog) </reference/configuration/monolog>`
   * :doc:`SecurityBundle (security) </reference/configuration/security>`
+  * :doc:`WebProfilerBundle (web_profiler) </reference/configuration/web_profiler>`
+  * :doc:`DoctrineMongoDBBundle (doctrine_mongo_db) </reference/configuration/mongodb>`
 
 * **Forms**
 
@@ -20,3 +21,4 @@
   * :doc:`/reference/dic_tags`
   * :doc:`/reference/YAML`
   * :doc:`/reference/requirements`
+  * :doc:`/reference/model`
