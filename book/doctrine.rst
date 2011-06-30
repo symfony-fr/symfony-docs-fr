@@ -37,19 +37,7 @@ persist it to the database and fetch it back out.
     
     .. code-block:: bash
     
-        php app/console init:bundle "Acme\StoreBundle" src/
-
-    Next, be sure that the new bundle is enabled in the kernel::
-    
-        // app/AppKernel.php
-        
-        public function registerBundles()
-        {
-            $bundles = array(
-                // ...
-                new Acme\StoreBundle\AcmeStoreBundle(),
-            );
-        }
+        php app/console generate:bundle --namespace=Acme/StoreBundle
 
 Configuring the Database
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -117,8 +105,8 @@ inside the ``Entity`` directory of your ``AcmeStoreBundle``::
         protected $description;
     }
 
-The class - often called an "entity", meaning *a basic class that holds data*
-- is simple and helps fulfill the business requirement of needing products
+The class - often called an "entity", meaning *a basic class that holds data* -
+is simple and helps fulfill the business requirement of needing products
 in your application. This class can't be persisted to a database yet - it's
 just a simple PHP class.
 
@@ -452,7 +440,7 @@ Once you have your repository, you have access to all sorts of helpful methods::
     // find *all* products
     $products = $repository->findAll();
 
-    // find a group of products based on an abitrary column value
+    // find a group of products based on an arbitrary column value
     $products = $repository->findByPrice(19.99);
 
 .. note::
@@ -466,7 +454,7 @@ to easily fetch objects based on multiple conditions::
     // query for one product matching be name and price
     $product = $repository->findOneBy(array('name' => 'foo', 'price' => 19.99));
 
-    // query for all prdocuts matching the name, ordered by price
+    // query for all products matching the name, ordered by price
     $product = $repository->findBy(
         array('name' => 'foo'),
         array('price', 'ASC')

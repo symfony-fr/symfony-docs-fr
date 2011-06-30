@@ -1,15 +1,15 @@
 Vue d'ensemble
 ==============
 
-Commencez à utiliser Symfony2 en 10 minutes! Ce tutoriel vous guide à travers
-quelques-uns des concepts les plus importants de Symfony2. Il explique
-comment démarrer rapidement en vous montrant la structure d'un projet simple.
+Commencez à utiliser Symfony2 en 10 minutes! Ce tutoriel vous guidera à travers
+quelques-uns des concepts les plus importants de Symfony2 et explique
+comment démarrer rapidement en vous montrant un projet simple.
 
 Si vous avez déjà utilisé un framework web avant, vous devriez vous sentir à l'aise
 avec Symfony2. Sinon, bienvenue dans une toute nouvelle façon de développer des
 applications web!
 
-.. tip:
+.. tip::
 
     Vous voulez savoir quand utiliser un framework et pourquoi? Lisez "`Symfony
     en 5 minutes`_".
@@ -20,7 +20,7 @@ Télécharger Symfony2
 Tout d'abord, vérifiez que vous avez installé et configuré un serveur web (comme
 Apache) avec PHP 5.3.2 ou supérieur.
 
-Vous êtes prêts? Commençons par télécharter la "`Symfony2 Standard Edition`_",
+Vous êtes prêts? Commencez par télécharger la "`Symfony2 Standard Edition`_",
 une :term:`distribution` Symfony préconfigurée pour répondre à la plupart des besoins,
 et qui contient également du code expliquant comment fonctionne Symfony2
 (téléchargez l'archive avec les *vendors* pour gagner encore plus de temps).
@@ -36,17 +36,31 @@ avoir un répertoire ``Symfony/`` qui ressemble à:
                 cache/
                 config/
                 logs/
+	        Ressources/
+            bin/
             src/
                 Acme/
                     DemoBundle/
                         Controller/
                         Resources/
+                        ...
             vendor/
                 symfony/
                 doctrine/
                 ...
             web/
                 app.php
+                ...
+
+
+.. note::
+
+    Si vous avez téléchargé la Standard Edition *sans vendors*, lancez simplement
+    la commande suivante pour télécharger toutes les librairies nécessaires:
+	
+    .. code-block:: bash
+	
+        php bin/vendors install
 
 Vérifier la Configuration
 -------------------------
@@ -62,8 +76,8 @@ votre serveur:
 
 S'il y encore des problèmes listés, vous devez les corriger. Vous pouvez également
 modifier votre configuration en suivant les recommandations données.
-Lorsque tout est bon, cliquez sur "Aller à la page d'accueil" pour afficher votre
-première "vraie" page Symfony2:
+Lorsque tout est bon, cliquez sur "*Ignorer la configuration et aller à la page
+d'accueil*" pour afficher votre première "vraie" page Symfony2:
 
 .. code-block:: text
 
@@ -72,6 +86,7 @@ première "vraie" page Symfony2:
 Symfony2 devrait vous féliciter pour le travail accompli jusqu'à présent!
 
 .. image:: /images/quick_tour/welcome.jpg
+   :align: center
 
 Comprendre les fondamentaux
 ---------------------------
@@ -96,6 +111,9 @@ Symfony2 (remplacez *Fabien* par votre prénom):
 
     http://localhost/Symfony/web/app_dev.php/demo/hello/Fabien
 
+.. image:: /images/quick_tour/hello_fabien.png
+   :align: center
+
 Que se passe t-il ici? Décortiquons cette URL:
 
 * ``app_dev.php``: C'est un :term:`contrôleur frontal<front controller>`. C'est l'unique point
@@ -106,7 +124,7 @@ Que se passe t-il ici? Décortiquons cette URL:
 
 Votre responsabilité en tant que développeur est d'écrire le code qui permet
 d'associer la *requête* d'un utilisateur (``/demo/hello/Fabien``) à la *ressource*
-qui y est rattachée (``Hello Fabien!``).
+qui y est rattachée (la page HTML ``Hello Fabien!``).
 
 Routage
 ~~~~~~~
@@ -117,7 +135,7 @@ définis dans le fichier de configuration ``app/config/routing.yml``:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # app/config/routing_dev.yml
     _welcome:
         pattern:  /
         defaults: { _controller: AcmeDemoBundle:Welcome:index }
@@ -127,10 +145,13 @@ définis dans le fichier de configuration ``app/config/routing.yml``:
         type:     annotation
         prefix:   /demo
 
+   # ...
+
 Les trois premières lignes (après le commentaire) définissent le code qui sera
 exécuté quand l'utilisateur demandera la ressource "``/``" (c'est-à-dire la page
-d'accueil). Suite à cette requête, le contrôleur ``AcmeDemoBundle:Welcome:index``
-sera exécuté.
+d'accueil que vous avez vu tout à l'heure). Suite à cette requête, le contrôleur
+``AcmeDemoBundle:Welcome:index`` sera exécuté. Dans la section suivante, vous 
+comprendrez exactement ce que cela signifie vraiment.
 
 
 .. tip::
@@ -145,7 +166,8 @@ sera exécuté.
 Contrôleurs
 ~~~~~~~~~~~
 
-Un contrôleur prend en charge les *requêtes* entrantes et retourne des *réponses*
+Un contrôleur est un nom un peu spécial donné à une fonction ou une méthode PHP
+qui prend en charge les *requêtes* entrantes et retourne des *réponses*
 (souvent du code HTML). PLutôt que d'utiliser des variables globales PHP et des
 fonctions (comme ``$_GET`` ou ``header()``) pour gérer ces messages HTTP, Symfony
 utilise des objets:
@@ -161,10 +183,11 @@ qu'il puisse exister crée une réponse à la main, basée sur la requête::
 
 .. note::
 
-    Ne vous laissez pas berner par la simplicité de ces concepts et leur puissance.
-    Lisez le chapitre ":doc:`/book/http_fundamentals`" pour en savoir plus sur la
-    manière dont Symfony2 gère HTTP et pourquoi il rend les choses plus simples
-    et plus puissantes à la fois.
+    Symfony2 adopte les spécification HTTP, qui sont les règles qui gouvernent
+    toutes les communications du Web. Lisez le chapitre ":doc:`/book/http_fundamentals`"
+    pour en savoir plus sur cette partie et la puissance que cela apporte.
+
+
 
 Symfony2 choisit le contrôleur en se basant sur la valeur du paramètre ``_controller``
 du fichier de routage: ``AcmeDemoBundle:Welcome:index``. Cette chaîne de caractères
@@ -186,7 +209,7 @@ de la classe ``Acme\DemoBundle\Controller\WelcomeController``::
 
 .. tip::
 
-    Vous auriez pu utiliser 
+    Vous auriez pu utiliser le nom complet de la classe et de la méthode
     ``Acme\DemoBundle\Controller\WelcomeController::indexAction`` comme valeur du
     paramètre ``_controller`` mais en suivant des conventions simples, le nom 
     logique est plus court et vous actroie plus de flexibilité.
@@ -207,6 +230,12 @@ pouvez modifier facilement l'objet Response avant de l'envoyer au navigateur::
         return $response;
     }
 
+Peu importe la méthode employée, le but final de votre contrôleur est toujours de
+rendre un objet ``Response`` qui sera retourné à l'utilisateur. Cet objet ``Response``
+peut être populé par du code HTML, représenter une redirection client ou encore
+retourner le contenu d'une image JPG avec l'entête ``Content-Type`` spécifié
+comme ``image/jpg``.
+
 .. tip::
 
     Etendre la classe ``Controller`` est facultatif. En fait, un contrôleur peut
@@ -215,21 +244,23 @@ pouvez modifier facilement l'objet Response avant de l'envoyer au navigateur::
     vous voudrez savoir sur les contrôleurs.
 
 Le nom du template, ``AcmeDemoBundle:Welcome:index.html.twig``, est son *nom logique*
-et il fait référence au fichier ``src/Acme/DemoBundle/Resources/views/Welcome/index.html.twig``.
+et il fait référence au fichier ``Resources/views/Welcome/index.html.twig`` du
+bundle ``AcmeDemoBundle`` (situé dans le dossier ``src/Acme/DemoBundle``).
 La section ci-dessous sur les bundles vous expliquera en quoi cela peut être utile.
 
-Maintenant, jetez un oeil à la fin de la configuration de routage:
+Maintenant, jetez à nouveau un oeil au fichier configuration de routage et trouvez
+la clé ``_demo``:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # app/config/routing_dev.yml
     _demo:
         resource: "@AcmeDemoBundle/Controller/DemoController.php"
         type:     annotation
         prefix:   /demo
 
-Symfony2 peut lire les informations de routage écrites en YAML, XML, PHP ou même
-grâce aux annotations. Ici, le *nom logique* de la ressource est 
+Symfony2 peut lire/importer les informations de routage écrites en YAML, XML, PHP
+ou même grâce aux annotations. Ici, le *nom logique* du fichier est 
 ``@AcmeDemoBundle/Controller/DemoController.php`` et fait référence au fichier
 ``src/Acme/DemoBundle/Controller/DemoController.php``. Dans ce fichiers, les
 routes sont définies par des annotations des méthodes action::
@@ -265,13 +296,13 @@ la méthode.
     configurer le comportement du framework et de conserver la configuration près
     du code.
 
-Si vous regardez de plus près le code de l'action, vous verrez qu'au lieu de rendre
-directement un template comme nous l'avons vu plus haut, la méthode retourne juste
-un tableau de paramètres. L'annotation ``@Template()`` dit à Symfony de rendre le
-template pour vous en passant chaque variable du tableau au template. Le nom du
-template qui est retourné dépend du nom du contrôleur. Donc, dans notre exemple,
-le template ``AcmeDemoBundle:Demo:hello.html.twig`` est retourné (il est situé
-dans le dossier ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``).
+Si vous regardez de plus près le code du contrôleur, vous verrez qu'au lieu de rendre
+un template et retourner un objet ``Response``comme nous l'avons vu plus haut,
+il retourne juste un tableau de paramètres. L'annotation ``@Template()`` dit à 
+Symfony de rendre le template pour vous en passant chaque variable du tableau au
+template. Le nom du template qui est retourné dépend du nom du contrôleur. Donc,
+dans notre exemple, le template ``AcmeDemoBundle:Demo:hello.html.twig`` est retourné
+(il est situé dans le dossier ``src/Acme/DemoBundle/Resources/views/Demo/hello.html.twig``).
 
 .. tip::
 
@@ -312,14 +343,25 @@ facilement partagé avec d'autres développeurs. Jusqu'à maintenant, nous avons
 manipulé un seul bundle, ``AcmeDemoBundle``. Vous en saurez plus sur les bundles
 dans le dernier chapitre de ce tutoriel.
 
+.. _quick-tour-big-picture-environments:
+
 Travailler avec les Environnements
 ----------------------------------
 
 Maintenant que vous comprenez mieux le fonctionnement de Symfony2, regardons de
-plus près le bas de la page; vous verrez une petite barre avec le logo Symfony2.
-On l'appelle la "Web Debug Toolbar" et c'est le meilleur ami du développeur. Mais
-il s'agit seulement de la partie émergée de l'iceberg. Cliquez sur le nombre
-hexadécimal pour révéler un nouvel outil Symfony2 très utile : le profiler.
+plus près le bas de n'importe quelle page affichée par Symfony2; vous devriez voir
+une petite barre avec le logo Symfony2. On l'appelle la "Web Debug Toolbar" et
+c'est le meilleur ami du développeur.
+
+.. image:: /images/quick_tour/web_debug_toolbar.png	
+   :align: center
+
+Mais ce que vous voyez au premier abord est seulement la partie émergée de l'iceberg.
+Cliquez sur le nombre hexadécimal pour révéler un nouvel outil Symfony2 très
+utile : le profiler.
+
+.. image:: /images/quick_tour/profiler.png
+   :align: center
 
 Bien évidemment, vous ne voulez pas voir ces ouils lorsque vous déploierez votre
 application sur le serveur de production. C'est pourquoi vous trouverez un autre
@@ -366,8 +408,9 @@ que par leur configuration. En fait, une configuration peut hériter d'une autre
         toolbar: true
         intercept_redirects: false
 
-L'environnement ``dev`` (défini dans ``config_dev.yml``) hérite du fichier global
-``config.yml`` et l'étend en activant la web debug toolbar.
+L'environnement ``dev`` (qui charge le fichier de configuration ``config_dev.yml``)
+importe le fichier global ``config.yml`` et le modifie en activant, dans cet exemple,
+la web debug toolbar.
 
 Derniers mots
 -------------
@@ -376,7 +419,7 @@ Félicitations! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
 terrible, n'est-ce pas? Il y a encore beaucoup à explorer et vous devrier déjà
 comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement. 
 Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 
-suivante: "La vue".
+suivante: ":doc:`La vue<the_view>`".
 
 .. _Symfony2 Standard Edition:      http://symfony.com/download
 .. _Symfony en 5 minutes:           http://symfony.com/symfony-in-five-minutes

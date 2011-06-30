@@ -20,23 +20,24 @@ recommandée d'une application Symfony2:
 * ``vendor/``: Les librairies tierces;
 * ``web/``:    Le répertoire Web racine.
 
-Le répertoire Web
-~~~~~~~~~~~~~~~~~
+Le répertoire ``web/``
+~~~~~~~~~~~~~~~~~~~~~~
 
 Le répertoire Web racine est l'endroit ou se situent tous les fichiers statiques
 et publics comme les images, les feuilles de styles et les fichiers javascript. 
 C'est aussi ici que se situeront les :term:`contrôleurs frontaux`::
 
     // web/app.php
-    require_once __DIR__.'/../app/bootstrap.php';
+    require_once __DIR__.'/../app/bootstrap.php.cache';
     require_once __DIR__.'/../app/AppKernel.php';
 
     use Symfony\Component\HttpFoundation\Request;
 
     $kernel = new AppKernel('prod', false);
+    $kernel->loadClassCache();
     $kernel->handle(Request::createFromGlobals())->send();
 
-Le noyau (kernel) requiert d'abord le fichier ``bootstrap.php``, qui amorce le
+Le noyau (kernel) requiert d'abord le fichier ``bootstrap.php.cache``, qui amorce le
 framework et l'autoloader (voir ci-dessous).
 
 Comme tout contrôleur frontal, ``app.php`` utilise une classe Kernel ``AppKernel``
@@ -44,8 +45,8 @@ pour amorcer une application.
 
 .. _the-app-dir:
 
-Le répertoire Application
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Le répertoire ``app/``
+~~~~~~~~~~~~~~~~~~~~~~
 
 La classe ``AppKernel`` est le point d'entrée principal de la configuration de
 l'application et, en tant que tel, il est placé dans le répertoire ``app/``.
@@ -73,12 +74,17 @@ L'autoloading PHP peut être configuré via ``app/autoload.php``::
         'Doctrine'         => __DIR__.'/../vendor/doctrine/lib',
         'Monolog'          => __DIR__.'/../vendor/monolog/src',
         'Assetic'          => __DIR__.'/../vendor/assetic/src',
-        'Acme'             => __DIR__.'/../src',
+        'Metadata'         => __DIR__.'/../vendor/metadata/src',
     ));
     $loader->registerPrefixes(array(
         'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
         'Twig_'            => __DIR__.'/../vendor/twig/lib',
-        'Swift_'           => __DIR__.'/../vendor/swiftmailer/lib/classes',
+    ));
+
+    // ...
+
+    $loader->registerNamespaceFallbacks(array(
+        __DIR__.'/../src',
     ));
     $loader->register();
 
@@ -103,19 +109,21 @@ Cette section présente une des plus géniales et puissantes fonctionnalités de
 Symfony2, le système de :term:`Bundles`.
 
 Un bundle est une sorte de plugin comme on en trouve dans d'autres logiciels. 
-Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin*? Parce que *tout* est
-un Bundle dans Symfony2, des fonctionnalités du noyau du framework au code que
+Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin*? C'est parce que *tout*
+est un Bundle dans Symfony2, des fonctionnalités du noyau du framework au code que
 vous écrirez pour votre application. Les bundles sont les citoyens de premier 
 rang pour Symfony2. Ils vous donnent la flexibilité d'utiliser des fonctionnalités
 pré-construites dans des bundles tiers ou de distribuer vos propres Bundles. 
 Ils facilitent la synergie et le choix des fonctionnalités à activer pour votre 
-application. et les optimisent de la manière que vous désirez.
+application. et les optimisent de la manière que vous désirez. Et après tout, le
+code de votre application est au moins aussi *important* que celui du framework.
 
 Définir un Bundle
 ~~~~~~~~~~~~~~~~~
 
 Une application est constituée de Bundles définis dans la méthode
-``registerBundles()`` de la classe ``AppKernel``::
+``registerBundles()`` de la classe ``AppKernel``. Chaque bundle est un répertoire
+qui contient une unique classe ``Bundle`` qui me décrit::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -130,20 +138,22 @@ Une application est constituée de Bundles définis dans la méthode
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-            new Acme\DemoBundle\AcmeDemoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+	    $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Symfony\Bundle\WebConfiguratorBundle\SymfonyWebConfiguratorBundle();
+            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
         return $bundles;
     }
 
 En plus de du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
-noyau active aussi les bundles ``FrameworkBundle``, ``DoctrineBundle``,
-``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous intégrés au framework.
+noyau active aussi d'autres bundles comme les bundles ``FrameworkBundle``,
+``DoctrineBundle``, ``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous
+intégrés au framework.
 
 Configurer un Bundle
 ~~~~~~~~~~~~~~~~~~~~
@@ -159,17 +169,15 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
         - { resource: security.yml }
 
     framework:
-        secret:          %csrf_secret%
+        secret:          %secret%
         charset:         UTF-8
-        error_handler:   null
-        form:            true
-        csrf_protection: true
         router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+        form:            true
+        csrf_protection: true        
         validation:      { enable_annotations: true }
         templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
         session:
-            default_locale: %locale%
-            lifetime:       3600
+            default_locale: %locale%            
             auto_start:     true
 
     # Twig Configuration
@@ -181,6 +189,12 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
     assetic:
         debug:          %kernel.debug%
         use_controller: false
+        filters:	
+            cssrewrite: ~	
+            # closure:
+            #     jar: %kernel.root_dir%/java/compiler.jar
+            # yui_css:
+            #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
 
     # Doctrine Configuration
     doctrine:
@@ -190,12 +204,11 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
             dbname:   %database_name%
             user:     %database_user%
             password: %database_password%
+            charset:  UTF8
 
         orm:
             auto_generate_proxy_classes: %kernel.debug%
-            default_entity_manager: default
-            mappings:
-                auto_mapping: true
+            auto_mapping: true
 
     # Swiftmailer Configuration
     swiftmailer:
@@ -231,10 +244,15 @@ principale (i.e. ``config.yml``) puis la modifier pour ajouter des outils de deb
         toolbar: true
         intercept_redirects: false
 
-    zend:
-        logger:
-            priority: debug
-            path:     %kernel.logs_dir%/%kernel.environment%.log
+    monolog:
+        handlers:
+            main:
+                type:  stream
+                path:  %kernel.logs_dir%/%kernel.environment%.log	
+                level: debug	
+            firephp:	
+                type:  firephp	
+                level: info
 
     assetic:
         use_controller: true
@@ -246,26 +264,46 @@ En plus d'être une façon sympathique d'organiser et de configurer votre code,
 les bundles peuvent étendre d'autres bundles. L'héritage entre bundle vous permet
 de surcharger n'importe quel bundle pour personnaliser ses contrôleurs, ses templates,
 ou n'importe lequel de ses fichiers.
-C'est ici que les noms logiques se revèlent pratiques car ils font abstraction de
-l'endroit ou est stockée la ressource.
+C'est ici que les noms logiques (ex ``@AcmeDemoBundle/Controller/SecuredController.php``)
+se revèlent pratiques: ils font abstraction de l'endroit où est stockée la ressource.
+
+Noms logiques de fichiers	
+.........................
 
 Quand vous voulez faire référence à un fichier depuis un bundle, utilisez cette
 notation:
 ``@BUNDLE_NAME/path/to/file``; Symfony2 remplacera ``@BUNDLE_NAME`` par le chemin
 du bundle. A titre d'exemple, le chemin logique
 ``@AcmeDemoBundle/Controller/DemoController.php`` sera transformé en
-``src/Acme/DemoBundle/Controller/DemoController.php``.
+``src/Acme/DemoBundle/Controller/DemoController.php``, car Symfony connait la
+la location du bundle ``AcmeDemoBundle``.
+	
+Noms logiques de contrôleurs	
+............................
 
 Pour les contrôleurs, vous aurez besoin de référencer les noms de méthode en 
 utilisant le format suivant ``NOM_DU_BUNDLE_NAME:NOM_DU_CONTROLEUR:NOM_DE_ACTION``.
 Par exemple, ``AcmeDemoBundle:Welcome:index`` référencera la méthode ``indexAction``
 de la classe ``Acme\DemoBundle\Controller\WelcomeController``.
 
+Noms logiques de templates	
+..........................
+
 Pour les templates, le nom logique ``AcmeDemoBundle:Welcome:index.html.twig``
 mènera vers le fichier ``src/Acme/DemoBundle/Resources/views/Welcome/index.html.twig``.
 Les templates deviennent encore plus intéressants quand on réalise qu'ils n'ont 
 pas besoin d'être stockés sur le système de fichiers. Vous pouvez par exemple les
 stocker dans une base de données.
+
+
+Etendre les Bundles
+...................
+	
+Si vous suivez ces conventions, alors vous pouvez utiliser :doc:`l'héritage de bundle</cookbook/bundles/inheritance>`
+pour "surcharger" les fichiers, les contrôleurs et les templates. Par exemple, si
+un nouveau bundle appelé ``AcmeNewBundle`` étend le ``AcmeDemoBundle``, alors Symfony
+essayera d'abord de charger le contrôleur ``AcmeDemoBundle:Welcome:index`` du
+``AcmeNewBundle`` et seulement ensuite il cherchera le ``AcmeDemoBundle``.
 
 Vous comprenez maintenant pourquoi Symfony2 est si flexible? Partagez vos
 Bundles entre applications, stockez-les localement ou globalement, c'est vous

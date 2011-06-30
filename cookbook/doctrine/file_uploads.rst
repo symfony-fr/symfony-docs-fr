@@ -70,6 +70,12 @@ method to return the absolute path to the file.
     :doc:`file</reference/forms/types/file>` type documentation first to
     understand how the basic upload process works.
 
+.. note::
+
+    If you're using annotations to specify your annotation rules (as shown
+    in this example), be sure that you've enabled validation by annotation
+    (see :ref:`validation configuration<book-validation-configuration>`).
+
 To handle the actual file upload in the form, use a "virtual" ``file`` field.
 For example, if you're building your form directly in a controller, it might
 look like this::
@@ -190,10 +196,10 @@ object, which is what's returned after a ``file`` field is submitted::
         // sanitize it at least to avoid any security issues
         
         // move takes the target directory and then the target filename to move to
-        $this->file->move($this->getUploadRootDir(), $this->file->getOriginalName());
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
 
         // set the path property to the filename where you'ved saved the file
-        $this->setPath($this->file->getOriginalName());
+        $this->setPath($this->file->getClientOriginalName());
 
         // clean up the file property as you won't need it anymore
         unset($this->file);
