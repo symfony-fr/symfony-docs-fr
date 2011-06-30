@@ -1,5 +1,3 @@
-../Commentaire à supprimer
-
 Documentation Symfony2
 ======================
 
@@ -18,48 +16,15 @@ Démarrez dès maintenant avec le :doc:`Quick Tour <quick_tour/index>` Symfony2:
 * :doc:`quick_tour/the_controller` >
 * :doc:`quick_tour/the_architecture`
 
-../Book
-../----
+Book
+----
 
-../Plongez dans Symfony2 grâce aux guides thématiques:
+Plongez dans Symfony2 grâce aux guides thématiques:
 
 .. toctree::
-../    :hidden:
+    :hidden:
 
-../    book/index
+    book/index
 
 .. include:: book/map.rst.inc
 
-../Cookbook
-../--------
-
-.. toctree::
-../    :hidden:
-
-../    cookbook/index
-
-../Lisez le :doc:`Cookbook </cookbook/index>`.
-
-../Documents de référence
-../----------------------
-
-../Obtenez une réponse rapidement avec les documents de référence:
-
-.. toctree::
-../    :hidden:
-
-../    reference/index
-
-.. include:: reference/map.rst.inc
-
-../Contribuer
-../------------
-
-../Contribuer à Symfony2:
-
-.. toctree::
-../    :hidden:
-
-../    contributing/index
-
-.. include:: contributing/map.rst.inc
