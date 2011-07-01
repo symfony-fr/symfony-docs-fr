@@ -328,7 +328,7 @@ Le contrôleur rend le template ``src/Acme/DemoBundle/Resources/views/Demo/hello
     {% endblock %}
 
 Par défaut, Symfony2 utilise `Twig`_ comme moteur de template mais vous pouvez
-aussi utilisez les templates traditionnels en PHP si vous préférez. Le prochain
+aussi utiliser les templates traditionnels en PHP si vous préférez. Le prochain
 chapitre introduira le fonctionnement des templates dans Symfony2.
 
 Bundles
@@ -363,7 +363,7 @@ utile : le profiler.
 .. image:: /images/quick_tour/profiler.png
    :align: center
 
-Bien évidemment, vous ne voulez pas voir ces ouils lorsque vous déploierez votre
+Bien évidemment, vous ne voulez pas voir ces outils lorsque vous déploierez votre
 application sur le serveur de production. C'est pourquoi vous trouverez un autre
 contrôleur dans le répertoire``web/`` (``app.php``), qui est optimisé pour 
 l'environnement de production:
@@ -416,7 +416,7 @@ Derniers mots
 -------------
 
 Félicitations! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
-terrible, n'est-ce pas? Il y a encore beaucoup à explorer et vous devrier déjà
+terrible, n'est-ce pas? Il y a encore beaucoup à explorer et vous devriez déjà
 comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement. 
 Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 
 suivante: ":doc:`La vue<the_view>`".
