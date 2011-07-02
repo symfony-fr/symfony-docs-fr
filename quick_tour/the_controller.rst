@@ -191,7 +191,7 @@ De plus, l'utilisateur ``admin`` a le rôle ``ROLE_ADMIN``, qui inclut aussi le 
 
 .. tip::
     
-    Pour des raisons de lisibilié, les mots de passe sont stockés en clair dans
+    Pour des raisons de lisibilité, les mots de passe sont stockés en clair dans
     cette configuration, mais vous pouvez utiliser un algorithme en modifiant la
     section ``encoders``.
 
@@ -223,7 +223,7 @@ Symfony2 devrait retourner un code HTTP 403, indiquant que la ressource est "int
 
 .. note::
 
-    La couche de sécurité de Symfony2 est très flexible et est livré avec différents
+    La couche de sécurité de Symfony2 est très flexible et est livrée avec différents
     fournisseurs (par exemple un pour l'ORM Doctrine) et des fournisseurs 
     d'authentification (comme HTTP basic, HTTP digest, ou le certificat X509).
     Lisez le chapitre ":doc:`/book/security`" pour avoir plus d'information sur
