@@ -23,7 +23,7 @@ recommandée d'une application Symfony2:
 Le répertoire ``web/``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Le répertoire Web racine est l'endroit ou se situent tous les fichiers statiques
+Le répertoire Web racine est l'endroit où se situent tous les fichiers statiques
 et publics comme les images, les feuilles de styles et les fichiers javascript. 
 C'est aussi ici que se situeront les :term:`contrôleurs frontaux`::
 
@@ -115,7 +115,7 @@ vous écrirez pour votre application. Les bundles sont les citoyens de premier
 rang pour Symfony2. Ils vous donnent la flexibilité d'utiliser des fonctionnalités
 pré-construites dans des bundles tiers ou de distribuer vos propres Bundles. 
 Ils facilitent la synergie et le choix des fonctionnalités à activer pour votre 
-application. et les optimisent de la manière que vous désirez. Et après tout, le
+application et les optimisent de la manière que vous désirez. Et après tout, le
 code de votre application est au moins aussi *important* que celui du framework.
 
 Définir un Bundle
@@ -150,7 +150,7 @@ qui contient une unique classe ``Bundle`` qui me décrit::
         return $bundles;
     }
 
-En plus de du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
+En plus du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
 noyau active aussi d'autres bundles comme les bundles ``FrameworkBundle``,
 ``DoctrineBundle``, ``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous
 intégrés au framework.
