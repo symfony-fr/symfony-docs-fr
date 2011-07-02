@@ -412,8 +412,8 @@ L'environnement ``dev`` (qui charge le fichier de configuration ``config_dev.yml
 importe le fichier global ``config.yml`` et le modifie en activant, dans cet exemple,
 la web debug toolbar.
 
-Derniers mots
--------------
+Le mot de la fin
+----------------
 
 Félicitations! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
 terrible, n'est-ce pas? Il y a encore beaucoup à explorer et vous devriez déjà

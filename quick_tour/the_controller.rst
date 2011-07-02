@@ -266,8 +266,8 @@ facilement à votre application.
     la solution via les Edge Side Includes (ESI), qui sont supportés nativement.
     Lisez le chapitre ":doc:`/book/http_cache`" pour en savoir plus.
 
-Un dernier mot
---------------
+Le mot de la fin
+----------------
 
 C'est tout ce qu'il y a à faire et je ne suis même pas sûr que nous avons passé
 les 10 minutes que l'on s'était allouées. Nous avons brièvement présenté les 
