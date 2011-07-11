@@ -9,7 +9,7 @@ Créer des pages avec Symfony2 se fait en simplement deux étapes:
 * *Créez une route*: Une route définit l'URL (ex: ``/apropos``) pour votre
   page et spécifie un contrôleur (une fonction PHP) que Symfony2 devrait
   exécuter quand l'URL d'une requête HTTP correspond à une route que vous 
-  avez défini.
+  avez définie.
 
 * *Créez un contrôleur*: Un contrôleur est une fonction PHP qui traitera la 
   requête HTTP et la transformera en un objet ``Response`` Symfony2 qui sera
@@ -20,11 +20,10 @@ fonctionne le Web. Chaque interaction sur le Web est initiée par une requête
 HTTP. Le but de votre application est simplement d'interpréter cette requête 
 et de lui retourner une Response HTTP appropriée.
 
-Symfony2 suit cette philosophie 
-et vous fournit des outils et conventions pour garder votre application organisée
-tout en pouvant devenir plus complexe et fréquentée.
+Symfony2 suit cette philosophie et vous fournit des outils et conventions pour
+garder votre application organisée tout en pouvant devenir plus complexe et fréquentée.
 
-Ca vous parait suffisamment simple? Plongeons-nous dedans!
+Cela vous parait suffisamment simple? Alors allons-y!
 
 .. index::
    single: Page creation; Example
@@ -70,7 +69,7 @@ affichées à l'écran (choisissez les options par défaut):
 .. code-block:: bash
 
 	
-    ./app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
+    php app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
 
 Un répertoire ``src/Acme/HelloBundle`` est créé pour le bundle. Une ligne est aussi
 automatiquement ajoutée au fichier ``app/AppKernel.php`` afin que le bundle soit
