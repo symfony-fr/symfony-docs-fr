@@ -1,8 +1,8 @@
 Le Contrôleur
 =============
 
-Toujours avec nous après ces deux premières parties? Vous êtes déjà un
-inconditionnel de Symfony2! Sans plus tarder, nous allons voir ce que les
+Toujours avec nous après ces deux premières parties ? Vous êtes déjà un
+inconditionnel de Symfony2 ! Sans plus tarder, nous allons voir ce que les
 contrôleurs peuvent faire pour vous.
 
 Utiliser les formats
@@ -77,7 +77,7 @@ de paramètres comme arguments et retourne la jolie adresse qui
 convient.
 
 Vous pouvez facilement renvoyer une action vers une autre avec la méthode
-``forward()``. En interne, Symfony crée une "sous-requête", et retourne l'objet
+``forward()``. En interne, Symfony crée une «sous-requête», et retourne l'objet
 ``Response``de cette sous-requête::
 
     $response = $this->forward('AcmeDemoBundle:Hello:fancy', array('name' => $name, 'color' => 'green'));
@@ -111,7 +111,7 @@ Dans un template, vous pouvez accéder à l'objet ``Request`` via la variable ``
 Persister les données en session
 --------------------------------
 
-Même si le protocole HTTP est "stateless", Symfony2 fournit un objet session
+Même si le protocole HTTP est «stateless», Symfony2 fournit un objet session
 très pratique qui représente le client (une personne physique qui utilise un
 navigateur, un robot ou un web service). Entre deux requêtes, Symfony2 stocke les
 attributs dans un cookie en utilisant les sessions PHP natives.
@@ -191,7 +191,7 @@ De plus, l'utilisateur ``admin`` a le rôle ``ROLE_ADMIN``, qui inclut aussi le 
 
 .. tip::
     
-    Pour des raisons de lisibilité, les mots de passe sont stockés en clair dans
+    Pour des raisons de lisibilié, les mots de passe sont stockés en clair dans
     cette configuration, mais vous pouvez utiliser un algorithme en modifiant la
     section ``encoders``.
 
@@ -217,16 +217,16 @@ Vous pouvez aussi forcer l'action à exiger un rôle donné en utilisant l'annot
     }
 
 Maintenant, connecté en tant que ``user`` (qui n'a *pas* le rôle ``ROLE_ADMIN``)
-et depuis la page  sécurisée "hello" cliquez sur le lien "ressource sécurisée Hello".
-Symfony2 devrait retourner un code HTTP 403, indiquant que la ressource est "interdite"
+et depuis la page  sécurisée «hello» cliquez sur le lien «ressource sécurisée Hello».
+Symfony2 devrait retourner un code HTTP 403, indiquant que la ressource est «interdite»
 à cet utilisateur.
 
 .. note::
 
-    La couche de sécurité de Symfony2 est très flexible et est livrée avec différents
+    La couche de sécurité de Symfony2 est très flexible et est livré avec différents
     fournisseurs (par exemple un pour l'ORM Doctrine) et des fournisseurs 
     d'authentification (comme HTTP basic, HTTP digest, ou le certificat X509).
-    Lisez le chapitre ":doc:`/book/security`" pour avoir plus d'information sur
+    Lisez le chapitre «:doc:`/book/security`» pour avoir plus d'information sur
     leur configuration ou leur utilisation.
 
 Cacher les ressources
@@ -262,17 +262,17 @@ facilement à votre application.
 
 .. note::
 
-    Mais si jamais vous ne pouvez pas cacher vos pages en entier? Symfony2 a
+    Mais si jamais vous ne pouvez pas cacher vos pages en entier ? Symfony2 a
     la solution via les Edge Side Includes (ESI), qui sont supportés nativement.
-    Lisez le chapitre ":doc:`/book/http_cache`" pour en savoir plus.
+    Lisez le chapitre «:doc:`/book/http_cache`» pour en savoir plus.
 
-Le mot de la fin
-----------------
+Un dernier mot
+--------------
 
 C'est tout ce qu'il y a à faire et je ne suis même pas sûr que nous avons passé
 les 10 minutes que l'on s'était allouées. Nous avons brièvement présenté les 
 Bundles dans la première partie et toutes les caractéristiques que nous avons 
-apprises jusqu'à maintenant font partie du "core framework Bundle".
+apprises jusqu'à maintenant font partie du «core framework Bundle».
 Mais grâce aux Bundles, tout peut être étendu ou remplacé dans Symfony2.
 C'est le thème de la :doc:`prochaine partie de ce tutoriel<the_architecture>`.
 

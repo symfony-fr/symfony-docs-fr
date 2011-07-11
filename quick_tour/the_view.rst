@@ -2,7 +2,7 @@ La vue
 ======
 
 Après avoir lu la première partie de ce tutoriel, vous avez décidé que Symfony2
-méritait 10 minutes de plus. Excellent choix! Dans cette seconde partie, vous 
+méritait 10 minutes de plus. Excellent choix ! Dans cette seconde partie, vous 
 en apprendrez plus sur le moteur de template de Symfony2, `Twig`_. Twig est un
 moteur de template PHP flexible, rapide et sécurisé. Il rend vos templates plus
 concis et lisibles; il les rend également plus accessibles aux web designers.
@@ -65,7 +65,7 @@ contrôleur et passez toutes les variables requises par le template::
 
 Les variables passées à un template peuvent être des chaînes de caractères, des
 tableaux ou même des objets. Twig les gère de la même manière et vous permet
-d'accéder aux "attributs" d'une variable grâce à la notation (``.``):
+d'accéder aux «attributs» d'une variable grâce à la notation (``.``):
 
 .. code-block:: jinja
 
@@ -102,8 +102,8 @@ Bien souvent, les templates d'un projet partagent des éléments communs, comme 
 célèbres entête et pied de page. Dans Symfony2, nous abordons ce problème
 différemment: un template peut être décoré par un autre. Cela fonctionne exactement
 comme les classes PHP : l'héritage de template vous permet de batir un template
-"layout" de base qui contient tous les éléments communs de votre site et de définir
-des "blocks" que les templates fils pourront surcharger
+«layout» de base qui contient tous les éléments communs de votre site et de définir
+des «blocks» que les templates fils pourront surcharger
 
 Le template ``hello.html.twig`` hérite du template ``layout.html.twig``, grâce au
 tag ``extends``:
@@ -119,7 +119,7 @@ tag ``extends``:
         <h1>Hello {{ name }}!</h1>
     {% endblock %}
 
-La notation ``AcmeDemoBundle::layout.html.twig`` vous semble familière, n'est-ce pas?
+La notation ``AcmeDemoBundle::layout.html.twig`` vous semble familière, n'est-ce pas ?
 C'est la même noteation utilisée pour référencer un template classique. La partie
 ``::`` signifie simplement que le contrôleur est vide, et donc que le fichier
 correspondant est directement stocjé dans le répertoire ``Resources/views/``.
@@ -139,7 +139,7 @@ Tout ce que le tag block fait est de spécifier au moteur de template qu'un temp
 fils va surcharger cette partie du template.
 
 Dans cet exemple, le template ``hello.html.twig`` surcharge le block ``content``,
-ce qui signifie que le texte "Hello Fabien" sera affiché dans l'élément ``div.symfony-content``.
+ce qui signifie que le texte «Hello Fabien» sera affiché dans l'élément ``div.symfony-content``.
 
 Utiliser les tags, les filtres et les fonctions
 -----------------------------------------------
@@ -176,7 +176,7 @@ Et changez le template ``index.html.twig`` pour l'inclure:
 Imbriquer d'autres contrôleurs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Et si vous vouliez inclure le résultat d'un autre contrôleur dans votre template?
+Et si vous vouliez inclure le résultat d'un autre contrôleur dans votre template ?
 C'est très utilse en travaillant avec Ajax, ou quand les templates inclus
 ont besoin de variables qui ne sont pas disponibles dans le template principal.
 
@@ -219,7 +219,7 @@ de configuration:
 
 .. code-block:: html+jinja
 
-    <a href="{{ path('_demo_hello', { 'name': 'Thomas' }) }}">Greet Thomas!</a>
+    <a href="{{ path('_demo_hello', { 'name': 'Fabien' }) }}">Hello Fabien!</a>
 
 La fonction ``path`` prend le nom de la route et un tableau de paramètres comme
 arguments. Le nom de la route est la clé principale sous laquelle les
@@ -247,7 +247,7 @@ pattern de chaque route::
 Inclure les assets: images, javascripts, et feuilles de style
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Que serait Internet sans images, javascripts, et feuilles de style?
+Que serait Internet sans images, javascripts, et feuilles de style ?
 Symfony2 fournit la fonction ``asset`` pour les gérer très facilement:
 
 .. code-block:: jinja
@@ -285,7 +285,7 @@ une architecture flexible.
 
 Mais il ne faut pas trop vite. D'abord, vous devez en apprendre plus sur le 
 contrôleur et c'est justement le sujet de la :doc:`prochaine partie de ce tutoriel<the_controller>`.
-Prêt pour 10 nouvelles minutes avec Symfony2?
+Prêt pour 10 nouvelles minutes avec Symfony2 ?
 
 .. _Twig:          http://www.twig-project.org/
 .. _documentation: http://www.twig-project.org/documentation

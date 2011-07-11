@@ -1,8 +1,8 @@
 L'Architecture
 ==============
 
-Vous êtes mon héros! Qui aurait pensé que vous seriez encore là après les trois
-premières parties? Vos efforts seront récompensés dans un instant.
+Vous êtes mon héros ! Qui aurait pensé que vous seriez encore là après les trois
+premières parties ? Vos efforts seront récompensés dans un instant.
 
 Les trois premières parties n'explorent pas trop profondément l'architecture du
 framework. Comme Symfony2 se distingue de la nuée des frameworks, nous allons
@@ -15,15 +15,15 @@ L'arborescence d'une :term:`application` Symfony2 est plutôt flexible mais
 celle de la distribution *Standard Edition* reflète la structure typique et 
 recommandée d'une application Symfony2:
 
-* ``app/``:    La configuration de l'application;
-* ``src/``:    Le code PHP du projet;
-* ``vendor/``: Les librairies tierces;
+* ``app/``:    La configuration de l'application,
+* ``src/``:    Le code PHP du projet,
+* ``vendor/``: Les librairies tierces,
 * ``web/``:    Le répertoire Web racine.
 
 Le répertoire ``web/``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Le répertoire Web racine est l'endroit où se situent tous les fichiers statiques
+Le répertoire Web racine est l'endroit ou se situent tous les fichiers statiques
 et publics comme les images, les feuilles de styles et les fichiers javascript. 
 C'est aussi ici que se situeront les :term:`contrôleurs frontaux`::
 
@@ -54,10 +54,10 @@ l'application et, en tant que tel, il est placé dans le répertoire ``app/``.
 Cette classe doit implémenter deux méthodes:
 
 * ``registerBundles()`` doit retourner un tableau de tous les Bundles nécessaires au 
-  fonctionnement de l'application;
+  fonctionnement de l'application.
 
 * ``registerContainerConfiguration()`` charge la configuration de l'application
-  (cette partie sera détaillée ultérieurement);
+  (cette partie sera détaillée ultérieurement).
 
 L'autoloading PHP peut être configuré via ``app/autoload.php``::
 
@@ -88,7 +88,7 @@ L'autoloading PHP peut être configuré via ``app/autoload.php``::
     ));
     $loader->register();
 
-La :class:`Symfony\\Component\\ClassLoader\\UniversalClassLoader` est utilisée 
+La classe :class:`Symfony\\Component\\ClassLoader\\UniversalClassLoader` est utilisée 
 pour charger automatiquement les fichiers qui respectent les `standards`_ 
 d'interopérabilité technique pour les namespace PHP 5.3, ou les `conventions`_ 
 de nommage PEAR pour les classes. Comme vous pouvez le voir ici, toutes les 
@@ -100,7 +100,7 @@ serveur ou au sein même de vos projets.
 .. note::
 
     Si vous voulez en savoir plus sur la flexibilité de l'autoloader de Symfony2,
-    lisez l'article ":doc:`/cookbook/tools/autoloader`" dans le cookbook.
+    lisez l'article «:doc:`/cookbook/tools/autoloader`» dans le cookbook.
 
 Comprendre le système de Bundles
 --------------------------------
@@ -109,13 +109,13 @@ Cette section présente une des plus géniales et puissantes fonctionnalités de
 Symfony2, le système de :term:`Bundles`.
 
 Un bundle est une sorte de plugin comme on en trouve dans d'autres logiciels. 
-Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin*? C'est parce que *tout*
+Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin* ? C'est parce que *tout*
 est un Bundle dans Symfony2, des fonctionnalités du noyau du framework au code que
 vous écrirez pour votre application. Les bundles sont les citoyens de premier 
 rang pour Symfony2. Ils vous donnent la flexibilité d'utiliser des fonctionnalités
 pré-construites dans des bundles tiers ou de distribuer vos propres Bundles. 
 Ils facilitent la synergie et le choix des fonctionnalités à activer pour votre 
-application et les optimisent de la manière que vous désirez. Et après tout, le
+application. et les optimisent de la manière que vous désirez. Et après tout, le
 code de votre application est au moins aussi *important* que celui du framework.
 
 Définir un Bundle
@@ -150,7 +150,7 @@ qui contient une unique classe ``Bundle`` qui me décrit::
         return $bundles;
     }
 
-En plus du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
+En plus de du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
 noyau active aussi d'autres bundles comme les bundles ``FrameworkBundle``,
 ``DoctrineBundle``, ``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous
 intégrés au framework.
@@ -265,7 +265,7 @@ les bundles peuvent étendre d'autres bundles. L'héritage entre bundle vous per
 de surcharger n'importe quel bundle pour personnaliser ses contrôleurs, ses templates,
 ou n'importe lequel de ses fichiers.
 C'est ici que les noms logiques (ex ``@AcmeDemoBundle/Controller/SecuredController.php``)
-se revèlent pratiques: ils font abstraction de l'endroit où est stockée la ressource.
+se revèlent pratiques : ils font abstraction de l'endroit où est stockée la ressource.
 
 Noms logiques de fichiers	
 .........................
@@ -300,12 +300,12 @@ Etendre les Bundles
 ...................
 	
 Si vous suivez ces conventions, alors vous pouvez utiliser :doc:`l'héritage de bundle</cookbook/bundles/inheritance>`
-pour "surcharger" les fichiers, les contrôleurs et les templates. Par exemple, si
+pour «surcharger» les fichiers, les contrôleurs et les templates. Par exemple, si
 un nouveau bundle appelé ``AcmeNewBundle`` étend le ``AcmeDemoBundle``, alors Symfony
 essayera d'abord de charger le contrôleur ``AcmeDemoBundle:Welcome:index`` du
 ``AcmeNewBundle`` et seulement ensuite il cherchera le ``AcmeDemoBundle``.
 
-Vous comprenez maintenant pourquoi Symfony2 est si flexible? Partagez vos
+Vous comprenez maintenant pourquoi Symfony2 est si flexible ? Partagez vos
 Bundles entre applications, stockez-les localement ou globalement, c'est vous
 qui décidez.
 
@@ -324,7 +324,7 @@ Comprendre le Cache et les Logs
 
 Symfony2 est probablement l'un des plus rapides framework full-stack existant.
 Mais comment peut-il être si rapide s'il analyse et interprète des dizaines de
-fichiers YAML et XML à chaque requête? Cette rapidité est en partie due à son
+fichiers YAML et XML à chaque requête ? Cette rapidité est en partie due à son
 système de cache. La configuration de l'application est uniquement analysée
 lors de la première requête, puis compilée en PHP pur stocké dans le répertoire
 ``app/cache/`` de l'application. Dans l'environnement de développement, Symfony2 est
@@ -366,10 +366,10 @@ Symfony2 travailler pour vous. Tout est fait dans Symfony2 pour que vous traciez
 votre voie. Alors, n'hésitez pas à renommer et déplacer des répertoires comme
 bon vous semble.
 
-C'en est tout pour ce quick tour. Des tests à l'envoi d'e-mails, vous
+C'en est tout pour ce Quick Tour. Des tests à l'envoi d'e-mails, vous
 avez encore besoin d'en apprendre beaucoup pour devenir un expert Symfony2. Prêt
-à plonger dans ces thèmes maintenant? Ne cherchez plus, consultez le
-:doc:`/book/index` et choisissez le sujet qui vous intéresse
+à plonger dans ces thèmes maintenant ? Ne cherchez plus, consultez le
+:doc:`/book/index` et choisissez le sujet qui vous intéresse.
 
 .. _standards:               http://groups.google.com/group/php-standards/web/psr-0-final-proposal
 .. _convention:              http://pear.php.net/
