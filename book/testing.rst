@@ -4,23 +4,25 @@
 Testing
 =======
 
-Whenever you write a new line of code, you also potentially add new bugs.
-Automated tests should have you covered and this tutorial shows you how to
-write unit and functional tests for your Symfony2 application.
+A chaque fois que vous écrivez une nouvelle ligne de code, vous ajoutez aussi
+potentiellement de nouveaux bugs. Les tests automatisés devraient vous couvrir
+et ce tutoriel vous montre comment écrire des tests unitaires et fonctionnels
+pour votre application Symfony2.
 
-Testing Framework
------------------
+Le Framework de Test
+--------------------
 
-Symfony2 tests rely heavily on PHPUnit, its best practices, and some
-conventions. This part does not document PHPUnit itself, but if you don't know
-it yet, you can read its excellent `documentation`_.
+Les tests Symfony2 s'appuient fortement sur PHPUnit, ses meilleures pratiques,
+et quelques conventions. Cette partie ne documente pas PHPUnit lui-même, mais
+si vous ne le connaissez pas encore, vous pouvez lire son excellente
+`documentation`_.
 
 .. note::
 
-    Symfony2 works with PHPUnit 3.5.11 or later.
+    Symfony2 fonctionne avec PHPUnit 3.5.11 ou plus.
 
-The default PHPUnit configuration looks for tests under the ``Tests/``
-sub-directory of your bundles:
+La configuration par défaut de PHPUnit cherche les tests dans le sous-répertoire
+``Tests/`` de vos bundles:
 
 .. code-block:: xml
 
@@ -36,73 +38,74 @@ sub-directory of your bundles:
         ...
     </phpunit>
 
-Running the test suite for a given application is straightforward:
+Exécuter la suite de test pour une application donnée est très simple:
 
 .. code-block:: bash
 
-    # specify the configuration directory on the command line
+    # spécifiez le répertoire de configuration sur la ligne de commande
     $ phpunit -c app/
 
-    # or run phpunit from within the application directory
+    # ou exécutez phpunit depuis l'intérieur du répertoire de l'application
     $ cd app/
     $ phpunit
 
 .. tip::
 
-    Code coverage can be generated with the ``--coverage-html`` option.
+    La couverture du code peut être générée avec l'option ``--coverage-html``.
 
 .. index::
-   single: Tests; Unit Tests
+   single: Tests; Tests Unitaires
 
-Unit Tests
-----------
+Tests Unitaires
+---------------
 
-Writing Symfony2 unit tests is no different than writing standard PHPUnit unit
-tests. By convention, it's recommended to replicate the bundle directory
-structure under its ``Tests/`` sub-directory. So, write tests for the
-``Acme\HelloBundle\Model\Article`` class in the
-``Acme/HelloBundle/Tests/Model/ArticleTest.php`` file.
+Ecrire des tests unitaires Symfony2 n'est en aucun cas différent que d'écrire
+des tests unitaires standards PHPUnit. Par convention, il est recommandé de
+reproduire la structure du répertoire du bundle dans son sous-répertoire ``Tests/``.
+Donc, écrivez les tests pour la classe ``Acme\HelloBundle\Model\Article`` dans le
+fichier ``Acme/HelloBundle/Tests/Model/ArticleTest.php``.
 
-In a unit test, autoloading is automatically enabled via the
-``src/autoload.php`` file (as configured by default in the ``phpunit.xml.dist``
-file).
+Dans un test unitaire, l'autoloading est activé automatiquement via le fichier
+``src/autoload.php`` (comme configuré par défaut dans le fichier ``phpunit.xml.dist``).
 
-Running tests for a given file or directory is also very easy:
+Exécuter les tests pour un fichier ou répertoire donné est aussi très facile:
 
 .. code-block:: bash
 
-    # run all tests for the Controller
+    # exécute tous les tests pour le contrôleur
     $ phpunit -c app src/Acme/HelloBundle/Tests/Controller/
 
-    # run all tests for the Model
+    # exécute tous les tests pour le modèle
     $ phpunit -c app src/Acme/HelloBundle/Tests/Model/
 
-    # run tests for the Article class
+    # exécute les tests pour la classe Article
     $ phpunit -c app src/Acme/HelloBundle/Tests/Model/ArticleTest.php
 
-    # run all tests for the entire Bundle
+    # exécute tous les tests pour le Bundle entier
     $ phpunit -c app src/Acme/HelloBundle/
 
 .. index::
-   single: Tests; Functional Tests
+   single: Tests; Tests Fonctionnels
 
-Functional Tests
-----------------
+Tests Fonctionnels
+------------------
 
-Functional tests check the integration of the different layers of an
-application (from the routing to the views). They are no different from unit
-tests as far as PHPUnit is concerned, but they have a very specific workflow:
+Les tests fonctionnels vérifient l'intégration des différentes couches d'une
+application (du routing jusqu'aux vues). Ils ne sont pas différents des tests
+unitaires tant que PHPUnit est concerné, mais ils possèdent un workflow très
+spécifique:
 
-* Make a request;
-* Test the response;
-* Click on a link or submit a form;
-* Test the response;
-* Rinse and repeat.
+* Faire une requête;
+* Tester la réponse;
+* Cliquer sur un lien ou soumettre un formulaire;
+* Tester la réponse;
+* Recommencer ainsi de suite.
 
-Requests, clicks, and submissions are done by a client that knows how to talk
-to the application. To access such a client, your tests need to extend the
-Symfony2 ``WebTestCase`` class. The Symfony2 Standard Edition provides a
-simple functional test for ``DemoController`` that reads as follows::
+Les requêtes, les clics, et les envois sont effectués par un client qui sait
+comment parler à l'application. Pour accéder à un tel client, vos tests ont
+besoin d'étendre la classe Symfony2 ``WebTestCase``. La Standard Edition de
+Symfony2 fournit un test fonctionnel pour le ``DemoController` qui se lit
+comme suit::
 
     // src/Acme/DemoBundle/Tests/Controller/DemoControllerTest.php
     namespace Acme\DemoBundle\Tests\Controller;
@@ -121,53 +124,57 @@ simple functional test for ``DemoController`` that reads as follows::
         }
     }
 
-The ``createClient()`` method returns a client tied to the current application::
+La méthode ``createClient()`` retourne un client lié à l'application courante::
 
     $crawler = $client->request('GET', 'hello/Fabien');
 
-The ``request()`` method returns a ``Crawler`` object which can be used to
-select elements in the Response, to click on links, and to submit forms.
+La méthode ``request()`` retourne un objet ``Crawler`` qui peut être utilisé pour
+sélectionner des éléments dans la Réponse, cliquer des liens, et soumettre
+des formulaires.
 
 .. tip::
 
-    The Crawler can only be used if the Response content is an XML or an HTML
-    document. For other content types, get the content of the Response with
-    ``$client->getResponse()->getContent()``.
+    Le Crawler peut être utilisé seulement si le contenu de la Réponse est un
+    document XML ou HTML. Pour les autres types de contenu, vous pouvez obtenir
+    le contenu de la Réponse avec ``$client->getResponse()->getContent()``.
 
-Click on a link by first selecting it with the Crawler using either a XPath
-expression or a CSS selector, then use the Client to click on it::
+Cliquez sur un lien en le sélectionnant en premier avec le Crawler en utilisant
+soit une expression XPath ou un sélecteur CSS, puis utilisez le Client pour
+cliquer dessus::
 
     $link = $crawler->filter('a:contains("Greet")')->eq(1)->link();
 
     $crawler = $client->click($link);
 
-Submitting a form is very similar; select a form button, optionally override
-some form values, and submit the corresponding form::
+Soumettre un form est très similaire; sélectionnez un bouton de formulaire,
+optionnellement ré-écrivez quelques valeurs du formulaires, et soumettez le
+formulaire correspondant::
 
     $form = $crawler->selectButton('submit')->form();
 
-    // set some values
+    // définit quelques valeurs
     $form['name'] = 'Lucas';
 
-    // submit the form
+    // soumet le formulaire
     $crawler = $client->submit($form);
 
-Each ``Form`` field has specialized methods depending on its type::
+Chaque champ de ``Formulaire`` possède des méthodes spécialisées dépendant
+de son type::
 
-    // fill an input field
+    // remplit un champ de saisie
     $form['name'] = 'Lucas';
 
-    // select an option or a radio
+    // sélectionne une option/radio
     $form['country']->select('France');
 
-    // tick a checkbox
+    // coche une case
     $form['like_symfony']->tick();
 
-    // upload a file
+    // upload un fichier
     $form['photo']->upload('/path/to/lucas.jpg');
 
-Instead of changing one field at a time, you can also pass an array of values
-to the ``submit()`` method::
+Plutôt que de changer un champ à la fois, vous pouvez aussi passer un tableau
+de valeurs à la méthode ``submit()``::
 
     $crawler = $client->submit($form, array(
         'name'         => 'Lucas',
@@ -176,16 +183,16 @@ to the ``submit()`` method::
         'photo'        => '/path/to/lucas.jpg',
     ));
 
-Now that you can easily navigate through an application, use assertions to test
-that it actually does what you expect it to. Use the Crawler to make assertions
-on the DOM::
+Maintenant que vous pouvez naviguer aisément à travers une application, utilisez
+les assertions pour tester qu'elle fait effectivement ce que vous souhaitez
+qu'elle fasse. Utilisez le Crawler pour faire des assertions sur le DOM::
 
-    // Assert that the response matches a given CSS selector.
+    // affirme que la réponse correspond au sélecteur CSS donné
     $this->assertTrue($crawler->filter('h1')->count() > 0);
 
-Or, test against the Response content directly if you just want to assert that
-the content contains some text, or if the Response is not an XML/HTML
-document::
+Ou, testez directement par rapport au contenu de la Réponse si vous voulez
+juste vérifier que ce dernier contient un certain morceau de texte, ou si
+la Réponse n'est pas un document XML/HTML::
 
     $this->assertRegExp('/Hello Fabien/', $client->getResponse()->getContent());
 
