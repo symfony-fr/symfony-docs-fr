@@ -490,36 +490,38 @@ pour les noeuds correspondants::
 Extraction d'informations
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Crawler can extract information from the nodes::
+Le Crawler peut extraire des informations des noeuds::
 
-    // Returns the attribute value for the first node
+    // retourne la valeur de l'attribut du premier noeud
     $crawler->attr('class');
 
-    // Returns the node value for the first node
+    // retourne la valeur du noeud pour le premier noeud
     $crawler->text();
 
-    // Extracts an array of attributes for all nodes (_text returns the node value)
+    // extrait un tableau d'attributs pour tous les noeuds (_text retourne
+    // la valeur du noeud)
     $crawler->extract(array('_text', 'href'));
 
-    // Executes a lambda for each node and return an array of results
+    // exécute une lambda pour chaque noeud et retourne un tableau
+    // de résultats
     $data = $crawler->each(function ($node, $i)
     {
         return $node->getAttribute('href');
     });
 
-Links
+Liens
 ~~~~~
 
-You can select links with the traversing methods, but the ``selectLink()``
-shortcut is often more convenient::
+Vous pouvez sélectionner les liens grâce aux méthodes de traversement, mais
+utiliser la méthode ``selectLink()`` est souvent plus pratique::
 
     $crawler->selectLink('Click here');
 
-It selects links that contain the given text, or clickable images for which
-the ``alt`` attribute contains the given text.
+Cela sélectionne les liens qui contiennent le texte donné, ou les images cliquables
+pour lesquelles l'attribut ``alt`` contient le texte donné.
 
-The Client ``click()`` method takes a ``Link`` instance as returned by the
-``link()`` method::
+La méthode ``click()`` du Client prend une instance de ``Link`` en paramètre; cette
+dernière étant retournée par la méthode ``link()``:: 
 
     $link = $crawler->link();
 
@@ -527,83 +529,85 @@ The Client ``click()`` method takes a ``Link`` instance as returned by the
 
 .. tip::
 
-    The ``links()`` method returns an array of ``Link`` objects for all nodes.
+    La méthode ``links()`` retourne un tableau d'objets ``Link`` pour tous les noeuds.
 
-Forms
-~~~~~
+Formulaires
+~~~~~~~~~~~
 
-As for links, you select forms with the ``selectButton()`` method::
+Comme pour les liens, vous sélectionnez les formulaires à l'aide de la méthode
+``selectButton()``::
 
     $crawler->selectButton('submit');
 
-Notice that we select form buttons and not forms as a form can have several
-buttons; if you use the traversing API, keep in mind that you must look for a
-button.
+Notez que nous sélectionnons les boutons de formulaire et non pas les formulaires
+eux-mêmes car un formulaire peut contenir plusieurs boutons; si vous utilisez l'API
+de traversement, gardez en mémoire que vous devez chercher un bouton.
 
-The ``selectButton()`` method can select ``button`` tags and submit ``input``
-tags; it has several heuristics to find them:
+La méthode ``selectButton()`` peut sélectionner des tags ``button`` et soumettre des
+tags ``input``; elle possède plusieurs manières de les trouver:
 
-* The ``value`` attribute value;
+* La valeur de l'attribut ``value``;
 
-* The ``id`` or ``alt`` attribute value for images;
+* La valeur de l'attribut ``id`` ou ``alt`` pour les images;
 
-* The ``id`` or ``name`` attribute value for ``button`` tags.
+* La valeur de l'attribut ``id`` ou ``name`` pour les tags ``button``.
 
-When you have a node representing a button, call the ``form()`` method to get a
-``Form`` instance for the form wrapping the button node::
+Lorsque vous avez un noeud représentant un bouton, appelez la method ``form()`` pour
+obtenir une instance de ``Form`` pour le formulaire contenant le noeud du bouton::
 
     $form = $crawler->form();
 
-When calling the ``form()`` method, you can also pass an array of field values
-that overrides the default ones::
+Quand vous appelez la méthode ``form()``, vous pouvez aussi passer un tableau de
+valeurs de champ qui ré-écrit les valeurs par défaut::
 
     $form = $crawler->form(array(
         'name'         => 'Fabien',
         'like_symfony' => true,
     ));
 
-And if you want to simulate a specific HTTP method for the form, pass it as a
-second argument::
+Et si vous voulez simuler une méthode HTTP spécifique pour le formulaire, passez la
+le lui en second argument::
 
     $form = $crawler->form(array(), 'DELETE');
 
-The Client can submit ``Form`` instances::
+Le Client peut soumettre des instances de ``Form``::
 
     $client->submit($form);
 
-The field values can also be passed as a second argument of the ``submit()``
-method::
+Les valeurs des champs peuvent aussi être passées en second argument de la
+méthode ``submit()``::
 
     $client->submit($form, array(
         'name'         => 'Fabien',
         'like_symfony' => true,
     ));
 
-For more complex situations, use the ``Form`` instance as an array to set the
-value of each field individually::
+Pour les situations plus complexes, utilisez l'instance de ``Form`` en tant
+que tableau pour définir la valeur de chaque champ individuellement::
 
-    // Change the value of a field
+    // change la valeur d'un champ
     $form['name'] = 'Fabien';
 
-There is also a nice API to manipulate the values of the fields according to
-their type::
+Il y a aussi une sympathique API qui permet de manipuler les valeurs des champs
+selon leur type::
 
-    // Select an option or a radio
+    // sélectionne une option/radio
     $form['country']->select('France');
 
-    // Tick a checkbox
+    // coche une case
     $form['like_symfony']->tick();
 
-    // Upload a file
+    // upload un fichier
     $form['photo']->upload('/path/to/lucas.jpg');
 
 .. tip::
 
-    You can get the values that will be submitted by calling the ``getValues()``
-    method. The uploaded files are available in a separate array returned by
-    ``getFiles()``. The ``getPhpValues()`` and ``getPhpFiles()`` also return
-    the submitted values, but in the PHP format (it converts the keys with
-    square brackets notation to PHP arrays).
+    Vous pouvez obtenir les valeurs qui sont soumises en appelant la méthode
+    ``getValues()``. Les fichiers uploadés sont disponibles dans un tableau
+    séparé retourné par ``getFiles()``. Les méthodes ``getPhpValues()`` et
+    ``getPhpFiles()`` retournent aussi les valeurs soumises, mais au format
+    PHP (cela convertit les clés avec la notation entre crochets en tableaux
+    PHP).
 
 .. index::
    pair: Tests; Configuration
