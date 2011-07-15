@@ -612,28 +612,29 @@ selon leur type::
 .. index::
    pair: Tests; Configuration
 
-Testing Configuration
+Configuration de Test
 ---------------------
 
 .. index::
    pair: PHPUnit; Configuration
 
-PHPUnit Configuration
+Configuration PHPUnit
 ~~~~~~~~~~~~~~~~~~~~~
 
-Each application has its own PHPUnit configuration, stored in the
-``phpunit.xml.dist`` file. You can edit this file to change the defaults or
-create a ``phpunit.xml`` file to tweak the configuration for your local machine.
+Chaque application possède sa propre configuration PHPUnit, stockée dans le
+fichier ``phpunit.xml.dist``. Vous pouvez éditer ce fichier pour changer les
+valeurs par défaut ou vous pouvez créer un fichier ``phpunit.xml`` pour tweaker
+la configuration de votre machine locale.
 
 .. tip::
 
-    Store the ``phpunit.xml.dist`` file in your code repository, and ignore the
-    ``phpunit.xml`` file.
+    Stockez le fichier ``phpunit.xml.dist`` dans votre gestionnaire de code, et
+    ignorez le fichier ``phpunit.xml``.
 
-By default, only the tests stored in "standard" bundles are run by the
-``phpunit`` command (standard being tests under Vendor\\*Bundle\\Tests
-namespaces). But you can easily add more namespaces. For instance, the
-following configuration adds the tests from the installed third-party bundles:
+Par défaut, seulement les tests stockés dans des bundles "standards" sont exécutés
+par la commande ``phpunit`` (standard étant des tests dans l'espace de noms
+Vendor\\*Bundle\\Tests). Mais vous pouvez aisément ajouter d'autres espaces de noms.
+Par example, la configuration suivante ajoute les tests de bundles tiers installés::
 
 .. code-block:: xml
 
@@ -645,8 +646,8 @@ following configuration adds the tests from the installed third-party bundles:
         </testsuite>
     </testsuites>
 
-To include other namespaces in the code coverage, also edit the ``<filter>``
-section:
+Pour inclure d'autres espaces de noms dans la couverture du code, éditez aussi
+la section ``<filter>``:
 
 .. code-block:: xml
 
@@ -662,11 +663,12 @@ section:
         </whitelist>
     </filter>
 
-Client Configuration
-~~~~~~~~~~~~~~~~~~~~
+Configuration du Client
+~~~~~~~~~~~~~~~~~~~~~~~
 
-The Client used by functional tests creates a Kernel that runs in a special
-``test`` environment, so you can tweak it as much as you want:
+Le Client utilisé par les tests fonctionnels crée un Kernel qui est exécuté dans
+un environnement spécial dit ``test``, afin que vous puissiez le tweaker autant
+que vous le désirez:
 
 .. configuration-block::
 
@@ -740,24 +742,25 @@ The Client used by functional tests creates a Kernel that runs in a special
            
         )));
 
-You can also change the default environment (``test``) and override the
-default debug mode (``true``) by passing them as options to the
-``createClient()`` method::
+Vous pouvez aussi changer l'environnement par défaut (``test``) et ré-écrire
+le mode debug par défaut (``true``) en les passant en tant qu'options à la
+méthode ``createClient()``::
 
     $client = static::createClient(array(
         'environment' => 'my_test_env',
         'debug'       => false,
     ));
 
-If your application behaves according to some HTTP headers, pass them as the
-second argument of ``createClient()``::
+Si votre application se comporte selon certaines en-têtes HTTP, passez les en
+tant que second argument de ``createClient()``::
 
     $client = static::createClient(array(), array(
         'HTTP_HOST'       => 'en.example.com',
         'HTTP_USER_AGENT' => 'MySuperBrowser/1.0',
     ));
 
-You can also override HTTP headers on a per request basis::
+Vous pouvez aussi ré-écrire les en-têtes HTTP par requête (i.e. et non pas pour
+toutes les requêtes)::
 
     $client->request('GET', '/', array(), array(
         'HTTP_HOST'       => 'en.example.com',
@@ -766,11 +769,12 @@ You can also override HTTP headers on a per request basis::
 
 .. tip::
 
-    To provide your own Client, override the ``test.client.class`` parameter,
-    or define a ``test.client`` service.
+    Pour fournir votre propre Client, ré-écrivez le paramètre ``test.client.class``,
+    ou définissez un service ``test.client``.
 
-Learn more from the Cookbook
-----------------------------
+
+En savoir plus grâce au Cookbook
+-----------------------------------
 
 * :doc:`/cookbook/testing/http_authentication`
 * :doc:`/cookbook/testing/insulating_clients`
