@@ -199,31 +199,31 @@ la Réponse n'est pas un document XML/HTML::
 .. index::
    single: Tests; Assertions
 
-Useful Assertions
+Assertions Utiles
 ~~~~~~~~~~~~~~~~~
 
-After some time, you will notice that you always write the same kind of
-assertions. To get you started faster, here is a list of the most common and
-useful assertions::
+Après quelques temps, vous remarquerez que vous écrivez toujours la même sorte
+d'assertion. Afin que vous démarriez plus rapidement, voici une liste des
+assertions les plus communes et utiles::
 
-    // Assert that the response matches a given CSS selector.
+    // affirme que la réponse correspond à un sélecteur CSS donné
     $this->assertTrue($crawler->filter($selector)->count() > 0);
 
-    // Assert that the response matches a given CSS selector n times.
+    // affirme que la réponse correspond n fois à un sélecteur CSS donné
     $this->assertEquals($count, $crawler->filter($selector)->count());
 
-    // Assert the a response header has the given value.
+    // affirme que l'en-tête de la réponse possède la valeur donnée
     $this->assertTrue($client->getResponse()->headers->contains($key, $value));
 
-    // Assert that the response content matches a regexp.
+    // affirme que le contenu de la réponse correspond à une expression régulière donnée
     $this->assertRegExp($regexp, $client->getResponse()->getContent());
 
-    // Assert the response status code.
+    // affirme que le code de statut de la réponse correspond à celui donné
     $this->assertTrue($client->getResponse()->isSuccessful());
     $this->assertTrue($client->getResponse()->isNotFound());
     $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-    // Assert that the response status code is a redirect.
+    // affirme que le code de statut de la réponse est une redirection
     $this->assertTrue($client->getResponse()->isRedirected('google.com'));
 
 .. _documentation: http://www.phpunit.de/manual/3.5/en/
@@ -231,28 +231,27 @@ useful assertions::
 .. index::
    single: Tests; Client
 
-The Test Client
----------------
+Le Client Test
+--------------
 
-The test Client simulates an HTTP client like a browser.
+Le Client test simule un client HTTP comme un navigateur.
 
 .. note::
 
-    The test Client is based on the ``BrowserKit`` and the ``Crawler``
-    components.
+    Le Client test est basé sur les composants ``BrowserKit` et ``Crawler``.
 
-Making Requests
-~~~~~~~~~~~~~~~
+Faire des requêtes
+~~~~~~~~~~~~~~~~~~
 
-The client knows how to make requests to a Symfony2 application::
+Le client sait comment effectuer des requêtes à une application Symfony2::
 
     $crawler = $client->request('GET', '/hello/Fabien');
 
-The ``request()`` method takes the HTTP method and a URL as arguments and
-returns a ``Crawler`` instance.
+La méthode ``request()`` prend en arguments la méthode HTTP et une URL et
+retourne une instance de ``Crawler``.
 
-Use the Crawler to find DOM elements in the Response. These elements can then
-be used to click on links and submit forms::
+Utilisez le Crawler pour trouver des éléments DOM dans la Réponse. Ces éléments
+peuvent ainsi être utilisé pour cliquer sur des liens et soumettre des formulaires::
 
     $link = $crawler->selectLink('Go elsewhere...')->link();
     $crawler = $client->click($link);
@@ -260,126 +259,130 @@ be used to click on links and submit forms::
     $form = $crawler->selectButton('validate')->form();
     $crawler = $client->submit($form, array('name' => 'Fabien'));
 
-The ``click()`` and ``submit()`` methods both return a ``Crawler`` object.
-These methods are the best way to browse an application as it hides a lot of
-details. For instance, when you submit a form, it automatically detects the
-HTTP method and the form URL, it gives you a nice API to upload files, and it
-merges the submitted values with the form default ones, and more.
+Les méthodes ``click()`` et ``submit()`` retournent toutes deux un objet
+``Crawler``. Ces méthodes sont le meilleur moyen de naviguer au travers d'une
+application car cela masque beaucoup de détails. Par exemple, quand vous
+soumettez un formulaire, il détecte automatiquement la méthode HTTP et l'URL
+du formulaire, il vous fournit une API pour uploader des fichiers,
+et il fusionne les valeurs soumises avec celles par défaut du formulaire,
+et plus encore.
 
 .. tip::
 
-    You will learn more about the ``Link`` and ``Form`` objects in the Crawler
-    section below.
+    Vous en apprendrez davantage sur les objets ``Link`` et ``Form`` dans la
+    section Crawler ci-dessous.
 
-But you can also simulate form submissions and complex requests with the
-additional arguments of the ``request()`` method::
+Mais vous pouvez aussi simuler les soumissions de formulaires et des requêtes
+complexes à l'aide des arguments additionnels de la méthode ``request()``::
 
-    // Form submission
+    // soumission de formulaire
     $client->request('POST', '/submit', array('name' => 'Fabien'));
 
-    // Form submission with a file upload
+    // soumission de formulaire avec un upload de fichier
     $client->request('POST', '/submit', array('name' => 'Fabien'), array('photo' => '/path/to/photo'));
 
-    // Specify HTTP headers
+    // spécifie les en-têtes HTTP
     $client->request('DELETE', '/post/12', array(), array(), array('PHP_AUTH_USER' => 'username', 'PHP_AUTH_PW' => 'pa$$word'));
 
-When a request returns a redirect response, the client automatically follows
-it. This behavior can be changed with the ``followRedirects()`` method::
+Quand une requête retourne une redirection en tant que réponse, le client la
+suit automatiquement. Ce comportement peut être changé via la méthode
+``followRedirects()``::
 
     $client->followRedirects(false);
 
-When the client does not follow redirects, you can force the redirection with
-the ``followRedirect()`` method::
+Quand le client ne suit pas les redirections, vous pouvez le forcer grâce à la
+méthode ``followRedirect()``::
 
     $crawler = $client->followRedirect();
 
-Last but not least, you can force each request to be executed in its own PHP
-process to avoid any side-effects when working with several clients in the same
-script::
+Enfin, et non des moindres, vous pouvez forcer chaque requête à être exécutée
+dans son propre processus PHP afin d'éviter quelconques effets secondaires
+quand vous travaillez avec plusieurs clients dans le même script::
 
     $client->insulate();
 
-Browsing
+Naviguer
 ~~~~~~~~
 
-The Client supports many operations that can be done in a real browser::
+Le Client supporte de nombreuses opérations qui peuvent être effectuées
+à travers un navigateur réel::
 
     $client->back();
     $client->forward();
     $client->reload();
 
-    // Clears all cookies and the history
+    // efface tous les cookies et l'historique
     $client->restart();
 
-Accessing Internal Objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Accéder aux Objets Internes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you use the client to test your application, you might want to access the
-client's internal objects::
+Si vous utilisez le client pour tester votre application, vous pourriez vouloir
+accéder aux objets internes du client::
 
     $history   = $client->getHistory();
     $cookieJar = $client->getCookieJar();
 
-You can also get the objects related to the latest request::
+Vous pouvez aussi obtenir les objets liés à la dernière requête::
 
     $request  = $client->getRequest();
     $response = $client->getResponse();
     $crawler  = $client->getCrawler();
 
-If your requests are not insulated, you can also access the ``Container`` and
-the ``Kernel``::
+Si vos requêtes ne sont pas isolées, vous pouvez aussi accéder au ``Container``
+et au ``Kernel``::
 
     $container = $client->getContainer();
     $kernel    = $client->getKernel();
 
-Accessing the Container
-~~~~~~~~~~~~~~~~~~~~~~~
+Accéder au Container
+~~~~~~~~~~~~~~~~~~~~
 
-It's highly recommended that a functional test only tests the Response. But
-under certain very rare circumstances, you might want to access some internal
-objects to write assertions. In such cases, you can access the dependency
-injection container::
+Il est fortement recommandé qu'un test fonctionnel teste seulement la Réponse.
+Mais dans certaines rares circonstances, vous pourriez vouloir accéder à
+quelques objets internes pour écrire des assertions. Dans tels cas, vous
+pouvez accéder au conteneur d'injection des dépendances::
 
     $container = $client->getContainer();
 
-Be warned that this does not work if you insulate the client or if you use an
-HTTP layer.
+Soyez averti que cela ne fonctionne pas si vous isolez le client ou si vous
+utilisez une couche HTTP.
 
 .. tip::
 
-    If the information you need to check are available from the profiler, use
-    them instead.
+    Si les informations que vous avez besoin de vérifier sont disponibles via le
+    profileur, utilisez plutôt ces dernières à la place.
 
-Accessing the Profiler Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Accéder aux données du profileur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To assert data collected by the profiler, you can get the profile for the
-current request like this::
+Pour vérifier les données collectées par le profileur, vous pouvez obtenir
+le profil pour la requête courante comme ceci::
 
     $profile = $client->getProfile();
 
-Redirecting
+Redirection
 ~~~~~~~~~~~
 
-By default, the Client doesn't follow HTTP redirects, so that you can get
-and examine the Response before redirecting. Once you do want the client
-to redirect, call the ``followRedirect()`` method::
+Par défaut, le Client ne suit pas les redirections HTTP, de sorte que vous
+puissiez obtenir et examiner la Réponse avant la redirection. Une fois que
+vous voulez que le client soit redirigé, appelez la méthode ``followRedirect()``::
 
-    // do something that would cause a redirect to be issued (e.g. fill out a form)
+    // faites quelque chose qui cause une redirection (ex: remplir un formulaire)
 
-    // follow the redirect
+    // suit la redirection
     $crawler = $client->followRedirect();
 
-If you want the Client to always automatically redirect, you can call the
-``followRedirects()`` method::
+Si vous souhaitez que le Client soit toujours redirigé automatiquement, vous
+pouvez appeler la méthode ``followRedirects()``::
 
     $client->followRedirects();
 
     $crawler = $client->request('GET', '/');
 
-    // all redirects are followed
+    // toutes les redirections sont suivies
 
-    // set Client back to manual redirection
+    // reconfigure le client en mode redirection manuelle
     $client->followRedirects(false);
 
 .. index::
