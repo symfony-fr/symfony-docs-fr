@@ -388,87 +388,89 @@ pouvez appeler la méthode ``followRedirects()``::
 .. index::
    single: Tests; Crawler
 
-The Crawler
+Le Crawler
 -----------
 
-A Crawler instance is returned each time you make a request with the Client.
-It allows you to traverse HTML documents, select nodes, find links and forms.
+Une instance de Crawler est retournée chaque fois que vous effectuez une requête
+avec le Client. Elle vous permet de naviguer à travers des documents HTML, de
+sélectionner des noeuds, de trouver des liens et des formulaires.
 
-Creating a Crawler Instance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Créer une instance de Crawler
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A Crawler instance is automatically created for you when you make a request
-with a Client. But you can create your own easily::
+Une instance de Crawler est automatiquement créée pour vous quand vous effectuez
+une requête avec un Client. Mais vous pouvez créer la vôtre facilement::
 
     use Symfony\Component\DomCrawler\Crawler;
 
     $crawler = new Crawler($html, $url);
 
-The constructor takes two arguments: the second one is the URL that is used to
-generate absolute URLs for links and forms; the first one can be any of the
-following:
+Le constructeur prend deux arguments: le second est une URL qui est utilisée pour
+générer des URLs absolues pour les liens et les formulaires; la première peut être
+n'importe lequel des éléments suivants:
 
-* An HTML document;
-* An XML document;
-* A ``DOMDocument`` instance;
-* A ``DOMNodeList`` instance;
-* A ``DOMNode`` instance;
-* An array of the above elements.
+* Un document HTML;
+* Un document XML;
+* Une instance de ``DOMDocument``
+* Une instance de ``DOMNodeList``
+* Une instance de ``DOMNode``
+* Un tableau composé des éléments ci-dessus.
 
-After creation, you can add more nodes:
+Après création, vous pouvez ajouter plus de noeuds:
 
-+-----------------------+----------------------------------+
-| Method                | Description                      |
-+=======================+==================================+
-| ``addHTMLDocument()`` | An HTML document                 |
-+-----------------------+----------------------------------+
-| ``addXMLDocument()``  | An XML document                  |
-+-----------------------+----------------------------------+
-| ``addDOMDocument()``  | A ``DOMDocument`` instance       |
-+-----------------------+----------------------------------+
-| ``addDOMNodeList()``  | A ``DOMNodeList`` instance       |
-+-----------------------+----------------------------------+
-| ``addDOMNode()``      | A ``DOMNode`` instance           |
-+-----------------------+----------------------------------+
-| ``addNodes()``        | An array of the above elements   |
-+-----------------------+----------------------------------+
-| ``add()``             | Accept any of the above elements |
-+-----------------------+----------------------------------+
++-----------------------+-------------------------------------------------+
+| Méthode               | Description                                     |
++=======================+=================================================+
+| ``addHTMLDocument()`` | Un document HTML                                |
++-----------------------+-------------------------------------------------+
+| ``addXMLDocument()``  | Un document XML                                 |
++-----------------------+-------------------------------------------------+
+| ``addDOMDocument()``  | Une instance de ``DOMDocument``                 |
++-----------------------+-------------------------------------------------+
+| ``addDOMNodeList()``  | Une instance de ``DOMNodeList``                 |
++-----------------------+-------------------------------------------------+
+| ``addDOMNode()``      | Une instance de ``DOMNode``                     |
++-----------------------+-------------------------------------------------+
+| ``addNodes()``        | Un tableau composé des éléments ci-dessus       |
++-----------------------+-------------------------------------------------+
+| ``add()``             | Accepte n'importe lequel des éléments ci-dessus |
++-----------------------+-------------------------------------------------+
 
-Traversing
-~~~~~~~~~~
+Traverser
+~~~~~~~~~
 
-Like jQuery, the Crawler has methods to traverse the DOM of an HTML/XML
-document:
+Comme jQuery, le Crawler possède des méthodes lui permettant de naviguer à travers
+le DOM d'un document HTML/XML:
 
-+-----------------------+----------------------------------------------------+
-| Method                | Description                                        |
-+=======================+====================================================+
-| ``filter('h1')``      | Nodes that match the CSS selector                  |
-+-----------------------+----------------------------------------------------+
-| ``filterXpath('h1')`` | Nodes that match the XPath expression              |
-+-----------------------+----------------------------------------------------+
-| ``eq(1)``             | Node for the specified index                       |
-+-----------------------+----------------------------------------------------+
-| ``first()``           | First node                                         |
-+-----------------------+----------------------------------------------------+
-| ``last()``            | Last node                                          |
-+-----------------------+----------------------------------------------------+
-| ``siblings()``        | Siblings                                           |
-+-----------------------+----------------------------------------------------+
-| ``nextAll()``         | All following siblings                             |
-+-----------------------+----------------------------------------------------+
-| ``previousAll()``     | All preceding siblings                             |
-+-----------------------+----------------------------------------------------+
-| ``parents()``         | Parent nodes                                       |
-+-----------------------+----------------------------------------------------+
-| ``children()``        | Children                                           |
-+-----------------------+----------------------------------------------------+
-| ``reduce($lambda)``   | Nodes for which the callable does not return false |
-+-----------------------+----------------------------------------------------+
++-----------------------+-----------------------------------------------------+
+| Méthode               | Description                                         |
++=======================+=====================================================+
+| ``filter('h1')``      | Noeuds qui correspondent au sélecteur CSS           |
++-----------------------+-----------------------------------------------------+
+| ``filterXpath('h1')`` | Noeuds qui correspondent à l'expression XPath       |
++-----------------------+-----------------------------------------------------+
+| ``eq(1)``             | Noeud pour l'index spéficié                         |
++-----------------------+-----------------------------------------------------+
+| ``first()``           | Premier noeud                                       |
++-----------------------+-----------------------------------------------------+
+| ``last()``            | Dernier noeud                                       |
++-----------------------+-----------------------------------------------------+
+| ``siblings()``        | Frères et soeurs                                    |
++-----------------------+-----------------------------------------------------+
+| ``nextAll()``         | Tous les frères et soeurs suivants                  |
++-----------------------+-----------------------------------------------------+
+| ``previousAll()``     | Tous les frères et soeurs précédents                |
++-----------------------+-----------------------------------------------------+
+| ``parents()``         | Noeuds parents                                      |
++-----------------------+-----------------------------------------------------+
+| ``children()``        | Noeuds enfants                                      |
++-----------------------+-----------------------------------------------------+
+| ``reduce($lambda)``   | Noeuds pour lesquels la lambda ne retourne pas faux |
++-----------------------+-----------------------------------------------------+
 
-You can iteratively narrow your node selection by chaining method calls as
-each method returns a new Crawler instance for the matching nodes::
+Vous pouvez affiner de manière itérative votre sélection de noeuds en enchaînant les
+appels de méthodes car chaque méthode retourne une nouvelle instance de Crawler
+pour les noeuds correspondants::
 
     $crawler
         ->filter('h1')
@@ -482,11 +484,11 @@ each method returns a new Crawler instance for the matching nodes::
 
 .. tip::
 
-    Use the ``count()`` function to get the number of nodes stored in a Crawler:
-    ``count($crawler)``
+    Utilisez la fonction ``count()`` pour obtenir le nombre de noeuds stockés
+    dans un Crawler: ``count($crawler)``.
 
-Extracting Information
-~~~~~~~~~~~~~~~~~~~~~~
+Extraction d'informations
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Crawler can extract information from the nodes::
 
