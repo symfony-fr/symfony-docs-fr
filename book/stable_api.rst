@@ -1,38 +1,38 @@
-The Symfony2 Stable API
-=======================
+L'API stable de Symfony2
+========================
 
-The Symfony2 stable API is a subset of all Symfony2 published public methods
-(components and core bundles) that share the following properties:
+L'API stable de Symfony2 is un sous-ensemble des toutes les méthodes publiques
+de Symfony2 (composants et bundles core) qui partagent les propriétés suivantes:
 
-* The namespace and class name won't change;
-* The method name won't change;
-* The method signature (arguments and return value type) won't change;
-* The semantic of what the method does won't change.
+* le namespace et le nom de la classe ne changera pas,
+* le nom de la méthode ne changera pas,
+* la signatude de la méthode (arguments et valeur de retour) ne changera pas,
+* le rôle et la responsbilité de ce que la méthode fait ne changera pas ('''NOTE: pas satisfait de la traduction''')
 
-The implementation itself can change though. The only valid case for a change
-in the stable API is in order to fix a security issue.
+L'implémentation elle-même peut changer. La seule raison valable pour un changement 
+de l'API stable de Symfony2 serait pour corriger un problème de sécurité.
 
-.. note::
+..note::
 
-    The stable API is based on a whitelist. Therefore, everything not listed
-    explicitly in this document is not part of the stable API.
+    L'API stable est basé sur un principe de liste blanche ("whitelist"). Donc tout ce qui n'est pas 
+    listé dans ce document ne fait pas parti de l'API stable.
 
-.. note::
+..note::
 
-    This is a work in progress and the definitive list will be published when
-    Symfony2 final will be released. In the meantime, if you think that some
-    methods deserve to be in this list, please start a discussion on the
-    Symfony developer mailing-list.
+    Cette liste est en cours de définition et la liste définitive sera finalisée lorsque
+    la version finale de Symfony2 sera publiée. Si vous considérez que des méthodes
+    devraient être incluses à cette liste, vous pouvez démarrer une discussion sur 
+    la mailing-list Symfony developer.
+
+..note::
+
+    Chaque méthode faisant partie de l'API stable est signalée sur le site de 'API
+    de Symony2 (au moyen de l'annotation ``@stable``).
 
 .. tip::
 
-    Any method part of the stable API is marked as such on the Symfony2 API
-    website (has the ``@stable`` annotation).
-
-.. tip::
-
-    Any third party bundle should also publish its own stable API.
-
+    Chaque bundle tiers devrait aussi publier sa propre API stable.
+    
 HttpKernel Component
 --------------------
 
