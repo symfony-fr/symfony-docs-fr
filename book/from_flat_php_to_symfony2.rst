@@ -1,27 +1,29 @@
-Symfony2 versus Flat PHP
-========================
+Symfony2 comparé à du PHP simple
+================================
 
-**Why is Symfony2 better than just opening up a file and writing flat PHP?**
+** Pourquoi est-ce que Symfony2 est mieux que juste simplement ouvrir un fichier 
+et écrire du PHP simple?
 
-If you've never used a PHP framework, aren't familiar with the MVC philosophy,
-or just wonder what all the *hype* is around Symfony2, this chapter is for
-you. Instead of *telling* you that Symfony2 allows you to develop faster and
-better software than with flat PHP, you'll see for yourself.
+Si vous n'avez jamais utilisé un framework PHP, que vous n'êtes pas familier avec 
+la philosophie MVC, ou simplement que vous vous demander pourquoi il y a tant de
+*hype* autours de Symfony2, ce chapitre est pour vous. au lieu de vous *dire* que
+Symfony2 vous permet de déveloper plus rapidement et de meilleurs applications qu'avec 
+du PHP simple, vous allez le voir de vos propres yeux.
 
-In this chapter, you'll write a simple application in flat PHP, and then
-refactor it to be more organized. You'll travel through time, seeing the
-decisions behind why web development has evolved over the past several years
-to where it is now. 
+Dans ce chapitre, vous aller écrire une application simple en PHP simple, puis refactoriser
+le code afin d'en améliorer l'organisation. You voyagerez dans le temps, en comprenant
+les décisions qui ont fait évoluer le développement web au cours de ces dernières années.
 
-By the end, you'll see how Symfony2 can rescue you from mundane tasks and
-let you take back control of your code.
+D'ici la fin, vous verrez comment Symfony peut vous épargner les tâches banales et vous
+permettra de reprendre le contrôle de votre code.
 
-A simple Blog in flat PHP
--------------------------
+Un simple blog en PHP
+---------------------
 
-In this chapter, you'll build the token blog application using only flat PHP.
-To begin, create a single page that displays blog entries that have been
-persisted to the database. Writing in flat PHP is quick and dirty:
+Dans ce chapitre, vous batirez une application de blog en utilisant uniquement du 
+code PHP simple.
+Pour commencer, créer une page qui affiche les articles du blog qu ont été sauvegardés
+dans la base de données. Écrire en PHP simple est "rapide et sale":
 
 .. code-block:: html+php
 
@@ -55,31 +57,36 @@ persisted to the database. Writing in flat PHP is quick and dirty:
     <?php
     mysql_close($link);
 
-That's quick to write, fast to execute, and, as your app grows, impossible
-to maintain. There are several problems that need to be addressed:
+C'est rapide à écrire, rapide à exécuter et, comme votre application évoluera, 
+impossible à maintenir. IL y a plusieurs problèmes qui doivent être résolus:
 
-* **No error-checking**: What if the connection to the database fails?
+* **aucune gestion d'erreur**: Que se passe-t-il si la connection à la base de 
+données échoue?
 
-* **Poor organization**: If the application grows, this single file will become
-  increasingly unmaintainable. Where should you put code to handle a form
-  submission? How can you validate data? Where should code go for sending
-  emails?
+* **mauvaise organisation**: si votre application évolue, ce fichier deviendra de 
+moins en moins maintenable. Où devriez vous mettre le code qui traite la soumission
+d'un formulaire? Comment pouvez-vous valider les données? Où devriez-vous placer
+le code qui envoie des courriels?
 
-* **Difficult to reuse code**: Since everything is in one file, there's no
-  way to reuse any part of the application for other "pages" of the blog.
+* **Difficulté de réutiliser du code**: puisque tout se trouve dans un seul 
+fichier, il n'y a pas de moyen de réutiliser des parties de l'application pour 
+d'autres pages du blog.
 
 .. note::
-    Another problem not mentioned here is the fact that the database is
-    tied to MySQL. Though not covered here, Symfony2 fully integrates `Doctrine`_,
-    a library dedicated to database abstraction and mapping.
+    Un autre problème non mentionné ici est le fait que la base de données est 
+    liée à MySQL. Même si le sujet n'est pas couvert ici, Symfony intègre 
+.. note::
+    Another problem not mentioned here is the fact that the database is `Doctrine`_,
+    une librairie dédiée à l'abstraction des base de données 
+    et aux mapping objet-relationnel.
+    
+Retroussons-nous les manches et résolvons ces problèmes ainsi que d'autres.
 
-Let's get to work on solving these problems and more.
+Isoler la présentation
+~~~~~~~~~~~~~~~~~~~~~~
 
-Isolating the Presentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The code can immediately gain from separating the application "logic" from
-the code that prepares the HTML "presentation":
+Le code sera mieux structuré en séparant la logique d'application du code qui s'occupe
+de la présentation HTML:
 
 .. code-block:: html+php
 
@@ -98,11 +105,11 @@ the code that prepares the HTML "presentation":
 
     mysql_close($link);
 
-    // include the HTML presentation code
+    // inclure le code de la présentation HTML
     require 'templates/list.php';
 
-The HTML code is now stored in a separate file (``templates/list.php``), which
-is primarily an HTML file that uses a template-like PHP syntax:
+Le code HTML est maintenant dans un fichier séparé (``templates/list.php``), 
+qui est essentiellement un fichier HTML qui utilise une syntaxe PHP de template:
 
 .. code-block:: html+php
 
@@ -124,23 +131,26 @@ is primarily an HTML file that uses a template-like PHP syntax:
         </body>
     </html>
 
-By convention, the file that contains all of the application logic - ``index.php`` -
-is known as a "controller". The term :term:`controller` is a word you'll hear
-a lot, regardless of the language or framework you use. It refers simply
-to the area of *your* code that processes user input and prepares the response.
+Par convention, le fichier qui contient la logique d'applicaiton - ``index.php`` 
+est appelé "controller". Le terme :term:`controller` est u mot que vous allez 
+entendre souvent, quel que soit le langage ou le framework utilisé. Il fait
+simplement référence à *votre* code qui traite les entrées de l'utilisateur
+et prépare une réponse.
 
-In this case, our controller prepares data from the database and then includes
-a template to present that data. With the controller isolated, you could
-easily change *just* the template file if you needed to render the blog
-entries in some other format (e.g. ``list.json.php`` for JSON format). 
+Dans notre cas, le controlleur prépare les données de la base de données et ensuite
+inclut un template pour présenter ces données. Comme le controleur est isolé, 
+vous pouvez facilement changer *uniquement* le fichier de template si vous désirez
+afficher les articles du blog dans un autre format (par exemple ``list.json.php`` 
+pour un format JSON).
 
-Isolating the Application (Domain) Logic
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Isoler la logique d'affaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-So far the application contains only one page. But what if a second page
-needed to use the same database connection, or even the same array of blog
-posts? Refactor the code so that the core behavior and data-access functions
-of the application are isolated in a new file called ``model.php``:
+Pour l'instant, l'application ne contient qu'une seule page. Mais que faire 
+si une deuxième page a besoin d'utiliser la même connection à la base de données,
+or même le même tableau d'articles du blog? Refactoriser le code pour les le comportement
+principal et les fonctions d'accès qux données de l'application sont isolées dans un nouveau
+fichier appelé ``model.php``:
 
 .. code-block:: html+php
 
@@ -176,14 +186,14 @@ of the application are isolated in a new file called ``model.php``:
 
 .. tip::
 
-   The filename ``model.php`` is used because the logic and data access of
-   an application is traditionally known as the "model" layer. In a well-organized
-   application, the majority of the code representing your "business logic"
-   should live in the model (as opposed to living in a controller). And unlike
-   in this example, only a portion (or none) of the model is actually concerned
-   with accessing a database.
+   Le nom du fichier ``model.php`` est utilisé car la logique et l'accès aux données
+   de l'application est traditionnellement connu sous le nom de couche "modèle".
+   Dans une applicatio bien structurée, la majorité du code représentant la logique d'affaire
+   devrait résider dans le modèle (plutôt que dans le controlleur). Et contrairement 
+   à cette exemple, seulement une portion (or aucune portion) du modèle est en fait responsable
+   d'accéder à la base de données.
 
-The controller (``index.php``) is now very simple:
+Le controlleur (``index.php``) est maintenant très simple:
 
 .. code-block:: html+php
 
@@ -194,19 +204,19 @@ The controller (``index.php``) is now very simple:
 
     require 'templates/list.php';
 
-Now, the sole task of the controller is to get data from the model layer of
-the application (the model) and to call a template to render that data.
-This is a very simple example of the model-view-controller pattern.
+Maintenant, la seule responsabilité du controlleur est de récupérer les données
+de la couche modèle de l'application (le modèle) et d'appeler le template to afficher
+les données.
+C'est un exemple très simple du patron de conception Modèle-Vue-Controlleur.
 
-Isolating the Layout
-~~~~~~~~~~~~~~~~~~~~
+Isoler le layout
+~~~~~~~~~~~~~~~~
 
-At this point, the application has been refactored into three distinct pieces
-offering various advantages and the opportunity to reuse almost everything
-on different pages.
-
-The only part of the code that *can't* be reused is the page layout. Fix
-that by creating a new ``layout.php`` file:
+À ce point-ci, l'application a été refactorisée en trois parties distinctes, offrant
+plusieurs avantages et l'opportunité de réutiliser pratiquement la totalité du code
+pour d'autres pages.
+La seule partie du code qui *ne peut pas* être réutiliser est le layout de la page.
+Corrigez cela en créant un nouveau fichier ``layout.php``:
 
 .. code-block:: html+php
 
@@ -220,8 +230,8 @@ that by creating a new ``layout.php`` file:
         </body>
     </html>
 
-The template (``templates/list.php``) can now be simplified to "extend"
-the layout:
+Le template (``templates/list.php``) peut maintenant simplement "hériter" 
+du layout:
 
 .. code-block:: html+php
 
@@ -242,21 +252,22 @@ the layout:
 
     <?php include 'layout.php' ?>
 
-You've now introduced a methodology that allows for the reuse of the
-layout. Unfortunately, to accomplish this, you're forced to use a few ugly
-PHP functions (``ob_start()``, ``ob_get_clean()``) in the template. Symfony2
-uses a ``Templating`` component that allows this to be accomplished cleanly
-and easily. You'll see it in action shortly.
+Vous avez maintenant une méthode qui permet la réutilisation du layout. 
+Malheureusement, pour accomplir cela, vous êtes forcer d'utiliser quelques 
+fonctions laides de PHP (``ob_start()``, ``ob_get_clean()``) dans le template.
+Symfony utilise un composant de ``Templating`` qui permet d'accomplir ce résultat
+proprement et facilement. Vous le verrez en action bientôt.
 
-Adding a Blog "show" Page
--------------------------
+Ajout d'une page de détail d'article
+------------------------------------
 
-The blog "list" page has now been refactored so that the code is better-organized
-and reusable. To prove it, add a blog "show" page, which displays an individual
-blog post identified by an ``id`` query parameter.
+La page de liste a maintenant été refactorisé afin que le code soit mieux organisé
+et réutilisable. Pour le prouver, ajoutez une page de détail d'article ("show" page),
+qui affiche un article du blog identifié par un paramètre de requète ``id``.
 
-To begin, create a new function in the ``model.php`` file that retrieves
-an individual blog result based on a given id::
+Pour commencer, créer une fonction dans le fichier  ``model.php`` qui récupère un seul 
+article du blog en fonction d'un id passé en paramètre::
+
 
     // model.php
     function get_post_by_id($id)
@@ -273,8 +284,8 @@ an individual blog result based on a given id::
         return $row;
     }
 
-Next, create a new file called ``show.php`` - the controller for this new
-page:
+Puis créez un nouveau fichier appelé ``show.php`` - le controlleur pour cette 
+nouvelle page:
 
 .. code-block:: html+php
 
@@ -285,8 +296,8 @@ page:
 
     require 'templates/show.php';
 
-Finally, create the new template file - ``templates/show.php`` - to render
-the individual blog post:
+Finalement, créez un nouveau fichier de template - ``templates/show.php`` - afin
+d'afficher un articl du blog:
 
 .. code-block:: html+php
 
@@ -303,68 +314,69 @@ the individual blog post:
 
     <?php include 'layout.php' ?>
 
-Creating the second page is now very easy and no code is duplicated. Still,
-this page introduces even more lingering problems that a framework can solve
-for you. For example, a missing or invalid ``id`` query parameter will cause
-the page to crash. It would be better if this caused a 404 page to be rendered,
-but this can't really be done easily yet. Worse, had you forgotten to clean
-the ``id`` parameter via the ``mysql_real_escape_string()`` function, your
-entire database would be at risk for an SQL injection attack.
+Créer cette nouvelle page est vraiment facile et aucun code n'est dupliqué.
+Malgré tout, cette page introduit des problèmes persistant qu'un framework peut
+résoudre. Par exemple, un paramètre de requête ``id`` manquant ou invalide va
+générer une erreur fatale. Il serait mieux que cela génére une erreur 404, mais
+cela ne peut pas vraiment être fait facilement. Pire, si vous oubliez d'échapper
+le paramètre  ``id`` avec la fonction ``mysql_real_escape_string()``, votre base
+de données est sujette à des attaques d'injection SQL.
 
-Another major problem is that each individual controller file must include
-the ``model.php`` file. What if each controller file suddenly needed to include
-an additional file or perform some other global task (e.g. enforce security)?
-As it stands now, that code would need to be added to every controller file.
-If you forget to include something in one file, hopefully it doesn't relate
-to security...
+Un autre problème est que chaque fichier controlleur doit inclure le fichier 
+``model.php``. Que se passerait-il si chaque controlleur devait soudainement
+inclure un fichier additionnel ou effectuer une quelconque tache globale (comme
+renforcer la sécurité)? Dans l'état actuel, tout nouveau code devra être ajouter
+à chaque fichier controlleur. Si vous oubliez quelqus chose à un fichier, il serait
+bon que ce ne soit pas relier à la sécurité...
 
-A "Front Controller" to the Rescue
-----------------------------------
+Un "contrôleur frontal" à la rescousse
+--------------------------------------
 
-The solution is to use a :term:`front controller`: a single PHP file through
-which *all* requests are processed. With a front controller, the URIs for the
-application change slightly, but start to become more flexible:
+La solution est d'utiliser un :term:`contrôleur frontal` (front controller):
+a fichier PHP à travers lequel chaque requête est processé. Avec un contrôleur
+frontal, les URIs de l'application change un peu, mais elles sont plus flexibles:
 
 .. code-block:: text
 
-    Without a front controller
-    /index.php          => Blog post list page (index.php executed)
-    /show.php           => Blog post show page (show.php executed)
+    Sans contrôleur frontal
+    /index.php          => page de liste des articles (éxecution de index.php)
+    /show.php           => page de détail d'un article (show.php executé)
 
-    With index.php as the front controller
-    /index.php          => Blog post list page (index.php executed)
-    /index.php/show     => Blog post show page (index.php executed)
+    avec index.php comme contrôleur frontal
+    /index.php          => page de liste des articles (éxecution de index.php)
+    /index.php/show     => page de détail d'un article (éxecution de index.php)
 
 .. tip::
-    The ``index.php`` portion of the URI can be removed if using Apache
-    rewrite rules (or equivalent). In that case, the resulting URI of the
-    blog show page would be simply ``/show``.
+	La portion ``index.php`` de l'URI peut être enlevé sen utilisant les règles
+	de réécritures d'URI (ou équivalent). Dans ce cas, l'URI de la page de détail
+	d'un article serait simplement ``/show``.
 
-When using a front controller, a single PHP file (``index.php`` in this case)
-renders *every* request. For the blog post show page, ``/index.php/show`` will
-actually execute the ``index.php`` file, which is now responsible for routing
-requests internally based on the full URI. As you'll see, a front controller
-is a very powerful tool.
+En utilisant un contrôleur frontal, un seul fichier PHP (``index.php`` dans notre cas)
+traite *chaque* requête. Pour la page de détail d'un article, ``/index.php/show``
+va donc exécuter le fichier ``index.php``, qui est maintenant responsable de router
+en interne les requêtes en fonction de l'URI complète. Comme vous allez le voir,
+un controlêur frontal est un outil très puissant.
 
-Creating the Front Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Créer le contrôleur frontal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You're about to take a **big** step with the application. With one file handling
-all requests, you can centralize things such as security handling, configuration
-loading, and routing. In this application, ``index.php`` must now be smart
-enough to render the blog post list page *or* the blog post show page based
-on the requested URI:
+Vous êtes sur le point de franchir une étapes importante avec l'application. 
+Avec un seul fichier qui traite toutes les requêtes, vous pouvez centraliser des
+fonctionnalités comme la gestion de la sécurité, le chargement de la configuration,
+et le routage. Dans cette application, ``index.php`` doit être assez intelligent pour
+traiter la page de liste des articles *ou* la page de détail d'un article en fonction
+de l'URI demandée:
 
 .. code-block:: html+php
 
     <?php
     // index.php
 
-    // load and initialize any global libraries
+    // charge et initialise les librairies globales
     require_once 'model.php';
     require_once 'controllers.php';
 
-    // route the request internally
+    // route la requête en interne
     $uri = $_SERVER['REQUEST_URI'];
     if ($uri == '/index.php') {
         list_action();
@@ -375,8 +387,9 @@ on the requested URI:
         echo '<html><body><h1>Page Not Found</h1></body></html>';
     }
 
-For organization, both controllers (formerly ``index.php`` and ``show.php``)
-are now PHP functions and each has been moved into a separate file, ``controllers.php``:
+Pour des raisons d'organisation, chaque controlleur (initialement  ``index.php`` et ``show.php``)
+sont maintenant des fonctions PHP et ont été placées dans le fichier 
+For organization, both controllers (formerly ``index.php`` and ``show.php``)``controllers.php``:
 
 .. code-block:: php
 
@@ -392,11 +405,13 @@ are now PHP functions and each has been moved into a separate file, ``controller
         require 'templates/show.php';
     }
 
-As a front controller, ``index.php`` has taken on an entirely new role, one
-that includes loading the core libraries and routing the application so that
-one of the two controllers (the ``list_action()`` and ``show_action()``
-functions) is called. In reality, the front controller is beginning to look and
-act a lot like Symfony2's mechanism for handling and routing requests.
+En tant que contrôleur frontal, ``index.php`` a pris un nouveau rôle, celui d'inclure
+les librairies principales et de router l'application pour qu'un des deux contrôleur
+(les fonctiones ``list_action()`` et ``show_action()``) soit appelé. En réalité,
+le contrôleur frontal commence à ressembler et à agir comme le mécanisme de Symfony2 qui prend 
+en charge de route les requêtes.
+
+======================> ICI <===============================
 
 .. tip::
 
