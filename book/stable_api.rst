@@ -7,7 +7,7 @@ de Symfony2 (composants et bundles core) qui partagent les propriétés suivante
 * le namespace et le nom de la classe ne changera pas,
 * le nom de la méthode ne changera pas,
 * la signatude de la méthode (arguments et valeur de retour) ne changera pas,
-* le sens de ce que la méthode fait ne changera pas ('''NOTE: pas satisfait de la traduction''')
+* le rôle et la responsbilité de ce que la méthode fait ne changera pas ('''NOTE: pas satisfait de la traduction''')
 
 L'implémentation elle-même peut changer. La seule raison valable pour un changement 
 de l'API stable de Symfony2 serait pour corriger un problème de sécurité.
