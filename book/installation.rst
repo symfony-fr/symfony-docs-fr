@@ -1,59 +1,59 @@
 .. index::
    single: Installation
 
-Installing and Configuring Symfony
-==================================
+Installer et Configurer Symfony
+===============================
 
-The goal of this chapter is to get you up and running with a working application
-built on top of Symfony. Fortunately, Symfony offers "distributions", which
-are functional Symfony "starter" projects that you can download and begin
-developing in immediately.
+Le but de ce chapitre est de vous permettre de démarrer avec un application
+construite avec Symfony. Heureusement, Symfony propose un système de « distributions ».
+Ce sont des projets Symfony fonctionnel « de départ » que vous pouvez télécharger
+et développer immédiatement.
 
-Downloading a Symfony2 Distribution
------------------------------------
+Télécharger une Distribution Symfony2 
+-------------------------------------
 
 .. tip::
 
-    First, check that you have installed and configured a Web server (such
-    as Apache) with PHP 5.3.2 or higher. For more information on Symfony2
-    requirements, see the :doc:`requirements reference</reference/requirements>`.
+    Premièrement, vérifiez que vous avez installé et configurer un serveur web
+    (comme Apache) avec PHP 5.3.2 ou supérieur. Pour plus d'informations sur les
+    prérequis Symfony2, lisez le chapitre :doc:`requirements reference</reference/requirements>`.
 
-Symfony2 packages "distributions", which are fully-functional applications
-that include the Symfony2 core libraries, a selection of useful bundles, a
-sensible directory structure and some default configuration. When you download
-a Symfony2 distribution, you're downloading a functional application skeleton
-that can be used immediately to begin developing your application.
+Les « distributions » Symfony2 sont des applications entièrement fonctionnelles
+qui incluent les librairies du coeur de Symfony2, une sélection de bundles utiles,
+une arborescence pratique et une configuration par défaut. Quand vous téléchargez
+une distribution Symfony2, vous téléchargez un squelette d'application qui peut
+être immédiatement utilisé pour commencer à développer votre application.
 
-Start by visiting the Symfony2 download page at `http://symfony.com/download`_.
-On this page, you'll see the *Symfony Standard Edition*, which is the main
-Symfony2 distribution. Here, you'll need to make two choices:
+Commencez par visiter la page de téléchargement de Symfony2 à `http://symfony.com/download`_.
+Sur cette page, vous verrez la *Symfony Standard Edition*, qui est la principale
+distribution Symfony2. Vous devrez alors faire deux choix:
 
-* Download either a ``.tgz`` or ``.zip`` archive - both are equivalent, download
-  whatever you're more comfortable using;
+* Télécharger l'archive au format ``.tgz`` ou ``.zip``. Les deux sont équivalentes
+  donc téléchargez celle avec laquelle vous vous sentez le plus à l'aise;
 
-* Download the distribution with or without vendors. If you have `Git`_ installed
-  on your computer, you should download Symfony2 "without vendors", as it
-  adds a bit more flexibility when including third-party/vendor libraries.
+* Téléchargez la distribution avec ou sans vendors. Si vous avez installé `Git`_
+  sur votre ordinateur, vous devriez télécharger Symfony2 « sans vendors ». Cela
+  vous donnera plus de flexibilité quand vous incluerez des librairies tierces.
 
-Download one of the archives somewhere under your local web server's root
-directory and unpack it. From a UNIX command line, this can be done with
-one of the following commands (replacing ``###`` with your actual filename):
+Téléchargez l'une des archives quelque part dans le dossier racine de votre serveur
+web et extrayez là. Depuis une interface de commande UNIX, cela peut être fait
+avec l'une des commandes suivantes (remplacez ``###`` par le nom du fichier):
 
 .. code-block:: bash
 
-    # for .tgz file
+    # pour l'archive .tgz
     tar zxvf Symfony_Standard_Vendors_2.0.###.tgz
 
-    # for a .zip file
+    # pour l'archive .zip
     unzip Symfony_Standard_Vendors_2.0.###.zip
 
-When you're finished, you should have a ``Symfony/`` directory that looks
-something like this:
+Lorsque vous aurez fini, vous devriez avoir un répertoire ``Symfony/`` qui
+ressemble à ceci:
 
 .. code-block:: text
 
-    www/ <- your web root directory
-        Symfony/ <- the unpacked archive
+    www/ <- votre dossier racine
+        Symfony/ <- l'archive extraite
             app/
                 cache/
                 config/
@@ -66,51 +66,52 @@ something like this:
                 app.php
                 ...
 
-Updating Vendors
-~~~~~~~~~~~~~~~~
+Mettre à jour les Vendors
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Finally, if you downloaded the archive "without vendors", install the vendors
-by running the following command from the command line:
+Finallement, si vous avez téléchargé l'archive « sans vendors », installez les en
+lancant la commande suivante depuis une invite de commande:
 
 .. code-block:: bash
 
     php bin/vendors install
 
-This command downloads all of the necessary vendor libraries - including
-Symfony itself - into the ``vendor/`` directory.
+Cette commande télécharge toutes les librairies vendor nécessaires - incluant
+Symfony - dans le répertoire ``vendor/``.
 
-Configuration and Setup
-~~~~~~~~~~~~~~~~~~~~~~~
+Configuration et installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point, all of the needed third-party libraries now live in the ``vendor/``
-directory. You also have a default application setup in ``app/`` and some
-sample code inside the ``src/`` directory.
+Maintenant, toutes les librairies tierces nécessaires sont dans le répertoire
+``vendor/``. Vous avez également une application par défaut installée dans le
+répertoire ``app/`` et un exemple de code dans le répertoire ``src/``.
 
-Symfony2 comes with a visual server configuration tester to help make sure
-your Web server and PHP are configured to use Symfony. Use the following URL
-to check your configuration:
+Symfony2 est livré avec un testeur de configuration de votre serveur afin de
+vérifier que votre serveur web et PHP sont bien configurés pour utiliser Symfony.
+Utilisez l'URL suivante pour vérifier votre configuration:
 
 .. code-block:: text
 
     http://localhost/Symfony/web/config.php
 
-If there are any issues, correct them now before moving on.
+S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
 
-.. sidebar:: Setting up Permissions
+.. sidebar:: Définir les permissions
 
-    One common issue is that the ``app/cache`` and ``app/logs`` directories
-    must be writable both by the web server and the command line user. On
-    a UNIX system, if your web server user is different from your command
-    line user, you can run the following commands just once in your project
-    to ensure that permissions will be setup properly. Change ``www-data``
-    to the web server user and ``yourname`` to your command line user:
+    Un des problèmes les plus fréquents et que les répertoires ``app/cache`` et
+    ``app/logs`` ne sont pas accessibles en écriture par le serveur web et par
+    l'utilisateur de ligne de commande. Sur un système UNIX, si votre utilisateur
+    de ligne de commande est différent de celui du serveur web, vous pouvez lancer
+    les commandes suivantes une fois dans votre projet pour vous assurer que les
+    permissions sont correctement définies. Changez l'utilisateur du serveur web
+    pour ``www-data`` et celui de la ligne de commande pour ``yourname``:
 
-    **1. Using ACL on a system that supports chmod +a**
+    **1. Utiliser l'ACL sur un système qui supporte chmod +a**
+
+    Beaucoup de systèmes autorisent l'usage de la commande ``chmod +a``.
+    Essayez d'abord cela, et si vous avez une erreur, essayez la méthode suivante.
 
     .. code-block:: bash
-
-        Many systems allow you to use the ``chmod +a`` command. Try this first,
-        and if you get an error - try the next method:
 
         rm -rf app/cache/*
         rm -rf app/logs/*
@@ -118,92 +119,92 @@ If there are any issues, correct them now before moving on.
         sudo chmod +a "www-data allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
         sudo chmod +a "yourname allow delete,write,append,file_inherit,directory_inherit" app/cache app/logs
 
-    **2. Using Acl on a system that does not support chmod +a**
+    **2. Utiliser l'ACL sur un système qui ne supporte pas chmod +a**
 
-    Some systems, like Ubuntu, don't support ``chmod +a``, but do support
-    another utility called ``setfacl``. On some systems, this will need to
-    be installed before using it:
+    Certains systèmes, comme Ubuntu, ne supporte pas la commande``chmod +a``, 
+    mais ils en supportent une autre appelée ``setfacl``. Sur certains systèmes,
+    vous aurez besoin de l'installer avant de pouvoir l'utiliser:
 
     .. code-block:: bash
 
         sudo setfacl -R -m u:www-data:rwx -m u:yourname:rwx app/cache app/logs
         sudo setfacl -dR -m u:www-data:rwx -m u:yourname:rwx app/cache app/logs
 
-    **3. Without using ACL**
+    **3. Sans utiliser l'ACL**
 
-    If you don't have access to changing the ACL of the directories, you will
-    need to change the umask so that the cache and log directories will
-    be group-writable or world-writable (depending if the web server user
-    and the command line user are in the same group or not). To achieve
-    this, put the following line at the beginning of the ``app/console``,
-    ``web/app.php`` and ``web/app_dev.php`` files:
+    Si vous n'avez pas les droits de changer les accès aux répertoires, vous aurez
+    besoin de changer le umask pour que les répertoires cache et log soit accessibles
+    en écriture au groupe ou aux autres (cela dépend si l'utilisateur serveur web
+    et l'utilisateur de ligne de commande sont dans le même groupe ou non). Pour
+    faire ceci, ajoutez la ligne suivante au début des fichiers ``app/console``,
+    ``web/app.php`` et ``web/app_dev.php``:
 
     .. code-block:: php
 
-        umask(0002); // This will let the permissions be 0775
+        umask(0002); // Définit une permission 0775
 
-        // or
+        // ou
 
-        umask(0000); // This will let the permissions be 0777
+        umask(0000); // Définit une permission 0777
 
-    Note that using the ACL is recommended when you have access to them
-    on your server because changing the umask is not thread-safe.
+    Notez que utiliser l'ALC est recommandé si vous y avez accès sur votre serveur
+    car changer le umask n'est pas sûr.
 
-When everything is fine, click on "Go to the Welcome page" to request your
-first "real" Symfony2 webpage:
+Lorsque tout est bon, cliquez sur «Go to the Welcome page » pour afficher votre
+première «vraie » page Symfony2:
 
 .. code-block:: text
 
     http://localhost/Symfony/web/app_dev.php/
 
-Symfony2 should welcome and congratulate you for your hard work so far!
+Symfony2 devrait vous accueillir et vous féliciter pour tout le travail fait
+jusqu'ici !
 
 .. image:: /images/quick_tour/welcome.jpg
 
-Beginning Development
----------------------
+Commencer à développer
+----------------------
 
-Now that you have a fully-functional Symfony2 application, you can begin
-development! Your distribution may contain some sample code - check the
-``README.rst`` file included with the distribution (open it as a text file)
-to learn about what sample code was included with your distribution and how
-you can remove it later.
+Maintenant que vous avez une application Symfony2 fonctionnelle, vous pouvez
+commencer à développer ! Votre distribution devrait contenir un exemple de code.
+Vérifiez le fichier ``README.rst`` inclu avec la distribution (ouvrez le en tant
+que fichier texte) pour savoir quel exemple de code est inclu avec votre distribution
+et savoir comment le supprimer par la suite.
 
-If you're new to Symfony, join us in the ":doc:`page_creation`", where you'll
-learn how to create pages, change configuration, and do everything else you'll
-need in your new application.
+Si vous découvrez Symfony, jetez un oeil au chapitre « :doc:`page_creation` », où
+vous apprendrez comment créer des pages, changer la configuration  et faire tout
+ce que vous aurez besoin de faire dans votre nouvelle application.
 
-Using Source Control
---------------------
+Utiliser un gestionnaire de code
+--------------------------------
 
-If you're using a version control system like ``Git`` or ``Subversion``, you
-can setup your version control system and begin committing your project to
-it as normal. For ``Git``, this can be done easily with the following command:
+Si vous utilisez un système de contrôle de version comme ``Git`` ou ``Subversion``,
+vous pouvez le configurer et commencer à commiter votre projet normalement.
+Pour ``Git``, cela peut être fait facilement avec la commande suivante:
 
 .. code-block:: bash
 
     git init
 
-For more information on setting up and using Git, check out the `GitHub Bootcamp`_
-tutorials.
+Pour plus d'informations sur l'installation et l'utilisation de Git, liser le
+tutoriel sur `GitHub`_.
 
-Ignoring the ``vendor/`` Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ignorer le répertoire ``vendor/`` 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you've downloaded the archive *without vendors*, you can safely ignore
-the entire ``vendors/`` directory and not commit it to source control. With
-``Git``, this is done by creating and adding the following to a ``.gitignore``
-file:
+Si vous avez téléchargé l'archive *sans vendors*, vous pouvez ignorer tout le 
+répertoire ``vendors/`` en toute sécurité et ne pas le commiter. Avec ``Git``,
+cela se fait en créant le fichier ``.gitignore`` et en y ajoutant la ligne suivante:
 
 .. code-block:: text
 
     vendor/
 
-Now, the vendor directory won't be committed to source control. This is fine
-(actually, it's great!) because when someone else clones or checks out the
-project, he/she can simply run the ``php bin/vendors install`` script to
-download all the necessary vendor libraries.
+Maintenant, le répertoire vendor ne sera pas commité sur votre système de gestion
+de code. C'est plutôt bien (en fait c'est génial !) car lorsque quelqu'un clone ou
+récupère le projet, il lui suffit de lancer la commande ``php bin/vendors install``
+pour récupérer toutes les librairies nécessaires..
 
 .. _`http://symfony.com/download`: http://symfony.com/download
 .. _`Git`: http://git-scm.com/
-.. _`GitHub Bootcamp`: http://help.github.com/set-up-git-redirect
+.. _`GitHub`: http://help.github.com/set-up-git-redirect
