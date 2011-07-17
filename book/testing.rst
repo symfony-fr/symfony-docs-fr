@@ -12,7 +12,7 @@ pour votre application Symfony2.
 Le Framework de Test
 --------------------
 
-Les tests Symfony2 s'appuient fortement sur PHPUnit, ses meilleures pratiques,
+Les tests Symfony2 s'appuient fortement sur PHPUnit, ses bonnes pratiques,
 et quelques conventions. Cette partie ne documente pas PHPUnit lui-même, mais
 si vous ne le connaissez pas encore, vous pouvez lire son excellente
 `documentation`_.
@@ -146,9 +146,8 @@ cliquer dessus::
 
     $crawler = $client->click($link);
 
-Soumettre un form est très similaire; sélectionnez un bouton de formulaire,
-optionnellement ré-écrivez quelques valeurs du formulaires, et soumettez le
-formulaire correspondant::
+Soumettre un formulaire est très similaire: sélectionnez un bouton de ce dernier,
+si besoin est ré-écrivez quelques unes de ses valeurs, et soumettez-le::
 
     $form = $crawler->selectButton('submit')->form();
 
@@ -251,7 +250,7 @@ La méthode ``request()`` prend en arguments la méthode HTTP et une URL et
 retourne une instance de ``Crawler``.
 
 Utilisez le Crawler pour trouver des éléments DOM dans la Réponse. Ces éléments
-peuvent ainsi être utilisé pour cliquer sur des liens et soumettre des formulaires::
+peuvent ainsi être utilisés pour cliquer sur des liens et soumettre des formulaires::
 
     $link = $crawler->selectLink('Go elsewhere...')->link();
     $crawler = $client->click($link);
@@ -543,14 +542,14 @@ Notez que nous sélectionnons les boutons de formulaire et non pas les formulair
 eux-mêmes car un formulaire peut contenir plusieurs boutons; si vous utilisez l'API
 de traversement, gardez en mémoire que vous devez chercher un bouton.
 
-La méthode ``selectButton()`` peut sélectionner des tags ``button`` et soumettre des
-tags ``input``; elle possède plusieurs manières de les trouver:
+La méthode ``selectButton()`` peut sélectionner des balises ``button`` et soumettre des
+balises ``input``; elle possède plusieurs manières de les trouver:
 
 * La valeur de l'attribut ``value``;
 
 * La valeur de l'attribut ``id`` ou ``alt`` pour les images;
 
-* La valeur de l'attribut ``id`` ou ``name`` pour les tags ``button``.
+* La valeur de l'attribut ``id`` ou ``name`` pour les balises ``button``.
 
 Lorsque vous avez un noeud représentant un bouton, appelez la method ``form()`` pour
 obtenir une instance de ``Form`` pour le formulaire contenant le noeud du bouton::
@@ -623,7 +622,7 @@ Configuration PHPUnit
 
 Chaque application possède sa propre configuration PHPUnit, stockée dans le
 fichier ``phpunit.xml.dist``. Vous pouvez éditer ce fichier pour changer les
-valeurs par défaut ou vous pouvez créer un fichier ``phpunit.xml`` pour tweaker
+valeurs par défaut ou vous pouvez créer un fichier ``phpunit.xml`` pour personnaliser
 la configuration de votre machine locale.
 
 .. tip::
@@ -634,7 +633,7 @@ la configuration de votre machine locale.
 Par défaut, seulement les tests stockés dans des bundles "standards" sont exécutés
 par la commande ``phpunit`` (standard étant des tests dans l'espace de noms
 Vendor\\*Bundle\\Tests). Mais vous pouvez aisément ajouter d'autres espaces de noms.
-Par example, la configuration suivante ajoute les tests de bundles tiers installés::
+Par exemple, la configuration suivante ajoute les tests de bundles tiers installés::
 
 .. code-block:: xml
 
@@ -667,7 +666,7 @@ Configuration du Client
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Le Client utilisé par les tests fonctionnels crée un Kernel qui est exécuté dans
-un environnement spécial dit ``test``, afin que vous puissiez le tweaker autant
+un environnement spécial dit ``test``, afin que vous puissiez le modifier autant
 que vous le désirez:
 
 .. configuration-block::
