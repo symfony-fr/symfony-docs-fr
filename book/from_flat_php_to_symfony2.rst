@@ -1,14 +1,14 @@
-Symfony2 comparé à du PHP simple
-================================
+Symfony2 comparé à du pur PHP
+=============================
 
-** Pourquoi est-ce que Symfony2 est mieux que juste simplement ouvrir un fichier 
-et écrire du PHP simple?
+** Pourquoi est-ce que Symfony2 est mieux qu'ouvrir simplement un fichier 
+et écrire du pur PHP?
 
 Si vous n'avez jamais utilisé un framework PHP, que vous n'êtes pas familier avec 
-la philosophie MVC, ou simplement que vous vous demandez pourquoi il y a tant de
-*hype* autours de Symfony2, ce chapitre est pour vous. au lieu de vous *dire* que
-Symfony2 vous permet de développer plus rapidement et de meilleurs applications qu'avec 
-du PHP simple, vous allez le voir de vos propres yeux.
+la philosophie MVC, ou simplement que vous vous demandez pourquoi il y a tant d'*agitation*
+autours de Symfony2, ce chapitre est pour vous. Au lieu de vous *dire* que
+Symfony2 vous permet de développer plus rapidement de meilleures applications qu'en
+pur PHP, vous allez le voir de vos propres yeux.
 
 Dans ce chapitre, vous aller écrire une application simple en PHP, puis refactoriser
 le code afin d'en améliorer l'organisation. Vous voyagerez dans le temps, en comprenant
@@ -60,11 +60,11 @@ dans la base de données. Écrire en PHP simple est "rapide et sale":
 C'est rapide à écrire, rapide à exécuter et, comme votre application évoluera, 
 impossible à maintenir. Il y a plusieurs problèmes qui doivent être résolus:
 
-* **aucune gestion d'erreur**: Que se passe-t-il si la connexion à la base de 
+* **aucune gestion d'erreur**: Que se passe t-il si la connexion à la base de 
 données échoue?
 
 * **mauvaise organisation**: si votre application évolue, ce fichier deviendra de 
-moins en moins maintenable. Où devriez vous mettre le code qui traite la soumission
+moins en moins maintenable. Où devriez-vous mettre le code qui traite la soumission
 d'un formulaire? Comment pouvez-vous valider les données? Où devriez-vous placer
 le code qui envoie des courriels?
 
@@ -141,14 +141,14 @@ vous pouvez facilement changer *uniquement* le fichier de template si vous dési
 afficher les articles du blog dans un autre format (par exemple ``list.json.php`` 
 pour un format JSON).
 
-Isoler la logique d'affaire
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Isoler la logique
+~~~~~~~~~~~~~~~~~
 
 Pour l'instant, l'application ne contient qu'une seule page. Mais que faire 
 si une deuxième page a besoin d'utiliser la même connexion à la base de données,
-or même le même tableau d'articles du blog? Refactoriser le code pour les le comportement
-principal et les fonctions d'accès aux données de l'application sont isolées dans un nouveau
-fichier appelé ``model.php``:
+ou le même tableau d'articles du blog? Refactorisez le code pour que le comportement
+principal et les fonctions d'accès aux données de l'application soient isolées
+dans un nouveau fichier appelé ``model.php``:
 
 .. code-block:: html+php
 
@@ -185,11 +185,11 @@ fichier appelé ``model.php``:
 .. tip::
 
    Le nom du fichier ``model.php`` est utilisé car la logique et l'accès aux données
-   de l'application est traditionnellement connu sous le nom de couche "modèle".
-   Dans une application bien structurée, la majorité du code représentant la logique d'affaire
-   devrait résider dans le modèle (plutôt que dans le contrôleur). Et contrairement 
-   à cette exemple, seulement une portion (or aucune portion) du modèle est en fait responsable
-   d'accéder à la base de données.
+   de l'application sont traditionnellement connus sous le nom de couche "modèle".
+   Dans une application bien structurée, la majorité du code représentant la logique
+   métier devrait résider dans le modèle (plutôt que dans le contrôleur). Et
+   contrairement à cet exemple, seulement une portion (ou aucune) du
+   modèle est en fait responsable d'accéder à la base de données.
 
 Le contrôleur (``index.php``) est maintenant très simple:
 
@@ -204,7 +204,7 @@ Le contrôleur (``index.php``) est maintenant très simple:
 
 Maintenant, la seule responsabilité du contrôleur est de récupérer les données
 de la couche modèle de l'application (le modèle) et d'appeler le template à afficher
-les données.
+ces données.
 C'est un exemple très simple du patron de conception Modèle-Vue-Controlleur.
 
 Isoler le layout
@@ -213,7 +213,7 @@ Isoler le layout
 À ce point-ci, l'application a été refactorisée en trois parties distinctes, offrant
 plusieurs avantages et l'opportunité de réutiliser pratiquement la totalité du code
 pour d'autres pages.
-La seule partie du code qui *ne peut pas* être réutiliser est le layout de la page.
+La seule partie du code qui *ne peut pas* être réutilisée est le layout de la page.
 Corrigez cela en créant un nouveau fichier ``layout.php``:
 
 .. code-block:: html+php
@@ -251,7 +251,7 @@ du layout:
     <?php include 'layout.php' ?>
 
 Vous avez maintenant une méthode qui permet la réutilisation du layout. 
-Malheureusement, pour accomplir cela, vous êtes forcer d'utiliser quelques 
+Malheureusement, pour accomplir cela, vous êtes forcé d'utiliser quelques 
 fonctions laides de PHP (``ob_start()``, ``ob_get_clean()``) dans le template.
 Symfony utilise un composant de ``Templates`` qui permet d'accomplir ce résultat
 proprement et facilement. Vous le verrez en action bientôt.
@@ -259,11 +259,11 @@ proprement et facilement. Vous le verrez en action bientôt.
 Ajout d'une page de détail d'article
 ------------------------------------
 
-La page de liste a maintenant été refactorisé afin que le code soit mieux organisé
+La page de liste a maintenant été refactorisée afin que le code soit mieux organisé
 et réutilisable. Pour le prouver, ajoutez une page de détail d'article ("show" page),
 qui affiche un article identifié par un paramètre de requête ``id``.
 
-Pour commencer, créer une fonction dans le fichier ``model.php`` qui récupère un seul 
+Pour commencer, créez une fonction dans le fichier ``model.php`` qui récupère un seul 
 article du blog en fonction d'un id passé en paramètre::
 
 
@@ -312,7 +312,7 @@ d'afficher un article du blog:
 
     <?php include 'layout.php' ?>
 
-Créer cette nouvelle page est vraiment facile et aucun code n'est dupliqué.
+Créez cette nouvelle page est vraiment facile et aucun code n'est dupliqué.
 Malgré tout, cette page introduit des problèmes persistants qu'un framework peut
 résoudre. Par exemple, un paramètre de requête ``id`` manquant ou invalide va
 générer une erreur fatale. Il serait mieux que cela génère une erreur 404, mais
@@ -323,16 +323,16 @@ de données est sujette à des attaques d'injection SQL.
 Un autre problème est que chaque fichier contrôleur doit inclure le fichier 
 ``model.php``. Que se passerait-il si chaque contrôleur devait soudainement
 inclure un fichier additionnel ou effectuer une quelconque tache globale (comme
-renforcer la sécurité)? Dans l'état actuel, tout nouveau code devra être ajouter
-à chaque fichier contrôleur. Si vous oubliiez de modifier un fichier, il serait
-bon que ce ne soit pas relier à la sécurité...
+renforcer la sécurité)? Dans l'état actuel, tout nouveau code devra être ajouté
+à chaque fichier contrôleur. Si vous oubliez de modifier un fichier, il serait
+bon que ce ne soit pas relié à la sécurité...
 
 Un "contrôleur frontal" à la rescousse
 --------------------------------------
 
 La solution est d'utiliser un :term:`contrôleur frontal` (front controller):
-a fichier PHP à travers lequel chaque requête est traitée. Avec un contrôleur
-frontal, les URIs de l'application change un peu, mais elles sont plus flexibles:
+un fichier PHP à travers lequel chaque requête est traitée. Avec un contrôleur
+frontal, les URIs de l'application changent un peu, mais elles sont plus flexibles:
 
 .. code-block:: text
 
@@ -346,8 +346,8 @@ frontal, les URIs de l'application change un peu, mais elles sont plus flexibles
 
 .. tip::
 	La portion ``index.php`` de l'URI peut être enlevée en utilisant les règles
-	de réécritures d'URI d'Apache (ou équivalent). Dans ce cas, l'URI de la page de détail
-	d'un article serait simplement ``/show``.
+	de réécritures d'URI d'Apache (ou équivalent). Dans ce cas, l'URI de la
+        page de détail d'un article serait simplement ``/show``.
 
 En utilisant un contrôleur frontal, un seul fichier PHP (``index.php`` dans notre cas)
 traite *chaque* requête. Pour la page de détail d'un article, ``/index.php/show``
@@ -358,12 +358,12 @@ un contrôleur frontal est un outil très puissant.
 Créer le contrôleur frontal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous êtes sur le point de franchir une étape importante avec l'application. 
+Vous êtes sur le point de franchir une étape *importante* avec l'application. 
 Avec un seul fichier qui traite toutes les requêtes, vous pouvez centraliser des
 fonctionnalités comme la gestion de la sécurité, le chargement de la configuration,
-et le routage. Dans cette application, ``index.php`` doit être assez intelligent pour
-traiter la page de liste des articles *ou* la page de détail d'un article en fonction
-de l'URI demandée:
+et le routage. Dans cette application, ``index.php`` doit être assez intelligent
+pour traiter la page de liste des articles *ou* la page de détail d'un article en
+fonction de l'URI demandée:
 
 .. code-block:: html+php
 
@@ -402,38 +402,42 @@ sont maintenant des fonctions PHP et ont été placés dans le fichier ``control
         require 'templates/show.php';
     }
 
-En tant que contrôleur frontal, ``index.php`` assume un nouveau rôle, celui d'inclure
-les librairies principales et de router l'application pour qu'un des deux contrôleurs
-(les fonctions ``list_action()`` et ``show_action()``) soit appelé. En réalité,
-le contrôleur frontal commence à ressembler et à agir comme le mécanisme de Symfony2 qui prend 
-en charge achemine les requêtes.
+En tant que contrôleur frontal, ``index.php`` assume un nouveau rôle, celui
+d'inclure les librairies principales et de router l'application pour qu'un des
+deux contrôleurs (les fonctions ``list_action()`` et ``show_action()``) soit appelé.
+En réalité, le contrôleur frontal commence à ressembler et à agir comme le mécanisme
+de Symfony2 qui prend en charge et achemine les requêtes.
 
 .. tip::
 
    Un autre avantage du contrôleur frontal est d'avoir des URIs flexibles.
-   Veuillez noter que l'URL de la page de détail d'un article peut être changée de
-   ``/show`` à ``/read`` en changeant le code à un seul endroit. Sans le contrôleur frontal,
-   il aurait fallu renommer un fichier. Avec Symfony2, les URLs sont encore plus flexible.
+   Veuillez noter que l'URL de la page de détail d'un article peut être changée
+   de ``/show`` à ``/read`` en changeant le code à un seul endroit. Sans le
+   contrôleur frontal, il aurait fallu renommer un fichier. Avec Symfony2, les
+   URLs sont encore plus flexible.
 
-Jusqu'ici, l'application est passée d'un seul fichier PHP à une organisation qui permet 
-la réutilisation du code. Vous devriez être plus heureux, mais loin d'être satisfait.
-Par exemple, le système de routage est inconstant, et ne reconnaitrait pas que la page de liste
-d'articles (``/index.php``) devrait aussi être accessible via ``/`` (si Apache rewrite est activé).
-Aussi, au lieu de développer une application de blog, beaucoup de temps a été consacré à 
-l'"architecture" du code (par exemple le routage, l'appel aux contrôleurs, aux templates...).
-Plus de temps devrait être consacré à la prise en charge des formulaires, la validation des champs, 
-la journalisation et la sécurité. Pourquoi réinventer des solutions pour tous ses problèmes?
+Jusqu'ici, l'application est passée d'un seul fichier PHP à une organisation qui
+permet la réutilisation du code. Vous devriez être plus heureux, mais loin d'être
+satisfait. Par exemple, le système de routage est inconstant, et ne reconnaitrait
+pas que la page de liste d'articles (``/index.php``) devrait aussi être accessible
+via ``/`` (si Apache rewrite est activé). Aussi, au lieu de développer une
+application de blog, beaucoup de temps a été consacré à l'"architecture" du code
+(par exemple le routage, l'appel aux contrôleurs, aux templates...). Plus de temps
+devrait être consacré à la prise en charge des formulaires, la validation des champs, 
+la journalisation et la sécurité. Pourquoi réinventer des solutions pour tout
+ces problèmes?
 
 Ajoutez une touche de Symfony2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Symfony2 à la rescousse. Avant d'utiliser Symony2, vous devez vous assurer que PHP puisse trouver
-les classes Symfony2. Ceci est fait grâce à un chargeur automatique ("autoloader") 
-fourni par Symfony2. Un chargeur automatique est un outil qui permet d'utiliser des classes 
-PHP sans avoir à explicitement inclure le fichier contenant la classe.
+Symfony2 à la rescousse. Avant d'utiliser Symfony2, vous devez vous assurer que
+PHP puisse trouver les classes Symfony2. Ceci est fait grâce à un chargeur
+automatique ("autoloader") fourni par Symfony2. Un chargeur automatique est un
+outil qui permet d'utiliser des classes PHP sans avoir à explicitement inclure
+le fichier contenant la classe.
 
-Tout d'abord, `téléchargez symfony`_ et placez le dans un répertoire ``vendor/symfony/``.
-Puis créer un fichier ``app/bootstrap.php``. Utilisez le pour ``requérir`` (``require``) 
+Tout d'abord, `téléchargez Symfony2`_ et placez le dans un répertoire ``vendor/symfony/``.
+Puis créer un fichier ``app/bootstrap.php``. Utilisez le pour ``inclure`` (``require``) 
 les 2 fichiers de l'application et pour configurer le chargeur automatique:
 
 .. code-block:: html+php
@@ -451,16 +455,17 @@ les 2 fichiers de l'application et pour configurer le chargeur automatique:
 
     $loader->register();
 
-Cela indique au chargeur automatique où se trouvent les classes ``Symfony``. Grâce à cela,
-vous pouvez maintenant utiliser les classes Symfony sans avoir à utiliser l'instruction de langage
-``require`` sur les fichiers qui les définissent.
+Cela indique au chargeur automatique où se trouvent les classes ``Symfony``. Grâce
+à cela, vous pouvez maintenant utiliser les classes Symfony sans avoir à utiliser
+l'instruction de langage ``require`` sur les fichiers qui les définissent.
 
-Le philosophie de base de Symfony est que la principale activité d'une application est
-d'interpréter chaque requête et de retourner une réponse. Pour cela, Symfony2 fournit les classes
-:class:`Symfony\\Component\\HttpFoundation\\Request` et
-:class:`Symfony\\Component\\HttpFoundation\\Response`. Ces classes sont des représentations 
-orientées-objet des requêtes HTTP brutes qui est en train d'être exécuter et d'une réponse HTTP qui
-est retournée. Utilisez-les pour améliorer le blog:
+Le philosophie de base de Symfony est que la principale activité d'une application
+est d'interpréter chaque requête et de retourner une réponse. Pour cela, Symfony2
+fournit les classes :class:`Symfony\\Component\\HttpFoundation\\Request` et
+:class:`Symfony\\Component\\HttpFoundation\\Response`. Ces classes sont des
+représentations orientées-objet des requêtes HTTP brutes qui sont en train d'être
+exécutées et d'une réponse HTTP qui est retournée. Utilisez-les pour améliorer le
+blog:
 
 .. code-block:: html+php
 
@@ -486,7 +491,7 @@ est retournée. Utilisez-les pour améliorer le blog:
     // affiche les entêtes et envoie la réponse
     $response->send();
 
-Les contrôleurs sont maintenant responsable de retourner un objet ``Response``.
+Les contrôleurs sont maintenant chargés de retourner un objet ``Response``.
 Pour simplifier les choses, vous pouvez ajouter une nouvelle fonction ``render_template()``, 
 qui agit un peu comme le moteur de template de Symfony2:
 
@@ -582,10 +587,10 @@ Voici la même application, en utilisant cette fois-ci Symfony2:
         }
     }
 
-Les 2 contrôleurs sont toujours simples. Chacun utilise la libraire ORM Doctrine pour récupérer
-les objets de la base de données et le composant de ``Templating`` pour faire le rendu
-des templates et retourner un objet ``Response``. Le template pour la liste est maintenant
-un peu plus simple:
+Les deux contrôleurs sont toujours simples. Chacun utilise la libraire ORM Doctrine
+pour récupérer les objets de la base de données et le composant de ``Templating``
+pour faire le rendu des templates et retourner un objet ``Response``. Le template
+qui affiche la liste est maintenant un peu plus simple:
 
 .. code-block:: html+php
 
@@ -625,7 +630,7 @@ Le layout est à peu près identique:
     assez simple en se basant sur le template de liste.
 
 Lorsque le moteur de Symfony2 (appelé le coeur (``Kernel``)) démarre, il a besoin d'une table
-qui définit quels contrôleurs exécuter en fonction des information de la requête.
+qui définit quels contrôleurs exécuter en fonction des informations de la requête.
 Une table de routage fournit cette information dans un format lisible::
 
     # app/config/routing.yml
@@ -638,7 +643,7 @@ Une table de routage fournit cette information dans un format lisible::
         defaults: { _controller: AcmeBlogBundle:Blog:show }
 
 Maintenant que Symfony2 prend en charge toutes les taches banales, le contrôleur frontal
-est extrêmement simple. Et comme il fait si peu de chose, vous n'aurez jamais à la modifier
+est extrêmement simple. Et comme il fait si peu de chose, vous n'aurez jamais à le modifier
 une fois que vous l'aurez créé (et si vous utilisez une distribution de Symfony2, vous n'aurez
 même pas à le créer):
 
@@ -670,16 +675,16 @@ chaque élément de Symfony et sur la structure recommandée d'un projet. Pour l
 voyons en quoi la migration du blog depuis une version PHP en une version Symfony2 nous simplifie 
 la vie:
 
-* Votre application est constitué de **code clair et bien organisé** (même si Symfony ne vous force
+* Votre application est constituée de **code clair et bien organisé** (même si Symfony ne vous force
 pas à le faire). Cela encourage la **ré-utilisabilité** et permet aux nouveaux programmeurs d'être 
-productif sur un projet plus rapidement.
+productifs sur un projet plus rapidement.
 
 * 100% du code que vous écrivez est pour *votre* application. Vous **n'avez pas à développer
 ou à maintenir des outils bas niveaux** tel que :ref:`le chargeur automatique<autoloading-introduction-sidebar>`,
   :doc:`le routage</book/routing>`, ou  :doc:`les contrôleurs</book/controller>`.
 
 * Symfony2 vous donne **accès à des outils open source** comme Doctrine et le composants 
-de Templates, de sécurité, de formulaires, da validation et de traduction 
+de Templates, de sécurité, de formulaires, de validation et de traduction 
 (pour en nommer quelques uns).
 
 * L'application maintenant profite d'**URLs complètement flexibles**, grâce au 
@@ -749,7 +754,7 @@ Apprenez en lisant le Cookbook
 * :doc:`/cookbook/controller/service`
 
 .. _`Doctrine`: http://www.doctrine-project.org
-.. _`download symfony`: http://symfony.com/download
+.. _`téléchargez Symfony2`: http://symfony.com/download
 .. _`Routing`: https://github.com/symfony/Routing
 .. _`Templating`: https://github.com/symfony/Templating
 .. _`Symfony2Bundles.org`: http://symfony2bundles.org
