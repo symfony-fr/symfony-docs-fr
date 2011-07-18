@@ -183,13 +183,14 @@ Symfony est architecturé pour correspondre à cette réalité.
      pour Firefox `Live HTTP Headers`_.
 
 .. index::
-   single: Symfony2 Fundamentals; Requests and responses
+   single: Fondamentaux Symfony2; Requêtes et réponses
 
-Requests and Responses in PHP
------------------------------
+Requêtes et réponses en PHP
+---------------------------
 
-So how do you interact with the "request" and create a "response" when using
-PHP? In reality, PHP abstracts you a bit from the whole process:
+Alors comment intéragissez-vous avec la "requête" et créez-vous la "réponse"
+quand vous utilisez PHP? En réalité, PHP vous abstrait une partie du processus
+global:
 
 .. code-block:: php
 
@@ -201,14 +202,15 @@ PHP? In reality, PHP abstracts you a bit from the whole process:
     echo 'The URI requested is: '.$uri;
     echo 'The value of the "foo" parameter is: '.$foo;
 
-As strange as it sounds, this small application is in fact taking information
-from the HTTP request and using it to create an HTTP response. Instead of
-parsing the raw HTTP request message, PHP prepares superglobal variables
-such as ``$_SERVER`` and ``$_GET`` that contain all the information from
-the request. Similarly, instead of returning the HTTP-formatted text response,
-you can use the ``header()`` function to create response headers and simply
-print out the actual content that will be the content portion of the response
-message. PHP will create a true HTTP response and return it to the client:
+Aussi étrange que cela puisse paraître, cette petite application prend en
+fait de l'information de la requête HTTP et l'utilise pour créer une réponse
+HTTP. Plutôt que d'analyser le message texte de la requête HTTP directement,
+PHP prépare des variables superglobales telles que ``$_SERVER`` et ``$_GET``
+qui contiennent toute l'information de la requête. Similairement, au lieu de
+retourner la réponse texte HTTP formatée, vous pouvez utiliser la fonction
+``header()`` pour créer des en-têtes de réponse et simplement délivrer le
+contenu actuel qui sera la portion "contenu" du message de la réponse.
+PHP va ainsi créer une véritable réponse HTTP et la retourner au client:
 
 .. code-block:: text
 
