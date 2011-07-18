@@ -1,62 +1,68 @@
 .. index::
-   single: Symfony2 Fundamentals
+   single: Les fondamentaux de Symfony2
 
-Symfony2 and HTTP Fundamentals
-==============================
+Les fondamentaux de Symfony2 et HTTP
+====================================
 
-Congratulations! By learning about Symfony2, you're well on your way towards
-being a more *productive*, *well-rounded* and *popular* web developer (actually,
-you're on your own for the last part). Symfony2 is built to get back to
-basics: to develop tools that let you develop faster and build more robust
-applications, while staying out of your way. Symfony is built on the best
-ideas from many technologies: the tools and concepts you're about to learn
-represent the efforts of thousands of people, over many years. In other words,
-you're not just learning "Symfony", you're learning the fundamentals of the
-web, development best practices, and how to use many amazing new PHP libraries,
-inside or independent of Symfony2. So, get ready.
+Félicitations! Grâce à l'apprentissage de Symfony2, vous êtes sur la bonne voie pour
+devenir un développeur web plus *productif* et *populaire* (en fait vous serez livré
+à vous-même pour la dernière partie). Symfony2 est construit de manière à revenir à
+l'essentiel: pour implémenter des outils qui vous aide à développer plus rapidement
+et à construire des applications plus robustes, tout en restant hors de votre chemin.
+Symfony repose sur les meilleures idées provenant de diverses technologies: les outils
+et concepts que vous êtes sur le point d'apprendre représentent les efforts de
+milliers de personnes depuis de nombreuses années. En d'autres termes, vous
+n'apprenez pas juste "Symfony", vous apprenez les fondamentaux du web,
+les bonnes pratiques de développement, et comment utiliser de nombreuses
+nouvelles bibliothèques PHP, internes ou indépendantes de Symfony2. Alors,
+soyez prêt!
 
-True to the Symfony2 philosophy, this chapter begins by explaining the fundamental
-concept common to web development: HTTP. Regardless of your background or
-preferred programming language, this chapter is a **must-read** for everyone.
+Fidèle à la philosophie de Symfony2, ce chapitre débute par une explication du
+concept fondamental du développement web: HTTP. Quelles que soient vos
+connaissances ou votre langage de programmation préféré, ce chapitre **doit
+être lu** par tout un chacun.
 
-HTTP is Simple
---------------
+HTTP est Simple
+---------------
 
-HTTP (Hypertext Transfer Protocol to the geeks) is a text language that allows
-two machines to communicate with each other. That's it! For example, when
-checking for the latest `xkcd`_ comic, the following (approximate) conversation
-takes place:
+HTTP (Hypertext Transfer Protocol pour les geeks) est un langage texte qui
+permet à deux machines de communiquer ensemble. C'est tout! Par exemple,
+lorsque vous regardez la dernière BD de `xkcd`_, la conversation suivante
+(approximative) se déroule:
 
 .. image:: /images/http-xkcd.png
    :align: center
 
-And while the actual language used is a bit more formal, it's still dead-simple.
-HTTP is the term used to describe this simple text-based language. And no
-matter how you develop on the web, the goal of your server is *always* to
-understand simple text requests, and return simple text responses.
+Et alors que l'actuel langage utilisé est un peu plus formel, cela reste
+toujours très simple. HTTP est le terme utilisé pour décrire ce simple
+langage basé sur le texte. Et peu importe comment vous développez sur
+le web, le but de votre serveur est *toujours* de comprendre de simples
+requêtes composées de texte, et de retourner de simples réponses composées
+elles aussi de texte.
 
-Symfony2 is built from the ground-up around that reality. Whether you realize
-it or not, HTTP is something you use everyday. With Symfony2, you'll learn
-how to master it.
+Symfony2 est construit sur les bases de cette réalité. Que vous le
+réalisiez ou non, HTTP est quelque chose que vous utilisez tous les jours.
+Avec Symfony2, vous allez apprendre comment le maîtriser.
 
 .. index::
-   single: HTTP; Request-response paradigm
+   single: HTTP; Paradigme requête-réponse
 
-Step1: The Client sends a Request
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Etape 1: Le Client envoie une Requête
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Every conversation on the web starts with a *request*. The request is a text
-message created by a client (e.g. a browser, an iPhone app, etc) in a
-special format known as HTTP. The client sends that request to a server,
-and then waits for the response.
+Chaque conversation sur le web débute avec une *requête*. La requête est
+un message textuel créé par un client (par exemple: un navigateur, une
+application iPhone, etc...) dans un format spécial connu sous le nom d'HTTP.
+Le client envoie cette requête à un serveur, et puis attend la réponse.
 
-Take a look at the first part of the interaction (the request) between a
-browser and the xkcd web server:
+Jetez un oeil à la première partie de l'intéraction (la requête) entre un
+navigateur et le serveur web xkcd:
 
 .. image:: /images/http-xkcd-request.png
    :align: center
 
-In HTTP-speak, this HTTP request would actually look something like this:
+Dans le langage HTTP, cette requête HTTP ressemblerait à quelque chose
+comme ça:
 
 .. code-block:: text
 
@@ -65,28 +71,28 @@ In HTTP-speak, this HTTP request would actually look something like this:
     Accept: text/html
     User-Agent: Mozilla/5.0 (Macintosh)
 
-This simple message communicates *everything* necessary about exactly which
-resource the client is requesting. The first line of an HTTP request is the
-most important and contains two things: the URI and the HTTP method.
+Ce simple message communique *tout* ce qui est nécessaire concernant la
+ressource que le client a demandé. La première ligne d'une requête HTTP
+est la plus importante et contient deux choses: l'URI et la méthode HTTP.
 
-The URI (e.g. ``/``, ``/contact``, etc) is the unique address or location
-that identifies the resource the client wants. The HTTP method (e.g. ``GET``)
-defines what you want to *do* with the resource. The HTTP methods are the
-*verbs* of the request and define the few common ways that you can act upon
-the resource:
+L'URI (par exemple: ``/``, ``/contact``, etc...) est l'adresse unique ou
+la localisation qui identifie la ressource que le client veut. La méthode
+HTTP (par exemple: ``GET``) définit ce que vous voulez *faire* avec la
+ressource. Les méthodes HTTP sont les *verbes* de la requête et définissent
+les quelques moyens avec lesquels vous pouvez agir sur la ressource:
 
-+----------+---------------------------------------+
-| *GET*    | Retrieve the resource from the server |
-+----------+---------------------------------------+
-| *POST*   | Create a resource on the server       |
-+----------+---------------------------------------+
-| *PUT*    | Update the resource on the server     |
-+----------+---------------------------------------+
-| *DELETE* | Delete the resource from the server   |
-+----------+---------------------------------------+
++----------+-----------------------------------------+
+| *GET*    | Récupère la ressource depuis le serveur |
++----------+-----------------------------------------+
+| *POST*   | Crée une ressource sur le serveur       |
++----------+-----------------------------------------+
+| *PUT*    | Met à jour la ressource sur le serveur  |
++----------+-----------------------------------------+
+| *DELETE* | Supprime la ressource sur le serveur    |
++----------+-----------------------------------------+
 
-With this in mind, you can imagine what an HTTP request might look like to
-delete a specific blog entry, for example:
+Avec ceci en mémoire, vous pouvez imaginer ce à quoi ressemblerait une
+requête HTTP pour supprimer une entrée spécifique d'un blog, par exemple:
 
 .. code-block:: text
 
@@ -94,31 +100,33 @@ delete a specific blog entry, for example:
 
 .. note::
 
-    There are actually nine HTTP methods defined by the HTTP specification,
-    but many of them are not widely used or supported. In reality, many modern
-    browsers don't support the ``PUT`` and ``DELETE`` methods.
+    Il y a en fait neuf méthodes HTTP définies par la spécification HTTP,
+    mais beaucoup d'entre elles ne sont pas largement utilisées ou supportées.
+    En réalité, beaucoup de navigateurs modernes ne supportent pas les méthodes
+    ``PUT`` et ``DELETE``.
 
-In addition to the first line, an HTTP request invariably contains other
-lines of information called request headers. The headers can supply a wide
-range of information such as the requested ``Host``, the response formats
-the client accepts (``Accept``) and the application the client is using to
-make the request (``User-Agent``). Many other headers exist and can be found
-on Wikipedia's `List of HTTP header fields`_ article.
+En plus de la première ligne, une requête HTTP contient invariablement
+d'autres lignes d'informations appelées en-têtes de requête. Les en-têtes
+peuvent fournir un large éventail d'informations tels que l'en-tête requise
+``Host``, le format de réponse que le client accepte (``Accept``) et
+l'application que le client utilise pour effectuer la requête (``User-Agent``).
+Beaucoup d'autres en-têtes existent et peuvent être trouvées sur la page
+Wikipedia `List of HTTP header fields`_ (anglais).
 
-Step 2: The Server returns a Response
+Etape 2: Le Serveur retourne une réponse
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once a server has received the request, it knows exactly which resource the
-client needs (via the URI) and what the client wants to do with that resource
-(via the method). For example, in the case of a GET request, the server
-prepares the resource and returns it in an HTTP response. Consider the response
-from the xkcd web server:
+Une fois que le serveur a reçu la requête, il connaît exactement quelle ressource
+le client a besoin (via l'URI) et ce que le client souhaite faire avec cette
+ressource (via la méthode). Par exemple, dans le cas d'une requête GET, le
+serveur prépare la ressource et la retourne dans une réponse HTTP. Considérez
+la réponse du serveur web xkcd:
 
 .. image:: /images/http-xkcd.png
    :align: center
 
-Translated into HTTP, the response sent back to the browser will look something
-like this: 
+Traduit en HTTP, la réponse envoyée au navigateur va ressembler à quelque chose
+comme ça:
 
 .. code-block:: text
 
@@ -131,44 +139,48 @@ like this:
       <!-- HTML for the xkcd comic -->
     </html>
 
-The HTTP response contains the requested resource (the HTML content in this
-case), as well as other information about the response. The first line is
-especially important and contains the HTTP response status code (200 in this
-case). The status code communicates the overall outcome of the request back
-to the client. Was the request successful? Was there an error? Different
-status codes exist that indicate success, an error, or that the client needs
-to do something (e.g. redirect to another page). A full list can be found
-on Wikipedia's `List of HTTP status codes`_ article.
+La réponse HTTP contient la ressource demandé (le contenu HTML dans ce cas),
+ainsi que d'autres informations à propos de la réponse. La première ligne
+est spécialement importante et contient le code de statut de la réponse
+HTTP (200 dans ce cas). Le code de statut communique le résultat global
+de la requête retournée au client. A-t-elle réussie? Y'a-t-il eu une
+erreur? Différents codes de statut existent qui indiquent le succès, une
+erreur, ou que le client a besoin de faire quelque chose (par exemple:
+rediriger sur une autre page). Une liste complète peut être trouvée sur
+la page Wikipedia `List of HTTP status codes`_ (anglais).
 
-Like the request, an HTTP response contains additional pieces of information
-known as HTTP headers. For example, one important HTTP response header is
-``Content-Type``. The body of the same resource could be returned in multiple
-different formats including HTML, XML, or JSON to name a few. The ``Content-Type``
-header tells the client which format is being returned.
+Comme la requête, une réponse HTTP contient de l'information additionnelle
+appelée en-têtes HTTP. Par exemple, une importante en-tête de réponse HTTP
+est le ``Content-Type``. Le corps d'une même ressource peut être retournée
+dans de multiples formats incluant HTML, XML ou JSON pour en nommer quelques
+uns. L'en-tête ``Content-Type`` dit au client quel format va être retourné.
 
-Many other headers exist, some of which are very powerful. For example, certain
-headers can be used to create a powerful caching system.
+De nombreuses autres en-têtes existent, dont quelques unes sont très puissantes.
+Par exemple, certaines en-têtes peuvent être utilisées pour créer un puissant
+système de cache.
 
-Requests, Responses and Web Development
+Requêtes, Réponses et Développement Web
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This request-response conversation is the fundamental process that drives all
-communication on the web. And as important and powerful as this process is,
-it's inescapably simple.
+Cette conversation requête-réponse est le procédé fondamental qui dirige
+toute communication sur le web. Et tout aussi important et puissant que ce
+procédé soit, il est inéluctablement simple.
 
-The most important fact is this: regardless of the language you use, the
-type of application you build (web, mobile, JSON API), or the development
-philosophy you follow, the end goal of an application is **always** to understand
-each request and create and return the appropriate response.
+Le plus important fait est: quel que soit le langage que vous utilisez, le
+type d'application que vous construisez (web, mobile, API JSON), ou la
+philosophie de développement que vous suivez, l'objectif final d'une
+application est **toujours** de comprendre chaque requête et de créer et
+retourner la réponse appropriée.
 
-Symfony is architected to match this reality.
+Symfony est architecturé pour correspondre à cette réalité.
 
 .. tip::
 
-    To learn more about the HTTP specification, read the original `HTTP 1.1 RFC`_
-    or the `HTTP Bis`_, which is an active effort to clarify the original
-    specification. A great tool to check both the request and response headers
-    while browsing is the `Live HTTP Headers`_ extension for Firefox.
+    Pour en savoir plus à propos de la spécification HTTP, lisez l'original
+    `HTTP 1.1 RFC`_ ou le `HTTP Bis`_, qui est effort actif pour clarifier la
+     spécification originale. Un super outil pour inspecter/vérifier les en-têtes
+     de la requête et de la réponse durant votre navigation est l'extension
+     pour Firefox `Live HTTP Headers`_.
 
 .. index::
    single: Symfony2 Fundamentals; Requests and responses
