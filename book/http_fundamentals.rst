@@ -222,40 +222,41 @@ PHP va ainsi créer une véritable réponse HTTP et la retourner au client:
     L'URI demandée est: /testing?foo=symfony
     La valeur du paramètre "foo" est: symfony
 
-Requests and Responses in Symfony
+Requêtes et Réponses dans Symfony
 ---------------------------------
 
-Symfony provides an alternative to the raw PHP approach via two classes that
-allow you to interact with the HTTP request and response in an easier way.
-The :class:`Symfony\\Component\\HttpFoundation\\Request` class is a simple
-object-oriented representation of the HTTP request message. With it, you
-have all the request information at your fingertips::
+Symfony fournit une alternative à l'approche basique de PHP via deux classes
+qui vous permettent d'intéragir avec la requête et la réponse HTTP de manière
+plus facile. La classe :class:`Symfony\\Component\\HttpFoundation\\Request`
+est une simple représentation orientée objet du message de la requête HTTP.
+Avec elle, vous avez toute l'information de la requête à votre portée::
 
     use Symfony\Component\HttpFoundation\Request;
 
     $request = Request::createFromGlobals();
 
-    // the URI being requested (e.g. /about) minus any query parameters
+    // l'URI demandée (par exemple: /about) sans aucun paramètre
     $request->getPathInfo();
 
-    // retrieve GET and POST variables respectively
+    // obtient respectivement des variables GET et POST
     $request->query->get('foo');
     $request->request->get('bar');
 
-    // retrieves an instance of UploadedFile identified by foo
+    // obtient une instance de UploadedFile identifiée par foo
     $request->files->get('foo');
 
     $request->getMethod();          // GET, POST, PUT, DELETE, HEAD
-    $request->getLanguages();       // an array of languages the client accepts
+    $request->getLanguages();       // un tableau des langues que le client accepte
 
-As a bonus, the ``Request`` class does a lot of work in the background that
-you'll never need to worry about. For example, the ``isSecure()`` method
-checks the *three* different values in PHP that can indicate whether or not
-the user is connecting via a secured connection (i.e. ``https``).
+En bonus, la classe ``Request`` effectue beaucoup de travail en arrière-plan
+dont vous n'aurez jamais à vous soucier. Par exemple, la méthode ``isSecure()``
+vérifie les *trois* valeurs PHP qui peuvent indiquer si oui ou non l'utilisateur
+est connecté via une connexion sécurisée (i.e. ``https``).
 
-Symfony also provides a ``Response`` class: a simple PHP representation of
-an HTTP response message. This allows your application to use an object-oriented
-interface to construct the response that needs to be returned to the client::
+Symfony fournit aussi une classe ``Response``: une simple représentation PHP du
+message d'une réponse HTTP. Cela permet à votre application d'utiliser une
+interface orientée objet pour construire la réponse qui doit être retournée
+au client::
 
     use Symfony\Component\HttpFoundation\Response;
     $response = new Response();
@@ -264,21 +265,22 @@ interface to construct the response that needs to be returned to the client::
     $response->setStatusCode(200);
     $response->headers->set('Content-Type', 'text/html');
 
-    // prints the HTTP headers followed by the content
+    // affiche les en-têtes HTTP suivies du contenu
     $response->send();
 
-If Symfony offered nothing else, you would already have a toolkit for easily
-accessing request information and an object-oriented interface for creating
-the response. Even as you learn the many powerful features in Symfony, keep
-in mind that the goal of your application is always *to interpret a request
-and create the appropriate response based on your application logic*.
+Si Symfony n'offre rien d'autre, vous devriez néanmoins déjà avoir en votre
+possession une boîte à outils pour accéder facilement aux informations de la
+requête et une interface orientée objet pour créer la réponse. Bien que vous
+appreniez les nombreuses et puissantes fonctions de Symfony, gardez à l'esprit
+que le but de votre application est toujours *d'interpréter une requête et de
+créer la réponse appropriée basée sur votre logique applicative*.
 
 .. tip::
 
-    The ``Request`` and ``Response`` classes are part of a standalone component
-    included with Symfony called ``HttpFoundation``. This component can be
-    used entirely independent of Symfony and also provides classes for handling
-    sessions and file uploads.
+    Les classes ``Request`` et ``Response`` font partie d'un composant
+    autonome inclus dans Symfony appelé ``HttpFoundation``. Ce composant peut
+    être utilisé de manière entièrement indépendante de Symfony et fournit aussi
+    des classes pour gérer les sessions et les uploads de fichier.
 
 The Journey from the Request to the Response
 --------------------------------------------
