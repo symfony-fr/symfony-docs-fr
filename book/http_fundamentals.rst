@@ -199,8 +199,8 @@ global:
     $foo = $_GET['foo'];
 
     header('Content-type: text/html');
-    echo 'The URI requested is: '.$uri;
-    echo 'The value of the "foo" parameter is: '.$foo;
+    echo 'L'URI demandée est: '.$uri;
+    echo 'La valeur du paramètre "foo" est: '.$foo;
 
 Aussi étrange que cela puisse paraître, cette petite application prend en
 fait de l'information de la requête HTTP et l'utilise pour créer une réponse
@@ -219,8 +219,8 @@ PHP va ainsi créer une véritable réponse HTTP et la retourner au client:
     Server: Apache/2.2.17 (Unix)
     Content-Type: text/html
 
-    The URI requested is: /testing?foo=symfony
-    The value of the "foo" parameter is: symfony
+    L'URI demandée est: /testing?foo=symfony
+    La valeur du paramètre "foo" est: symfony
 
 Requests and Responses in Symfony
 ---------------------------------
