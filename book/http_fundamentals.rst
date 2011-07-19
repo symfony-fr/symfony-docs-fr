@@ -282,26 +282,27 @@ créer la réponse appropriée basée sur votre logique applicative*.
     être utilisé de manière entièrement indépendante de Symfony et fournit aussi
     des classes pour gérer les sessions et les uploads de fichier.
 
-The Journey from the Request to the Response
---------------------------------------------
+Le Parcours de la Requête à la Réponse
+--------------------------------------
 
-Like HTTP itself, the ``Request`` and ``Response`` objects are pretty simple.
-The hard part of building an application is writing what's comes in between.
-In other words, the real work comes in writing the code that interprets the
-request information and creates the response.
+Comme HTTP lui-même, les objets ``Request`` et ``Response`` sont assez simples.
+La partie difficile de la création d'une application est d'écrire ce qui vient
+entre les deux. En d'autres mots, le réel travail commence lors de l'écriture
+du code qui interprète l'information de la requête et crée la réponse.
 
-Your application probably does many things, like sending emails, handling
-form submissions, saving things to a database, rendering HTML pages and protecting
-content with security. How can you manage all of this and still keep your
-code organized and maintainable?
+Votre application fait probablement beaucoup de choses comme envoyer des emails,
+gérer des soumissions de formulaire, sauver des "trucs" dans votre base de données,
+délivrer des pages HTML et protéger du contenu avec sécurité. Comment pouvez-vous
+vous occuper de tout cela tout en conservant votre code organisé et maintenable?
 
-Symfony was created to solve these problems so that you don't have to.
+Symfony a été créé pour résoudre ces problématiques afin que vous n'ayez pas à le
+faire vous-même.
 
-The Front Controller
-~~~~~~~~~~~~~~~~~~~~
+Le Contrôleur Frontal
+~~~~~~~~~~~~~~~~~~~~~
 
-Traditionally, applications were built so that each "page" of a site was
-its own physical file:
+Traditionnellement, les applications étaient construites de telle sorte que
+chaque "page" d'un site avait son propre fichier physique:
 
 .. code-block:: text
 
@@ -309,42 +310,46 @@ its own physical file:
     contact.php
     blog.php
 
-There are several problems with this approach, including the inflexibility
-of the URLs (what if you wanted to change ``blog.php`` to ``news.php`` without
-breaking all of your links?) and the fact that each file *must* manually
-include some set of core files so that security, database connections and
-the "look" of the site can remain consistent.
+Il y a plusieurs problèmes avec cette approche, incluant la non-flexibilité
+des URLs (que se passait-il si vous souhaitiez changer ``blog.php`` en
+``news.php`` sans que tous vos liens existants ne cessent de fonctionner?)
+et le fait que chaque fichier *doive* manuellement inclure tout un ensemble
+de fichiers coeurs pour que la sécurité, les connexions à la base de données
+et le "look" du site puissent rester consistents.
 
-A much better solution is to use a :term:`front controller`: a single PHP
-file that handles every request coming into your application. For example:
+Une bien meilleure solution est d'utiliser un simple fichier PHP appelé
+:term:`contrôleur frontal`: qui s'occupe de chaque requête arrivant dans
+votre application. Par exemple:
 
-+------------------------+------------------------+
-| ``/index.php``         | executes ``index.php`` |
-+------------------------+------------------------+
-| ``/index.php/contact`` | executes ``index.php`` |
-+------------------------+------------------------+
-| ``/index.php/blog``    | executes ``index.php`` |
-+------------------------+------------------------+
++------------------------+-----------------------+
+| ``/index.php``         | exécute ``index.php`` |
++------------------------+-----------------------+
+| ``/index.php/contact`` | exécute ``index.php`` |
++------------------------+-----------------------+
+| ``/index.php/blog``    | exécute ``index.php`` |
++------------------------+-----------------------+
 
 .. tip::
 
-    Using Apache's ``mod_rewrite`` (or equivalent with other web servers),
-    the URLs can easily be cleaned up to be just ``/``, ``/contact`` and
-    ``/blog``.
+    En utilisant la fonction ``mod_rewrite`` d'Apache (ou son équivalent
+    avec d'autres serveurs web), les URLs peuvent être facilement réécrites
+    afin de devenir simplement ``/``, ``/contact`` et ``/blog``.
 
-Now, every request is handled exactly the same. Instead of individual URLs
-executing different PHP files, the front controller is *always* executed,
-and the routing of different URLs to different parts of your application
-is done internally. This solves both problems with the original approach.
-Almost all modern web apps do this - including apps like WordPress.
+Maintenant, chaque requête est gérée exactement de la même façon. Plutôt
+que d'avoir des URLs individuelles exécutant des fichiers PHP différents,
+le contrôleur frontal est *toujours* exécuté, et le routage ("routing") des
+différentes URLs vers différentes parties de votre application est effectué
+en interne. Cela résoud les deux problèmes de l'approche originelle.
+Presque toutes les applications web modernes font ça - incluant les
+applications comme WordPress.
 
-Stay Organized
-~~~~~~~~~~~~~~
+Rester Organisé
+~~~~~~~~~~~~~~~
 
-But inside your front controller, how do you know which page should
-be rendered and how can you render each in a sane way? One way or another, you'll need to
-check the incoming URI and execute different parts of your code depending
-on that value. This can get ugly quickly:
+Mais à l'intérieur de votre contrôleur frontal, comment savez-vous quelle page devrait
+être rendue et comment pouvez-vous délivrer chacune d'elles de façon "saine"? D'une manière
+ou d'une autre, vous allez devoir inspecter l'URI entrante et exécuter les différentes
+parties de votre code dépendant de cette valeur. Cela peut rapidement devenir moche:
 
 .. code-block:: php
 
@@ -362,47 +367,50 @@ on that value. This can get ugly quickly:
     }
     $response->send();
 
-Solving this problem can be difficult. Fortunately it's *exactly* what Symfony
-is designed to do.
+Résoudre ce problème peut être difficile. Heureusement, c'est *exactement* ce pourquoi
+Symfony a été conçu.
 
-The Symfony Application Flow
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Le Déroulement d'une Application Symfony
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you let Symfony handle each request, life is much easier. Symfony follows
-the same simple pattern for every request:
+Quand vous laissez Symfony gérer chaque requête, la vie est beaucoup plus facile.
+Symfony suit un pattern simple et identique pour toutes les requêtes:
 
 .. _request-flow-figure:
 
 .. figure:: /images/request-flow.png
    :align: center
-   :alt: Symfony2 request flow
+   :alt: Le déroulement d'une requête Symfony2
 
-   Incoming requests are interpreted by the routing and passed to controller
-   functions that return ``Response`` objects.
+   Les requêtes entrantes sont interprétées par le routage et passées aux
+   fonctions des contrôleurs qui retournent des objets ``Response``.
 
-Each "page" of your site is defined in a routing configuration file that
-maps different URLs to different PHP functions. The job of each PHP function,
-called a :term:`controller`, is to use information from the request - along
-with many other tools Symfony makes available - to create and return a ``Response``
-object. In other words, the controller is where *your* code goes: it's where
-you interpret the request and create a response.
+Chaque "page" de votre site est définie dans un fichier de configuration du
+routage qui relie différentes URLs à différentes fonctions PHP. Le travail de
+chaque fonction PHP, appelée :term:`contrôleur`, est d'utiliser les informations
+de la requête - en sus de beaucoup d'autres outils que Symfony met à votre
+disposition - pour créer et retourner un objet ``Response``. En d'autres termes,
+le contrôleur est le lieu où *votre* code va: c'est là que vous interprétez la
+requête et que vous créez une réponse.
 
-It's that easy! Let's review:
+C'est si facile! Revoyons cela:
 
-* Each request executes a front controller file;
+* Chaque requête exécute un fichier ayant le rôle de contrôleur frontal;
 
-* The routing system determines which PHP function should be executed based
-  on information from the request and routing configuration you've created;
+* Le système de routage détermine quelle fonction PHP doit être exécutée
+  basé sur les informations provenant de la requête et la configuration de
+  routage que vous avez créée;
 
-* The correct PHP function is executed, where your code creates and returns
-  the appropriate ``Response`` object.
+* La fonction PHP correcte est exécutée, là où votre code crée et retourne
+  l'objet ``Response`` approprié.
 
-A Symfony Request in Action
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Une Requête Symfony en Action
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Without diving into too much detail, let's see this process in action. Suppose
-you want to add a ``/contact`` page to your Symfony application. First, start
-by adding an entry for ``/contact`` to your routing configuration file:
+Sans aller trop loin dans les détails, voyons ce procédé en action. Supposez
+que vous vouliez ajouter une page ``/contact`` à votre application Symfony.
+Premièrement, commencez par ajouter une entrée pour ``/contact`` dans votre
+fichier de configuration du routage:
 
 .. code-block:: yaml
 
@@ -412,14 +420,15 @@ by adding an entry for ``/contact`` to your routing configuration file:
 
 .. note::
 
-   This example uses :doc:`YAML</reference/YAML>` to define the routing configuration.
-   Routing configuration can also be written in other formats such as XML
-   or PHP.
+   Cet exemple utilise :doc:`YAML</reference/YAML>` pour définir la configuration de
+   routage. Cette dernière peut aussi être écrite dans d'autres formats comme XML ou
+   PHP.
 
-When someone visits the ``/contact`` page, this route is matched, and the
-specified controller is executed. As you'll learn in the :doc:`routing chapter</book/routing>`,
-the ``AcmeDemoBundle:Main:contact`` string is a short syntax that points to a
-specific PHP method ``contactAction`` inside a class called ``MainController``:
+Lorsque quelqu'un visite la page ``/contact``, il y a correspondance avec cette route,
+et le contrôleur spécifié est exécuté. Comme vous l'apprendrez dans le
+:doc:`chapitre sur le routage</book/routing>`, la chaîne de caractères ``AcmeDemoBundle:Main:contact``
+est une syntaxe raccourcie qui pointe vers une méthode PHP spécifique ``contactAction`` dans la
+classe appelée ``MainController``:
 
 .. code-block:: php
 
@@ -431,13 +440,12 @@ specific PHP method ``contactAction`` inside a class called ``MainController``:
         }
     }
 
-In this very simple example, the controller simply creates a ``Response``
-object with the HTML "<h1>Contact us!</h1>". In the :doc:`controller chapter</book/controller>`,
-you'll learn how a controller can render templates, allowing your "presentation"
-code (i.e. anything that actually writes out HTML) to live in a separate
-template file. This frees up the controller to worry only about the hard
-stuff: interacting with the database, handling submitted data, or sending
-email messages. 
+Dans cet exemple très simple, le contrôleur crée simplement un objet ``Response`` contenant l'HTML
+"<h1>Contact us!</h1>". Dans le :doc:`chapitre du contrôleur</book/controller>`, vous allez
+apprendre comment un contrôleur peut fournir des templates, permettant à votre code de
+"présentation" (i.e. quoi que ce soit qui délivre du HTML) de se trouver dans un fichier template
+séparé. Cela libère le contrôleur et lui permet de s'occuper seulement des choses complexes:
+intéragir avec la base de données, gérer les données soumises, ou envoyer des emails.
 
 Symfony2: Build your App, not your Tools.
 -----------------------------------------
