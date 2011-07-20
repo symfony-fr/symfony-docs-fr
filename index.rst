@@ -1,4 +1,4 @@
-Documentation Symfony2
+Documentation Symfony2 
 ======================
 
 Quick Tour
@@ -26,5 +26,5 @@ Plongez dans Symfony2 grâce aux guides thématiques:
 
     book/index
 
-.. include:: book/map.rst.inc
+.. include:: /book/map.rst.inc
 
