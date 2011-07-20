@@ -177,10 +177,10 @@ Symfony est architecturé pour correspondre à cette réalité.
 .. tip::
 
     Pour en savoir plus à propos de la spécification HTTP, lisez l'original
-    `HTTP 1.1 RFC`_ ou le `HTTP Bis`_, qui est effort actif pour clarifier la
-     spécification originale. Un super outil pour inspecter/vérifier les en-têtes
-     de la requête et de la réponse durant votre navigation est l'extension
-     pour Firefox `Live HTTP Headers`_.
+    `HTTP 1.1 RFC`_ ou le `HTTP Bis`_, qui est un effort actif pour clarifier la
+    spécification originale. Un super outil pour inspecter/vérifier les en-têtes
+    de la requête et de la réponse durant votre navigation est l'extension
+    pour Firefox `Live HTTP Headers`_.
 
 .. index::
    single: Fondamentaux Symfony2; Requêtes et réponses
