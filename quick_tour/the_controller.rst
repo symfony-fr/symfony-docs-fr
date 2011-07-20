@@ -63,7 +63,7 @@ correspondre à des emplacements réservés. Dans cet exemple, si vous essayez d
 demander la ressource ``/hello/Fabien.js``, vous obtiendrez une erreur HTTP 404,
 car elle ne correspond pas à l'exigence ``_format``.
 
-Redirections et Renvois
+Redirections et renvois
 -----------------------
 
 Si vous voulez rediriger un utilisateur vers une autre page, utilisez la méthode
@@ -78,7 +78,7 @@ convient.
 
 Vous pouvez facilement renvoyer une action vers une autre avec la méthode
 ``forward()``. En interne, Symfony crée une «sous-requête», et retourne l'objet
-``Response``de cette sous-requête::
+``Response`` de cette sous-requête::
 
     $response = $this->forward('AcmeDemoBundle:Hello:fancy', array('name' => $name, 'color' => 'green'));
 
@@ -90,7 +90,7 @@ Obtenir des informations de la requête
 En plus des paramètres venant des routes, le contrôleur peut également accéder
 à l'objet ``Request``::
 
-    $request = $this->get('request');
+    $request = $this->$this->getRequest();
 
     $request->isXmlHttpRequest(); // is it an Ajax request?
 
@@ -119,7 +119,7 @@ attributs dans un cookie en utilisant les sessions PHP natives.
 Stocker et retrouver les informations en session peut être fait très facilement
 dans un contrôleur::
 
-    $session = $this->get('request')->getSession();
+    $session = $this->$this->getRequest()->getSession();
 
     // stocke un attribut pour une future requête
     $session->set('foo', 'bar');
@@ -191,7 +191,7 @@ De plus, l'utilisateur ``admin`` a le rôle ``ROLE_ADMIN``, qui inclut aussi le 
 
 .. tip::
     
-    Pour des raisons de lisibilié, les mots de passe sont stockés en clair dans
+    Pour des raisons de lisibilité, les mots de passe sont stockés en clair dans
     cette configuration, mais vous pouvez utiliser un algorithme en modifiant la
     section ``encoders``.
 
@@ -223,7 +223,7 @@ Symfony2 devrait retourner un code HTTP 403, indiquant que la ressource est «in
 
 .. note::
 
-    La couche de sécurité de Symfony2 est très flexible et est livré avec différents
+    La couche de sécurité de Symfony2 est très flexible et est livrée avec différents
     fournisseurs (par exemple un pour l'ORM Doctrine) et des fournisseurs 
     d'authentification (comme HTTP basic, HTTP digest, ou le certificat X509).
     Lisez le chapitre «:doc:`/book/security`» pour avoir plus d'information sur
@@ -266,8 +266,8 @@ facilement à votre application.
     la solution via les Edge Side Includes (ESI), qui sont supportés nativement.
     Lisez le chapitre «:doc:`/book/http_cache`» pour en savoir plus.
 
-Un dernier mot
---------------
+Le mot de la fin
+----------------
 
 C'est tout ce qu'il y a à faire et je ne suis même pas sûr que nous avons passé
 les 10 minutes que l'on s'était allouées. Nous avons brièvement présenté les 

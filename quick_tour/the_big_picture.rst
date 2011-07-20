@@ -126,10 +126,10 @@ Votre responsabilité en tant que développeur est d'écrire le code qui permet
 d'associer la *requête* d'un utilisateur (``/demo/hello/Fabien``) à la *ressource*
 qui y est rattachée (la page HTML ``Hello Fabien!``).
 
-Routage
+Routing
 ~~~~~~~
 
-Symfony2 achemenine la requête au code qui la gère en essayant d'associer l'URL
+Symfony2 achemine la requête vers le code qui la gère en essayant d'associer l'URL
 demandée à des masques prédéfinis. Par défaut, ces masques (appelés routes) sont
 définis dans le fichier de configuration ``app/config/routing.yml``:
 
@@ -159,7 +159,7 @@ comprendrez exactement ce que cela signifie vraiment.
     La Symfony2 Standard Edition utilise le format `YAML`_ pour ses fichiers de
     configuration, mais Symfony2 supporte également nativement le XML, le PHP,
     et les annotations. Les différents formats sont compatibles et peuvent être
-    utilisées de façon interchangeable dans une application. Enfin, les performances
+    utilisés de façon interchangeable dans une application. Enfin, les performances
     de votre application ne dépendent pas du format de configuration que vous aurez
     choisi puisque tout est mis en cache lors de la première requête.
 
@@ -168,7 +168,7 @@ Contrôleurs
 
 Un contrôleur est un nom un peu spécial donné à une fonction ou une méthode PHP
 qui prend en charge les *requêtes* entrantes et retourne des *réponses*
-(souvent du code HTML). PLutôt que d'utiliser des variables globales PHP et des
+(souvent du code HTML). Plutôt que d'utiliser des variables globales PHP et des
 fonctions (comme ``$_GET`` ou ``header()``) pour gérer ces messages HTTP, Symfony
 utilise des objets:
 :class:`Symfony\\Component\\HttpFoundation\\Request` et
@@ -183,14 +183,14 @@ qu'il puisse exister crée une réponse à la main, basée sur la requête::
 
 .. note::
 
-    Symfony2 adopte les spécification HTTP, qui sont les règles qui gouvernent
+    Symfony2 adopte les spécifications HTTP, qui sont les règles qui gouvernent
     toutes les communications du Web. Lisez le chapitre «:doc:`/book/http_fundamentals`»
     pour en savoir plus sur cette partie et la puissance que cela apporte.
 
 
 
 Symfony2 choisit le contrôleur en se basant sur la valeur du paramètre ``_controller``
-du fichier de routage: ``AcmeDemoBundle:Welcome:index``. Cette chaîne de caractères
+du fichier de routing: ``AcmeDemoBundle:Welcome:index``. Cette chaîne de caractères
 est le *nom logique* du contrôleur et elle fait référence à la méthode ``indexAction``
 de la classe ``Acme\DemoBundle\Controller\WelcomeController``::
 
@@ -212,7 +212,7 @@ de la classe ``Acme\DemoBundle\Controller\WelcomeController``::
     Vous auriez pu utiliser le nom complet de la classe et de la méthode
     ``Acme\DemoBundle\Controller\WelcomeController::indexAction`` comme valeur du
     paramètre ``_controller`` mais en suivant des conventions simples, le nom 
-    logique est plus court et vous actroie plus de flexibilité.
+    logique est plus court et vous octroie plus de flexibilité.
 
 La classe ``WelcomeController`` étend la classe ``Controller`` qui fournit des
 raccourcis très pratiques vers des méthodes comme la méthode
@@ -248,7 +248,7 @@ et il fait référence au fichier ``Resources/views/Welcome/index.html.twig`` du
 bundle ``AcmeDemoBundle`` (situé dans le dossier ``src/Acme/DemoBundle``).
 La section ci-dessous sur les bundles vous expliquera en quoi cela peut être utile.
 
-Maintenant, jetez à nouveau un oeil au fichier configuration de routage et trouvez
+Maintenant, jetez à nouveau un oeil au fichier configuration de routing et trouvez
 la clé ``_demo``:
 
 .. code-block:: yaml
@@ -259,7 +259,7 @@ la clé ``_demo``:
         type:     annotation
         prefix:   /demo
 
-Symfony2 peut lire/importer les informations de routage écrites en YAML, XML, PHP
+Symfony2 peut lire/importer les informations de routing écrites en YAML, XML, PHP
 ou même grâce aux annotations. Ici, le *nom logique* du fichier est 
 ``@AcmeDemoBundle/Controller/DemoController.php`` et fait référence au fichier
 ``src/Acme/DemoBundle/Controller/DemoController.php``. Dans ce fichiers, les
@@ -284,9 +284,9 @@ routes sont définies par des annotations des méthodes action::
     }
 
 L'annotation ``@Route()`` définit une nouvelle route avec le masque ``/hello/{name}``
-qui, lorsqu'elle sera reconnue, éxécutera la méthode ``helloAction``. Une chaine
+qui, lorsqu'elle sera reconnue, exécutera la méthode ``helloAction``. Une chaine
 de caractères entre accolades comme ``{name}`` est une variable réservée. Comme
-vous pouvez le voir, sa valteur peut être récupérée par l'argument ``$name`` de
+vous pouvez le voir, sa valeur peut être récupérée par l'argument ``$name`` de
 la méthode.
 
 .. note::
@@ -297,7 +297,7 @@ la méthode.
     du code.
 
 Si vous regardez de plus près le code du contrôleur, vous verrez qu'au lieu de rendre
-un template et retourner un objet ``Response``comme nous l'avons vu plus haut,
+un template et retourner un objet ``Response`` comme nous l'avons vu plus haut,
 il retourne juste un tableau de paramètres. L'annotation ``@Template()`` dit à 
 Symfony de rendre le template pour vous en passant chaque variable du tableau au
 template. Le nom du template qui est retourné dépend du nom du contrôleur. Donc,
@@ -306,7 +306,7 @@ dans notre exemple, le template ``AcmeDemoBundle:Demo:hello.html.twig`` est reto
 
 .. tip::
 
-    Les annotations ``@Route()`` et ``@Template()`` sont plus puissante que les
+    Les annotations ``@Route()`` et ``@Template()`` sont plus puissantes que les
     simples exemples décrits dans ce tutoriel. Apprenez en plus sur «`les annotations
     dans les contrôleurs`_» dans la documentation officielle.
 
@@ -328,17 +328,17 @@ Le contrôleur rend le template ``src/Acme/DemoBundle/Resources/views/Demo/hello
     {% endblock %}
 
 Par défaut, Symfony2 utilise `Twig`_ comme moteur de template mais vous pouvez
-aussi utilisez les templates traditionnels en PHP si vous préférez. Le prochain
+aussi utiliser les templates traditionnels en PHP si vous préférez. Le prochain
 chapitre introduira le fonctionnement des templates dans Symfony2.
 
 Bundles
 ~~~~~~~
 
-Vous vous êtes surement demandé pourquoi le mot :term:`bundle` est utilisez dans
+Vous vous êtes surement demandé pourquoi le mot :term:`bundle` est utilisé dans
 la plupart des noms que nous avons vus précédemment. Tout le code que vous écrivez
 dans votre application est organisé en bundles. En jargon Symfony2, un bundle est
 un ensemble structuré de fichiers (PHP, feuilles de styles, javascript, images, ...)
-qui implémente une fonctionnalité unique (un blog, un forum, ...) et qui peut être
+qui implémentent une fonctionnalité unique (un blog, un forum, ...) et qui peut être
 facilement partagé avec d'autres développeurs. Jusqu'à maintenant, nous avons
 manipulé un seul bundle, ``AcmeDemoBundle``. Vous en saurez plus sur les bundles
 dans le dernier chapitre de ce tutoriel.
@@ -363,7 +363,7 @@ utile : le profiler.
 .. image:: /images/quick_tour/profiler.png
    :align: center
 
-Bien évidemment, vous ne voulez pas voir ces ouils lorsque vous déploierez votre
+Bien évidemment, vous ne voudrez pas voir ces outils lorsque vous déploierez votre
 application sur le serveur de production. C'est pourquoi vous trouverez un autre
 contrôleur dans le répertoire``web/`` (``app.php``), qui est optimisé pour 
 l'environnement de production:
@@ -412,11 +412,11 @@ L'environnement ``dev`` (qui charge le fichier de configuration ``config_dev.yml
 importe le fichier global ``config.yml`` et le modifie en activant, dans cet exemple,
 la web debug toolbar.
 
-Derniers mots
--------------
+Le mot de la fin
+----------------
 
 Félicitations ! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
-terrible, n'est-ce pas ? Il y a encore beaucoup à explorer et vous devrier déjà
+terrible, n'est-ce pas ? Il y a encore beaucoup à explorer et vous devriez déjà
 comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement. 
 Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 
 suivante : «:doc:`La vue<the_view>`».

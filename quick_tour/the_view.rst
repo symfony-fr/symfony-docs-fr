@@ -120,9 +120,9 @@ tag ``extends``:
     {% endblock %}
 
 La notation ``AcmeDemoBundle::layout.html.twig`` vous semble familière, n'est-ce pas ?
-C'est la même noteation utilisée pour référencer un template classique. La partie
+C'est la même notation utilisée pour référencer un template classique. La partie
 ``::`` signifie simplement que le contrôleur est vide, et donc que le fichier
-correspondant est directement stocjé dans le répertoire ``Resources/views/``.
+correspondant est directement stocké dans le répertoire ``Resources/views/``.
 
 Maintenant, jettons à un oeil à un exemple simple du template ``layout.html.twig``:
 
@@ -134,9 +134,9 @@ Maintenant, jettons à un oeil à un exemple simple du template ``layout.html.tw
         {% endblock %}
     </div>
 
-Le tag ``{% block %}`` définit des blocs que les templates fils vont pouvoir remplir.
+Le tag ``{% block %}`` définit des blocs que les templates enfants vont pouvoir remplir.
 Tout ce que le tag block fait est de spécifier au moteur de template qu'un template
-fils va surcharger cette partie du template.
+enfant va surcharger cette partie du template.
 
 Dans cet exemple, le template ``hello.html.twig`` surcharge le block ``content``,
 ce qui signifie que le texte «Hello Fabien» sera affiché dans l'élément ``div.symfony-content``.
@@ -177,11 +177,11 @@ Imbriquer d'autres contrôleurs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Et si vous vouliez inclure le résultat d'un autre contrôleur dans votre template ?
-C'est très utilse en travaillant avec Ajax, ou quand les templates inclus
+C'est très utile en travaillant avec Ajax, ou quand les templates inclus
 ont besoin de variables qui ne sont pas disponibles dans le template principal.
 
 Supposez que vous avez créé une action ``fancy`` et que vous voulez l'inclure
-à l'interieur du template ``index``. POur faire cela, utilisez le tag ``render``:
+à l'interieur du template ``index``. Pour faire cela, utilisez le tag ``render``:
 
 .. code-block:: jinja
 
@@ -212,8 +212,8 @@ Créer des liens entre les pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Créer des liens entre les pages d'une application web est incontournable. Au 
-lieu de coder en dur les URL dans les templates, la fonction ``path`` peut 
-générer des URLs en se basant sur la configuration du routage. De cette manière, 
+lieu de coder en dur les URLs dans les templates, la fonction ``path`` peut 
+générer des URLs en se basant sur la configuration du routing. De cette manière, 
 toutes vos URLs peuvent être facilement mise à jour en changeant juste le fichier 
 de configuration:
 
@@ -224,7 +224,7 @@ de configuration:
 La fonction ``path`` prend le nom de la route et un tableau de paramètres comme
 arguments. Le nom de la route est la clé principale sous laquelle les
 routes sont référencées et les paramètres sont les valeurs définies dans le
-pattern de chaque route::
+masque (pattern) de chaque route::
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -257,7 +257,7 @@ Symfony2 fournit la fonction ``asset`` pour les gérer très facilement:
     <img src="{{ asset('images/logo.png') }}" />
 
 Le but principal de la fonction ``asset`` est de rendre votre application plus
-portable. Grâce à cette fonction, vous pouvez déplacer votre le répertoire racine
+portable. Grâce à cette fonction, vous pouvez déplacer le répertoire racine
 de votre application n'importe où sous le répertoire racine web sans changer le
 moindre code dans vos templates.
 
@@ -273,17 +273,17 @@ Le mot de la fin
 
 Twig est simple mais puissant. Grâce aux layouts, aux blocks, aux templates et
 aux inclusions d'actions, il est très facile d'organiser vos templates de façon
-logique et extensible. Pourtant, si vous n'êtes pas à l'êtes pas à l'aise avec
+logique et extensible. Pourtant, si vous n'êtes pas à l'aise avec
 Twig, vous pouvez toujours utiliser PHP dans les templates de Symfony sans aucun
 soucis.
 
 
 Vous avez travaillé à peine 20 minutes avec Symfony2, mais vous pouvez déjà faire
-incroyables avec. C'est la puissance de Symfony2. Apprendre les concepts de base
+des choses incroyables avec. C'est la puissance de Symfony2. Apprendre les concepts de base
 est très simple, et vous apprendrez bientôt que cette simplicité est cachée derrière
 une architecture flexible.
 
-Mais il ne faut pas trop vite. D'abord, vous devez en apprendre plus sur le 
+Mais il ne faut pas aller trop vite. D'abord, vous devez en apprendre plus sur le 
 contrôleur et c'est justement le sujet de la :doc:`prochaine partie de ce tutoriel<the_controller>`.
 Prêt pour 10 nouvelles minutes avec Symfony2 ?
 

@@ -5,7 +5,7 @@ Vous êtes mon héros ! Qui aurait pensé que vous seriez encore là après les 
 premières parties ? Vos efforts seront récompensés dans un instant.
 
 Les trois premières parties n'explorent pas trop profondément l'architecture du
-framework. Comme Symfony2 se distingue de la nuée des frameworks, nous allons
+framework. Comme Symfony2 se distingue des autres frameworks, nous allons
 nous y atteler dès maintenant.
 
 Comprendre l'arborescence
@@ -102,28 +102,28 @@ serveur ou au sein même de vos projets.
     Si vous voulez en savoir plus sur la flexibilité de l'autoloader de Symfony2,
     lisez l'article «:doc:`/cookbook/tools/autoloader`» dans le cookbook.
 
-Comprendre le système de Bundles
+Comprendre le système de bundles
 --------------------------------
 
 Cette section présente une des plus géniales et puissantes fonctionnalités de
 Symfony2, le système de :term:`Bundles`.
 
-Un bundle est une sorte de plugin comme on en trouve dans d'autres logiciels. 
+Un bundle est une sorte de plugin comme on peut en trouver dans d'autres logiciels. 
 Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin* ? C'est parce que *tout*
-est un Bundle dans Symfony2, des fonctionnalités du noyau du framework au code que
+est un bundle dans Symfony2, des fonctionnalités du noyau du framework au code que
 vous écrirez pour votre application. Les bundles sont les citoyens de premier 
 rang pour Symfony2. Ils vous donnent la flexibilité d'utiliser des fonctionnalités
-pré-construites dans des bundles tiers ou de distribuer vos propres Bundles. 
+pré-construites dans des bundles tiers ou de distribuer vos propres bundles. 
 Ils facilitent la synergie et le choix des fonctionnalités à activer pour votre 
-application. et les optimisent de la manière que vous désirez. Et après tout, le
+application et les optimisent de la manière que vous désirez. Et après tout, le
 code de votre application est au moins aussi *important* que celui du framework.
 
-Définir un Bundle
+Définir un bundle
 ~~~~~~~~~~~~~~~~~
 
-Une application est constituée de Bundles définis dans la méthode
+Une application est constituée de bundles définis dans la méthode
 ``registerBundles()`` de la classe ``AppKernel``. Chaque bundle est un répertoire
-qui contient une unique classe ``Bundle`` qui me décrit::
+qui contient une unique classe ``Bundle`` qui le décrit::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -150,15 +150,15 @@ qui contient une unique classe ``Bundle`` qui me décrit::
         return $bundles;
     }
 
-En plus de du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
+En plus du bundle ``AcmeDemoBundle`` dont nous avons déjà parlé, notez que le
 noyau active aussi d'autres bundles comme les bundles ``FrameworkBundle``,
 ``DoctrineBundle``, ``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous
 intégrés au framework.
 
-Configurer un Bundle
+Configurer un bundle
 ~~~~~~~~~~~~~~~~~~~~
 
-Chaque Bundle peut être personnalisé via des fichiers de configuration écrits en
+Chaque bundle peut être personnalisé via des fichiers de configuration écrits en
 YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
 
 .. code-block:: yaml
@@ -257,7 +257,7 @@ principale (i.e. ``config.yml``) puis la modifier pour ajouter des outils de deb
     assetic:
         use_controller: true
 
-Etendre un Bundle
+Etendre un bundle
 ~~~~~~~~~~~~~~~~~
 
 En plus d'être une façon sympathique d'organiser et de configurer votre code,
@@ -272,7 +272,7 @@ Noms logiques de fichiers
 
 Quand vous voulez faire référence à un fichier depuis un bundle, utilisez cette
 notation:
-``@BUNDLE_NAME/path/to/file``; Symfony2 remplacera ``@BUNDLE_NAME`` par le chemin
+``@NOM_DU_BUNDLE/path/to/file``; Symfony2 remplacera ``@NOM_DU_BUNDLE`` par le chemin
 du bundle. A titre d'exemple, le chemin logique
 ``@AcmeDemoBundle/Controller/DemoController.php`` sera transformé en
 ``src/Acme/DemoBundle/Controller/DemoController.php``, car Symfony connait la
@@ -282,7 +282,7 @@ Noms logiques de contrôleurs
 ............................
 
 Pour les contrôleurs, vous aurez besoin de référencer les noms de méthode en 
-utilisant le format suivant ``NOM_DU_BUNDLE_NAME:NOM_DU_CONTROLEUR:NOM_DE_ACTION``.
+utilisant le format suivant ``NOM_DU_BUNDLE:NOM_DU_CONTROLEUR:NOM_DE_ACTION``.
 Par exemple, ``AcmeDemoBundle:Welcome:index`` référencera la méthode ``indexAction``
 de la classe ``Acme\DemoBundle\Controller\WelcomeController``.
 
@@ -296,7 +296,7 @@ pas besoin d'être stockés sur le système de fichiers. Vous pouvez par exemple
 stocker dans une base de données.
 
 
-Etendre les Bundles
+Etendre les bundles
 ...................
 	
 Si vous suivez ces conventions, alors vous pouvez utiliser :doc:`l'héritage de bundle</cookbook/bundles/inheritance>`
@@ -372,4 +372,4 @@ avez encore besoin d'en apprendre beaucoup pour devenir un expert Symfony2. Prê
 :doc:`/book/index` et choisissez le sujet qui vous intéresse.
 
 .. _standards:               http://groups.google.com/group/php-standards/web/psr-0-final-proposal
-.. _convention:              http://pear.php.net/
+.. _conventions:              http://pear.php.net/
