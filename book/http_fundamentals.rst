@@ -291,7 +291,7 @@ entre les deux. En d'autres mots, le réel travail commence lors de l'écriture
 du code qui interprète l'information de la requête et crée la réponse.
 
 Votre application fait probablement beaucoup de choses comme envoyer des emails,
-gérer des soumissions de formulaire, sauver des "trucs" dans votre base de données,
+gérer des soumissions de formulaires, sauver des "trucs" dans votre base de données,
 délivrer des pages HTML et protéger du contenu avec sécurité. Comment pouvez-vous
 vous occuper de tout cela tout en conservant votre code organisé et maintenable?
 
@@ -447,82 +447,91 @@ apprendre comment un contrôleur peut fournir des templates, permettant à votre
 séparé. Cela libère le contrôleur et lui permet de s'occuper seulement des choses complexes:
 intéragir avec la base de données, gérer les données soumises, ou envoyer des emails.
 
-Symfony2: Build your App, not your Tools.
------------------------------------------
+Symfony2: Construisez votre application, pas vos outils.
+--------------------------------------------------------
 
-You now know that the goal of any app is to interpret each incoming request
-and create an appropriate response. As an application grows, it becomes more
-difficult to keep your code organized and maintainable. Invariably, the same
-complex tasks keep coming up over and over again: persisting things to the
-database, rendering and reusing templates, handling form submissions, sending
-emails, validating user input and handling security.
+Vous savez maintenant que le but de quelconque application est d'interpréter
+chaque requête entrante et de créer une réponse appropriée. Avec le temps,
+une application grandit et il devient plus difficile de garder le code organisé
+et maintenable. Invariablement, les mêmes tâches complexes reviennent encore
+et toujours: persister des éléments dans la base de données, délivrer et
+réutiliser des templates, gérer des soumissions de formulaires, envoyer
+des emails, valider des entrées d'utilisateurs et gérer la sécurité.
 
-The good news is that none of these problems is unique. Symfony provides
-a framework full of tools that allow you to build your application, not your
-tools. With Symfony2, nothing is imposed on you: you're free to use the full
-Symfony framework, or just one piece of Symfony all by itself.
+La bonne nouvelle est qu'aucun de ces problèmes est unique. Symfony fournit
+un framework rempli d'outils qui vous permettent de construire votre
+application, mais pas vos outils. Avec Symfony2, rien ne vous est imposé:
+vous êtes libre d'utiliser le framework Symfony en entier, ou juste une partie
+de Symfony toute seule.
 
 .. index::
-   single: Symfony2 Components
+   single: Les Composants Symfony2
 
-Standalone Tools: The Symfony2 *Components*
+Outils Autonomes: Les *Composants* Symfony2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-So what *is* Symfony2? First, Symfony2 is a collection of over twenty independent
-libraries that can be used inside *any* PHP project. These libraries, called
-the *Symfony2 Components*, contain something useful for almost any situation,
-regardless of how your project is developed. To name a few:
+Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plus
+de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
+projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
+quelque chose d'utile pour presque n'importe quelle situation, quelle que soit
+la manière dont votre projet est développé. Pour en nommer certaines:
 
-* `HttpFoundation`_ - Contains the ``Request`` and ``Response`` classes, as
-  well as other classes for handling sessions and file uploads;
 
-* `Routing`_ - Powerful and fast routing system that allows you to map a
-  specific URI (e.g. ``/contact``) to some information about how that request
-  should be handled (e.g. execute the ``contactAction()`` method);
+* `HttpFoundation`_ - Contient les classes ``Request`` et ``Response``, ainsi
+  que d'autres classes pour la gestion des sessions et des uploads de fichiers;
 
-* `Form`_ - A full-featured and flexible framework for creating forms and
-  handing form submissions;
+* `Routing`_ - Un puissant et rapide système qui vous permet de lier une
+  URI spécifique (par exemple: ``/contact``) à l'information lui permettant
+  de savoir comment gérer cette requête (par exemple: exécute la méthode
+  ``contactAction()``);
 
-* `Validator`_ A system for creating rules about data and then validating
-  whether or not user-submitted data follows those rules;
+* `Form`_ - Un framework complet et flexible pour la création de formulaires
+  et la gestion de la soumission de ces derniers;
 
-* `ClassLoader`_ An autoloading library that allows PHP classes to be used
-  without needing to manually ``require`` the files containing those classes;
+* `Validator`_ Un système permettant de créer des règles à propos de données
+  et de valider ou non les données utilisateurs soumises suivant ces règles;
 
-* `Templating`_ A toolkit for rendering templates, handling template inheritance
-  (i.e. a template is decorated with a layout) and performing other common
-  template tasks;
+* `ClassLoader`_ Une bibliothèque pour le chargement automatique qui permet
+  aux classes PHP d'être utilisées sans avoir besoin de ``requérir`` ("require")
+  manuellement les fichiers contenant ces dernières;
 
-* `Security`_ - A powerful library for handling all types of security inside
-  an application;
+* `Templating`_ Une boîte à outils pour délivrer des templates, gérer leur
+  inhéritance (i.e. un template est décoré par un layout) et effectuer d'autres
+  tâches communes aux templates;
 
-* `Translation`_ A framework for translating strings in your application.
+* `Security`_ - Une puissante bibliothèque pour gérer tous les types de
+  sécurité dans une application;
 
-Each and every one of these components is decoupled and can be used in *any*
-PHP project, regardless of whether or not you use the Symfony2 framework.
-Every part is made to be used if needed and replaced when necessary.
+* `Translation`_ Un framework pour traduire les chaînes de caractères dans
+  votre application.
 
-The Full Solution: The Symfony2 *Framework*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Chacun de ces composants est découplé et peut être utilisé dans *n'importe quel*
+projet PHP, que vous utilisiez le framework Symfony2 ou non.
+Chaque partie est faite pour être utilisée si besoin est, et remplacée quand cela
+est nécessaire.
 
-So then, what *is* the Symfony2 *Framework*? The *Symfony2 Framework* is
-a PHP library that accomplishes two distinct tasks:
+La Solution Complète: Le *Framework* Symfony2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Provides a selection of components (i.e. the Symfony2 Components) and
-   third-party libraries (e.g. ``Swiftmailer`` for sending emails);
+Donc finalement, *qu'est-ce* que le *Framework* Symfony2? Le *Framework Symfony2*
+est une bibliothèque PHP qui accomplit deux tâches distinctes:
 
-#. Provides sensible configuration and a "glue" library that ties all of these
-   pieces together.
+#. Fournir une sélection de composants (i.e. les Composants Symfony2) et
+des bibliothèques tiers (e.g. ``Swiftmailer`` pour envoyer des emails);
 
-The goal of the framework is to integrate many independent tools in order
-to provide a consistent experience for the developer. Even the framework
-itself is a Symfony2 bundle (i.e. a plugin) that can be configured or replaced
-entirely.
+#. Fournir une configuration et une bibliothèque "colle" qui lie toutes ces
+   pièces ensemble.
 
-Symfony2 provides a powerful set of tools for rapidly developing web applications
-without imposing on your application. Normal users can quickly start development
-by using a Symfony2 distribution, which provides a project skeleton with
-sensible defaults. For more advanced users, the sky is the limit.
+Le but du framework est d'intégrer beaucoup d'outils indépendants afin de
+fournir une expérience consistente au développeur. Même le framework lui-même
+est un bundle Symfony2 (i.e. un plugin) qui peut être configuré ou remplacé
+entièrement.
+
+Symfony2 fournit un puissant ensemble d'outils pour développer rapidement des
+applications web sans pour autant s'imposer à votre application. Les utilisateurs
+normaux peuvent commencer rapidement à développer en utilisant une distribution
+Symfony2, ce qui fournit un squelette de projet avec des paramètres par défaut.
+Pour les utilisateurs avancés, le ciel est la seule limite.
 
 .. _`xkcd`: http://xkcd.com/
 .. _`HTTP 1.1 RFC`: http://www.w3.org/Protocols/rfc2616/rfc2616.html
