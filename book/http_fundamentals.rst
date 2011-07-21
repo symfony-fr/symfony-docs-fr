@@ -395,7 +395,7 @@ requête et que vous créez une réponse.
 
 C'est si facile! Revoyons cela:
 
-* Chaque requête exécute un fichier ayant le rôle de contrôleur frontal;
+* Chaque requête exécute un même et unique fichier ayant le rôle de contrôleur frontal;
 
 * Le système de routage détermine quelle fonction PHP doit être exécutée
   basé sur les informations provenant de la requête et la configuration de
@@ -491,9 +491,9 @@ la manière dont votre projet est développé. Pour en nommer certaines:
 * `Validator`_ Un système permettant de créer des règles à propos de données
   et de valider ou non les données utilisateurs soumises suivant ces règles;
 
-* `ClassLoader`_ Une bibliothèque pour le chargement automatique qui permet
-  aux classes PHP d'être utilisées sans avoir besoin de ``requérir`` ("require")
-  manuellement les fichiers contenant ces dernières;
+* `ClassLoader`_ Une bibliothèque pour le chargement automatique ("autoloading")
+  qui permet aux classes PHP d'être utilisées sans avoir besoin de ``requérir``
+  ("require") manuellement les fichiers contenant ces dernières;
 
 * `Templating`_ Une boîte à outils pour délivrer des templates, gérer leur
   inhéritance (i.e. un template est décoré par un layout) et effectuer d'autres
