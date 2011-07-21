@@ -4,17 +4,16 @@
 Installer et Configurer Symfony
 ===============================
 
-Le but de ce chapitre est de vous permettre de démarrer avec un application
+Le but de ce chapitre est de vous permettre de démarrer avec une application
 construite avec Symfony. Heureusement, Symfony propose un système de « distributions ».
-Ce sont des projets Symfony fonctionnel « de départ » que vous pouvez télécharger
-et développer immédiatement.
+Ce sont des projets Symfony fonctionnels « de départ » que vous pouvez télécharger
+et qui vous permettent de développer immédiatement.
 
 Télécharger une Distribution Symfony2 
 -------------------------------------
 
 .. tip::
-
-    Premièrement, vérifiez que vous avez installé et configurer un serveur web
+    Premièrement, vérifiez que vous avez installé et configuré un serveur web
     (comme Apache) avec PHP 5.3.2 ou supérieur. Pour plus d'informations sur les
     prérequis Symfony2, lisez le chapitre :doc:`requirements reference</reference/requirements>`.
 
@@ -26,10 +25,10 @@ une distribution Symfony2, vous téléchargez un squelette d'application qui peu
 
 Commencez par visiter la page de téléchargement de Symfony2 à `http://symfony.com/download`_.
 Sur cette page, vous verrez la *Symfony Standard Edition*, qui est la principale
-distribution Symfony2. Vous devrez alors faire deux choix:
+distribution Symfony2. Vous devrez alors faire deux choix :
 
 * Télécharger l'archive au format ``.tgz`` ou ``.zip``. Les deux sont équivalentes
-  donc téléchargez celle avec laquelle vous vous sentez le plus à l'aise;
+  donc téléchargez celle avec laquelle vous vous sentez le plus à l'aise.
 
 * Téléchargez la distribution avec ou sans vendors. Si vous avez installé `Git`_
   sur votre ordinateur, vous devriez télécharger Symfony2 « sans vendors ». Cela
@@ -37,7 +36,7 @@ distribution Symfony2. Vous devrez alors faire deux choix:
 
 Téléchargez l'une des archives quelque part dans le dossier racine de votre serveur
 web et extrayez là. Depuis une interface de commande UNIX, cela peut être fait
-avec l'une des commandes suivantes (remplacez ``###`` par le nom du fichier):
+avec l'une des commandes suivantes (remplacez ``###`` par le nom du fichier) :
 
 .. code-block:: bash
 
@@ -48,7 +47,7 @@ avec l'une des commandes suivantes (remplacez ``###`` par le nom du fichier):
     unzip Symfony_Standard_Vendors_2.0.###.zip
 
 Lorsque vous aurez fini, vous devriez avoir un répertoire ``Symfony/`` qui
-ressemble à ceci:
+ressemble à ceci :
 
 .. code-block:: text
 
@@ -70,7 +69,7 @@ Mettre à jour les Vendors
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Finallement, si vous avez téléchargé l'archive « sans vendors », installez les en
-lancant la commande suivante depuis une invite de commande:
+lancant la commande suivante depuis une invite de commande :
 
 .. code-block:: bash
 
@@ -88,7 +87,7 @@ répertoire ``app/`` et un exemple de code dans le répertoire ``src/``.
 
 Symfony2 est livré avec un testeur de configuration de votre serveur afin de
 vérifier que votre serveur web et PHP sont bien configurés pour utiliser Symfony.
-Utilisez l'URL suivante pour vérifier votre configuration:
+Utilisez l'URL suivante pour vérifier votre configuration :
 
 .. code-block:: text
 
@@ -104,7 +103,7 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
     de ligne de commande est différent de celui du serveur web, vous pouvez lancer
     les commandes suivantes une fois dans votre projet pour vous assurer que les
     permissions sont correctement définies. Changez l'utilisateur du serveur web
-    pour ``www-data`` et celui de la ligne de commande pour ``yourname``:
+    pour ``www-data`` et celui de la ligne de commande pour ``yourname`` :
 
     **1. Utiliser l'ACL sur un système qui supporte chmod +a**
 
@@ -123,7 +122,7 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
 
     Certains systèmes, comme Ubuntu, ne supporte pas la commande``chmod +a``, 
     mais ils en supportent une autre appelée ``setfacl``. Sur certains systèmes,
-    vous aurez besoin de l'installer avant de pouvoir l'utiliser:
+    vous aurez besoin de l'installer avant de pouvoir l'utiliser :
 
     .. code-block:: bash
 
@@ -137,7 +136,7 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
     en écriture au groupe ou aux autres (cela dépend si l'utilisateur serveur web
     et l'utilisateur de ligne de commande sont dans le même groupe ou non). Pour
     faire ceci, ajoutez la ligne suivante au début des fichiers ``app/console``,
-    ``web/app.php`` et ``web/app_dev.php``:
+    ``web/app.php`` et ``web/app_dev.php`` :
 
     .. code-block:: php
 
@@ -150,14 +149,14 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
     Notez que utiliser l'ALC est recommandé si vous y avez accès sur votre serveur
     car changer le umask n'est pas sûr.
 
-Lorsque tout est bon, cliquez sur «Go to the Welcome page » pour afficher votre
-première «vraie » page Symfony2:
+Lorsque tout est bon, cliquez sur « Go to the Welcome page » pour afficher votre
+première « vraie » page Symfony2 :
 
 .. code-block:: text
 
     http://localhost/Symfony/web/app_dev.php/
 
-Symfony2 devrait vous accueillir et vous féliciter pour tout le travail fait
+Symfony2 devrait vous accueillir et vous féliciter pour tout le travail accompli
 jusqu'ici !
 
 .. image:: /images/quick_tour/welcome.jpg
@@ -180,7 +179,7 @@ Utiliser un gestionnaire de code
 
 Si vous utilisez un système de contrôle de version comme ``Git`` ou ``Subversion``,
 vous pouvez le configurer et commencer à commiter votre projet normalement.
-Pour ``Git``, cela peut être fait facilement avec la commande suivante:
+Pour ``Git``, cela peut être fait facilement avec la commande suivante :
 
 .. code-block:: bash
 
@@ -203,7 +202,7 @@ cela se fait en créant le fichier ``.gitignore`` et en y ajoutant la ligne suiv
 Maintenant, le répertoire vendor ne sera pas commité sur votre système de gestion
 de code. C'est plutôt bien (en fait c'est génial !) car lorsque quelqu'un clone ou
 récupère le projet, il lui suffit de lancer la commande ``php bin/vendors install``
-pour récupérer toutes les librairies nécessaires..
+pour récupérer toutes les librairies nécessaires.
 
 .. _`http://symfony.com/download`: http://symfony.com/download
 .. _`Git`: http://git-scm.com/

@@ -12,7 +12,9 @@ De nos jours, une application Web doit être en mesure de livrer plus que de
 simples fichiers HTML. Du XML pour les flux RSS ou des Web Services, du JSON
 pour les requêtes Ajax,... Bref, il y a beaucoup de formats différents à choisir.
 Manipuler ces formats dans Symfony2 est simple. Modifiez ``routing.yml`` et
-ajoutez un ``_format`` avec une valeur d'attribut ``xml``::
+ajoutez un ``_format`` avec une valeur d'attribut ``xml`` :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,7 +30,7 @@ ajoutez un ``_format`` avec une valeur d'attribut ``xml``::
     }
 
 En utilisant le format (défini par la valeur ``_format``) dans la requête, Symfony2
-choisira automatiquement le bon template, ici ``hello.xml.twig``:
+choisira automatiquement le bon template, ici ``hello.xml.twig`` :
 
 .. code-block:: xml+php
 
@@ -40,7 +42,9 @@ choisira automatiquement le bon template, ici ``hello.xml.twig``:
 C'est tout ce qu'il y a à faire. Pour les formats standards, Symfony2 choisira
 automatiquement le meilleur en-tête ``Content-Type`` pour la réponse. Si vous
 voulez prendre en charge des formats différents pour une seule action, utilisez
-l'emplacement ``{_format}`` dans le pattern à la place::
+l'emplacement ``{_format}`` dans le pattern à la place :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -67,7 +71,9 @@ Redirections et renvois
 -----------------------
 
 Si vous voulez rediriger un utilisateur vers une autre page, utilisez la méthode
-``redirect()``::
+``redirect()`` :
+
+.. code-block:: php
 
     return $this->redirect($this->generateUrl('_demo_hello', array('name' => 'Lucas')));
 
@@ -78,7 +84,9 @@ convient.
 
 Vous pouvez facilement renvoyer une action vers une autre avec la méthode
 ``forward()``. En interne, Symfony crée une «sous-requête», et retourne l'objet
-``Response`` de cette sous-requête::
+``Response`` de cette sous-requête :
+
+.. code-block:: php
 
     $response = $this->forward('AcmeDemoBundle:Hello:fancy', array('name' => $name, 'color' => 'green'));
 
@@ -88,7 +96,9 @@ Obtenir des informations de la requête
 --------------------------------------
 
 En plus des paramètres venant des routes, le contrôleur peut également accéder
-à l'objet ``Request``::
+à l'objet ``Request`` :
+
+.. code-block:: php
 
     $request = $this->$this->getRequest();
 
@@ -117,7 +127,9 @@ navigateur, un robot ou un web service). Entre deux requêtes, Symfony2 stocke l
 attributs dans un cookie en utilisant les sessions PHP natives.
 
 Stocker et retrouver les informations en session peut être fait très facilement
-dans un contrôleur::
+dans un contrôleur :
+
+.. code-block:: php
 
     $session = $this->$this->getRequest()->getSession();
 
@@ -131,7 +143,9 @@ dans un contrôleur::
     $session->setLocale('fr');
 
 Vous pouvez aussi stocker de courts messages qui ne seront disponibles que pour
-la prochaine requête::
+la prochaine requête :
+
+.. code-block:: php
 
     // stocke un message pour la prochaine requête (dans un contrôleur)
     $session->setFlash('notice', 'Congratulations, your action succeeded!');
@@ -200,7 +214,9 @@ vous redirigera automatiquement au formulaire d'authentification car la ressourc
 est protégée par un ``firewall``.
 
 Vous pouvez aussi forcer l'action à exiger un rôle donné en utilisant l'annotation
-``@Secure`` du contrôleur::
+``@Secure`` du contrôleur :
+
+.. code-block:: php
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -235,7 +251,9 @@ Cacher les ressources
 Dès que votre site commencera à générer du trafic, vous voudrez éviter de générer
 les ressources encore et encore. Symfony2 utilise le cache HTTP pour gérer la mise
 en cache des ressources. Pour une stratégie de mise en cache basique, utilisez
-l'annotation ``@Cache()``::
+l'annotation ``@Cache()`` :
+
+.. code-block:: php
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

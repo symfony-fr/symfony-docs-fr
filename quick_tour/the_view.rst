@@ -22,15 +22,15 @@ Découvrir Twig
     concepts de base.
 
 Un template Twig est un fichier texte qui peut générer n'importe quel type de
-contenu (HTML, XML, CSV, LaTeX, ...). Twig définit deux sortes de délimiteurs:
+contenu (HTML, XML, CSV, LaTeX, ...). Twig définit deux sortes de délimiteurs :
 
-* ``{{ ... }}``: Affiche une variable ou le résultat d'une expression;
+* ``{{ ... }}``: Affiche une variable ou le résultat d'une expression.
 
 * ``{% ... %}``: Contrôle la logique du template; il est utilisé pour éxécuter des
 boucles ``for`` et des conditions ``if``, entre autres.
 
 Ci-dessous un template minimal qui illustre quelques bases; en utilisant deux
-variables ``page_title`` et ``navigation``, qui ont été passées au template:
+variables ``page_title`` et ``navigation``, qui ont été passées au template :
 
 .. code-block:: html+jinja
 
@@ -57,7 +57,9 @@ variables ``page_title`` et ``navigation``, qui ont été passées au template:
    délimiteur ``{# ... #}``.
 
 Pour rendre un template dans Symfony, utilisez la méthode ``render`` depuis un 
-contrôleur et passez toutes les variables requises par le template::
+contrôleur et passez toutes les variables requises par le template :
+
+.. code-block:: php
 
     $this->render('AcmeDemoBundle:Demo:hello.html.twig', array(
         'name' => $name,
@@ -65,7 +67,7 @@ contrôleur et passez toutes les variables requises par le template::
 
 Les variables passées à un template peuvent être des chaînes de caractères, des
 tableaux ou même des objets. Twig les gère de la même manière et vous permet
-d'accéder aux «attributs» d'une variable grâce à la notation (``.``):
+d'accéder aux « attributs » d'une variable grâce à la notation (``.``) :
 
 .. code-block:: jinja
 
@@ -103,10 +105,10 @@ célèbres entête et pied de page. Dans Symfony2, nous abordons ce problème
 différemment: un template peut être décoré par un autre. Cela fonctionne exactement
 comme les classes PHP : l'héritage de template vous permet de batir un template
 «layout» de base qui contient tous les éléments communs de votre site et de définir
-des «blocks» que les templates fils pourront surcharger
+des «blocks» que les templates fils pourront surcharger.
 
 Le template ``hello.html.twig`` hérite du template ``layout.html.twig``, grâce au
-tag ``extends``:
+tag ``extends`` :
 
 .. code-block:: html+jinja
 
@@ -124,7 +126,7 @@ C'est la même notation utilisée pour référencer un template classique. La pa
 ``::`` signifie simplement que le contrôleur est vide, et donc que le fichier
 correspondant est directement stocké dans le répertoire ``Resources/views/``.
 
-Maintenant, jettons à un oeil à un exemple simple du template ``layout.html.twig``:
+Maintenant, jettons à un oeil à un exemple simple du template ``layout.html.twig`` :
 
 .. code-block:: jinja
 
@@ -139,7 +141,7 @@ Tout ce que le tag block fait est de spécifier au moteur de template qu'un temp
 enfant va surcharger cette partie du template.
 
 Dans cet exemple, le template ``hello.html.twig`` surcharge le block ``content``,
-ce qui signifie que le texte «Hello Fabien» sera affiché dans l'élément ``div.symfony-content``.
+ce qui signifie que le texte « Hello Fabien » sera affiché dans l'élément ``div.symfony-content``.
 
 Utiliser les tags, les filtres et les fonctions
 -----------------------------------------------
@@ -154,7 +156,7 @@ Inclure d'autres templates
 La meilleure manière de partager un morceau de code entre plusieurs templates
 distincts est de créer un nouveau template qui sera inclu dans les autres.
 
-Créez un template ``embedded.html.twig``:
+Créez un template ``embedded.html.twig`` :
 
 .. code-block:: jinja
 
@@ -181,7 +183,7 @@ C'est très utile en travaillant avec Ajax, ou quand les templates inclus
 ont besoin de variables qui ne sont pas disponibles dans le template principal.
 
 Supposez que vous avez créé une action ``fancy`` et que vous voulez l'inclure
-à l'interieur du template ``index``. Pour faire cela, utilisez le tag ``render``:
+à l'interieur du template ``index``. Pour faire cela, utilisez le tag ``render`` :
 
 .. code-block:: jinja
 
@@ -191,7 +193,9 @@ Supposez que vous avez créé une action ``fancy`` et que vous voulez l'inclure
 Ici, la chaîne de caractères ``AcmeDemoBundle:Demo:fancy`` fait référence à l'action
 ``fancy`` du contrôleur ``Demo``. Les arguments (``name`` et ``color``) agissent
 comme des variables de requête simulée (comme si l'action ``fancyAction`` 
-était gérée comme une toute nouvelle requête) et sont mis à disposition du contrôleur::
+était gérée comme une toute nouvelle requête) et sont mis à disposition du contrôleur :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Controller/DemoController.php
 
@@ -215,7 +219,7 @@ Créer des liens entre les pages d'une application web est incontournable. Au
 lieu de coder en dur les URLs dans les templates, la fonction ``path`` peut 
 générer des URLs en se basant sur la configuration du routing. De cette manière, 
 toutes vos URLs peuvent être facilement mise à jour en changeant juste le fichier 
-de configuration:
+de configuration :
 
 .. code-block:: html+jinja
 
@@ -224,7 +228,9 @@ de configuration:
 La fonction ``path`` prend le nom de la route et un tableau de paramètres comme
 arguments. Le nom de la route est la clé principale sous laquelle les
 routes sont référencées et les paramètres sont les valeurs définies dans le
-masque (pattern) de chaque route::
+masque (pattern) de chaque route :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -248,7 +254,7 @@ Inclure les assets: images, javascripts, et feuilles de style
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Que serait Internet sans images, javascripts, et feuilles de style ?
-Symfony2 fournit la fonction ``asset`` pour les gérer très facilement:
+Symfony2 fournit la fonction ``asset`` pour les gérer très facilement :
 
 .. code-block:: jinja
 

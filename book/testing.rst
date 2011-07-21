@@ -1,8 +1,8 @@
 .. index::
    single: Tests
 
-Testing
-=======
+Tests
+=====
 
 A chaque fois que vous écrivez une nouvelle ligne de code, vous ajoutez aussi
 potentiellement de nouveaux bugs. Les tests automatisés devraient vous couvrir
@@ -65,10 +65,11 @@ reproduire la structure du répertoire du bundle dans son sous-répertoire ``Tes
 Donc, écrivez les tests pour la classe ``Acme\HelloBundle\Model\Article`` dans le
 fichier ``Acme/HelloBundle/Tests/Model/ArticleTest.php``.
 
-Dans un test unitaire, l'autoloading est activé automatiquement via le fichier
-``src/autoload.php`` (comme configuré par défaut dans le fichier ``phpunit.xml.dist``).
+Dans un test unitaire, le chargement automatique des classes (autoloading) est
+activé automatiquement via le fichier ``src/autoload.php`` (comme configuré par
+défaut dans le fichier ``phpunit.xml.dist``).
 
-Exécuter les tests pour un fichier ou répertoire donné est aussi très facile:
+Exécuter les tests pour un fichier ou répertoire donné est aussi très facile :
 
 .. code-block:: bash
 
@@ -93,7 +94,7 @@ Tests Fonctionnels
 Les tests fonctionnels vérifient l'intégration des différentes couches d'une
 application (du routing jusqu'aux vues). Ils ne sont pas différents des tests
 unitaires tant que PHPUnit est concerné, mais ils possèdent un workflow très
-spécifique:
+spécifique :
 
 * Faire une requête;
 * Tester la réponse;
@@ -101,11 +102,13 @@ spécifique:
 * Tester la réponse;
 * Recommencer ainsi de suite.
 
-Les requêtes, les clics, et les envois sont effectués par un client qui sait
+Les requêtes, les clics et les envois sont effectués par un client qui sait
 comment parler à l'application. Pour accéder à un tel client, vos tests ont
 besoin d'étendre la classe Symfony2 ``WebTestCase``. La Standard Edition de
 Symfony2 fournit un test fonctionnel pour le ``DemoController` qui se lit
-comme suit::
+comme suit :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Tests/Controller/DemoControllerTest.php
     namespace Acme\DemoBundle\Tests\Controller;
@@ -124,12 +127,14 @@ comme suit::
         }
     }
 
-La méthode ``createClient()`` retourne un client lié à l'application courante::
+La méthode ``createClient()`` retourne un client lié à l'application courante :
+
+.. code-block:: php
 
     $crawler = $client->request('GET', 'hello/Fabien');
 
 La méthode ``request()`` retourne un objet ``Crawler`` qui peut être utilisé pour
-sélectionner des éléments dans la Réponse, cliquer des liens, et soumettre
+sélectionner des éléments dans la Réponse, cliquer sur des liens et soumettre
 des formulaires.
 
 .. tip::
@@ -138,16 +143,20 @@ des formulaires.
     document XML ou HTML. Pour les autres types de contenu, vous pouvez obtenir
     le contenu de la Réponse avec ``$client->getResponse()->getContent()``.
 
-Cliquez sur un lien en le sélectionnant en premier avec le Crawler en utilisant
+Cliquez sur un lien en le sélectionnant avec le Crawler en utilisant
 soit une expression XPath ou un sélecteur CSS, puis utilisez le Client pour
-cliquer dessus::
+cliquer dessus :
+
+.. code-block:: php
 
     $link = $crawler->filter('a:contains("Greet")')->eq(1)->link();
 
     $crawler = $client->click($link);
 
-Soumettre un formulaire est très similaire: sélectionnez un bouton de ce dernier,
-si besoin est ré-écrivez quelques unes de ses valeurs, et soumettez-le::
+Soumettre un formulaire est très similaire : sélectionnez un bouton de ce dernier,
+ré-écrivez quelques unes de ses valeurs si besoin est puis soumettez-le :
+
+.. code-block:: php
 
     $form = $crawler->selectButton('submit')->form();
 
@@ -158,7 +167,9 @@ si besoin est ré-écrivez quelques unes de ses valeurs, et soumettez-le::
     $crawler = $client->submit($form);
 
 Chaque champ de ``Formulaire`` possède des méthodes spécialisées dépendant
-de son type::
+de son type :
+
+.. code-block:: php
 
     // remplit un champ de saisie
     $form['name'] = 'Lucas';
@@ -173,7 +184,9 @@ de son type::
     $form['photo']->upload('/path/to/lucas.jpg');
 
 Plutôt que de changer un champ à la fois, vous pouvez aussi passer un tableau
-de valeurs à la méthode ``submit()``::
+de valeurs à la méthode ``submit()`` :
+
+.. code-block:: php
 
     $crawler = $client->submit($form, array(
         'name'         => 'Lucas',
@@ -184,14 +197,18 @@ de valeurs à la méthode ``submit()``::
 
 Maintenant que vous pouvez naviguer aisément à travers une application, utilisez
 les assertions pour tester qu'elle fait effectivement ce que vous souhaitez
-qu'elle fasse. Utilisez le Crawler pour faire des assertions sur le DOM::
+qu'elle fasse. Utilisez le Crawler pour faire des assertions sur le DOM :
+
+.. code-block:: php
 
     // affirme que la réponse correspond au sélecteur CSS donné
     $this->assertTrue($crawler->filter('h1')->count() > 0);
 
-Ou, testez directement par rapport au contenu de la Réponse si vous voulez
-juste vérifier que ce dernier contient un certain morceau de texte, ou si
-la Réponse n'est pas un document XML/HTML::
+Ou alors, testez directement le contenu de la Réponse si vous voulez
+juste vérifier qu'il contient un certain texte, ou si
+la Réponse n'est pas un document XML/HTML :
+
+.. code-block:: php
 
     $this->assertRegExp('/Hello Fabien/', $client->getResponse()->getContent());
 
@@ -203,7 +220,9 @@ Assertions Utiles
 
 Après quelques temps, vous remarquerez que vous écrivez toujours la même sorte
 d'assertion. Afin que vous démarriez plus rapidement, voici une liste des
-assertions les plus communes et utiles::
+assertions les plus communes et utiles :
+
+.. code-block:: php
 
     // affirme que la réponse correspond à un sélecteur CSS donné
     $this->assertTrue($crawler->filter($selector)->count() > 0);
@@ -237,20 +256,24 @@ Le Client test simule un client HTTP comme un navigateur.
 
 .. note::
 
-    Le Client test est basé sur les composants ``BrowserKit` et ``Crawler``.
+    Le Client test est basé sur les composants ``BrowserKit`` et ``Crawler``.
 
 Faire des requêtes
 ~~~~~~~~~~~~~~~~~~
 
-Le client sait comment effectuer des requêtes à une application Symfony2::
+Le client sait comment envoyer des requêtes à une application Symfony2 :
+
+.. code-block:: php
 
     $crawler = $client->request('GET', '/hello/Fabien');
 
-La méthode ``request()`` prend en arguments la méthode HTTP et une URL et
+La méthode ``request()`` prend en arguments la méthode HTTP et une URL, et
 retourne une instance de ``Crawler``.
 
 Utilisez le Crawler pour trouver des éléments DOM dans la Réponse. Ces éléments
-peuvent ainsi être utilisés pour cliquer sur des liens et soumettre des formulaires::
+peuvent ainsi être utilisés pour cliquer sur des liens et soumettre des formulaires :
+
+.. code-block:: php
 
     $link = $crawler->selectLink('Go elsewhere...')->link();
     $crawler = $client->click($link);
@@ -272,7 +295,9 @@ et plus encore.
     section Crawler ci-dessous.
 
 Mais vous pouvez aussi simuler les soumissions de formulaires et des requêtes
-complexes à l'aide des arguments additionnels de la méthode ``request()``::
+complexes à l'aide des arguments additionnels de la méthode ``request()`` :
+
+.. code-block:: php
 
     // soumission de formulaire
     $client->request('POST', '/submit', array('name' => 'Fabien'));
@@ -285,18 +310,24 @@ complexes à l'aide des arguments additionnels de la méthode ``request()``::
 
 Quand une requête retourne une redirection en tant que réponse, le client la
 suit automatiquement. Ce comportement peut être changé via la méthode
-``followRedirects()``::
+``followRedirects()`` :
+
+.. code-block:: php
 
     $client->followRedirects(false);
 
 Quand le client ne suit pas les redirections, vous pouvez le forcer grâce à la
-méthode ``followRedirect()``::
+méthode ``followRedirect()`` :
+
+.. code-block:: php
 
     $crawler = $client->followRedirect();
 
-Enfin, et non des moindres, vous pouvez forcer chaque requête à être exécutée
+Enfin, vous pouvez forcer chaque requête à être exécutée
 dans son propre processus PHP afin d'éviter quelconques effets secondaires
-quand vous travaillez avec plusieurs clients dans le même script::
+quand vous travaillez avec plusieurs clients dans le même script :
+
+.. code-block:: php
 
     $client->insulate();
 
@@ -304,7 +335,9 @@ Naviguer
 ~~~~~~~~
 
 Le Client supporte de nombreuses opérations qui peuvent être effectuées
-à travers un navigateur réel::
+à travers un navigateur réel :
+
+.. code-block:: php
 
     $client->back();
     $client->forward();
@@ -317,19 +350,25 @@ Accéder aux Objets Internes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous utilisez le client pour tester votre application, vous pourriez vouloir
-accéder aux objets internes du client::
+accéder aux objets internes du client :
+
+.. code-block:: php
 
     $history   = $client->getHistory();
     $cookieJar = $client->getCookieJar();
 
-Vous pouvez aussi obtenir les objets liés à la dernière requête::
+Vous pouvez aussi obtenir les objets liés à la dernière requête :
+
+.. code-block:: php
 
     $request  = $client->getRequest();
     $response = $client->getResponse();
     $crawler  = $client->getCrawler();
 
 Si vos requêtes ne sont pas isolées, vous pouvez aussi accéder au ``Container``
-et au ``Kernel``::
+et au ``Kernel`` :
+
+.. code-block:: php
 
     $container = $client->getContainer();
     $kernel    = $client->getKernel();
@@ -340,23 +379,27 @@ Accéder au Container
 Il est fortement recommandé qu'un test fonctionnel teste seulement la Réponse.
 Mais dans certaines rares circonstances, vous pourriez vouloir accéder à
 quelques objets internes pour écrire des assertions. Dans tels cas, vous
-pouvez accéder au conteneur d'injection des dépendances::
+pouvez accéder au conteneur d'injection de dépendances :
+
+.. code-block:: php
 
     $container = $client->getContainer();
 
-Soyez averti que cela ne fonctionne pas si vous isolez le client ou si vous
+Notez bien que cela ne fonctionne pas si vous isolez le client ou si vous
 utilisez une couche HTTP.
 
 .. tip::
 
     Si les informations que vous avez besoin de vérifier sont disponibles via le
-    profileur, utilisez plutôt ces dernières à la place.
+    profileur, utilisez le.
 
 Accéder aux données du profileur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour vérifier les données collectées par le profileur, vous pouvez obtenir
-le profil pour la requête courante comme ceci::
+le profil pour la requête courante comme ceci :
+
+.. code-block:: php
 
     $profile = $client->getProfile();
 
@@ -364,8 +407,10 @@ Redirection
 ~~~~~~~~~~~
 
 Par défaut, le Client ne suit pas les redirections HTTP, de sorte que vous
-puissiez obtenir et examiner la Réponse avant la redirection. Une fois que
-vous voulez que le client soit redirigé, appelez la méthode ``followRedirect()``::
+puissiez obtenir et examiner la Réponse avant la redirection. Quand vous voulez
+que le client soit redirigé, appelez la méthode ``followRedirect()`` :
+
+.. code-block:: php
 
     // faites quelque chose qui cause une redirection (ex: remplir un formulaire)
 
@@ -373,7 +418,9 @@ vous voulez que le client soit redirigé, appelez la méthode ``followRedirect()
     $crawler = $client->followRedirect();
 
 Si vous souhaitez que le Client soit toujours redirigé automatiquement, vous
-pouvez appeler la méthode ``followRedirects()``::
+pouvez appeler la méthode ``followRedirects()`` :
+
+.. code-block:: php
 
     $client->followRedirects();
 
@@ -398,15 +445,17 @@ Créer une instance de Crawler
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une instance de Crawler est automatiquement créée pour vous quand vous effectuez
-une requête avec un Client. Mais vous pouvez créer la vôtre facilement::
+une requête avec un Client. Mais vous pouvez créer la vôtre facilement :
+
+.. code-block:: php
 
     use Symfony\Component\DomCrawler\Crawler;
 
     $crawler = new Crawler($html, $url);
 
-Le constructeur prend deux arguments: le second est une URL qui est utilisée pour
+Le constructeur prend deux arguments : le second est une URL qui est utilisée pour
 générer des URLs absolues pour les liens et les formulaires; la première peut être
-n'importe lequel des éléments suivants:
+n'importe lequel des éléments suivants :
 
 * Un document HTML;
 * Un document XML;
@@ -415,7 +464,7 @@ n'importe lequel des éléments suivants:
 * Une instance de ``DOMNode``
 * Un tableau composé des éléments ci-dessus.
 
-Après création, vous pouvez ajouter plus de noeuds:
+Après création, vous pouvez ajouter plus de noeuds :
 
 +-----------------------+-------------------------------------------------+
 | Méthode               | Description                                     |
@@ -469,7 +518,9 @@ le DOM d'un document HTML/XML:
 
 Vous pouvez affiner de manière itérative votre sélection de noeuds en enchaînant les
 appels de méthodes car chaque méthode retourne une nouvelle instance de Crawler
-pour les noeuds correspondants::
+pour les noeuds correspondants :
+
+.. code-block:: php
 
     $crawler
         ->filter('h1')
@@ -489,7 +540,9 @@ pour les noeuds correspondants::
 Extraction d'informations
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le Crawler peut extraire des informations des noeuds::
+Le Crawler peut extraire des informations des noeuds :
+
+.. code-block:: php
 
     // retourne la valeur de l'attribut du premier noeud
     $crawler->attr('class');
@@ -512,7 +565,9 @@ Liens
 ~~~~~
 
 Vous pouvez sélectionner les liens grâce aux méthodes de traversement, mais
-utiliser la méthode ``selectLink()`` est souvent plus pratique::
+utiliser la méthode ``selectLink()`` est souvent plus pratique :
+
+.. code-block:: php
 
     $crawler->selectLink('Click here');
 
@@ -520,7 +575,9 @@ Cela sélectionne les liens qui contiennent le texte donné, ou les images cliqu
 pour lesquelles l'attribut ``alt`` contient le texte donné.
 
 La méthode ``click()`` du Client prend une instance de ``Link`` en paramètre; cette
-dernière étant retournée par la méthode ``link()``:: 
+dernière étant retournée par la méthode ``link()`` :
+
+.. code-block:: php
 
     $link = $crawler->link();
 
@@ -534,7 +591,9 @@ Formulaires
 ~~~~~~~~~~~
 
 Comme pour les liens, vous sélectionnez les formulaires à l'aide de la méthode
-``selectButton()``::
+``selectButton()`` :
+
+.. code-block:: php
 
     $crawler->selectButton('submit');
 
@@ -552,12 +611,16 @@ balises ``input``; elle possède plusieurs manières de les trouver:
 * La valeur de l'attribut ``id`` ou ``name`` pour les balises ``button``.
 
 Lorsque vous avez un noeud représentant un bouton, appelez la method ``form()`` pour
-obtenir une instance de ``Form`` pour le formulaire contenant le noeud du bouton::
+obtenir une instance de ``Form`` pour le formulaire contenant le noeud du bouton :
+
+.. code-block:: php
 
     $form = $crawler->form();
 
 Quand vous appelez la méthode ``form()``, vous pouvez aussi passer un tableau de
-valeurs de champ qui ré-écrit les valeurs par défaut::
+valeurs de champ qui ré-écrit les valeurs par défaut :
+
+.. code-block:: php
 
     $form = $crawler->form(array(
         'name'         => 'Fabien',
@@ -565,16 +628,22 @@ valeurs de champ qui ré-écrit les valeurs par défaut::
     ));
 
 Et si vous voulez simuler une méthode HTTP spécifique pour le formulaire, passez la
-le lui en second argument::
+le lui en second argument :
+
+.. code-block:: php
 
     $form = $crawler->form(array(), 'DELETE');
 
-Le Client peut soumettre des instances de ``Form``::
+Le Client peut soumettre des instances de ``Form`` :
+
+.. code-block:: php
 
     $client->submit($form);
 
 Les valeurs des champs peuvent aussi être passées en second argument de la
-méthode ``submit()``::
+méthode ``submit()`` :
+
+.. code-block:: php
 
     $client->submit($form, array(
         'name'         => 'Fabien',
@@ -582,13 +651,17 @@ méthode ``submit()``::
     ));
 
 Pour les situations plus complexes, utilisez l'instance de ``Form`` en tant
-que tableau pour définir la valeur de chaque champ individuellement::
+que tableau pour définir la valeur de chaque champ individuellement :
+
+.. code-block:: php
 
     // change la valeur d'un champ
     $form['name'] = 'Fabien';
 
 Il y a aussi une sympathique API qui permet de manipuler les valeurs des champs
-selon leur type::
+selon leur type :
+
+.. code-block:: php
 
     // sélectionne une option/radio
     $form['country']->select('France');
@@ -630,10 +703,10 @@ la configuration de votre machine locale.
     Stockez le fichier ``phpunit.xml.dist`` dans votre gestionnaire de code, et
     ignorez le fichier ``phpunit.xml``.
 
-Par défaut, seulement les tests stockés dans des bundles "standards" sont exécutés
-par la commande ``phpunit`` (standard étant des tests dans l'espace de noms
-Vendor\\*Bundle\\Tests). Mais vous pouvez aisément ajouter d'autres espaces de noms.
-Par exemple, la configuration suivante ajoute les tests de bundles tiers installés::
+Par défaut, seulement les tests stockés dans des bundles « standards » sont exécutés
+par la commande ``phpunit`` (standard étant des tests dans le namespace
+Vendor\\*Bundle\\Tests). Mais vous pouvez aisément ajouter d'autres namespaces.
+Par exemple, la configuration suivante ajoute les tests de bundles tiers installés :
 
 .. code-block:: xml
 
@@ -645,8 +718,8 @@ Par exemple, la configuration suivante ajoute les tests de bundles tiers install
         </testsuite>
     </testsuites>
 
-Pour inclure d'autres espaces de noms dans la couverture du code, éditez aussi
-la section ``<filter>``:
+Pour inclure d'autres namespaces dans la couverture du code, éditez aussi
+la section ``<filter>`` :
 
 .. code-block:: xml
 
@@ -667,7 +740,7 @@ Configuration du Client
 
 Le Client utilisé par les tests fonctionnels crée un Kernel qui est exécuté dans
 un environnement spécial dit ``test``, afin que vous puissiez le modifier autant
-que vous le désirez:
+que vous le désirez :
 
 .. configuration-block::
 
@@ -743,7 +816,9 @@ que vous le désirez:
 
 Vous pouvez aussi changer l'environnement par défaut (``test``) et ré-écrire
 le mode debug par défaut (``true``) en les passant en tant qu'options à la
-méthode ``createClient()``::
+méthode ``createClient()`` :
+
+.. code-block:: php
 
     $client = static::createClient(array(
         'environment' => 'my_test_env',
@@ -751,7 +826,9 @@ méthode ``createClient()``::
     ));
 
 Si votre application se comporte selon certaines en-têtes HTTP, passez les en
-tant que second argument de ``createClient()``::
+tant que second argument de ``createClient()`` :
+
+.. code-block:: php
 
     $client = static::createClient(array(), array(
         'HTTP_HOST'       => 'en.example.com',
@@ -759,7 +836,9 @@ tant que second argument de ``createClient()``::
     ));
 
 Vous pouvez aussi ré-écrire les en-têtes HTTP par requête (i.e. et non pas pour
-toutes les requêtes)::
+toutes les requêtes) :
+
+.. code-block:: php
 
     $client->request('GET', '/', array(), array(
         'HTTP_HOST'       => 'en.example.com',

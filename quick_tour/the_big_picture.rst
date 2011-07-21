@@ -11,8 +11,8 @@ applications web !
 
 .. tip::
 
-    Vous voulez savoir quand utiliser un framework et pourquoi ? Lisez «`Symfony
-    en 5 minutes`_».
+    Vous voulez savoir quand utiliser un framework et pourquoi ? Lisez « `Symfony
+    en 5 minutes`_ ».
 
 Télécharger Symfony2
 --------------------
@@ -20,13 +20,13 @@ Télécharger Symfony2
 Tout d'abord, vérifiez que vous avez installé et configuré un serveur web (comme
 Apache) avec PHP 5.3.2 ou supérieur.
 
-Vous êtes prêts ? Commencez par télécharger la «`Symfony2 Standard Edition`_»,
+Vous êtes prêts ? Commencez par télécharger la « `Symfony2 Standard Edition`_ »,
 une :term:`distribution` Symfony préconfigurée pour répondre à la plupart des besoins,
 et qui contient également du code expliquant comment fonctionne Symfony2
 (téléchargez l'archive avec les *vendors* pour gagner encore plus de temps).
 
 Après avoir décompressé l'archive dans la racine de votre serveur web, vous devriez
-avoir un répertoire ``Symfony/`` qui ressemble à:
+avoir un répertoire ``Symfony/`` qui ressemble à :
 
 .. code-block:: text
 
@@ -56,7 +56,7 @@ avoir un répertoire ``Symfony/`` qui ressemble à:
 .. note::
 
     Si vous avez téléchargé la Standard Edition *sans vendors*, lancez simplement
-    la commande suivante pour télécharger toutes les librairies nécessaires:
+    la commande suivante pour télécharger toutes les librairies nécessaires :
 	
     .. code-block:: bash
 	
@@ -68,7 +68,7 @@ Vérifier la Configuration
 Symfony2 est livré avec une interface de test de votre configuration pour
 vous éviter tous maux de tête dûs à des problèmes de serveur ou à une mauvaise 
 configuration de PHP. Utilisez l'URL suivante pour consulter le diagnostic de 
-votre serveur:
+votre serveur :
 
 .. code-block:: text
 
@@ -76,8 +76,8 @@ votre serveur:
 
 S'il y encore des problèmes listés, vous devez les corriger. Vous pouvez également
 modifier votre configuration en suivant les recommandations données.
-Lorsque tout est bon, cliquez sur «*Ignorer la configuration et aller à la page
-d'accueil*» pour afficher votre première «vraie» page Symfony2:
+Lorsque tout est bon, cliquez sur « *Bypass configuration and go to the Welcome page* »
+pour afficher votre première « vraie » page Symfony2 :
 
 .. code-block:: text
 
@@ -101,11 +101,11 @@ les termes fondamentaux.
 .. tip::
 
     Vous voulez une preuve qu'utiliser un framework est mieux que tout mélanger
-    dans le même script ? Lisez le chapitre «:doc:`/book/from_flat_php_to_symfony2`».
+    dans le même script ? Lisez le chapitre « :doc:`/book/from_flat_php_to_symfony2` ».
 
 La distribution est fournie avec des exemples de code que vous pouvez utiliser pour
 comprendre les concepts de Symfony2. Entrez l'URL suivante pour être salué par
-Symfony2 (remplacez *Fabien* par votre prénom):
+Symfony2 (remplacez *Fabien* par votre prénom) :
 
 .. code-block:: text
 
@@ -114,7 +114,7 @@ Symfony2 (remplacez *Fabien* par votre prénom):
 .. image:: /images/quick_tour/hello_fabien.png
    :align: center
 
-Que se passe t-il ici ? Décortiquons cette URL:
+Que se passe t-il ici ? Décortiquons cette URL :
 
 * ``app_dev.php``: C'est un :term:`contrôleur frontal<front controller>`. C'est l'unique point
   d'entrée de votre application et cela prend en charge toutes les requêtes.
@@ -131,7 +131,7 @@ Routing
 
 Symfony2 achemine la requête vers le code qui la gère en essayant d'associer l'URL
 demandée à des masques prédéfinis. Par défaut, ces masques (appelés routes) sont
-définis dans le fichier de configuration ``app/config/routing.yml``:
+définis dans le fichier de configuration ``app/config/routing.yml`` :
 
 .. code-block:: yaml
 
@@ -170,10 +170,12 @@ Un contrôleur est un nom un peu spécial donné à une fonction ou une méthode
 qui prend en charge les *requêtes* entrantes et retourne des *réponses*
 (souvent du code HTML). Plutôt que d'utiliser des variables globales PHP et des
 fonctions (comme ``$_GET`` ou ``header()``) pour gérer ces messages HTTP, Symfony
-utilise des objets:
+utilise des objets :
 :class:`Symfony\\Component\\HttpFoundation\\Request` et
 :class:`Symfony\\Component\\HttpFoundation\\Response`. Le plus simple contrôleur
-qu'il puisse exister crée une réponse à la main, basée sur la requête::
+qu'il puisse exister crée une réponse à la main, basée sur la requête :
+
+.. code-block:: php
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -192,7 +194,9 @@ qu'il puisse exister crée une réponse à la main, basée sur la requête::
 Symfony2 choisit le contrôleur en se basant sur la valeur du paramètre ``_controller``
 du fichier de routing: ``AcmeDemoBundle:Welcome:index``. Cette chaîne de caractères
 est le *nom logique* du contrôleur et elle fait référence à la méthode ``indexAction``
-de la classe ``Acme\DemoBundle\Controller\WelcomeController``::
+de la classe ``Acme\DemoBundle\Controller\WelcomeController`` :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Controller/WelcomeController.php
     namespace Acme\DemoBundle\Controller;
@@ -220,7 +224,9 @@ raccourcis très pratiques vers des méthodes comme la méthode
 qui charge et rend un template
 (``AcmeDemoBundle:Welcome:index.html.twig``). La valeur retournée est un objet
 Response qui contient le contenu rendu. Donc, si le besoin s'en fait sentir, vous
-pouvez modifier facilement l'objet Response avant de l'envoyer au navigateur::
+pouvez modifier facilement l'objet Response avant de l'envoyer au navigateur :
+
+.. code-block:: php
 
     public function indexAction()
     {
@@ -263,7 +269,9 @@ Symfony2 peut lire/importer les informations de routing écrites en YAML, XML, P
 ou même grâce aux annotations. Ici, le *nom logique* du fichier est 
 ``@AcmeDemoBundle/Controller/DemoController.php`` et fait référence au fichier
 ``src/Acme/DemoBundle/Controller/DemoController.php``. Dans ce fichiers, les
-routes sont définies par des annotations des méthodes action::
+routes sont définies par des annotations des méthodes action :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -365,15 +373,15 @@ utile : le profiler.
 
 Bien évidemment, vous ne voudrez pas voir ces outils lorsque vous déploierez votre
 application sur le serveur de production. C'est pourquoi vous trouverez un autre
-contrôleur dans le répertoire``web/`` (``app.php``), qui est optimisé pour 
-l'environnement de production:
+contrôleur dans le répertoire ``web/`` (``app.php``), qui est optimisé pour 
+l'environnement de production :
 
 .. code-block:: text
 
     http://localhost/Symfony/web/app.php/demo/hello/Fabien
 
 Et si vous utilisez Apache avec le ``mod_rewrite`` activé, vous pouvez omettre
-la partie ``app.php`` dans l'URL:
+la partie ``app.php`` dans l'URL :
 
 .. code-block:: text
 
@@ -381,7 +389,7 @@ la partie ``app.php`` dans l'URL:
 
 Enfin, sur le serveur de production, vous devriez faire pointer le répertoire 
 racine web vers le répertoire ``web/`` pour sécuriser votre installation et avoir 
-des URLs plus propres:
+des URLs plus propres :
 
 .. code-block:: text
 
@@ -396,7 +404,7 @@ pourquoi vous devriez toujours utiliser l'environnement de développement pour
 développer vos applications.
 
 Différents :term:`environnements<environment>` d'une application donnée ne diffèrent
-que par leur configuration. En fait, une configuration peut hériter d'une autre:
+que par leur configuration. En fait, une configuration peut hériter d'une autre :
 
 .. code-block:: yaml
 

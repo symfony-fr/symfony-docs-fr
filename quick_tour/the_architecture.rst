@@ -13,7 +13,7 @@ Comprendre l'arborescence
 
 L'arborescence d'une :term:`application` Symfony2 est plutôt flexible mais
 celle de la distribution *Standard Edition* reflète la structure typique et 
-recommandée d'une application Symfony2:
+recommandée d'une application Symfony2 :
 
 * ``app/``:    La configuration de l'application,
 * ``src/``:    Le code PHP du projet,
@@ -25,7 +25,9 @@ Le répertoire ``web/``
 
 Le répertoire Web racine est l'endroit ou se situent tous les fichiers statiques
 et publics comme les images, les feuilles de styles et les fichiers javascript. 
-C'est aussi ici que se situeront les :term:`contrôleurs frontaux`::
+C'est aussi ici que se situeront les :term:`contrôleurs frontaux` :
+
+.. code-block:: php
 
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php.cache';
@@ -51,7 +53,7 @@ Le répertoire ``app/``
 La classe ``AppKernel`` est le point d'entrée principal de la configuration de
 l'application et, en tant que tel, il est placé dans le répertoire ``app/``.
 
-Cette classe doit implémenter deux méthodes:
+Cette classe doit implémenter deux méthodes :
 
 * ``registerBundles()`` doit retourner un tableau de tous les Bundles nécessaires au 
   fonctionnement de l'application.
@@ -59,7 +61,9 @@ Cette classe doit implémenter deux méthodes:
 * ``registerContainerConfiguration()`` charge la configuration de l'application
   (cette partie sera détaillée ultérieurement).
 
-L'autoloading PHP peut être configuré via ``app/autoload.php``::
+L'autoloading PHP peut être configuré via ``app/autoload.php`` :
+
+.. code-block:: php
 
     // app/autoload.php
     use Symfony\Component\ClassLoader\UniversalClassLoader;
@@ -100,7 +104,7 @@ serveur ou au sein même de vos projets.
 .. note::
 
     Si vous voulez en savoir plus sur la flexibilité de l'autoloader de Symfony2,
-    lisez l'article «:doc:`/cookbook/tools/autoloader`» dans le cookbook.
+    lisez l'article « :doc:`/cookbook/tools/autoloader`» dans le cookbook.
 
 Comprendre le système de bundles
 --------------------------------
@@ -123,7 +127,9 @@ Définir un bundle
 
 Une application est constituée de bundles définis dans la méthode
 ``registerBundles()`` de la classe ``AppKernel``. Chaque bundle est un répertoire
-qui contient une unique classe ``Bundle`` qui le décrit::
+qui contient une unique classe ``Bundle`` qui le décrit :
+
+.. code-block:: php
 
     // app/AppKernel.php
     public function registerBundles()
@@ -159,7 +165,7 @@ Configurer un bundle
 ~~~~~~~~~~~~~~~~~~~~
 
 Chaque bundle peut être personnalisé via des fichiers de configuration écrits en
-YAML, XML ou PHP. Jetons un oeil à la configuration par défaut:
+YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
 
 .. code-block:: yaml
 
@@ -228,7 +234,7 @@ tandis que ``swiftmailer`` configure le bundle ``SwiftmailerBundle``.
 Chaque :term:`environnement` peut surcharger la configuration par défaut en
 apportant un fichier de configuration spécifique. Par exemple, l'environnement
 ``dev`` charge le fichier ``config_dev.yml`` qui va charger la configuration
-principale (i.e. ``config.yml``) puis la modifier pour ajouter des outils de debug:
+principale (i.e. ``config.yml``) puis la modifier pour ajouter des outils de debug :
 
 .. code-block:: yaml
 
@@ -271,7 +277,7 @@ Noms logiques de fichiers
 .........................
 
 Quand vous voulez faire référence à un fichier depuis un bundle, utilisez cette
-notation:
+notation :
 ``@NOM_DU_BUNDLE/path/to/file``; Symfony2 remplacera ``@NOM_DU_BUNDLE`` par le chemin
 du bundle. A titre d'exemple, le chemin logique
 ``@AcmeDemoBundle/Controller/DemoController.php`` sera transformé en
@@ -345,13 +351,13 @@ Chaque application est fournie avec une interface en ligne de commandes
 met à votre disposition des commandes qui augmentent votre productivité en
 automatisant les tâches fastidieuses et répétitives.
 
-Lancez-la sans aucun argument pour en apprendre plus sur ses possibilités:
+Lancez-la sans aucun argument pour en apprendre plus sur ses possibilités :
 
 .. code-block:: bash
 
     $ php app/console
 
-L'option ``--help`` vous renseignera sur une commande précise:
+L'option ``--help`` vous renseignera sur une commande précise :
 
 .. code-block:: bash
 
