@@ -517,7 +517,7 @@ Donc finalement, *qu'est-ce* que le *Framework* Symfony2? Le *Framework Symfony2
 est une bibliothèque PHP qui accomplit deux tâches distinctes:
 
 #. Fournir une sélection de composants (i.e. les Composants Symfony2) et
-des bibliothèques tiers (e.g. ``Swiftmailer`` pour envoyer des emails);
+   des bibliothèques tiers (e.g. ``Swiftmailer`` pour envoyer des emails);
 
 #. Fournir une configuration et une bibliothèque "colle" qui lie toutes ces
    pièces ensemble.
