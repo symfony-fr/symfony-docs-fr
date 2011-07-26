@@ -1,18 +1,20 @@
 .. index::
-   single: Controller
+   single: Contrôleur
 
-Controller
+Contrôleur
 ==========
 
-A controller is a PHP function you create that takes information from the
-HTTP request and constructs and returns an HTTP response (as a Symfony2
-``Response`` object). The response could be an HTML page, an XML document,
-a serialized JSON array, an image, a redirect, a 404 error or anything else
-you can dream up. The controller contains whatever arbitrary logic *your
-application* needs to render the content of a page.
+Un contrôleur est une fonction PHP créée par vos soins qui prend l'information
+provenant de la requête HTTP et construit puis retourne une réponse HTTP
+(sous forme d'un objet Symfony2 ``Response``). La réponse pourrait être
+une page HTML, un document XML, un tableau JSON sérialisé, une image, une
+redirection, une erreur 404 ou quoi que ce soit d'autre dont vous pouvez
+rêver. Le contrôleur contient n'importe quelle logique arbitraire dont
+*votre application* a besoin pour retourner le contenu d'une page.
 
-To see how simple this is, let's look at a Symfony2 controller in action.
-The following controller would render a page that simply prints ``Hello world!``::
+Pour en illustrer la simplicité, jetons un oeil à un contrôleur Symfony2
+en action. Le contrôleur suivant rend une page qui écrit simplement
+``Hello world!``::
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -21,28 +23,30 @@ The following controller would render a page that simply prints ``Hello world!``
         return new Response('Hello world!');
     }
 
-The goal of a controller is always the same: create and return a ``Response``
-object. Along the way, it might read information from the request, load a
-database resource, send an email, or set information on the user's session.
-But in all cases, the controller will eventually return the ``Response`` object
-that will be delivered back to the client.
+Le but d'un contrôleur est toujours le même: créer et retourner un objet
+``Response``. Durant son cheminement, il se peut qu'il lise de l'information
+depuis la requête, qu'il charge une ressource depuis la base de données, qu'il
+envoie un email, ou qu'il définisse une valeur dans la session de l'utilisateur.
+Mais dans tous les cas, le contrôleur va finalement retourner l'objet ``Response``
+qui sera délivré au client.
 
-There's no magic and no other requirements to worry about! Here are a few
-common examples:
+Il n'y a pas de magie et aucune autre exigence à prendre en compte! Suivent
+quelques exemples communs:
 
-* *Controller A* prepares a ``Response`` object representing the content
-  for the homepage of the site.
+* *Le contrôleur A* prépare un objet ``Response`` représentant le contenu de
+  la page d'accueil.
 
-* *Controller B* reads the ``slug`` parameter from the request to load a
-  blog entry from the database and create a ``Response`` object displaying
-  that blog. If the ``slug`` can't be found in the database, it creates and
-  returns a ``Response`` object with a 404 status code.
+* *Le contrôleur B* lit le paramètre ``slug`` contenu dans la requête pour
+  charger une entrée du blog depuis la base de données et crée un objet
+  ``Response`` affichant ce blog. Si le ``slug`` ne peut pas être trouvé
+  dans la base de données, il crée et retourne un objet ``Response`` avec
+  un code de statut 404.
 
-* *Controller C* handles the form submission of a contact form. It reads
-  the form information from the request, saves the contact information to
-  the database and emails the contact information to the webmaster. Finally,
-  it creates a ``Response`` object that redirects the client's browser to
-  the contact form "thank you" page.
+* *Le contrôleur C* gère la soumission d'un formulaire de contact. Il lit
+  l'information de ce dernier depuis la requête, enregistre les informations
+  du contact dans la base de données et envoie ces dernières par email au webmaster.
+  Enfin, il crée un objet ``Response`` qui redirige le navigateur du client vers
+  la page "merci" du formulaire de contact.
 
 .. index::
    single: Controller; Request-controller-response lifecycle
