@@ -1,8 +1,8 @@
 .. index::
-   single: Contrôleur
+   single: Le Contrôleur
 
-Contrôleur
-==========
+Le Contrôleur
+=============
 
 Un contrôleur est une fonction PHP créée par vos soins qui prend l'information
 provenant de la requête HTTP et construit puis retourne une réponse HTTP
