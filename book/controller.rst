@@ -49,40 +49,40 @@ quelques exemples communs:
   la page "merci" du formulaire de contact.
 
 .. index::
-   single: Controller; Request-controller-response lifecycle
+   single: Le Contrôleur; Cycle de vie Requête-contrôleur-réponse
 
-Requests, Controller, Response Lifecycle
-----------------------------------------
+Cycle de vie Requête, Contrôleur, Réponse
+-----------------------------------------
 
-Every request handled by a Symfony2 project goes through the same simple lifecycle.
-The framework takes care of the repetitive tasks and ultimately executes a
-controller, which houses your custom application code:
+Chaque requête gérée par un projet Symfony2 suit le même cycle de vie. Le
+framework prend soin des tâches répétitives et exécute finalement un contrôleur
+qui contient votre code applicatif personnalisé:
 
-#. Each request is handled by a single front controller file (e.g. ``app.php``
-   or ``app_dev.php``) that's bootstraps the application;
+#. Chaque requête est gérée par un unique fichier contrôleur frontal (par exemple:
+``app.php`` ou ``app_dev.php``) qui démarre l'application;
 
-#. The ``Router`` reads information from the request (e.g. the URI), finds
-   a route that matches that information, and reads the ``_controller`` parameter
-   from the route;
+#. Le ``Router`` lit l'information depuis la requête (par exemple: l'URI), trouve
+   une route qui correspond à cette information, et lit le paramètre ``_controller``
+   depuis la route;
 
-#. The controller from the matched route is executed and the code inside the
-   controller creates and returns a ``Response`` object;
+#. Le contrôleur correspondant à la route est exécuté et le code interne au
+   contrôleur crée et retourne un objet ``Response``;
 
-#. The HTTP headers and content of the ``Response`` object are sent back to
-   the client.
+#. Les en-têtes HTTP et le contenu de l'objet ``Response`` sont envoyés au client.
 
-Creating a page is as easy as creating a controller (#3) and making a route that
-maps a URL to that controller (#2).
+Créer une page est aussi facile que de créer un contrôleur (#3) et d'implémenter une
+route qui fasse correspondre une URL à ce dernier (#2).
 
 .. note::
 
-    Though similarly named, a "front controller" is different from the
-    "controllers" we'll talk about in this chapter. A front controller
-    is a short PHP file that lives in your web directory and through which
-    all requests are directed. A typical application will have a production
-    front controller (e.g. ``app.php``) and a development front controller
-    (e.g. ``app_dev.php``). You'll likely never need to edit, view or worry
-    about the front controllers in your application.
+    Bien que nommé de la même manière, un "contrôleur frontal" est différent
+    des "contrôleurs" dont nous allons parler dans ce chapitre. Un contrôleur
+    frontal est un petit fichier PHP qui se situe dans votre répertoire web et
+    à travers lequel toutes les requêtes sont dirigées. Une application typique
+    va avoir un contrôleur frontal de production (par exemple: ``app.php``) et
+    un contrôleur frontal de développement (par exemple: ``app_dev.php``). Vous
+    n'aurez vraisemblablement jamais besoin d'éditer, de regarder ou de vous
+    occuper des contrôleurs frontaux dans votre application.
 
 .. index::
    single: Controller; Simple example
