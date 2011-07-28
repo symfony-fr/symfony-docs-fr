@@ -343,18 +343,19 @@ lorsque vous travaillez avec les formulaires, par exemple::
     }
 
 .. index::
-   single: Controller; Base controller class
+   single: Le Contrôleur; La classe contrôleur de base
 
-The Base Controller Class
--------------------------
+La Classe Contrôleur de Base
+----------------------------
 
-For convenience, Symfony2 comes with a base ``Controller`` class that assists
-with some of the most common controller tasks and gives your controller class
-access to any resource it might need. By extending this ``Controller`` class,
-you can take advantage of several helper methods.
+Afin de vous faciliter le travail, Symfony2 vient avec une classe ``Controller``
+de base qui vous assiste dans les tâches les plus communes d'un contrôleur et
+qui donne à votre propre classe contrôleur l'accès à n'importe quelle ressource
+dont elle pourrait avoir besoin. En étendant cette classe ``Controller``, vous
+pouvez tirer parti de plusieurs méthodes d'aide ("helper").
 
-Add the ``use`` statement atop the ``Controller`` class and then modify the
-``HelloController`` to extend it:
+Ajoutez le mot-clé ``use`` au-dessus de la classe ``Controller`` et modifiez
+``HelloController`` pour qu'il l'étende:
 
 .. code-block:: php
 
@@ -372,25 +373,26 @@ Add the ``use`` statement atop the ``Controller`` class and then modify the
         }
     }
 
-This doesn't actually change anything about how your controller works. In
-the next section, you'll learn about the helper methods that the base controller
-class makes available. These methods are just shortcuts to using core Symfony2
-functionality that's available to you with or without the use of the base
-``Controller`` class. A great way to see the core functionality in action
-is to look in the
-:class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller` class
-itself.
+Cela ne change en fait rien au fonctionnement de votre contrôleur. Dans la
+prochaine section, vous apprendrez des choses sur les méthodes d'aide que la
+classe contrôleur de base met à votre disposition. Ces méthodes sont juste
+des raccourcis pour utiliser des fonctionnalités coeurs de Symfony2 qui sont
+à votre disposition en utilisant ou non la classe ``Controller`` de base.
+Une bonne façon de voir cette fonctionnalité coeur en action est de regarder
+la classe :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`
+elle-même.
 
 .. tip::
 
-    Extending the base class is *optional* in Symfony; it contains useful
-    shortcuts but nothing mandatory. You can also extend
-    ``Symfony\Component\DependencyInjection\ContainerAware``. The service
-    container object will then be accessible via the ``container`` property.
+    Etendre la classe de base est *optionnel* dans Symfony; elle contient
+    des raccourcis utiles mais rien d'obligatoire. Vous pouvez aussi étendre
+    ``Symfony\Component\DependencyInjection\ContainerAware``. L'objet conteneur
+    de service ("service container") sera ainsi accessible à travers la
+    propriété ``container``.
 
 .. note::
 
-    You can also define your :doc:`Controllers as Services
+    Vous pouvez aussi définir vos :doc:`Contrôleurs en tant que Services
     </cookbook/controller/service>`.
 
 .. index::
