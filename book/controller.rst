@@ -85,14 +85,15 @@ route qui fasse correspondre une URL à ce dernier (#2).
     occuper des contrôleurs frontaux dans votre application.
 
 .. index::
-   single: Controller; Simple example
+   single: Le Contrôleur; Un exemple simple
 
-A Simple Controller
--------------------
+Un contrôleur simple
+--------------------
 
-While a controller can be any PHP callable (a function, method on an object,
-or a ``Closure``), in Symfony2, a controller is usually a single method inside
-a controller object. Controllers are also called *actions*.
+Bien qu'un contrôleur puisse être n'importe quel "chose PHP" appelable (une
+fonction, une méthode d'un objet, ou une ``Closure``), dans Symfony2, un
+contrôleur est généralement une unique méthode à l'intérieur d'un objet contrôleur.
+Les contrôleurs sont aussi appelés *actions*.
 
 .. code-block:: php
     :linenos:
@@ -112,31 +113,34 @@ a controller object. Controllers are also called *actions*.
 
 .. tip::
 
-    Note that the *controller* is the ``indexAction`` method, which lives
-    inside a *controller class* (``HelloController``). Don't be confused
-    by the naming: a *controller class* is simply a convenient way to group
-    several controllers/actions together. Typically, the controller class
-    will house several controllers/actions (e.g. ``updateAction``, ``deleteAction``,
-    etc).
+    Notez que le *contrôleur* est la méthode ``indexAction``, qui réside
+    dans une *classe contrôleur* (``HelloController``). Ne soyez pas confus
+    par le nommage: une *classe contrôleur* est simplement une manière
+    pratique de grouper plusieurs contrôleurs/actions ensemble. Typiquement,
+    la classe contrôleur va héberger plusieurs contrôleurs/actions (par exemple:
+    ``updateAction``, ``deleteAction``, etc).
 
-This controller is pretty straightforward, but let's walk through it:
+Ce contrôleur est relativement simple, mais parcourons-le tout de même:
 
-* *line 3*: Symfony2 takes advantage of PHP 5.3 namespace functionality to
-  namespace the entire controller class. The ``use`` keyword imports the
-  ``Response`` class, which our controller must return.
+* *ligne 3*: Symfony2 tire avantage de la fonctionnalité des espaces de noms
+  ("namespaces") de PHP 5.3 afin de donner un espace de noms à la classe entière
+  du contrôleur. Le mot-clé ``use`` importe la classe ``Response``, que notre
+  contrôleur doit retourner.
 
-* *line 6*: The class name is the concatenation of a name for the controller
-  class (i.e. ``Hello``) and the word ``Controller``. This is a convention
-  that provides consistency to controllers and allows them to be referenced
-  only by the first part of the name (i.e. ``Hello``) in the routing configuration.
+* *ligne 6*: Le nom de la classe est la concaténation d'un nom pour la classe
+  du contrôleur (par exemple: ``Hello``) et du mot ``Controller``. Ceci est une
+  convention qui fournit une uniformité aux contrôleurs et qui leurs permet
+  d'être référencés seulement par la première partie du nom (par exemple: ``Hello``)
+  dans la configuration de routage.
 
-* *line 8*: Each action in a controller class is suffixed with ``Action``
-  and is referenced in the routing configuration by the action's name (``index``).
-  In the next section, you'll create a route that maps a URI to this action.
-  You'll learn how the route's placeholders (``{name}``) become arguments
-  to the action method (``$name``).
+* *ligne 8*: Chaque action dans une classe contrôleur est suffixée avec ``Action``
+  et est référencée dans la configuration du routage par le nom de l'action
+  (``index``). Dans la prochaine section, vous allez créer une route qui fait
+  correspondre une URI à son action. Vous allez apprendre comment les paramètres
+  substituables de la route (``{name}``) deviennent les arguments de la méthode
+  action (``$name``).
 
-* *line 10*: The controller creates and returns a ``Response`` object.
+* *ligne 10*: Le contrôleur crée et retourne un objet ``Response``.
 
 .. index::
    single: Controller; Routes and controllers
