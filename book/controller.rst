@@ -131,7 +131,7 @@ Ce contrôleur est relativement simple, mais parcourons-le tout de même:
   du contrôleur (par exemple: ``Hello``) et du mot ``Controller``. Ceci est une
   convention qui fournit une uniformité aux contrôleurs et qui leurs permet
   d'être référencés seulement par la première partie du nom (par exemple: ``Hello``)
-  dans la configuration de routage.
+  dans la configuration de routage ("routing").
 
 * *ligne 8*: Chaque action dans une classe contrôleur est suffixée avec ``Action``
   et est référencée dans la configuration du routage par le nom de l'action
@@ -143,14 +143,14 @@ Ce contrôleur est relativement simple, mais parcourons-le tout de même:
 * *ligne 10*: Le contrôleur crée et retourne un objet ``Response``.
 
 .. index::
-   single: Controller; Routes and controllers
+   single: Le Contrôleur; Routes et contrôleurs
 
-Mapping a URL to a Controller
------------------------------
+Faire correspondre une URL à un Contrôleur
+------------------------------------------
 
-The new controller returns a simple HTML page. To actually view this page
-in your browser, you need to create a route, which maps a specific URL pattern
-to the controller:
+Le nouveau contrôleur retourne une simple page HTML. Pour voir cette page dans
+votre navigateur, vous avez besoin de créer une route qui va faire correspondre
+un pattern d'URL spécifique à ce contrôleur:
 
 .. configuration-block::
 
@@ -175,42 +175,44 @@ to the controller:
             '_controller' => 'AcmeHelloBundle:Hello:index',
         )));
 
-Going to ``/hello/ryan`` now executes the ``HelloController::indexAction()``
-controller and passes in ``ryan`` for the ``$name`` variable. Creating a
-"page" means simply creating a controller method and associated route.
+Naviguer à l'URL ``/hello/ryan`` va maintenant exécuter le contrôleur
+``HelloController::indexAction()`` et passer en tant que variable ``$name`` la
+valeur ``ryan``. Créer une "page" signifie simplement créer une méthode contrôleur
+et une route associée.
 
-Notice the syntax used to refer to the controller: ``AcmeHelloBundle:Hello:index``.
-Symfony2 uses a flexible string notation to refer to different controllers.
-This is the most common syntax and tells Symfony2 to look for a controller
-class called ``HelloController`` inside a bundle named ``AcmeHelloBundle``. The
-method ``indexAction()`` is then executed.
+Notez la syntaxe utilisée pour faire référence au contrôleur: ``AcmeHelloBundle:Hello:index``.
+Symfony2 utilise une notation de chaîne de caractères flexible pour référer aux
+différents contrôleurs. Ceci est la syntaxe la plus commune qui spécifie à Symfony2 de
+chercher une classe contrôleur appelée ``HelloController`` dans un bundle appelé
+``AcmeHelloBundle``. La méthode ``indexAction()`` est alors exécutée.
 
-For more details on the string format used to reference different controllers,
-see :ref:`controller-string-syntax`.
+Pour plus de détails sur le format de chaîne de caractères utilisé pour référencer
+les différents contrôleurs, regardez du côté de :ref:`controller-string-syntax`.
 
 .. note::
 
-    This example places the routing configuration directly in the ``app/config/``
-    directory. A better way to organize your routes is to place each route
-    in the bundle it belongs to. For more information on this, see
-    :ref:`routing-include-external-resources`.
+    Cet exemple place la configuration de routage directement dans le répertoire
+    ``app/config/``. Une meilleure façon d'organiser vos routes est de placer
+    chacune d'entre elles dans le bundle auquel elle appartient. Pour plus
+    d'informations sur ceci, voyez :ref:`routing-include-external-resources`.
 
 .. tip::
 
-    You can learn much more about the routing system in the :doc:`Routing chapter</book/routing>`.
+    Vous pouvez apprendre beaucoup plus de choses à propos du système de routage dans
+    :doc:`Routing chapter</book/routing>`.
 
 .. index::
-   single: Controller; Controller arguments
+   single: Le Contrôleur; Les arguments du contrôleur
 
 .. _route-parameters-controller-arguments:
 
-Route Parameters as Controller Arguments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Les paramètres de la route en tant qu'arguments du contrôleur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You already know that the ``_controller`` parameter ``AcmeHelloBundle:Hello:index``
-refers to a ``HelloController::indexAction()`` method that lives inside the
-``AcmeHelloBundle`` bundle. What's more interesting is the arguments that are
-passed to that method:
+Vous savez déjà que le paramètre ``_controller`` ``AcmeHelloBundle:Hello:index``
+réfère à une méthode ``HelloController::indexAction()`` qui réside dans le bundle
+``AcmeHelloBundle``. Ce qui est plus intéressant sont les arguments qui sont passés
+à cette méthode:
 
 .. code-block:: php
 
@@ -228,11 +230,11 @@ passed to that method:
         }
     }
 
-The controller has a single argument, ``$name``, which corresponds to the
-``{name}`` parameter from the matched route (``ryan`` in our example). In
-fact, when executing your controller, Symfony2 matches each argument of
-the controller with a parameter from the matched route. Take the following
-example:
+Le contrôleur possède un argument unique, ``$name``, qui correspond au
+paramètre ``{name}`` de la route associée (``ryan`` dans notre exemple).
+En fait, lorsque vous exécutez votre contrôleur, Symfony2 fait correspondre
+chaque argument du contrôleur avec un paramètre de la route correspondante.
+Prenez l'exemple suivant:
 
 .. configuration-block::
 
@@ -259,56 +261,57 @@ example:
             'color'       => 'green',
         )));
 
-The controller for this can take several arguments::
+Le contrôleur dans cet exemple peut prendre plusieurs arguments::
 
     public function indexAction($first_name, $last_name, $color)
     {
         // ...
     }
 
-Notice that both placeholder variables (``{first_name}``, ``{last_name}``)
-as well as the default ``color`` variable are available as arguments in the
-controller. When a route is matched, the placeholder variables are merged
-with the ``defaults`` to make one array that's available to your controller.
+Notez que les deux variables de substitution (``{first_name}``, ``{last_name}``)
+ainsi que la variable par défaut ``color`` sont disponibles en tant qu'arguments
+dans le contrôleur. Quand une route correspond, les variables de substitution
+sont fusionnées avec celles ``par défaut`` afin de construire un tableau
+qui est à la disposition de votre contrôleur.
 
-Mapping route parameters to controller arguments is easy and flexible. Keep
-the following guidelines in mind while you develop.
+Faire correspondre les paramètres de la route aux arguments du contrôleur est
+facile et flexible. Gardez les directives suivantes en tête quand vous développez.
 
-* **The order of the controller arguments does not matter**
+* **L'ordre des arguments du contrôleur n'a pas d'importance**
 
-    Symfony is able to match the parameter names from the route to the variable
-    names in the controller method's signature. In other words, it realizes that
-    the ``{last_name}`` parameter matches up with the ``$last_name`` argument.
-    The arguments of the controller could be totally reordered and still work
-    perfectly::
+    Symfony est capable de faire correspondre les noms des paramètres de la route
+    aux noms des variables de la signature de la méthode du contrôleur. En d'autres
+    termes, il réalise que le paramètre ``{last_name}`` correspond à l'argument
+    ``$last_name``. Les arguments du contrôleur pourraient être totalement
+    réorganisés que cela fonctionnerait toujours parfaitement::
 
         public function indexAction($last_name, $color, $first_name)
         {
             // ..
         }
 
-* **Each required controller argument must match up with a routing parameter**
+* **Chaque argument requis du contrôleur doit correspondre à un paramètre de la route**
 
-    The following would throw a ``RuntimeException`` because there is no ``foo``
-    parameter defined in the route::
+    Le code suivant lancerait une ``RuntimeException`` parce qu'il n'y a pas
+    de paramètre ``foo`` défini dans la route::
 
         public function indexAction($first_name, $last_name, $color, $foo)
         {
             // ..
         }
 
-    Making the argument optional, however, is perfectly ok. The following
-    example would not throw an exception::
+    Cependant, définir l'argument en tant qu'optionnel est parfaitement valide.
+    L'exemple suivant ne lancerait pas d'exception::
 
         public function indexAction($first_name, $last_name, $color, $foo = 'bar')
         {
             // ..
         }
 
-* **Not all routing parameters need to be arguments on your controller**
+* **Tous les paramètres de la route n'ont pas besoin d'être des arguments de votre contrôleur**
 
-    If, for example, the ``last_name`` weren't important for your controller,
-    you could omit it entirely::
+    Si, par exemple, le paramètre ``last_name`` n'était pas important pour votre
+    contrôleur, vous pourriez complètement l'omettre::
 
         public function indexAction($first_name, $color)
         {
@@ -317,16 +320,17 @@ the following guidelines in mind while you develop.
 
 .. tip::
 
-    Every route also has a special ``_route`` parameter, which is equal to
-    the name of the route that was matched (e.g. ``hello``). Though not usually
-    useful, this is equally available as a controller argument.
+    Chaque route possède aussi un paramètre spécial ``_route`` qui est égal
+    au nom de la route qui a correspondu (par exemple: ``hello``). Bien que
+    pas très utile généralement, il est néanmoins disponible en tant qu'argument
+    du contrôleur au même titre que les autres.
 
-The ``Request`` as a Controller Argument
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+La ``Requête`` en tant qu'argument du Contrôleur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For convenience, you can also have Symfony pass you the ``Request`` object
-as an argument to your controller. This is especially convenient when you're
-working with forms, for example::
+Pour plus de commodité, Symfony peut aussi vous passer l'objet ``Request``
+en tant qu'argument de votre contrôleur. Ceci est spécialement pratique
+lorsque vous travaillez avec les formulaires, par exemple::
 
     use Symfony\Component\HttpFoundation\Request;
 
