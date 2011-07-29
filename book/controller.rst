@@ -398,33 +398,34 @@ elle-même.
 .. index::
    single: Controller; Common Tasks
 
-Common Controller Tasks
------------------------
+Les Tâches Communes du Contrôleur
+---------------------------------
 
-Though a controller can do virtually anything, most controllers will perform
-the same basic tasks over and over again. These tasks, such as redirecting,
-forwarding, rendering templates and accessing core services, are very easy
-to manage in Symfony2.
+Bien qu'un contrôleur puisse effectuer quoi que soit virtuellement, la plupart
+d'entre eux va accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
+tel rediriger, forwarder, rendre des templates et accéder aux services coeurs,
+sont très faciles à gérer dans Symfony2.
 
 .. index::
-   single: Controller; Redirecting
+   single: Le Contrôleur; Rediriger
 
-Redirecting
-~~~~~~~~~~~
+Rediriger
+~~~~~~~~~
 
-If you want to redirect the user to another page, use the ``redirect()`` method::
+Si vous voulez rediriger l'utilisateur sur une autre page, utilisez la méthode
+``redirect()``::
 
     public function indexAction()
     {
         return $this->redirect($this->generateUrl('homepage'));
     }
 
-The ``generateUrl()`` method is just a helper function that generates the URL
-for a given route. For more information, see the :doc:`Routing </book/routing>`
-chapter.
+La méthode ``generateUrl()`` est juste une fonction d'aide qui génère une URL
+pour une route donnée. Pour plus d'informations, voyez le chapitre
+:doc:`Routage </book/routing>`.
 
-By default, the ``redirect()`` method performs a 302 (temporary) redirect. To
-perform a 301 (permanent) redirect, modify the second argument::
+Par défaut, la méthode ``redirect()`` produit une redirection 302 (temporaire).
+Afin d'exécuter une redirection 301 (permanente), modifiez le second argument::
 
     public function indexAction()
     {
@@ -433,8 +434,9 @@ perform a 301 (permanent) redirect, modify the second argument::
 
 .. tip::
 
-    The ``redirect()`` method is simply a shortcut that creates a ``Response``
-    object that specializes in redirecting the user. It's equivalent to:
+    La méthode ``redirect()`` est simplement un raccourci qui crée un objet
+    ``Response`` spécialisé dans la redirection d'utilisateur. Cela revient
+    à faire:
 
     .. code-block:: php
 
@@ -443,15 +445,15 @@ perform a 301 (permanent) redirect, modify the second argument::
         return new RedirectResponse($this->generateUrl('homepage'));
 
 .. index::
-   single: Controller; Forwarding
+   single: Le Contrôleur; Forwarder
 
-Forwarding
-~~~~~~~~~~
+Forwarder
+~~~~~~~~~
 
-You can also easily forward to another controller internally with the ``forward()``
-method. Instead of redirecting the user's browser, it makes an internal sub-request,
-and calls the specified controller. The ``forward()`` method returns the ``Response``
-object that's returned from that controller::
+Vous pouvez aussi facilement forwarder sur un autre contrôleur en interne avec la
+méthode ``forward()``. Plutôt que de rediriger le navigateur de l'utilisateur, elle
+effectue une sous-requête interne, et appelle le contrôleur spécifié. La méthode
+``forward()`` retourne l'objet ``Response`` qui est retourné par ce contrôleur::
 
     public function indexAction($name)
     {
@@ -460,36 +462,36 @@ object that's returned from that controller::
             'color' => 'green'
         ));
 
-        // further modify the response or return it directly
-        
+        // modifiez encore la réponse ou bien retournez-la directement
+
         return $response;
     }
 
-Notice that the `forward()` method uses the same string representation of
-the controller used in the routing configuration. In this case, the target
-controller class will be ``HelloController`` inside some ``AcmeHelloBundle``.
-The array passed to the method becomes the arguments on the resulting controller.
-This same interface is used when embedding controllers into templates (see
-:ref:`templating-embedding-controller`). The target controller method should
-look something like the following::
+Notez que la méthode `forward()` utilise la même représentation de chaîne
+de caractères du contrôleur que celle utilisée dans la configuration de
+routage. Dans ce cas, la classe contrôleur cible va être ``HelloController``
+dans le bundle ``AcmeHelloBundle``. Le tableau passé à la méthode devient
+les arguments du contrôleur. Cette même interface est utilisée lorsque vous
+intégrez des contrôleurs dans des templates (voir :ref:`templating-embedding-controller`).
+La méthode contrôleur cible devrait ressembler à quelque chose comme::
 
     public function fancyAction($name, $color)
     {
-        // ... create and return a Response object
+        // ... crée et retourne un objet Response
     }
 
-And just like when creating a controller for a route, the order of the arguments
-to ``fancyAction`` doesn't matter. Symfony2 matches the index key names
-(e.g. ``name``) with the method argument names (e.g. ``$name``). If you
-change the order of the arguments, Symfony2 will still pass the correct
-value to each variable.
+Et comme quand vous créez un contrôleur pour une route, l'ordre des arguments
+de ``fancyAction`` n'a pas d'importance. Symfony2 fait correspondre le nom
+des clés d'index (par exemple: ``name``) avec le nom des arguments de la
+méthode (par exemple: ``$name``). Si vous changez l'ordre des arguments,
+Symfony2 va toujours passer la valeur correcte à chaque variable.
 
 .. tip::
 
-    Like other base ``Controller`` methods, the ``forward`` method is just
-    a shortcut for core Symfony2 functionality. A forward can be accomplished
-    directly via the ``http_kernel`` service. A forward returns a ``Response``
-    object::
+    Comme d'autres méthodes de base de ``Controller``, la méthode ``forward``
+    est juste un raccourci pour une fonctionnalité coeur de Symfony2. Un
+    forward peut être exécuté directement via le service ``http_kernel``.
+    Un forward retourne un objet ``Response``::
     
         $httpKernel = $this->container->get('http_kernel');
         $response = $httpKernel->forward('AcmeHelloBundle:Hello:fancy', array(
@@ -498,49 +500,50 @@ value to each variable.
         ));
 
 .. index::
-   single: Controller; Rendering templates
+   single: Le Contrôleur; Rendre des templates
 
 .. _controller-rendering-templates:
 
-Rendering Templates
-~~~~~~~~~~~~~~~~~~~
+Rendre des Templates
+~~~~~~~~~~~~~~~~~~~~
 
-Though not a requirement, most controllers will ultimately render a template
-that's responsible for generating the HTML (or other format) for the controller.
-The ``renderView()`` method renders a template and returns its content. The
-content from the template can be used to create a ``Response`` object::
+Bien que n'étant pas une condition requise, la plupart des contrôleurs vont finalement
+délivrer un template qui est responsable de la génération du HTML (ou d'un autre format)
+pour le contrôleur. La méthode ``renderView()`` rend un template et retourne son contenu.
+Le contenu du template peut être utilisé pour créer un objet ``Response``::
 
     $content = $this->renderView('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
     return new Response($content);
 
-This can even be done in just one step with the ``render()`` method, which
-returns a ``Response`` object containing the content from the template::
+Ceci peut même être effectué en une seule étape à l'aide de la méthode ``render()``,
+qui retourne un objet ``Response`` contenant le contenu du template::
 
     return $this->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
-In both cases, the ``Resources/views/Hello/index.html.twig`` template inside
-the ``AcmeHelloBundle`` will be rendered.
+Dans les deux cas, le template ``Resources/views/Hello/index.html.twig`` dans
+``AcmeHelloBundle`` sera délivré.
 
-The Symfony templating engine is explained in great detail in the
-:doc:`Templating </book/templating>` chapter.
+Le moteur de rendu ("templating engine") de Symfony est expliqué plus en détails dans
+le chapitre :doc:`Templating </book/templating>`
 
 .. tip::
 
-    The ``renderView`` method is a shortcut to direct use of the ``templating``
-    service. The ``templating`` service can also be used directly::
+    La méthode ``renderView`` est un raccourci de l'utilisation directe du
+    service ``templating``. Ce dernier peut aussi être utilisé directement::
     
         $templating = $this->get('templating');
         $content = $templating->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
 .. index::
-   single: Controller; Accessing services
+   single: Le Contrôleur; Accéder aux services
 
-Accessing other Services
-~~~~~~~~~~~~~~~~~~~~~~~~
+Accéder à d'autres Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When extending the base controller class, you can access any Symfony2 service
-via the ``get()`` method. Here are several common services you might need::
+Quand vous étendez la classe contrôleur de base, vous pouvez utiliser n'importe
+quel service Symfony2 via la méthode ``get()``. Voici plusieurs services communs
+dont vous pourriez avoir besoin::
 
     $request = $this->getRequest();
 
@@ -552,15 +555,15 @@ via the ``get()`` method. Here are several common services you might need::
 
     $mailer = $this->get('mailer');
 
-There are countless other services available and you are encouraged to define
-your own. To list all available services, use the ``container:debug`` console
-command:
+Il y a d'innombrables autres services à votre disposition et vous êtes encouragé
+à définir les vôtres. Pour lister tous les services disponibles, utilisez la
+commande de la console ``container:debug``:
 
 .. code-block:: bash
 
     php app/console container:debug
 
-For more information, see the :doc:`/book/service_container` chapter.
+Pour plus d'informations, voir le chapitre :doc:`/book/service_container`.
 
 .. index::
    single: Controller; Managing errors
