@@ -12,28 +12,30 @@ de Symfony2 (composants et bundles "du coeur") qui partagent les propriétés su
 L'implémentation elle-même peut changer. La seule raison valable d'un changement 
 de l'API stable de Symfony2 serait de corriger un problème de sécurité.
 
-..note::
-
-    L'API stable est basée sur un principe de liste blanche ("whitelist"). Donc tout ce qui n'est pas 
-    listé dans ce document ne fait pas partie de l'API stable.
-
-..note::
-
-    Cette liste est en cours de définition et la liste définitive sera finalisée lorsque
-    la version finale de Symfony2 sera publiée. Si vous considérez que des méthodes
-    devraient être incluses à cette liste, vous pouvez démarrer une discussion sur 
-    la mailing-list Symfony developer.
-
-..note::
-
-    Chaque méthode faisant partie de l'API stable est signalée sur le site de l'API
-    de Symfony2 (au moyen de l'annotation ``@stable``).
+L'API stable est basée sur un principe de liste blanche ("whitelist"), taggée 
+par `@api`. En conséquence, tout ce qui n'est pas explicitement taggé ne fait pas
+partie de l'API stable.
 
 .. tip::
 
     Chaque bundle tiers devrait aussi publier sa propre API stable.
     
-HttpKernel Component
---------------------
+Tout comme Symfony 2.0, les composants suivants ont leur propre API publique :
 
-* HttpKernelInterface:::method:`Symfony\\Component\\HttpKernel\\HttpKernelInterface::handle`
+* BrowserKit
+* ClassLoader
+* Console
+* CssSelector
+* DependencyInjection
+* DomCrawler
+* EventDispatcher
+* Finder
+* HttpFoundation
+* HttpKernel
+* Locale
+* Process
+* Routing
+* Templating
+* Translation
+* Validator
+* Yaml

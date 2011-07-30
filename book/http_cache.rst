@@ -145,13 +145,16 @@ kernel::
 
     // web/app.php
 
-    require_once __DIR__.'/../app/bootstrap_cache.php.cache';
+    require_once __DIR__.'/../app/bootstrap.php.cache';
+    require_once __DIR__.'/../app/AppKernel.php';
     require_once __DIR__.'/../app/AppCache.php';
 
     use Symfony\Component\HttpFoundation\Request;
 
+    $kernel = new AppKernel('prod', false);
+    $kernel->loadClassCache();
     // wrap the default AppKernel with the AppCache one
-    $kernel = new AppCache(new AppKernel('prod', false));
+    $kernel = new AppCache($kernel);
     $kernel->handle(Request::createFromGlobals())->send();
 
 The caching kernel will immediately act as a reverse proxy - caching responses
@@ -545,9 +548,9 @@ md5 of the content::
 
     public function indexAction()
     {
-        $response = $this->renderView('MyBundle:Main:index.html.twig');
+        $response = $this->render('MyBundle:Main:index.html.twig');
         $response->setETag(md5($response->getContent()));
-        $response->isNotModified($this->get('request'));
+        $response->isNotModified($this->getRequest());
 
         return $response;
     }
@@ -598,7 +601,7 @@ header value::
         $date = $authorDate > $articleDate ? $authorDate : $articleDate;
 
         $response->setLastModified($date);
-        $response->isNotModified($this->get('request'));
+        $response->isNotModified($this->getRequest());
 
         return $response;
     }
@@ -643,7 +646,7 @@ exposing a simple and efficient pattern::
         $response->setLastModified($article->getPublishedAt());
 
         // Check that the Response is not modified for the given Request
-        if ($response->isNotModified($this->get('request'))) {
+        if ($response->isNotModified($this->getRequest())) {
             // return the 304 Response immediately
             return $response;
         } else {
@@ -835,7 +838,7 @@ independent of the rest of the page.
 
     public function indexAction()
     {
-        $response = $this->renderView('MyBundle:MyController:index.html.twig');
+        $response = $this->render('MyBundle:MyController:index.html.twig');
         $response->setSharedMaxAge(600);
 
         return $response;

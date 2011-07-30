@@ -146,7 +146,7 @@ namespace in the ``vendor/bundle`` directory:
     ));
 
 If the file did *not* live at this exact location, you'd receive a
-``Class "Acme\DemoBundle\Controller\DemoController" does not exist.``
+``Class "Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle" does not exist.``
 error. In Symfony2, a "class does not exist" means that the suspect class
 namespace and physical location do not match. Basically, Symfony2 is looking
 in one exact location for that class, but that location doesn't exist (or
@@ -251,8 +251,8 @@ In Symfony2, the bundles are activated inside the application kernel::
         return $bundles;
     }
 
-Routing (``routing.yml``) and Configration (``config.yml``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Routing (``routing.yml``) and Configuration (``config.yml``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In symfony1, the ``routing.yml`` and ``app.yml`` configuration files were
 automatically loaded inside any plugin. In Symfony2, routing and application

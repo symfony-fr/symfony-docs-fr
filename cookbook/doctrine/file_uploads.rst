@@ -32,7 +32,8 @@ First, create a simple Doctrine Entity class to work with::
     class Document
     {
         /**
-         * @ORM\Id @ORM\Column(type="integer")
+         * @ORM\Id
+         * @ORM\Column(type="integer")
          * @ORM\GeneratedValue(strategy="AUTO")
          */
         public $id;
@@ -48,22 +49,35 @@ First, create a simple Doctrine Entity class to work with::
          */
         public $path;
 
-        public function getFullPath()
+        public function getAbsolutePath()
         {
             return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+        }
+
+        public function getWebPath()
+        {
+            return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
         }
 
         protected function getUploadRootDir()
         {
             // the absolute directory path where uploaded documents should be saved
-            return __DIR__.'/../../../../web/uploads/documents';
+            return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        }
+
+        protected function getUploadDir()
+        {
+            // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+            return 'uploads/documents';
         }
     }
 
 The ``Document`` entity has a name and it is associated with a file. The ``path``
 property stores the relative path to the file and is persisted to the database.
-The ``getFullPath()`` is a convenience method that uses the ``getUploadRootDir()``
-method to return the absolute path to the file.
+The ``getAbsolutePath()`` is a convenience method that returns the absolute
+path to the file while the ``getWebPath()`` is a convenience method that
+returns the web path, which can be used in a template to link to the uploaded
+file.
 
 .. tip::
 
@@ -248,7 +262,7 @@ Next, refactor the ``Document`` class to take advantage of these callbacks::
         {
             if (null !== $this->file) {
                 // do whatever you want to generate a unique name
-                $this->setPath(uniq().'.'.$this->file->guessExtension());
+                $this->setPath(uniqid().'.'.$this->file->guessExtension());
             }
         }
 
@@ -274,7 +288,7 @@ Next, refactor the ``Document`` class to take advantage of these callbacks::
          */
         public function removeUpload()
         {
-            if ($file = $this->getFullPath()) {
+            if ($file = $this->getAbsolutePath()) {
                 unlink($file);
             }
         }
@@ -331,12 +345,12 @@ property, instead of the actual filename::
          */
         public function removeUpload()
         {
-            if ($file = $this->getFullPath()) {
+            if ($file = $this->getAbsolutePath()) {
                 unlink($file);
             }
         }
 
-        public function getFullPath()
+        public function getAbsolutePath()
         {
             return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
         }

@@ -322,7 +322,7 @@ nom du contrôleur et enfin ``index.html.twig`` est le template :
        :linenos:
 
         {# src/Acme/HelloBundle/Resources/views/Hello/index.html.twig #}
-        {% extends '::layout.html.twig' %}
+        {% extends '::base.html.twig' %}
 
         {% block body %}
             Hello {{ name }}!
@@ -331,7 +331,7 @@ nom du contrôleur et enfin ``index.html.twig`` est le template :
     .. code-block:: php
 
         <!-- src/Acme/HelloBundle/Resources/views/Hello/index.html.php -->
-        <?php $view->extend('::layout.html.php') ?>
+        <?php $view->extend('::base.html.php') ?>
 
         Hello <?php echo $view->escape($name) ?>!
 
@@ -342,10 +342,10 @@ Analysons maintenant le template Twig ligne par ligne :
 
 * *Ligne 4* : Le symbole ``block`` indique que tout ce qui est à l'intérieur doit
   être placé à l'intérieur d'un bloc appelé ``body``. Comme vous le voyez, c'est
-  en définitive la responsabilité du template parent (``layout.html.twig``) de rendre
+  en définitive la responsabilité du template parent (``base.html.twig``) de rendre
   le bloc ``body``.
 
-Le nom de fichier du template parent, ``::layout.html.twig``, est exempté des portions
+Le nom de fichier du template parent, ``::base.html.twig``, est exempté des portions
 **NomBundle** et **NomControleur** (remarquez les deux points (``::``) au début). Ceci
 signifie que le template se site en dehors du bundle et dans le répertoire ``app``.
 
@@ -353,29 +353,35 @@ signifie que le template se site en dehors du bundle et dans le répertoire ``ap
 
     .. code-block:: html+jinja
 
-        {# app/Resources/views/layout.html.twig #}
+        {# app/Resources/views/base.html.twig #}
         <!DOCTYPE html>
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <title>{% block title %}Hello Application{% endblock %}</title>
+                <title>{% block title %}Welcome!{% endblock %}</title>
+                {% block stylesheets %}{% endblock %}
+                <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
             </head>
             <body>
                 {% block body %}{% endblock %}
+		{% block javascripts %}{% endblock %}
             </body>
         </html>
 
     .. code-block:: php
 
-        <!-- app/Resources/views/layout.html.php -->
+        <!-- app/Resources/views/base.html.php -->
         <!DOCTYPE html>
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <title><?php $view['slots']->output('title', 'Hello Application') ?></title>
+                <title><?php $view['slots']->output('title', 'Welcome!') ?></title>	
+                <?php $view['slots']->output('stylesheets') ?>
+                <link rel="shortcut icon" href="<?php echo $view['assets']->getUrl('favicon.ico') ?>" />
             </head>
             <body>
                 <?php $view['slots']->output('_content') ?>
+		<?php $view['slots']->output('stylesheets') ?>
             </body>
         </html>
 

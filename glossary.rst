@@ -1,70 +1,68 @@
 :orphan:
 
-Glossaire
-=========
+Glossary
+========
 
 .. glossary::
    :sorted:
 
    Distribution
-        Une *Distribution* est un ensemble de composants Symfony2, une sélection
-        de bundles, une arborescence structurée, une configuration par défaut et
-        un système de configuration optionnel.
+        A *Distribution* is a package made of the Symfony2 Components, a
+        selection of bundles, a sensible directory structure, a default
+        configuration, and an optional configuration system.
 
-   Projet
-        Un *Projet* est une arborescence composée d'une Application, d'un
-        certain nombre de "bundles", de librairies tierces, d'un autoloader et
-        de scripts.
+   Project
+        A *Project* is a directory composed of an Application, a set of
+        bundles, vendor libraries, an autoloader, and web front controller
+        scripts.
 
    Application
-        Une *Application* est une arborescence contenant la *configuration* pour
-        un certain nombre de "Bundles" donné.
+        An *Application* is a directory containing the *configuration* for a
+        given set of Bundles.
 
    Bundle
-        Un *Bundle* est un ensemble structuré de fichiers (scripts PHP, feuilles
-        de style CSS, javascripts, images,...) qui *implémente* une fonctionalité
-        unique (un blog, un forum, etc...). Dans Symfony2, (*presque*) tout 
-        réside dans un bundle. (voir :ref:`page-creation-bundles`)
+        A *Bundle* is a directory containing a set of files (PHP files,
+        stylesheets, JavaScripts, images, ...) that *implement* a single
+        feature (a blog, a forum, etc). In Symfony2, (*almost*) everything
+        lives inside a bundle. (see :ref:`page-creation-bundles`)
 
-   Contrôleur Frontal
-        Un Contrôleur Frontal est un petit script PHP situé dans le répertoire 
-        web de votre projet. En règle générale, *toutes* les requêtes sont 
-        traitées par l'exécution du même contrôleur frontal, dont la mission est
-        d'amorcer votre application Symfony.
+   Front Controller
+        A *Front Controller* is a short PHP script that lives in the web directory
+        of your project. Typically, *all* requests are handled by executing
+        the same front controller, whose job is to bootstrap the Symfony
+        application.
 
-   Contrôleur
-        Un *contrôleur* est une fonction PHP qui détient toute la logique nécessaire
-        pour retourner un objet ``Réponse`` qui représente une page particulière.
-        Typiquement, une route est associée à un contrôleur qui utilise ensuite 
-        informations de la requête pour la traiter, effectuer des actions et
-        finalement construire puis retourner un objet ``Réponse``.
+   Controller
+        A *controller* is a PHP function that houses all the logic necessary
+        to return a ``Response`` object that represents a particular page.
+        Typically, a route is mapped to a controller, which then uses information
+        from the request to process information, perform actions, and ultimately
+        construct and return a ``Response`` object.
 
    Service
-        Un *Service* est un terme générique désignant tout objet PHP qui effectue
-        une tâche spécifique. Un service est généralement utilisé «globalement»,
-        comme un objet de connexion à la base de données ou un objet qui envoie
-        des e-mails par exemple. Dans Symfony2, les services sont souvent
-        configurés et récupérés à partir du conteneur de services. Une application
-        qui a de nombreux services découplés est qualifiée d'`architecture
-        orientée services`_.
+        A *Service* is a generic term for any PHP object that performs a
+        specific task. A service is usually used "globally", such as a database
+        connection object or an object that delivers email messages. In Symfony2,
+        services are often configured and retrieved from the service container.
+        An application that has many decoupled services is said to follow
+        a `service-oriented architecture`_.
 
-   Conteneur de Services
-        Un *Conteneur de Services*, aussi nommé *Conteneur d'Injection de
-        Dépendances*, est un objet spécial qui gère les instances de services au
-        cœur de l'application. Au lieu de créer des services directement, le
-        développeur *éduque* le conteneur de services (en le paramétrant) sur
-        la façon de créer des services. Le contrôleur de services prend en charge
-        l'instantiation passive et l'injection des services qui en dépendent.
-        Voir le chapitre :doc:`/book/service_container`.
+   Service Container
+        A *Service Container*, also known as a *Dependency Injection Container*,
+        is a special object that manages the instantiation of services inside
+        an application. Instead of creating services directly, the developer
+        *trains* the service container (via configuration) on how to create
+        the services. The service container takes care of lazily instantiating
+        and injecting dependent services. See :doc:`/book/service_container` 
+        chapter.
 
-   Specification HTTP
-        La *Specification HTTP* est un document de référence qui décrit le
-        Protocole de Transfert HTTP (un ensemble de règles portant sur la
-        communication requête-réponse d'un traditionnel client-serveur). Cette
-        spécification définit le format utilisé pour la requête et la réponse 
-        ainsi que les différents entêtes HTTP possibles que chacun peut avoir.
-        Pour plus d'informations, lisez l'article sur `Wikipedia`_ ou le 
-        `HTTP 1.1 RFC`_.
+   HTTP Specification
+        The *Http Specification* is a document that describes the Hypertext
+        Transfer Protocol - a set of rules laying out the classic client-server
+        request-response communication. The specification defines the format
+        used for a request and response as well as the possible HTTP headers
+        that each may have. For more information, read the `Http Wikipedia`_
+        article or the `HTTP 1.1 RFC`_.
 
    Environment
         An environment is a string (e.g. ``prod`` or ``dev``) that corresponds
@@ -120,6 +118,6 @@ Glossaire
 
 
 
-.. _`architecture orientée services`: http://fr.wikipedia.org/wiki/Architecture_orient%C3%A9e_services
-.. _`Wikipedia`: http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+.. _`service-oriented architecture`: http://wikipedia.org/wiki/Service-oriented_architecture
+.. _`HTTP Wikipedia`: http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
 .. _`HTTP 1.1 RFC`: http://www.w3.org/Protocols/rfc2616/rfc2616.html
