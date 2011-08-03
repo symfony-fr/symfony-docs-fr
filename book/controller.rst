@@ -566,82 +566,86 @@ commande de la console ``container:debug``:
 Pour plus d'informations, voir le chapitre :doc:`/book/service_container`.
 
 .. index::
-   single: Controller; Managing errors
-   single: Controller; 404 pages
+   single: Le Contrôleur; Gérer les erreurs
+   single: Le Contrôleur; Les pages 404
 
-Managing Errors and 404 Pages
------------------------------
+Gérer les Erreurs et les Pages 404
+----------------------------------
 
-When things are not found, you should play well with the HTTP protocol and
-return a 404 response. To do this, you'll throw a special type of exception.
-If you're extending the base controller class, do the following::
+Quand des "choses" ne sont pas trouvées, vous devriez vous servir correctement
+du protocole HTTP et retourner une réponse 404. Pour ce faire, vous allez lancer
+un type spécial d'exception. Si vous étendez la classe contrôleur de base, faites
+comme ça::
 
     public function indexAction()
     {
-        $product = // retrieve the object from database
+        $product = // récupérer l'objet depuis la base de données
         if (!$product) {
-            throw $this->createNotFoundException('The product does not exist');
+            throw $this->createNotFoundException('Le produit n\'existe pas');
         }
 
         return $this->render(...);
     }
 
-The ``createNotFoundException()`` method creates a special ``NotFoundHttpException``
-object, which ultimately triggers a 404 HTTP response inside Symfony.
+La méthode ``createNotFoundException()`` crée un objet spécial ``NotFoundHttpException``,
+qui finalement déclenche une réponse HTTP 404 dans Symfony.
 
-Of course, you're free to throw any ``Exception`` class in your controller -
-Symfony2 will automatically return a 500 HTTP response code.
+Evidemment, vous êtes libre de lancer quelconque classe ``Exception`` dans votre
+contrôleur - Symfony2 retournera automatiquement un code de réponse HTTP 500.
 
 .. code-block:: php
 
-    throw new \Exception('Something went wrong!');
+    throw new \Exception('Quelque chose s'est mal passé!');
 
-In every case, a styled error page is shown to the end user and a full debug
-error page is shown to the developer (when viewing the page in debug mode).
-Both of these error pages can be customized. For details, read the
-":doc:`/cookbook/controller/error_pages`" cookbook recipe.
+Dans chaque cas, une page d'erreur stylée est montrée à l'utilisateur final et une
+page d'erreur complète avec des infos de debugging est montrée au développeur
+(lorsqu'il affiche cette page en mode debug). Deux de ces pages d'erreur peuvent
+être personnalisées. Pour de plus amples détails, lisez la partie du cookbook
+":doc:`/cookbook/controller/error_pages`".
 
 .. index::
-   single: Controller; The session
+   single: Le Contrôleur; La session
    single: Session
 
-Managing the Session
---------------------
+Gérer la Session
+----------------
 
-Symfony2 provides a nice session object that you can use to store information
-about the user (be it a real person using a browser, a bot, or a web service)
-between requests. By default, Symfony2 stores the attributes in a cookie
-by using the native PHP sessions.
+Symfony2 fournit un objet session sympa que vous pouvez utiliser pour stocker
+de l'information à propos de l'utilisateur (que ce soit une personne réelle
+utilisant un navigateur, un bot, ou un service web) entre les requêtes. Par
+défaut, Symfony2 stocke les attributs dans un cookie en utilisant les sessions
+natives de PHP.
 
-Storing and retrieving information from the session can be easily achieved
-from any controller::
+Stocker et récupérer des informations depuis la session peut être effectué
+facilement depuis n'importe quel contrôleur::
 
     $session = $this->getRequest()->getSession();
 
-    // store an attribute for reuse during a later user request
+    // stocke un attribut pour une réutilisation lors d'une future requête utilisateur
     $session->set('foo', 'bar');
 
-    // in another controller for another request
+    // dans un autre contrôleur pour une autre requête
     $foo = $session->get('foo');
 
-    // set the user locale
+    // définit la "locale" de l'utilisateur
     $session->setLocale('fr');
 
-These attributes will remain on the user for the remainder of that user's
-session.
+Ces attributs vont rester affectés à cet utilisateur pour le restant de la
+session de ce dernier.
 
 .. index::
-   single Session; Flash messages
+   single Session; Les messages Flash
 
-Flash Messages
-~~~~~~~~~~~~~~
+Les Messages Flash
+~~~~~~~~~~~~~~~~~~
 
-You can also store small messages that will be stored on the user's session
-for exactly one additional request. This is useful when processing a form:
-you want to redirect and have a special message shown on the *next* request.
-These types of messages are called "flash" messages.
+Vous pouvez aussi stocker de petits messages qui vont être garder dans la session
+de l'utilisateur pour exactement une requête additionnelle. Ceci est utile lors
+du traitement d'un formulaire: vous souhaitez rediriger l'utilisateur et avoir un
+message spécial affiché à la *prochaine* requête. Ces types de message sont appelés
+messages "flash".
 
-For example, imagine you're processing a form submit::
+Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
 
     public function updateAction()
     {
@@ -649,9 +653,9 @@ For example, imagine you're processing a form submit::
 
         $form->bindRequest($this->getRequest());
         if ($form->isValid()) {
-            // do some sort of processing
+            // effectue le traitement du formulaire
 
-            $this->get('session')->setFlash('notice', 'Your changes were saved!');
+            $this->get('session')->setFlash('notice', 'Vos changements ont été sauvegardés!');
 
             return $this->redirect($this->generateUrl(...));
         }
@@ -659,12 +663,12 @@ For example, imagine you're processing a form submit::
         return $this->render(...);
     }
 
-After processing the request, the controller sets a ``notice`` flash message
-and then redirects. The name (``notice``) isn't significant - it's just what
-you're using to identify the type of the message.
+Après avoir traité la requête, le contrôleur définit un message flash ``notice``
+et puis redirige. Le nom (``notice``) n'est pas significatif - c'est juste ce que
+vous utilisez pour identifier le type du message.
 
-In the template of the next action, the following code could be used to render
-the ``notice`` message:
+Dans le template de la prochaine action, la code suivant pourrait être utilisé
+pour délivrer le message ``notice``:
 
 .. configuration-block::
 
@@ -684,77 +688,79 @@ the ``notice`` message:
             </div>
         <?php endif; ?>
 
-By design, flash messages are meant to live for exactly one request (they're
-"gone in a flash"). They're designed to be used across redirects exactly as
-you've done in this example.
+Par conception, les messages flash sont faits pour durer pendant exactement une
+requête (ils "disparaissent en un éclair/flash"). Ils sont conçus pour être utilisés
+au travers des redirections exactement comme vous l'avez fait dans cet exemple.
 
 .. index::
-   single: Controller; Response object
+   single: Le Contrôleur; L'objet response
 
-The Response Object
--------------------
+L'Objet Response
+----------------
 
-The only requirement for a controller is to return a ``Response`` object. The
-:class:`Symfony\\Component\\HttpFoundation\\Response` class is a PHP
-abstraction around the HTTP response - the text-based message filled with HTTP
-headers and content that's sent back to the client::
+La seule condition requise d'un contrôleur est de retourner un objet ``Response``.
+La classe :class:`Symfony\\Component\\HttpFoundation\\Response` est une abstraction
+PHP autour de la réponse HTTP - le message texte rempli avec des en-têtes HTTP et
+du contenu qui est envoyé au client::
 
-    // create a simple Response with a 200 status code (the default)
+    // crée une simple Réponse avec un code de statut 200 (celui par défaut)
     $response = new Response('Hello '.$name, 200);
     
-    // create a JSON-response with a 200 status code
+    // crée une réponse JSON avec un code de statut 200
     $response = new Response(json_encode(array('name' => $name)));
     $response->headers->set('Content-Type', 'application/json');
 
 .. tip::
 
-    The ``headers`` property is a
-    :class:`Symfony\\Component\\HttpFoundation\\HeaderBag` object with several
-    useful methods for reading and mutating the ``Response`` headers. The
-    header names are normalized so that using ``Content-Type`` is equivalent
-    to ``content-type`` or even ``content_type``.
+    La propriété ``headers`` (en-têtes en français) est un objet
+    :class:`Symfony\\Component\\HttpFoundation\\HeaderBag` avec plusieurs
+    méthodes utiles pour lire et transformer les en-têtes de la ``Response``.
+    Les noms des en-têtes sont normalisés et ainsi, utiliser ``Content-Type``
+    est équivalent à ``content-type`` ou même ``content_type``.
 
 .. index::
-   single: Controller; Request object
+   single: Le Contrôleur; L'objet request
 
-The Request Object
-------------------
+L'Objet Request
+---------------
 
-Besides the values of the routing placeholders, the controller also has access
-to the ``Request`` object when extending the base ``Controller`` class::
+En sus des valeurs de substitution du routage, le contrôleur a aussi accès à
+l'objet ``Request`` quand il étend la classe ``Controller`` de base::
 
     $request = $this->getRequest();
 
-    $request->isXmlHttpRequest(); // is it an Ajax request?
+    $request->isXmlHttpRequest(); // est-ce une requête Ajax?
 
     $request->getPreferredLanguage(array('en', 'fr'));
 
-    $request->query->get('page'); // get a $_GET parameter
+    $request->query->get('page'); // prend un paramètre $_GET
 
-    $request->request->get('page'); // get a $_POST parameter
+    $request->request->get('page'); // prend un paramètre $_POST
 
-Like the ``Response`` object, the request headers are stored in a ``HeaderBag``
-object and are easily accessible.
+Comme l'objet ``Response``, les en-têtes de la requête sont stockées dans un
+objet ``HeaderBag`` et sont facilement accessibles.
 
-Final Thoughts
---------------
+Réflexions finales
+------------------
 
-Whenever you create a page, you'll ultimately need to write some code that
-contains the logic for that page. In Symfony, this is called a controller,
-and it's a PHP function that can do anything it needs to to in order to return
-the final ``Response`` object that will be returned to the user.
+Chaque fois que vous créez une page, vous allez au final avoir besoin
+d'écrire du code qui contient la logique pour cette page. Dans Symfony, ceci
+est appelé un contrôleur, et c'est une fonction PHP qui peut faire tout ce
+qu'il faut pour retourner l'objet final ``Response`` qui sera delivré à
+l'utilisateur.
 
-To make life easier, you can choose to extend a base ``Controller`` class,
-which contains shortcut methods for many common controller tasks. For example,
-since you don't want to put put HTML code in your controller, you can use
-the ``render()`` method to render and return the content from a template.
+Pour vous simplifier la vie, vous pouvez choisir d'étendre une classe ``Controller``
+de base, qui contient des méthodes raccourcis pour de nombreuses tâches
+communes d'un contrôleur. Par exemple, sachant que vous ne voulez pas mettre
+de code HTML dans votre contrôleur, vous pouvez utiliser la méthode ``render()``
+pour délivrer et retourner le contenu d'un template.
 
-In other chapters, you'll see how the controller can be used to persist and
-fetch objects from a database, process form submissions, handle caching and
-more.
+Dans d'autres chapitres, vous verrez comment le contrôleur peut être utilisé
+pour sauvegarder et aller chercher des objets dans une base de données, traiter
+des soumissions de formulaires, gérer le cache et plus encore.
 
-Learn more from the Cookbook
-----------------------------
+En savoir plus grâce au Cookbook
+--------------------------------
 
 * :doc:`/cookbook/controller/error_pages`
 * :doc:`/cookbook/controller/service`
