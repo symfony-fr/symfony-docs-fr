@@ -852,7 +852,7 @@ toutes les requêtes) :
 
 
 En savoir plus grâce au Cookbook
------------------------------------
+--------------------------------
 
 * :doc:`/cookbook/testing/http_authentication`
 * :doc:`/cookbook/testing/insulating_clients`
