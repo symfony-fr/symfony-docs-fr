@@ -1,36 +1,40 @@
 .. index::
-   single: Routing
+   single: Routage
 
-Routing
+Routage
 =======
 
-Beautiful URLs are an absolute must for any serious web application. This
-means leaving behind ugly URLs like ``index.php?article_id=57`` in favor
-of something like ``/read/intro-to-symfony``.
+De belles URLs sont une obligation absolue pour quelconque application web
+sérieuse. Cela signifie d'oublier les URLs moches comme
+``index.php?article_id=57`` en faveur de quelque chose comme
+``/read/intro-to-symfony``.
 
-Having flexibility is even more important. What if you need to change the
-URL of a page from ``/blog`` to ``/news``? How many links should you need to
-hunt down and update to make the change? If you're using Symfony's router,
-the change is simple.
+Avoir de la flexibilité est encore plus important. Que se passe-t-il si
+vous avez besoin de changer l'URL d'une page de ``/blog`` à ``/news`` ?
+Combien de liens auriez-vous besoin de traquer et mettre à jour afin
+de prendre en compte ce changement ? Si vous utilisez le routeur de Symfony,
+le changement est simple.
 
-The Symfony2 router lets you define creative URLs that you map to different
-areas of your application. By the end of this chapter, you'll be able to:
+Le routeur Symfony2 vous laisse définir des URLs créatives que vous faites
+correspondre à différents points de votre application. A la fin de ce
+chapitre, vous serez capable de :
 
-* Create complex routes that map to controllers
-* Generate URLs inside templates and controllers
-* Load routing resources from bundles (or anywhere else) 
-* Debug your routes
+* Créer des routes complexes qui correspondent à des contrôleurs
+* Générer des URLs à l'intérieur des templates et des contrôleurs
+* Charger des ressources de routage depuis des bundles (ou depuis ailleurs)
+* Débugger vos routes
 
 .. index::
-   single: Routing; Basics
+   single: Routage; Les bases
 
-Routing in Action
------------------
+Le routage en Action
+--------------------
 
-A *route* is a map from a URL pattern to a controller. For example, suppose
-you want to match any URL like ``/blog/my-post`` or ``/blog/all-about-symfony``
-and send it to a controller that can look up and render that blog entry.
-The route is simple:
+Une *route* est une correspondance entre un pattern d'URL et un contrôleur.
+Par exemple, supposez que vous vouliez faire correspondre n'importe quelle
+URL comme ``/blog/my-post`` ou ``/blog/all-about-symfony`` et l'envoyer vers
+un contrôleur qui puisse chercher et retourner cette entrée de blog.
+La route est simple :
 
 .. configuration-block::
 
@@ -67,15 +71,16 @@ The route is simple:
 
         return $collection;
 
-The pattern defined by the ``blog_show`` route acts like ``/blog/*`` where
-the wildcard is given the name ``slug``. For the URL ``/blog/my-blog-post``,
-the ``slug`` variable gets a value of ``my-blog-post``, which is available
-for you to use in your controller (keep reading).
+Le pattern défini par la route ``blog_show`` agit comme ``/blog/*`` où le
+joker (l'étoile) possède le nom ``slug``. Pour l'URL ``/blog/my-blog-post``,
+la variable ``slug`` prend la valeur de ``my-blog-post``, qui est à votre
+disposition dans votre contrôleur (continuez à lire).
 
-The ``_controller`` parameter is a special key that tells Symfony which controller
-should be executed when a URL matches this route. The ``_controller`` string
-is called the :ref:`logical name<controller-string-syntax>`. It follows a
-pattern that points to a specific PHP class and method:
+Le paramètre ``_controller`` est une clé spéciale qui dit à Symfony quel
+contrôleur devrait être exécuté lorsqu'une URL correspond à cette route.
+La chaîne de caractères ``_controller`` est appelée le
+:ref:`nom logique<controller-string-syntax>`. Il suit un pattern qui pointe
+vers une classe et une méthode PHP spécifique :
 
 .. code-block:: php
 
@@ -88,21 +93,21 @@ pattern that points to a specific PHP class and method:
     {
         public function showAction($slug)
         {
-            $blog = // use the $slug varible to query the database
-            
+            $blog = // utilisez la variable $slug pour interroger la base de données
+
             return $this->render('AcmeBlogBundle:Blog:show.html.twig', array(
                 'blog' => $blog,
             ));
         }
     }
 
-Congratulations! You've just created your first route and connected it to
-a controller. Now, when you visit ``/blog/my-post``, the ``showAction`` controller
-will be executed and the ``$slug`` variable will be equal to ``my-post``.
+Félicitations ! Vous venez juste de créer votre première route et de la connecter
+à un contrôleur. Maintenant, quand vous visitez ``/blog/my-post``, le contrôleur
+``showAction`` va être exécuté et la variable ``$slug`` aura la valeur ``my-post``.
 
-This is the goal of the Symfony2 router: to map the URL of a request to a
-controller. Along the way, you'll learn all sorts of tricks that make mapping
-even the most complex URLs easy. 
+Ceci est le but du routeur Symfony2 : faire correspondre l'URL d'une requête
+à un contrôleur. Tout au long du chemin, vous allez apprendre toutes sortes
+d'astuces qui rendent même facile la création des URLs les plus complexes.
 
 .. index::
    single: Routing; Under the hood
