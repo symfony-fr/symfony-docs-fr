@@ -110,39 +110,43 @@ Ceci est le but du routeur Symfony2 : faire correspondre l'URL d'une requête
 d'astuces qui rendent même facile la création des URLs les plus complexes.
 
 .. index::
-   single: Routing; Under the hood
+   single: Routage; Sous le capot
 
-Routing: Under the Hood
------------------------
+Routage: Sous le Capot
+----------------------
 
-When a request is made to your application, it contains an address to the
-exact "resource" that the client is requesting. This address is called the
-URL, (or URI), and could be ``/contact``, ``/blog/read-me``, or anything
-else. Take the following HTTP request for example:
+Quand une requête est faite à votre application, elle contient une adresse
+pointant sur la «ressource» exacte que le client désire. Cette adresse est
+appelée l'URL, (ou l'URI), et pourrait être ``/contact``, ``/blog/read-me``,
+ou n'importe quoi d'autre. Prenez l'exemple de la requête HTTP suivante :
 
 .. code-block:: text
 
     GET /blog/my-blog-post
 
-The goal of the Symfony2 routing system is to parse this URL and determine
-which controller should be executed. The whole process looks like this:
+Le but du système de routage de Symfony2 est d'analyser cette URL et de
+déterminer quel contrôleur devrait être exécuté. Le déroulement complet
+ressemble à ça :
 
-#. The request is handled by the Symfony2 front controller (e.g. ``app.php``);
+#. La requête est gérée par le contrôleur frontal de Symfony2 (par exemple :
+   ``app.php``);
 
-#. The Symfony2 core (i.e. Kernel) asks the router to inspect the request;
+#. Le coeur de Symfony2 (i.e. Kernel) demande au routeur d'inspecter la
+   requête;
 
-#. The router matches the incoming URL to a specific route and returns information
-   about the route, including the controller that should be executed;
+#. Le routeur fait correspondre l'URL entrante à une route spécifique et retourne
+   l'information à propos de la route, incluant le contrôleur qui devrait
+   être exécuté;
 
-#. The Symfony2 Kernel executes the controller, which ultimately returns
-   a ``Response`` object.
+#. Le Kernel Symfony2 exécute le contrôleur, qui finalement retourne un
+   objet ``Response``.
 
 .. figure:: /images/request-flow.png
    :align: center
    :alt: Symfony2 request flow
 
-   The routing layer is a tool that translates the incoming URL into a specific
-   controller to execute.
+   La partie routage est un outil qui traduit l'URL entrante en un contrôleur
+   spécifique à exécuter.
 
 .. index::
    single: Routing; Creating routes
