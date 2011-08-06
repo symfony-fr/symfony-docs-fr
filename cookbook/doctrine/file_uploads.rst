@@ -257,6 +257,7 @@ Next, refactor the ``Document`` class to take advantage of these callbacks::
     {
         /**
          * @ORM\PrePersist()
+         * @ORM\PreUpdate()
          */
         public function preUpload()
         {
@@ -268,6 +269,7 @@ Next, refactor the ``Document`` class to take advantage of these callbacks::
 
         /**
          * @ORM\PostPersist()
+         * @ORM\PostUpdate()
          */
         public function upload()
         {
@@ -298,6 +300,22 @@ The class now does everything you need: it generates a unique filename before
 persisting, moves the file after persisting, and removes the file if the
 entity is ever deleted.
 
+.. note::
+
+    The ``@ORM\PrePersist()`` and ``@ORM\PostPersist()`` event callbacks are
+    triggered before and after the entity is persisted to the database. On the
+    other hand, the ``@ORM\PreUpdate()`` and ``@ORM\PostUpdate()`` event
+    callbacks are called when the entity is updated.
+
+.. caution::
+
+    The ``PreUpdate`` and ``PostUpdate`` callbacks are only triggered if there
+    is a change in one of the entity's field that are persisted. This means
+    that, by default, if you modify only the ``$file`` property, these events
+    will not be triggered, as the property itself is not directly persisted
+    via Doctrine. One solution would be to use an ``updated`` field that's
+    persisted to Doctrine, and to modify it manually when changing the file.
+
 Using the ``id`` as the filename
 --------------------------------
 
@@ -315,6 +333,7 @@ property, instead of the actual filename::
     {
         /**
          * @ORM\PrePersist()
+         * @ORM\PreUpdate()
          */
         public function preUpload()
         {
@@ -325,6 +344,7 @@ property, instead of the actual filename::
 
         /**
          * @ORM\PostPersist()
+         * @ORM\PostUpdate()
          */
         public function upload()
         {

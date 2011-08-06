@@ -120,9 +120,10 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
 
     **2. Utiliser l'ACL sur un système qui ne supporte pas chmod +a**
 
-    Certains systèmes, comme Ubuntu, ne supporte pas la commande``chmod +a``, 
-    mais ils en supportent une autre appelée ``setfacl``. Sur certains systèmes,
-    vous aurez besoin de l'installer avant de pouvoir l'utiliser :
+    Certains systèmes ne supportent pas la commande``chmod +a``, 
+    mais supportent un autre utilitaire appelé ``setfacl``. Vous devrez sans doute
+    `activer le support ACL`_ sur votre partition et installer setfacl avant de
+    pouvoir l'utiliser (comme c'est le cas avec Ubuntu), de cette façon :
 
     .. code-block:: bash
 
@@ -204,6 +205,7 @@ de code. C'est plutôt bien (en fait c'est génial !) car lorsque quelqu'un clon
 récupère le projet, il lui suffit de lancer la commande ``php bin/vendors install``
 pour récupérer toutes les librairies nécessaires.
 
+.. _`activer le support ACL`: https://help.ubuntu.com/community/FilePermissions#ACLs
 .. _`http://symfony.com/download`: http://symfony.com/download
 .. _`Git`: http://git-scm.com/
 .. _`GitHub`: http://help.github.com/set-up-git-redirect
