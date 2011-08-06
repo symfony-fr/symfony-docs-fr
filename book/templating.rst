@@ -1,18 +1,18 @@
 .. index::
    single: Templating
 
-Creating and using Templates
-============================
+Créer et utiliser les templates
+===============================
 
-As you know, the :doc:`controller </book/controller>` is responsible for
-handling each request that comes into a Symfony2 application. In reality,
-the controller delegates the most of the heavy work to other places so that
-code can be tested and reused. When a controller needs to generate HTML,
-CSS or any other content, it hands the work off to the templating engine.
-In this chapter, you'll learn how to write powerful templates that can be
-used to return content to the user, populate email bodies, and more. You'll
-learn shortcuts, clever ways to extend templates and how to reuse template
-code.
+Comme vous le savez, le :doc:`contrôleur </book/controller>` est responsable de
+la gestion de toute les requêtes d'une application Symfony2. En réalité, le contrôleur
+délègue le plus gros du travail à d'autres classes afin que le code puisse être
+testé et réutilisé. Quand un contrôleur a besoin de générer du HTML, CSS ou tout
+autre contenu,  il donne la main au moteur de template.
+Dans ce chapitre, vous apprendrez comment écrire des templates puissants qui peuvent
+être utilisés pour retourner du contenu à l'utilisateur, remplir le corps d'emails
+et bien d'autres. Vous apprendrez des raccourcis, des méthodes ingénieuses pour
+étendre les templates et surtout comment les réutiliser.
 
 .. index::
    single: Templating; What is a template?
