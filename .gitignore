@@ -2,3 +2,5 @@ _*
 Makefile
 make.bat
 conf.py
+
+sphinx-php/
