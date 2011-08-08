@@ -461,23 +461,23 @@ pour la contrainte soit jouez la sécurité en passant toujours dans un tableau d'
 
 .. _validator-constraint-targets:
 
-Constraint Targets
+Objectifs des contraintes
 ------------------
 
-Constraints can be applied to a class property (e.g. ``name``) or a public
-getter method (e.g. ``getFullName``). The first is the most common and easy
-to use, but the second allows you to specify more complex validation rules.
+Les contraintes peuvent être appliquées à une propriété de classe (par ex. ``name``) ou une
+méthode publique getter (par ex. ``getFullName``). Le premier est le plus commun et facile
+à utiliser, mais la seconde vous permet de spécifier des règles de validation plus complexe.
 
 .. index::
    single: Validation; Property constraints
 
-Properties
+Propriétés
 ~~~~~~~~~~
 
-Validating class properties is the most basic validation technique. Symfony2
-allows you to validate private, protected or public properties. The next
-listing shows you how to configure the ``$firstName`` property of an ``Author``
-class to have at least 3 characters.
+Valider des propriétés de classe est la technique de validation la plus basique. Symfony2
+vous permet de valider des propriétés privées, protégées ou publiques. Le prochain
+listing vous montre comment configurer la propriété ``$firstName`` d'une classe ``Author``
+pour avoir au moins 3 caractères.
 
 .. configuration-block::
 
@@ -538,16 +538,16 @@ class to have at least 3 characters.
 Getters
 ~~~~~~~
 
-Constraints can also be applied to the return value of a method. Symfony2
-allows you to add a constraint to any public method whose name starts with
-"get" or "is". In this guide, both of these types of methods are referred
-to as "getters".
+Les contraintes peuvent également être appliqué à la valeur de retour d'une méthode. Symfony2
+vous permet d'ajouter une contrainte à toute méthode publique dont le nom commence par
+"get" ou "is". Dans ce guide, ces deux types de méthodes sont désignées 
+comme "getters".
 
-The benefit of this technique is that it allows you to validate your object
-dynamically. For example, suppose you want to make sure that a password field
-doesn't match the first name of the user (for security reasons). You can
-do this by creating an ``isPasswordLegal`` method, and then asserting that
-this method must return ``true``:
+L'avantage de cette technique est qu'elle vous permet de valider votre objet
+dynamiquement. Par exemple, supposons que vous voulez vous assurer que le champ Mot de passe
+ne correspond pas au prénom de l'utilisateur (pour des raisons de sécurité). vous pouvez
+le faire en créant une méthode ``isPasswordLegal``, puis en affirmant que
+cette méthode doit retourner ``true`` :
 
 .. configuration-block::
 
@@ -602,7 +602,7 @@ this method must return ``true``:
             }
         }
 
-Now, create the ``isPasswordLegal()`` method, and include the logic you need::
+Maintenant, créez la méthode ``isPasswordLegal()``, et incluez la logique que vous avez besoin:: 
 
     public function isPasswordLegal()
     {
@@ -611,25 +611,26 @@ Now, create the ``isPasswordLegal()`` method, and include the logic you need::
 
 .. note::
 
-    The keen-eyed among you will have noticed that the prefix of the getter
-    ("get" or "is") is omitted in the mapping. This allows you to move the
-    constraint to a property with the same name later (or vice versa) without
-    changing your validation logic.
-
+    Les plus perspicaces d'entre vous auront remarqué que le préfixe du getter
+    ("get" ou "is") est omis dans le mapping. Cela vous permet de déplacer la
+    contrainte à une propriété du même nom plus tard (ou vice versa) sans
+    changer votre logique de validation.
+	
+	
 .. _book-validation-validation-groups:
 
-Validation Groups
------------------
+Groupes de Validation
+---------------------
 
-So far, you've been able to add constraints to a class and ask whether or
-not that class passes all of the defined constraints. In some cases, however,
-you'll need to validate an object against only *some* of the constraints
-on that class. To do this, you can organize each constraint into one or more
-"validation groups", and then apply validation against just one group of
-constraints.
+Jusqu'ici, vous avez été en mesure d'ajouter des contraintes à une classe et demander si oui ou
+non que la classe passe toutes les contraintes définies. Dans certains cas, cependant,
+vous aurez besoin de valider un objet contre seulement *certains* des contraintes
+de cette classe. Pour ce faire, vous pouvez organiser chaque contrainte en une ou plusieurs
+"groupes de validation", et ensuite appliquer la validation contre seulement un groupe de
+contraintes.
 
-For example, suppose you have a ``User`` class, which is used both when a
-user registers and when a user updates his/her contact information later:
+Par exemple, supposons que vous avez une classe  ``User``, qui est utilisé à la fois quand un
+utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tard : 
 
 .. configuration-block::
 
@@ -732,33 +733,33 @@ user registers and when a user updates his/her contact information later:
             }
         }
 
-With this configuration, there are two validation groups:
+Avec cette configuration, il y a deux groupes de validation :
 
-* ``Default`` - contains the constraints not assigned to any other group;
+* ``Default`` - contient les contraintes non affecté à tout autre groupe ;
 
-* ``registration`` - contains the constraints on the ``email`` and ``password``
-  fields only.
+* ``registration`` - contient les contraintes sur les champs ``email`` and ``password``
+  seulement.
 
-To tell the validator to use a specific group, pass one or more group names
-as the second argument to the ``validate()`` method::
+Pour dire au validateur d'utiliser un groupe spécifique, passer un ou plusieurs noms de groupe
+comme le deuxième argument de la méthode ``validate()`` ::
 
     $errorList = $validator->validate($author, array('registration'));
 
-Of course, you'll usually work with validation indirectly through the form
-library. For information on how to use validation groups inside forms, see
+Bien sûr, vous travaillerez généralement avec la validation indirectement via la bibliothèque de
+formulaire. Pour plus d'informations sur la façon d'utiliser les groupes de validation à l'intérieur des formulaires, voir
 :ref:`book-forms-validation-groups`.
 
-Final Thoughts
+Pensées finales
 --------------
 
-The Symfony2 ``validator`` is a powerful tool that can be leveraged to
-guarantee that the data of any object is "valid". The power behind validation
-lies in "constraints", which are rules that you can apply to properties or
-getter methods of your object. And while you'll most commonly use the validation
-framework indirectly when using forms, remember that it can be used anywhere
-to validate any object.
+Le ``validator`` de Symfony2 est un outil puissant qui peut être un levier pour
+garantir que les données de n'importe quel objet est «valide». La puissance derrière la validation
+réside dans les «contraintes», qui sont des règles que vous pouvez appliquer aux propriétés ou
+aux méthodes getter de votre objet. Et tandis que vous utiliserez plus communément le système 
+de validation indirectement lors de l'utilisation des formulaires, n'oubliez pas qu'il peut être utilisé partout
+pour valider n'importe quel objet.
 
-Learn more from the Cookbook
+En savoir plus avec le Cookbook
 ----------------------------
 
 * :doc:`/cookbook/validation/custom_constraint`
