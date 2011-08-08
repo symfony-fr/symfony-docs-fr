@@ -112,7 +112,7 @@ Utiliser le Service ``validator``
 
 Ensuite, pour vraiment valider un objet ``Author``, utilisez la méthode ``validate``
 du service ``validator`` (class :class:`Symfony\\Component\\Validator\\Validator`).
-Le travail du ``validator`` est simple : lire les contraintes (ex : règles)
+Le travail du ``validator`` est simple : lire les contraintes (règles)
 d'une classe et vérifier si oui ou non les données sur l'objet satisfont ces
 contraintes. Si la validation échoue, un tableau d'erreurs est retourné. Prenez cet
 exemple simple provenant de l'intérieur d'un contrôleur:
@@ -289,21 +289,22 @@ les annotations, si vous utilisez la méthode d'annotation pour spécifier vos con
 Contraintes
 -----------
 
-The ``validator`` is designed to validate objects against *constraints* (i.e.
-rules). In order to validate an object, simply map one or more constraints
-to its class and then pass it to the ``validator`` service.
+Le ``validator`` est conçu pour valider des objets contre les *contraintes* 
+(règles). Afin de valider un objet, il suffit de mapper une ou plusieurs contraintes
+à sa classe et ensuite de le passer au service ``validator``.
 
-Behind the scenes, a constraint is simply a PHP object that makes an assertive
-statement. In real life, a constraint could be: "The cake must not be burned".
-In Symfony2, constraints are similar: they are assertions that a condition
-is true. Given a value, a constraint will tell you whether or not that value
-adheres to the rules of the constraint.
+Dans les coulisses, une contrainte est simplement un objet PHP qui fait une déclaration affirmative.
+Dans la vraie vie, une contrainte pourrait être : «Le gâteau ne doit pas être brûlé».
+ En Symfony2, les contraintes sont similaires : ce sont des affirmations que la condition
+est vraie. Suivant une valeur, une contrainte vous dira si oui ou non que cette valeur
+adhère aux règles de la contrainte.
+ 
 
-Supported Constraints
+Contraintes soutenues
 ~~~~~~~~~~~~~~~~~~~~~
 
-Symfony2 packages a large number of the most commonly-needed constraints.
-The full list of constraints with details is available in the
+Symfony2 est fourni avec un large nombre des contraintes les plus nécessaires habituellement.
+La liste complète des contraintes avec les détails sont disponibles dans le
 :doc:`constraints reference section</reference/constraints>`.
 
 .. index::
@@ -314,11 +315,11 @@ The full list of constraints with details is available in the
 Constraint Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Some constraints, like :doc:`NotBlank</reference/constraints/NotBlank>`,
-are simple whereas others, like the :doc:`Choice</reference/constraints/Choice>`
-constraint, have several configuration options available. Suppose that the
-``Author`` class has another property, ``gender`` that can be set to either
-"male" or "female":
+Certaines contraintes, comme :doc:`NotBlank</reference/constraints/NotBlank>`,
+sont simples alors que d'autres, comme la contrainte :doc:`Choice</reference/constraints/Choice>`
+ont plusieurs options de configuration disponibles. Supposons que la classe
+``Author`` a une autre propriété, ``gender`` qui peut prendre comme valeur
+«male» ou «female» :
 
 .. configuration-block::
 
@@ -386,10 +387,10 @@ constraint, have several configuration options available. Suppose that the
             }
         }
 
-The options of a constraint can always be passed in as an array. Some constraints,
-however, also allow you to pass the value of one, "*default*", option in place
-of the array. In the case of the ``Choice`` constraint, the ``choices``
-options can be specified in this way.
+Les options d'une contrainte peuvent toujours être passées en tant que tableau. Certaines contraintes,
+cependant, vous permettent également de passer la valeur d'un, "*default*", option au lieu
+du tableau. Dans le cas de la contrainte ``Choice``, les options de ``choices``
+peuvent être spécifiées de cette manière.
 
 .. configuration-block::
 
@@ -448,12 +449,12 @@ options can be specified in this way.
             }
         }
 
-This is purely meant to make the configuration of the most common option of
-a constraint shorter and quicker.
+Ceci est purement destiné à rendre la configuration de l'option la plus commune
+d'une contrainte plus courte et plus rapide.
 
-If you're ever unsure of how to specify an option, either check the API documentation
-for the constraint or play it safe by always passing in an array of options
-(the first method shown above).
+Si jamais vous êtes incertain de la façon de spécifier une option, soit vérifiez la documentation de l'API
+pour la contrainte soit jouez la sécurité en passant toujours dans un tableau d'options
+(la première méthode indiquée ci-dessus).
 
 .. index::
    single: Validation; Constraint targets
