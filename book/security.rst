@@ -102,7 +102,7 @@ nom d'utilisateur/mot de passe):
         ));
 
 .. tip::
-    La distribution standard de Symfony place la configuration de la sécurité dans un fichier 
+    Une distribution Symfony standard place la configuration de la sécurité dans un fichier 
     séparé (``app/config/security.yml``). Si vous ne voulez pas utiliser un fichier séparé,
     vous pouvez mettre la configuration directement dans le fichier principal de configuration
     (``app/config/security.yml``).
