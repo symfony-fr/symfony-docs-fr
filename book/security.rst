@@ -4,7 +4,7 @@ La sécurité est un processus comprenant 2 étapes, dont le but est de préveni
 d'accéder à une ressource à laquelle il n'a pas accès.
 Dans la première étape du processus, le système de sécurité identifie l'utilisateur en lui 
 demandant de soumettre une sorte d'identification. C'est ce qu'on appelle l'**authentification**,
-et cela signifie que le système cherche à savoir qui nous sommes.
+et cela signifie que le système cherche à savoir qui vous êtes.
 Une fois que le système sait qui nous sommes, l'étape suivante est de déterminer si nous avons
 accès à une ressource donnée. Cette étape du processus est appelée **autorisation**, et cela 
 signifie que le système vérifie si vous avez les privilèges pour exécuter certaines actions.
@@ -24,7 +24,7 @@ Le composant de sécurité peut être configuré grâce aux fichiers de configur
 En fait, la plupart des réglages de sécurité ne nécessitent que l'utilisation d'une
 configuration adéquate. La configuration suivante indique à Symfony de sécuriser toute URL
 correspondant au format ``/admin/*`` et de demander à l'utilisateur de s'authentifier
-en utilisant l'authentification HTTP (c'est-à-dire la boite désuète avec 
+en utilisant l'authentification HTTP (c'est-à-dire la boite à l'ancienne avec 
 nom d'utilisateur/mot de passe):
 
 .. configuration-block::
@@ -39,13 +39,16 @@ nom d'utilisateur/mot de passe):
                     anonymous: ~
                     http_basic:
                         realm: "Secured Demo Area"
+                        
             access_control:
                 - { path: ^/admin, roles: ROLE_ADMIN }
+                
             providers:
                 in_memory:
                     users:
                         ryan:  { password: ryanpass, roles: 'ROLE_USER' }
                         admin: { password: kitten, roles: 'ROLE_ADMIN' }
+                        
             encoders:
                 Symfony\Component\Security\Core\User\User: plaintext
 
@@ -56,18 +59,22 @@ nom d'utilisateur/mot de passe):
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+            
             <config>
                 <firewall name="secured_area" pattern="^/">
                     <anonymous />
                     <http-basic realm="Secured Demo Area" />
                 </firewall>
-                <access-control>
+            
+            	<access-control>
                     <rule path="^/admin" role="ROLE_ADMIN" />
                 </access-control>
+                
                 <provider name="in_memory">
                     <user name="ryan" password="ryanpass" roles="ROLE_USER" />
                     <user name="admin" password="kitten" roles="ROLE_ADMIN" />
                 </provider>
+                
                 <encoder class="Symfony\Component\Security\Core\User\User" algorithm="plaintext" />
             </config>
         </srv:container>
@@ -102,7 +109,7 @@ nom d'utilisateur/mot de passe):
         ));
 
 .. tip::
-    La distribution standard de Symfony place la configuration de la sécurité dans un fichier 
+    Une distribution Symfony standard place la configuration de la sécurité dans un fichier 
     séparé (``app/config/security.yml``). Si vous ne voulez pas utiliser un fichier séparé,
     vous pouvez mettre la configuration directement dans le fichier principal de configuration
     (``app/config/security.yml``).
@@ -121,7 +128,7 @@ Voyons rapidement comment la sécurité fonctionne et quel est le rôle de chaqu
 la configuration.
 
 Comment fonctionne la sécurité : authentification et autorisation
-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 Le système de sécurité de Symfony commence par déterminer qui est l'utilisateur 
 (c'est l'authentification) puis par voir si il a accès à une ressource ou une URL.
@@ -131,7 +138,7 @@ Pare-feu (authentification)
 
 Lorsqu'un utilisateur fait une requête à une URL qui est protégée par un pare-feu (firewall),
 le système de sécurité est activé. Le rôle du pare-feu est de déterminer si un utilisateur doit 
-ou ne doit pas être authentifié, et s?il doit l'être, de retourner une réponse à l'utilisateur 
+ou ne doit pas être authentifié, et s'il doit l'être, de retourner une réponse à l'utilisateur 
 afin d'entamer le processus d'authentification.
 
 Un pare-feu est activé lorsque l'URL d'une requête correspond à un ``masque`` 
@@ -165,14 +172,14 @@ la base de la plupart des mécanismes d'autorisation: un utilisateur peut accéd
    :align: center
 
 Comme précédemment, quand l'utilisateur fait une requête, le pare-feu ne lui demande pas de
-s'authentifier. Par contre, dès que la couche de contrôle d'accès refus l'accès à l'utilisateur
+s'authentifier. Par contre, dès que la couche de contrôle d'accès refuse l'accès à l'utilisateur
 (parce que l'utilisateur anonyme ne possède pas le rôle ``ROLE_ADMIN``), le pare-feu entre 
 en action et initialise le processus d'authentification.
 
 Le processus d'authentification dépend du mécanisme d'authentification que vous utilisez.
-Par exemple, si vous utilisez la méthode d'authentification par formulaire de connexion
-(form login authentication method), l'utilisateu sera redirigé à la page de formulaire 
-de connexion. Si vous utilisez l'authentification HTTP, l'utilisateur recevra une réponse HTTP 401
+Par exemple, si vous utilisez la méthode d'authentification par formulaire de connexion, 
+l'utilisateur sera redirigé à la page de formulaire de connexion. 
+Si vous utilisez l'authentification HTTP, l'utilisateur recevra une réponse HTTP 401
 et verra donc la boite contenant les champs nom d'usager et mot de passe.
 
 L'utilisateur a maintenant la possibilité de soumettre ses informations d'identification
@@ -232,7 +239,7 @@ ou les authentifications via Twitter. Quel que soit la méthode d'authentificati
 .. _book-security-form-login:
 
 Utilisation d'un formulaire de connexion traditionnel
-------------------------------------------------
+-----------------------------------------------------
 
 Pour l'instant, vous avez vu comment protéger votre application derrière un pare-feu et
 ensuite comment protéger l'accès à certaines zones en utilisant les rôles. En utilisant 
@@ -246,7 +253,9 @@ Dans cette section, vous allez améliorer le processus en autorisant l'utilisate
 D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
 
 .. configuration-block::
+
     .. code-block:: yaml
+    
         # app/config/config.yml
         security:
             firewalls:
@@ -264,6 +273,7 @@ D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+            
             <config>
                 <firewall name="secured_area" pattern="^/">
                     <anonymous />
@@ -296,6 +306,7 @@ D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
     .. configuration-block::
 
         .. code-block:: yaml
+        
             form_login: ~
 
         .. code-block:: xml
@@ -327,13 +338,16 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
 
         <!-- app/config/routing.xml -->
         <?xml version="1.0" encoding="UTF-8" ?>
+        
         <routes xmlns="http://symfony.com/schema/routing"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+            
             <route id="login" pattern="/login">
                 <default key="_controller">AcmeSecurityBundle:Security:login</default>
             </route>
             <route id="login_check" pattern="/login_check" />
+            
         </routes>
 
     ..  code-block:: php
@@ -341,7 +355,9 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
         // app/config/routing.php
         use Symfony\Component\Routing\RouteCollection;
         use Symfony\Component\Routing\Route;
+        
         $collection = new RouteCollection();
+        
         $collection->add('login', new Route('/login', array(
             '_controller' => 'AcmeDemoBundle:Security:login',
         )));
@@ -350,7 +366,7 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
 
 .. note::
 
-    Vous *ne n'avez pas*  à implémenter un contrôleur pour l'URL ``/login_check``
+    Vous *n'avez pas*  à implémenter un contrôleur pour l'URL ``/login_check``
     car le pare-feu va automatiquement intercepter et traiter tout formulaire soumis
     à cette URL. Il est optionnel, mais utile de créer une route que vous pourrez utiliser
     pour générer l'URL de soumission du formulaire dans le template de connexion plus bas.
@@ -401,20 +417,25 @@ Il ne nous reste qu'à créer le template correspondant :
 .. configuration-block::
 
     .. code-block:: html+jinja
+    
         {# src/Acme/SecurityBundle/Resources/views/Security/login.html.twig #}
         {% if error %}
             <div>{{ error.message }}</div>
         {% endif %}
+        
         <form action="{{ path('login_check') }}" method="post">
             <label for="username">Nom d'usager:</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="_password" />
+            
             {#
                 Si vous voulez controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
                 (plus de détails plus bas)
                 <input type="hidden" name="_target_path" value="/account" />
             #}
+            
             <input type="submit" name="login" />
         </form>
 
@@ -424,9 +445,11 @@ Il ne nous reste qu'à créer le template correspondant :
         <?php if ($error): ?>
             <div><?php echo $error->getMessage() ?></div>
         <?php endif; ?>
+        
         <form action="<?php echo $view['router']->generate('login_check') ?>" method="post">
-            <label for="username">Nom d'usager:</label>
+            <label for="username">Nom d'utilisateur:</label>
             <input type="text" id="username" name="_username" value="<?php echo $last_username ?>" />
+            
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="_password" />
             <!--
@@ -434,6 +457,7 @@ Il ne nous reste qu'à créer le template correspondant :
                 (plus de détails plus bas)
                 <input type="hidden" name="_target_path" value="/account" />
             -->
+            
             <input type="submit" name="login" />
         </form>
 
@@ -593,7 +617,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
     plupart des applications, avoir un seul pare-feu est suffisant.
 
 Autorisation
--------------
+------------
 
 La première étape en scurité est toujours l'authentification: le processus de vérifier
 qui l'utilisateur est. Avec Symfony, l'authentification peut être faite de toutes les façons
@@ -613,7 +637,7 @@ appels de méthodes...) grâce aux rôles. Plus tard, vous apprendrez comment le
 peuvent être créés et assignés aux utilisateurs.
 
 Sécurisation d'URLs spécifiques
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La façon la plus simple pour sécuriser une partie de votre application est de sécuriser un masque
 d'URL au complet. Vous avez déjà vu dans le premier exemple de ce chapitre, où tout ce qui
@@ -733,7 +757,7 @@ différents services et méthodes de votre application, voir
 :doc:`/cookbook/security/securing_services`.
 
 Listes de contrôle d'accès (ACL): sécuriser des objets de la base de données
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Imaginez que vous êtes en train de concevoir un système de blogue où les utilisateurs
 peuvent écrire des commentaires sur les articles. Mais vous voulez qu'un utilisateur
@@ -757,7 +781,7 @@ ressources en exigeant un ensemble de rôles pour une ressource. Dans cette sect
 explorer l'autre aspect de l'autorisation : les utilisateurs.
 
 D'où viennent les utilisateurs (*Fournisseurs d'utilisateurs*)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Au cours de l'authentification, l'utilisateur soumet ses informations d'identité (généralement
 un nom d'usager et un mot de passe). La responsabilité du système d'authentification
@@ -932,7 +956,7 @@ Pour plus apprendre comment créer votre propre fournisseur (par exemple si vous
 des utilisateurs depuis un service Web), reportez-vous à :doc:`/cookbook/security/custom_provider`.
 
 Encoder les mots de passe
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Jusqu'à maintenant, afin de garder ça simple, les mots de passe des utilisateurs ont tous été
 conservés au format texte (qu'il soit sauvegardé dans un fichier de configuration ou dans
@@ -955,6 +979,7 @@ en utilisant ``sha1``, suivez les instructions suivantes:
                     users:
                         ryan:  { password: bb87a29949f3a1ee0559f8a57357487151281386, roles: 'ROLE_USER' }
                         admin: { password: 74913f5cd5f61ec0bcfdb775414c2fb3d161b620, roles: 'ROLE_ADMIN' }
+		
             encoders:
                 Symfony\Component\Security\Core\User\User:
                     algorithm:   sha1
@@ -970,6 +995,7 @@ en utilisant ``sha1``, suivez les instructions suivantes:
                 <user name="ryan" password="bb87a29949f3a1ee0559f8a57357487151281386" roles="ROLE_USER" />
                 <user name="admin" password="74913f5cd5f61ec0bcfdb775414c2fb3d161b620" roles="ROLE_ADMIN" />
             </provider>
+            
             <encoder class="Symfony\Component\Security\Core\User\User" algorithm="sha1" iterations="1" encode_as_base64="false" />
         </config>
 
@@ -1010,9 +1036,11 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
 .. configuration-block::
 
     .. code-block:: yaml
+    
         # app/config/config.yml
         security:
             # ...
+            
             encoders:
                 Acme\UserBundle\Entity\User: sha512
 
@@ -1021,6 +1049,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
         <!-- app/config/config.xml -->
         <config>
             <!-- ... -->
+            
             <encoder class="Acme\UserBundle\Entity\User" algorithm="sha512" />
         </config>
 
@@ -1029,6 +1058,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
         // app/config/config.php
         $container->loadFromExtension('security', array(
             // ...
+            
             'encoders' => array(
                 'Acme\UserBundle\Entity\User' => 'sha512',
             ),
@@ -1075,7 +1105,7 @@ récupérer via le service ``security.context``. Depuis un controleur, cela ress
     ``IS_AUTHENTICATED_FULLY``.
 
 Utiliser plusieurs fournisseurs d'utilisateurs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Chaque mécanisme d'authentification (par exemple authentification HTTP, formulaire de connexion, 
 etc...) utilise exactement un fournisseur d'utilisateur (user provider), et va utiliser 
@@ -1146,6 +1176,7 @@ depuis les fournisseurs ``in_memory`` et ``user_db``.
     .. configuration-block::
 
         .. code-block:: yaml
+        
             # app/config/security.yml
             security:
                 providers:
@@ -1373,10 +1404,13 @@ de l'utiliser pour générer l'URL:
 
         <!-- app/config/routing.xml -->
         <?xml version="1.0" encoding="UTF-8" ?>
+        
         <routes xmlns="http://symfony.com/schema/routing"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-            <route id="logout" pattern="/logout" />
+        
+        	<route id="logout" pattern="/logout" />
+        
         </routes>
 
     ..  code-block:: php
@@ -1384,8 +1418,10 @@ de l'utiliser pour générer l'URL:
         // app/config/routing.php
         use Symfony\Component\Routing\RouteCollection;
         use Symfony\Component\Routing\Route;
+        
         $collection = new RouteCollection();
         $collection->add('logout', new Route('/logout', array()));
+        
         return $collection;
 
 Une fois qu'un utilisateur s'est déconnecté, il sera redirigé à l'URL définie par le paramètre
@@ -1443,7 +1479,7 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
     détails.
 
 "Usurper l'identité" d'un utilisateur
------------------------------------
+-------------------------------------
 
 Parfois, il peut être utile de pouvoir passer d'un utilisateur à un autre sans avoir 
 à se déconnecter et à se reconnecter (par exemple si vous êtes en train de débugguer ou de 
