@@ -24,7 +24,7 @@ Le composant de sécurité peut être configuré grâce aux fichiers de configur
 En fait, la plupart des réglages de sécurité ne nécessitent que l'utilisation d'une
 configuration adéquate. La configuration suivante indique à Symfony de sécuriser toute URL
 correspondant au format ``/admin/*`` et de demander à l'utilisateur de s'authentifier
-en utilisant l'authentification HTTP (c'est-à-dire la boite désuète avec 
+en utilisant l'authentification HTTP (c'est-à-dire la boite à l'ancienne avec 
 nom d'utilisateur/mot de passe):
 
 .. configuration-block::
