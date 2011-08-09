@@ -4,7 +4,7 @@ La sécurité est un processus comprenant 2 étapes, dont le but est de préveni
 d'accéder à une ressource à laquelle il n'a pas accès.
 Dans la première étape du processus, le système de sécurité identifie l'utilisateur en lui 
 demandant de soumettre une sorte d'identification. C'est ce qu'on appelle l'**authentification**,
-et cela signifie que le système cherche à savoir qui nous sommes.
+et cela signifie que le système cherche à savoir qui vous êtes.
 Une fois que le système sait qui nous sommes, l'étape suivante est de déterminer si nous avons
 accès à une ressource donnée. Cette étape du processus est appelée **autorisation**, et cela 
 signifie que le système vérifie si vous avez les privilèges pour exécuter certaines actions.
