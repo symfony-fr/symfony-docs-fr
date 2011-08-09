@@ -1,51 +1,52 @@
 .. index::
-   single: Translations
+   single: Traductions
 
-Translations
+Traductions
 ============
 
-The term "internationalization" refers to the process of abstracting strings
-and other locale-specific pieces out of your application and into a layer
-where they can be translated and converted based on the user's locale (i.e.
-language and country). For text, this means wrapping each with a function
-capable of translating the text (or "message") into the language of the user::
+Le terme «internationalisation» se réfère au processus d'extraire des chaines 
+et autres spécificités locales hors de votre application et de le mettre dans un fichier
+où ils peuvent être traduits et convertis basé sur le locale de l'utilisateur (cad
+la langue et le pays). Pour le texte, cela signifie envelopper chaque texte avec une fonction
+capable de traduire le texte (ou "message") dans la langue de l'utilisateur::
 
-    // text will *always* print out in English
+    // le texte va *toujours* s'afficher en anglais
     echo 'Hello World';
 
-    // text can be translated into the end-user's language or default to English
+    // le texte peut être traduit dans le langage de l'utilisateur final ou par défaut en anglais
     echo $translator->trans('Hello World');
 
 .. note::
 
-    The term *locale* refers roughly to the user's language and country. It
-    can be any string that your application then uses to manage translations
-    and other format differences (e.g. currency format). We recommended the
-    ISO639-1 *language* code, an underscore (``_``), then the ISO3166 *country*
-    code (e.g. ``fr_FR`` for French/France).
+    Le terme *locale* se réfère en gros à la langue et au pays de l'utilisateur. Ca
+    peut être n'importe quel chaîne que votre application va utiliser ensuite pour gérer
+	les traudctions et autres différences de format (par ex. format de monnaie). Nous recommandons 
+	le code *language* ISO639-1 , un underscore (``_``), ensuite le code *country* ISO3166 
+    (par ex. ``fr_FR`` for French/France).
 
-In this chapter, we'll learn how to prepare an application to support multiple
-locales and then how to create translations for multiple locales. Overall,
-the process has several common steps:
+Dans ce chapitre, nous allons apprendre comment préparer une application à soutenir de multiples
+locales et ensuite comment créer des traductions pour plusieurs locales. Dans l'ensemble,
+le processus a plusieurs étapes communes :
+	
+1. Activer et configurer le composant  ``Translation`` de Symfony ;
 
-1. Enable and configure Symfony's ``Translation`` component;
+1. Extraire les chaînes (cad "messages") en les enveloppant dans des appels vers le ``Translator`` ;
 
-1. Abstract strings (i.e. "messages") by wrapping them in calls to the ``Translator``;
+1. Créer des ressources de traduction pour chaque locale supporté qui traduit
+   chaque message dans l'application ;
 
-1. Create translation resources for each supported locale that translate
-   each message in the application;
+1. Déterminer, définir et gérer le locale de l'utilisateur dans la session.
 
-1. Determine, set and manage the user's locale in the session.
 
 .. index::
-   single: Translations; Configuration
+   single: Traductions ; Configuration
 
 Configuration
 -------------
 
-Translations are handled by a ``Translator`` :term:`service` that uses the
-user's locale to lookup and return translated messages. Before using it,
-enable the ``Translator`` in your configuration:
+Les traductions sont traités par le ``Translator`` :term:`service` qui utilise le 
+locale de l'utilisateur pour chercher et retourner les messages traduits. Avant de l'utiliser,
+activez le ``Translator`` dans votre configuration :
 
 .. configuration-block::
 
@@ -69,29 +70,29 @@ enable the ``Translator`` in your configuration:
             'translator' => array('fallback' => 'en'),
         ));
 
-The ``fallback`` option defines the fallback locale when a translation does
-not exist in the user's locale.
+L'option ``fallback`` définit le locale de secours quand une traduction
+n'existe pas dans le locale de l'utilisateur.
 
 .. tip::
 
-    When a translation does not exist for a locale, the translator first tries
-    to find the translation for the language (``fr`` if the locale is
-    ``fr_FR`` for instance). If this also fails, it looks for a translation
-    using the fallback locale.
+	Quand une traduction n'existe pas pour un locale, le translator essaye tout d'abord
+	de trouver une traduction pour ce langage (``fr`` si le locale est 
+	``fr_FR`` par exemple). Si cela échoue également, il regarde pour une traduction
+     utilisant le locale de secours.
 
-The locale used in translations is the one stored in the user session.
+Le locale utilisé en traductions est celui qui est stocké dans la session de l'utilisateur.
 
 .. index::
-   single: Translations; Basic translation
+   single: Traductions; Traduction basique
 
-Basic Translation
+Traduction Basique
 -----------------
 
-Translation of text is done through the  ``translator`` service
-(:class:`Symfony\\Component\\Translation\\Translator`). To translate a block
-of text (called a *message*), use the
-:method:`Symfony\\Component\\Translation\\Translator::trans` method. Suppose,
-for example, that we're translating a simple message from inside a controller:
+La traduction du texte est faite à travers le service ``translator`` 
+(:class:`Symfony\\Component\\Translation\\Translator`). Pour traduire un bloc 
+de texte (appelé un *message*), utilisez la méthode
+:method:`Symfony\\Component\\Translation\\Translator::trans`. Supposons,
+par exemple, que nous traduisons un simple message de l'intérieur d'un controlleur :
 
 .. code-block:: php
 
@@ -102,12 +103,12 @@ for example, that we're translating a simple message from inside a controller:
         return new Response($t);
     }
 
-When this code is executed, Symfony2 will attempt to translate the message
-"Symfony2 is great" based on the ``locale`` of the user. For this to work,
-we need to tell Symfony2 how to translate the message via a "translation
-resource", which is a collection of message translations for a given locale.
-This "dictionary" of translations can be created in several different formats,
-XLIFF being the recommended format:
+Quand ce code est exécuté, Symfony2 va essayé de traduire ce message
+"Symfony2 is great" basé sur le ``locale`` de l'utilisateur. Pour que cela marche,
+nous devons dire à Symfony2 comment traduire le message via une "translation
+resource", qui est une collection de traductions de message pour un locale donné.
+Ce "dictionnaire" de traduction peut être créé en plusieurs formats différents,
+XLIFF étant le format recommandé :
 
 .. configuration-block::
 
@@ -138,27 +139,27 @@ XLIFF being the recommended format:
         # messages.fr.yml
         Symfony2 is great: J'aime Symfony2
 
-Now, if the language of the user's locale is French (e.g. ``fr_FR`` or ``fr_BE``),
-the message will be translated into ``J'aime Symfony2``.
+Maintentn, si le langage du locale de l'utilisateur est le français, (cad ``fr_FR`` or ``fr_BE``),
+le message va être traduit en ``J'aime Symfony2``.
 
-The Translation Process
+Le Process de Traduction
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-To actually translate the message, Symfony2 uses a simple process:
+Pour traduire généralement le message, Symfony2 utilise un processus simple :
 
-* The ``locale`` of the current user, which is stored in the session, is determined;
+* Le ``locale`` de l'utilisateur actuel, qui est stocké dans la session, est déterminé ;
 
-* A catalog of translated messages is loaded from translation resources defined
-  for the ``locale`` (e.g. ``fr_FR``). Messages from the fallback locale are
-  also loaded and added to the catalog if they don't already exist. The end
-  result is a large "dictionary" of translations. See `Message Catalogues`_
-  for more details;
+* Un catalogue des messages traduits est chargé depuis les ressources de traduction définies
+  pour le ``locale`` (cad ``fr_FR``). Les messages du locale de secours sont
+  aussi chargés et ajoutés au catalogue s'ils n'existent pas déjà. Le
+  résultat final est un large "dictionnaire" de traductions. Voir `Message Catalogues`_
+  pour plus de détails ;
 
-* If the message is located in the catalog, the translation is returned. If
-  not, the translator returns the original message.
-
-When using the ``trans()`` method, Symfony2 looks for the exact string inside
-the appropriate message catalog and returns it (if it exists).
+* Si le message est dans le catalogue, la traduction est retournée. Si non,
+  le translator retourne le message original.
+  
+Lorsque vous utilisez  la méthode ``trans()``, Symfony2 cherche la chaîne exacte à l'intérieur
+du catalogue de messages approprié et la retourne (si elle existe).
 
 .. index::
    single: Translations; Message placeholders
@@ -166,7 +167,7 @@ the appropriate message catalog and returns it (if it exists).
 Message Placeholders
 ~~~~~~~~~~~~~~~~~~~~
 
-Sometimes, a message containing a variable needs to be translated:
+Parfois, un message contenant une variable a besoin d'être traduit :
 
 .. code-block:: php
 
@@ -177,11 +178,11 @@ Sometimes, a message containing a variable needs to be translated:
         return new Response($t);
     }
 
-However, creating a translation for this string is impossible since the translator
-will try to look up the exact message, including the variable portions
-(e.g. "Hello Ryan" or "Hello Fabien"). Instead of writing a translation
-for every possible iteration of the ``$name`` variable, we can replace the
-variable with a "placeholder":
+Cependant, créer une traduction pour cette chaîne est impossible étant donné que le translator
+va essayer de trouver le message exact, incluant les portions de la variable
+(cad "Hello Ryan" or "Hello Fabien"). Au lieu d'écrire une traduction
+pour tous les itérations possibles de la variable ``$name``, nous pouvons remplacer la
+variable avec un "placeholder":
 
 .. code-block:: php
 
@@ -192,9 +193,9 @@ variable with a "placeholder":
         new Response($t);
     }
 
-Symfony2 will now look for a translation of the raw message (``Hello %name%``)
-and *then* replace the placeholders with their values. Creating a translation
-is done just as before:
+Symfony2 va maintenant chercher une traduction du message brut (``Hello %name%``)
+et *ensuite* remplacer les placeholders avec leurs valeurs. Créer une traduction
+est fait juste comme avant :
 
 .. configuration-block::
 
@@ -818,8 +819,8 @@ for that library.
 
 Summary
 -------
-
 With the Symfony2 Translation component, creating an internationalized application
+
 no longer needs to be a painful process and boils down to just a few basic
 steps:
 
