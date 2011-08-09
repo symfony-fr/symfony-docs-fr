@@ -39,13 +39,16 @@ nom d'utilisateur/mot de passe):
                     anonymous: ~
                     http_basic:
                         realm: "Secured Demo Area"
+                        
             access_control:
                 - { path: ^/admin, roles: ROLE_ADMIN }
+                
             providers:
                 in_memory:
                     users:
                         ryan:  { password: ryanpass, roles: 'ROLE_USER' }
                         admin: { password: kitten, roles: 'ROLE_ADMIN' }
+                        
             encoders:
                 Symfony\Component\Security\Core\User\User: plaintext
 
@@ -56,18 +59,22 @@ nom d'utilisateur/mot de passe):
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+            
             <config>
                 <firewall name="secured_area" pattern="^/">
                     <anonymous />
                     <http-basic realm="Secured Demo Area" />
                 </firewall>
-                <access-control>
+            
+            	<access-control>
                     <rule path="^/admin" role="ROLE_ADMIN" />
                 </access-control>
+                
                 <provider name="in_memory">
                     <user name="ryan" password="ryanpass" roles="ROLE_USER" />
                     <user name="admin" password="kitten" roles="ROLE_ADMIN" />
                 </provider>
+                
                 <encoder class="Symfony\Component\Security\Core\User\User" algorithm="plaintext" />
             </config>
         </srv:container>
@@ -246,7 +253,9 @@ Dans cette section, vous allez améliorer le processus en autorisant l'utilisate
 D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
 
 .. configuration-block::
+
     .. code-block:: yaml
+    
         # app/config/config.yml
         security:
             firewalls:
@@ -264,6 +273,7 @@ D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+            
             <config>
                 <firewall name="secured_area" pattern="^/">
                     <anonymous />
@@ -296,6 +306,7 @@ D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
     .. configuration-block::
 
         .. code-block:: yaml
+        
             form_login: ~
 
         .. code-block:: xml
@@ -327,13 +338,16 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
 
         <!-- app/config/routing.xml -->
         <?xml version="1.0" encoding="UTF-8" ?>
+        
         <routes xmlns="http://symfony.com/schema/routing"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+            
             <route id="login" pattern="/login">
                 <default key="_controller">AcmeSecurityBundle:Security:login</default>
             </route>
             <route id="login_check" pattern="/login_check" />
+            
         </routes>
 
     ..  code-block:: php
@@ -341,7 +355,9 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
         // app/config/routing.php
         use Symfony\Component\Routing\RouteCollection;
         use Symfony\Component\Routing\Route;
+        
         $collection = new RouteCollection();
+        
         $collection->add('login', new Route('/login', array(
             '_controller' => 'AcmeDemoBundle:Security:login',
         )));
@@ -350,7 +366,7 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
 
 .. note::
 
-    Vous *ne n'avez pas*  à implémenter un contrôleur pour l'URL ``/login_check``
+    Vous *n'avez pas*  à implémenter un contrôleur pour l'URL ``/login_check``
     car le pare-feu va automatiquement intercepter et traiter tout formulaire soumis
     à cette URL. Il est optionnel, mais utile de créer une route que vous pourrez utiliser
     pour générer l'URL de soumission du formulaire dans le template de connexion plus bas.
@@ -401,20 +417,25 @@ Il ne nous reste qu'à créer le template correspondant :
 .. configuration-block::
 
     .. code-block:: html+jinja
+    
         {# src/Acme/SecurityBundle/Resources/views/Security/login.html.twig #}
         {% if error %}
             <div>{{ error.message }}</div>
         {% endif %}
+        
         <form action="{{ path('login_check') }}" method="post">
             <label for="username">Nom d'usager:</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="_password" />
+            
             {#
                 Si vous voulez controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
                 (plus de détails plus bas)
                 <input type="hidden" name="_target_path" value="/account" />
             #}
+            
             <input type="submit" name="login" />
         </form>
 
@@ -424,9 +445,11 @@ Il ne nous reste qu'à créer le template correspondant :
         <?php if ($error): ?>
             <div><?php echo $error->getMessage() ?></div>
         <?php endif; ?>
+        
         <form action="<?php echo $view['router']->generate('login_check') ?>" method="post">
-            <label for="username">Nom d'usager:</label>
+            <label for="username">Nom d'utilisateur:</label>
             <input type="text" id="username" name="_username" value="<?php echo $last_username ?>" />
+            
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="_password" />
             <!--
@@ -434,6 +457,7 @@ Il ne nous reste qu'à créer le template correspondant :
                 (plus de détails plus bas)
                 <input type="hidden" name="_target_path" value="/account" />
             -->
+            
             <input type="submit" name="login" />
         </form>
 
@@ -955,6 +979,7 @@ en utilisant ``sha1``, suivez les instructions suivantes:
                     users:
                         ryan:  { password: bb87a29949f3a1ee0559f8a57357487151281386, roles: 'ROLE_USER' }
                         admin: { password: 74913f5cd5f61ec0bcfdb775414c2fb3d161b620, roles: 'ROLE_ADMIN' }
+		
             encoders:
                 Symfony\Component\Security\Core\User\User:
                     algorithm:   sha1
@@ -970,6 +995,7 @@ en utilisant ``sha1``, suivez les instructions suivantes:
                 <user name="ryan" password="bb87a29949f3a1ee0559f8a57357487151281386" roles="ROLE_USER" />
                 <user name="admin" password="74913f5cd5f61ec0bcfdb775414c2fb3d161b620" roles="ROLE_ADMIN" />
             </provider>
+            
             <encoder class="Symfony\Component\Security\Core\User\User" algorithm="sha1" iterations="1" encode_as_base64="false" />
         </config>
 
@@ -1010,9 +1036,11 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
 .. configuration-block::
 
     .. code-block:: yaml
+    
         # app/config/config.yml
         security:
             # ...
+            
             encoders:
                 Acme\UserBundle\Entity\User: sha512
 
@@ -1021,6 +1049,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
         <!-- app/config/config.xml -->
         <config>
             <!-- ... -->
+            
             <encoder class="Acme\UserBundle\Entity\User" algorithm="sha512" />
         </config>
 
@@ -1029,6 +1058,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
         // app/config/config.php
         $container->loadFromExtension('security', array(
             // ...
+            
             'encoders' => array(
                 'Acme\UserBundle\Entity\User' => 'sha512',
             ),
@@ -1146,6 +1176,7 @@ depuis les fournisseurs ``in_memory`` et ``user_db``.
     .. configuration-block::
 
         .. code-block:: yaml
+        
             # app/config/security.yml
             security:
                 providers:
@@ -1373,10 +1404,13 @@ de l'utiliser pour générer l'URL:
 
         <!-- app/config/routing.xml -->
         <?xml version="1.0" encoding="UTF-8" ?>
+        
         <routes xmlns="http://symfony.com/schema/routing"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-            <route id="logout" pattern="/logout" />
+        
+        	<route id="logout" pattern="/logout" />
+        
         </routes>
 
     ..  code-block:: php
@@ -1384,8 +1418,10 @@ de l'utiliser pour générer l'URL:
         // app/config/routing.php
         use Symfony\Component\Routing\RouteCollection;
         use Symfony\Component\Routing\Route;
+        
         $collection = new RouteCollection();
         $collection->add('logout', new Route('/logout', array()));
+        
         return $collection;
 
 Une fois qu'un utilisateur s'est déconnecté, il sera redirigé à l'URL définie par le paramètre
