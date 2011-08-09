@@ -121,7 +121,7 @@ Voyons rapidement comment la sécurité fonctionne et quel est le rôle de chaqu
 la configuration.
 
 Comment fonctionne la sécurité : authentification et autorisation
-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 Le système de sécurité de Symfony commence par déterminer qui est l'utilisateur 
 (c'est l'authentification) puis par voir si il a accès à une ressource ou une URL.
@@ -131,7 +131,7 @@ Pare-feu (authentification)
 
 Lorsqu'un utilisateur fait une requête à une URL qui est protégée par un pare-feu (firewall),
 le système de sécurité est activé. Le rôle du pare-feu est de déterminer si un utilisateur doit 
-ou ne doit pas être authentifié, et s?il doit l'être, de retourner une réponse à l'utilisateur 
+ou ne doit pas être authentifié, et s'il doit l'être, de retourner une réponse à l'utilisateur 
 afin d'entamer le processus d'authentification.
 
 Un pare-feu est activé lorsque l'URL d'une requête correspond à un ``masque`` 
@@ -165,7 +165,7 @@ la base de la plupart des mécanismes d'autorisation: un utilisateur peut accéd
    :align: center
 
 Comme précédemment, quand l'utilisateur fait une requête, le pare-feu ne lui demande pas de
-s'authentifier. Par contre, dès que la couche de contrôle d'accès refus l'accès à l'utilisateur
+s'authentifier. Par contre, dès que la couche de contrôle d'accès refuse l'accès à l'utilisateur
 (parce que l'utilisateur anonyme ne possède pas le rôle ``ROLE_ADMIN``), le pare-feu entre 
 en action et initialise le processus d'authentification.
 
