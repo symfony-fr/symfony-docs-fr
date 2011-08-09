@@ -170,9 +170,9 @@ s'authentifier. Par contre, dès que la couche de contrôle d'accès refuse l'ac
 en action et initialise le processus d'authentification.
 
 Le processus d'authentification dépend du mécanisme d'authentification que vous utilisez.
-Par exemple, si vous utilisez la méthode d'authentification par formulaire de connexion
-(form login authentication method), l'utilisateu sera redirigé à la page de formulaire 
-de connexion. Si vous utilisez l'authentification HTTP, l'utilisateur recevra une réponse HTTP 401
+Par exemple, si vous utilisez la méthode d'authentification par formulaire de connexion, 
+l'utilisateur sera redirigé à la page de formulaire de connexion. 
+Si vous utilisez l'authentification HTTP, l'utilisateur recevra une réponse HTTP 401
 et verra donc la boite contenant les champs nom d'usager et mot de passe.
 
 L'utilisateur a maintenant la possibilité de soumettre ses informations d'identification
@@ -232,7 +232,7 @@ ou les authentifications via Twitter. Quel que soit la méthode d'authentificati
 .. _book-security-form-login:
 
 Utilisation d'un formulaire de connexion traditionnel
-------------------------------------------------
+-----------------------------------------------------
 
 Pour l'instant, vous avez vu comment protéger votre application derrière un pare-feu et
 ensuite comment protéger l'accès à certaines zones en utilisant les rôles. En utilisant 
@@ -593,7 +593,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
     plupart des applications, avoir un seul pare-feu est suffisant.
 
 Autorisation
--------------
+------------
 
 La première étape en scurité est toujours l'authentification: le processus de vérifier
 qui l'utilisateur est. Avec Symfony, l'authentification peut être faite de toutes les façons
@@ -613,7 +613,7 @@ appels de méthodes...) grâce aux rôles. Plus tard, vous apprendrez comment le
 peuvent être créés et assignés aux utilisateurs.
 
 Sécurisation d'URLs spécifiques
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La façon la plus simple pour sécuriser une partie de votre application est de sécuriser un masque
 d'URL au complet. Vous avez déjà vu dans le premier exemple de ce chapitre, où tout ce qui
@@ -733,7 +733,7 @@ différents services et méthodes de votre application, voir
 :doc:`/cookbook/security/securing_services`.
 
 Listes de contrôle d'accès (ACL): sécuriser des objets de la base de données
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Imaginez que vous êtes en train de concevoir un système de blogue où les utilisateurs
 peuvent écrire des commentaires sur les articles. Mais vous voulez qu'un utilisateur
@@ -757,7 +757,7 @@ ressources en exigeant un ensemble de rôles pour une ressource. Dans cette sect
 explorer l'autre aspect de l'autorisation : les utilisateurs.
 
 D'où viennent les utilisateurs (*Fournisseurs d'utilisateurs*)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Au cours de l'authentification, l'utilisateur soumet ses informations d'identité (généralement
 un nom d'usager et un mot de passe). La responsabilité du système d'authentification
@@ -932,7 +932,7 @@ Pour plus apprendre comment créer votre propre fournisseur (par exemple si vous
 des utilisateurs depuis un service Web), reportez-vous à :doc:`/cookbook/security/custom_provider`.
 
 Encoder les mots de passe
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Jusqu'à maintenant, afin de garder ça simple, les mots de passe des utilisateurs ont tous été
 conservés au format texte (qu'il soit sauvegardé dans un fichier de configuration ou dans
@@ -1075,7 +1075,7 @@ récupérer via le service ``security.context``. Depuis un controleur, cela ress
     ``IS_AUTHENTICATED_FULLY``.
 
 Utiliser plusieurs fournisseurs d'utilisateurs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Chaque mécanisme d'authentification (par exemple authentification HTTP, formulaire de connexion, 
 etc...) utilise exactement un fournisseur d'utilisateur (user provider), et va utiliser 
@@ -1443,7 +1443,7 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
     détails.
 
 "Usurper l'identité" d'un utilisateur
------------------------------------
+-------------------------------------
 
 Parfois, il peut être utile de pouvoir passer d'un utilisateur à un autre sans avoir 
 à se déconnecter et à se reconnecter (par exemple si vous êtes en train de débugguer ou de 
