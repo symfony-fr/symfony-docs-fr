@@ -804,31 +804,33 @@ qui correspondent à cette route pourraient ressembler à ça :
     manière très puissante de délivrer le même contenu dans différents formats.
 
 .. index::
-   single: Routing; Controllers
-   single: Controller; String naming format
+   single: Routage; Les contrôleurs
+   single: Contrôleur; Format de nommage des chaînes de caractères
 
 .. _controller-string-syntax:
 
-Controller Naming Pattern
--------------------------
+Pattern de Nommage du Contrôleur
+--------------------------------
 
-Every route must have a ``_controller`` parameter, which dictates which
-controller should be executed when that route is matched. This parameter
-uses a simple string pattern called the *logical controller name*, which
-Symfony maps to a specific PHP method and class. The pattern has three parts,
-each separated by a colon:
+Chaque route doit avoir un paramètre ``_controller``, qui lui dicte quel
+contrôleur devrait être exécuté lorsque cette route correspond à l'URL.
+Ce paramètre utilise un pattern de chaîne de caractères simple appelé
+*nom logique du contrôleur*, que Symfony fait correspondre à une méthode
+et à une classe PHP spécifique. Le pattern a trois parties, chacune
+séparée par deux-points :
 
-    **bundle**:**controller**:**action**
+    **bundle**:**contrôleur**:**action**
 
-For example, a ``_controller`` value of ``AcmeBlogBundle:Blog:show`` means:
+Par exemple, la valeur ``AcmeBlogBundle:Blog:show`` pour le paramètre
+``_controller`` signifie :
 
-+----------------+------------------+-------------+
-| Bundle         | Controller Class | Method Name |
-+================+==================+=============+
-| AcmeBlogBundle | BlogController   | showAction  |
-+----------------+------------------+-------------+
++----------------+----------------------+-------------------+
+| Bundle         | Classe du Contrôleur | Nom de la Méthode |
++================+======================+===================+
+| AcmeBlogBundle | BlogController       | showAction        |
++----------------+----------------------+-------------------+
 
-The controller might look like this:
+Le contrôleur pourrait ressembler à quelque chose comme ça :
 
 .. code-block:: php
 
@@ -845,20 +847,21 @@ The controller might look like this:
         }
     }
 
-Notice that Symfony adds the string ``Controller`` to the class name (``Blog``
-=> ``BlogController``) and ``Action`` to the method name (``show`` => ``showAction``).
+Notez que Symfony ajoute la chaîne de caractères ``Controller`` au nom de la
+classe (``Blog`` => ``BlogController``) et ``Action`` au nom de la méthode
+(``show`` => ``showAction``).
 
-You could also refer to this controller using its fully-qualified class name
-and method: ``Acme\BlogBundle\Controller\BlogController::showAction``.
-But if you follow some simple conventions, the logical name is more concise
-and allows more flexibility.
+Vous pourriez aussi faire référence à ce contrôleur en utilisant le nom complet
+de sa classe et de sa méthode : ``Acme\BlogBundle\Controller\BlogController::showAction``.
+Mais si vous suivez quelques conventions simples, le nom logique est plus
+concis et permet aussi plus de flexibilité.
 
 .. note::
 
-   In addition to using the logical name or the fully-qualified class name,
-   Symfony supports a third way of referring to a controller. This method
-   uses just one colon separator (e.g. ``service_name:indexAction``) and
-   refers to the controller as a service (see :doc:`/cookbook/controller/service`).
+   En plus d'utiliser le nom logique ou le nom complet de la classe, Symfony
+   supporte une troisième manière de référer à un contrôleur. Cette méthode
+   utilise un seul séparateur deux-points (par exemple : ``service_name:indexAction``)
+   et réfère au contrôleur en tant que service (see :doc:`/cookbook/controller/service`).
 
 Route Parameters and Controller Arguments
 -----------------------------------------
