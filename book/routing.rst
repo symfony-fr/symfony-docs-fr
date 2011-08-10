@@ -129,14 +129,14 @@ déterminer quel contrôleur devrait être exécuté. Le déroulement complet
 ressemble à ça :
 
 #. La requête est gérée par le contrôleur frontal de Symfony2 (par exemple :
-   ``app.php``);
+   ``app.php``) ;
 
 #. Le coeur de Symfony2 (i.e. Kernel) demande au routeur d'inspecter la
-   requête;
+   requête ;
 
 #. Le routeur fait correspondre l'URL entrante à une route spécifique et retourne
    l'information à propos de la route, incluant le contrôleur qui devrait
-   être exécuté;
+   être exécuté ;
 
 #. Le Kernel Symfony2 exécute le contrôleur, qui finalement retourne un
    objet ``Response``.
@@ -149,15 +149,16 @@ ressemble à ça :
    spécifique à exécuter.
 
 .. index::
-   single: Routing; Creating routes
+   single: Routage; Créer des routes
 
-Creating Routes
----------------
+Créer des Routes
+----------------
 
-Symfony loads all the routes for your application from a single routing configuration
-file. The file is usually ``app/config/routing.yml``, but can be configured
-to be anything (including an XML or PHP file) via the application configuration
-file:
+Symfony charge toutes les routes de votre application depuis un fichier unique
+de configuration du routage. Le fichier est généralement localisé dans le
+répertoire ``app/config/routing.yml``, mais peut être configuré afin d'être
+n'importe quoi d'autre (incluant un fichier XML ou PHP) via le fichier de
+configuration de l'application :
 
 .. configuration-block::
 
@@ -186,16 +187,17 @@ file:
 
 .. tip::
 
-    Even though all routes are loaded from a single file, it's common practice
-    to include additional routing resources from inside the file. See the
-    :ref:`routing-include-external-resources` section for more information.
+    Bien que toutes les routes soient chargées depuis un fichier unique, c'est
+    une pratique courante d'inclure des ressources de routage additionnelles
+    directement depuis ce dernier. Référez-vous à la section
+    :ref:`routing-include-external-resources` pour plus d'informations.
 
-Basic Route Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuration Basique des Routes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Defining a route is easy, and a typical application will have lots of routes.
-A basic route consists of just two parts: the ``pattern`` to match and a
-``defaults`` array:
+Définir une route est facile, et une application typique va avoir de nombreuses
+routes. Une route basique consiste simplement de deux parties : le ``pattern``
+à comparer et un tableau ``defaults`` :
 
 .. configuration-block::
 
@@ -231,19 +233,21 @@ A basic route consists of just two parts: the ``pattern`` to match and a
 
         return $collection;
 
-This route matches the homepage (``/``) and maps it to the ``AcmeDemoBundle:Main:homepage``
-controller. The ``_controller`` string is translated by Symfony2 into an
-actual PHP function and executed. That process will be explained shortly
-in the :ref:`controller-string-syntax` section.
+Cette route correspond à la page d'accueil (``/``) et la relie avec le
+contrôleur ``AcmeDemoBundle:Main:homepage``. La chaîne de caractères
+``_controller`` est traduite par Symfony2 en une fonction PHP qui est
+ensuite exécutée. Ce processus sera expliqué rapidement dans la section
+:ref:`controller-string-syntax`.
 
 .. index::
-   single: Routing; Placeholders
+   single: Routage; Paramètres de substitution
 
-Routing with Placeholders
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Routage avec les Paramètres de substitution
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Of course the routing system supports much more interesting routes. Many
-routes will contain one or more named "wildcard" placeholders:
+Evidemment, le système de routage supporte des routes beaucoup plus
+intéressantes. De nombreuses routes vont contenir un ou plusieurs
+paramètres de substitution nommés «joker» :
 
 .. configuration-block::
 
@@ -278,21 +282,25 @@ routes will contain one or more named "wildcard" placeholders:
 
         return $collection;
 
-The pattern will match anything that looks like ``/blog/*``. Even better,
-the value matching the ``{slug}`` placeholder will be available inside your
-controller. In other words, if the URL is ``/blog/hello-world``, a ``$slug``
-variable, with a value of ``hello-world``, will be available in the controller.
-This can be used, for example, to load the blog post matching that string.
+Le pattern va faire correspondre tout ce qui ressemble à ``/blog/*``.
+Mieux encore, la valeur correspondante au paramètre de substitution
+``{slug}`` sera disponible dans votre contrôleur. En d'autres mots, si
+l'URL est ``/blog/hello-world``, une variable ``$slug``, avec la valeur
+``hello-world``, sera à votre disposition dans le contrôleur. Ceci
+peut être utilisé, par exemple, pour récupérer l'entrée du blog qui
+correspond à cette chaîne de caractères.
 
-The pattern will *not*, however, match simply ``/blog``. That's because,
-by default, all placeholders are required. This can be changed by adding
-a placeholder value to the ``defaults`` array.
+Cependant, le pattern *ne va pas* faire correspondre simplement ``/blog``
+à cette route. Ceci parce que, par défaut, tous les paramètres de substitution
+sont requis. Ce comportement peut être modifié en ajoutant une valeur
+au paramètre de substitution dans le tableau ``defaults``.
 
-Required and Optional Placeholders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Paramètres de substitution Requis et Optionnels
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To make things more exciting, add a new route that displays a list of all
-the available blog posts for this imaginary blog application:
+Pour rendre les choses plus excitantes, ajoutez une nouvelle route qui
+affiche une liste de toutes les entrées du blog disponibles pour cette
+application imaginaire :
 
 .. configuration-block::
 
@@ -327,10 +335,12 @@ the available blog posts for this imaginary blog application:
 
         return $collection;
 
-So far, this route is as simple as possible - it contains no placeholders
-and will only match the exact URL ``/blog``. But what if you need this route
-to support pagination, where ``/blog/2`` displays the second page of blog
-entries? Update the route to have a new ``{page}`` placeholder:
+Jusqu'ici, cette route est aussi simple que possible - elle ne contient
+pas de paramètres de substitution et va correspondre uniquement à l'URL
+exacte ``/blog``. Mais que se passe-t-il si vous avez besoin que cette
+route supporte la pagination, où ``blog/2`` affiche la seconde page des
+entrées du blog ? Mettez la route à jour afin qu'elle ait un nouveau
+paramètre de substitution ``{page}`` :
 
 .. configuration-block::
 
@@ -365,15 +375,18 @@ entries? Update the route to have a new ``{page}`` placeholder:
 
         return $collection;
 
-Like the ``{slug}`` placeholder before, the value matching ``{page}`` will
-be available inside your controller. Its value can be used to determine which
-set of blog posts to display for the given page.
+Comme le paramètre de substitution ``{slug}`` d'avant, la valeur correspondante
+à ``{page}`` va être disponible dans votre contrôleur. Cette dernière peut être
+utilisée pour déterminer quel ensemble d'entrées blog doit être délivré
+pour la page donnée.
 
-But hold on! Since placeholders are required by default, this route will
-no longer match on simply ``/blog``. Instead, to see page 1 of the blog,
-you'd need to use the URL ``/blog/1``! Since that's no way for a rich web
-app to behave, modify the route to make the ``{page}`` parameter optional.
-This is done by including it in the ``defaults`` collection:
+Mais attendez ! Sachant que les paramètres substitutifs sont requis par
+défaut, cette route va maintenant arrêter de correspondre à une requête
+contenant simplement l'URL ``/blog``. A la place, pour voir la page 1 du
+blog, vous devriez utiliser l'URL ``/blog/1`` ! Ceci n'étant pas une solution
+«viable» pour une telle application web, modifiez la route et faites en sorte
+que le paramètre ``{page}`` soit optionnel. Vous pouvez faire cela en
+l'incluant dans la collection des ``defaults`` :
 
 .. configuration-block::
 
@@ -410,10 +423,11 @@ This is done by including it in the ``defaults`` collection:
 
         return $collection;
 
-By adding ``page`` to the ``defaults`` key, the ``{page}`` placeholder is no
-longer required. The URL ``/blog`` will match this route and the value of
-the ``page`` parameter will be set to ``1``. The URL ``/blog/2`` will also
-match, giving the ``page`` parameter a value of ``2``. Perfect.
+En ajoutant ``page`` aux clés ``defaults``, le paramètre substitutif ``{page}``
+n'est donc plus obligatoire. L'URL ``/blog`` va correspondre à cette route
+et la valeur du paramètre ``page`` sera défini comme étant ``1``. L'URL
+``/blog/2`` quant à elle va aussi correspondre, donnant au paramètre ``page``
+la valeur ``2``. Parfait.
 
 +---------+------------+
 | /blog   | {page} = 1 |
@@ -424,12 +438,12 @@ match, giving the ``page`` parameter a value of ``2``. Perfect.
 +---------+------------+
 
 .. index::
-   single: Routing; Requirements
+   single: Routage; Conditions Requises
 
-Adding Requirements
-~~~~~~~~~~~~~~~~~~~
+Ajouter des Conditions Requises
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Take a quick look at the routes that have been created so far:
+Regardez rapidement les routes qui ont été créées jusqu'ici :
 
 .. configuration-block::
 
@@ -478,25 +492,28 @@ Take a quick look at the routes that have been created so far:
 
         return $collection;
 
-Can you spot the problem? Notice that both routes have patterns that match
-URL's that look like ``/blog/*``. The Symfony router will always choose the
-**first** matching route it finds. In other words, the ``blog_show`` route
-will *never* be matched. Instead, a URL like ``/blog/my-blog-post`` will match
-the first route (``blog``) and return a nonsense value of ``my-blog-post``
-to the ``{page}`` parameter.
+Pouvez-vous voir le problème ? Notez que les deux routes possèdent des
+patterns qui correspondent aux URLs ressemblant à ``/blog/*``. Le routeur
+Symfony choisira toujours la **première** route correspondante qu'il trouve.
+En d'autres mots, la route ``blog_show`` ne sera *jamais* utilisée. Néanmoins,
+une URL comme ``/blog/my-blog-post`` correspondra à la première route (``blog``)
+qui retournera une valeur (n'ayant aucun sens) ``my-blog-post`` au paramètre
+``{page}``.
 
 +--------------------+-------+-----------------------+
-| URL                | route | parameters            |
+| URL                | route | paramètres            |
 +====================+=======+=======================+
 | /blog/2            | blog  | {page} = 2            |
 +--------------------+-------+-----------------------+
 | /blog/my-blog-post | blog  | {page} = my-blog-post |
 +--------------------+-------+-----------------------+
 
-The answer to the problem is to add route *requirements*. The routes in this
-example would work perfectly if the ``/blog/{page}`` pattern *only* matched
-URLs where the ``{page}`` portion is an integer. Fortunately, regular expression
-requirements can easily be added for each parameter. For example:
+La réponse au problème est d'ajouter des conditions requises à la route. Les
+routes de l'exemple ci-dessus fonctionneraient parfaitement si le pattern
+``/blog/{page}`` correspondait *uniquement* aux URLs avec la partie ``{page}``
+étant un nombre entier. Heureusement, des conditions requises sous forme
+d'expression régulière peuvent être facilement ajoutées pour chaque paramètre.
+Par exemple :
 
 .. configuration-block::
 
@@ -538,35 +555,37 @@ requirements can easily be added for each parameter. For example:
 
         return $collection;
 
-The ``\d+`` requirement is a regular expression that says that the value of
-the ``{page}`` parameter must be a digit (i.e. a number). The ``blog`` route
-will still match on a URL like ``/blog/2`` (because 2 is a number), but it
-will no longer match a URL like ``/blog/my-blog-post`` (because ``my-blog-post``
-is *not* a number).
+La condition requise ``\d+`` est une expression régulière qui oblige la valeur
+du paramètre ``{page}`` à être un nombre (composé d'un ou plusieurs chiffres).
+La route ``blog`` correspondra toujours à une URL comme ``/blog/2`` (parce
+que 2 est un nombre), mais elle ne correspondra par contre plus à une URL comme
+``/blog/my-blog-post`` (car ``my-blog-post`` n'est *pas* un nombre).
 
-As a result, a URL like ``/blog/my-blog-post`` will now properly match the
-``blog_show`` route.
+Comme résultat, une URL comme ``/blog/my-blog-post`` va dorénavant correspondre
+correctement à la route ``blog_show``.
 
 +--------------------+-----------+-----------------------+
-| URL                | route     | parameters            |
+| URL                | route     | paramètres            |
 +====================+===========+=======================+
 | /blog/2            | blog      | {page} = 2            |
 +--------------------+-----------+-----------------------+
 | /blog/my-blog-post | blog_show | {slug} = my-blog-post |
 +--------------------+-----------+-----------------------+
 
-.. sidebar:: Earlier Routes always Win
+.. sidebar:: Les Routes précédentes Gagnent toujours
 
-    What this all means is that the order of the routes is very important.
-    If the ``blog_show`` route were placed above the ``blog`` route, the
-    URL ``/blog/2`` would match ``blog_show`` instead of ``blog`` since the
-    ``{slug}`` parameter of ``blog_show`` has no requirements. By using proper
-    ordering and clever requirements, you can accomplish just about anything.
+    Tout cela signifie que l'ordre des routes est très important. Si la
+    route ``blog_show`` était placée au-dessus de la route ``blog``, l'URL
+    ``/blog/2`` correspondrait à ``blog_show`` au lieu de ``blog`` puisque
+    le paramètre {slug}`` de ``blog_show`` n'a pas de conditions requises.
+    En utilisant un ordre clair et intelligent, vous pouvez accomplir tout
+    ce que vous voulez.
 
-Since the parameter requirements are regular expressions, the complexity
-and flexibility of each requirement is entirely up to you. Suppose the homepage
-of your application is available in two different languages, based on the
-URL:
+Avec la possibilité de définir des conditions requises pour les paramètres à
+l'aide d'expressions régulières, la complexité et la flexibilité de chaque
+condition est entièrement dépendante de ce que vous en faites. Supposez que
+la page d'accueil de votre application soit disponible en deux langues
+différentes, basé sur l'URL :
 
 .. configuration-block::
 
@@ -608,30 +627,32 @@ URL:
 
         return $collection;
 
-For incoming requests, the ``{culture}`` portion of the URL is matched against
-the regular expression ``(en|fr)``.
+Pour les requêtes entrantes, la partie ``{culture}`` de l'URL est comparée à
+l'expression régulière ``(en|fr)``.
 
-+-----+--------------------------+
-| /   | {culture} = en           |
-+-----+--------------------------+
-| /en | {culture} = en           |
-+-----+--------------------------+
-| /fr | {culture} = fr           |
-+-----+--------------------------+
-| /es | *won't match this route* |
-+-----+--------------------------+
++-----+-------------------------------------+
+| /   | {culture} = en                      |
++-----+-------------------------------------+
+| /en | {culture} = en                      |
++-----+-------------------------------------+
+| /fr | {culture} = fr                      |
++-----+-------------------------------------+
+| /es | *ne correspondra pas à cette route* |
++-----+-------------------------------------+
 
 .. index::
-   single: Routing; Method requirement
+   single: Routage; Conditions requises pour la méthode
 
-Adding HTTP Method Requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter des Conditions Requises pour la Méthode HTTP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to the URL, you can also match on the *method* of the incoming
-request (i.e. GET, HEAD, POST, PUT, DELETE). Suppose you have a contact form
-with two controllers - one for displaying the form (on a GET request) and one
-for processing the form when it's submitted (on a POST request). This can
-be accomplished with the following route configuration:
+En plus de l'URL, vous pouvez aussi comparer la *méthode* (i.e. GET, HEAD,
+POST, PUT, DELETE) de la requête entrante avec celle définie dans les
+conditions requises de la route. Supposez que vous ayez un formulaire de
+contact avec deux contrôleurs - un pour afficher le formulaire (quand on
+a une requête GET) et un pour traiter le formulaire une fois qu'il a été
+soumis (avec une requête POST). Ceci peut être accompli avec la configuration
+de routage suivante :
 
 .. configuration-block::
 
@@ -688,30 +709,32 @@ be accomplished with the following route configuration:
 
         return $collection;
 
-Despite the fact that these two routes have identical patterns (``/contact``),
-the first route will match only GET requests and the second route will match
-only POST requests. This means that you can display the form and submit the
-form via the same URL, while using distinct controllers for the two actions.
+Malgré le fait que ces deux routes ont des patterns identiques (``/contact``),
+la première route correspondra uniquement aux requêtes GET et la seconde route
+correspondra seulement aux requêtes POST. Cela signifie que vous pouvez
+afficher le formulaire et le soumettre via la même URL, tout en utilisant
+des contrôleurs distincts pour les deux actions.
 
 .. note::
-    If no ``_method`` requirement is specified, the route will match on
-    *all* methods.
+    Si aucune condition requise ``_method`` n'est spécifiée, la route
+    correspondra à *toutes* les méthodes.
 
-Like the other requirements, the ``_method`` requirement is parsed as a regular
-expression. To match ``GET`` *or* ``POST`` requests, you can use ``GET|POST``.
+Comme les autres, la condition requise ``_method`` est analysée en tant
+qu'expression régulière. Pour faire correspondre les requêtes à la méthode
+``GET`` *ou* à ``POST``, vous pouvez utiliser ``GET|POST``.
 
 .. index::
-   single: Routing; Advanced example
-   single: Routing; _format parameter
+   single: Routage; Exemple avancé
+   single: Routage; Le paramètre _format
 
 .. _advanced-routing-example:
 
-Advanced Routing Example
-~~~~~~~~~~~~~~~~~~~~~~~~
+Exemple de Routage Avancé
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point, you have everything you need to create a powerful routing
-structure in Symfony. The following is an example of just how flexible the
-routing system can be:
+A ce point, vous possédez tout ce dont vous avez besoin pour créer une
+structure de routage puissante dans Symfony. La suite est un exemple
+montrant simplement à quel point le système de routage peut être flexible :
 
 .. configuration-block::
 
@@ -759,24 +782,26 @@ routing system can be:
 
         return $collection;
 
-As you've seen, this route will only match if the ``{culture}`` portion of
-the URL is either ``en`` or ``fr`` and if the ``{year}`` is a number. This
-route also shows how you can use a period between placeholders instead of
-a slash. URLs matching this route might look like:
+Comme vous l'avez vu, cette route correspondra uniquement si la partie
+``{culture}`` de l'URL est ``en`` ou ``fr`` et si ``{year}`` est
+un nombre. Cette route montre aussi comment vous pouvez utiliser un point
+entre les paramètres de substitution à la place d'un slash. Les URLs
+qui correspondent à cette route pourraient ressembler à ça :
 
  * ``/articles/en/2010/my-post``
  * ``/articles/fr/2010/my-post.rss``
 
-.. sidebar:: The Special ``_format`` Routing Parameter
+.. sidebar:: Le Paramètre Spécial de Routage ``_format``
 
-    This example also highlights the special ``_format`` routing parameter.
-    When using this parameter, the matched value becomes the "request format"
-    of the ``Request`` object. Ultimately, the request format is used for such
-    things such as setting the ``Content-Type`` of the response (e.g. a ``json``
-    request format translates into a ``Content-Type`` of ``application/json``).
-    It can also be used in the controller to render a different template for
-    each value of ``_format``. The ``_format`` parameter is a very powerful way
-    to render the same content in different formats.
+    Cet exemple met aussi en valeur le paramètre spécial de routage ``_format``.
+    Lorsque vous utilisez ce paramètre, la valeur correspondante devient alors
+    le «format de la requête» de l'objet ``Request``. Finalement, le format de
+    la requête est utilisé pour des choses comme spécifier le ``Content-Type``
+    de la réponse (par exemple : un format de requête ``json`` se traduit
+    en un ``Content-Type`` ayant pour valeur ``application/json``). Il peut
+    aussi être utilisé dans le contrôleur pour délivrer un template différent
+    pour chaque valeur de ``_format``. Le paramètre ``_format`` est une
+    manière très puissante de délivrer le même contenu dans différents formats.
 
 .. index::
    single: Routing; Controllers
