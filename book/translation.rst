@@ -162,7 +162,7 @@ Lorsque vous utilisez  la méthode ``trans()``, Symfony2 cherche la chaîne exacte
 du catalogue de messages approprié et la retourne (si elle existe).
 
 .. index::
-   single: Translations; Message placeholders
+   single: Traductions; Message placeholders
 
 Message Placeholders
 ~~~~~~~~~~~~~~~~~~~~
@@ -182,7 +182,7 @@ Cependant, créer une traduction pour cette chaîne est impossible étant donné que
 va essayer de trouver le message exact, incluant les portions de la variable
 (cad "Hello Ryan" or "Hello Fabien"). Au lieu d'écrire une traduction
 pour tous les itérations possibles de la variable ``$name``, nous pouvons remplacer la
-variable avec un "placeholder":
+variable avec un placeholder (paramètre de substitution) :
 
 .. code-block:: php
 
@@ -194,7 +194,7 @@ variable avec un "placeholder":
     }
 
 Symfony2 va maintenant chercher une traduction du message brut (``Hello %name%``)
-et *ensuite* remplacer les placeholders avec leurs valeurs. Créer une traduction
+et *ensuite* remplacer les paramètres de substitution avec leurs valeurs. Créer une traduction
 est fait juste comme avant :
 
 .. configuration-block::
@@ -228,107 +228,106 @@ est fait juste comme avant :
 
 .. note::
 
-    The placeholders can take on any form as the full message is reconstructed
-    using the PHP `strtr function`_. However, the ``%var%`` notation is
-    required when translating in Twig templates, and is overall a sensible
-    convention to follow.
+    Les paramètres de substitution peuvent prendre n'importe quel forme puisque le message en entier est reconstruit
+	utilisant le PHP `strtr function`_. Cependant, la notation ``%var%`` est 
+	requis lors de la traduction dans des templates Twig, et est globalement une convention
+	sensée à suivre.
+	
+Comme nous l'avons vu, créer une traduction est un processus en deux étapes :
 
-As we've seen, creating a translation is a two-step process:
+1. Extraire le message qui a besoin d'être traduit en le traitant à travers 
+   le ``Translator``.
 
-1. Abstract the message that needs to be translated by processing it through
-   the ``Translator``.
+1. Créer une traduction pour le message dans chaque que vous avez choisi de 
+   supporter.
 
-1. Create a translation for the message in each locale that you choose to
-   support.
-
-The second step is done by creating message catalogues that define the translations
-for any number of different locales.
+La deuxième étape est fait en créant des catalogues de messages qui définissent les traductions
+pour tout nombre de locales différents.
 
 .. index::
-   single: Translations; Message catalogues
+   single: Traduction; Catalogues de Message
 
-Message Catalogues
+Catalogues de Message
 ------------------
 
-When a message is translated, Symfony2 compiles a message catalogue for the
-user's locale and looks in it for a translation of the message. A message
-catalogue is like a dictionary of translations for a specific locale. For
-example, the catalogue for the ``fr_FR`` locale might contain the following
-translation:
+Lorsqu'un message est traduit, Symfony2 compile un catalogue de messages pour le
+locale de l'utilisateur et regarde dedans pour une traduction du message. Un catalogue
+de message est comme un dictionnaire de traductions pour un locale spécifique. 
+Par exemple, le catalogue du locale fr_FR `` `` pourrait contenir la traduction
+suivante :
 
     Symfony2 is Great => J'aime Symfony2
 
-It's the responsibility of the developer (or translator) of an internationalized
-application to create these translations. Translations are stored on the
-filesystem and discovered by Symfony, thanks to some conventions.
-
+C'est la responsabilité du développeur (ou traducteur) d'une application
+internationalisée de créer ces traductions. Les traductions sont stockées sur le
+système de fichiers et découverts par Symfony, grâce à certaines conventions.
+	
 .. tip::
 
-    Each time you create a *new* translation resource (or install a bundle
-    that includes a translation resource), be sure to clear your cache so
-    that Symfony can discover the new translation resource:
-    
+	Chaque fois que vous créez une *nouvelle* ressource de traduction (ou d'installer un bundle
+    qui comprend une ressource de traduction), assurez-vous de vider votre cache afin
+    que Symfony peut découvrir la nouvelle ressource de traduction :
+
     .. code-block:: bash
     
         php app/console cache:clear
 
 .. index::
-   single: Translations; Translation resource locations
+   single: Traductions; Emplacements des ressources de traduction
 
-Translation Locations and Naming Conventions
+Emplacements des Traductions et Conventions de Nommage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Symfony2 looks for message files (i.e. translations) in two locations:
+Symfony2 cherche les fichiers de messages (cad traductions) à deux endroits :
 
-* For messages found in a bundle, the corresponding message files should
-  live in the ``Resources/translations/`` directory of the bundle;
+* Pour les messages trouvés dans un bundle, les fichiers de messages correspondant doit
+  se situer dans le répertoire ``Resources/translations/`` du bundle ;
 
-* To override any bundle translations, place message files in the
-  ``app/Resources/translations`` directory.
+* Pour outrepasser n'importe quel traduction du bundle, placez les fichiers de messages dans le
+  répertoire ``app/Resources/translations``.
 
-The filename of the translations is also important as Symfony2 uses a convention
-to determine details about the translations. Each message file must be named
-according to the following pattern: ``domain.locale.loader``:
+Le nom du fichier des traductions est aussi important puisque Symfony2 utilise une convention
+pour déterminer les détails sur les traductions. Chaque fichier de message doit être nommé
+selon le schéma suivant : ``domain.locale.loader`` :
 
-* **domain**: An optional way to organize messages into groups (e.g. ``admin``,
-  ``navigation`` or the default ``messages``) - see `Using Message Domains`_;
+* **domain**: Une façon optionnelle pour organiser les messages dans des groupes (par ex. ``admin``,
+  ``navigation`` ou les ``messages`` par défaut) - voir `Using Message Domains`_;
 
-* **locale**: The locale that the translations are for (e.g. ``en_GB``, ``en``, etc);
+* **locale**: Le locale that the translations are for (par ex. ``en_GB``, ``en``, etc);
 
-* **loader**: How Symfony2 should load and parse the file (e.g. ``xliff``,
-  ``php`` or ``yml``).
+* **loader**: Comment Symfony2 doit charger et parser le fichier (par ex. ``xliff``,
+  ``php`` ou ``yml``).
 
-The loader can be the name of any registered loader. By default, Symfony
-provides the following loaders:
+Le loader peut être le nom de n'importe quel loader enregistré. Par défaut, Symfony
+fournit les loaders suivants :
 
 * ``xliff``: XLIFF file;
 * ``php``:   PHP file;
 * ``yml``:  YAML file.
 
-The choice of which loader to use is entirely up to you and is a matter of
-taste.
+Le choix de quel loader utiliser dépend de vous et c'est une question de
+goût.
 
 .. note::
 
-    You can also store translations in a database, or any other storage by
-    providing a custom class implementing the
-    :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface` interface.
-    See :doc:`Custom Translation Loaders </cookbook/translation/custom_loader>`
-    below to learn how to register custom loaders.
+    Vous pouvez également stocker des traductions dans une base de données, ou tout autre stockage en
+    fournissant une classe personnalisée mettant en oeuvre l'interface
+    :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface`.
+    Voir :doc:`Custom Translation Loaders </cookbook/translation/custom_loader>`
+    ci-dessous pour apprendre comment enregistrer des loaders personnalisés.
 
 .. index::
-   single: Translations; Creating translation resources
+   single: Traductions; Créer les ressources de traduction
 
-Creating Translations
+Creer les Traductions
 ~~~~~~~~~~~~~~~~~~~~~
 
-Each file consists of a series of id-translation pairs for the given domain and
-locale. The id is the identifier for the individual translation, and can
-be the message in the main locale (e.g. "Symfony is great") of your application
-or a unique identifier (e.g. "symfony2.great" - see the sidebar below):
+Chaque fichier est constitué d'une série de paires id-traduction pour le domaine et
+locale donné. L'id est l'identifiant de la traduction individuelle, et peut
+être le message dans le locale principal (par exemple "Symfony is great") de votre application
+ou un identificateur unique (par exemple "symfony2.great" - voir l'encadré ci-dessous):
 
 .. configuration-block::
-
     .. code-block:: xml
 
         <!-- src/Acme/DemoBundle/Resources/translations/messages.fr.xliff -->
@@ -362,14 +361,14 @@ or a unique identifier (e.g. "symfony2.great" - see the sidebar below):
         Symfony2 is great: J'aime Symfony2
         symfony2.great:    J'aime Symfony2
 
-Symfony2 will discover these files and use them when translating either
-"Symfony2 is great" or "symfony2.great" into a French language locale (e.g.
+Symfony2 va découvrir ces fichiers et les utiliser lors de la traduction de 
+"Symfony2 is great" ou de "symfony2.great" dans un locale de langue française (par ex.
 ``fr_FR`` or ``fr_BE``).
 
 .. sidebar:: Using Real or Keyword Messages
 
-    This example illustrates the two different philosophies when creating
-    messages to be translated:
+    Cet exemple illustre les deux philosophies différentes lors de la création
+	des messages à traduire :
 
     .. code-block:: php
 
@@ -820,7 +819,6 @@ for that library.
 Summary
 -------
 With the Symfony2 Translation component, creating an internationalized application
-
 no longer needs to be a painful process and boils down to just a few basic
 steps:
 
