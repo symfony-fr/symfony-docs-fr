@@ -863,11 +863,12 @@ concis et permet aussi plus de flexibilité.
    utilise un seul séparateur deux-points (par exemple : ``service_name:indexAction``)
    et réfère au contrôleur en tant que service (see :doc:`/cookbook/controller/service`).
 
-Route Parameters and Controller Arguments
------------------------------------------
+Les Paramètres de la Route et les Arguments du Contrôleur
+---------------------------------------------------------
 
-The route parameters (e.g. ``{slug}``) are especially important because
-each is made available as an argument to the controller method:
+Les paramètres de la route (par exemple : ``{slug}``) sont spécialement
+importants parce que chacun d'entre eux est mis à disposition en tant
+qu'argument de la méthode contrôleur :
 
 .. code-block:: php
 
@@ -876,14 +877,15 @@ each is made available as an argument to the controller method:
       // ...
     }
 
-In reality, the entire ``defaults`` collection is merged with the parameter
-values to form a single array. Each key of that array is available as an
-argument on the controller.
+En réalité, la collection entière ``defaults`` est fusionnée avec les valeurs
+des paramètres afin de former un unique tableau. Chaque clé du tableau est
+disponible en tant qu'argument dans le contrôleur.
 
-In other words, for each argument of your controller method, Symfony looks
-for a route parameter of that name and assigns its value to that argument.
-In the advanced example above, any combination (in any order) of the following
-variables could be used as arguments to the ``showAction()`` method:
+En d'autres termes, pour chaque argument de votre méthode contrôleur, Symfony
+recherche un paramètre de la route avec ce nom et assigne sa valeur à cet
+argument. Dans l'exemple avancé ci-dessus, n'importe quelle combinaison (dans
+n'importe quel ordre) des variable suivantes pourrait être utilisée en tant
+qu'arguments de la méthode ``showAction()`` :
 
 * ``$culture``
 * ``$year``
@@ -891,14 +893,14 @@ variables could be used as arguments to the ``showAction()`` method:
 * ``$_format``
 * ``$_controller``
 
-Since the placeholders and ``defaults`` collection are merged together, even
-the ``$_controller`` variable is available. For a more detailed discussion,
-see :ref:`route-parameters-controller-arguments`.
+Sachant que les paramètres de substitution et la collection ``defaults`` sont
+fusionnés ensemble, même la variable ``$_controller`` est disponible. Pour une
+discussion plus détaillée sur le sujet, voyez :ref:`route-parameters-controller-arguments`.
 
 .. tip::
 
-    You can also use a special ``$_route`` variable, which is set to the
-    name of the route that was matched.
+    Vous pouvez aussi utiliser une variable ``$_route`` spéciale, qui est
+    définie comme étant le nom de la route qui a correspondu.
 
 .. index::
    single: Routing; Importing routing resources
