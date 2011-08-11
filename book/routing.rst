@@ -1187,16 +1187,17 @@ Des URLs absolues peuvent aussi être générées.
             Lire cette entrée blog.
         </a>
 
-Summary
--------
+Résumé
+------
 
-Routing is a system for mapping the URL of incoming requests to the controller
-function that should be called to process the request. It both allows you
-to specify beautiful URLs and keeps the functionality of your application
-decoupled from those URLs. Routing is a two-way mechanism, meaning that it
-should also be used to generate URLs.
+Le routage est un système permettant de faire correspondre l'URL des requêtes
+entrantes à une fonction contrôleur qui devrait être appelée pour traiter la
+requête. Cela vous permet d'une part de spécifier de belles URLs et d'autre part
+de conserver la fonctionnalité de votre application découplée de ces URLs. Le
+routage est un mécanisme bi-directionnel, ce qui signifie qu'il doit aussi
+être utilisé pour générer des URLs.
 
-Learn more from the Cookbook
-----------------------------
+En savoir plus grâce au Cookbook
+--------------------------------
 
 * :doc:`/cookbook/routing/scheme`
