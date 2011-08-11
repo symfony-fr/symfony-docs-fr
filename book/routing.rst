@@ -995,12 +995,12 @@ Le fichier importé pourrait ressemblé à quelque chose comme ça :
 Les routes de ce fichier sont analysées et chargées de la même manière que
 pour le fichier de routage principal.
 
-Prefixing Imported Routes
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Préfixer les Routes Importées
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also choose to provide a "prefix" for the imported routes. For example,
-suppose you want the ``acme_hello`` route to have a final pattern of ``/admin/hello/{name}``
-instead of simply ``/hello/{name}``:
+Vous pouvez aussi choisir de fournir un «préfixe» pour les routes importées. Par
+exemple, supposez que vous vouliez que la route ``acme_hello`` ait un pattern
+final tel ``/admin/hello/{name}`` à la place de simplement ``/hello/{name}`` :
 
 .. configuration-block::
 
@@ -1033,8 +1033,8 @@ instead of simply ``/hello/{name}``:
 
         return $collection;
 
-The string ``/admin`` will now be prepended to the pattern of each route
-loaded from the new routing resource.
+La chaîne de caractères ``/admin`` sera maintenant ajoutée devant le pattern
+de chaque route chargée depuis la nouvelle ressource de routage.
 
 .. index::
    single: Routing; Debugging
