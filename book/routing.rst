@@ -1072,17 +1072,17 @@ route en incluant le nom de cette dernière après la commande :
     php app/console router:debug article_show
 
 .. index::
-   single: Routing; Generating URLs
+   single: Routage; Générer des URLs
 
-Generating URLs
----------------
+Générer des URLs
+----------------
 
-The routing system should also be used to generate URLs. In reality, routing
-is a bi-directional system: mapping the URL to a controller+parameters and
-a route+parameters back to a URL. The
-:method:`Symfony\\Component\\Routing\\Router::match` and
-:method:`Symfony\\Component\\Routing\\Router::generate` methods form this bi-directional
-system. Take the ``blog_show`` example route from earlier::
+Le système de routage devrait aussi être utilisé pour générer des URLs. En
+réalité, le routage est un système bi-directionnel : faire correspondre une
+URL à un contrôleur+paramètres et une route+paramètres à une URL. Les méthodes
+:method:`Symfony\\Component\\Routing\\Router::match` et
+:method:`Symfony\\Component\\Routing\\Router::generate` forment ce système
+bi-directionnel. Prenez l'exemple de la route ``blog_show`` vu plus haut ::
 
     $params = $router->match('/blog/my-blog-post');
     // array('slug' => 'my-blog-post', '_controller' => 'AcmeBlogBundle:Blog:show')
@@ -1090,9 +1090,10 @@ system. Take the ``blog_show`` example route from earlier::
     $uri = $router->generate('blog_show', array('slug' => 'my-blog-post'));
     // /blog/my-blog-post
 
-To generate a URL, you need to specify the name of the route (e.g. ``blog_show``)
-and any wildcards (e.g. ``slug = my-blog-post``) used in the pattern for
-that route. With this information, any URL can easily be generated:
+Pour générer une URL, vous avez besoin de spécifier le nom de la route (par
+exemple : ``blog_show``) ainsi que quelconque joker (par exemple :
+``slug = my-blog-post``) utilisé dans le pattern de cette route. Avec cette
+information, n'importe quelle URL peut être générée facilement :
 
 .. code-block:: php
 
@@ -1106,17 +1107,18 @@ that route. With this information, any URL can easily be generated:
         }
     }
 
-In an upcoming section, you'll learn how to generate URLs from inside templates.
+Dans une prochaine section, vous apprendrez comment générer des URLs directement
+depuis les templates.
 
 .. index::
-   single: Routing; Absolute URLs
+   single: Routage; URLs Absolues
 
-Generating Absolute URLs
-~~~~~~~~~~~~~~~~~~~~~~~~
+Générer des URLs Absolues
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the router will generate relative URLs (e.g. ``/blog``). To generate
-an absolute URL, simply pass ``true`` to the third argument of the ``generate()``
-method:
+Par défaut, le routeur va générer des URLs relatives (par exemple : ``/blog``).
+Pour générer une URL absolue, passez simplement ``true`` comme troisième argument
+de la méthode ``generate()`` :
 
 .. code-block:: php
 
@@ -1125,63 +1127,64 @@ method:
 
 .. note::
 
-    The host that's used when generating an absolute URL is the host of
-    the current ``Request`` object. This is detected automatically based
-    on server information supplied by PHP. When generating absolute URLs for
-    scripts run from the command line, you'll need to manually set the desired
-    host on the ``Request`` object:
+    L'host qui est utilisé lorsque vous générez une URL absolue est celui
+    de l'objet courant ``Request``. Celui-ci est détecté automatiquement basé
+    sur les informations du serveur fournies par PHP. Lorsque vous générez
+    des URLs absolues pour des scripts exécutés depuis la ligne de commande,
+    vous devrez spécifier manuellement l'host désiré sur l'objet ``Request`` :
     
     .. code-block:: php
     
         $request->headers->set('HOST', 'www.example.com');
 
 .. index::
-   single: Routing; Generating URLs in a template
+   single: Routage; Générer des URLs depuis un template
 
-Generating URLs with Query Strings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Générer des URLs avec «Query Strings»
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``generate`` method takes an array of wildcard values to generate the URI.
-But if you pass extra ones, they will be added to the URI as a query string::
+La méthode ``generate`` prend un tableau de valeurs jokers pour générer l'URI.
+Mais si vous en passez d'autres, elles seront ajoutées à l'URI en tant que
+«query string» ::
 
     $router->generate('blog', array('page' => 2, 'category' => 'Symfony'));
     // /blog/2?category=Symfony
 
-Generating URLs from a template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Générer des URLs depuis un template
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The most common place to generate a URL is from within a template when linking
-between pages in your application. This is done just as before, but using
-a template helper function:
+L'endroit principal où vous générez une URL est depuis un template lorsque vous
+créez des liens entre les pages de votre application. Cela se fait comme on l'a
+vu auparavant, mais en utilisant une fonction d'aide du template :
 
 .. configuration-block::
 
     .. code-block:: html+jinja
 
         <a href="{{ path('blog_show', { 'slug': 'my-blog-post' }) }}">
-          Read this blog post.
+          Lire cette entrée blog.
         </a>
 
     .. code-block:: php
 
         <a href="<?php echo $view['router']->generate('blog_show', array('slug' => 'my-blog-post')) ?>">
-            Read this blog post.
+            Lire cette entrée blog.
         </a>
 
-Absolute URLs can also be generated.
+Des URLs absolues peuvent aussi être générées.
 
 .. configuration-block::
 
     .. code-block:: html+jinja
 
         <a href="{{ url('blog_show', { 'slug': 'my-blog-post' }) }}">
-          Read this blog post.
+            Lire cette entrée blog.
         </a>
 
     .. code-block:: php
 
         <a href="<?php echo $view['router']->generate('blog_show', array('slug' => 'my-blog-post'), true) ?>">
-            Read this blog post.
+            Lire cette entrée blog.
         </a>
 
 Summary
