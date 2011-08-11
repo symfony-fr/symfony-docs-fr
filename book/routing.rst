@@ -903,17 +903,17 @@ discussion plus détaillée sur le sujet, voyez :ref:`route-parameters-controlle
     définie comme étant le nom de la route qui a correspondu.
 
 .. index::
-   single: Routing; Importing routing resources
+   single: Routage; Importer des ressources de routage
 
 .. _routing-include-external-resources:
 
-Including External Routing Resources
-------------------------------------
+Inclure des Ressources Externes de Routage
+------------------------------------------
 
-All routes are loaded via a single configuration file - usually ``app/config/routing.yml``
-(see `Creating Routes`_ above). Commonly, however, you'll want to load routes
-from other places, like a routing file that lives inside a bundle. This can
-be done by "importing" that file:
+Toutes les routes sont chargées via un unique fichier de configuration - généralement
+``app/config/routing.yml`` (voir `Créer des Routes`_ ci-dessus). Cependant, la plupart
+du temps, vous voudrez charger les routes depuis d'autres endroits, comme un fichier de
+routage qui se trouve dans un bundle. Ceci peut être fait en «important» ce fichier :
 
 .. configuration-block::
 
