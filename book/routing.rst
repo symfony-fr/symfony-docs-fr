@@ -1037,22 +1037,23 @@ La chaîne de caractères ``/admin`` sera maintenant ajoutée devant le pattern
 de chaque route chargée depuis la nouvelle ressource de routage.
 
 .. index::
-   single: Routing; Debugging
+   single: Routage; Debugging
 
-Visualizing & Debugging Routes
-------------------------------
+Visualiser et Debugger les Routes
+---------------------------------
 
-While adding and customizing routes, it's helpful to be able to visualize
-and get detailed information about your routes. A great way to see every route
-in your application is via the ``router:debug`` console command. Execute
-the command by running the following from the root of your project.
+Lorsque vous ajoutez et personnalisez des routes, cela aide beaucoup de
+pouvoir visualiser et d'avoir des informations détaillées à propos de ces
+dernières. Une manière géniale de voir chaque route de votre application est
+d'utiliser la commande de la console ``router:debug``. Exécutez la commande
+suivante depuis la racine de votre projet.
 
 .. code-block:: bash
 
     php app/console router:debug
 
-The command will print a helpful list of *all* the configured routes in
-your application:
+La commande va retourner une liste de *toutes* les routes configurées
+dans votre application :
 
 .. code-block:: text
 
@@ -1063,8 +1064,8 @@ your application:
     blog                  ANY       /blog/{page}
     blog_show             ANY       /blog/{slug}
 
-You can also get very specific information on a single route by including
-the route name after the command:
+Vous pouvez aussi avoir des informations très spécifiques pour une seule
+route en incluant le nom de cette dernière après la commande :
 
 .. code-block:: bash
 
