@@ -947,13 +947,14 @@ routage qui se trouve dans un bundle. Ceci peut être fait en «important» ce f
 
 .. note::
 
-   When importing resources from YAML, the key (e.g. ``acme_hello``) is meaningless.
-   Just be sure that it's unique so no other lines override it.
+   Lorsque vous importez des ressources depuis YAML, la clé (par exemple :
+   ``acme_hello``) n'a pas de sens précis. Assurez-vous simplement que cette
+   dernière soit unique afin qu'aucune autre ligne ne l'outrepasse.
 
-The ``resource`` key loads the given routing resource. In this example the
-resource is the full path to a file, where the ``@AcmeHelloBundle`` shortcut
-syntax resolves to the path of that bundle. The imported file might look
-like this:
+La clé de la ``ressource`` charge la ressource de routage donnée. Dans cet
+exemple, la ressource est le répertoire entier d'un fichier, où la syntaxe
+raccourcie ``@AcmeHelloBundle`` est traduite par le répertoire de ce bundle.
+Le fichier importé pourrait ressemblé à quelque chose comme ça :
 
 .. configuration-block::
 
@@ -991,8 +992,8 @@ like this:
 
         return $collection;
 
-The routes from this file are parsed and loaded in the same way as the main
-routing file.
+Les routes de ce fichier sont analysées et chargées de la même manière que
+pour le fichier de routage principal.
 
 Prefixing Imported Routes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
