@@ -4,62 +4,63 @@
 Performance
 ===========
 
-Symfony2 is fast, right out of the box. Of course, if you really need speed,
-there are many ways that you can make Symfony even faster. In this chapter,
-you'll explore many of the most common and powerful ways to make your Symfony
-application even faster.
+Symfony2 est rapide, sans aucune configuration. Bien entendu, si vous voulez
+que ça soit plus rapide, il y a de nombreuses façons de rendre Symfony
+encore plus rapide. Dans ce chapitre, vous explorerez les façons les plus courantes
+et les plus puissantes pour rendre votre application Symfony encore plus rapide.
 
 .. index::
    single: Performance; Byte code cache
 
-Use a Byte Code Cache (e.g. APC)
---------------------------------
+Utiliser un cache de byte code (e.g. APC)
+-----------------------------------------
 
-One the best (and easiest) things that you should do to improve your performance
-is to use a "byte code cache". The idea of a byte code cache is to remove
-the need to constantly recompile the PHP source code. There are a number of
-`byte code caches`_ available, some of which are open source. The most widely
-used byte code cache is probably `APC`_
+L'une des meilleures choses (et des plus simples) que vous devriez faire pour
+augmenter la performance est d'utiliser un cache de byte code (« byte code cache »).
+L'idée d'un cache de byte code est de ne plus avoir à recompiler constamment
+le code source PHP. Il existe un certain nombre de `caches de byte code`, dont certains
+sont open source. Le cache de byte code le plus largement utilisé est 
+probablement `APC`_
 
-Using a byte code cache really has no downside, and Symfony2 has been architected
-to perform really well in this type of environment.
+Il n'y a aucun effet négatif à utiliser un cache de byte code, et Symfony2 
+a été architecturé pour être vraiment performant dans ce type d'environnement.
 
-Further Optimizations
-~~~~~~~~~~~~~~~~~~~~~
+D'autres optimisations
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Byte code caches usually monitor the source files for changes. This ensures
-that if the source of a file changes, the byte code is recompiled automatically.
-This is really convenient, but obviously adds overhead.
+Le cache de byte code surveille normalement tout changement de code source.
+Cela permet de recompiler automatiquement le byte code en cas de changement
+d'un fichier source. C'est très pratique, mais cela a évidemment un coût.
 
-For this reason, some byte code caches offer an option to disable these checks.
-Obviously, when disabling these checks, it will be up to the server admin
-to ensure that the cache is cleared whenever any source files change. Otherwise,
-the updates you've made won't be seen.
+Pour cette raison, certains cache de byte code offre l'option de désactiver
+la vérification, ce sera donc à l'administrateur système de vider le cache 
+à chaque changement de fichier. Sinon, les mises à jour ne seront pas visibles.
 
-For example, to disable these checks in APC, simply add ``apc.stat=0`` to
-your php.ini configuration.
+Par exemple, pour désactiver cette vérification avec APC, ajoutez simplement
+``apc.stat=0`` à votre fichier de configuration php.ini.
 
 .. index::
    single: Performance; Autoloader
 
-Use an Autoloader that caches (e.g. ``ApcUniversalClassLoader``)
-----------------------------------------------------------------
+Utiliser un chargeur automatique qui met en cache (par exemple ``ApcUniversalClassLoader``)
+-------------------------------------------------------------------------------------------
 
-By default, the Symfony2 standard edition uses the ``UniversalClassLoader``
-in the `autoloader.php`_ file. This autoloader is easy to use, as it will
-automatically find any new classes that you've placed in the registered
-directories.
+Par défaut, la distribution Symfony standard utilise ``UniversalClassLoader``
+dans le fichier `autoloader.php`_. Ce chargeur automatique (autoloader) est facile
+à utiliser, car il va automatiquement trouver toute nouvelle classe que vous aurez
+placée dans les répertoires enregistrés.
 
-Unfortunately, this comes at a cost, as the loader iterates over all configured
-namespaces to find a particular file, making ``file_exists`` calls until it
-finally finds the file it's looking for.
+Malheureusement, cela a un coût, et le chargeur itère à travers tous les espaces de noms
+(namespaces) pour trouver un fichier en particulier, en appelant ``file_exists`` 
+jusqu'à ce qu'il trouve le fichier qu'il recherchait.
 
-The simplest solution is to cache the location of each class after it's located
-the first time. Symfony comes with a class - ``ApcUniversalClassLoader`` -
-loader that extends the ``UniversalClassLoader`` and stores the class locations
-in APC.
+La solution la plus simple est de mettre en cache l'emplacement de chaque classe
+après qu'il l'ait trouvé la première fois. Symfony est fourni avec une classe chargeur
+- ``ApcUniversalClassLoader`` - qui étend ``UniversalClassLoader`` et qui sauvegarde
+l'emplacement de la classe dans APC.
 
-To use this class loader, simply adapt your ``autoloader.php`` as follows:
+Pour utiliser cette classe de chargeur, vous n'avez qu'à adapter votre fichier 
+``autoloader.php`` de la manière suivante :
 
 .. code-block:: php
 
@@ -69,62 +70,68 @@ To use this class loader, simply adapt your ``autoloader.php`` as follows:
 
     use Symfony\Component\ClassLoader\ApcUniversalClassLoader;
 
-    $loader = new ApcUniversalClassLoader('some caching unique prefix');
+    $loader = new ApcUniversalClassLoader('un préfixe de caching unique');
     // ...
 
 .. note::
 
-    When using the APC autoloader, if you add new classes, they will be found
-    and automatically and everything will work the same as before (i.e. no
-    reason to "clear" the cach). However, if you change the location of a
-    particular namespace or prefix, you'll need to flush your APC cache. Otherwise,
-    the autoloader will still be looking at the old location for all classes
-    inside that namespace.
+    Lorsque vous utilisez le chargeur automatique APC, si vous avez de nouvelles
+    classes, elles vont être trouvées automatiquement et tout fonctionnera comme
+    avant (donc aucune raison de vider le cache). Par contre, si vous changez
+    l'emplacement d'un espace de noms ou d'un préfixe, il va falloir que vous vidiez le
+    cache APC. Sinon, le chargeur automatique verra toujours l'ancien emplacement 
+    des classes à l'intérieur de ce namespace.
 
 .. index::
    single: Performance; Bootstrap files
 
-Use Bootstrap Files
--------------------
 
-To ensure optimal flexibility and code reuse, Symfony2 applications leverage
-a variety of classes and 3rd party components. But loading all of these classes
-from separate files on each request can result in some overhead. To reduce
-this overhead, the Symfony2 Standard Edition provides a script to generate
-a so-called `bootstrap file`_, consisting of multiple classes definitions
-in a single file. By including this file (which contains a copy of many of
-the core classes), Symfony no longer needs to include any of the source files
-containing those classes. This will reduce disc IO quite a bit.
+Utiliser des fichiers d'amorçage
+--------------------------------
 
-If you're using the Symfony2 Standard Edition, then you're probably already
-using the bootstrap file. To be sure, open your front controller (usually
-``app.php``) and check to make sure that one of the following lines exists
-and is uncommented (exactly which you need depends on if you're using Symfony's
-:doc:`HTTP Caching layer</book/http_cache>`)::
+Afin d'assurer une flexibilité maximale et de favoriser la réutilisation du code,
+les applications Symfony2 profitent de nombreuses classes et composants externes.
+Mais charger toutes les classes de fichiers séparés à chaque requête peut
+entraîner des coûts. Afin de réduire ces coûts, la distribution Symfony standard
+fournit un script qui génère ce qu'on appelle un `fichier d'amorçage`_
+(« bootstrap file »), qui consiste en une multitude de définitions de classes
+en un seul fichier. En incluant ce fichier (qui contient une copie de 
+nombreux fichiers du core), Symfony n'a plus besoin d'inclure les fichiers 
+sources individuels qui contiennent ces classes. Cela va réduire un peu 
+les lectures/écritures sur le disque.
+
+Si vous utilisez l'édition Symfony standard, alors vous utilisez probablement 
+déjà le fichier d'amorçage. Pour vous en assurer, ouvrez votre contrôleur frontal
+(front controller, généralement ``app.php``) et vérifiez si l'une de ces lignes
+existe et n'est pas commentée (ce dont vous avez besoin dépend de si vous utilisez
+:doc:`HTTP Caching layer</book/http_cache>`) :
 
     require_once __DIR__.'/../app/bootstrap.php.cache';
     require_once __DIR__.'/../app/bootstrap_cache.php.cache';
 
-Note that there are two disadvantages when using a bootstrap file:
+Veuillez noter qu'il y a deux désavantages à utiliser un fichier d'amorçage :
 
-* the file needs to be regenerated whenever any of the original sources change
-  (i.e. when you update the Symfony2 source or vendor libraries);
+* le fichier nécessite d'être régénérer à chaque fois les fichiers sources 
+originaux changent (à savoir quand vous mettez à jour le code source de Symfony2
+ou un une librairie "vendor",
 
-* when debugging, one will need to place break points inside the bootstrap file.
+* lors du débogage, vous devrez placer des points d'arrêt (breakpoints) dans ce fichier
+d'amorçage.
 
-If you're using Symfony2 Standard Edition, the bootstrap files are automatically
-rebuilt after updating the vendor libraries via the ``php bin/vendors install``
-command.
+Si vous utilisez l'édition Symfony2 standard, les fichiers d'amorçage sont automatiquement
+regénérés après avoir mis à jour les librairies "vendor" grâce à la commande
+``php bin/vendors install``.
 
-Bootstrap Files and Byte Code Caches
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fichiers d'amorçage et  caches de byte code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Even when using a byte code cache, performance will improve when using a bootstrap
-file since there will be less files to monitor for changes. Of course if this
-feature is disabled in the byte code cache (e.g. ``apc.stat=0`` in APC), there
-is no longer a reason to use a bootstrap file.
+Même en utilisant un cache de byte code, la performance sera améliorée si vous utilisez
+un fichier d'amorçage, car il y aura moins de fichiers dont il faut surveiller 
+les changements. Bien sûr, si vous désactivez la surveillance des changements de fichiers
+(par exemple ``apc.stat=0`` in APC), il n'y a plus de raison d'utiliser un fichier
+d'amorçage.
 
-.. _`byte code caches`: http://en.wikipedia.org/wiki/List_of_PHP_accelerators
+.. _`caches de byte code`: http://en.wikipedia.org/wiki/List_of_PHP_accelerators
 .. _`APC`: http://php.net/manual/en/book.apc.php
 .. _`autoloader.php`: https://github.com/symfony/symfony-standard/blob/master/app/autoload.php
-.. _`bootstrap file`: https://github.com/sensio/SensioDistributionBundle/blob/master/Resources/bin/build_bootstrap.php
+.. _`fichier d'amorçage`: https://github.com/sensio/SensioDistributionBundle/blob/master/Resources/bin/build_bootstrap.php
