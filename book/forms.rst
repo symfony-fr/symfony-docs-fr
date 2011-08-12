@@ -1,19 +1,20 @@
 .. index::
-   single: Forms
+   single: Formulaires
 
-Forms
-=====
+Formulaires
+===========
 
-Dealing with HTML forms is one of the most common - and challenging - tasks for
-a web developer. Symfony2 integrates a Form component that makes dealing with
-forms easy. In this chapter, you'll build a complex form from the ground-up,
-learning the most important features of the form library along the way.
+Intéragir avec les formulaires HTML est l'une des plus communes - et stimulantes -
+tâches pour un développeur web. Symfony2 intègre un composant «Form» qui rend
+la chose facile. Dans ce chapitre, vous allez construire un formulaire complexe
+depuis la base, tout en apprenant au fur et à mesure les caractéristiques les
+plus importantes de la bibliothèque des formulaires.
 
 .. note::
 
-   The Symfony form component is a standalone library that can be used outside
-   of Symfony2 projects. For more information, see the `Symfony2 Form Component`_
-   on Github.
+   Le composant formulaire de Symfony est une bibliothèque autonome qui peut être
+   utilisée en dehors des projets Symfony2. Pour plus d'informations, voir le
+   `Symfony2 Form Component`_ sur Github.
 
 .. index::
    single: Forms; Create a simple form
