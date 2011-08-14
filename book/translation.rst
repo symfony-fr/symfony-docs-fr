@@ -20,14 +20,14 @@ capable de traduire le texte (ou "message") dans la langue de l'utilisateur::
 
     Le terme *locale* se réfère en gros à la langue et au pays de l'utilisateur. Ca
     peut être n'importe quel chaîne que votre application va utiliser ensuite pour gérer
-	les traudctions et autres différences de format (par ex. format de monnaie). Nous recommandons 
-	le code *language* ISO639-1 , un underscore (``_``), ensuite le code *country* ISO3166 
+    les traductions et autres différences de format (par ex. format de monnaie). Nous recommandons 
+    le code *language* ISO639-1 , un underscore (``_``), ensuite le code *country* ISO3166 
     (par ex. ``fr_FR`` for French/France).
 
 Dans ce chapitre, nous allons apprendre comment préparer une application à soutenir de multiples
 locales et ensuite comment créer des traductions pour plusieurs locales. Dans l'ensemble,
 le processus a plusieurs étapes communes :
-	
+    
 1. Activer et configurer le composant  ``Translation`` de Symfony ;
 
 1. Extraire les chaînes (cad "messages") en les enveloppant dans des appels vers le ``Translator`` ;
@@ -75,9 +75,9 @@ n'existe pas dans le locale de l'utilisateur.
 
 .. tip::
 
-	Quand une traduction n'existe pas pour un locale, le translator essaye tout d'abord
-	de trouver une traduction pour ce langage (``fr`` si le locale est 
-	``fr_FR`` par exemple). Si cela échoue également, il regarde pour une traduction
+    Quand une traduction n'existe pas pour un locale, le translator essaye tout d'abord
+    de trouver une traduction pour ce langage (``fr`` si le locale est 
+    ``fr_FR`` par exemple). Si cela échoue également, il regarde pour une traduction
      utilisant le locale de secours.
 
 Le locale utilisé en traductions est celui qui est stocké dans la session de l'utilisateur.
@@ -229,10 +229,10 @@ est fait juste comme avant :
 .. note::
 
     Les paramètres de substitution peuvent prendre n'importe quel forme puisque le message en entier est reconstruit
-	utilisant le PHP `strtr function`_. Cependant, la notation ``%var%`` est 
-	requis lors de la traduction dans des templates Twig, et est globalement une convention
-	sensée à suivre.
-	
+    utilisant le PHP `strtr function`_. Cependant, la notation ``%var%`` est 
+    requis lors de la traduction dans des templates Twig, et est globalement une convention
+    sensée à suivre.
+    
 Comme nous l'avons vu, créer une traduction est un processus en deux étapes :
 
 1. Extraire le message qui a besoin d'être traduit en le traitant à travers 
@@ -261,10 +261,10 @@ suivante :
 C'est la responsabilité du développeur (ou traducteur) d'une application
 internationalisée de créer ces traductions. Les traductions sont stockées sur le
 système de fichiers et découverts par Symfony, grâce à certaines conventions.
-	
+    
 .. tip::
 
-	Chaque fois que vous créez une *nouvelle* ressource de traduction (ou d'installer un bundle
+    Chaque fois que vous créez une *nouvelle* ressource de traduction (ou d'installer un bundle
     qui comprend une ressource de traduction), assurez-vous de vider votre cache afin
     que Symfony peut découvrir la nouvelle ressource de traduction :
 
@@ -368,7 +368,7 @@ Symfony2 va découvrir ces fichiers et les utiliser lors de la traduction de
 .. sidebar:: Using Real or Keyword Messages
 
     Cet exemple illustre les deux philosophies différentes lors de la création
-	des messages à traduire :
+    des messages à traduire :
 
     .. code-block:: php
 
@@ -377,22 +377,22 @@ Symfony2 va découvrir ces fichiers et les utiliser lors de la traduction de
         $t = $translator->trans('symfony2.great');
 
     Dans la première méthode, les messages sont écrits dans la langue du 
-	locale par défaut (Anglais dans ce cas). Ce message est ensuite utilisé comme l' "id"
-	lors de la création des traductions
-	
+    locale par défaut (Anglais dans ce cas). Ce message est ensuite utilisé comme l' "id"
+    lors de la création des traductions
+    
     Dans la seconde méthode, les messages sont en fait des "mots clés" qui évoque 
     l'idée du message. Le message mot-clé est ensuite utilisée comme "id" pour
     toutes les traductions. Dans ce cas, les traductions doivent être faites pour le 
-	locale par défaut (cad pour traduire ``symfony2.great`` à ``Symfony2 is great``).
-	
-	La deuxième méthode est très pratique car la clé du message n'aura pas besoin d'être modifié
+    locale par défaut (cad pour traduire ``symfony2.great`` à ``Symfony2 is great``).
+    
+    La deuxième méthode est très pratique car la clé du message n'aura pas besoin d'être modifié
     dans chaque fichier de traduction si nous décidons que le message devrait en fait
     être "Symfony2 is really great" dans le locale par défaut.
-	
+    
     Le choix de la méthode à utiliser dépend de vous, mais le format "mot-clé"
     est souvent recommandé.
-	
-	En outre, les formats de fichiers ``php`` et ``yaml`` prend en charge les ids imbriqués pour
+    
+    En outre, les formats de fichiers ``php`` et ``yaml`` prend en charge les ids imbriqués pour
     éviter de vous répéter, si vous utilisez des mots-clés plutôt que du texte réel pour votre
     ids :
     
@@ -429,7 +429,7 @@ Symfony2 va découvrir ces fichiers et les utiliser lors de la traduction de
     Les multiples niveaux sont aplaties en uniques paires id / traduction par
     l'ajout d'un point (.) entre chaque niveau, donc les exemples ci-dessus sont
     équivalents à ce qui suit :
-	
+    
     .. configuration-block::
 
         .. code-block:: yaml
@@ -647,15 +647,10 @@ utilisés pour déterminer quelle forme plurielle utiliser. Les tags peuvent être 
 chaîne descriptive qui se termine par un deux-points (``:``). Les tags aussi n'ont pas besoin d'être le
 même dans le message original comme dans la traduction.
 
-	The tags are really only hints for translators and don't affect the logic
-used to determine which plural form to use. The tags can be any descriptive
-string that ends with a colon (``:``). The tags also do not need to be the
-same in the original message as in the translated one.
-
 .. tip:
 
     Comme les tags sont optionnels, le translator ne les utilise pas (le translator va
-	seulement obtenir une chaîne en fonction de sa position dans la chaîne).
+    seulement obtenir une chaîne en fonction de sa position dans la chaîne).
 
 Explicit Interval Pluralization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -682,7 +677,7 @@ Par exemple, pour ``1`` apple, la règle standard ``There is one apple`` va
 être utilisée. Pour ``2-19`` apples, la seconde règle standard ``There are %count%
 apples`` va être sélectionnée.
 
-Une :class:`Symfony\\Component\\Translation\\Interval` peut représenter un can represent un ensemble fini
+Une :class:`Symfony\\Component\\Translation\\Interval` peut représenter un ensemble fini
 de nombres::
 
     {1,2,3,4}
@@ -758,7 +753,7 @@ Les filtres ``trans`` and ``transchoice`` peuvent être utilisés pour traduire le
     variables traduites en utilisant un filtre. En d'autres termes, si vous avez besoin 
     d'être sûr que votre variable traduite n'est *pas* échappé en sortie, vous devez
     appliquer le filtre brut après le filtre de traduction :
-	
+    
     .. code-block:: jinja
 
             {# text translated between tags is never escaped #}
@@ -820,10 +815,6 @@ Traduire le Contenu d'une Base de Données
 La traduction du contenu de bases de données doivent être traitées par Doctrine par le biais
 de `Translatable Extension`_. Pour plus d'informations, voir la documentation
 pour cette bibliothèque.
-
-The translation of database content should be handled by Doctrine through
-the `Translatable Extension`_. For more information, see the documentation
-for that library.
 
 Sommaire
 -------
