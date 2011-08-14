@@ -1,51 +1,52 @@
 .. index::
-   single: Translations
+   single: Traductions
 
-Translations
+Traductions
 ============
 
-The term "internationalization" refers to the process of abstracting strings
-and other locale-specific pieces out of your application and into a layer
-where they can be translated and converted based on the user's locale (i.e.
-language and country). For text, this means wrapping each with a function
-capable of translating the text (or "message") into the language of the user::
+Le terme «internationalisation» se réfère au processus d'extraire des chaines 
+et autres spécificités locales hors de votre application et de le mettre dans un fichier
+où ils peuvent être traduits et convertis basé sur le locale de l'utilisateur (cad
+la langue et le pays). Pour le texte, cela signifie envelopper chaque texte avec une fonction
+capable de traduire le texte (ou "message") dans la langue de l'utilisateur::
 
-    // text will *always* print out in English
+    // le texte va *toujours* s'afficher en anglais
     echo 'Hello World';
 
-    // text can be translated into the end-user's language or default to English
+    // le texte peut être traduit dans le langage de l'utilisateur final ou par défaut en anglais
     echo $translator->trans('Hello World');
 
 .. note::
 
-    The term *locale* refers roughly to the user's language and country. It
-    can be any string that your application then uses to manage translations
-    and other format differences (e.g. currency format). We recommended the
-    ISO639-1 *language* code, an underscore (``_``), then the ISO3166 *country*
-    code (e.g. ``fr_FR`` for French/France).
+    Le terme *locale* se réfère en gros à la langue et au pays de l'utilisateur. Ca
+    peut être n'importe quel chaîne que votre application va utiliser ensuite pour gérer
+    les traductions et autres différences de format (par ex. format de monnaie). Nous recommandons 
+    le code *language* ISO639-1 , un underscore (``_``), ensuite le code *country* ISO3166 
+    (par ex. ``fr_FR`` for French/France).
 
-In this chapter, we'll learn how to prepare an application to support multiple
-locales and then how to create translations for multiple locales. Overall,
-the process has several common steps:
+Dans ce chapitre, nous allons apprendre comment préparer une application à soutenir de multiples
+locales et ensuite comment créer des traductions pour plusieurs locales. Dans l'ensemble,
+le processus a plusieurs étapes communes :
+    
+1. Activer et configurer le composant  ``Translation`` de Symfony ;
 
-1. Enable and configure Symfony's ``Translation`` component;
+1. Extraire les chaînes (cad "messages") en les enveloppant dans des appels vers le ``Translator`` ;
 
-1. Abstract strings (i.e. "messages") by wrapping them in calls to the ``Translator``;
+1. Créer des ressources de traduction pour chaque locale supporté qui traduit
+   chaque message dans l'application ;
 
-1. Create translation resources for each supported locale that translate
-   each message in the application;
+1. Déterminer, définir et gérer le locale de l'utilisateur dans la session.
 
-1. Determine, set and manage the user's locale in the session.
 
 .. index::
-   single: Translations; Configuration
+   single: Traductions ; Configuration
 
 Configuration
 -------------
 
-Translations are handled by a ``Translator`` :term:`service` that uses the
-user's locale to lookup and return translated messages. Before using it,
-enable the ``Translator`` in your configuration:
+Les traductions sont traités par le ``Translator`` :term:`service` qui utilise le 
+locale de l'utilisateur pour chercher et retourner les messages traduits. Avant de l'utiliser,
+activez le ``Translator`` dans votre configuration :
 
 .. configuration-block::
 
@@ -69,29 +70,29 @@ enable the ``Translator`` in your configuration:
             'translator' => array('fallback' => 'en'),
         ));
 
-The ``fallback`` option defines the fallback locale when a translation does
-not exist in the user's locale.
+L'option ``fallback`` définit le locale de secours quand une traduction
+n'existe pas dans le locale de l'utilisateur.
 
 .. tip::
 
-    When a translation does not exist for a locale, the translator first tries
-    to find the translation for the language (``fr`` if the locale is
-    ``fr_FR`` for instance). If this also fails, it looks for a translation
-    using the fallback locale.
+    Quand une traduction n'existe pas pour un locale, le translator essaye tout d'abord
+    de trouver une traduction pour ce langage (``fr`` si le locale est 
+    ``fr_FR`` par exemple). Si cela échoue également, il regarde pour une traduction
+     utilisant le locale de secours.
 
-The locale used in translations is the one stored in the user session.
+Le locale utilisé en traductions est celui qui est stocké dans la session de l'utilisateur.
 
 .. index::
-   single: Translations; Basic translation
+   single: Traductions; Traduction basique
 
-Basic Translation
+Traduction Basique
 -----------------
 
-Translation of text is done through the  ``translator`` service
-(:class:`Symfony\\Component\\Translation\\Translator`). To translate a block
-of text (called a *message*), use the
-:method:`Symfony\\Component\\Translation\\Translator::trans` method. Suppose,
-for example, that we're translating a simple message from inside a controller:
+La traduction du texte est faite à travers le service ``translator`` 
+(:class:`Symfony\\Component\\Translation\\Translator`). Pour traduire un bloc 
+de texte (appelé un *message*), utilisez la méthode
+:method:`Symfony\\Component\\Translation\\Translator::trans`. Supposons,
+par exemple, que nous traduisons un simple message de l'intérieur d'un controlleur :
 
 .. code-block:: php
 
@@ -102,12 +103,12 @@ for example, that we're translating a simple message from inside a controller:
         return new Response($t);
     }
 
-When this code is executed, Symfony2 will attempt to translate the message
-"Symfony2 is great" based on the ``locale`` of the user. For this to work,
-we need to tell Symfony2 how to translate the message via a "translation
-resource", which is a collection of message translations for a given locale.
-This "dictionary" of translations can be created in several different formats,
-XLIFF being the recommended format:
+Quand ce code est exécuté, Symfony2 va essayé de traduire ce message
+"Symfony2 is great" basé sur le ``locale`` de l'utilisateur. Pour que cela marche,
+nous devons dire à Symfony2 comment traduire le message via une "translation
+resource", qui est une collection de traductions de message pour un locale donné.
+Ce "dictionnaire" de traduction peut être créé en plusieurs formats différents,
+XLIFF étant le format recommandé :
 
 .. configuration-block::
 
@@ -138,35 +139,35 @@ XLIFF being the recommended format:
         # messages.fr.yml
         Symfony2 is great: J'aime Symfony2
 
-Now, if the language of the user's locale is French (e.g. ``fr_FR`` or ``fr_BE``),
-the message will be translated into ``J'aime Symfony2``.
+Maintentn, si le langage du locale de l'utilisateur est le français, (cad ``fr_FR`` or ``fr_BE``),
+le message va être traduit en ``J'aime Symfony2``.
 
-The Translation Process
+Le Process de Traduction
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-To actually translate the message, Symfony2 uses a simple process:
+Pour traduire généralement le message, Symfony2 utilise un processus simple :
 
-* The ``locale`` of the current user, which is stored in the session, is determined;
+* Le ``locale`` de l'utilisateur actuel, qui est stocké dans la session, est déterminé ;
 
-* A catalog of translated messages is loaded from translation resources defined
-  for the ``locale`` (e.g. ``fr_FR``). Messages from the fallback locale are
-  also loaded and added to the catalog if they don't already exist. The end
-  result is a large "dictionary" of translations. See `Message Catalogues`_
-  for more details;
+* Un catalogue des messages traduits est chargé depuis les ressources de traduction définies
+  pour le ``locale`` (cad ``fr_FR``). Les messages du locale de secours sont
+  aussi chargés et ajoutés au catalogue s'ils n'existent pas déjà. Le
+  résultat final est un large "dictionnaire" de traductions. Voir `Message Catalogues`_
+  pour plus de détails ;
 
-* If the message is located in the catalog, the translation is returned. If
-  not, the translator returns the original message.
-
-When using the ``trans()`` method, Symfony2 looks for the exact string inside
-the appropriate message catalog and returns it (if it exists).
+* Si le message est dans le catalogue, la traduction est retournée. Si non,
+  le translator retourne le message original.
+  
+Lorsque vous utilisez  la méthode ``trans()``, Symfony2 cherche la chaîne exacte à l'intérieur
+du catalogue de messages approprié et la retourne (si elle existe).
 
 .. index::
-   single: Translations; Message placeholders
+   single: Traductions; Message placeholders
 
 Message Placeholders
 ~~~~~~~~~~~~~~~~~~~~
 
-Sometimes, a message containing a variable needs to be translated:
+Parfois, un message contenant une variable a besoin d'être traduit :
 
 .. code-block:: php
 
@@ -177,11 +178,11 @@ Sometimes, a message containing a variable needs to be translated:
         return new Response($t);
     }
 
-However, creating a translation for this string is impossible since the translator
-will try to look up the exact message, including the variable portions
-(e.g. "Hello Ryan" or "Hello Fabien"). Instead of writing a translation
-for every possible iteration of the ``$name`` variable, we can replace the
-variable with a "placeholder":
+Cependant, créer une traduction pour cette chaîne est impossible étant donné que le translator
+va essayer de trouver le message exact, incluant les portions de la variable
+(cad "Hello Ryan" or "Hello Fabien"). Au lieu d'écrire une traduction
+pour tous les itérations possibles de la variable ``$name``, nous pouvons remplacer la
+variable avec un placeholder (paramètre de substitution) :
 
 .. code-block:: php
 
@@ -192,9 +193,9 @@ variable with a "placeholder":
         new Response($t);
     }
 
-Symfony2 will now look for a translation of the raw message (``Hello %name%``)
-and *then* replace the placeholders with their values. Creating a translation
-is done just as before:
+Symfony2 va maintenant chercher une traduction du message brut (``Hello %name%``)
+et *ensuite* remplacer les paramètres de substitution avec leurs valeurs. Créer une traduction
+est fait juste comme avant :
 
 .. configuration-block::
 
@@ -227,107 +228,106 @@ is done just as before:
 
 .. note::
 
-    The placeholders can take on any form as the full message is reconstructed
-    using the PHP `strtr function`_. However, the ``%var%`` notation is
-    required when translating in Twig templates, and is overall a sensible
-    convention to follow.
+    Les paramètres de substitution peuvent prendre n'importe quel forme puisque le message en entier est reconstruit
+    utilisant le PHP `strtr function`_. Cependant, la notation ``%var%`` est 
+    requis lors de la traduction dans des templates Twig, et est globalement une convention
+    sensée à suivre.
+    
+Comme nous l'avons vu, créer une traduction est un processus en deux étapes :
 
-As we've seen, creating a translation is a two-step process:
+1. Extraire le message qui a besoin d'être traduit en le traitant à travers 
+   le ``Translator``.
 
-1. Abstract the message that needs to be translated by processing it through
-   the ``Translator``.
+1. Créer une traduction pour le message dans chaque que vous avez choisi de 
+   supporter.
 
-1. Create a translation for the message in each locale that you choose to
-   support.
-
-The second step is done by creating message catalogues that define the translations
-for any number of different locales.
+La deuxième étape est fait en créant des catalogues de messages qui définissent les traductions
+pour tout nombre de locales différents.
 
 .. index::
-   single: Translations; Message catalogues
+   single: Traduction; Catalogues de Message
 
-Message Catalogues
+Catalogues de Message
 ------------------
 
-When a message is translated, Symfony2 compiles a message catalogue for the
-user's locale and looks in it for a translation of the message. A message
-catalogue is like a dictionary of translations for a specific locale. For
-example, the catalogue for the ``fr_FR`` locale might contain the following
-translation:
+Lorsqu'un message est traduit, Symfony2 compile un catalogue de messages pour le
+locale de l'utilisateur et regarde dedans pour une traduction du message. Un catalogue
+de message est comme un dictionnaire de traductions pour un locale spécifique. 
+Par exemple, le catalogue du locale fr_FR `` `` pourrait contenir la traduction
+suivante :
 
     Symfony2 is Great => J'aime Symfony2
 
-It's the responsibility of the developer (or translator) of an internationalized
-application to create these translations. Translations are stored on the
-filesystem and discovered by Symfony, thanks to some conventions.
-
+C'est la responsabilité du développeur (ou traducteur) d'une application
+internationalisée de créer ces traductions. Les traductions sont stockées sur le
+système de fichiers et découverts par Symfony, grâce à certaines conventions.
+    
 .. tip::
 
-    Each time you create a *new* translation resource (or install a bundle
-    that includes a translation resource), be sure to clear your cache so
-    that Symfony can discover the new translation resource:
-    
+    Chaque fois que vous créez une *nouvelle* ressource de traduction (ou d'installer un bundle
+    qui comprend une ressource de traduction), assurez-vous de vider votre cache afin
+    que Symfony peut découvrir la nouvelle ressource de traduction :
+
     .. code-block:: bash
     
         php app/console cache:clear
 
 .. index::
-   single: Translations; Translation resource locations
+   single: Traductions; Emplacements des ressources de traduction
 
-Translation Locations and Naming Conventions
+Emplacements des Traductions et Conventions de Nommage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Symfony2 looks for message files (i.e. translations) in two locations:
+Symfony2 cherche les fichiers de messages (cad traductions) à deux endroits :
 
-* For messages found in a bundle, the corresponding message files should
-  live in the ``Resources/translations/`` directory of the bundle;
+* Pour les messages trouvés dans un bundle, les fichiers de messages correspondant doit
+  se situer dans le répertoire ``Resources/translations/`` du bundle ;
 
-* To override any bundle translations, place message files in the
-  ``app/Resources/translations`` directory.
+* Pour outrepasser n'importe quel traduction du bundle, placez les fichiers de messages dans le
+  répertoire ``app/Resources/translations``.
 
-The filename of the translations is also important as Symfony2 uses a convention
-to determine details about the translations. Each message file must be named
-according to the following pattern: ``domain.locale.loader``:
+Le nom du fichier des traductions est aussi important puisque Symfony2 utilise une convention
+pour déterminer les détails sur les traductions. Chaque fichier de message doit être nommé
+selon le schéma suivant : ``domain.locale.loader`` :
 
-* **domain**: An optional way to organize messages into groups (e.g. ``admin``,
-  ``navigation`` or the default ``messages``) - see `Using Message Domains`_;
+* **domain**: Une façon optionnelle pour organiser les messages dans des groupes (par ex. ``admin``,
+  ``navigation`` ou les ``messages`` par défaut) - voir `Using Message Domains`_;
 
-* **locale**: The locale that the translations are for (e.g. ``en_GB``, ``en``, etc);
+* **locale**: Le locale de la traduction (par ex. ``en_GB``, ``en``, etc);
 
-* **loader**: How Symfony2 should load and parse the file (e.g. ``xliff``,
-  ``php`` or ``yml``).
+* **loader**: Comment Symfony2 doit charger et parser le fichier (par ex. ``xliff``,
+  ``php`` ou ``yml``).
 
-The loader can be the name of any registered loader. By default, Symfony
-provides the following loaders:
+Le loader peut être le nom de n'importe quel loader enregistré. Par défaut, Symfony
+fournit les loaders suivants :
 
 * ``xliff``: XLIFF file;
 * ``php``:   PHP file;
 * ``yml``:  YAML file.
 
-The choice of which loader to use is entirely up to you and is a matter of
-taste.
+Le choix de quel loader utiliser dépend de vous et c'est une question de
+goût.
 
 .. note::
 
-    You can also store translations in a database, or any other storage by
-    providing a custom class implementing the
-    :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface` interface.
-    See :doc:`Custom Translation Loaders </cookbook/translation/custom_loader>`
-    below to learn how to register custom loaders.
+    Vous pouvez également stocker des traductions dans une base de données, ou tout autre stockage en
+    fournissant une classe personnalisée mettant en oeuvre l'interface
+    :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface`.
+    Voir :doc:`Custom Translation Loaders </cookbook/translation/custom_loader>`
+    ci-dessous pour apprendre comment enregistrer des loaders personnalisés.
 
 .. index::
-   single: Translations; Creating translation resources
+   single: Traductions; Créer les ressources de traduction
 
-Creating Translations
+Creer les Traductions
 ~~~~~~~~~~~~~~~~~~~~~
 
-Each file consists of a series of id-translation pairs for the given domain and
-locale. The id is the identifier for the individual translation, and can
-be the message in the main locale (e.g. "Symfony is great") of your application
-or a unique identifier (e.g. "symfony2.great" - see the sidebar below):
+Chaque fichier est constitué d'une série de paires id-traduction pour le domaine et
+locale donné. L'id est l'identifiant de la traduction individuelle, et peut
+être le message dans le locale principal (par exemple "Symfony is great") de votre application
+ou un identificateur unique (par exemple "symfony2.great" - voir l'encadré ci-dessous):
 
 .. configuration-block::
-
     .. code-block:: xml
 
         <!-- src/Acme/DemoBundle/Resources/translations/messages.fr.xliff -->
@@ -361,14 +361,14 @@ or a unique identifier (e.g. "symfony2.great" - see the sidebar below):
         Symfony2 is great: J'aime Symfony2
         symfony2.great:    J'aime Symfony2
 
-Symfony2 will discover these files and use them when translating either
-"Symfony2 is great" or "symfony2.great" into a French language locale (e.g.
+Symfony2 va découvrir ces fichiers et les utiliser lors de la traduction de 
+"Symfony2 is great" ou de "symfony2.great" dans un locale de langue française (par ex.
 ``fr_FR`` or ``fr_BE``).
 
 .. sidebar:: Using Real or Keyword Messages
 
-    This example illustrates the two different philosophies when creating
-    messages to be translated:
+    Cet exemple illustre les deux philosophies différentes lors de la création
+    des messages à traduire :
 
     .. code-block:: php
 
@@ -376,26 +376,26 @@ Symfony2 will discover these files and use them when translating either
 
         $t = $translator->trans('symfony2.great');
 
-    In the first method, messages are written in the language of the default
-    locale (English in this case). That message is then used as the "id"
-    when creating translations.
-
-    In the second method, messages are actually "keywords" that convey the
-    idea of the message. The keyword message is then used as the "id" for
-    any translations. In this case, translations must be made for the default
-    locale (i.e. to translate ``symfony2.great`` to ``Symfony2 is great``).
-
-    The second method is handy because the message key won't need to be changed
-    in every translation file if we decide that the message should actually
-    read "Symfony2 is really great" in the default locale.
-
-    The choice of which method to use is entirely up to you, but the "keyword"
-    format is often recommended. 
-
-    Additionally, the ``php`` and ``yaml`` file formats support nested ids to
-    avoid repeating yourself if you use keywords instead of real text for your
-    ids:
-
+    Dans la première méthode, les messages sont écrits dans la langue du 
+    locale par défaut (Anglais dans ce cas). Ce message est ensuite utilisé comme l' "id"
+    lors de la création des traductions
+    
+    Dans la seconde méthode, les messages sont en fait des "mots clés" qui évoque 
+    l'idée du message. Le message mot-clé est ensuite utilisée comme "id" pour
+    toutes les traductions. Dans ce cas, les traductions doivent être faites pour le 
+    locale par défaut (cad pour traduire ``symfony2.great`` à ``Symfony2 is great``).
+    
+    La deuxième méthode est très pratique car la clé du message n'aura pas besoin d'être modifié
+    dans chaque fichier de traduction si nous décidons que le message devrait en fait
+    être "Symfony2 is really great" dans le locale par défaut.
+    
+    Le choix de la méthode à utiliser dépend de vous, mais le format "mot-clé"
+    est souvent recommandé.
+    
+    En outre, les formats de fichiers ``php`` et ``yaml`` prend en charge les ids imbriqués pour
+    éviter de vous répéter, si vous utilisez des mots-clés plutôt que du texte réel pour votre
+    ids :
+    
     .. configuration-block::
 
         .. code-block:: yaml
@@ -426,10 +426,10 @@ Symfony2 will discover these files and use them when translating either
                 ),
             );
 
-    The multiple levels are flattened into single id/translation pairs by
-    adding a dot (.) between every level, therefore the above examples are
-    equivalent to the following:
-
+    Les multiples niveaux sont aplaties en uniques paires id / traduction par
+    l'ajout d'un point (.) entre chaque niveau, donc les exemples ci-dessus sont
+    équivalents à ce qui suit :
+    
     .. configuration-block::
 
         .. code-block:: yaml
@@ -449,41 +449,41 @@ Symfony2 will discover these files and use them when translating either
             );
 
 .. index::
-   single: Translations; Message domains
+   single: Translations; Domaines de Message
 
-Using Message Domains
+Utiliser les Domaines de Message
 ---------------------
 
-As we've seen, message files are organized into the different locales that
-they translate. The message files can also be organized further into "domains".
-When creating message files, the domain is the first portion of the filename.
-The default domain is ``messages``. For example, suppose that, for organization,
-translations were split into three different domains: ``messages``, ``admin``
-and ``navigation``. The French translation would have the following message
-files:
+Comme nous l'avons vu, les fichiers de messages sont organisés dans les différents locales 
+qu'ils traduisent. Les fichiers de messages peuvent également être organisées davantage dans des "domaines".
+Lors de la création des fichiers de message, le domaine est la première partie du nom de fichier.
+Le domaine par défaut est ``messages``. Par exemple, supposons que, pour l'organisation,
+les traductions ont été divisés en trois domaines différents: ``messages``, ``admin``
+et ``navigation``. La traduction française aurait les fichiers de message
+suivant :
 
 * ``messages.fr.xliff``
 * ``admin.fr.xliff``
 * ``navigation.fr.xliff``
 
-When translating strings that are not in the default domain (``messages``),
-you must specify the domain as the third argument of ``trans()``:
+Lors de la traduction des chaînes qui ne sont pas dans le domaine par défaut (``messages``),
+vous devez spécifier le domaine comme troisième paramètre de ``trans()``:
 
 .. code-block:: php
 
     $this->get('translator')->trans('Symfony2 is great', array(), 'admin');
 
-Symfony2 will now look for the message in the ``admin`` domain of the user's
-locale.
+Symfony2 va maintenant chercher le message dans le domaine ``admin`` du locale
+de l'utilisateur.
 
 .. index::
-   single: Translations; User's locale
+   single: Traductions; Locale de l'utilisateur
 
-Handling the User's Locale
+Gérer le locale de l'utilisateur
 --------------------------
 
-The locale of the current user is stored in the session and is accessible
-via the ``session`` service:
+Le locale de l'utilisateur courant est stocké dans la session et est accessible
+via le service ``session`` :
 
 .. code-block:: php
 
@@ -492,17 +492,17 @@ via the ``session`` service:
     $this->get('session')->setLocale('en_US');
 
 .. index::
-   single: Translations; Fallback and default locale
+   single: Traductions; Fallback et locale par défaut
 
-Fallback and Default Locale
+Fallback et Locale par Défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the locale hasn't been set explicitly in the session, the ``fallback_locale``
-configuration parameter will be used by the ``Translator``. The parameter
-defaults to ``en`` (see `Configuration`_).
+Si le locale n'a pas été explicitement défini dans la session le paramètre de 
+configuration ``fallback_locale`` va être utilisé par le ``Translator``. Le paramètre
+est par défaut à ``en`` (voir `Configuration`_).
 
-Alternatively, you can guarantee that a locale is set on the user's session
-by defining a ``default_locale`` for the session service:
+Alternativement, vous pouvez garantir que le locale est défini dans la session de l'utilisateur
+en définissant un ``default_locale`` dans le service de session :
 
 .. configuration-block::
 
@@ -526,19 +526,19 @@ by defining a ``default_locale`` for the session service:
             'session' => array('default_locale' => 'en'),
         ));
 
-The Locale and the URL
+Le Locale et l'URL
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Since the locale of the user is stored in the session, it may be tempting
-to use the same URL to display a resource in many different languages based
-on the user's locale. For example, ``http://www.example.com/contact`` could
-show content in English for one user and French for another user. Unfortunately,
-this violates a fundamental rule of the Web: that a particular URL returns
-the same resource regardless of the user. To further muddy the problem, which
-version of the content would be indexed by search engines?
+Puisque le locale de l'utilisateur est stocké dans la session, il peut être tentant
+d'utiliser la même URL pour afficher une ressource dans de nombreuses langues différentes basé
+sur le locale de l'utilisateur. Par exemple, ``http://www.example.com/contact`` pourrait
+afficher le contenu en anglais pour un utilisateur et en français pour un autre utilisateur. Malheureusement,
+cela viole une règle fondamentale de l'Internet : qu'une URL particulière retourne
+la même ressource indépendamment de l'utilisateur. Pour mieux "muddy" le problème, quel
+version du contenu serait indexé par les moteurs de recherche ?
 
-A better policy is to include the locale in the URL. This is fully-supported
-by the routing system using the special ``_locale`` parameter:
+Une meilleure politique est d'inclure la localisation dans l'URL. Ceci est entièrement prise en charge
+par le système de routage en utilisant le paramètre spécial ``_locale`` :
 
 .. configuration-block::
 
@@ -573,37 +573,37 @@ by the routing system using the special ``_locale`` parameter:
 
         return $collection;
 
-When using the special `_locale` parameter in a route, the matched locale
-will *automatically be set on the user's session*. In other words, if a user
-visits the URI ``/fr/contact``, the locale ``fr`` will automatically be set
-as the locale for the user's session.
+Lorsque vous utilisez le paramètre spécial `_locale` dans une route, le locale correspondant
+sera *automatiquement défini sur la session de l'utilisateur*. En d'autres termes, si un utilisateur
+visite l'URI ``/fr/contact``, le locale ``fr`` sera automatiquement défini
+comme le locale pour la session de l'utilisateur.
 
-You can now use the user's locale to create routes to other translated pages
-in your application.
+Vous pouvez maintenant utiliser le locale de l'utilisateur pour créer des routes
+à d'autres pages traduites dans votre application.
 
 .. index::
-   single: Translations; Pluralization
+   single: Traductions; Pluralisation
 
-Pluralization
+Pluralisation
 -------------
 
-Message pluralization is a tough topic as the rules can be quite complex. For
-instance, here is the mathematic representation of the Russian pluralization
-rules::
+La pluralisation des messages est un sujet difficile car les règles peuvent être assez complexes. 
+Par exemple, voici la représentation mathématique des règles de la pluralisation 
+russe::
 
     (($number % 10 == 1) && ($number % 100 != 11)) ? 0 : ((($number % 10 >= 2) && ($number % 10 <= 4) && (($number % 100 < 10) || ($number % 100 >= 20))) ? 1 : 2);
 
-As you can see, in Russian, you can have three different plural forms, each
-given an index of 0, 1 or 2. For each form, the plural is different, and
-so the translation is also different.
+Comme vous pouvez voir, en russe, vous pouvez avoir trois formes de pluriel différent, chacun
+donnant un index de 0, 1 or 2. Pour chaque forme, le pluriel est différent, et
+ainsi la traduction est également différent.
 
-When a translation has different forms due to pluralization, you can provide
-all the forms as a string separated by a pipe (``|``)::
+Quand une traduction a des formes différentes dûes à la pluralisation, vous pouvez fournir
+toutes les formes comme une chaîne séparé par un pipe (``|``)::
 
     'There is one apple|There are %count% apples'
 
-To translate pluralized messages, use the
-:method:`Symfony\\Component\\Translation\\Translator::transChoice` method:
+Pour traduire des messages pluralisés, utilisez la méthode 
+:method:`Symfony\\Component\\Translation\\Translator::transChoice` :
 
 .. code-block:: php
 
@@ -613,98 +613,98 @@ To translate pluralized messages, use the
         array('%count%' => 10)
     );
 
-The second argument (``10`` in this example), is the *number* of objects being
-described and is used to determine which translation to use and also to populate
-the ``%count%`` placeholder.
+Le second paramètre (``10`` dans cet exemple), est le *nombre* d'objets étant
+décrits et est utilisé pour déterminer quel traduction utiliser et aussi pour définir
+le paramètre de substitution ``%count%``.
 
-Based on the given number, the translator chooses the right plural form.
-In English, most words have a singular form when there is exactly one object
-and a plural form for all other numbers (0, 2, 3...). So, if ``count`` is
-``1``, the translator will use the first string (``There is one apple``)
-as the translation. Otherwise it will use ``There are %count% apples``.
+Basé sur le nombre donné, le translator choisit la bonne forme du pluriel. 
+En anglais, la plupart des mots ont une forme singulière quand il y a exactement un objet
+et un pluriel pour tous les autres nombres (0, 2, 3 ...). Ainsi, si ``count`` is
+``1``, le translator va utiliser la première chaîne (``There is one apple``)
+comme la traduction. Sinon, il va utiliser ``There are %count% apples``.
 
-Here is the French translation::
+Voici la traduction française::
 
     'Il y a %count% pomme|Il y a %count% pommes'
 
-Even if the string looks similar (it is made of two sub-strings separated by a
-pipe), the French rules are different: the first form (no plural) is used when
-``count`` is ``0`` or ``1``. So, the translator will automatically use the
-first string (``Il y a %count% pomme``) when ``count`` is ``0`` or ``1``.
+Même si la chaîne se ressemble (il est constitué de deux sous-chaînes séparées par un
+pipe), les règles françaises sont différentes : la première forme (pas de pluriel) est utilisée lorsque
+``count`` is ``0`` or ``1``. Ainsi, le translator va utiliser automatiquement la
+première chaîne (``Il y a %count% pomme``) lorsque ``count`` est ``0`` ou ``1``.
 
-Each locale has its own set of rules, with some having as many as six different
-plural forms with complex rules behind which numbers map to which plural form.
-The rules are quite simple for English and French, but for Russian, you'd
-may want a hint to know which rule matches which string. To help translators,
-you can optionally "tag" each string::
+Chaque locale a son propre ensemble de règles, certains ayant jusqu'à six différentes
+formes plurielles avec des règles complexes pour déterminer quel nombre correspond à quelle forme du pluriel.
+Les règles sont assez simples pour l'anglais et le français, mais pour le russe, vous auriez
+voulu un indice pour savoir quelle règle correspond à quelle chaîne. Pour aider les traducteurs,
+vous pouvez éventuellement "tag" chaque chaîne ::
 
     'one: There is one apple|some: There are %count% apples'
 
     'none_or_one: Il y a %count% pomme|some: Il y a %count% pommes'
 
-The tags are really only hints for translators and don't affect the logic
-used to determine which plural form to use. The tags can be any descriptive
-string that ends with a colon (``:``). The tags also do not need to be the
-same in the original message as in the translated one.
+Les tags sont seulement des indices pour les traducteurs et n'affectent pas la logique
+utilisés pour déterminer quelle forme plurielle utiliser. Les tags peuvent être toute 
+chaîne descriptive qui se termine par un deux-points (``:``). Les tags aussi n'ont pas besoin d'être le
+même dans le message original comme dans la traduction.
 
 .. tip:
 
-    As tags are optional, the translator doesn't use them (the translator will
-    only get a string based on its position in the string).
+    Comme les tags sont optionnels, le translator ne les utilise pas (le translator va
+    seulement obtenir une chaîne en fonction de sa position dans la chaîne).
 
 Explicit Interval Pluralization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The easiest way to pluralize a message is to let Symfony2 use internal logic
-to choose which string to use based on a given number. Sometimes, you'll
-need more control or want a different translation for specific cases (for
-``0``, or when the count is negative, for example). For such cases, you can
-use explicit math intervals::
+La meilleure façon de pluraliser un message est de laisser Symfony2 utiliser la logique interne
+de choisir quelle chaînes utiliser basé sur un nombre donné. Parfois, vous aurez
+besoin de plus de contrôle ou si vous voulez une traduction différente pour des cas spécifiques (pour
+``0``, ou lorsque le nombre est négatif, par exemple). Pour de tels cas, vous pouvez
+utiliser des intervalles mathématiques explicites::
 
     '{0} There is no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf] There are many apples'
 
-The intervals follow the `ISO 31-11`_ notation. The above string specifies
-four different intervals: exactly ``0``, exactly ``1``, ``2-19``, and ``20``
-and higher.
+Les intervalles suivent la notation `ISO 31-11`_ . la chaîne ci-dessus spécifie
+quatre différentes intervalles : exactement ``0``, exactement ``1``, ``2-19``, et ``20``
+et plus.
 
-You can also mix explicit math rules and standard rules. In this case, if
-the count is not matched by a specific interval, the standard rules take
-effect after removing the explicit rules::
+Vous pouvez également mélanger les règles mathématiques explicites et des règles standard. Dans ce cas, si
+le nombre ne correspond pas à un intervalle spécifique, les règles standard prennent 
+effet après la suppression des règles explicites::
 
     '{0} There is no apples|[20,Inf] There are many apples|There is one apple|a_few: There are %count% apples'
 
-For example, for ``1`` apple, the standard rule ``There is one apple`` will
-be used. For ``2-19`` apples, the second standard rule ``There are %count%
-apples`` will be selected.
+Par exemple, pour ``1`` apple, la règle standard ``There is one apple`` va
+être utilisée. Pour ``2-19`` apples, la seconde règle standard ``There are %count%
+apples`` va être sélectionnée.
 
-An :class:`Symfony\\Component\\Translation\\Interval` can represent a finite set
-of numbers::
+Une :class:`Symfony\\Component\\Translation\\Interval` peut représenter un ensemble fini
+de nombres::
 
     {1,2,3,4}
 
-Or numbers between two other numbers::
+Ou des nombres entre deux autres nombres::
 
     [1, +Inf[
     ]-1,2[
 
-The left delimiter can be ``[`` (inclusive) or ``]`` (exclusive). The right
-delimiter can be ``[`` (exclusive) or ``]`` (inclusive). Beside numbers, you
-can use ``-Inf`` and ``+Inf`` for the infinite.
+Le délimiteur gauche peut être ``[`` (inclusive) ou ``]`` (exclusive). Le 
+delimiteur droit peut être ``[`` (exclusive) ou ``]`` (inclusive). A côté des nombres, vous
+pouvez utiliser ``-Inf`` and ``+Inf`` pour l'infini.
 
 .. index::
-   single: Translations; In templates
+   single: Traductions; Dans les templates
 
-Translations in Templates
+Traductions dans les Templates
 -------------------------
 
-Most of the time, translation occurs in templates. Symfony2 provides native
-support for both Twig and PHP templates.
+La plupart du temps, les traductions surviennent dans des templates. Symfony2 fournit un 
+support natif pour les deux templates Twig et PHP.
 
 Twig Templates
 ~~~~~~~~~~~~~~
 
-Symfony2 provides specialized Twig tags (``trans`` and ``transchoice``) to
-help with message translation of *static blocks of text*:
+Symfony2 fournit des tags Twig spécialisés (``trans`` and ``transchoice``) pour
+aider avec les traductions de message des *blocs statiques de texte*:
 
 .. code-block:: jinja
 
@@ -714,16 +714,16 @@ help with message translation of *static blocks of text*:
         {0} There is no apples|{1} There is one apple|]1,Inf] There are %count% apples
     {% endtranschoice %}
 
-The ``transchoice`` tag automatically gets the ``%count%`` variable from
-the current context and passes it to the translator. This mechanism only
-works when you use a placeholder following the ``%var%`` pattern.
+Le tag ``transchoice``  obtient automatiquement la variable ``%count%`` du
+contexte actuel et le passe au translator. Ce mécanisme marche seulement
+lorsque vous utilisez un paramètre de substitution suivi du pattern ``%var%``.
 
 .. tip::
 
-    If you need to use the percent character (``%``) in a string, escape it by
-    doubling it: ``{% trans %}Percent: %percent%%%{% endtrans %}``
+    Si vous avez besoin d'utiliser le caractère pourcentage (``%``) dans une chaîne, échapper le en
+    le doublant : ``{% trans %}Percent: %percent%%%{% endtrans %}``
 
-You can also specify the message domain and pass some additional variables:
+Vous pouvez également spécifier le domaine de message et passer quelques variables supplémentaires :
 
 .. code-block:: jinja
 
@@ -733,8 +733,8 @@ You can also specify the message domain and pass some additional variables:
         {0} There is no apples|{1} There is one apple|]1,Inf] There are %count% apples
     {% endtranschoice %}
 
-The ``trans`` and ``transchoice`` filters can be used to translate *variable
-texts* and complex expressions:
+Les filtres ``trans`` and ``transchoice`` peuvent être utilisés pour traduire les 
+*textes de variable* et expressions complexes :
 
 .. code-block:: jinja
 
@@ -748,12 +748,12 @@ texts* and complex expressions:
 
 .. tip::
 
-    Using the translation tags or filters have the same effect, but with
-    one subtle difference: automatic output escaping is only applied to
-    variables translated using a filter. In other words, if you need to
-    be sure that your translated variable is *not* output escaped, you must
-    apply the raw filter after the translation filter:
-
+    Utiliser les tags ou filtres de traduction ont le même effet, mais avec
+    une différence subtile : l'échappement automatique en sortie est appliquée uniquement aux
+    variables traduites en utilisant un filtre. En d'autres termes, si vous avez besoin 
+    d'être sûr que votre variable traduite n'est *pas* échappé en sortie, vous devez
+    appliquer le filtre brut après le filtre de traduction :
+    
     .. code-block:: jinja
 
             {# text translated between tags is never escaped #}
@@ -772,8 +772,8 @@ texts* and complex expressions:
 PHP Templates
 ~~~~~~~~~~~~~
 
-The translator service is accessible in PHP templates through the
-``translator`` helper:
+Le service translator est accessible dans les templates PHP à travers le 
+helper ``translator`` :
 
 .. code-block:: html+php
 
@@ -785,12 +785,12 @@ The translator service is accessible in PHP templates through the
         array('%count%' => 10)
     ) ?>
 
-Forcing the Translator Locale
+Forcer le Translator Locale
 -----------------------------
 
-When translating a message, Symfony2 uses the locale from the user's session
-or the ``fallback`` locale if necessary. You can also manually specify the
-locale to use for translation:
+Lors de la traduction d'un message, Symfony2 utilise le locale de la session de l'utilisateur
+ou le ``fallback`` locale si nécessaire. Vous pouvez également spécifier manuellement le
+locale à utiliser pour la traduction :
 
 .. code-block:: php
 
@@ -809,29 +809,28 @@ locale to use for translation:
         'fr_FR',
     );
 
-Translating Database Content
+Traduire le Contenu d'une Base de Données
 ----------------------------
 
-The translation of database content should be handled by Doctrine through
-the `Translatable Extension`_. For more information, see the documentation
-for that library.
+La traduction du contenu de bases de données doivent être traitées par Doctrine par le biais
+de `Translatable Extension`_. Pour plus d'informations, voir la documentation
+pour cette bibliothèque.
 
-Summary
+Sommaire
 -------
+Avec le composant de Traduction Symfony2, créer une application internationalisée
+n'est plus maintenant un processus douloureux et se résume à quelques
+étapes basiques :
 
-With the Symfony2 Translation component, creating an internationalized application
-no longer needs to be a painful process and boils down to just a few basic
-steps:
+* Extraire les messages dans votre application en enveloppant chaque message soit par 
+  la :method:`Symfony\\Component\\Translation\\Translator::trans` ou
+  la :method:`Symfony\\Component\\Translation\\Translator::transChoice`;
 
-* Abstract messages in your application by wrapping each in either the
-  :method:`Symfony\\Component\\Translation\\Translator::trans` or
-  :method:`Symfony\\Component\\Translation\\Translator::transChoice` methods;
-
-* Translate each message into multiple locales by creating translation message
-  files. Symfony2 discovers and processes each file because its name follows
-  a specific convention;
-
-* Manage the user's locale, which is stored in the session.
+* Traduire chaque message dans des locales multiples en créant des fichiers de message
+  de traduction. Symfony2 découvre et traite chaque fichier parce que son nom suit
+  une convention spécifique ;
+  
+* Gérer le locale de l'utilisateur, qui est stocké dans la session.
 
 .. _`strtr function`: http://www.php.net/manual/en/function.strtr.php
 .. _`ISO 31-11`: http://en.wikipedia.org/wiki/Interval_%28mathematics%29#The_ISO_notation
