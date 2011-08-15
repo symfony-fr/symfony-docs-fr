@@ -20,9 +20,10 @@ et bien d'autres. Vous apprendrez des raccourcis, des méthodes ingénieuses pou
 Templates
 ---------
 
-A template is simply a text file that can generate any text-based format
-(HTML, XML, CSV, LaTeX ...). The most familiar type of template is a *PHP*
-template - a text file parsed by PHP that contains a mix of text and PHP code::
+Un template est un simple fichier texte qui peut génerer n'importe quel format
+basé sur du texte (HTML, XML, CSV, LaTeX ...). Le type de template le plus connu
+est le template *PHP* - un fichier texte interpreté par PHP qui contient du texte
+et du code PHP::
 
     <!DOCTYPE html>
     <html>
@@ -46,9 +47,10 @@ template - a text file parsed by PHP that contains a mix of text and PHP code::
 
 .. index:: Twig; Introduction
 
-But Symfony2 packages an even more powerful templating language called `Twig`_.
-Twig allows you to write concise, readable templates that are more friendly
-to web designers and, in several ways, more powerful than PHP templates:
+Mais Symfony2 contient un langage de template encore plus puissant appelé `Twig`_.
+Twig vous permet d'écrire des templates simples et lisibles qui sont plus
+compréhensibles par les web designers et, dans bien des aspects, plus puissants
+que les templates PHP :
 
 .. code-block:: html+jinja
 
@@ -68,40 +70,40 @@ to web designers and, in several ways, more powerful than PHP templates:
         </body>
     </html>
 
-Twig defines two types of special syntax:
+Twig définit deux types de syntaxe spéciale :
 
-* ``{{ ... }}``: "Says something": prints a variable or the result of an
-  expression to the template;
+* ``{{ ... }}``: « Dit quelque chose »: écrit une variable ou le résultat d'une
+  expression  dans le template ;
 
-* ``{% ... %}``: "Does something": a **tag** that controls the logic of the
-  template; it is used to execute statements such as for-loops for example.
+* ``{% ... %}``: « Fait quelque chose »: un **tag** qui contrôle la logique
+  du template ; il est utilisé pour exécuter des instructions comme la boucle
+  for par exemple.
 
 .. note::
 
-   There is a third syntax used for creating comments: ``{# this is a comment #}``.
-   This syntax can be used across multiple lines like the PHP-equivalent
-   ``/* comment */`` syntax.
+   Il y a une troisième syntaxe utilisée pour les commentaires : ``{# un commentaire #}``.
+   Cette syntaxe peut être utilisée sur plusieurs lignes comme la syntaxe PHP
+   ``/* commentaire */`` qui est équivalente.
 
-Twig also contains **filters**, which modify content before being rendered.
-The following makes the ``title`` variable all uppercase before rendering
-it:
+Twig contient également des **filtres**, qui modifient le contenu avant de le rendre.
+Le filtre suivant met la variable ``title`` en majuscule avant de la rendre :
 
 .. code-block:: jinja
 
     {{ title | upper }}
 
-Twig comes with a long list of `tags`_ and `filters`_ that are available
-by default. You can even `add your own extensions`_ to Twig as needed.
+Twig est fourni avec une longue liste de `tags`_ et de `filtres`_ qui sont disponibles
+par défaut. Vous pouvez même `ajouter vos propres extensions`_ à Twig si besoin.
 
 .. tip::
 
-    Registering a Twig extension is as easy as creating a new service and tagging
-    it with ``twig.extension`` :ref:`tag<book-service-container-tags>`.
+    Créer une nouvelle extension Twig est aussi simple que de créer un nouveau
+    service et de le tagger avec ``twig.extension`` :ref:`tag<book-service-container-tags>`.
 
-As you'll see throughout the documentation, Twig also supports functions
-and new functions can be easily added. For example, the following uses a
-standard ``for`` tag and the ``cycle`` function to print ten div tags, with
-alternating ``odd``, ``even`` classes:
+Comme vous le verrez tout au long de la documentation, Twig supporte aussi les
+fonctions, et de nouvelles fonctions peuvent être ajoutées. Par exemple, la fonction
+suivante utilise le tag standard ``for`` et la fonction ``cycle`` pour écrire dix
+balises div en alternant les classes ``odd`` et ``even`` :
 
 .. code-block:: html+jinja
 
@@ -111,22 +113,25 @@ alternating ``odd``, ``even`` classes:
       </div>
     {% endfor %}
 
-Throughout this chapter, template examples will be shown in both Twig and PHP.
+Tout au long de ce chapitre, les exemples de templates seront donnés à la fois
+avec Twig et PHP.
 
-.. sidebar:: Why Twig?
+.. sidebar:: Pourquoi Twig?
 
-    Twig templates are meant to be simple and won't process PHP tags. This
-    is by design: the Twig template system is meant to express presentation,
-    not program logic. The more you use Twig, the more you'll appreciate
-    and benefit from this distinction. And of course, you'll be loved by
-    web designers everywhere.
-    
-    Twig can also do things that PHP can't, such as true template inheritance
-    (Twig templates compile down to PHP classes that inherit from each other),
-    whitespace control, sandboxing, and the inclusion of custom functions
-    and filters that only affect templates. Twig contains little features
-    that make writing templates easier and more concise. Take the following
-    example, which combines a loop with a logical ``if`` statement:
+    Les templates Twig sont conçus pour être simple et ne traiteront aucun code
+    PHP. 
+    Twig templates are meant to be simple and won't process PHP tags. De par sa
+    conception, le système de template Twig s'occupe de la présentation, pas de
+    la logique. Plus vous utiliserez Twig, plus vous apprécierez cette distinction
+    et en bénéficierez. Et bien sûr, vous serez adoré par tous les web designers.
+
+    Twig peut aussi faire des choses que PHP ne pourrait pas faire, comme du vrai
+    héritage de templates (Twig compile les templates en classes PHP qui héritent
+    les unes des autres), le contrôle d'espace, le bac à sable et l'inclusion de
+    fonctions et de filtres personnalisés qui n'affectent que les templates. Twig
+    contient de petites fonctionnalités qui rendent l'écriture de template plus
+    facile et plus concise. Prenez l'exemple suivant, il combine une boucle avec
+    l'instruction logique ``if`` :
     
     .. code-block:: html+jinja
     
@@ -141,42 +146,42 @@ Throughout this chapter, template examples will be shown in both Twig and PHP.
 .. index::
    pair: Twig; Cache
 
-Twig Template Caching
-~~~~~~~~~~~~~~~~~~~~~
+Twig et la mise en cache
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Twig is fast. Each Twig template is compiled down to a native PHP class
-that is rendered at runtime. The compiled classes are located in the
-``app/cache/{environment}/twig`` directory (where ``{environment}`` is the
-environment, such as ``dev`` or ``prod``) and in some cases can be useful
-while debugging. See :ref:`environments-summary` for more information on
-environments.
+Twig est rapide. Chaque template Twig est compilé en une classe PHP natif qui est
+rendue à l'éxécution. Les classes compilées sont stockées dans le répertoire
+``app/cache/{environment}/twig`` (où ``{environment}`` est l'environnement, par
+exemple ``dev`` ou ``prod``) et elles peuvent être utiles dans certains cas pour
+débugguer. Lisez le chapitre :ref:`environments-summary` pour plus d'informations
+sur les environnements.
 
-When ``debug`` mode is enabled (common in the ``dev`` environment), a Twig
-template will be automatically recompiled when changes are made to it. This
-means that during development you can happily make changes to a Twig template
-and instantly see the changes without needing to worry about clearing any
-cache.
+Lorsque le mode ``debug`` est activé (par exemple en environnement de ``dev``), 
+un template Twig sera automatiquement recompilé à chaque fois qu'un changement y
+sera apporté. Cela signifie que durant le développement, vous pouvez effectuer des
+modifications dans un template Twig et voir instantanément les changements sans vous
+soucier de vider le cache.
 
-When ``debug`` mode is disabled (common in the ``prod`` environment), however,
-you must clear the Twig cache directory so that the Twig templates will
-regenerate. Remember to do this when deploying your application.
+Lorsque le mode ``debug`` est désactivé (par exemple en environnement de ``prod``),
+en revanche, vous devrez vider le répertoire de cache Twig afin que le template soit
+regénéré. Souvenez vous bien de cela lorsque vous déploirez votre application.
 
 .. index::
    single: Templating; Inheritance
 
-Template Inheritance and Layouts
---------------------------------
+L'héritage de template et layouts
+---------------------------------
 
-More often than not, templates in a project share common elements, like the
-header, footer, sidebar or more. In Symfony2, we like to think about this
-problem differently: a template can be decorated by another one. This works
-exactly the same as PHP classes: template inheritance allows you to build
-a base "layout" template that contains all the common elements of your site
-defined as **blocks** (think "PHP class with base methods"). A child template
-can extend the base layout and override any of its blocks (think "PHP subclass
-that overrides certain methods of its parent class").
+Bien souvent, les templates d'un projet partagent des éléments communs, comme les
+entête, pied de page et menu latéraux. Dans Symfony2, nous abordons ce problème
+différemment : un template peut être décoré par un autre. Cela fonctionne exactement
+comme les classes PHP : l'héritage de template vous permet de batir un template
+« layout » de base qui contient tous les éléments communs de votre site et de définir
+des **blocks** (comprenez « classe PHP avec des méthodes de base »). Un template
+enfant peut étendre le template layout et surcharger n'importe lequel de ses blocks
+(comprenez « une sous-classe PHP qui surcharge certaines méthodes de sa classe parente »).
 
-First, build a base layout file:
+TOut d'abord, construisez un fichier layout :
 
 .. configuration-block::
 
@@ -234,8 +239,8 @@ First, build a base layout file:
 
 .. note::
 
-    Though the discussion about template inheritance will be in terms of Twig,
-    the philosophy is the same between Twig and PHP templates.
+    Bien que les explications sur l'héritage de template concernent Twig, la
+    philosophie est la même pour les templates PHP.
 
 This template defines the base HTML skeleton document of a simple two-column
 page. In this example, three ``{% block %}`` areas are defined (``title``,
@@ -1222,5 +1227,5 @@ Learn more from the Cookbook
 .. _`Cross Site Scripting`: http://en.wikipedia.org/wiki/Cross-site_scripting
 .. _`Output Escaping`: http://www.twig-project.org
 .. _`tags`: http://www.twig-project.org/doc/templates.html#list-of-control-structures
-.. _`filters`: http://www.twig-project.org/doc/templates.html#list-of-built-in-filters
-.. _`add your own extensions`: http://www.twig-project.org/doc/advanced.html
+.. _`filtres`: http://www.twig-project.org/doc/templates.html#list-of-built-in-filters
+.. _`ajouter vos propres extensions`: http://www.twig-project.org/doc/advanced.html
