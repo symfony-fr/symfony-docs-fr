@@ -102,10 +102,10 @@ Templates de décoration
 
 Bien souvent, les templates d'un projet partagent des éléments communs, comme les
 célèbres entête et pied de page. Dans Symfony2, nous abordons ce problème
-différemment: un template peut être décoré par un autre. Cela fonctionne exactement
+différemment : un template peut être décoré par un autre. Cela fonctionne exactement
 comme les classes PHP : l'héritage de template vous permet de batir un template
-«layout» de base qui contient tous les éléments communs de votre site et de définir
-des «blocks» que les templates fils pourront surcharger.
+« layout » de base qui contient tous les éléments communs de votre site et de définir
+des « blocks » que les templates enfants pourront surcharger.
 
 Le template ``hello.html.twig`` hérite du template ``layout.html.twig``, grâce au
 tag ``extends`` :
