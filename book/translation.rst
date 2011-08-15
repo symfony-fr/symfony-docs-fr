@@ -78,7 +78,7 @@ n'existe pas dans le locale de l'utilisateur.
     Quand une traduction n'existe pas pour un locale, le translator essaye tout d'abord
     de trouver une traduction pour ce langage (``fr`` si le locale est 
     ``fr_FR`` par exemple). Si cela échoue également, il regarde pour une traduction
-     utilisant le locale de secours.
+    utilisant le locale de secours.
 
 Le locale utilisé en traductions est celui qui est stocké dans la session de l'utilisateur.
 

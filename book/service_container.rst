@@ -1,26 +1,32 @@
-.. index::
+﻿.. index::
    single: Service Container
    single: Dependency Injection Container
 
 Service Container
 =================
 
-A modern PHP application is full of objects. One object may facilitate the
-delivery of email messages while another may allow you to persist information
-into a database. In your application, you may create an object that manages
-your product inventory, or another object that processes data from a third-party
-API. The point is that a modern application does many things and is organized
-into many objects that handle each task.
+Une application PHP moderne est plein d'objets. Un objet peut faciliter la
+distribution des messages e-mail, tandis qu'un autre peut vous permettre de persister les informations
+dans une base de données. Dans votre application, vous pouvez créer un objet qui gère
+votre inventaire de produits, ou tout autre objet qui traite des données auprès d'un API 
+tiers. Le fait est qu'une application moderne fait beaucoup de choses et est organisé
+dans de nombreux objets qui gèrent chaque tâche.
 
-In this chapter, we'll talk about a special PHP object in Symfony2 that helps
-you instantiate, organize and retrieve the many objects of your application.
-This object, called a service container, will allow you to standardize and
-centralize the way objects are constructed in your application. The container
-makes your life easier, is super fast, and emphasizes an architecture that
-promotes reusable and decoupled code. And since all core Symfony2 classes
-use the container, you'll learn how to extend, configure and use any object
-in Symfony2. In large part, the service container is the biggest contributor
-to the speed and extensibility of Symfony2.
+Dans ce chapitre, nous allons parler d'un objet spécial PHP dans Symfony2 qui vous aide
+à instancier, organiser et récupérer les nombreux objets de votre application.
+Cet objet, appelé un conteneur de services, vous permettra de standardiser et
+centraliser la façon dont les objets sont construits dans votre application. Le conteneur
+vous facilite la vie, est super rapide, et met en valeur une architecture qui
+encourage un code réutilisable et découplées. Et puisque toutes les classes fondamentales de Symfony2
+utilisent le conteneur, vous allez apprendre comment étendre, configurer et utiliser n'importe quel objet
+dans Symfony2. En grande partie, le conteneur de service contribue le plus 
+à la vitesse et l'extensibilité de Symfony2.
+
+Enfin, configurer et utiliser le conteneur de service est facile. A la fin
+de ce chapitre, vous serez à l'aise pour créer vos propres objets via le
+conteneur et de personnaliser des objets provenant de bundle tiers. Vous allez commencer
+à écrire du code qui est plus réutilisables, testables et découplées, tout simplement parce
+le conteneur de service rend l'écriture de bon code si facile.
 
 Finally, configuring and using the service container is easy. By the end
 of this chapter, you'll be comfortable creating your own objects via the
