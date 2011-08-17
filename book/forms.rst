@@ -17,15 +17,17 @@ plus importantes de la bibliothèque des formulaires.
    `Symfony2 Form Component`_ sur Github.
 
 .. index::
-   single: Forms; Create a simple form
+   single: Formulaires; Créer un formulaire simple
 
-Creating a Simple Form
-----------------------
+Créer un Formulaire Simple
+--------------------------
 
-Suppose you're building a simple todo list application that will need to
-display "tasks". Because your users will need to edit and create tasks, you're
-going to need to build a form. But before you begin, first focus on the generic
-``Task`` class that represents and stores the data for a single task:
+Supposez que vous construisiez une application «todo list» (en français : «liste
+de choses à faire») simple qui doit afficher des «tâches». Parce que vos
+utilisateurs devront éditer et créer des tâches, vous allez avoir besoin de
+construire des formulaires. Mais avant que vous commenciez, concentrez-vous
+d'abord sur la classe générique ``Task`` qui représente et stocke les données
+pour une tâche :
 
 .. code-block:: php
 
@@ -59,31 +61,32 @@ going to need to build a form. But before you begin, first focus on the generic
 
 .. note::
 
-   If you're coding along with this example, create the ``AcmeTaskBundle``
-   first by running the following command (and accepting all of the default
-   options):
+   Si vous codez en même temps que vous lisez cet exemple, créez en premier
+   le bundle ``AcmeTaskBundle`` en exécutant la commande suivante (et en
+   acceptant toutes les options par défaut) :
 
    .. code-block:: bash
 
         php app/console generate:bundle --namespace=Acme/TaskBundle
 
-This class is a "plain-old-PHP-object" because, so far, it has nothing
-to do with Symfony or any other library. It's quite simply a normal PHP object
-that directly solves a problem inside *your* application (i.e. the need to
-represent a task in your application). Of course, by the end of this chapter,
-you'll be able to submit data to a ``Task`` instance (via an HTML form), validate
-its data, and persist it to the database.
+Cette classe est un «bon vieux objet PHP» parce que, jusqu'ici, elle n'a rien
+à voir avec Symfony ou quelconque autre bibliothèque. C'est tout simplement
+un objet PHP normal qui solutionne directement un problème dans *votre*
+application (i.e. le besoin de représenter une tâche dans votre application).
+Bien sûr, à la fin de ce chapitre, vous serez capable de soumettre des données
+à une instance de ``Task`` (via un formulaire HTML), de valider ses données,
+et de les persister dans la base de données.
 
 .. index::
-   single: Forms; Create a form in a controller
+   single: Formulaires; Créer un formulaire dans un contrôleur
 
-Building the Form
-~~~~~~~~~~~~~~~~~
+Construire le Formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that you've created a ``Task`` class, the next step is to create and
-render the actual HTML form. In Symfony2, this is done by building a form
-object and then rendering it in a template. For now, this can all be done
-from inside a controller::
+Maintenant que vous avez créé une classe ``Task``, la prochaine étape est
+de créer et de retourner le formulaire HTML. Dans Symfony2, cela se fait
+en construisant un objet formulaire qui est ensuite rendu dans un template.
+Pour l'instant, tout ceci peut être effectué depuis un contrôleur ::
 
     // src/Acme/TaskBundle/Controller/DefaultController.php
     namespace Acme\TaskBundle\Controller;
@@ -96,7 +99,7 @@ from inside a controller::
     {
         public function newAction(Request $request)
         {
-            // create a task and give it some dummy data for this example
+            // crée une tâche et lui donne quelques données par défaut pour cet exemple
             $task = new Task();
             $task->setTask('Write a blog post');
             $task->setDueDate(new \DateTime('tomorrow'));
@@ -114,34 +117,37 @@ from inside a controller::
 
 .. tip::
 
-   This examples shows you how to build your form directly in the controller.
-   Later, in the ":ref:`book-form-creating-form-classes`" section, you'll learn
-   how to build your form in a standalone class, which is recommended as
-   your form becomes reusable.
+   Cet exemple vous montre comment construire votre formulaire directement
+   depuis le contrôleur. Plus tard, dans la section
+   «:ref:`book-form-creating-form-classes`», vous apprendrez à construire
+   votre formulaire dans une classe autonome, ce qui est recommandé car comme
+   cela, vos formulaires deviennent réutilisables.
 
-Creating a form requires relatively little code because Symfony2 form objects
-are built with a "form builder". The form builder's purpose is to allow you
-to write simple form "recipes", and have it do all the heavy-lifting of actually
-building the form.
+Créer un formulaire requiert relativement peu de code car les objets formulaires
+de Symfony2 sont construits avec un «constructeur de formulaire» («form builder»).
+Le principe du constructeur de formulaire est de vous permettre d'écrire des
+«conteneurs» de formulaires simples, et de le laisser prendre en charge toute
+la plus grosse partie du travail qu'est la construction du formulaire.
 
-In this example, you've added two fields to your form - ``task`` and ``dueDate`` -
-corresponding to the ``task`` and ``dueDate`` properties of the ``Task`` class.
-You've also assigned each a "type" (e.g. ``text``, ``date``), which, among
-other things, determines which HTML form tag(s) is rendered for that field.
+Dans cet exemple, vous avez ajouté deux champs à votre formulaire - ``task`` et
+``dueDate`` - correspondants aux propriétés ``task`` et ``dueDate`` de votre
+classe ``Task``. Vous avez aussi assigné à chacune un «type» (par exemple :
+``text``, ``date``), qui, parmi d'autres choses, détermine quelle(s) balise(s) HTML
+est rendue pour ce champ.
 
-Symfony2 comes with many built-in types that will be discussed shortly
-(see :ref:`book-forms-type-reference`).
+Symfony2 est livré avec beaucoup de types pré-définis qui seront présentés
+rapidement plus tard (voir :ref:`book-forms-type-reference`).
 
 .. index::
-  single: Forms; Basic template rendering
+  single: Formulaires; Rendu de template basique
 
-Rendering the Form
-~~~~~~~~~~~~~~~~~~
+Rendu du Formulaire
+~~~~~~~~~~~~~~~~~~~
 
-Now that the form has been created, the next step is to render it. This is
-done by passing a special form "view" object to your template (notice the
-``$form->createView()`` in the controller above) and using a set of form
-helper functions:
+Maintenant que le formulaire a été créé, la prochaine étape est de le rendre.
+Ceci est fait en passant un objet spécial «vue de formulaire» à votre template
+(notez le ``$form->createView()`` dans le contrôleur ci-dessus) et en utilisant
+un ensemble de fonctions d'aide pour les formulaires :
 
 .. configuration-block::
 
@@ -170,46 +176,49 @@ helper functions:
 
 .. note::
 
-    This example assumes that you've created a route called ``task_new``
-    that points to the ``AcmeTaskBundle:Default:new`` controller that
-    was created earlier.
+    Cet exemple assume que vous avez créé une route nommée ``task_new``
+    qui pointe sur le contrôleur ``AcmeTaskBundle:Default:new`` qui a
+    été créé plus tôt.
 
-That's it! By printing ``form_widget(form)``, each field in the form is
-rendered, along with a label and error message (if there is one). As easy
-as this is, it's not very flexible (yet). Usually, you'll want to render each
-form field individually so you can control how the form looks. You'll learn how
-to do that in the ":ref:`form-rendering-template`" section.
+C'est tout ! En affichant ``form_widget(form)``, chaque champ du formulaire
+est rendu, avec un label et un message d'erreur (si erreur il y a). Aussi
+facile que cela soit, ce n'est pas (encore) très flexible. Habituellement,
+vous voudrez rendre chaque champ du formulaire individuellement afin de
+pouvoir contrôler ce à quoi le formulaire ressemble. Vous apprendrez comment
+faire cela dans la section «:ref:`form-rendering-template`».
 
-Before moving on, notice how the rendered ``task`` input field has the value
-of the ``task`` property from the ``$task`` object (i.e. "Write a blog post").
-This is the first job of a form: to take data from an object and translate
-it into a format that's suitable for being rendered in an HTML form.
+Avant de continuer, notez comment le champ ``task`` rendu possède la
+valeur de la propriété ``task`` de l'objet ``$task`` (i.e. «Write a blog
+post»). C'est le premier travail d'un formulaire : de prendre les données
+d'un objet et de les traduire dans un format adapté pour être rendues dans
+un formulaire HTML.
 
 .. tip::
 
-   The form system is smart enough to access the value of the protected
-   ``task`` property via the ``getTask()`` and ``setTask()`` methods on the
-   ``Task`` class. Unless a property is public, it *must* have a "getter" and
-   "setter" method so that the form component can get and put data onto the
-   property. For a Boolean property, you can use an "isser" method (e.g.
-   ``isPublished()``) instead of a getter (e.g. ``getPublished()``).
+   Le système de formulaire est assez intelligent pour accéder la valeur de la
+   propriété protégée ``task`` via les méthodes ``getTask()`` et ``setTask()``
+   de la classe ``Task``. A moins qu'une propriété soit publique, elle *doit*
+   avoir une méthode «getter» et une «setter» afin que le composant formulaire
+   puisse récupérer et assigner des données à cette propriété. Pour une propriété
+   booléenne, vous pouvez utiliser une méthode «isser» (par exemple :
+   ``isPublished()``) à la place d'un getter (par exemple : ``getPublished()``).
 
 .. index::
-  single: Forms; Handling form submission
+  single: Formulaires; Gérer la soumission des formulaires
 
-Handling Form Submissions
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Gérer la Soumission des Formulaires
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The second job of a form is to translate user-submitted data back to the
-properties of an object. To make this happen, the submitted data from the
-user must be bound to the form. Add the following functionality to your
-controller::
+Le second travail d'un formulaire est de transmettre les données soumises par
+l'utilisateur aux propriétés d'un objet. Pour réaliser cela, les données
+soumises par l'utilisateur doivent être liées au formulaire. Ajoutez la
+fonctionnalité suivante à votre contrôleur ::
 
     // ...
 
     public function newAction(Request $request)
     {
-        // just setup a fresh $task object (remove the dummy data)
+        // initialisez simplement un objet $task (supprimez les données fictives)
         $task = new Task();
 
         $form = $this->createFormBuilder($task)
@@ -221,8 +230,8 @@ controller::
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                // perform some action, such as saving the task to the database
-
+                // effectuez quelques actions, comme sauvegarder la tâche dans
+                // la base de données
                 return $this->redirect($this->generateUrl('task_success'));
             }
         }
@@ -230,53 +239,57 @@ controller::
         // ...
     }
 
-Now, when submitting the form, the controller binds the submitted data to the
-form, which translates that data back to the ``task`` and ``dueDate`` properties
-of the ``$task`` object. This all happens via the ``bindRequest()`` method.
+Maintenant, lorsque vous soumettez le formulaire, le contrôleur lie les données
+soumises avec le formulaire, qui transmet ces données en retour aux propriétés
+``task`` et ``dueDate`` de l'objet ``$task``. Tout ceci a lieu grâce à la
+méthode ``bindRequest()``.
 
 .. note::
 
-    As soon as ``bindRequest()`` is called, the submitted data is transferred
-    to the underlying object immediately. This happens regardless of whether
-    or not the underlying data is actually valid.
+    Aussitôt que ``bindRequest()`` est appelée, les données soumises sont
+    transférées immédiatement à l'objet sous-jacent. Ceci intervient
+    indépendamment du fait que les donnés sous-jacentes soient valides ou non.
 
-This controller follows a common pattern for handling forms, and has three
-possible paths:
+Ce contrôleur suit un pattern commun dans la manière de gérer les formulaires,
+et a trois scénarios possibles :
 
-#. When initially loading the page in a browser, the request method is ``GET``
-   and the form is simply created and rendered;
+#. Lors du chargement initial de la page dans votre navigateur, la méthode
+   de la requête est ``GET`` et le formulaire est simplement créé et rendu ;
 
-#. When the user submits the form (i.e. the method is ``POST``) with invalid
-   data (validation is covered in the next section), the form is bound and
-   then rendered, this time displaying all validation errors;
+#. Lorsque l'utilisateur soumet le formulaire (i.e. la méthode est ``POST``)
+   avec des données non-valides (la validation est expliquée dans la prochaine
+   section), le formulaire est lié puis rendu, affichant cette fois toutes les
+   erreurs de validation ;
 
-#. When the user submits the form with valid data, the form is bound and
-   you have the opportunity to perform some actions using the ``$task``
-   object (e.g. persisting it to the database) before redirecting the user
-   to some other page (e.g. a "thank you" or "success" page).
+#. Lorsque l'utilisateur soumet le formulaire avec des données valides, ce
+   dernier est lié et vous avez l'opportunité d'effectuer quelques actions
+   en utilisant l'objet ``$task`` (par exemple : le persister dans la base
+   de données) avant de rediriger l'utilisateur vers une autre page (par
+   exemple : une page «merci» ou de «succès»).
 
 .. note::
 
-   Redirecting a user after a successful form submission prevents the user
-   from being able to hit "refresh" and re-post the data.
+   Rediriger un utilisateur après une soumission de formulaire réussie empêche
+   l'utilisateur de pouvoir presser «Rafraîchir» et de re-soumettre les données.
 
 .. index::
-   single: Forms; Validation
+   single: Formulaires; Validation
 
-Form Validation
----------------
+Validation de Formulaire
+------------------------
 
-In the previous section, you learned how a form can be submitted with valid
-or invalid data. In Symfony2, validation is applied to the underlying object
-(e.g. ``Task``). In other words, the question isn't whether the "form" is
-valid, but whether or not the ``$task`` object is valid after the form has
-applied the submitted data to it. Calling ``$form->isValid()`` is a shortcut
-that asks the ``$task`` object whether or not it has valid data.
+Dans la section précédente, vous avez appris comment un formulaire peut être
+soumis avec des données valides ou non-valides. Dans Symfony2, la validation
+est appliquée à l'objet sous-jacent (par exemple : ``Task``). En d'autres mots,
+la question n'est pas de savoir si le «formulaire» est valide, mais plutôt de
+savoir si l'objet ``$task`` est valide ou non après que le formulaire lui ait
+appliqué les données. Appeler ``$form->isValid()`` est un raccourci qui demande
+à l'objet ``$task`` si oui ou non il possède des données valides.
 
-Validation is done by adding a set of rules (called constraints) to a class. To
-see this in action, add validation constraints so that the ``task`` field cannot
-be empty and the ``dueDate`` field cannot be empty and must be a valid \DateTime
-object.
+La validation est effectuée en ajoutant un ensemble de règles (appelées contraintes)
+à une classe. Pour voir cela en action, ajoutez des contraintes de validation
+afin que le champ ``task`` ne puisse pas être vide et que le champ ``dueDate`` ne
+puisse pas être vide et qu'il doive être un objet \DateTime valide.
 
 .. configuration-block::
 
@@ -345,54 +358,54 @@ object.
             }
         }
 
-That's it! If you re-submit the form with invalid data, you'll see the
-corresponding errors printed out with the form.
+C'est tout ! Si vous re-soumettez le formulaire avec des données non-valides,
+vous allez voir les erreurs correspondantes affichées avec le formulaire.
 
 .. _book-forms-html5-validation-disable:
 
-.. sidebar:: HTML5 Validation
+.. sidebar:: Validation HTML5
 
-   As of HTML5, many browsers can natively enforce certain validation constraints
-   on the client side. The most common validation is activated by rendering
-   a ``required`` attribute on fields that are required. For browsers that
-   support HTML5, this will result in a native browser message being displayed
-   if the user tries to submit the form with that field blank.
-   
-   Generated forms take full advantage of this new feature by adding sensible
-   HTML attributes that trigger the validation. The client-side validation,
-   however, can be disabled by adding the ``novalidate`` attribute to the
-   ``form`` tag or ``formnovalidate`` to the submit tag. This is especially
-   useful when you want to test your server-side validation constraints,
-   but are being prevented by your browser from, for example, submitting
-   blank fields.
+   Grâce à HTML5, beaucoup de navigateurs peuvent nativement forcer certaines
+   contraintes de validation côté client. La validation la plus commune est
+   activée en rendant un attribut ``required`` sur les champs qui sont requis.
+   Pour les navigateurs qui supportent HTML5, cela résultera en l'affichage
+   d'un message natif du navigateur si l'utilisateur essaye de soumettre le
+   formulaire avec ce champ vide.
 
-Validation is a very powerful feature of Symfony2 and has its own
-:doc:`dedicated chapter</book/validation>`.
+   Les formulaires générés profitent pleinement de cette nouvelle fonctionnalité
+   en ajoutant des attributs HTML qui déclenchent la validation. La validation
+   côté client, néanmoins, peut être désactivée en ajoutant l'attribut ``novalidate``
+   à la balise ``form`` ou ``formnovalidate`` à la balise ``submit``. Ceci est
+   particulièrement utile quand vous voulez tester vos contraintes de validation
+   côté serveur, mais que vous en êtes empêché par le formulaire de votre
+   navigateur, par exemple, quand vous soumettez des champs vides.
+
+La validation est une fonctionnalité très puissante de Symfony2 et possède son
+:doc:`propre chapitre</book/validation>`.
 
 .. index::
-   single: Forms; Validation Groups
+   single: Formulaires; Les Groupes de Validation
 
 .. _book-forms-validation-groups:
 
-Validation Groups
-~~~~~~~~~~~~~~~~~
+Les Groupes de Validation
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tip::
 
-    If you're not using :ref:`validation groups <book-validation-validation-groups>`,
-    then you can skip this section.
+    Si vous n'utilisez pas :ref:`les groupes de validation <book-validation-validation-groups>`,
+    alors vous pouvez sauter cette section.
 
-If your object takes advantage of :ref:`validation groups <book-validation-validation-groups>`,
-you'll need to specify which validation group(s) your form should use::
+Si votre objet profite des avantages des :ref:`groupes de validation <book-validation-validation-groups>`,
+vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire doit utiliser ::
 
     $form = $this->createFormBuilder($users, array(
         'validation_groups' => array('registration'),
     ))->add(...)
     ;
 
-If you're creating :ref:`form classes<book-form-creating-form-classes>` (a
-good practice), then you'll need to add the following to the ``getDefaultOptions()``
-method::
+Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
+bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefaultOptions()`` ::
 
     public function getDefaultOptions(array $options)
     {
@@ -401,8 +414,8 @@ method::
         );
     }
 
-In both of these cases, *only* the ``registration`` validation group will
-be used to validate the underlying object.
+Dans les deux cas, *uniquement* le groupe de validation ``registration``
+sera utilisé pour valider l'objet sous-jacent.
 
 .. index::
    single: Forms; Built-in Field Types
