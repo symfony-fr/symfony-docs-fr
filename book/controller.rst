@@ -599,7 +599,7 @@ contrôleur - Symfony2 retournera automatiquement un code de réponse HTTP 500.
 
 Dans chaque cas, une page d'erreur stylée est montrée à l'utilisateur final et une
 page d'erreur complète avec des infos de debugging est montrée au développeur
-(lorsqu'il affiche cette page en mode debug). Deux de ces pages d'erreur peuvent
+(lorsqu'il affiche cette page en mode debug). Ces deux pages d'erreur peuvent
 être personnalisées. Pour de plus amples détails, lisez la partie du cookbook
 ":doc:`/cookbook/controller/error_pages`".
 
