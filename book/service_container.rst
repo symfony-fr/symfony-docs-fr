@@ -169,8 +169,8 @@ plus tard, comment vous pouvez configurer un service qui a de multiples instance
 	
 .. _book-service-container-parameters:
 
-Service Parameters
-------------------
+Paramètres de Service
+---------------------
 
 La création de nouveaux services (cad objets) via le conteneur est assez 
 simple. Les paramètres rend les définitions de services plus organisés et flexibles :
@@ -245,7 +245,7 @@ Importer d'autres Ressources de Configuration de Conteneur
 .. tip::
 
     Dans cette section, nous allons faire référence aux fichiers de configuration de service comme des *ressources*.
-	C'est pour souligner le fait que, alors que la plupart des ressources de configuration
+    C'est pour souligner le fait que, alors que la plupart des ressources de configuration
     seront des fichiers (par exemple YAML, XML, PHP), Symfony2 est si flexible que la configuration
     pourrait être chargé de n'importe où (par exemple une base de données ou même via un service
     web externe).
@@ -361,8 +361,8 @@ répertoire.
 
 .. _service-container-extension-configuration:
 
-Importer la Configuration via Container Extensions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Importer la Configuration via les Extensions de Conteneur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quand vous développerez avec Symfony2, vous utiliserez le plus souvent la directive ``imports``
 pour importer la configuration du conteneur des bundles que vous avez créé spécifiquement
@@ -383,8 +383,8 @@ afin d'accomplir deux choses :
   pour le bundle ;
 
 * fournir une configuration sémantique, simple de sorte que le bundle peut
-   être configuré sans interagir avec les paramètres plats de la 
-   configuration du conteneur de service du bundle.  
+  être configuré sans interagir avec les paramètres plats de la 
+  configuration du conteneur de service du bundle.  
 
 En d'autres termes, une extension de conteneur de services configure les services pour
 un bundle en votre nom. Et comme nous le verrons dans un instant, l'extension fournit
@@ -466,8 +466,8 @@ disponibles pour les bundles du noyau peuvent être trouvés à :doc:`Reference 
 .. index::
    single: Service Container; Referencing services
 
-Referencing (Injecting) Services
---------------------------------
+Reférencer (Injecter) les Services
+----------------------------------
 
 Jusqu'à présent, notre service originel ``my_mailer`` est simple: il suffit d'un seul paramètre
 dans son constructeur, qui est facilement configurable. Comme vous le verrez, la vraie
@@ -573,8 +573,8 @@ de services indépendantes avec des dépendances bien définies. Dans cet exempl
 cette dépendance dans le conteneur de service, le conteneur prend soin de tout
 le travail de l'instanciation des objets.
 
-Optional Dependencies: Setter Injection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dépendances optionnelles : Setter Injection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 L'injection de dépendances dans le constructeur de cette manière est une excellente
 moyen de s'assurer que la dépendance est disponible pour utilisation. Si vous avez des
@@ -658,8 +658,8 @@ L'injection de la dépendance par la méthode setter a juste besoin d'un changem
     et "setter injection". Le conteneur de service Symfony2 supporte aussi 
     "property injection".
 
-Making References Optional
---------------------------
+Rendre les Références Optionnelles
+----------------------------------
 
 Parfois, un de vos services peuvent avoir une dépendance optionnelle, ce qui signifie
 que la dépendance n'est pas requise pour votre service pour fonctionner correctement. Dans
@@ -721,7 +721,7 @@ permettre une dépendance optionnelle :
             // ...
         }
 
-Core Symfony and Third-Party Bundle Services
+Services de Bundle Tiers et Noyau de Symfony
 --------------------------------------------
 
 Etant donné que Symfony2 et tous les bundles tiers configurent et récupèrent leurs services
@@ -805,15 +805,15 @@ du framework.
 .. tip::
 
     Soyez sur que l'entrée ``swiftmailer`` apparaît dans votre configuration de
-	l'application. Comme nous l'avons mentionné dans :ref:`service-container-extension-configuration`,
+    l'application. Comme nous l'avons mentionné dans :ref:`service-container-extension-configuration`,
     la clé ``swiftmailer`` invoque l'extension du service de 
     ``SwiftmailerBundle``, qui déclare le service ``mailer``.
 
 .. index::
    single: Service Container; Advanced configuration
 
-Advanced Container Configuration
---------------------------------
+Configuration de Conteneur Avancée
+----------------------------------
 
 Comme nous l'avons vu, la définition des services à l'intérieur du conteneur est facile, en général
 impliquant une clé de configuration de ``service`` et quelques paramètres. Cependant,
@@ -821,8 +821,8 @@ le conteneur a plusieurs autres outils disponibles qui aident à *tagger* les se
 pour des fonctionnalités spéciales, créent des services plus complexes, et effectuent des opérations
 après que le conteneur soit construit.
 
-Marking Services as public / private
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Marquer les Services comme public / privé
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Lors de la définition des services, vous souhaitez généralement être en mesure d'accéder à ces définitions
 au sein de votre code d'application. Ces services sont appelés ``publics``. Par exemple,
@@ -911,7 +911,7 @@ service  ``foo`` en demandant le service ``bar`` comme ceci ::
 
     $container->get('bar'); // Would return the foo service
 
-Requiring files
+Fichiers Requis
 ~~~~~~~~~~~~~~~
 
 Il pourrait y avoir des cas utiles où vous avez besoin d'inclure un autre fichier juste avant
