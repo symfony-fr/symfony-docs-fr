@@ -245,7 +245,7 @@ Importer d'autres Ressources de Configuration de Conteneur
 .. tip::
 
     Dans cette section, nous allons faire référence aux fichiers de configuration de service comme des *ressources*.
-	C'est pour souligner le fait que, alors que la plupart des ressources de configuration
+	  C'est pour souligner le fait que, alors que la plupart des ressources de configuration
     seront des fichiers (par exemple YAML, XML, PHP), Symfony2 est si flexible que la configuration
     pourrait être chargé de n'importe où (par exemple une base de données ou même via un service
     web externe).
