@@ -5,7 +5,7 @@ Traductions
 ===========
 
 Le terme « internationalisation » se réfère au processus d'abstraction des textes
-et autres spécificités locales hors de votre application; ensuite, ces derniers sont placés
+et autres spécificités locales en dehors de votre application qui sont ensuite placés
 dans un fichier où ils peuvent être traduits et convertis en se basant sur la locale de
 l'utilisateur (i.e. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
 une fonction capable de traduire le texte (ou « message ») dans la langue de l'utilisateur ::
@@ -76,7 +76,7 @@ n'existe pas dans la locale de l'utilisateur.
 
 .. tip::
 
-    Quand une traduction n'existe pas pour une locale donnée, le traducteur essaye tout d'abord
+    Quand une traduction n'existe pas pour une locale donnée, le traducteur (« Translator ») essaye tout d'abord
     de trouver une traduction pour cette langue (``fr`` si la locale est ``fr_FR`` par exemple).
     Si cela échoue également, il regarde alors pour une traduction utilisant la locale de secours.
 
@@ -298,7 +298,7 @@ selon le schéma suivant : ``domaine.locale.format`` :
 * **format**: Comment Symfony2 doit charger et analyser le fichier (par ex. ``xliff``,
   ``php`` ou ``yml``).
 
-Le format peut être le nom de n'importe quel format enregistré. Par défaut, Symfony
+La valeur du format peut être le nom de n'importe quel format enregistré. Par défaut, Symfony
 fournit les formats suivants :
 
 * ``xliff`` : fichier XLIFF ;
@@ -453,7 +453,7 @@ Utiliser les Domaines de Message
 --------------------------------
 
 Comme nous l'avons vu, les fichiers de messages sont organisés par les différentes locales
-qu'ils traduisent. Les fichiers de messages peuvent également être organisés davantage en
+qu'ils traduisent. Pour plus de structure, les fichiers de messages peuvent également être organisés en
 « domaines ». Lors de la création des fichiers de message, le domaine est la première
 partie du nom du fichier. Le domaine par défaut est ``messages``. Par exemple, supposons que,
 par soucis d'organisation, les traductions ont été divisées en trois domaines différents : ``messages``,
@@ -498,7 +498,7 @@ Si la locale n'a pas été explicitement définie dans la session, le paramètre
 configuration ``fallback_locale`` va être utilisé par le ``Translator``. Le paramètre
 est défini comme ``en`` par défaut (voir `Configuration`_).
 
-Alternativement, vous pouvez garantir que la locale est définie dans la session de l'utilisateur
+Alternativement, vous pouvez garantir que la locale soit définie dans la session de l'utilisateur
 en définissant le paramètre ``default_locale`` dans le service de session :
 
 .. configuration-block::
@@ -530,7 +530,7 @@ Puisque la locale de l'utilisateur est stockée dans la session, il peut être t
 d'utiliser la même URL pour afficher une ressource dans de nombreuses langues différentes
 en se basant sur la locale de l'utilisateur. Par exemple, ``http://www.example.com/contact``
 pourrait afficher le contenu en anglais pour un utilisateur, et en français pour un autre
-utilisateur. Malheureusement, cela viole une règle fondamentale du Web : qu'une URL
+utilisateur. Malheureusement, cela viole une règle fondamentale du Web qui dit qu'une URL
 particulière retourne la même ressource indépendamment de l'utilisateur. Pour enfoncer encore
 plus le clou, quel version du contenu serait indexée par les moteurs de recherche ?
 
@@ -693,8 +693,8 @@ peut être ``[`` (exclusif) ou ``]`` (inclusif). En sus des nombres, vous pouvez
 Traductions dans les Templates
 ------------------------------
 
-La plupart du temps, les traductions surviennent dans les templates. Symfony2 fournit un
-support natif pour les deux types de templates que sont Twig et PHP.
+La plupart du temps, les traductions surviennent dans les templates. Symfony2 supporte
+nativement les deux types de templates que sont Twig et PHP.
 
 Templates Twig
 ~~~~~~~~~~~~~~
@@ -745,7 +745,7 @@ Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire l
 .. tip::
 
     Utiliser les balises ou filtres de traduction a le même effet, mais avec
-    une différence subtile : l'échappement automatique en sortie est appliquée
+    une différence subtile : l'échappement automatique en sortie est appliqué
     uniquement aux variables traduites via un filtre. En d'autres termes, si
     vous avez besoin d'être sûr que votre variable traduite n'est *pas* échappée
     en sortie, vous devez appliquer le filtre brut après le filtre de traduction :
@@ -824,7 +824,7 @@ n'a plus besoin d'être un processus douloureux et se résume simplement à quel
   la méthode :method:`Symfony\\Component\\Translation\\Translator::transChoice`;
 
 * Traduire chaque message dans de multiples locales en créant des fichiers de message
-  de traduction. Symfony2 découvre et traite chaque fichier parce que son nom suit
+  de traduction. Symfony2 découvre et traite chaque fichier grâce à leur nom qui suit
   une convention spécifique ;
   
 * Gérer la locale de l'utilisateur, qui est stockée dans la session.
