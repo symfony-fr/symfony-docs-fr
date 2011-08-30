@@ -418,58 +418,61 @@ Dans les deux cas, *uniquement* le groupe de validation ``registration``
 sera utilisé pour valider l'objet sous-jacent.
 
 .. index::
-   single: Forms; Built-in Field Types
+   single: Formulaires; Types de Champ Intégrés
 
 .. _book-forms-type-reference:
 
-Built-in Field Types
---------------------
+Types de Champ Intégrés
+-----------------------
 
-Symfony comes standard with a large group of field types that cover all of
-the common form fields and data types you'll encounter:
+Symfony vient par défaut avec un grand groupe de types de champ qui couvre
+la plupart des champs de formulaire existants et des types de données que vous
+pourrez rencontrer :
 
 .. include:: /reference/forms/types/map.rst.inc
 
-You can also create your own custom field types. This topic is covered in
-the ":doc:`/cookbook/form/create_custom_field_type`" article of the cookbook.
+Vous pouvez aussi créer vos propres types de champ personnalisés. Ce sujet
+est couvert par l'article du cookbook « :doc:`/cookbook/form/create_custom_field_type` ».
 
 .. index::
-   single: Forms; Field type options
+   single: Formulaires; Options des types de champ
 
-Field Type Options
-~~~~~~~~~~~~~~~~~~
+Options des types de champ
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each field type has a number of options that can be used to configure it.
-For example, the ``dueDate`` field is currently being rendered as 3 select
-boxes. However, the :doc:`date field</reference/forms/types/date>` can be
-configured to be rendered as a single text box (where the user would enter
-the date as a string in the box)::
+Chaque type de champ possède un nombre d'options qui peuvent être utilisées
+pour le configurer. Par exemple, le champ ``dueDate`` est rendu par défaut
+comme 3 champs select. Cependant, le :doc:`champ date</reference/forms/types/date>`
+peut être configuré pour être rendu en tant qu'un unique champ texte (où
+l'utilisateur entrerait la date « manuellement » comme une chaîne de caractères) ::
 
     ->add('dueDate', 'date', array('widget' => 'single_text'))
 
 .. image:: /images/book/form-simple2.png
     :align: center
 
-Each field type has a number of different options that can be passed to it.
-Many of these are specific to the field type and details can be found in
-the documentation for each type.
+Chaque type de champ a un nombre d'options différentes qui peuvent lui être
+passées. Beaucoup d'entre elles sont spécifiques à chacun et vous pouvez trouver
+ces détails dans la documentation de chaque type.
 
-.. sidebar:: The ``required`` option
+.. sidebar:: L'option ``required``
 
-    The most common option is the ``required`` option, which can be applied to
-    any field. By default, the ``required`` option is set to ``true``, meaning
-    that HTML5-ready browsers will apply client-side validation if the field
-    is left blank. If you don't want this behavior, either set the ``required``
-    option on your field to ``false`` or :ref:`disable HTML5 validation<book-forms-html5-validation-disable>`.
-    
-    Also note that setting the ``required`` option to ``true`` will **not**
-    result in server-side validation to be applied. In other words, if a
-    user submits a blank value for the field (either with an old browser
-    or web service, for example), it will be accepted as a valid value unless
-    you use Symfony's ``NotBlank`` or ``NotNull`` validation constraint.
-    
-    In other words, the ``required`` option is "nice", but true server-side
-    validation should *always* be used.
+    La plus commune des options est l'option ``required``, qui peut être appliquée à
+    tous les champs. Par défaut, cette dernière est définie comme ``true``,
+    signifiant que les navigateurs supportant HTML5 vont appliquer la validation
+    côté client si le champ est laissé vide. Si vous ne souhaitez pas ce
+    comportement, vous pouvez soit définir l'option ``required`` de vos champs
+    à ``false``, ou soit :ref:`désactiver la validation HTML5<book-forms-html5-validation-disable>`.
+
+    Notez aussi que définir l'option ``required`` à ``true`` **ne** résultera
+    en **aucune** validation côté serveur. En d'autres termes, si un utilisateur
+    soumet une valeur vide pour le champ (soit avec un vieux navigateur ou via
+    un service web, par exemple), cette valeur sera acceptée comme valide à moins
+    que vous utilisiez la contrainte de validation de Symfony ``NotBlank`` ou
+    ``NotNull``.
+
+    En d'autres mots, l'option ``required`` est « cool », mais une réelle validation
+    côté serveur devrait *toujours* être mise en place.
 
 .. index::
    single: Forms; Field type guessing
