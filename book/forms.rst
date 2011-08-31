@@ -475,18 +475,19 @@ ces détails dans la documentation de chaque type.
     côté serveur devrait *toujours* être mise en place.
 
 .. index::
-   single: Forms; Field type guessing
+   single: Formulaires; Prédiction de type de champ
 
 .. _book-forms-field-guessing:
 
-Field Type Guessing
--------------------
+Prédiction de Type de Champ
+---------------------------
 
-Now that you've added validation metadata to the ``Task`` class, Symfony
-already knows a bit about your fields. If you allow it, Symfony can "guess"
-the type of your field and set it up for you. In this example, Symfony can
-guess from the validation rules that both the ``task`` field is a normal
-``text`` field and the ``dueDate`` field is a ``date`` field::
+Maintenant que vous avez ajouté les métadonnées de validation à la classe
+``Task``, Symfony en sait déjà un peu plus à propos de vos champs. Si vous
+l'autorisez, Symfony peut « prédire » le type de vos champs et les mettre
+en place pour vous. Dans cet exemple, Symfony peut deviner depuis les règles
+de validation que le champ ``task`` est un champ ``texte`` normal et que
+``dueDate`` est un champ ``date`` ::
 
     public function newAction()
     {
@@ -498,46 +499,49 @@ guess from the validation rules that both the ``task`` field is a normal
             ->getForm();
     }
 
-The "guessing" is activated when you omit the second argument to the ``add()``
-method (or if you pass ``null`` to it). If you pass an options array as the
-third argument (done for ``dueDate`` above), these options are applied to
-the guessed field.
+La « prédiction » est activée lorsque vous omettez le second argument de
+la méthode ``add()`` (ou si vous lui passez ``null``). Si vous passez un
+tableau d'options en tant que troisième argument (comme pour ``dueDate``
+un peu plus haut), ces options sont appliquées au champ prédit.
 
 .. caution::
 
-    If your form uses a specific validation group, the field type guesser
-    will still consider *all* validation constraints when guessing your
-    field types (including constraints that are not part of the validation
-    group(s) being used).
+    Si votre formulaire utilise un groupe de validation spéficique, le
+    prédicteur de type de champ continuera toujours à considérer *toutes*
+    les contraintes de validation lorsqu'il essaie de deviner ces derniers
+    (incluant les contraintes qui ne font pas partie du ou des groupe(s)
+    étant utilisés).
 
 .. index::
-   single: Forms; Field type guessing
+   single: Formulaires; Prédiction de type de champ
 
-Field Type Options Guessing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prédiction des Options de Type de Champ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to guessing the "type" for a field, Symfony can also try to guess
-the correct values of a number of field options:
+En plus de pouvoir prédire le « type » d'un champ, Symfony peut aussi essayer
+de deviner les valeurs correctes d'un certain nombre d'options de champ :
 
-* ``required``: The ``required`` option can be guessed based off of the validation
-  rules (i.e. is the field ``NotBlank`` or ``NotNull``) or the Doctrine metadata
-  (i.e. is the field ``nullable``). This is very useful, as your client-side
-  validation will automatically match your validation rules.
+* ``required`` : L'option ``required`` peut être devinée grâce aux règles de
+  validation (i.e. est-ce que le champ est ``NotBlank`` ou ``NotNull``) ou
+  grâce aux métadonnées de Doctrine (i.e. est-ce que le champ est ``nullable``).
+  Ceci est très utile car votre validation côté client va automatiquement
+  correspondre à vos règles de validation.
 
-* ``min_length``: If the field is some sort of text field, then the ``min_length``
-  option can be guessed from the validation constrains (if ``MinLength``
-  or ``Min`` is used) or from the Doctrine metadata (via the field's length).
+* ``min_length`` : Si le champ est de type texte, alors l'option ``min_length``
+  peut être devinée grâce aux contraintes de validation (si ``MinLength`` ou ``Min``
+  est utilisée) ou grâce aux métadonnées de Doctrine (via la longueur du champ).
 
-* ``max_length``: Similar to ``min_length``, the maximum length can also 
-  be guessed.
+* ``max_length`` : Similaire à ``min_length``, la longueur maximale peut aussi
+  être prédite.
 
 .. note::
 
-  These field options are *only* guessed if you're using Symfony to guess
-  the field type (i.e. omit or pass ``null`` as the second argument to ``add()``).
+  Ces options de champ sont *uniquement* devinées si vous utilisez Symfony pour
+  prédire le type des champs (i.e. en omettant ou en passant ``null`` en tant
+  que deuxième argument de la méthode ``add()``).
 
-If you'd like to change one of the guessed values, you can override it by
-passing the option in the options field array::
+Si vous voudriez changer une des valeurs prédites, vous pouvez l'outrepasser en
+passant l'option au tableau des options de champ ::
 
     ->add('task', null, array('min_length' => 4))
 
