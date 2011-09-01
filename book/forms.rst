@@ -546,15 +546,16 @@ passant l'option au tableau des options de champ ::
     ->add('task', null, array('min_length' => 4))
 
 .. index::
-   single: Forms; Rendering in a Template
+   single: Formulaires; Rendu dans un Template
 
 .. _form-rendering-template:
 
-Rendering a Form in a Template
-------------------------------
+Rendre un Formulaire dans un Template
+-------------------------------------
 
-So far, you've seen how an entire form can be rendered with just one line
-of code. Of course, you'll usually need much more flexibility when rendering:
+Jusqu'içi, vous avez vu comment un formulaire entier peut être rendu avec
+seulement une ligne de code. Bien sûr, vous aurez probablement besoin de
+bien plus de flexibilité :
 
 .. configuration-block::
 
@@ -588,40 +589,42 @@ of code. Of course, you'll usually need much more flexibility when rendering:
             <input type="submit" />
         </form>
 
-Let's take a look at each part:
+Jetons un coup d'oeil à chaque partie :
 
-* ``form_enctype(form)`` - If at least one field is a file upload field, this
-  renders the obligatory ``enctype="multipart/form-data"``;
+* ``form_enctype(form)`` - Si au moins un champ est un upload de fichier, ceci
+  se charge de rendre l'attribut obligatoire ``enctype="multipart/form-data"`` ;
 
-* ``form_errors(form)`` - Renders any errors global to the whole form
-  (field-specific errors are displayed next to each field);
+* ``form_errors(form)`` - Rend toutes les erreurs globales du formulaire (les
+  erreurs spécifiques aux champs sont affichées à côté de chaque champ) ;
 
-* ``form_row(form.dueDate)`` - Renders the label, any errors, and the HTML
-  form widget for the given field (e.g. ``dueDate``) inside, by default, a
-  ``div`` element;
+* ``form_row(form.dueDate)`` - Rend le label, toutes les erreurs, ainsi que le
+  widget HTML pour le champ donné (par ex. ``dueDate``) qui, par défaut, est
+  dans une balise ``div`` ;
 
-* ``form_rest(form)`` - Renders any fields that have not yet been rendered.
-  It's usually a good idea to place a call to this helper at the bottom of
-  each form (in case you forgot to output a field or don't want to bother
-  manually rendering hidden fields). This helper is also useful for taking
-  advantage of the automatic :ref:`CSRF Protection<forms-csrf>`.
+* ``form_rest(form)`` - Rend tous les champs qui n'ont pas encore été rendus.
+  C'est généralement une bonne idée de placer un appel à cette fonction d'aide
+  à la fin de chaque formulaire (au cas où vous auriez oublié d'afficher un
+  champ ou si vous ne souhaitez pas vous embêter à rendre manuellement les
+  champs cachés). Cette fonction d'aide est aussi utile pour profiter
+  de la :ref:`Protection CSRF<forms-csrf>` automatique.
 
-The majority of the work is done by the ``form_row`` helper, which renders
-the label, errors and HTML form widget of each field inside a ``div`` tag
-by default. In the :ref:`form-theming` section, you'll learn how the ``form_row``
-output can be customized on many different levels.
+La plus grande partie du travail est effectuée par la fonction d'aide ``form_row``,
+qui rend le label, les erreurs et le widget HTML de chaque champ dans une balise
+``div`` par défaut. Dans la section :ref:`form-theming`, vous apprendrez comment
+le rendu de ``form_row`` peut être personnalisé à différents niveaux.
 
 .. index::
-   single: Forms; Rendering each field by hand
+   single: Formulaires; Rendre chaque champ à la main
 
-Rendering each Field by Hand
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Rendre chaque Champ à la Main
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``form_row`` helper is great because you can very quickly render each
-field of your form (and the markup used for the "row" can be customized as
-well). But since life isn't always so simple, you can also render each field
-entirely by hand. The end-product of the following is the same as when you
-used the ``form_row`` helper:
+La fonction d'aide ``form_row`` est géniale car, grâce à elle, vous pouvez
+rendre très rapidement chaque champ de votre formulaire (et les balises
+utilisées pour ce champ peuvent être personnalisées aussi). Mais comme la
+vie n'est pas toujours simple, vous pouvez aussi rendre chaque champ
+entièrement à la main. Le produit fini décrit dans la suite revient au même
+que lorsque vous avez utilisé la fonction d'aide ``form_row`` :
 
 .. configuration-block::
 
@@ -661,8 +664,8 @@ used the ``form_row`` helper:
 
         <?php echo $view['form']->rest($form) ?>
 
-If the auto-generated label for a field isn't quite right, you can explicitly
-specify it:
+Si le label auto-généré pour un champ n'est pas tout à fait correct, vous
+pouvez le spécifier explicitement :
 
 .. configuration-block::
 
@@ -674,11 +677,11 @@ specify it:
 
         <?php echo $view['form']->label($form['task'], 'Task Description') ?>
 
-Finally, some field types have additional rendering options that can be passed
-to the widget. These options are documented with each type, but one common
-options is ``attr``, which allows you to modify attributes on the form element.
-The following would add the ``task_field`` class to the rendered input text
-field:
+Finalement, quelques types de champ ont des options de rendu supplémentaires
+qui peuvent être passées au widget. Ces options sont documentées avec chaque
+type, mais une qui est commune est l'option ``attr``, qui vous permet de modifier
+les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
+``task_field`` au champ texte rendu :
 
 .. configuration-block::
 
@@ -692,13 +695,13 @@ field:
             'attr' => array('class' => 'task_field'),
         )) ?>
 
-Twig Template Function Reference
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fonctions de Référence des Templates Twig
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you're using Twig, a full reference of the form rendering functions is
-available in the :doc:`reference manual</reference/forms/twig_reference>`.
-Read this to know everything about the helpers available and the options
-that can be used with each.
+Si vous utilisez Twig, un :doc:`manuel de référence</reference/forms/twig_reference>`
+complet des fonctions de rendu de formulaire est mis à votre disposition.
+Lisez-le afin de connaître tout à propos des fonctions d'aide disponibles
+ainsi que les options qui peuvent être utilisées avec ces dernières.
 
 .. index::
    single: Forms; Creating form classes
