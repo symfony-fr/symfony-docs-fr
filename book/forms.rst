@@ -783,18 +783,20 @@ manière de créer des formulaires, mais le choix final vous revient.
         }
 
 .. index::
-   pair: Forms; Doctrine
+   pair: Formulaires; Doctrine
 
-Forms and Doctrine
-------------------
+Formulaires et Doctrine
+-----------------------
 
-The goal of a form is to translate data from an object (e.g. ``Task``) to an
-HTML form and then translate user-submitted data back to the original object. As
-such, the topic of persisting the ``Task`` object to the database is entirely
-unrelated to the topic of forms. But, if you've configured the ``Task`` class
-to be persisted via Doctrine (i.e. you've added
-:ref:`mapping metadata<book-doctrine-adding-mapping>` for it), then persisting
-it after a form submission can be done when the form is valid::
+Le but d'un formulaire est de traduire les données d'un objet (par exemple :
+``Task``) en un formulaire HTML et puis de transcrire en retour les données
+soumises par l'utilisateur à l'objet original. En tant que tel, le sujet de la
+persistance de l'objet ``Task`` dans la base de données n'a rien à voir avec
+le sujet des formulaires. Mais, si vous avez configuré la classe ``Task`` de
+telle sorte qu'elle soit persistée via Doctrine (i.e. vous avez ajouté des
+:ref:`métadonnées de correspondance<book-doctrine-adding-mapping>` pour cela),
+alors sa persistance peut être effectuée après la soumission d'un formulaire
+lorsque ce dernier est valide ::
 
     if ($form->isValid()) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -804,17 +806,17 @@ it after a form submission can be done when the form is valid::
         return $this->redirect($this->generateUrl('task_success'));
     }
 
-If, for some reason, you don't have access to your original ``$task`` object,
-you can fetch it from the form::
+Si, pour quelconque raison, vous n'avez pas accès à votre objet ``$task``
+d'origine, vous pouvez le récupérer depuis le formulaire ::
 
     $task = $form->getData();
 
-For more information, see the :doc:`Doctrine ORM chapter</book/doctrine>`.
+Pour plus d'informations, voir le :doc:`chapitre Doctrine ORM</book/doctrine>`.
 
-The key thing to understand is that when the form is bound, the submitted
-data is transferred to the underlying object immediately. If you want to
-persist that data, you simply need to persist the object itself (which already
-contains the submitted data).
+La chose principale à comprendre est que lorsque le formulaire est lié (« binding »),
+les données soumises sont transférées à l'objet sous-jacent immédiatement. Si
+vous souhaitez persister ces données, vous avez simplement besoin de persister
+l'objet lui-même (qui contient déjà les données soumises).
 
 .. index::
    single: Forms; Embedded forms
