@@ -770,7 +770,7 @@ manière de créer des formulaires, mais le choix final vous revient.
     données sous-jacentes (par exemple : ``Acme\TaskBundle\Entity\Task``).
     Généralement, cette information est devinée grâce à l'objet passé en
     second argument de la méthode ``createForm`` (i.e. ``$task``).
-    Plus tard, quand vous commencerez à intégrer des formulaires les uns avec
+    Plus tard, quand vous commencerez à embarquer des formulaires les uns avec
     les autres, cela ne sera plus suffisant. Donc, bien que pas nécessaire,
     c'est généralement une bonne idée de spécifier explicitement l'option
     ``data_class`` en ajoutant ce qui suit à votre classe formulaire ::
@@ -819,21 +819,22 @@ vous souhaitez persister ces données, vous avez simplement besoin de persister
 l'objet lui-même (qui contient déjà les données soumises).
 
 .. index::
-   single: Forms; Embedded forms
+   single: Formulaires; Formulaires embarqués
 
-Embedded Forms
---------------
+Formulaires Embarqués
+---------------------
 
-Often, you'll want to build a form that will include fields from many different
-objects. For example, a registration form may contain data belonging to
-a ``User`` object as well as many ``Address`` objects. Fortunately, this
-is easy and natural with the form component.
+Souvent, vous allez vouloir construire un formulaire qui inclura des champs
+de beaucoup d'objets différents. Par exemple, un formulaire de souscription
+pourrait contenir des données appartenant à un objet ``User`` ainsi qu'à
+plusieurs objets ``Address``. Heureusement, gérer cela est facile et naturel
+avec le composant formulaire.
 
-Embedding a Single Object
+Embarquer un Objet Unique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Suppose that each ``Task`` belongs to a simple ``Category`` object. Start,
-of course, by creating the ``Category`` object::
+Supposez que chaque ``Task`` appartienne à un simple objet ``Category``.
+Commencez, bien sûr, par créer l'objet ``Category`` ::
 
     // src/Acme/TaskBundle/Entity/Category.php
     namespace Acme\TaskBundle\Entity;
@@ -848,7 +849,7 @@ of course, by creating the ``Category`` object::
         public $name;
     }
 
-Next, add a new ``category`` property to the ``Task`` class::
+Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task`` ::
 
     // ...
 
@@ -874,8 +875,9 @@ Next, add a new ``category`` property to the ``Task`` class::
         }
     }
 
-Now that your application has been updated to reflect the new requirements,
-create a form class so that a ``Category`` object can be modified by the user::
+Maintenant que votre application a été mise à jour pour refléter nos nouvelles
+conditions requises, créez une classe formulaire afin que l'objet ``Category``
+puisse être modifié par l'utilisateur ::
 
     // src/Acme/TaskBundle/Form/Type/CategoryType.php
     namespace Acme\TaskBundle\Form\Type;
@@ -903,10 +905,10 @@ create a form class so that a ``Category`` object can be modified by the user::
         }
     }
 
-The end goal is to allow the ``Category`` of a ``Task`` to be modified right
-inside the task form itself. To accomplish this, add a ``category`` field
-to the ``TaskType`` object whose type is an instance of the new ``CategoryType``
-class:
+Le but final est d'autoriser la ``Category`` d'une ``Task`` à être modifiée
+directement dans le formulaire de la tâche lui-même. Pour accomplir cela,
+ajoutez un champ ``category`` à l'objet ``TaskType`` dont le type est une
+instance de la nouvelle classe ``CategoryType`` :
 
 .. code-block:: php
 
@@ -917,9 +919,9 @@ class:
         $builder->add('category', new CategoryType());
     }
 
-The fields from ``CategoryType`` can now be rendered alongside those from
-the ``TaskType`` class. Render the ``Category`` fields in the same way
-as the original ``Task`` fields:
+Les champs de ``CategoryType`` peuvent maintenant être rendus à côté de ceux
+de la classe ``TaskType``. Rendez les champs de ``Category`` de la même manière
+que les champs de la classe ``Task`` :
 
 .. configuration-block::
 
@@ -947,19 +949,20 @@ as the original ``Task`` fields:
         <?php echo $view['form']->rest($form) ?>
         <!-- ... -->
 
-When the user submits the form, the submitted data for the ``Category`` fields
-are used to construct an instance of ``Category``, which is then set on the
-``category`` field of the ``Task`` instance.
+Lorsque l'utilisateur soumet le formulaire, les données soumises pour les champs
+de ``Category`` sont utilisées pour construire une instance de ``Category``, qui
+est ensuite affectée au champ ``category`` de l'instance de `Task``.
 
-The ``Category`` instance is accessible naturally via ``$task->getCategory()``
-and can be persisted to the database or used however you need.
+L'instance ``Category`` est accessible naturellement via ``$task->getCategory()``
+et peut être persistée dans la base de données ou utilisée de quelconque manière
+que vous souhaitez.
 
-Embedding a Collection of Forms
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Embarquer une Collection de Formulaires
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also embed a collection of forms into one form. This is done by
-using the ``collection`` field type. For more information, see the
-:doc:`collection field type reference</reference/forms/types/collection>`.
+Vous pouvez aussi embarquer une collection de formulaires dans un formulaire.
+Cela est possible grâce au type de champ ``collection``. Pour plus d'informations,
+voir la :doc:`référence du type de champ collection</reference/forms/types/collection>`.
 
 .. index::
    single: Forms; Theming
