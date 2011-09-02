@@ -598,7 +598,7 @@ Jetons un coup d'oeil à chaque partie :
   erreurs spécifiques aux champs sont affichées à côté de chaque champ) ;
 
 * ``form_row(form.dueDate)`` - Rend le label, toutes les erreurs, ainsi que le
-  widget HTML pour le champ donné (par ex. ``dueDate``) qui, par défaut, est
+  widget HTML pour le champ donné (par exemple : ``dueDate``) qui, par défaut, est
   dans une balise ``div`` ;
 
 * ``form_rest(form)`` - Rend tous les champs qui n'ont pas encore été rendus.
@@ -704,17 +704,18 @@ Lisez-le afin de connaître tout à propos des fonctions d'aide disponibles
 ainsi que les options qui peuvent être utilisées avec ces dernières.
 
 .. index::
-   single: Forms; Creating form classes
+   single: Formulaires; Créer des classes de formulaire
 
 .. _book-form-creating-form-classes:
 
-Creating Form Classes
----------------------
+Créer des Classes de Formulaire
+-------------------------------
 
-As you've seen, a form can be created and used directly in a controller.
-However, a better practice is to build the form in a separate, standalone PHP
-class, which can then be reused anywhere in your application. Create a new class
-that will house the logic for building the task form:
+Comme vous l'avez vu, un formulaire peut être créé et utilisé directement dans
+un contrôleur. Cependant, une meilleure pratique est de construire le formulaire
+dans une classe PHP séparée et autonome, qui peut ainsi être réutilisée n'importe
+où dans votre application. Créez une nouvelle classe qui va héberger la logique
+de construction du formulaire « task » :
 
 .. code-block:: php
 
@@ -739,15 +740,16 @@ that will house the logic for building the task form:
         }
     }
 
-This new class contains all the directions needed to create the task form
-(note that the ``getName()`` method should return a unique identifier for this
-form "type"). It can be used to quickly build a form object in the controller:
+Cette nouvelle classe contient toutes les directives nécessaires à la création
+du formulaire « task » (notez que la méthode ``getName()`` doit retourner un
+identifiant unique pour ce « type » de formulaire). Il peut être utilisé pour
+construire rapidement un objet formulaire dans le contrôleur :
 
 .. code-block:: php
 
     // src/Acme/TaskBundle/Controller/DefaultController.php
 
-    // add this new use statement at the top of the class
+    // ajoutez cette nouvelle déclaration « use » en haut de la classe
     use Acme\TaskBundle\Form\Type\TaskType;
 
     public function newAction()
@@ -758,19 +760,20 @@ form "type"). It can be used to quickly build a form object in the controller:
         // ...
     }
 
-Placing the form logic into its own class means that the form can be easily
-reused elsewhere in your project. This is the best way to create forms, but
-the choice is ultimately up to you.
+Placer la logique du formulaire dans sa propre classe signifie que le formulaire
+peut être réutilisé facilement ailleurs dans votre projet. C'est la meilleure
+manière de créer des formulaires, mais le choix final vous revient.
 
-.. sidebar:: Setting the ``data_class``
+.. sidebar:: Définir la ``data_class``
 
-    Every form needs to know the name of the class that holds the underlying
-    data (e.g. ``Acme\TaskBundle\Entity\Task``). Usually, this is just guessed
-    based off of the object passed to the second argument to ``createForm``
-    (i.e. ``$task``). Later, when you begin embedding forms, this will no
-    longer be sufficient. So, while not always necessary, it's generally a
-    good idea to explicitly specify the ``data_class`` option by add the
-    following to your form type class::
+    Chaque formulaire a besoin de savoir le nom de la classe qui détient les
+    données sous-jacentes (par exemple : ``Acme\TaskBundle\Entity\Task``).
+    Généralement, cette information est devinée grâce à l'objet passé en
+    second argument de la méthode ``createForm`` (i.e. ``$task``).
+    Plus tard, quand vous commencerez à intégrer des formulaires les uns avec
+    les autres, cela ne sera plus suffisant. Donc, bien que pas nécessaire,
+    c'est généralement une bonne idée de spécifier explicitement l'option
+    ``data_class`` en ajoutant ce qui suit à votre classe formulaire ::
 
         public function getDefaultOptions(array $options)
         {
