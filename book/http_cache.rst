@@ -1,12 +1,17 @@
 .. index::
    single: Cache
 
-Le Cache du HTTP
+Le Cache HTTP
 ==========
 
 Le propre d'une application web riche est d'être dynamique. Peu
-importe l'efficacité de l'application, le traitement d'une requête
+importe l'efficacité de votre application, le traitement d'une requête
 sera toujours plus important que l'envoi d'une page statique.
+
+Et pour la plupart des applications web, c'est correct. Symfony2 est
+d'une rapidité foudrayante, et il est inutile que vous fassiez de
+sérieux remaniements, toute requête sera traitée rapidement sans
+mettre trop de stress sur le serveur.
 
 HTTP Cache
 ==========
