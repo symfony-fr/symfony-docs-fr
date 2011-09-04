@@ -4,9 +4,9 @@
 Le Cache du HTTP
 ==========
 
-Si une application web est dite de nature riche, alors elle est
-dynamique. Peu importe l'efficacité de votre application, une requête
-sera toujours plus conséquente à traiter que l'envoi d'une page statique.
+Le propre d'une application web riche est d'être dynamique. Peu
+importe l'efficacité de l'application, le traitement d'une requête
+sera toujours plus important que l'envoi d'une page statique.
 
 HTTP Cache
 ==========
