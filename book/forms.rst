@@ -1270,33 +1270,35 @@ Tous les fragments à l'intérieur du répertoire ``Acme/TaskBundle/Resources/vi
 sont maintenant utilisés globalement pour définir le rendu en sortie des formulaires.
 
 .. index::
-   single: Forms; CSRF Protection
+   single: Formulaires; Protection CSRF
 
 .. _forms-csrf:
 
-CSRF Protection
+Protection CSRF
 ---------------
 
-CSRF - or `Cross-site request forgery`_ - is a method by which a malicious
-user attempts to make your legitimate users unknowingly submit data that
-they don't intend to submit. Fortunately, CSRF attacks can be prevented by
-using a CSRF token inside your forms.
+CSRF - ou `Cross-site request forgery`_ - est une méthode grâce à laquelle
+un utilisateur malveillant tente de faire soumettre inconsciemment des
+données à un utilisateur légitime qui n'avait pas l'intention de les soumettre.
+Heureusement, les attaques CSRF peuvent être contrées en utilisant un jeton CSRF
+à l'intérieur de vos formulaires.
 
-The good news is that, by default, Symfony embeds and validates CSRF tokens
-automatically for you. This means that you can take advantage of the CSRF
-protection without doing anything. In fact, every form in this chapter has
-taken advantage of the CSRF protection!
+La bonne nouvelle est que, par défaut, Symfony embarque et valide automatiquement
+les jetons CSRF pour vous. Cela signifie que vous pouvez profiter de la protection
+CSRF sans n'avoir rien à faire. En fait, chaque formulaire dans ce chapitre
+a profité de la protection CSRF !
 
-CSRF protection works by adding a hidden field to your form - called ``_token``
-by default - that contains a value that only you and your user knows. This
-ensures that the user - not some other entity - is submitting the given data.
-Symfony automatically validates the presence and accuracy of this token.
+La protection CSRF fonctionne en ajoutant un champ caché dans votre formulaire -
+appelé ``_token`` par défaut - qui contient une valeur que seuls vous et votre
+utilisateur connaissez. Cela garantit que l'utilisateur - et non pas une autre
+entité - soumet les informations données. Symfony valide automatiquement la
+présence et l'exactitude de ce jeton.
 
-The ``_token`` field is a hidden field and will be automatically rendered
-if you include the ``form_rest()`` function in your template, which ensures
-that all un-rendered fields are output.
+Le champ ``_token`` est un champ caché et sera rendu automatiquement si vous
+incluez la fonction ``form_rest()`` dans votre template, qui garantit que
+tous les champs non-rendus sont délivrés en sortie.
 
-The CSRF token can be customized on a form-by-form basis. For example::
+Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple ::
 
     class TaskType extends AbstractType
     {
@@ -1308,7 +1310,7 @@ The CSRF token can be customized on a form-by-form basis. For example::
                 'data_class'      => 'Acme\TaskBundle\Entity\Task',
                 'csrf_protection' => true,
                 'csrf_field_name' => '_token',
-                // a unique key to help generate the secret token
+                // une clé unique pour aider à la génération du jeton secret
                 'intention'       => 'task_item',
             );
         }
@@ -1316,15 +1318,15 @@ The CSRF token can be customized on a form-by-form basis. For example::
         // ...
     }
 
-To disable CSRF protection, set the ``csrf_protection`` option to false.
-Customizations can also be made globally in your project. For more information,
-see the :ref:`form configuration reference </reference-frameworkbundle-forms>`
-section.
+Pour désactiver la protection CSRF, définissez l'option ``csrf_protection``
+à faux. Les personnalisations peuvent aussi être effectuées globalement dans
+votre projet. Pour plus d'informations, voir la section de
+:ref:`référence de configuration de formulaire</reference-frameworkbundle-forms>`.
 
 .. note::
 
-    The ``intention`` option is optional but greatly enhances the security of
-    the generated token by making it different for each form.
+    L'option ``intention`` est optionnelle mais améliore grandement la sécurité
+    du jeton généré en le rendant différent pour chaque formulaire.
 
 Final Thoughts
 --------------
