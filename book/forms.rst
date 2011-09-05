@@ -14,7 +14,7 @@ plus importantes de la bibliothèque des formulaires.
 
    Le composant formulaire de Symfony est une bibliothèque autonome qui peut être
    utilisée en dehors des projets Symfony2. Pour plus d'informations, voir le
-   `Symfony2 Form Component`_ sur Github.
+   `Composant Formulaire Symfony2`_ sur Github.
 
 .. index::
    single: Formulaires; Créer un formulaire simple
@@ -1328,33 +1328,36 @@ votre projet. Pour plus d'informations, voir la section de
     L'option ``intention`` est optionnelle mais améliore grandement la sécurité
     du jeton généré en le rendant différent pour chaque formulaire.
 
-Final Thoughts
---------------
+Réflexions finales
+------------------
 
-You now know all of the building blocks necessary to build complex and
-functional forms for your application. When building forms, keep in mind that
-the first goal of a form is to translate data from an object (``Task``) to an
-HTML form so that the user can modify that data. The second goal of a form is to
-take the data submitted by the user and to re-apply it to the object.
+Vous connaissez maintenant tout sur les bases nécessaires à la construction
+de formulaires complexes et fonctionnels pour votre application. Quand vous
+construisez des formulaires, gardez à l'esprit que le but premier d'un
+formulaire est de transcrire les données d'un objet (``Task``) en un formulaire
+HTML afin que l'utilisateur puisse modifier ces données. Le second objectif d'un
+formulaire est de prendre les données soumises par l'utilisateur et de les
+ré-appliquer à l'objet.
 
-There's still much more to learn about the powerful world of forms, such as
-how to handle :doc:`file uploads with Doctrine
-</cookbook/doctrine/file_uploads>` or how to create a form where a dynamic
-number of sub-forms can be added (e.g. a todo list where you can keep adding
-more fields via Javascript before submitting). See the cookbook for these
-topics. Also, be sure to lean on the
-:doc:`field type reference documentation</reference/forms/types>`, which
-includes examples of how to use each field type and its options.
+Il y a beaucoup plus à apprendre à propos de la puissance du monde des
+formulaires, comme par exemple comment gérer les :doc:`uploads de fichier
+avec Doctrine</cookbook/doctrine/file_uploads>` ou comment créer un
+formulaire où un nombre dynamique de sous-formulaires peut être ajouté
+(par exemple : une liste de choses à faire où vous pouvez continuer d'ajouter
+des champs via Javascript avant de soumettre le formulaire).
+Voyez le cookbook pour ces sujets. Aussi, assurez-vous de vous appuyer sur la
+:doc:`documentation de référence des types de champ</reference/forms/types>`,
+qui inclut des exemples de comment utiliser chaque type de champ et ses options.
 
-Learn more from the Cookbook
-----------------------------
+En savoir plus grâce au Cookbook
+--------------------------------
 
 * :doc:`/cookbook/doctrine/file_uploads`
-* :doc:`File Field Reference </reference/forms/types/file>`
-* :doc:`Creating Custom Field Types </cookbook/form/create_custom_field_type>`
+* :doc:`Référence du Champ Fichier </reference/forms/types/file>`
+* :doc:`Créer des Types de Champ Personnalisés </cookbook/form/create_custom_field_type>`
 * :doc:`/cookbook/form/form_customization`
 
-.. _`Symfony2 Form Component`: https://github.com/symfony/Form
+.. _`Composant Formulaire Symfony2`: https://github.com/symfony/Form
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php
 .. _`Twig Bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Twig
 .. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
