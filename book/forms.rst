@@ -965,32 +965,35 @@ Cela est possible grâce au type de champ ``collection``. Pour plus d'informatio
 voir la :doc:`référence du type de champ collection</reference/forms/types/collection>`.
 
 .. index::
-   single: Forms; Theming
-   single: Forms; Customizing fields
+   single: Formulaires; Habillage
+   single: Formulaires; Personnaliser les champs
 
 .. _form-theming:
 
-Form Theming
-------------
+Habillage de Formulaire (« Theming »)
+-------------------------------------
 
-Every part of how a form is rendered can be customized. You're free to change
-how each form "row" renders, change the markup used to render errors, or
-even customize how a ``textarea`` tag should be rendered. Nothing is off-limits,
-and different customizations can be used in different places.
+Chaque partie de l'affichage d'un formulaire peut être personnalisée. Vous êtes
+libre de changer comment chaque ligne du formulaire est rendue, de changer les
+balises utilisées pour afficher les erreurs, ou même de personnaliser comment
+la balise ``textarea`` devrait être rendue. Rien n'est limité, et des différentes
+personnalisations peuvent être utilisées à différents endroits.
 
-Symfony uses templates to render each and every part of a form, such as
-``label`` tags, ``input`` tags, error messages and everything else.
+Symfony utilise des templates pour rendre chaque partie d'un formulaire, comme
+les balises ``tags``, les balises ``input``, les messages d'erreur et tout le reste.
 
-In Twig, each form "fragment" is represented by a Twig block. To customize
-any part of how a form renders, you just need to override the appropriate block.
+Dans Twig, chaque « fragment » de formulaire est représenté par un bloc Twig. Pour
+personnaliser n'importe quelle partie d'un formulaire, vous avez juste besoin de
+réécrire le bloc approprié.
 
-In PHP, each form "fragment" is rendered via an individual template file.
-To customize any part of how a form renders, you just need to override the
-existing template by creating a new one.
+En PHP, chaque « fragment » de formulaire est rendu via un fichier de template
+individuel. Pour personnaliser n'importe quelle partie d'un formulaire, vous avez
+juste besoin de réécrire le template existant en en créant un nouveau.
 
-To understand how this works, let's customize the ``form_row`` fragment and
-add a class attribute to the ``div`` element that surrounds each row. To
-do this, create a new template file that will store the new markup:
+Pour comprendre comment tout cela fonctionne, personnalisons le fragment ``form_row``
+et ajoutons l'attribut « class » à l'élément ``div`` qui entoure chaque ligne. Pour
+faire cela, créez un nouveau fichier de template qui va stocker la nouvelle
+balise :
 
 .. configuration-block::
 
@@ -1018,10 +1021,10 @@ do this, create a new template file that will store the new markup:
             <?php echo $view['form']->widget($form, $parameters) ?>
         </div>
 
-The ``field_row`` form fragment is used when rendering most fields via the
-``form_row`` function. To tell the form component to use your new ``field_row``
-fragment defined above, add the following to the top of the template that
-renders the form:
+Le fragment de formulaire ``field_row`` est utilisé pour rendre la plupart
+des champs via la fonction ``form_row``. Pour dire au composant formulaire
+d'utiliser votre nouveau fragment ``field_row`` defini ci-dessus, ajoutez
+ce qui suit en haut du template qui rend le formulaire :
 
 .. configuration-block:: php
 
@@ -1041,112 +1044,116 @@ renders the form:
 
         <form ...>
 
-The ``form_theme`` tag (in Twig) "imports" the fragments defined in the given
-template and uses them when rendering the form. `In other words, when the
-``form_row`` function is called later in this template, it will use the ``field_row``
-block from your custom theme (instead of the default ``field_row`` block
-that ships with Symfony).
+La balise ``form_theme`` (dans Twig) « importe » les fragments définis dans le
+template donné et les utilise lorsqu'il rend le formulaire. En d'autres mots,
+quand la fonction ``form_row`` est appelée plus tard dans ce template, elle va
+utiliser le bloc ``field_row`` de votre thème personnalisé (à la place du bloc
+par défaut ``field_row`` qui est délivré avec Symfony).
 
-To customize any portion of a form, you just need to override the appropriate
-fragment. Knowing exactly which block or file to override is the subject of
-the next section.
+Pour personnaliser n'importe quelle portion d'un formulaire, vous devez juste
+réécrire le fragment approprié. Connaître exactement quel bloc ou fichier
+réécrire est le sujet de la prochaine section.
 
-For a more extensive discussion, see :doc:`/cookbook/form/form_customization`.
+Pour une discussion plus développée, voir :doc:`/cookbook/form/form_customization`.
 
 .. index::
-   single: Forms; Template fragment naming
+   single: Formulaires; Nommage de fragment de template
 
 .. _form-template-blocks:
 
-Form Fragment Naming
-~~~~~~~~~~~~~~~~~~~~
+Nommage de Fragment de Formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In Symfony, every part a form that is rendered - HTML form elements, errors,
-labels, etc - is defined in a base theme, which is a collection of blocks
-in Twig and a collection of template files in PHP.
+Dans Symfony, chaque partie d'un formulaire qui est rendue - éléments de formulaire
+HTML, erreurs, labels, etc - est définie dans un thème de base, qui est une
+collection de blocs dans Twig et une collection de fichiers de template dans PHP.
 
-In Twig, every block needed is defined in a single template file (`form_div_layout.html.twig`_)
-that lives inside the `Twig Bridge`_. Inside this file, you can see every block
-needed to render a form and every default field type.
+Dans Twig, chaque bloc nécessaire est défini dans un unique fichier de template
+(`form_div_layout.html.twig`_) qui réside dans le `Twig Bridge`_. Dans ce fichier,
+vous pouvez voir chaque bloc requis pour rendre un formulaire et chaque type
+de champ par défaut.
 
-In PHP, the fragments are individual template files. By default they are located in
-the `Resources/views/Form` directory of the framework bundle (`view on GitHub`_).
+En PHP, les fragments sont des fichiers de template individuels. Par défaut, ils
+sont situés dans le répertoire `Resources/views/Form` du bundle du framework
+(`voir sur GitHub`_).
 
-Each fragment name follows the same basic pattern and is broken up into two pieces,
-separated by a single underscore character (``_``). A few examples are:
+Chaque nom de fragment suit le même pattern de base et est divisé en deux parties,
+séparées par un unique underscore (``_``). Quelques exemples sont :
 
-* ``field_row`` - used by ``form_row`` to render most fields;
-* ``textarea_widget`` - used by ``form_widget`` to render a ``textarea`` field
-  type;
-* ``field_errors`` - used by ``form_errors`` to render errors for a field;
+* ``field_row`` - utilisé par ``form_row`` pour rendre la plupart des champs ;
+* ``textarea_widget`` - utilisé par ``form_widget`` pour rendre un champ de
+  type ``textarea`` ;
+* ``field_errors`` - utilisé par ``form_errors`` pour rendre les erreurs d'un champ.
 
-Each fragment follows the same basic pattern: ``type_part``. The ``type`` portion
-corresponds to the field *type* being rendered (e.g. ``textarea``, ``checkbox``,
-``date``, etc) whereas the ``part`` portion corresponds to *what* is being
-rendered (e.g. ``label``, ``widget``, ``errors``, etc). By default, there
-are 4 possible *parts* of a form that can be rendered:
+Chaque fragment suit le même pattern de base : ``type_part``. La partie ``type``
+correspond au *type* du champ qui doit être rendu (par exemple : ``textarea``,
+``checkbox``, ``date``, etc) alors que la partie ``part`` correspond à *ce qui*
+va être rendu (par exemple : ``label``, ``widget``, ``errors``, etc). Par défaut,
+il y a 4 *parts* possibles d'un formulaire qui peuvent être rendues :
 
-+-------------+--------------------------+---------------------------------------------------------+
-| ``label``   | (e.g. ``field_label``)   | renders the field's label                               |
-+-------------+--------------------------+---------------------------------------------------------+
-| ``widget``  | (e.g. ``field_widget``)  | renders the field's HTML representation                 |
-+-------------+--------------------------+---------------------------------------------------------+
-| ``errors``  | (e.g. ``field_errors``)  | renders the field's errors                              |
-+-------------+--------------------------+---------------------------------------------------------+
-| ``row``     | (e.g. ``field_row``)     | renders the field's entire row (label, widget & errors) |
-+-------------+--------------------------+---------------------------------------------------------+
++-------------+-----------------------------------+------------------------------------------------------------+
+| ``label``   | (par exemple : ``field_label``)   | rend le label du champ                                     |
++-------------+-----------------------------------+------------------------------------------------------------+
+| ``widget``  | (par exemple : ``field_widget``)  | rend la représentation HTML du champ                       |
++-------------+-----------------------------------+------------------------------------------------------------+
+| ``errors``  | (par exemple : ``field_errors``)  | rend les erreurs du champ                                  |
++-------------+-----------------------------------+------------------------------------------------------------+
+| ``row``     | (par exemple : ``field_row``)     | rend la ligne entière du champ (label, widget, et erreurs) |
++-------------+-----------------------------------+------------------------------------------------------------+
 
 .. note::
 
-    There are actually 3 other *parts*  - ``rows``, ``rest``, and ``enctype`` -
-    but you should rarely if ever need to worry about overriding them.
+    Il y a en fait 3 autres *parts* - ``rows``, ``rest``, et ``enctype`` - mais
+    vous ne devriez que rarement, voir jamais, avoir besoin de les réécrire.
 
-By knowing the field type (e.g. ``textarea``) and which part you want to
-customize (e.g. ``widget``), you can construct the fragment name that needs
-to be overridden (e.g. ``textarea_widget``).
+En connaissant le type du champ (par exemple : ``textarea``) et quelle partie de
+ce dernier vous souhaitez personnaliser (par exemple : ``widget``), vous pouvez
+construire le nom du fragment qui a besoin d'être réécrit (par exemple : ``textarea_widget``).
 
 .. index::
-   single: Forms; Template Fragment Inheritance
+   single: Formulaires; Inhéritance de Fragment de Template
 
-Template Fragment Inheritance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Inhéritance de Fragment de Template
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In some cases, the fragment you want to customize will appear to be missing.
-For example, there is no ``textarea_errors`` fragment in the default themes
-provided with Symfony. So how are the errors for a textarea field rendered?
+Dans certains cas, le fragment que vous voulez personnaliser sera absent.
+Par exemple, il n'y a pas de fragment ``textarea_errors`` dans les thèmes
+fournis par défaut par Symfony.
 
-The answer is: via the ``field_errors`` fragment. When Symfony renders the errors
-for a textarea type, it looks first for a ``textarea_errors`` fragment before
-falling back to the ``field_errors`` fragment. Each field type has a *parent*
-type (the parent type of ``textarea`` is ``field``), and Symfony uses the
-fragment for the parent type if the base fragment doesn't exist.
+La réponse est : via le fragment ``field_errors``. Quand Symfony rend les erreurs
+d'un champ de type textarea, il recherche en premier un fragment ``textarea_errors``
+avant de se replier sur le fragment de secours ``field_errors``. Chaque type de
+champ a un type *parent* (le type parent de ``textarea`` est ``field``), et
+Symfony l'utilise si le fragment de base n'existe pas.
 
-So, to override the errors for *only* ``textarea`` fields, copy the
-``field_errors`` fragment, rename it to ``textarea_errors`` and customize it. To
-override the default error rendering for *all* fields, copy and customize the
-``field_errors`` fragment directly.
+Donc, afin de réécrire les erreurs pour les champs ``textarea`` *seulement*, copiez
+le fragment ``field_errors``, renommez-le en ``textarea_errors`` et personnalisez-le.
+Pour réécrire le rendu d'erreur par défaut pour *tous* les champs, copiez et personnalisez
+le fragment ``field_errors`` directement.
 
 .. tip::
 
-    The "parent" type of each field type is available in the
-    :doc:`form type reference</reference/forms/types>` for each field type.
+    Le type « parent » de chaque type de champ est disponible dans la
+    :doc:`référence de type de formulaire</reference/forms/types>` pour
+    chaque type de champ.
 
 .. index::
-   single: Forms; Global Theming
+   single: Formulaires; Habillage Global
 
-Global Form Theming
-~~~~~~~~~~~~~~~~~~~
+Habillage Global de Formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the above example, you used the ``form_theme`` helper (in Twig) to "import"
-the custom form fragments into *just* that form. You can also tell Symfony
-to import form customizations across your entire project.
+Dans l'exemple ci-dessus, vous avez utilisé la fonction d'aide ``form_theme``
+(dans Twig) pour « importer » les fragments personnalisés de formulaire à
+l'intérieur de ce formulaire uniquement. Vous pouvez aussi dire à Symfony
+d'importer les personnalisations de formulaire à travers votre projet entier.
 
 Twig
 ....
 
-To automatically include the customized blocks from the ``fields.html.twig``
-template created earlier in *all* templates, modify your application configuration
-file:
+Pour inclure automatiquement les blocs personnalisés du template ``fields.html.twig``
+créés plus tôt dans *tous* les templates, modifiez votre fichier de configuration
+d'application :
 
 .. configuration-block::
 
@@ -1182,24 +1189,24 @@ file:
             // ...
         ));
 
-Any blocks inside the ``fields.html.twig`` template are now used globally
-to define form output.
+Tous les blocs se trouvant dans le template ``fields.html.twig`` sont
+maintenant utilisés globalement pour définir le rendu de formulaire en sortie.
 
-.. sidebar::  Customizing Form Output all in a Single File with Twig
+.. sidebar::  Personnaliser le Rendu de Formulaire en Sortie dans un Fichier Unique avec Twig
 
-    In Twig, you can also customize a form block right inside the template
-    where that customization is needed:
+    Dans Twig, vous pouvez aussi personnaliser un bloc de formulaire directement
+    à l'intérieur du template nécessitant une personnalisation :
 
     .. code-block:: html+jinja
 
         {% extends '::base.html.twig' %}
 
-        {# import "_self" as the form theme #}
+        {# importe « _self » en tant qu'habillage du formulaire #}
         {% form_theme form _self %}
 
-        {# make the form fragment customization #}
+        {# effectue la personnalisation du fragment de formulaire #}
         {% block field_row %}
-            {# custom field row output #}
+            {# personnalisez le rendu en sortie de la ligne du champ #}
         {% endblock field_row %}
 
         {% block content %}
@@ -1208,17 +1215,17 @@ to define form output.
             {{ form_row(form.task) }}
         {% endblock %}
 
-    The ``{% form_theme form _self %}`` tag allows form blocks to be customized
-    directly inside the template that will use those customizations. Use
-    this method to quickly make form output customizations that will only
-    ever be needed in a single template.
+    La balise ``{% form_theme form _self %}`` permet aux blocs de formulaire d'être
+    personnalisés directement à l'intérieur du template qui va utiliser ces
+    personnalisations. Utilisez cette méthode pour faire des personnalisations
+    de formulaire qui ne seront nécessaires que dans un unique template.
 
 PHP
 ...
 
-To automatically include the customized templates from the ``Acme/TaskBundle/Resources/views/Form``
-directory created earlier in *all* templates, modify your application configuration
-file:
+Pour inclure automatiquement les templates personnalisés du répertoire
+``Acme/TaskBundle/Resources/views/Form`` créés plus tôt dans *tous* les templates,
+modifiez votre fichier de configuration d'application :
 
 .. configuration-block::
 
@@ -1259,8 +1266,8 @@ file:
             // ...
         ));
 
-Any fragments inside the ``Acme/TaskBundle/Resources/views/Form`` directory
-are now used globally to define form output.
+Tous les fragments à l'intérieur du répertoire ``Acme/TaskBundle/Resources/views/Form``
+sont maintenant utilisés globalement pour définir le rendu en sortie des formulaires.
 
 .. index::
    single: Forms; CSRF Protection
@@ -1350,4 +1357,4 @@ Learn more from the Cookbook
 .. _`Twig Bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Twig
 .. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
 .. _`Cross-site request forgery`: http://en.wikipedia.org/wiki/Cross-site_request_forgery
-.. _`view on GitHub`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form
+.. _`voir sur GitHub`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form
