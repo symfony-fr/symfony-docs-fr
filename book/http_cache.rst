@@ -9,69 +9,71 @@ importe l'efficacité de votre application, le traitement d'une requête
 sera toujours plus important que l'envoi d'une page statique.
 
 Et pour la plupart des applications web, c'est correct. Symfony2 est
-d'une rapidité foudrayante, et il est inutile que vous fassiez de
-sérieux remaniements, toute requête sera traitée rapidement sans
-mettre trop de stress sur le serveur.
+d'une rapidité foudrayante, et à moins que vous fassiez de sérieux
+remaniements, toute requête sera traitée rapidement sans trop mettre
+de stress sur votre serveur.
 
-HTTP Cache
-==========
+Mais comme votre site grandi, ce traitement peut devenir un
+problème. Le processus qui est normalement effectué à chaque requête
+peut être exécuter une unique fois. C'est exactement l'objectif de la
+mise en cache.
 
-The nature of rich web applications means that they're dynamic. No matter
-how efficient your application, each request will always contain more overhead
-than serving a static file.
-
-And for most Web applications, that's fine. Symfony2 is lightning fast, and
-unless you're doing some serious heavy-lifting, each request will come back
-quickly without putting too much stress on your server.
-
-But as your site grows, that overhead can become a problem. The processing
-that's normally performed on every request should be done only once. This
-is exactly what caching aims to accomplish.
-
-Caching on the Shoulders of Giants
+La mise en cache sur les épaules des Géants
 ----------------------------------
 
-The most effective way to improve performance of an application is to cache
-the full output of a page and then bypass the application entirely on each
-subsequent request. Of course, this isn't always possible for highly dynamic
-websites, or is it? In this chapter, we'll show you how the Symfony2 cache
-system works and why we think this is the best possible approach.
+Le moyen le plus efficace d'améliorer les performances d'une
+application est mettre en cache l'intégralité d'une page et ensuite de
+court-circuiter l'application pour toutes les requêtes suivantes. Bien
+sûr, ce n'est pas toujours possible pour les sites web très
+dynamiques, ou peut être que ça l'est ? Dans ce châpitre, nous allons
+vous montrer comment fonctionne le système de cache de Symfony2 et
+pourquoi nous pensons que c'est la meilleur approche possible.
 
-The Symfony2 cache system is different because it relies on the simplicity
-and power of the HTTP cache as defined in the :term:`HTTP specification`.
-Instead of reinventing a caching methodology, Symfony2 embraces the standard
-that defines basic communication on the Web. Once you understand the fundamental
-HTTP validation and expiration caching models, you'll be ready to master
-the Symfony2 cache system.
+Le système de cache de Symfony2 est différent car il se base sur la
+simplicité et la puissance du cache HTTP tel qu'il est défini dans les
+:term:`HTTP specification`. Au lieu de réinventer la méthodologie de
+la mise en cache, Symfony2 adopte la norme qui définit la
+communication élémentaire sur le Web. Une fois que vous avez compris
+les fondamentaux de la validation HTTP et de l'expiration de la mise
+en cache de modèles, vous serez prêt à maîtriser le système de cache de
+Symfony2.
 
-For the purposes of learning how to cache with Symfony2, we'll cover the
-subject in four steps:
+Dans le but d'apprendre comment utiliser le cache avec Symfony2, nous
+allons parcourir ce sujet en quatre étapes :
 
-* **Step 1**: A :ref:`gateway cache <gateway-caches>`, or reverse proxy, is
-  an independent layer that sits in front of your application. The reverse
-  proxy caches responses as they're returned from your application and answers
-  requests with cached responses before they hit your application. Symfony2
-  provides its own reverse proxy, but any reverse proxy can be used.
+* **Etape 1**: Une :ref:`passerelle de cache <gateway-caches>`,
+    ou reverse proxy, est une couche indépendante qui intervient à
+    l'entrée de votre application. Le reverse proxy mais en cache les
+    réponses telles qu'elles sont retournées par l'application et
+    répond aux requêtes donc les réponses sont cache avant qu'elles
+    n'atteignent l'application. Symfony2 fournit son propre reverse
+    proxy, mais n'importe quel reverse proxy peut être utiliser.
 
-* **Step 2**: :ref:`HTTP cache <http-cache-introduction>` headers are used
-  to communicate with the gateway cache and any other caches between your
-  application and the client. Symfony2 provides sensible defaults and a
-  powerful interface for interacting with the cache headers.
+* **Etape 2**: Les entêtes du :ref:`cache HTTP
+    <http-cache-introduction>` sont utilisées pour communiquer avec la
+    passerelle de cache et tout autre cache entre votre application et
+    le client. Symfony2 est configurer par défaut par des choix
+    raisonnable et fournit une puissante interface pour intéragir avec
+    les entêtes de cache.
 
-* **Step 3**: HTTP :ref:`expiration and validation <http-expiration-validation>`
-  are the two models used for determining whether cached content is *fresh*
-  (can be reused from the cache) or *stale* (should be regenerated by the
-  application).
+* **Etape 3**: :ref:`L'expiration et la validation
+    <http-expiration-validation>` sont les deux modèles utilisés pour
+    déterminer si le contenu d'un cache est *récent* (peut être
+    réutilisé à partir du cache) ou *périmé* (doit être regénérer par
+    l'application).
 
-* **Step 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI) allow HTTP
-  cache to be used to cache page fragments (even nested fragments) independently.
-  With ESI, you can even cache an entire page for 60 minutes, but an embedded
-  sidebar for only 5 minutes.
+* **Etape 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI)
+    autorise le cache HTTP à être utilisé pour mettre en cache des
+    fragments de pages (voir des fragments imbriqués) de façon
+    indépendante. Avec l'ESI, vous pouvez même mettre en cache une
+    page entière pour 60 minutes, mais un encadré imbriqué dans cette
+    page uniquement 5 minutes.
 
-Since caching with HTTP isn't unique to Symfony, many articles already exist
-on the topic. If you're new to HTTP caching, we *highly* recommend Ryan
-Tomayko's article `Things Caches Do`_. Another in-depth resource is Mark
-Nottingham's `Cache Tutorial`_.
+La mise en cache via HTTP n'est pas réservée à Symfony, beaucoup
+d'articles existent à ce sujet. Si vous n'êtes pas familié avec la
+mise cache par HTTP, nous vous recommandons *chaudement* l'article de
+Ryan Tomayko `Things Caches Do`_. Une autre ressource appronfondi sur
+ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 
 .. index::
    single: Cache; Proxy
@@ -79,6 +81,23 @@ Nottingham's `Cache Tutorial`_.
    single: Cache; Gateway
 
 .. _gateway-caches:
+
+La mise en cache avec la Passerelle de Cache
+----------------------------
+
+Lors d'une mise en cache via HTTP, le *cache* est complétement séparé
+de votre application et est placé entre votre application et le client
+effectuant des requêtes.
+
+Le travail du cache est d'accepter les requêtes du client et de les
+transmettre à votre application. Le cache recevra aussi en retour des
+réponses de votre application et les enverra au client. Le cache est
+"l'homme du milieu" dans le jeu de commmunication requête-réponse
+entre le client et votre application.
+
+Tout au long de la communication, le cache stockera toutes les
+réponses qu'ils estimes "stockable" (voir
+:ref:`http-cache-introduction`). 
 
 Caching with a Gateway Cache
 ----------------------------
