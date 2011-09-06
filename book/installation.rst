@@ -9,6 +9,10 @@ construite avec Symfony. Heureusement, Symfony propose un système de « distrib
 Ce sont des projets Symfony fonctionnels « de départ » que vous pouvez télécharger
 et qui vous permettent de développer immédiatement.
 
+.. tip::
+    Si vous cherchez des instructions sur la meilleure façon de créer un nouveau
+    projet et de le stocker dans un gestionnaire de versions, lisez `Utiliser un Gestionnaire de Versions`_.
+
 Télécharger une Distribution Symfony2 
 -------------------------------------
 
@@ -76,7 +80,9 @@ lancant la commande suivante depuis une invite de commande :
     php bin/vendors install
 
 Cette commande télécharge toutes les librairies vendor nécessaires - incluant
-Symfony - dans le répertoire ``vendor/``.
+Symfony - dans le répertoire ``vendor/``. Pour plus d'informations sur la façon
+dont les librairies tierces sont gérées dans Symfony2, lisez le chapitre
+«:ref:`cookbook-managing-vendor-libraries`».
 
 Configuration et installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,21 +185,17 @@ Utiliser un gestionnaire de code
 --------------------------------
 
 Si vous utilisez un système de contrôle de version comme ``Git`` ou ``Subversion``,
-vous pouvez le configurer et commencer à commiter votre projet normalement.
-Pour ``Git``, cela peut être fait facilement avec la commande suivante :
+vous pouvez le configurer et commencer à commiter votre projet normalement. La
+Symfony Standard edition *est* le point de départ de votre nouveau projet.
 
-.. code-block:: bash
-
-    git init
-
-Pour plus d'informations sur l'installation et l'utilisation de Git, liser le
-tutoriel sur `GitHub`_.
+Pour des instructions spécifiques sur la meilleur façon de gérer votre projet avec git, 
+lisez le chapitre :doc:`/cookbook/workflow/new_project_git`.
 
 Ignorer le répertoire ``vendor/`` 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous avez téléchargé l'archive *sans vendors*, vous pouvez ignorer tout le 
-répertoire ``vendors/`` en toute sécurité et ne pas le commiter. Avec ``Git``,
+répertoire ``vendor/`` en toute sécurité et ne pas le commiter. Avec ``Git``,
 cela se fait en créant le fichier ``.gitignore`` et en y ajoutant la ligne suivante:
 
 .. code-block:: text

@@ -304,21 +304,6 @@ puisse pas être vide et qu'il doive être un objet \DateTime valide.
                     - NotBlank: ~
                     - Type: \DateTime
 
-    .. code-block:: xml
-
-        <!-- Acme/TaskBundle/Resources/config/validation.xml -->
-        <class name="Acme\TaskBundle\Entity\Task">
-            <property name="task">
-                <constraint name="NotBlank" />
-            </property>
-            <property name="dueDate">
-                <constraint name="NotBlank" />
-                <constraint name="Type">
-                    <value>\DateTime</value>
-                </constraint>
-            </property>
-        </class>
-
     .. code-block:: php-annotations
 
         // Acme/TaskBundle/Entity/Task.php
@@ -337,6 +322,22 @@ puisse pas être vide et qu'il doive être un objet \DateTime valide.
              */
             protected $dueDate;
         }
+
+
+    .. code-block:: xml
+	
+        <!-- Acme/TaskBundle/Resources/config/validation.xml -->
+        <class name="Acme\TaskBundle\Entity\Task">	
+            <property name="task">	
+                <constraint name="NotBlank" />	
+            </property>	
+            <property name="dueDate">
+                <constraint name="NotBlank" />
+                <constraint name="Type">
+                    <value>\DateTime</value>
+                </constraint>
+            </property>
+        </class>
 
     .. code-block:: php
 
@@ -520,6 +521,14 @@ Prédiction des Options de Type de Champ
 
 En plus de pouvoir prédire le « type » d'un champ, Symfony peut aussi essayer
 de deviner les valeurs correctes d'un certain nombre d'options de champ :
+
+
+.. tip::
+    Lorsque ces options sont définies, le champ sera rendu avec des attributs HTML
+    spécifiques qui permettent la validation du champ côté client. Cependant, cela
+    ne génère pas l'équivalent côté serveur (ex ``Assert\MaxLength``). Et puisque
+    vous aurez besoin d'ajouter la validation côté serveur manuellement, ces options
+    peuvent être déduites de cette information.
 
 * ``required`` : L'option ``required`` peut être devinée grâce aux règles de
   validation (i.e. est-ce que le champ est ``NotBlank`` ou ``NotNull``) ou

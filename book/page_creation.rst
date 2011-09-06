@@ -245,7 +245,23 @@ Félicitations ! Après avoir n'avoir créé qu'une route et un contrôleur, vou
 avez une page pleinement fonctionnelle ! Si vous avez tout effectué correctement,
 votre application devrait vous saluer::
 
-    http://localhost/app_dev.php/hello/Fabien
+    http://localhost/app_dev.php/hello/Ryan
+
+.. tip::
+
+    Vous pouvez aussi voir votre application en :ref:`environment<environments-summary>`
+    de « prod » en allant à l'adresse :
+
+    .. code-block:: text
+	
+        http://localhost/app.php/hello/Ryan
+ 
+    Si vous avez une erreur, c'est certainement parce que vous avez besoin de vider
+    votre cache grâce à la commande :
+
+    .. code-block:: bash
+
+        php app/console cache:clear --env=prod --no-debug
 
 Une troisième étape optionelle dans ce processus est de créer un template.
 
@@ -389,7 +405,7 @@ Le fichier du template de base définit le layout HTML en rend le bloc ``body``
 que vous avez défini dans le template ``index.html.twig``. Il rend également 
 un bloc ``title``, que vous pouvez choisir de définir dans le template 
 ``index.html.twig``. Si vous ne définissez pas le bloc ``title`` dans le template
-enfant, il aura pour valeur par défaut ``Hello Application``.
+enfant, il aura pour valeur par défaut ``Welcome!``.
 
 Les templates sont une façon puissante de rendre et d'organiser le contenu de 
 votre page. Les templates peuvent tout rendre, des layouts HTML au codes CSS,
@@ -850,6 +866,15 @@ call the ``prod`` front controller instead:
 
     http://localhost/app.php/hello/Ryan
 
+
+Since the ``prod`` environment is optimized for speed; the configuration,	
+routing and Twig templates are compiled into flat PHP classes and cached.
+When viewing changes in the ``prod`` environment, you'll need to clear these
+cached files and allow them to rebuild::
+
+    php app/console cache:clear --env=prod --no-debug
+
+
 .. note::
 
    If you open the ``web/app.php`` file, you'll find that it's configured explicitly
@@ -859,13 +884,6 @@ call the ``prod`` front controller instead:
 
    You can create a new front controller for a new environment by copying
    this file and changing ``prod`` to some other value.
-
-Since the ``prod`` environment is optimized for speed; the configuration,
-routing and Twig templates are compiled into flat PHP classes and cached.
-When viewing changes in the ``prod`` environment, you'll need to clear these
-cached files and allow them to rebuild::
-
-    php app/console cache:clear --env=prod
 
 .. note::
 
@@ -974,6 +992,6 @@ and advanced concepts. The more you know about Symfony2, the more you'll
 appreciate the flexibility of its architecture and the power it gives you
 to rapidly develop applications.
 
-.. _`Twig`: http://www.twig-project.org
+.. _`Twig`: http://twig.sensiolabs.org
 .. _`third-party bundles`: http://symfony2bundles.org/
 .. _`Symfony Standard Edition`: http://symfony.com/download
