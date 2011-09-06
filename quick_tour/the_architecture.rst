@@ -306,10 +306,12 @@ Etendre les bundles
 ...................
 	
 Si vous suivez ces conventions, alors vous pouvez utiliser :doc:`l'héritage de bundle</cookbook/bundles/inheritance>`
-pour «surcharger» les fichiers, les contrôleurs et les templates. Par exemple, si
-un nouveau bundle appelé ``AcmeNewBundle`` étend le ``AcmeDemoBundle``, alors Symfony
-essayera d'abord de charger le contrôleur ``AcmeDemoBundle:Welcome:index`` du
-``AcmeNewBundle`` et seulement ensuite il cherchera le ``AcmeDemoBundle``.
+pour «surcharger» les fichiers, les contrôleurs et les templates. Par exemple, 
+vous pouvez créer un nouveau bundle (``AcmeNewBundle``) et spécifier que son parent
+est ``AcmeDemoBundle``. Lorsque Symfony chargera le contrôleur ``AcmeDemoBundle:Welcome:index``,
+il cherchera d'abord la classe ``WelcomeController`` dans le bundle ``AcmeNewBundle``
+puis dans le bundle ``AcmeDemoBundle``. Cela signifie qu'un bundle peut surcharger
+presque toutes les parties d'un autre bundle!
 
 Vous comprenez maintenant pourquoi Symfony2 est si flexible ? Partagez vos
 Bundles entre applications, stockez-les localement ou globalement, c'est vous

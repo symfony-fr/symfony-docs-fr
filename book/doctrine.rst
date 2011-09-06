@@ -22,7 +22,7 @@ avec une base de données.
 
     Vous pouvez aussi persister vos données à l'aide de `MongoDB`_ an utilisant la
     bibliothèque ODM de Doctrine. Pour plus d'informations, lisez l'article 
-    ":doc:`/cookbook/doctrine/mongodb`" du cookbook
+    ":doc:`/bundles/DoctrineMongoDBBundle/index`" du cookbook
 
 Un simple exemple: un produit
 ---------------------------~~
@@ -122,7 +122,7 @@ base de donnée - c'est juste une simple classe PHP.
     
     .. code-block:: bash
     
-        php app/console doctrine:generate:entity AcmeStoreBundle:Product "nom:string(255) prix:float description:text"
+        php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Product" --fields="name:string(255) price:float description:text"
 
 .. index::
     single: Doctrine; Adding mapping metadata
@@ -293,6 +293,21 @@ la classe ``Product``. C'est une commande sure - vous pouvez la lancer
 encore et encore : elle ne génèrera que les getters et les setters qui n'existent
 pas (c.à.d qu'elle ne remplace pas les méthodes existantes)
 
+.. caution::
+
+    La commande ``doctrine:generate:entities`` fait une sauvegarde de ``Product.php``
+    appelée ``Product.php~``. Dans certains cas, la présence de ce fichier peut
+    créer l'erreur "Cannot redeclare class". Vous pouvez supprimer ce fichier en
+    toute sécurité
+
+Vous pouvez également générer toutes les entitées connues (c.à.d toute classe PHP
+qui contient des informations de mapping Doctrine) d'un bundle ou d'un namespace:
+
+.. code-block:: bash
+	
+    php app/console doctrine:generate:entities AcmeStoreBundle
+    php app/console doctrine:generate:entities Acme
+
 .. note::
 
     Doctrine se moque que vos propriétés soient ``protected`` ou ``private``, ou
@@ -335,7 +350,7 @@ nécéssaires aux entités connues dans votre application. Pour ce faire, lancez
     nécéssaire pour ajouter cette nouvelle colonne à la table ``products`` existante.
 
     Une façon encore meilleure de profiter de cette fonctionnalité est d'utiliser
-    les :doc:`migrations</cookbook/doctrine/migrations>`, qui vous permettent de
+    les :doc:`migrations</bundles/DoctrineMigrationsBundle/index>`, qui vous permettent de
     générer ces requêtes SQL et de les stocker dans des classes de migrations
     qui peuvent être lancées systématiquement sur vos serveurs de production
     dans le but de traquer et de migrer vos schémas de base de données de manière
@@ -402,10 +417,10 @@ Décortiquons cet exemple :
   En fait, comme Doctrine a connaissance de toutes vos entités gérées, lorsque
   vous apellez la méthode ``flush()``, il calcule un ensemble de changement
   global et execute la ou les requêtes les plus efficace possible. Par exemple,
-  si vous persistez 100 ``Product`` et que vous apellez ``persist()``, Doctrine
-  créera une *unique* requête préparée et la réutilisera pour chaque insertion.
-  Ce concept est nommé *Unité de travail*, et est utilisé pour sa rapidité
-  et son efficacité.
+  si vous persistez un total de 100 objets ``Product`` et que vous appelez ensuite
+  la méthode ``flush()``, Doctrine créera une *unique* requête préparée et la
+  réutilisera pour chaque insertion. Ce concept est nommé *Unité de travail*, et
+  est utilisé pour sa rapidité et son efficacité.
 
 Pour la création et la suppression d'objet, le fonctionnement le même. 
 Dans la prochaine section, vous découvrirez que Doctrine est assez rusé pour
@@ -416,7 +431,7 @@ de données.
 
     Doctrine fournit une bibliothèque qui vous permet de charger de manière 
     automatisée des données de test dans votre projet (c.à.d, des "données d'installation").
-    Pour plus d'informations, voir :doc:`/cookbook/doctrine/doctrine_fixtures`.
+    Pour plus d'informations, voir :doc:`/bundles/DoctrineFixturesBundle/index`.
 
 Récupérer des objets de la base de données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -770,11 +785,11 @@ Supposons que les produits de votre application appartiennent tous à exactement
 "catégorie". Dans ce cas, vous aurez besoin d'un objet ``Category`` et d'une manière
 de rattacher un objet ``Product`` à un objet ``Category``. Commencez par créer l'entité
 ``Category``. Puisque vous savez que vous aurez besoin que Doctrine persist votre
-classe, vous pouvez le laisser générer la classe pour vous :
+classe, vous pouvez le laisser générer la classe pour vous.
 
 .. code-block:: bash
 
-    php app/console doctrine:generate:entity AcmeStoreBundle:Category "name:string(255)" --mapping-type=yml
+    php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Category" --fields="name:string(255)"
 
 Cette commande génère l'entité ``Category`` pour vous, avec un champ ``id``,
 un champ ``name`` et les méthodes getter et setter associées.
@@ -880,7 +895,7 @@ nouvelle clé étrangère :
 
     Cette tâche ne devrait être réalisé en pratique que lors du développement.
     Pour une méthode plus robuste de mettre à jour systématiquement les base de
-    données de production, lisez l'article suivant: :doc:`Doctrine migrations</cookbook/doctrine/migrations>`.
+    données de production, lisez l'article suivant: :doc:`Doctrine migrations</bundles/DoctrineFixturesBundle/index>`.
 
 Sauver les entités associées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1305,9 +1320,9 @@ Quelques commandes notables ou intéréssantes incluent :
 
 .. note::
 
-    Pour pouvoir charger des données d'installation (fixture), vous devrez 
+    Pour pouvoir charger des données d'installation (fixtures), vous devrez 
     installer le bundle ``DoctrineFixtureBundle``. Pour apprendre comment
-    le faire, lisez l'entrée suivante du Cookbook : ":doc:`/cookbook/doctrine/doctrine_fixtures`"
+    le faire, lisez le chapitre du Cookbook : ":doc:`/bundles/DoctrineFixturesBundle/index`"
 
 Résumé
 ------
@@ -1328,8 +1343,7 @@ Pour plus d'informations sur Doctrine, lisez la section *Doctrine* du
 Cookbook: :doc:`cookbook</cookbook/index>`, qui inclut les articles 
 suivant :
 
-* :doc:`/cookbook/doctrine/doctrine_fixtures`
-* :doc:`/cookbook/doctrine/migrations`
+* :doc:`/bundles/DoctrineFixturesBundle/index`
 * :doc:`/cookbook/doctrine/mongodb`
 * :doc:`/cookbook/doctrine/common_extensions`
 

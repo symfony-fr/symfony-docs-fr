@@ -761,6 +761,6 @@ Apprenez en lisant le Cookbook
 .. _`Routing`: https://github.com/symfony/Routing
 .. _`Templating`: https://github.com/symfony/Templating
 .. _`Symfony2Bundles.org`: http://symfony2bundles.org
-.. _`Twig`: http://www.twig-project.org
+.. _`Twig`: http://twig.sensiolabs.org
 .. _`Varnish`: http://www.varnish-cache.org
 .. _`PHPUnit`: http://www.phpunit.de
