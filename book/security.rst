@@ -661,10 +661,8 @@ régulière.
         <!-- app/config/config.xml -->
         <config>
             <!-- ... -->
-            <access-control>
-                <rule path="^/admin/users" role="ROLE_SUPER_ADMIN" />
-                <rule path="^/admin" role="ROLE_ADMIN" />
-            </access-control>
+            <rule path="^/admin/users" role="ROLE_SUPER_ADMIN" />
+            <rule path="^/admin" role="ROLE_ADMIN" />
         </config>
 
     .. code-block:: php
@@ -681,8 +679,8 @@ régulière.
 .. tip::
 
     En préfixant votre chemin par ``^`` vous assure que seulement les URLs *commençant* par le masque
-    correspondent. Par exemple, un chemin spécifiant simplement ``/admin`` 
-    correspond à ``/admin/foo`` mais aussi à ``/foo/admin``.
+    correspondent. Par exemple, un chemin spécifiant simplement ``/admin`` (sans 
+    le ``^``) reconnaitra une url du type ``/admin/foo`` mais aussi  ``/foo/admin``.
 
 Pour chaque requête entrante, Symfony essaie de trouver une règle d'accès de contrôle
 (la première gagne). Si l'utilisateur n'est pas encore authentifié, le processus 
@@ -1302,10 +1300,8 @@ d'héritage de rôle en créant une hiérarchie de rôles:
 
         <!-- app/config/security.xml -->
         <config>
-            <role-hierarchy>
-                <role id="ROLE_ADMIN">ROLE_USER</role>
-                <role id="ROLE_SUPER_ADMIN">ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH</role>
-            </role-hierarchy>
+           <role id="ROLE_ADMIN">ROLE_USER</role>
+           <role id="ROLE_SUPER_ADMIN">ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH</role>
         </config>
 
     .. code-block:: php
