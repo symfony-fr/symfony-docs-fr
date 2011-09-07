@@ -181,20 +181,19 @@ Le cache noyau se comportera immédiatement comme un "reverse proxy" en
 mettant en cache les réponses de l'application et en les renvoyant au
 client.
 
-The caching kernel will immediately act as a reverse proxy - caching responses
-from your application and returning them to the client.
-
 .. tip::
 
-    The cache kernel has a special ``getLog()`` method that returns a string
-    representation of what happened in the cache layer. In the development
-    environment, use it to debug and validate your cache strategy::
+    Le cache Noyau a une méthode spéciale ``getLog()`` qui retourne
+    une chaine de caractère décrivant ce qui se passe dans la couche
+    du cache. Dans l'environnement de développement, il est possible
+    de l'utiliser pour du débogage ou afin de valider votre stratégie
+    de mise en cache : ::
 
         error_log($kernel->getLog());
 
-The ``AppCache`` object has a sensible default configuration, but it can be
-finely tuned via a set of options you can set by overriding the ``getOptions()``
-method::
+L'objet ``AppCache`` a un configuration par défaut raisonnable mais
+peut être reconfigurer finement grâce à une série d'options que vous
+pouvez paramètrer en surchargeant la méthode ``getOptions()`` : ::
 
     // app/AppCache.php
     class AppCache extends Cache
@@ -215,43 +214,47 @@ method::
 
 .. tip::
 
-    Unless overridden in ``getOptions()``, the ``debug`` option will be set
-    to automatically be the debug value of the wrapped ``AppKernel``.
+    A moins que la méthode ``getOptions()`` soit surchargée, l'option
+    ``debug`` est mise automatiquement à la valeur ``débogage`` du
+    ``AppKernel`` encapsulé.
 
-Here is a list of the main options:
+Voici une liste des principales options :
 
-* ``default_ttl``: The number of seconds that a cache entry should be
-  considered fresh when no explicit freshness information is provided in a
-  response. Explicit ``Cache-Control`` or ``Expires`` headers override this
-  value (default: ``0``);
+* ``default_ttl`` : Le nombre de seconde pendant laquelle une entrée du
+  cache devrait être considérée comme "valide" quand il n'y a pas
+  d'information explicite fournie dans une réponse. Une valeur
+  explicite pour les en-têtes ``Cache-Control`` ou ``Expires``
+  surcharge cette valeur (par défaut : ``0``);
 
-* ``private_headers``: Set of request headers that trigger "private"
-  ``Cache-Control`` behavior on responses that don't explicitly state whether
-  the response is ``public`` or ``private`` via a ``Cache-Control`` directive.
-  (default: ``Authorization`` and ``Cookie``);
 
-* ``allow_reload``: Specifies whether the client can force a cache reload by
-  including a ``Cache-Control`` "no-cache" directive in the request. Set it to
-  ``true`` for compliance with RFC 2616 (default: ``false``);
+* ``private_headers`` : Type d'en-têtes de requête qui déclenche le
+  comportement "privé" du ``Cache-Control`` pour les réponses qui ne
+  spécifie pas leur état, c'est à dire, si la réponse est ``public``
+  ou ``private`` via une directive du ``Cache-Control``. (par défaut
+  : ``Authorization`` et ``Cookie``);
 
-* ``allow_revalidate``: Specifies whether the client can force a cache
-  revalidate by including a ``Cache-Control`` "max-age=0" directive in the
-  request. Set it to ``true`` for compliance with RFC 2616 (default: false);
+* ``allow_reload`` : Définit si le client peut forcer ou non un rechargement du cache en incluant une directive du ``Cache-Control`` "no-cache" dans la requête. Définit à ``true`` pour la conformité avec la RFC 2616 (par défaut : ``false``);
 
-* ``stale_while_revalidate``: Specifies the default number of seconds (the
-  granularity is the second as the Response TTL precision is a second) during
-  which the cache can immediately return a stale response while it revalidates
-  it in the background (default: ``2``); this setting is overridden by the
-  ``stale-while-revalidate`` HTTP ``Cache-Control`` extension (see RFC 5861);
+* ``allow_revalidate`` : Définit si le client peut forcer une revalidation du cache en incluant une directive de ``Cache-Control`` "max-age=0" dans la requête. Défini à ``true`` pour la conformité avec la RFC 2616 (par defaut : ``false``);
 
-* ``stale_if_error``: Specifies the default number of seconds (the granularity
-  is the second) during which the cache can serve a stale response when an
-  error is encountered (default: ``60``). This setting is overridden by the
-  ``stale-if-error`` HTTP ``Cache-Control`` extension (see RFC 5861).
+* ``stale_while_revalidate`` : Spécifie le nombre de secondes par
+  défaut (la granularité est la seconde parce que le TTL de la réponse
+  est en seconde) pendant lesquelles le cache peut renvoyer une
+  réponse "périmée" alors que la nouvelle réponse est calculée en
+  arrière-plan (par défaut : ``2``). Ce paramètre est surchargé par
+  l'extension HTTP ``stale-while-revalidate`` du ``Cache-Control``
+  (cf. RFC 5861);
 
-If ``debug`` is ``true``, Symfony2 automatically adds a ``X-Symfony-Cache``
-header to the response containing useful information about cache hits and
-misses.
+* ``stale_if_error`` : Spécifie le nombre de seconde par défaut (la
+  granularité est la seconde) pendant lesquelles le cache peut
+  renvoyer une réponse "périmée" quand une erreur est rencontrée (par
+  défaut : ``60``). Ce paramètre est surchargé par l'extension HTTP
+  ``stale-if-error`` du ``Cache-Control`` (cf. RFC 5961).
+
+SI le paramètre ``debug`` est à ``true``, Symfony2 ajoute
+automatiquement l'entêtes ``X-Symfony-Cache`` à la réponse contenant
+des informations utiles à propos des cache "hits" (utilisation du
+cache) et "misses" (page ou réponse non présente en cache).
 
 .. sidebar:: Changing from one Reverse Proxy to Another
 
