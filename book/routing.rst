@@ -791,6 +791,8 @@ qui correspondent à cette route pourraient ressembler à ça :
  * ``/articles/en/2010/my-post``
  * ``/articles/fr/2010/my-post.rss``
 
+.. _book-routing-format-param:
+
 .. sidebar:: Le Paramètre Spécial de Routage ``_format``
 
     Cet exemple met aussi en valeur le paramètre spécial de routage ``_format``.
@@ -802,6 +804,19 @@ qui correspondent à cette route pourraient ressembler à ça :
     aussi être utilisé dans le contrôleur pour délivrer un template différent
     pour chaque valeur de ``_format``. Le paramètre ``_format`` est une
     manière très puissante de délivrer le même contenu dans différents formats.
+
+
+Paramètres spéciaux de routing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comme vous l'avez vu, chaque paramètre ou valeur par défaut peut être passé comme
+argument à la méthode contrôleur. De plus, il y a 3 paramètres spéciaux : chacun
+d'eux apporte une fonctionnalité unique à votre application :
+
+* ``_controller``: Comme vous l'avez vu, ce paramètre est utilisé pour déterminer
+quel contrôleur est éxecuté lorsque l'URL est reconnue.
+* ``_format``: Utilisé pour définir le format de la requête(:ref:`read more<book-routing-format-param>`);
+* ``_locale``: Utilisé pour définir la locale de la session (:ref:`read more<book-translation-locale-url>`);
 
 .. index::
    single: Routage; Les contrôleurs

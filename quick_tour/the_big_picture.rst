@@ -432,5 +432,5 @@ suivante : «:doc:`La vue<the_view>`».
 .. _Symfony2 Standard Edition:      http://symfony.com/download
 .. _Symfony en 5 minutes:           http://symfony.com/symfony-in-five-minutes
 .. _YAML:                           http://www.yaml.org/
-.. _les annotations dans les contrôleurs:     http://bundles.symfony-reloaded.org/frameworkextrabundle/
-.. _Twig:                           http://www.twig-project.org/
+.. _les annotations dans les contrôleurs:     http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html#annotations-for-controllers
+.. _Twig:                           http://twig.sensiolabs.org/

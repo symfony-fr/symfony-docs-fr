@@ -293,5 +293,5 @@ Mais il ne faut pas aller trop vite. D'abord, vous devez en apprendre plus sur l
 contrôleur et c'est justement le sujet de la :doc:`prochaine partie de ce tutoriel<the_controller>`.
 Prêt pour 10 nouvelles minutes avec Symfony2 ?
 
-.. _Twig:          http://www.twig-project.org/
-.. _documentation: http://www.twig-project.org/documentation
+.. _Twig:          http://twig.sensiolabs.org/	
+.. _documentation: http://twig.sensiolabs.org/documentation
