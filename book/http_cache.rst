@@ -256,26 +256,30 @@ automatiquement l'entêtes ``X-Symfony-Cache`` à la réponse contenant
 des informations utiles à propos des cache "hits" (utilisation du
 cache) et "misses" (page ou réponse non présente en cache).
 
-.. sidebar:: Changing from one Reverse Proxy to Another
+.. sidebar:: Passer d'un Reverse Proxy à un autre
 
-    The Symfony2 reverse proxy is a great tool to use when developing your
-    website or when you deploy your website to a shared host where you cannot
-    install anything beyond PHP code. But being written in PHP, it cannot
-    be as fast as a proxy written in C. That's why we highly recommend you
-    to use Varnish or Squid on your production servers if possible. The good
-    news is that the switch from one proxy server to another is easy and
-    transparent as no code modification is needed in your application. Start
-    easy with the Symfony2 reverse proxy and upgrade later to Varnish when
-    your traffic increases.
+   Le reverse proxy de Symfony2 est un formidable outil lors de la
+   phase de développement de votre site web ou lors d'un déploiement
+   sur des serveurs mutualisés sur lesquels il n'est pas possible
+   d'installer d'autres outils que ceux proposés par PHP. Mais il
+   n'est pas aussi performant que des proxy écrits en C. C'est
+   pourquoi il est fortement recommandé d'utiliser Varnish ou Squid
+   sur les serveurs de production si possible. La bonne nouvelle est
+   qu'il est très simple de passer d'un proxy à un autre sans
+   qu'aucune modification ne soit nécessaire dans le code. Vous pouvez
+   commencez avec le reverse proxy de Symfony2 puis le mettre à jour
+   plus tard vers Varnish quand votre traffic augmentera.
 
-    For more information on using Varnish with Symfony2, see the
-    :doc:`How to use Varnish </cookbook/cache/varnish>` cookbook chapter.
+   Pour plus d'information concernant Varnish avec Symfony2, veuillez
+   vous reportez au chapitre du cookbook :doc:`How to use Varnish
+   </cookbook/cache/varnish>`.
 
 .. note::
 
-    The performance of the Symfony2 reverse proxy is independent of the
-    complexity of the application. That's because the application kernel is
-    only booted when the request needs to be forwarded to it.
+    Les performances du reverse proxy de Symfony2 ne sont pas liées à
+    la complexité de votre application. C'est parce que le noyau de
+    m'application n'est démarré que quand la requête lui est
+    transmise.
 
 .. index::
    single: Cache; HTTP
