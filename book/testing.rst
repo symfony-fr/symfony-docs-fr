@@ -131,7 +131,7 @@ La méthode ``createClient()`` retourne un client lié à l'application courante
 
 .. code-block:: php
 
-    $crawler = $client->request('GET', 'hello/Fabien');
+    $crawler = $client->request('GET', '/demo/hello/Fabien');
 
 La méthode ``request()`` retourne un objet ``Crawler`` qui peut être utilisé pour
 sélectionner des éléments dans la Réponse, cliquer sur des liens et soumettre
@@ -142,6 +142,22 @@ des formulaires.
     Le Crawler peut être utilisé seulement si le contenu de la Réponse est un
     document XML ou HTML. Pour les autres types de contenu, vous pouvez obtenir
     le contenu de la Réponse avec ``$client->getResponse()->getContent()``.
+
+    Vous pouvez spécifier le content-type d'une requête en JSON en ajoutant
+    'HTTP_CONTENT_TYPE' => 'application/json'.
+ 
+.. tip::
+
+    La signature complète de la méthode ``request()`` est::
+
+      request($method, 
+  	$uri, 
+        array $parameters = array(), 
+        array $files = array(), 
+        array $server = array(), 
+        $content = null, 
+        $changeHistory = true
+      )
 
 Cliquez sur un lien en le sélectionnant avec le Crawler en utilisant
 soit une expression XPath ou un sélecteur CSS, puis utilisez le Client pour
@@ -303,10 +319,23 @@ complexes à l'aide des arguments additionnels de la méthode ``request()`` :
     $client->request('POST', '/submit', array('name' => 'Fabien'));
 
     // soumission de formulaire avec un upload de fichier
-    $client->request('POST', '/submit', array('name' => 'Fabien'), array('photo' => '/path/to/photo'));
+
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+    $photo = new UploadedFile('/path/to/photo.jpg', 'photo.jpg', 'image/jpeg', 123);
+    // or
+    $photo = array('tmp_name' => '/path/to/photo.jpg', 'name' => 'photo.jpg', 'type' => 'image/jpeg', 'size' => 123, 'error' => UPLOAD_ERR_OK);
+
+    $client->request('POST', '/submit', array('name' => 'Fabien'), array('photo' => $photo));
 
     // spécifie les en-têtes HTTP
     $client->request('DELETE', '/post/12', array(), array(), array('PHP_AUTH_USER' => 'username', 'PHP_AUTH_PW' => 'pa$$word'));
+
+
+.. tip::
+    
+    Les soumissions de formulaires sont grandement simplifiées grâce à l'objet
+    Crawler (voir ci-dessous).
 
 Quand une requête retourne une redirection en tant que réponse, le client la
 suit automatiquement. Ce comportement peut être changé via la méthode

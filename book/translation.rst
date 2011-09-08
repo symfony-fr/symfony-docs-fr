@@ -30,13 +30,13 @@ le processus a plusieurs étapes communes :
     
 1. Activer et configurer le composant ``Translation`` de Symfony ;
 
-1. Faire abstraction des chaînes de caractères (i.e. « messages ») en les encadrant
+2. Faire abstraction des chaînes de caractères (i.e. « messages ») en les encadrant
    avec des appels au ``Translator`` ;
 
-1. Créer des ressources de traduction pour chaque locale supportée qui traduit
+3. Créer des ressources de traduction pour chaque locale supportée qui traduit
    chaque message dans l'application ;
 
-1. Déterminer, définir et gérer la locale de l'utilisateur dans la session.
+4. Déterminer, définir et gérer la locale de l'utilisateur dans la session.
 
 
 .. index::
@@ -238,7 +238,7 @@ Comme nous l'avons vu, créer une traduction est un processus en deux étapes :
 1. Faire abstraction du message qui a besoin d'être traduit en le passant à travers 
    le ``Translator``.
 
-1. Créer une traduction pour le message dans chaque locale que vous avez choisi de 
+2. Créer une traduction pour le message dans chaque locale que vous avez choisi de 
    supporter.
 
 La deuxième étape est faite en créant des catalogues de messages qui définissent les traductions
@@ -522,6 +522,8 @@ en définissant le paramètre ``default_locale`` dans le service de session :
         $container->loadFromExtension('framework', array(
             'session' => array('default_locale' => 'en'),
         ));
+
+.. _book-translation-locale-url:
 
 La locale et l'URL
 ~~~~~~~~~~~~~~~~~~

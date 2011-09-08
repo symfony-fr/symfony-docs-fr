@@ -986,11 +986,11 @@ Overriding Core Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Since the Symfony2 framework itself is just a bundle, core templates can be
-overridden in the same way. For example, the core ``FrameworkBundle`` contains
+overridden in the same way. For example, the core ``TwigBundle`` contains
 a number of different "exception" and "error" templates that can be overridden
 by copying each from the ``Resources/views/Exception`` directory of the
-``FrameworkBundle`` to, you guessed it, the
-``app/Resources/FrameworkBundle/views/Exception`` directory.
+``TwigBundle`` to, you guessed it, the
+``app/Resources/TwigBundle/views/Exception`` directory.
 
 .. index::
    single: Templating; Three-level inheritance pattern
@@ -1146,8 +1146,8 @@ For example, the same "resource" is often rendered in several different formats.
 To render an article index page in XML, simply include the format in the
 template name:
 
-*XML template name*: ``AcmeArticleBundle:Article:index.xml.twig``
-*XML template filename*: ``index.xml.twig``
+* *XML template name*: ``AcmeArticleBundle:Article:index.xml.twig``
+* *XML template filename*: ``index.xml.twig``
 
 In reality, this is nothing more than a naming convention and the template
 isn't actually rendered differently based on its format.
@@ -1180,8 +1180,8 @@ key in the parameter hash:
     .. code-block:: html+jinja
 
         <a href="{{ path('article_show', {'id': 123, '_format': 'pdf'}) }}">
-	        PDF Version
-	    </a>
+	    PDF Version
+	</a>
 
     .. code-block:: html+php
 
@@ -1222,10 +1222,10 @@ Learn more from the Cookbook
 * :doc:`/cookbook/templating/PHP`
 * :doc:`/cookbook/controller/error_pages`
 
-.. _`Twig`: http://www.twig-project.org
+.. _`Twig`: http://twig.sensiolabs.org
 .. _`Symfony2Bundles.org`: http://symfony2bundles.org
 .. _`Cross Site Scripting`: http://en.wikipedia.org/wiki/Cross-site_scripting
-.. _`Output Escaping`: http://www.twig-project.org
-.. _`tags`: http://www.twig-project.org/doc/templates.html#list-of-control-structures
-.. _`filtres`: http://www.twig-project.org/doc/templates.html#list-of-built-in-filters
-.. _`ajouter vos propres extensions`: http://www.twig-project.org/doc/advanced.html
+.. _`Output Escaping`: http://twig.sensiolabs.org
+.. _`tags`: http://twig.sensiolabs.org/doc/templates.html#list-of-control-structures
+.. _`filtres`: http://twig.sensiolabs.org/doc/templates.html#list-of-built-in-filters
+.. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/advanced.html

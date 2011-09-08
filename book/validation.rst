@@ -54,21 +54,6 @@ suivant:
                 name:
                     - NotBlank: ~
 
-    .. code-block:: xml
-
-        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
-            <class name="Acme\BlogBundle\Entity\Author">
-                <property name="name">
-                    <constraint name="NotBlank" />
-                </property>
-            </class>
-        </constraint-mapping>
-
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
@@ -81,6 +66,21 @@ suivant:
              */
             public $name;
         }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+            <class name="Acme\BlogBundle\Entity\Author">
+                <property name="name">
+                    <constraint name="NotBlank" />
+                </property>
+            </class>
+        </constraint-mapping>
 
     .. code-block:: php
 
@@ -331,27 +331,6 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
                 gender:
                     - Choice: { choices: [male, female], message: Choose a valid gender. }
 
-    .. code-block:: xml
-
-        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
-            <class name="Acme\BlogBundle\Entity\Author">
-                <property name="gender">
-                    <constraint name="Choice">
-                        <option name="choices">
-                            <value>male</value>
-                            <value>female</value>
-                        </option>
-                        <option name="message">Choose a valid gender.</option>
-                    </constraint>
-                </property>
-            </class>
-        </constraint-mapping>
-
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
@@ -367,6 +346,28 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
              */
             public $gender;
         }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+            <class name="Acme\BlogBundle\Entity\Author">
+                <property name="gender">
+                    <constraint name="Choice">
+                        <option name="choices">
+                            <value>male</value>
+                            <value>female</value>
+                        </option>
+                        <option name="message">Choose a valid gender.</option>
+                    </constraint>
+                </property>
+            </class>
+        </constraint-mapping>
+
 
     .. code-block:: php
 
@@ -387,6 +388,8 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
             }
         }
 
+.. _validation-default-option:
+
 Les options d'une contrainte peuvent toujours être passées en tant que tableau. Certaines contraintes,
 cependant, vous permettent également de passer la valeur d'un, "*default*", option au lieu
 du tableau. Dans le cas de la contrainte ``Choice``, les options de ``choices``
@@ -402,24 +405,6 @@ peuvent être spécifiées de cette manière.
                 gender:
                     - Choice: [male, female]
 
-    .. code-block:: xml
-
-        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
-            <class name="Acme\BlogBundle\Entity\Author">
-                <property name="gender">
-                    <constraint name="Choice">
-                        <value>male</value>
-                        <value>female</value>
-                    </constraint>
-                </property>
-            </class>
-        </constraint-mapping>
-
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
@@ -432,6 +417,24 @@ peuvent être spécifiées de cette manière.
              */
             protected $gender;
         }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+            <class name="Acme\BlogBundle\Entity\Author">
+                <property name="gender">
+                    <constraint name="Choice">
+                        <value>male</value>
+                        <value>female</value>
+                    </constraint>
+                </property>
+            </class>
+        </constraint-mapping>
 
     .. code-block:: php
 
@@ -471,6 +474,8 @@ méthode publique getter (par ex. ``getFullName``). Le premier est le plus commun
 .. index::
    single: Validation; Property constraints
 
+.. _validation-property-target:
+
 Propriétés
 ~~~~~~~~~~
 
@@ -490,16 +495,6 @@ pour avoir au moins 3 caractères.
                     - NotBlank: ~
                     - MinLength: 3
 
-    .. code-block:: xml
-
-        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
-        <class name="Acme\BlogBundle\Entity\Author">
-            <property name="firstName">
-                <constraint name="NotBlank" />
-                <constraint name="MinLength">3</constraint>
-            </property>
-        </class>
-
     .. code-block:: php-annotations
 
         // Acme/BlogBundle/Entity/Author.php
@@ -513,6 +508,17 @@ pour avoir au moins 3 caractères.
              */
             private $firstName;
         }
+
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <property name="firstName">
+                <constraint name="NotBlank" />
+                <constraint name="MinLength">3</constraint>
+            </property>
+        </class>
 
     .. code-block:: php
 
@@ -557,18 +563,7 @@ cette méthode doit retourner ``true`` :
         Acme\BlogBundle\Entity\Author:
             getters:
                 passwordLegal:
-                    - True: { message: "The password cannot match your first name" }
-
-    .. code-block:: xml
-
-        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
-        <class name="Acme\BlogBundle\Entity\Author">
-            <getter property="passwordLegal">
-                <constraint name="True">
-                    <option name="message">The password cannot match your first name</option>
-                </constraint>
-            </getter>
-        </class>
+                    - "True": { message: "The password cannot match your first name" }
 
     .. code-block:: php-annotations
 
@@ -585,6 +580,17 @@ cette méthode doit retourner ``true`` :
                 // return true or false
             }
         }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <getter property="passwordLegal">
+                <constraint name="True">
+                    <option name="message">The password cannot match your first name</option>
+                </constraint>
+            </getter>
+        </class>
 
     .. code-block:: php
 
@@ -616,6 +622,16 @@ Maintenant, créez la méthode ``isPasswordLegal()``, et incluez la logique que vo
     contrainte à une propriété du même nom plus tard (ou vice versa) sans
     changer votre logique de validation.
 	
+.. _validation-class-target:
+
++Classes	
++~~~~~~~
+
+Certaines contraintes s'appliquent à toute la classe qui est validée. Par exemple,
+la contrainte :doc:`Callback</reference/constraints/Callback>` est une contrainte
+générique qui s'applique à la classe elle-même. Lorsque cette classe est validée,
+les méthodes spécifiées par cette contrainte sont simplement exécutées pour personnaliser
+encore plus la validation
 	
 .. _book-validation-validation-groups:
 
@@ -647,6 +663,33 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tard
                 city:
                     - MinLength: 2
 
+    .. code-block:: php-annotations
+
+        // src/Acme/BlogBundle/Entity/User.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Security\Core\User\UserInterface
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class User implements UserInterface
+        {
+            /**
+            * @Assert\Email(groups={"registration"})
+            */
+            private $email;
+
+            /**
+            * @Assert\NotBlank(groups={"registration"})
+            * @Assert\MinLength(limit=7, groups={"registration"})
+            */
+            private $password;
+
+            /**
+            * @Assert\MinLength(2)
+            */
+            private $city;
+        }
+
     .. code-block:: xml
 
         <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
@@ -675,33 +718,6 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tard
                 <constraint name="MinLength">7</constraint>
             </property>
         </class>
-
-    .. code-block:: php-annotations
-
-        // src/Acme/BlogBundle/Entity/User.php
-        namespace Acme\BlogBundle\Entity;
-
-        use Symfony\Component\Security\Core\User\UserInterface
-        use Symfony\Component\Validator\Constraints as Assert;
-
-        class User implements UserInterface
-        {
-            /**
-            * @Assert\Email(groups={"registration"})
-            */
-            private $email;
-
-            /**
-            * @Assert\NotBlank(groups={"registration"})
-            * @Assert\MinLength(limit=7, groups={"registration"})
-            */
-            private $password;
-
-            /**
-            * @Assert\MinLength(2)
-            */
-            private $city;
-        }
 
     .. code-block:: php
 
