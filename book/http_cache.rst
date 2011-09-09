@@ -47,12 +47,12 @@ Nous allons parcourir ce sujet en quatre étapes :
     l'application. Symfony2 possède sa propre passerelle par défaut,
     mais toute technologie peut être utiliser.
 
-* **Etape 2**: Les entêtes du :ref:`cache HTTP
+* **Etape 2**: Les en-têtes du :ref:`cache HTTP
     <http-cache-introduction>` sont utilisées pour communiquer avec la
     passerelle de cache et tout autre cache entre votre application et
     le client. Symfony2 propose par défaut par des valeurs 
     raisonnables et fournit interface riche pour intéragir avec
-    les entêtes de cache.
+    les en-têtes de cache.
 
 * **Etape 3**: :ref:`L'expiration et la validation
   <http-expiration-validation>` sont les deux modèles utilisés pour
@@ -252,7 +252,7 @@ Voici une liste des principales options :
   ``stale-if-error`` du ``Cache-Control`` (cf. RFC 5961).
 
 SI le paramètre ``debug`` est à ``true``, Symfony2 ajoute
-automatiquement l'entêtes ``X-Symfony-Cache`` à la réponse contenant
+automatiquement l'en-têtes ``X-Symfony-Cache`` à la réponse contenant
 des informations utiles à propos des cache "hits" (utilisation du
 cache) et "misses" (page ou réponse non présente en cache).
 
@@ -286,54 +286,58 @@ cache) et "misses" (page ou réponse non présente en cache).
 
 .. _http-cache-introduction:
 
-Introduction to HTTP Caching
+Introduction à la mise en cache avec HTTP
 ----------------------------
 
-To take advantage of the available cache layers, your application must be
-able to communicate which responses are cacheable and the rules that govern
-when/how that cache should become stale. This is done by setting HTTP cache
-headers on the response.
+Pour tirer partie des couches de gestion du cache, l'application doit
+être capable de communiquer quelles réponses peuvent être mises en
+cache et les règles qui décident quand et comment le cache devient
+obsolète. Cela se fait en définissant des en-têtes de gestion de cache
+HTTP dans la réponse.
 
 .. tip::
 
-    Keep in mind that "HTTP" is nothing more than the language (a simple text
-    language) that web clients (e.g. browsers) and web servers use to communicate
-    with each other. When we talk about HTTP caching, we're talking about the
-    part of that language that allows clients and servers to exchange information
-    related to caching.
+    Il faut garder à l'esprit que "HTTP" n'est rien d'autre que le
+    langage (un simple langage texte) que les clients web (les
+    navigateurs par exemple) et les serveurs utilisent pour
+    communiquer entre eux. Parler de mise en cache HTTP revient à
+    parler de la partie du langage qui permet aux clients et aux
+    serveurs d'échanger les informations relatives à la gestion du
+    cache.
 
-HTTP specifies four response cache headers that we're concerned with:
+HTTP définit quatre en-têtes spécifiques à la mise en cache des réponse :
 
 * ``Cache-Control``
 * ``Expires``
 * ``ETag``
 * ``Last-Modified``
 
-The most important and versatile header is the ``Cache-Control`` header,
-which is actually a collection of various cache information.
+L'en-tête le plus important et le plus versatile est l'en-tête
+``Cache-Control`` qui est en réalité une collection d'informations
+diverses sur le cache.
 
 .. note::
 
-    Each of the headers will be explained in full detail in the
-    :ref:`http-expiration-validation` section.
+    Tous ces en-têtes seront complétement détaillés dans la section
+    :ref:`http-expiration-validation`.
 
 .. index::
    single: Cache; Cache-Control Header
    single: HTTP headers; Cache-Control
 
-The Cache-Control Header
+L'en-tête Cache-Control
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``Cache-Control`` header is unique in that it contains not one, but various
-pieces of information about the cacheability of a response. Each piece of
-information is separated by a comma:
+Cet en-tête est unique du fait qu'il contient non pas une, mais un
+ensemble varié d'information sur la possiblité de mise en cache d'une
+réponse. Chaque information est séparée par une virgule :
 
      Cache-Control: private, max-age=0, must-revalidate
 
      Cache-Control: max-age=3600, must-revalidate
 
-Symfony provides an abstraction around the ``Cache-Control`` header to make
-its creation more manageable:
+Symfony fournit une abstraction du ``Cache-Control`` pour faciliter sa
+gestion :
 
 .. code-block:: php
 
@@ -350,29 +354,39 @@ its creation more manageable:
     // set a custom Cache-Control directive
     $response->headers->addCacheControlDirective('must-revalidate', true);
 
-Public vs Private Responses
+Réponse publique et réponse privée
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Both gateway and proxy caches are considered "shared" caches as the cached
-content is shared by more than one user. If a user-specific response were
-ever mistakenly stored by a shared cache, it might be returned later to any
-number of different users. Imagine if your account information were cached
-and then returned to every subsequent user who asked for their account page!
+Les passerelles de cache et les caches "proxy" sont considérés comme
+étant "partagés" car leur contenu est partagé par plusieurs
+utilisateurs. Si une réponse spécifique à un utilisateur est par
+erreur stockée dans ce type de cache, elle pourrait être renvoyée à un
+nombre quelconque d'autres utilisateurs. Imaginez si les informations
+concernant votre compte sont mises en cache et ensuite envoyées à tous
+les utilisateurs suivants qui souhaite accéder à leur page de compte !
 
-To handle this situation, every response may be set to be public or private:
+Pour gérer cette situation, chaque réponse doit être définie comme
+étant publique ou privée :
 
-* *public*: Indicates that the response may be cached by both private and
-  shared caches;
+* *public*: Indique que la réponse peut être mise en cache, à la fois, par les caches privés et les caches publiques;
 
-* *private*: Indicates that all or part of the response message is intended
-  for a single user and must not be cached by a shared cache.
+* *private*: Indique que toute la réponse concerne un unique utilisateur et qu'elle ne doit pas être stockée dans les caches publiques.
 
-Symfony conservatively defaults each response to be private. To take advantage
-of shared caches (like the Symfony2 reverse proxy), the response will need
-to be explicitly set as public.
+Symfony considère par défaut chaque réponse comme étant privée. Pour
+tirer parti des caches partagés (comme le reverse proxy de Symfony2),
+la réponse devra explicitement être définie comme publique.
 
 .. index::
    single: Cache; Safe methods
+
+Méthodes sûres
+~~~~~~~~~~~~
+
+La mise en cache HTTP ne fonctionne qu'avec les méthodes "sûres"
+(telles que GET et HEAD). "Être sûr" signifie que l'état de
+l'application n'est jamais modifié par le serveur au moment de servir
+la requête (il est bien-sûr possible de loguer des informations,
+mettre en cache des données, etc.). Cela a deux conséquences :
 
 Safe Methods
 ~~~~~~~~~~~~
@@ -382,78 +396,88 @@ safe means that you never change the application's state on the server when
 serving the request (you can of course log information, cache data, etc).
 This has two very reasonable consequences:
 
-* You should *never* change the state of your application when responding
-  to a GET or HEAD request. Even if you don't use a gateway cache, the presence
-  of proxy caches mean that any GET or HEAD request may or may not actually
-  hit your server.
+* L'état de l'application ne devrait *jamais* être modifié en répondant
+  à une requête GET ou HEAD. Même s'il n'y a pas de passerelle de
+  cache, la présence d'un cache "proxy" signifie qu'aucune requête
+  GET ou HEAD ne pourrait pas atteindre le serveur.
 
-* Don't expect PUT, POST or DELETE methods to cache. These methods are meant
-  to be used when mutating the state of your application (e.g. deleting a
-  blog post). Caching them would prevent certain requests from hitting and
-  mutating your application.
+* Ne pas mettre en cache les méthodes PUT, POST ou DELETE. Ces
+  méthodes sont normalement utilisées pour changer l'état de
+  l'application (supprimer un billet de blog par exemple). La mise en
+  cache ces méthodes empêcherait certaine requête d'atteindre et de
+  modifier l'application.
 
-Caching Rules and Defaults
+Règles de mise en cache et configuration par défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-HTTP 1.1 allows caching anything by default unless there is an explicit
-``Cache-Control`` header. In practice, most caches do nothing when requests
-have a cookie, an authorization header, use a non-safe method (i.e. PUT, POST,
-DELETE), or when responses have a redirect status code.
+HTTP 1.1 permet de tout mettre en cache par défaut à moins qu'il n'y
+ait un en-tête ``Cache-Control``. En pratique, la plus part des
+systèmes de cache ne font rien quand les requêtes contiennent un
+cookie, ont un en-tête d'autorisation, utilisent une méthode non sûr
+(i.e. PUT, POST, DELETE), ou quand les réponses ont un code de
+redirection.
 
-Symfony2 automatically sets a sensible and conservative ``Cache-Control``
-header when none is set by the developer by following these rules:
+Symfony2 définit automatiquement une configuration de l'en-tête
+Cache-Control quand aucun n'est défini par le développeur en suivant
+ces règles :
 
-* If no cache header is defined (``Cache-Control``, ``Expires``, ``ETag``
-  or ``Last-Modified``), ``Cache-Control`` is set to ``no-cache``, meaning
-  that the response will not be cached;
+* Si aucun en-tête de cache n'est défini (``Cache-Control``, ``Expires``, ``Etag``
+  ou ``Last-Modified``), ``Cache-Control`` est défini à ``no-cache``, ce qui veut
+  dire que la réponse ne sera pas mise en cache;
 
-* If ``Cache-Control`` is empty (but one of the other cache headers is present),
-  its value is set to ``private, must-revalidate``;
+* Si ``Cache-Control`` est vide (mais que l'un des autres en-têtes de cache est
+  présent) sa valeur est définie à ``private, must-revalidate``;
 
-* But if at least one ``Cache-Control`` directive is set, and no 'public' or
-  ``private`` directives have been explicitly added, Symfony2 adds the
-  ``private`` directive automatically (except when ``s-maxage`` is set).
+* Mais si au moins une directive ``Cache-Control`` est définie et
+  aucune directive 'publique' ou ``private`` n'a pas été ajoutée
+  explicitement, Symfony2 ajoute la directive ``private``
+  automatiquement (sauf quand ``s-maxage`` est défini).
 
 .. _http-expiration-validation:
 
-HTTP Expiration and Validation
+HTTP Expiration et Validation
 ------------------------------
 
-The HTTP specification defines two caching models:
+La spécification HTTP définit deux modèles de mise en cache :
 
-* With the `expiration model`_, you simply specify how long a response should
-  be considered "fresh" by including a ``Cache-Control`` and/or an ``Expires``
-  header. Caches that understand expiration will not make the same request
-  until the cached version reaches its expiration time and becomes "stale".
+* Avec le `modèle expiration`_, on spécifie simplement combien de
+  temps une réponse doit être considérée comme "valide" en incluant un
+  en-tête ``Cache-Control`` et/ou ``Expires``. Les système de cache qui
+  comprennent les directives n'enverront pas la même requête jusqu'à ce
+  que la version en cache devienne "invalide".
 
-* When pages are really dynamic (i.e. their representation changes often),
-  the `validation model`_ model is often necessary. With this model, the
-  cache stores the response, but asks the server on each request whether
-  or not the cached response is still valid. The application uses a unique
-  response identifier (the ``Etag`` header) and/or a timestamp (the ``Last-Modified``
-  header) to check if the page has changed since being cached.
+* Quand une page est dynamique (i.e. quand son contenu change
+  souvent), le `modèle validation`_ est souvent nécessaire. Avec ce
+  modèle, le système de cache stocke la réponse mais demande au
+  serveur à chaque requête si la réponse est encore
+  valide. L'application utilise un identifiant unique (l'en-tête ``Etag``)
+  et/ou un timestamp (l'en-tête ``Last-Modified``) pour vérifier si la
+  page a changé depuis sa mise en cache.
 
-The goal of both models is to never generate the same response twice by relying
-on a cache to store and return "fresh" responses.
+Le but des deux modèles est de ne jamais générer deux fois la même
+réponse en s'appuyant sur le système de cache pour stoker et renvoyer
+la réponse valide.
 
-.. sidebar:: Reading the HTTP Specification
+.. sidebar:: En lisant la spécification HTTP
 
-    The HTTP specification defines a simple but powerful language in which
-    clients and servers can communicate. As a web developer, the request-response
-    model of the specification dominates our work. Unfortunately, the actual
-    specification document - `RFC 2616`_ - can be difficult to read.
+    La spécification HTTP définit un langage simple mais puissant dans
+    lequel les clients et les serveurs peuvent communiquer. En tant
+    que développeur web, le modèle requête-réponse est le plus
+    populaire. Malheureusement, le document de spécification - `RFC 2616`_ - 
+    peut être difficile à lire.
 
-    There is an on-going effort (`HTTP Bis`_) to rewrite the RFC 2616. It does
-    not describe a new version of HTTP, but mostly clarifies the original HTTP
-    specification. The organization is also improved as the specification
-    is split into seven parts; everything related to HTTP caching can be
-    found in two dedicated parts (`P4 - Conditional Requests`_ and `P6 -
-    Caching: Browser and intermediary caches`_).
+    Il existe actuellement une tentative (`HTTP Bis`_) de réécriture
+    de la RFC 2616.  Elle ne décrit pas une nouvelle version du HTTP
+    mais clarifie plutôt la spécification originale du HTTP. Elle est
+    découpée en sept parties ; tout ce qui concerne la gestion du
+    cache se retrouve dans deux chapitres dédiés (`P4 - Conditional
+    Requests`_ et `P6 - Caching: Browser and intermediary caches`_).
 
-    As a web developer, we strongly urge you to read the specification. Its
-    clarity and power - even more than ten years after its creation - is
-    invaluable. Don't be put-off by the appearance of the spec - its contents
-    are much more beautiful than its cover.
+    En tant que développeur web, il est fortement recommandé de lire
+    la spécification. Ca clarté et sa puissance - mais dix ans après
+    sa création - est inestimable. Ne soyez pas répulser par
+    l'apparence de la spec - son contenu est beaucoup plus beau que sa
+    couverture.
 
 .. index::
    single: Cache; HTTP Expiration
@@ -461,58 +485,59 @@ on a cache to store and return "fresh" responses.
 Expiration
 ~~~~~~~~~~
 
-The expiration model is the more efficient and straightforward of the two
-caching models and should be used whenever possible. When a response is cached
-with an expiration, the cache will store the response and return it directly
-without hitting the application until it expires.
+Le modèle d'expiration du cache est le plus efficace et le plus simple
+à mettre en place et devrait être utilisé dès que possible. Quand une
+réponse est mise en cache avec une directive d'expiration, le cache
+stockera la réponse et la renverra directement sans solliciter
+l'application avant son expiration.
 
-The expiration model can be accomplished using one of two, nearly identical,
-HTTP headers: ``Expires`` or ``Cache-Control``.
+Ce modèle est mis en oeuvre avec deux en-têtes HTTP presque identiques :
+``Expires`` ou ``Cache-Control``.
 
 .. index::
    single: Cache; Expires header
    single: HTTP headers; Expires
 
-Expiration with the ``Expires`` Header
+Expiration avec l'en-tête ``Expires``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-According to the HTTP specification, "the ``Expires`` header field gives
-the date/time after which the response is considered stale." The ``Expires``
-header can be set with the ``setExpires()`` ``Response`` method. It takes a
-``DateTime`` instance as an argument::
+D'après la spécification HTTP, "les champs de l'en-tête ``Expires``
+donne la date après laquelle la réponse est considérée comme
+invalide". Cet en-tête peut être définit avec la méthode ``setExpires()``
+de l'objet ``Response``. Elle prend un objet ``DateTime`` en argument : ::
 
     $date = new DateTime();
     $date->modify('+600 seconds');
 
     $response->setExpires($date);
 
-The resulting HTTP header will look like this::
+L'en-tête HTTP résultante sera : ::
 
     Expires: Thu, 01 Mar 2011 16:00:00 GMT
 
 .. note::
 
-    The ``setExpires()`` method automatically converts the date to the GMT
-    timezone as required by the specification.
+    La méthode ``setExpires()`` convertit automatiquement la date au
+    format GMT comme demandé par la spécification.
 
-The ``Expires`` header suffers from two limitations. First, the clocks on the
-Web server and the cache (e.g. the browser) must be synchronized. Then, the
-specification states that "HTTP/1.1 servers should not send ``Expires`` dates
-more than one year in the future."
+L'en-tête ``Expires`` souffre de deux limitations. D'abord, l'heure du
+serveur web et celle du serveur de cache (le navigateur par exemple)
+doivent être synchronisées. Aussi, la spécification déclare que "les
+serveurs HTTP/1.1 ne devraient pas envoyer des dates ``Expires`` de
+plus d'un an dans le futur".
 
 .. index::
    single: Cache; Cache-Control header
    single: HTTP headers; Cache-Control
 
-Expiration with the ``Cache-Control`` Header
+Expiration avec l'en-tête ``Cache-Control``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Because of the ``Expires`` header limitations, most of the time, you should
-use the ``Cache-Control`` header instead. Recall that the ``Cache-Control``
-header is used to specify many different cache directives. For expiration,
-there are two directives, ``max-age`` and ``s-maxage``. The first one is
-used by all caches, whereas the second one is only taken into account by
-shared caches::
+À cause des limitations de l'en-tête ``Expires``, la plus part du temps, il faut utiliser
+l'en-tête ``Cache-Control``. Rappelez-vous que l'en-tête ``Cache-Control`` est utilisé pour spécifier beaucoup de différentes directives de cache. Pour le modèle d'expiration, il y a
+deux directives, ``max-age`` et ``s-maxage``. La première est utilisée par
+tous les systèmes de cache alors que la seconde n'est utilisée que par les
+systèmes de cache partagés : ::
 
     // Sets the number of seconds after which the response
     // should no longer be considered fresh
@@ -521,8 +546,7 @@ shared caches::
     // Same as above but only for shared caches
     $response->setSharedMaxAge(600);
 
-The ``Cache-Control`` header would take on the following format (it may have
-additional directives)::
+L'en-tête ``Cache-Control`` devrait être (il peut y avoir d'autres directives) : ::
 
     Cache-Control: max-age=600, s-maxage=600
 
@@ -532,50 +556,56 @@ additional directives)::
 Validation
 ~~~~~~~~~~
 
-When a resource needs to be updated as soon as a change is made to the underlying
-data, the expiration model falls short. With the expiration model, the application
-won't be asked to return the updated response until the cache finally becomes
-stale.
+S'il faut mettre à jour une ressource dès qu'il y a un changement dans
+les données, le modèle d'expiration ne convient pas. Avec le modèle
+d'expiration, l'application ne sera pas appelée jusqu'au moment où le
+cache devient invalide.
 
-The validation model addresses this issue. Under this model, the cache continues
-to store responses. The difference is that, for each request, the cache asks
-the application whether or not the cached response is still valid. If the
-cache *is* still valid, your application should return a 304 status code
-and no content. This tells the cache that it's ok to return the cached response.
+Le modèle de validation du cache corrige ce problème. Dans ce modèle,
+le cache continue de stoker les réponses. La différence est que pour
+chaque requête, le cache demande à l'application si la réponse en cache
+est encore valide. Si la réponse en cache est encore valide,
+l'application renvoie un statut 304 et aucun contenu. Le cache sait
+que la réponse en cache est valide.
 
-Under this model, you mainly save bandwidth as the representation is not
-sent twice to the same client (a 304 response is sent instead). But if you
-design your application carefully, you might be able to get the bare minimum
-data needed to send a 304 response and save CPU also (see below for an implementation
-example).
+Ce modèle permet d'économiser beaucoup de bande passante car la même
+réponse n'est pas envoyée deux fois au même client (un code 304 est
+envoyé à la place). Si l'application est bien construite, il est
+possible de déterminer le minimum de données nécessitant l'envoie de
+réponse 304 et aussi d'économiser des ressources CPU (voir ci-dessous
+pour un exemple d'implémentation).
 
 .. tip::
 
-    The 304 status code means "Not Modified". It's important because with
-    this status code do *not* contain the actual content being requested.
-    Instead, the response is simply a light-weight set of directions that
-    tell cache that it should use its stored version.
+    Le code 304 signifie "Non modifié". C'est important car la réponse
+    associée à ce code ne contient pas le contenu demandé en
+    réalité. Au lieu de cela, la réponse est simplement un ensemble
+    léger de directives qui informe le cache qu'il devrait utiliser la
+    réponse stockée.
 
-Like with expiration, there are two different HTTP headers that can be used
-to implement the validation model: ``ETag`` and ``Last-Modified``.
+Comme avec le modèle d'expiration, il y a deux différents types
+d'en-tête HTTP qui peuvent être utilisés pour implémenter ce modèle :
+``ETag`` et ``Last-Modified``.
 
 .. index::
    single: Cache; Etag header
    single: HTTP headers; Etag
 
-Validation with the ``ETag`` Header
+Validation avec l'en-tête ``ETag``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``ETag`` header is a string header (called the "entity-tag") that uniquely
-identifies one representation of the target resource. It's entirely generated
-and set by your application so that you can tell, for example, if the ``/about``
-resource that's stored by the cache is up-to-date with what your application
-would return. An ``ETag`` is like a fingerprint and is used to quickly compare
-if two different versions of a resource are equivalent. Like fingerprints,
-each ``ETag`` must be unique across all representations of the same resource.
+L'en-tête ``ETag`` est une chaîne de caractère (appelée "entity-tag")
+qui identifie de façon unique une représentation de la ressource
+appelée. Il est entièrement généré et défini par votre application tel
+que vous pouvez spécifier, par exemple, si la ressource ``/about``,
+stockée en cache, sera mise à jour avec ce que votre application
+retourne. Un ``ETag`` est similaire à une empreinte et est utilisé
+pour comparer rapidement si deux versions différentes d'une ressource
+sont équivalentes. Comme une empreinte, chaque ``ETag`` doit être
+unique pour toutes les représentations de la même ressource.
 
-Let's walk through a simple implementation that generates the ETag as the
-md5 of the content::
+Voici une implémentation simple qui génère l'en-tête ETag depuis un
+hachage md5 du contenu : ::
 
     public function indexAction()
     {
@@ -586,17 +616,19 @@ md5 of the content::
         return $response;
     }
 
-The ``Response::isNotModified()`` method compares the ``ETag`` sent with
-the ``Request`` with the one set on the ``Response``. If the two match, the
-method automatically sets the ``Response`` status code to 304.
+La méthode ``Response::isNotModified()`` compare le ``ETag`` envoyé avec la
+requête avec celui défini dans l'objet ``Reponse``. S'ils sont
+identiques, la méthode renvoie automatiquement le code 304 en ``Response``.
 
-This algorithm is simple enough and very generic, but you need to create the
-whole ``Response`` before being able to compute the ETag, which is sub-optimal.
-In other words, it saves on bandwidth, but not CPU cycles.
+Cet algorithme est assez simple et très généric, mais il est
+nécessaire de créer entièrement la ``Response`` avant de pouvoir
+calculer l'en-tête ETag, ce qui n'est pas optimal. En d'autre terme,
+cette approche économise la bande passante mais pas l'utilisation du
+CPU.
 
-In the :ref:`optimizing-cache-validation` section, we'll show how validation
-can be used more intelligently to determine the validity of a cache without
-doing so much work.
+Dans la section :ref:`optimizing-cache-validation`, nous verrons
+comment le modèle de validation peut être utiliser plus intelligeament
+pour déterminer la validité d'un cache sans faire autant de travail.
 
 .. tip::
 
