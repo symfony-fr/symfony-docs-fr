@@ -343,15 +343,15 @@ gestion :
 
     $response = new Response();
 
-    // mark the response as either public or private
+    // marquer la réponse comme publique ou privée
     $response->setPublic();
     $response->setPrivate();
 
-    // set the private or shared max age
+    // définir l'âge max des caches privés ou des caches partagés
     $response->setMaxAge(600);
     $response->setSharedMaxAge(600);
 
-    // set a custom Cache-Control directive
+    // définir une directive personnalisée du Cache-Control
     $response->headers->addCacheControlDirective('must-revalidate', true);
 
 Réponse publique et réponse privée
@@ -421,7 +421,7 @@ Symfony2 définit automatiquement une configuration de l'en-tête
 Cache-Control quand aucun n'est défini par le développeur en suivant
 ces règles :
 
-* Si aucun en-tête de cache n'est défini (``Cache-Control``, ``Expires``, ``Etag``
+* Si aucun en-tête de cache n'est défini (``Cache-Control``, ``Expires``, ``ETag``
   ou ``Last-Modified``), ``Cache-Control`` est défini à ``no-cache``, ce qui veut
   dire que la réponse ne sera pas mise en cache;
 
@@ -539,11 +539,11 @@ deux directives, ``max-age`` et ``s-maxage``. La première est utilisée par
 tous les systèmes de cache alors que la seconde n'est utilisée que par les
 systèmes de cache partagés : ::
 
-    // Sets the number of seconds after which the response
-    // should no longer be considered fresh
+    // Définir le nombre de secondes après lequel la réponse
+    // ne devrait plus être considérée comme valide
     $response->setMaxAge(600);
 
-    // Same as above but only for shared caches
+    // Idem mais uniquement pour les caches partagés
     $response->setSharedMaxAge(600);
 
 L'en-tête ``Cache-Control`` devrait être (il peut y avoir d'autres directives) : ::
@@ -588,8 +588,8 @@ d'en-tête HTTP qui peuvent être utilisés pour implémenter ce modèle :
 ``ETag`` et ``Last-Modified``.
 
 .. index::
-   single: Cache; Etag header
-   single: HTTP headers; Etag
+   single: Cache; ETag header
+   single: HTTP headers; ETag
 
 Validation avec l'en-tête ``ETag``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -632,9 +632,9 @@ pour déterminer la validité d'un cache sans faire autant de travail.
 
 .. tip::
 
-    Symfony2 also supports weak ETags by passing ``true`` as the second
-    argument to the
-    :method:`Symfony\\Component\\HttpFoundation\\Response::setETag` method.
+    Symfony2 supporte aussi les ETags moins robustes en définissant le
+    second argument à ``true`` pour la méthode
+    :method:`Symfony\\Component\\HttpFoundation\\Response::setETag`.
 
 .. index::
    single: Cache; Last-Modified header
@@ -697,10 +697,11 @@ exposing a simple and efficient pattern::
 
     public function showAction($articleSlug)
     {
-        // Get the minimum information to compute
-        // the ETag or the Last-Modified value
-        // (based on the Request, data are retrieved from
-        // a database or a key-value store for instance)
+	// Obtenir la minimum d'information pour calculer 
+	// l'ETag ou la dernière valeur modifiée (Last-Modified value)
+	// (basé sur la requête (Request), les données sont recueillies
+	// d'une base de données ou d'un couple clé-valeur stocker 
+	// par exemple)
         $article = // ...
 
         // create a Response with a ETag and/or a Last-Modified header
