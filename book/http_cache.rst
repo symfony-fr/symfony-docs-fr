@@ -2,7 +2,7 @@
    single: Cache
 
 Le Cache HTTP
-==========
+=============
 
 Le propre d'une application web riche est d'être dynamique. Peu
 importe l'efficacité de votre application, le traitement d'une requête
@@ -19,14 +19,15 @@ peut être exécuter une unique fois. C'est exactement l'objectif de la
 mise en cache.
 
 La Mise en cache
-----------------------------------
+----------------
 
 Le moyen le plus efficace d'améliorer les performances d'une
-application est mettre en cache l'intégralité d'une réponse pour ne plus avoir à rappeler l'application pour les requêtes suivantes. Bien
+application est mettre en cache l'intégralité d'une réponse pour ne
+plus avoir à rappeler l'application pour les requêtes suivantes. Bien
 sûr, ce n'est pas toujours possible pour les sites web fortement
-dynamiques. A travers ce chapitre, nous allons
-décrire comment fonctionne le système de cache de Symfony2 et
-pourquoi nous pensons que c'est la meilleur approche possible.
+dynamiques. A travers ce chapitre, nous allons décrire comment
+fonctionne le système de cache de Symfony2 et pourquoi nous pensons
+que c'est la meilleur approche possible.
 
 Le système de cache de Symfony2 est différent car il se base sur la
 simplicité et la puissance du cache HTTP tel qu'il est défini dans les
@@ -81,7 +82,7 @@ ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 .. _gateway-caches:
 
 La mise en cache avec la Passerelle de Cache
-----------------------------
+--------------------------------------------
 
 Lors d'une mise en cache via HTTP, le *cache* est complétement séparé
 de votre application. Il est placé entre votre application et le client
@@ -106,7 +107,7 @@ HTTP. Beaucoup d'autres solutions existent telles que `Varnish`_,
    single: Cache; Types of
 
 Les types de caches
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Mais une passerelle de cache ne possède pas qu'un seul type de
 cache. Les en-têtes de cache HTTP envoyé par votre application sont
@@ -233,9 +234,15 @@ Voici une liste des principales options :
   ou ``private`` via une directive du ``Cache-Control``. (par défaut
   : ``Authorization`` et ``Cookie``);
 
-* ``allow_reload`` : Définit si le client peut forcer ou non un rechargement du cache en incluant une directive du ``Cache-Control`` "no-cache" dans la requête. Définit à ``true`` pour la conformité avec la RFC 2616 (par défaut : ``false``);
+* ``allow_reload`` : Définit si le client peut forcer ou non un
+  rechargement du cache en incluant une directive du ``Cache-Control``
+  "no-cache" dans la requête. Définit à ``true`` pour la conformité
+  avec la RFC 2616 (par défaut : ``false``);
 
-* ``allow_revalidate`` : Définit si le client peut forcer une revalidation du cache en incluant une directive de ``Cache-Control`` "max-age=0" dans la requête. Défini à ``true`` pour la conformité avec la RFC 2616 (par defaut : ``false``);
+* ``allow_revalidate`` : Définit si le client peut forcer une
+  revalidation du cache en incluant une directive de ``Cache-Control``
+  "max-age=0" dans la requête. Défini à ``true`` pour la conformité
+  avec la RFC 2616 (par defaut : ``false``);
 
 * ``stale_while_revalidate`` : Spécifie le nombre de secondes par
   défaut (la granularité est la seconde parce que le TTL de la réponse
@@ -287,7 +294,7 @@ cache) et "misses" (page ou réponse non présente en cache).
 .. _http-cache-introduction:
 
 Introduction à la mise en cache avec HTTP
-----------------------------
+-----------------------------------------
 
 Pour tirer partie des couches de gestion du cache, l'application doit
 être capable de communiquer quelles réponses peuvent être mises en
@@ -326,7 +333,7 @@ diverses sur le cache.
    single: HTTP headers; Cache-Control
 
 L'en-tête Cache-Control
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Cet en-tête est unique du fait qu'il contient non pas une, mais un
 ensemble varié d'information sur la possiblité de mise en cache d'une
@@ -355,7 +362,7 @@ gestion :
     $response->headers->addCacheControlDirective('must-revalidate', true);
 
 Réponse publique et réponse privée
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les passerelles de cache et les caches "proxy" sont considérés comme
 étant "partagés" car leur contenu est partagé par plusieurs
@@ -368,9 +375,12 @@ les utilisateurs suivants qui souhaite accéder à leur page de compte !
 Pour gérer cette situation, chaque réponse doit être définie comme
 étant publique ou privée :
 
-* *public*: Indique que la réponse peut être mise en cache, à la fois, par les caches privés et les caches publiques;
+* *public*: Indique que la réponse peut être mise en cache, à la fois,
+   par les caches privés et les caches publiques;
 
-* *private*: Indique que toute la réponse concerne un unique utilisateur et qu'elle ne doit pas être stockée dans les caches publiques.
+* *private*: Indique que toute la réponse concerne un unique
+   utilisateur et qu'elle ne doit pas être stockée dans les caches
+   publiques.
 
 Symfony considère par défaut chaque réponse comme étant privée. Pour
 tirer parti des caches partagés (comme le reverse proxy de Symfony2),
@@ -380,21 +390,13 @@ la réponse devra explicitement être définie comme publique.
    single: Cache; Safe methods
 
 Méthodes sûres
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 La mise en cache HTTP ne fonctionne qu'avec les méthodes "sûres"
 (telles que GET et HEAD). "Être sûr" signifie que l'état de
 l'application n'est jamais modifié par le serveur au moment de servir
 la requête (il est bien-sûr possible de loguer des informations,
 mettre en cache des données, etc.). Cela a deux conséquences :
-
-Safe Methods
-~~~~~~~~~~~~
-
-HTTP caching only works for "safe" HTTP methods (like GET and HEAD). Being
-safe means that you never change the application's state on the server when
-serving the request (you can of course log information, cache data, etc).
-This has two very reasonable consequences:
 
 * L'état de l'application ne devrait *jamais* être modifié en répondant
   à une requête GET ou HEAD. Même s'il n'y a pas de passerelle de
@@ -408,7 +410,7 @@ This has two very reasonable consequences:
   modifier l'application.
 
 Règles de mise en cache et configuration par défaut
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 HTTP 1.1 permet de tout mettre en cache par défaut à moins qu'il n'y
 ait un en-tête ``Cache-Control``. En pratique, la plus part des
@@ -436,7 +438,7 @@ ces règles :
 .. _http-expiration-validation:
 
 HTTP Expiration et Validation
-------------------------------
+-----------------------------
 
 La spécification HTTP définit deux modèles de mise en cache :
 
@@ -499,7 +501,7 @@ Ce modèle est mis en oeuvre avec deux en-têtes HTTP presque identiques :
    single: HTTP headers; Expires
 
 Expiration avec l'en-tête ``Expires``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 D'après la spécification HTTP, "les champs de l'en-tête ``Expires``
 donne la date après laquelle la réponse est considérée comme
@@ -531,7 +533,7 @@ plus d'un an dans le futur".
    single: HTTP headers; Cache-Control
 
 Expiration avec l'en-tête ``Cache-Control``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 À cause des limitations de l'en-tête ``Expires``, la plus part du
 temps, il faut utiliser l'en-tête ``Cache-Control``. Rappelez-vous que
@@ -594,7 +596,7 @@ d'en-tête HTTP qui peuvent être utilisés pour implémenter ce modèle :
    single: HTTP headers; ETag
 
 Validation avec l'en-tête ``ETag``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 L'en-tête ``ETag`` est une chaîne de caractère (appelée "entity-tag")
 qui identifie de façon unique une représentation de la ressource
@@ -643,7 +645,7 @@ pour déterminer la validité d'un cache sans faire autant de travail.
    single: HTTP headers; Last-Modified
 
 Validation avec l'en-tête ``Last-Modified``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 L'en-tête ``Last-Modified`` est la seconde forme de la
 validation. D'après la spécification HTTP, les champs de l'en-tête
@@ -693,7 +695,7 @@ La méthode ``Response::isNotModified()`` compares l'en-tête
 .. _optimizing-cache-validation:
 
 Optimiser son code avec le modèle de validation du cache
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le but principal de toutes les stratégies de mise en cache est de
 diminuer la charge de l'application. Autrement dit, le moins
@@ -745,7 +747,7 @@ status ``304`` (voir la
    single: HTTP headers; Vary
 
 Faire varier la Response
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Jusqu'ici, chaque URI est considérée comme une représentation unique
 de la ressource cible. Par défaut, la mise en cache HTTP est faite en
@@ -789,7 +791,7 @@ La méthode ``setVary()`` prend un nom d'en-tête ou un tableau de noms
 d'en-tête pour lesquels la réponse varie.
 
 Expiration et Validation
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Il est possible bien entendu d'utiliser à la fois le modèle de
 validation et d'expiration pour un même objet ``Response``. Mais comme
@@ -804,7 +806,7 @@ toujours valide.
     pair: Cache; Configuration
 
 Les autres méthodes de l'objet Response
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La classe Response fournit beaucoup d'autres méthodes en relation avec
 la gestion du cache. Voici les plus utiles : ::
@@ -835,7 +837,7 @@ La plupart des en-têtes en relation avec la gestion du cache peuvent
 .. _edge-side-includes:
 
 Utilisation de la technologie "Edge Side Includes"
-------------------------
+--------------------------------------------------
 
 Les passerelles de caches sont une bonne solution pour améliorer les
 performances d'un site. Mais elles ont une limitation : elles peuvent
@@ -887,7 +889,7 @@ pouvez le voir, si vous décidez de prendre l'avantage des marqueurs
 ESI, Symfony2 réalise le procédé pour les inclure presque sans effort.
 
 Utiliser ESI avec Symfony2
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Premièrement, pour utiliser ESI, il faut l'activer dans la
 configuration de l'application :
@@ -1066,7 +1068,7 @@ Le "helper" ``render`` supporte deux autres méthodes utiles :
 .. _http-cache-invalidation:
 
 Invalidation du cache
-------------------
+---------------------
 
     "There are only two hard things in Computer Science: cache invalidation
     and naming things." --Phil Karlton
@@ -1122,7 +1124,7 @@ Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HT
     autre pour éviter que n'importe qui ne puisse purger le cache.
 
 Résumé
--------
+------
 
 Symfony2 a été conçu pour suivre les règles éprouvées du protocole
 HTTP. La mise en cache n'y fait pas exception. Comprendre le système
@@ -1134,7 +1136,7 @@ de connaissance relative au cache et paserelle de cache HTTP tel que
 Varnish.
 
 En savoir plus grâce au Cookbook
-----------------------------
+--------------------------------
 
 * :doc:`/cookbook/cache/varnish`
 
