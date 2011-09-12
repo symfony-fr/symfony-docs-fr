@@ -11,7 +11,7 @@ sera toujours plus important que l'envoi d'une page statique.
 Pour la plupart des applications web, cela ne pose pas de
 problème. Symfony2 est d'une rapidité foudrayante, et à moins que vous
 ne fassiez de sérieux remaniements, chaque requête sera traitée
-rapidement sans trop "stresser" sur votre serveur.
+rapidement sans trop «stresser» sur votre serveur.
 
 Mais si la fréquentation de votre site augmente, ce traitement peut devenir un
 problème. Le processus qui s'effectue à chaque requête
@@ -91,11 +91,11 @@ effectuant des requêtes.
 Le travail du cache est d'accepter les requêtes du client et de les
 transmettre à votre application. Le cache recevra aussi en retour des
 réponses de votre application et les enverra au client. Le cache est au milieu
-("middle-man") dans ce jeu de commmunication requête-réponse
+(«middle-man») dans ce jeu de commmunication requête-réponse
 entre le client et votre application.
 
 Lors d'une communication, le cache stockera toutes les réponses qu'ils
-estimes "stockable" (voir :ref:`http-cache-introduction`). Si la même
+estimes «stockable» (voir :ref:`http-cache-introduction`). Si la même
 ressource est demandée, le cache renvoie le contenu mis en cache au
 client, en ignorant entièrement l'application.
 
@@ -119,7 +119,7 @@ interprétés par trois différents types de cache :
   les ressources stockées ne sont pas partagées avec d'autres
   applications.
 
-* *Le "cache proxy"* : un proxy est un cache *partagé* car plusieurs
+* *Le «cache proxy»* : un proxy est un cache *partagé* car plusieurs
   applications peut se placer derrière un seul proxy. Il est
   habituellement installé par les entreprises pour diminuer le temps
   de réponse des sites et la consommation des ressources réseaux.
@@ -131,8 +131,8 @@ interprétés par trois différents types de cache :
 
 .. tip::
 
-    Les passerelles de cache peuvent être désignées comme des "reverse
-    proxy", "surrogate proxy" ou des accélérateurs HTTP.
+    Les passerelles de cache peuvent être désignées comme des «reverse
+    proxy», «surrogate proxy» ou des accélérateurs HTTP.
 
 .. note::
 
@@ -178,7 +178,7 @@ contrôleur principal pour qu'il utilise le cache noyau : ::
     $kernel = new AppCache($kernel);
     $kernel->handle(Request::createFromGlobals())->send();
 
-Le cache noyau se comportera immédiatement comme un "reverse proxy" en
+Le cache noyau se comportera immédiatement comme un «reverse proxy» en
 mettant en cache les réponses de l'application et en les renvoyant au
 client.
 
@@ -222,46 +222,46 @@ pouvez paramètrer en surchargeant la méthode ``getOptions()`` : ::
 Voici une liste des principales options :
 
 * ``default_ttl`` : Le nombre de seconde pendant laquelle une entrée du
-  cache devrait être considérée comme "valide" quand il n'y a pas
+  cache devrait être considérée comme «valide» quand il n'y a pas
   d'information explicite fournie dans une réponse. Une valeur
   explicite pour les en-têtes ``Cache-Control`` ou ``Expires``
   surcharge cette valeur (par défaut : ``0``);
 
 
 * ``private_headers`` : Type d'en-têtes de requête qui déclenche le
-  comportement "privé" du ``Cache-Control`` pour les réponses qui ne
+  comportement «privé» du ``Cache-Control`` pour les réponses qui ne
   spécifie pas leur état, c'est à dire, si la réponse est ``public``
   ou ``private`` via une directive du ``Cache-Control``. (par défaut
   : ``Authorization`` et ``Cookie``);
 
 * ``allow_reload`` : Définit si le client peut forcer ou non un
   rechargement du cache en incluant une directive du ``Cache-Control``
-  "no-cache" dans la requête. Définit à ``true`` pour la conformité
+  «no-cache» dans la requête. Définit à ``true`` pour la conformité
   avec la RFC 2616 (par défaut : ``false``);
 
 * ``allow_revalidate`` : Définit si le client peut forcer une
   revalidation du cache en incluant une directive de ``Cache-Control``
-  "max-age=0" dans la requête. Défini à ``true`` pour la conformité
+  «max-age=0» dans la requête. Défini à ``true`` pour la conformité
   avec la RFC 2616 (par defaut : ``false``);
 
 * ``stale_while_revalidate`` : Spécifie le nombre de secondes par
   défaut (la granularité est la seconde parce que le TTL de la réponse
   est en seconde) pendant lesquelles le cache peut renvoyer une
-  réponse "périmée" alors que la nouvelle réponse est calculée en
+  réponse «périmée» alors que la nouvelle réponse est calculée en
   arrière-plan (par défaut : ``2``). Ce paramètre est surchargé par
   l'extension HTTP ``stale-while-revalidate`` du ``Cache-Control``
   (cf. RFC 5861);
 
 * ``stale_if_error`` : Spécifie le nombre de seconde par défaut (la
   granularité est la seconde) pendant lesquelles le cache peut
-  renvoyer une réponse "périmée" quand une erreur est rencontrée (par
+  renvoyer une réponse «périmée» quand une erreur est rencontrée (par
   défaut : ``60``). Ce paramètre est surchargé par l'extension HTTP
   ``stale-if-error`` du ``Cache-Control`` (cf. RFC 5961).
 
 SI le paramètre ``debug`` est à ``true``, Symfony2 ajoute
 automatiquement l'en-têtes ``X-Symfony-Cache`` à la réponse contenant
-des informations utiles à propos des cache "hits" (utilisation du
-cache) et "misses" (page ou réponse non présente en cache).
+des informations utiles à propos des cache «hits» (utilisation du
+cache) et «misses» (page ou réponse non présente en cache).
 
 .. sidebar:: Passer d'un Reverse Proxy à un autre
 
@@ -304,7 +304,7 @@ HTTP dans la réponse.
 
 .. tip::
 
-    Il faut garder à l'esprit que "HTTP" n'est rien d'autre que le
+    Il faut garder à l'esprit que «HTTP» n'est rien d'autre que le
     langage (un simple langage texte) que les clients web (les
     navigateurs par exemple) et les serveurs utilisent pour
     communiquer entre eux. Parler de mise en cache HTTP revient à
@@ -364,8 +364,8 @@ gestion :
 Réponse publique et réponse privée
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Les passerelles de cache et les caches "proxy" sont considérés comme
-étant "partagés" car leur contenu est partagé par plusieurs
+Les passerelles de cache et les caches «proxy» sont considérés comme
+étant «partagés» car leur contenu est partagé par plusieurs
 utilisateurs. Si une réponse spécifique à un utilisateur est par
 erreur stockée dans ce type de cache, elle pourrait être renvoyée à un
 nombre quelconque d'autres utilisateurs. Imaginez si les informations
@@ -392,15 +392,15 @@ la réponse devra explicitement être définie comme publique.
 Méthodes sûres
 ~~~~~~~~~~~~~~
 
-La mise en cache HTTP ne fonctionne qu'avec les méthodes "sûres"
-(telles que GET et HEAD). "Être sûr" signifie que l'état de
+La mise en cache HTTP ne fonctionne qu'avec les méthodes «sûres»
+(telles que GET et HEAD). «Être sûr» signifie que l'état de
 l'application n'est jamais modifié par le serveur au moment de servir
 la requête (il est bien-sûr possible de loguer des informations,
 mettre en cache des données, etc.). Cela a deux conséquences :
 
 * L'état de l'application ne devrait *jamais* être modifié en répondant
   à une requête GET ou HEAD. Même s'il n'y a pas de passerelle de
-  cache, la présence d'un cache "proxy" signifie qu'aucune requête
+  cache, la présence d'un cache «proxy» signifie qu'aucune requête
   GET ou HEAD ne pourrait pas atteindre le serveur.
 
 * Ne pas mettre en cache les méthodes PUT, POST ou DELETE. Ces
@@ -443,10 +443,10 @@ HTTP Expiration et Validation
 La spécification HTTP définit deux modèles de mise en cache :
 
 * Avec le `modèle expiration`_, on spécifie simplement combien de
-  temps une réponse doit être considérée comme "valide" en incluant un
+  temps une réponse doit être considérée comme «valide» en incluant un
   en-tête ``Cache-Control`` et/ou ``Expires``. Les système de cache qui
   comprennent les directives n'enverront pas la même requête jusqu'à ce
-  que la version en cache devienne "invalide".
+  que la version en cache devienne «invalide».
 
 * Quand une page est dynamique (i.e. quand son contenu change
   souvent), le `modèle validation`_ est souvent nécessaire. Avec ce
@@ -503,9 +503,9 @@ Ce modèle est mis en oeuvre avec deux en-têtes HTTP presque identiques :
 Expiration avec l'en-tête ``Expires``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-D'après la spécification HTTP, "les champs de l'en-tête ``Expires``
+D'après la spécification HTTP, «les champs de l'en-tête ``Expires``
 donne la date après laquelle la réponse est considérée comme
-invalide". Cet en-tête peut être définit avec la méthode ``setExpires()``
+invalide». Cet en-tête peut être définit avec la méthode ``setExpires()``
 de l'objet ``Response``. Elle prend un objet ``DateTime`` en argument : ::
 
     $date = new DateTime();
@@ -524,9 +524,9 @@ L'en-tête HTTP résultante sera : ::
 
 L'en-tête ``Expires`` souffre de deux limitations. D'abord, l'heure du
 serveur web et celle du serveur de cache (le navigateur par exemple)
-doivent être synchronisées. Aussi, la spécification déclare que "les
+doivent être synchronisées. Aussi, la spécification déclare que «les
 serveurs HTTP/1.1 ne devraient pas envoyer des dates ``Expires`` de
-plus d'un an dans le futur".
+plus d'un an dans le futur».
 
 .. index::
    single: Cache; Cache-Control header
@@ -581,7 +581,7 @@ pour un exemple d'implémentation).
 
 .. tip::
 
-    Le code 304 signifie "Non modifié". C'est important car la réponse
+    Le code 304 signifie «Non modifié». C'est important car la réponse
     associée à ce code ne contient pas le contenu demandé en
     réalité. Au lieu de cela, la réponse est simplement un ensemble
     léger de directives qui informe le cache qu'il devrait utiliser la
@@ -598,7 +598,7 @@ d'en-tête HTTP qui peuvent être utilisés pour implémenter ce modèle :
 Validation avec l'en-tête ``ETag``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-L'en-tête ``ETag`` est une chaîne de caractère (appelée "entity-tag")
+L'en-tête ``ETag`` est une chaîne de caractère (appelée «entity-tag»)
 qui identifie de façon unique une représentation de la ressource
 appelée. Il est entièrement généré et défini par votre application tel
 que vous pouvez spécifier, par exemple, si la ressource ``/about``,
@@ -699,7 +699,7 @@ Optimiser son code avec le modèle de validation du cache
 
 Le but principal de toutes les stratégies de mise en cache est de
 diminuer la charge de l'application. Autrement dit, le moins
-l'application aura a "travailler" pour renvoyer un status 304, le
+l'application aura a «travailler» pour renvoyer un status 304, le
 mieux ce sera. La méthode ``Response::isNotModified()`` fait
 exactement ça en exposant un modèle simple et efficace : ::
 
@@ -836,7 +836,7 @@ La plupart des en-têtes en relation avec la gestion du cache peuvent
 
 .. _edge-side-includes:
 
-Utilisation de la technologie "Edge Side Includes"
+Utilisation de la technologie «Edge Side Includes»
 --------------------------------------------------
 
 Les passerelles de caches sont une bonne solution pour améliorer les
@@ -845,12 +845,12 @@ uniquement mettre en cache une page dans son intégralité. Si ce n'est
 pas possible de mettre une page entière en cache ou si des parties de
 cette page sont plus dynamiques que d'autres, cela pose
 problème. Heureusement, Symfony2 fournit une solution pour ces
-situations, basée sur la technologie "Edge Side Includes", aussi appelée
+situations, basée sur la technologie «Edge Side Includes», aussi appelée
 `ESI`_. Akamaï a écrit cette spécification il y a 10 ans ; elle permet
 de mettre en cache une partie de page avec une stratégie différente de
 l'ensemble de la page.
 
-La spécification "ESI" décrit des marqueurs ("tags") qui peuvent être
+La spécification «ESI» décrit des marqueurs («tags») qui peuvent être
 embarqués dans la page pour communiquer avec la passerelle de
 cache. Un seul marqueur est implémenté dans Symfony2, ``include`` car
 c'est le seul qui est utile en dehors du contexte Akamaï : 
@@ -875,12 +875,12 @@ c'est le seul qui est utile en dehors du contexte Akamaï :
     qui peut être appelé via une URL donnée.
 
 Quand une requête est envoyée, la passerelle de cache appelle la page
-entière depuis son espace de stockage ou depuis le "backend" de
+entière depuis son espace de stockage ou depuis le «backend» de
 l'application. Si la réponse contient un ou plusieurs marqueur ESI,
 ils sont gérés de la même manière. S'ils sont ne sont pas dans
 l'espace de stockage du cache, ils sont calculés par
 l'application. Quand tous les marqueurs ont été calculés, la
-passerelle les "fusionne" avec la page principale et envoie le contenu
+passerelle les «fusionne» avec la page principale et envoie le contenu
 final vers le client.
 
 Le processus est géré de manière transparente au niveau de la
@@ -920,7 +920,7 @@ configuration de l'application :
         ));
 
 Maintenant, prenons l'exemple d'une page statique excepté pour
-l'espace "Actualité" qui se trouve en base de page. Avec ESI, il est
+l'espace «Actualité» qui se trouve en base de page. Avec ESI, il est
 possible de mettre en cache la partie qui gère les actualités
 indépendamment du reste de la page.
 
@@ -937,11 +937,11 @@ indépendamment du reste de la page.
 Dans cet exemple, la page a une espèrance de vie de 10 minutes en
 cache. Dans un deuxième temps, incluons l'élément relatif à
 l'actualité dans un template via une action embarquée. Ceci sera
-réalisé grâce au "helper" ``render`` (voir la documentation sur
+réalisé grâce au «helper» ``render`` (voir la documentation sur
 `templating-embedding-controller` pour plus de détails).
 
 Comme le contenu embarqué provient d'une autre page (un d'un autre
-contrôleur), Symfony2 utilise le "helper" standard ``render`` pour
+contrôleur), Symfony2 utilise le «helper» standard ``render`` pour
 configurer le marqueur ESI :
 
 .. configuration-block::
@@ -956,9 +956,9 @@ configurer le marqueur ESI :
 
 Définir ``standalone`` à ``true`` permet à Symfony2 de savoir que
 l'action doit être renvoyée en tant que marqueur ESI. Vous devez vous
-demandez pourquoi vous devriez préférer utiliser un "helper" au lieu
+demandez pourquoi vous devriez préférer utiliser un «helper» au lieu
 d'écrire simplement le marquer ESI vous-même. C'est parce que
-l'utilisation d'un "helper" permettra à l'application de fonctionner
+l'utilisation d'un «helper» permettra à l'application de fonctionner
 même s'il n'y a pas de paserelle de cache installée. Voyons cela plus
 en détail.
 
@@ -1048,11 +1048,11 @@ toute en faisant appel à cette application le moins possible.
     Une fois que ESI est utilisée, il ne faut pas oublier de toujours
     utiliser la directive ``s-maxage`` à la place de
     ``max-age``. Comme le navigateur ne reçoit que la réponse
-    "agrégée" de la ressource, il n'est pas conscient de son
-    "sous-contenu", il suit la directive ``max-age`` et met toute la
+    «agrégée» de la ressource, il n'est pas conscient de son
+    «sous-contenu», il suit la directive ``max-age`` et met toute la
     page en cache. Ce qui n'est pas souhaitable.
 
-Le "helper" ``render`` supporte deux autres méthodes utiles :
+Le «helper» ``render`` supporte deux autres méthodes utiles :
 
 * ``alt``: utilisée comme l'attribut ``alt`` du marqueur ESI, il
   permet de spécifier une URL alternative si la ressource ``src`` ne
@@ -1070,12 +1070,12 @@ Le "helper" ``render`` supporte deux autres méthodes utiles :
 Invalidation du cache
 ---------------------
 
-    "There are only two hard things in Computer Science: cache invalidation
-    and naming things." --Phil Karlton
+    «There are only two hard things in Computer Science: cache invalidation
+    and naming things.» --Phil Karlton
 
     Ceci peut être traduit comme : 
-    "Il existe uniquement deux opérations délicates en Informatique :
-    l'invalidation de cache et nommé les choses."
+    «Il existe uniquement deux opérations délicates en Informatique :
+    l'invalidation de cache et nommé les choses.»
 
 L'invalidation des données du cache ne devrait pas être gérée au
 niveau de l'application parce que l'invalidation est déjà prise en
@@ -1091,7 +1091,7 @@ définie trop loin dans le futur.
     qu'on peut utiliser nimporte quel reverse proxy sans rien changer
     au code de l'application.
 
-Au fait, tous les "reverse proxies" fournissent un moyen de purger les
+Au fait, tous les «reverse proxies» fournissent un moyen de purger les
 données du cache mais il faut l'éviter autant que possible. Le moyen
 le plus standard est de purger le cache pour une URL donnée en
 l'appelant avec la méthode HTTP spéciale ``PURGE``.
