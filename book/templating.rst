@@ -118,12 +118,12 @@ avec Twig et PHP.
 
 .. sidebar:: Pourquoi Twig?
 
-    Les templates Twig sont conçus pour être simple et ne traiteront aucun code
-    PHP. 
-    Twig templates are meant to be simple and won't process PHP tags. De par sa
-    conception, le système de template Twig s'occupe de la présentation, pas de
-    la logique. Plus vous utiliserez Twig, plus vous apprécierez cette distinction
-    et en bénéficierez. Et bien sûr, vous serez adoré par tous les web designers.
+    Les templates Twig sont conçus pour être simple et ne traiteront
+    aucun code PHP. De par sa conception, le système de template Twig
+    s'occupe de la présentation, pas de la logique. Plus vous
+    utiliserez Twig, plus vous apprécierez cette distinction et en
+    bénéficierez. Et bien sûr, vous serez adoré par tous les web
+    designers.
 
     Twig peut aussi faire des choses que PHP ne pourrait pas faire, comme du vrai
     héritage de templates (Twig compile les templates en classes PHP qui héritent
@@ -181,7 +181,7 @@ des **blocks** (comprenez « classe PHP avec des méthodes de base »). Un templ
 enfant peut étendre le template layout et surcharger n'importe lequel de ses blocks
 (comprenez « une sous-classe PHP qui surcharge certaines méthodes de sa classe parente »).
 
-TOut d'abord, construisez un fichier layout :
+Tout d'abord, construisez un fichier layout :
 
 .. configuration-block::
 
@@ -242,14 +242,15 @@ TOut d'abord, construisez un fichier layout :
     Bien que les explications sur l'héritage de template concernent Twig, la
     philosophie est la même pour les templates PHP.
 
-This template defines the base HTML skeleton document of a simple two-column
-page. In this example, three ``{% block %}`` areas are defined (``title``,
-``sidebar`` and ``body``). Each block may be overridden by a child template
-or left with its default implementation. This template could also be rendered
-directly. In that case the ``title``, ``sidebar`` and ``body`` blocks would
-simply retain the default values used in this template.
+Ce template définit le squelette HTML de base d'un document constitué simplement
+de deux colonnes. Dans cette exemplen, trois espaces ``{% block %}`` sont défnis
+(``title``, ``sidebar`` et ``body``). Chacun de ces bloques peut être soit
+surcharger dans un template enfant ou soit conserver leur code d'origine. Ce
+template peut aussi être rendu directement. Dans ce cas, les bloques ``title``,
+``sidebar`` et ``body`` conserveront simplement les valeurs par défauts
+utilisées dans ce template.
 
-A child template might look like this:
+Un template enfant peut ressembler à cela : 
 
 .. configuration-block::
 
@@ -283,17 +284,17 @@ A child template might look like this:
 
 .. note::
 
-   The parent template is identified by a special string syntax
-   (``::base.html.twig``) that indicates that the template lives in the
-   ``app/Resources/views`` directory of the project. This naming convention is
-   explained fully in :ref:`template-naming-locations`.
+   Le template parent est identifié grâce à une chaine de caractères
+   particulière (``::base.html.twig``) qui indique que ce template se trouve
+   dans le dossier ``app/Resources/views`` du projet. Cette convention de
+   nommage est complètement expliqués dans :ref:`template-naming-locations`.
 
-The key to template inheritance is the ``{% extends %}`` tag. This tells
-the templating engine to first evaluate the base template, which sets up
-the layout and defines several blocks. The child template is then rendered,
-at which point the ``title`` and ``body`` blocks of the parent are replaced
-by those from the child. Depending on the value of ``blog_entries``, the
-output might look like this::
+La clé de l'héritage de template est la balise ``{% extends %}``. Elle indique
+au moteur de template d'évaluer d'abord le template de base, qui configure le
+layout et définit plusieurs bloques. Le template enfant est ensuite
+rendu. Durant ce traitement les bloques parents ``title`` et ``body`` sont
+remplacés par ceux de l'enfant. Dépendant de la valeur de ``blog_entries``, la
+sortie peut ressembler à ceci : ::
 
     <!DOCTYPE html>
     <html>
@@ -319,33 +320,37 @@ output might look like this::
         </body>
     </html>
 
-Notice that since the child template didn't define a ``sidebar`` block, the
-value from the parent template is used instead. Content within a ``{% block %}``
-tag in a parent template is always used by default.
+Remarquons que comme le template enfant n'a pas définit le block ``sidebar``, la
+valeur du template parent est utilisé à la place. Le contenu d'une balise 
+``{% block %}`` d'un template parent est toujours utilisé par défaut.
 
-You can use as many levels of inheritance as you want. In the next section,
-a common three-level inheritance model will be explained along with how templates
-are organized inside a Symfony2 project.
+Vous pouvez utiliser autant de niveau d'héritage que vous souhaitez. Dans la
+section suivante, un modèle commun d'héritage à trois niveaux sera expliqué,
+ainsi que l'organisation des templates au sein d'un projet Symfony2.
 
-When working with template inheritance, here are some tips to keep in mind:
+Quand on travaille avec l'héritage de template, il est important de garder ces
+astuces à l'esprit :
 
-* If you use ``{% extends %}`` in a template, it must be the first tag in
-  that template.
+* Si vous utilisez ``{% extends %}`` dans un template, alors ce doit être la
+  première balise de ce template.
 
-* The more ``{% block %}`` tags you have in your base templates, the better.
-  Remember, child templates don't have to define all parent blocks, so create
-  as many blocks in your base templates as you want and give each a sensible
-  default. The more blocks your base templates have, the more flexible your
-  layout will be.
+* Plus vous utilisez les balises ``{% block %}`` dans les templates, le mieux
+  c'est. Souvenez-vous, les templates enfants ne doivent pas obligatoirement
+  définir tous les bloques parents, donc créez autant de bloques que vous
+  désirez dans le template de base et attribuez leurs une configuration par
+  défaut. Plus vous avez de bloques dans le template de base, plus le layout
+  sera flexible.
 
-* If you find yourself duplicating content in a number of templates, it probably
-  means you should move that content to a ``{% block %}`` in a parent template.
-  In some cases, a better solution may be to move the content to a new template
-  and ``include`` it (see :ref:`including-templates`).
+* Si vous vous retrouvez à dupliquer du contenu dans plusieurs template, cela
+  veut probablement dire que vous devriez déplacer ce contenu dans un 
+  ``{% block  %}`` d'un template parent. Dans certain cas, la meilleur solution 
+  peut être de déplacer le contenu dans un nouveau template et de l'``include`` 
+  (voir :ref:`including-templates`).
 
-* If you need to get the content of a block from the parent template, you
-  can use the ``{{ parent() }}`` function. This is useful if you want to add
-  to the contents of a parent block instead of completely overriding it:
+* Si vous avez besoin de récupérer le contenu d'un bloque d'un template parent,
+  vous pouvez utiliser la fonction ``{{ parent() }}``. C'est utile si on
+  souhaite compléter le contenu du bloque parent au lieu de le réécrire
+  totalement :
 
     .. code-block:: html+jinja
 
@@ -361,60 +366,63 @@ When working with template inheritance, here are some tips to keep in mind:
 
 .. _template-naming-locations:
 
-Template Naming and Locations
+Nommage de template et Emplacements
 -----------------------------
 
-By default, templates can live in two different locations:
+Par défaut, les templates peuvent se trouver dans deux emplacements
+différents :
 
-* ``app/Resources/views/``: The applications ``views`` directory can contain
-  application-wide base templates (i.e. your application's layouts) as well as
-  templates that override bundle templates (see
-  :ref:`overriding-bundle-templates`);
+* ``app/Resources/views/`` : Le dossier des ``views`` de l'application peut
+  aussi bien contenir le template de base de l'application (i.e. le layout de
+  l'application) ou les templates qui surchargent les templates des bundles
+  (voir :ref:`overriding-bundle-templates`);
 
-* ``path/to/bundle/Resources/views/``: Each bundle houses its templates in its
-  ``Resources/views`` directory (and subdirectories). The majority of templates
-  will live inside a bundle.
+* ``path/to/bundle/Resources/views/`` : Chaque bundle place leurs
+  templates dans leur dossier ``Resources/views`` (et sous dossiers). La
+  plupart des templates résident au sein d'un bundle.
 
-Symfony2 uses a **bundle**:**controller**:**template** string syntax for
-templates. This allows for several different types of templates, each which
-lives in a specific location:
+Symfony2 utilise une chaine de caractère au format
+**bundle**:**controller**:**template** pour les templates.
 
-* ``AcmeBlogBundle:Blog:index.html.twig``: This syntax is used to specify a
-  template for a specific page. The three parts of the string, each separated
-  by a colon (``:``), mean the following:
+* ``AcmeBlogBundle:Blog:index.html.twig``: Cette syntaxe est utilisée pour
+  spécifier un template pour une page donnée. Les trois parties de la chaine de
+  caractère, séparée par deux-points (``:``), signifie ceci :
 
-    * ``AcmeBlogBundle``: (*bundle*) the template lives inside the
-      ``AcmeBlogBundle`` (e.g. ``src/Acme/BlogBundle``);
+    * ``AcmeBlogBundle``: (*bundle*) le template se trouve dans le 
+      ``AcmeBlogBundle`` (``src/Acme/BlogBundle`` par exemple);
 
-    * ``Blog``: (*controller*) indicates that the template lives inside the
-      ``Blog`` subdirectory of ``Resources/views``;
+    * ``Blog``: (*controller*) indique que le template se trouve dans le
+      sous-répertoire ``Blog`` de ``Resources/views``;
 
-    * ``index.html.twig``: (*template*) the actual name of the file is
+    * ``index.html.twig``: (*template*) le nom réel du fichier est 
       ``index.html.twig``.
 
-  Assuming that the ``AcmeBlogBundle`` lives at ``src/Acme/BlogBundle``, the
-  final path to the layout would be ``src/Acme/BlogBundle/Resources/views/Blog/index.html.twig``.
+  En supposant que le ``AcmeBlogBundle`` se trouve à ``src/Acme/BlogBundle``, le
+  chemin final du layout serait ``src/Acme/BlogBundle/Resources/views/Blog/index.html.twig``.
 
-* ``AcmeBlogBundle::layout.html.twig``: This syntax refers to a base template
-  that's specific to the ``AcmeBlogBundle``. Since the middle, "controller",
-  portion is missing (e.g. ``Blog``), the template lives at
-  ``Resources/views/layout.html.twig`` inside ``AcmeBlogBundle``.
+* ``AcmeBlogBundle::layout.html.twig``: Cette syntaxe fait référence à un
+  template de base qui est spécifique au ``AcmeBlogBundle``. Donc la partie du
+  milieu, "controller", est absente (``Blog`` par exemple), le template se
+  trouve à ``Resources/views/layout.html.twig`` dans ``AcmeBlogBundle``.
 
-* ``::base.html.twig``: This syntax refers to an application-wide base template
-  or layout. Notice that the string begins with two colons (``::``), meaning
-  that both the *bundle* and *controller* portions are missing. This means
-  that the template is not located in any bundle, but instead in the root
-  ``app/Resources/views/`` directory.
+* ``::base.html.twig``: Cette syntaxe fait référence à un template de base d'une
+  application ou layout. Remarquez que la chaine de caractère commence par deux
+  deux-points (``::``), ce qui signifie que les deux parties *bundle* et
+  *controller* sont absente. Ce qui signifie que le template ne se trouve dans
+  aucun bundle, mais directement dans le répertoire racine
+  ``app/Resources/views/``.
 
-In the :ref:`overriding-bundle-templates` section, you'll find out how each
-template living inside the ``AcmeBlogBundle``, for example, can be overridden
-by placing a template of the same name in the ``app/Resources/AcmeBlogBundle/views/``
-directory. This gives the power to override templates from any vendor bundle.
+Dans la section :ref:`overriding-bundle-templates`, vous verrez comment les
+templates intéragissent avec ``AcmeBlogBundle``. Par exemple, il est possible de
+surcharger un template en plaçant un template du même nom dans le répertoire
+``app/Resources/AcmeBlogBundle/views/``. Cela offre la possibilité de surcharger
+les templates fournis par n'importe quel vendor bundle.
 
 .. tip::
 
-    Hopefully the template naming syntax looks familiar - it's the same naming
-    convention used to refer to :ref:`controller-string-syntax`.
+    Heureusement la syntaxe de nommage des template parait familière - c'est la
+    même convention de nommage qui est utiliser pour faire référence à
+    :ref:`controller-string-syntax`.
 
 Template Suffix
 ~~~~~~~~~~~~~~~
