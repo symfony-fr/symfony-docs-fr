@@ -6,14 +6,14 @@ Performance
 
 Symfony2 est rapide, sans aucune configuration. Bien entendu, si vous voulez
 que ça soit plus rapide, il y a de nombreuses façons de rendre Symfony
-encore plus rapide. Dans ce chapitre, vous explorerez les façons les plus courantes
+encore plus rapide. Dans ce chapitre, vous explorerez les méthodes les plus courantes
 et les plus puissantes pour rendre votre application Symfony encore plus rapide.
 
 .. index::
    single: Performance; Byte code cache
 
-Utiliser un cache de byte code (e.g. APC)
------------------------------------------
+Utiliser un cache de byte code (ex APC)
+---------------------------------------
 
 L'une des meilleures choses (et des plus simples) que vous devriez faire pour
 augmenter la performance est d'utiliser un cache de byte code (« byte code cache »).
@@ -23,16 +23,16 @@ sont open source. Le cache de byte code le plus largement utilisé est
 probablement `APC`_
 
 Il n'y a aucun effet négatif à utiliser un cache de byte code, et Symfony2 
-a été architecturé pour être vraiment performant dans ce type d'environnement.
+a été conçu pour être vraiment performant dans ce type d'environnement.
 
 D'autres optimisations
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 Le cache de byte code surveille normalement tout changement de code source.
 Cela permet de recompiler automatiquement le byte code en cas de changement
 d'un fichier source. C'est très pratique, mais cela a évidemment un coût.
 
-Pour cette raison, certains cache de byte code offre l'option de désactiver
+Pour cette raison, certains cache de byte code offrent l'option de désactiver
 la vérification, ce sera donc à l'administrateur système de vider le cache 
 à chaque changement de fichier. Sinon, les mises à jour ne seront pas visibles.
 
@@ -90,7 +90,7 @@ Utiliser des fichiers d'amorçage
 
 Afin d'assurer une flexibilité maximale et de favoriser la réutilisation du code,
 les applications Symfony2 profitent de nombreuses classes et composants externes.
-Mais charger toutes les classes de fichiers séparés à chaque requête peut
+Mais charger toutes les classes depuis des fichiers séparés à chaque requête peut
 entraîner des coûts. Afin de réduire ces coûts, la distribution Symfony standard
 fournit un script qui génère ce qu'on appelle un `fichier d'amorçage`_
 (« bootstrap file »), qui consiste en une multitude de définitions de classes
@@ -108,21 +108,21 @@ existe et n'est pas commentée (ce dont vous avez besoin dépend de si vous util
     require_once __DIR__.'/../app/bootstrap.php.cache';
     require_once __DIR__.'/../app/bootstrap_cache.php.cache';
 
-Veuillez noter qu'il y a deux désavantages à utiliser un fichier d'amorçage :
+Veuillez noter qu'il y a deux inconvénients à utiliser un fichier d'amorçage :
 
-* le fichier nécessite d'être régénérer à chaque fois les fichiers sources 
+* le fichier nécessite d'être régénéré à chaque fois que les fichiers sources 
 originaux changent (à savoir quand vous mettez à jour le code source de Symfony2
-ou un une librairie "vendor",
+ou une librairie tierce),
 
 * lors du débogage, vous devrez placer des points d'arrêt (breakpoints) dans ce fichier
 d'amorçage.
 
 Si vous utilisez l'édition Symfony2 standard, les fichiers d'amorçage sont automatiquement
-regénérés après avoir mis à jour les librairies "vendor" grâce à la commande
-``php bin/vendors install``.
+regénérés après avoir mis à jour les librairies tierces (« vendors »)
+grâce à la commande ``php bin/vendors install``.
 
-Fichiers d'amorçage et  caches de byte code
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fichiers d'amorçage et caches de byte code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Même en utilisant un cache de byte code, la performance sera améliorée si vous utilisez
 un fichier d'amorçage, car il y aura moins de fichiers dont il faut surveiller 
