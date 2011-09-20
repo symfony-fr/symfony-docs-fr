@@ -4,14 +4,14 @@
 Routage
 =======
 
-De belles URLs sont une obligation absolue pour quelconque application web
-sérieuse. Cela signifie d'oublier les URLs moches comme
+De belles URLs sont une obligation absolue pour une quelconque application web
+sérieuse. Cela implique d'oublier les URLs moches comme
 ``index.php?article_id=57`` en faveur de quelque chose comme
 ``/read/intro-to-symfony``.
 
 Avoir de la flexibilité est encore plus important. Que se passe-t-il si
-vous avez besoin de changer l'URL d'une page de ``/blog`` à ``/news`` ?
-Combien de liens auriez-vous besoin de traquer et mettre à jour afin
+vous avez besoin de changer l'URL d'une page de ``/blog`` pour ``/news`` ?
+Combien de liens aurez-vous besoin de traquer et mettre à jour afin
 de prendre en compte ce changement ? Si vous utilisez le routeur de Symfony,
 le changement est simple.
 
@@ -33,7 +33,7 @@ Le routage en Action
 Une *route* est une correspondance entre un pattern d'URL et un contrôleur.
 Par exemple, supposez que vous vouliez faire correspondre n'importe quelle
 URL comme ``/blog/my-post`` ou ``/blog/all-about-symfony`` et l'envoyer vers
-un contrôleur qui puisse chercher et retourner cette entrée de blog.
+un contrôleur qui puisse chercher et retourner ce billet de blog.
 La route est simple :
 
 .. configuration-block::
@@ -77,7 +77,7 @@ la variable ``slug`` prend la valeur de ``my-blog-post``, qui est à votre
 disposition dans votre contrôleur (continuez à lire).
 
 Le paramètre ``_controller`` est une clé spéciale qui dit à Symfony quel
-contrôleur devrait être exécuté lorsqu'une URL correspond à cette route.
+contrôleur doit être exécuté lorsqu'une URL correspond à cette route.
 La chaîne de caractères ``_controller`` est appelée le
 :ref:`nom logique<controller-string-syntax>`. Il suit un pattern qui pointe
 vers une classe et une méthode PHP spécifique :
@@ -115,8 +115,8 @@ d'astuces qui rendent même facile la création des URLs les plus complexes.
 Routage: Sous le Capot
 ----------------------
 
-Quand une requête est faite à votre application, elle contient une adresse
-pointant sur la «ressource» exacte que le client désire. Cette adresse est
+Quand une requête est lancée vers votre application, elle contient une adresse
+pointant sur la « ressource » exacte que le client désire. Cette adresse est
 appelée l'URL, (ou l'URI), et pourrait être ``/contact``, ``/blog/read-me``,
 ou n'importe quoi d'autre. Prenez l'exemple de la requête HTTP suivante :
 
@@ -131,7 +131,7 @@ ressemble à ça :
 #. La requête est gérée par le contrôleur frontal de Symfony2 (par exemple :
    ``app.php``) ;
 
-#. Le coeur de Symfony2 (i.e. Kernel) demande au routeur d'inspecter la
+#. Le coeur de Symfony2 (c-a-d Kernel) demande au routeur d'inspecter la
    requête ;
 
 #. Le routeur fait correspondre l'URL entrante à une route spécifique et retourne
@@ -247,7 +247,7 @@ Routage avec les Paramètres de substitution
 
 Evidemment, le système de routage supporte des routes beaucoup plus
 intéressantes. De nombreuses routes vont contenir un ou plusieurs
-paramètres de substitution nommés «joker» :
+paramètres de substitution nommés « joker » :
 
 .. configuration-block::
 
@@ -284,14 +284,14 @@ paramètres de substitution nommés «joker» :
 
 Le pattern va faire correspondre tout ce qui ressemble à ``/blog/*``.
 Mieux encore, la valeur correspondante au paramètre de substitution
-``{slug}`` sera disponible dans votre contrôleur. En d'autres mots, si
+``{slug}`` sera disponible dans votre contrôleur. En d'autres termes, si
 l'URL est ``/blog/hello-world``, une variable ``$slug``, avec la valeur
 ``hello-world``, sera à votre disposition dans le contrôleur. Ceci
 peut être utilisé, par exemple, pour récupérer l'entrée du blog qui
 correspond à cette chaîne de caractères.
 
 Cependant, le pattern *ne va pas* faire correspondre simplement ``/blog``
-à cette route. Ceci parce que, par défaut, tous les paramètres de substitution
+à cette route. Et cela parce que, par défaut, tous les paramètres de substitution
 sont requis. Ce comportement peut être modifié en ajoutant une valeur
 au paramètre de substitution dans le tableau ``defaults``.
 
@@ -384,7 +384,7 @@ Mais attendez ! Sachant que les paramètres substitutifs sont requis par
 défaut, cette route va maintenant arrêter de correspondre à une requête
 contenant simplement l'URL ``/blog``. A la place, pour voir la page 1 du
 blog, vous devriez utiliser l'URL ``/blog/1`` ! Ceci n'étant pas une solution
-«viable» pour une telle application web, modifiez la route et faites en sorte
+« viable » pour une telle application web, modifiez la route et faites en sorte
 que le paramètre ``{page}`` soit optionnel. Vous pouvez faire cela en
 l'incluant dans la collection des ``defaults`` :
 
@@ -585,7 +585,7 @@ Avec la possibilité de définir des conditions requises pour les paramètres à
 l'aide d'expressions régulières, la complexité et la flexibilité de chaque
 condition est entièrement dépendante de ce que vous en faites. Supposez que
 la page d'accueil de votre application soit disponible en deux langues
-différentes, basé sur l'URL :
+différentes, basée sur l'URL :
 
 .. configuration-block::
 
@@ -646,7 +646,7 @@ l'expression régulière ``(en|fr)``.
 Ajouter des Conditions Requises pour la Méthode HTTP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-En plus de l'URL, vous pouvez aussi comparer la *méthode* (i.e. GET, HEAD,
+En plus de l'URL, vous pouvez aussi comparer la *méthode* (c-a-d GET, HEAD,
 POST, PUT, DELETE) de la requête entrante avec celle définie dans les
 conditions requises de la route. Supposez que vous ayez un formulaire de
 contact avec deux contrôleurs - un pour afficher le formulaire (quand on
@@ -709,7 +709,7 @@ de routage suivante :
 
         return $collection;
 
-Malgré le fait que ces deux routes ont des patterns identiques (``/contact``),
+Malgré le fait que ces deux routes aient des patterns identiques (``/contact``),
 la première route correspondra uniquement aux requêtes GET et la seconde route
 correspondra seulement aux requêtes POST. Cela signifie que vous pouvez
 afficher le formulaire et le soumettre via la même URL, tout en utilisant
@@ -732,8 +732,8 @@ qu'expression régulière. Pour faire correspondre les requêtes à la méthode
 Exemple de Routage Avancé
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A ce point, vous possédez tout ce dont vous avez besoin pour créer une
-structure de routage puissante dans Symfony. La suite est un exemple
+A ce point, vous connaissez tout ce dont vous avez besoin pour créer une
+structure de routage puissante dans Symfony. Ce qui suit est un exemple
 montrant simplement à quel point le système de routage peut être flexible :
 
 .. configuration-block::
@@ -797,8 +797,8 @@ qui correspondent à cette route pourraient ressembler à ça :
 
     Cet exemple met aussi en valeur le paramètre spécial de routage ``_format``.
     Lorsque vous utilisez ce paramètre, la valeur correspondante devient alors
-    le «format de la requête» de l'objet ``Request``. Finalement, le format de
-    la requête est utilisé pour des choses comme spécifier le ``Content-Type``
+    le « format de la requête » de l'objet ``Request``. Finalement, le format de
+    la requête est utilisé pour des taches comme spécifier le ``Content-Type``
     de la réponse (par exemple : un format de requête ``json`` se traduit
     en un ``Content-Type`` ayant pour valeur ``application/json``). Il peut
     aussi être utilisé dans le contrôleur pour délivrer un template différent
@@ -828,7 +828,7 @@ Pattern de Nommage du Contrôleur
 --------------------------------
 
 Chaque route doit avoir un paramètre ``_controller``, qui lui dicte quel
-contrôleur devrait être exécuté lorsque cette route correspond à l'URL.
+contrôleur doit être exécuté lorsque cette route correspond à l'URL.
 Ce paramètre utilise un pattern de chaîne de caractères simple appelé
 *nom logique du contrôleur*, que Symfony fait correspondre à une méthode
 et à une classe PHP spécifique. Le pattern a trois parties, chacune
@@ -910,7 +910,7 @@ qu'arguments de la méthode ``showAction()`` :
 
 Sachant que les paramètres de substitution et la collection ``defaults`` sont
 fusionnés ensemble, même la variable ``$_controller`` est disponible. Pour une
-discussion plus détaillée sur le sujet, voyez :ref:`route-parameters-controller-arguments`.
+discussion plus détaillée sur le sujet, lisez :ref:`route-parameters-controller-arguments`.
 
 .. tip::
 
@@ -928,7 +928,7 @@ Inclure des Ressources Externes de Routage
 Toutes les routes sont chargées via un unique fichier de configuration - généralement
 ``app/config/routing.yml`` (voir `Créer des Routes`_ ci-dessus). Cependant, la plupart
 du temps, vous voudrez charger les routes depuis d'autres endroits, comme un fichier de
-routage qui se trouve dans un bundle. Ceci peut être fait en «important» ce fichier :
+routage qui se trouve dans un bundle. Ceci peut être fait en « important » ce fichier :
 
 .. configuration-block::
 
@@ -964,12 +964,12 @@ routage qui se trouve dans un bundle. Ceci peut être fait en «important» ce f
 
    Lorsque vous importez des ressources depuis YAML, la clé (par exemple :
    ``acme_hello``) n'a pas de sens précis. Assurez-vous simplement que cette
-   dernière soit unique afin qu'aucune autre ligne ne l'outrepasse.
+   dernière soit unique afin qu'aucune autre ligne ne la surcharge.
 
 La clé de la ``ressource`` charge la ressource de routage donnée. Dans cet
 exemple, la ressource est le répertoire entier d'un fichier, où la syntaxe
 raccourcie ``@AcmeHelloBundle`` est traduite par le répertoire de ce bundle.
-Le fichier importé pourrait ressemblé à quelque chose comme ça :
+Le fichier importé pourrait ressembler à quelque chose comme ça :
 
 .. configuration-block::
 
@@ -1013,9 +1013,9 @@ pour le fichier de routage principal.
 Préfixer les Routes Importées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi choisir de fournir un «préfixe» pour les routes importées. Par
+Vous pouvez aussi choisir de définir un « préfixe » pour les routes importées. Par
 exemple, supposez que vous vouliez que la route ``acme_hello`` ait un pattern
-final tel ``/admin/hello/{name}`` à la place de simplement ``/hello/{name}`` :
+final ``/admin/hello/{name}`` à la place de simplement ``/hello/{name}`` :
 
 .. configuration-block::
 
@@ -1097,7 +1097,7 @@ réalité, le routage est un système bi-directionnel : faire correspondre une
 URL à un contrôleur+paramètres et une route+paramètres à une URL. Les méthodes
 :method:`Symfony\\Component\\Routing\\Router::match` et
 :method:`Symfony\\Component\\Routing\\Router::generate` forment ce système
-bi-directionnel. Prenez l'exemple de la route ``blog_show`` vu plus haut ::
+bi-directionnel. Prenez l'exemple de la route ``blog_show`` vue plus haut ::
 
     $params = $router->match('/blog/my-blog-post');
     // array('slug' => 'my-blog-post', '_controller' => 'AcmeBlogBundle:Blog:show')
@@ -1170,7 +1170,7 @@ Générer des URLs depuis un template
 
 L'endroit principal où vous générez une URL est depuis un template lorsque vous
 créez des liens entre les pages de votre application. Cela se fait comme on l'a
-vu auparavant, mais en utilisant une fonction d'aide du template :
+vu auparavant, mais en utilisant une fonction d'aide (helper) du template :
 
 .. configuration-block::
 
