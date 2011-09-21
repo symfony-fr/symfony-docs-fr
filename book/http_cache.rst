@@ -154,13 +154,13 @@ Symfony2 Reverse Proxy
 
 Symfony2 contient un reverse proxy (aussi appelé passerelle de cache)
 écrit en PHP. Son activation entrainera la mise en cache immédiate des
-réponses stockables de l'application. L'installé est si simple. Chaque
+réponses stockables de l'application. L'installer est aussi simple que ça. Chaque
 nouvelle application Symfony2 contient un noyau pré-configuré
-(AppCache) qui encapsule le noyau par défault (AppKernel). Le cache
-noyau *est* le reverse proxy.
+(AppCache) qui encapsule le noyau par défault (AppKernel). Le cache kernel (cache
+du noyau) *est* le reverse proxy.
 
 Pour activer le mécanisme de cache, il faut modifier le code du
-contrôleur principal pour qu'il utilise le cache noyau : ::
+contrôleur principal pour qu'il utilise le cache kernel : ::
 
     // web/app.php
 
@@ -176,22 +176,22 @@ contrôleur principal pour qu'il utilise le cache noyau : ::
     $kernel = new AppCache($kernel);
     $kernel->handle(Request::createFromGlobals())->send();
 
-Le cache noyau se comportera immédiatement comme un «reverse proxy» en
+Le cache kernel se comportera immédiatement comme un « reverse proxy » en
 mettant en cache les réponses de l'application et en les renvoyant au
 client.
 
 .. tip::
 
-    Le cache Noyau a une méthode spéciale ``getLog()`` qui retourne
-    une chaine de caractère décrivant ce qui se passe dans la couche
+    Le cache kernel a une méthode spéciale ``getLog()`` qui retourne
+    une chaine de caractères décrivant ce qui se passe dans la couche
     du cache. Dans l'environnement de développement, il est possible
     de l'utiliser pour du débogage ou afin de valider votre stratégie
     de mise en cache : ::
 
         error_log($kernel->getLog());
 
-L'objet ``AppCache`` a un configuration par défaut raisonnable mais
-peut être reconfigurer finement grâce à une série d'options que vous
+L'objet ``AppCache`` a une configuration par défaut mais
+peut être reconfiguré finement grâce à une série d'options que vous
 pouvez paramètrer en surchargeant la méthode ``getOptions()`` : ::
 
     // app/AppCache.php
@@ -214,52 +214,52 @@ pouvez paramètrer en surchargeant la méthode ``getOptions()`` : ::
 .. tip::
 
     A moins que la méthode ``getOptions()`` soit surchargée, l'option
-    ``debug`` est mise automatiquement à la valeur ``débogage`` du
+    ``debug`` est mise automatiquement à la valeur de debug de l'objet
     ``AppKernel`` encapsulé.
 
 Voici une liste des principales options :
 
-* ``default_ttl`` : Le nombre de seconde pendant laquelle une entrée du
-  cache devrait être considérée comme «valide» quand il n'y a pas
+* ``default_ttl`` : Le nombre de seconde pendant lesquelles une entrée du
+  cache devrait être considérée comme « valide » quand il n'y a pas
   d'information explicite fournie dans une réponse. Une valeur
   explicite pour les en-têtes ``Cache-Control`` ou ``Expires``
   surcharge cette valeur (par défaut : ``0``);
 
 
 * ``private_headers`` : Type d'en-têtes de requête qui déclenche le
-  comportement «privé» du ``Cache-Control`` pour les réponses qui ne
-  spécifie pas leur état, c'est à dire, si la réponse est ``public``
-  ou ``private`` via une directive du ``Cache-Control``. (par défaut
-  : ``Authorization`` et ``Cookie``);
+  comportement « privé » du ``Cache-Control`` pour les réponses qui ne
+  spécifient pas leur état, c'est-à-dire, si la réponse est ``public``
+  ou ``private`` via une directive du ``Cache-Control``. (par défaut : ``Authorization``
+  et ``Cookie``);
 
 * ``allow_reload`` : Définit si le client peut forcer ou non un
   rechargement du cache en incluant une directive du ``Cache-Control``
-  «no-cache» dans la requête. Définit à ``true`` pour la conformité
+  « no-cache » dans la requête. Définissez la à ``true`` pour la conformité
   avec la RFC 2616 (par défaut : ``false``);
 
 * ``allow_revalidate`` : Définit si le client peut forcer une
   revalidation du cache en incluant une directive de ``Cache-Control``
-  «max-age=0» dans la requête. Défini à ``true`` pour la conformité
+  « max-age=0 » dans la requête. Définissez la à ``true`` pour la conformité
   avec la RFC 2616 (par defaut : ``false``);
 
 * ``stale_while_revalidate`` : Spécifie le nombre de secondes par
   défaut (la granularité est la seconde parce que le TTL de la réponse
   est en seconde) pendant lesquelles le cache peut renvoyer une
-  réponse «périmée» alors que la nouvelle réponse est calculée en
+  réponse « périmée » alors que la nouvelle réponse est calculée en
   arrière-plan (par défaut : ``2``). Ce paramètre est surchargé par
   l'extension HTTP ``stale-while-revalidate`` du ``Cache-Control``
   (cf. RFC 5861);
 
 * ``stale_if_error`` : Spécifie le nombre de seconde par défaut (la
   granularité est la seconde) pendant lesquelles le cache peut
-  renvoyer une réponse «périmée» quand une erreur est rencontrée (par
+  renvoyer une réponse « périmée » quand une erreur est rencontrée (par
   défaut : ``60``). Ce paramètre est surchargé par l'extension HTTP
   ``stale-if-error`` du ``Cache-Control`` (cf. RFC 5961).
 
-SI le paramètre ``debug`` est à ``true``, Symfony2 ajoute
-automatiquement l'en-têtes ``X-Symfony-Cache`` à la réponse contenant
-des informations utiles à propos des cache «hits» (utilisation du
-cache) et «misses» (page ou réponse non présente en cache).
+Si le paramètre ``debug`` est à ``true``, Symfony2 ajoute
+automatiquement l'en-tête ``X-Symfony-Cache`` à la réponse contenant
+des informations utiles à propos des cache « hits » (utilisation du
+cache) et « misses » (page ou réponse non présente en cache).
 
 .. sidebar:: Passer d'un Reverse Proxy à un autre
 
@@ -273,9 +273,9 @@ cache) et «misses» (page ou réponse non présente en cache).
    qu'il est très simple de passer d'un proxy à un autre sans
    qu'aucune modification ne soit nécessaire dans le code. Vous pouvez
    commencez avec le reverse proxy de Symfony2 puis le mettre à jour
-   plus tard vers Varnish quand votre traffic augmentera.
+   plus tard vers Varnish quand votre trafic augmentera.
 
-   Pour plus d'information concernant Varnish avec Symfony2, veuillez
+   Pour plus d'informations concernant Varnish avec Symfony2, veuillez
    vous reportez au chapitre du cookbook :doc:`How to use Varnish
    </cookbook/cache/varnish>`.
 
@@ -283,7 +283,7 @@ cache) et «misses» (page ou réponse non présente en cache).
 
     Les performances du reverse proxy de Symfony2 ne sont pas liées à
     la complexité de votre application. C'est parce que le noyau de
-    m'application n'est démarré que quand la requête lui est
+    l'application n'est démarré que quand la requête lui est
     transmise.
 
 .. index::
@@ -302,7 +302,7 @@ HTTP dans la réponse.
 
 .. tip::
 
-    Il faut garder à l'esprit que «HTTP» n'est rien d'autre que le
+    Il faut garder à l'esprit que « HTTP » n'est rien d'autre que le
     langage (un simple langage texte) que les clients web (les
     navigateurs par exemple) et les serveurs utilisent pour
     communiquer entre eux. Parler de mise en cache HTTP revient à
@@ -310,7 +310,7 @@ HTTP dans la réponse.
     serveurs d'échanger les informations relatives à la gestion du
     cache.
 
-HTTP définit quatre en-têtes spécifiques à la mise en cache des réponse :
+HTTP définit quatre en-têtes spécifiques à la mise en cache des réponses :
 
 * ``Cache-Control``
 * ``Expires``
@@ -334,7 +334,7 @@ L'en-tête Cache-Control
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Cet en-tête est unique du fait qu'il contient non pas une, mais un
-ensemble varié d'information sur la possiblité de mise en cache d'une
+ensemble varié d'informations sur la possibilité de mise en cache d'une
 réponse. Chaque information est séparée par une virgule :
 
      Cache-Control: private, max-age=0, must-revalidate
@@ -362,13 +362,13 @@ gestion :
 Réponse publique et réponse privée
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Les passerelles de cache et les caches «proxy» sont considérés comme
-étant «partagés» car leur contenu est partagé par plusieurs
+Les passerelles de cache et les caches « proxy » sont considérés comme
+étant « partagés » car leur contenu est partagé par plusieurs
 utilisateurs. Si une réponse spécifique à un utilisateur est par
 erreur stockée dans ce type de cache, elle pourrait être renvoyée à un
 nombre quelconque d'autres utilisateurs. Imaginez si les informations
 concernant votre compte sont mises en cache et ensuite envoyées à tous
-les utilisateurs suivants qui souhaite accéder à leur page de compte !
+les utilisateurs suivants qui souhaitent accéder à leur page de compte !
 
 Pour gérer cette situation, chaque réponse doit être définie comme
 étant publique ou privée :
@@ -378,7 +378,7 @@ Pour gérer cette situation, chaque réponse doit être définie comme
 
 * *private*: Indique que toute la réponse concerne un unique
    utilisateur et qu'elle ne doit pas être stockée dans les caches
-   publiques.
+   publics.
 
 Symfony considère par défaut chaque réponse comme étant privée. Pour
 tirer parti des caches partagés (comme le reverse proxy de Symfony2),
