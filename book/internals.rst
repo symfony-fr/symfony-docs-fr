@@ -75,196 +75,196 @@ qu'avec des conventions afin d'en faciliter l'apprentissage.
 .. index::
    single: Internals; Kernel
 
-Kernel
-------
+Le Kernel
+---------
 
-The :class:`Symfony\\Component\\HttpKernel\\HttpKernel` class is the central
-class of Symfony2 and is responsible for handling client requests. Its main
-goal is to "convert" a :class:`Symfony\\Component\\HttpFoundation\\Request`
-object to a :class:`Symfony\\Component\\HttpFoundation\\Response` object.
+La classe :class:`Symfony\\Component\\HttpKernel\\HttpKernel` est la classe
+centrale de Symfony2 et est responsable de la gestion des requêtes clientes.
+Son but principal est de « convertir » un objet
+:class:`Symfony\\Component\\HttpFoundation\\Request` en un objet
+:class:`Symfony\\Component\\HttpFoundation\\Response`.
 
-Every Symfony2 Kernel implements
-:class:`Symfony\\Component\\HttpKernel\\HttpKernelInterface`::
+Chaque Kernel Symfony2 implémente
+:class:`Symfony\\Component\\HttpKernel\\HttpKernelInterface` ::
 
     function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
 
 .. index::
-   single: Internals; Controller Resolver
+   single: Composants Internes; Résolution du Contrôleur
 
-Controllers
-~~~~~~~~~~~
+Les Contrôleurs
+~~~~~~~~~~~~~~~
 
-To convert a Request to a Response, the Kernel relies on a "Controller". A
-Controller can be any valid PHP callable.
+Pour convertir une Requête en une Réponse, le Kernel repose sur un « Contrôleur ».
+Un Contrôleur peut être n'importe quel « callable » PHP.
 
-The Kernel delegates the selection of what Controller should be executed
-to an implementation of
-:class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface`::
+Le Kernel délègue la sélection de quel Contrôleur devrait être exécuté à une
+implémentation de
+:class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface` ::
 
     public function getController(Request $request);
 
     public function getArguments(Request $request, $controller);
 
-The
+La méthode
 :method:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface::getController`
-method returns the Controller (a PHP callable) associated with the given
-Request. The default implementation
-(:class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver`)
-looks for a ``_controller`` request attribute that represents the controller
-name (a "class::method" string, like
-``Bundle\BlogBundle\PostController:indexAction``).
+retourne le Contrôleur (un « callable » PHP) associé à la Requête donnée. L'implémentation par
+défaut (:class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver`) recherche un
+attribut de la requête ``_controller`` qui représente le nom du contrôleur (une chaîne de
+caractères « class::method », comme ``Bundle\BlogBundle\PostController:indexAction``).
 
 .. tip::
+    L'implémentation par défaut utilise le
+    :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\RouterListener` pour définir
+    l'attribut de la Requête ``_controller`` (voir :ref:`kernel-core-request`).
 
-    The default implementation uses the
-    :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\RouterListener`
-    to define the ``_controller`` Request attribute (see :ref:`kernel-core-request`).
-
-The
+La méthode
 :method:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface::getArguments`
-method returns an array of arguments to pass to the Controller callable. The
-default implementation automatically resolves the method arguments, based on
-the Request attributes.
+retourne un tableau d'arguments à passer au Contrôleur. L'implémentation par défaut résoud
+automatiquement les arguments de la méthode, basé sur les attributs de la Requête.
 
-.. sidebar:: Matching Controller method arguments from Request attributes
+.. sidebar:: Faire correspondre les arguments de la méthode du Contrôleur aux attributs de la Requête
 
-    For each method argument, Symfony2 tries to get the value of a Request
-    attribute with the same name. If it is not defined, the argument default
-    value is used if defined::
+    Pour chaque argument d'une méthode, Symfony2 essaye d'obtenir la valeur d'un attribut
+    d'une Requête avec le même nom. S'il n'est pas défini, la valeur par défaut de l'argument
+    est utilisée si elle est définie ::
 
-        // Symfony2 will look for an 'id' attribute (mandatory)
-        // and an 'admin' one (optional)
+        // Symfony2 va rechercher un attribut « id » (obligatoire)
+        // et un nommé « admin » (optionnel)
         public function showAction($id, $admin = true)
         {
             // ...
         }
 
 .. index::
-  single: Internals; Request Handling
+  single: Composants Internes; Gestion de la Requête
 
-Handling Requests
-~~~~~~~~~~~~~~~~~
+Gestion des Requêtes
+~~~~~~~~~~~~~~~~~~~~
 
-The ``handle()`` method takes a ``Request`` and *always* returns a ``Response``.
-To convert the ``Request``, ``handle()`` relies on the Resolver and an ordered
-chain of Event notifications (see the next section for more information about
-each Event):
+La méthode ``handle()`` prend une ``Requête`` et retourne *toujours* une ``Réponse``.
+Pour convertir la ``Requête``, ``handle()`` repose sur le « Resolver » et sur une
+chaîne ordonnée de notifications d'évènements (voir la prochaine section pour plus
+d'informations à propos de chaque évènement) :
 
-1. Before doing anything else, the ``kernel.request`` event is notified -- if
-   one of the listener returns a ``Response``, it jumps to step 8 directly;
+1. Avant de faire quoi que ce soit d'autre, l'évènement ``kernel.request`` est
+   notifié -- si l'un des listeners (« écouteurs » en français) retourne une
+   ``Réponse``, il saute directement à l'étape 8 ;
 
-2. The Resolver is called to determine the Controller to execute;
+2. Le « Resolver » est appelé pour déterminer le Contrôleur à exécuter ;
 
-3. Listeners of the ``kernel.controller`` event can now manipulate the
-   Controller callable the way they want (change it, wrap it, ...);
+3. Les listeners de l'évènement ``kernel.controller`` peuvent maintenant
+   manipuler le « callable » Contrôleur de la manière dont ils souhaitent
+   (le changer, créer un « wrapper » au-dessus de lui, ...) ;
 
-4. The Kernel checks that the Controller is actually a valid PHP callable;
+4. Le Kernel vérifie que le Contrôleur est un « callable » PHP valide ;
 
-5. The Resolver is called to determine the arguments to pass to the Controller;
+5. Le « Resolver » est appelé pour déterminer les arguments à passer au Contrôleur ;
 
-6. The Kernel calls the Controller;
+6. Le Kernel appelle le Contrôleur ;
 
-7. If the Controller does not return a ``Response``, listeners of the
-   ``kernel.view`` event can convert the Controller return value to a ``Response``;
+7. Si le Contrôleur ne retourne pas une ``Réponse``, les listeners de l'évènement
+   ``kernel.view`` peuvent convertir la valeur retournée par le Contrôleur en une ``Réponse`` ;
 
-8. Listeners of the ``kernel.response`` event can manipulate the ``Response``
-   (content and headers);
+8. Les listeners de l'évènement ``kernel.response`` peuvent manipuler la ``Réponse``
+   (contenu et en-têtes) ;
 
-9. The Response is returned.
+9. La Réponse est retournée.
 
-If an Exception is thrown during processing, the ``kernel.exception`` is
-notified and listeners are given a change to convert the Exception to a
-Response. If that works, the ``kernel.response`` event is notified; if not the
-Exception is re-thrown.
+Si une Exception est jetée pendant le traitement de la Requête, l'évènement
+``kernel.exception`` est notifié et les listeners ont alors une chance de
+convertir l'Exception en une Réponse. Si cela fonctionne, l'évènement
+``kernel.response`` sera notifié ; si non, l'Exception sera re-jetée.
 
-If you don't want Exceptions to be caught (for embedded requests for
-instance), disable the ``kernel.exception`` event by passing ``false`` as the
-third argument to the ``handle()`` method.
+Si vous ne voulez pas que les Exceptions soient capturées (pour des requêtes embarquées
+par exemple), désactivez l'évènement ``kernel.exception`` en passant ``false`` en tant
+que troisième argument de la méthode ``handle()``.
 
 .. index::
-  single: Internals; Internal Requests
+  single: Composants Internes; Requêtes Internes
 
-Internal Requests
+Requêtes Internes
 ~~~~~~~~~~~~~~~~~
 
-At any time during the handling of a request (the 'master' one), a sub-request
-can be handled. You can pass the request type to the ``handle()`` method (its
-second argument):
+A tout moment durant la gestion de la requête (la « master »), une sous-requête
+peut être gérée. Vous pouvez passer le type de requête à la méthode ``handle()``
+(son second argument) :
 
 * ``HttpKernelInterface::MASTER_REQUEST``;
 * ``HttpKernelInterface::SUB_REQUEST``.
 
-The type is passed to all events and listeners can act accordingly (some
-processing must only occur on the master request).
+Le type est passé à tous les évènements et les listeners peuvent ainsi agir
+en conséquence (le traitement doit seulement intervenir sur la requête
+« master »).
 
 .. index::
-   pair: Kernel; Event
+   pair: Kernel; Evènement
 
-Events
-~~~~~~
+Les Evènements
+~~~~~~~~~~~~~~
 
-Each event thrown by the Kernel is a subclass of
-:class:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent`. This means that
-each event has access to the same basic information:
+Chaque évènement jeté par le Kernel est une sous-classe de
+:class:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent`. Cela signifie que
+chaque évènement a accès aux mêmes informations de base :
 
-* ``getRequestType()`` - returns the *type* of the request
-  (``HttpKernelInterface::MASTER_REQUEST`` or ``HttpKernelInterface::SUB_REQUEST``);
+* ``getRequestType()`` - retourne le *type* de la requête
+  (``HttpKernelInterface::MASTER_REQUEST`` ou ``HttpKernelInterface::SUB_REQUEST``) ;
 
-* ``getKernel()`` - returns the Kernel handling the request;
+* ``getKernel()`` - retourne le Kernel gérant la requête ;
 
-* ``getRequest()`` - returns the current ``Request`` being handled.
+* ``getRequest()`` - retourne la ``Requête`` courante qui est en train d'être gérée.
 
 ``getRequestType()``
 ....................
 
-The ``getRequestType()`` method allows listeners to know the type of the
-request. For instance, if a listener must only be active for master requests,
-add the following code at the beginning of your listener method::
+La méthode ``getRequestType()`` permet aux listeners de connaître le type
+de la requête. Par exemple, si un listener doit seulement être activé pour les
+requêtes « master », ajoutez le code suivant au début de votre méthode listener ::
 
     use Symfony\Component\HttpKernel\HttpKernelInterface;
 
     if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
-        // return immediately
+        // retourne immédiatement
         return;
     }
 
 .. tip::
 
-    If you are not yet familiar with the Symfony2 Event Dispatcher, read the
-    :ref:`event_dispatcher` section first.
+    Si vous n'êtes pas encore familier avec le « Dispatcher d'Evènements » de
+    Symfony2, lisez la section :ref:`event_dispatcher` en premier.
 
 .. index::
-   single: Event; kernel.request
+   single: Evènement; kernel.request
 
 .. _kernel-core-request:
 
-``kernel.request`` Event
-........................
+L'Evènement ``kernel.request``
+..............................
 
-*Event Class*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`
+*La Classe Evènement* : :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`
 
-The goal of this event is to either return a ``Response`` object immediately
-or setup variables so that a Controller can be called after the event. Any
-listener can return a ``Response`` object via the ``setResponse()`` method on
-the event. In this case, all other listeners won't be called.
+Le but de cet évènement est soit de retourner un objet ``Response`` immédiatement ou bien
+de définir des variables afin qu'un Contrôleur puisse être appelé après l'évènement.
+Tout listener peut retourner un objet ``Response`` via la méthode ``setResponse()``
+sur l'évènement. Dans ce cas, tous les autres listeners ne seront pas appelés.
 
-This event is used by ``FrameworkBundle`` to populate the ``_controller``
-``Request`` attribute, via the
+Cet évènement est utilisé par le ``FrameworkBundle`` afin de remplir l'attribut de la
+``Requête`` ``_controller``, via
 :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\RouterListener`. RequestListener
-uses a :class:`Symfony\\Component\\Routing\\RouterInterface` object to match
-the ``Request`` and determine the Controller name (stored in the
-``_controller`` ``Request`` attribute).
+utilise un objet :class:`Symfony\\Component\\Routing\\RouterInterface` pour faire correspondre
+la ``Requête`` et déterminer le nom du Contrôleur (stocké dans l'attribut de la
+``Requête`` ``_controller``).
 
 .. index::
-   single: Event; kernel.controller
+   single: Evènement; kernel.controller
 
-``kernel.controller`` Event
-...........................
+L'évènement ``kernel.controller``
+.................................
 
-*Event Class*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`
+*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`
 
-This event is not used by ``FrameworkBundle``, but can be an entry point used
-to modify the controller that should be executed:
+Cet évènement n'est pas utilisé par le ``FrameworkBundle``, mais peut être un point
+d'entrée utilisé pour modifier le contrôleur qui devrait être exécuté :
 
 .. code-block:: php
 
@@ -275,25 +275,24 @@ to modify the controller that should be executed:
         $controller = $event->getController();
         // ...
 
-        // the controller can be changed to any PHP callable
+        // le contrôleur peut être remplacé par n'importe quel « callable » PHP
         $event->setController($controller);
     }
 
 .. index::
-   single: Event; kernel.view
+   single: Evènement; kernel.view
 
-``kernel.view`` Event
-.....................
+L'évènement ``kernel.view``
+...........................
 
-*Event Class*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForControllerResultEvent`
+*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForControllerResultEvent`
 
-This event is not used by ``FrameworkBundle``, but it can be used to implement
-a view sub-system. This event is called *only* if the Controller does *not*
-return a ``Response`` object. The purpose of the event is to allow some other
-return value to be converted into a ``Response``.
+Cet évènement n'est pas utilisé par le ``FrameworkBundle``, mais il peut être utilisé
+pour implémenter un sous-système de vues. Cet évènement est appelé *seulement* si le
+Contrôleur *ne* retourne *pas* un objet ``Response``. Le but de cet évènement est
+de permettre à d'autres valeurs retournées d'être converties en une ``Réponse``.
 
-The value returned by the Controller is accessible via the
-``getControllerResult`` method::
+La valeur retournée par le Contrôleur est accessible via la méthode ``getControllerResult`` ::
 
     use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
     use Symfony\Component\HttpFoundation\Response;
@@ -302,63 +301,64 @@ The value returned by the Controller is accessible via the
     {
         $val = $event->getReturnValue();
         $response = new Response();
-        // some how customize the Response from the return value
+        // personnalisez d'une manière ou d'une autre la Réponse
+        // en vous basant sur la valeur retournée
 
         $event->setResponse($response);
     }
 
 .. index::
-   single: Event; kernel.response
+   single: Evènement; kernel.response
 
-``kernel.response`` Event
-.........................
+L'évènement ``kernel.response``
+...............................
 
-*Event Class*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`
+*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`
 
-The purpose of this event is to allow other systems to modify or replace the
-``Response`` object after its creation:
+L'objectif de cet évènement est de permettre à d'autres systèmes de modifier ou
+de remplacer l'objet ``Response`` après sa création :
 
 .. code-block:: php
 
     public function onKernelResponse(FilterResponseEvent $event)
     {
         $response = $event->getResponse();
-        // .. modify the response object
+        // .. modifiez l'objet Response
     }
 
-The ``FrameworkBundle`` registers several listeners:
+Le ``FrameworkBundle`` enregistre plusieurs listeners :
 
 * :class:`Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener`:
-  collects data for the current request;
+  collecte les données pour la requête courante ;
 
 * :class:`Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener`:
-  injects the Web Debug Toolbar;
+  injecte la Web Debug Toolbar (« Barre d'outils de Debugging Web » en français) ;
 
-* :class:`Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener`: fixes the
-  Response ``Content-Type`` based on the request format;
+* :class:`Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener`: définit la
+  valeur du ``Content-Type`` de la Réponse basé sur le format de la requête ;
 
-* :class:`Symfony\\Component\\HttpKernel\\EventListener\\EsiListener`: adds a
-  ``Surrogate-Control`` HTTP header when the Response needs to be parsed for
-  ESI tags.
+* :class:`Symfony\\Component\\HttpKernel\\EventListener\\EsiListener`: ajoute un
+  en-tête HTTP ``Surrogate-Control`` lorsque la Réponse a besoin d'être analysée
+  pour trouver des balises ESI.
 
 .. index::
-   single: Event; kernel.exception
+   single: Evènement; kernel.exception
 
 .. _kernel-kernel.exception:
 
-``kernel.exception`` Event
-..........................
+L'évènement ``kernel.exception``
+................................
 
-*Event Class*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`
+*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`
 
-``FrameworkBundle`` registers a
-:class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener` that
-forwards the ``Request`` to a given Controller (the value of the
-``exception_listener.controller`` parameter -- must be in the
-``class::method`` notation).
+Le ``FrameworkBundle`` enregistre un
+:class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener` qui
+transmet la ``Requête`` à un Contrôleur donné (la valeur du paramètre
+``exception_listener.controller`` -- doit être exprimé suivant la notation
+``class::method``).
 
-A listener on this event can create and set a ``Response`` object, create
-and set a new ``Exception`` object, or do nothing:
+Un listener sur cet évènement peut créer et définir un objet ``Response``,
+créer et définir un nouvel objet ``Exception``, ou ne rien faire :
 
 .. code-block:: php
 
@@ -369,10 +369,10 @@ and set a new ``Exception`` object, or do nothing:
     {
         $exception = $event->getException();
         $response = new Response();
-        // setup the Response object based on the caught exception
+        // définissez l'objet Response basé sur l'exception capturée
         $event->setResponse($response);
 
-        // you can alternatively set a new Exception
+        // vous pouvez alternativement définir une nouvelle Exception
         // $exception = new \Exception('Some special exception');
         // $event->setException($exception);
     }
