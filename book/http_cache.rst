@@ -9,20 +9,20 @@ importe l'efficacité de votre application, le traitement d'une requête
 sera toujours plus important que l'envoi d'une page statique.
 
 Pour la plupart des applications web, cela ne pose pas de
-problème. Symfony2 est d'une rapidité foudrayante, et à moins que vous
+problème. Symfony2 est d'une rapidité foudroyante, et à moins que vous
 ne fassiez de sérieux remaniements, chaque requête sera traitée
-rapidement sans trop «stresser» sur votre serveur.
+rapidement sans trop « stresser » votre serveur.
 
 Mais si la fréquentation de votre site augmente, ce traitement peut devenir un
 problème. Le processus qui s'effectue à chaque requête
-peut être exécuter une unique fois. C'est exactement l'objectif de la
+peut être exécuté une unique fois. C'est exactement l'objectif de la
 mise en cache.
 
 La Mise en cache
 ----------------
 
 Le moyen le plus efficace d'améliorer les performances d'une
-application est mettre en cache l'intégralité d'une réponse pour ne
+application est de mettre en cache l'intégralité d'une réponse pour ne
 plus avoir à rappeler l'application pour les requêtes suivantes. Bien
 sûr, ce n'est pas toujours possible pour les sites web fortement
 dynamiques. A travers ce chapitre, nous allons décrire comment
@@ -31,35 +31,34 @@ que c'est la meilleur approche possible.
 
 Le système de cache de Symfony2 est différent car il se base sur la
 simplicité et la puissance du cache HTTP tel qu'il est défini dans les
-:term:`HTTP specification`. Au lieu de réinventer la méthodologie de
-la mise en cache, Symfony2 adopte la norme qui définit la
-communication élémentaire sur le Web. Une fois que vous avez compris
+:term:`spécifications HTTP`. Au lieu de réinventer la méthodologie de
+mise en cache, Symfony2 adopte la norme qui définit la
+communication de base sur le Web. Une fois que vous avez compris
 les fondamentaux de la validation HTTP et de l'expiration de la mise
-en cache de modèles, vous serez prêt à maîtriser le système de cache de
+en cache, vous serez prêt à maîtriser le système de cache de
 Symfony2.
 
 Nous allons parcourir ce sujet en quatre étapes :
 
 * **Etape 1**: Une :ref:`passerelle de cache <gateway-caches>`, ou
     reverse proxy, est une couche indépendante qui se trouve devant
-    votre application. Le passerelle mais en cache les réponses telles
+    votre application. Le passerelle met en cache les réponses telles
     qu'elles sont retournées par l'application et répond aux requêtes
     dont les réponses sont en cache avant qu'elles n'atteignent
     l'application. Symfony2 possède sa propre passerelle par défaut,
-    mais toute technologie peut être utiliser.
+    mais toute autre technologie peut être utilisée.
 
 * **Etape 2**: Les en-têtes du :ref:`cache HTTP
     <http-cache-introduction>` sont utilisées pour communiquer avec la
     passerelle de cache et tout autre cache entre votre application et
-    le client. Symfony2 propose par défaut par des valeurs 
-    raisonnables et fournit interface riche pour intéragir avec
-    les en-têtes de cache.
+    le client. Symfony2 en propose par défaut et fournit une interface puissante
+    pour intéragir avec elles.
 
 * **Etape 3**: :ref:`L'expiration et la validation
-  <http-expiration-validation>` sont les deux modèles utilisés pour
-  déterminer si le contenu d'un cache est *valide* (peut être
-  réutilisé à partir du cache) ou *périmé* (doit être regénérer par
-  l'application).
+    <http-expiration-validation>` sont les deux modèles utilisés pour
+    déterminer si le contenu d'un cache est *valide* (peut être
+    réutilisé à partir du cache) ou *périmé* (doit être regénéré par
+    l'application).
 
 * **Etape 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI)
     autorise le cache HTTP à mettre en cache des
@@ -69,8 +68,8 @@ Nous allons parcourir ce sujet en quatre étapes :
     page uniquement 5 minutes.
 
 La mise en cache via HTTP n'est pas réservée à Symfony, beaucoup
-d'articles existent à ce sujet. Si vous n'êtes pas familié avec la
-mise cache par HTTP, nous vous recommandons *chaudement* l'article de
+d'articles existent à ce sujet. Si vous n'êtes pas familier avec la
+mise cache HTTP, nous vous recommandons *chaudement* l'article de
 Ryan Tomayko `Things Caches Do`_. Une autre ressource appronfondie sur
 ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 
@@ -91,11 +90,11 @@ effectuant des requêtes.
 Le travail du cache est d'accepter les requêtes du client et de les
 transmettre à votre application. Le cache recevra aussi en retour des
 réponses de votre application et les enverra au client. Le cache est au milieu
-(«middle-man») dans ce jeu de commmunication requête-réponse
+(« middle-man ») dans ce jeu de commmunication requête-réponse
 entre le client et votre application.
 
 Lors d'une communication, le cache stockera toutes les réponses qu'ils
-estimes «stockable» (voir :ref:`http-cache-introduction`). Si la même
+estimes « stockable » (voir :ref:`http-cache-introduction`). Si la même
 ressource est demandée, le cache renvoie le contenu mis en cache au
 client, en ignorant entièrement l'application.
 
@@ -110,8 +109,8 @@ Les types de caches
 ~~~~~~~~~~~~~~~~~~~
 
 Mais une passerelle de cache ne possède pas qu'un seul type de
-cache. Les en-têtes de cache HTTP envoyé par votre application sont
-interprétés par trois différents types de cache :
+cache. Les en-têtes de cache HTTP envoyées par votre application sont
+interprétées par trois différents types de cache :
 
 * *Le cache du navigateur* : tous les navigateurs ont leur propre
   cache qui est utile quand un utilisateur demande la page précédente
@@ -119,32 +118,31 @@ interprétés par trois différents types de cache :
   les ressources stockées ne sont pas partagées avec d'autres
   applications.
 
-* *Le «cache proxy»* : un proxy est un cache *partagé* car plusieurs
-  applications peut se placer derrière un seul proxy. Il est
+* *Le « cache proxy »* : un proxy est un cache *partagé* car plusieurs
+  applications peuvent se placer derrière un seul proxy. Il est
   habituellement installé par les entreprises pour diminuer le temps
   de réponse des sites et la consommation des ressources réseaux.
 
-* *Passerelle de cache* : comme une proxy, ce système de cache est
+* *Passerelle de cache* : comme un proxy, ce système de cache est
   également partagé mais du côté du serveur. Installé par des
   administrateurs réseau, il permet aux sites d'être plus extensibles,
   sûrs et performants.
 
 .. tip::
 
-    Les passerelles de cache peuvent être désignées comme des «reverse
-    proxy», «surrogate proxy» ou des accélérateurs HTTP.
+    Les passerelles de cache peuvent être désignées comme des « reverse
+    proxy », « surrogate proxy » ou même des accélérateurs HTTP.
 
 .. note::
 
-    La signification de cache privé par rapport au cache partagé sera
-    expliqué plus en détails lorsque nous verrons les contenus liés à
+    La notion de cache privé par rapport au cache partagé sera
+    expliquée plus en détails lorsque nous verrons les contenus liés à
     exactement un utilisateur (les informations sur un compte
     utilisateur par exemple).
 
 Toutes les réponses de l'application iront communément dans un ou deux
-des deux premiers types de cache ou l'autre des deux types de
-cache. Ces systèmes ne sont pas contrôlés par l'application mais
-suivent les directives du cache HTTP définies dans les réponses.
+des deux premiers types de cache. Ces systèmes ne sont pas sous votre contrôle 
+mais suivent les directives du cache HTTP définies dans les réponses.
 
 .. index::
    single: Cache; Symfony2 Reverse Proxy
