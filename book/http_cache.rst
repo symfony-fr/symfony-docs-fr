@@ -671,10 +671,10 @@ nécessitant de calculer le rendu de la ressource comme valeur de l'en-tête
         return $response;
     }
 
-La méthode ``Response::isNotModified()`` compares l'en-tête
+La méthode ``Response::isNotModified()`` compare l'en-tête
 ``If-Modified-Since`` envoyé par la requête avec l'en-tête
-``Last-Modified`` définit pour la réponse. S'ils sont équivalent, l'objet
-``Response`` contiendra le status code 304.
+``Last-Modified`` défini pour la réponse. S'ils sont équivalents, l'objet
+``Response`` contiendra le code 304.
 
 .. note::
 
@@ -694,14 +694,14 @@ Optimiser son code avec le modèle de validation du cache
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le but principal de toutes les stratégies de mise en cache est de
-diminuer la charge de l'application. Autrement dit, le moins
-l'application aura a «travailler» pour renvoyer un status 304, le
+diminuer la charge de l'application. Autrement dit, moins
+l'application aura à « travailler » pour renvoyer un status 304, 
 mieux ce sera. La méthode ``Response::isNotModified()`` fait
 exactement ça en exposant un modèle simple et efficace : ::
 
     public function showAction($articleSlug)
     {
-	// Obtenir la minimum d'information pour calculer 
+	// Obtenir le minimum d'informations pour calculer 
 	// l'ETag ou la dernière valeur modifiée (Last-Modified value)
 	// (basé sur lobjet Request, les données sont recueillies
 	// d'une base de données ou d'un couple clé-valeur 
@@ -792,7 +792,7 @@ Expiration et Validation
 Il est possible bien entendu d'utiliser à la fois le modèle de
 validation et d'expiration pour un même objet ``Response``. Mais comme
 le modèle d'expiration l'emporte sur le modèle de validation, il est
-facile de bénéficier du meilleur des deux mondes. En d'autres termes
+facile de bénéficier du meilleur des deux modèles. En d'autres termes
 en utilisant à la fois l'expiration et la validation, vous pouvez
 programmer le cache pour qu'il fournisse son contenu pendant qu'il
 vérifie à intervalle régulier (l'expiration) que ce contenu est
@@ -832,8 +832,8 @@ La plupart des en-têtes en relation avec la gestion du cache peuvent
 
 .. _edge-side-includes:
 
-Utilisation de la technologie «Edge Side Includes»
---------------------------------------------------
+Utilisation de la technologie « Edge Side Includes »
+----------------------------------------------------
 
 Les passerelles de caches sont une bonne solution pour améliorer les
 performances d'un site. Mais elles ont une limitation : elles peuvent
@@ -841,12 +841,12 @@ uniquement mettre en cache une page dans son intégralité. Si ce n'est
 pas possible de mettre une page entière en cache ou si des parties de
 cette page sont plus dynamiques que d'autres, cela pose
 problème. Heureusement, Symfony2 fournit une solution pour ces
-situations, basée sur la technologie «Edge Side Includes», aussi appelée
+situations, basée sur la technologie « Edge Side Includes », aussi appelée
 `ESI`_. Akamaï a écrit cette spécification il y a 10 ans ; elle permet
 de mettre en cache une partie de page avec une stratégie différente de
 l'ensemble de la page.
 
-La spécification «ESI» décrit des marqueurs («tags») qui peuvent être
+La spécification « ESI » décrit des marqueurs (« tags ») qui peuvent être
 embarqués dans la page pour communiquer avec la passerelle de
 cache. Un seul marqueur est implémenté dans Symfony2, ``include`` car
 c'est le seul qui est utile en dehors du contexte Akamaï : 
@@ -871,16 +871,15 @@ c'est le seul qui est utile en dehors du contexte Akamaï :
     qui peut être appelé via une URL donnée.
 
 Quand une requête est envoyée, la passerelle de cache appelle la page
-entière depuis son espace de stockage ou depuis le «backend» de
+entière depuis son espace de stockage ou depuis le « backend » de
 l'application. Si la réponse contient un ou plusieurs marqueur ESI,
-ils sont gérés de la même manière. S'ils sont ne sont pas dans
-l'espace de stockage du cache, ils sont calculés par
-l'application. Quand tous les marqueurs ont été calculés, la
-passerelle les «fusionne» avec la page principale et envoie le contenu
-final vers le client.
+ils sont gérés de la même manière. En d'autres termes, la passerelle de cache récupère
+les fragments de page de son cache, ou demande à l'application de les recalculer.
+Quand tous les marqueurs ont été calculés, la passerelle les « fusionne » avec la
+page principale et envoie le contenu final vers le client.
 
 Le processus est géré de manière transparente au niveau de la
-passerelle de cache (i.e. à l'extérieur de l'application). Comme vous
+passerelle de cache (c-a-d à l'extérieur de l'application). Comme vous
 pouvez le voir, si vous décidez de prendre l'avantage des marqueurs
 ESI, Symfony2 réalise le procédé pour les inclure presque sans effort.
 
@@ -916,7 +915,7 @@ configuration de l'application :
         ));
 
 Maintenant, prenons l'exemple d'une page statique excepté pour
-l'espace «Actualité» qui se trouve en base de page. Avec ESI, il est
+l'espace « Actualités » qui se trouve en base de page. Avec ESI, il est
 possible de mettre en cache la partie qui gère les actualités
 indépendamment du reste de la page.
 
@@ -933,11 +932,11 @@ indépendamment du reste de la page.
 Dans cet exemple, la page a une espèrance de vie de 10 minutes en
 cache. Dans un deuxième temps, incluons l'élément relatif à
 l'actualité dans un template via une action embarquée. Ceci sera
-réalisé grâce au «helper» ``render`` (voir la documentation sur
+réalisé grâce au « helper » ``render`` (voir la documentation sur
 `templating-embedding-controller` pour plus de détails).
 
-Comme le contenu embarqué provient d'une autre page (un d'un autre
-contrôleur), Symfony2 utilise le «helper» standard ``render`` pour
+Comme le contenu embarqué provient d'une autre page (ou d'un autre
+contrôleur), Symfony2 utilise le « helper » standard ``render`` pour
 configurer le marqueur ESI :
 
 .. configuration-block::
@@ -952,10 +951,10 @@ configurer le marqueur ESI :
 
 Définir ``standalone`` à ``true`` permet à Symfony2 de savoir que
 l'action doit être renvoyée en tant que marqueur ESI. Vous devez vous
-demandez pourquoi vous devriez préférer utiliser un «helper» au lieu
+demandez pourquoi vous devriez préférer utiliser un « helper » au lieu
 d'écrire simplement le marquer ESI vous-même. C'est parce que
-l'utilisation d'un «helper» permettra à l'application de fonctionner
-même s'il n'y a pas de paserelle de cache installée. Voyons cela plus
+l'utilisation d'un helper permettra à l'application de fonctionner
+même s'il n'y a pas de passerelle de cache installée. Voyons cela plus
 en détail.
 
 Quand standalone est défini à ``false`` (la valeur par défaut), Symfony2
@@ -1031,30 +1030,30 @@ correctement, il faut définir une route ``_internal`` :
 .. tip::
 
     Puisque la route permet à toutes les actions d'être appelées
-    depuis une URL, il est possible de les protéger avec le par-feu de
+    depuis une URL, il est possible de les protéger avec le pare-feu de
     Symfony2 (en autorisant l'accès uniquement aux adresses IP de vos
     serveurs proxy).
 
 Un des grands avantages de cette stratégie de cache est qu'il est
 possible d'avoir une application aussi dynamique que souhaitée et
-toute en faisant appel à cette application le moins possible.
+tout en faisant appel à cette application le moins possible.
 
 .. note::
 
     Une fois que ESI est utilisée, il ne faut pas oublier de toujours
     utiliser la directive ``s-maxage`` à la place de
     ``max-age``. Comme le navigateur ne reçoit que la réponse
-    «agrégée» de la ressource, il n'est pas conscient de son
-    «sous-contenu», il suit la directive ``max-age`` et met toute la
+    « agrégée » de la ressource, il n'est pas conscient de son
+    « sous-contenu », il suit la directive ``max-age`` et met toute la
     page en cache. Ce qui n'est pas souhaitable.
 
-Le «helper» ``render`` supporte deux autres méthodes utiles :
+Le helper ``render`` supporte deux autres méthodes utiles :
 
 * ``alt``: utilisée comme l'attribut ``alt`` du marqueur ESI, il
   permet de spécifier une URL alternative si la ressource ``src`` ne
-  peut pas être toruvée ;
+  peut pas être trouvée ;
 
-* ``ignore_errors``: s'il est définie à ``true``, un atribut ``onerror`` sera ajouté à
+* ``ignore_errors``: s'il est défini à ``true``, un attribut ``onerror`` sera ajouté à
   l'ESI avec une valeur ``continue`` indiquant que, en cas d'échec, la
   passerelle de cache enlèvera la marqueur ESI sans erreur ou warning.
 
@@ -1066,18 +1065,18 @@ Le «helper» ``render`` supporte deux autres méthodes utiles :
 Invalidation du cache
 ---------------------
 
-    «There are only two hard things in Computer Science: cache invalidation
-    and naming things.» --Phil Karlton
+    « There are only two hard things in Computer Science: cache invalidation
+    and naming things. » --Phil Karlton
 
     Ceci peut être traduit comme : 
-    «Il existe uniquement deux opérations délicates en Informatique :
-    l'invalidation de cache et nommé les choses.»
+    « Il existe uniquement deux opérations délicates en Informatique :
+    l'invalidation de cache et nommer les choses. »
 
 L'invalidation des données du cache ne devrait pas être gérée au
 niveau de l'application parce que l'invalidation est déjà prise en
 compte nativement par le modèle de gestion du cache HTTP. Si la
 validation est utilisée, il ne devrait pas y avoir besoin d'utiliser
-l'invalidation par définition ; si l'expiration est utilsée et qu'il y
+l'invalidation par définition ; si l'expiration est utilisée et qu'il y
 a besoin d'invalider une ressource, c'est que date d'expiration a été
 définie trop loin dans le futur.
 
@@ -1087,7 +1086,7 @@ définie trop loin dans le futur.
     qu'on peut utiliser nimporte quel reverse proxy sans rien changer
     au code de l'application.
 
-Au fait, tous les «reverse proxies» fournissent un moyen de purger les
+Au fait, tous les « reverse proxies » fournissent un moyen de purger les
 données du cache mais il faut l'éviter autant que possible. Le moyen
 le plus standard est de purger le cache pour une URL donnée en
 l'appelant avec la méthode HTTP spéciale ``PURGE``.
@@ -1128,7 +1127,7 @@ de cache de Symfony2 signifie une bonne compréhension des modèles de
 gestion du cache HTTP et de les utiliser efficacement. Ceci veut dire
 qu'au lieu de s'appuyer uniquement sur la documentation et les
 exemples de code de Symfony2, vous pouvez vous ouvrir à un monde plein
-de connaissance relative au cache et paserelle de cache HTTP tel que
+de connaissances relatives au cache et passerelles de cache HTTP telles que
 Varnish.
 
 En savoir plus grâce au Cookbook
