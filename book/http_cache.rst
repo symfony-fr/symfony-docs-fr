@@ -387,33 +387,33 @@ la réponse devra explicitement être définie comme publique.
 .. index::
    single: Cache; Safe methods
 
-Méthodes sûres
+Méthodes sures
 ~~~~~~~~~~~~~~
 
-La mise en cache HTTP ne fonctionne qu'avec les méthodes «sûres»
-(telles que GET et HEAD). «Être sûr» signifie que l'état de
+La mise en cache HTTP ne fonctionne qu'avec les méthodes « sures »
+(telles que GET et HEAD). « Être sûr » signifie que l'état de
 l'application n'est jamais modifié par le serveur au moment de servir
 la requête (il est bien-sûr possible de loguer des informations,
 mettre en cache des données, etc.). Cela a deux conséquences :
 
 * L'état de l'application ne devrait *jamais* être modifié en répondant
   à une requête GET ou HEAD. Même s'il n'y a pas de passerelle de
-  cache, la présence d'un cache «proxy» signifie qu'aucune requête
+  cache, la présence d'un cache « proxy » signifie qu'aucune requête
   GET ou HEAD ne pourrait pas atteindre le serveur.
 
 * Ne pas mettre en cache les méthodes PUT, POST ou DELETE. Ces
   méthodes sont normalement utilisées pour changer l'état de
   l'application (supprimer un billet de blog par exemple). La mise en
-  cache ces méthodes empêcherait certaine requête d'atteindre et de
+  cache de ces méthodes empêcherait certaines requêtes d'atteindre et de
   modifier l'application.
 
 Règles de mise en cache et configuration par défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 HTTP 1.1 permet de tout mettre en cache par défaut à moins qu'il n'y
-ait un en-tête ``Cache-Control``. En pratique, la plus part des
+ait un en-tête ``Cache-Control``. En pratique, la plupart des
 systèmes de cache ne font rien quand les requêtes contiennent un
-cookie, ont un en-tête d'autorisation, utilisent une méthode non sûr
+cookie, ont un en-tête d'autorisation, utilisent une méthode non sure
 (i.e. PUT, POST, DELETE), ou quand les réponses ont un code de
 redirection.
 
@@ -441,12 +441,12 @@ HTTP Expiration et Validation
 La spécification HTTP définit deux modèles de mise en cache :
 
 * Avec le `modèle expiration`_, on spécifie simplement combien de
-  temps une réponse doit être considérée comme «valide» en incluant un
-  en-tête ``Cache-Control`` et/ou ``Expires``. Les système de cache qui
+  temps une réponse doit être considérée comme « valide » en incluant un
+  en-tête ``Cache-Control`` et/ou ``Expires``. Les systèmes de cache qui
   comprennent les directives n'enverront pas la même requête jusqu'à ce
-  que la version en cache devienne «invalide».
+  que la version en cache devienne « invalide ».
 
-* Quand une page est dynamique (i.e. quand son contenu change
+* Quand une page est dynamique (c-a-d quand son contenu change
   souvent), le `modèle validation`_ est souvent nécessaire. Avec ce
   modèle, le système de cache stocke la réponse mais demande au
   serveur à chaque requête si la réponse est encore
@@ -454,7 +454,7 @@ La spécification HTTP définit deux modèles de mise en cache :
   et/ou un timestamp (l'en-tête ``Last-Modified``) pour vérifier si la
   page a changé depuis sa mise en cache.
 
-Le but des deux modèles est de ne jamais générer deux fois la même
+Le but de ces deux modèles est de ne jamais générer deux fois la même
 réponse en s'appuyant sur le système de cache pour stoker et renvoyer
 la réponse valide.
 
@@ -474,10 +474,9 @@ la réponse valide.
     Requests`_ et `P6 - Caching: Browser and intermediary caches`_).
 
     En tant que développeur web, il est fortement recommandé de lire
-    la spécification. Ca clarté et sa puissance - mais dix ans après
-    sa création - est inestimable. Ne soyez pas répulser par
-    l'apparence de la spec - son contenu est beaucoup plus beau que sa
-    couverture.
+    la spécification. Sa clarté et sa puissance - même plus dix ans après
+    sa création - est inestimable. Ne soyez pas rebuté par
+    l'apparence du document - son contenu est beaucoup plus beau que son aspect.
 
 .. index::
    single: Cache; HTTP Expiration
@@ -501,9 +500,9 @@ Ce modèle est mis en oeuvre avec deux en-têtes HTTP presque identiques :
 Expiration avec l'en-tête ``Expires``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-D'après la spécification HTTP, «les champs de l'en-tête ``Expires``
-donne la date après laquelle la réponse est considérée comme
-invalide». Cet en-tête peut être définit avec la méthode ``setExpires()``
+D'après la spécification HTTP, « les champs de l'en-tête ``Expires``
+donnent la date après laquelle la réponse est considérée comme
+invalide ». Cet en-tête peut être défini avec la méthode ``setExpires()``
 de l'objet ``Response``. Elle prend un objet ``DateTime`` en argument : ::
 
     $date = new DateTime();
@@ -522,9 +521,9 @@ L'en-tête HTTP résultante sera : ::
 
 L'en-tête ``Expires`` souffre de deux limitations. D'abord, l'heure du
 serveur web et celle du serveur de cache (le navigateur par exemple)
-doivent être synchronisées. Aussi, la spécification déclare que «les
+doivent être synchronisées. De même, la spécification déclare que « les
 serveurs HTTP/1.1 ne devraient pas envoyer des dates ``Expires`` de
-plus d'un an dans le futur».
+plus d'un an dans le futur ».
 
 .. index::
    single: Cache; Cache-Control header
@@ -533,15 +532,14 @@ plus d'un an dans le futur».
 Expiration avec l'en-tête ``Cache-Control``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-À cause des limitations de l'en-tête ``Expires``, la plus part du
-temps, il faut utiliser l'en-tête ``Cache-Control``. Rappelez-vous que
-l'en-tête ``Cache-Control`` est utilisé pour spécifier beaucoup de
-différentes directives de cache. Pour le modèle d'expiration, il y a
-deux directives, ``max-age`` et ``s-maxage``. La première est utilisée
-par tous les systèmes de cache alors que la seconde n'est utilisée que
+À cause des limitations de l'en-tête ``Expires``, bien souvent, il faut utiliser
+l'en-tête ``Cache-Control``. Rappelez-vous que l'en-tête ``Cache-Control`` est
+utilisé pour spécifier une grande partie des directives de cache. Pour le modèle
+d'expiration, il y a deux directives, ``max-age`` et ``s-maxage``. La première
+est utilisée par tous les systèmes de cache alors que la seconde n'est utilisée que
 par les systèmes de cache partagés : ::
 
-    // Définir le nombre de secondes après lequel la réponse
+    // Définir le nombre de secondes après lesquelles la réponse
     // ne devrait plus être considérée comme valide
     $response->setMaxAge(600);
 
@@ -558,13 +556,13 @@ L'en-tête ``Cache-Control`` devrait être (il peut y avoir d'autres directives)
 Validation
 ~~~~~~~~~~
 
-S'il faut mettre à jour une ressource dès qu'il y a un changement dans
-les données, le modèle d'expiration ne convient pas. Avec le modèle
+S'il faut mettre à jour une ressource dès qu'il y a un changement de
+données, le modèle d'expiration ne convient pas. Avec le modèle
 d'expiration, l'application ne sera pas appelée jusqu'au moment où le
 cache devient invalide.
 
 Le modèle de validation du cache corrige ce problème. Dans ce modèle,
-le cache continue de stoker les réponses. La différence est que pour
+le cache continue de stocker les réponses. La différence est que pour
 chaque requête, le cache demande à l'application si la réponse en cache
 est encore valide. Si la réponse en cache est encore valide,
 l'application renvoie un statut 304 et aucun contenu. Le cache sait
@@ -573,20 +571,20 @@ que la réponse en cache est valide.
 Ce modèle permet d'économiser beaucoup de bande passante car la même
 réponse n'est pas envoyée deux fois au même client (un code 304 est
 envoyé à la place). Si l'application est bien construite, il est
-possible de déterminer le minimum de données nécessitant l'envoie de
+possible de déterminer le minimum de données nécessitant l'envoi de
 réponse 304 et aussi d'économiser des ressources CPU (voir ci-dessous
 pour un exemple d'implémentation).
 
 .. tip::
 
-    Le code 304 signifie «Non modifié». C'est important car la réponse
+    Le code 304 signifie « Non modifié ». C'est important car la réponse
     associée à ce code ne contient pas le contenu demandé en
     réalité. Au lieu de cela, la réponse est simplement un ensemble
     léger de directives qui informe le cache qu'il devrait utiliser la
     réponse stockée.
 
 Comme avec le modèle d'expiration, il y a deux différents types
-d'en-tête HTTP qui peuvent être utilisés pour implémenter ce modèle :
+d'en-têtes HTTP qui peuvent être utilisés pour implémenter ce modèle :
 ``ETag`` et ``Last-Modified``.
 
 .. index::
@@ -596,7 +594,7 @@ d'en-tête HTTP qui peuvent être utilisés pour implémenter ce modèle :
 Validation avec l'en-tête ``ETag``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-L'en-tête ``ETag`` est une chaîne de caractère (appelée «entity-tag»)
+L'en-tête ``ETag`` est une chaîne de caractères (appelée « entity-tag »)
 qui identifie de façon unique une représentation de la ressource
 appelée. Il est entièrement généré et défini par votre application tel
 que vous pouvez spécifier, par exemple, si la ressource ``/about``,
@@ -607,7 +605,7 @@ sont équivalentes. Comme une empreinte, chaque ``ETag`` doit être
 unique pour toutes les représentations de la même ressource.
 
 Voici une implémentation simple qui génère l'en-tête ETag depuis un
-hachage md5 du contenu : ::
+md5 du contenu : ::
 
     public function indexAction()
     {
@@ -624,12 +622,12 @@ identiques, la méthode renvoie automatiquement le code 304 en ``Response``.
 
 Cet algorithme est assez simple et très générique, mais il est
 nécessaire de créer entièrement l'objet ``Response`` avant de pouvoir
-calculer l'en-tête ETag, ce qui n'est pas optimal. En d'autre terme,
+calculer l'en-tête ETag, ce qui n'est pas optimal. En d'autre termes,
 cette approche économise la bande passante mais pas l'utilisation du
 CPU.
 
 Dans la section :ref:`optimizing-cache-validation`, nous verrons
-comment le modèle de validation peut être utiliser plus intelligeament
+comment le modèle de validation peut être utilisé plus intelligemment
 pour déterminer la validité d'un cache sans faire autant de travail.
 
 .. tip::
@@ -648,15 +646,15 @@ Validation avec l'en-tête ``Last-Modified``
 L'en-tête ``Last-Modified`` est la seconde forme de la
 validation. D'après la spécification HTTP, les champs de l'en-tête
 ``Last-Modified`` indiquent la date et l'heure à laquelle le serveur
-d'origine croit que la représentation a été modifié pour la dernière
+d'origine croit que la représentation a été modifiée pour la dernière
 fois. En d'autres termes, l'application décide si oui ou non le
 contenu du cache a été mis à jour, en se basant sur le fait que, si oui
 ou non le cache a été mis à jour depuis que la réponse a été mise en
 cache.
 
-Par exemple, vous pouvez utiliser la dernière mise à jour de tout les objets
-nécessitants de calculer le rendu de la ressource comme valeur 
-pour le contenu de l'en-tête ``Last-Modified`` : ::
+Par exemple, vous pouvez utiliser la date de dernière mise à jour de tout les objets
+nécessitant de calculer le rendu de la ressource comme valeur de l'en-tête
+``Last-Modified`` : ::
 
     public function showAction($articleSlug)
     {
