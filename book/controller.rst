@@ -547,8 +547,6 @@ dont vous pourriez avoir besoin::
 
     $request = $this->getRequest();
 
-    $response = $this->get('response');
-
     $templating = $this->get('templating');
 
     $router = $this->get('router');

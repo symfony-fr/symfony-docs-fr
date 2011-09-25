@@ -634,7 +634,7 @@ Lorsque le moteur de Symfony2 (appelé ``Kernel``) démarre, il a besoin d'une t
 qui définit quels contrôleurs exécuter en fonction des informations de la requête.
 Une table de routage fournit cette information dans un format lisible :
 
-.. code-block:: php
+.. code-block:: yaml
 
     # app/config/routing.yml
     blog_list:
