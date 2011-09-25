@@ -1,11 +1,12 @@
 La sécurité
 ===========
+
 La sécurité est un processus comprenant 2 étapes, dont le but est de prévenir un utilisateur 
 d'accéder à une ressource à laquelle il n'a pas accès.
 Dans la première étape du processus, le système de sécurité identifie l'utilisateur en lui 
 demandant de soumettre une sorte d'identification. C'est ce qu'on appelle l'**authentification**,
 et cela signifie que le système cherche à savoir qui vous êtes.
-Une fois que le système sait qui nous sommes, l'étape suivante est de déterminer si nous avons
+Une fois que le système sait qui vous êtes, l'étape suivante est de déterminer si vous avez
 accès à une ressource donnée. Cette étape du processus est appelée **autorisation**, et cela 
 signifie que le système vérifie si vous avez les privilèges pour exécuter certaines actions.
 .. image:: /images/book/security_authentication_authorization.png
@@ -24,8 +25,8 @@ Le composant de sécurité peut être configuré grâce aux fichiers de configur
 En fait, la plupart des réglages de sécurité ne nécessitent que l'utilisation d'une
 configuration adéquate. La configuration suivante indique à Symfony de sécuriser toute URL
 correspondant au format ``/admin/*`` et de demander à l'utilisateur de s'authentifier
-en utilisant l'authentification HTTP (c'est-à-dire la boite à l'ancienne avec 
-nom d'utilisateur/mot de passe):
+en utilisant l'authentification HTTP (c'est-à-dire un bon vieux système avec 
+login/mot de passe):
 
 .. configuration-block::
 
@@ -109,16 +110,16 @@ nom d'utilisateur/mot de passe):
         ));
 
 .. tip::
-    Une distribution Symfony standard place la configuration de la sécurité dans un fichier 
+    La distribution Symfony Standard place la configuration de la sécurité dans un fichier 
     séparé (``app/config/security.yml``). Si vous ne voulez pas utiliser un fichier séparé,
     vous pouvez mettre la configuration directement dans le fichier principal de configuration
     (``app/config/security.yml``).
 
 Le résultat final de cette configuration est un système de sécurité entièrement fonctionnel, 
-qu'on peut décrire de la manière suivante :
+que l'on peut décrire de la manière suivante :
 
 * Il y a 2 utilisateurs dans le système (``ryan`` et ``admin``);
-* Les utilisateurs s'authentifient grâce à la boite d'authentification basique HTTP;
+* Les utilisateurs s'authentifient grâce à une authentification basique HTTP;
 * Toute URL correspondant au format `/admin/*`` est sécurisée, et seul l'utilisateur ``admin`` 
   peut y accéder
 * Toutes les URLs qui ne correspondent pas au format ``/admin/*`` sont accessibles par 
@@ -131,7 +132,7 @@ Comment fonctionne la sécurité : authentification et autorisation
 -----------------------------------------------------------------
 
 Le système de sécurité de Symfony commence par déterminer qui est l'utilisateur 
-(c'est l'authentification) puis par voir si il a accès à une ressource ou une URL.
+(c'est l'authentification) puis il voit si l'utilisateur a accès à une ressource ou une URL.
 
 Pare-feu (authentification)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,7 +146,7 @@ Un pare-feu est activé lorsque l'URL d'une requête correspond à un ``masque``
 d'expression régulière contenu dans la configuration du pare-feu. Dans cet exemple,
 le ``masque`` (``^/``) va correspondre à *toutes* les requêtes entrantes. Le fait que 
 le pare-feu soit activé ne veut *pas* dire que la boite d'authentification HTTP contenant
-les champs "nom d'utilisateur" et "mot de passe" sera affichée pour chaque requête. 
+les champs « nom d'utilisateur » et « mot de passe » sera affichée pour chaque requête. 
 Par exemple, tout utilisateur peut accéder ``/foo``  sans qu'on lui demande de s'authentifier.
 .. image:: /images/book/security_anonymous_user_access.png
    :align: center
@@ -165,7 +166,7 @@ Par contre, si un utilisateur demande ``/admin/foo``, le système se comporte di
 C'est à cause de la section de la configuration ``access_control`` qui stipule que toute 
 requête correspondant au masque d'expression régulière ``^/admin`` (c'est à dire ``/admin``
 ou tout ce qui correspond à ``/admin/*``) requiert le rôle ``ROLE_ADMIN``. Les rôles sont à
-la base de la plupart des mécanismes d'autorisation: un utilisateur peut accéder à 
+la base de la plupart des mécanismes d'autorisation : un utilisateur peut accéder à 
 ``/admin/foo`` seulement s'il possède le role ``ROLE_ADMIN``.
 
 .. image:: /images/book/security_anonymous_user_denied_authorization.png
@@ -180,18 +181,18 @@ Le processus d'authentification dépend du mécanisme d'authentification que vou
 Par exemple, si vous utilisez la méthode d'authentification par formulaire de connexion, 
 l'utilisateur sera redirigé à la page de formulaire de connexion. 
 Si vous utilisez l'authentification HTTP, l'utilisateur recevra une réponse HTTP 401
-et verra donc la boite contenant les champs nom d'usager et mot de passe.
+et verra donc la boite contenant les champs login et mot de passe.
 
 L'utilisateur a maintenant la possibilité de soumettre ses informations d'identification
-à l'application. Si ces informations sont valides, la requête initiale peut être essayée 
-de nouveau.
+à l'application. Si ces informations sont valides, la requête initiale peut être lancée 
+à nouveau.
 
 .. image:: /images/book/security_ryan_no_role_admin_access.png
    :align: center
 
 Dans cet exemple, l'utilisateur ``ryan``s'authentifie avec succès auprès du pare-feu.
 Mais comme ``ryan`` n'a pas le rôle ``ROLE_ADMIN``, il se verra refuser l'accès à
-``/admin/foo``. Ultimement, cela veut dire que l'utilisateur verra un message indiquant
+``/admin/foo``. Enfin, cela veut dire que l'utilisateur verra un message indiquant
 que l'accès lui est refusé.
 
 .. tip::
@@ -216,16 +217,16 @@ ou les authentifications via Twitter. Quel que soit la méthode d'authentificati
 
 #. Un utilisateur accède à une ressource protégée;
 #. L'application redirige l'utilisateur au formulaire de connexion;
-#. L'utilisateur soumet ses informations d'identification (par exemple nom d'usager/mot de passe);
+#. L'utilisateur soumet ses informations d'identification (par exemple login/mot de passe);
 #. Le pare-feu authentifie l'utilisateur;
 #. L'utilisateur authentifié renvoie la requête initiale.
 
 .. note::
     Le processus *exact* dépend en fait légèrement du mécanisme d'authentification que vous
     utilisez. Par exemple, lorsque le formulaire de connexion est utilisé, l'utilisateur
-    soumet ses informations d'identifications à une URL qui traite le formulaire
-    (par exemple ``/login_check``) et est ensuite redirigé à L'URL qu'il a demandée initialement 
-    (par exemple ``/admin/foo``).Par contre, avec l'authentification HTTP, l'utilisateur soumet 
+    soumet ses informations d'identification à une URL qui traite le formulaire
+    (par exemple ``/login_check``) et est ensuite redirigé à l'URL qu'il a demandée initialement 
+    (par exemple ``/admin/foo``). Par contre, avec l'authentification HTTP, l'utilisateur soumet 
     ses informations d'identification directement à l'URL initiale (par exemple ``/admin/foo``)
     et la page est retournée dans la même requête (donc pas de redirection).
 
