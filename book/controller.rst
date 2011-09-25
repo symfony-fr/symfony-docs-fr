@@ -198,8 +198,8 @@ les différents contrôleurs, regardez du côté de :ref:`controller-string-synt
 
 .. tip::
 
-    Vous pouvez en apprendre beaucoup plus sur le système de routage en lisant
-    :doc:`Routing chapter</book/routing>`.
+    Vous pouvez en apprendre beaucoup plus sur le système de routage en lisant le
+    chapitre :doc:`Routage</book/routing>`.
 
 .. index::
    single: Le Contrôleur; Les arguments du contrôleur

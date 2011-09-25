@@ -5,7 +5,7 @@ Formulaires
 ===========
 
 Intéragir avec les formulaires HTML est l'une des plus communes - et stimulantes -
-tâches pour un développeur web. Symfony2 intègre un composant «Form» qui rend
+tâches pour un développeur web. Symfony2 intègre un composant « Form » qui rend
 la chose facile. Dans ce chapitre, vous allez construire un formulaire complexe
 depuis la base, tout en apprenant au fur et à mesure les caractéristiques les
 plus importantes de la bibliothèque des formulaires.
@@ -22,10 +22,10 @@ plus importantes de la bibliothèque des formulaires.
 Créer un Formulaire Simple
 --------------------------
 
-Supposez que vous construisiez une application «todo list» (en français : «liste
-de choses à faire») simple qui doit afficher des «tâches». Parce que vos
+Supposez que vous construisiez une application « todo list » (en français : « liste
+de choses à faire ») simple qui doit afficher des « tâches ». Parce que vos
 utilisateurs devront éditer et créer des tâches, vous allez avoir besoin de
-construire des formulaires. Mais avant que vous commenciez, concentrez-vous
+construire des formulaires. Mais avant de commencer, concentrez-vous
 d'abord sur la classe générique ``Task`` qui représente et stocke les données
 pour une tâche :
 
@@ -69,10 +69,10 @@ pour une tâche :
 
         php app/console generate:bundle --namespace=Acme/TaskBundle
 
-Cette classe est un «bon vieux objet PHP» parce que, jusqu'ici, elle n'a rien
+Cette classe est un « bon vieil objet PHP » parce que, jusqu'ici, elle n'a rien
 à voir avec Symfony ou quelconque autre bibliothèque. C'est tout simplement
-un objet PHP normal qui solutionne directement un problème dans *votre*
-application (i.e. le besoin de représenter une tâche dans votre application).
+un objet PHP normal qui répond directement à un besoin dans *votre*
+application (c-a-d le besoin de représenter une tâche dans votre application).
 Bien sûr, à la fin de ce chapitre, vous serez capable de soumettre des données
 à une instance de ``Task`` (via un formulaire HTML), de valider ses données,
 et de les persister dans la base de données.
@@ -119,20 +119,20 @@ Pour l'instant, tout ceci peut être effectué depuis un contrôleur ::
 
    Cet exemple vous montre comment construire votre formulaire directement
    depuis le contrôleur. Plus tard, dans la section
-   «:ref:`book-form-creating-form-classes`», vous apprendrez à construire
+   « :ref:`book-form-creating-form-classes` », vous apprendrez à construire
    votre formulaire dans une classe autonome, ce qui est recommandé car comme
    cela, vos formulaires deviennent réutilisables.
 
 Créer un formulaire requiert relativement peu de code car les objets formulaires
-de Symfony2 sont construits avec un «constructeur de formulaire» («form builder»).
+de Symfony2 sont construits avec un « constructeur de formulaire » (« form builder »).
 Le principe du constructeur de formulaire est de vous permettre d'écrire des
-«conteneurs» de formulaires simples, et de le laisser prendre en charge toute
+« conteneurs » de formulaire simples, et de le laisser prendre en charge toute
 la plus grosse partie du travail qu'est la construction du formulaire.
 
 Dans cet exemple, vous avez ajouté deux champs à votre formulaire - ``task`` et
 ``dueDate`` - correspondants aux propriétés ``task`` et ``dueDate`` de votre
-classe ``Task``. Vous avez aussi assigné à chacune un «type» (par exemple :
-``text``, ``date``), qui, parmi d'autres choses, détermine quelle(s) balise(s) HTML
+classe ``Task``. Vous avez aussi assigné à chaque champ un « type » (par exemple :
+``text``, ``date``), qui, entre autres, détermine quelle(s) balise(s) HTML
 est rendue pour ce champ.
 
 Symfony2 est livré avec beaucoup de types pré-définis qui seront présentés
@@ -145,9 +145,9 @@ Rendu du Formulaire
 ~~~~~~~~~~~~~~~~~~~
 
 Maintenant que le formulaire a été créé, la prochaine étape est de le rendre.
-Ceci est fait en passant un objet spécial «vue de formulaire» à votre template
+Ceci est fait en passant un objet spécial « vue de formulaire » à votre template
 (notez le ``$form->createView()`` dans le contrôleur ci-dessus) et en utilisant
-un ensemble de fonctions d'aide pour les formulaires :
+un ensemble de fonctions d'aide (helpers) pour les formulaires :
 
 .. configuration-block::
 
@@ -188,8 +188,8 @@ pouvoir contrôler ce à quoi le formulaire ressemble. Vous apprendrez comment
 faire cela dans la section «:ref:`form-rendering-template`».
 
 Avant de continuer, notez comment le champ ``task`` rendu possède la
-valeur de la propriété ``task`` de l'objet ``$task`` (i.e. «Write a blog
-post»). C'est le premier travail d'un formulaire : de prendre les données
+valeur de la propriété ``task`` de l'objet ``$task`` (c-a-d « Write a blog
+post »). C'est le premier travail d'un formulaire : de prendre les données
 d'un objet et de les traduire dans un format adapté pour être rendues dans
 un formulaire HTML.
 
@@ -198,9 +198,9 @@ un formulaire HTML.
    Le système de formulaire est assez intelligent pour accéder la valeur de la
    propriété protégée ``task`` via les méthodes ``getTask()`` et ``setTask()``
    de la classe ``Task``. A moins qu'une propriété soit publique, elle *doit*
-   avoir une méthode «getter» et une «setter» afin que le composant formulaire
+   avoir une méthode « getter » et une « setter » afin que le composant formulaire
    puisse récupérer et assigner des données à cette propriété. Pour une propriété
-   booléenne, vous pouvez utiliser une méthode «isser» (par exemple :
+   booléenne, vous pouvez utiliser une méthode « isser » (par exemple :
    ``isPublished()``) à la place d'un getter (par exemple : ``getPublished()``).
 
 .. index::
@@ -248,7 +248,7 @@ méthode ``bindRequest()``.
 
     Aussitôt que ``bindRequest()`` est appelée, les données soumises sont
     transférées immédiatement à l'objet sous-jacent. Ceci intervient
-    indépendamment du fait que les donnés sous-jacentes soient valides ou non.
+    indépendamment du fait que les données sous-jacentes soient valides ou non.
 
 Ce contrôleur suit un pattern commun dans la manière de gérer les formulaires,
 et a trois scénarios possibles :
@@ -256,7 +256,7 @@ et a trois scénarios possibles :
 #. Lors du chargement initial de la page dans votre navigateur, la méthode
    de la requête est ``GET`` et le formulaire est simplement créé et rendu ;
 
-#. Lorsque l'utilisateur soumet le formulaire (i.e. la méthode est ``POST``)
+#. Lorsque l'utilisateur soumet le formulaire (la méthode est ``POST``)
    avec des données non-valides (la validation est expliquée dans la prochaine
    section), le formulaire est lié puis rendu, affichant cette fois toutes les
    erreurs de validation ;
@@ -265,12 +265,12 @@ et a trois scénarios possibles :
    dernier est lié et vous avez l'opportunité d'effectuer quelques actions
    en utilisant l'objet ``$task`` (par exemple : le persister dans la base
    de données) avant de rediriger l'utilisateur vers une autre page (par
-   exemple : une page «merci» ou de «succès»).
+   exemple : une page « merci » ou de « succès »).
 
 .. note::
 
    Rediriger un utilisateur après une soumission de formulaire réussie empêche
-   l'utilisateur de pouvoir presser «Rafraîchir» et de re-soumettre les données.
+   l'utilisateur de pouvoir rafraichir la page et de re-soumettre les données.
 
 .. index::
    single: Formulaires; Validation
@@ -280,8 +280,8 @@ Validation de Formulaire
 
 Dans la section précédente, vous avez appris comment un formulaire peut être
 soumis avec des données valides ou non-valides. Dans Symfony2, la validation
-est appliquée à l'objet sous-jacent (par exemple : ``Task``). En d'autres mots,
-la question n'est pas de savoir si le «formulaire» est valide, mais plutôt de
+est appliquée à l'objet sous-jacent (par exemple : ``Task``). En d'autres termes,
+la question n'est pas de savoir si le « formulaire » est valide, mais plutôt de
 savoir si l'objet ``$task`` est valide ou non après que le formulaire lui ait
 appliqué les données. Appeler ``$form->isValid()`` est un raccourci qui demande
 à l'objet ``$task`` si oui ou non il possède des données valides.
@@ -426,7 +426,7 @@ sera utilisé pour valider l'objet sous-jacent.
 Types de Champ Intégrés
 -----------------------
 
-Symfony vient par défaut avec un grand groupe de types de champ qui couvre
+Symfony vient par défaut avec un grand nombre de types de champ qui couvre
 la plupart des champs de formulaire existants et des types de données que vous
 pourrez rencontrer :
 
@@ -465,14 +465,14 @@ ces détails dans la documentation de chaque type.
     comportement, vous pouvez soit définir l'option ``required`` de vos champs
     à ``false``, ou soit :ref:`désactiver la validation HTML5<book-forms-html5-validation-disable>`.
 
-    Notez aussi que définir l'option ``required`` à ``true`` **ne** résultera
-    en **aucune** validation côté serveur. En d'autres termes, si un utilisateur
+    Notez aussi que définir l'option ``required`` à ``true`` **ne** créera
+    **aucune** validation côté serveur. En d'autres termes, si un utilisateur
     soumet une valeur vide pour le champ (soit avec un vieux navigateur ou via
     un service web, par exemple), cette valeur sera acceptée comme valide à moins
-    que vous utilisiez la contrainte de validation de Symfony ``NotBlank`` ou
+    que vous n'utilisiez la contrainte de validation de Symfony ``NotBlank`` ou
     ``NotNull``.
 
-    En d'autres mots, l'option ``required`` est « cool », mais une réelle validation
+    En d'autres termes, l'option ``required`` est « cool », mais une réelle validation
     côté serveur devrait *toujours* être mise en place.
 
 .. index::
@@ -531,8 +531,8 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ :
     peuvent être déduites de cette information.
 
 * ``required`` : L'option ``required`` peut être devinée grâce aux règles de
-  validation (i.e. est-ce que le champ est ``NotBlank`` ou ``NotNull``) ou
-  grâce aux métadonnées de Doctrine (i.e. est-ce que le champ est ``nullable``).
+  validation (c-a-d est-ce que le champ est ``NotBlank`` ou ``NotNull``) ou
+  grâce aux métadonnées de Doctrine (c-a-d est-ce que le champ est ``nullable``).
   Ceci est très utile car votre validation côté client va automatiquement
   correspondre à vos règles de validation.
 
@@ -546,10 +546,10 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ :
 .. note::
 
   Ces options de champ sont *uniquement* devinées si vous utilisez Symfony pour
-  prédire le type des champs (i.e. en omettant ou en passant ``null`` en tant
+  prédire le type des champs (c-a-d en omettant ou en passant ``null`` en tant
   que deuxième argument de la méthode ``add()``).
 
-Si vous voudriez changer une des valeurs prédites, vous pouvez l'outrepasser en
+Si vous voulez changer une des valeurs prédites, vous pouvez l'outrepasser en
 passant l'option au tableau des options de champ ::
 
     ->add('task', null, array('min_length' => 4))
@@ -709,7 +709,7 @@ Fonctions de Référence des Templates Twig
 
 Si vous utilisez Twig, un :doc:`manuel de référence</reference/forms/twig_reference>`
 complet des fonctions de rendu de formulaire est mis à votre disposition.
-Lisez-le afin de connaître tout à propos des fonctions d'aide disponibles
+Lisez-le afin de tout connaître sur des fonctions d'aide disponibles
 ainsi que les options qui peuvent être utilisées avec ces dernières.
 
 .. index::
@@ -778,9 +778,9 @@ manière de créer des formulaires, mais le choix final vous revient.
     Chaque formulaire a besoin de savoir le nom de la classe qui détient les
     données sous-jacentes (par exemple : ``Acme\TaskBundle\Entity\Task``).
     Généralement, cette information est devinée grâce à l'objet passé en
-    second argument de la méthode ``createForm`` (i.e. ``$task``).
+    second argument de la méthode ``createForm`` (c-a-d ``$task``).
     Plus tard, quand vous commencerez à embarquer des formulaires les uns avec
-    les autres, cela ne sera plus suffisant. Donc, bien que pas nécessaire,
+    les autres, cela ne sera plus suffisant. Donc, bien que facultatif,
     c'est généralement une bonne idée de spécifier explicitement l'option
     ``data_class`` en ajoutant ce qui suit à votre classe formulaire ::
 
@@ -802,7 +802,7 @@ Le but d'un formulaire est de traduire les données d'un objet (par exemple :
 soumises par l'utilisateur à l'objet original. En tant que tel, le sujet de la
 persistance de l'objet ``Task`` dans la base de données n'a rien à voir avec
 le sujet des formulaires. Mais, si vous avez configuré la classe ``Task`` de
-telle sorte qu'elle soit persistée via Doctrine (i.e. vous avez ajouté des
+telle sorte qu'elle soit persistée via Doctrine (c-a-d qye vous avez ajouté des
 :ref:`métadonnées de correspondance<book-doctrine-adding-mapping>` pour cela),
 alors sa persistance peut être effectuée après la soumission d'un formulaire
 lorsque ce dernier est valide ::
@@ -815,14 +815,14 @@ lorsque ce dernier est valide ::
         return $this->redirect($this->generateUrl('task_success'));
     }
 
-Si, pour quelconque raison, vous n'avez pas accès à votre objet ``$task``
+Si, pour une quelconque raison, vous n'avez pas accès à votre objet ``$task``
 d'origine, vous pouvez le récupérer depuis le formulaire ::
 
     $task = $form->getData();
 
 Pour plus d'informations, voir le :doc:`chapitre Doctrine ORM</book/doctrine>`.
 
-La chose principale à comprendre est que lorsque le formulaire est lié (« binding »),
+La chose principale à comprendre est que lorsque le formulaire est lié (« bindé »),
 les données soumises sont transférées à l'objet sous-jacent immédiatement. Si
 vous souhaitez persister ces données, vous avez simplement besoin de persister
 l'objet lui-même (qui contient déjà les données soumises).
@@ -830,7 +830,7 @@ l'objet lui-même (qui contient déjà les données soumises).
 .. index::
    single: Formulaires; Formulaires embarqués
 
-Formulaires Embarqués
+Formulaires imbriqués
 ---------------------
 
 Souvent, vous allez vouloir construire un formulaire qui inclura des champs
@@ -839,7 +839,7 @@ pourrait contenir des données appartenant à un objet ``User`` ainsi qu'à
 plusieurs objets ``Address``. Heureusement, gérer cela est facile et naturel
 avec le composant formulaire.
 
-Embarquer un Objet Unique
+Imbriquer un Objet Unique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposez que chaque ``Task`` appartienne à un simple objet ``Category``.
@@ -966,10 +966,10 @@ L'instance ``Category`` est accessible naturellement via ``$task->getCategory()`
 et peut être persistée dans la base de données ou utilisée de quelconque manière
 que vous souhaitez.
 
-Embarquer une Collection de Formulaires
+Imbriquer une Collection de Formulaires
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi embarquer une collection de formulaires dans un formulaire.
+Vous pouvez aussi imbriquer une collection de formulaires dans un formulaire.
 Cela est possible grâce au type de champ ``collection``. Pour plus d'informations,
 voir la :doc:`référence du type de champ collection</reference/forms/types/collection>`.
 
@@ -1054,7 +1054,7 @@ ce qui suit en haut du template qui rend le formulaire :
         <form ...>
 
 La balise ``form_theme`` (dans Twig) « importe » les fragments définis dans le
-template donné et les utilise lorsqu'il rend le formulaire. En d'autres mots,
+template donné et les utilise lorsqu'il rend le formulaire. En d'autres termes,
 quand la fonction ``form_row`` est appelée plus tard dans ce template, elle va
 utiliser le bloc ``field_row`` de votre thème personnalisé (à la place du bloc
 par défaut ``field_row`` qui est délivré avec Symfony).
@@ -1113,7 +1113,7 @@ il y a 4 *parts* possibles d'un formulaire qui peuvent être rendues :
 .. note::
 
     Il y a en fait 3 autres *parts* - ``rows``, ``rest``, et ``enctype`` - mais
-    vous ne devriez que rarement, voir jamais, avoir besoin de les réécrire.
+    vous ne devriez que rarement, voire jamais, avoir besoin de les réécrire.
 
 En connaissant le type du champ (par exemple : ``textarea``) et quelle partie de
 ce dernier vous souhaitez personnaliser (par exemple : ``widget``), vous pouvez
@@ -1122,8 +1122,8 @@ construire le nom du fragment qui a besoin d'être réécrit (par exemple : ``te
 .. index::
    single: Formulaires; Inhéritance de Fragment de Template
 
-Inhéritance de Fragment de Template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Héritage de Fragment de Template
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans certains cas, le fragment que vous voulez personnaliser sera absent.
 Par exemple, il n'y a pas de fragment ``textarea_errors`` dans les thèmes
@@ -1298,7 +1298,7 @@ CSRF sans n'avoir rien à faire. En fait, chaque formulaire dans ce chapitre
 a profité de la protection CSRF !
 
 La protection CSRF fonctionne en ajoutant un champ caché dans votre formulaire -
-appelé ``_token`` par défaut - qui contient une valeur que seuls vous et votre
+appelé ``_token`` par défaut - qui contient une valeur que seul vous et votre
 utilisateur connaissez. Cela garantit que l'utilisateur - et non pas une autre
 entité - soumet les informations données. Symfony valide automatiquement la
 présence et l'exactitude de ce jeton.

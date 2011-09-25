@@ -138,7 +138,7 @@ dans des tableaux. A la place, Doctrine vous permet de persister des *objets* en
 dans votre base de données et récupérer ces objets depuis votre base de données. Ce système
 fonctionne en associant vos classes PHP avec des tables de votre base,
 et les propriétés de ces classes PHP avec des colonnes de la table, c'est ce que l'on
-apelle le mapping :
+appelle le mapping :
 
 .. image:: /images/book/doctrine_image_1.png
    :align: center
@@ -243,7 +243,7 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
 
 .. seealso::
 
-    Vous pouvez aussi regarder la `Basic Mapping Documentation`_ de Doctrine pour
+    Vous pouvez aussi regarder la documentation sur les`Bases du Mapping`_ de Doctrine pour
     avoir tout les détails à propos des informations de mapping. Si vous utilisez 
     les annotations, vous devrez préfixer toutes les annotations avec ``ORM\`` 
     (ex: ``ORM\Column(..)``), ce qui n'est pas montré dans la documentation de
@@ -257,7 +257,7 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
     mappés avec des mots-clés SQL (comme ``group`` ou ``user``). Par exemple, si
     le nom de la classe de votre entité est ``Group``, alors, par défaut, le nom
     de la table correspondante sera ``group``, ce qui causera des problèmes SQL
-    avec certains moteurs. Lisez la `Reserved SQL keywords documentation`_ de
+    avec certains moteurs. Lisez la documentation sur les `Mots-clé SQL réservés`_ de
     Doctrine pour savoir comment échapper ces noms.
 
 .. note::
@@ -1239,7 +1239,7 @@ vous utilisez. Les types suivants sont supportés par Doctrine :
   * ``object`` (serialisé et stocké dans un champ ``CLOB``)
   * ``array`` (serialisé et stocké dans un champ ``CLOB``)
 
-Pour plus d'informations, lisez la documentation Doctrine `Mapping Types documentation`_.
+Pour plus d'informations, lisez la documentation Doctrine `Types de mapping Doctrine`_.
 
 Options des champs
 ~~~~~~~~~~~~~~~~~~
@@ -1349,12 +1349,12 @@ suivant :
 
 .. _`Doctrine`: http://www.doctrine-project.org/
 .. _`MongoDB`: http://www.mongodb.org/
-.. _`Basic Mapping Documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html
+.. _`Bases du Mapping`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html
 .. _`Query Builder`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/query-builder.html
 .. _`Doctrine Query Language`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/dql-doctrine-query-language.html
 .. _`Association Mapping Documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/association-mapping.html
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php
-.. _`Mapping Types Documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html#doctrine-mapping-types
+.. _`Types de mapping Doctrine`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html#doctrine-mapping-types
 .. _`Property Mapping documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html#property-mapping
 .. _`Lifecycle Events documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/events.html#lifecycle-events
-.. _`Reserved SQL keywords documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html#quoting-reserved-words
+.. _`Mots-clé SQL réservés`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/basic-mapping.html#quoting-reserved-words
