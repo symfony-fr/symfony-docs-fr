@@ -378,111 +378,117 @@ créer et définir un nouvel objet ``Exception``, ou ne rien faire :
     }
 
 .. index::
-   single: Event Dispatcher
+   single: Dispatcher d'Evènements
 
-The Event Dispatcher
---------------------
+Le Dispatcher d'Evènements
+--------------------------
 
-Objected Oriented code has gone a long way to ensuring code extensibility. By
-creating classes that have well defined responsibilities, your code becomes
-more flexible and a developer can extend them with subclasses to modify their
-behaviors. But if he wants to share his changes with other developers who have
-also made their own subclasses, code inheritance is moot.
+Le code Orienté Objet a effectué un long chemin afin d'assurer une extensibilité
+du code. En créant des classes qui ont des responsabilités bien définies, votre
+code devient plus flexible et un développeur peut les étendre avec des sous-classes
+pour modifier leurs comportements. Mais s'il souhaite partager ses changements
+avec d'autres développeurs qui ont aussi créés leurs propres sous-classes,
+l'héritage du code devient alors discutable.
 
-Consider the real-world example where you want to provide a plugin system for
-your project. A plugin should be able to add methods, or do something before
-or after a method is executed, without interfering with other plugins. This is
-not an easy problem to solve with single inheritance, and multiple inheritance
-(were it possible with PHP) has its own drawbacks.
+Considérez l'exemple du monde réel lorsque vous voulez fournir un système de
+plugin pour votre projet. Un plugin devrait être capable d'ajouter des méthodes,
+ou de faire quelque chose avant ou après qu'une méthode soit exécutée, sans
+interférer avec d'autres plugins. Ceci n'est pas un problème facile à résoudre
+avec l'héritage unique ; et l'héritage multiple (s'il était possible avec PHP)
+possède ses propres inconvénients.
 
-The Symfony2 Event Dispatcher implements the `Observer`_ pattern in a simple
-and effective way to make all these things possible and to make your projects
-truly extensible.
+Le Dispatcher d'Evènements de Symfony2 implémente le pattern `Observer`_ d'une
+manière simple et efficace afin de rendre ces choses possibles et de pouvoir
+avoir des projets réellement extensibles.
 
-Take a simple example from the `Symfony2 HttpKernel component`_. Once a
-``Response`` object has been created, it may be useful to allow other elements
-in the system to modify it (e.g. add some cache headers) before it's actually
-used. To make this possible, the Symfony2 kernel throws an event -
-``kernel.response``. Here's how it work:
+Prenez un exemple simple du `Composant HttpKernel de Symfony2`_. Une fois qu'un
+objet ``Response`` a été créé, il pourrait être utile de permettre à d'autres
+éléments du système de le modifier (par exemple : ajouter quelques en-têtes de
+cache) avant qu'il soit utilisé. Afin de rendre ceci possible, le kernel de
+Symfony2 jette un évènement - ``kernel.response``. Voilà comment cela fonctionne :
 
-* A *listener* (PHP object) tells a central *dispatcher* object that it wants
-  to listen to the ``kernel.response`` event;
+* Un *listener* (objet PHP) informe un objet *dispatcher* (« répartiteur » en français)
+  central qu'il souhaite écouter l'évènement ``kernel.response`` ;
 
-* At some point, the Symfony2 kernel tells the *dispatcher* object to dispatch
-  the ``kernel.response`` event, passing with it an ``Event`` object that has
-  access to the ``Response`` object;
+* A un moment donné, le kernel de Symfony2 informe l'objet *dispatcher* qu'il doit
+  répartir (i.e. informer les listeners) l'évènement ``kernel.response``, en
+  passant avec lui un objet ``Event`` qui a accès à l'objet ``Response`` ;
 
-* The dispatcher notifies (i.e. calls a method on) all listeners of the
-  ``kernel.response`` event, allowing each of them to make any modification to
-  the ``Response`` object.
+* Le dispatcher notifie (i.e. appelle une méthode de) tous les listeners
+  de l'évènement ``kernel.response``, permettant à chacun d'entre eux d'effectuer
+  quelconque modification sur l'objet ``Response``.
 
 .. index::
-   single: Event Dispatcher; Events
+   single: Dispatcher d'Evènements; Evènements
 
 .. _event_dispatcher:
 
-Events
-~~~~~~
+Les Evènements
+~~~~~~~~~~~~~~
 
-When an event is dispatched, it's identified by a unique name (e.g.
-``kernel.response``), which any number of listeners might be listening to. A
-:class:`Symfony\\Component\\EventDispatcher\\Event` instance is also created
-and passed to all of the listeners. As you'll see later, the ``Event`` object
-itself often contains data about the event being dispatched.
+Lorsqu'un évènement est réparti, il est identifié par un nom unique (par
+exemple : ``kernel.response``), qu'un quelconque nombre de listeners pourraient
+écouter. Une instance de :class:`Symfony\\Component\\EventDispatcher\\Event`
+est aussi créée et passée à tous les listeners. Comme vous le verrez plus
+tard, l'objet ``Event`` lui-même contient souvent des données à propos de
+l'évènement étant réparti.
 
 .. index::
-   pair: Event Dispatcher; Naming conventions
+   pair: Dispatcher d'Evènements; Conventions de nommage
 
-Naming Conventions
-..................
+Conventions de Nommage
+......................
 
-The unique event name can be any string, but optionally follows a few simple
-naming conventions:
+Le nom unique d'un évènement peut être n'importe quelle chaîne de caractères,
+mais suit optionnellement quelques conventions de nommage simples :
 
-* use only lowercase letters, numbers, dots (``.``), and underscores (``_``);
+* utilisez seulement des lettres en minuscules, des chiffres, des points (``.``),
+  et des underscores (``_``) ;
 
-* prefix names with a namespace followed by a dot (e.g. ``kernel.``);
+* préfixez les noms avec un espace de noms suivi d'un point (par exemple :
+  ``kernel.``) ;
 
-* end names with a verb that indicates what action is being taken (e.g.
-  ``request``).
+* terminez les noms avec un verbe qui indique quelle action est en train
+  d'être effectuée (par exemple : ``request``).
 
-Here are some examples of good event names:
+Vous trouvez ci-dessous quelques exemples de noms d'évènements corrects :
 
 * ``kernel.response``
 * ``form.pre_set_data``
 
 .. index::
-   single: Event Dispatcher; Event Subclasses
+   single: Dispatcher d'Evènements; Sous-classes d'Evènements
 
-Event Names and Event Objects
-.............................
+Noms d'Evènements et Objets Evènements
+......................................
 
-When the dispatcher notifies listeners, it passes an actual ``Event`` object
-to those listeners. The base ``Event`` class is very simple: it contains a
-method for stopping :ref:`event
-propagation<event_dispatcher-event-propagation>`, but not much else.
+Lorsque le dispatcher notifie les listeners, il passe un objet ``Event`` à
+ces derniers. La classe ``Event`` de base est très simple : elle contient
+une méthode pour stopper la
+:ref:`propagation de l'évènement<event_dispatcher-event-propagation>`, mais
+pas grand chose de plus.
 
-Often times, data about a specific event needs to be passed along with the
-``Event`` object so that the listeners have needed information. In the case of
-the ``kernel.response`` event, the ``Event`` object that's created and passed to
-each listener is actually of type
-:class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`, a
-subclass of the base ``Event`` object. This class contains methods such as
-``getResponse`` and ``setResponse``, allowing listeners to get or even replace
-the ``Response`` object.
+Souvent, des données à propos d'un évènement spécifique ont besoin d'être
+passées avec l'objet ``Event`` afin que les listeners aient les informations
+nécessaires. Dans le cas de l'évènement ``kernel.response``, l'objet ``Event``
+qui est créé et passé à chaque listener est en fait de type
+:class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`, une
+sous-classe de l'objet ``Event`` de base. Cette classe contient des méthodes
+telles ``getResponse`` et ``setResponse``, permettant aux listeners d'obtenir
+ou même de remplacer l'objet ``Response``.
 
-The moral of the story is this: when creating a listener to an event, the
-``Event`` object that's passed to the listener may be a special subclass that
-has additional methods for retrieving information from and responding to the
-event.
+Finalement, la morale de l'histoire est : lorsque vous créez un listener
+d'évènement, il se peut que l'objet ``Event`` passé au listener soit une
+sous-classe spéciale qui possède des méthodes additionnelles pour récupérer
+des informations et répondre à l'évènement.
 
-The Dispatcher
-~~~~~~~~~~~~~~
+Le Dispatcher
+~~~~~~~~~~~~~
 
-The dispatcher is the central object of the event dispatcher system. In
-general, a single dispatcher is created, which maintains a registry of
-listeners. When an event is dispatched via the dispatcher, it notifies all
-listeners registered with that event.
+Le dispatcher est un objet central du système de répartition des évènements.
+En général, un unique dispatcher est créé, qui maintient un registre de
+listeners. Lorsqu'un évènement est réparti via le dispatcher, il notifie
+tous les listeners ayant souscrit à ce dernier.
 
 .. code-block:: php
 
@@ -491,56 +497,58 @@ listeners registered with that event.
     $dispatcher = new EventDispatcher();
 
 .. index::
-   single: Event Dispatcher; Listeners
+   single: Dispatcher d'Evènements; Listeners
 
-Connecting Listeners
-~~~~~~~~~~~~~~~~~~~~
+Connecter les Listeners
+~~~~~~~~~~~~~~~~~~~~~~~
 
-To take advantage of an existing event, you need to connect a listener to the
-dispatcher so that it can be notified when the event is dispatched. A call to
-the dispatcher ``addListener()`` method associates any valid PHP callable to
-an event:
+Pour profiter d'un évènement existant, vous avez besoin de connecter un listener
+au dispatcher afin qu'il puisse vous notifier lorsque l'évènement est réparti.
+Un appel à la méthode ``addListener()`` du dispatcher associe quelconque
+« callable » PHP à un évènement :
 
 .. code-block:: php
 
     $listener = new AcmeListener();
     $dispatcher->addListener('foo.action', array($listener, 'onFooAction'));
 
-The ``addListener()`` method takes up to three arguments:
+La méthode ``addListener()`` prend jusqu'à trois arguments :
 
-* The event name (string) that this listener wants to listen to;
+* Le nom de l'évènement (chaîne de caractères) auquel ce listener souhaite souscrire ;
 
-* A PHP callable that will be notified when an event is thrown that it listens
-  to;
+* Un « callable » PHP qui sera notifié lorsqu'un évènement qu'il écoute est jeté
 
-* An optional priority integer (higher equals more important) that determines
-  when a listener is triggered versus other listeners (defaults to ``0``). If
-  two listeners have the same priority, they are executed in the order that
-  they were added to the dispatcher.
+* Un paramètre optionnel représentant la priorité (plus grand voulant dire plus
+  important) qui détermine quand un listener est déclenché par rapport à d'autres
+  listeners (la valeur par défaut est ``0``). Si deux listeners possèdent la même
+  priorité, ils sont exécutés dans l'ordre auquel ils ont été ajoutés au dispatcher.
 
 .. note::
 
-    A `PHP callable`_ is a PHP variable that can be used by the
-    ``call_user_func()`` function and returns ``true`` when passed to the
-    ``is_callable()`` function. It can be a ``\Closure`` instance, a string
-    representing a function, or an array representing an object method or a
-    class method.
+    Un `callable PHP`_ est une variable PHP qui peut être utilisée par la
+    fonction ``call_user_func()`` et qui retourne ``true`` lorsqu'elle est
+    passée à la fonction ``is_callable()``. Ce peut être une instance de
+    ``\Closure``, une chaîne de caractères représentant une fonction, ou
+    encore un tableau représentant une méthode d'objet ou une méthode de
+    classe.
 
-    So far, you've seen how PHP objects can be registered as listeners. You
-    can also register PHP `Closures`_ as event listeners:
+    Jusqu'içi, vous avez vu comment des objets PHP peuvent être enregistrés
+    en tant que listeners. Vous pouvez aussi enregistrer des `Closures`_
+    PHP en tant que listeners d'évènements :
 
     .. code-block:: php
 
         use Symfony\Component\EventDispatcher\Event;
 
         $dispatcher->addListener('foo.action', function (Event $event) {
-            // will be executed when the foo.action event is dispatched
+            // sera exécuté quand l'évènement foo.action est réparti
         });
 
-Once a listener is registered with the dispatcher, it waits until the event is
-notified. In the above example, when the ``foo.action`` event is dispatched,
-the dispatcher calls the ``AcmeListener::onFooAction`` method and passes the
-``Event`` object as the single argument:
+Une fois qu'un listener est enregistré auprès du dispatcher, il attend jusqu'à
+ce que l'évènement soit notifié. Dans l'exemple ci-dessus, quand l'évènement
+``foo.action`` est réparti, le dispatcher appelle la méthode
+``AcmeListener::onFooAction`` et lui passe l'objet ``Event`` en tant qu'unique
+argument :
 
 .. code-block:: php
 
@@ -552,22 +560,25 @@ the dispatcher calls the ``AcmeListener::onFooAction`` method and passes the
 
         public function onFooAction(Event $event)
         {
-            // do something
+            // faites quelque chose
         }
     }
 
 .. tip::
 
-    If you use the Symfony2 MVC framework, listeners can be registered via
-    your :ref:`configuration <dic-tags-kernel-event-listener>`. As an added
-    bonus, the listener objects are instantiated only when needed.
+    Si vous utilisez le framework MVC de Symfony2, les listeners peuvent
+    être enregistrés via votre
+    :ref:`configuration <dic-tags-kernel-event-listener>`. Et en tant que
+    bonus, les objets listeners sont instanciés uniquement quand cela est
+    nécessaire.
 
-In many cases, a special ``Event`` subclass that's specific to the given event
-is passed to the listener. This gives the listener access to special
-information about the event. Check the documentation or implementation of each
-event to determine the exact ``Symfony\Component\EventDispatcher\Event``
-instance that's being passed. For example, the ``kernel.event`` event passes an
-instance of ``Symfony\Component\HttpKernel\Event\FilterResponseEvent``:
+Dans beaucoup de cas, une sous-classe spéciale ``Event`` qui est spécifique
+à l'évènement donné est passée au listener. Cela donne la possibilité au
+listener d'accéder à des informations spéciales à propos de l'évènement.
+Vérifiez la documentation ou l'implémentation de chaque évènement pour
+déterminer l'instance exacte de ``Symfony\Component\EventDispatcher\Event``
+qui est passée. Par exemple, l'évènement ``kernel.event`` passe une instance
+de ``Symfony\Component\HttpKernel\Event\FilterResponseEvent`` :
 
 .. code-block:: php
 
@@ -584,23 +595,23 @@ instance of ``Symfony\Component\HttpKernel\Event\FilterResponseEvent``:
 .. _event_dispatcher-closures-as-listeners:
 
 .. index::
-   single: Event Dispatcher; Creating and Dispatching an Event
+   single: Dispatcher d'Evènements; Créer et Répartir un Evènement
 
-Creating and Dispatching an Event
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Créer et Répartir un Evènement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to registering listeners with existing events, you can create and
-throw your own events. This is useful when creating third-party libraries and
-also when you want to keep different components of your own system flexible
-and decoupled.
+En plus d'enregistrer des listeners avec des évènements existants, vous pouvez
+créer et jeter vos propres évènements. Cela est utile lorsque vous créez des
+bibliothèques tierces et aussi quand vous voulez garder différents composants
+de votre propre système flexibles et découplés.
 
-The Static ``Events`` Class
-...........................
+La Classe Statique ``Events``
+.............................
 
-Suppose you want to create a new Event - ``store.order`` - that is dispatched
-each time an order is created inside your application. To keep things
-organized, start by creating a ``StoreEvents`` class inside your application
-that serves to define and document your event:
+Supposez que vous vouliez créer un nouvel Evènement - ``store.order`` - qui est
+réparti chaque fois qu'une commande (« order ») est créée dans votre application.
+Pour garder les choses organisées, commencez par créer une classe ``StoreEvents``
+dans votre application qui sert à définir et documenter votre évènement :
 
 .. code-block:: php
 
@@ -609,36 +620,37 @@ that serves to define and document your event:
     final class StoreEvents
     {
         /**
-         * The store.order event is thrown each time an order is created
-         * in the system.
+         * L'évènement store.order est jeté chaque fois qu'une commande
+         * est créée dans le système.
          *
-         * The event listener receives an Acme\StoreBundle\Event\FilterOrderEvent
-         * instance.
+         * Le listener d'évènement reçoit une instance de
+         * Acme\StoreBundle\Event\FilterOrderEvent
          *
          * @var string
          */
         const onStoreOrder = 'store.order';
     }
 
-Notice that this class doesn't actually *do* anything. The purpose of the
-``StoreEvents`` class is just to be a location where information about common
-events can be centralized. Notice also that a special ``FilterOrderEvent``
-class will be passed to each listener of this event.
+Notez que cette classe ne *fait* rien finalement. Le but de la classe
+``StoreEvents`` est juste d'être un endroit où de les informations à propos
+d'évènements communs peut être centralisées. Notez aussi que la classe
+spéciale ``FilterOrderEvent`` sera passée à chaque listener de cet
+évènement.
 
-Creating an Event object
+Créer un Objet Evènement
 ........................
 
-Later, when you dispatch this new event, you'll create an ``Event`` instance
-and pass it to the dispatcher. The dispatcher then passes this same instance
-to each of the listeners of the event. If you don't need to pass any
-information to your listeners, you can use the default
-``Symfony\Component\EventDispatcher\Event`` class. Most of the time, however,
-you *will* need to pass information about the event to each listener. To
-accomplish this, you'll create a new class that extends
-``Symfony\Component\EventDispatcher\Event``.
+Plus tard, quand vous répartirez ce nouvel évènement, vous allez créer une
+instance ``Event`` et la passer au dispatcher. Le dispatcher va à son tour
+passer cette même instance à chacun des listeners de l'évènement. Si vous
+n'avez pas besoin de passer des informations à vos listeners, vous pouvez
+utiliser la classe par défaut ``Symfony\Component\EventDispatcher\Event``.
+La plupart du temps, cependant, vous *aurez* besoin de passer de l'information
+à propos de l'évènement à chaque listener. Pour accomplir cela, vous créerez
+une nouvelle classe qui étend ``Symfony\Component\EventDispatcher\Event``.
 
-In this example, each listener will need access to some pretend ``Order``
-object. Create an ``Event`` class that makes this possible:
+Dans cet exemple, chaque listener aura besoin d'avoir accès à un prétendu
+objet ``Order``. Créez une classe ``Event`` qui rend cela possible :
 
 .. code-block:: php
 
@@ -662,16 +674,16 @@ object. Create an ``Event`` class that makes this possible:
         }
     }
 
-Each listener now has access to to ``Order`` object via the ``getOrder``
-method.
+Chaque listener a maintenant accès à l'objet ``Order`` via la méthode
+``getOrder``.
 
-Dispatch the Event
-..................
+Répartir l'Evènement
+....................
 
-The :method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::dispatch`
-method notifies all listeners of the given event. It takes two arguments: the
-name of the event to dispatch and the ``Event`` instance to pass to each
-listener of that event:
+La méthode :method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::dispatch`
+notifie tous les listeners de l'évènement donné. Elle prend deux arguments : le nom
+de l'évènement à répartir et l'instance ``Event`` à passer à chaque listener de cet
+évènement :
 
 .. code-block:: php
 
@@ -679,43 +691,46 @@ listener of that event:
     use Acme\StoreBundle\Order;
     use Acme\StoreBundle\Event\FilterOrderEvent;
 
-    // the order is somehow created or retrieved
+    // la commande est créée ou obtenue d'une manière ou d'une autre
     $order = new Order();
     // ...
 
-    // create the FilterOrderEvent and dispatch it
+    // créez l'évènement FilterOrderEvent et répartissez-le
     $event = new FilterOrderEvent($order);
     $dispatcher->dispatch(StoreEvents::onStoreOrder, $event);
 
-Notice that the special ``FilterOrderEvent`` object is created and passed to
-the ``dispatch`` method. Now, any listener to the ``store.order`` event will
-receive the ``FilterOrderEvent`` and have access to the ``Order`` object via
-the ``getOrder`` method:
+Notez que l'objet spécial ``FilterOrderEvent`` est créé et passé à la méthode
+``dispatch``. Maintenant, tous les listeners de l'évènement ``store.order``
+vont recevoir l'évènement ``FilterOrderEvent`` et avoir accès à l'objet ``Order``
+via la méthode ``getOrder`` :
 
 .. code-block:: php
 
-    // some listener class that's been registered for onStoreOrder
+    // une quelconque classe listener qui a été enregistrée pour onStoreOrder
     use Acme\StoreBundle\Event\FilterOrderEvent;
 
     public function onStoreOrder(FilterOrderEvent $event)
     {
         $order = $event->getOrder();
-        // do something to or with the order
+        // faites quelque chose sur ou avec la commande
     }
 
-Passing along the Event Dispatcher Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Passer l'Objet Dispatcher d'Evènements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you have a look at the ``EventDispatcher`` class, you will notice that the
-class does not act as a Singleton (there is no ``getInstance()`` static method).
-That is intentional, as you might want to have several concurrent event
-dispatchers in a single PHP request. But it also means that you need a way to
-pass the dispatcher to the objects that need to connect or notify events.
+Si vous regardez de plus près la classe ``EventDispatcher``, vous noterez que
+la classe n'agit pas comme un Singleton (il n'y a pas de méthode statique
+``getInstance()``). Ceci est intentionnel, car vous pourriez vouloir avoir
+plusieurs dispatchers d'évènements concurrents dans une seule et même requête
+PHP. Mais cela signifie aussi que vous avez besoin d'une manière de passer
+le dispatcher aux objets qui ont besoin de se connecter à lui ou de lui
+notifier des évènements.
 
-The best practice is to inject the event dispatcher object into your objects,
-aka dependency injection.
+La bonne pratique est d'injecter l'objet dispatcher d'évènements dans vos
+objets, connu aussi sous le nom d'injection de dépendances (« Dependency
+Injection »).
 
-You can use constructor injection::
+Vous pouvez utiliser l'injection via le constructeur ::
 
     class Foo
     {
@@ -727,7 +742,7 @@ You can use constructor injection::
         }
     }
 
-Or setter injection::
+Ou l'injection via un setter ::
 
     class Foo
     {
@@ -739,34 +754,38 @@ Or setter injection::
         }
     }
 
-Choosing between the two is really a matter of taste. Many tend to prefer the
-constructor injection as the objects are fully initialized at construction
-time. But when you have a long list of dependencies, using setter injection
-can be the way to go, especially for optional dependencies.
+Choisir entre les deux possibilités est réellement une question de goût. Beaucoup
+préfèrent l'injection via le constructeur car ainsi, les objets sont initialisés
+entièrement au moment de la construction. Mais quand vous avez une longue liste
+de dépendances, utiliser l'injection via un setter peut être le bon choix à
+suivre, spécialement pour des dépendances optionnelles.
 
 .. tip::
 
-    If you use dependency injection like we did in the two examples above, you
-    can then use the `Symfony2 Dependency Injection component`_ to elegantly
-    manage these objects.
+    Si vous utilisez l'injection de dépendances comme nous l'avons fait dans
+    les deux exemples ci-dessus, vous pouvez dès lors utiliser le
+    `Composant d'Injection de Dépendances de Symfony2`_ afin de gérer ces objets
+    de manière élégante.
 
 .. index::
-   single: Event Dispatcher; Event subscribers
+   single: Dispatcher d'Evènements; Souscripteurs d'Evènements
 
-Using Event Subscribers
-~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser les Souscripteurs d'Evènements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The most common way to listen to an event is to register an *event listener*
-with the dispatcher. This listener can listen to one or more events and is
-notified each time those events are dispatched.
+La solution la plus courante pour écouter un évènement est de souscrire un
+*listener d'évènement* avec le dispatcher. Ce listener peut écouter un ou
+plusieurs évènements et est notifié chaque fois que ces évènements sont
+répartis.
 
-Another way to listen to events is via an *event subscriber*. An event
-subscriber is a PHP class that's able to tell the dispatcher exactly which
-events it should subscribe to. It implements the
-:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`
-interface, which requires a single static method called
-``getSubscribedEvents``. Take the following example of a subscriber that
-subscribes to the ``kernel.response`` and ``store.order`` events:
+Une autre manière d'écouter les évènements est via un *souscripteur
+d'évènement*. Un souscripteur d'évènement est une classe PHP qui est
+capable de dire au dispatcher exactement à quels évènements il devrait
+souscrire. Il implémente l'interface
+:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`,
+qui requiert une unique méthode statique appelée ``getSubscribedEvents``.
+Prenez l'exemple suivant d'un souscripteur qui souscrit aux évènements
+``kernel.response`` et ``store.order`` :
 
 .. code-block:: php
 
@@ -796,11 +815,10 @@ subscribes to the ``kernel.response`` and ``store.order`` events:
         }
     }
 
-This is very similar to a listener class, except that the class itself can
-tell the dispatcher which events it should listen to. To register a subscriber
-with the dispatcher, use the
-:method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::addSubscriber`
-method:
+Cela ressemble très fortement à une classe listener, excepté que la classe
+peut elle-même dire au dispatcher quels évènements il devrait écouter. Pour
+souscrire un souscripteur avec le dispatcher, utilisez la méthode
+:method:`Symfony\\Component\\EventDispatcher\\EventDispatcher::addSubscriber` :
 
 .. code-block:: php
 
@@ -809,25 +827,26 @@ method:
     $subscriber = new StoreSubscriber();
     $dispatcher->addSubscriber($subscriber);
 
-The dispatcher will automatically register the subscriber for each event
-returned by the ``getSubscribedEvents`` method. This method returns an array
-indexed by event names and whose values are either the method name to call or
-an array composed of the method name to call and a priority.
+Le dispatcher va automatiquement souscrire le souscripteur pour chaque
+évènement retourné par la méthode ``getSubscribedEvents``. Cette méthode
+retourne un tableau indexé par les noms des évènements et dont les valeurs
+sont soit le nom de la méthode à appeler, soit un tableau composé de noms
+de méthodes à appeler et une priorité.
 
 .. index::
-   single: Event Dispatcher; Stopping event flow
+   single: Dispatcher d'Evènements; Arrêter la propagation d'un évènement
 
 .. _event_dispatcher-event-propagation:
 
-Stopping Event Flow/Propagation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Arrêter le Déroulement/la Propagation d'un Evènement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In some cases, it may make sense for a listener to prevent any other listeners
-from being called. In other words, the listener needs to be able to tell the
-dispatcher to stop all propagation of the event to future listeners (i.e. to
-not notify any more listeners). This can be accomplished from inside a
-listener via the
-:method:`Symfony\\Component\\EventDispatcher\\Event::stopPropagation` method:
+Dans certains cas, cela peut faire du sens pour un listener d'empêcher n'importe
+quel autre listener d'être appelé. En d'autres termes, le listener a besoin
+d'être capable de dire au dispatcher d'arrêter toute propagation de l'évènement
+aux prochains listeners (i.e. de ne plus notifier aucun autre listener). Cela
+peut être réalisé via la méthode
+:method:`Symfony\\Component\\EventDispatcher\\Event::stopPropagation` :
 
 .. code-block:: php
 
@@ -840,8 +859,8 @@ listener via the
        $event->stopPropagation();
    }
 
-Now, any listeners to ``store.order`` that have not yet been called will *not*
-be called.
+Maintenant, tous les listeners de ``store.order`` qui n'ont pas encore été
+appelés *ne seront pas* appelés.
 
 .. index::
    single: Profiler
