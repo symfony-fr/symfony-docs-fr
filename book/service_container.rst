@@ -5,28 +5,28 @@
 Service Container
 =================
 
-Une application PHP moderne est plein d'objets. Un objet peut faciliter la
-livraison des messages e-mail, tandis qu'un autre peut vous permettre de persister les informations
+Une application PHP moderne est plein d'objets. Un objet peut faciliter l'envoi
+des messages e-mail, tandis qu'un autre peut vous permettre de persister les informations
 dans une base de données. Dans votre application, vous pouvez créer un objet qui gère
-votre inventaire de produits, ou tout autre objet qui traite des données auprès d'un API 
-tiers. Le fait est qu'une application moderne fait beaucoup de choses et est organisé
-dans de nombreux objets qui gèrent chaque tâche.
+votre inventaire de produits, ou tout autre objet qui traite des données via une API 
+tierce. Le fait est qu'une application moderne fait beaucoup de choses et est organisée
+entre de nombreux objets qui gèrent chaque tâche.
 
 Dans ce chapitre, nous allons parler d'un objet spécial PHP dans Symfony2 qui vous aide
 à instancier, organiser et récupérer les nombreux objets de votre application.
 Cet objet, appelé un conteneur de services, vous permettra de standardiser et
 centraliser la façon dont les objets sont construits dans votre application. Le conteneur
 vous facilite la vie, est super rapide, et met en valeur une architecture qui
-encourage un code réutilisable et découplées. Et puisque toutes les classes fondamentales de Symfony2
+encourage un code réutilisable et découplé. Et puisque toutes les classes fondamentales de Symfony2
 utilisent le conteneur, vous allez apprendre comment étendre, configurer et utiliser n'importe quel objet
-dans Symfony2. En grande partie, le conteneur de service est le plus grand contributeur  
-à la vitesse et l'extensibilité de Symfony2.
+dans Symfony2. En bien des aspects, le conteneur de services est le principal responsable 
+de la vitesse et de l'extensibilité de Symfony2.
 
-Enfin, configurer et utiliser le conteneur de service est facile. A la fin
+Enfin, configurer et utiliser le conteneur de services est facile. A la fin
 de ce chapitre, vous serez à l'aise pour créer vos propres objets via le
-conteneur et de personnaliser des objets provenant de bundle tiers. Vous allez commencer
-à écrire du code qui est plus réutilisables, testables et découplées, tout simplement parce
-le conteneur de service rend l'écriture de bons codes si facile.
+conteneur et pour personnaliser des objets provenant de bundles tiers. Vous allez commencer
+à écrire du code qui est plus réutilisable, testable et découplé, tout simplement parce
+le conteneur de services facilite l'écriture de code de qualité.
 
 .. index::
    single: Service Container; Qu'est-ce qu'un service ?
@@ -34,9 +34,9 @@ le conteneur de service rend l'écriture de bons codes si facile.
 Qu'est-ce qu'un Service ?
 -------------------------
 
-Plus simplement, un :term:`Service` est tout objet PHP qui effectue un genre de 
-tâche "globale". C'est un nom générique utilisé en informatique
-pour décrire un objet qui est créé dans un but précis (par ex. la livraison des
+Plus simplement, un :term:`Service` désigne tout objet PHP qui effectue une sorte de 
+tâche « globale ». C'est un nom générique utilisé en informatique
+pour décrire un objet qui est créé dans un but précis (par ex. l'envoi des
 emails). Chaque service est utilisé tout au long de votre application lorsque vous avez besoin
 de la fonctionnalité spécifique qu'il fournit. Vous n'avez pas à faire quelque chose de spécial
 pour fabriquer un service : il suffit d'écrire une classe PHP avec un code qui accomplit
@@ -44,28 +44,28 @@ une tâche spécifique. Félicitations, vous venez tout juste de créer un servi
 
 .. note::
 
-    En règle générale, un objet PHP est un service si elle est utilisée globalement dans votre
+    En règle générale, un objet PHP est un service s'il est utilisé de façon globale dans votre
     application. Un seul service ``Mailer`` est utilisé globalement pour envoyer des
     messages email tandis que les nombreux objets ``Message`` qu'il délivre
     ne sont *pas* des services. De même, un objet ``Product`` n'est pas un service,
-    mais un objet qui persiste des objets ``Product`` à une base de données *est* un service.
+    mais un objet qui persiste des objets ``Product`` dans une base de données *est* un service.
 
-Alors quelle est la grosse affaire, alors? L'avantage de réfléchir sur les «services» est
+Alors quel est l'avantage ? L'avantage de réfléchir sur les « services » est
 que vous commencez à penser à séparer chaque morceau de fonctionnalité dans votre
-application dans une série de services. Puisque chaque service ne fait qu'une fonction,
-vous pouvez facilement accéder à chaque service et utiliser ses fonctionnalités, chaque fois que vous
-en avez besoin. Chaque service peut également être plus facilement testée et configurée puisqu'il
-est séparé de l'autre fonctionnalité dans votre application. Cette idée
+application dans une série de services. Puisque chaque service ne réalise qu'une fonction,
+vous pouvez facilement accéder à chaque service et utiliser ses fonctionnalités chaque fois que vous
+en avez besoin. Chaque service peut également être plus facilement testé et configuré puisqu'il
+est séparé des autres fonctionnalités de votre application. Cette idée
 est appelée `service-oriented architecture`_ et n'est pas unique à Symfony2
-ou encore PHP. Structurer votre application autour d'un ensemble de classes de services indépendant
+ou encore PHP. Structurer votre application autour d'un ensemble de classes de services indépendants
 est une bonne pratique orientée objet célèbre et fiable. Ces compétences
 sont les clés pour devenir un bon développeur dans presque tous les langages.
 	
 .. index::
    single: Service Container ; Définition
 
-Définition d'un Conteneur de Service 
-------------------------------------
+Définition d'un Conteneur de Services
+-------------------------------------
 
 Un :term:`Service Container` (or *dependency injection container*) est simplement
 un objet PHP qui gère l'instanciation des services (cad objets).
