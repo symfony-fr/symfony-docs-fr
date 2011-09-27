@@ -1147,8 +1147,8 @@ Vous pouvez utiliser la correspondance de requête :
             ),
         ));
 
-Learn more from the Cookbook
-----------------------------
+En savoir plus grâce au Cookbook
+--------------------------------
 
 * :doc:`/cookbook/testing/profiling`
 * :doc:`/cookbook/profiler/data_collector`
@@ -1156,7 +1156,7 @@ Learn more from the Cookbook
 * :doc:`/cookbook/event_dispatcher/method_behavior`
 
 .. _Observer: http://en.wikipedia.org/wiki/Observer_pattern
-.. _`Symfony2 HttpKernel component`: https://github.com/symfony/HttpKernel
-.. _Closures: http://php.net/manual/en/functions.anonymous.php
-.. _`Symfony2 Dependency Injection component`: https://github.com/symfony/DependencyInjection
-.. _PHP callable: http://www.php.net/manual/en/language.pseudo-types.php#language.types.callback
+.. _`Composant HttpKernel de Symfony2`: https://github.com/symfony/HttpKernel
+.. _Closures: http://php.net/manual/fr/functions.anonymous.php
+.. _`Composant d'Injection de Dépendances de Symfony2`: https://github.com/symfony/DependencyInjection
+.. _Callable PHP: http://www.php.net/manual/fr/language.pseudo-types.php#language.types.callback
