@@ -696,8 +696,74 @@ Comme Symfony utilise la première règle d'accès de contrôle qui correspond, 
 ``ROLE_SUPER_ADMIN``.
 Tout URL comme ``/admin/blog`` correspondra à la seconde règle et nécessitera donc ``ROLE_ADMIN``.
 
-Vous pouvez aussi forcer ``HTTP`` ou ``HTTPS`` grâce aux paramètres ``access_control``.
-Pour plus d'informations, voir :doc:`/cookbook/security/force_https`.
+.. _book-security-securing-ip:
+
+Sécuriser par IP
+~~~~~~~~~~~~~~~~
+
+Dans certaines situations qui peuvent survenir, vous aurez besoin de restreindre 
+l'accès à une route donnée basée sur une IP. C'est particulièrement le cas des
+:ref:`Edge Side Includes<edge-side-includes>` (ESI), par exemple, qui utilisent
+une route nommée « _internal ». Lorsque les ESI sont utilisés, la route _internal
+est requise par la passerelle de cache pour activer différentes options de cache
+pour les portions d'une même page. Dans la Standard Edition, cette route est préfixée
+par défaut par ^/_internal (en supposant que vous avez décommenté ces lignes dans
+le fichier de routage)
+
+Ci-dessous un exemple de comment sécuriser une route d'un accès externe : 
+
+.. configuration-block::
+
+    .. code-block:: yaml
+	
+        # app/config/security.yml
+        security:
+            # ...
+            access_control:
+                - { path: ^/cart/checkout, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+
+    .. code-block:: xml
+	
+            <access-control>	
+                <rule path="^/cart/checkout" role="IS_AUTHENTICATED_ANONYMOUSLY" ip="127.0.0.1" />
+            </access-control>
+
+    .. code-block:: php
+	
+            'access_control' => array(
+                array('path' => '^/cart/checkout', 'role' => 'IS_AUTHENTICATED_ANONYMOUSLY', 'ip' => '127.0.0.1'),
+            ),
+
+.. _book-security-securing-channel:
+
+Sécuriser par canal
+~~~~~~~~~~~~~~~~~~~
+
+Tout comme la sécurisation basée sur IP, obliger l'usage d'SSL est aussi simple
+qu'ajouter une nouvelle entrée access_control :
+
+.. configuration-block::
+	
+    .. code-block:: yaml
+
+        # app/config/security.yml
+        security:
+            # ...
+            access_control:
+                - { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+
+    .. code-block:: xml
+
+            <access-control>
+                <rule path="^/_internal" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel: https />
+            </access-control>
+
+    .. code-block:: php
+
+            'access_control' => array(
+                array('path' => '^/_internal', 'role' => 'IS_AUTHENTICATED_ANONYMOUSLY', 'requires_channel' => 'https'),
+            ),
+
 
 .. _book-security-securing-controller:
 

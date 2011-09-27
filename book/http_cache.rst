@@ -1032,7 +1032,9 @@ correctement, il faut définir une route ``_internal`` :
     Puisque la route permet à toutes les actions d'être appelées
     depuis une URL, il est possible de les protéger avec le pare-feu de
     Symfony2 (en autorisant l'accès uniquement aux adresses IP de vos
-    serveurs proxy).
+    serveurs proxy). Lisez le paragraphe :ref:`Securiser par IP<book-security-securing-ip>` 
+    du :doc:`chapitre Sécurité </book/security>` pour plus d'informations sur
+    comment faire cela.
 
 Un des grands avantages de cette stratégie de cache est qu'il est
 possible d'avoir une application aussi dynamique que souhaitée et
