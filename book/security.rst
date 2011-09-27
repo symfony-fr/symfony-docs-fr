@@ -244,14 +244,14 @@ Utilisation d'un formulaire de connexion traditionnel
 
 Pour l'instant, vous avez vu comment protéger votre application derrière un pare-feu et
 ensuite comment protéger l'accès à certaines zones en utilisant les rôles. En utilisant 
-l'authentification HTTP, vous pouvez sans effort profiter de la boite nom d'usager/mot de passe
+l'authentification HTTP, vous pouvez sans effort profiter de la boite login/mot de passe
 offert par tous les navigateurs. Mais Symfony comprend plusieurs mécanismes d'authentification
 par défaut. Pour plus de détails sur chacun d'eux, référez-vous à la documentation de 
 :doc:`référence sur la configuration de la sécurité</reference/configuration/security>`.
 
 Dans cette section, vous allez améliorer le processus en autorisant l'utilisateur 
 à s'authentifier via un formulaire de connexion traditionnel.
-D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
+D'abord, activez le formulaire de connexion (« form login ») de votre pare-feu:
 
 .. configuration-block::
 
@@ -302,7 +302,7 @@ D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
 .. tip::
     Si vous ne voulez pas personnaliser les valeurs de ``login_path`` ou ``check_path``
     (les valeurs utilisées ici sont celles par défaut), vous pouvez raccourcir votre 
-    configuration:
+    configuration :
 
     .. configuration-block::
 
@@ -321,8 +321,8 @@ D'abord, activez le formulaire de connexion ("form login") de votre pare-feu:
 Maintenant, quand le système de sécurité initie le processus d'authentification,
 il va rediriger l'utilisateur au formulaire de connexion (``/login`` by default).
 L'implémentation de ce formulaire de connexion est de toute évidence votre responsabilité.
-Tout d'abord, créez 2 routes: une qui affiche le formulaire de connexion (ici, ``/login``) 
-et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check``):
+Tout d'abord, créez 2 routes : une qui affiche le formulaire de connexion (ici, ``/login``) 
+et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check``) :
 
 .. configuration-block::
 
@@ -370,12 +370,12 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
     Vous *n'avez pas*  à implémenter un contrôleur pour l'URL ``/login_check``
     car le pare-feu va automatiquement intercepter et traiter tout formulaire soumis
     à cette URL. Il est optionnel, mais utile de créer une route que vous pourrez utiliser
-    pour générer l'URL de soumission du formulaire dans le template de connexion plus bas.
+    pour générer l'URL de soumission du formulaire dans le template de connexion ci-après.
 
 Veuillez noter que le nom de la route ``login`` n'est pas important. Ce qui importe est
 que l'URL de la route (``login``) corresponde à la valeur de ``login_path``, car c'est
 là que le système de sécurité va rediriger les utilisateurs qui doivent se connecter.
-Ensuite, créez un contrôleur qui va afficher le formulaire de connexion:
+Ensuite, créez un contrôleur qui va afficher le formulaire de connexion :
 
 .. code-block:: php
 
@@ -405,13 +405,13 @@ Ensuite, créez un contrôleur qui va afficher le formulaire de connexion:
 
 Ne vous laissez pas impressionner par le contrôleur. Comme vous allez le voir dans un moment, 
 lorsque l'utilisateur soumet le formulaire, le système de sécurité prend en charge automatiquement 
-le formulaire soumis. Si l'utilisateur venait à soumettre un nom d'usager ou un mot de passe
+le formulaire soumis. Si l'utilisateur venait à soumettre un login ou un mot de passe
 invalide, ce formulaire lit les erreurs de soumission du système de sécurité afin 
-qu'il soit ensuite affiché à l'utilisateur.
+qu'elles soient ensuite affichées à l'utilisateur.
 
 En d'autres termes, votre rôle est d'afficher le formulaire de connexion et toute erreur
 qui aurait pu survenir, mais c'est le système de sécurité lui-même qui prend en charge
-la validation du nom d'utilisateur et du mot de passe et qui authentifie l'utilisateur.
+la validation du login et du mot de passe et qui authentifie l'utilisateur.
 
 Il ne nous reste qu'à créer le template correspondant :
 
@@ -425,15 +425,15 @@ Il ne nous reste qu'à créer le template correspondant :
         {% endif %}
         
         <form action="{{ path('login_check') }}" method="post">
-            <label for="username">Nom d'usager:</label>
+            <label for="username">Login :</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
             
-            <label for="password">Mot de passe:</label>
+            <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="_password" />
             
             {#
                 Si vous voulez controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
-                (plus de détails plus bas)
+                (plus de détails ci-dessous)
                 <input type="hidden" name="_target_path" value="/account" />
             #}
             
@@ -448,14 +448,14 @@ Il ne nous reste qu'à créer le template correspondant :
         <?php endif; ?>
         
         <form action="<?php echo $view['router']->generate('login_check') ?>" method="post">
-            <label for="username">Nom d'utilisateur:</label>
+            <label for="username">Login :</label>
             <input type="text" id="username" name="_username" value="<?php echo $last_username ?>" />
             
-            <label for="password">Mot de passe:</label>
+            <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="_password" />
             <!--
                 Si vous voulez controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
-                (plus de détails plus bas)
+                (plus de détails ci-dessous)
                 <input type="hidden" name="_target_path" value="/account" />
             -->
             
@@ -466,26 +466,26 @@ Il ne nous reste qu'à créer le template correspondant :
 
     La variable ``error`` passée au template est une instance de 
     :class:`Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException`.
+    Elle peut contenir plus d'informations - et même des informations sensibles - à propos
+    de l'échec de l'authentification, alors utilisez là judicieusement !
 
-Elle peut contenir plus d'information _ et mes des informations sensibles - à propos
- de l'échec de l'authentification, alors utilisez là judicieusement!
-Le formulaire a très peut d'exigence. D'abord, en soumettant le formulaire à ``/login_check``
+Le formulaire a très peu d'exigence. D'abord, en soumettant le formulaire à ``/login_check``
 (via la route ``login_check``), le système de sécurité va intercepter la soumission 
 du formulaire et traiter le formulaire automatiquement. Ensuite, le système de sécurité
-s'attend à ce que les champs soumis soient nommés ``_username`` and ``_password``
+s'attend à ce que les champs soumis soient nommés ``_username`` et ``_password``
 (le nom de ces champs peut être :ref:`configuré<reference-security-firewall-form-login>`).
 
-Et c'est tout! Lorsque vous soumettez le formulaire, le système de sécurité va automatiquement
-vérifier son identité va va soit authentifier l'utilisateur ou va renvoyer l'utilisateur
+Et c'est tout ! Lorsque vous soumettez le formulaire, le système de sécurité va automatiquement
+vérifier son identité et va soit authentifier l'utilisateur, soit renvoyer l'utilisateur
 au formulaire de connexion, où les erreurs vont être affichées.
 
-Récapitulons tout le processus:
+Récapitulons tout le processus :
 
 #. L'utilisateur cherche à accéder une ressource qui est protégée;
 #. Le pare-feu initie le processus d'authentification en redirigeant l'utilisateur
    au formulaire de connexion (``/login``);
 #. La page ``/login`` affiche le formulaire de connexion en utilisant la route et le formulaire
-   créé dans cet exemple.
+   créés dans cet exemple.
 #. L'utilisateur soumet le formulaire de connexion à ``/login_check``;
 #. Le système de sécurité intercepte la requête, vérifie les informations d'identification 
    soumis par l'utilisateur, authentifie l'utilisateur si elles sont correctes et renvoie 
@@ -497,13 +497,13 @@ est allé directement au formulaire de connexion, il sera redirigé à la page d
 Cela peut être entièrement configuré, en vous permettant, par exemple, de rediriger l'utilisateur
 vers une URL spécifique.
 
-Pour plus de détails, et savoir comment personnaliser le processus de connexions par formulaire
+Pour plus de détails, et savoir comment personnaliser le processus de connexion par formulaire
 en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
 
 .. _book-security-common-pitfalls:
 
-.. sidebar:: Éviter les écueils courants
-    Lorsque vous configurez le formulaire de connexion, faites attention aux écueils courants.
+.. sidebar:: Éviter les erreurs courantes
+    Lorsque vous configurez le formulaire de connexion, faites attention aux erreurs courants.
 
     **1. Créez les routes adéquates**
 
@@ -518,7 +518,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
     Aussi, assurez-vous que la page de connexion ne requiert *pas* un rôle particulier afin 
     d'être affichée. Par exemple, la configuration suivante - qui nécessite le rôle
     ``ROLE_ADMIN`` pour toutes les URLs (inluant l'URL ``/login``), va provoquer une boucle de
-    redirection:
+    redirection :
     
     .. configuration-block::
 
@@ -566,7 +566,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
 
     Aussi, si votre pare-feu n'autorise *pas* les utilisateurs anonymes, vous devrez
     créer un pare-feu spécial qui permet l'accès à l'utilisateur anonyme d'accéder la page de
-    connexion:
+    connexion :
 
     .. configuration-block::
 
@@ -610,19 +610,19 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
     ``/login_check``). Si ``/login_check`` n'est pris en charge par aucun pare-feu, vous obtiendrez
     une exception ``Unable to find the controller for path "/login_check"``.
 
-    **4. Plusieurs pare-feux ne partagent pas de contexte de sécurité**
+    **4. Plusieurs pare-feu ne partagent pas de contexte de sécurité**
 
     Si vous utilisez plusieurs pare-feu et que vous vous authentifiez auprès d'un pare-feu,
-    vous ne serez *pas* automatiquement authentifié auprès des autres pare-feux automatiquement.
-    Différents pare-feus sont comme plusieurs systèmes de sécurité. C'est pourquoi, pour la
+    vous ne serez *pas* automatiquement authentifié auprès des autres pare-feu automatiquement.
+    Différents pare-feu sont comme plusieurs systèmes de sécurité. C'est pourquoi, pour la
     plupart des applications, avoir un seul pare-feu est suffisant.
 
 Autorisation
 ------------
 
-La première étape en scurité est toujours l'authentification: le processus de vérifier
-qui l'utilisateur est. Avec Symfony, l'authentification peut être faite de toutes les façons
-voulus - au travers d'un formulaire de connexion, de l'authentification HTTP, ou même de facebook.
+La première étape en sécurité est toujours l'authentification : le processus de vérifier
+l'identité de l'utilisateur. Avec Symfony, l'authentification peut être faite de toutes les façons
+voulues - au travers d'un formulaire de connexion, de l'authentification HTTP, ou même de facebook.
 Une fois l'utilisateur authentifié, l'autorisation commence. L'autorisation fournit une façon
 standard et puissante de décider si un utilisateur peut accéder une ressource
 (une URL, un objet du modèle, un appel de méthode...). Cela fonctionne en assignant des rôles
@@ -631,9 +631,9 @@ standard et puissante de décider si un utilisateur peut accéder une ressource
 Le processus d'autorisation comporte 2 aspects :
 
 #. Un utilisateur possède un ensemble de rôles;
-#. Une ressource requiert un rôle spécifique pour être accédée.
+#. Une ressource requiert un rôle spécifique pour être atteinte.
 
-Dans cette section, vous vous verrez en détail comment sécuriser différentes ressources (p. ex. URLs,
+Dans cette section, vous verrez en détail comment sécuriser différentes ressources (ex. URLs,
 appels de méthodes...) grâce aux rôles. Plus tard, vous apprendrez comment les rôles 
 peuvent être créés et assignés aux utilisateurs.
 
@@ -679,16 +679,16 @@ régulière.
 
 .. tip::
 
-    En préfixant votre chemin par ``^`` vous assure que seulement les URLs *commençant* par le masque
+    En préfixant votre chemin par ``^``, vous vous assurez que seules les URLs *commençant* par le masque
     correspondent. Par exemple, un chemin spécifiant simplement ``/admin`` (sans 
     le ``^``) reconnaitra une url du type ``/admin/foo`` mais aussi  ``/foo/admin``.
 
 Pour chaque requête entrante, Symfony essaie de trouver une règle d'accès de contrôle
 (la première gagne). Si l'utilisateur n'est pas encore authentifié, le processus 
-d'authentification est initié (c'est-à-dire que l'utilisateur se fait proposer). 
+d'authentification est initié (c'est-à-dire que l'utilisateur a une chance de se connecter). 
 Mais si l'utilisateur *est* authentifié, mais qu'il ne possède pas le rôle nécessaire, 
 une exception :class:`Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException`
-est lancée, qui peut être attrapée et convertie en une belle page d'erreur "accès refusé" 
+est lancée, qui peut être attrapée et convertie en une belle page d'erreur « accès refusé » 
 présentée à l'utilisateur. Voir :doc:`/cookbook/controller/error_pages` pour plus d'informations.
 
 Comme Symfony utilise la première règle d'accès de contrôle qui correspond, une URL comme
@@ -697,7 +697,7 @@ Comme Symfony utilise la première règle d'accès de contrôle qui correspond, 
 Tout URL comme ``/admin/blog`` correspondra à la seconde règle et nécessitera donc ``ROLE_ADMIN``.
 
 Vous pouvez aussi forcer ``HTTP`` ou ``HTTPS`` grâce aux paramètres ``access_control``.
-Pour plus d'information, voir :doc:`/cookbook/security/force_https`.
+Pour plus d'informations, voir :doc:`/cookbook/security/force_https`.
 
 .. _book-security-securing-controller:
 
@@ -723,7 +723,7 @@ l'autorisation dans un contrôleur :
 .. _book-security-securing-controller-annotations:
 
 Vous pouvez aussi choisir d'installer et d'utiliser le Bundle ``JMSSecurityExtraBundle``,
-qui peut sécuriser un contrôleur en utilisant les annotations:
+qui peut sécuriser un contrôleur en utilisant les annotations :
 
 .. code-block:: php
 
@@ -736,7 +736,7 @@ qui peut sécuriser un contrôleur en utilisant les annotations:
         // ...
     }
 
-Pour plus d'information, voir la documentation de `JMSSecurityExtraBundle`_. Si vous utilisez
+Pour plus d'informations, voir la documentation de `JMSSecurityExtraBundle`_. Si vous utilisez
 la distribution standard de Symfony, ce bundle est disponible par défaut.
 Sinon, vous pouvez facilement le télécharger et l'installer.
 
@@ -758,7 +758,7 @@ différents services et méthodes de votre application, voir
 Listes de contrôle d'accès (ACL): sécuriser des objets de la base de données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Imaginez que vous êtes en train de concevoir un système de blogue où les utilisateurs
+Imaginez que vous êtes en train de concevoir un système de blog où les utilisateurs
 peuvent écrire des commentaires sur les articles. Mais vous voulez qu'un utilisateur
 puisse éditer ses propres commentaires, mais pas les autres utilisateurs. Aussi, vous, en tant
 qu'administrateur, voulez pouvoir éditer *tous* les commentaires.
@@ -783,15 +783,15 @@ D'où viennent les utilisateurs (*Fournisseurs d'utilisateurs*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Au cours de l'authentification, l'utilisateur soumet ses informations d'identité (généralement
-un nom d'usager et un mot de passe). La responsabilité du système d'authentification
+un login et un mot de passe). La responsabilité du système d'authentification
 est de faire correspondre cette identité avec un ensemble d'utilisateurs. Mais d'où cet 
 ensemble provient-il?
 
 Dans Symfony2, les utilisateurs peuvent provenir de n'importe où - un fichier de configuration,
-une table de base de données, un service Web, où n'importe quoi dont vous pouvez espérer.
+une table de base de données, un service Web, ou tout ce que vous pouvez imaginer d'autre.
 Tout ce qui fournit un ou plusieurs utilisateurs au système d'authentification est appelé
-"fournisseur d'utilisateurs" (User Provider). Symfony2 comprend en standard deux des fournisseurs
-les plus utilisés: un qui charge ses utilisateurs depuis un fichier de configuration, et un autre
+« fournisseur d'utilisateurs » (User Provider). Symfony2 comprend en standard deux des fournisseurs
+les plus utilisés : un qui charge ses utilisateurs depuis un fichier de configuration, et un autre
 qui charge ses utilisateurs d'une table de base de données.
 
 Spécifier les utilisateurs dans un fichier de configuration
@@ -839,7 +839,7 @@ fichier de configuration. En fait, vous avez déjà vu cet exemple dans ce chapi
             ),
         ));
 
-Ce fournisseur d'utilisateurs est appelé fournisseur d'utilisateurs en mémoire ("in-memory") 
+Ce fournisseur d'utilisateurs est appelé fournisseur d'utilisateurs en mémoire (« in-memory ») 
 car les utilisateurs ne sont pas sauvegardés dans une base de données. L'objet User est fourni
 par Symfony (:class:`Symfony\\Component\\Security\\Core\\User\\User`).
 
@@ -851,7 +851,7 @@ par Symfony (:class:`Symfony\\Component\\Security\\Core\\User\\User`).
     
 .. caution::
 
-    Si votre nom d'usager est complètement numérique (par exemple ``77``) ou contient un tiret
+    Si votre login est complètement numérique (par exemple ``77``) ou contient un tiret
     (par exemple ``user-name``), vous devez utiliser une syntaxe alternative pour définir
     les utilisateurs en YAML:
 
@@ -874,7 +874,7 @@ en créant une classe ``User``et en configurant le fournisseur d'entités (``ent
 
 .. tip:
 
-    Un bundle de très haute qualité est disponible, qui permet de sauvegarder vos utilisateurs
+    Un bundle de très grande qualité est disponible, qui permet de sauvegarder vos utilisateurs
     depuis l'ORM ou l'ODM de Doctrine. Apprenez-en plus sur le `FOSUserBundle`_
     sur GitHub.
 
@@ -901,7 +901,7 @@ sauvegardée dans la base de données.
 
 Pour ce qui concerne le système de sécurité, la seule exigence est que la classe User implémente
 l'interface :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`. 
-Cela signifie que le concept d'"utilisateur" peut être n'importe quoi, pour peu qu'il implémente
+Cela signifie que le concept d'« utilisateur » peut être n'importe quoi, pour peu qu'il implémente
 cette interface.
 
 .. note::
@@ -911,7 +911,7 @@ cette interface.
     parente avec des propriétés privées.
 
 Ensuite, il faut configurer le fournisseur d'utilisateur ``entity`` (``entity`` user provider),
-le pointer vers la classe ``User``:
+le pointer vers la classe ``User`` :
 
 .. configuration-block::
 
@@ -951,19 +951,19 @@ un objet ``User``depuis la base de données en utilisant le champ ``username``de
     Pour un exemple complet et fonctionnel, veuillez lire 
     :doc:`/cookbook/security/entity_provider`.
 
-Pour plus apprendre comment créer votre propre fournisseur (par exemple si vous devez charger
+Pour en apprendre plus sur comment créer votre propre fournisseur (par exemple si vous devez charger
 des utilisateurs depuis un service Web), reportez-vous à :doc:`/cookbook/security/custom_provider`.
 
 Encoder les mots de passe
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Jusqu'à maintenant, afin de garder ça simple, les mots de passe des utilisateurs ont tous été
-conservés au format texte (qu'il soit sauvegardé dans un fichier de configuration ou dans
+conservés au format texte (qu'ils soient sauvegardés dans un fichier de configuration ou dans
 la base de données). Il est clair que dans une vraie application, vous allez vouloir encoder
 les mots de passe de vos utilisateurs pour des raisons de sécurité. Ceci est facile à
-accomplir en mappant votre classe User avec un des nombreux "encodeurs" intégrés.
+accomplir en mappant votre classe User avec un des nombreux « encodeurs » intégrés.
 
-Par exemple, pour rendre indéchiffrable les mots de passe de vos utilisateurs "in memory" 
+Par exemple, pour rendre indéchiffrable les mots de passe de vos utilisateurs « in memory » 
 en utilisant ``sha1``, suivez les instructions suivantes:
 
 .. configuration-block::
@@ -1030,7 +1030,7 @@ Si vous créez vos utilisateurs dynamiquement (et que vous les sauvegardez dans 
 données), vous pouvez rendre l'algorithme de hachage plus complexe puis utiliser un objet 
 d'encodage de mot de passe pour vous aider à encoder les mots de passe.
 Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`` 
-(comme dans l'exemple ci-dessus). D'abord, configurez l'encodeur pour cet utilisateur:
+(comme dans l'exemple ci-dessus). D'abord, configurez l'encodeur pour cet utilisateur :
 
 .. configuration-block::
 
@@ -1072,7 +1072,7 @@ de passe depuis le mot de passe haché).
 
 Si vous avez une sorte de formulaire d'enregistrement pour les utilisateurs, vous devez pouvoir
 générer un mot de passe haché pour pouvoir le sauvegarder. Peu importe l'algorithme que vous 
-avez configuré pour votre objet User, le mot de passe haché peut toujours être déterminer de
+avez configuré pour votre objet User, le mot de passe haché peut toujours être déterminé de
 la manière suivante depuis un contrôleur :
 
 .. code-block:: php
@@ -1087,7 +1087,7 @@ Récupérer l'objet User
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Après l'authentification, l'objet ``User`` correspondant à l'utilisateur courant peut être
-récupérer via le service ``security.context``. Depuis un controleur, cela ressemble à ça:
+récupéré via le service ``security.context``. Depuis un controleur, cela ressemble à ça :
 
 .. code-block:: php
 
@@ -1110,7 +1110,7 @@ Chaque mécanisme d'authentification (par exemple authentification HTTP, formula
 etc...) utilise exactement un fournisseur d'utilisateur (user provider), et va utiliser 
 par défaut le premier fournisseur d'utilisateurs déclaré. Mais que faire si vous voulez déclarer
 quelques utilisateurs via la configuration et le reste des utilisateurs dans 
-la base de données? C'est possible en créant un fournisseur qui liant les 2 fournisseurs ensemble :
+la base de données? C'est possible en créant un fournisseur qui lie les 2 fournisseurs ensemble :
 
 .. configuration-block::
 
@@ -1210,7 +1210,7 @@ depuis les fournisseurs ``in_memory`` et ``user_db``.
 
 Vous pouvez configurer le pare-feu ou des mécanismes individuels d'authentification afin
 qu'ils utilisent un fournisseur spécifique. Encore une fois, le premier fournisseur sera toujours
-utilisé, sauf si vous en spécifiez un spécifiquement :
+utilisé, sauf si vous en spécifiez un explicitement :
 
 .. configuration-block::
 
@@ -1261,23 +1261,23 @@ essaie de se connecter via le formulaire de connexion, le fournisseur ``user_db`
 utilisé (car c'est celui par défaut du pare-feu).
 
 Pour plus d'informations à propos des fournisseurs d'utilisateurs et de la configuration
-des pare-feux, veuillez vous reporter à :doc:`/reference/configuration/security`.
+des pare-feu, veuillez vous reporter à :doc:`/reference/configuration/security`.
 
 Les rôles
 ---------
 
-La notion de "rôle " est clé dans le processus d'autorisation. Chaque utilisateur se fait
+La notion de « rôle » est au centre du processus d'autorisation. Chaque utilisateur se fait
 assigner un groupe de rôles et chaque ressource nécessite un ou plusieurs rôles.
 Si un utilisateur a les rôles requis, l'accès est accordé. Sinon, l'accès est refusé.
 Les rôles sont assez simples, et sont en fait des chaines de caractères que vous créez 
 et utilisez au besoin (même si les rôles sont des objets en interne). Par exemple,
-si vous désirez limiter l'accès à la section d'administration du blogue de votre site web,
+si vous désirez limiter l'accès à la section d'administration du blog de votre site web,
 vous pouvez protéger cette section en utilisant un rôle ``ROLE_BLOG_ADMIN``.
 Ce rôle n'a pas besoin d'être défini quelque part - vous n'avez qu'à commencer à l'utiliser.
 
 .. note::
 
-    Tous les rôles *doivent* commencer par le préfixe ``ROLE_`` afin d'être géré par 
+    Tous les rôles *doivent* commencer par le préfixe ``ROLE_`` afin d'être gérés par 
     Symfony2. Si vous définissez vos propres rôles avec une classe ``Role``dédiée
     (plus avancé), n'utilisez pas le préfixe ``ROLE_``.
 
@@ -1285,7 +1285,7 @@ Rôles hiérarchiques
 ~~~~~~~~~~~~~~~~~~~
 
 Au lieu d'associer plusieurs rôles aux utilisateurs, vous pouvez définir des règles 
-d'héritage de rôle en créant une hiérarchie de rôles:
+d'héritage de rôle en créant une hiérarchie de rôles :
 
 .. configuration-block::
 
@@ -1315,7 +1315,7 @@ d'héritage de rôle en créant une hiérarchie de rôles:
             ),
         ));
 
-Dans la configuration ci-dessus, les utilisateurs avec le rôle ``ROLE_ADMIN``vont aussi avoir
+Dans la configuration ci-dessus, les utilisateurs avec le rôle ``ROLE_ADMIN`` vont aussi avoir
 le rôle ``ROLE_USER``. Le rôle ``ROLE_SUPER_ADMIN`` a les rôles ``ROLE_ADMIN``,
 ``ROLE_ALLOWED_TO_SWITCH`` et ``ROLE_USER`` (hérité de ``ROLE_ADMIN``).
 
@@ -1324,7 +1324,7 @@ Se déconnecter
 
 Généralement, vous désirez aussi que vos utilisateurs puissent se déconnecter.
 Heureusement, le pare-feu peut prendre ça en charge automatiquement lorsque vous activez le
-paramètre de configuration ``logout``:
+paramètre de configuration ``logout`` :
 
 .. configuration-block::
 
@@ -1365,11 +1365,11 @@ paramètre de configuration ``logout``:
         ));
 
 Une fois que c'est configuré au niveau de votre pare-feu, un utilisateur qui accèdera à ``/logout``
-( ou quel que soit la configuration de ``path``que vous avez) sera déconnecté. 
+(ou quelle que soit la configuration de ``path``que vous avez) sera déconnecté. 
 L'utilisateur sera redirigé à la page d'accueil (la valeur du paramètre ``target``).
 Les 2 paramètres de configuration ``path``et ``target``ont comme valeur par défaut ce qui est 
 défini ici. En d'autres termes, sauf si vous voulez les changer, vous pouvez les omettre 
-complètement et ainsi réduire votre configuration:
+complètement et ainsi réduire votre configuration :
 
 .. configuration-block::
 
@@ -1387,7 +1387,7 @@ complètement et ainsi réduire votre configuration:
 
 Veuillez noter que vous n'aurez *pas* à implémenter un contrôleur pour l'URL ``/logout``
 car le pare-feu se charge de tout. Vous pouvez toutefois vouloir créer une route afin 
-de l'utiliser pour générer l'URL:
+de l'utiliser pour générer l'URL :
 
 .. configuration-block::
 
@@ -1422,15 +1422,15 @@ de l'utiliser pour générer l'URL:
         return $collection;
 
 Une fois qu'un utilisateur s'est déconnecté, il sera redirigé à l'URL définie par le paramètre
-``target`` (par exemple ``homepage``). Pour plus d'information sur la configuration de la 
+``target`` (par exemple ``homepage``). Pour plus d'informations sur la configuration de la 
 déconnexion, veuillez lire
 :doc:`Security Configuration Reference</reference/configuration/security>`.
 
 Contrôle d'accès dans les templates
 -----------------------------------
 
-Si vous désirez vérifier dans un template si un utilisateur possède a un rôle, utilisez 
-la fonction helper intégrée:
+Si vous désirez vérifier dans un template si un utilisateur possède un rôle donné, utilisez 
+la fonction helper intégrée :
 
 .. configuration-block::
 
@@ -1450,10 +1450,10 @@ la fonction helper intégrée:
 
     Si vous utilisez cette fonction et que vous ne vous trouvez pas à une URL pour laquelle
     un pare-feu est actif, une exception sera lancée. Encore une fois, c'est toujours une
-    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (que tel montré dans ce chapitre).
+    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (que montré dans ce chapitre).
 
-Access Control in Controllers
------------------------------
+Contrôle d'accès dans les Contrôleurs
+-------------------------------------
 
 Si vous désirez vérifier dans un contrôleur si l'utilisateur courant possède un rôle, 
 utilisez la méthode ``isGranted`` du contexte de sécurité:
@@ -1475,13 +1475,13 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
     ``isGranted``. Référez-vous aux notes ci-dessus par rapport aux templates pour plus de 
     détails.
 
-"Usurper l'identité" d'un utilisateur
--------------------------------------
+« Usurper l'identité » d'un utilisateur
+---------------------------------------
 
 Parfois, il peut être utile de pouvoir passer d'un utilisateur à un autre sans avoir 
 à se déconnecter et à se reconnecter (par exemple si vous êtes en train de débugguer ou de 
 comprendre un bug qu'un utilisateur obtient, mais que vous ne pouvez pas reproduire).
-Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_user``du pare-feu:
+Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_user``du pare-feu :
 
 .. configuration-block::
 
@@ -1516,7 +1516,7 @@ Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_
             ),
         ));
 
-Pour changer d'utilisateur, il suffit d'ajouter à la chaÓne de requête le paramètre 
+Pour changer d'utilisateur, il suffit d'ajouter à la chaine de requête le paramètre 
 ``_switch_user`` et le nom d'utilisateur comme valeur à l'URL en cours :
 
     http://example.com/somewhere?_switch_user=thomas
@@ -1566,13 +1566,13 @@ vous pouvez aussi changer le nom du paramètre de configuration grâce au param�
 Authentification sans état
 --------------------------
 
-Par défaut, Symfony2 s'appuie sur un témoin de connexion (cookie) (la Session) pour garder 
+Par défaut, Symfony2 s'appuie sur cookie (la Session) pour garder 
 le contexte de sécurité d'un utilisateur.
-Mais vous utilisez des certificats ou l'authentification HTTP par exemple, la persistence
+Mais si vous utilisez des certificats ou l'authentification HTTP par exemple, la persistence
 n'est pas nécessaire car l'identité est disponible à chaque requête. Dans ce cas, et si vous
 n'avez pas besoin de sauvegarder quelque chose entre les requêtes, vous pouvez activer
-l'authentification sans état (stateless authentication) (ce qui veut dire qu'aucun cookie
-ne sera jamais créé par Symony2:
+l'authentification sans état (stateless authentication), ce qui veut dire qu'aucun cookie
+ne sera jamais créé par Symfony2 :
 
 .. configuration-block::
 
@@ -1605,7 +1605,7 @@ ne sera jamais créé par Symony2:
 
 .. note::
 
-    Si vous utilisez un formulaire de connexion, Symfony2 va créer un cookie même si voua avez configuré
+    Si vous utilisez un formulaire de connexion, Symfony2 va créer un cookie même si vous avez configuré
     ``stateless`` à ``true``.
 
 Derniers mots
@@ -1614,20 +1614,20 @@ Derniers mots
 La sécurité peut être un problème complexe à résoudre correctement dans une application.
 Heureusement, le composant de sécurité de Symfony se base un modèle bien éprouvé basé sur
 l'*authentification* et l'*autorisation*. L'authentification, qui arrive toujours en premier,
-est prise en charge par le pare-feu dont la responsabilité est de déterminer l'Identité
+est prise en charge par le pare-feu dont la responsabilité est de déterminer l'identité
 des utilisateurs grâce à différentes méthodes (par exemple l'authentification HTTP,
 les formulaires de connexion, etc.). Dans le cookbook, vous trouverez des exemples
 d'autres méthodes pour prendre en charge l'authentification, incluant une manière 
-d'implémenter la fonction de cookie "se souvenir de moi" ("remember me"),
+d'implémenter la fonction de cookie « se souvenir de moi » (« remember me »),
 
-Une fois l'utilisateur authentifié, la couche d'autorisation peut déterminer si ou utilisateur
-a ou n'a pas accès à des ressources spécifiques. Le plus souvent, des *rôles* sont appliqués
+Une fois l'utilisateur authentifié, la couche d'autorisation peut déterminer si l'utilisateur
+a accès ou non à des ressources spécifiques. Le plus souvent, des *rôles* sont appliqués
 aux URLs, classes ou méthodes et si l'utilisateur courant ne possède pas ce rôle, l'accès
 est refusé. La couche d'autorisation est toutefois beaucoup plus complexe, et suit un système
-de "vote" afin que plusieurs entités puissent déterminer si l'utilisateur courant devrait avoir
+de « vote » afin que plusieurs entités puissent déterminer si l'utilisateur courant devrait avoir
 accès à une ressource donnée.
 
-Apprenez plus à propos de la sécurité et sur d'autres sujets dans le cookbook.
+Apprenez en plus sur la sécurité et sur d'autres sujets dans le cookbook.
 
 Apprenez plus grâce au Cookbook
 -------------------------------
