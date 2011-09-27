@@ -332,7 +332,7 @@ Le ``FrameworkBundle`` enregistre plusieurs listeners :
   collecte les données pour la requête courante ;
 
 * :class:`Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener`:
-  injecte la Web Debug Toolbar (« Barre d'outils de Debugging Web » en français) ;
+  injecte la Barre d'Outils de Débuggage Web (« Web Debug Toolbar ») ;
 
 * :class:`Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener`: définit la
   valeur du ``Content-Type`` de la Réponse basé sur le format de la requête ;
@@ -876,11 +876,11 @@ les performances de votre application; utilisez le dans l'environnement
 de production pour explorer des problèmes après coup.
 
 Vous avez rarement besoin d'intéragir avec le profiler directement puisque
-Symfony2 vous fournit des outils de visualisation tels la Web Debug Toolbar
-(« Barre d'Outils de Débugging » en français) et le Web Profiler (« Profiler
-Web » en français). Si vous utilisez l'Edition Standard de Symfony2, le profiler,
-la web debug toolbar, et le web profiler sont tous déjà configurés avec
-des paramètres prédéfinis.
+Symfony2 vous fournit des outils de visualisation tels la Barre d'Outils de
+Débuggage Web (« Web Debug Toolbar ») et le Profiler Web (« Web Profiler »).
+Si vous utilisez l'Edition Standard de Symfony2, le profiler, la barre d'outils
+de débuggage web, et le profiler web sont tous déjà configurés avec des
+paramètres prédéfinis.
 
 .. note::
 
@@ -896,17 +896,17 @@ des paramètres prédéfinis.
 Visualiser les Données de Profiling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Utiliser la Web Debug Toolbar
-.............................
+Utiliser la Barre d'Outils de Débuggage Web
+...........................................
 
-Dans l'environnement de développement, la web debug toolbar est disponible
-en bas de toutes les pages. Elle affiche un bon résumé des données de
-profiling qui vous donne accès instantanément à beaucoup d'informations
-utiles quand quelque chose ne fonctionne pas comme prévu.
+Dans l'environnement de développement, la barre d'outils de débuggage web
+est disponible en bas de toutes les pages. Elle affiche un bon résumé des
+données de profiling qui vous donne accès instantanément à beaucoup
+d'informations utiles quand quelque chose ne fonctionne pas comme prévu.
 
-Si le résumé fourni par la Web Debug Toolbar n'est pas suffisant, cliquez sur
-le lien du jeton (une chaîne de caractères composée de 13 caractères aléatoires)
-pour pouvoir accéder au Web Profiler.
+Si le résumé fourni par la Barre d'Outils de Débuggage Web n'est pas suffisant,
+cliquez sur le lien du jeton (une chaîne de caractères composée de 13 caractères
+aléatoires) pour pouvoir accéder au Profiler Web.
 
 .. note::
 
@@ -914,10 +914,10 @@ pour pouvoir accéder au Web Profiler.
     ne sont pas enregistrées (voir ci-dessous pour les informations concernant
     la configuration).
 
-Analyser les données de Profiling avec le Web Profiler
+Analyser les données de Profiling avec le Profiler Web
 ......................................................
 
-Le Web Profiler est un outil de visualisation pour profiler des données que vous
+Le Profiler Web est un outil de visualisation pour profiler des données que vous
 pouvez utiliser en développement pour débugger votre code et améliorer les
 performances ; mais il peut aussi être utilisé pour explorer des problèmes
 qui surviennent en production. Il expose toutes les informations collectées
@@ -942,9 +942,9 @@ lui associe aussi un jeton ; ce jeton est disponible dans l'en-tête HTTP
 
 .. tip::
 
-    Lorsque le profiler est activé mais sans la web debug toolbar, ou lorsque
-    vous voulez récupérer le jeton pour une requête Ajax, utilisez un outil
-    comme Firebug pour obtenir la valeur de l'en-tête HTTP ``X-Debug-Token``.
+    Lorsque le profiler est activé mais sans la barre d'outils de débuggage web,
+    ou lorsque vous voulez récupérer le jeton pour une requête Ajax, utilisez un
+    outil comme Firebug pour obtenir la valeur de l'en-tête HTTP ``X-Debug-Token``.
 
 Utilisez la méthode ``find()`` pour accéder aux jetons basé sur quelques critères :
 
@@ -975,8 +975,8 @@ Configuration
 .............
 
 La configuration par défaut de Symfony2 vient avec des paramètres prédéfinis
-pour le profiler, la web debug toolbar, et le web profiler. Voici par exemple
-la configuration pour l'environnement de développement :
+pour le profiler, la barre d'outils de débuggage web, et le profiler web.
+Voici par exemple la configuration pour l'environnement de développement :
 
 .. configuration-block::
 
@@ -986,7 +986,7 @@ la configuration pour l'environnement de développement :
         framework:
             profiler: { only_exceptions: false }
 
-        # active le web profiler
+        # active le profiler web
         web_profiler:
             toolbar: true
             intercept_redirects: true
@@ -1002,7 +1002,7 @@ la configuration pour l'environnement de développement :
             <framework:profiler only-exceptions="false" />
         </framework:config>
 
-        <!-- active le web profiler -->
+        <!-- active le profiler web -->
         <webprofiler:config
             toolbar="true"
             intercept-redirects="true"
@@ -1016,7 +1016,7 @@ la configuration pour l'environnement de développement :
             'profiler' => array('only-exceptions' => false),
         ));
 
-        // active le web profiler
+        // active le profiler web
         $container->loadFromExtension('web_profiler', array(
             'toolbar' => true,
             'intercept-redirects' => true,
@@ -1031,11 +1031,12 @@ Quand l'option ``intercept-redirects`` est définie comme ``true``, le web
 profiler intercepte les redirections et vous donne l'opportunité d'inspecter
 les données collectées avant de suivre la redirection.
 
-Quand l'option ``verbose`` est définie comme ``true``, la Web Debug Toolbar
-affiche beaucoup d'informations. Définir ``verbose`` comme ``false`` cache
-quelques informations secondaires afin de rendre la barre d'outils plus petite.
+Quand l'option ``verbose`` est définie comme ``true``, la Barre d'Outils de
+Débuggage Web affiche beaucoup d'informations. Définir ``verbose`` comme ``false``
+cache quelques informations secondaires afin de rendre la barre d'outils plus
+petite.
 
-Si vous activez le web profiler, vous avez aussi besoin de monter les routes
+Si vous activez le profiler web, vous avez aussi besoin de monter les routes
 du profiler :
 
 .. configuration-block::
