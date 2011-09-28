@@ -369,7 +369,7 @@ astuces à l'esprit :
 .. _template-naming-locations:
 
 Nommage de template et Emplacements
------------------------------
+-----------------------------------
 
 Par défaut, les templates peuvent se trouver dans deux emplacements
 différents :
@@ -404,7 +404,7 @@ Symfony2 utilise une chaine de caractère au format
 
 * ``AcmeBlogBundle::layout.html.twig``: Cette syntaxe fait référence à un
   template de base qui est spécifique au ``AcmeBlogBundle``. Donc la partie du
-  milieu, "controller", est absente (``Blog`` par exemple), le template se
+  milieu, «controller», est absente (``Blog`` par exemple), le template se
   trouve à ``Resources/views/layout.html.twig`` dans ``AcmeBlogBundle``.
 
 * ``::base.html.twig``: Cette syntaxe fait référence à un template de base d'une
@@ -427,7 +427,7 @@ les templates fournis par n'importe quel vendor bundle.
     :ref:`controller-string-syntax`.
 
 Le Template Suffixe
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 Le format **bundle**:**controller**:**template** de chaque template spécifie
 *où* se situe le fichier template. Chaque nom de template a aussi deux extension
@@ -459,8 +459,8 @@ lisez la section :ref:`template-formats`.
    single: Templating; Tags and Helpers
    single: Templating; Helpers
 
-Tags et Helpers
-----------------
+Balises et Helpers
+------------------
 
 Vous avez maintenant compris les bases des templates, comment ils sont nommés et
 comment utiliser l'héritage de template. Les parties les plus difficiles sont
@@ -483,12 +483,12 @@ plus.
 
 .. _including-templates:
 
-L'inclusion de templates
-~~~~~~~~~~~~~~~~~~~~~~~~~
+L'inclusion de Templates
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vous voudrez souvent inclure le même template ou fragment de code dans
-différentes pages. Par exemple, dans une application avec un espace "nouveaux
-articles", le code du template affichant un article peut être utiliser sur la
+différentes pages. Par exemple, dans une application avec un espace «nouveaux
+articles», le code du template affichant un article peut être utiliser sur la
 page détaillant l'article, sur une page affichant les articles les plus
 populaires, ou dans une liste des derniers articles.
 
@@ -569,7 +569,7 @@ passée au template ``list.html.twig`` en utilisant la commande ``with``.
 .. _templating-embedding-controller:
 
 Contrôleurs Embarqués
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Dans quelques cas, vous aurez besoin d'inclure plus qu'un simple
 template. Supposons que vous avez un menu latéral dans votre layout qui contient
@@ -660,7 +660,7 @@ organisation et réutilisabilité du code.
    single: Templating; Linking to pages
 
 Le Lien vers des Pages
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 La création de lien vers d'autres pages de votre projet est l'opération la plus
 commune qui soit dans un template. Au lieu de coder en dure les URLs dans les
@@ -670,7 +670,7 @@ vous désirez modifier l'URL d'une page particulière, tout ce que vous avez
 besoin de faire c'est changer la configuration des routes; les templates
 genereront automatiquement la nouvelle URL.
 
-Dans un premier temps, configurons le lien vers la page "_welcome" qui est
+Dans un premier temps, configurons le lien vers la page «_welcome» qui est
 accessible via la configuration de route suivant :
 
 .. configuration-block::
@@ -779,7 +779,7 @@ faisons le lien vers les articles correctement :
    single: Templating; Linking to assets
 
 Le Lien vers des Fichiers
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les templates font aussi très souvent référence à des images, du Javascript, des
 feuilles de style et d'autres fichiers. Bien sûr vous pouvez coder en dur le chemin
@@ -815,7 +815,7 @@ votre application est utilisé et en générant les chemins correctes.
    single: Javascripts; Including Javascripts
 
 L'inclusion de Feuilles de style et de Javascripts avec Twig
----------------------------------------------
+------------------------------------------------------------
 
 Aucun site n'est complet sans inclure des fichiers Javascript et des feuilles de
 styles. Dans Symfony, l'inclusion de ces fichiers est gérée d'une façon élégante en
@@ -889,7 +889,7 @@ Le résultat final est une page qui inclut à la fois la feuille de style
    single: Templating; The templating service
 
 Configuration et Utilisation du Service ``templating``
-------------------------------------------------
+------------------------------------------------------
 
 Le coeur du système de template dans Symfony2 est le ``Engine`` de template. Cet
 objet spécial est responsable du rendement des templates et de retourner leur
@@ -912,7 +912,7 @@ est équivalent à
 
 .. _template-configuration:
 
-Le moteur de template (ou "service") est préconfiguré pour travailler
+Le moteur de template (ou «service») est préconfiguré pour travailler
 automatiquement dans Symfony2. Il peut, bien sur, être configuré grâce au
 fichier de configuration de l'application :
 
@@ -956,7 +956,7 @@ Plusieurs options de configuration sont disponibles et sont détaillé dans le
 .. _overriding-bundle-templates:
 
 La Surcharge de templates de Bundle
----------------------------
+-----------------------------------
 
 La communaté Symfony2 est fier de créer et de maintenir des bundles de haute
 qualité (voir `Symfony2Bundles.org`_) pour un grand nombre d'aspects. A un fois
@@ -965,7 +965,7 @@ surcharger et personnaliser un ou plusieurs de ces templates.
 
 Supposons que vous utilisiez un imaginaire ``AcmeBlogBundle`` open-source dans
 votre projet (dans le répertoire ``src/Acme/blogBundle`` par exemple). Et bien
-que vous soyez content de tout cela, vous voudriez surchargé le page "list" du
+que vous soyez content de tout cela, vous voudriez surchargé le page «list» du
 blog pour la personnaliser ces décorations spécialement pour votre
 application. En cherchant un peu dans le contrôleur ``Blog`` du
 ``AcmeBlogBundle``, vous trouvez ceci : ::
@@ -1014,12 +1014,12 @@ bon sous-répertoire de ``app/Resources``.
     single; Template; Overriding exception templates
 
 La Surcharge des Core Templates
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Puisque le framework Symfony2 lui même est juste un bundle, les core templates
 peuvent être surchargés de la même façon. Par exemple, le core
 ``FrameworkBundle`` contient un certain nombre de templates relatives aux
-"exception" et aux "erreurs" qui peuvent être surchargés en copiant chacun d'eux
+«exception» et aux «erreurs» qui peuvent être surchargés en copiant chacun d'eux
 du répertoire ``Ressources/views/Exception`` de ``FrameworkBundle`` vers, vous
 le devenez, le répertoire ``app/Resources/FrameworkBundle/views/Exception``.
 
@@ -1027,7 +1027,7 @@ le devenez, le répertoire ``app/Resources/FrameworkBundle/views/Exception``.
    single: Templating; Three-level inheritance pattern
 
 Trois niveaux d'héritages
------------------------
+-------------------------
 
 Une façon commune d'utiliser l'héritage est d'utiliser l'approche à trois
 niveaux. Cette méthode fonctionnement parfaitement avec trois différents types
@@ -1037,7 +1037,7 @@ de templates que nous détaillons :
   principal layout pour votre application (comme dans l'exemple précédent). En
   interne, ce template est appelé ``::base.html.twig``;
 
-* Créer un template pour chaque "section" de votre site. Par exemple, un
+* Créer un template pour chaque «section» de votre site. Par exemple, un
   ``AcmeBlogBundle`` devrait avoir un template appelé
   ``AcmeBlogBundle::layout.html.twig`` qui contient uniquement les éléments de
   section spécifiques au blog;
@@ -1055,7 +1055,7 @@ de templates que nous détaillons :
 
 * Créer un template individuel pour chaque page et faites en sorte que chacun
   étende (extend) la template approprié à la section. Par exemple, la page
-  "index" sera appelé à peu de chose prés
+  «index» sera appelé à peu de chose prés
   ``AcmeBlogBundle:Blog:index.html.twig`` et listera les postes du blog.
 
     .. code-block:: html+jinja
@@ -1085,8 +1085,8 @@ vendor. De ce fait, la layout d'un bundle peut facilement être surchargée pour
 .. index::
    single: Templating; Output escaping
 
-Sortie Echappée
----------------
+L'Echappée
+----------
 
 Lors de la génération HTML d'un template, il y a toujours un risque qu'une
 variable du template affiche du code HTML non désiré ou du code dangeux côté
@@ -1118,7 +1118,7 @@ même utilisateur peut aussi écrire un Javascript qui réalise des actions
 malicieuses dans un espace sécurisé d'un inconnu et légitime utilisateur.
 
 La réponse à ce problème est l'échappement de la sortie. Avec l'échappement de
-la sortie à "on", le même template sera rendu de façon inoffensive, et affichera
+la sortie à «on», le même template sera rendu de façon inoffensive, et affichera
 littéralement la balise ``script`` à l'écran ::
 
     Hello &lt;script&gt;alert(&#39;helloe&#39;)&lt;/script&gt;
@@ -1129,7 +1129,7 @@ PHP, l'échappement n'est pas automatique, ce qui signifie que vous aurez besoin
 d'échappé manuellement là où c'est nécessaire.
 
 Léchappement avec Twig
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous utilisez les templates de Twig, alors l'échappement est activé par
 défaut. Ce qui signifie que vous êtes protéger immédiatement des conséquences
@@ -1148,7 +1148,7 @@ un template entier, Pour plus d'information, voir `Output Escaping`_ dans la
 documentation de Twig.
 
 L'échappement en PHP
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 L'échappement n'est pas automatique lorsque vous utilisez des templates PHP. Ce
 qui signife que à moins que vous choissiez explicitement d'échapper une
@@ -1173,14 +1173,14 @@ context ``js`` :
 .. _template-formats:
 
 Les Formats de Template
-----------------
+-----------------------
 
 Les templates sont une façon générique de rendre un contenu dans *n'importe
 quel* format. Et bien que dans la plupart des cas vous utiliserez les templates
 pour rendre du contenu HTML, un template peut tout aussi facilement générer du
 JavaScript, du CSS, du XML ou tout autre format dont vous pouvez rêver.
 
-Par exemple, la même "ressource" est souvent rendu dans plusieurs différents
+Par exemple, la même «ressource» est souvent rendu dans plusieurs différents
 formats. Pour rendre la page index d'un article en XML, incluez simplement le
 format dans le nom du template :
 
@@ -1191,7 +1191,7 @@ En réalité, ce n'est rien de plus qu'une convention de nommage et le template
 n'est pas rendu différemment en se basant sur ce format.
 
 Dans beaucoup de cas, vous pourriez vouloir autoriser un simple contrôleur à
-rendre plusieurs formats en se basant sur le "request format". Pour cette
+rendre plusieurs formats en se basant sur le «request format». Pour cette
 raison, un pattern commun est de procéder comme cela :
 
 .. code-block:: php
@@ -1229,7 +1229,7 @@ Pour créer des liens qui inclus le paramétre de format, incluez une clé
         </a>
 
 Réflexions Finales
---------------
+------------------
 
 Le moteur de template dans Symfony est un outil puissant qui peut être utiliser
 chaque fois que vous avez besoin de générer du contenu de répresentation en
