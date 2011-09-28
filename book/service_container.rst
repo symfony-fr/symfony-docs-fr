@@ -67,10 +67,10 @@ sont les clés pour devenir un bon développeur dans presque tous les langages.
 Définition d'un Conteneur de Services
 -------------------------------------
 
-Un :term:`Service Container` (or *dependency injection container*) est simplement
-un objet PHP qui gère l'instanciation des services (cad objets).
-Par exemple, supposons que nous avons une simple classe PHP qui délivre des messages email.
-Sans un conteneur de service, nous devons manuellement créer l'objet chaque fois que
+Un :term:`Service Container` (ou *dependency injection container*) est simplement
+un objet PHP qui gère l'instanciation des services (c-a-d objets).
+Par exemple, supposons que nous avons une simple classe PHP qui envoie des messages email.
+Sans un conteneur de services, nous devons manuellement créer l'objet chaque fois que
 nous en avons besoin :
 
 .. code-block:: php
@@ -81,7 +81,7 @@ nous en avons besoin :
     $mailer->send('ryan@foobar.net', ... );
 
 Ceci est assez facile. La classe imaginaire ``Mailer`` nous permet de configurer
-la méthode utilisée pour délivrer les messages e-mail (par exemple ``sendmail``, ``smtp``, etc)
+la méthode utilisée pour envoyer les messages par e-mail (par exemple ``sendmail``, ``smtp``, etc)
 Mais que faire si nous voulions utiliser le service mailer ailleurs ? Nous ne 
 voulons certainement pas répéter la configuration du mailer *chaque* fois que nous devons utiliser
 l'objet ``Mailer``. Que se passe-t-il si nous avions besoin de changer le ``transport`` de
@@ -92,12 +92,12 @@ chaque endroit où nous avons créé un service ``Mailer`` et de le changer.
    single: Service Container; Configuring services
 
 Créer/Configurer les services dans le Conteneur
-----------------------------------------------
+-----------------------------------------------
 
-Une meilleure réponse est de laisser le conteneur de services créer l'objet ``Mailer``
-pour vous. Pour que cela fonctionne, nous devons *enseigner* au conteneur comment
+Une meilleure solution est de laisser le conteneur de services créer l'objet ``Mailer``
+pour vous. Pour que cela fonctionne, nous devons *spécifier* au conteneur comment
 créer le ``Mailer``. Cela se fait via la configuration, qui peut
-être spécifié en YAML, XML ou PHP :
+être spécifiée en YAML, XML ou PHP :
 
 .. configuration-block::
 
@@ -130,15 +130,15 @@ créer le ``Mailer``. Cela se fait via la configuration, qui peut
 
 .. note::
 
-    Lorsque Symfony2 initialise, il construit le conteneur de services en utilisant la
+    Lorsque Symfony2 s'initialise, il construit le conteneur de services en utilisant la
     configuration de l'application (``app/config/config.yml`` par défaut). Le
-    fichier exact qui est chargée est dicté par la méthode ``AppKernel::registerContainerConfiguration()``,
+    fichier exact qui est chargé est dicté par la méthode ``AppKernel::registerContainerConfiguration()``,
     qui charge un fichier de configuration spécifique à l'environnement (par exemple
     ``config_dev.yml`` pour l'environnement de ``dev`` ou ``config_prod.yml``
     pour la ``prod``).
 
 Une instance de l'objet ``Acme\HelloBundle\Mailer`` est maintenant disponible via 
-le conteneur de service. Le conteneur est disponible dans tous les contrôleurs traditionnels
+le conteneur de services. Le conteneur est disponible dans tous les contrôleurs traditionnels
 de Symfony2 où vous pouvez accéder aux services du conteneur via la méthode 
 de raccourci ``get()`` ::
 
@@ -164,7 +164,7 @@ beaucoup de services. Les services qui ne sont jamais utilisés ne sont jamais c
 
 Comme bonus supplémentaire, le service ``Mailer`` est seulement créé une fois et la même
 instance est retournée chaque fois que vous demandez le service. Ceci est presque toujours
-le comportement que vous aurez besoin (c'est plus souple et plus puissant), mais nous allons apprendre
+le comportement dont vous aurez besoin (c'est plus souple et plus puissant), mais nous allons apprendre
 plus tard, comment vous pouvez configurer un service qui a de multiples instances.
 	
 .. _book-service-container-parameters:
@@ -172,8 +172,8 @@ plus tard, comment vous pouvez configurer un service qui a de multiples instance
 Paramètres de Service
 ---------------------
 
-La création de nouveaux services (cad objets) via le conteneur est assez 
-simple. Les paramètres rend les définitions de services plus organisés et flexibles :
+La création de nouveaux services (c-a-d objets) via le conteneur est assez 
+simple. Les paramètres rendent les définitions de services plus organisées et flexibles :
 
 .. configuration-block::
 
@@ -217,25 +217,25 @@ simple. Les paramètres rend les définitions de services plus organisés et fle
         ));
 
 Le résultat final est exactement le même que précédemment - la différence est seulement dans
-* comment *, nous avons défini le service. En entourant les chaînes ``my_mailer.class`` et
+* comment * nous avons défini le service. En entourant les chaînes ``my_mailer.class`` et
 ``my_mailer.transport`` par le signe pourcent (``%``), le conteneur sait qu'il 
 faut chercher des paramètres avec ces noms. Quand le conteneur est construit, il
 cherche la valeur de chaque paramètre et l'utilise dans la définition du service.
 
 Le but des paramètres est de fournir l'information dans les services. Bien sûr,
-il n'y avait rien de mal à définir le service sans utiliser aucun paramètre.
+il n'y avait rien de mal à définir le service sans utiliser de paramètre.
 Les paramètres, cependant, ont plusieurs avantages :
 
-* la séparation and organisation de tous les "options" de service sous une seule
+* la séparation et l'organisation de toutes les « options » de service sous une seule
   clé de ``paramètres`` ;
 
-* les valeurs de paramètres peuvent être utilisés dans de multiples définitions de service ;
+* les valeurs de paramètres peuvent être utilisées dans de multiples définitions de service ;
 
 * Lors de la création d'un service dans un bundle (nous allons voir ceci sous peu), utiliser les paramètres
-  permet au servicce d'être facilement personnalisé dans votre application.
+  permet au service d'être facilement personnalisé dans votre application.
 
 Le choix d'utiliser ou non des paramètres dépend de vous. Les bundles 
-tiers de haute qualité utiliseront *toujours* les paramètres puisqu'ils rend le service 
+tiers de haute qualité utiliseront *toujours* les paramètres puisqu'ils rendent le service 
 stocké dans le conteneur plus configurable. Pour les services dans votre application,
 cependant, vous pouvez ne pas avoir besoin de la flexibilité des paramètres.  
 
@@ -246,17 +246,17 @@ Importer d'autres Ressources de Configuration de Conteneur
 
     Dans cette section, nous allons faire référence aux fichiers de configuration de service comme des *ressources*.
     C'est pour souligner le fait que, alors que la plupart des ressources de configuration
-    seront des fichiers (par exemple YAML, XML, PHP), Symfony2 est si flexible que la configuration
-    pourrait être chargé de n'importe où (par exemple une base de données ou même via un service
+    sont des fichiers (par exemple YAML, XML, PHP), Symfony2 est si flexible que la configuration
+    pourrait être chargée de n'importe où (par exemple une base de données ou même via un service
     web externe).
 	
 Le conteneur de services est construit en utilisant une ressource de configuration unique
 (``app/config/config.yml`` par défaut). Toutes les autres configurations de service
 (y compris la configuration du noyau de Symfony2 et des bundle tiers) doivent
-être importés à l'intérieur de ce fichier d'une manière ou d'une autre. Cela vous donne une
+être importées à l'intérieur de ce fichier d'une manière ou d'une autre. Cela vous donne une
 flexibilité absolue sur les services dans votre application.
 
-La configuration des services externes peuvent être importés de deux manières différentes. Tout d'abord,
+La configuration des services externes peut être importée de deux manières différentes. Tout d'abord,
 nous allons parler de la méthode que vous utiliserez le plus souvent dans votre application :
 la directive ``imports``. Dans la section suivante, nous allons introduire la
 deuxième méthode, qui est la méthode flexible et préférée pour l'importation de 
@@ -269,7 +269,7 @@ configuration de services des bundles tiers.
 .. _service-container-imports-directive:
 
 Importer la Configuration avec ``imports``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Jusqu'ici, nous avons placé notre définition de conteneur de service ``my_mailer`` directement
 dans le fichier de configuration de l'application (par exemple ``app/config/config.yml``).
@@ -277,7 +277,7 @@ Bien sûr, puisque la classe ``Mailer`` elle-même vit à l'intérieur de ``Acme
 il est plus logique de mettre la définition du conteneur ``my_mailer`` à l'intérieur du
 bundle aussi.
 
-Tout d'abord, déplacer la définition du conteneur ``my_mailer`` dans un nouveau fichier de ressource
+Tout d'abord, déplacez la définition du conteneur ``my_mailer`` dans un nouveau fichier de ressource
 de conteneur à l'intérieur d' ``AcmeHelloBundle``. Si les répertoires ``Resources`` ou
 ``Resources/config`` n'existent pas, créez-les.
 
@@ -371,20 +371,20 @@ les services du noyau de Symfony2, sont habituellement chargés en utilisant une
 souple et facile à configurer dans votre application.
 
 Voici comment cela fonctionne. En interne, chaque bundle définit ses services 
-comme nous avons vu jusqu'à présent. A savoir, un bundle utilise un ou plusieurs fichier de 
-ressource de configuration (généralement XML) pour spécifier les paramètres et les services pour ce
+comme nous avons vu jusqu'à présent. A savoir, un bundle utilise un ou plusieurs fichiers de 
+ressources de configuration (généralement XML) pour spécifier les paramètres et les services pour ce
 bundle. Cependant, au lieu d'importer chacune de ces ressources directement à partir de
 la configuration de votre application en utilisant la directive ``imports``, vous pouvez simplement
-invoquer une *extension du conteneur de service* à l'intérieur du bundle qui fait le travail pour
-vous. Une extension de conteneur de service est une classe PHP créée par l'auteur du bundle
+invoquer une *extension du conteneur de services* à l'intérieur du bundle qui fait le travail pour
+vous. Une extension de conteneur de services est une classe PHP créée par l'auteur du bundle
 afin d'accomplir deux choses :
 
 * importer toutes les ressources du conteneur de services nécessaires pour configurer les services
   pour le bundle ;
 
 * fournir une configuration sémantique, simple de sorte que le bundle peut
-  être configuré sans interagir avec les paramètres plats de la 
-  configuration du conteneur de service du bundle.  
+  être configuré sans interagir avec les paramètres de la 
+  configuration du conteneur de services du bundle.  
 
 En d'autres termes, une extension de conteneur de services configure les services pour
 un bundle en votre nom. Et comme nous le verrons dans un instant, l'extension fournit
@@ -392,7 +392,7 @@ une interface pratique, de haut niveau pour configurer le bundle.
 
 Prenez le ``FrameworkBundle`` - le bundle noyau du framework Symfony2 - comme un
 exemple. La présence du code suivant dans votre configuration de l'application
-invoque l'extension du conteneur de service à l'intérieur du ``FrameworkBundle`` :
+invoque l'extension du conteneur de services à l'intérieur du ``FrameworkBundle`` :
 
 .. configuration-block::
 
@@ -438,7 +438,7 @@ ne seront pas chargés. Le fait est que vous avez la maîtrise : le framework Sy
 ne contient pas de magie et n'effectue aucune action dont vous n'avez pas le contrôle
 dessus.
 
-Bien sûr, vous pouvez faire beaucoup plus que simplement «activer» l'extension du conteneur 
+Bien sûr, vous pouvez faire beaucoup plus que simplement « activer » l'extension du conteneur 
 de services du ``FrameworkBundle``. Chaque extension vous permet de facilement
 personnaliser le bundle, sans se soucier de la manière dont les services internes sont
 définis.
@@ -449,18 +449,18 @@ Dans ce cas, l'extension vous permet de personnaliser la ``charset``, ``error_ha
 le ``FrameworkBundle`` utilise les options spécifiées ici pour définir et configurer
 les services qui lui sont spécifiques. Le bundle se charge de créer tous les  
 ``paramètres`` et ``services`` nécessaires pour le conteneur du service, tout en permettant
-une grande partie de la configuration d'être facilement personnalisé. Comme bonus supplémentaire, la plupart des
-extensions du conteneur de services sont aussi assez malins pour effectuer la validation -
-vous informant des options qui sont manquants ou du mauvais type de données.
+une grande partie de la configuration d'être facilement personnalisée. Comme bonus supplémentaire, la plupart des
+extensions du conteneur de services sont assez malines pour effectuer la validation -
+vous informant des options qui sont manquantes ou du mauvais type de données.
 
 Lors de l'installation ou la configuration d'un bundle, consultez la documentation du bundle pour
 savoir comment installer et configurer les services pour le bundle. Les options
-disponibles pour les bundles du noyau peuvent être trouvés à :doc:`Reference Guide</reference/index>`.
+disponibles pour les bundles du noyau peuvent être trouvées à :doc:`Reference Guide</reference/index>`.
 
 .. note::
 
-   Nativement, le conteneur de service reconnait seulement les
-   directives ``parameters``, ``services``, et ``imports``. Toutes autres directives
+   Nativement, le conteneur de services reconnait seulement les
+   directives ``parameters``, ``services``, et ``imports``. Toutes les autres directives
    sont gérées par une extension du conteneur de service.
 
 .. index::
@@ -469,16 +469,16 @@ disponibles pour les bundles du noyau peuvent être trouvés à :doc:`Reference 
 Reférencer (Injecter) les Services
 ----------------------------------
 
-Jusqu'à présent, notre service originel ``my_mailer`` est simple: il suffit d'un seul paramètre
+Jusqu'à présent, notre service originel ``my_mailer`` est simple : il suffit d'un seul paramètre
 dans son constructeur, qui est facilement configurable. Comme vous le verrez, la vraie
 puissance du conteneur est démontrée lorsque vous avez besoin de créer un service qui
 dépend d'un ou plusieurs autres services dans le conteneur.
 
 Commençons par un exemple. Supposons que nous ayons un nouveau service, ``NewsletterManager`` ,
-qui aide à gérer la préparation et la livraison d'un message email à
-une collection d'adresses. Bien sûr, le service ``my_mailer`` excelle 
-vraiment pour livrer des messages email, donc nous allons l'utiliser dans ``NewsletterManager``
-pour gérer la livraison effective des messages. Cette fausse classe pourrait ressembler à 
+qui aide à gérer la préparation et l'envoi d'un message email à
+une liste d'adresses. Bien sûr, le service ``my_mailer`` excelle 
+vraiment pour envoyer des messages email, donc nous allons l'utiliser dans ``NewsletterManager``
+pour gérer l'envoi effectif des messages. Cette fausse classe pourrait ressembler à 
 quelque chose comme ceci ::
 
     namespace Acme\HelloBundle\Newsletter;
@@ -498,7 +498,7 @@ quelque chose comme ceci ::
     }
 
 Sans utiliser le conteneur de services, nous pouvons créer une nouvelle ``NewsletterManager`` 
-assez facilement de l'intérieur d'un contrôleur ::
+assez facilement à l'intérieur d'un contrôleur ::
 
     public function sendNewsletterAction()
     {
@@ -507,11 +507,11 @@ assez facilement de l'intérieur d'un contrôleur ::
         // ...
     }
 
-Cette approche est bien, mais si nous décidons plus tard que la classe ``NewsletterManager``
+Cette approche est pas mal, mais si nous décidons plus tard que la classe ``NewsletterManager``
 a besoin d'un deuxième ou troisième paramètre de constructeur ? Que se passe-t-il si nous décidons de
 refactoriser notre code et de renommer la classe ? Dans les deux cas, vous auriez besoin de trouver tous les
 endroits où le ``NewsletterManager`` a été instancié et de le modifier. Bien sûr,
-le conteneur de service nous donne une option beaucoup plus attrayante :
+le conteneur de services nous donne une option beaucoup plus attrayante :
 
 .. configuration-block::
 
@@ -565,7 +565,7 @@ En YAML, la syntaxe spéciale ``@my_mailer`` indique au conteneur de chercher
 un service nommé ``my_mailer`` et de transmettre cet objet dans le constructeur
 de ``NewsletterManager``. Dans ce cas, cependant, le service spécifié ``my_mailer`` 
 doit exister. Si ce n'est pas le cas, une exception sera levée. Vous pouvez marquer vos
-dépendances comme facultative - ce sera discuté dans la section suivante.
+dépendances comme facultatives - nous en parlerons dans la section suivante.
 
 Utiliser des références est un outil très puissant qui vous permet de créer des classes
 de services indépendantes avec des dépendances bien définies. Dans cet exemple, le service
@@ -576,9 +576,9 @@ le travail de l'instanciation des objets.
 Dépendances optionnelles : Setter Injection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-L'injection de dépendances dans le constructeur de cette manière est une excellente
+L'injection de dépendances dans le constructeur de cette manière est un excellent
 moyen de s'assurer que la dépendance est disponible pour utilisation. Si vous avez des
-dépendances optionnelles pour une classe, alors "setter injection" peut être une meilleure option. 
+dépendances optionnelles pour une classe, alors « setter injection » peut être une meilleure option. 
 Cela signifie d'injecter la dépendance en utilisant un appel de méthode plutôt que par le
 constructeur. La classe devrait ressembler à ceci ::
 
@@ -654,17 +654,17 @@ L'injection de la dépendance par la méthode setter a juste besoin d'un changem
 
 .. note::
 
-    Les approches présentées dans cette section sont appelées "constructor injection"
-    et "setter injection". Le conteneur de service Symfony2 supporte aussi 
-    "property injection".
+    Les approches présentées dans cette section sont appelées « constructor injection »
+    et « setter injection« ». Le conteneur de service Symfony2 supporte aussi 
+    « property injection« ».
 
 Rendre les Références Optionnelles
 ----------------------------------
 
-Parfois, un de vos services peuvent avoir une dépendance optionnelle, ce qui signifie
-que la dépendance n'est pas requise pour votre service pour fonctionner correctement. Dans
+Parfois, un de vos services peut avoir une dépendance optionnelle, ce qui signifie
+que la dépendance n'est pas requise par le service pour fonctionner correctement. Dans
 l'exemple ci-dessus, le service ``my_mailer`` *doit* exister, sinon une exception
-sera levée. En modifiant les définitions de service ``newsletter_manager``,
+sera levée. En modifiant les définitions du service ``newsletter_manager``,
 vous pouvez rendre cette référence optionnelle. Le conteneur va ensuite l'injecter si
 elle existe et ne rien faire si ce n'est pas le cas :
 
@@ -741,7 +741,7 @@ auquel vous pouvez accéder de l'intérieur d'un contrôleur standard comme suit
     }
 
 Dans Symfony2, vous allez constamment utiliser les services fournis par le noyau de Symfony ou
-autres bundles tiers pour effectuer des tâches telles que rendering templates (``templating``),
+autres bundles tiers pour effectuer des tâches telles que rendre des templates (``templating``),
 envoyer des emails (``mailer``), ou d'accéder à des informations sur la requête (``request``).
 
 Nous pouvons aller plus loin en utilisant ces services à l'intérieur des services
@@ -769,7 +769,7 @@ afin qu'il puisse générer le contenu de l'email via un template ::
         // ...
     }
 
-Configurer le conteneur de service est facile :
+Configurer le conteneur de services est facile :
 
 .. configuration-block::
 
@@ -804,7 +804,7 @@ du framework.
 
 .. tip::
 
-    Soyez sur que l'entrée ``swiftmailer`` apparaît dans votre configuration de
+    Soyez sûr que l'entrée ``swiftmailer`` apparaît dans votre configuration de
     l'application. Comme nous l'avons mentionné dans :ref:`service-container-extension-configuration`,
     la clé ``swiftmailer`` invoque l'extension du service de 
     ``SwiftmailerBundle``, qui déclare le service ``mailer``.
@@ -839,7 +839,7 @@ paramètre pour un autre service.
 
     Si vous utilisez un service privé comme un paramètre pour plus d'un autre service,
     cela se traduira par deux instances différentes étant utilisées puisque l'instanciation
-    du service privé se fait "inline" (par exemple ``new PrivateFooBar()``).
+    du service privé se fait « inline » (par exemple ``new PrivateFooBar()``).
 
 Autrement dit : un service sera privé lorsque vous ne voulez pas y accéder
 directement à partir de votre code.
@@ -915,7 +915,7 @@ Fichiers Requis
 ~~~~~~~~~~~~~~~
 
 Il pourrait y avoir des cas utiles où vous avez besoin d'inclure un autre fichier juste avant
-que le service proprement dit est chargé. Pour ce faire, vous pouvez utiliser la directive ``file``.
+que le service proprement dit ne soit chargé. Pour ce faire, vous pouvez utiliser la directive ``file``.
 
 .. configuration-block::
 
@@ -939,16 +939,16 @@ que le service proprement dit est chargé. Pour ce faire, vous pouvez utiliser l
         $container->setDefinition('foo', $definition);
 
 Veuillez noter que symfony appelera en interne la fonction PHP require_once
-ce qui signifie que votre fichier sera inclus qu'une seule fois par request.
+ce qui signifie que votre fichier ne sera inclu qu'une seule fois par requête.
 
 .. _book-service-container-tags:
 
 Tags (``tags``)
 ~~~~~~~~~~~~~~~
 
-De la même manière qu'un billet de blog sur le Web pourrait être taggé avec des choses
-telles que «Symfony» ou «PHP», les services configurés dans votre conteneur peut également être
-taggés. Dans le conteneur de service, un tag laisse supposer que le service est censé
+De la même manière qu'un billet de blog sur le Web pourrait être taggé avec des noms
+telles que « Symfony » ou « PHP », les services configurés dans votre conteneur peuvent également être
+taggés. Dans le conteneur de services, un tag laisse supposer que le service est censé
 être utilisé dans un but précis. Prenons l'exemple suivant :
 
 .. configuration-block::
@@ -980,7 +980,7 @@ comme une extension Twig avec Twig. En d'autres termes, Twig trouve tous les ser
 avec ``twig.extension`` et les enregistre automatiquement comme des extensions.
 
 Les tags, alors, sont un moyen de dire aux bundles de Symfony2 ou tiers que
-votre service doit être enregistrée ou utilisée d'une manière spéciale par le bundle.
+votre service doit être enregistré ou utilisé d'une manière spéciale par le bundle.
 
 Ce qui suit est une liste de tags disponibles avec les bundles noyau de Symfony2.
 Chacun d'eux a un effet différent sur votre service et de nombreuses tags nécessitent
@@ -1001,8 +1001,8 @@ des paramètres supplémentaires (au-delà du paramètre ``name``).
 * translation.loader
 * validator.constraint_validator
 
-Learn more from the Cookbook
-----------------------------
+Apprenez en plus en lisant le Cookbook
+--------------------------------------
 
 * :doc:`/cookbook/service_container/factories`
 * :doc:`/cookbook/service_container/parentservices`
