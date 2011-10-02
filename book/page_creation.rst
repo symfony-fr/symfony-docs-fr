@@ -576,8 +576,8 @@ les templates, les feuilles de style, le javascript, les tests et tout le reste.
 Chaque aspect d'une fonctionnalité se trouve dans le bundle, et chaque fonctionnalité
 aussi.
 
-An application is made up of bundles as defined in the ``registerBundles()``
-method of the ``AppKernel`` class::
+Une application est faite de bundles qui sont définis dans la méthode ``registerBundles()``
+de la classe ``AppKernel``::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -604,8 +604,8 @@ method of the ``AppKernel`` class::
         return $bundles;
     }
 
-With the ``registerBundles()`` method, you have total control over which bundles
-are used by your application (including the core Symfony bundles).
+Avec la méthode ``registerBundles()``, vous avez le contrôle totale des bundles
+qui sont utilisés dans votre application (incluant les bundles du coeur de Symfony).
 
 .. tip::
 
