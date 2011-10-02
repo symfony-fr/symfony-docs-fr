@@ -23,13 +23,13 @@ et de lui retourner une Response HTTP appropriée.
 Symfony2 suit cette philosophie et vous fournit des outils et conventions pour
 garder votre application organisée tout en pouvant devenir plus complexe et fréquentée.
 
-Cela vous parait suffisamment simple? Alors allons-y!
+Cela vous parait suffisamment simple ? Alors allons-y !
 
 .. index::
    single: Page creation; Example
 
-La page « Hello Symfony !»
---------------------------
+La page « Hello Symfony ! »
+---------------------------
 
 Commençons avec une application traditionnelle « Hello World ! ». Quand nous
 aurons terminé, l'utilisateur sera capable de reçevoir un message de 
@@ -39,7 +39,7 @@ salutation personnalisé (ex « Hello Symfony ») en se rendant à l'URL suivant
 
    http://localhost/app_dev.php/hello/Symfony
 
-En fait, vous serez capables de pouvoir remplacer ``Symfony`` par n'importe
+En fait, vous serez capable de pouvoir remplacer ``Symfony`` par n'importe
 quel autre nom qui doit être salué. Afin de créer cette page, suivez ce simple
 processus en deux étapes.
 
@@ -49,7 +49,7 @@ processus en deux étapes.
    Symfony2 sur votre serveur web. L'URL ci-dessus suppose que ``localhost``
    pointe vers le répertoire ``web`` de votre nouveau projet Symfony2.
    Pour des instructions détaillées à ce sujet, rendez vous dans la section
-   respective de la documentation :doc:`Installez Symfony2</book/installation>`.
+   traitant de la documentation :doc:`Installez Symfony2</book/installation>`.
 
 
 Avant de commencer : Créez un Bundle
@@ -249,7 +249,7 @@ votre application devrait vous saluer::
 
 .. tip::
 
-    Vous pouvez aussi voir votre application en :ref:`environment<environments-summary>`
+    Vous pouvez aussi voir votre application en :ref:`environnement<environments-summary>`
     de « prod » en allant à l'adresse :
 
     .. code-block:: text
@@ -313,7 +313,7 @@ d'un template rendu. Comme tout autre contrôleur, vous retournerez cet objet
 ``Response``.
 
 Notez qu'il y a deux différents exemples afin de rendre un template.
-Par défaut, Symfony2 supporte deux langages différents  de templates :
+Par défaut, Symfony2 supporte deux langages différents de templates :
 les templates classiques PHP et les simples mais puissants templates ``Twig``.
 Ne paniquez pas, vous êtes libres de choisir celui que vous désirez
 voire les deux.
@@ -425,17 +425,17 @@ La structure des répertoires
 Après seulement quelques courtes sections, vous comprenez déjà la philosophie
 derrière la création et le rendu de pages dans Symfony2. Vous avez déjà commencé
 à voir comment les projets Symfony2 sont structurés et organisés. A la fin de
-cette section, vous saurez où trouver et mettre les différents types de fichiers
+cette section, vous saurez où trouver et où mettre les différents types de fichiers
 et pourquoi.
 
 Bien qu'entièrement flexible, chaque :term:`application` 
-a par défaut la même structure de répertoires basique et recommandée:
+a par défaut la même structure de répertoires basique et recommandée :
 
 * ``app/``: Ce répertoire contient la configuration de l'application;
 
 * ``src/``: Tout le code PHP du projet est stocké ici;
 
-* ``vendor/``: par convention, toutes les librairies tierces (additionnelles) sont placées ici;
+* ``vendor/``: Par convention, toutes les librairies tierces (additionnelles) sont placées ici;
 
 * ``web/``: Le répertoire racine web qui contient tous les fichiers publiquement accessibles;
 
@@ -481,7 +481,7 @@ Cependant, vous aurez rarement besoin de les modifier ou même d'y penser.
 Nous en reparlerons dans la section `Environnements`_ .
 
 Le répertoire de l'application (``app``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme nous l'avons vu dans le contrôleur frontal, la classe ``AppKernel`` est le
 point d'entrée principal de l'application et est chargée de toute la configuration. 
@@ -489,7 +489,7 @@ De ce fait, elle est stockée dans le répertoire ``app/``.
 
 Cette classe doit implémenter deux méthodes qui définissent tout ce dont Symfony
 a besoin de savoir à propos de votre application. Vous n'avez pas à vous soucier
-de ces méthodes en commençant - Symfony les complète pour vous avec de valeurs
+de ces méthodes en commençant - Symfony les complète pour vous avec des valeurs
 par défaut.
 
 *``registerBundles()``: renvoit un tableau de tous les bundles dont l'application
@@ -513,7 +513,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
 .. sidebar:: Autoloading
 
 Lorsque Symfony se charge, un fichier spécial - ``app/autoload.php`` - est
-inclus. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
+inclu. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
 tous vos fichiers depuis le répertoire ``src/`` et toutes les librairies tierces
 depuis le repertoire ``vendor/``.
 
@@ -554,26 +554,27 @@ Mais qu'est-ce qu'un :term:`bundle`?
 Le Système de Bundles
 ---------------------
 
-A bundle is similar to a plugin in other software, but even better. The key
-difference is that *everything* is a bundle in Symfony2, including both the
-core framework functionality and the code written for your application.
-Bundles are first-class citizens in Symfony2. This gives you the flexibility
-to use pre-built features packaged in `third-party bundles`_ or to distribute
-your own bundles. It makes it easy to pick and choose which features to enable
-in your application and to optimize them the way you want.
+Un bundle est similaire aux plugins que l'on peut trouver dans d'autres logiciels,
+mais en mieux. La différence clé est que *tout* est un bundle dans Symfony2, ce qui
+inclut le coeur du framework et le code de votre application.
+Les bundles sont aux premières loges dans Symfony2. Ils vous offrent la flexibilité
+d'utiliser des fonctionnalités pré-construites packagées dans des `bundles tiers`_
+ou de distribuer vos propres bundles. Cela rend facile de sélectionner quelles
+fonctionnalités activer dans votre application et de les optimiser comme vous voulez.
 
 .. note::
 
-   While you'll learn the basics here, an entire cookbook entry is devoted
-   to the organization and best practices of :doc:`bundles</cookbook/bundles/best_practices>`.
+   Alors que vous apprendrez les bases ici, une entrée du cookbook est entièrement
+   dévouée à l'organisation et aux bonnes pratiques : :doc:`bundles</cookbook/bundles/best_practices>`.
 
-A bundle is simply a structured set of files within a directory that implement
-a single feature. You might create a ``BlogBundle``, a ``ForumBundle`` or
-a bundle for user management (many of these exist already as open source
-bundles). Each directory contains everything related to that feature, including
-PHP files, templates, stylesheets, JavaScripts, tests and anything else.
-Every aspect of a feature exists in a bundle and every feature lives in a
-bundle.
+Un bundle est simplement un ensemble structuré de fichiers au sein d'un répertoire
+et qui implémentent une fonctionnalité unique. Vous pourrez ainsi créer un
+``BlogBundle``, un ``ForumBundle`` ou un bundle pour la gestion des utilisateurs
+(beaucoup de ces bundles existent déjà et sont open-source). Chaque répertoire
+contient tout ce qui est lié à cette fonctionnalité incluant les fichiers PHP,
+les templates, les feuilles de style, le javascript, les tests et tout le reste.
+Chaque aspect d'une fonctionnalité se trouve dans le bundle, et chaque fonctionnalité
+aussi.
 
 An application is made up of bundles as defined in the ``registerBundles()``
 method of the ``AppKernel`` class::
@@ -993,5 +994,5 @@ appreciate the flexibility of its architecture and the power it gives you
 to rapidly develop applications.
 
 .. _`Twig`: http://twig.sensiolabs.org
-.. _`third-party bundles`: http://symfony2bundles.org/
+.. _`bundles tiers`: http://symfony2bundles.org/
 .. _`Symfony Standard Edition`: http://symfony.com/download
