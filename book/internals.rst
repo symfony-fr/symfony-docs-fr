@@ -17,7 +17,7 @@ Vue Globale
 -----------
 
 Le code de Symfony2 se compose de plusieurs couches indépendantes. Chacune
-d'entre elles est construite par-dessus celles qui la précèdent.
+d'entre elles est construite par dessus celles qui la précèdent.
 
 .. tip::
 
@@ -68,7 +68,7 @@ Le Bundle ``FrameworkBundle``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le bundle :namespace:`Symfony\\Bundle\\FrameworkBundle` est le bundle qui lie
-les principaux composants et bibliothèques ensemble afin de fournir un framework
+les principaux composants et bibliothèques ensembles afin de fournir un framework
 MVC léger et rapide. Il vient avec une configuration par défaut ainsi
 qu'avec des conventions afin d'en faciliter l'apprentissage.
 
