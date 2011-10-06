@@ -69,7 +69,7 @@ Le Bundle ``FrameworkBundle``
 
 Le bundle :namespace:`Symfony\\Bundle\\FrameworkBundle` est le bundle qui lie
 les principaux composants et bibliothèques ensembles afin de fournir un framework
-MVC léger et rapide. Il vient avec une configuration par défaut ainsi
+MVC léger et rapide. Il est fourni avec une configuration par défaut ainsi
 qu'avec des conventions afin d'en faciliter l'apprentissage.
 
 .. index::
@@ -96,7 +96,7 @@ Les Contrôleurs
 ~~~~~~~~~~~~~~~
 
 Pour convertir une Requête en une Réponse, le Kernel repose sur un « Contrôleur ».
-Un Contrôleur peut être n'importe quel « callable » PHP.
+Un Contrôleur peut être n'importe quel « callable » (code qui peut être appelé) PHP.
 
 Le Kernel délègue la sélection de quel Contrôleur devrait être exécuté à une
 implémentation de
@@ -111,7 +111,7 @@ La méthode
 retourne le Contrôleur (un « callable » PHP) associé à la Requête donnée. L'implémentation par
 défaut (:class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver`) recherche un
 attribut de la requête ``_controller`` qui représente le nom du contrôleur (une chaîne de
-caractères « class::method », comme ``Bundle\BlogBundle\PostController:indexAction``).
+caractères « classe::méthode », comme ``Bundle\BlogBundle\PostController:indexAction``).
 
 .. tip::
     L'implémentation par défaut utilise le
@@ -171,12 +171,12 @@ d'informations à propos de chaque évènement) :
 
 9. La Réponse est retournée.
 
-Si une Exception est jetée pendant le traitement de la Requête, l'évènement
+Si une Exception est capturée pendant le traitement de la Requête, l'évènement
 ``kernel.exception`` est notifié et les listeners ont alors une chance de
 convertir l'Exception en une Réponse. Si cela fonctionne, l'évènement
 ``kernel.response`` sera notifié ; si non, l'Exception sera re-jetée.
 
-Si vous ne voulez pas que les Exceptions soient capturées (pour des requêtes embarquées
+Si vous ne voulez pas que les Exceptions soient capturées (pour des requêtes imbriquées
 par exemple), désactivez l'évènement ``kernel.exception`` en passant ``false`` en tant
 que troisième argument de la méthode ``handle()``.
 
@@ -203,7 +203,7 @@ en conséquence (le traitement doit seulement intervenir sur la requête
 Les Evènements
 ~~~~~~~~~~~~~~
 
-Chaque évènement jeté par le Kernel est une sous-classe de
+Chaque évènement capturé par le Kernel est une sous-classe de
 :class:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent`. Cela signifie que
 chaque évènement a accès aux mêmes informations de base :
 
@@ -243,7 +243,7 @@ L'Evènement ``kernel.request``
 
 *La Classe Evènement* : :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`
 
-Le but de cet évènement est soit de retourner un objet ``Response`` immédiatement ou bien
+Le but de cet évènement est soit de retourner un objet ``Response`` immédiatement, soit
 de définir des variables afin qu'un Contrôleur puisse être appelé après l'évènement.
 Tout listener peut retourner un objet ``Response`` via la méthode ``setResponse()``
 sur l'évènement. Dans ce cas, tous les autres listeners ne seront pas appelés.
@@ -335,7 +335,7 @@ Le ``FrameworkBundle`` enregistre plusieurs listeners :
   injecte la Barre d'Outils de Débuggage Web (« Web Debug Toolbar ») ;
 
 * :class:`Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener`: définit la
-  valeur du ``Content-Type`` de la Réponse basé sur le format de la requête ;
+  valeur du ``Content-Type`` de la Réponse basée sur le format de la requête ;
 
 * :class:`Symfony\\Component\\HttpKernel\\EventListener\\EsiListener`: ajoute un
   en-tête HTTP ``Surrogate-Control`` lorsque la Réponse a besoin d'être analysée
@@ -387,7 +387,7 @@ Le code Orienté Objet a effectué un long chemin afin d'assurer une extensibili
 du code. En créant des classes qui ont des responsabilités bien définies, votre
 code devient plus flexible et un développeur peut les étendre avec des sous-classes
 pour modifier leurs comportements. Mais s'il souhaite partager ses changements
-avec d'autres développeurs qui ont aussi créés leurs propres sous-classes,
+avec d'autres développeurs qui ont aussi créé leurs propres sous-classes,
 l'héritage du code devient alors discutable.
 
 Considérez l'exemple du monde réel lorsque vous voulez fournir un système de
@@ -397,7 +397,7 @@ interférer avec d'autres plugins. Ceci n'est pas un problème facile à résoud
 avec l'héritage unique ; et l'héritage multiple (s'il était possible avec PHP)
 possède ses propres inconvénients.
 
-Le Dispatcher d'Evènements de Symfony2 implémente le pattern `Observer`_ d'une
+Le Dispatcher d'Evènements de Symfony2 implémente le patron de conception `Observer`_ d'une
 manière simple et efficace afin de rendre ces choses possibles et de pouvoir
 avoir des projets réellement extensibles.
 
@@ -405,18 +405,18 @@ Prenez un exemple simple du `Composant HttpKernel de Symfony2`_. Une fois qu'un
 objet ``Response`` a été créé, il pourrait être utile de permettre à d'autres
 éléments du système de le modifier (par exemple : ajouter quelques en-têtes de
 cache) avant qu'il soit utilisé. Afin de rendre ceci possible, le kernel de
-Symfony2 jette un évènement - ``kernel.response``. Voilà comment cela fonctionne :
+Symfony2 capte un évènement - ``kernel.response``. Voilà comment cela fonctionne :
 
 * Un *listener* (objet PHP) informe un objet *dispatcher* (« répartiteur » en français)
   central qu'il souhaite écouter l'évènement ``kernel.response`` ;
 
 * A un moment donné, le kernel de Symfony2 informe l'objet *dispatcher* qu'il doit
-  répartir (i.e. informer les listeners) l'évènement ``kernel.response``, en
+  répartir (c-a-d informer les listeners) l'évènement ``kernel.response``, en
   passant avec lui un objet ``Event`` qui a accès à l'objet ``Response`` ;
 
-* Le dispatcher notifie (i.e. appelle une méthode de) tous les listeners
+* Le dispatcher notifie (appelle une méthode de) tous les listeners
   de l'évènement ``kernel.response``, permettant à chacun d'entre eux d'effectuer
-  quelconque modification sur l'objet ``Response``.
+  une quelconque modification sur l'objet ``Response``.
 
 .. index::
    single: Dispatcher d'Evènements; Evènements
@@ -426,12 +426,12 @@ Symfony2 jette un évènement - ``kernel.response``. Voilà comment cela fonctio
 Les Evènements
 ~~~~~~~~~~~~~~
 
-Lorsqu'un évènement est réparti, il est identifié par un nom unique (par
+Lorsqu'un évènement est réparti/dispaché, il est identifié par un nom unique (par
 exemple : ``kernel.response``), qu'un quelconque nombre de listeners pourraient
 écouter. Une instance de :class:`Symfony\\Component\\EventDispatcher\\Event`
 est aussi créée et passée à tous les listeners. Comme vous le verrez plus
 tard, l'objet ``Event`` lui-même contient souvent des données à propos de
-l'évènement étant réparti.
+l'évènement qui est réparti.
 
 .. index::
    pair: Dispatcher d'Evènements; Conventions de nommage
@@ -601,7 +601,7 @@ Créer et Répartir un Evènement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En plus d'enregistrer des listeners avec des évènements existants, vous pouvez
-créer et jeter vos propres évènements. Cela est utile lorsque vous créez des
+créer et capturer vos propres évènements. Cela est utile lorsque vous créez des
 bibliothèques tierces et aussi quand vous voulez garder différents composants
 de votre propre système flexibles et découplés.
 
@@ -620,7 +620,7 @@ dans votre application qui sert à définir et documenter votre évènement :
     final class StoreEvents
     {
         /**
-         * L'évènement store.order est jeté chaque fois qu'une commande
+         * L'évènement store.order est capturé chaque fois qu'une commande
          * est créée dans le système.
          *
          * Le listener d'évènement reçoit une instance de
@@ -632,8 +632,8 @@ dans votre application qui sert à définir et documenter votre évènement :
     }
 
 Notez que cette classe ne *fait* rien finalement. Le but de la classe
-``StoreEvents`` est juste d'être un endroit où de les informations à propos
-d'évènements communs peut être centralisées. Notez aussi que la classe
+``StoreEvents`` est juste d'être un endroit où les informations des
+évènements communs peuvent être centralisées. Notez aussi que la classe
 spéciale ``FilterOrderEvent`` sera passée à chaque listener de cet
 évènement.
 
@@ -844,7 +844,7 @@ Arrêter le Déroulement/la Propagation d'un Evènement
 Dans certains cas, cela peut faire du sens pour un listener d'empêcher n'importe
 quel autre listener d'être appelé. En d'autres termes, le listener a besoin
 d'être capable de dire au dispatcher d'arrêter toute propagation de l'évènement
-aux prochains listeners (i.e. de ne plus notifier aucun autre listener). Cela
+aux prochains listeners (c-a-d de ne plus notifier aucun autre listener). Cela
 peut être réalisé via la méthode
 :method:`Symfony\\Component\\EventDispatcher\\Event::stopPropagation` :
 
@@ -901,7 +901,7 @@ Utiliser la Barre d'Outils de Débuggage Web
 
 Dans l'environnement de développement, la barre d'outils de débuggage web
 est disponible en bas de toutes les pages. Elle affiche un bon résumé des
-données de profiling qui vous donne accès instantanément à beaucoup
+données de profiling qui vous donne accès instantanément à plein
 d'informations utiles quand quelque chose ne fonctionne pas comme prévu.
 
 Si le résumé fourni par la Barre d'Outils de Débuggage Web n'est pas suffisant,
@@ -946,7 +946,7 @@ lui associe aussi un jeton ; ce jeton est disponible dans l'en-tête HTTP
     ou lorsque vous voulez récupérer le jeton pour une requête Ajax, utilisez un
     outil comme Firebug pour obtenir la valeur de l'en-tête HTTP ``X-Debug-Token``.
 
-Utilisez la méthode ``find()`` pour accéder aux jetons basé sur quelques critères :
+Utilisez la méthode ``find()`` pour accéder aux jetons basés sur quelques critères :
 
     // récupère les 10 derniers jetons
     $tokens = $container->get('profiler')->find('', '', 10);
@@ -1024,15 +1024,15 @@ Voici par exemple la configuration pour l'environnement de développement :
         ));
 
 Quand l'option ``only-exceptions`` est définie comme ``true``, le profiler
-collecte uniquement des données lorsqu'une exception est jetée par
+collecte uniquement des données lorsqu'une exception est capturée par
 l'application.
 
-Quand l'option ``intercept-redirects`` est définie comme ``true``, le web
+Quand l'option ``intercept-redirects`` est définie à ``true``, le web
 profiler intercepte les redirections et vous donne l'opportunité d'inspecter
 les données collectées avant de suivre la redirection.
 
-Quand l'option ``verbose`` est définie comme ``true``, la Barre d'Outils de
-Débuggage Web affiche beaucoup d'informations. Définir ``verbose`` comme ``false``
+Quand l'option ``verbose`` est définie à ``true``, la Barre d'Outils de
+Débuggage Web affiche beaucoup d'informations. Définir ``verbose`` à ``false``
 cache quelques informations secondaires afin de rendre la barre d'outils plus
 petite.
 
