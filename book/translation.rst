@@ -728,6 +728,8 @@ Vous pouvez également spécifier le domaine de messages et passer quelques variab
 
     {% trans with {'%name%': 'Fabien'} from "app" %}Hello %name%{% endtrans %}
 
+    {% trans with {'%name%': 'Fabien'} from "app" into "fr" %}Hello %name%{% endtrans %}
+
     {% transchoice count with {'%name%': 'Fabien'} from "app" %}
         {0} There is no apples|{1} There is one apple|]1,Inf] There are %count% apples
     {% endtranschoice %}

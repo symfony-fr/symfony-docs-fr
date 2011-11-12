@@ -380,6 +380,8 @@ créer et définir un nouvel objet ``Exception``, ou ne rien faire :
 .. index::
    single: Dispatcher d'Evènements
 
+.. _`book-internals-event-dispatcher`:
+
 Le Dispatcher d'Evènements
 --------------------------
 
@@ -764,8 +766,16 @@ suivre, spécialement pour des dépendances optionnelles.
 
     Si vous utilisez l'injection de dépendances comme nous l'avons fait dans
     les deux exemples ci-dessus, vous pouvez dès lors utiliser le
-    `Composant d'Injection de Dépendances de Symfony2`_ afin de gérer ces objets
-    de manière élégante.
+    `Composant d'Injection de Dépendances de Symfony2`_ afin de gérer l'injection
+    du service ``event_dispatcher`` dans ces objets de manière élégante.
+
+        .. code-block:: yaml
+	
+            # src/Acme/HelloBundle/Resources/config/services.yml
+            services:
+                foo_service:
+                    class: Acme/HelloBundle/Foo/FooService
+                    arguments: [@event_dispatcher]
 
 .. index::
    single: Dispatcher d'Evènements; Souscripteurs d'Evènements
@@ -832,6 +842,13 @@ Le dispatcher va automatiquement souscrire le souscripteur pour chaque
 retourne un tableau indexé par les noms des évènements et dont les valeurs
 sont soit le nom de la méthode à appeler, soit un tableau composé de noms
 de méthodes à appeler et une priorité.
+
+.. tip::
+
+    Si vous utilisez le framework MVC Symfony2, les souscripteurs peuvent être enregistrés
+    via votre :ref:`configuration <dic-tags-kernel-event-subscriber>`. Petit bonus
+    en plus, les objets du souscripteur sont instanciés seulement lorsque c'est
+    nécessaire.
 
 .. index::
    single: Dispatcher d'Evènements; Arrêter la propagation d'un évènement

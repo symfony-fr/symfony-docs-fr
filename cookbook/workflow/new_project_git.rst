@@ -33,13 +33,13 @@ git repository:
         /app/cache/*
         /app/logs/*
         /vendor/  
-        /app/config/parameters.ini
+        /app/config/parameters.yml
 
-4. Copy ``app/config/parameters.ini`` to ``app/config/parameters.ini.dist``.
-   The ``parameters.ini`` file is ignored by git (see above) so that machine-specific
-   settings like database passwords aren't committed. By creating the ``parameters.ini.dist``
+4. Copy ``app/config/parameters.yml`` to ``app/config/parameters.yml.dist``.
+   The ``parameters.yml`` file is ignored by git (see above) so that machine-specific
+   settings like database passwords aren't committed. By creating the ``parameters.yml.dist``
    file, new developers can quickly clone the project, copy this file to
-   ``parameters.ini``, customize it, and start developing.
+   ``parameters.yml``, customize it, and start developing.
 
 5. Initialize your git repository:
 
@@ -115,7 +115,12 @@ script to ensure that all of the needed vendor libraries are downloaded.
     There is also a ``php bin/vendors update`` command, but this has nothing
     to do with upgrading your project and you will normally not need to use
     it. This command is used to freeze the versions of all of your vendor libraries
-    by reading their current state and recording it into the ``deps.lock`` file.
+    by updating them to the version specified in ``deps`` and recording it
+    into the ``deps.lock`` file.
+
+    Additionally, if you would simply like to update the ``deps.lock`` file
+    to what you already have installed, then you can simply run ``php bin/vendors lock``
+    to store the appropriate git SHA identifiers in the deps.lock file.
 
 Vendors and Submodules
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -140,7 +145,7 @@ to host private repositories.
 
 Alternatively, you can store your git repository on any server by creating
 a `barebones repository`_ and then pushing to it. One library that helps
-manage this is `Gitosis`_.
+manage this is `Gitolite`_.
 
 .. _`git`: http://git-scm.com/
 .. _`Symfony2 Standard Edition`: http://symfony.com/download
@@ -148,4 +153,4 @@ manage this is `Gitosis`_.
 .. _`git submodules`: http://book.git-scm.com/5_submodules.html
 .. _`GitHub`: https://github.com/
 .. _`barebones repository`: http://progit.org/book/ch4-4.html
-.. _`Gitosis`: https://github.com/res0nat0r/gitosis
+.. _`Gitolite`: https://github.com/sitaramc/gitolite

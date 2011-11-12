@@ -100,7 +100,7 @@ par défaut. Vous pouvez même `ajouter vos propres extensions`_ à Twig si beso
 .. tip::
 
     Créer une nouvelle extension Twig est aussi simple que de créer un nouveau
-    service et de le tagger avec ``twig.extension`` :ref:`tag<book-service-container-tags>`.
+    service et de le tagger avec ``twig.extension`` :ref:`tag<reference-dic-tags-twig-extension>`.
 
 Comme vous le verrez tout au long de la documentation, Twig supporte aussi les
 fonctions, et de nouvelles fonctions peuvent être ajoutées. Par exemple, la fonction
@@ -504,7 +504,7 @@ vous souhaiterez réutiliser.
     .. code-block:: html+jinja
 
         {# src/Acme/ArticleBundle/Resources/views/Article/articleDetails.html.twig #}
-        <h1>{{ article.title }}</h1>
+        <h2>{{ article.title }}</h2>
         <h3 class="byline">by {{ article.authorName }}</h3>
 
         <p>
@@ -612,7 +612,7 @@ Le template ``recentList`` est simplement le suivant :
     .. code-block:: php
 
         <!-- src/Acme/ArticleBundle/Resources/views/Article/recentList.html.php -->
-        <?php foreach ($articles in $article): ?>
+        <?php foreach ($articles as $article): ?>
             <a href="/article/<?php echo $article->getSlug() ?>">
                 <?php echo $article->getTitle() ?>
             </a>
@@ -753,7 +753,7 @@ faisons les liens vers les articles correctement :
     .. code-block:: php
 
         <!-- src/Acme/ArticleBundle/Resources/views/Article/recentList.html.php -->
-        <?php foreach ($articles in $article): ?>
+        <?php foreach ($articles as $article): ?>
             <a href="<?php echo $view['router']->generate('article_show', array('slug' => $article->getSlug()) ?>">
                 <?php echo $article->getTitle() ?>
             </a>
@@ -880,6 +880,14 @@ en ajoutant une nouvelle balise de feuille de style dans ce bloc. Bien sûr,
 puisque nous voulons ajouter du contenu au bloc parent (et non le *remplacer*),
 nous devons utiliser la fonction Twig ``parent()`` pour inclure le bloc
 ``stylesheets`` du template de base.
+
+Vous pouvez aussi inclure des ressources situées dans le dossier ``Resources/public``
+de vos bundles. Vous devrez lancer la commande ``php app/console assets:install target [--symlink]`` 
+pour placer les fichiers dans le bon répertoire ("web" par défaut)
+
+.. code-block:: html+jinja
+
+   <link href="{{ asset('bundles/acmedemo/css/contact.css') }}" type="text/css" rel="stylesheet" />
 
 Le résultat final est une page qui inclut à la fois la feuille de style
 ``main.css`` et ``contact.css``.
@@ -1264,6 +1272,6 @@ En savoir plus grâce au Cookbook
 .. _`Symfony2Bundles.org`: http://symfony2bundles.org
 .. _`Cross Site Scripting`: http://en.wikipedia.org/wiki/Cross-site_scripting
 .. _`Output Escaping`: http://twig.sensiolabs.org
-.. _`tags`: http://twig.sensiolabs.org/doc/templates.html#list-of-control-structures
-.. _`filtres`: http://twig.sensiolabs.org/doc/templates.html#list-of-built-in-filters
+.. _`tags`: http://twig.sensiolabs.org/doc/tags/index.html
+.. _`filtres`: http://twig.sensiolabs.org/doc/templates.html#filters
 .. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/advanced.html

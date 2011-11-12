@@ -45,7 +45,7 @@ managers that use this connection.
                 tags:
                     - { name: doctrine.event_listener, event: postSave, connection: default }
             my.subscriber:
-                class: Acme\SearchBundle\Listener\SearchIndexerSubsriber
+                class: Acme\SearchBundle\Listener\SearchIndexerSubscriber
                 tags:
                     - { name: doctrine.event_subscriber, connection: default }
 
@@ -68,7 +68,7 @@ managers that use this connection.
                 <service id="my.listener2" class="Acme\SearchBundle\Listener\SearchIndexer2">
                     <tag name="doctrine.event_listener" event="postSave" connection="default" />
                 </service>
-                <service id="my.subscriber" class="Acme\SearchBundle\Listener\SearchIndexerSubsriber">
+                <service id="my.subscriber" class="Acme\SearchBundle\Listener\SearchIndexerSubscriber">
                     <tag name="doctrine.event_subscriber" connection="default" />
                 </service>
             </services>
@@ -85,6 +85,7 @@ a ``postSave`` method, which will be called when the event is thrown::
     namespace Acme\SearchBundle\Listener;
     
     use Doctrine\ORM\Event\LifecycleEventArgs;
+    use Acme\StoreBundle\Entity\Product;
     
     class SearchIndexer
     {
@@ -94,7 +95,7 @@ a ``postSave`` method, which will be called when the event is thrown::
             $entityManager = $args->getEntityManager();
             
             // perhaps you only want to act on some "Product" entity
-            if ($entity instanceof Acme\StoreBundle\Entity\Product) {
+            if ($entity instanceof Product) {
                 // do something with the Product
             }
         }

@@ -257,7 +257,7 @@ D'abord, activez le formulaire de connexion (« form login ») de votre pare-feu
 
     .. code-block:: yaml
     
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             firewalls:
                 secured_area:
@@ -269,7 +269,7 @@ D'abord, activez le formulaire de connexion (« form login ») de votre pare-feu
 
     .. code-block:: xml
     
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <srv:container xmlns="http://symfony.com/schema/dic/security"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
@@ -285,7 +285,7 @@ D'abord, activez le formulaire de connexion (« form login ») de votre pare-feu
     
     .. code-block:: php
     
-    	// app/config/config.php
+    	// app/config/security.php
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'secured_area' => array(
@@ -755,7 +755,7 @@ qu'ajouter une nouvelle entrée access_control :
     .. code-block:: xml
 
             <access-control>
-                <rule path="^/_internal" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel: https />
+                <rule path="^/_internal" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="https" />
             </access-control>
 
     .. code-block:: php
@@ -776,7 +776,7 @@ l'autorisation dans un contrôleur :
 
 .. code-block:: php
 
-    use Symfony\Component\Security\Core\Exception\AccessDeniedException
+    use Symfony\Component\Security\Core\Exception\AccessDeniedException;
     // ...
     public function helloAction($name)
     {
@@ -1162,6 +1162,15 @@ récupéré via le service ``security.context``. Depuis un controleur, cela ress
         $user = $this->get('security.context')->getToken()->getUser();
     }
 
+Dans un contrôleur, vous pouvez utiliser le raccourci suivant :
+	
+.. code-block:: php
+
+    public function indexAction()
+    {
+        $user = $this->getUser();
+    }
+
 .. note::
 
     Les utilisateurs anonymes sont techniquement authentifiés, ce qui veut dire que la méthode
@@ -1529,7 +1538,7 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
     public function indexAction()
     {
         // show different content to admin users
-        if($this->get('security.context')->isGranted('ADMIN')) {
+        if ($this->get('security.context')->isGranted('ADMIN')) {
             // Load admin content here
         }
         // load other regular content here
