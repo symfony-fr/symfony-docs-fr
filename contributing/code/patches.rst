@@ -4,6 +4,63 @@ Submitting a Patch
 Patches are the best way to provide a bug fix or to propose enhancements to
 Symfony2.
 
+Check List
+----------
+
+The purpose of the check list is to ensure that contributions may be reviewed
+without needless feedback loops to ensure that your contributions can be included
+into Symfony2 as quickly as possible.
+
+The pull request title should be prefixed with the component name or bundle
+it relates to.
+
+.. code-block:: text
+
+    [Component] Short title description here.
+
+An example title might look like this:
+
+.. code-block:: text
+
+    [Form] Add selectbox field type.
+
+.. tip::
+
+    Please use the title with "[WIP]" if the submission is not yet completed
+    or the tests are incomplete or not yet passing.
+
+All pull requests should include the following template in the request
+description:
+
+.. code-block:: text
+
+    Bug fix: [yes|no]
+    Feature addition: [yes|no]
+    Backwards compatibility break: [yes|no]
+    Symfony2 tests pass: [yes|no]
+    Fixes the following tickets: [comma separated list of tickets fixed by the PR]
+    Todo: [list of todos pending]
+    
+An example submission could now look as follows:
+
+.. code-block:: text
+
+    Bug fix: no
+    Feature addition: yes
+    Backwards compatibility break: no
+    Symfony2 tests pass: yes
+    Fixes the following tickets: -
+    Todo: -
+
+Thank you for including the filled out template in your submission!
+
+.. tip::
+
+    All feature addition's should be sent to the "master" branch, while all
+    bug fixes should be sent to the oldest still active branch. Furthermore
+    submissions should, as a rule of thumb, not break backwards compatibility.
+
+
 Initial Setup
 -------------
 

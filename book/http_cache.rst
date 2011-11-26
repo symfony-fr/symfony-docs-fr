@@ -933,7 +933,7 @@ Dans cet exemple, la page a une espèrance de vie de 10 minutes en
 cache. Dans un deuxième temps, incluons l'élément relatif à
 l'actualité dans un template via une action embarquée. Ceci sera
 réalisé grâce au « helper » ``render`` (voir la documentation sur
-`templating-embedding-controller` pour plus de détails).
+:ref:`templating-embedding-controller` pour plus de détails).
 
 Comme le contenu embarqué provient d'une autre page (ou d'un autre
 contrôleur), Symfony2 utilise le « helper » standard ``render`` pour
@@ -1084,11 +1084,11 @@ définie trop loin dans le futur.
 
 .. note::
 
-    C'est aussi parce qu'il n'y a pas de mécanisme d'invalidation
-    qu'on peut utiliser nimporte quel reverse proxy sans rien changer
-    au code de l'application.
+    Puisque l'invalidation est un sujet spécifique à chaque type de reverse proxy,
+    si vous ne vous occupez pas de l'invalidation, vous pouvez passer d'un reverse
+    proxy à l'autre sans changer quoique ce soit au code de votre application.
 
-Au fait, tous les « reverse proxies » fournissent un moyen de purger les
+En fait, tous les « reverse proxies » fournissent un moyen de purger les
 données du cache mais il faut l'éviter autant que possible. Le moyen
 le plus standard est de purger le cache pour une URL donnée en
 l'appelant avec la méthode HTTP spéciale ``PURGE``.
@@ -1105,7 +1105,7 @@ Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HT
             }
 
             $response = new Response();
-            if (!$this->store->purge($request->getUri())) {
+            if (!$this->getStore()->purge($request->getUri())) {
                 $response->setStatusCode(404, 'Not purged');
             } else {
                 $response->setStatusCode(200, 'Purged');

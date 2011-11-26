@@ -670,7 +670,7 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tard
         // src/Acme/BlogBundle/Entity/User.php
         namespace Acme\BlogBundle\Entity;
 
-        use Symfony\Component\Security\Core\User\UserInterface
+        use Symfony\Component\Security\Core\User\UserInterface;
         use Symfony\Component\Validator\Constraints as Assert;
 
         class User implements UserInterface

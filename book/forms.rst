@@ -622,6 +622,20 @@ qui rend le label, les erreurs et le widget HTML de chaque champ dans une balise
 ``div`` par défaut. Dans la section :ref:`form-theming`, vous apprendrez comment
 le rendu de ``form_row`` peut être personnalisé à différents niveaux.
 
+.. tip::
+
+    Vous pouvez accéder à la donnée courante de votre formulaire via ``form.vars.value``:
+
+    .. configuration-block::
+
+        .. code-block:: jinja
+
+            {{ form.vars.value.task }}
+
+        .. code-block:: html+php
+
+            <?php echo $view['form']->get('value')->getTask() ?>
+
 .. index::
    single: Formulaires; Rendre chaque champ à la main
 
@@ -772,6 +786,8 @@ construire rapidement un objet formulaire dans le contrôleur :
 Placer la logique du formulaire dans sa propre classe signifie que le formulaire
 peut être réutilisé facilement ailleurs dans votre projet. C'est la meilleure
 manière de créer des formulaires, mais le choix final vous revient.
+
+.. _book-forms-data-class:
 
 .. sidebar:: Définir la ``data_class``
 
@@ -969,9 +985,13 @@ que vous souhaitez.
 Imbriquer une Collection de Formulaires
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi imbriquer une collection de formulaires dans un formulaire.
-Cela est possible grâce au type de champ ``collection``. Pour plus d'informations,
-voir la :doc:`référence du type de champ collection</reference/forms/types/collection>`.
+Vous pouvez aussi imbriquer une collection de formulaire dans un formulaire
+(imaginez un formulaire ``Catégorie`` avec plusieurs sous-formulaires ``Produit``).
+Cela peut être accompli en utilisant le type de champ ``collection``.
+
+
+Pour plus d'informations, lisez le chapitre du cookbook ":doc:`/cookbook/form/form_collections`"
+et le chapitre sur le type de champ :ref:`collection</reference/forms/types/collection>`.
 
 .. index::
    single: Formulaires; Habillage
@@ -1337,6 +1357,130 @@ votre projet. Pour plus d'informations, voir la section de
     L'option ``intention`` est optionnelle mais améliore grandement la sécurité
     du jeton généré en le rendant différent pour chaque formulaire.
 
+.. index:
+   single: Forms; With no class
+
+Utiliser un formulaire sans classe
+----------------------------------
+
+Dans la plupart des cas, un formulaire est associé à un objet, et les champs du 
+formulaire affichent et stockent leur données dans les propriétés d'un objet. C'est
+exactement ce que vous avez vu jusqu'ici dans ce chapitre avec la classe `Task`.
+
+Mais parfois, vous voudrez juste utiliser un formulaire sans une classe, et obtenir
+un tableau des données soumises. C'est en fait très facile::
+
+    // Assurez vous d'avoir importé le namespace Request namespace en haut de la classe
+    use Symfony\Component\HttpFoundation\Request
+    // ...
+
+    public function contactAction(Request $request)
+    {
+        $defaultData = array('message' => 'Type your message here');
+        $form = $this->createFormBuilder($defaultData)
+            ->add('name', 'text')
+            ->add('email', 'email')
+            ->add('message', 'textarea')
+            ->getForm();
+        
+            if ($request->getMethod() == 'POST') {
+                $form->bindRequest($request);
+
+                // les données sont un tableau avec les clés "name", "email", et "message"
+                $data = $form->getData();
+            }
+        
+        // ... rend le formulaire
+    }
+
+Par défaut, en fait, un formulaire part du principe que vous voulez travailler avec
+un tableau de données plutôt qu'avec un objet.Il y a exactement deux façons de changer
+ce comportement et d'associer le formulaire avec un objet à la place:
+
+1. Passez un objet lors de la création du formulaire (comme premier argument de ``createFormBuilder``
+   ou deuxième argument de ``createForm``);
+
+2. Définissez l'option ``data_class`` de votre formulaire.
+
+Si vous ne faites *pas* l'un ou l'autre, alors le formulaire retournera les données
+dans un tableau. Dans cet exemple, puisque ``$defaultData`` n'est pas un objet (et
+que l'option ``data_class`` n'est pas définie), ``$form->getData()`` retournera
+finalement un tableau.
+
+.. tip::
+
+    Vous pouvez également accéder directement aux valeurs POST (dans ce cas "name")
+    par le biais de l'objet Request, comme ceci :
+
+    .. code-block:: php
+
+        $this->get('request')->request->get('name');
+
+    Notez cependant que, dans la plupart des cas, utiliser la méthode getData() est le
+    meilleur choix, puisqu'elle retourne la donnée (souvent un objet) après qu'elle
+    soit transformée par le framework.
+
+
+Ajouter la Validation
+~~~~~~~~~~~~~~~~~~~~~
+
+La seule pièce manquante est la validation. D'habitude, quand vous appelez ``$form->isValid()``,
+l'objet est validé en parcourant les contraintes que vous appliquez à sa classe.
+Mais sans classe, comment ajouter des contraintes aux données de votre formulaire?
+
+La réponse est de définir les contraintes vous-même, et les passer au formulaire.
+L'approche globale est un peu plus expliquée dans le :ref:`chapitre validation<book-validation-raw-values>`,
+mais voici un petit exemple::
+
+    // importez les namespaces en haut de votre classe
+    use Symfony\Component\Validator\Constraints\Email;
+    use Symfony\Component\Validator\Constraints\MinLength;
+    use Symfony\Component\Validator\Constraints\Collection;
+
+    $collectionConstraint = new Collection(array(
+        'name' => new MinLength(5),
+        'email' => new Email(array('message' => 'Invalid email address')),
+    ));
+
+    // créez un formulaire, sans valeurs par défaut, et passez les contraintes
+    $form = $this->createFormBuilder(null, array(
+        'validation_constraint' => $collectionConstraint,
+    ))->add('email', 'email')
+        // ...
+    ;
+
+Maintenant, quand vous appelez `$form->isValid()`, les contraintes configurées sont
+appliquées aux données de votre formulaire. Si vous utilisez une classe de formulaire,
+surchargez la méthode ``getDefaultOptions`` pour les spécifier::
+
+    namespace Acme\TaskBundle\Form\Type;
+
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\Validator\Constraints\Email;
+    use Symfony\Component\Validator\Constraints\MinLength;
+    use Symfony\Component\Validator\Constraints\Collection;
+
+    class ContactType extends AbstractType
+    {
+        // ...
+
+        public function getDefaultOptions(array $options)
+        {
+            $collectionConstraint = new Collection(array(
+                'name' => new MinLength(5),
+                'email' => new Email(array('message' => 'Invalid email address')),
+            ));
+        
+            $options['validation_constraint'] = $collectionConstraint;
+        }
+    }
+
+Maintenant, vous avez la flexibilité de créer des formulaires - avec validation -
+qui retourne un tableau de données plutôt qu'un objet. Dans la plupart des cas, il
+est préférable - et certainement plus robuste - d'associer le formulaire à un objet.
+Mais pour les formulaires simple, cette approche est suffisante. 
+
 Réflexions finales
 ------------------
 
@@ -1365,6 +1509,7 @@ En savoir plus grâce au Cookbook
 * :doc:`Référence du Champ Fichier </reference/forms/types/file>`
 * :doc:`Créer des Types de Champ Personnalisés </cookbook/form/create_custom_field_type>`
 * :doc:`/cookbook/form/form_customization`
+* :doc:`/cookbook/form/dynamic_form_generation`
 
 .. _`Composant Formulaire Symfony2`: https://github.com/symfony/Form
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php

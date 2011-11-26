@@ -325,6 +325,8 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
     pas très utile généralement, il est néanmoins disponible en tant qu'argument
     du contrôleur au même titre que les autres.
 
+.. _book-controller-request-argument:
+
 La ``Requête`` en tant qu'argument du Contrôleur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

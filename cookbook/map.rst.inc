@@ -33,6 +33,8 @@
 
   * :doc:`/cookbook/form/form_customization`
   * :doc:`/cookbook/form/create_custom_field_type`
+  * :doc:`/cookbook/form/dynamic_form_generation`
+  * :doc:`/cookbook/form/form_collections`
   * :doc:`/cookbook/validation/custom_constraint`
   * (doctrine) :doc:`/cookbook/doctrine/file_uploads`
 
@@ -42,12 +44,14 @@
   * :doc:`/cookbook/configuration/external_parameters`
   * :doc:`/cookbook/service_container/factories`
   * :doc:`/cookbook/service_container/parentservices`
+  * :doc:`/cookbook/service_container/scopes`
   * :doc:`/cookbook/configuration/pdo_session_storage`
 
 * **Bundles**
 
   * :doc:`/cookbook/bundles/best_practices`
   * :doc:`/cookbook/bundles/inheritance`
+  * :doc:`/cookbook/bundles/override`
   * :doc:`/cookbook/bundles/extension`
 
 * **Emailing**
@@ -76,6 +80,7 @@
   * :doc:`/cookbook/security/entity_provider`
   * :doc:`/cookbook/security/custom_provider`
   * :doc:`/cookbook/security/custom_authentication_provider`
+  * :doc:`/cookbook/security/target_path`
 
 * **Caching**
 
@@ -83,6 +88,7 @@
 
 * **Templating**
 
+  * :doc:`/cookbook/templating/global_variables`
   * :doc:`/cookbook/templating/PHP`
 
 * **Tools, Logging and Internals**

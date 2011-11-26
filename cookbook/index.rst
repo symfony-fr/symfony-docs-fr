@@ -27,16 +27,20 @@ Cookbook
 
     form/form_customization
     form/create_custom_field_type
+    form/dynamic_form_generation
+    form/form_collections
     validation/custom_constraint
 
     configuration/environments
     configuration/external_parameters
     service_container/factories
     service_container/parentservices
+    service_container/scopes
     configuration/pdo_session_storage
 
     bundles/best_practices
     bundles/inheritance
+    bundles/override
     bundles/extension
 
     email
@@ -59,9 +63,11 @@ Cookbook
     security/entity_provider
     security/custom_provider
     security/custom_authentication_provider
+    security/target_path
 
     cache/varnish
 
+    templating/global_variables
     templating/PHP
 
     tools/autoloader

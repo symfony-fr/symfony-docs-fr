@@ -47,11 +47,11 @@ Configurer la base de données
 
 Avant que vous ne soyez réellement prêt, vous devez configurer les paramètres
 de connexion à votre base de données. Par convention, ces paramètres sont
-habituellement placés dans le fichier ``app/config/parameters.ini`:
+habituellement placés dans le fichier ``app/config/parameters.yml`:
 
-.. code-block:: ini
+.. code-block:: yaml
 
-    ;app/config/parameters.ini
+    #app/config/parameters.yml
     [parameters]
         database_driver   = pdo_mysql
         database_host     = localhost
@@ -61,7 +61,7 @@ habituellement placés dans le fichier ``app/config/parameters.ini`:
 
 .. note::
 
-    Définir la configuration dans ``parametres.ini`` est juste une convention.
+    Définir la configuration dans ``parameters.yml`` est juste une convention.
     Les paramètres definis dans ce fichiers sont référencés dans le fichier de
     configuration principale au moment de configurer Doctrine :
     

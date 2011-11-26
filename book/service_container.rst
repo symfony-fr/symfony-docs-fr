@@ -239,6 +239,63 @@ tiers de haute qualité utiliseront *toujours* les paramètres puisqu'ils renden
 stocké dans le conteneur plus configurable. Pour les services dans votre application,
 cependant, vous pouvez ne pas avoir besoin de la flexibilité des paramètres.  
 
+Tableaux de paramètres
+~~~~~~~~~~~~~~~~~~~~~~
+
+Les paramètres ne sont pas obligatoirement des chaines de caractères, ils peuvent aussi
+être des tableaux. Pour le format XML, vous devez utiliser l'attribut type="collection"
+pour tous les paramètres qui sont des tableaux.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/config.yml
+        parameters:
+            my_mailer.gateways:
+                - mail1
+                - mail2
+                - mail3
+            my_multilang.language_fallback:
+                en:
+                    - en
+                    - fr
+                fr:
+                    - fr
+                    - en
+
+    .. code-block:: xml
+
+        <!-- app/config/config.xml -->
+        <parameters>
+            <parameter key="my_mailer.gateways" type="collection">
+                <parameter>mail1</parameter>
+                <parameter>mail2</parameter>
+                <parameter>mail3</parameter>
+            </parameter>
+            <parameter key="my_multilang.language_fallback" type="collection">
+                <parameter key="en" type="collection">
+                    <parameter>en</parameter>
+                    <parameter>fr</parameter>
+                </parameter>
+                <parameter key="fr" type="collection">
+                    <parameter>fr</parameter>
+                    <parameter>en</parameter>
+                </parameter>
+            </parameter>
+        </parameters>
+
+    .. code-block:: php
+
+        // app/config/config.php
+        use Symfony\Component\DependencyInjection\Definition;
+
+        $container->setParameter('my_mailer.gateways', array('mail1', 'mail2', 'mail3'));
+        $container->setParameter('my_multilang.language_fallback',
+                                 array('en' => array('en', 'fr'),
+                                       'fr' => array('fr', 'en'),
+                                ));
+
 Importer d'autres Ressources de Configuration de Conteneur
 ----------------------------------------------------------
 
