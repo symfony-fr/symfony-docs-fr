@@ -171,7 +171,7 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
 
     # app/config/config.yml
     imports:
-        - { resource: parameters.ini }
+        - { resource: parameters.yml }
         - { resource: security.yml }
 
     framework:

@@ -150,7 +150,7 @@ Si vous insérez une valeur dans la propriété ``name``, le message de succès va a
 .. tip::
 
 	La plupart du temps, vous n'aurez pas à interagir directement avec le
-        service validator ou besoin de vous inquiéter concernant l'affichage des erreurs.
+        service ``validator`` ou besoin de vous inquiéter concernant l'affichage des erreurs.
         La plupart du temps, vous allez utiliser la validation indirectement lors
         de la soumission des données du formulaire. Pour plus d'informations,
         consultez le :ref:`book-validation-forms`.
@@ -304,8 +304,10 @@ Contraintes supportées
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Symfony2 est fourni avec un grand nombre des contraintes les plus utiles habituellement.
-La liste complète des contraintes ainsi que des détails sont disponibles dans le
-chapitre :doc:`constraints reference section</reference/constraints>`.
+
+.. include:: /reference/constraints/map.rst.inc
+
+Vous pouvez aussi créer vos propres contraintes. Ce sujet est abordé dans l'article «:doc:`/cookbook/validation/custom_constraint`» du cookbook.
 
 .. index::
    single: Validation; Constraints configuration
@@ -319,7 +321,7 @@ Certaines contraintes, comme :doc:`NotBlank</reference/constraints/NotBlank>`,
 sont simples alors que d'autres, comme la contrainte :doc:`Choice</reference/constraints/Choice>`
 ont plusieurs options de configuration disponibles. Supposons que la classe
 ``Author`` a une autre propriété, ``gender`` qui peut prendre comme valeur
-« male » ou « female » :
+« homme » ou « femme » :
 
 .. configuration-block::
 
@@ -329,7 +331,7 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
         Acme\BlogBundle\Entity\Author:
             properties:
                 gender:
-                    - Choice: { choices: [male, female], message: Choose a valid gender. }
+                    - Choice: { choices: [homme, femme], message: Choose a valid gender. }
 
     .. code-block:: php-annotations
 
@@ -340,7 +342,7 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
         {
             /**
              * @Assert\Choice(
-             *     choices = { "male", "female" },
+             *     choices = { "homme", "femme" },
              *     message = "Choose a valid gender."
              * )
              */
@@ -359,8 +361,8 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
                 <property name="gender">
                     <constraint name="Choice">
                         <option name="choices">
-                            <value>male</value>
-                            <value>female</value>
+                            <value>homme</value>
+                            <value>femme</value>
                         </option>
                         <option name="message">Choose a valid gender.</option>
                     </constraint>
@@ -382,7 +384,7 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('gender', new Choice(array(
-                    'choices' => array('male', 'female'),
+                    'choices' => array('homme', 'femme'),
                     'message' => 'Choose a valid gender.',
                 )));
             }
@@ -403,7 +405,7 @@ peuvent être spécifiées de cette manière.
         Acme\BlogBundle\Entity\Author:
             properties:
                 gender:
-                    - Choice: [male, female]
+                    - Choice: [homme, femme]
 
     .. code-block:: php-annotations
 
@@ -413,7 +415,7 @@ peuvent être spécifiées de cette manière.
         class Author
         {
             /**
-             * @Assert\Choice({"male", "female"})
+             * @Assert\Choice({"homme", "femme"})
              */
             protected $gender;
         }
@@ -429,8 +431,8 @@ peuvent être spécifiées de cette manière.
             <class name="Acme\BlogBundle\Entity\Author">
                 <property name="gender">
                     <constraint name="Choice">
-                        <value>male</value>
-                        <value>female</value>
+                        <value>homme</value>
+                        <value>femme</value>
                     </constraint>
                 </property>
             </class>
@@ -448,7 +450,7 @@ peuvent être spécifiées de cette manière.
 
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addPropertyConstraint('gender', new Choice(array('male', 'female')));
+                $metadata->addPropertyConstraint('gender', new Choice(array('homme', 'femme')));
             }
         }
 
@@ -764,6 +766,53 @@ comme deuxième argument de la méthode ``validate()`` ::
 Bien sûr, vous travaillerez bien souvent indirectement avec la validation via la bibliothèque de
 formulaire. Pour plus d'informations sur la façon d'utiliser les groupes de validation
 à l'intérieur des formulaires, voir :ref:`book-forms-validation-groups`.
+
+.. index::
+   single: Validation; Validating raw values
+
+.. _book-validation-raw-values:
+
+Valider des valeurs et des tableaux
+-----------------------------------
+
+Jusqu'ici, vous avez vu comment valider des objets entiers. Mais souvent,
+vous voudrez juste valider une simple valeur, comme par exemple vérifier qu'une
+chaine de caractères est une adresse email valide. C'est en fait très facile à
+faire. Dans un contrôleur, ça ressemble à ceci::
+
+    // Ajouter ceci en haut de votre classe
+    use Symfony\Component\Validator\Constraints\Email;
+    
+    public function addEmailAction($email)
+    {
+        $emailConstraint = new Email();
+        // toutes les "options" de contrainte sont définies comme suit
+        $emailConstraint->message = 'Invalid email address';
+
+        // utiliser le validator pour valider la valeur
+        $errorList = $this->get('validator')->validateValue($email, $emailConstraint);
+
+        if (count($errorList) == 0) {
+            // c'est une adresse valide, faire quelque chose
+        } else {
+            // ce n'est *pas* une adresse valide
+            $errorMessage = $errorList[0]->getMessage()
+            
+            // faire quelque chose avec l'erreur
+        }
+        
+        // ...
+    }
+
+En appelant ``validateValue`` du validator, vous pouvez passer une valeur brute et
+l'objet contrainte dont vous voulez valider la valeur. Une liste complète des
+contraintes disponibles - ainsi que le nom de classe complet de chaque contrainte -
+est disponible dans le chapitre :doc:`contraintes</reference/constraints>`.
+
+La méthode ``validateValue`` retourne un objet :class:`Symfony\\Component\\Validator\\ConstraintViolationList`
+qui se comporte comme un tableau d'erreurs. Chaque erreur de la collection est un
+objet :class:`Symfony\\Component\\Validator\\ConstraintViolation`, qui contient
+le message d'erreur dans sa méthode `getMessage`.
 
 Le mot de la fin
 ----------------
