@@ -63,7 +63,7 @@ habituellement placés dans le fichier ``app/config/parameters.yml`:
 
     Définir la configuration dans ``parameters.yml`` est juste une convention.
     Les paramètres definis dans ce fichiers sont référencés dans le fichier de
-    configuration principale au moment de configurer Doctrine :
+    configuration principal au moment de configurer Doctrine :
     
     .. code-block:: yaml
     
@@ -92,7 +92,7 @@ demander de créer votre base de données :
 Créer une classe entité
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Supposons que vous créez une application affichant des produits.
+Supposons que vous créiez une application affichant des produits.
 
 Sans même pensez à Doctrine ou à votre base de données, vous savez déjà que
 vous aurez besoin d'un objet ``Product`` représentant ces derniers. Créez
@@ -237,7 +237,7 @@ dans la classe ``Product`` avec les annotations :
     en se basant sur le nom de la classe de l'entité.
 
 
-    Doctrine vous permet de choisir parmi une très grande variété de types de champs
+Doctrine vous permet de choisir parmi une très grande variété de types de champs
 chacun avec ses propres options. Pour obtenir des informations sur les types de champs
 disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
 
@@ -315,17 +315,6 @@ qui contient des informations de mapping Doctrine) d'un bundle ou d'un namespace
     Les getters et setters sont générés ici seulement parce que vous en aurez besoin
     pour intéragir avec vos objets PHP.
 
-.. tip::
-
-    Vous pouvez aussi générer toutes les entités connues (c.à.d n'importe quelle 
-    classe PHP ayant des informations de mapping pour Doctrine) d'un bundle ou
-    d'un espace de nom entier.
-
-    .. code-block:: bash
-
-        php app/console doctrine:generate:entities AcmeStoreBundle
-        php app/console doctrine:generate:entities Acme
-
 Créer les Tables et le Schema
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -386,7 +375,7 @@ suivante au ``DefaultController`` du bundle :
         $em->persist($product);
         $em->flush();
 
-        return new Response('Created product id '.$product->getId());
+        return new Response('Produit créé avec id '.$product->getId());
     }
 
 .. note::
@@ -406,7 +395,7 @@ Décortiquons cet exemple :
 * **ligne 14** La méthode ``persist()`` dit à Doctrine de « gérer » l'objet ``product``.
   Cela ne crée pas vraiment de requête dans la base de données (du moins pas encore).
 
-* **ligne 15** Quand la méthode ``flush()`` est apelée, Doctrine regarde dans tous 
+* **ligne 15** Quand la méthode ``flush()`` est appelée, Doctrine regarde dans tous 
   les objets qu'il gère pour savoir si ils ont besoin d'être persistés dans la base
   de données. Dans cet exemple, l'objet ``$product`` n'a pas encore été persisté,
   le gestionnaire d'entités éxecute donc une requête ``INSERT`` et une ligne est créée dans
@@ -415,7 +404,7 @@ Décortiquons cet exemple :
 .. note::
 
   En fait, comme Doctrine a connaissance de toutes vos entités gérées, lorsque
-  vous apellez la méthode ``flush()``, il calcule un ensemble de changement
+  vous appelez la méthode ``flush()``, il calcule un ensemble de changements
   global et éxecute la ou les requêtes les plus efficaces possibles. Par exemple,
   si vous persistez un total de 100 objets ``Product`` et que vous appelez ensuite
   la méthode ``flush()``, Doctrine créera une *unique* requête préparée et la
@@ -430,7 +419,7 @@ de données.
 .. tip::
 
     Doctrine fournit une bibliothèque qui vous permet de charger de manière 
-    automatisée des données de test dans votre projet (c.à.d, des « données d'installation »).
+    automatisée des données de test dans votre projet (des « fixtures »).
     Pour plus d'informations, voir :doc:`/bundles/DoctrineFixturesBundle/index`.
 
 Récupérer des objets de la base de données
@@ -438,7 +427,9 @@ Récupérer des objets de la base de données
 
 Récupérer un objet depuis la base de données est encore plus facile. Par exemple,
 supposons que vous avez configuré une route pour afficher un ``Product`` spécifique
-en se basant sur la valeur de son ``id`` ::
+en se basant sur la valeur de son ``id`` :
+
+.. code-block:: php
 
     public function showAction($id)
     {
@@ -447,17 +438,19 @@ en se basant sur la valeur de son ``id`` ::
             ->find($id);
         
         if (!$product) {
-            throw $this->createNotFoundException('No product found for id '.$id);
+            throw $this->createNotFoundException('Produit non trouvé avec id '.$id);
         }
 
-        // do something, like pass the $product object into a template
+        // faire quelque chose comme envoyer l'objet $product à un template
     }
 
 Lorsque vous requêtez pour un type particulier d'objet, vous utiliserez toujours
 ce qui est connu sous le nom de « dépôt » (ou « repository »). Dites vous qu'un
 dépôt est une classe PHP dont le seul travail est de vous aider à récupérer 
 des entités d'une certaine classe. Vous pouvez accéder au dépôt d'une classe
-d'entités avec ::
+d'entités avec :
+
+.. code-block:: php
 
     $repository = $this->getDoctrine()
         ->getRepository('AcmeStoreBundle:Product');
@@ -469,19 +462,21 @@ d'entités avec ::
     (c.à.d ``Acme\StoreBundle\Entity\Product``). Tant que vos entités sont disponibles
     sous l'espace de nom ``Entity`` de votre bundle, cela marchera.
 
-Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte de méthodes utiles ::
+Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte de méthodes utiles :
 
-    // query by the primary key (usually "id")
+.. code-block:: php
+
+    // requête par clé primaire (souvent "id")
     $product = $repository->find($id);
 
-    // dynamic method names to find based on a column value
+    // Noms de méthodes dynamique en se basant sur un nom de colonne
     $product = $repository->findOneById($id);
     $product = $repository->findOneByName('foo');
 
-    // find *all* products
+    // trouver *tout* les produits
     $products = $repository->findAll();
 
-    // find a group of products based on an arbitrary column value
+    // trouver un groupe de produits en se basant sur une valeur de colonne
     $products = $repository->findByPrice(19.99);
 
 .. note::
@@ -490,7 +485,9 @@ Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte
     dans la section :ref:`book-doctrine-queries`.
 
 Vous pouvez aussi profiter des méthodes utiles ``findBy`` et ``findOneBy`` pour
-récupérer facilement des objets en se basant sur des conditions multiples ::
+récupérer facilement des objets en se basant sur des conditions multiples :
+
+.. code-block:: php
 
     // query for one product matching be name and price
     $product = $repository->findOneBy(array('name' => 'foo', 'price' => 19.99));
@@ -520,7 +517,9 @@ Mettre un objet à jour
 
 Une fois que vous avez récupéré un objet depuis Doctrine, le mettre à jour est
 facile. Supposons que vous avez une route qui mappe l'id d'un produit vers
-une action de mise à jour dans un contrôleur ::
+une action de mise à jour dans un contrôleur :
+
+.. code-block:: php
 
     public function updateAction($id)
     {
@@ -543,7 +542,7 @@ Mettre à jour l'objet ne nécessite que trois étapes :
 2. Modifier l'objet;
 3. Apeller la méthode ``flush()`` du gestionnaire d'entités
 
-Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Rapellez
+Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Rappeler
 cette méthode dit simplement à Doctrine de gérer, ou « regarder » l'objet ``$product``.
 Dans ce cas, comme vous avez récupéré l'objet ``$product`` depuis Doctrine,
 il est déjà surveillé.
@@ -568,7 +567,9 @@ Requêter des objets
 -------------------
 
 Vous avez déja vu comment les objets dépôts vous permettaient de lancer des
-requêtes basiques sans aucun travail ::
+requêtes basiques sans aucun travail :
+
+.. code-block:: php
 
     $repository->find($id);
     
@@ -587,7 +588,9 @@ Requêter des objets avec DQL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Imaginons que vous souhaitez récupérer tous les produits dont le prix est supérieur
-à ``19.99``, triés du moins cher au plus cher. Depuis un contrôleur, vous pouvez faire ::
+à ``19.99``, triés du moins cher au plus cher. Depuis un contrôleur, vous pouvez faire :
+
+.. code-block:: php
 
     $em = $this->getDoctrine()->getEntityManager();
     $query = $em->createQuery(
@@ -602,8 +605,10 @@ base de données. Pour cette raison, vous effectuez une sélection *depuis* ``Ac
 et lui donnez ``p`` pour alias.
 
 La méthode ``getResult()`` retourne un tableau de résultats. Si vous ne souhaitez
-obtenir qu'un seul objet, vous pouvez utiliser la méthode ``getSingleResult)`` à
-la place ::
+obtenir qu'un seul objet, vous pouvez utiliser la méthode ``getSingleResult()`` à
+la place :
+
+.. code-block:: php
 
     $product = $query->getSingleResult();
 
@@ -613,8 +618,10 @@ la place ::
     si aucun résultat n'est retourné et une exception ``Doctrine\ORM\NonUniqueResultException``
     si *plus* d'un résultat est retourné. Si vous utilisez cette méthode, vous voudrez
     sans doute l'entourer d'un block try-catch pour vous assurer que seul un résultat
-    est retourné (si vous requêtez quelque chose qui pourrait retourner plus d'un résultat) ::
+    est retourné (si vous requêtez quelque chose qui pourrait retourner plus d'un résultat) :
     
+    .. code-block:: php
+
         $query = $em->createQuery('SELECT ....')
             ->setMaxResults(1);
         
@@ -641,7 +648,9 @@ officielle de Doctrine : `Doctrine Query Language`.
         ... WHERE p.price > :price ...
 
     Vous pouvez alors définir la valeur de l'emplacement ``price`` en appelant la méthode
-    ``setParameter()`` ::
+    ``setParameter()`` :
+
+    .. code-block:: php
 
         ->setParameter('price', '19.99')
 
@@ -649,7 +658,9 @@ officielle de Doctrine : `Doctrine Query Language`.
     constituant la requête permet de se prémunir des attaques de type injections de SQL
     et devrait *toujours* être fait. Si vous utilisez plusieurs paramètres, vous
     pouvez alors définir leurs valeurs d'un seul coup en utilisant la méthode 
-    ``setParameters()`` ::
+    ``setParameters()`` :
+
+    .. code-block:: php
 
         ->setParameters(array(
             'price' => '19.99',
@@ -663,7 +674,9 @@ Au lieu d'écrire des requêtes directement, vous pouvez alternativement utilise
 le ``QueryBuilder`` (constructeur de requêtes) de Doctrine pour faire le même
 travail en utilisant une jolie interface orientée-objet.
 Si vous utilisez un IDE, vous pourrez aussi profiter de l'auto-complétion
-en tapant le nom des méthodes. De l'intérieur d'un contrôleur ::
+en tapant le nom des méthodes. De l'intérieur d'un contrôleur :
+
+.. code-block:: php
 
     $repository = $this->getDoctrine()
         ->getRepository('AcmeStoreBundle:Product');
@@ -765,7 +778,9 @@ ordre alphabétique.
     Vous pouvez accéder au gestionnaire d'entités par ``$this->getEntityManager()`` à
     l'intérieur du dépôt.
 
-Vous pouvez alors utiliser cette nouvelle méthode comme les méthodes par défaut du dépôt ::
+Vous pouvez alors utiliser cette nouvelle méthode comme les méthodes par défaut du dépôt :
+
+.. code-block:: php
 
     $em = $this->getDoctrine()->getEntityManager();
     $products = $em->getRepository('AcmeStoreBundle:Product')
@@ -798,7 +813,9 @@ Métadonnées de mapping de relations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour relier les entités ``Category`` et ``Product``, commencez par créer une
-propriété ``products`` dans la classe ``Category`` ::
+propriété ``products`` dans la classe ``Category`` :
+
+.. code-block:: php-annotations
 
     // src/Acme/StoreBundle/Entity/Category.php
     // ...
@@ -836,7 +853,9 @@ contiennent un tableau d'objets ``Product``.
     bien.
 
 Ensuite, comme chaque classe ``Product`` est reliée exactement à un objet ``Category``,
-il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` ::
+il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
+
+.. code-block:: php-annotations
 
     // src/Acme/StoreBundle/Entity/Product.php
     // ...
@@ -900,7 +919,9 @@ nouvelle clé étrangère :
 Sauver les entités associées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant, regardons le code en action. Imaginez que vous êtes dans un contrôleur ::
+Maintenant, regardons le code en action. Imaginez que vous êtes dans un contrôleur :
+
+.. code-block:: php
 
     // ...
     use Acme\StoreBundle\Entity\Category;
@@ -942,7 +963,9 @@ Récupérer des objets associés
 
 Lorsque vous récupérez des objets associés, le processus que vous employez
 ressemble exactement à celui employé auparavant. Tout d'abord, récupérez
-un objet ``$product`` et accéder alors à sa ``Category`` associée ::
+un objet ``$product`` et accéder alors à sa ``Category`` associée :
+
+.. code-block:: php
 
     public function showAction($id)
     {
@@ -970,7 +993,9 @@ associée au produit, mais que les données de cette catégorie ne sont réellem
 récupérées que lorsque vous demandez la catégorie (on parle alors de chargement
 fainéant ou « lazy loading »).
 
-Vous pouvez aussi faire cette requête dans l'autre sens ::
+Vous pouvez aussi faire cette requête dans l'autre sens :
+
+.. code-block:: php
 
     public function showProductAction($id)
     {
@@ -994,7 +1019,9 @@ La variable ``$products`` est un tableau de tous les objets ``Product`` associé
 
     Ce mécanisme de « chargement fainéant » est possible car, quand c'est nécessaire,
     Doctrine retourne un objet « mandataire » (proxy) au lieu des vrais objets.
-    Regardez de plus près l'exemple ci-dessus::
+    Regardez de plus près l'exemple ci-dessus :
+
+    .. code-block:: php
 
         $product = $this->getDoctrine()
             ->getRepository('AcmeStoreBundle:Product')
@@ -1035,7 +1062,9 @@ original (par exemple, une ``Category``), et une pour le(s) objet(s) associé(s)
 Bien sûr, si vous savez dès le début que vous aurez besoin d'accéder aux deux
 objets, vous pouvez éviter de produire une deuxième requête en ajoutant
 une jointure dans la requête originale. Ajouter le code suivant à la classe
-``ProductRepository`` ::
+``ProductRepository`` :
+
+.. code-block:: php
 
     // src/Acme/StoreBundle/Repository/ProductRepository.php
     
@@ -1056,7 +1085,9 @@ une jointure dans la requête originale. Ajouter le code suivant à la classe
     }
 
 Maintenant, vous pouvez utiliser cette méthode dans votre contrôleur pour
-requêter un objet ``Product`` et sa ``Category`` associée avec une seule requête ::
+requêter un objet ``Product`` et sa ``Category`` associée avec une seule requête :
+
+.. code-block:: php
 
     public function showAction($id)
     {
@@ -1344,7 +1375,6 @@ Cookbook: :doc:`cookbook</cookbook/index>`, qui inclut les articles
 suivant :
 
 * :doc:`/bundles/DoctrineFixturesBundle/index`
-* :doc:`/cookbook/doctrine/mongodb`
 * :doc:`/cookbook/doctrine/common_extensions`
 
 .. _`Doctrine`: http://www.doctrine-project.org/

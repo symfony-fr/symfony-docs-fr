@@ -24,7 +24,7 @@ en action. Le contrôleur suivant rend une page qui écrit simplement
     }
 
 Le but d'un contrôleur est toujours le même : créer et retourner un objet
-``Response``. Durant son cheminement, il peut lire de l'information
+``Response``. Durant ce processus, il peut lire de l'information
 depuis la requête, charger une ressource depuis la base de données, envoyer un 
 email, ou définir une variable dans la session de l'utilisateur.
 Mais dans tous les cas, le contrôleur va finalement retourner l'objet ``Response``
@@ -129,13 +129,13 @@ Ce contrôleur est relativement simple, mais parcourons-le tout de même :
 
 * *ligne 6*: Le nom de la classe est la concaténation d'un nom pour la classe
   du contrôleur (par exemple: ``Hello``) et du mot ``Controller``. Ceci est une
-  convention qui fournit une uniformité aux contrôleurs et qui leurs permet
+  convention qui fournit une uniformité aux contrôleurs et qui leur permet
   d'être référencés seulement par la première partie du nom (par exemple: ``Hello``)
   dans la configuration de routage (« routing »).
 
 * *ligne 8*: Chaque action dans une classe contrôleur se termine par ``Action``
   et est référencée dans la configuration de routage par le nom de l'action
-  (``index``). Dans la prochaine section, vous allez créer une route qui fait
+  (ex ``index``). Dans la prochaine section, vous allez créer une route qui fait
   correspondre une URI à son action. Vous allez apprendre comment les paramètres
   substituables de la route (par exemple ``{name}``) deviennent les arguments de la méthode
   action (``$name``).
@@ -175,7 +175,7 @@ un pattern d'URL spécifique à ce contrôleur :
             '_controller' => 'AcmeHelloBundle:Hello:index',
         )));
 
-Naviguer à l'URL ``/hello/ryan`` va maintenant exécuter le contrôleur
+Aller à l'URL ``/hello/ryan`` va maintenant exécuter le contrôleur
 ``HelloController::indexAction()`` et passer en tant que variable ``$name`` la
 valeur ``ryan``. Créer une « page » signifie simplement créer une méthode contrôleur
 et une route associée.
@@ -405,7 +405,7 @@ Les Tâches Communes du Contrôleur
 
 Bien qu'un contrôleur puisse effectuer quoi que soit virtuellement, la plupart
 d'entre eux va accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
-tel rediriger, forwarder, rendre des templates et accéder aux services,
+telles rediriger, forwarder, rendre des templates et accéder aux services,
 sont très faciles à gérer dans Symfony2.
 
 .. index::
@@ -597,7 +597,7 @@ contrôleur - Symfony2 retournera automatiquement un code de réponse HTTP 500.
 
     throw new \Exception('Quelque chose s'est mal passé!');
 
-Dans chaque cas, une page d'erreur stylée est retournée à l'utilisateur final et une
+Dans chaque cas, une page d'erreur avec style est retournée à l'utilisateur final et une
 page d'erreur complète avec des infos de debugging est retournée au développeur
 (lorsqu'il affiche cette page en mode debug). Ces deux pages d'erreur peuvent
 être personnalisées. Pour de plus amples détails, lisez la partie du cookbook
@@ -627,8 +627,8 @@ facilement depuis n'importe quel contrôleur::
     // dans un autre contrôleur pour une autre requête
     $foo = $session->get('foo');
 
-    // définit la « locale » de l'utilisateur
-    $session->setLocale('fr');
+    // utilise une valeur par défaut si la clé n'existe pas
+    $filters = $session->set('filters', array());
 
 Ces attributs vont rester affectés à cet utilisateur pour le restant de sa
 session.
