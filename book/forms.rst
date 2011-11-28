@@ -86,7 +86,9 @@ Construire le Formulaire
 Maintenant que vous avez créé une classe ``Task``, la prochaine étape est
 de créer et de retourner le formulaire HTML. Dans Symfony2, cela se fait
 en construisant un objet formulaire qui est ensuite rendu dans un template.
-Pour l'instant, tout ceci peut être effectué depuis un contrôleur ::
+Pour l'instant, tout ceci peut être effectué depuis un contrôleur :
+
+.. code-block:: php
 
     // src/Acme/TaskBundle/Controller/DefaultController.php
     namespace Acme\TaskBundle\Controller;
@@ -212,7 +214,9 @@ Gérer la Soumission des Formulaires
 Le second travail d'un formulaire est de transmettre les données soumises par
 l'utilisateur aux propriétés d'un objet. Pour réaliser cela, les données
 soumises par l'utilisateur doivent être liées au formulaire. Ajoutez la
-fonctionnalité suivante à votre contrôleur ::
+fonctionnalité suivante à votre contrôleur :
+
+.. code-block:: php
 
     // ...
 
@@ -398,7 +402,9 @@ Les Groupes de Validation
     alors vous pouvez sauter cette section.
 
 Si votre objet profite des avantages des :ref:`groupes de validation <book-validation-validation-groups>`,
-vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire doit utiliser ::
+vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire doit utiliser :
+
+.. code-block:: php
 
     $form = $this->createFormBuilder($users, array(
         'validation_groups' => array('registration'),
@@ -406,7 +412,9 @@ vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire
     ;
 
 Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
-bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefaultOptions()`` ::
+bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefaultOptions()`` :
+
+.. code-block:: php
 
     public function getDefaultOptions(array $options)
     {
@@ -417,6 +425,47 @@ bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefau
 
 Dans les deux cas, *uniquement* le groupe de validation ``registration``
 sera utilisé pour valider l'objet sous-jacent.
+
+Groupes basés sur les données soumises
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.1
+   La possibilité de spécifier un callback ou une Closure dans ``validation_groups``
+   date de la version 2.1
+
+Si vous avez besoin de plus de logique pour déterminer les groupes de validation
+(c'est-à-dire basés sur les données), vous pouvez définir l'option ``validation_groups``
+comme un tableau callbak, ou une ``Closure`` :
+
+.. code-block:: php
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'validation_groups' => array('Acme\\AcmeBundle\\Entity\\Client', 'determineValidationGroups'),
+        );
+    }
+
+Cela appelera la méthode statique  ``determineValidationGroups()`` de la classe
+``Client`` après que le formulaire soit associé, mais avant que la validation soit faite.
+L'objet Form est passé comme argument à cette méthode (regardez l'exemple suivant).
+Vous pouvez aussi définir une logique entière en utilisant une Closure :
+
+.. code-block:: php
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'validation_groups' => function(FormInterface $form) {
+                $data = $form->getData();
+                if (Entity\Client::TYPE_PERSON == $data->getType()) {
+                    return array('person')
+                } else {
+                    return array('company');
+                }
+            },
+        );
+    }
 
 .. index::
    single: Formulaires; Types de Champ Intégrés
@@ -488,7 +537,9 @@ Maintenant que vous avez ajouté les métadonnées de validation à la classe
 l'autorisez, Symfony peut « prédire » le type de vos champs et les mettre
 en place pour vous. Dans cet exemple, Symfony peut deviner depuis les règles
 de validation que le champ ``task`` est un champ ``texte`` normal et que
-``dueDate`` est un champ ``date`` ::
+``dueDate`` est un champ ``date`` :
+
+.. code-block:: php
 
     public function newAction()
     {
@@ -798,7 +849,9 @@ manière de créer des formulaires, mais le choix final vous revient.
     Plus tard, quand vous commencerez à embarquer des formulaires les uns avec
     les autres, cela ne sera plus suffisant. Donc, bien que facultatif,
     c'est généralement une bonne idée de spécifier explicitement l'option
-    ``data_class`` en ajoutant ce qui suit à votre classe formulaire ::
+    ``data_class`` en ajoutant ce qui suit à votre classe formulaire :
+    
+    .. code-block:: php
 
         public function getDefaultOptions(array $options)
         {
@@ -821,7 +874,9 @@ le sujet des formulaires. Mais, si vous avez configuré la classe ``Task`` de
 telle sorte qu'elle soit persistée via Doctrine (c-a-d qye vous avez ajouté des
 :ref:`métadonnées de correspondance<book-doctrine-adding-mapping>` pour cela),
 alors sa persistance peut être effectuée après la soumission d'un formulaire
-lorsque ce dernier est valide ::
+lorsque ce dernier est valide :
+
+.. code-block:: php
 
     if ($form->isValid()) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -832,7 +887,9 @@ lorsque ce dernier est valide ::
     }
 
 Si, pour une quelconque raison, vous n'avez pas accès à votre objet ``$task``
-d'origine, vous pouvez le récupérer depuis le formulaire ::
+d'origine, vous pouvez le récupérer depuis le formulaire :
+
+.. code-block:: php
 
     $task = $form->getData();
 
@@ -859,7 +916,9 @@ Imbriquer un Objet Unique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposez que chaque ``Task`` appartienne à un simple objet ``Category``.
-Commencez, bien sûr, par créer l'objet ``Category`` ::
+Commencez, bien sûr, par créer l'objet ``Category`` :
+
+.. code-block:: php
 
     // src/Acme/TaskBundle/Entity/Category.php
     namespace Acme\TaskBundle\Entity;
@@ -874,7 +933,9 @@ Commencez, bien sûr, par créer l'objet ``Category`` ::
         public $name;
     }
 
-Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task`` ::
+Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task`` :
+
+.. code-block:: php
 
     // ...
 
@@ -902,7 +963,9 @@ Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task`` ::
 
 Maintenant que votre application a été mise à jour pour refléter nos nouvelles
 conditions requises, créez une classe formulaire afin que l'objet ``Category``
-puisse être modifié par l'utilisateur ::
+puisse être modifié par l'utilisateur :
+
+.. code-block:: php
 
     // src/Acme/TaskBundle/Form/Type/CategoryType.php
     namespace Acme\TaskBundle\Form\Type;
@@ -1327,7 +1390,9 @@ Le champ ``_token`` est un champ caché et sera rendu automatiquement si vous
 incluez la fonction ``form_rest()`` dans votre template, qui garantit que
 tous les champs non-rendus sont délivrés en sortie.
 
-Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple ::
+Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple :
+
+.. code-block:: php
 
     class TaskType extends AbstractType
     {
@@ -1348,7 +1413,7 @@ Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple 
     }
 
 Pour désactiver la protection CSRF, définissez l'option ``csrf_protection``
-à faux. Les personnalisations peuvent aussi être effectuées globalement dans
+à false. Les personnalisations peuvent aussi être effectuées globalement dans
 votre projet. Pour plus d'informations, voir la section de
 :ref:`référence de configuration de formulaire</reference-frameworkbundle-forms>`.
 
@@ -1368,7 +1433,9 @@ formulaire affichent et stockent leur données dans les propriétés d'un objet.
 exactement ce que vous avez vu jusqu'ici dans ce chapitre avec la classe `Task`.
 
 Mais parfois, vous voudrez juste utiliser un formulaire sans une classe, et obtenir
-un tableau des données soumises. C'est en fait très facile::
+un tableau des données soumises. C'est en fait très facile :
+
+.. code-block:: php
 
     // Assurez vous d'avoir importé le namespace Request namespace en haut de la classe
     use Symfony\Component\HttpFoundation\Request
@@ -1451,7 +1518,9 @@ mais voici un petit exemple::
 
 Maintenant, quand vous appelez `$form->isValid()`, les contraintes configurées sont
 appliquées aux données de votre formulaire. Si vous utilisez une classe de formulaire,
-surchargez la méthode ``getDefaultOptions`` pour les spécifier::
+surchargez la méthode ``getDefaultOptions`` pour les spécifier :
+
+.. code-block:: php
 
     namespace Acme\TaskBundle\Form\Type;
 
@@ -1510,6 +1579,7 @@ En savoir plus grâce au Cookbook
 * :doc:`Créer des Types de Champ Personnalisés </cookbook/form/create_custom_field_type>`
 * :doc:`/cookbook/form/form_customization`
 * :doc:`/cookbook/form/dynamic_form_generation`
+* :doc:`/cookbook/form/data_transformers`
 
 .. _`Composant Formulaire Symfony2`: https://github.com/symfony/Form
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php
