@@ -62,12 +62,12 @@ siègera dans un bundle.
 Un bundle n'est rien d'autre qu'un répertoire qui contient tout ce qui est relatif
 à une fonctionnalité spécifique, ce qui inclut les classes PHP, la configuration
 et même les feuilles de style et le javascript (voir :ref:`page-creation-bundles`).
+
 Afin de créer un bundle nommé ``AcmeHelloBundle`` (un bundle fictif que vous 
 créerez dans ce chapitre), lancez la commande suivante et suivez les instructions
 affichées à l'écran (choisissez les options par défaut) :
 
 .. code-block:: bash
-
 	
     php app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
 
@@ -135,12 +135,6 @@ ajouté une entrée lorsque vous avez généré le ``AcmeHelloBundle`` :
         );
         return $collection;
 
-Les premières lignes d'un fichier de configuration de routage définissent quel
-code appeler quand l'utilisateur demande la ressource « ``/`` » (la page d'accueil)
-et servent d'exemple de configuration de routage que vous pouvez trouver dans ces
-fichiers. La dernière partie est plus intéressante, elle importe un autre fichier
-de configuration qui se trouve dans le ``AcmeHelloBundle`` :
-
 Ce code est très basique : il dit à Symfony de charger la configuration de routage
 depuis le fichier ``Resources/config/routing.yml`` qui se trouve dans le ``AcmeHelloBundle``.
 Cela signifie que vous pouvez placer votre configuration de routage directement
@@ -189,7 +183,7 @@ route qui définit l'URL de la page que vous êtes sur le point de créer :
 Le routage est constitué de deux parties principales : le ``pattern``, qui est
 l'URL correspondante à cette route, et un tableau ``par défaut``, qui spécifie
 le contrôleur qui devra être exécuté. La syntaxe pour le paramètre dans le 
-pattern (``{name}``) est un joker. Cela signifie que ``hello/Jean``, ``hello/Bernard``
+pattern (``{name}``) est un joker. Cela signifie que ``hello/Ryan``, ``hello/Bernard``
 ou n'importe quelle URL similaire correspondra à cette route. Le paramètre ``{name}``
 sera également passé à notre contrôleur afin que nous puissions utiliser la valeur
 afin de saluer l'utilisateur.
@@ -204,14 +198,25 @@ afin de saluer l'utilisateur.
 Etape 2 : Créez le Contrôleur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Quand une URL comme ``/hello/Jean`` est traitée par l'application, la route
+Quand une URL comme ``/hello/Ryan`` est traitée par l'application, la route
 ``hello`` est reconnue et le contrôleur ``AcmeHelloBundle:Hello/index``
 est exécuté par le framework. L'étape suivante est de créer ce contrôleur.
 
 Le contrôleur - ``AcmeHelloBundle:Hello:index`` est le nom *logique* du contrôleur,
 et il est associé à la méthode ``indexAction`` d'une classe PHP appelée
 ``Acme\HelloBundle\Controller\Hello``. Commencez par créer ce fichier dans votre
-``AcmeHelloBundle``.
+``AcmeHelloBundle`` :
+
+.. code-block:: php
+
+    // src/Acme/HelloBundle/Controller/HelloController.php
+    namespace Acme\HelloBundle\Controller;
+
+    use Symfony\Component\HttpFoundation\Response;
+
+    class HelloController
+    {
+    }
 
 En réalité, un contrôleur n'est rien d'autre qu'une méthode PHP que vous créez
 et que Symfony exécute. C'est à cet endroit que le code propre à l'application
@@ -221,7 +226,9 @@ le résultat final d'un contrôleur sera toujours le même :
 un objet ``Response`` Symfony2.
 
 Créez la méthode ``indexAction`` que Symfony exécutera lorsque la route ``hello``
-sera identifiée::
+sera identifiée :
+
+.. code-block:: php
 
     // src/Acme/HelloBundle/Controller/HelloController.php
     namespace Acme\HelloBundle\Controller;
@@ -325,9 +332,8 @@ qui suit la convention de nommage :
 
 C'est le nom *logique* du template, qui est associé à une location physique selon
 la convention suivante.
-
 	
-    **/path/to/BundleName**/Resources/views/**ControllerName**/**TemplateName**
+    **/chemin/vers/NomBundle**/Resources/views/**NomControleur**/**NomTemplate**
 
 Dans ce cas, ``AcmeHelloBundle`` est le nom de bundle, ``Hello`` est le
 nom du contrôleur et enfin ``index.html.twig`` est le template :
@@ -444,7 +450,9 @@ Le répertoire Web
 
 Le répertoire web contient tous les fichiers publics et statiques incluant les
 images, les feuilles de style et les javascripts. 
-Il contient également le :term:`front controller` (contrôleur frontal)::
+Il contient également le :term:`front controller` (contrôleur frontal) :
+
+.. code-block:: php
 
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php.cache';
@@ -464,7 +472,9 @@ classe Kernel, ``AppKernel``, pour initialiser l'application (bootstrap).
 	   
    Avoir un contrôleur frontal signifie des URL différentes et plus flexibles
    que dans une application en pur php. 
-   Lorsqu'on utilise un contrôleur frontal, les URLs sont formatées comme suit::
+   Lorsqu'on utilise un contrôleur frontal, les URLs sont formatées comme suit :
+
+    .. code-block:: text
 
        http://localhost/app.php/hello/Ryan
 
@@ -473,6 +483,8 @@ classe Kernel, ``AppKernel``, pour initialiser l'application (bootstrap).
    En utilisant les règles du module Apache ``mod_rewrite``, 
    vous pouvez forcer le script ``app.php`` à être exécuté sans
    avoir besoin de le mentionner dans l'URL::
+
+    .. code-block:: text
 
     http://localhost/hello/Ryan
 
@@ -492,10 +504,10 @@ a besoin de savoir à propos de votre application. Vous n'avez pas à vous souci
 de ces méthodes en commençant - Symfony les complète pour vous avec des valeurs
 par défaut.
 
-*``registerBundles()``: renvoit un tableau de tous les bundles dont l'application
+* ``registerBundles()``: renvoit un tableau de tous les bundles dont l'application
 a besoin pour fonctionner (voir le :ref:`page-creation-bundles`);
 
-*``registerContainerConfiguration()``: Charge le fichier de configuration ressources
+* ``registerContainerConfiguration()``: Charge le fichier de configuration ressources
    principal de l'application (voir la section `Configuration de l'Application`_)
 
 
@@ -504,28 +516,27 @@ Dans le développement au quotidien, vous utiliserez principalement le répertoi
 ``app/config`` (voir `Configuration de l'Application`_). ``app/`` contient également
 le répertoire de cache de l'application (``app/cache``), le répertoire des logs
 (``app/logs``) et un répertoire pour les ressources communes à l'application
-entière (``app/Resources``).
- 
+entière (``app/Resources``). 
 Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
 
 .. _autoloading-introduction-sidebar:
 
 .. sidebar:: Autoloading
 
-Lorsque Symfony se charge, un fichier spécial - ``app/autoload.php`` - est
-inclu. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
-tous vos fichiers depuis le répertoire ``src/`` et toutes les librairies tierces
-depuis le repertoire ``vendor/``.
+    Lorsque Symfony se charge, un fichier spécial - ``app/autoload.php`` - est
+    inclu. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
+    tous vos fichiers depuis le répertoire ``src/`` et toutes les librairies tierces
+    depuis le repertoire ``vendor/``.
 
-Grace à l'autoloader, vous n'avez jamais à vous soucier d'utiliser les instructions
-``include`` ou ``require``. Symfony2 se base sur l'espace de nom (namespace) d'une
-classe pour déterminer son emplacement et l'inclure automatiquement le fichier à
-votre place à l'instant où vous en avez besoin.
+    Grace à l'autoloader, vous n'avez jamais à vous soucier d'utiliser les instructions
+    ``include`` ou ``require``. Symfony2 se base sur l'espace de nom (namespace) d'une
+    classe pour déterminer son emplacement et l'inclure automatiquement le fichier à
+    votre place à l'instant où vous en avez besoin.
     
 
-L'autoloader est déjà configuré pour regarder dans le dossier ``src/`` pour chacune
-de vos classes PHP. Pour que le chargement automatique fonctionne, le nom de la
-classe et le chemin du fichier doivent avoir une structure similaire :
+    L'autoloader est déjà configuré pour regarder dans le dossier ``src/`` pour chacune
+    de vos classes PHP. Pour que le chargement automatique fonctionne, le nom de la
+    classe et le chemin du fichier doivent avoir une structure similaire :
 
     .. code-block:: text
 
@@ -534,10 +545,10 @@ classe et le chemin du fichier doivent avoir une structure similaire :
         Chemin:
             src/Acme/HelloBundle/Controller/HelloController.php
 
-Typiquement, le seul moment où vous devrez vous soucier du fichier ``app/autoload.php``	
-est quand vous incluerez des librairies tierces dans le repertoire ``vendor/``.
-Pour plus d'informations sur le chargement automatique, voir 
-:doc: `Comment charger automatiquement des classes</cookbook/tools/autoloader>`.
+    Typiquement, le seul moment où vous devrez vous soucier du fichier ``app/autoload.php``	
+    est quand vous incluerez des librairies tierces dans le repertoire ``vendor/``.
+    Pour plus d'informations sur le chargement automatique, voir 
+    :doc: `Comment charger automatiquement des classes</cookbook/tools/autoloader>`.
 
 Le répertoire des sources (``src/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -565,7 +576,7 @@ fonctionnalités activer dans votre application et de les optimiser comme vous v
 .. note::
 
    Alors que vous apprendrez les bases ici, une entrée du cookbook est entièrement
-   dévouée à l'organisation et aux bonnes pratiques : :doc:`bundles</cookbook/bundles/best_practices>`.
+   dédiée à l'organisation et aux bonnes pratiques : :doc:`bundles</cookbook/bundles/best_practices>`.
 
 Un bundle est simplement un ensemble structuré de fichiers au sein d'un répertoire
 et qui implémentent une fonctionnalité unique. Vous pourrez ainsi créer un
@@ -577,7 +588,9 @@ Chaque aspect d'une fonctionnalité se trouve dans le bundle, et chaque fonction
 aussi.
 
 Une application est faite de bundles qui sont définis dans la méthode ``registerBundles()``
-de la classe ``AppKernel``::
+de la classe ``AppKernel`` :
+
+.. code-block:: php
 
     // app/AppKernel.php
     public function registerBundles()
@@ -614,7 +627,7 @@ qui sont utilisés dans votre application (incluant les bundles du coeur de Symf
 Créer un Bundle
 ~~~~~~~~~~~~~~~
 
-La Symfony Standard Edition est fournir avec une tache qui crée un bundle
+La Symfony Standard Edition est fournie avec une tâche qui crée un bundle
 totalement fonctionnel pour vous. Bien sûr, vous pouvez tout aussi facilement créer un
 bundle à la main.
 
@@ -628,7 +641,9 @@ bundle appelé ``AcmeTestBundle`` et activons le.
     entreprise nommée ``ABC``).
 
 Commencez par créer un répertoire ``src/Acme/TestBundle/`` et ajoutez y un nouveau
-fichier appelé ``AcmeTestBundle.php``::
+fichier appelé ``AcmeTestBundle.php`` :
+
+.. code-block:: php
 
     // src/Acme/TestBundle/AcmeTestBundle.php
     namespace Acme\TestBundle;
@@ -649,7 +664,9 @@ Cette classe vide est la seule pièce dont vous avez besoin afin de créer un no
 bundle. Bien que souvent vide, cette classe est très puissante et peut être utilisée
 pour personnaliser le comportement du bundle.
 
-Maintenant que vous avez créé le bundle, activez le via la classe ``AppKernel``::
+Maintenant que vous avez créé le bundle, activez le via la classe ``AppKernel`` :
+
+.. code-block:: php
 
     // app/AppKernel.php
     public function registerBundles()
@@ -736,13 +753,7 @@ selon le format que vous préférez :
             secret:          %secret%
             charset:         UTF-8
             router:          { resource: "%kernel.root_dir%/config/routing.yml" }
-            form:            true
-            csrf_protection: true
-            validation:      { enable_annotations: true }
-            templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-            session:
-                default_locale: %locale%
-                auto_start:     true
+            #...
 
         # Twig Configuration
         twig:
@@ -761,13 +772,7 @@ selon le format que vous préférez :
         
         <framework:config charset="UTF-8" secret="%secret%">
             <framework:router resource="%kernel.root_dir%/config/routing.xml" />
-            <framework:form />
-            <framework:csrf-protection />
-            <framework:validation annotations="true" />
-            <framework:templating assets-version="SomeVersionScheme">
-                <framework:engine id="twig" />
-            </framework:templating>
-            <framework:session default-locale="%locale%" auto-start="true" />
+            <!-- ... -->
         </framework:config>
 
         <!-- Twig Configuration -->
@@ -784,17 +789,7 @@ selon le format que vous préférez :
             'secret'          => '%secret%',
             'charset'         => 'UTF-8',
             'router'          => array('resource' => '%kernel.root_dir%/config/routing.php'),
-            'form'            => array(),
-            'csrf-protection' => array(),
-            'validation'      => array('annotations' => true),
-            'templating'      => array(
-                'engines' => array('twig'),
-                #'assets_version' => "SomeVersionScheme",
-            ),
-            'session' => array(
-                'default_locale' => "%locale%",
-                'auto_start'     => true,
-            ),
+            // ...
         ));
 
         // Twig Configuration
@@ -869,15 +864,18 @@ de production, appelez le contrôleur frontal de ``prod`` :
 Puisque l'environnement de ``prod`` est optimisé pour la vitesse; la configuration,
 les routes et les templates Twig sont compilés en classes PHP et cachés.
 Quand vous voudrez voir des changements en environnement de ``prod``, vous aurez
-besoin de nettoyer ces fichiers cachés afin de permettre leur regénération::
+besoin de nettoyer ces fichiers cachés afin de permettre leur regénération :
+
+.. code-block:: bash
 
     php app/console cache:clear --env=prod --no-debug
-
 
 .. note::
 
    Si vous ouvrez le fichier ``web/app.php``, vous trouverez ce qui est explicitement
-   configuré en environnement de ``prod``::
+   configuré en environnement de ``prod`` :
+   
+   .. code-block:: php
 
        $kernel = new AppKernel('prod', false);
 
@@ -897,7 +895,9 @@ Configuration d'Environnement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La classe ``AppKernel`` est responsable du chargement du fichier de configuration
-que vous avez choisi::
+que vous avez choisi :
+
+.. code-block:: php
 
     // app/AppKernel.php
     public function registerContainerConfiguration(LoaderInterface $loader)

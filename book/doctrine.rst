@@ -96,7 +96,9 @@ Supposons que vous créiez une application affichant des produits.
 
 Sans même pensez à Doctrine ou à votre base de données, vous savez déjà que
 vous aurez besoin d'un objet ``Product`` représentant ces derniers. Créez
-cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle``::
+cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle`` :
+
+.. code-block:: php
 
     // src/Acme/StoreBundle/Entity/Product.php    
     namespace Acme\StoreBundle\Entity;
@@ -551,7 +553,9 @@ Supprimer un objet
 ~~~~~~~~~~~~~~~~~~
 
 Supprimer un objet est très similaire, mais requiert un appel à la méthode
-``remove()`` du gestionnaire d'entités::
+``remove()`` du gestionnaire d'entités :
+
+.. code-block:: php
 
     $em->remove($product);
     $em->flush();
@@ -851,6 +855,14 @@ contiennent un tableau d'objets ``Product``.
     avec quelque flexibilités supplémentaires. Si ça vous dérange, ne vous
     inquiétez pas. Imaginez juste que c'est un ``array`` et vous vous porterez
     bien.
+
+
+.. tip::
+
+    La valeur targetEntity utilisée plus haut peut faire référence à n'importe
+    quelle entitée avec un espace de nom valide, et pas seulement les entitées
+    définies dans la même classe. Pour lier une entitée définie dans une autre
+    classe ou un autre bundle, entrez l'espace de nom complet dans targetEntity.
 
 Ensuite, comme chaque classe ``Product`` est reliée exactement à un objet ``Category``,
 il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :

@@ -160,7 +160,9 @@ nouvelle application Symfony2 contient un noyau pré-configuré
 du noyau) *est* le reverse proxy.
 
 Pour activer le mécanisme de cache, il faut modifier le code du
-contrôleur principal pour qu'il utilise le cache kernel : ::
+contrôleur principal pour qu'il utilise le cache kernel :
+
+.. code-block:: php
 
     // web/app.php
 
@@ -192,7 +194,9 @@ client.
 
 L'objet ``AppCache`` a une configuration par défaut mais
 peut être reconfiguré finement grâce à une série d'options que vous
-pouvez paramètrer en surchargeant la méthode ``getOptions()`` : ::
+pouvez paramètrer en surchargeant la méthode ``getOptions()`` :
+
+.. code-block:: php
 
     // app/AppCache.php
     class AppCache extends Cache
@@ -503,14 +507,18 @@ Expiration avec l'en-tête ``Expires``
 D'après la spécification HTTP, « les champs de l'en-tête ``Expires``
 donnent la date après laquelle la réponse est considérée comme
 invalide ». Cet en-tête peut être défini avec la méthode ``setExpires()``
-de l'objet ``Response``. Elle prend un objet ``DateTime`` en argument : ::
+de l'objet ``Response``. Elle prend un objet ``DateTime`` en argument :
+
+.. code-block:: php
 
     $date = new DateTime();
     $date->modify('+600 seconds');
 
     $response->setExpires($date);
 
-L'en-tête HTTP résultante sera : ::
+L'en-tête HTTP résultante sera :
+
+.. code-block:: php
 
     Expires: Thu, 01 Mar 2011 16:00:00 GMT
 
@@ -537,7 +545,9 @@ l'en-tête ``Cache-Control``. Rappelez-vous que l'en-tête ``Cache-Control`` est
 utilisé pour spécifier une grande partie des directives de cache. Pour le modèle
 d'expiration, il y a deux directives, ``max-age`` et ``s-maxage``. La première
 est utilisée par tous les systèmes de cache alors que la seconde n'est utilisée que
-par les systèmes de cache partagés : ::
+par les systèmes de cache partagés :
+
+.. code-block:: php
 
     // Définir le nombre de secondes après lesquelles la réponse
     // ne devrait plus être considérée comme valide
@@ -605,7 +615,9 @@ sont équivalentes. Comme une empreinte, chaque ``ETag`` doit être
 unique pour toutes les représentations de la même ressource.
 
 Voici une implémentation simple qui génère l'en-tête ETag depuis un
-md5 du contenu : ::
+md5 du contenu :
+
+.. code-block:: php
 
     public function indexAction()
     {
@@ -654,7 +666,9 @@ cache.
 
 Par exemple, vous pouvez utiliser la date de dernière mise à jour de tout les objets
 nécessitant de calculer le rendu de la ressource comme valeur de l'en-tête
-``Last-Modified`` : ::
+``Last-Modified`` :
+
+.. code-block:: php
 
     public function showAction($articleSlug)
     {
@@ -697,7 +711,9 @@ Le but principal de toutes les stratégies de mise en cache est de
 diminuer la charge de l'application. Autrement dit, moins
 l'application aura à « travailler » pour renvoyer un status 304, 
 mieux ce sera. La méthode ``Response::isNotModified()`` fait
-exactement ça en exposant un modèle simple et efficace : ::
+exactement ça en exposant un modèle simple et efficace :
+
+.. code-block:: php
 
     public function showAction($articleSlug)
     {
@@ -775,7 +791,9 @@ ressource.
     différentes de la même ressource en se basant sur l'URI et la
     valeur des en-têtes ``Accept-Encoding`` et ``User-Agent``.
 
-L'objet ``Response`` propose une interface pour gérer l'en-tête ``Vary`` : ::
+L'objet ``Response`` propose une interface pour gérer l'en-tête ``Vary`` :
+
+.. code-block:: php
 
     // définir une en-tête "vary"
     $response->setVary('Accept-Encoding');
@@ -805,7 +823,9 @@ Les autres méthodes de l'objet Response
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La classe Response fournit beaucoup d'autres méthodes en relation avec
-la gestion du cache. Voici les plus utiles : ::
+la gestion du cache. Voici les plus utiles :
+
+.. code-block:: php
 
     // Marquer l'objet Response comme obsolète
     $response->expire();
@@ -814,7 +834,9 @@ la gestion du cache. Voici les plus utiles : ::
     $response->setNotModified();
 
 La plupart des en-têtes en relation avec la gestion du cache peuvent
-être définis avec la seule méthode ``setCache()`` : ::
+être définis avec la seule méthode ``setCache()`` :
+
+.. code-block:: php
 
     // Définir la configuration du cache avec un seul appel
     $response->setCache(array(
@@ -1093,7 +1115,9 @@ données du cache mais il faut l'éviter autant que possible. Le moyen
 le plus standard est de purger le cache pour une URL donnée en
 l'appelant avec la méthode HTTP spéciale ``PURGE``.
 
-Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HTTP ``PURGE`` : ::
+Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HTTP ``PURGE`` :
+
+.. code-block:: php
 
     // app/AppCache.php
     class AppCache extends Cache

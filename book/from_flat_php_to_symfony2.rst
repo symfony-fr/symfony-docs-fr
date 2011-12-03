@@ -213,6 +213,7 @@ Isoler le layout
 À ce point-ci, l'application a été refactorisée en trois parties distinctes, offrant
 plusieurs avantages et l'opportunité de réutiliser pratiquement la totalité du code
 pour d'autres pages.
+
 La seule partie du code qui *ne peut pas* être réutilisée est le layout de la page.
 Corrigez cela en créant un nouveau fichier ``layout.php`` :
 
@@ -569,7 +570,7 @@ Voici la même application, en utilisant cette fois-ci Symfony2 :
                 ->createQuery('SELECT p FROM AcmeBlogBundle:Post p')
                 ->execute();
 
-            return $this->render('AcmeBlogBundle:Post:list.html.php', array('posts' => $posts));
+            return $this->render('AcmeBlogBundle:Blog:list.html.php', array('posts' => $posts));
         }
 
         public function showAction($id)
@@ -584,7 +585,7 @@ Voici la même application, en utilisant cette fois-ci Symfony2 :
                 throw $this->createNotFoundException();
             }
 
-            return $this->render('AcmeBlogBundle:Post:show.html.php', array('post' => $post));
+            return $this->render('AcmeBlogBundle:Blog:show.html.php', array('post' => $post));
         }
     }
 

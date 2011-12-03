@@ -73,7 +73,7 @@ comme ça:
     User-Agent: Mozilla/5.0 (Macintosh)
 
 Ce simple message communique *tout* ce qui est nécessaire concernant la
-ressource que le client a demandé. La première ligne d'une requête HTTP
+ressource que le client a demandée. La première ligne d'une requête HTTP
 est la plus importante et contient deux choses: l'URI et la méthode HTTP.
 
 L'URI (par exemple: ``/``, ``/contact``, etc...) est l'adresse unique ou
@@ -230,7 +230,9 @@ Symfony fournit une alternative à l'approche basique de PHP via deux classes
 qui vous permettent d'intéragir avec la requête et la réponse HTTP de manière
 plus facile. La classe :class:`Symfony\\Component\\HttpFoundation\\Request`
 est une simple représentation orientée objet du message de la requête HTTP.
-Avec elle, vous avez toute l'information de la requête à votre portée::
+Avec elle, vous avez toute l'information de la requête à votre portée :
+
+.. code-block:: php
 
     use Symfony\Component\HttpFoundation\Request;
 

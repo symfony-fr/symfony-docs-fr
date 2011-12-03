@@ -14,7 +14,9 @@ contient n'importe quelle logique arbitraire dont
 
 Pour en illustrer la simplicité, jetons un oeil à un contrôleur Symfony2
 en action. Le contrôleur suivant rend une page qui écrit simplement
-``Hello world!``::
+``Hello world!`` :
+
+.. code-block:: php
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -261,7 +263,9 @@ Prenez l'exemple suivant :
             'color'       => 'green',
         )));
 
-Le contrôleur dans cet exemple peut prendre plusieurs arguments::
+Le contrôleur dans cet exemple peut prendre plusieurs arguments :
+
+.. code-block:: php
 
     public function indexAction($first_name, $last_name, $color)
     {
@@ -283,7 +287,9 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
     aux noms des variables de la signature de la méthode du contrôleur. En d'autres
     termes, il réalise que le paramètre ``{last_name}`` correspond à l'argument
     ``$last_name``. Les arguments du contrôleur pourraient être totalement
-    réorganisés que cela fonctionnerait toujours parfaitement::
+    réorganisés que cela fonctionnerait toujours parfaitement :
+
+.. code-block:: php
 
         public function indexAction($last_name, $color, $first_name)
         {
@@ -293,7 +299,9 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
 * **Chaque argument requis du contrôleur doit correspondre à un paramètre de la route**
 
     Le code suivant lancerait une ``RuntimeException`` parce qu'il n'y a pas
-    de paramètre ``foo`` défini dans la route::
+    de paramètre ``foo`` défini dans la route :
+
+.. code-block:: php
 
         public function indexAction($first_name, $last_name, $color, $foo)
         {
@@ -301,7 +309,9 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
         }
 
     Cependant, définir l'argument en tant qu'optionnel est parfaitement valide.
-    L'exemple suivant ne lancerait pas d'exception::
+    L'exemple suivant ne lancerait pas d'exception :
+
+.. code-block:: php
 
         public function indexAction($first_name, $last_name, $color, $foo = 'bar')
         {
@@ -311,7 +321,9 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
 * **Tous les paramètres de la route n'ont pas besoin d'être des arguments de votre contrôleur**
 
     Si, par exemple, le paramètre ``last_name`` n'était pas important pour votre
-    contrôleur, vous pourriez complètement l'omettre::
+    contrôleur, vous pourriez complètement l'omettre :
+
+.. code-block:: php
 
         public function indexAction($first_name, $color)
         {
@@ -332,7 +344,9 @@ La ``Requête`` en tant qu'argument du Contrôleur
 
 Pour plus de facilités, Symfony peut aussi vous passer l'objet ``Request``
 en tant qu'argument de votre contrôleur. Ceci est spécialement pratique
-lorsque vous travaillez avec les formulaires, par exemple::
+lorsque vous travaillez avec les formulaires, par exemple :
+
+.. code-block:: php
 
     use Symfony\Component\HttpFoundation\Request;
 
@@ -415,7 +429,9 @@ Rediriger
 ~~~~~~~~~
 
 Si vous voulez rediriger l'utilisateur sur une autre page, utilisez la méthode
-``redirect()``::
+``redirect()`` :
+
+.. code-block:: php
 
     public function indexAction()
     {
@@ -427,7 +443,9 @@ pour une route donnée. Pour plus d'informations, lisez le chapitre
 :doc:`Routage </book/routing>`.
 
 Par défaut, la méthode ``redirect()`` produit une redirection 302 (temporaire).
-Afin d'exécuter une redirection 301 (permanente), modifiez le second argument::
+Afin d'exécuter une redirection 301 (permanente), modifiez le second argument :
+
+.. code-block:: php
 
     public function indexAction()
     {
@@ -455,7 +473,9 @@ Forwarder
 Vous pouvez aussi facilement forwarder sur un autre contrôleur en interne avec la
 méthode ``forward()``. Plutôt que de rediriger le navigateur de l'utilisateur, elle
 effectue une sous-requête interne, et appelle le contrôleur spécifié. La méthode
-``forward()`` retourne l'objet ``Response`` qui est retourné par ce contrôleur::
+``forward()`` retourne l'objet ``Response`` qui est retourné par ce contrôleur :
+
+.. code-block:: php
 
     public function indexAction($name)
     {
@@ -475,7 +495,9 @@ routage. Dans ce cas, la classe contrôleur cible va être ``HelloController``
 dans le bundle ``AcmeHelloBundle``. Le tableau passé à la méthode devient
 les arguments du contrôleur. Cette même interface est utilisée lorsque vous
 intégrez des contrôleurs dans des templates (voir :ref:`templating-embedding-controller`).
-La méthode contrôleur cible devrait ressembler à quelque chose comme::
+La méthode contrôleur cible devrait ressembler à quelque chose comme :
+
+.. code-block:: php
 
     public function fancyAction($name, $color)
     {
@@ -493,8 +515,10 @@ Symfony2 va toujours passer la valeur correcte à chaque variable.
     Comme d'autres méthodes de base de ``Controller``, la méthode ``forward``
     est juste un raccourci pour une fonctionnalité coeur de Symfony2. Un
     forward peut être exécuté directement via le service ``http_kernel``.
-    Un forward retourne un objet ``Response``::
+    Un forward retourne un objet ``Response`` :
     
+    .. code-block:: php
+
         $httpKernel = $this->container->get('http_kernel');
         $response = $httpKernel->forward('AcmeHelloBundle:Hello:fancy', array(
             'name'  => $name,
@@ -512,14 +536,18 @@ Rendre des Templates
 Bien que n'étant pas une condition requise, la plupart des contrôleurs vont finalement
 délivrer un template qui est responsable de la génération du HTML (ou d'un autre format)
 pour le contrôleur. La méthode ``renderView()`` rend un template et retourne son contenu.
-Le contenu du template peut être utilisé pour créer un objet ``Response``::
+Le contenu du template peut être utilisé pour créer un objet ``Response`` :
+
+.. code-block:: php
 
     $content = $this->renderView('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
     return new Response($content);
 
 Ceci peut même être effectué en une seule étape à l'aide de la méthode ``render()``,
-qui retourne un objet ``Response`` contenant le contenu du template::
+qui retourne un objet ``Response`` contenant le contenu du template :
+
+.. code-block:: php
 
     return $this->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
@@ -532,8 +560,10 @@ le chapitre :doc:`Templating </book/templating>`
 .. tip::
 
     La méthode ``renderView`` est un raccourci de l'utilisation directe du
-    service ``templating``. Ce dernier peut aussi être utilisé directement::
+    service ``templating``. Ce dernier peut aussi être utilisé directement :
     
+    .. code-block:: php
+
         $templating = $this->get('templating');
         $content = $templating->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
@@ -545,7 +575,9 @@ Accéder à d'autres Services
 
 Quand vous étendez la classe contrôleur de base, vous pouvez utiliser n'importe
 quel service Symfony2 via la méthode ``get()``. Voici plusieurs services communs
-dont vous pourriez avoir besoin::
+dont vous pourriez avoir besoin :
+
+.. code-block:: php
 
     $request = $this->getRequest();
 
@@ -557,7 +589,7 @@ dont vous pourriez avoir besoin::
 
 Il y a d'innombrables autres services à votre disposition et vous êtes encouragé
 à définir les vôtres. Pour lister tous les services disponibles, utilisez la
-commande de la console ``container:debug``:
+commande de la console ``container:debug`` :
 
 .. code-block:: bash
 
@@ -575,7 +607,9 @@ Gérer les Erreurs et les Pages 404
 Quand « quelque chose » n'est pas trouvé, vous devriez vous servir correctement
 du protocole HTTP et retourner une réponse 404. Pour ce faire, vous allez lancer
 un type spécial d'exception. Si vous étendez la classe contrôleur de base, faites
-comme ça::
+comme ça :
+
+.. code-block:: php
 
     public function indexAction()
     {
@@ -617,7 +651,9 @@ défaut, Symfony2 stocke les attributs dans un cookie en utilisant les sessions
 natives de PHP.
 
 Stocker et récupérer des informations depuis la session peut être effectué
-facilement depuis n'importe quel contrôleur::
+facilement depuis n'importe quel contrôleur :
+
+.. code-block:: php
 
     $session = $this->getRequest()->getSession();
 
@@ -645,7 +681,9 @@ du traitement d'un formulaire : vous souhaitez rediriger l'utilisateur et affich
 message spécial lors de la *prochaine* requête. Ces types de message sont appelés
 messages « flash ».
 
-Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
+Par exemple, imaginez que vous traitiez la soumission d'un formulaire :
+
+.. code-block:: php
 
     public function updateAction()
     {
@@ -701,7 +739,9 @@ L'Objet Response
 La seule condition requise d'un contrôleur est de retourner un objet ``Response``.
 La classe :class:`Symfony\\Component\\HttpFoundation\\Response` est une abstraction
 PHP autour de la réponse HTTP - le message texte rempli avec des en-têtes HTTP et
-du contenu qui est envoyé au client::
+du contenu qui est envoyé au client :
+
+.. code-block:: php
 
     // crée une simple Réponse avec un code de statut 200 (celui par défaut)
     $response = new Response('Hello '.$name, 200);
@@ -725,7 +765,9 @@ L'Objet Request
 ---------------
 
 En sus des valeurs de substitution du routage, le contrôleur a aussi accès à
-l'objet ``Request`` quand il étend la classe ``Controller`` de base::
+l'objet ``Request`` quand il étend la classe ``Controller`` de base :
+
+.. code-block:: php
 
     $request = $this->getRequest();
 

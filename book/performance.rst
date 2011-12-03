@@ -101,12 +101,11 @@ les lectures/écritures sur le disque.
 
 Si vous utilisez l'édition Symfony standard, alors vous utilisez probablement 
 déjà le fichier d'amorçage. Pour vous en assurer, ouvrez votre contrôleur frontal
-(front controller, généralement ``app.php``) et vérifiez si l'une de ces lignes
-existe et n'est pas commentée (ce dont vous avez besoin dépend de si vous utilisez
-:doc:`HTTP Caching layer</book/http_cache>`) :
+(généralement ``app.php``) et vérifiez que la ligne suivante est présente :
+
+.. code-block:: php
 
     require_once __DIR__.'/../app/bootstrap.php.cache';
-    require_once __DIR__.'/../app/bootstrap_cache.php.cache';
 
 Veuillez noter qu'il y a deux inconvénients à utiliser un fichier d'amorçage :
 

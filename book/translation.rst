@@ -660,7 +660,7 @@ de contrôle ou vous voudrez une traduction différente pour des cas spécifiques (
 lorsque le nombre est négatif, par exemple). Pour de tels cas, vous pouvez utiliser des
 intervalles mathématiques explicites ::
 
-    '{0} There is no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf] There are many apples'
+    '{0} There are no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf] There are many apples'
 
 Les intervalles suivent la notation `ISO 31-11`_ . La chaîne de caractères ci-dessus spécifie
 quatre intervalles différents : exactement ``0``, exactement ``1``, ``2-19``, et ``20``
@@ -670,7 +670,7 @@ Vous pouvez également mélanger les règles mathématiques explicites et les règles
 Dans ce cas, si le nombre ne correspond pas à un intervalle spécifique, les règles standards
 prennent effet après la suppression des règles explicites ::
 
-    '{0} There is no apples|[20,Inf] There are many apples|There is one apple|a_few: There are %count% apples'
+    '{0} There are no apples|[20,Inf] There are many apples|There is one apple|a_few: There are %count% apples'
 
 Par exemple, pour ``1`` pomme (« apple »), la règle standard ``There is one apple`` va
 être utilisée. Pour ``2-19`` pommes (« apples »), la seconde règle standard ``There are %count%

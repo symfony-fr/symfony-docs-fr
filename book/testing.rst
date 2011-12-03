@@ -100,7 +100,7 @@ Exécuter les tests pour un fichier ou répertoire donné est aussi très facile
     # lancer tous les tests du répertoire Utility
     $ phpunit -c app src/Acme/DemoBundle/Tests/Utility/
 
-    # lancer les tests de la classe Article
+    # lancer les tests de la classe Calculator
     $ phpunit -c app src/Acme/DemoBundle/Tests/Utility/CalculatorTest.php
 
     # lancer tous les tests d'un Bundle

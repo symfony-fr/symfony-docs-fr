@@ -1541,7 +1541,7 @@ surchargez la méthode ``getDefaultOptions`` pour les spécifier :
                 'email' => new Email(array('message' => 'Invalid email address')),
             ));
         
-            $options['validation_constraint'] = $collectionConstraint;
+            return array('validation_constraint' => $collectionConstraint);
         }
     }
 

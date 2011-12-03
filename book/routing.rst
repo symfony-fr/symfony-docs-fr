@@ -818,6 +818,11 @@ quel contrôleur est éxecuté lorsque l'URL est reconnue.
 * ``_format``: Utilisé pour définir le format de la requête(:ref:`read more<book-routing-format-param>`);
 * ``_locale``: Utilisé pour définir la locale de la session (:ref:`read more<book-translation-locale-url>`);
 
+.. tip::
+
+    Si vous utilisez le paramètre ``_locale`` dans une route, cette valeur sera
+    également stockée en session pour que les futures requêtes la conservent.
+
 .. index::
    single: Routage; Les contrôleurs
    single: Contrôleur; Format de nommage des chaînes de caractères
@@ -1097,7 +1102,9 @@ réalité, le routage est un système bi-directionnel : faire correspondre une
 URL à un contrôleur+paramètres et une route+paramètres à une URL. Les méthodes
 :method:`Symfony\\Component\\Routing\\Router::match` et
 :method:`Symfony\\Component\\Routing\\Router::generate` forment ce système
-bi-directionnel. Prenez l'exemple de la route ``blog_show`` vue plus haut ::
+bi-directionnel. Prenez l'exemple de la route ``blog_show`` vue plus haut :
+
+.. code-block:: php
 
     $params = $router->match('/blog/my-blog-post');
     // array('slug' => 'my-blog-post', '_controller' => 'AcmeBlogBundle:Blog:show')
@@ -1167,8 +1174,8 @@ de la méthode ``generate()`` :
 .. index::
    single: Routage; Générer des URLs depuis un template
 
-Générer des URLs avec «Query Strings»
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Générer des URLs avec « Query Strings »
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La méthode ``generate`` prend un tableau de valeurs jokers pour générer l'URI.
 Mais si vous en passez d'autres, elles seront ajoutées à l'URI en tant que
