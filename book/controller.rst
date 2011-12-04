@@ -289,7 +289,7 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
     ``$last_name``. Les arguments du contrôleur pourraient être totalement
     réorganisés que cela fonctionnerait toujours parfaitement :
 
-.. code-block:: php
+    .. code-block:: php
 
         public function indexAction($last_name, $color, $first_name)
         {
@@ -301,7 +301,7 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
     Le code suivant lancerait une ``RuntimeException`` parce qu'il n'y a pas
     de paramètre ``foo`` défini dans la route :
 
-.. code-block:: php
+    .. code-block:: php
 
         public function indexAction($first_name, $last_name, $color, $foo)
         {
@@ -311,7 +311,7 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
     Cependant, définir l'argument en tant qu'optionnel est parfaitement valide.
     L'exemple suivant ne lancerait pas d'exception :
 
-.. code-block:: php
+    .. code-block:: php
 
         public function indexAction($first_name, $last_name, $color, $foo = 'bar')
         {
@@ -323,7 +323,7 @@ facile et flexible. Gardez les directives suivantes en tête quand vous dévelop
     Si, par exemple, le paramètre ``last_name`` n'était pas important pour votre
     contrôleur, vous pourriez complètement l'omettre :
 
-.. code-block:: php
+    .. code-block:: php
 
         public function indexAction($first_name, $color)
         {

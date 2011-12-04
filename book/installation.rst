@@ -181,8 +181,8 @@ Si vous découvrez Symfony, jetez un oeil au chapitre « :doc:`page_creation` »
 vous apprendrez comment créer des pages, changer la configuration  et faire tout
 ce que vous aurez besoin de faire dans votre nouvelle application.
 
-Utiliser un gestionnaire de code
---------------------------------
+Utiliser un Gestionnaire de Versions
+------------------------------------
 
 Si vous utilisez un système de contrôle de version comme ``Git`` ou ``Subversion``,
 vous pouvez le configurer et commencer à commiter votre projet normalement. La

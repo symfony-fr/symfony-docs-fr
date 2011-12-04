@@ -730,8 +730,8 @@ créer et valider des formulaires, créer des traductions pour votre application
 écrire des tests et bien plus encore. Chacun de ces aspect a sa propre place et
 son propre rôle au sein d'un bundle.
 
-Configuration d'application
----------------------------
+Configuration de l'Application
+------------------------------
 
 Une application consiste en un ensemble de bundles qui représente toutes les
 fonctionnalités et capacités de votre application. Chaque bundle peut être
