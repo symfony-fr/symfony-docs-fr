@@ -8,7 +8,9 @@ Le terme « internationalisation » désigne le processus d'abstraction des textes
 et autres spécificités locales en dehors de votre application qui sont ensuite placés
 dans un fichier où ils peuvent être traduits et convertis en se basant sur la locale de
 l'utilisateur (i.e. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
-une fonction capable de traduire le texte (ou « message ») dans la langue de l'utilisateur ::
+une fonction capable de traduire le texte (ou « message ») dans la langue de l'utilisateur :
+
+.. code-block:: php
 
     // le texte va *toujours* s'afficher en anglais
     echo 'Hello World';
@@ -36,7 +38,8 @@ le processus a plusieurs étapes communes :
 3. Créer des ressources de traduction pour chaque locale supportée qui traduit
    chaque message dans l'application ;
 
-4. Déterminer, définir et gérer la locale de l'utilisateur dans la session.
+4. Déterminer, définir et gérer la locale de l'utilisateur dans la requête, et
+   optionnellement dans la session.
 
 
 .. index::
@@ -81,7 +84,8 @@ n'existe pas dans la locale de l'utilisateur.
     la locale est ``fr_FR`` par exemple). Si cela échoue également, il regarde
     alors pour une traduction utilisant la locale de secours.
 
-La locale utilisée pour les traductions est celle qui est stockée dans la session de l'utilisateur.
+La locale utilisée pour les traductions est celle qui est stockée dans la requête.
+Vous pouvez la définir grâce à l'attribut ``_locale`` de vos routes (:ref:`book-translation-locale-url`).
 
 .. index::
    single: Traductions; Traduction basique
@@ -148,7 +152,8 @@ Le processus de traduction
 
 Pour traduire le message, Symfony2 utilise un processus simple :
 
-* La ``locale`` de l'utilisateur actuel, qui est stockée dans la session, est déterminée ;
+* La ``locale`` de l'utilisateur actuel, qui est stockée dans la requête (ou stockée
+  comme ``_locale`` en session), est déterminée ;
 
 * Un catalogue des messages traduits est chargé depuis les ressources de traduction définies
   pour la ``locale`` (par ex. ``fr_FR``). Les messages de la locale de secours sont aussi
@@ -481,16 +486,27 @@ Gérer la Locale de l'Utilisateur
 --------------------------------
 
 La locale de l'utilisateur courant est stockée dans la session et est accessible
-via le service ``session`` :
+via l'objet ``request`` :
 
 .. code-block:: php
 
-    $locale = $this->get('session')->getLocale();
+    // access the reqest object in a standard controller
+    $request = $this->getRequest();
 
-    $this->get('session')->setLocale('en_US');
+    $request->setLocale('en_US');
 
 .. index::
    single: Traductions; Solution de secours et locale par défaut
+
+Il est aussi possible de stocker la locale en session plutôt qu'en requête. Si vous
+faites cela, toutes les requêtes auront la même locale.
+
+.. code-block:: php
+
+    $this->get('session')->set('_locale', 'en_US');
+
+Lisez le chapitre :ref:`.. _book-translation-locale-url:` pour voir comment définir
+la locale dans vos routes.
 
 Solution de Secours et Locale par Défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -499,8 +515,8 @@ Si la locale n'a pas été explicitement définie dans la session, le paramètre de
 configuration ``fallback_locale`` va être utilisé par le ``Translator``. Le paramètre
 est défini comme ``en`` par défaut (voir `Configuration`_).
 
-Alternativement, vous pouvez garantir que la locale soit définie dans la session de l'utilisateur
-en définissant le paramètre ``default_locale`` dans le service de session :
+Alternativement, vous pouvez garantir que la locale soit définie dans chaque requête
+de l'utilisateur en définissant le paramètre ``default_locale`` du framework :
 
 .. configuration-block::
 
@@ -508,28 +524,33 @@ en définissant le paramètre ``default_locale`` dans le service de session :
 
         # app/config/config.yml
         framework:
-            session: { default_locale: en }
+            default_locale: en
 
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
         <framework:config>
-            <framework:session default-locale="en" />
+            <framework:default-locale>en</framework:default-locale>
         </framework:config>
 
     .. code-block:: php
 
         // app/config/config.php
         $container->loadFromExtension('framework', array(
-            'session' => array('default_locale' => 'en'),
+            'default_locale' => 'en',
         ));
+
+.. versionadded:: 2.1
+     Le paramètre ``default_locale`` était à la base défini dans la clé session,
+     cependant cela a changé dans la version 2.1. C'est parce que la locale est
+     maintenant définie dans la requête et non plus dans la session
 
 .. _book-translation-locale-url:
 
 La locale et l'URL
 ~~~~~~~~~~~~~~~~~~
 
-Puisque la locale de l'utilisateur est stockée dans la session, il peut être tentant
+Puisque vous pouvez stocker la locale de l'utilisateur dans la session, il peut être tentant
 d'utiliser la même URL pour afficher une ressource dans de nombreuses langues différentes
 en se basant sur la locale de l'utilisateur. Par exemple, ``http://www.example.com/contact``
 pourrait afficher le contenu en anglais pour un utilisateur, et en français pour un autre
@@ -588,7 +609,9 @@ Pluralisation
 -------------
 
 La pluralisation des messages est un sujet difficile car les règles peuvent être assez complexes. 
-Par exemple, voici la représentation mathématique des règles de la pluralisation russe ::
+Par exemple, voici la représentation mathématique des règles de la pluralisation russe :
+
+.. code-block:: text
 
     (($number % 10 == 1) && ($number % 100 != 11)) ? 0 : ((($number % 10 >= 2) && ($number % 10 <= 4) && (($number % 100 < 10) || ($number % 100 >= 20))) ? 1 : 2);
 
@@ -597,7 +620,9 @@ donnant un index de 0, 1 ou 2. Pour chaque forme, le pluriel est différent, et a
 est également différente.
 
 Quand une traduction a des formes différentes dues à la pluralisation, vous pouvez fournir
-toutes les formes comme une chaîne de caractères séparée par un pipe (``|``)::
+toutes les formes comme une chaîne de caractères séparée par un pipe (``|``):
+
+.. code-block:: text
 
     'There is one apple|There are %count% apples'
 
@@ -622,7 +647,9 @@ et un pluriel pour tous les autres nombres (0, 2, 3 ...). Ainsi, si ``count`` va
 ``1``, le traducteur va utiliser la première chaîne de caractères (``There is one apple``)
 comme traduction. Sinon, il va utiliser ``There are %count% apples``.
 
-Voici la traduction française::
+Voici la traduction française :
+
+.. code-block:: text
 
     'Il y a %count% pomme|Il y a %count% pommes'
 
@@ -635,7 +662,9 @@ Chaque locale a son propre ensemble de règles, certaines ayant jusqu'à six diffé
 formes plurielles avec des règles complexes pour déterminer quel nombre correspond à quelle forme du pluriel.
 Les règles sont assez simples pour l'anglais et le français, mais pour le russe, vous auriez
 voulu un indice pour savoir quelle règle correspond à quelle chaîne de caractères. Pour aider les traducteurs,
-vous pouvez éventuellement « tagger » chaque chaîne ::
+vous pouvez éventuellement « tagger » chaque chaîne :
+
+.. code-block:: text
 
     'one: There is one apple|some: There are %count% apples'
 
@@ -658,7 +687,9 @@ La meilleure façon de pluraliser un message est de laisser Symfony2 utiliser sa 
 pour choisir quelle chaîne utiliser en se basant sur un nombre donné. Parfois, vous aurez besoin de plus
 de contrôle ou vous voudrez une traduction différente pour des cas spécifiques (pour ``0``, ou
 lorsque le nombre est négatif, par exemple). Pour de tels cas, vous pouvez utiliser des
-intervalles mathématiques explicites ::
+intervalles mathématiques explicites :
+
+.. code-block:: text
 
     '{0} There are no apples|{1} There is one apple|]1,19] There are %count% apples|[20,Inf] There are many apples'
 
@@ -668,7 +699,9 @@ et plus.
 
 Vous pouvez également mélanger les règles mathématiques explicites et les règles standards.
 Dans ce cas, si le nombre ne correspond pas à un intervalle spécifique, les règles standards
-prennent effet après la suppression des règles explicites ::
+prennent effet après la suppression des règles explicites :
+
+.. code-block:: text
 
     '{0} There are no apples|[20,Inf] There are many apples|There is one apple|a_few: There are %count% apples'
 
@@ -677,11 +710,15 @@ Par exemple, pour ``1`` pomme (« apple »), la règle standard ``There is one appl
 apples`` va être sélectionnée.
 
 Une classe :class:`Symfony\\Component\\Translation\\Interval` peut représenter un ensemble fini
-de nombres ::
+de nombres :
+
+.. code-block:: text
 
     {1,2,3,4}
 
-Ou des nombres entre deux autres nombres ::
+Ou des nombres entre deux autres nombres :
+
+.. code-block:: text
 
     [1, +Inf[
     ]-1,2[
@@ -789,7 +826,7 @@ d'aide ``translator`` :
 Forcer la Locale du Traducteur
 ------------------------------
 
-Lors de la traduction d'un message, Symfony2 utilise la locale de la session de l'utilisateur
+Lors de la traduction d'un message, Symfony2 utilise la locale de la requête courante
 ou la locale ``de secours`` (« fallback locale ») si nécessaire. Vous pouvez également spécifier
 manuellement la locale à utiliser pour la traduction :
 
@@ -832,7 +869,8 @@ n'a plus besoin d'être un processus douloureux et se résume simplement à quelque
   de traduction. Symfony2 découvre et traite chaque fichier grâce à leur nom qui suit
   une convention spécifique ;
   
-* Gérer la locale de l'utilisateur, qui est stockée dans la session.
+* Gérer la locale de l'utilisateur, qui est stockée dans la requête, ou une fois pour
+  toutes en session.
 
 .. _`strtr function`: http://www.php.net/manual/en/function.strtr.php
 .. _`ISO 31-11`: http://en.wikipedia.org/wiki/Interval_%28mathematics%29#The_ISO_notation

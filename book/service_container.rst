@@ -140,7 +140,9 @@ créer le ``Mailer``. Cela se fait via la configuration, qui peut
 Une instance de l'objet ``Acme\HelloBundle\Mailer`` est maintenant disponible via 
 le conteneur de services. Le conteneur est disponible dans tous les contrôleurs traditionnels
 de Symfony2 où vous pouvez accéder aux services du conteneur via la méthode 
-de raccourci ``get()`` ::
+de raccourci ``get()`` :
+
+.. code-block:: php
 
     class HelloController extends Controller
     {
@@ -500,7 +502,6 @@ de services du ``FrameworkBundle``. Chaque extension vous permet de facilement
 personnaliser le bundle, sans se soucier de la manière dont les services internes sont
 définis.
 
-
 Dans ce cas, l'extension vous permet de personnaliser la ``charset``, ``error_handler``,
 ``csrf_protection``, ``router`` et bien plus encore. En interne,
 le ``FrameworkBundle`` utilise les options spécifiées ici pour définir et configurer
@@ -536,7 +537,9 @@ qui aide à gérer la préparation et l'envoi d'un message email à
 une liste d'adresses. Bien sûr, le service ``my_mailer`` excelle 
 vraiment pour envoyer des messages email, donc nous allons l'utiliser dans ``NewsletterManager``
 pour gérer l'envoi effectif des messages. Cette fausse classe pourrait ressembler à 
-quelque chose comme ceci ::
+quelque chose comme ceci :
+
+.. code-block:: php
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -555,7 +558,9 @@ quelque chose comme ceci ::
     }
 
 Sans utiliser le conteneur de services, nous pouvons créer une nouvelle ``NewsletterManager`` 
-assez facilement à l'intérieur d'un contrôleur ::
+assez facilement à l'intérieur d'un contrôleur :
+
+.. code-block:: php
 
     public function sendNewsletterAction()
     {
@@ -635,9 +640,11 @@ Dépendances optionnelles : Setter Injection
 
 L'injection de dépendances dans le constructeur de cette manière est un excellent
 moyen de s'assurer que la dépendance est disponible pour utilisation. Si vous avez des
-dépendances optionnelles pour une classe, alors « setter injection » peut être une meilleure option. 
-Cela signifie d'injecter la dépendance en utilisant un appel de méthode plutôt que par le
-constructeur. La classe devrait ressembler à ceci ::
+dépendances optionnelles pour une classe, alors la méthode « setter injection » peut
+être une meilleure option. Cela signifie d'injecter la dépendance en utilisant un
+appel de méthode plutôt que par le constructeur. La classe devrait ressembler à ceci :
+
+.. code-block:: php
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -787,7 +794,9 @@ services. Pour garder les choses simples, par défaut Symfony2 n'exige pas que
 les contrôleurs soient définis comme des services. Par ailleurs Symfony2 injecte l'ensemble du
 conteneur de services dans votre contrôleur. Par exemple, pour gérer le stockage 
 des informations sur une session utilisateur, Symfony2 fournit un service ``session``,
-auquel vous pouvez accéder de l'intérieur d'un contrôleur standard comme suit ::
+auquel vous pouvez accéder de l'intérieur d'un contrôleur standard comme suit :
+
+.. code-block:: php
 
     public function indexAction($bar)
     {
@@ -805,7 +814,9 @@ Nous pouvons aller plus loin en utilisant ces services à l'intérieur des servi
 que vous avez créés pour votre application. Modifions le ``NewsletterManager``
 afin d'utiliser le vrai service ``mailer`` de Symfony2 (au lieu du faux ``my_mailer``).
 Passons aussi le service du moteur de template à ``NewsletterManager``
-afin qu'il puisse générer le contenu de l'email via un template ::
+afin qu'il puisse générer le contenu de l'email via un template :
+
+.. code-block:: php
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -884,11 +895,13 @@ Marquer les Services comme public / privé
 Lors de la définition des services, vous souhaitez généralement être en mesure d'accéder à ces définitions
 au sein de votre code d'application. Ces services sont appelés ``publics``. Par exemple,
 le service ``doctrine`` enregistré avec le conteneur en utilisant le DoctrineBundle
-est un service public que vous pouvez y accéder via ::
+est un service public que vous pouvez y accéder via :
+
+.. code-block:: php
 
    $doctrine = $container->get('doctrine');
 
-Cependant, il ya des cas utiles où vous ne voulez pas qu'un service soit public. Cela
+Cependant, il y a des cas utiles où vous ne voulez pas qu'un service soit public. Cela
 est courant quand un service est seulement défini car il pourrait être utilisé comme un
 paramètre pour un autre service.
 
@@ -922,7 +935,9 @@ Voici un exemple :
         $definition->setPublic(false);
         $container->setDefinition('foo', $definition);
 
-Maintenant que le service est privé, vous *ne pouvez pas* appeler ::
+Maintenant que le service est privé, vous *ne pouvez pas* appeler :
+
+.. code-block:: php
 
     $container->get('foo');
 
@@ -931,7 +946,7 @@ ci-dessous) pour accéder à ce service (via l'alias).
 
 .. note::
 
-   Les services sont par défaut publics.
+   Les services sont publics par défaut.
 
 Aliasing
 ~~~~~~~~
@@ -964,7 +979,9 @@ en outre, vous pouvez même mettre en alias les services non publics.
         $containerBuilder->setAlias('bar', 'foo');
 
 Cela signifie que quand vous utilisez le conteneur directement, vous pouvez accéder au 
-service  ``foo`` en demandant le service ``bar`` comme ceci ::
+service  ``foo`` en demandant le service ``bar`` comme ceci :
+
+.. code-block:: php
 
     $container->get('bar'); // Would return the foo service
 

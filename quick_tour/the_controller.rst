@@ -139,8 +139,8 @@ dans un contrôleur :
     // dans un autre contrôleur et une autre requête
     $foo = $session->get('foo');
 
-    // définit la locale de l'utilisateur
-    $session->setLocale('fr');
+    // utilise la valeur par défaut si la clé n'existe pas
+    $filters = $session->set('filters', array());
 
 Vous pouvez aussi stocker de courts messages qui ne seront disponibles que pour
 la prochaine requête :
@@ -175,9 +175,10 @@ qui suffit à la plupart des besoins:
 
         providers:
             in_memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                memory:
+                    users:
+                        user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                        admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
         firewalls:
             dev:	

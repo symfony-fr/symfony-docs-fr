@@ -175,6 +175,8 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
         - { resource: security.yml }
 
     framework:
+	#esi:            ~
+        #translator:     { fallback: %locale% }
         secret:          %secret%
         charset:         UTF-8
         router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -182,8 +184,8 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
         csrf_protection: true        
         validation:      { enable_annotations: true }
         templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-        session:
-            default_locale: %locale%            
+	default_locale:  %locale%
+        session:       
             auto_start:     true
 
     # Twig Configuration
@@ -195,6 +197,8 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
     assetic:
         debug:          %kernel.debug%
         use_controller: false
+        bundles:        [ ]
+        # java: /usr/bin/java
         filters:	
             cssrewrite: ~	
             # closure:
@@ -207,6 +211,7 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
         dbal:
             driver:   %database_driver%
             host:     %database_host%
+            port:     %database_port%
             dbname:   %database_name%
             user:     %database_user%
             password: %database_password%

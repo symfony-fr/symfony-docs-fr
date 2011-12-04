@@ -296,7 +296,9 @@ au moteur de template d'évaluer d'abord le template de base, qui configure le
 layout et définit plusieurs blocs. Le template enfant est ensuite
 rendu. Durant ce traitement les blocs parents ``title`` et ``body`` sont
 remplacés par ceux de l'enfant. Dépendant de la valeur de ``blog_entries``, la
-sortie peut ressembler à ceci::
+sortie peut ressembler à ceci :
+
+.. code-block:: html+jinja
 
     <!DOCTYPE html>
     <html>
@@ -384,7 +386,8 @@ différents :
   plupart des templates résident au sein d'un bundle.
 
 Symfony2 utilise une chaine de caractères au format
-**bundle**:**controller**:**template** pour les templates.
+**bundle**:**controller**:**template** pour les templates. Cela permet plusieurs
+types de templates, chacun se situant à un endroit spécifique :
 
 * ``AcmeBlogBundle:Blog:index.html.twig``: Cette syntaxe est utilisée pour
   spécifier un template pour une page donnée. Les trois parties de la chaine de
@@ -629,7 +632,6 @@ Pour inclure le contrôleur, vous avez besoin de faire référence à ce dernier
 utilisant la chaine de caractères standard pour les contrôleurs
 (c-a-d **bundle**:**controller**:**action**) :
 
-
 .. configuration-block::
 
     .. code-block:: html+jinja
@@ -658,10 +660,10 @@ organisation et réutilisabilité du code.
 .. index::
    single: Templating; Linking to pages
 
-Le Lien vers des Pages
-~~~~~~~~~~~~~~~~~~~~~~
+Liens vers des Pages
+~~~~~~~~~~~~~~~~~~~~
 
-La création de lien vers d'autres pages de votre projet est l'opération la plus
+La création de liens vers d'autres pages de votre projet est l'opération la plus
 commune qui soit dans un template. Au lieu de coder en dur les URLs dans les
 templates, utilisez la fonction ``path`` de Twig (ou le helper ``router`` en
 PHP) pour générer les URLs basées sur la configuration des routes. Plus tard, si
@@ -777,8 +779,8 @@ faisons les liens vers les articles correctement :
 .. index::
    single: Templating; Linking to assets
 
-Le Lien vers des Fichiers
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Liens vers des Fichiers
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Les templates font aussi très souvent référence à des images, du Javascript, des
 feuilles de style et d'autres fichiers. Bien sûr vous pouvez coder en dur le chemin
@@ -807,6 +809,12 @@ répertoire (http://example.com/my_app par exemple), chaque chemin vers les
 fichiers sera alors généré avec le sous répertoire (``/my_app/images/logo.png``
 par exemple). La fonction ``asset`` fait attention à cela en déterminant comment
 votre application est utilisée et en générant les chemins corrects.
+
+De plus, si vous utilisez la fonction ``asset``, Symfony peut automatiquement ajouter
+une chaine de caractères afin de garantir que la ressource statique mise à jour ne
+sera pas mise en cache lors de son déploiement. Par exemple, ``/images/logo.png`` 
+pourrait ressembler à ``/images/logo.png?v2``. Pour plus d'informations, lisez
+la documentation de l'option de configuration :ref:`ref-framework-assets-version`.
 
 .. index::
    single: Templating; Including stylesheets and Javascripts
@@ -974,7 +982,9 @@ Supposons que vous utilisiez un imaginaire ``AcmeBlogBundle`` open-source dans
 votre projet (dans le répertoire ``src/Acme/blogBundle`` par exemple). Même si vous
 êtes très content de ce bundle, vous voudriez probablement surcharger la page « liste » du
 blog pour la personnaliser et l'adapter spécialement à votre application. En
-cherchant un peu dans le contrôleur ``Blog`` du ``AcmeBlogBundle``, vous trouvez ceci : ::
+cherchant un peu dans le contrôleur ``Blog`` du ``AcmeBlogBundle``, vous trouvez ceci :
+
+.. code-block:: php
 
     public function indexAction()
     {
@@ -1028,7 +1038,6 @@ peuvent être surchargés de la même façon. Par exemple, le bundle noyau
 « exceptions » et aux « erreurs » qui peuvent être surchargés en copiant chacun d'eux
 du répertoire ``Ressources/views/Exception`` du ``TwigBundle`` vers, vous
 l'avez deviné, le répertoire ``app/Resources/TwigBundle/views/Exception``.
-
 
 .. index::
    single: Templating; Three-level inheritance pattern
@@ -1110,12 +1119,16 @@ page résultante ou permettre à un utilisateur malicieux de réaliser une attaq
 
         Hello <?php echo $name ?>
 
-Imaginons que l'utilisateur ait rentré le code suivant comme son nom ::
+Imaginons que l'utilisateur ait rentré le code suivant comme son nom :
+
+.. code-block:: text
 
     <script>alert('hello!')</script>
 
 Sans échappement du rendu, le template résultant provoquera l'affichage d'une boîte
-d'alert Javascript ::
+d'alert Javascript :
+
+.. code-block:: text
 
     Hello <script>alert('hello!')</script>
 
@@ -1125,7 +1138,9 @@ malicieuses dans un espace sécurisé d'un inconnu et légitime utilisateur.
 
 La réponse à ce problème est l'échappement (output escaping). En activant l'échappement,
 le même template sera rendu de façon inoffensive, et affichera
-littéralement la balise ``script`` à l'écran ::
+littéralement la balise ``script`` à l'écran :
+
+.. code-block:: text
 
     Hello &lt;script&gt;alert(&#39;helloe&#39;)&lt;/script&gt;
 
@@ -1159,7 +1174,9 @@ L'échappement en PHP
 L'échappement n'est pas automatique lorsque vous utilisez des templates PHP. Ce
 qui signife que, à moins que vous ne choisissiez explicitement d'échapper une
 variable, vous n'êtes pas protégé. Pour utiliser l'échappement, utilisez la
-méthode spéciale ``escape()`` de view : ::
+méthode spéciale ``escape()`` de view : :
+
+.. code-block:: php
 
     Hello <?php echo $view->escape($name) ?>
 

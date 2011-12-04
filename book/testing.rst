@@ -50,7 +50,9 @@ le comportement général de votre application, lisez la sections sur les `Tests
 Ecrire des tests unitaires avec Symfony2 n'est pas différent d'écrire des tests
 unitaires standards PHPUnit. Supposez, par exemple, que vous avez un classe
 *incroyablement* simple appelée ``Calculator`` dans le répertoire ``Utility/`` de
-votre bundle::
+votre bundle :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Utility/Calculator.php
     namespace Acme\DemoBundle\Utility;
@@ -64,7 +66,9 @@ votre bundle::
     }
 
 Poour tester cela, créez le fichier ``CalculatorTest`` dans le dossier ``Tests/Utility``
-de votre::
+de votre:
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Tests/Utility/CalculatorTest.php
     namespace Acme\DemoBundle\Tests\Utility;
@@ -132,7 +136,9 @@ Les tests fonctionnels sont de simples fichiers PHP qui se trouvent dans le rép
 qui étend la classe spéciale ``WebTestCase``.
 
 Par exemple, la Symfony2 Standard Edition fournit un simple test fonctionnel pour
-son ``DemoController`` (`DemoControllerTest`_)::
+son ``DemoController`` (`DemoControllerTest`_) :
+
+.. code-block:: php
 
     // src/Acme/DemoBundle/Tests/Controller/DemoControllerTest.php
     namespace Acme\DemoBundle\Tests\Controller;
@@ -157,7 +163,9 @@ son ``DemoController`` (`DemoControllerTest`_)::
     le noyau (kernel) de votre application. Dans la plupart des cas, cela fonctionnera
     automatiquement. Cependant, si votre kernel n'est pas dans le répertoire habituel,
     vous devrez modifier le fichier ``phpunit.xml.dist`` pour définir la variable
-    d'environnement ``KERNEL_DIR`` afin qu'elle pointe vers le répertoire du kernel::
+    d'environnement ``KERNEL_DIR`` afin qu'elle pointe vers le répertoire du kernel :
+
+    .. code-block:: xml
 
         <phpunit
             <!-- ... -->
@@ -168,7 +176,9 @@ son ``DemoController`` (`DemoControllerTest`_)::
         </phpunit>
 
 La méthode ``createClient()`` retourne un client, qui ressemble au navigateur que
-vous utilisez pour surfer sur vos sites::
+vous utilisez pour surfer sur vos sites:
+
+.. code-block:: php
 
     $crawler = $client->request('GET', '/demo/hello/Fabien');
 
@@ -186,14 +196,18 @@ soumettre des formulaires.
 Cliquez sur un lien en le sélectionnant avec le Crawler en utilisant
 soit une expression XPath ou un sélecteur CSS, puis utilisez le Client pour
 cliquer dessus. Par exemple, le code suivant trouve tous les liens avec le text
-``Greet``, puis sélectionne le second et clique dessus::
+``Greet``, puis sélectionne le second et clique dessus :
+
+.. code-block:: php
 
     $link = $crawler->filter('a:contains("Greet")')->eq(1)->link();
 
     $crawler = $client->click($link);
 
 Soumettre un formulaire est très similaire : sélectionnez un bouton de ce dernier,
-ré-écrivez quelques unes de ses valeurs si besoin est puis soumettez-le::
+ré-écrivez quelques unes de ses valeurs si besoin est puis soumettez-le :
+
+.. code-block:: php
 
     $form = $crawler->selectButton('submit')->form();
 
@@ -245,7 +259,9 @@ document XML/HTML :
 
     Le tableau ``server`` contient les valeurs brutes que vous trouveriez normalement
     dans la variable superglobale `$_SERVER`_. Par exemple, pour définir les entêtes
-    HTTP `Content-Type` et `Referer`, vous procéderiez comme suit::
+    HTTP `Content-Type` et `Referer`, vous procéderiez comme suit :
+
+    .. code-block:: php
 
         $client->request(
             'GET',
@@ -262,7 +278,6 @@ document XML/HTML :
    single: Tests; Assertions
 
 .. sidebar: Assertions Utiles
-
     
     Afin que vous démarriez plus rapidement, voici une liste des
     assertions les plus communes et utiles :
@@ -300,7 +315,9 @@ Travailler avec le Client Test
 ------------------------------
 
 Le Client test simule un client HTTP comme un navigateur et lance des requêtes à
-votre application Symfony2::
+votre application Symfony2 :
+
+.. code-block:: php
 
     $crawler = $client->request('GET', '/hello/Fabien');
 
@@ -385,6 +402,7 @@ Le Client supporte de nombreuses opérations qui peuvent être effectuées
 à travers un navigateur réel :
 
 .. code-block:: php
+
     $client->back();
     $client->forward();
     $client->reload();

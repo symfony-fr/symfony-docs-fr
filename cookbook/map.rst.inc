@@ -32,9 +32,10 @@
 * **Forms and Validation**
 
   * :doc:`/cookbook/form/form_customization`
-  * :doc:`/cookbook/form/create_custom_field_type`
+  * :doc:`/cookbook/form/data_transformers`
   * :doc:`/cookbook/form/dynamic_form_generation`
   * :doc:`/cookbook/form/form_collections`
+  * :doc:`/cookbook/form/create_custom_field_type`
   * :doc:`/cookbook/validation/custom_constraint`
   * (doctrine) :doc:`/cookbook/doctrine/file_uploads`
 
@@ -91,13 +92,17 @@
   * :doc:`/cookbook/templating/global_variables`
   * :doc:`/cookbook/templating/PHP`
 
-* **Tools, Logging and Internals**
+* **Logging**
+
+  * :doc:`/cookbook/logging/monolog`
+  * :doc:`/cookbook/logging/monolog_email`
+
+* **Tools and Internals**
 
   * :doc:`/cookbook/tools/autoloader`
   * :doc:`/cookbook/tools/finder`
   * :doc:`/cookbook/console`
   * :doc:`/cookbook/debugging`
-  * :doc:`/cookbook/logging/monolog`
 
 * **Web Services**
 

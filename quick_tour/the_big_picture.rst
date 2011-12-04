@@ -395,6 +395,15 @@ des URLs plus propres :
 
     http://localhost/demo/hello/Fabien
 
+.. note::
+    
+    Notez bien que les trois URLs ci-dessus sont fournies à titre d'**exemple**
+    afin de montrer à quoi ressemble une URL lors que le contrôleur frontal de
+    production est utilisé (avec ou sans mod_rewrite). Si vous les essayez dans
+    la *Symfony Standard Edition*, vous aurez une erreur 404 car *AcmeDemoBundle*
+    est activé pour l'environnemenr de dev uniquement, et ses routes sont importées
+    dans *app/config/routing_dev.yml*.
+
 Pour que votre application répondre plus rapidement, Symfony2 met en cache certains
 dossiers dans le répertoire ``app/cache/``. En environnement de développement 
 (``app_dev.php``), le cache est vidé automatiquement lorsque vous apportez une
