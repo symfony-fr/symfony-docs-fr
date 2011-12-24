@@ -527,10 +527,13 @@ L'en-tête HTTP résultante sera :
     La méthode ``setExpires()`` convertit automatiquement la date au
     format GMT comme demandé par la spécification.
 
-L'en-tête ``Expires`` souffre de deux limitations. D'abord, l'heure du
-serveur web et celle du serveur de cache (le navigateur par exemple)
-doivent être synchronisées. De même, la spécification déclare que « les
-serveurs HTTP/1.1 ne devraient pas envoyer des dates ``Expires`` de
+Notez que dans toutes les versions HTTP précédant la 1.1, le serveur d'origine
+n'était pas obligé d'envoyer l'entête ``Date``. En conséquence, le cache
+(par exemple le navigateur) pourrait être obligé de consulter l'horloge
+locale afin d'évaluer l'entête ``Expires`` rendant ainsi le calcul de la
+durée de vie sensible aux décalages d'horloges.
+Une autre limitation de l'entête  ``Expires`` est que la spécification déclare
+que « les serveurs HTTP/1.1 ne devraient pas envoyer des dates ``Expires`` de
 plus d'un an dans le futur ».
 
 .. index::

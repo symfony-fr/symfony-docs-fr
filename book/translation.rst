@@ -4,7 +4,7 @@
 Traductions
 ===========
 
-Le terme « internationalisation » désigne le processus d'abstraction des textes
+Le terme « internationalisation » (souvent abrégé `i18n`_)désigne le processus d'abstraction des textes
 et autres spécificités locales en dehors de votre application qui sont ensuite placés
 dans un fichier où ils peuvent être traduits et convertis en se basant sur la locale de
 l'utilisateur (i.e. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
@@ -327,8 +327,10 @@ Le choix du format à utiliser dépend de vous, c'est une question de goût.
 Créer les Traductions
 ~~~~~~~~~~~~~~~~~~~~~
 
-Chaque fichier est constitué d'une série de paires id-traduction pour un domaine et
-une locale donnés. L'id est l'identifiant de la traduction individuelle, et peut
+Le fait de créer des fichiers de traduction est une partie importante de la 
+« localisation » (souvent abrégée `L10n`_). Les fichiers de traduction consistent
+en une série de paires id-traduction pour un domaine et une locale donnés.
+L'id est l'identifiant de la traduction individuelle, et peut
 être le message dans la locale principale (par exemple « Symfony is great ») de votre application
 ou un identificateur unique (par exemple « symfony2.great » - voir l'encadré ci-dessous) :
 
@@ -872,6 +874,8 @@ n'a plus besoin d'être un processus douloureux et se résume simplement à quelque
 * Gérer la locale de l'utilisateur, qui est stockée dans la requête, ou une fois pour
   toutes en session.
 
-.. _`strtr function`: http://www.php.net/manual/en/function.strtr.php
-.. _`ISO 31-11`: http://en.wikipedia.org/wiki/Interval_%28mathematics%29#The_ISO_notation
+.. _`i18n`: http://fr.wikipedia.org/wiki/Internationalisation_et_localisation
+.. _`L10n`: http://fr.wikipedia.org/wiki/Localisation_(informatique)
+.. _`strtr function`: http://www.php.net/manual/fr/function.strtr.php
+.. _`ISO 31-11`: http://en.wikipedia.org/wiki/ISO_31-11
 .. _`Translatable Extension`: https://github.com/l3pp4rd/DoctrineExtensions
