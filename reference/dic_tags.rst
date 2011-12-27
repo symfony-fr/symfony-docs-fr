@@ -1,5 +1,5 @@
-The Dependency Injection Tags
-=============================
+Les Tags de l'Injection de Dépendance
+====================================
 
 Tags:
 
@@ -18,13 +18,12 @@ Tags:
 * ``twig.extension``
 * ``validator.initializer``
 
-Enabling Custom PHP Template Helpers
-------------------------------------
+Activer les helpers de template PHP personnalisés
+-------------------------------------------------
 
-To enable a custom template helper, add it as a regular service in one
-of your configuration, tag it with ``templating.helper`` and define an
-``alias`` attribute (the helper will be accessible via this alias in the
-templates):
+Pour activer un helper de template personnalisé, ajoutez le comme service dans 
+votre configuration, taguez avec ``templating.helper`` puis définissez un attribut
+``alias`` (le helper sera accessible via cet alias dans les templates) :
 
 .. configuration-block::
 
@@ -51,11 +50,11 @@ templates):
 
 .. _reference-dic-tags-twig-extension:
 
-Enabling Custom Twig Extensions
--------------------------------
+Activer les extension Twig personnalisées
+-----------------------------------------
 
-To enable a Twig extension, add it as a regular service in one of your
-configuration, and tag it with ``twig.extension``:
+Pour activer une extension Twig, ajoutez la comme service dans l'une de vos
+configurations, et taguez la avec ``twig.extension`` :
 
 .. configuration-block::
 
@@ -80,19 +79,19 @@ configuration, and tag it with ``twig.extension``:
             ->addTag('twig.extension')
         ;
 
-For information on how to create the actual Twig Extension class, see
-`Twig's documentation`_ on the topic.
+Pour plus d'informations sur comment créer une classe d'extension Twig, lisez
+la `documentation Twig`_ sur ce sujet.
 
 
 .. _dic-tags-kernel-event-listener:
 
-Enabling Custom Listeners
--------------------------
+Activer les Listeners personnalisés
+-----------------------------------
 
-To enable a custom listener, add it as a regular service in one of your
-configuration, and tag it with ``kernel.event_listener``. You must provide
-the name of the event your service listens to, as well as the method that
-will be called:
+Pour activer un listener personnalisé, ajoutez le comme service dans l'une de vos
+configurations, et taguez le avec ``kernel.event_listener``. Vous devez spécifier
+le nom de l'évènement que votre service écoute, tout comme la méthode qui sera
+appelée :
 
 .. configuration-block::
 
@@ -119,24 +118,24 @@ will be called:
 
 .. note::
 
-    You can also specify priority as an attribute of the kernel.event_listener 
-    tag (much like the method or event attributes), with either a positive 
-    or negative integer. This allows you to make sure your listener will always 
-    be called before or after another listener listening for the same event.
-
+    Vous pouvez aussi spécifier la priorité comme attribut du tag kernel.event_listener 
+    (un peu comme la méthode ou les attributs de l'évènement), avec un valeur entière
+    positive ou négative. Cela permettra à votre listener d'être toujours appelé
+    avant ou après un autre listerner qui écoute le même évènement.
 
 
 .. _dic-tags-kernel-event-subscriber:
 
-Enabling Custom Subscribers
----------------------------
+Activer les abonnements personnalisés
+-------------------------------------
 
 .. versionadded:: 2.1
+   
+   Le fait d'ajouter des abonnements (subscribers) à l'évènement kernel est apparu
+   avec la version 2.1.
 
-   The ability to add kernel event subscribers is new to 2.1.
-
-To enable a custom subscriber, add it as a regular service in one of your
-configuration, and tag it with ``kernel.event_subscriber``:
+Pour activer un abonnement, ajoutez le comme service dans l'une de vos configurations,
+et taguez le avec ``kernel.event_subscriber`` :
 
 .. configuration-block::
 
@@ -163,19 +162,18 @@ configuration, and tag it with ``kernel.event_subscriber``:
 
 .. note::
 
-    Your service must implement the :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`
-    interface.
+    Votre service doit implémenter l'interface :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`.
 
 .. note::
 
-    If your service is created by a factory, you **MUST** correctly set the ``class``
-    parameter for this tag to work correctly.
+    Si votre service est créé par un factory, vous **DEVEZ** définir correctement
+    le paramètre ``class`` pour que ce tag fonctionne bien.
 
-Enabling Custom Template Engines
---------------------------------
+Activer les moteurs de Template personnalisés
+---------------------------------------------
 
-To enable a custom template engine, add it as a regular service in one
-of your configuration, tag it with ``templating.engine``:
+Pour activer un moteur de template personnalisé, ajoutez le comme service dans l'une
+de vos configurations puis taguez le avec ``templating.engine`` :
 
 .. configuration-block::
 
@@ -200,11 +198,11 @@ of your configuration, tag it with ``templating.engine``:
             ->addTag('templating.engine')
         ;
 
-Enabling Custom Routing Loaders
--------------------------------
+Activer un chargeur de routes personnalisé
+------------------------------------------
 
-To enable a custom routing loader, add it as a regular service in one
-of your configuration, and tag it with ``routing.loader``:
+Pour activer un chargeur de routes personnalisé, ajoutez le comme service dans l'une
+de vos configurations puis taguez le avec ``routing.loader`` :
 
 .. configuration-block::
 
@@ -231,12 +229,12 @@ of your configuration, and tag it with ``routing.loader``:
 
 .. _dic_tags-monolog:
 
-Using a custom logging channel with Monolog
--------------------------------------------
+Utiliser un canal de logging personnalisé avec Monolog
+------------------------------------------------------
 
-Monolog allows you to share its handlers between several logging channels.
-The logger service uses the channel ``app`` but you can change the
-channel when injecting the logger in a service.
+Monolog vous permet de partager ses handlers entre différents canaux de logging.
+Le service logger utilise le canal ``app`` mais vous pouvez le changer au moment
+d'injecter le logger dans un service.
 
 .. configuration-block::
 
@@ -264,23 +262,23 @@ channel when injecting the logger in a service.
 
 .. note::
 
-    This works only when the logger service is a constructor argument,
-    not when it is injected through a setter.
+    Cela fonctionne uniquement lorsque le service logger est un argument de constructeur,
+    et non pas lorsqu'il est injecté via un setter.
 
 .. _dic_tags-monolog-processor:
 
-Adding a processor for Monolog
-------------------------------
 
-Monolog allows you to add processors in the logger or in the handlers to add
-extra data in the records. A processor receives the record as an argument and
-must return it after adding some extra data in the ``extra`` attribute of
-the record.
+Ajouter un processeur pour Monolog
+----------------------------------
 
-Let's see how you can use the built-in ``IntrospectionProcessor`` to add
-the file, the line, the class and the method where the logger was triggered.
+Monolog vous autorise à ajouter des processeurs dans le logger ou dans les handlers
+pour ajouter des données en plus dans les enregistrements. Un processeur recoit
+l'enregistrement comme argument et doit le retourner après avoir ajouté des données
+en plus dans l'attribut ``extra``.
 
-You can add a processor globally:
+Voyons comment vous pouvez utiliser ``IntrospectionProcessor`` pour ajouter
+le fichier, la ligne, la classe et la méthode où le logger a été déclenché.
+Vous pouvez ajouter un processeur de façon globale :
 
 .. configuration-block::
 
@@ -306,11 +304,11 @@ You can add a processor globally:
 
 .. tip::
 
-    If your service is not a callable (using ``__invoke``) you can add the
-    ``method`` attribute in the tag to use a specific method.
+    Si votre service n'est pas appelable (en utilisant``__invoke``) vous pouvez
+    ajouter l'attribut ``method`` dans  le tag pour utiliser une méthode spécifique.
 
-You can add also a processor for a specific handler by using the ``handler``
-attribute:
+Vous pouvez aussi ajouter un processeur pour un handler spécifique en utilisant
+l'attribut ``handler`` :
 
 .. configuration-block::
 
@@ -334,9 +332,9 @@ attribute:
         $definition->addTag('monolog.processor', array('handler' => 'firephp');
         $container->register('my_service', $definition);
 
-You can also add a processor for a specific logging channel by using the ``channel``
-attribute. This will register the processor only for the ``security`` logging
-channel used in the Security component:
+Vous pouvez aussi ajouter un processeur pour un canal de logging spécifique en
+utilisant l'attribut ``channel``. Cela enregistrera seulement le processeur pour
+le canal de logging ``security`` qui est utilisé dans le composant Security :
 
 .. configuration-block::
 
@@ -361,8 +359,8 @@ channel used in the Security component:
         $container->register('my_service', $definition);
 
 .. note::
+ 
+    Vous ne pouvea pas utiliser les attributs ``handler`` et ``channel`` en même
+    temps pour le même tag car les handlers sont partagés par un même canal.
 
-    You cannot use both the ``handler`` and ``channel`` attributes for the
-    same tag as handlers are shared between all channels.
-
-..  _`Twig's documentation`: http://twig.sensiolabs.org/doc/extensions.html
+..  _`documentation Twig`: http://twig.sensiolabs.org/doc/extensions.html
