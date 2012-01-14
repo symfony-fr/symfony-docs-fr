@@ -819,26 +819,42 @@ Métadonnées de mapping de relations
 Pour relier les entités ``Category`` et ``Product``, commencez par créer une
 propriété ``products`` dans la classe ``Category`` :
 
-.. code-block:: php-annotations
+.. configuration-block::
 
-    // src/Acme/StoreBundle/Entity/Category.php
-    // ...
-    use Doctrine\Common\Collections\ArrayCollection;
-    
-    class Category
-    {
+    .. code-block:: php-annotations
+	
+        // src/Acme/StoreBundle/Entity/Category.php
         // ...
-        
-        /**
-         * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
-         */
-        protected $products;
 
-        public function __construct()
+        use Doctrine\Common\Collections\ArrayCollection;
+
+	class Category
         {
-            $this->products = new ArrayCollection();
+            // ...
+
+            /**
+             * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+             */
+            protected $products;
+
+            public function __construct()
+            {
+                $this->products = new ArrayCollection();
+            }
         }
-    }
+
+    .. code-block:: yaml
+
+        # src/Acme/StoreBundle/Resources/config/doctrine/Category.orm.yml
+        Acme\StoreBundle\Entity\Category:
+            type: entity
+            # ...
+            oneToMany:
+                products:
+                    targetEntity: Product
+                    mappedBy: category
+            # n'oubliez pas d'initialiser la collection dans la méthode __construct() de l'entité
+
 
 Tout d'abord, comme un objet ``Category`` sera relié à plusieurs objets
 ``Product``, une propriété tableau ``products`` est ajoutée pour stocker
@@ -867,21 +883,38 @@ contiennent un tableau d'objets ``Product``.
 Ensuite, comme chaque classe ``Product`` est reliée exactement à un objet ``Category``,
 il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
 
-.. code-block:: php-annotations
 
-    // src/Acme/StoreBundle/Entity/Product.php
-    // ...
+.. configuration-block::
 
-    class Product
-    {
-        // ...
-    
-        /**
-         * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-         * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-         */
-        protected $category;
-    }
+    .. code-block:: php-annotations
+
+        // src/Acme/StoreBundle/Entity/Product.php
+         // ...
+
+        class Product
+        {
+            // ...
+
+            /**
+             * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+             * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+             */
+            protected $category;
+        }
+
+    .. code-block:: yaml
+
+        # src/Acme/StoreBundle/Resources/config/doctrine/Product.orm.yml
+        Acme\StoreBundle\Entity\Product:
+            type: entity
+            # ...
+            manyToOne:
+                category:
+                    targetEntity: Category
+                    inversedBy: products
+                    joinColumn:
+                        name: category_id
+                        referencedColumnName: id
 
 Finallement, maintenant que vous avez ajouté une nouvelle propriété aux classes
 ``Category`` et ``Product``, dites à Doctrine de regénérer les getters et setters
@@ -1289,26 +1322,44 @@ Options des champs
 
 Un ensemble d'options peut être appliqué à chaque champ. Les options
 disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
-``length``, ``unique`` et ``nullable``. Regardons quelques annotations
-en guise d'exemple :
+``length``, ``unique`` et ``nullable``. Regardons quelques exemples :
 
-.. code-block:: php-annotations
+.. configuration-block::
 
-    /**
-     * Une chaîne de caractères de longueur 255 qui ne peut pas être nul
-     * (refletant les valeurs par défaut des options "type", "length" et *nullable);
-     * 
-     * @ORM\Column()
-     */
-    protected $name;
+    .. code-block:: php-annotations
+        /**
+        * Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
+        * (refletant les valeurs par défaut des options "type", "length" et *nullable);
+        * 
+        * @ORM\Column()
+        */
+        protected $name;
 
-    /**
-     * Une chaîne de longueur 150 qui sera persistée vers une colonne "email_address"
-     * et a un index unique.
-     *
-     * @ORM\Column(name="email_address", unique="true", length="150")
-     */
-    protected $email;
+        /**
+        * Une chaîne de longueur 150 qui sera persistée vers une colonne "email_address"
+        * et a un index unique.
+        *
+        * @ORM\Column(name="email_address", unique="true", length="150")
+        */
+        protected $email;
+
+    .. code-block:: yaml
+ 
+        fields:
+            # Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
+            # (refletant les valeurs par défaut des options "type", "length" et *nullable);
+            # l'attribut type est nécessaire dans une configuration en yaml
+            name:
+                type: string
+
+            # Une chaîne de longueur 150 qui sera persistée vers une colonne "email_address"
+            # et a un index unique.
+            email:
+                type: string
+                column: email_address
+                length: 150
+                unique: true
+
 
 .. note::
 

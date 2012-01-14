@@ -1,11 +1,20 @@
 .. index::
    single: Finder
 
-How to locate Files
-===================
+The Finder Component
+====================
 
-The :namespace:`Symfony\\Component\\Finder` component helps you to find files
-and directories quickly and easily.
+   The Finder Component finds files and directories via an intuitive fluent
+   interface.
+
+Installation
+------------
+
+You can install the component in many different ways:
+
+* Use the official Git repository (https://github.com/symfony/Finder);
+* Install it via PEAR ( `pear.symfony.com/Finder`);
+* Install it via Composer (`symfony/finder` on Packagist).
 
 Usage
 -----
@@ -22,7 +31,9 @@ directories::
         print $file->getRealpath()."\n";
     }
 
-The ``$file`` is an instance of :phpclass:`SplFileInfo`.
+The ``$file`` is an instance of :class:`Symfony\\Component\\Finder\\SplFileInfo`
+which extends :phpclass:`SplFileInfo` to provide methods to work with relative
+paths.
 
 The above code prints the names of all the files in the current directory
 recursively. The Finder class uses a fluent interface, so all methods return

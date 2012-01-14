@@ -46,6 +46,7 @@
   * :doc:`/cookbook/service_container/factories`
   * :doc:`/cookbook/service_container/parentservices`
   * :doc:`/cookbook/service_container/scopes`
+  * :doc:`/cookbook/service_container/tags`
   * :doc:`/cookbook/configuration/pdo_session_storage`
 
 * **Bundles**
@@ -57,8 +58,8 @@
 
 * **Emailing**
 
-  * :doc:`/cookbook/email`
-  * :doc:`/cookbook/gmail`
+  * :doc:`/cookbook/email/email`
+  * :doc:`/cookbook/email/gmail`
   * :doc:`/cookbook/email/dev_environment`
   * :doc:`/cookbook/email/spool`
 
@@ -71,6 +72,7 @@
 
 * **Security**
 
+  * :doc:`/cookbook/security/entity_provider`
   * :doc:`/cookbook/security/remember_me`
   * :doc:`/cookbook/security/voters`
   * :doc:`/cookbook/security/acl`
@@ -78,7 +80,6 @@
   * :doc:`/cookbook/security/force_https`
   * :doc:`/cookbook/security/form_login`
   * :doc:`/cookbook/security/securing_services`
-  * :doc:`/cookbook/security/entity_provider`
   * :doc:`/cookbook/security/custom_provider`
   * :doc:`/cookbook/security/custom_authentication_provider`
   * :doc:`/cookbook/security/target_path`
@@ -99,9 +100,6 @@
 
 * **Tools and Internals**
 
-  * :doc:`/cookbook/tools/autoloader`
-  * :doc:`/cookbook/tools/finder`
-  * :doc:`/cookbook/console`
   * :doc:`/cookbook/debugging`
 
 * **Web Services**

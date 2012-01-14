@@ -25,7 +25,7 @@ d'entre elles est construite par dessus celles qui la précèdent.
     framework directement ; ceci est effectué indépendemment à l'aide de
     la classe :class:`Symfony\\Component\\ClassLoader\\UniversalClassLoader`
     et du fichier ``src/autoload.php``. Lisez le :doc:`chapitre dédié
-    </cookbook/tools/autoloader>` pour plus d'informations.
+    </components/class_loader>` pour plus d'informations.
 
 Le Composant ``HttpFoundation``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

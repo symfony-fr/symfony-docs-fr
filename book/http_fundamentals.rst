@@ -241,12 +241,24 @@ Avec elle, vous avez toute l'information de la requête à votre portée :
     // l'URI demandée (par exemple: /about) sans aucun paramètre
     $request->getPathInfo();
 
-    // obtient respectivement des variables GET et POST
+    // obtenir respectivement des variables GET et POST
     $request->query->get('foo');
-    $request->request->get('bar');
 
-    // obtient une instance de UploadedFile identifiée par foo
+    $request->request->get('bar', 'valeur par défaut si bar est inexistant');
+  
+    // obtenir les variables SERVER
+    $request->server->get('HTTP_HOST');
+
+    // obtenir une instance de UploadedFile identifiée par foo
     $request->files->get('foo');
+
+
+    // obtenir la valeur d'un COOKIE value
+    $request->cookies->get('PHPSESSID');
+
+    // obtenir un entête de requête HTTP request header, normalisé en minuscules
+    $request->headers->get('host');
+    $request->headers->get('content_type');
 
     $request->getMethod();          // GET, POST, PUT, DELETE, HEAD
     $request->getLanguages();       // un tableau des langues que le client accepte
@@ -255,6 +267,27 @@ En bonus, la classe ``Request`` effectue beaucoup de travail en arrière-plan
 dont vous n'aurez jamais à vous soucier. Par exemple, la méthode ``isSecure()``
 vérifie les *trois* valeurs PHP qui peuvent indiquer si oui ou non l'utilisateur
 est connecté via une connexion sécurisée (i.e. ``https``).
+
+
+.. sidebar:: Attributs de ParameterBags et Request
+
+    Comme vu ci-dessus, les variables ``$_GET`` et ``$_POST`` sont accessibles
+    respectivement via les propriétés publiques ``query`` et ``request``. Chacun
+    de ces objets et un objet :class:`Symfony\\Component\\HttpFoundation\\ParameterBag`
+    qui a des méthodes comme :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::get`,
+    :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::has`,
+    :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::all` et bien d'autres.
+    Dans les faits, chaque propriété publique utilisée dans l'exemple précédent est
+    une instance de ParameterBag.
+
+    La classe Request a aussi une propriété publique ``attributes`` qui contient
+    des données spéciales liées au fonctionnement interne de l'application. Pour
+    le framework Symfony2, la propriété ``attributes`` contient la valeur retournée
+    par la route identifiée, comme ``_controller``, ``id`` (si vous utilisez le joker ``{id}``),
+    et même le nom de la route (``_route``). La propriété ``attributes`` existe pour
+    vous permettre d'y stocker des informations spécifiques liées au contexte de
+    la requête.
+
 
 Symfony fournit aussi une classe ``Response`` : une simple représentation PHP du
 message d'une réponse HTTP. Cela permet à votre application d'utiliser une
@@ -423,7 +456,7 @@ fichier de configuration du routing :
 
 .. note::
 
-   Cet exemple utilise :doc:`YAML</reference/YAML>` pour définir la configuration de
+   Cet exemple utilise :doc:`YAML</components/yaml>` pour définir la configuration de
    routage. Cette dernière peut aussi être écrite dans d'autres formats comme XML ou
    PHP.
 

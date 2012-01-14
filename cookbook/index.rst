@@ -37,6 +37,7 @@ Cookbook
     service_container/factories
     service_container/parentservices
     service_container/scopes
+    service_container/tags
     configuration/pdo_session_storage
 
     bundles/best_practices
@@ -44,8 +45,8 @@ Cookbook
     bundles/override
     bundles/extension
 
-    email
-    gmail
+    email/email
+    email/gmail
     email/dev_environment
     email/spool
 
@@ -74,9 +75,6 @@ Cookbook
     logging/monolog
     logging/monolog_email
 
-    tools/autoloader
-    tools/finder
-    console
     debugging
 
     event_dispatcher/class_extension

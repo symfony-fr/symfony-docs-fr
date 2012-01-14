@@ -974,7 +974,7 @@ La Surcharge de templates de Bundle
 -----------------------------------
 
 La communauté Symfony2 est fière de créer et de maintenir des bundles de haute
-qualité (voir `Symfony2Bundles.org`_) concernant un grand nombre de fonctionnalités.
+qualité (voir `KnpBundles.com`_) concernant un grand nombre de fonctionnalités.
 Une fois que vous utilisez un tel bundle, vous aimeriez surement surcharger et
 personnaliser un ou plusieurs de ses templates.
 
@@ -1286,9 +1286,9 @@ En savoir plus grâce au Cookbook
 * :doc:`/cookbook/controller/error_pages`
 
 .. _`Twig`: http://twig.sensiolabs.org
-.. _`Symfony2Bundles.org`: http://symfony2bundles.org
+.. _`KnpBundles.com`: http://knpbundles.com
 .. _`Cross Site Scripting`: http://en.wikipedia.org/wiki/Cross-site_scripting
-.. _`Output Escaping`: http://twig.sensiolabs.org
+.. _`Output Escaping`: http://twig.sensiolabs.org/doc/api.html#escaper-extension
 .. _`tags`: http://twig.sensiolabs.org/doc/tags/index.html
-.. _`filtres`: http://twig.sensiolabs.org/doc/templates.html#filters
-.. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/advanced.html
+.. _`filtres`: http://twig.sensiolabs.org/doc/filters/index.html
+.. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/extensions.html
