@@ -4,7 +4,7 @@ Symfony2 Documentation
 Quick Tour
 ----------
 
-Get started fast with the Symfony2 :doc:`Quick Tour <quick_tour/index>`:
+Démarrez rapidement avec le :doc:`Quick Tour <quick_tour/index>` Symfony2 :
 
 .. toctree::
     :hidden:
@@ -19,7 +19,7 @@ Get started fast with the Symfony2 :doc:`Quick Tour <quick_tour/index>`:
 Book
 ----
 
-Dive into Symfony2 with the topical guides:
+Plongez vous dans Symfony2 avec les guides thématiques :
 
 .. toctree::
     :hidden:
@@ -28,58 +28,4 @@ Dive into Symfony2 with the topical guides:
 
 .. include:: /book/map.rst.inc
 
-Cookbook
---------
 
-.. toctree::
-    :hidden:
-
-    cookbook/index
-
-Read the :doc:`Cookbook </cookbook/index>`.
-
-Components
-----------
-
-.. toctree::
-    :hidden:
-
-    components/index
-
-Read the :doc:`Components </components/index>` documentation.
-
-Reference Documents
--------------------
-
-Get answers quickly with reference documents:
-
-.. toctree::
-    :hidden:
-
-    reference/index
-
-.. include:: /reference/map.rst.inc
-
-Bundles
--------
-
-The Symfony Standard Edition comes with some bundles. Learn more about them:
-
-.. toctree::
-    :hidden:
-
-    bundles/index
-
-.. include:: /bundles/map.rst.inc
-
-Contributing
-------------
-
-Contribute to Symfony2:
-
-.. toctree::
-    :hidden:
-
-    contributing/index
-
-.. include:: /contributing/map.rst.inc
