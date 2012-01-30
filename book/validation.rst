@@ -233,7 +233,7 @@ au code suivant :
             if ($form->isValid()) {
                 // the validation passed, do something with the $author object
                 
-                $this->redirect($this->generateUrl('...'));
+                return $this->redirect($this->generateUrl('...'));
             }
         }
         

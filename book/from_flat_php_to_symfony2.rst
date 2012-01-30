@@ -701,7 +701,7 @@ la vie :
 
 Et peut-être le point le plus important, en utilisant Symfony, vous avez maintenant accès 
 à un ensemble d'**outils de qualité open source développés par la communauté Symfony2** ! 
-Pour plus d'information, allez à `Symfony2Bundles.org`_
+Un large choix d'outils de la communauté Symfony2 se trouve sur `KnpBundles.com`_.
 
 
 De meilleurs templates
@@ -761,7 +761,7 @@ Apprenez en lisant le Cookbook
 .. _`téléchargez Symfony2`: http://symfony.com/download
 .. _`Routing`: https://github.com/symfony/Routing
 .. _`Templating`: https://github.com/symfony/Templating
-.. _`Symfony2Bundles.org`: http://symfony2bundles.org
+.. _`KnpBundles.com`: http://knpbundles.com/
 .. _`Twig`: http://twig.sensiolabs.org
 .. _`Varnish`: http://www.varnish-cache.org
 .. _`PHPUnit`: http://www.phpunit.de

@@ -1,5 +1,5 @@
-Documents de référence
-======================
+Reference Documents
+===================
 
 .. toctree::
     :hidden:
@@ -18,7 +18,6 @@ Documents de référence
 
     constraints
     dic_tags
-    YAML
     requirements
 
 .. include:: /reference/map.rst.inc

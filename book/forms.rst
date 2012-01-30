@@ -524,6 +524,19 @@ ces détails dans la documentation de chaque type.
     En d'autres termes, l'option ``required`` est « cool », mais une réelle validation
     côté serveur devrait *toujours* être mise en place.
 
+.. sidebar:: The ``label`` option
+
+    Le label d'un champ de formulaire peut être défini grâce à l'option ``label``,
+    qui s'applique à n'importe quel champ::
+	
+        ->add('dueDate', 'date', array(
+            'widget' => 'single_text',	
+            'label'  => 'Due Date',	
+        ))
+
+    Le label d'un champ peut aussi être défini dans le template lorsque vous affichez
+    le formulaire, voir ci-dessous.
+
 .. index::
    single: Formulaires; Prédiction de type de champ
 
@@ -1054,7 +1067,7 @@ Cela peut être accompli en utilisant le type de champ ``collection``.
 
 
 Pour plus d'informations, lisez le chapitre du cookbook ":doc:`/cookbook/form/form_collections`"
-et le chapitre sur le type de champ :ref:`collection</reference/forms/types/collection>`.
+et le chapitre sur le type de champ :doc:`collection</reference/forms/types/collection>`.
 
 .. index::
    single: Formulaires; Habillage
@@ -1415,7 +1428,7 @@ Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple 
 Pour désactiver la protection CSRF, définissez l'option ``csrf_protection``
 à false. Les personnalisations peuvent aussi être effectuées globalement dans
 votre projet. Pour plus d'informations, voir la section de
-:ref:`référence de configuration de formulaire</reference-frameworkbundle-forms>`.
+:ref:`référence de configuration de formulaire</reference-framework-form>`.
 
 .. note::
 

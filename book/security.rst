@@ -1,3 +1,6 @@
+.. index::
+   single: Security
+
 La sécurité
 ===========
 
@@ -989,6 +992,13 @@ l'interface :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 Cela signifie que le concept d'« utilisateur » peut être n'importe quoi, pour peu qu'il implémente
 cette interface.
 
+
+.. versionadded:: 2.1
+
+   Dans Symfony 2.1, la méthode ``equals`` a été retirée de la ``UserInterface``.
+   Si vous avez besoin de surcharger l'implémentation par défaut de la logique de comparaison,
+   implémentez la nouvelle interface :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface`.
+
 .. note::
 
     L'objet User sera sérialisé et sauvegardé dans la session lors des requêtes, il est donc
@@ -1197,6 +1207,16 @@ Dans un contrôleur, vous pouvez utiliser le raccourci suivant :
     ``isAuthenticated()`` sur un objet d'utilisateur anonyme va retourner true. Pour vérifier
     si un utilisateur est vraiment authentifié, vérifiez si l'utilisateur a le rôle
     ``IS_AUTHENTICATED_FULLY``.
+
+
+Dans un template Twig, cet objet est accessible via la clé ``app.user``, qui appelle
+la méthode :method:`GlobalVariables::getUser()<Symfony\\Bundle\\FrameworkBundle\\Templating\\GlobalVariables::getUser>` :
+	
+.. configuration-block::
+
+    .. code-block:: html+jinja
+	
+        <p>Username: {{ app.user.username }}</p>
 
 Utiliser plusieurs fournisseurs d'utilisateurs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1559,7 +1579,7 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
     public function indexAction()
     {
         // show different content to admin users
-        if ($this->get('security.context')->isGranted('ADMIN')) {
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
             // Load admin content here
         }
         // load other regular content here

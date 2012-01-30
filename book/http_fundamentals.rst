@@ -148,13 +148,15 @@ de la requête retournée au client. A-t-elle réussi ? Y'a-t-il eu une
 erreur ? Différents codes de statut existent qui indiquent le succès, une
 erreur, ou que le client a besoin de faire quelque chose (par exemple:
 rediriger sur une autre page). Une liste complète peut être trouvée sur
-la page Wikipedia `List of HTTP status codes`_ (anglais).
+la page Wikipedia `Liste des codes HTTP`_ .
 
 Comme la requête, une réponse HTTP contient de l'information additionnelle
 appelée en-têtes HTTP. Par exemple, une importante en-tête de réponse HTTP
 est le ``Content-Type``. Le corps d'une même ressource peut être retournée
-dans de multiples formats incluant HTML, XML ou JSON pour en nommer quelques
-uns. L'en-tête ``Content-Type`` dit au client quel format va être retourné.
+dans de multiples formats incluant HTML, XML ou JSON et l'en-tête ``Content-Type``
+utilise les Internet Media Types comme ``text/html`` pour dire au client quel format
+doit être retourné. Une liste des media types les plus commun peut êter trouvée sur
+la page Wikipedia `Liste de media type usuels`_.
 
 De nombreuses autres en-têtes existent, dont quelques unes sont très puissantes.
 Par exemple, certaines en-têtes peuvent être utilisées pour créer un puissant
@@ -359,7 +361,7 @@ parties de votre code dépendant de cette valeur. Cela peut rapidement devenir m
     // index.php
 
     $request = Request::createFromGlobals();
-    $path = $request->getPathInfo(); // the URL being requested
+    $path = $request->getPathInfo(); // the URI path being requested
 
     if (in_array($path, array('', '/')) {
         $response = new Response('Welcome to the homepage.');
@@ -539,9 +541,10 @@ Pour les utilisateurs avancés, le ciel est la seule limite.
 .. _`xkcd`: http://xkcd.com/
 .. _`HTTP 1.1 RFC`: http://www.w3.org/Protocols/rfc2616/rfc2616.html
 .. _`HTTP Bis`: http://datatracker.ietf.org/wg/httpbis/
-.. _`Live HTTP Headers`: https://addons.mozilla.org/en-US/firefox/addon/3829/
-.. _`List of HTTP status codes`: http://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+.. _`Live HTTP Headers`: https://addons.mozilla.org/fr/firefox/addon/live-http-headers/
+.. _`Liste des codes HTTP`: http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
 .. _`List of HTTP header fields`: http://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+.. _`Liste de media type usuels`: http://fr.wikipedia.org/wiki/Type_MIME#Liste_de_media_type_usuels
 .. _`HttpFoundation`: https://github.com/symfony/HttpFoundation
 .. _`Routing`: https://github.com/symfony/Routing
 .. _`Form`: https://github.com/symfony/Form

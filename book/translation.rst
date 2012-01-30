@@ -778,13 +778,13 @@ Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire les
 
 .. code-block:: jinja
 
-    {{ message | trans }}
+    {{ message|trans }}
 
-    {{ message | transchoice(5) }}
+    {{ message|transchoice(5) }}
 
-    {{ message | trans({'%name%': 'Fabien'}, "app") }}
+    {{ message|trans({'%name%': 'Fabien'}, "app") }}
 
-    {{ message | transchoice(5, {'%name%': 'Fabien'}, 'app') }}
+    {{ message|transchoice(5, {'%name%': 'Fabien'}, 'app') }}
 
 .. tip::
 
@@ -804,10 +804,10 @@ Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire les
             {% set message = '<h3>foo</h3>' %}
 
             {# une variable traduite via un filtre est échappée par défaut #}
-            {{ message | trans | raw }}
+            {{ message|trans|raw }}
 
             {# mais les chaînes de caractères statiques ne sont jamais échappées #}
-            {{ '<h3>foo</h3>' | trans }}
+            {{ '<h3>foo</h3>'|trans }}
 
 Templates PHP
 ~~~~~~~~~~~~~

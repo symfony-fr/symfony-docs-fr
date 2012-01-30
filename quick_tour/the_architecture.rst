@@ -384,5 +384,5 @@ avez encore besoin d'en apprendre beaucoup pour devenir un expert Symfony2. Prê
 à plonger dans ces thèmes maintenant ? Ne cherchez plus, consultez le
 :doc:`/book/index` et choisissez le sujet qui vous intéresse.
 
-.. _standards:               http://groups.google.com/group/php-standards/web/psr-0-final-proposal
-.. _conventions:              http://pear.php.net/
+.. _standards:               https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+.. _conventions:             http://pear.php.net/

@@ -1,5 +1,5 @@
-Contraintes de Validation de Référence
-======================================
+Validation Constraints Reference
+================================
 
 .. toctree::
    :maxdepth: 1
@@ -42,14 +42,14 @@ Contraintes de Validation de Référence
    constraints/UserPassword
    constraints/Valid
 
-Le Validator est conçu pour valider des objets selon des *contraintes*.
-Par exemple, une contrainte pourrait être : « Le gâteau ne doit pas être brulé».
-Dans Symfony2, les contraintes sont similaires : ce sont des affirmations qui
-font qu'une condition est vraie.
+The Validator is designed to validate objects against *constraints*.
+In real life, a constraint could be: "The cake must not be burned". In
+Symfony2, constraints are similar: They are assertions that a condition is 
+true.
 
-Contraintes supportées
-----------------------
+Supported Constraints
+---------------------
 
-Les contraintes suivantes sont nativement supportées dans Symfony2 :
+The following constraints are natively available in Symfony2:
 
 .. include:: /reference/constraints/map.rst.inc
