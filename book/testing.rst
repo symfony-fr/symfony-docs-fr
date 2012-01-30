@@ -18,7 +18,8 @@ elle a sa propre `documentation`_.
 
 .. note::
 
-    Symfony2 fonctionne avec PHPUnit 3.5.11 au minimum.
+    Symfony2 fonctionne avec PHPUnit 3.5.11 au minimum, mais la version 3.6.4 est
+    nécessaire pour tester le coeur du framework.
 
 Chaque test - que ce soit un test fonctionnel ou un test unitaire - est une classe
 PHP qui devrait se trouver dans le sous-répertoire `Tests/` de vos bundles. Si vous

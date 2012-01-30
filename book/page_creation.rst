@@ -548,7 +548,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
     Typiquement, le seul moment où vous devrez vous soucier du fichier ``app/autoload.php``	
     est quand vous incluerez des librairies tierces dans le repertoire ``vendor/``.
     Pour plus d'informations sur le chargement automatique, voir 
-    :doc: `Comment charger automatiquement des classes</cookbook/tools/autoloader>`.
+    :doc: `Comment charger automatiquement des classes</components/class_loader>`.
 
 Le répertoire des sources (``src/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

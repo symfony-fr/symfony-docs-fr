@@ -674,7 +674,7 @@ régulière.
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             # ...
             access_control:
@@ -683,7 +683,7 @@ régulière.
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <!-- ... -->
             <rule path="^/admin/users" role="ROLE_SUPER_ADMIN" />
@@ -692,7 +692,7 @@ régulière.
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             // ...
             'access_control' => array(
@@ -893,7 +893,7 @@ fichier de configuration. En fait, vous avez déjà vu cet exemple dans ce chapi
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             # ...
             providers:
@@ -904,7 +904,7 @@ fichier de configuration. En fait, vous avez déjà vu cet exemple dans ce chapi
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <!-- ... -->
             <provider name="default_provider">
@@ -915,7 +915,7 @@ fichier de configuration. En fait, vous avez déjà vu cet exemple dans ce chapi
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             // ...
             'providers' => array(
@@ -1049,6 +1049,8 @@ un objet ``User``depuis la base de données en utilisant le champ ``username``de
 Pour en apprendre plus sur comment créer votre propre fournisseur (par exemple si vous devez charger
 des utilisateurs depuis un service Web), reportez-vous à :doc:`/cookbook/security/custom_provider`.
 
+.. _book-security-encoding-user-password:
+
 Encoder les mots de passe
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1065,7 +1067,7 @@ en utilisant ``sha1``, suivez les instructions suivantes :
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             # ...
             providers:
@@ -1082,7 +1084,7 @@ en utilisant ``sha1``, suivez les instructions suivantes :
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <!-- ... -->
             <provider name="in_memory">
@@ -1095,7 +1097,7 @@ en utilisant ``sha1``, suivez les instructions suivantes :
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             // ...
             'providers' => array(
@@ -1131,7 +1133,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
 
     .. code-block:: yaml
     
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             # ...
             
@@ -1140,7 +1142,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <!-- ... -->
             
@@ -1149,7 +1151,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             // ...
             
@@ -1244,7 +1246,7 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <provider name="chain_provider">
                 <provider>in_memory</provider>
@@ -1260,7 +1262,7 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             'providers' => array(
                 'chain_provider' => array(
@@ -1301,7 +1303,7 @@ depuis les fournisseurs ``in_memory`` et ``user_db``.
 
         .. code-block:: xml
 
-            <!-- app/config/config.xml -->
+            <!-- app/config/security.xml -->
             <config>
                 <provider name=="main_provider">
                     <user name="foo" password="test" />
@@ -1311,7 +1313,7 @@ depuis les fournisseurs ``in_memory`` et ``user_db``.
 
         .. code-block:: php
 
-            // app/config/config.php
+            // app/config/security.php
             $container->loadFromExtension('security', array(
                 'providers' => array(
                     'main_provider' => array(
@@ -1331,7 +1333,7 @@ utilisé, sauf si vous en spécifiez un explicitement :
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             firewalls:
                 secured_area:
@@ -1344,7 +1346,7 @@ utilisé, sauf si vous en spécifiez un explicitement :
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <firewall name="secured_area" pattern="^/" provider="user_db">
                 <!-- ... -->
@@ -1355,7 +1357,7 @@ utilisé, sauf si vous en spécifiez un explicitement :
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'secured_area' => array(
@@ -1446,7 +1448,7 @@ paramètre de configuration ``logout`` :
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/security.yml
         security:
             firewalls:
                 secured_area:
@@ -1458,7 +1460,7 @@ paramètre de configuration ``logout`` :
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <!-- app/config/security.xml -->
         <config>
             <firewall name="secured_area" pattern="^/">
                 <!-- ... -->
@@ -1469,7 +1471,7 @@ paramètre de configuration ``logout`` :
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/security.php
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'secured_area' => array(

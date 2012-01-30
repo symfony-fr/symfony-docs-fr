@@ -104,7 +104,7 @@ serveur ou au sein même de vos projets.
 .. note::
 
     Si vous voulez en savoir plus sur la flexibilité de l'autoloader de Symfony2,
-    lisez l'article « :doc:`/cookbook/tools/autoloader`» dans le cookbook.
+    lisez l'article « :doc:`/components/class_loader`» dans le cookbook.
 
 Comprendre le système de bundles
 --------------------------------

@@ -393,7 +393,7 @@ la configuration de l'application.
         # app/config/config.yml
         imports:
             hello_bundle:
-                resource: @AcmeHelloBundle/Resources/config/services.yml
+		 - { resource: @AcmeHelloBundle/Resources/config/services.yml }
 
     .. code-block:: xml
 

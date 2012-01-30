@@ -18,7 +18,11 @@ You can install the component in many different ways:
 Usage
 -----
 
+<<<<<<< HEAD
 The :class:`Symfony\\Component\\Process\\Process` class allows you to execute
+=======
+The `:class:Symfony\\Component\\Process\\Process` class allows you to execute
+>>>>>>> d6023ef546934b47429ac6e71c35c7a010ba6b68
 a command in a sub-process::
 
     use Symfony\Component\Process\Process;
@@ -32,14 +36,22 @@ a command in a sub-process::
 
     print $process->getOutput();
 
+<<<<<<< HEAD
 The :method:`Symfony\\Component\\Process\\Process::run` method takes care
+=======
+The ``:method::Symfony\\Component\\Process\\Process:run()`` method takes care
+>>>>>>> d6023ef546934b47429ac6e71c35c7a010ba6b68
 of the subtle differences between the different platforms when executing the
 command.
 
 When executing a long running command (like rsync-ing files to a remote
 server), you can give feedback to the end user in real-time by passing an
 anonymous function to the
+<<<<<<< HEAD
 :method:`Symfony\\Component\\Process\\Process::run` method::
+=======
+``:method::Symfony\\Component\\Process\\Process:run()`` method::
+>>>>>>> d6023ef546934b47429ac6e71c35c7a010ba6b68
 
     use Symfony\Component\Process\Process;
 
@@ -66,7 +78,11 @@ instead::
     The ``ProcessBuilder`` class has been as of 2.1.
 
 To make your code work better on all platforms, you might want to use the
+<<<<<<< HEAD
 :class:`Symfony\\Component\\Process\\ProcessBuilder` class instead::
+=======
+``:class:Symfony\Component\Process\ProcessBuilder`` class instead::
+>>>>>>> d6023ef546934b47429ac6e71c35c7a010ba6b68
 
     use Symfony\Component\Process\ProcessBuilder;
 
