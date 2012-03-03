@@ -106,7 +106,7 @@ we want to always render it in a ``ul`` element. In your form theme template
 
 .. code-block:: html+jinja
 
-    {# src/Acme/DemoBundle/Resources/Form/fields.html.twig #}
+    {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
 
     {% block gender_widget %}
     {% spaceless %}
@@ -247,7 +247,7 @@ argument to ``GenderType``, which receives the gender configuration::
         public function getDefaultOptions(array $options)
         {
             return array(
-                'choices' => $this->genderChoices;
+                'choices' => $this->genderChoices,
             );
         }
         

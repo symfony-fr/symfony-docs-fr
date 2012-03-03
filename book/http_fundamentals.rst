@@ -282,6 +282,8 @@ est connecté via une connexion sécurisée (i.e. ``https``).
     Dans les faits, chaque propriété publique utilisée dans l'exemple précédent est
     une instance de ParameterBag.
 
+    .. _book-fundamentals-attributes:
+
     La classe Request a aussi une propriété publique ``attributes`` qui contient
     des données spéciales liées au fonctionnement interne de l'application. Pour
     le framework Symfony2, la propriété ``attributes`` contient la valeur retournée

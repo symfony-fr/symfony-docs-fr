@@ -26,7 +26,7 @@ git repository:
    (e.g. next to the ``deps`` file) and paste the following into it. Files
    matching these patterns will be ignored by git:
 
-    .. code-block:: text
+   .. code-block:: text
 
         /web/bundles/
         /app/bootstrap*
@@ -43,31 +43,57 @@ git repository:
 
 5. Initialize your git repository:
 
-    .. code-block:: bash
-    
+   .. code-block:: bash
+
         $ git init
 
 6. Add all of the initial files to git:
 
-    .. code-block:: bash
-    
+   .. code-block:: bash
+
         $ git add .
 
 7. Create an initial commit with your started project:
 
-    .. code-block:: bash
-    
+   .. code-block:: bash
+
         $ git commit -m "Initial commit"
 
 8. Finally, download all of the third-party vendor libraries:
 
-    .. code-block:: bash
-    
+   .. code-block:: bash
+
         $ php bin/vendors install
 
 At this point, you have a fully-functional Symfony2 project that's correctly
 committed to git. You can immediately begin development, committing the new
 changes to your git repository.
+
+.. tip::
+
+    After execution of the command:
+
+    .. code-block:: bash
+
+        $ php bin/vendors install
+
+    your project will contain complete the git history of all the bundles
+    and libraries defined in the ``deps`` file. It can be as much as 100 MB!
+    You can remove the git history directories with the following command:
+
+    .. code-block:: bash
+
+        $ find vendor -name .git -type d | xargs rm -rf
+
+    The command removes all ``.git`` directories contained inside the
+    ``vendor`` directory.
+
+    If you want to update bundles defined in ``deps`` file after this, you
+    will have to reinstall them:
+
+    .. code-block:: bash
+
+        $ php bin/vendors install --reinstall
 
 You can continue to follow along with the :doc:`/book/page_creation` chapter
 to learn more about how to configure and develop inside your application.
@@ -80,10 +106,6 @@ to learn more about how to configure and develop inside your application.
 .. _cookbook-managing-vendor-libraries:
 
 .. include:: _vendor_deps.rst.inc
-
-    Additionally, if you would simply like to update the ``deps.lock`` file
-    to what you already have installed, then you can simply run ``php bin/vendors lock``
-    to store the appropriate git SHA identifiers in the deps.lock file.
 
 Vendors and Submodules
 ~~~~~~~~~~~~~~~~~~~~~~

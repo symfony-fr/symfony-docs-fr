@@ -199,7 +199,10 @@ pouvez paramètrer en surchargeant la méthode ``getOptions()`` :
 .. code-block:: php
 
     // app/AppCache.php
-    class AppCache extends Cache
+
+    use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
+
+    class AppCache extends HttpCache
     {
         protected function getOptions()
         {

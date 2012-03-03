@@ -764,7 +764,7 @@ pouvez le spécifier explicitement :
 
         <?php echo $view['form']->label($form['task'], 'Task Description') ?>
 
-Finalement, quelques types de champ ont des options de rendu supplémentaires
+Quelques types de champ ont des options de rendu supplémentaires
 qui peuvent être passées au widget. Ces options sont documentées avec chaque
 type, mais une qui est commune est l'option ``attr``, qui vous permet de modifier
 les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
@@ -781,6 +781,33 @@ les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
         <?php echo $view['form']->widget($form['task'], array(
             'attr' => array('class' => 'task_field'),
         )) ?>
+
+Si vous avez besoin de rendre des champs du formulaire « à la main » alors vous
+pouvez utiliser individuellement les valeurs des champs comme ``id``, ``name`` et ``label``.
+Par exemple, pour obtenir l'``id`` :
+
+.. configuration-block::
+
+    .. code-block:: html+jinja
+
+        {{ form.task.vars.id }}
+
+    .. code-block:: html+php
+
+        <?php echo $form['task']->get('id') ?>
+
+Pour obtenir la valeur utilisée pour l'attribut name du champ de formulaire, 
+vous devez utiliser la valeur ``full_name`` :
+
+.. configuration-block::
+	
+    .. code-block:: html+jinja
+	
+        {{ form.task.vars.full_name }}
+
+    .. code-block:: html+php
+	
+        <?php echo $form['task']->get('full_name') ?>
 
 Fonctions de Référence des Templates Twig
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -859,7 +886,7 @@ manière de créer des formulaires, mais le choix final vous revient.
     données sous-jacentes (par exemple : ``Acme\TaskBundle\Entity\Task``).
     Généralement, cette information est devinée grâce à l'objet passé en
     second argument de la méthode ``createForm`` (c-a-d ``$task``).
-    Plus tard, quand vous commencerez à embarquer des formulaires les uns avec
+    Plus tard, quand vous commencerez à imbriquer des formulaires les uns avec
     les autres, cela ne sera plus suffisant. Donc, bien que facultatif,
     c'est généralement une bonne idée de spécifier explicitement l'option
     ``data_class`` en ajoutant ce qui suit à votre classe formulaire :
@@ -872,6 +899,27 @@ manière de créer des formulaires, mais le choix final vous revient.
                 'data_class' => 'Acme\TaskBundle\Entity\Task',
             );
         }
+
+
+.. tip::
+
+    Lorsque vous associez un formulaire à un objet, tous les champs sont mappés.
+    Chaque champ du formulaire qui n'existe pas dans l'objet associé entrainera
+    la levée d'une exception.
+  
+    Dans le cas où vous avez besoin de champs supplémentaires dans le formulaire
+    (par exemple une checkbox « Acceptez vous les conditions d'utilisation ») qui
+    ne doi pas être mappé à l'objet sous-jacent, vous devez définir l'option
+    property_path setting à ``false``::
+
+        public function buildForm(FormBuilder $builder, array $options)
+        {
+            $builder->add('task');
+            $builder->add('dueDate', null, array('property_path' => false));
+        }
+
+    De plus, s'il y a des champs dans le formulaire qui ne sont pas inclus dans
+    les données soumises, ces champs seront définis à ``null``.
 
 .. index::
    pair: Formulaires; Doctrine
@@ -914,7 +962,7 @@ vous souhaitez persister ces données, vous avez simplement besoin de persister
 l'objet lui-même (qui contient déjà les données soumises).
 
 .. index::
-   single: Formulaires; Formulaires embarqués
+   single: Formulaires; Formulaires imbriqués
 
 Formulaires imbriqués
 ---------------------
@@ -1388,7 +1436,7 @@ données à un utilisateur légitime qui n'avait pas l'intention de les soumettr
 Heureusement, les attaques CSRF peuvent être contrées en utilisant un jeton CSRF
 à l'intérieur de vos formulaires.
 
-La bonne nouvelle est que, par défaut, Symfony embarque et valide automatiquement
+La bonne nouvelle est que, par défaut, Symfony prend en charge et valide automatiquement
 les jetons CSRF pour vous. Cela signifie que vous pouvez profiter de la protection
 CSRF sans n'avoir rien à faire. En fait, chaque formulaire dans ce chapitre
 a profité de la protection CSRF !
