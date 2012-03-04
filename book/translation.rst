@@ -318,8 +318,6 @@ Le choix du format à utiliser dépend de vous, c'est une question de goût.
     Vous pouvez également stocker des traductions dans une base de données, ou
     tout autre système de stockage en fournissant une classe personnalisée implémentant
     l'interface :class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface`.
-    Voir :doc:`Custom Translation Loaders </cookbook/translation/custom_loader>`
-    ci-dessous pour apprendre comment enregistrer des formats personnalisés.
 
 .. index::
    single: Traductions; Créer les ressources de traduction
@@ -507,7 +505,7 @@ faites cela, toutes les requêtes auront la même locale.
 
     $this->get('session')->set('_locale', 'en_US');
 
-Lisez le chapitre :ref:`.. _book-translation-locale-url:` pour voir comment définir
+Lisez le chapitre :ref:`book-translation-locale-url` pour voir comment définir
 la locale dans vos routes.
 
 Solution de Secours et Locale par Défaut

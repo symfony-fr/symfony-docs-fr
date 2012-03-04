@@ -826,6 +826,27 @@ en apprendrez plus sur les options de configuration spécifiques à chaque fonct
 
     * *PHP*: Très puissant mais moins lisible que les formats de configuration standards.
 
+
+Dump de configuration par défaut
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+. versionadded:: 2.1
+    La commande ``config:dump-reference`` a été ajoutée dans la version 2.1 de Symfony
+
+Vous pouvez dumper la configuration par défaut d'un bundle en yaml vers la console
+en utilisant la commande ``config:dump-reference``. Voici un exemple de dump de la
+configuration du FrameworkBundle :
+
+.. code-block:: text
+
+    app/console config:dump-reference FrameworkBundle
+
+.. note::
+
+    Lisez l'article du Cookbook : :doc:`Comment exposer un configuration sémantique
+    pour un Bundle </cookbook/bundles/extension>` pour avoir des informations sur
+    l'ajout de configuration dans votre bundle.
+
 .. index::
    single: Environments; Introduction
 

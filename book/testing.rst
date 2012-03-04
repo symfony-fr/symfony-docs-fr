@@ -285,10 +285,10 @@ document XML/HTML :
 
     .. code-block:: php
 
-        // Vérifie qu'il y a exactement une balise h2 dans la classe "subtitle"
+        // Vérifie qu'il y a au moins une balise h2 dans la classe "subtitle"
         $this->assertTrue($crawler->filter('h2.subtitle')->count() > 0);
 
-        // Vérifie qu'il y a 4 balises h2 sur la page
+        // Vérifie qu'il y a exactement 4 balises h2 sur la page
         $this->assertEquals(4, $crawler->filter('h2')->count());
 
         // Vérifie que l'entête "Content-Type" vaut "application/json"
@@ -315,7 +315,7 @@ document XML/HTML :
 Travailler avec le Client Test
 ------------------------------
 
-Le Client test simule un client HTTP comme un navigateur et lance des requêtes à
+Le Client Test simule un client HTTP comme un navigateur et lance des requêtes à
 votre application Symfony2 :
 
 .. code-block:: php
@@ -543,9 +543,9 @@ Beaucoup d'autres méthodes sont également disponibles :
 +------------------------+----------------------------------------------------+
 | ``previousAll()``      | Tous les siblings précédents                       |
 +------------------------+----------------------------------------------------+
-| ``parents()``          | Noeuds parents                                     |
+| ``parents()``          | Retourne les noeuds parents                        |
 +------------------------+----------------------------------------------------+
-| ``children()``         | Enfants                                            |
+| ``children()``         | Retourne les noeuds enfants                        |
 +------------------------+----------------------------------------------------+
 | ``reduce($lambda)``    | Noeuds pour lesquels $lambda ne retourne pas false |
 +------------------------+----------------------------------------------------+
@@ -668,7 +668,7 @@ comme second argument :
 
 .. code-block:: php
 
-    $form = $crawler->form(array(), 'DELETE');
+    $form = $buttonCrawlerNode->form(array(), 'DELETE');
 
 Le Client peut soumettre des instances de ``Form`` :
 

@@ -788,8 +788,8 @@ un nombre. Cette route montre aussi comment vous pouvez utiliser un point
 entre les paramètres de substitution à la place d'un slash. Les URLs
 qui correspondent à cette route pourraient ressembler à ça :
 
- * ``/articles/en/2010/my-post``
- * ``/articles/fr/2010/my-post.rss``
+* ``/articles/en/2010/my-post``
+* ``/articles/fr/2010/my-post.rss``
 
 .. _book-routing-format-param:
 
