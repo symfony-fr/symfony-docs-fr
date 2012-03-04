@@ -1,53 +1,53 @@
 .. index::
    single: Forms; Fields; checkbox
 
-checkbox Field Type
-===================
+Type de champ Checkbox
+======================
 
-Creates a single input checkbox. This should always be used for a field that
-has a Boolean value: if the box is checked, the field will be set to true,
-if the box is unchecked, the value will be set to false.
+Crée un unique champ de type input checkbox. Cela devrait toujours ête utilisé pour
+un champ qui a une valeur booléenne : si la checkbox est cochée, le champ sera
+défini à true. Si la checkbox n'est pas cochée, le champ sera défini à false.
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                               |
+| Rendu comme | Champ ``input`` ``text``                                               |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `value`_                                                             |
 +-------------+------------------------------------------------------------------------+
-| Inherited   | - `required`_                                                          |
-| options     | - `label`_                                                             |
+| Options     | - `required`_                                                          |
+| héritées    | - `label`_                                                             |
 |             | - `read_only`_                                                         |
 |             | - `error_bubbling`_                                                    |
 +-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                             |
+| Type parent | :doc:`field</reference/forms/types/field>`                             |
 +-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType` |
 +-------------+------------------------------------------------------------------------+
 
-Example Usage
--------------
+Exemple d'utilisation
+---------------------
 
 .. code-block:: php
 
     $builder->add('public', 'checkbox', array(
-        'label'     => 'Show this entry publicly?',
+        'label'     => 'Afficher publiquement ?',
         'required'  => false,
     ));
 
-Field Options
--------------
+Options du champ
+----------------
 
 value
 ~~~~~
 
 **type**: ``mixed`` **default**: ``1``
 
-The value that's actually used as the value for the checkbox. This does
-not affect the value that's set on your object.
+La valeur qui est effectivement utilisée comme valeur de la checkbox. Cela n'affecte
+pas la valeur qui est définie sur votre objet.
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

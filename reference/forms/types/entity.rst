@@ -1,56 +1,57 @@
 .. index::
    single: Forms; Fields; choice
 
-entity Field Type
-=================
+Type de champ Entity
+====================
 
-A special ``choice`` field that's designed to load options from a Doctrine
-entity. For example, if you have a ``Category`` entity, you could use this
-field to display a ``select`` field of all, or some, of the ``Category``
-objects from the database.
+Un champ ``choice`` spécial qui est conçu pour charger ses options d'une entité
+Doctrine. Par exemple, si vous avez une entité ``Category``, vous pourrez utiliser
+ce champ pour afficher une liste ``select`` de tout ou de certains objets ``Category``
+depuis la base de données.
 
-+-------------+------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)     |
-+-------------+------------------------------------------------------------------+
-| Options     | - `class`_                                                       |
-|             | - `property`_                                                    |
-|             | - `query_builder`_                                               |
-|             | - `em`_                                                          |
-+-------------+------------------------------------------------------------------+
-| Inherited   | - `required`_                                                    |
-| options     | - `label`_                                                       |
-|             | - `multiple`_                                                    |
-|             | - `expanded`_                                                    |
-|             | - `preferred_choices`_                                           |
-|             | - `empty_value`_                                                 |
-|             | - `read_only`_                                                   |
-|             | - `error_bubbling`_                                              |
-+-------------+------------------------------------------------------------------+
-| Parent type | :doc:`choice</reference/forms/types/choice>`                     |
-+-------------+------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType`       |
-+-------------+------------------------------------------------------------------+
++-------------+----------------------------------------------------------------------+
+| Rendu comme | peut être plusieurs balises (voir :ref:`forms-reference-choice-tags`)|
++-------------+----------------------------------------------------------------------+
+| Options     | - `class`_                                                           |
+|             | - `property`_                                                        |
+|             | - `query_builder`_                                                   |
+|             | - `em`_                                                              |
++-------------+----------------------------------------------------------------------+
+| Options     | - `required`_                                                        |
+| héritées    | - `label`_                                                           |
+|             | - `multiple`_                                                        |
+|             | - `expanded`_                                                        |
+|             | - `preferred_choices`_                                               |
+|             | - `empty_value`_                                                     |
+|             | - `read_only`_                                                       |
+|             | - `error_bubbling`_                                                  |
++-------------+----------------------------------------------------------------------+
+| Type parent | :doc:`choice</reference/forms/types/choice>`                         |
++-------------+----------------------------------------------------------------------+
+| Classe      | :class:`Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType`           |
++-------------+----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-The ``entity`` type has just one required option: the entity which should
-be listed inside the choice field::
+Le type ``entity`` n'a qu'une seule option obligatoire : l'entité qui doit être listée
+dans le champ Choice::
 
     $builder->add('users', 'entity', array(
         'class' => 'AcmeHelloBundle:User',
     ));
 
-In this case, all ``User`` objects will be loaded from the database and rendered
-as either a ``select`` tag, a set or radio buttons or a series of checkboxes
-(this depends on the ``multiple`` and ``expanded`` values).
+Dans ce cas, tout les objets ``User`` seront chargés depuis la base de données et seront
+affichés soit comme une balise ``select``, soit un ensemble de boutons radio ou de checkboxes
+(cela dépendra des valeurs des options ``multiple`` et ``expanded``).
 
-Using a Custom Query for the Entities
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser une requête personnalisée pour les entités
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you need to specify a custom query to use when fetching the entities (e.g.
-you only want to return some entities, or need to order them), use the ``query_builder``
-option. The easiest way to use the option is as follows::
+Si vous avez besoin de spécifier une requête personnalisée à utiliser pour charger
+les entitées (par exemple si vous ne voulez que certaines entités, ou que vous voulez
+les classer), utilisez l'option ``query_builder``. La façon la plus simple d'utiliser
+cette option est la suivante::
 
     use Doctrine\ORM\EntityRepository;
     // ...
@@ -65,50 +66,50 @@ option. The easiest way to use the option is as follows::
 
 .. include:: /reference/forms/types/options/select_how_rendered.rst.inc
 
-Field Options
--------------
+Options du champ
+----------------
 
 class
 ~~~~~
 
-**type**: ``string`` **required**
+**type**: ``string`` **obligatoire*
 
-The class of your entity (e.g. ``AcmeStoreBundle:Category``). This can be
-a fully-qualified class name (e.g. ``Acme\StoreBundle\Entity\Category``)
-or the short alias name (as shown prior).
+La classe de votre entité (ex: ``AcmeStoreBundle:Category``). Cela peut être
+le nom complet de la classe (ex: ``Acme\StoreBundle\Entity\Category``) ou son alias
+(voir ci-dessus).
 
 property
 ~~~~~~~~
 
 **type**: ``string``
 
-This is the property that should be used for displaying the entities
-as text in the HTML element. If left blank, the entity object will be
-cast into a string and so must have a ``__toString()`` method.
+C'est la propriété qui doit être utilisée pour afficher l'entité sous forme de
+texte dans l'élément HTML. Si vous le laissez vite, l'objet entité sera converti
+en texte et devra alors implémenter la méthode ``__toString()``.
 
 query_builder
 ~~~~~~~~~~~~~
 
 **type**: ``Doctrine\ORM\QueryBuilder`` or a Closure
 
-If specified, this is used to query the subset of options (and their
-order) that should be used for the field. The value of this option can
-either be a ``QueryBuilder`` object or a Closure. If using a Closure,
-it should take a single argument, which is the ``EntityRepository`` of
-the entity.
+Si elle est spécifiée, cette option sera utilisée pour requêter un sous-ensemble
+d'objets (et leur classement) qui sera affiché dans le champ. La valeur de cette
+option peut être soit un objet ``QueryBuilder`` soit une Closure. Si vous utilisez
+une Closure, elle ne doit prendre qu'un seul argument qui est l'objet ``EntityRepository``
+de l'entité.
 
 em
 ~~
 
-**type**: ``string`` **default**: the default entity manager
+**type**: ``string`` **default**: le gestionnaire d'entité par défaut
 
-If specified, the specified entity manager will be used to load the choices
-instead of the default entity manager.
+Si elle est spécifiée, cette option définit le gestionnaire d'entité (entity manager)
+qui sera utilisé pour charger les objets au lieu du gestionnaire par défaut.
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`choice</reference/forms/types/choice>` type:
+Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -118,7 +119,7 @@ These options inherit from the :doc:`choice</reference/forms/types/choice>` type
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

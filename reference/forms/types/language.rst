@@ -1,30 +1,29 @@
 .. index::
    single: Forms; Fields; language
 
-language Field Type
-===================
+Type de champ Language
+======================
 
-The ``language`` type is a subset of the ``ChoiceType`` that allows the user
-to select from a large list of languages. As an added bonus, the language names
-are displayed in the language of the user.
+Le type ``language`` est un sous-ensemble de ``ChoiceType`` qui permet à l'utilisateur
+de choisir une langue dans une liste déroulante. En bonus, les noms de langues sont
+affichés dans la langue de l'utilisateur.
 
-The "value" for each locale is either the two letter ISO639-1 *language* code
-(e.g. ``fr``).
+La "valeur"  de chaque locale est le code *language* ISO639-1 en deux lettres (ex ``fr``).
 
 .. note::
 
-   The locale of your user is guessed using `Locale::getDefault()`_
+   La locale de votre utilisateur est devinée en utilisant `Locale::getDefault()`_
 
-Unlike the ``choice`` type, you don't need to specify a ``choices`` or
-``choice_list`` option as the field type automatically uses a large list
-of languages. You *can* specify either of these options manually, but then
-you should just use the ``choice`` type directly.
+Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options
+``choices`` ou ``choice_list`` puisque ce type de champ utilise automatiquement
+la liste des langues. Vous *pouvez* spécifier l'une ou l'autre de ces options manuellement,
+mais alors vous devriez plutôt utiliser directement le type ``choice``.
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)           |
+| Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
-| Inherited   | - `multiple`_                                                          |
-| options     | - `expanded`_                                                          |
+| Options     | - `multiple`_                                                          |
+| héritées    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
@@ -32,15 +31,15 @@ you should just use the ``choice`` type directly.
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
 +-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`choice</reference/forms/types/choice>`                           |
+| Type parent | :doc:`choice</reference/forms/types/choice>`                           |
 +-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType` |
 +-------------+------------------------------------------------------------------------+
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`choice</reference/forms/types/choice>` type:
+Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -52,7 +51,7 @@ These options inherit from the :doc:`choice</reference/forms/types/choice>` type
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

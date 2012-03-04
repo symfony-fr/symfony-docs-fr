@@ -1,23 +1,24 @@
 .. index::
    single: Forms; Fields; date
 
-date Field Type
-===============
+Type de champ Date
+==================
 
-A field that allows the user to modify date information via a variety of
-different HTML elements.
+Un champ qui permet à l'utilisateur de modifier une date via différents éléments
+HTML.
 
-The underlying data used for this field type can be a ``DateTime`` object,
-a string, a timestamp or an array. As long as the `input`_ option is set
-correctly, the field will take care of all of the details.
+Les données utilisées par ce type de champ peuvent être un objet ``DateTime``,
+une chaine de caractères, un timestamp ou un tableau. Tant que l'option `input`_
+est correctement définie, le champ s'occupera de tous les détails.
 
-The field can be rendered as a single text box, three text boxes (month,
-day, and year) or three select boxes (see the `widget_` option).
+Le champ peut être rendu comme un simple champ texte, trois champs texte (mois,
+jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 
 +----------------------+-----------------------------------------------------------------------------+
-| Underlying Data Type | can be ``DateTime``, string, timestamp, or array (see the ``input`` option) |
+| Type de données      | peut être ``DateTime``, une chaine de caractères, un timestamp, ou un       |
+|                      | tableau (voir l'option ``input``)                                           |
 +----------------------+-----------------------------------------------------------------------------+
-| Rendered as          | single text box or three select fields                                      |
+| Rendu comme          | champ texte unique, trois champs textes, ou trois listes déroulantes        |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `widget`_                                                                 |
 |                      | - `input`_                                                                  |
@@ -30,20 +31,20 @@ day, and year) or three select boxes (see the `widget_` option).
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
-| Parent type          | ``field`` (if text), ``form`` otherwise                                     |
+| Type parent          | ``field`` (is texte), ``form`` sinon                                        |
 +----------------------+-----------------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType`          |
+| Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType`          |
 +----------------------+-----------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation basique
+-------------------
 
-This field type is highly configurable, but easy to use. The most important
-options are ``input`` and ``widget``.
+Ce type de champ est hautement configurable mais très facile à utiliser. Les options
+les plus importantes sont ``input`` et ``widget``.
 
-Suppose that you have a ``publishedAt`` field whose underlying date is a
-``DateTime`` object. The following configures the ``date`` type for that
-field as three different choice fields:
+Supposons que vous avez un champ ``publishedAt`` dont la date est un objet ``DateTime``.
+L'exemple suivant montre comment configurer le type ``date`` pour que le champ soit
+rendu comme trois différents champs Choice (listes déroulantes) :
 
 .. code-block:: php
 
@@ -52,9 +53,9 @@ field as three different choice fields:
         'widget' => 'choice',
     ));
 
-The ``input`` option *must* be changed to match the type of the underlying
-date data. For example, if the ``publishedAt`` field's data were a unix timestamp,
-you'd need to set ``input`` to ``timestamp``:
+L'option ``input`` *doit* être changée pour correspondre au type de donnée de la date.
+Par exemple, si la donnée du champ ``publishedAt`` est un timestamp unix, vous
+aurez besoin de définir ``input`` à ``timestamp``:
 
 .. code-block:: php
 
@@ -63,11 +64,11 @@ you'd need to set ``input`` to ``timestamp``:
         'widget' => 'choice',
     ));
 
-The field also supports an ``array`` and ``string`` as valid ``input`` option
-values.
+Le champ supporte aussi un ``array`` ou une ``string`` comme valeurs valides de
+l'option ``input``.
 
-Field Options
--------------
+Options du champ
+----------------
 
 .. include:: /reference/forms/types/options/date_widget.rst.inc
 
@@ -78,17 +79,18 @@ Field Options
 empty_value
 ~~~~~~~~~~~
 
-**type**: ``string`` or ``array``
+**type**: ``string`` ou ``array``
 
-If your widget option is set to ``choice``, then this field will be represented
-as a series of ``select`` boxes. The ``empty_value`` option can be used to
-add a "blank" entry to the top of each select box::
+Si votre option Widget est définir à ``choice``, alors ce champ sera représenté comme
+une série de listes déroulantes (``select``). L'option ``empty_value`` peut être
+utilisée pour définir un choix "vide" en haut de chaque liste déroulante::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => '',
     ));
 
-Alternatively, you can specify a string to be displayed for the "blank" value::
+Sinon, vous pouvez aussi spécifier une chaine de caractères qui sera affichée pour
+la valeur "vide"::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day')

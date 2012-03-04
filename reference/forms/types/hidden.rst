@@ -1,26 +1,26 @@
 .. index::
    single: Forms; Fields; hidden
 
-hidden Field Type
-=================
+Type de champ Hidden
+====================
 
-The hidden type represents a hidden input field.
+Le type hidden représente un champ input hidden.
 
 +-------------+----------------------------------------------------------------------+
-| Rendered as | ``input`` ``hidden`` field                                           |
+| Rendered as | Champ ``input`` ``hidden``                                           |
 +-------------+----------------------------------------------------------------------+
-| Inherited   | - ``data``                                                           |
-| options     | - ``property_path``                                                  |
+| Options     | - ``data``                                                           |
+| héritées    | - ``property_path``                                                  |
 +-------------+----------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                           |
+| Type parent | :doc:`field</reference/forms/types/field>`                           |
 +-------------+----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\HiddenType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\HiddenType` |
 +-------------+----------------------------------------------------------------------+
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/data.rst.inc
 

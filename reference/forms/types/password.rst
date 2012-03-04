@@ -1,47 +1,47 @@
 .. index::
    single: Forms; Fields; password
 
-password Field Type
-===================
+Type de champ Password
+======================
 
-The ``password`` field renders an input password text box.
+Le champ ``password`` rend un input text de type password.
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | ``input`` ``password`` field                                           |
+| Rendu comme | Champ ``input`` ``password``                                           |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `always_empty`_                                                      |
 +-------------+------------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                        |
-| options     | - `required`_                                                          |
+| Options     | - `max_length`_                                                        |
+| héritées    | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `trim`_                                                              |
 |             | - `read_only`_                                                         |
 |             | - `error_bubbling`_                                                    |
 +-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`text</reference/forms/types/text>`                               |
+| Type parent | :doc:`text</reference/forms/types/text>`                               |
 +-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType` |
 +-------------+------------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 always_empty
 ~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: ``true``
 
-If set to true, the field will *always* render blank, even if the corresponding
-field has a value. When set to false, the password field will be rendered
-with the ``value`` attribute set to its true value.
+Si cette option est définie à true, le champ sera *toujours* rendu vide, même si
+le champ correspondant a une valeur. Si elle est définie à false, alors le champ
+password sera rendu avec l'attribut ``value`` correctement rempli avec la vraie valeur.
 
-Put simply, if for some reason you want to render your password field
-*with* the password value already entered into the box, set this to false.
+Plus simple, si pour une raison quelconque vous voulez rendre le champ password
+*avec* sa valeur déjà préremplie, définissez cette option à false.
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

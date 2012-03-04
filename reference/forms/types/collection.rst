@@ -1,17 +1,18 @@
 .. index::
    single: Forms; Fields; collection
 
-collection Field Type
-=====================
+Type de champ Collection
+========================
 
-This field type is used to render a "collection" of some field or form. In
-the easiest sense, it could be an array of ``text`` fields that populate
-an array ``emails`` field. In more complex examples, you can embed entire
-forms, which is useful when creating forms that expose one-to-many relationships
-(e.g. a product from where you can manage many related product photos).
+Ce type de champ est utilisé pour rendre une "collection" de champs ou de formulaires.
+Plus simplement, ce pourrait être un tableau de champs ``text`` qui remplirait un tableau
+de champs``emails``. 
+Dans les cas les plus complexex, vous pourrez imbriquer des formulaires entiers, ce qui
+est très utile lorsque vous créerez des formulaires avec des relations one-to-many
+(par exemple un produit pour lequel vous pouvez gérer plusieurs photos de ce produit).
 
 +-------------+-----------------------------------------------------------------------------+
-| Rendered as | depends on the `type`_ option                                               |
+| Rendu comme | dépend de l'option `type`_                                                  |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `type`_                                                                   |
 |             | - `options`_                                                                |
@@ -19,34 +20,34 @@ forms, which is useful when creating forms that expose one-to-many relationships
 |             | - `allow_delete`_                                                           |
 |             | - `prototype`_                                                              |
 +-------------+-----------------------------------------------------------------------------+
-| Inherited   | - `label`_                                                                  |
-| options     | - `error_bubbling`_                                                         |
+| Options     | - `label`_                                                                  |
+| héritées    | - `error_bubbling`_                                                         |
 |             | - `by_reference`_                                                           |
 +-------------+-----------------------------------------------------------------------------+
-| Parent type | :doc:`form</reference/forms/types/form>`                                    |
+| Type Parent | :doc:`form</reference/forms/types/form>`                                    |
 +-------------+-----------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType`    |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType`    |
 +-------------+-----------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation basique
+-------------------
 
-This type is used when you want to manage a collection of similar items in
-a form. For example, suppose you have an ``emails`` field that corresponds
-to an array of email addresses. In the form, you want to expose each email
-address as its own input text box::
+Ce type est utilisé quand vous voulez gérer une collection d'items similaires dans 
+un formulaire. Par exemple, supposez que vous avez un champ ``emails`` qui correspond
+à un tableau d'adresses email. Dans le formulaire, vous voudrez afficher chaque adresse
+email dans son propre champ input::
 
     $builder->add('emails', 'collection', array(
-        // each item in the array will be an "email" field
+        // chaque item du tableau sera un champ "email"
         'type'   => 'email',
-        // these options are passed to each "email" type
+        // ces options sont passées à chaque type "email"
         'options'  => array(
             'required'  => false,
             'attr'      => array('class' => 'email-box')
         ),
     ));
 
-The simplest way to render this is all at once:
+La façon la plus simple de rendre ces champs est de tout faire en un coup :
 
 .. configuration-block::
 
@@ -58,7 +59,7 @@ The simplest way to render this is all at once:
     
         <?php echo $view['form']->row($form['emails]) ?>
 
-A much more flexible method would look like this:
+Une méthode plus flexible pourrait ressembler à ceci :
 
 .. configuration-block::
 
@@ -91,53 +92,51 @@ A much more flexible method would look like this:
         <?php endforeach; ?>
         </ul>
 
-In both cases, no input fields would render unless your ``emails`` data array
-already contained some emails.
+Dans les deux cas, aucun champ input ne sera affiché tant que le tableau ``emails``
+ne contient aucune adresse email.
 
-In this simple example, it's still impossible to add new addresses or remove
-existing addresses. Adding new addresses is possible by using the `allow_add`_
-option (and optionally the `prototype`_ option) (see example below). Removing
-emails from the ``emails`` array is possible with the `allow_delete`_ option.
+Dans cet exemple simple, il est toujours impossible d'ajouter de nouvelles adresses
+ou d'en supprimer. Ajouter une nouvelle adresse est possible en utilisant l'option
+`allow_add`_ (et optionnellement l'option `prototype`_) (voir l'exemple ci-dessous). 
+Supprimer des emails du tableau ``emails`` est possible grâce à l'option `allow_delete`_.
 
-Adding and Removing items
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter et supprimer des items
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If `allow_add`_ is set to ``true``, then if any unrecognized items are submitted,
-they'll be added seamlessly to the array of items. This is great in theory,
-but takes a little bit more effort in practice to get the client-side JavaScript
-correct.
+Si `allow_add`_ est défini à ``true``, alors tout item non reconnu qui est envoyé
+sera ajouté dans le tableau de façon transparente. C'est génial en théorie, mais en
+pratique, il vous faudra plus d'effort pour adapter la partie client JavaScript.
 
-Following along with the previous example, suppose you start with two
-emails in the ``emails`` data array. In that case, two input fields will
-be rendered that will look something like this (depending on the name of
-your form):
+En poursuivant avec l'exemple précédent, supposez que vous commencez avec deux emails
+dans votre tableau de données ``emails``.  Dans ce cas, deux champs input sera rendus,
+ce qui ressemblera à quelque chose comme ceci (ça dépendra du nom de votre formulaire) :
 
 .. code-block:: html
 
     <input type="email" id="form_emails_1" name="form[emails][0]" value="foo@foo.com" />
     <input type="email" id="form_emails_1" name="form[emails][1]" value="bar@bar.com" />
 
-To allow your user to add another email, just set `allow_add`_ to ``true``
-and - via JavaScript - render another field with the name ``form[emails][2]``
-(and so on for more and more fields).
+Pour autoriser votre utilisateur à ajouter un autre email, définissez juste `allow_add`_
+à ``true`` et - en JavaScript - rendez un autre champ avec le nom ``form[emails][2]``
+(en incrémentant à chaque nouveau champ).
 
-To help make this easier, setting the `prototype`_ option to ``true`` allows
-you to render a "template" field, which you can then use in your JavaScript
-to help you dynamically create these new fields. A rendered prototype field
-will look like this:
+Pour vous aider à faire cela plus facilement, définir l'option `prototype`_ à ``true`` 
+permet de rendre un "template" de champ que vous pourrez utiliser dans votre fichier
+JavaScript afin de créer dynamiquement des nouveau champs. Un champ prototype rendu
+ressemblera à :
 
 .. code-block:: html
 
     <input type="email" id="form_emails_$$name$$" name="form[emails][$$name$$]" value="" />
 
-By replacing ``$$name$$`` with some unique value (e.g. ``2``),
-you can build and insert new HTML fields into your form.
+En remplaçant ``$$name$$`` par une valeur unique (ex: ``2``), vous pouvez construire
+et insérer des nouveaux champs HTML dans votre formulaire.
 
-Using jQuery, a simple example might look like this. If you're rendering
-your collection fields all at once (e.g. ``form_row(form.emails)``), then
-things are even easier because the ``data-prototype`` attribute is rendered
-automatically for you (with a slight difference - see note below) and all
-you need is the JavaScript:
+Si vous utilisez jQuery, un exemple simple pourrait ressembler à ceci. Si vous rendez
+votre collection de champs en une seule fois (ex: ``form_row(form.emails)``), alors
+les choses sont encore plus simples puisque l'attribut ``data-prototype`` est automatiquement
+rendu pour vous (avec une legère différence - voir la note ci-dessous) et vous n'avez
+besoin que du JavaScript :
 
 .. configuration-block::
 
@@ -188,36 +187,36 @@ you need is the JavaScript:
 
 .. tip::
 
-    If you're rendering the entire collection at once, then the prototype
-    is automatically available on the ``data-prototype`` attribute of the
-    element (e.g. ``div`` or ``table``) that surrounds your collection. The
-    only difference is that the entire "form row" is rendered for you, meaning
-    you wouldn't have to wrap it in any container element like we've done
-    above.
+    Si vous rendez une collection entière en une seule fois, alors le prototype
+	est automatiquement disponible dans l'attribut ``data-prototype`` de l'élément
+    (ex: ``div`` ou ``table``) qui encadre votre collection. La seule différence
+	c'est que le "form row" est rendu pour vous en entier, ce qui signifie que vous
+	n'aurez pas à l'encadrer dans un conteneur quelconque comme nous l'avions fait
+	ci-dessus.
 
-Field Options
--------------
+Options du champ
+----------------
 
 type
 ~~~~
 
 **type**: ``string`` or :class:`Symfony\\Component\\Form\\FormTypeInterface` **required**
 
-This is the field type for each item in this collection (e.g. ``text``, ``choice``,
-etc). For example, if you have an array of email addresses, you'd use the
-:doc`email</reference/forms/types/email>` type. If you want to embed
-a collection of some other form, create a new instance of your form type
-and pass it as this option.
+C'est le type de champ pour chaque item dans la collection (ex: ``text``, ``choice``,
+etc). Par exemple, si vous avez un tableau d'adresses email, vous utiliserez le type 
+:doc`email</reference/forms/types/email>`. Si vous voulez imbriquer une collection
+d'un autre formulaire, créez une nouvelle instance de votre type de formulaire et passez
+la dans cette option.
 
 options
 ~~~~~~~
 
 **type**: ``array`` **default**: ``array()``
 
-This is the array that's passed to the form type specified in the `type`_
-option. For example, if you used the :doc`choice</reference/forms/types/choice>`
-type as your `type`_ option (e.g. for a collection of drop-down menus), then
-you'd need to at least pass the ``choices`` option to the underlying type::
+C'est le tableau qui est passé au type formulaire spécifié dans l'option `type`_.
+Par exemple, si vous utilisez le type :doc`choice</reference/forms/types/choice>`
+dans l'option `type`_ (pa exemple pour une collection de menus déroulants), alors
+vous devrez au moins passer l'option ``choices`` au type sous-jacent::
 
     $builder->add('favorite_cities', 'collection', array(
         'type'   => 'choice',
@@ -236,43 +235,44 @@ allow_add
 
 **type**: ``Boolean`` **default**: ``false``
 
-If set to ``true``, then if unrecognized items are submitted to the collection,
-they will be added as new items. The ending array will contain the existing
-items as well as the new item that was in the submitted data. See the above
-example for more details.
+Si cette option est définie à ``true``, alors tout item non reconnu qui est soumis
+sera ajouté à la collection comme nouvel item. Le tableau final contiendra les items
+existants ainsi que les nouveaux items qui auront été soumis. Regardez l'exemple
+ci-dessus pour plus de détails.
 
-The `prototype`_ option can be used to help render a prototype item that
-can be used - with JavaScript - to create new form items dynamically on the
-client side. For more information, see the above example and :ref:`cookbook-form-collections-new-prototype`.
+L'option `prototype`_ peut être utilisée pour rendre un prototype d'item qui pourra être
+utilisé - en JavaScript - pour créer des nouveaux item de formulaire dynamiquement
+côté client. Pour plus d'informations, voyez l'exemple ci-dessus et :ref:`cookbook-form-collections-new-prototype`.
 
 .. caution::
-
-    If you're embedding entire other forms to reflect a one-to-many database
-    relationship, you may need to manually ensure that the foreign key of
-    these new objects is set correctly. If you're using Doctrine, this won't
-    happen automatically. See the above link for more details.
+    Si vous imbriquez des autres formulaires entiers pour prendre en compte une
+	relation one-to-many en base de données, vous devrez vous assurer manuellement
+	que la clé étrangère de ces nouveaux objets est correctement définie. Si vous
+	utilisez Doctrine, ce ne sera pas fait automatiquement. Voyez le lien ci-dessus
+	pour plus de détails.
 
 allow_delete
 ~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: ``false``
 
-If set to ``true``, then if an existing item is not contained in the submitted
-data, it will be correctly absent from the final array of items. This means
-that you can implement a "delete" button via JavaScript which simply removes
-a form element from the DOM. When the user submits the form, its absence
-from the submitted data will mean that it's removed from the final array.
+Si cette option est définie à ``true``, alors si un item existant ne se retrouve
+pas dans les données soumises, il sera supprimé du tableau d'items final. Ca signifie
+que vous pouvez implémenter un bouton "Supprimer" en JavaScript qui supprimera
+simplement un élément formulaire du DOM. Quand l'utilisateur soumettra le formulaire,
+l'absence de cet élément des données soumises entrainera la suppression de l'item
+dans le tableau final.
 
-For more information, see :ref:`cookbook-form-collections-remove`.
+Pour plus d'informations, lisez :ref:`cookbook-form-collections-remove`.
 
 .. caution::
-
-    Be careful when using this option when you're embedding a collection
-    of objects. In this case, if any embedded forms are removed, they *will*
-    correctly be missing from the final array of objects. However, depending on
-    your application logic, when one of those objects is removed, you may want
-    to delete it or at least remove its foreign key reference to the main object.
-    None of this is handled automatically. For more information, see
+    
+	Soyez prudents lorsque vous utilisez cette option en imbriquant une collection
+	d'objets. Dans ce cas, si un formulaire imbriqué est supprimé, il *sera* bien
+	retiré du tableau final d'objets. Pourtant, selon la logique de votre application,
+	lorsque l'un de ces objets est supprimé, vous voudrez probablement supprimer,
+	ou au moins retirer, les clé étrangères qui lient cet objet à l'objet principal.
+	Rien de tout cela n'est fait automatiquement. Pour plus d'informations, lisez
     :ref:`cookbook-form-collections-remove`.
 
 prototype
@@ -280,17 +280,16 @@ prototype
 
 **type**: ``Boolean`` **default**: ``true``
 
-This option is useful when using the `allow_add`_ option. If ``true`` (and
-if `allow_add`_ is also ``true``), a special "prototype" attribute will be
-available so that you can render a "template" example on your page of what
-a new element should look like. The ``name`` attribute given to this element
-is ``$$name$$``. This allows you to add a "add another" button via JavaScript
-which reads the prototype, replaces ``$$name$$`` with some unique name or
-number, and render it inside your form. When submitted, it will be added
-to your underlying array due to the `allow_add`_ option.
+Cette option est utile lorsqu'elle est associée à l'option `allow_add`_. Si elle
+est à ``true`` (et que `allow_add`_ est aussi à ``true``), un attribut spécial "prototype"
+sera disponible pour que vous puissiez rendre un exemple de "template" à votre page
+afin de spécifier ce à quoi le nouvel élement doit ressembler. L'attribut ``name``
+donné à cet élément est ``$$name$$``. Cela vous permet d'ajouter un bouton "Ajouter
+un élément" en JavaScript qui parcourt le prototype, remplace ``$$name$$`` par un
+nom unique ou un numéro, et le rend à votre formulaire. Lors de la soumission, il sera
+ajouté à votre tableau de données grâce à l'option `allow_add`_.
 
-The prototype field can be rendered via the ``prototype`` variable in the
-collection field:
+Le champ prototype peut être rendu via la variable ``prototype`` du champ collection :
 
 .. configuration-block::
 
@@ -302,23 +301,25 @@ collection field:
     
         <?php echo $view['form']->row($form['emails']->get('prototype')) ?>
 
-Note that all you really need is the "widget", but depending on how you're
-rendering your form, having the entire "form row" may be easier for you.
+Notez que tout ce dont vous avez vraiment besoin c'est le "widget", mais selon la
+manière dont vous rendez votre formulaire, utiliser le "form row" peut être plus
+facile pour vous.
 
 .. tip::
+    
+	Si vous rendez une entière collection de champs en une seule fois, alors le
+	prototype du "form row" est automatiquement disponible dans l'attribut ``data-prototype``
+	de l'élément (ex ``div`` ou ``table``) qui encadre votre collection.
 
-    If you're rendering the entire collection field at once, then the prototype
-    form row is automatically available on the ``data-prototype`` attribute
-    of the element (e.g. ``div`` or ``table``) that surrounds your collection.
+Pour plus de détails sur l'utilisation de cette option, lisez l'exemple ci-dessus
+ou :ref:`cookbook-form-collections-new-prototype`.
 
-For details on how to actually use this option, see the above example as well
-as :ref:`cookbook-form-collections-new-prototype`.
+Options héritées
+----------------
 
-Inherited options
------------------
-
-These options inherit from the :doc:`field</reference/forms/types/form>` type.
-Not all options are listed here - only the most applicable to this type:
+Ces options sont héritées du type :doc:`field</reference/forms/types/form>`.
+Toutes les options ne sont pas listées ici, seulement celles qui s'appliquent le plus
+à ce type :
 
 .. include:: /reference/forms/types/options/label.rst.inc
 

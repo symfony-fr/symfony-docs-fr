@@ -1,5 +1,5 @@
-Reference Documents
-===================
+Documents de Référence
+======================
 
 .. toctree::
     :hidden:

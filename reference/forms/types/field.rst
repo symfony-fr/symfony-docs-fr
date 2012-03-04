@@ -1,13 +1,13 @@
 .. index::
    single: Forms; Fields; field
 
-The Abstract "field" Type
-=========================
+Le type abstrait "field"
+========================
 
-The ``field`` form type is not an actual field type you use, but rather
-functions as the parent field type for many other fields.
+Le type de formulaire ``field`` n'est pas un type de champ que vous pouvez utiliser,
+mais plutôt des fonctions comme le type de champ parent pour de nombreux autres champs.
 
-The ``field`` type predefines a couple of options:
+Le type ``field`` prédéfinit un ensemble d'options :
 
 .. include:: /reference/forms/types/options/data.rst.inc
 

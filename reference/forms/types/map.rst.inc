@@ -1,5 +1,5 @@
-Text Fields
-~~~~~~~~~~~
+Champs de type Texte
+~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`text</reference/forms/types/text>`
 * :doc:`textarea</reference/forms/types/textarea>`
@@ -12,8 +12,8 @@ Text Fields
 * :doc:`search</reference/forms/types/search>`
 * :doc:`url</reference/forms/types/url>`
 
-Choice Fields
-~~~~~~~~~~~~~
+Champs de type Choice
+~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`choice</reference/forms/types/choice>`
 * :doc:`entity</reference/forms/types/entity>`
@@ -22,35 +22,35 @@ Choice Fields
 * :doc:`locale</reference/forms/types/locale>`
 * :doc:`timezone</reference/forms/types/timezone>`
 
-Date and Time Fields
-~~~~~~~~~~~~~~~~~~~~
+Champs de type Date et Time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`date</reference/forms/types/date>`
 * :doc:`datetime</reference/forms/types/datetime>`
 * :doc:`time</reference/forms/types/time>`
 * :doc:`birthday</reference/forms/types/birthday>`
 
-Other Fields
-~~~~~~~~~~~~
+Autres champs
+~~~~~~~~~~~~~
 
 * :doc:`checkbox</reference/forms/types/checkbox>`
 * :doc:`file</reference/forms/types/file>`
 * :doc:`radio</reference/forms/types/radio>`
 
-Field Groups
-~~~~~~~~~~~~
+Champs de type Groupe
+~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`collection</reference/forms/types/collection>`
 * :doc:`repeated</reference/forms/types/repeated>`
 
-Hidden Fields
+Champs cachés
 ~~~~~~~~~~~~~
 
 * :doc:`hidden</reference/forms/types/hidden>`
 * :doc:`csrf</reference/forms/types/csrf>`
 
-Base Fields
-~~~~~~~~~~~
+Champs de base
+~~~~~~~~~~~~~~
 
 * :doc:`field</reference/forms/types/field>`
 * :doc:`form</reference/forms/types/form>`

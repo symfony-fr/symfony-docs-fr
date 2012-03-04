@@ -1,39 +1,39 @@
 .. index::
    single: Forms; Fields; csrf
 
-csrf Field Type
-===============
+Type de champ Csrf
+==================
 
-The ``csrf`` type is a hidden input field containing a CSRF token.
+Le type ``csrf`` est un champ input hidden qui contient le CSRF token (ou jeton).
 
 +-------------+--------------------------------------------------------------------+
-| Rendered as | ``input`` ``hidden`` field                                         |
+| Rendu comme | Champ ``input`` ``hidden``                                         |
 +-------------+--------------------------------------------------------------------+
 | Options     | - ``csrf_provider``                                                |
 |             | - ``intention``                                                    |
 |             | - ``property_path``                                                |
 +-------------+--------------------------------------------------------------------+
-| Parent type | ``hidden``                                                         |
+| Type parent | ``hidden``                                                         |
 +-------------+--------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Csrf\\Type\\CsrfType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Csrf\\Type\\CsrfType` |
 +-------------+--------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 csrf_provider
 ~~~~~~~~~~~~~
 
 **type**: ``Symfony\Component\Form\CsrfProvider\CsrfProviderInterface``
 
-The ``CsrfProviderInterface`` object that should generate the CSRF token.
-If not set, this defaults to the default provider.
+L'objet ``CsrfProviderInterface`` qui doit générer le CSRF token.
+S'il n'est pas défini, la valeur par défaut est le provider par défaut.
 
 intention
 ~~~~~~~~~
 
 **type**: ``string``
 
-An optional unique identifier used to generate the CSRF token.
+Un identifiant unique facultatif pour générer le CSRF token.
 
 .. include:: /reference/forms/types/options/property_path.rst.inc

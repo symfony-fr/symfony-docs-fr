@@ -1,83 +1,81 @@
 .. index::
    single: Forms; Fields; money
 
-money Field Type
-================
+Type de champ Money
+===================
 
-Renders an input text field and specializes in handling submitted "money"
-data.
+Rend un champ input texte spécialisé dans la gestion des données monétaires.
 
-This field type allows you to specify a currency, whose symbol is rendered
-next to the text field. There are also several other options for customizing
-how the input and output of the data is handled.
+Ce type de champ vous permet de spécifier une devise, dont le symbole sera affiché
+à côté du champ texte. Il y a plusieurs autres options pour personnaliser les
+données en entrée et en sortie seront prises en charge.
 
 +-------------+---------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                            |
+| Rendu comme | Champ ``input`` ``text``                                            |
 +-------------+---------------------------------------------------------------------+
 | Options     | - `currency`_                                                       |
 |             | - `divisor`_                                                        |
 |             | - `precision`_                                                      |
 |             | - `grouping`_                                                       |
 +-------------+---------------------------------------------------------------------+
-| Inherited   | - `required`_                                                       |
-| options     | - `label`_                                                          |
+| Options     | - `required`_                                                       |
+| héritées    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                          |
+| Type parent | :doc:`field</reference/forms/types/field>`                          |
 +-------------+---------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType` |
 +-------------+---------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 currency
 ~~~~~~~~
 
 **type**: ``string`` **default**: ``EUR``
 
-Specifies the currency that the money is being specified in. This determines
-the currency symbol that should be shown by the text box. Depending on
-the currency - the currency symbol may be shown before or after the input
-text field.
-    
-This can also be set to false to hide the currency symbol.
+Définit la devise dans laquelle la somme est spécifiée. Cela détermine quel symbole
+monétaire sera affiché dans le champ texte. Selon la devise choisie, le symbole
+s'affichera avant ou après la donnée dans le champ texte.
+
+Cette option peut aussi être définie à false pour cacher le symbole monétaire.
 
 divisor
 ~~~~~~~
 
 **type**: ``integer`` **default**: ``1``
 
-If, for some reason, you need to divide your starting value by a number
-before rendering it to the user, you can use the ``divisor`` option.
-For example::
+Si, pour une raison, vous avez besoin de diviser votre valeur de départ par un
+nombre avant de le rendre à l'utilisateur, vous pouvez utiliser l'option ``divisor``.
+Par exemple::
 
     $builder->add('price', 'money', array(
         'divisor' => 100,
     ));
 
-In this case, if the ``price`` field is set to ``9900``, then the value
-``99`` will actually be rendered to the user. When the user submits the
-value ``99``, it will be multiplied by ``100`` and ``9900`` will ultimately
-be set back on your object.
+Dans ce cas, si le champ ``price`` est défini ``9900``, alors c'est en fait la valeur
+``99`` qui sera affichée à l'utilisateur. Lorsque l'utilisateur soumettra la valeur
+``99``, elle sera automatiquement multipliée par ``100`` et ``9900`` sera la valeur
+finalement stockée dans votre projet.
 
 precision
 ~~~~~~~~~
 
 **type**: ``integer`` **default**: ``2``
 
-For some reason, if you need some precision other than 2 decimal places,
-you can modify this value. You probably won't need to do this unless,
-for example, you want to round to the nearest dollar (set the precision
-to ``0``).
+Si pour une raison quelconque vous avez besoin d'une autre précision que 2 décimales,
+vous pouvez modifier cette option. Vous n'aurez probablement pas besoin de le faire
+à moins, par exemple, que vous ne vouliez arrondir au dollar le plus proche (dans
+ce cas, définissez la précision à ``0``).
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

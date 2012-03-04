@@ -1,63 +1,63 @@
 .. index::
    single: Forms; Fields; integer
 
-integer Field Type
-==================
+Type de champ Integer
+=====================
 
-Renders an input "number" field. Basically, this is a text field that's good
-at handling data that's in an integer form. The input ``number`` field looks
-like a text box, except that - if the user's browser supports HTML5 - it will
-have some extra frontend functionality.
+Affiche un champ input "number". De façon basique, c'est un champ texte qui sait bien 
+traiter les données entières d'un formulaire. Le champ input ``number`` ressemble à
+un champ texte, excepté que, si le navigateur supporte l'HTML5, il aura des fonctionnalités
+supplémentaires.
 
-This field has different options on how to handle input values that aren't
-integers. By default, all non-integer values (e.g. 6.78) will round down (e.g. 6).
+Ce champ a différentes options permettant de définir comment gérer les valeurs qui
+ne sont pas des entiers. Par défaut, toutes les valeurs non entières (ex: 6,78)
+seront arrondies à l'entier inférieur (ex: 6).
 
 +-------------+-----------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                              |
+| Rendu comme | Champ ``input`` ``text``                                              |
 +-------------+-----------------------------------------------------------------------+
 | Options     | - `rounding_mode`_                                                    |
 |             | - `grouping`_                                                         |
 +-------------+-----------------------------------------------------------------------+
-| Inherited   | - `required`_                                                         |
-| options     | - `label`_                                                            |
+| Options     | - `required`_                                                         |
+| héritées    | - `label`_                                                            |
 |             | - `read_only`_                                                        |
 |             | - `error_bubbling`_                                                   |
 +-------------+-----------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                            |
+| Type parent | :doc:`field</reference/forms/types/field>`                            |
 +-------------+-----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\IntegerType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\IntegerType` |
 +-------------+-----------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 rounding_mode
 ~~~~~~~~~~~~~
 
 **type**: ``integer`` **default**: ``IntegerToLocalizedStringTransformer::ROUND_DOWN``
 
-By default, if the user enters a non-integer number, it will be rounded
-down. There are several other rounding methods, and each is a constant
-on the :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\IntegerToLocalizedStringTransformer`:
+Par défaut, si l'utilisateur entre un nombre qui n'est pas entier, il sera arrondi
+à l'entier inférieur. Il y a plusieurs autres méthodes pour arrondir, et chacune
+est une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\IntegerToLocalizedStringTransformer`:
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Rounding mode to
-    round towards zero.
+*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Mode pour arrondir jusqu'à zéro.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Rounding mode to
-    round towards negative infinity.
+*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Mode pour arrondir jusqu'à
+    l'infini négatif.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_UP`` Rounding mode to round 
-    away from zero.
+*   ``IntegerToLocalizedStringTransformer::ROUND_UP`` Mode pour arrondir en partant
+    de zéro.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Rounding mode
-    to round towards positive infinity.
+*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Mode pour arrondir jusqu'à
+    l'infini positif.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

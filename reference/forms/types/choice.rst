@@ -1,17 +1,17 @@
 .. index::
    single: Forms; Fields; choice
 
-choice Field Type
-=================
+Type de champ Choice
+====================
 
-A multi-purpose field used to allow the user to "choose" one or more options.
-It can be rendered as a ``select`` tag, radio buttons, or checkboxes.
+Un champ multi-usage pour permettre à l'utilisateur de "choisir" une ou plusieurs
+options. Il peut être affiché avec des balises ``select``, des boutons radio, ou
+des checkboxes.
 
-To use this field, you must specify *either* the ``choice_list`` or ``choices``
-option.
+Pour utiliser ce champ, vous devez spécifier *soit l'option* ``choice_list``, *soit* ``choices``.
 
 +-------------+-----------------------------------------------------------------------------+
-| Rendered as | can be various tags (see below)                                             |
+| Rendu comme | peut être différentes balises (voir ci-dessous)                             |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `choices`_                                                                |
 |             | - `choice_list`_                                                            |
@@ -21,67 +21,69 @@ option.
 |             | - `empty_value`_                                                            |
 |             | - `empty_data`_                                                             |
 +-------------+-----------------------------------------------------------------------------+
-| Inherited   | - `required`_                                                               |
-| options     | - `label`_                                                                  |
+| Options     | - `required`_                                                               |
+| héritées    | - `label`_                                                                  |
 |             | - `read_only`_                                                              |
 |             | - `error_bubbling`_                                                         |
 +-------------+-----------------------------------------------------------------------------+
-| Parent type | :doc:`form</reference/forms/types/form>` (if expanded), ``field`` otherwise |
+| Type parent | :doc:`form</reference/forms/types/form>` (if expanded), ``field`` otherwise |
 +-------------+-----------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType`        |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType`        |
 +-------------+-----------------------------------------------------------------------------+
 
-Example Usage
--------------
+Exemple d'utilisation
+---------------------
 
-The easiest way to use this field is to specify the choices directly via the
-``choices`` option. The key of the array becomes the value that's actually
-set on your underlying object (e.g. ``m``), while the value is what the
-user sees on the form (e.g. ``Male``).
+La manière la plus facile d'utiliser ce champ est de spécifier directement les
+choix possibles via l'option ``choices``. L'index du tableau deviendra la valeur
+qui sera effectivement définie dans votre objet final (ex: ``m``), alors que la valeur
+est ce que verra l'utilisateur dans le formulaire (ex: ``Masculin``).
 
 .. code-block:: php
 
     $builder->add('gender', 'choice', array(
-        'choices'   => array('m' => 'Male', 'f' => 'Female'),
+        'choices'   => array('m' => 'Masculin', 'f' => 'Féminin'),
         'required'  => false,
     ));
 
-By setting ``multiple`` to true, you can allow the user to choose multiple
-values. The widget will be rendered as a multiple ``select`` tag or a series
-of checkboxes depending on the ``expanded`` option:
+En définissant l'option ``multiple`` à true, vous pouvez autoriser l'utilisateur à 
+choisir plusieurs valeurs. Le widget sera rendu comme une balide``select`` multiple, ou
+comme une série de checkboxes en fonction de l'option ``expanded`` :
 
 .. code-block:: php
 
     $builder->add('availability', 'choice', array(
         'choices'   => array(
-            'morning'   => 'Morning',
-            'afternoon' => 'Afternoon',
-            'evening'   => 'Evening',
+            'matin'   => 'Matin',
+            'apresmidi' => 'Après-midi',
+            'soir'   => 'Soir',
         ),
         'multiple'  => true,
     ));
 
-You can also use the ``choice_list`` option, which takes an object that can
-specify the choices for your widget.
+Vous pouvez aussi utiliser l'option ``choice_list``, qui prend un objet comme argument
+pour spécifier les choix de votre widget.
 
 .. _forms-reference-choice-tags:
 
 .. include:: /reference/forms/types/options/select_how_rendered.rst.inc
 
-Field Options
--------------
+Options du champ
+----------------
 
 choices
 ~~~~~~~
 
 **type**: ``array`` **default**: ``array()``
 
-This is the most basic way to specify the choices that should be used
-by this field. The ``choices`` option is an array, where the array key
-is the item value and the array value is the item's label::
+C'est la façon la plus simple de spécifier les choix qui pourront être choisis 
+dans le champ. L'option ``choices`` est un tableay, où les index sont les valeurs
+des items, et les valeurs du tableau sont les labels des items :
+
+.. code-block:: php
 
     $builder->add('gender', 'choice', array(
-        'choices' => array('m' => 'Male', 'f' => 'Female')
+        'choices' => array('m' => 'Masculin', 'f' => 'Féminin')
     ));
 
 choice_list
@@ -89,10 +91,10 @@ choice_list
 
 **type**: ``Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface``
 
-This is one way of specifying the options to be used for this field.
-The ``choice_list`` option must be an instance of the ``ChoiceListInterface``.
-For more advanced cases, a custom class that implements the interface
-can be created to supply the choices.
+C'est une façon de spécifier les options de champ à utiliser. L'option ``choice_list``
+doit être une instance de ``ChoiceListInterface``.
+Pour des cas plus avancés, une classe personnalisée qui implémente l'interface peut
+être créée pour définir les choix.
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -104,10 +106,10 @@ can be created to supply the choices.
 
 .. include:: /reference/forms/types/options/empty_data.rst.inc
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

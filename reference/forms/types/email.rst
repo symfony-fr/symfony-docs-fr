@@ -1,31 +1,31 @@
 .. index::
    single: Forms; Fields; email
 
-email Field Type
-================
+Type de champ Email
+===================
 
-The ``email`` field is a text field that is rendered using the HTML5
-``<input type="email" />`` tag.
+Le champ ``email`` est un champ texte qui est rendu en utilisant la balise HTML5
+``<input type="email" />``.
 
 +-------------+---------------------------------------------------------------------+
-| Rendered as | ``input`` ``email`` field (a text box)                              |
+| Rendu comme | Champ ``input`` ``email`` (balise texte)                            |
 +-------------+---------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                     |
-| options     | - `required`_                                                       |
+| Options     | - `max_length`_                                                     |
+| héritées    | - `required`_                                                       |
 |             | - `label`_                                                          |
 |             | - `trim`_                                                           |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                          |
+| Type parent | :doc:`field</reference/forms/types/field>`                          |
 +-------------+---------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType` |
 +-------------+---------------------------------------------------------------------+
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

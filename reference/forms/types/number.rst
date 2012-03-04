@@ -1,82 +1,82 @@
 .. index::
    single: Forms; Fields; number
 
-number Field Type
-=================
+Type de champ Number
+====================
 
-Renders an input text field and specializes in handling number input. This
-type offers different options for the precision, rounding, and grouping that
-you want to use for your number.
+Rend un champ input texte spécialisé dans la gestion des nombres. Ce type propose
+différentes options pour gérer la précision, les arrondis, et les regroupements
+que vous pouvez utiliser pour vos nombres.
 
 +-------------+----------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                             |
+| Rendu comme | Champ ``input`` ``text``                                             |
 +-------------+----------------------------------------------------------------------+
 | Options     | - `rounding_mode`_                                                   |
 |             | - `precision`_                                                       |
 |             | - `grouping`_                                                        |
 +-------------+----------------------------------------------------------------------+
-| Inherited   | - `required`_                                                        |
-| options     | - `label`_                                                           |
+| Options     | - `required`_                                                        |
+| héritées    | - `label`_                                                           |
 |             | - `read_only`_                                                       |
 |             | - `error_bubbling`_                                                  |
 +-------------+----------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                           |
+| Type parent | :doc:`field</reference/forms/types/field>`                           |
 +-------------+----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType` |
 +-------------+----------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 precision
 ~~~~~~~~~
 
 **type**: ``integer`` **default**: Locale-specific (usually around ``3``)
 
-This specifies how many decimals will be allowed until the field rounds
-the submitted value (via ``rounding_mode``). For example, if ``precision``
-is set to ``2``, a submitted value of ``20.123`` will be rounded to,
-for example, ``20.12`` (depending on your ``rounding_mode``).
+Cette option spécifie combien de décimales seront autorisées après que le champ
+aura arrondi la valeur soumise (via ``rounding_mode``). Par exemple, si ``precision``
+est défini à ``2``, une valeur soumise de ``20.123`` sera arrondie, par exemple,
+``20.12`` (cela dépendra de votre ``rounding_mode``).
 
 rounding_mode
 ~~~~~~~~~~~~~
 
 **type**: ``integer`` **default**: ``IntegerToLocalizedStringTransformer::ROUND_HALFUP``
 
-If a submitted number needs to be rounded (based on the ``precision``
-option), you have several configurable options for that rounding. Each
-option is a constant on the :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\IntegerToLocalizedStringTransformer`:
+Si le nombre soumis a besoin d'être arrondi (et en se basant sur l'option ``precision``),
+vous avez plusieurs options configurables pour gérer cet arrondi. Chaque option est
+une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\IntegerToLocalizedStringTransformer`:
     
-*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Rounding mode to
-    round towards zero.
+*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Mode pour arrondir jusqu'à
+    zéro.    
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Rounding mode to
-    round towards negative infinity.
+*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Mode pour arrondir jusqu'à
+    l'infini négatif.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_UP`` Rounding mode to round 
-    away from zero.
+*   ``IntegerToLocalizedStringTransformer::ROUND_UP`` Mode pour arrondir en partant
+    de zéro.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Rounding mode
-    to round towards positive infinity.
+*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Mode pour arrondir jusqu'à
+    l'infini positif.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_HALFDOWN`` Rounding mode
-    to round towards "nearest neighbor" unless both neighbors are equidistant,
-    in which case round down.
+*   ``IntegerToLocalizedStringTransformer::ROUND_HALFDOWN`` Mode pour arrondir
+    au "voisin le plus proche". Si les deux voisins sont équidistants, alors c'est
+	arrondi au voisin inférieur.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_HALFEVEN`` Rounding mode
-    to round towards the "nearest neighbor" unless both neighbors are equidistant,
-    in which case, round towards the even neighbor.
+*   ``IntegerToLocalizedStringTransformer::ROUND_HALFEVEN`` Mode pour arrondir
+    au "voisin le plus proche". Si les deux voisins sont équidistants, alors c'est
+	arrondi au voisin pair.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_HALFUP`` Rounding mode to
-    round towards "nearest neighbor" unless both neighbors are equidistant,
-    in which case round up.
+*   ``IntegerToLocalizedStringTransformer::ROUND_HALFUP`` Mode pour arrondir
+    au "voisin le plus proche". Si les deux voisins sont équidistants, alors c'est
+	arrondi au voisin supérieur.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Inherited Options
------------------
+Option héritées
+---------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

@@ -1,28 +1,28 @@
 .. index::
    single: Forms; Fields; file
 
-file Field Type
-===============
+Le type de champ File
+=====================
 
-The ``file`` type represents a file input in your form.
+Le type ``file`` représente un input File dans votre formulaire.
 
 +-------------+---------------------------------------------------------------------+
-| Rendered as | ``input`` ``file`` field                                            |
+| Rendu comme | Champ ``input`` ``file``                                            |
 +-------------+---------------------------------------------------------------------+
-| Inherited   | - `required`_                                                       |
-| options     | - `label`_                                                          |
+| Options     | - `required`_                                                       |
+| héritées    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
-| Parent type | :doc:`form</reference/forms/types/field>`                           |
+| Type parent | :doc:`form</reference/forms/types/field>`                           |
 +-------------+---------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FileType`  |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FileType`  |
 +-------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-Let's say you have this form definition:
+Imaginons que vous avez défini ce formulaire :
 
 .. code-block:: php
 
@@ -30,12 +30,12 @@ Let's say you have this form definition:
 
 .. caution::
 
-    Don't forget to add the ``enctype`` attribute in the form tag: ``<form
-    action="#" method="post" {{ form_enctype(form) }}>``.
+    N'oubliez pas d'ajouter l'attribut ``enctype`` dans la balise form : 
+	``<form action="#" method="post" {{ form_enctype(form) }}>``.
 
-When the form is submitted, the ``attachment`` field will be an instance of
-:class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`. It can be
-used to move the ``attachment`` file to a permanent location:
+Lorsque le formulaire est soumis, le champ ``attachment`` sera une instance de
+:class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`. Elle peut être
+utilisée pour déplacer le fichier ``attachment`` vers son emplacement définitif :
 
 .. code-block:: php
 
@@ -56,32 +56,32 @@ used to move the ``attachment`` file to a permanent location:
         // ...
     }
 
-The ``move()`` method takes a directory and a file name as its arguments.
-You might calculate the filename in one of the following ways::
+La méthode ``move()`` prend un répertoire et un nom de fichier comme arguments.
+Vous pouvez calculer le nom de fichier grâce à l'une des méthodes suivantes::
 
-    // use the original file name
+    // utiliser le nom de fichier original
     $file->move($dir, $file->getClientOriginalName());
 
-    // compute a random name and try to guess the extension (more secure)
+    // générer un nom aléatoire et essayer de deviner l'extension (plus sécurisé)
     $extension = $file->guessExtension();
     if (!$extension) {
-        // extension cannot be guessed
+        // l'extension n'a pas été trouvée
         $extension = 'bin';
     }
     $file->move($dir, rand(1, 99999).'.'.$extension);
 
-Using the original name via ``getClientOriginalName()`` is not safe as it
-could have been manipulated by the end-user. Moreover, it can contain
-characters that are not allowed in file names. You should sanitize the name
-before using it directly.
+Utiliser le nom original via la méthode ``getClientOriginalName()`` n'est pas sécurisé
+car il a pu être manipulé par l'utilisateur. De plus, il peut contenir des caractères
+qui ne sont pas utilisés dans les noms de fichiers. Il est recommandé de nettoyer
+le nom avant de l'utiliser.
 
-Read the :doc:`cookbook </cookbook/doctrine/file_uploads>` for an example of
-how to manage a file upload associated with a Doctrine entity.
+Lisez le chapitre :doc:`cookbook </cookbook/doctrine/file_uploads>` pour avoir un
+exemple d'upload de fichier associé à une entité Doctrine.
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

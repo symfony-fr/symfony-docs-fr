@@ -1,7 +1,7 @@
 .. index::
    single: Forms; Fields; form
 
-form Field Type
-===============
+Type de champ Form
+==================
 
-See :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType`.
+Voir :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType`.

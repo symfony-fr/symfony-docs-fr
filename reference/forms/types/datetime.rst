@@ -1,19 +1,20 @@
 .. index::
    single: Forms; Fields; datetime
 
-datetime Field Type
-===================
+Type de champ Datetime
+======================
 
-This field type allows the user to modify data that represents a specific
-date and time (e.g. ``1984-06-05 12:15:30``).
+Ce type de champ permet à l'utilisateur de manipuler une donnée qui représente
+une date et une heure (ex: ``1984-06-05 12:15:30``).
 
-Can be rendered as a text input or select tags. The underlying format of the
-data can be a ``DateTime`` object, a string, a timestamp or an array.
+Il peut être rendu comme un input text ou des balises select. Le format de la donnée
+réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau.
 
 +----------------------+-----------------------------------------------------------------------------+
-| Underlying Data Type | can be ``DateTime``, string, timestamp, or array (see the ``input`` option) |
+| Type de données      | peut être ``DateTime``, une chaine de caractères, un timestamp,             |
+|                      | ou un tableau (voir l'option ``input``)                                     |
 +----------------------+-----------------------------------------------------------------------------+
-| Rendered as          | single text box or three select fields                                      |
+| Rendu comme          | simple champ texte ou trois champs select                                   |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `date_widget`_                                                            |
 |                      | - `time_widget`_                                                            |
@@ -29,50 +30,49 @@ data can be a ``DateTime`` object, a string, a timestamp or an array.
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
-| Parent type          | :doc:`form</reference/forms/types/form>`                                    |
+| Type parent          | :doc:`form</reference/forms/types/form>`                                    |
 +----------------------+-----------------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateTimeType`      |
+| Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateTimeType`      |
 +----------------------+-----------------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 date_widget
 ~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``choice``
 
-Defines the ``widget`` option for the :doc:`date</reference/forms/types/date>` type
+Définit l'option ``widget`` pour le type :doc:`date</reference/forms/types/date>`
 
 time_widget
 ~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``choice``
 
-Defines the ``widget`` option for the :doc:`time</reference/forms/types/time>` type
+Définit l'option ``widget`` pour le type :doc:`time</reference/forms/types/time>`
 
 input
 ~~~~~
 
 **type**: ``string`` **default**: ``datetime``
 
-The format of the *input* data - i.e. the format that the date is stored on
-your underlying object. Valid values are:
+Le format de la donnée en *entrée* - c'est-à-dire le format sous lequel la date
+est stockées dans l'objet. Les valeurs valides sont :
 
-* ``string`` (e.g. ``2011-06-05 12:15:00``)
-* ``datetime`` (a ``DateTime`` object)
-* ``array`` (e.g. ``array(2011, 06, 05, 12, 15, 0)``)
-* ``timestamp`` (e.g. ``1307276100``)
+* ``string`` (ex: ``2011-06-05 12:15:00``)
+* ``datetime`` (un objet ``DateTime``)
+* ``array`` (ex: ``array(2011, 06, 05, 12, 15, 0)``)
+* ``timestamp`` (ex: ``1307276100``)
 
-The value that comes back from the form will also be normalized back into
-this format.
+La valeur provenant du formulaire sera aussi normalisée dans ce format.
 
 date_format
 ~~~~~~~~~~~
 
-**type**: ``integer`` or ``string`` **default**: ``IntlDateFormatter::MEDIUM``
+**type**: ``integer`` ou ``string`` **default**: ``IntlDateFormatter::MEDIUM``
 
-Defines the ``format`` option that will be passed down to the date field.
+Définit l'option ``format`` qui sera passée au champ date.
 
 .. include:: /reference/forms/types/options/hours.rst.inc
 
