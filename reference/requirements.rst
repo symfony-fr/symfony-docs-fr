@@ -42,7 +42,7 @@ Facultatives
   * ``magic_quotes_gpc = Off``
   * ``register_globals = Off``
   * ``session.autostart = Off``
-    
+
 Doctrine
 --------
 
