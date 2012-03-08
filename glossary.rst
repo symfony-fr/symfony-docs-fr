@@ -1,7 +1,7 @@
 :orphan:
 
-Glossary
-========
+Glossaire
+=========
 
 .. glossary::
    :sorted:
