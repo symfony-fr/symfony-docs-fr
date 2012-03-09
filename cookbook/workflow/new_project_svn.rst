@@ -1,29 +1,30 @@
-How to Create and store a Symfony2 Project in Subversion
-========================================================
+Comment créer et stocker un projet Symfony2 dans Subversion
+===========================================================
 
 .. tip::
 
-    This entry is specifically about Subversion, and based on principles found
-    in :doc:`/cookbook/workflow/new_project_git`.
+    Cette article est spécifique à Subversion et basé sur des principes que
+    vous trouvez dans l'article :doc:`/cookbook/workflow/new_project_git`.
 
-Once you've read through :doc:`/book/page_creation` and become familiar with
-using Symfony, you'll no-doubt be ready to start your own project. The
-preferred method to manage Symfony2 projects is using `git`_ but some prefer
-to use `Subversion`_ which is totally fine!. In this cookbook article, you'll
-learn how to manage your project using `svn`_ in a similar manner you
-would do with `git`_.
+Une fois que vous avez lu :doc:`/book/page_creation` et que vous êtes devenu
+familier avec l'usage de Symfony, vous serez sans aucun doute prêt à démarrer
+votre propre projet. La méthode préférée pour gérer des projets Symfony2 est
+d'utiliser `git`_ mais certains préfèrent utiliser `Subversion`_, ce qui ne pose
+aucun problème! Dans cet article du cookbook, vous allez apprendre comment gérer
+votre projet en utilisant `svn`_ de manière similaire à si vous l'aviez fait avec
+`git`_.
 
 .. tip::
 
-    This is **a** method to tracking your Symfony2 project in a Subversion
-    repository. There are several ways to do and this one is simply one that
-    works.
+    Ceci est **une** méthode parmi tant d'autres de stocker votre projet
+    Symfony2 dans un dépôt Subversion. Il y a plusieurs manières de faire
+    cela et celle-ci en est simplement une qui fonctionne.
 
-The Subversion Repository
--------------------------
+Le Dépôt Subversion
+-------------------
 
-For this article we will suppose that your repository layout follows the
-widespread standard structure:
+Pour cet article, nous supposerons que votre schéma de dépôt suit la structure
+standard et répandue :
 
 .. code-block:: text
 
@@ -34,39 +35,40 @@ widespread standard structure:
 
 .. tip::
 
-    Most subversion hosting should follow this standard practice. This
-    is the recommended layout in `Version Control with Subversion`_ and the
-    layout used by most free hosting (see :ref:`svn-hosting`).
+    La plupart des hébergements subversion devrait suivre cette pratique standard.
+    C'est le schéma recommandé par `Version Control with Subversion`_ et utilisé
+    par la plupart des hébergements gratuits (voir :ref:`svn-hosting`).
 
-Initial Project Setup
----------------------
+Configuration Initiale du Projet
+--------------------------------
 
-To get started, you'll need to download Symfony2 and get the basic Subversion setup:
+Pour démarrer, vous aurez besoin de télécharger Symfony2 et de d'effectuer la
+configuration basique de Subversion :
 
-1. Download the `Symfony2 Standard Edition`_ without or without vendors.
+1. Téléchargez `Symfony2 Standard Edition`_ sans les « vendors ».
 
-2. Unzip/untar the distribution. It will create a folder called Symfony with
-   your new project structure, config files, etc. Rename it to whatever you
-   like.
+2. Unzippez/untarez la distribution. Cela va créer un dossier nommé Symfony
+   avec votre nouvelle structure de projet, les fichiers de configuration, etc.
+   Renommez-le en ce que vous voulez.
 
-3. Checkout the Subversion repository that will host this project. Let's say it
-   is hosted on `Google code`_ and called ``myproject``:
+3. Effectuez un « checkout » du dépôt Subversion qui va héberger ce projet. Disons
+   qu'il est héberger sur `Google code`_ et nommé ``myproject`` :
 
     .. code-block:: bash
     
         $ svn checkout http://myproject.googlecode.com/svn/trunk myproject
 
-4. Copy the Symfony2 project files in the subversion folder:
+4. Copiez les fichiers du projet Symfony2 dans le dossier subversion :
 
     .. code-block:: bash
 
         $ mv Symfony/* myproject/
 
-5. Let's now set the ignore rules. Not everything *should* be stored in your
-   subversion repository. Some files (like the cache) are generated and
-   others (like the database configuration) are meant to be customized
-   on each machine. This makes use of the ``svn:ignore`` property, so that
-   we can ignore specific files.
+5. Ecrivons maintenant les patterns pour les fichiers à ignorer. Tout ne doit pas
+   être stocké dans votre dépôt subversion. Quelques fichiers (comme le cache) sont
+   générés et d'autres (comme la configuration de la base de données) sont destinés
+   à être adaptés sur chaque machine. Ainsi, nous utilisons la propriété
+   ``svn:ignore`` afin de pouvoir ignorer ces fichiers spécifiques.
 
     .. code-block:: bash
 
@@ -83,21 +85,21 @@ To get started, you'll need to download Symfony2 and get the basic Subversion se
 
         $ svn ci -m "commit basic symfony ignore list (vendor, app/bootstrap*, app/config/parameters.ini, app/cache/*, app/logs/*, web/bundles)"
 
-6. The rest of the files can now be added and committed to the project:
+6. Le reste des fichiers peut maintenant être ajouté et committé dans le projet :
 
     .. code-block:: bash
 
         $ svn add --force .
         $ svn ci -m "add basic Symfony Standard 2.X.Y"
 
-7. Copy ``app/config/parameters.ini`` to ``app/config/parameters.ini.dist``.
-   The ``parameters.ini`` file is ignored by svn (see above) so that
-   machine-specific settings like database passwords aren't committed. By
-   creating the ``parameters.ini.dist`` file, new developers can quickly clone
-   the project, copy this file to ``parameters.ini``, customize it, and start
-   developing.
+7. Copiez ``app/config/parameters.ini`` vers ``app/config/parameters.ini.dist``.
+   Le fichier ``parameters.ini`` est ignoré par svn (voir ci-dessus) afin que afin que les
+   paramètres spécifiques à la machine comme les mots de passe de base de données ne
+   soient pas committés. En créant le fichier ``parameters.ini.dist``, les
+   nouveaux développeurs peuvent rapidement cloner le projet, copier ce fichier
+   vers ``parameters.ini``, l'adapter, et commencer à developper.
 
-8. Finally, download all of the third-party vendor libraries:
+8. Finalement, téléchargez toutes les bibliothèques tierces :
 
     .. code-block:: bash
     
@@ -105,39 +107,40 @@ To get started, you'll need to download Symfony2 and get the basic Subversion se
 
 .. tip::
 
-    `git`_ has to be installed to run ``bin/vendors``, this is the protocol
-    used to fetch vendor libraries. This only means that ``git`` is used as
-    a tool to basically help download the libraries in the ``vendor/`` directory.
+    `git`_ doit être installé pour pouvoir exécuter la commande ``bin/vendors`` ;
+    c'est le protocole utilisé pour aller récupérer les bibliothèques vendor.
+    Cela signifie seulement que ``git`` est utilisé comme outil pour aider au
+    téléchargement des bibliothèques dans le répertoire ``vendor/``.
 
-At this point, you have a fully-functional Symfony2 project stored in your
-Subversion repository. The development can start with commits in the Subversion
-repository.
+A ce point, vous avez un projet Symfony2 entièrement fonctionnel stocké dans votre
+dépôt Subversion. Le développement peut démarrer avec des commits dans ce dernier.
 
-You can continue to follow along with the :doc:`/book/page_creation` chapter
-to learn more about how to configure and develop inside your application.
+Vous pouvez continuer en lisant le chapitre :doc:`/book/page_creation` pour en
+apprendre plus sur comment configurer et développer votre application en interne.
 
 .. tip::
 
-    The Symfony2 Standard Edition comes with some example functionality. To
-    remove the sample code, follow the instructions on the `Standard Edition Readme`_.
+    L'Edition Standard Symfony2 vient avec des exemples de fonctionnalités. Pour
+    supprimer le code de démonstration, suivez les instructions du fichier
+    `Standard Edition Readme`_.
 
 .. include:: _vendor_deps.rst.inc
 
 .. _svn-hosting:
 
-Subversion hosting solutions
-----------------------------
+Solutions d'hébergement Subversion
+----------------------------------
 
-The biggest difference between `git`_ and `svn`_ is that Subversion *needs* a
-central repository to work. You then have several solutions:
+La plus grosse différence entre `git`_ et `svn`_ est que Subversion *a besoin*
+d'un dépôt central pour fonctionner. Vous avez donc plusieurs solutions :
 
-- Self hosting: create your own repository and access it either through the
-  filesystem or the network. To help in this task you can read `Version Control
-  with Subversion`_.
+- Hébergement par vos soins : créez votre propre dépôt et accédez-y soit grâce au
+  système de fichiers, soit via le réseau. Pour vous aider dans cette tâche, vous
+  pouvez lire `Version Control with Subversion`_.
 
-- Third party hosting: there are a lot of serious free hosting solutions
-  available like `GitHub`_, `Google code`_, `SourceForge`_ or `Gna`_. Some of them offer
-  git hosting as well.
+- Hébergement via une entité tierce : il y a beaucoup de solutions d'hébergement
+  gratuites et sérieuses disponibles comme `GitHub`_, `Google code`_, `SourceForge`_
+  ou `Gna`_. Certaines d'entre elles offrent aussi des possibilités d'hébergement git.
 
 .. _`git`: http://git-scm.com/
 .. _`svn`: http://subversion.apache.org/
