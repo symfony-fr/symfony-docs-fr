@@ -657,6 +657,62 @@ auxquelles vous n'avez pas accès à partir d'un template, penser à rendre un
 contrôleur. Les contrôleurs sont rapides à l'exécution et favorisent une bonne
 organisation et réutilisabilité du code.
 
+
+Contenu asynchrone avec hinclude.js
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.1 
+    hinclude.js support was added in Symfony 2.1
+
+Les contrôleurs peuvent être imbriqués de façon asynchrone avec la librairie
+javascript hinclude.js_.
+Comme le contenu imbriqué vient d'une autre page (un d'un autre contrôleur),
+Syfmony2 utiliser le helper standard ``render`` pour configurer les tags ``hinclude``:
+ 
+.. configuration-block::
+
+    .. code-block:: jinja
+ 
+        {% render '...:news' with {}, {'standalone': 'js'} %}
+  
+    .. code-block:: php
+ 
+        <?php echo $view['actions']->render('...:news', array(), array('standalone' => 'js')) ?>
+
+.. note::
+
+   hinclude.js_ doit être inclu dans votre page pour fonctionner.
+
+Le contenu par défaut (pendant le chargement ou si javascript n'est pas activé) peut
+être défini de manière globale dans la configuration de votre application :
+ 
+.. configuration-block::
+ 
+    .. code-block:: yaml
+ 
+        # app/config/config.yml
+        framework:
+            # ...
+            templating:
+                hinclude_default_template: AcmeDemoBundle::hinclude.html.twig
+
+    .. code-block:: xml
+
+        <!-- app/config/config.xml -->
+        <framework:config>
+            <framework:templating hinclude-default-template="AcmeDemoBundle::hinclude.html.twig" />
+        </framework:config>
+
+    .. code-block:: php
+
+        // app/config/config.php
+        $container->loadFromExtension('framework', array(
+            // ...
+            'templating'      => array(
+                'hinclude_default_template' => array('AcmeDemoBundle::hinclude.html.twig'),
+            ),
+        ));
+
 .. index::
    single: Templating; Linking to pages
 
@@ -1292,3 +1348,4 @@ En savoir plus grâce au Cookbook
 .. _`tags`: http://twig.sensiolabs.org/doc/tags/index.html
 .. _`filtres`: http://twig.sensiolabs.org/doc/filters/index.html
 .. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/extensions.html
+.. _`hinclude.js`: http://mnot.github.com/hinclude/

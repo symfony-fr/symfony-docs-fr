@@ -841,6 +841,13 @@ configuration du FrameworkBundle :
 
     app/console config:dump-reference FrameworkBundle
 
+
+L'alias de l'extension (clé de configuration) peut aussi être utilisé :
+
+.. code-block:: text
+
+    app/console config:dump-reference framework
+
 .. note::
 
     Lisez l'article du Cookbook : :doc:`Comment exposer un configuration sémantique
