@@ -9,7 +9,7 @@ Glossaire
    Distribution
         Une *Distribution* est un ensemble fait de composants Symfony2, une
         sélection de bundles, un structure pertinente, une configuration par
-        défaut, et système de configuration optionnel.
+        défaut, et un système de configuration optionnel.
 
    Projet
         Un *Projet* est un répertoire composé d'une Application, un ensemble de
@@ -44,7 +44,7 @@ Glossaire
         spécifique. Un service est souvent utilisé « globalement », comme un objet
         de connexion à une base de données ou un objet qui envoie des emails. Dans
         Symfony2, un service est souvent configuré et recupéré par le conteneur de
-        services. Une application qui a de nombreux services découplée suit une
+        services. Une application qui a de nombreux services découplés suit une
         `architecture orientée services`_.
 
    Conteneur de services
@@ -58,17 +58,17 @@ Glossaire
 
    Spécification HTTP
         La *Spécification Http* est un document qui décrit le protocole HTTP (HyperText
-        Transfer Protocol), c'est-à-dire un ensemble de règle qui définissent les
+        Transfer Protocol), c'est-à-dire un ensemble de règles qui définissent les
         échanges classiques client-serveur requête-réponse. La spécification définit
         le format utilisé pour une requête et une réponse, tout comme les différents
-        entêtes possible que chacun peut avoir. Pour plus d'informations, lisez
+        entêtes possibles que chacun peut avoir. Pour plus d'informations, lisez
         l'article `Wikipedia sur HTTP`_ ou la `HTTP 1.1 RFC`_.
 
    Environnement
         Un environnement est une chaine de caractères (ex ``prod`` ou ``dev``) qui
-        correspond à un ensemble de configurations spécifique. La même application peut
+        correspond à un ensemble de configurations spécifiques. La même application peut
         être éxécutée sur la même machine avec une configuration différente en l'éxécutant
-        dans différents environnementy. C'est très utile puisque cela permet à une
+        dans différents environnements. C'est très utile puisque cela permet à une
         application unique d'avoir un environnement de ``dev`` conçu pour débuguer et
         un environnement de ``prod`` qui est optimisé pour de meilleures performances.
 
@@ -98,7 +98,7 @@ Glossaire
         dans le dossier web en utilisant la commande ``assets:install``.
 
    Kernel
-        Le *Kernel* (noyau) est le coeur deSymfony2. L'objet Kernel prend en charge
+        Le *Kernel* (noyau) est le coeur de Symfony2. L'objet Kernel prend en charge
         les requêtes HTTP en utilisant tous les bundles et librairies qui sont enregistrés.
         Lisez :ref:`L'Architecture : Le répertoire Application<the-app-dir>` et le chapitre
         :doc:`/book/internals`.
