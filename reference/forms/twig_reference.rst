@@ -1,78 +1,76 @@
 .. index::
    single: Forms; Twig form function reference
 
-Twig Template Form Function Reference
-=====================================
+Fonctions de template de formulaire Twig de référence
+=====================================================
 
-This reference manual covers all the possible Twig functions available for
-rendering forms. There are several different functions available, and each
-is responsible for rendering a different part of a form (e.g. labels, errors,
+Cette documentation de référence liste toutes les fonctions Twig possibles
+pour rendre des formulaires. Plusieurs fonctions différentes sont disponibles,
+chacune étant chargée de rendre une partie du formulaire (ex libellés, erreurs,
 widgets, etc).
 
 form_label(form.name, label, variables)
 ---------------------------------------
 
-Renders the label for the given field. You can optionally pass the specific
-label you want to display as the second argument.
+Affiche le libellé d'un champ donné. Le second paramètre, facultatif, vous permet
+de spécifier le libellé que vous voulez afficher.
 
 .. code-block:: jinja
 
     {{ form_label(form.name) }}
 
-    {# The two following syntaxes are equivalent #}
-    {{ form_label(form.name, 'Your Name', { 'attr': {'class': 'foo'} }) }}
-    {{ form_label(form.name, null, { 'label': 'Your name', 'attr': {'class': 'foo'} }) }}
+    {# Ces deux syntaxes sont équivalentes #}
+    {{ form_label(form.name, 'Votre nom', { 'attr': {'class': 'foo'} }) }}
+    {{ form_label(form.name, null, { 'label': 'Votre nom', 'attr': {'class': 'foo'} }) }}
 
 form_errors(form.name)
 ----------------------
 
-Renders any errors for the given field.
+Affiche toutes les erreurs d'un champ donné.
 
 .. code-block:: jinja
 
     {{ form_errors(form.name) }}
 
-    {# render any "global" errors #}
+    {# affiche les erreurs "globales" #}
     {{ form_errors(form) }}
 
 form_widget(form.name, variables)
 ---------------------------------
 
-Renders the HTML widget of a given field. If you apply this to an entire form
-or collection of fields, each underlying form row will be rendered.
+Affiche le widget HTML d'un champ donné. Si vous l'appliquez au formulaire entier
+ou à une collection de champs, chaque item du formulaire sera affiché.
 
 .. code-block:: jinja
 
-    {# render a widget, but add a "foo" class to it #}
+    {# affiche un widget, et lui affecte la classe "foo" #}
     {{ form_widget(form.name, { 'attr': {'class': 'foo'} }) }}
 
-The second argument to ``form_widget`` is an array of variables. The most
-common variable is ``attr``, which is an array of HTML attributes to apply
-to the HTML widget. In some cases, certain types also have other template-related
-options that can be passed. These are discussed on a type-by-type basis.
+Le deuxième argument de ``form_widget`` est un tableau de variables. La variable
+la plus commune est ``attr``, qui est un tableau d'attibuts HTML à appliquer au widget.
+Dans certains cas, des types ont aussi des options liées au template. C'est au cas par cas.
 
 form_row(form.name, variables)
 ------------------------------
 
-Renders the "row" of a given field, which is the combination of the field's
-label, errors and widget.
+Affiche le « row » (bloc) d'un champ donné, qui est la combinaison du libellé, des erreurs
+et du widget.
 
 .. code-block:: jinja
 
-    {# render a field row, but display a label with text "foo" #}
+    {# affiche un bloc de champ, mais affiche « foo » comme libellé #}
     {{ form_row(form.name, { 'label': 'foo' }) }}
 
-The second argument to ``form_row`` is an array of variables. The templates
-provided in Symfony only allow to override the label as shown in the example
-above.
+Le deuxième argument de ``form_row`` est un tableau de variables. Les templates fournis dans
+Symfony ne permettent que de surcharger le libellé, comme vous le voyez dans l'exemple ci-dessus.
 
 form_rest(form, variables)
 --------------------------
 
-This renders all fields that have not yet been rendered for the given form.
-It's a good idea to always have this somewhere inside your form as it'll
-render hidden fields for you and make any fields you forgot to render more
-obvious (since it'll render the field for you).
+Cette fonction affiche tous les champs d'un formulaire donné qui n'ont pas encore été
+affichés. C'est une bonne pratique que de toujours utiliser cette fonction quelque part
+dans votre formulaire puisqu'elle affichera tous les champs cachés et vous permettra
+de mieux vous rendre compte des champs que vous aurez oublié (car ils seront alors affichés).
 
 .. code-block:: jinja
 
@@ -81,9 +79,9 @@ obvious (since it'll render the field for you).
 form_enctype(form)
 ------------------
 
-If the form contains at least one file upload field, this will render the
-required ``enctype="multipart/form-data"`` form attribute. It's always a
-good idea to include this in your form tag:
+Si le formulaire contient au moins un champ d'upload de fichier, cette fonction
+affichera l'attribut de formulaire ``enctype="multipart/form-data"``. C'est une bonne
+pratique de toujours l'ajouter dans votre balise form :
 
 .. code-block:: html+jinja
 

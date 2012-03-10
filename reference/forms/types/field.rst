@@ -1,8 +1,8 @@
 .. index::
    single: Forms; Fields; field
 
-Le type abstrait "field"
-========================
+Le type abstrait « field »
+==========================
 
 Le type de formulaire ``field`` n'est pas un type de champ que vous pouvez utiliser,
 mais plutôt des fonctions comme le type de champ parent pour de nombreux autres champs.

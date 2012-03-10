@@ -1,33 +1,33 @@
 .. index::
    single: Forms; Fields; search
 
-search Field Type
-=================
+Type de champ Search
+====================
 
-This renders an ``<input type="search" />`` field, which is a text box with
-special functionality supported by some browsers.
+Cela retourne un champ ``<input type="search" />`` qui est un champ texte 
+avec une fonctionnalité spéciale supportée par certains navigateurs.
 
-Read about the input search field at `DiveIntoHTML5.info`_
+Apprenez en plus sur le champ input Search sur `DiveIntoHTML5.info`_
 
 +-------------+----------------------------------------------------------------------+
-| Rendered as | ``input search`` field                                               |
+| Rendu comme | Champ ``input search``                                               |
 +-------------+----------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                      |
-| options     | - `required`_                                                        |
+| Options     | - `max_length`_                                                      |
+| héritées    | - `required`_                                                        |
 |             | - `label`_                                                           |
 |             | - `trim`_                                                            |
 |             | - `read_only`_                                                       |
 |             | - `error_bubbling`_                                                  |
 +-------------+----------------------------------------------------------------------+
-| Parent type | :doc:`text</reference/forms/types/text>`                             |
+| Type parent | :doc:`text</reference/forms/types/text>`                             |
 +-------------+----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType` |
 +-------------+----------------------------------------------------------------------+
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

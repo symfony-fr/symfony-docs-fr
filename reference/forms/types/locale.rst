@@ -5,11 +5,11 @@ Type de champ Locale
 ====================
 
 Le type ``locale`` est un sous-ensemble de ``ChoiceType`` qui permet à l'utilisateur
-de choisir une locale (langue+pays) dans une liste déroulante. En bonus, les noms des
+de choisir une locale (langue + pays) dans une liste déroulante. En bonus, les noms des
 locales sont affichés dans la langue de l'utilisateur.
 
 
-La "valeur" de chaque locale est soit le code *langue* ISO639-1 en deux lettres
+La « valeur » de chaque locale est soit le code *langue* ISO639-1 en deux lettres
 (ex ``fr``), soit le code langue suivi d'un underscore  (``_``), puis le code
 *pays* ISO3166 (ex ``fr_FR`` pour Français/France).
 
@@ -23,7 +23,7 @@ la liste des locales. Vous *pouvez* spécifier l'une ou l'autre de ces options ma
 mais alors vous devriez plutôt utiliser directement le type ``choice``.
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | Peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
+| Rendu comme | Peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
 | héritées    | - `expanded`_                                                          |

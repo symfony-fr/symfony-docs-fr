@@ -1,30 +1,30 @@
 .. index::
    single: Forms; Fields; textarea
 
-textarea Field Type
-===================
+Type de champ Textarea
+======================
 
-Renders a ``textarea`` HTML element. 
+Retourne un élément HTML ``textarea``. 
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | ``textarea`` tag                                                       |
+| Rendu comme | Balise ``textarea``                                                    |
 +-------------+------------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                        |
-| options     | - `required`_                                                          |
+| Options     | - `max_length`_                                                        |
+| héritées    | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `trim`_                                                              |
 |             | - `read_only`_                                                         |
 |             | - `error_bubbling`_                                                    |
 +-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                             |
+| Type parent | :doc:`field</reference/forms/types/field>`                             |
 +-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType` |
 +-------------+------------------------------------------------------------------------+
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

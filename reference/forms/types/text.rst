@@ -1,31 +1,31 @@
 .. index::
    single: Forms; Fields; text
 
-text Field Type
-===============
+Type de champ Text
+==================
 
-The text field represents the most basic input text field.
+Le champ texte représente le plus basique des champs input texte.
 
 +-------------+--------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                           |
+| Rendu comme | Champ ``input`` ``text``                                           |
 +-------------+--------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                    |
-| options     | - `required`_                                                      |
+| Options     | - `max_length`_                                                    |
+| héritées    | - `required`_                                                      |
 |             | - `label`_                                                         |
 |             | - `trim`_                                                          |
 |             | - `read_only`_                                                     |
 |             | - `error_bubbling`_                                                |
 +-------------+--------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                         |
+| Type parent | :doc:`field</reference/forms/types/field>`                         |
 +-------------+--------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType` |
 +-------------+--------------------------------------------------------------------+
 
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

@@ -4,7 +4,7 @@
 Type de champ Password
 ======================
 
-Le champ ``password`` rend un input text de type password.
+Le champ ``password`` rend un input texte de type password.
 
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``password``                                           |
@@ -35,7 +35,7 @@ Si cette option est définie à true, le champ sera *toujours* rendu vide, même si
 le champ correspondant a une valeur. Si elle est définie à false, alors le champ
 password sera rendu avec l'attribut ``value`` correctement rempli avec la vraie valeur.
 
-Plus simple, si pour une raison quelconque vous voulez rendre le champ password
+Plus simplement, si pour une raison quelconque vous voulez afficher le champ password
 *avec* sa valeur déjà préremplie, définissez cette option à false.
 
 Options héritées

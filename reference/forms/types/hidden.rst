@@ -7,7 +7,7 @@ Type de champ Hidden
 Le type hidden représente un champ input hidden.
 
 +-------------+----------------------------------------------------------------------+
-| Rendered as | Champ ``input`` ``hidden``                                           |
+| Rendu comme | Champ ``input`` ``hidden``                                           |
 +-------------+----------------------------------------------------------------------+
 | Options     | - ``data``                                                           |
 | héritées    | - ``property_path``                                                  |

@@ -1,19 +1,20 @@
 .. index::
    single: Forms; Fields; time
 
-time Field Type
-===============
+Type de champ Time
+==================
 
-A field to capture time input.
+Un champ pour saisir un temps.
 
-This can be rendered as a text field, a series of text fields (e.g. hour,
-minute, second) or a series of select fields. The underlying data can be stored
-as a ``DateTime`` object, a string, a timestamp or an array.
+Ce champ peut être affiché comme champ texte, une série de champs texte (ex heures, minutes,
+secondes) ou une série de listes déroulantes. La donnée finale peut être stockée comme un objet
+``DateTime``, une chaine de caractères, un timestamp ou un tableau.
 
 +----------------------+-----------------------------------------------------------------------------+
-| Underlying Data Type | can be ``DateTime``, string, timestamp, or array (see the ``input`` option) |
+| Type de donnée       | Peut être un objet``DateTime``, une chaine de caractère, un timestamp,      |
+|                      | ou un tableau (voir l'option ``input`` )                                    |
 +----------------------+-----------------------------------------------------------------------------+
-| Rendered as          | can be various tags (see below)                                             |
+| Rendu comme          | peut être différentes balises (voir plus bas)                               |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `widget`_                                                                 |
 |                      | - `input`_                                                                  |
@@ -24,20 +25,20 @@ as a ``DateTime`` object, a string, a timestamp or an array.
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
-| Parent type          | form                                                                        |
+| Type parent          | form                                                                        |
 +----------------------+-----------------------------------------------------------------------------+
-| Class                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimeType`          |
+| Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimeType`          |
 +----------------------+-----------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation basique
+-------------------
 
-This field type is highly configurable, but easy to use. The most important
-options are ``input`` and ``widget``.
+Ce type de champ est entièrement configurable mais très facile à utiliser. Les options
+les plus importantes sont ``input`` et ``widget``.
 
-Suppose that you have a ``startTime`` field whose underlying time data is a
-``DateTime`` object. The following configures the ``time`` type for that
-field as three different choice fields:
+Supposez que vous avec un champ ``startTime`` dont la donnée sous-jacente est un objet
+``DateTime``. L'exemple suivant configure le type ``time`` pour que le champ soit composé
+de trois listes déroulantes :
 
 .. code-block:: php
 
@@ -46,9 +47,9 @@ field as three different choice fields:
         'widget' => 'choice',
     ));
 
-The ``input`` option *must* be changed to match the type of the underlying
-date data. For example, if the ``startTime`` field's data were a unix timestamp,
-you'd need to set ``input`` to ``timestamp``:
+L'option ``input`` *doit* être changée pour correspondre au type de donnée date sous-jacent.
+Par exemple, si la données du champ ``startTime`` est un timestamp unix, vous devrez définir
+l'option ``input`` à ``timestamp`` :
 
 .. code-block:: php
 
@@ -57,41 +58,40 @@ you'd need to set ``input`` to ``timestamp``:
         'widget' => 'choice',
     ));
 
-The field also supports an ``array`` and ``string`` as valid ``input`` option
-values.
+Le champ supporte aussi ``array`` et ``string`` comme valeurs valides de l'option ``input``.
 
-Field Options
--------------
+Options du champ
+----------------
 
 widget
 ~~~~~~
 
 **type**: ``string`` **default**: ``choice``
 
-The basic way in which this field should be rendered. Can be one of the following:
 
-* ``choice``: renders two (or three if `with_seconds`_ is true) select inputs.
+Cette option définit la manière dont le champ doit être affiché. Les choix suivants sont possibles :
 
-* ``text``: renders a two or three text inputs (hour, minute, second).
+* ``choice``: rend deux (ou trois si `with_seconds`_ est à true) listes déroulantes.
 
-* ``single_text``: renders a single input of type text. User's input will
-  be validated against the form ``hh:mm`` (or ``hh:mm:ss`` if using seconds).
+* ``text``: rend deux ou trois champs input texte (heures, minutes, secondes).
+
+* ``single_text``: rend un simple input texte. La donnée saisie sera validée en fonction
+  du format ``hh:mm`` (ou ``hh:mm:ss`` si vous utilisez les secondes).
 
 input
 ~~~~~
 
 **type**: ``string`` **default**: ``datetime``
 
-The format of the *input* data - i.e. the format that the date is stored on
-your underlying object. Valid values are:
+Le format de la donnée *finale*, c'est-à-dire le format dans lequel la donnée
+sera stockée dans votre objet. Les valeurs autorisées sont :
 
-* ``string`` (e.g. ``12:17:26``)
-* ``datetime`` (a ``DateTime`` object)
-* ``array`` (e.g. ``array('hour' => 12, 'minute' => 17, 'second' => 26)``)
-* ``timestamp`` (e.g. ``1307232000``)
+* ``string`` (ex ``12:17:26``)
+* ``datetime`` (un objet``DateTime``)
+* ``array`` (ex ``array('hour' => 12, 'minute' => 17, 'second' => 26)``)
+* ``timestamp`` (ex ``1307232000``)
 
-The value that comes back from the form will also be normalized back into
-this format.
+la valeur qui provient du formulaire sera également normalisée selon ce format.
 
 .. include:: /reference/forms/types/options/with_seconds.rst.inc
 

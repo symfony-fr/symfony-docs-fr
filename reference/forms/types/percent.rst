@@ -1,31 +1,30 @@
 .. index::
    single: Forms; Fields; percent
 
-percent Field Type
-==================
+Type de champ Percent
+=====================
 
+Le type ``percent`` rend un champ input texte spécialisé dans la gestion de pourcentages.
+Si votre pourcentage est stocké comme décimale (ex ``0,95``),
+vous pouvez utiliser ce champ directement. Si vous stockez votre données comme nombre
+(ex ``95``), vous devriez définir l'option ``type`` à ``integer``.
 
-The ``percent`` type renders an input text field and specializes in handling
-percentage data. If your percentage data is stored as a decimal (e.g. ``.95``),
-you can use this field out-of-the-box. If you store your data as a number
-(e.g. ``95``), you should set the ``type`` option to ``integer``.
-
-This field adds a percentage sign "``%``" after the input box.
+Ce champ ajoute le signe pourcentage "``%``" après l'input.
 
 +-------------+-----------------------------------------------------------------------+
-| Rendered as | ``input`` ``text`` field                                              |
+| Rendu comme | Champ ``input`` ``text``                                              |
 +-------------+-----------------------------------------------------------------------+
 | Options     | - `type`_                                                             |
 |             | - `precision`_                                                        |
 +-------------+-----------------------------------------------------------------------+
-| Inherited   | - `required`_                                                         |
-| options     | - `label`_                                                            |
+| Options     | - `required`_                                                         |
+| héritées    | - `label`_                                                            |
 |             | - `read_only`_                                                        |
 |             | - `error_bubbling`_                                                   |
 +-------------+-----------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                            |
+| Type parent | :doc:`field</reference/forms/types/field>`                            |
 +-------------+-----------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\PercentType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\PercentType` |
 +-------------+-----------------------------------------------------------------------+
 
 Options
@@ -36,33 +35,32 @@ type
 
 **type**: ``string`` **default**: ``fractional``
 
-This controls how your data is stored on your object. For example, a percentage
-corresponding to "55%", might be stored as ``.55`` or ``55`` on your
-object. The two "types" handle these two cases:
+Cette option contrôle la façon dont vos données sont stockées dans l'objet. Par exemple,
+un pourcentage correspondant à « 55% », peut être stocké comme ``0,55`` ou ``55`` dans votre
+objet. Les deux « types » gèrent ces deux cas :
     
 *   ``fractional``
-    If your data is stored as a decimal (e.g. ``.55``), use this type.
-    The data will be multiplied by ``100`` before being shown to the
-    user (e.g. ``55``). The submitted data will be divided by ``100``
-    on form submit so that the decimal value is stored (``.55``);
+    Si votre donnée est stockée au format décimal (ex ``0,55``), utilisez ce type.
+    La donnée sera multipliée par ``100`` avant d'être affichée à l'utilisateur (ex ``55``).
+	La valeur soumise sera divisée par ``100`` lors de la soumission du formulaire pour que
+	la valeur soit stockée au format décimal (``0,55``);
 
 *   ``integer``
-    If your data is stored as an integer (e.g. 55), then use this option.
-    The raw value (``55``) is shown to the user and stored on your object.
-    Note that this only works for integer values.
+    Si votre donnée est stockée comme integer (ex 55), utilisez cette
+	option. La valeur brute (``55``) est affichée à l'utilisateur et stockée dans votre objet.
+	Notez que cela ne fonctionne que pour les valeurs entières.
 
 precision
 ~~~~~~~~~
 
 **type**: ``integer`` **default**: ``0``
 
-By default, the input numbers are are rounded. To allow for more decimal
-places, use this option.
+Par défaut, les nombres sont arrondis. Pour autoriser les décimales, utilisez cette option.
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

@@ -4,8 +4,8 @@
 Type de champ Integer
 =====================
 
-Affiche un champ input "number". De façon basique, c'est un champ texte qui sait bien 
-traiter les données entières d'un formulaire. Le champ input ``number`` ressemble à
+Affiche un champ input « number ». De façon basique, c'est un champ texte qui sait bien 
+gérer les données entières d'un formulaire. Le champ input ``number`` ressemble à
 un champ texte, excepté que, si le navigateur supporte l'HTML5, il aura des fonctionnalités
 supplémentaires.
 

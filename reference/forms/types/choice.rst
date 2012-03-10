@@ -4,11 +4,11 @@
 Type de champ Choice
 ====================
 
-Un champ multi-usage pour permettre à l'utilisateur de "choisir" une ou plusieurs
+Un champ multi-usage pour permettre à l'utilisateur de « choisir » une ou plusieurs
 options. Il peut être affiché avec des balises ``select``, des boutons radio, ou
 des checkboxes.
 
-Pour utiliser ce champ, vous devez spécifier *soit l'option* ``choice_list``, *soit* ``choices``.
+Pour utiliser ce champ, vous devez spécifier *soit* l'option ``choice_list``, *soit* ``choices``.
 
 +-------------+-----------------------------------------------------------------------------+
 | Rendu comme | peut être différentes balises (voir ci-dessous)                             |
@@ -26,7 +26,7 @@ Pour utiliser ce champ, vous devez spécifier *soit l'option* ``choice_list``, *s
 |             | - `read_only`_                                                              |
 |             | - `error_bubbling`_                                                         |
 +-------------+-----------------------------------------------------------------------------+
-| Type parent | :doc:`form</reference/forms/types/form>` (if expanded), ``field`` otherwise |
+| Type parent | :doc:`form</reference/forms/types/form>` (si étendu), ``field`` sinon       |
 +-------------+-----------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType`        |
 +-------------+-----------------------------------------------------------------------------+
@@ -77,7 +77,7 @@ choices
 **type**: ``array`` **default**: ``array()``
 
 C'est la façon la plus simple de spécifier les choix qui pourront être choisis 
-dans le champ. L'option ``choices`` est un tableay, où les index sont les valeurs
+dans le champ. L'option ``choices`` est un tableau, où les index sont les valeurs
 des items, et les valeurs du tableau sont les labels des items :
 
 .. code-block:: php
