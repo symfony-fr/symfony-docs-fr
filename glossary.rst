@@ -1,121 +1,121 @@
 :orphan:
 
-Glossary
-========
+Glossaire
+=========
 
 .. glossary::
    :sorted:
 
    Distribution
-        A *Distribution* is a package made of the Symfony2 Components, a
-        selection of bundles, a sensible directory structure, a default
-        configuration, and an optional configuration system.
+        Une *Distribution* est un ensemble fait de composants Symfony2, une
+        sélection de bundles, un structure pertinente, une configuration par
+        défaut, et système de configuration optionnel.
 
-   Project
-        A *Project* is a directory composed of an Application, a set of
-        bundles, vendor libraries, an autoloader, and web front controller
-        scripts.
+   Projet
+        Un *Projet* est un répertoire composé d'une Application, un ensemble de
+        bundles, des librairies tierces, un chargeur automatique (autoloader), et
+        des contrôleurs frontaux.
 
    Application
-        An *Application* is a directory containing the *configuration* for a
-        given set of Bundles.
+        Une *Application* est un répertoire qui contient une *configuration* pour un
+        ensemble de Bundles donné.
 
    Bundle
-        A *Bundle* is a directory containing a set of files (PHP files,
-        stylesheets, JavaScripts, images, ...) that *implement* a single
-        feature (a blog, a forum, etc). In Symfony2, (*almost*) everything
-        lives inside a bundle. (see :ref:`page-creation-bundles`)
+        Un *Bundle* est un répertoire qui contient un ensemble de fichiers (classes PHP,
+        feuilles de style, JavaScripts, images, ...) qui *implémentent* une fonctionnalité
+        unique (un blog, un forum, etc). Dans Symfony2, (*presque*) tout se trouve dans
+        un bundle. (voir :ref:`page-creation-bundles`)
 
-   Front Controller
-        A *Front Controller* is a short PHP script that lives in the web directory
-        of your project. Typically, *all* requests are handled by executing
-        the same front controller, whose job is to bootstrap the Symfony
-        application.
+   Contrôleur frontal
+        Un *Contrôleur Frontal* (Front Controller) est un court script PHP qui se trouve
+        dans le dossier web de votre projet. Typiquement, *toute* requête est prise en charge
+        en éxécutant le même contrôleur frontal, dont le rôle est de démarrer l'application
+        Symfony.
 
-   Controller
-        A *controller* is a PHP function that houses all the logic necessary
-        to return a ``Response`` object that represents a particular page.
-        Typically, a route is mapped to a controller, which then uses information
-        from the request to process information, perform actions, and ultimately
-        construct and return a ``Response`` object.
+   Contrôleur
+        Un *contrôleur* est une fonction PHP qui contient la logique nécessaire afin
+        de retourner un objet ``Response`` représentant une page particulière.
+        Typiquement, une route est associée au contrôleur qui utilise les informations de la
+        requête pour traiter les informations, éxécuter des actions, et finalement construire
+        et retourner un objet ``Response``.
 
    Service
-        A *Service* is a generic term for any PHP object that performs a
-        specific task. A service is usually used "globally", such as a database
-        connection object or an object that delivers email messages. In Symfony2,
-        services are often configured and retrieved from the service container.
-        An application that has many decoupled services is said to follow
-        a `service-oriented architecture`_.
+        Un *Service* est un terme générique pour tout objet PHP qui éxécute une tâche
+        spécifique. Un service est souvent utilisé « globalement », comme un objet
+        de connexion à une base de données ou un objet qui envoie des emails. Dans
+        Symfony2, un service est souvent configuré et recupéré par le conteneur de
+        services. Une application qui a de nombreux services découplée suit une
+        `architecture orientée services`_.
 
-   Service Container
-        A *Service Container*, also known as a *Dependency Injection Container*,
-        is a special object that manages the instantiation of services inside
-        an application. Instead of creating services directly, the developer
-        *trains* the service container (via configuration) on how to create
-        the services. The service container takes care of lazily instantiating
-        and injecting dependent services. See :doc:`/book/service_container` 
-        chapter.
+   Conteneur de services
+        Un *Conteneur de services*, aussi connu sous le nom de
+        *Conteneur d'Injection de Dépendances*, est un objet spécial qui gère
+        l'instanciation des services au sein d'une application. Plutôt que de créer
+        les services directement, le développeur *prépare* le conteneur de services
+        (via la configuration) sur la manière de créer les serrvices. Le conteneur
+        de services prend en charge l'instanciation et l'injection des services
+        dépendants. Lisez le chapitre :doc:`/book/service_container`.
 
-   HTTP Specification
-        The *Http Specification* is a document that describes the Hypertext
-        Transfer Protocol - a set of rules laying out the classic client-server
-        request-response communication. The specification defines the format
-        used for a request and response as well as the possible HTTP headers
-        that each may have. For more information, read the `Http Wikipedia`_
-        article or the `HTTP 1.1 RFC`_.
+   Spécification HTTP
+        La *Spécification Http* est un document qui décrit le protocole HTTP (HyperText
+        Transfer Protocol), c'est-à-dire un ensemble de règle qui définissent les
+        échanges classiques client-serveur requête-réponse. La spécification définit
+        le format utilisé pour une requête et une réponse, tout comme les différents
+        entêtes possible que chacun peut avoir. Pour plus d'informations, lisez
+        l'article `Wikipedia sur HTTP`_ ou la `HTTP 1.1 RFC`_.
 
-   Environment
-        An environment is a string (e.g. ``prod`` or ``dev``) that corresponds
-        to a specific set of configuration. The same application can be run
-        on the same machine using different configuration by running the application
-        in different environments. This is useful as it allows a single application
-        to have a ``dev`` environment built for debugging and a ``prod`` environment
-        that's optimized for speed.
+   Environnement
+        Un environnement est une chaine de caractères (ex ``prod`` ou ``dev``) qui
+        correspond à un ensemble de configurations spécifique. La même application peut
+        être éxécutée sur la même machine avec une configuration différente en l'éxécutant
+        dans différents environnementy. C'est très utile puisque cela permet à une
+        application unique d'avoir un environnement de ``dev`` conçu pour débuguer et
+        un environnement de ``prod`` qui est optimisé pour de meilleures performances.
 
    Vendor
-        A *vendor* is a supplier of PHP libraries and bundles including Symfony2
-        itself. Despite the usual commercial connotations of the word, vendors
-        in Symfony often (even usually) include free software. Any library you
-        add to your Symfony2 project should go in the ``vendor`` directory. See
-        :ref:`The Architecture: Using Vendors <using-vendors>`.
+        Un *vendor* est un fournisseur de librairies PHP et de bundles, incluant
+        Symfony2 lui-même. Malgré la connotation commercial du terme, les vendors
+        de Symfony sont souvent (et même très souvent) des logiciels libres. Toute
+        librairie que vous ajoutez dans votre projet Symfony2 devrait se trouver
+        dans le répertoire ``vendor``. Lisez
+        :ref:`L'Architecture: Utilisation de librairies externes <using-vendors>`.
 
    Acme
-        *Acme* is a sample company name used in Symfony demos and documentation.
-        It's used as a namespace where you would normally use your own company's
-        name (e.g. ``Acme\BlogBundle``).
+        *Acme* est un exemple d'entreprise utilisé dans Symofny pour les exemples et
+        la documentation. Il est utilisé dans les namespaces où vous devriez normalement
+        utiliser votre propre nom d'entreprise (ex ``Acme\BlogBundle``).
 
    Action
-        An *action* is a PHP function or method that executes, for example,
-        when a given route is matched. The term action is synonymous with
-        *controller*, though a controller may also refer to an entire PHP
-        class that includes several actions. See the :doc:`Controller Chapter </book/controller>`.
+        Une *action* est une fonction PHP ou une méthode qui s'éxécute, par exemple,
+        lorsqu'une route correspondante est trouvée. Le terme action est synonyme
+        de *contrôleur*, bien qu'un contrôleur fasse aussi référence à une classe PHP entière
+        qui inclut plusieurs actions. Lisez le :doc:`chapitre sur les Contrôleurs </book/controller>`.
 
    Asset
-        An *asset* is any non-executable, static component of a web application,
-        including CSS, JavaScript, images and video. Assets may be placed
-        directly in the project's ``web`` directory, or published from a :term:`Bundle`
-        to the web directory using the ``assets:install`` console task.
+        Un *asset* désigne tout ce qui n'est pas éxécutable, composants web statiques
+        incluant les CSS, le JavaScript, les images et les vidéos. Les assets peuvent être
+        placés directement dans le répertoire``web`` du projet, ou copiés par un :term:`Bundle`
+        dans le dossier web en utilisant la commande ``assets:install``.
 
    Kernel
-        The *Kernel* is the core of Symfony2. The Kernel object handles HTTP
-        requests using all the bundles and libraries registered to it. See
-        :ref:`The Architecture: The Application Directory <the-app-dir>` and the
-        :doc:`/book/internals` chapter.
+        Le *Kernel* (noyau) est le coeur deSymfony2. L'objet Kernel prend en charge
+        les requêtes HTTP en utilisant tous les bundles et librairies qui sont enregistrés.
+        Lisez :ref:`L'Architecture : Le répertoire Application<the-app-dir>` et le chapitre
+        :doc:`/book/internals`.
 
    Firewall
-        In Symfony2, a *Firewall* doesn't have to do with networking. Instead,
-        it defines the authentication mechanisms (i.e. it handles the process
-        of determining the identity of your users), either for the whole
-        application or for just a part of it. See the
-        :doc:`/book/security` chapters.
+        Dans Symfony2, un *Firewall* n'a rien à voir avec le réseau. En fait,
+        il définit les mécanismes d'authentification (c'est-à-dire qu'il prend
+        en charge le processus d'identification de vos utilisateurs) pour toute
+        l'application ou juste une partie de celle-ci. Lisez le chapitre
+        :doc:`/book/security`.
 
    YAML 
-        *YAML* is a recursive acronym for "YAML Ain't a Markup Language". It's a
-        lightweight, humane data serialization language used extensively in
-        Symfony2's configuration files.  See the :doc:`/components/yaml` 
-        chapter.
+        *YAML* est un acronyme récursif pour « YAML Ain't a Markup Language ». Il s'agit
+        d'un langage de sérialisation de données léger et intuitif, utilisé abondamment
+        dans les fichiers de configuration Symfony2. Lisez le chapitre :doc:`/components/yaml`.
 
 
-.. _`service-oriented architecture`: http://wikipedia.org/wiki/Service-oriented_architecture
-.. _`HTTP Wikipedia`: http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol
+.. _`architecture orientée services`: http://fr.wikipedia.org/wiki/Architecture_orient%C3%A9e_services
+.. _`Wikipedia sur HTTP`: http://fr.wikipedia.org/wiki/HTTP
 .. _`HTTP 1.1 RFC`: http://www.w3.org/Protocols/rfc2616/rfc2616.html
