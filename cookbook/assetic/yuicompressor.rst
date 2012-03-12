@@ -1,22 +1,22 @@
-How to Minify JavaScripts and Stylesheets with YUI Compressor
-=============================================================
+Comment minifier les JavaScripts et les feuilles de style avec YUI Compressor
+=============================================================================
 
-Yahoo! provides an excellent utility for minifying JavaScripts and stylesheets
-so they travel over the wire faster, the `YUI Compressor`_. Thanks to Assetic,
-you can take advantage of this tool very easily.
+Yahoo! fournit un exellent utilitaire pour minifier les JavaScripts et les
+feuilles de style pour qu'elles soient plus rapides à charge, `YUI Compressor`_.
+Grâce à Assetic, vous pourrez tirer profit de cet outil très facilement.
 
-Download the YUI Compressor JAR
--------------------------------
+Téléchargez le JAR YUI Compressor
+---------------------------------
 
-The YUI Compressor is written in Java and distributed as a JAR. `Download the JAR`_
-from the Yahoo! site and save it to ``app/Resources/java/yuicompressor.jar``.
+YUI Compressor est écrit en Java est distribué sous forme de JAR. `Téléchargez le JAR`_
+sur le site de Yahoo! et enregistrez le sous ``app/Resources/java/yuicompressor.jar``.
 
-Configure the YUI Filters
--------------------------
+Configurez les filtres YUI
+--------------------------
 
-Now you need to configure two Assetic filters in your application, one for
-minifying JavaScripts with the YUI Compressor and one for minifying
-stylesheets:
+Maintenant vous devez configurer les deux filtres Assetic dans votre application,
+l'un pour minifier les JavaScripts avec YUI Compressor et l'autre pour minifier
+les feuilles de style :
 
 .. configuration-block::
 
@@ -56,16 +56,16 @@ stylesheets:
             ),
         ));
 
-You now have access to two new Assetic filters in your application:
-``yui_css`` and ``yui_js``. These will use the YUI Compressor to minify
-stylesheets and JavaScripts, respectively.
+Vous avez maintenant accès aux deux nouveaux filtres Assetic dans votre
+application : ``yui_css`` et ``yui_js``. Ils utiliseront YUI Compressor
+pour minifier respectivement les feuilles de style et les JavaScripts.
 
-Minify your Assets
-------------------
+Minifiez vos Ressources
+-----------------------
 
-You have YUI Compressor configured now, but nothing is going to happen until
-you apply one of these filters to an asset. Since your assets are a part of
-the view layer, this work is done in your templates:
+Maintenant YUI Compressor est configuré, mais rien ne se passera tant que vous
+n'appliquez pas ces filtres à une ressource (asset). Puisque vos ressources font
+partie de la couche Vue, ce travail doit être fait dans  vos templates :
 
 .. configuration-block::
 
@@ -85,14 +85,14 @@ the view layer, this work is done in your templates:
 
 .. note::
 
-    The above example assumes that you have a bundle called ``AcmeFooBundle``
-    and your JavaScript files are in the ``Resources/public/js`` directory under
-    your bundle. This isn't important however - you can include your Javascript
-    files no matter where they are.
+    L'exemple ci-dessus part du principe que vous avez un bundle appelé ``AcmeFooBundle``
+    et que vos fichiers JavaScript se trouvent dans le répertoire ``Resources/public/js``
+    dans votre bundle. Ce n'est en fait pas très important car vous pouvez inclure vos
+    fichiers JavaScript où vous le voulez.
 
-With the addition of the ``yui_js`` filter to the asset tags above, you should
-now see minified JavaScripts coming over the wire much faster. The same process
-can be repeated to minify your stylesheets.
+En rajoutant le filtre ``yui_js`` à la ressource ci-dessus, vous devriez voir que les
+JavaScripts minifiés sont chargés beaucoup plus rapidement. Le même procédé peut être
+utilisé pour minifier vos feuilles de style.
 
 .. configuration-block::
 
@@ -110,14 +110,15 @@ can be repeated to minify your stylesheets.
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
-Disable Minification in Debug Mode
-----------------------------------
+désactiver la minification en Mode Debug
+----------------------------------------
 
-Minified JavaScripts and Stylesheets are very difficult to read, let alone
-debug. Because of this, Assetic lets you disable a certain filter when your
-application is in debug mode. You can do this be prefixing the filter name
-in your template with a question mark: ``?``. This tells Assetic to only
-apply this filter when debug mode is off.
+Les JavaScripts et feuilles de styles minifiés sont très difficiles à lire;
+et encore moins à débugguer. Pour palier cela, Assetic vous permet de désactiver
+un filtre lorsque votre application est en mode debug. Vous pouvez faire cela
+en préfixant le nom du filtre dans votre template par un point d'interrogation :
+``?``. Cela indique à Assetic que n'appliquer les filtres que si le mode debug
+n'est pas actif.
 
 .. configuration-block::
 
@@ -136,4 +137,4 @@ apply this filter when debug mode is off.
         <?php endforeach; ?>
 
 .. _`YUI Compressor`: http://developer.yahoo.com/yui/compressor/
-.. _`Download the JAR`: http://yuilibrary.com/downloads/#yuicompressor
+.. _`Téléchargez le JAR`: http://yuilibrary.com/downloads/#yuicompressor

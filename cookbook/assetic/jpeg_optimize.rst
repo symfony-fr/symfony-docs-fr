@@ -1,17 +1,18 @@
-How to Use Assetic For Image Optimization with Twig Functions
-=============================================================
+Comment utiliser Assetic et les fonctions Twig pour optimiser les images
+========================================================================
 
-Amongst its many filters, Assetic has four filters which can be used for on-the-fly
-image optimization. This allows you to get the benefits of smaller file sizes
-without having to use an image editor to process each image. The results
-are cached and can be dumped for production so there is no performance hit
-for your end users.
+Parmi ses nombreux filtres, Assetic possède quatre filtres qui peuvent
+être utilisés pour optimiser les images à la volée. Cela vous permet de
+tirer profit de tailles de fichiers réduites sans utiliser d'éditeur d'image
+pour réduire chaque image. Les résultats sont mis en cache et peuvent être
+réutilisés en production pour qu'il n'y ait pas d'impact sur les performances
+pour vos utilisateurs finaux.
 
-Using Jpegoptim
----------------
+Utiliser Jpegoptim
+------------------
 
-`Jpegoptim`_ is a utility for optimizing JPEG files. To use it with Assetic,
-add the following to the Assetic config:
+`Jpegoptim`_ est un utilitaire pour optimiser les fichiers JPEG.Pour l'utiliser avec
+Assetic, ajoutez le bout de code suivant à votre configuration Assetic :
 
 .. configuration-block::
 
@@ -45,10 +46,10 @@ add the following to the Assetic config:
 
 .. note::
 
-    Notice that to use jpegoptim, you must have it already installed on your
-    system. The ``bin`` option points to the location of the compiled binary.
+    Notez que pour utiliser jpegoptim, il faut qu'il soit déjà installé
+    sur votre système. L'option ``bin`` pointe vers le fichier binaire compilé.
 
-It can now be used from a template:
+Il peut maintenant être utilisé dans un template :
 
 .. configuration-block::
 
@@ -68,12 +69,12 @@ It can now be used from a template:
         <img src="<?php echo $view->escape($url) ?>" alt="Example"/>
         <?php endforeach; ?>
 
-Removing all EXIF Data
-~~~~~~~~~~~~~~~~~~~~~~
+Supprimer toutes les données EXIF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, running this filter only removes some of the meta information
-stored in the file. Any EXIF data and comments are not removed, but you can
-remove these by using the ``strip_all`` option:
+Par défaut, appliquer ce filtre ne supprime que certaines meta-informations
+du fichier. Les données EXIF et les commentaires ne sont pas supprimés, mais
+vous pouvez les supprimer en utilisant l'option ``strip_all`` :
 
 .. configuration-block::
 
@@ -108,13 +109,13 @@ remove these by using the ``strip_all`` option:
             ),
         ));
 
-Lowering Maximum Quality
-~~~~~~~~~~~~~~~~~~~~~~~~
+Réduire la qualité maximum
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The quality level of the JPEG is not affected by default. You can gain
-further file size reductions by setting the max quality setting lower than
-the current level of the images. This will of course be at the expense of
-image quality:
+Le niveau de qualité du JPEG n'est pas modifié par défaut. Vous pouvez réduire
+un peu la taille des images en définissant un niveau de qualité maximum plus
+bas que le niveau actuel. Cela se fera évidemment au détriment de la qualité
+de l'image :
 
 .. configuration-block::
 
@@ -149,12 +150,12 @@ image quality:
             ),
         ));
 
-Shorter syntax: Twig Function
------------------------------
+Fonctions Twig : syntaxe courte
+-------------------------------
 
-If you're using Twig, it's possible to achieve all of this with a shorter
-syntax by enabling and using a special Twig function. Start by adding the
-following config:
+Si vous utilisez Twig, il est possible de faire tout ceci avec une syntaxe
+raccourcie en activant et en utilisant les fonctions spéciales Twig.
+Commencez par ajouter la configuration suivante :
 
 .. configuration-block::
 
@@ -197,14 +198,14 @@ following config:
             ),
         ));
 
-The Twig template can now be changed to the following:
+Le template Twig peut maintenant être modifié comme suit :
 
 .. code-block:: html+jinja
 
     <img src="{{ jpegoptim('@AcmeFooBundle/Resources/public/images/example.jpg') }}"
          alt="Example"/>
 
-You can specify the output directory in the config in the following way:
+Vous pouvez cpésifier le répertoire cible dans la configuration de la manière suivante :
 
 .. configuration-block::
 

@@ -1,13 +1,14 @@
-How to Apply an Assetic Filter to a Specific File Extension
-===========================================================
+Comment appliquer un filtre Assetic à une extension de fichier spécifique
+=========================================================================
 
-Assetic filters can be applied to individual files, groups of files or even,
-as you'll see here, files that have a specific extension. To show you how
-to handle each option, let's suppose that you want to use Assetic's CoffeeScript
-filter, which compiles CoffeeScript files into Javascript.
+Les filtres Assetic peuvent être appliqués à des fichiers individuels, à
+des groupes de fichiers ou même, comme vous allez le voir ici, à des fichiers
+qui ont une extension spécifique. Pour vous montrer comment gérer chaque option,
+supposons que vous ayez le filtre Assetic CoffeeScript qui compile les fichiers
+CoffeeScript en JavaScript.
 
-The main configuration is just the paths to coffee and node. These default
-respectively to ``/usr/bin/coffee`` and ``/usr/bin/node``:
+La configuration principale contient juste les chemins vers coffee et node.
+Leurs valeurs par défaut respectives sont ``/usr/bin/coffee`` et ``/usr/bin/node``:
 
 .. configuration-block::
 
@@ -42,11 +43,11 @@ respectively to ``/usr/bin/coffee`` and ``/usr/bin/node``:
             ),
         ));
 
-Filter a Single File
---------------------
+Filtrer un fichier unique
+-------------------------
 
-You can now serve up a single CoffeeScript file as JavaScript from within your
-templates:
+Vous pouvez maintenant compiler un fichier unique CoffeeScript en JavaScript
+depuis vos templates :
 
 .. configuration-block::
 
@@ -66,13 +67,14 @@ templates:
         <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
         <?php endforeach; ?>
 
-This is all that's needed to compile this CoffeeScript file and server it
-as the compiled JavaScript.
+C'est tout ce dont vous avez besoin pour compiler ce fichier CoffeeScript
+et le servir comme JavaScript compilé.
 
-Filter Multiple Files
----------------------
+Filtrer des fichiers multiples
+------------------------------
 
-You can also combine multiple CoffeeScript files into a single output file:
+Vous pouvez aussi combiner plusieurs fichiers CoffeeScript en un unique
+fichier en sortie :
 
 .. configuration-block::
 
@@ -94,23 +96,24 @@ You can also combine multiple CoffeeScript files into a single output file:
         <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
         <?php endforeach; ?>
 
-Both the files will now be served up as a single file compiled into regular
-JavaScript.
+Les deux fichiers seront maintenant délivrés comme un unique fichier compilé
+en JavaScript.
 
-Filtering based on a File Extension
------------------------------------
+Filtrer en se basant sur les extensions
+---------------------------------------
 
-One of the great advantages of using Assetic is reducing the number of asset
-files to lower HTTP requests. In order to make full use of this, it would
-be good to combine *all* your JavaScript and CoffeeScript files together
-since they will ultimately all be served as JavaScript. Unfortunately just
-adding the JavaScript files to the files to be combined as above will not
-work as the regular JavaScript files will not survive the CoffeeScript compilation.
+Un des plus grands avantages d'Assetic est de pouvoir réduire le nombre de
+fichiers de ressources pour réduire le nombre de requêtes HTTP. Dans le but
+d'en le plus grand avantage possible, il pourrait être intéressant de combiner
+*tous* vos fichiers CoffeeScript et JavaScript ensembles puisqu'ils seront
+finalement délivrés comme JavaScript. Malheureusement, se contenter d'ajouter
+les fichiers JavaScript aux fichiers à combiner ne fonctionnera par car
+le JavaScript ne passera pas la compilation CoffeeScript.
 
-This problem can be avoided by using the ``apply_to`` option in the config,
-which allows you to specify that a filter should always be applied to particular
-file extensions. In this case you can specify that the Coffee filter is
-applied to all ``.coffee`` files:
+Ce problème peut être évité en ajoutant l'option ``apply_to`` à la configuration,
+ce qui vous permettra de spécifier qu'un filtre devra toujours être appliqué
+à une extension de fichier particulière. Dans ce cas, vous pouvez spécifier que
+le filtre Coffee s'applique à tous les fichiers ``.coffee`` :
 
 .. configuration-block::
 
@@ -148,10 +151,10 @@ applied to all ``.coffee`` files:
             ),
         ));
 
-With this, you no longer need to specify the ``coffee`` filter in the template.
-You can also list regular JavaScript files, all of which will be combined
-and rendered as a single JavaScript file (with only the ``.coffee`` files
-being run through the CoffeeScript filter):
+Avec cela, vous n'avez plus besoin de spécifier le filtre ``coffee`` dans le template.
+Vous pouvez aussi liste les fichiers JavaScript classique, chacun d'eux sera combiné
+et délivré en un unique fichier JavaScript (avec les fichiers ``.coffee`` seulement qui
+passeront à travers le filtre CoffeeScript) :
 
 .. configuration-block::
 
