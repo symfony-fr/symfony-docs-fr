@@ -1,14 +1,14 @@
 .. index::
     single: Cache; Varnish
 
-How to use Varnish to speed up my Website
-=========================================
+Comment utiliser Varnish pour accélérer mon site Web
+====================================================
 
-Because Symfony2's cache uses the standard HTTP cache headers, the
-:ref:`symfony-gateway-cache` can easily be replaced with any other reverse
-proxy. Varnish is a powerful, open-source, HTTP accelerator capable of serving
-cached content quickly and including support for :ref:`Edge Side
-Includes<edge-side-includes>`.
+Du fait que le cache de Symfony2 utilise les en-têtes HTTP standards, le
+:ref:`symfony-gateway-cache` peut facilement être remplacé par n'importe quel
+autre « reverse proxy ». Varnish est un accélérateur HTTP puissant et open-source
+capable de délivrer du contenu caché rapidement et incluant le support pour les
+:ref:`Edge Side Includes<edge-side-includes>`.
 
 .. index::
     single: Varnish; configuration
@@ -16,21 +16,22 @@ Includes<edge-side-includes>`.
 Configuration
 -------------
 
-As seen previously, Symfony2 is smart enough to detect whether it talks to a
-reverse proxy that understands ESI or not. It works out of the box when you
-use the Symfony2 reverse proxy, but you need a special configuration to make
-it work with Varnish. Thankfully, Symfony2 relies on yet another standard
-written by Akamaï (`Edge Architecture`_), so the configuration tips in this
-chapter can be useful even if you don't use Symfony2.
+Comme vu précédemment, Symfony2 est suffisament intelligent pour détecter si
+il parle à un « reverse proxy » qui comprend ESI ou non. Cela fonctionne
+automatiquement lorsque vous utilisez le « reverse proxy » de Symfony2, mais vous
+avez besoin d'une configuration spéciale pour que cela fonctionne avec Varnish.
+Heureusement, Symfony2 repose déjà sur un autre standard écrit par Akamaï
+(`Architecture Edge`_), donc les conseils de configuration décrits dans ce
+ chapitre peuvent être utiles même si vous n'utilisez pas Symfony2.
 
 .. note::
 
-    Varnish only supports the ``src`` attribute for ESI tags (``onerror`` and
-    ``alt`` attributes are ignored).
+    Varnish supporte seulement l'attribut ``src`` pour les balises ESI (les
+    attributs ``onerror`` et ``alt`` sont ignorés).
 
-First, configure Varnish so that it advertises its ESI support by adding a
-``Surrogate-Capability`` header to requests forwarded to the backend
-application:
+Tout d'abord, configurez Varnish afin qu'il annonce son support d'ESI en
+ajoutant un en-tête ``Surrogate-Capability`` aux requêtes transférées à
+l'application backend :
 
 .. code-block:: text
 
@@ -38,9 +39,9 @@ application:
         set req.http.Surrogate-Capability = "abc=ESI/1.0";
     }
 
-Then, optimize Varnish so that it only parses the Response contents when there
-is at least one ESI tag by checking the ``Surrogate-Control`` header that
-Symfony2 adds automatically:
+Puis, optimisez Varnish afin qu'il analyse uniquement le contenu de la réponse
+lorsqu'il y a au moins une balise ESI en vérifiant l'en-tête ``Surrogate-Control``
+que Symfony2 ajoute automatiquement :
 
 .. code-block:: text
 
@@ -57,21 +58,22 @@ Symfony2 adds automatically:
 
 .. caution::
 
-    Compression with ESI was not supported in Varnish until version 3.0
-    (read `GZIP and Varnish`_). If you're not using Varnish 3.0, put a web
-    server in front of Varnish to perform the compression.
+    La compression avec ESI n'était pas supportée dans Varnish jusqu'à la
+    version 3.0 (lire `GZIP et Varnish`_). Si vous n'utilisez pas Varnish
+    3.0, mettez un serveur web devant Varnish afin qu'il effectue la compression.
 
 .. index::
     single: Varnish; Invalidation
 
-Cache Invalidation
-------------------
+Invalidation du Cache
+---------------------
 
-You should never need to invalidate cached data because invalidation is already
-taken into account natively in the HTTP cache models (see :ref:`http-cache-invalidation`).
+Vous ne devriez jamais avoir besoin d'invalider des données cachées parce que
+l'invalidation est déjà pris en compte nativement dans les modèles de cache HTTP
+(voir :ref:`http-cache-invalidation`).
 
-Still, Varnish can be configured to accept a special HTTP ``PURGE`` method
-that will invalidate the cache for a given resource:
+Néanmoins, Varnish peut être configuré pour accepter une méthode HTTP spécifique
+``PURGE`` qui va invalider le cache pour une ressource donnée :
 
 .. code-block:: text
 
@@ -90,8 +92,8 @@ that will invalidate the cache for a given resource:
 
 .. caution::
 
-    You must protect the ``PURGE`` HTTP method somehow to avoid random people
-    purging your cached data.
+    Vous devez protéger la méthode HTTP ``PURGE`` d'une façon ou d'une autre afin
+    d'éviter que des personnes purgent vos données cachées.
 
-.. _`Edge Architecture`: http://www.w3.org/TR/edge-arch
-.. _`GZIP and Varnish`: https://www.varnish-cache.org/docs/3.0/phk/gzip.html
+.. _`Architecture Edge`: http://www.w3.org/TR/edge-arch
+.. _`GZIP et Varnish`: https://www.varnish-cache.org/docs/3.0/phk/gzip.html
