@@ -1,36 +1,40 @@
 .. index::
    single: Logging
 
-How to use Monolog to write Logs
-================================
+Comment utiliser Monolog pour écrire des Logs
+=============================================
 
-Monolog_ is a logging library for PHP 5.3 used by Symfony2. It is
-inspired by the Python LogBook library.
+Monolog_ est une bibliothèque pour PHP 5.3 servant à écrire des logs
+et utilisée par Symfony2. Elle est inspirée par la bibliothèque
+Python LogBook.
 
-Usage
------
+Utilisation
+-----------
 
-In Monolog each logger defines a logging channel. Each channel has a
-stack of handlers to write the logs (the handlers can be shared).
+Dans Monolog, chaque « logger » définit un canal de « logging ». Chaque
+canal possède une pile de gestionnaires pour écrire les logs (les
+gestionnaires peuvent être partagés).
 
 .. tip::
 
-    When injecting the logger in a service you can
-    :ref:`use a custom channel<dic_tags-monolog>` to see easily which
-    part of the application logged the message.
+    Lorsque vous injectez le « logger » dans un service, vous pouvez
+    :ref:`utiliser un canal personnalisé<dic_tags-monolog>` pour voir
+    facilement quelle partie de l'application a loggé le message.
 
-The basic handler is the ``StreamHandler`` which writes logs in a stream
-(by default in the ``app/logs/prod.log`` in the prod environment and
-``app/logs/dev.log`` in the dev environment).
+Le gestionnaire par défaut est le ``StreamHandler`` qui écrit les logs
+dans un « stream » (par défaut dans le fichier ``app/logs/prod.log`` dans
+l'environnement de production et dans ``app/logs/dev.log`` dans l'environnment
+ de développement).
 
-Monolog comes also with a powerful built-in handler for the logging in
-prod environment: ``FingersCrossedHandler``. It allows you to store the
-messages in a buffer and to log them only if a message reaches the
-action level (ERROR in the configuration provided in the standard
-edition) by forwarding the messages to another handler.
+Monolog est aussi livré avec un puissant gestionnaire intégré pour le « logging »
+en environnement de production : le ``FingersCrossedHandler``. Il vous permet
+de stocker les messages dans un « buffer » (« mémoire tampon » en français)
+et de les écrire dans le log que si un message atteint le niveau d'action
+(ERROR dans la configuration fournie dans l'édition standard) en transmettant
+les messages à un autre gestionnaire.
 
-To log a message simply get the logger service from the container in
-your controller::
+Pour « logger » un message, utilisez tout simplement le service logger depuis
+le conteneur dans un contrôleur::
 
     $logger = $this->get('logger');
     $logger->info('We just got the logger');
@@ -38,15 +42,15 @@ your controller::
 
 .. tip::
 
-    Using only the methods of the
-    :class:`Symfony\\Component\\HttpKernel\\Log\\LoggerInterface` interface
-    allows to change the logger implementation without changing your code.
+    Utiliser uniquement les méthodes de l'interface
+    :class:`Symfony\\Component\\HttpKernel\\Log\\LoggerInterface` permet
+    de changer l'implémentation du logger sans changer votre code.
 
-Using several handlers
-~~~~~~~~~~~~~~~~~~~~~~
+Utiliser plusieurs gestionnaires
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The logger uses a stack of handlers which are called successively. This
-allows you to log the messages in several ways easily.
+Le logger utilise une pile de gestionnaires qui sont appelés successivement.
+Ceci vous permet de « logger » facilement les messages de plusieurs manières.
 
 .. configuration-block::
 
@@ -95,28 +99,29 @@ allows you to log the messages in several ways easily.
             </monolog:config>
         </container>
 
-The above configuration defines a stack of handlers which will be called
-in the order where they are defined.
+La configuration ci-dessus définit une pile de gestionnaires qui vont être
+appelés dans l'ordre où ils sont définis.
 
 .. tip::
 
-    The handler named "file" will not be included in the stack itself as
-    it is used as a nested handler of the ``fingers_crossed`` handler.
+    Le gestionnaire nommé "file" ne va pas être inclus dans la pile elle-même
+    car il est utilisé comme un gestionnaire « imbriqué » du gestionnaire
+    ``fingers_crossed``.
 
 .. note::
 
-    If you want to change the config of MonologBundle in another config
-    file you need to redefine the whole stack. It cannot be merged
-    because the order matters and a merge does not allow to control the
-    order.
+    Si vous voulez changer la configuration de MonologBundle dans un autre
+    fichier de configuration, vous avez besoin de redéfinir tout le bloc.
+    Il ne peut pas être fusionné car l'ordre importe et une fusion ne
+    permet pas de contrôler ce dernier.
 
-Changing the formatter
-~~~~~~~~~~~~~~~~~~~~~~
+Changer la mise en forme
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-The handler uses a ``Formatter`` to format the record before logging
-it. All Monolog handlers use an instance of
-``Monolog\Formatter\LineFormatter`` by default but you can replace it
-easily. Your formatter must implement
+Le gestionnaire utilise un ``Formatter`` pour mettre en forme une entrée
+avant de la « logger ». Tous les gestionnaires Monolog utilisent une instance
+de ``Monolog\Formatter\LineFormatter`` par défaut mais vous pouvez la
+remplacer facilement. Votre outil de mise en forme doit implémenter
 ``Monolog\Formatter\FormatterInterface``.
 
 .. configuration-block::
@@ -154,24 +159,26 @@ easily. Your formatter must implement
             </monolog:config>
         </container>
 
-Adding some extra data in the log messages
-------------------------------------------
+Ajouter des données supplémentaires dans les messages de log
+------------------------------------------------------------
 
-Monolog allows to process the record before logging it to add some
-extra data. A processor can be applied for the whole handler stack or
-only for a specific handler.
+Monolog permet de traiter l'entrée avant de la « logger » afin d'y
+ajouter des données supplémentaires. Un processeur peut être appliqué
+pour la pile entière des gestionnaires ou uniquement pour un gestionnaire
+spécifique.
 
-A processor is simply a callable receiving the record as it's first argument.
+Un processeur est simplement un « callable » recevant l'entrée log en tant que
+son premier argument.
 
-Processors are configured using the ``monolog.processor`` DIC tag. See the
-:ref:`reference about it<dic_tags-monolog-processor>`.
+Les processeurs sont configurés en utilisant la balise DIC ``monolog.processor``.
+Voir la :ref:`référence à propos de celle-ci<dic_tags-monolog-processor>`.
 
-Adding a Session/Request Token
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter un jeton de Session/Requête
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes it is hard to tell which entries in the log belong to which session
-and/or request. The following example will add a unique token for each request
-using a processor.
+Parfois il est difficile de dire quelles entrées dans le log appartiennent à
+quelle session et/ou requête. L'exemple suivant va ajouter un jeton unique pour
+chaque requête en utilisant un processeur.
 
 .. code-block:: php
 
@@ -231,7 +238,7 @@ using a processor.
 
 .. note::
 
-    If you use several handlers, you can also register the processor at the
-    handler level instead of globally.
+    Si vous utilisez plusieurs gestionnaires, vous pouvez aussi déclarer le
+    processeur au niveau du gestionnaire au lieu de le faire globalement.
 
 .. _Monolog: https://github.com/Seldaek/monolog
