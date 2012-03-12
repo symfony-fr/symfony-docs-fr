@@ -1,47 +1,47 @@
 .. index::
    single: Forms; Fields; radio
 
-radio Field Type
-================
+Type de champ Radio
+===================
 
-Creates a single radio button. This should always be used for a field that
-has a Boolean value: if the radio button is selected, the field will be set
-to true, if the button is not selected, the value will be set to false.
+Crée un simple bouton radio. Il devrait toujours être utilisé pour un champ
+dont la valeur est booléenne. : si le bouton radio est sélectionné, le champ sera
+défini à true, sinon, la valeur sera définie à false.
 
-The ``radio`` type isn't usually used directly. More commonly it's used
-internally by other types such as :doc:`choice</reference/forms/types/choice>`.
-If you want to have a Boolean field, use :doc:`checkbox</reference/forms/types/checkbox>`.
+Le type ``radio`` n'est généralement pas utilisé directement. Le plus souvent, il 
+est utilisé indirectement par d'autres types comme le type :doc:`Choice</reference/forms/types/choice>`.
+Si vous voulez avoir un champ Booléen, utilisez :doc:`checkbox</reference/forms/types/checkbox>`.
 
 +-------------+---------------------------------------------------------------------+
-| Rendered as | ``input`` ``radio`` field                                           |
+| Rendu comme | Champ ``input`` ``radio``                                           | 
 +-------------+---------------------------------------------------------------------+
 | Options     | - `value`_                                                          |
 +-------------+---------------------------------------------------------------------+
-| Inherited   | - `required`_                                                       |
-| options     | - `label`_                                                          |
+| Options     | - `required`_                                                       |
+| héritées    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/field>`                          |
+| Type parent | :doc:`field</reference/forms/types/field>`                          |
 +-------------+---------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\RadioType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\RadioType` |
 +-------------+---------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 value
 ~~~~~
 
 **type**: ``mixed`` **default**: ``1``
 
-The value that's actually used as the value for the radio button. This does
-not affect the value that's set on your object.
+La valeur qui est effectivement utilisée comme valeur pour le radio bouton. Cela
+n'affecte pas la valeur qui est définie dans votre objet.
 
-Inherited Options
+Options héritées
 -----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

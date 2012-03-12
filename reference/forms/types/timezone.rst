@@ -1,25 +1,25 @@
 .. index::
    single: Forms; Fields; timezone
 
-timezone Field Type
-===================
+Type de champ Timezone
+======================
 
-The ``timezone`` type is a subset of the ``ChoiceType`` that allows the user
-to select from all possible timezones.
+Le type ``timezone`` est un sous-ensemble du type ``ChoiceType`` qui permet à l'utilisateur
+de choisir parmi les fuseaux horaires possibles.
 
-The "value" for each timezone is the full timezone name, such as ``America/Chicago``
-or ``Europe/Istanbul``.
+La « valeur » de chaque fuseau horaire est le nom complet du fuseau, comme ``America/Chicago``
+ou ``Europe/Istanbul``.
 
-Unlike the ``choice`` type, you don't need to specify a ``choices`` or
-``choice_list`` option as the field type automatically uses a large list
-of locales. You *can* specify either of these options manually, but then
-you should just use the ``choice`` type directly.
+Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options ``choices`` ou
+``choice_list`` puisque le type de champs utilise automatiquement la liste des fuseaux.
+Vous *pouvez* spécifier l'une ou l'autre de ces options manuellement, mais vous devriez
+alors utiliser directement le type ``choice``.
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | can be various tags (see :ref:`forms-reference-choice-tags`)           |
+| Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
-| Inherited   | - `multiple`_                                                          |
-| options     | - `expanded`_                                                          |
+| Options     | - `multiple`_                                                          |
+| héritées    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
@@ -27,15 +27,15 @@ you should just use the ``choice`` type directly.
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
 +-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`choice</reference/forms/types/choice>`                           |
+| Type parent | :doc:`choice</reference/forms/types/choice>`                           |
 +-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType` |
 +-------------+------------------------------------------------------------------------+
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`choice</reference/forms/types/choice>` type:
+Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -45,7 +45,7 @@ These options inherit from the :doc:`choice</reference/forms/types/choice>` type
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

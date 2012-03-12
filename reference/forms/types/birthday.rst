@@ -5,10 +5,10 @@ Type de champ Birthday
 ======================
 
 Un champ :doc:`date</reference/forms/types/date>` qui est spécialisé dans la gestion
-de dates de naissance.
+des dates de naissance.
 
 Peut être rendu comme un champ texte unique, trois champs textes (mois, jour et année),
-ou trois select.
+ou trois listes déroulantesS.
 
 Ce type est très similaire au type :doc:`date</reference/forms/types/date>`, mais
 avec des valeurs par défaut de l'option `years`_ plus appropriées. L'option `years`_

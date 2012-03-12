@@ -4,10 +4,10 @@
 Type de champ Collection
 ========================
 
-Ce type de champ est utilisé pour rendre une "collection" de champs ou de formulaires.
+Ce type de champ est utilisé pour rendre une « collection » de champs ou de formulaires.
 Plus simplement, ce pourrait être un tableau de champs ``text`` qui remplirait un tableau
 de champs``emails``. 
-Dans les cas les plus complexex, vous pourrez imbriquer des formulaires entiers, ce qui
+Dans les cas les plus complexes, vous pourrez imbriquer des formulaires entiers, ce qui
 est très utile lorsque vous créerez des formulaires avec des relations one-to-many
 (par exemple un produit pour lequel vous pouvez gérer plusieurs photos de ce produit).
 
@@ -38,9 +38,9 @@ un formulaire. Par exemple, supposez que vous avez un champ ``emails`` qui corre
 email dans son propre champ input::
 
     $builder->add('emails', 'collection', array(
-        // chaque item du tableau sera un champ "email"
+        // chaque item du tableau sera un champ « email »
         'type'   => 'email',
-        // ces options sont passées à chaque type "email"
+        // ces options sont passées à chaque type « email »
         'options'  => array(
             'required'  => false,
             'attr'      => array('class' => 'email-box')
@@ -105,10 +105,10 @@ Ajouter et supprimer des items
 
 Si `allow_add`_ est défini à ``true``, alors tout item non reconnu qui est envoyé
 sera ajouté dans le tableau de façon transparente. C'est génial en théorie, mais en
-pratique, il vous faudra plus d'effort pour adapter la partie client JavaScript.
+pratique, il vous faudra plus d'efforts pour adapter la partie client JavaScript.
 
 En poursuivant avec l'exemple précédent, supposez que vous commencez avec deux emails
-dans votre tableau de données ``emails``.  Dans ce cas, deux champs input sera rendus,
+dans votre tableau de données ``emails``.  Dans ce cas, deux champs input seront rendus,
 ce qui ressemblera à quelque chose comme ceci (ça dépendra du nom de votre formulaire) :
 
 .. code-block:: html
@@ -117,12 +117,12 @@ ce qui ressemblera à quelque chose comme ceci (ça dépendra du nom de votre formu
     <input type="email" id="form_emails_1" name="form[emails][1]" value="bar@bar.com" />
 
 Pour autoriser votre utilisateur à ajouter un autre email, définissez juste `allow_add`_
-à ``true`` et - en JavaScript - rendez un autre champ avec le nom ``form[emails][2]``
+à ``true`` et, en JavaScript, rendez un autre champ avec le nom ``form[emails][2]``
 (en incrémentant à chaque nouveau champ).
 
 Pour vous aider à faire cela plus facilement, définir l'option `prototype`_ à ``true`` 
-permet de rendre un "template" de champ que vous pourrez utiliser dans votre fichier
-JavaScript afin de créer dynamiquement des nouveau champs. Un champ prototype rendu
+permet de rendre un « template » de champ que vous pourrez utiliser dans votre fichier
+JavaScript afin de créer dynamiquement des nouveaux champs. Un champ prototype rendu
 ressemblera à :
 
 .. code-block:: html
@@ -145,7 +145,7 @@ besoin que du JavaScript :
         <form action="..." method="POST" {{ form_enctype(form) }}>
             {# ... #}
 
-            {# store the prototype on the data-prototype attribute #}
+            {# stocke le prototype dasn l'attribut data-prototype #}
             <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.get('prototype')) | e }}">
             {% for emailField in form.emails %}
                 <li>
@@ -161,22 +161,22 @@ besoin que du JavaScript :
         </form>
 
         <script type="text/javascript">
-            // keep track of how many email fields have been rendered
+            // garde une trace du nombre de champs email qui ont été affichés
             var emailCount = '{{ form.emails | length }}';
 
             jQuery(document).ready(function() {
                 jQuery('#add-another-email').click(function() {
                     var emailList = jQuery('#email-fields-list');
 
-                    // grab the prototype template
+                    // parcourt le template prototype
                     var newWidget = emailList.attr('data-prototype');
-                    // replace the "$$name$$" used in the id and name of the prototype
-                    // with a number that's unique to our emails
-                    // end name attribute looks like name="contact[emails][2]"
+                    // remplace les "$$name$$" utilisés dans l'id et le nom du prototype
+                    // par un nombre unique pour chaque email
+                    // le nom de l'attribut final ressemblera à name="contact[emails][2]"
                     newWidget = newWidget.replace(/\$\$name\$\$/g, emailCount);
                     emailCount++;
 
-                    // create a new list element and add it to our list
+                    // créer une nouvelle liste d'éléments et l'ajoute à notre liste
                     var newLi = jQuery('<li></li>').html(newWidget);
                     newLi.appendTo(jQuery('#email-fields-list'));
 
@@ -190,7 +190,7 @@ besoin que du JavaScript :
     Si vous rendez une collection entière en une seule fois, alors le prototype
 	est automatiquement disponible dans l'attribut ``data-prototype`` de l'élément
     (ex: ``div`` ou ``table``) qui encadre votre collection. La seule différence
-	c'est que le "form row" est rendu pour vous en entier, ce qui signifie que vous
+	c'est que le « form row » est rendu pour vous en entier, ce qui signifie que vous
 	n'aurez pas à l'encadrer dans un conteneur quelconque comme nous l'avions fait
 	ci-dessus.
 
@@ -200,7 +200,7 @@ Options du champ
 type
 ~~~~
 
-**type**: ``string`` or :class:`Symfony\\Component\\Form\\FormTypeInterface` **required**
+**type**: ``string`` ou :class:`Symfony\\Component\\Form\\FormTypeInterface` **required**
 
 C'est le type de champ pour chaque item dans la collection (ex: ``text``, ``choice``,
 etc). Par exemple, si vous avez un tableau d'adresses email, vous utiliserez le type 
@@ -241,7 +241,7 @@ existants ainsi que les nouveaux items qui auront été soumis. Regardez l'exemple
 ci-dessus pour plus de détails.
 
 L'option `prototype`_ peut être utilisée pour rendre un prototype d'item qui pourra être
-utilisé - en JavaScript - pour créer des nouveaux item de formulaire dynamiquement
+utilisé - en JavaScript - pour créer des nouveaux items de formulaire dynamiquement
 côté client. Pour plus d'informations, voyez l'exemple ci-dessus et :ref:`cookbook-form-collections-new-prototype`.
 
 .. caution::
@@ -257,8 +257,8 @@ allow_delete
 **type**: ``Boolean`` **default**: ``false``
 
 Si cette option est définie à ``true``, alors si un item existant ne se retrouve
-pas dans les données soumises, il sera supprimé du tableau d'items final. Ca signifie
-que vous pouvez implémenter un bouton "Supprimer" en JavaScript qui supprimera
+pas dans les données soumises, il sera supprimé du tableau d'items final. Cela signifie
+que vous pouvez implémenter un bouton « Supprimer » en JavaScript qui supprimera
 simplement un élément formulaire du DOM. Quand l'utilisateur soumettra le formulaire,
 l'absence de cet élément des données soumises entrainera la suppression de l'item
 dans le tableau final.
@@ -281,11 +281,11 @@ prototype
 **type**: ``Boolean`` **default**: ``true``
 
 Cette option est utile lorsqu'elle est associée à l'option `allow_add`_. Si elle
-est à ``true`` (et que `allow_add`_ est aussi à ``true``), un attribut spécial "prototype"
-sera disponible pour que vous puissiez rendre un exemple de "template" à votre page
+est à ``true`` (et que `allow_add`_ est aussi à ``true``), un attribut spécial « prototype »
+sera disponible pour que vous puissiez rendre un exemple de « template » à votre page
 afin de spécifier ce à quoi le nouvel élement doit ressembler. L'attribut ``name``
-donné à cet élément est ``$$name$$``. Cela vous permet d'ajouter un bouton "Ajouter
-un élément" en JavaScript qui parcourt le prototype, remplace ``$$name$$`` par un
+donné à cet élément est ``$$name$$``. Cela vous permet d'ajouter un bouton « Ajouter un
+élément » en JavaScript qui parcourt le prototype, remplace ``$$name$$`` par un
 nom unique ou un numéro, et le rend à votre formulaire. Lors de la soumission, il sera
 ajouté à votre tableau de données grâce à l'option `allow_add`_.
 
@@ -301,14 +301,14 @@ Le champ prototype peut être rendu via la variable ``prototype`` du champ collec
     
         <?php echo $view['form']->row($form['emails']->get('prototype')) ?>
 
-Notez que tout ce dont vous avez vraiment besoin c'est le "widget", mais selon la
-manière dont vous rendez votre formulaire, utiliser le "form row" peut être plus
+Notez que tout ce dont vous avez vraiment besoin c'est le « widget », mais selon la
+manière dont vous rendez votre formulaire, utiliser le « form row » peut être plus
 facile pour vous.
 
 .. tip::
     
 	Si vous rendez une entière collection de champs en une seule fois, alors le
-	prototype du "form row" est automatiquement disponible dans l'attribut ``data-prototype``
+	prototype du « form row » est automatiquement disponible dans l'attribut ``data-prototype``
 	de l'élément (ex ``div`` ou ``table``) qui encadre votre collection.
 
 Pour plus de détails sur l'utilisation de cette option, lisez l'exemple ci-dessus

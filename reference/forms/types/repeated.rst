@@ -1,62 +1,62 @@
 .. index::
    single: Forms; Fields; repeated
 
-repeated Field Type
-===================
+Type de champ Repeated
+======================
 
-This is a special field "group", that creates two identical fields whose
-values must match (or a validation error is thrown). The most common use
-is when you need the user to repeat his or her password or email to verify
-accuracy.
+C'est un « groupe » spécial de champs qui crée deux champs identiques dont les valeurs
+doivent correspondre (sinon une erreur de validation s'affiche). L'usage le plus commun
+est lorsque vous avez besoin que l'utilisateur tape une nouvelle fois son mot de passe
+ou son email pour vérifier qu'ils sont justes.
 
 +-------------+------------------------------------------------------------------------+
-| Rendered as | input ``text`` field by default, but see `type`_ option                |
+| Rendu comme | Champ input ``text`` par défaut, mais voyez l'option `type`_ option    |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `type`_                                                              |
 |             | - `options`_                                                           |
 |             | - `first_name`_                                                        |
 |             | - `second_name`_                                                       |
 +-------------+------------------------------------------------------------------------+
-| Inherited   | - `invalid_message`_                                                   |
-| options     | - `invalid_message_parameters`_                                        |
+| Options     | - `invalid_message`_                                                   |
+| héritées    | - `invalid_message_parameters`_                                        |
 |             | - `error_bubbling`_                                                    |
 +-------------+------------------------------------------------------------------------+
-| Parent type | :doc:`field</reference/forms/types/form>`                              |
+| Type parent | :doc:`field</reference/forms/types/form>`                              |
 +-------------+------------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType` |
 +-------------+------------------------------------------------------------------------+
 
-Example Usage
--------------
+Exemple d'utilisation
+---------------------
 
 .. code-block:: php
 
     $builder->add('password', 'repeated', array(
         'type' => 'password',
-        'invalid_message' => 'The password fields must match.',
+        'invalid_message' => 'Les mots de passe doivent correspondre',
         'options' => array('label' => 'Password'),
     ));
 
-Upon a successful form submit, the value entered into both of the "password"
-fields becomes the data of the ``password`` key. In other words, even though
-two fields are actually rendered, the end data from the form is just the
-single value (usually a string) that you need.
+Lors de la soumission réussie d'un formulaire, la valeur saisie dans les deux
+champs « password » devient la donnée de la clé ``password``. En d'autres termes,
+même si deux champs sont soumis en réalité, la donnée finale du formulaire est juste
+la valeur unique dont vous avez besoin (généralement une chaine de caractères).
 
-The most important option is ``type``, which can be any field type and determines
-the actual type of the two underlying fields. The ``options`` option is passed
-to each of those individual fields, meaning - in this example - any option
-supported by the ``password`` type can be passed in this array.
+L'option la plus importante est ``type``, qui peut être n'importe quel type de champ
+et qui détermine le réel type des deux champs sous-jacents. L'option ``options`` est passée
+à chacun de ces deux champs ce qui signifie, dans cet exemple, que toute option
+supportée par le type ``password`` peut être passée dans ce tableau.
 
 Validation
 ~~~~~~~~~~
 
-One of the key features of the ``repeated`` field is internal validation
-(you don't need to do anything to set this up) that forces the two fields
-to have a matching value. If the two fields don't match, an error will be
-shown to the user.
+L'une des fonctionnalités clé du champ ``repeated`` est sa validation interne
+(vous n'avez rien besoin de faire pour l'activer) qui force les 2 champs à avoir
+la même valeur. Si les deux valeurs ne sont pas identiques, une erreur sera
+envoyée à l'utilisateur.
 
-The ``invalid_message`` is used to customize the error that will
-be displayed when the two fields do not match each other.
+L'option ``invalid_message`` est utilisée pour personnaliser l'erreur qui
+sera affichée si les deux valeurs ne correspondent pas.
 
 Field Options
 -------------
@@ -66,42 +66,42 @@ type
 
 **type**: ``string`` **default**: ``text``
 
-The two underlying fields will be of this field type. For example, passing
-a type of ``password`` will render two password fields.
+Les deux champs sous-jacents auront ce type de champ. Par exemple, passer le
+type ``password`` retournera deux champs « mot de passe ».
 
 options
 ~~~~~~~
 
 **type**: ``array`` **default**: ``array()``
 
-This options array will be passed to each of the two underlying fields. In
-other words, these are the options that customize the individual field types.
-For example, if the ``type`` option is set to ``password``, this array might
-contain the options ``always_empty`` or ``required`` - both options that are
-supported by the ``password`` field type.
+Ce tableau d'options sera passé à chacun des deux champs sous-jacents. En d'autres
+termes, ce sont les options qui personnalisent les types de champs individuellement.
+Par exemple, si l'option ``type`` est définie comme ``password``, ce tableau peut
+contenir les options ``always_empty`` ou ``required``, c'est-à-dire deux options qui
+sont supportées par le type de champ ``password``.
 
 first_name
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``first``
 
-This is the actual field name to be used for the first field. This is mostly
-meaningless, however, as the actual data entered into both of the fields will
-be available under the key assigned to the ``repeated`` field itself (e.g.
-``password``). However, if you don't specify a label, this field name is used
-to "guess" the label for you.
+C'est le nom de champ qui sera utilisé par le premier champ. Ce n'est en fait
+pas très important puisque la donnée saisie dans les deux champs sera disponible
+en utilisant la clé du champ ``repeated`` lui-même (ex ``password``).
+Cependant, si vous ne spécifiez pas de libellé, ce nom de champ est utilisé pour
+deviner le libellé à votre place.
 
 second_name
 ~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``second``
 
-The same as ``first_name``, but for the second field.
+Le même que ``first_name``, mais pour le second champ.
 
-Inherited options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

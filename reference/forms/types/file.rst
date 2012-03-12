@@ -72,7 +72,7 @@ Vous pouvez calculer le nom de fichier grâce à l'une des méthodes suivantes::
 
 Utiliser le nom original via la méthode ``getClientOriginalName()`` n'est pas sécurisé
 car il a pu être manipulé par l'utilisateur. De plus, il peut contenir des caractères
-qui ne sont pas utilisés dans les noms de fichiers. Il est recommandé de nettoyer
+qui ne sont pas tolérés dans les noms de fichiers. Il est recommandé de nettoyer
 le nom avant de l'utiliser.
 
 Lisez le chapitre :doc:`cookbook </cookbook/doctrine/file_uploads>` pour avoir un

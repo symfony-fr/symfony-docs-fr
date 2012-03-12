@@ -2,8 +2,8 @@
    single: Doctrine; ORM Configuration Reference
    single: Configuration Reference; Doctrine ORM
 
-Configuration Reference
-=======================
+Configuration de référence
+==========================
 
 .. configuration-block::
 
@@ -43,12 +43,12 @@ Configuration Reference
                 default_entity_manager:         default # The first defined is used if not set
                 entity_managers:
                     default:
-                        # The name of a DBAL connection (the one marked as default is used if not set)
+                        # Le nom de la connexion DBAL connection (celle par défaut est utilisée si aucune n'est définie)
                         connection:                     conn1
-                        mappings: # Required
+                        mappings: # Obligatoire
                             AcmeHelloBundle: ~
                         class_metadata_factory_name:    Doctrine\ORM\Mapping\ClassMetadataFactory
-                        # All cache drivers have to be array, apc, xcache or memcache
+                        # Tous les drivers de cache doivent être un array, apc, xcache ou memcache
                         metadata_cache_driver:          array
                         query_cache_driver:             array
                         result_cache_driver:
@@ -126,11 +126,11 @@ Configuration Reference
             </doctrine:config>
         </container>
 
-Configuration Overview
-----------------------
+Vue d'ensemble de la configuration
+----------------------------------
 
-This following configuration example shows all the configuration defaults that
-the ORM resolves to:
+L'exemple de configuration suivant montre toutes les valeurs par défaut de
+la configuration de l'ORM :
 
 .. code-block:: yaml
 
@@ -146,16 +146,17 @@ the ORM resolves to:
             query_cache_driver: array
             result_cache_driver: array
 
-There are lots of other configuration options that you can use to overwrite
-certain classes, but those are for very advanced use-cases only.
+Il y a beaucoup d'autres options de configuration que vous pouvez utiliser
+pour surcharger certaines classes, mais elles sont uniquement réservées aux
+cas d'utilisation avancés.
 
-Caching Drivers
-~~~~~~~~~~~~~~~
+Drivers de cache
+~~~~~~~~~~~~~~~~
 
-For the caching drivers you can specify the values "array", "apc", "memcache"
-or "xcache".
+Pour les drivers de cache, vous pouvez spécifier les valeurs « array », « apc », « memcache »
+ou « xcache ».
 
-The following example shows an overview of the caching configurations:
+L'exemple suivant montre un aperçu d'une configuration de mise cache:
 
 .. code-block:: yaml
 
@@ -170,15 +171,16 @@ The following example shows an overview of the caching configurations:
                 port: 11211
                 instance_class: Memcache
 
-Mapping Configuration
-~~~~~~~~~~~~~~~~~~~~~
+Configuration de mapping
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Explicit definition of all the mapped entities is the only necessary
-configuration for the ORM and there are several configuration options that you
-can control. The following configuration options exist for a mapping:
+Une définition explicite de toutes les entitées associées (ou mappées)
+est l'unique configuration obligatoire de l'ORM et il y a plusieurs
+options de configuration que vous pouvez contrôler. Les options de
+configuration suivantes sont disponibles pour le mapping :
 
-* ``type`` One of ``annotation``, ``xml``, ``yml``, ``php`` or ``staticphp``.
-  This specifies which type of metadata type your mapping uses.
+* ``type`` Peut être ``annotation``, ``xml``, ``yml``, ``php`` ou ``staticphp``.
+  Cela spécifie quel type de métadata votre mapping utilise.
 
 * ``dir`` Path to the mapping or entity files (depending on the driver). If
   this path is relative it is assumed to be relative to the bundle root. This

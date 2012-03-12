@@ -57,8 +57,8 @@ input
 
 **type**: ``string`` **default**: ``datetime``
 
-Le format de la donnée en *entrée* - c'est-à-dire le format sous lequel la date
-est stockées dans l'objet. Les valeurs valides sont :
+Le format de la donnée *finale* - c'est-à-dire le format sous lequel la date
+est stockée dans l'objet. Les valeurs valides sont :
 
 * ``string`` (ex: ``2011-06-05 12:15:00``)
 * ``datetime`` (un objet ``DateTime``)

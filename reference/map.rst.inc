@@ -1,9 +1,10 @@
-* **Configuration Options**
+* **Options de Configuration**
 
-  Ever wondered what configuration options you have available to you in files
-  such as ``app/config/config.yml``? In this section, all the available configuration
-  is broken down by the key (e.g. ``framework``) that defines each possible
-  section of your Symfony2 configuration.
+  Vous êtes-vous déjà demandé quelles options de configuration étaient disponibles
+  dans des fichiers comme ``app/config/config.yml``? Dans cette partie, toute
+  la configuration disponible est décomposée en plusieurs parties, une pour chaque
+  clé (ex ``framework``), qui définissent chaque section possible de votre
+  configuration Symfony2.
 
   * :doc:`framework </reference/configuration/framework>`
   * :doc:`doctrine </reference/configuration/doctrine>`
@@ -14,13 +15,13 @@
   * :doc:`monolog </reference/configuration/monolog>`
   * :doc:`web_profiler </reference/configuration/web_profiler>`
 
-* **Forms and Validation**
+* **Formulaires et Validation**
 
-  * :doc:`Form Field Type Reference</reference/forms/types>`
-  * :doc:`Validation Constraints Reference </reference/constraints>`
-  * :doc:`Twig Template Function Reference</reference/forms/twig_reference>`
+  * :doc:`Types de champs de formulaires de référence</reference/forms/types>`
+  * :doc:`Contraintes de validation de référence </reference/constraints>`
+  * :doc:`Fonctions Twig de référence</reference/forms/twig_reference>`
 
-* **Other Areas**
+* **Autres sujets**
 
   * :doc:`/reference/dic_tags`
   * :doc:`/reference/requirements`

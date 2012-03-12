@@ -1,46 +1,45 @@
 .. index::
    single: Forms; Fields; url
 
-url Field Type
-==============
+Type de champ Url
+=================
 
-The ``url`` field is a text field that prepends the submitted value with
-a given protocol (e.g. ``http://``) if the submitted value doesn't already
-have a protocol.
+Le champ ``url`` est un champ texte qui préfixe la valeur soumise par un protocole
+donné (ex ``http://``) si la valeur n'a pas déjà un protocole.
 
 +-------------+-------------------------------------------------------------------+
-| Rendered as | ``input url`` field                                               |
+| Rendu comme | Champ ``input url``                                               |
 +-------------+-------------------------------------------------------------------+
 | Options     | - `default_protocol`_                                             |
 +-------------+-------------------------------------------------------------------+
-| Inherited   | - `max_length`_                                                   |
-| options     | - `required`_                                                     |
+| Options     | - `max_length`_                                                   |
+| héritées    | - `required`_                                                     |
 |             | - `label`_                                                        |
 |             | - `trim`_                                                         |
 |             | - `read_only`_                                                    |
 |             | - `error_bubbling`_                                               |
 +-------------+-------------------------------------------------------------------+
-| Parent type | :doc:`text</reference/forms/types/text>`                          |
+| Type parent | :doc:`text</reference/forms/types/text>`                          |
 +-------------+-------------------------------------------------------------------+
-| Class       | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType` |
+| Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType` |
 +-------------+-------------------------------------------------------------------+
 
-Field Options
--------------
+Options du champ
+----------------
 
 default_protocol
 ~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``http``
 
-If a value is submitted that doesn't begin with some protocol (e.g. ``http://``,
-``ftp://``, etc), this protocol will be prepended to the string when
-the data is bound to the form.
+Si une valeur soumise ne commence pas un protocole (ex ``http://``,
+``ftp://``, etc), ce protocole sera ajouté au début de la chaine de caractères
+lorsque les données seront associées au formulaire.
 
-Inherited Options
------------------
+Options héritées
+----------------
 
-These options inherit from the :doc:`field</reference/forms/types/field>` type:
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

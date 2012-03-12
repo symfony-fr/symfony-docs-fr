@@ -31,7 +31,7 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
-| Type parent          | ``field`` (is texte), ``form`` sinon                                        |
+| Type parent          | ``field`` (si texte), ``form`` sinon                                        |
 +----------------------+-----------------------------------------------------------------------------+
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType`          |
 +----------------------+-----------------------------------------------------------------------------+
@@ -39,10 +39,10 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 Utilisation basique
 -------------------
 
-Ce type de champ est hautement configurable mais très facile à utiliser. Les options
+Ce type de champ est entièrement configurable mais très facile à utiliser. Les options
 les plus importantes sont ``input`` et ``widget``.
 
-Supposons que vous avez un champ ``publishedAt`` dont la date est un objet ``DateTime``.
+Supposons que vous ayez un champ ``publishedAt`` dont la date est un objet ``DateTime``.
 L'exemple suivant montre comment configurer le type ``date`` pour que le champ soit
 rendu comme trois différents champs Choice (listes déroulantes) :
 
@@ -81,16 +81,16 @@ empty_value
 
 **type**: ``string`` ou ``array``
 
-Si votre option Widget est définir à ``choice``, alors ce champ sera représenté comme
+Si votre option Widget est définie à ``choice``, alors ce champ sera représenté comme
 une série de listes déroulantes (``select``). L'option ``empty_value`` peut être
-utilisée pour définir un choix "vide" en haut de chaque liste déroulante::
+utilisée pour définir un choix « vide » en haut de chaque liste déroulante::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => '',
     ));
 
 Sinon, vous pouvez aussi spécifier une chaine de caractères qui sera affichée pour
-la valeur "vide"::
+la valeur « vide»::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day')

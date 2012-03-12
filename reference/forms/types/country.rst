@@ -8,7 +8,7 @@ Le type ``country`` est un sous-ensemble de ``ChoiceType`` qui affiche la liste
 des pays du monde. Et en bonus, les noms des pays sont affichés dans la langue de
 l'utilisateur.
 
-La "value" de chaque pays est son code en 2 lettres.
+La « valeur » de chaque pays est son code en 2 lettres.
 
 .. note::
 

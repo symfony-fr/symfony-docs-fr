@@ -1,5 +1,5 @@
-The Dependency Injection Tags
-=============================
+Les Tags de l'Injection de Dépendances
+======================================
 
 Tags:
 
@@ -18,13 +18,13 @@ Tags:
 * ``twig.extension``
 * ``validator.initializer``
 
-Enabling Custom PHP Template Helpers
-------------------------------------
+Activer les helpers de template PHP personnalisés
+-------------------------------------------------
 
-To enable a custom template helper, add it as a regular service in one
-of your configuration, tag it with ``templating.helper`` and define an
-``alias`` attribute (the helper will be accessible via this alias in the
-templates):
+Pour activer un helper de template personnalisé, ajoutez le en tant que
+service dans votre configuration, taggez le avec ``templating.helper`` et
+définissez l'attribut ``alias`` (le helper sera accessible par cet alias dans
+vos templates) :
 
 .. configuration-block::
 
@@ -51,11 +51,11 @@ templates):
 
 .. _reference-dic-tags-twig-extension:
 
-Enabling Custom Twig Extensions
--------------------------------
+Activer une extension Twig personnalisée
+----------------------------------------
 
-To enable a Twig extension, add it as a regular service in one of your
-configuration, and tag it with ``twig.extension``:
+Pour activer une extension Twig, ajoutez la comme service dans votre
+configuration et taggez la avec ``twig.extension`` :
 
 .. configuration-block::
 
@@ -80,14 +80,14 @@ configuration, and tag it with ``twig.extension``:
             ->addTag('twig.extension')
         ;
 
-For information on how to create the actual Twig Extension class, see
-`Twig's documentation`_ on the topic.
+Pour plus d'informations sur comment créer une classe d'Extension Twig, lisez
+la `documentation Twig`_ sur le sujet.
 
-Before writing your own extensions, have a look at the
-`Twig official extension repository`_ which already includes several
-useful extensions. For example ``Intl`` and its ``localizeddate`` filter
-that formats a date according to user's locale. These official Twig extensions
-also have to be added as regular services:
+Avant d'écrire votre propre extension, jetez un oeil au
+`dépôt officiel des extensions Twig`_ qui contient déjà plusieurs extensions
+très utiles. Par exemple ``Intl`` et ses filtres ``localizeddate`` qui formattent
+une date selon la locale de l'utilisateur. Ces extensions Twig officielles ont
+également besoin d'être ajoutées comme services :
 
 .. configuration-block::
 
@@ -114,13 +114,13 @@ also have to be added as regular services:
 
 .. _dic-tags-kernel-event-listener:
 
-Enabling Custom Listeners
--------------------------
+Activer des listeners personnalisés
+-----------------------------------
 
-To enable a custom listener, add it as a regular service in one of your
-configuration, and tag it with ``kernel.event_listener``. You must provide
-the name of the event your service listens to, as well as the method that
-will be called:
+Pour activer un listener personnalisé, ajoutez le comme service dans 
+votre configuration et taggez le avec ``kernel.event_listener``. Vous devez
+définir le nom de l'évènement que votre service écoute, ainsi que la méthode
+qui sera appelée :
 
 .. configuration-block::
 
@@ -147,24 +147,23 @@ will be called:
 
 .. note::
 
-    You can also specify priority as an attribute of the kernel.event_listener 
-    tag (much like the method or event attributes), with either a positive 
-    or negative integer. This allows you to make sure your listener will always 
-    be called before or after another listener listening for the same event.
-
-
+    Vous pouvez aussi spécifier l'attribut priority du tag kernel.event_listener 
+    (tout comme les attributs method ou event) avec un entier positif ou négatif.
+	Cela vous permet d'être sûr que votre listener sera toujours appelé avant ou
+	après un autre listener qui écoute le même évènement.
 
 .. _dic-tags-kernel-event-subscriber:
 
-Enabling Custom Subscribers
----------------------------
+Activer les abonnements personnalisés
+-------------------------------------
 
 .. versionadded:: 2.1
+   
+   La possibilité d'ajouter des abonnements à un évènement du noyau est une nouveauté
+   de la version 2.1.
 
-   The ability to add kernel event subscribers is new to 2.1.
-
-To enable a custom subscriber, add it as a regular service in one of your
-configuration, and tag it with ``kernel.event_subscriber``:
+Pour activer un abonnement personnalisé, ajoutez le comme service dans votre configuration
+et taggez le avec ``kernel.event_subscriber`` :
 
 .. configuration-block::
 
@@ -191,19 +190,18 @@ configuration, and tag it with ``kernel.event_subscriber``:
 
 .. note::
 
-    Your service must implement the :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`
-    interface.
+    Votre service doit implémenter l'interface :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`.
 
 .. note::
 
-    If your service is created by a factory, you **MUST** correctly set the ``class``
-    parameter for this tag to work correctly.
+    Si votre service est créé par une factory, vous *DEVEZ* définir correctement
+    le paramètre ``class`` pour que ce tag fonctionne bien.
 
-Enabling Custom Template Engines
---------------------------------
+Activer les moteurs de template personnalisés
+---------------------------------------------
 
-To enable a custom template engine, add it as a regular service in one
-of your configuration, tag it with ``templating.engine``:
+Pour activer un moteur de template personnalisé, ajoutez le comme service
+dans votre configuration, et taggez le avec ``templating.engine`` :
 
 .. configuration-block::
 
@@ -228,11 +226,11 @@ of your configuration, tag it with ``templating.engine``:
             ->addTag('templating.engine')
         ;
 
-Enabling Custom Routing Loaders
--------------------------------
+Activer un chargeur de route personnalisé
+-----------------------------------------
 
-To enable a custom routing loader, add it as a regular service in one
-of your configuration, and tag it with ``routing.loader``:
+Pour ajouter un chargeur de route personnalisé, ajoutez le comme service dans
+votre configuration et taggez le avec ``routing.loader``:
 
 .. configuration-block::
 
@@ -259,12 +257,12 @@ of your configuration, and tag it with ``routing.loader``:
 
 .. _dic_tags-monolog:
 
-Using a custom logging channel with Monolog
--------------------------------------------
+Utiliser un canal d'authentification personnalisé avec Monolog
+--------------------------------------------------------------
 
-Monolog allows you to share its handlers between several logging channels.
-The logger service uses the channel ``app`` but you can change the
-channel when injecting the logger in a service.
+Monolog vous permet de partager ses gestionnaires entre plusieurs canaux
+d'authentification. Le service logger utilise le canal ``app``
+mais vous pouvez changer de canal en l'injectant dans le service.
 
 .. configuration-block::
 
@@ -292,23 +290,24 @@ channel when injecting the logger in a service.
 
 .. note::
 
-    This works only when the logger service is a constructor argument,
-    not when it is injected through a setter.
+    Ce ne fonctionne que quand le service logger est un argument du constructeur,
+    pas quand il est injecté avec un setter.
 
 .. _dic_tags-monolog-processor:
 
-Adding a processor for Monolog
-------------------------------
+Ajouter un processeur pour Monolog
+----------------------------------
 
-Monolog allows you to add processors in the logger or in the handlers to add
-extra data in the records. A processor receives the record as an argument and
-must return it after adding some extra data in the ``extra`` attribute of
-the record.
+Monolog vous permet d'ajouter des processeurs dans le logger ou dans les 
+gestionnaires pour ajouter des données supplémentaires à l'enregistrement.
+Un processeur recoit l'enregistrement comme argument et doit le retourner
+après avoir ajouté des données supplémentaires dans l'attribut ``extra`` de
+l'enregistrement.
 
-Let's see how you can use the built-in ``IntrospectionProcessor`` to add
-the file, the line, the class and the method where the logger was triggered.
+Regardons comment vous pouvez utiliser le processeur préconstruit ``IntrospectionProcessor``
+pour ajouter le fichier, la ligne, la classe et la méthode où le logger a été déclenché.
 
-You can add a processor globally:
+Vous pouvez ajouter un processeur de façon globale :
 
 .. configuration-block::
 
@@ -333,12 +332,11 @@ You can add a processor globally:
         $container->register('my_service', $definition);
 
 .. tip::
+    Si votre service n'est pas appelable directement (en utilisant ``__invoke``), vous
+    pouvez ajouter l'attribut ``method`` dans le tag pour utiliser une méthode spécifique.
 
-    If your service is not a callable (using ``__invoke``) you can add the
-    ``method`` attribute in the tag to use a specific method.
-
-You can add also a processor for a specific handler by using the ``handler``
-attribute:
+vous pouvez ajouter aussi un processeur pour un gestionnaire spécifique en utilisant
+l'attribut ``handler`` :
 
 .. configuration-block::
 
@@ -362,9 +360,8 @@ attribute:
         $definition->addTag('monolog.processor', array('handler' => 'firephp');
         $container->register('my_service', $definition);
 
-You can also add a processor for a specific logging channel by using the ``channel``
-attribute. This will register the processor only for the ``security`` logging
-channel used in the Security component:
+Vous pouvez également ajouter un processuer pour un canal d'authentification spécifique
+en utilisant l'attribut ``channel``. Cela enregistrera le processeur uniquement pour le canal d'authentification ``security`` qui est utilisé dans le composant Security :
 
 .. configuration-block::
 
@@ -390,8 +387,8 @@ channel used in the Security component:
 
 .. note::
 
-    You cannot use both the ``handler`` and ``channel`` attributes for the
-    same tag as handlers are shared between all channels.
+    Vous ne pouvez pas utiliser les attributs ``handler`` et ``channel`` simultannément
+    dans un même tag car les gestionnaires sont partagés avec tous les canaux.
 
-..  _`Twig's documentation`: http://twig.sensiolabs.org/doc/extensions.html
-..  _`Twig official extension repository`: http://github.com/fabpot/Twig-extensions
+..  _`documentation Twig`: http://twig.sensiolabs.org/doc/extensions.html
+..  _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions

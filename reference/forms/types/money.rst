@@ -7,8 +7,8 @@ Type de champ Money
 Rend un champ input texte spécialisé dans la gestion des données monétaires.
 
 Ce type de champ vous permet de spécifier une devise, dont le symbole sera affiché
-à côté du champ texte. Il y a plusieurs autres options pour personnaliser les
-données en entrée et en sortie seront prises en charge.
+à côté du champ texte. Il y a plusieurs autres options pour personnaliser la façon
+dont les données en entrée et en sortie seront prises en charge.
 
 +-------------+---------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``text``                                            |
@@ -47,7 +47,7 @@ divisor
 
 **type**: ``integer`` **default**: ``1``
 
-Si, pour une raison, vous avez besoin de diviser votre valeur de départ par un
+Si, pour une raison quelconque, vous avez besoin de diviser votre valeur de départ par un
 nombre avant de le rendre à l'utilisateur, vous pouvez utiliser l'option ``divisor``.
 Par exemple::
 
@@ -55,7 +55,7 @@ Par exemple::
         'divisor' => 100,
     ));
 
-Dans ce cas, si le champ ``price`` est défini ``9900``, alors c'est en fait la valeur
+Dans ce cas, si le champ ``price`` est défini à ``9900``, alors c'est en fait la valeur
 ``99`` qui sera affichée à l'utilisateur. Lorsque l'utilisateur soumettra la valeur
 ``99``, elle sera automatiquement multipliée par ``100`` et ``9900`` sera la valeur
 finalement stockée dans votre projet.

@@ -35,7 +35,7 @@ precision
 
 Cette option spécifie combien de décimales seront autorisées après que le champ
 aura arrondi la valeur soumise (via ``rounding_mode``). Par exemple, si ``precision``
-est défini à ``2``, une valeur soumise de ``20.123`` sera arrondie, par exemple,
+est définie à ``2``, une valeur soumise de ``20.123`` sera arrondie, par exemple,
 ``20.12`` (cela dépendra de votre ``rounding_mode``).
 
 rounding_mode
@@ -60,15 +60,15 @@ une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\Da
     l'infini positif.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFDOWN`` Mode pour arrondir
-    au "voisin le plus proche". Si les deux voisins sont équidistants, alors c'est
+    au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
 	arrondi au voisin inférieur.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFEVEN`` Mode pour arrondir
-    au "voisin le plus proche". Si les deux voisins sont équidistants, alors c'est
+    au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
 	arrondi au voisin pair.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFUP`` Mode pour arrondir
-    au "voisin le plus proche". Si les deux voisins sont équidistants, alors c'est
+    au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
 	arrondi au voisin supérieur.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
