@@ -21,7 +21,7 @@ il parle à un « reverse proxy » qui comprend ESI ou non. Cela fonctionne
 automatiquement lorsque vous utilisez le « reverse proxy » de Symfony2, mais vous
 avez besoin d'une configuration spéciale pour que cela fonctionne avec Varnish.
 Heureusement, Symfony2 repose déjà sur un autre standard écrit par Akamaï
-(`Architecture Edge`_), donc les conseils de configuration décrits dans ce
+(`Architecture Edge`_). En conséquence, les conseils de configuration décrits dans ce
  chapitre peuvent être utiles même si vous n'utilisez pas Symfony2.
 
 .. note::
@@ -69,7 +69,7 @@ Invalidation du Cache
 ---------------------
 
 Vous ne devriez jamais avoir besoin d'invalider des données cachées parce que
-l'invalidation est déjà pris en compte nativement dans les modèles de cache HTTP
+l'invalidation est déjà prise en compte nativement dans les modèles de cache HTTP
 (voir :ref:`http-cache-invalidation`).
 
 Néanmoins, Varnish peut être configuré pour accepter une méthode HTTP spécifique

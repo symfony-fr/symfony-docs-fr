@@ -4,14 +4,14 @@ Comment créer et stocker un projet Symfony2 dans Subversion
 .. tip::
 
     Cette article est spécifique à Subversion et basé sur des principes que
-    vous trouvez dans l'article :doc:`/cookbook/workflow/new_project_git`.
+    vous trouverez dans l'article :doc:`/cookbook/workflow/new_project_git`.
 
 Une fois que vous avez lu :doc:`/book/page_creation` et que vous êtes devenu
 familier avec l'usage de Symfony, vous serez sans aucun doute prêt à démarrer
 votre propre projet. La méthode préférée pour gérer des projets Symfony2 est
 d'utiliser `git`_ mais certains préfèrent utiliser `Subversion`_, ce qui ne pose
-aucun problème! Dans cet article du cookbook, vous allez apprendre comment gérer
-votre projet en utilisant `svn`_ de manière similaire à si vous l'aviez fait avec
+aucun problème! Dans cet article du Cookbook, vous allez apprendre comment gérer
+votre projet en utilisant `svn`_ de la même manière que si vous l'aviez fait avec
 `git`_.
 
 .. tip::
@@ -35,24 +35,24 @@ standard et répandue :
 
 .. tip::
 
-    La plupart des hébergements subversion devrait suivre cette pratique standard.
-    C'est le schéma recommandé par `Version Control with Subversion`_ et utilisé
+    La plupart des hébergements subversion devraient suivre cette pratique standard.
+    C'est le schéma recommandé par `Contrôle de version avec Subversion`_ et utilisé
     par la plupart des hébergements gratuits (voir :ref:`svn-hosting`).
 
 Configuration Initiale du Projet
 --------------------------------
 
-Pour démarrer, vous aurez besoin de télécharger Symfony2 et de d'effectuer la
+Pour démarrer, vous aurez besoin de télécharger Symfony2 et d'effectuer la
 configuration basique de Subversion :
 
 1. Téléchargez `Symfony2 Standard Edition`_ sans les « vendors ».
 
-2. Unzippez/untarez la distribution. Cela va créer un dossier nommé Symfony
+2. Dézippez/détarez la distribution. Cela va créer un dossier nommé Symfony
    avec votre nouvelle structure de projet, les fichiers de configuration, etc.
    Renommez-le en ce que vous voulez.
 
 3. Effectuez un « checkout » du dépôt Subversion qui va héberger ce projet. Disons
-   qu'il est héberger sur `Google code`_ et nommé ``myproject`` :
+   qu'il est hébergé sur `Google code`_ et nommé ``myproject`` :
 
     .. code-block:: bash
     
@@ -93,7 +93,7 @@ configuration basique de Subversion :
         $ svn ci -m "add basic Symfony Standard 2.X.Y"
 
 7. Copiez ``app/config/parameters.ini`` vers ``app/config/parameters.ini.dist``.
-   Le fichier ``parameters.ini`` est ignoré par svn (voir ci-dessus) afin que afin que les
+   Le fichier ``parameters.ini`` est ignoré par svn (voir ci-dessus) afin que les
    paramètres spécifiques à la machine comme les mots de passe de base de données ne
    soient pas committés. En créant le fichier ``parameters.ini.dist``, les
    nouveaux développeurs peuvent rapidement cloner le projet, copier ce fichier
@@ -122,7 +122,7 @@ apprendre plus sur comment configurer et développer votre application en intern
 
     L'Edition Standard Symfony2 vient avec des exemples de fonctionnalités. Pour
     supprimer le code de démonstration, suivez les instructions du fichier
-    `Standard Edition Readme`_.
+    `Readme de la Standard Edition`_.
 
 .. include:: _vendor_deps.rst.inc
 
@@ -136,7 +136,7 @@ d'un dépôt central pour fonctionner. Vous avez donc plusieurs solutions :
 
 - Hébergement par vos soins : créez votre propre dépôt et accédez-y soit grâce au
   système de fichiers, soit via le réseau. Pour vous aider dans cette tâche, vous
-  pouvez lire `Version Control with Subversion`_.
+  pouvez lire `Contrôle de version avec Subversion`_.
 
 - Hébergement via une entité tierce : il y a beaucoup de solutions d'hébergement
   gratuites et sérieuses disponibles comme `GitHub`_, `Google code`_, `SourceForge`_
@@ -146,8 +146,8 @@ d'un dépôt central pour fonctionner. Vous avez donc plusieurs solutions :
 .. _`svn`: http://subversion.apache.org/
 .. _`Subversion`: http://subversion.apache.org/
 .. _`Symfony2 Standard Edition`: http://symfony.com/download
-.. _`Standard Edition Readme`: https://github.com/symfony/symfony-standard/blob/master/README.md
-.. _`Version Control with Subversion`: http://svnbook.red-bean.com/
+.. _`Readme de la Standard Edition`: https://github.com/symfony/symfony-standard/blob/master/README.md
+.. _`Contrôle de version avec Subversion`: http://svnbook.red-bean.com/
 .. _`GitHub`: http://github.com/
 .. _`Google code`: http://code.google.com/hosting/
 .. _`SourceForge`: http://sourceforge.net/

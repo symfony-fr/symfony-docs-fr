@@ -3,12 +3,12 @@ Comment créer et stocker un projet Symfony2 dans git
 
 .. tip::
 
-    Bien que cette entrée soit spécifique à git, les mêmes principes génériques
+    Bien que cet article soit spécifique à git, les mêmes principes génériques
     s'appliqueront si vous stockez votre projet dans Subversion.
 
 Une fois que vous aurez lu :doc:`/book/page_creation` et que vous deviendrez
 familier avec l'usage de Symfony, vous serez sans aucun doute prêt à démarrer
-votre propre projet. Dans cet article du cookbook, vous allez apprendre la
+votre propre projet. Dans cet article du Cookbook, vous allez apprendre la
 meilleure façon qui soit de démarrer un nouveau projet Symfony2 stocké dans
 le système de gestion de contrôle de source `git`_.
 
@@ -20,7 +20,7 @@ votre dépôt local git :
 
 1. Télécharger `Symfony2 Standard Edition`_ sans les « vendors ».
 
-2. Unzippez/untarez la distribution. Cela va créer un dossier nommé Symfony
+2. Dézippez/détarez la distribution. Cela va créer un dossier nommé Symfony
    avec votre nouvelle structure de projet, les fichiers de configuration, etc.
    Renommez-le en ce que vous voulez.
 
@@ -81,7 +81,7 @@ développer, en committant les nouveaux changements dans votre dépôt git.
         $ php bin/vendors install
 
     votre projet va contenir l'historique git complet de tous les bundles
-    et de toutes les bibliothèques définis dans le fichier ``deps``. Cela
+    et de toutes les bibliothèques définies dans le fichier ``deps``. Cela
     peut aller jusqu'à 100 Mo ! Vous pouvez supprimer les répertoires d'historique
     git avec la commande suivante :
 
@@ -104,9 +104,9 @@ apprendre plus sur comment configurer et développer votre application en intern
 
 .. tip::
 
-    L'Edition Standard Symfony2 vient avec des exemples de fonctionnalités. Pour
+    L'Edition Standard Symfony2 est fournie avec des exemples de fonctionnalités. Pour
     supprimer le code de démonstration, suivez les instructions du fichier
-    `Standard Edition Readme`_.
+    `Readme de la Standard Edition`_.
 
 .. _cookbook-managing-vendor-libraries:
 
@@ -127,19 +127,19 @@ Stocker votre projet sur un serveur distant
 Vous disposez maintenant d'un projet totalement fonctionnel stocké dans git.
 Cependant, dans la plupart des cas, vous voudrez aussi stocker votre projet
 sur un serveur distant que ce soit pour des raisons de sauvegardes mais aussi
-afin que d'autres développeurs puissent collaborer sur le projet.
+afin que d'autres développeurs puissent collaborer au projet.
 
 La façon la plus facile de stocker votre projet sur un serveur distant est via
 `GitHub`_. Les dépôts publics sont gratuits, cependant vous devrez payer un
 abonnement mensuel pour héberger des dépôts privés.
 
 Une autre alternative est de stocker votre dépôt git sur n'importe quel serveur
-en créant un `dépôt barebones`_ et en « pushant » vers ce dernier. Une bibliothèque
+en créant un `dépôt barebones`_ et en « pushant » ce dernier. Une bibliothèque
 qui aide à gérer ceci est `Gitolite`_.
 
 .. _`git`: http://git-scm.com/
 .. _`Symfony2 Standard Edition`: http://symfony.com/download
-.. _`Standard Edition Readme`: https://github.com/symfony/symfony-standard/blob/master/README.md
+.. _`Readme de la Standard Edition`: https://github.com/symfony/symfony-standard/blob/master/README.md
 .. _`git submodules`: http://book.git-scm.com/5_submodules.html
 .. _`GitHub`: https://github.com/
 .. _`dépôt barebones`: http://progit.org/book/ch4-4.html
