@@ -1,22 +1,22 @@
 empty_data
 ~~~~~~~~~~
 
-**type**: ``mixed`` **default**: ``array()`` if ``multiple`` or ``expanded``, ``''`` otherwise
+**type**: ``divers`` **default**: ``array()`` si ``multiple`` ou ``expanded``, ``''`` sinon
 
-This option determines what value the field will return when the ``empty_value``
-choice is selected.
+Cette option détermine quelle valeur le champ affichera si le choix ``empty_value``
+est sélectionné.
 
-For example, if you want the ``gender`` field to be set to ``null`` when no
-value is selected, you can do it like this:
+Par exemple, si vous voulez que le champ ``gender`` soit défini comme ``null`` si
+aucune valeur n'est sélectionnée, vous pouvez le faire comme ceci :
 
 .. code-block:: php
 
     $builder->add('gender', 'choice', array(
         'choices' => array(
-            'm' => 'Male',
-            'f' => 'Female'
+            'm' => 'Masculin',
+            'f' => 'Féminin'
         ),
         'required'    => false,
-        'empty_value' => 'Choose your gender',
+        'empty_value' => 'Choisissez votre sexe',
         'empty_data'  => null
     ));

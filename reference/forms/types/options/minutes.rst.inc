@@ -1,7 +1,7 @@
 minutes
 ~~~~~~~
 
-**type**: ``integer`` **default**: 1 to 59
+**type**: ``integer`` **default**: 1 à 59
 
-List of minutes available to the minutes field type.  This option is only
-relevant when the ``widget`` option is set to ``choice``.
+Liste des minutes disponibles dans le type de champ minutes. Cette option
+n'est utile que quand l'option ``widget`` est définie à ``choice``.

@@ -3,19 +3,21 @@ preferred_choices
 
 **type**: ``array`` **default**: ``array()``
 
-If this option is specified, then a sub-set of all of the options will be
-moved to the top of the select menu. The following would move the "Baz" option
-to the top, with a visual separator between it and the rest of the options::
+Si cette option est spécifiée, alors un sous-ensemble d'options sera mis en
+tête de la liste déroulante. L'exemple suivant ramènera l'option « Baz »
+en haut de la liste, avec un séparateur visuel entre cette option et le
+reste des options.::
 
     $builder->add('foo_choices', 'choice', array(
         'choices' => array('foo' => 'Foo', 'bar' => 'Bar', 'baz' => 'Baz'),
         'preferred_choices' => array('baz'),
     ));
 
-Note that preferred choices are only meaningful when rendering as a ``select``
-element (i.e. ``expanded`` is false). The preferred choices and normal choices
-are separated visually by a set of dotted lines (i.e. ``-------------------``).
-This can be customized when rendering the field:
+Notez que cette option n'a de sens que si le champ est affiché sous forme de
+``liste déroulante`` (c'est-à-dire si ``expanded`` est à false). Les choix 
+favoris et les autres choix sont séparés visuellement par une ligne pointillée
+(ex ``-------------------``). Cela est bien sur personnalisable lorsque le champ
+est affiché :
 
 .. configuration-block::
 

@@ -3,7 +3,9 @@ multiple
 
 **type**: ``Boolean`` **default**: ``false``
 
-If true, the user will be able to select multiple options (as opposed
-to choosing just one option). Depending on the value of the ``expanded``
-option, this will render either a select tag or checkboxes if true and
-a select tag or radio buttons if false. The returned value will be an array.
+Si cette option est à true, l'utilisateur sera capable de sélectionner
+plusieurs option (en opposition au choix d'une option et une seule).
+Selon la valeur de l'option ``expanded``, cela affichera une liste déroulante
+ou des checkboxes si elle est à true, ou une liste déroulante ou des boutons
+radios si elle est à false. 
+La valeur retournée sera un tableau.

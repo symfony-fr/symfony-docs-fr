@@ -1,7 +1,7 @@
 years
 ~~~~~
 
-**type**: ``array`` **default**: five years before to five years after the current year
+**type**: ``array`` **default**: cinq années précédentes aux cinq années suivant l'année en cours.
 
-List of years available to the year field type.  This option is only relevant
-when the ``widget`` option is set to ``choice``.
+Liste des années disponibles dans le type de champ Year. Cette option n'est utile
+que si l'option ``widget`` est à ``choice``.

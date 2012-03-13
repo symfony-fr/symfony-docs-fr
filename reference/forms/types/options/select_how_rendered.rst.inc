@@ -1,17 +1,17 @@
-Select tag, Checkboxes or Radio Buttons
----------------------------------------
+Liste déroulante, checkboxes ou boutons radio
+---------------------------------------------
 
-This field may be rendered as one of several different HTML fields, depending
-on the ``expanded`` and ``multiple`` options:
+Ce champ peut être affichée comme un ou plusieurs différents champs HTML,
+selon la valeur des options ``expanded`` et ``multiple`` :
 
-+------------------------------------------+----------+----------+
-| element type                             | expanded | multiple |
-+==========================================+==========+==========+
-| select tag                               | false    | false    |
-+------------------------------------------+----------+----------+
-| select tag (with ``multiple`` attribute) | false    | true     |
-+------------------------------------------+----------+----------+
-| radio buttons                            | true     | false    |
-+------------------------------------------+----------+----------+
-| checkboxes                               | true     | true     |
-+------------------------------------------+----------+----------+
++-----------------------------------------------+----------+----------+
+| Balise HTML                                   | expanded | multiple |
++===============================================+==========+==========+
+| Liste déroulante                              | false    | false    |
++-----------------------------------------------+----------+----------+
+| Liste déroulante (avec attribut ``multiple``) | false    | true     |
++-----------------------------------------------+----------+----------+
+| Boutons radio                                 | true     | false    |
++-----------------------------------------------+----------+----------+
+| Checkboxes                                    | true     | true     |
++-----------------------------------------------+----------+----------+ 

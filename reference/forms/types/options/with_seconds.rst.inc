@@ -3,5 +3,5 @@ with_seconds
 
 **type**: ``Boolean`` **default**: ``false``
 
-Whether or not to include seconds in the input. This will result in an additional
-input to capture seconds.
+Cette option détermine si les secondes doivent être inclues ou non à la saisie.
+Cela entrainera l'ajout d'un champ de saisie pour les secondes.

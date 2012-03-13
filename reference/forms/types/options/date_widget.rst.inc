@@ -3,12 +3,13 @@ widget
 
 **type**: ``string`` **default**: ``choice``
 
-The basic way in which this field should be rendered. Can be one of the following:
+Désigne la manière sont le champ doit être affiché. Cette option accepte les
+cas suivants :
 
-* ``choice``: renders three select inputs.  The order of the selects is defined
-  in the `pattern`_ option.
+* ``choice``: Affiche trois listes déroulantes. L'ordre des liste est défini
+  par l'option `pattern`_.
 
-* ``text``: renders a three field input of type text (month, day, year).
+* ``text``: Affiche trois champs textes (mois, jour, année).
 
-* ``single_text``: renders a single input of type text. User's input is validated
-  based on the `format`_ option.
+* ``single_text``: Affiche un unique champ texte. La saisie de l'utilisateur sera
+  validé en se basant sur l'option `format`_.

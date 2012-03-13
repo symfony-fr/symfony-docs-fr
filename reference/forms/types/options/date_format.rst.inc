@@ -1,21 +1,23 @@
 format
 ~~~~~~
 
-**type**: ``integer`` or ``string`` **default**: ``IntlDateFormatter::MEDIUM``
+**type**: ``integer`` ou ``string`` **default**: ``IntlDateFormatter::MEDIUM``
 
-Option passed to the ``IntlDateFormatter`` class, used to transform user input
-into the proper format. This is critical when the `widget`_ option is
-set to ``single_text``, and will define how the user will input the data.
-By default, the format is determined based on the current user locale; you
-can override it by passing the format as a string.
+Option passée à la classe ``IntlDateFormatter``, utilisée pour formatter
+la saisie de l'utilisateur au bon format. C'est essentiel quand l'option
+`widget`_  est définie comme ``single_text``, et elle définira la manière
+dont l'utilisateur devra saisir ses données. 
+Par défaut, le format est déterminé selon la locale de l'utilisateur, mais
+vous pouvez la surcharger en passant le format sous forme de chaine de
+caractères.
 
-For more information on valid formats, see `Date/Time Format Syntax`_. For
-example, to render a single text box that expects the user to end ``yyyy-MM-dd``,
-use the following options::
+Pour plus d'informations sur les formats valides, lisez `Syntaxe des formats Date/Time`_.
+Par exemple, pour afficher un simple champ texte qui attend une saisie au format
+``yyyy-MM-dd``, utilisez l'option suivante::
 
     $builder->add('date_created', 'date', array(
         'widget' => 'single_text',
         'format' => 'yyyy-MM-dd',
     ));
 
-.. _`Date/Time Format Syntax`: http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax
+.. _`Syntaxe des formats Date/Time`: http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax

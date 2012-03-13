@@ -1,29 +1,28 @@
 empty_value
 ~~~~~~~~~~~
 
-**type**: ``string`` or ``Boolean``
+**type**: ``string`` ou ``Boolean``
 
-This option determines whether or not a special "empty" option (e.g. "Choose an option")
-will appear at the top of a select widget. This option only applies if both
-the ``expanded`` and ``multiple`` options are set to false.
+Cette option détermine si une option « vide » spécial (ex : « Choisissez une option »)
+soit apparaitre en haut de la liste déroulante. Cette option ne s'applique que si les
+deux option ``expanded`` et ``multiple`` ont été définies à false.
 
-* Add an empty value with "Choose an option" as the text::
+* Ajoute une valeur vide avec « Choisissez une option » comme texte::
 
     $builder->add('states', 'choice', array(
-        'empty_value' => 'Choose an option',
+        'empty_value' => 'Choisissez une option',
     ));
 
-* Guarantee that no "empty" value option is displayed::
+* Garantie qu'aucune option « vide » n'est affichée::
 
     $builder->add('states', 'choice', array(
         'empty_value' => false,
     ));
 
-If you leave the ``empty_value`` option unset, then a blank (with no text)
-option will automatically be added if and only if the ``required`` option
-is false::
+Si vous ne définissez pas l'option ``empty_value``, alors une option vide (sans texte)
+sera automatiquement ajoutée si et seulement si l'option ``required`` est à false::
 
-    // a blank (with no text) option will be added
+    // Une option vide (sans texte) sera ajoutée
     $builder->add('states', 'choice', array(
         'required' => false,
     ));

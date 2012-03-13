@@ -1,7 +1,7 @@
 seconds
 ~~~~~~~
 
-**type**: ``integer`` **default**: 1 to 59
+**type**: ``integer`` **default**: 1 à 59
 
-List of seconds available to the seconds field type. This option is only
-relevant when the ``widget`` option is set to ``choice``.
+Liste des secondes à afficher dans le type de champ Seconds. Cette option n'est
+utile que si l'option ``widget`` est définie à ``choice``.

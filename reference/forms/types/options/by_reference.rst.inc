@@ -3,12 +3,12 @@ by_reference
 
 **type**: ``Boolean`` **default**: ``true``
 
-If the underlying value of a field is an object and this option is set to
-``true``, then the resulting object won't actually be set when binding the
-form. For example, if you have a protected ``author`` field on your underlying
-object which is an instance of some ``Author`` object, then if ``by_reference``
-is ``false``, that ``Author`` object will be updated with the submitted data,
-but ``setAuthor`` will not actually be called on the main object. Since the
-``Author`` object is a reference, this only really makes a difference if
-you have some custom logic in your ``setAuthor`` method that you want to
-guarantee will be run. In that case, set this option to ``false``.
+Si la valeur réelle d'un champ est un objet et que cette option est à ``true``,
+alors l'objet résultant ne sera pas défini lors de l'association au formulaire.
+Par exemple, si vous avez sur un objet un champ protected ``author`` qui est
+une instance d'un objet ``Author``, alors si l'option ``by_reference`` est à
+``false``, cet objet ``Author`` sera mis à jour avec les données soumises, mais
+la méthode ``setAuthor`` ne sera pas appelée sur l'objet principal. 
+Puisque l'objet ``Author`` est une référence, cela ne fait de réelle différence
+que dans le cas où vous avez personnalisé la méthode ``setAuthor``. Dans ce cas,
+définissez l'option à ``false``.

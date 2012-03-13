@@ -3,5 +3,5 @@ translation_domain
 
 **type**: ``string`` **default**: ``messages``
 
-This is the translation domain that will be used for any labels or options
-that are rendered for this field.
+Cette option détermine le domaine de traduction qui doit être utilisé pour les
+libellés et les options qui sont affichées dans les champs.

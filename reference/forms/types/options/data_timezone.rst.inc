@@ -1,9 +1,9 @@
 data_timezone
 ~~~~~~~~~~~~~
 
-**type**: ``string`` **default**: system default timezone
+**type**: ``string`` **default**: Fuseau horaire par défaut du système
 
-Timezone that the input data is stored in. This must be one of the
-`PHP supported timezones`_
+Fuseau horaire dans lequel la donnée sera stockée. Il doit être l'un des
+`fuseaux horaires supportés par PHP`_
 
-.. _`PHP supported timezones`: http://php.net/manual/en/timezones.php
+.. _`fuseaux horaires supportés par PHP`: http://php.net/manual/fr/timezones.php

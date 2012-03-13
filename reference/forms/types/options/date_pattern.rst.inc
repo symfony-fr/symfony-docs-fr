@@ -3,12 +3,12 @@ pattern
 
 **type**: ``string``
 
-This option is only relevant when the `widget`_ is set to ``choice``.
-The default pattern is based off the `format`_ option, and tries to
-match the characters ``M``, ``d``, and ``y`` in the format pattern. If
-no match is found, the default is the string ``{{ year }}-{{ month }}-{{ day }}``.
-Tokens for this option include:
+Cette option n'est utile que si l'option `widget`_ est définie à ``choice``.
+Le masque par défaut se base sur l'option `format`_, est essaye de trouver
+les caractères ``M``, ``d``, et ``y`` du format. Si aucune occurence n'est
+trouvée, la valeur par défaut est la chaine de caractères ``{{ year }}-{{ month }}-{{ day }}``.
+Les identifiants de cette option sont :
 
-  * ``{{ year }}``: Replaced with the ``year`` widget
-  * ``{{ month }}``: Replaced with the ``month`` widget
-  * ``{{ day }}``: Replaced with the ``day`` widget
+  * ``{{ year }}``: Remplacé par le widget ``year``
+  * ``{{ month }}``: Remplacé par le widget ``month``
+  * ``{{ day }}``: Remplacé par le widget ``day``

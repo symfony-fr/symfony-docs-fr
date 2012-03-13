@@ -1,11 +1,11 @@
 label
 ~~~~~
 
-**type**: ``string`` **default**: The label is "guessed" from the field name
+**type**: ``string`` **default**: Le libellé est « deviné » à partir du nom du champ.
 
-Sets the label that will be used when rendering the field. The label can
-also be directly set inside the template:
+Définit le libellé qui sera utilisé à l'affichage du champ. Le libellé peut aussi
+être directement défini dans le template :
     
 .. code-block:: jinja
 
-    {{ form_label(form.name, 'Your name') }}
+    {{ form_label(form.name, 'Votre nom') }}

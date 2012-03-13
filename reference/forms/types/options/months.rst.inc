@@ -1,7 +1,7 @@
 months
 ~~~~~~
 
-**type**: ``array`` **default**: 1 to 12
+**type**: ``array`` **default**: 1 à 12
 
-List of months available to the month field type. This option is only relevant
-when the ``widget`` option is set to ``choice``.
+Liste des mois disponibles pour le type de champ Month. Cette option n'est
+utile que si l'option ``widget`` est définie à ``choice``.

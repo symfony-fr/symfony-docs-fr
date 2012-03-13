@@ -3,13 +3,12 @@ input
 
 **type**: ``string`` **default**: ``datetime``
 
-The format of the *input* data - i.e. the format that the date is stored on
-your underlying object. Valid values are:
+Le format de la donnée *finale*, c'est-à-dire le format dans lequel la date
+sera stockée dans l'objet sous-jacent. Les valeurs valides sont :
 
-* ``string`` (e.g. ``2011-06-05``)
-* ``datetime`` (a ``DateTime`` object)
-* ``array`` (e.g. ``array('year' => 2011, 'month' => 06, 'day' => 05)``)
-* ``timestamp`` (e.g. ``1307232000``)
+* ``string`` (ex ``2011-06-05``)
+* ``datetime`` (un objet ``DateTime``)
+* ``array`` (ex ``array('year' => 2011, 'month' => 06, 'day' => 05)``)
+* ``timestamp`` (ex ``1307232000``)
 
-The value that comes back from the form will also be normalized back into
-this format.
+La valeur qui provient du formulaire sera également normalisée dans ce format.

@@ -3,7 +3,8 @@ trim
 
 **type**: ``Boolean`` **default**: ``true``
 
-If true, the whitespace of the submitted string value will be stripped
-via the ``trim()`` function when the data is bound. This guarantees that
-if a value is submitted with extra whitespace, it will be removed before
-the value is merged back onto the underlying object.
+Si cette option est à true, les espaces d'une chaine de caractères soumise
+dans un formulaire seront supprimés grâce à la fonction ``trim()`` quand
+les données seront associées au formulaire. Cela garantie que, si une valeur
+est soumises avec des espaces en trop, ils seront supprimés avant que la donnée
+soit intégrée à l'objet sous-jacent.

@@ -1,14 +1,14 @@
 property_path
 ~~~~~~~~~~~~~
 
-**type**: ``any`` **default**: ``the field's value``
+**type**: ``any`` **default**: ``la valeur du champ``
 
-Fields display a property value of the form's domain object by default. When
-the form is submitted, the submitted value is written back into the object.
+Les champs affichent par défaut la valeur de la propriété de l'objet associé
+au formulaire. Lorsque le formulaire est soumis, la valeur soumise est réécrite
+dans l'objet.
 
-If you want to override the property that a field reads from and writes to, 
-you can set the ``property_path`` option. Its default value is the field's
-name.
+Si vous voulez surcharger la propriété qu'un champ lit ou remplit, vous pouvez
+définir l'option ``property_path``. Sa valeur par défaut est le nom du champ.
 
-If you wish the field to be ignored when reading or writing to the object 
-you can set the ``property_path`` option to ``false``
+Si vous souhaitez que le champ ne soit pas pris en compte lorsque l'objet est lu
+ou rempli, vous pouvez définir l'option ``property_path`` à ``false``
