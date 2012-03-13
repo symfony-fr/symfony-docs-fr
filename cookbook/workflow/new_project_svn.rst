@@ -54,13 +54,13 @@ configuration basique de Subversion :
 3. Effectuez un « checkout » du dépôt Subversion qui va héberger ce projet. Disons
    qu'il est hébergé sur `Google code`_ et nommé ``myproject`` :
 
-    .. code-block:: bash
+  .. code-block:: bash
     
         $ svn checkout http://myproject.googlecode.com/svn/trunk myproject
 
 4. Copiez les fichiers du projet Symfony2 dans le dossier subversion :
 
-    .. code-block:: bash
+  .. code-block:: bash
 
         $ mv Symfony/* myproject/
 
@@ -70,7 +70,7 @@ configuration basique de Subversion :
    à être adaptés sur chaque machine. Ainsi, nous utilisons la propriété
    ``svn:ignore`` afin de pouvoir ignorer ces fichiers spécifiques.
 
-    .. code-block:: bash
+  .. code-block:: bash
 
         $ cd myproject/
         $ svn add --depth=empty app app/cache app/logs app/config web
@@ -87,7 +87,7 @@ configuration basique de Subversion :
 
 6. Le reste des fichiers peut maintenant être ajouté et committé dans le projet :
 
-    .. code-block:: bash
+  .. code-block:: bash
 
         $ svn add --force .
         $ svn ci -m "add basic Symfony Standard 2.X.Y"
@@ -101,7 +101,7 @@ configuration basique de Subversion :
 
 8. Finalement, téléchargez toutes les bibliothèques tierces :
 
-    .. code-block:: bash
+  .. code-block:: bash
     
         $ php bin/vendors install
 

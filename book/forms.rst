@@ -1577,7 +1577,7 @@ mais voici un petit exemple::
         // ...
     ;
 
-Maintenant, quand vous appelez `$form->isValid()`, les contraintes configurées sont
+Maintenant, quand vous appelez `$form->bindRequest($request)`, les contraintes configurées sont
 appliquées aux données de votre formulaire. Si vous utilisez une classe de formulaire,
 surchargez la méthode ``getDefaultOptions`` pour les spécifier :
 
