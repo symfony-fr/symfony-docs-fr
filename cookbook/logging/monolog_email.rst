@@ -1,11 +1,11 @@
-How to Configure Monolog to Email Errors
-========================================
+Comment configurer Monolog pour envoyer les Erreurs par Email
+=============================================================
 
-Monolog_ can be configured to send an email when an error occurs with an
-application. The configuration for this requires a few nested handlers
-in order to avoid receiving too many emails. This configuration looks
-complicated at first but each handler is fairly straight forward when
-it is broken down.
+Monolog_ peut être configuré pour envoyer un email lorsqu'une erreur se
+produit dans une application. La configuration pour cela nécessite quelques
+gestionnaires « imbriqués » afin d'éviter de recevoir trop d'emails. Cette
+configuration paraît compliquée en premier lieu mais chaque gestionnaire
+est facilement compréhensible lorsqu'on les analyse un par un.
 
 .. configuration-block::
 
@@ -58,26 +58,27 @@ it is broken down.
             </monolog:config>
         </container>
 
-The ``mail`` handler is a ``fingers_crossed`` handler which means that
-it is only triggered when the action level, in this case ``critical`` is reached.
-It then logs everything including messages below the action level.  The
-``critical`` level is only triggered for 5xx HTTP code errors. The ``handler``
-setting means that the output is then passed onto the ``buffered`` handler.
+Le gestionnaire ``mail`` est un gestionnaire ``fingers_crossed``, ce qui signifie
+qu'il est déclenché uniquement lorsque le niveau d'action, dans notre cas ``critical``
+est atteint. Il écrit alors des logs pour tout incluant les messages en dessous
+du niveau d'action. Le niveau ``critical`` est déclenché seulement pour les erreurs
+HTTP de code 5xx. Le paramètre « handler » signifie que la « sortie » (« output »
+en anglais) est alors passée au gestionnaire ``buffered``.
 
 .. tip::
+    Si vous souhaitez que les erreurs de niveau 400 et 500 déclenchent un email,
+    définissez ``action_level`` avec la valeur ``error`` à la place de ``critical``.
 
-    If you want both 400 level and 500 level errors to trigger an email,
-    set the ``action_level`` to ``error`` instead of ``critical``.
+Le gestionnaire ``buffered`` garde simplement tous les messages pour une requête
+et les passe ensuite au gestionnaire « imbriqué » en une seule fois. Si vous
+n'utilisez pas ce gestionnaire alors chaque message sera envoyé par email
+séparément. C'est donc le gestionnaire ``swift`` qui prend le relais. C'est ce
+dernier qui se charge de vous envoyer l'erreur par email. Ses paramètres
+sont simples : « to » (« à » en français), « from » (« de » en français) et le
+sujet.
 
-The ``buffered`` handler simply keeps all the messages for a request and
-then passes them onto the nested handler in one go. If you do not use this
-handler then each message will be emailed separately. This is then passed
-to the ``swift`` handler. This is the handler that actually deals with
-emailing you the error. The settings for this are straightforward, the
-to and from addresses and the subject.
-
-You can combine these handlers with other handlers so that the errors still
-get logged on the server as well as the emails being sent:
+Vous pouvez combiner ces gestionnaires avec d'autres afin que les erreurs continuent
+d'être loggées sur le serveur en même temps qu'elles sont envoyées par email :
 
 .. configuration-block::
 
@@ -149,8 +150,8 @@ get logged on the server as well as the emails being sent:
             </monolog:config>
         </container>
 
-This uses the ``group`` handler to send the messages to the two
-group members, the ``buffered`` and the ``stream`` handlers. The messages will
-now be both written to the log file and emailed.
+Cette configuration utilise le gestionnaire ``group`` pour envoyer les messages
+aux deux membres du groupe, les gestionnaires ``buffered`` et ``stream``. Les
+messages vont donc maintenant être écrits dans le fichier log et envoyés par email.
 
 .. _Monolog: https://github.com/Seldaek/monolog
