@@ -3,12 +3,12 @@ Comment appliquer un filtre Assetic à une extension de fichier spécifique
 
 Les filtres Assetic peuvent être appliqués à des fichiers individuels, à
 des groupes de fichiers ou même, comme vous allez le voir ici, à des fichiers
-qui ont une extension spécifique. Pour vous montrer comment gérer chaque option,
+qui ont une extension spécifique. Pour vous montrer comment gérer chaque cas,
 supposons que vous ayez le filtre Assetic CoffeeScript qui compile les fichiers
 CoffeeScript en JavaScript.
 
 La configuration principale contient juste les chemins vers coffee et node.
-Leurs valeurs par défaut respectives sont ``/usr/bin/coffee`` et ``/usr/bin/node``:
+Leurs valeurs respectives par défaut sont ``/usr/bin/coffee`` et ``/usr/bin/node``:
 
 .. configuration-block::
 
@@ -104,10 +104,10 @@ Filtrer en se basant sur les extensions
 
 Un des plus grands avantages d'Assetic est de pouvoir réduire le nombre de
 fichiers de ressources pour réduire le nombre de requêtes HTTP. Dans le but
-d'en le plus grand avantage possible, il pourrait être intéressant de combiner
+d'en tirer le plus grand avantage possible, il pourrait être intéressant de combiner
 *tous* vos fichiers CoffeeScript et JavaScript ensembles puisqu'ils seront
 finalement délivrés comme JavaScript. Malheureusement, se contenter d'ajouter
-les fichiers JavaScript aux fichiers à combiner ne fonctionnera par car
+les fichiers JavaScript aux fichiers à combiner ne fonctionnera pas car
 le JavaScript ne passera pas la compilation CoffeeScript.
 
 Ce problème peut être évité en ajoutant l'option ``apply_to`` à la configuration,
@@ -152,7 +152,7 @@ le filtre Coffee s'applique à tous les fichiers ``.coffee`` :
         ));
 
 Avec cela, vous n'avez plus besoin de spécifier le filtre ``coffee`` dans le template.
-Vous pouvez aussi liste les fichiers JavaScript classique, chacun d'eux sera combiné
+Vous pouvez aussi lister les fichiers JavaScript classique, chacun d'eux sera combiné
 et délivré en un unique fichier JavaScript (avec les fichiers ``.coffee`` seulement qui
 passeront à travers le filtre CoffeeScript) :
 

@@ -205,7 +205,7 @@ Le template Twig peut maintenant être modifié comme suit :
     <img src="{{ jpegoptim('@AcmeFooBundle/Resources/public/images/example.jpg') }}"
          alt="Example"/>
 
-Vous pouvez cpésifier le répertoire cible dans la configuration de la manière suivante :
+Vous pouvez spécifier le répertoire cible dans la configuration de la manière suivante :
 
 .. configuration-block::
 

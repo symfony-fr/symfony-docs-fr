@@ -1,8 +1,8 @@
 Comment minifier les JavaScripts et les feuilles de style avec YUI Compressor
 =============================================================================
 
-Yahoo! fournit un exellent utilitaire pour minifier les JavaScripts et les
-feuilles de style pour qu'elles soient plus rapides à charge, `YUI Compressor`_.
+Yahoo! fournit un excellent utilitaire pour minifier les JavaScripts et les
+feuilles de style pour qu'elles soient plus rapides à charger, `YUI Compressor`_.
 Grâce à Assetic, vous pourrez tirer profit de cet outil très facilement.
 
 Téléchargez le JAR YUI Compressor
@@ -65,7 +65,7 @@ Minifiez vos Ressources
 
 Maintenant YUI Compressor est configuré, mais rien ne se passera tant que vous
 n'appliquez pas ces filtres à une ressource (asset). Puisque vos ressources font
-partie de la couche Vue, ce travail doit être fait dans  vos templates :
+partie de la couche Vue, ce travail doit être fait dans vos templates :
 
 .. configuration-block::
 
@@ -87,7 +87,7 @@ partie de la couche Vue, ce travail doit être fait dans  vos templates :
 
     L'exemple ci-dessus part du principe que vous avez un bundle appelé ``AcmeFooBundle``
     et que vos fichiers JavaScript se trouvent dans le répertoire ``Resources/public/js``
-    dans votre bundle. Ce n'est en fait pas très important car vous pouvez inclure vos
+    dans votre bundle. Ce n'est, en fait, pas très important car vous pouvez inclure vos
     fichiers JavaScript où vous le voulez.
 
 En rajoutant le filtre ``yui_js`` à la ressource ci-dessus, vous devriez voir que les
@@ -110,14 +110,14 @@ utilisé pour minifier vos feuilles de style.
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
-désactiver la minification en Mode Debug
+Désactiver la minification en Mode Debug
 ----------------------------------------
 
 Les JavaScripts et feuilles de styles minifiés sont très difficiles à lire;
 et encore moins à débugguer. Pour palier cela, Assetic vous permet de désactiver
 un filtre lorsque votre application est en mode debug. Vous pouvez faire cela
 en préfixant le nom du filtre dans votre template par un point d'interrogation :
-``?``. Cela indique à Assetic que n'appliquer les filtres que si le mode debug
+``?``. Cela indique à Assetic de n'appliquer les filtres que si le mode debug
 n'est pas actif.
 
 .. configuration-block::
