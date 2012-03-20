@@ -1,8 +1,8 @@
-Comment configurer Monolog pour envoyer les Erreurs par Email
+Comment configurer Monolog pour envoyer les erreurs par Email
 =============================================================
 
 Monolog_ peut être configuré pour envoyer un email lorsqu'une erreur se
-produit dans une application. La configuration pour cela nécessite quelques
+produit dans une application. Pour ce faire, la configuration nécessite quelques
 gestionnaires « imbriqués » afin d'éviter de recevoir trop d'emails. Cette
 configuration paraît compliquée en premier lieu mais chaque gestionnaire
 est facilement compréhensible lorsqu'on les analyse un par un.
@@ -60,7 +60,7 @@ est facilement compréhensible lorsqu'on les analyse un par un.
 
 Le gestionnaire ``mail`` est un gestionnaire ``fingers_crossed``, ce qui signifie
 qu'il est déclenché uniquement lorsque le niveau d'action, dans notre cas ``critical``
-est atteint. Il écrit alors des logs pour tout incluant les messages en dessous
+est atteint. Il écrit alors des logs pour tout, incluant les messages en dessous
 du niveau d'action. Le niveau ``critical`` est déclenché seulement pour les erreurs
 HTTP de code 5xx. Le paramètre « handler » signifie que la « sortie » (« output »
 en anglais) est alors passée au gestionnaire ``buffered``.
