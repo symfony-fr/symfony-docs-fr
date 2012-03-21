@@ -1,27 +1,29 @@
 .. _doctrine-event-config:
 
-Registering Event Listeners and Subscribers
-===========================================
+Enregistrer des listeners (« écouteurs » en français) et des souscripteurs d'évènement
+======================================================================================
 
-Doctrine packages a rich event system that fires events when almost anything
-happens inside the system. For you, this means that you can create arbitrary
-:doc:`services</book/service_container>` and tell Doctrine to notify those
-objects whenever a certain action (e.g. ``prePersist``) happens within Doctrine.
-This could be useful, for example, to create an independent search index
-whenever an object in your database is saved.
+Doctrine vient avec un riche système d'évènement qui lance des évènements à
+chaque fois - ou presque - que quelque chose se passe dans le système. Pour vous,
+cela signifie que vous pouvez créer arbitrairement des :doc:`services</book/service_container>`
+et dire à Doctrine de notifier ces objets à chaque fois qu'une certaine
+action (par exemple : ``prePersist``) a lieu dans Doctrine. Cela pourrait être
+utile par exemple de créer un index de recherche indépendant à chaque fois
+qu'un objet est sauvegardé dans votre base de données.
 
-Doctrine defines two types of objects that can listen to Doctrine events:
-listeners and subscribers. Both are very similar, but listeners are a bit
-more straightforward. For more, see `The Event System`_ on Doctrine's website.
+Doctrine définit deux types d'objets qui peuvent « écouter » des évènements
+Doctrine : les listeners et les souscripteurs d'évènement. Les deux sont très
+similaires, mais les listeners sont un peu plus simples. Pour plus d'informations,
+voir `The Event System`_ sur le site de Doctrine.
 
-Configuring the Listener/Subscriber
------------------------------------
+Configurer le listener/souscripteur d'évènement
+-----------------------------------------------
 
-To register a service to act as an event listener or subscriber you just have
-to :ref:`tag<book-service-container-tags>` it with the appropriate name. Depending
-on your use-case, you can hook a listener into every DBAL connection and ORM
-entity manager or just into one specific DBAL connection and all the entity
-managers that use this connection.
+Pour spécifier à un service d'agir comme un listener d'évènements ou comme un
+souscripteur, vous devez simplement le :ref:`tagger<book-service-container-tags>`
+avec un nom approprié. Dépendant de votre cas, vous pouvez placer un listener
+dans chaque connexion DBAL et gestionnaire d'entité ORM ou juste dans une connexion
+DBAL spécifique et tous les gestionnaires d'entité qui utilise cette connexion.
 
 .. configuration-block::
 
@@ -74,12 +76,13 @@ managers that use this connection.
             </services>
         </container>
 
-Creating the Listener Class
+Créer la Classe du Listener
 ---------------------------
 
-In the previous example, a service ``my.listener`` was configured as a Doctrine
-listener on the event ``postPersist``. That class behind that service must have
-a ``postPersist`` method, which will be called when the event is thrown::
+Dans l'exemple précédent, un service ``my.listener`` a été configuré en tant que
+listener Doctrine sur l'évènement ``postPersist``. Cette classe derrière ce
+service doit avoir une méthode ``postPersist``, qui va être appelée lorsque
+l'évènement est lancé::
 
     // src/Acme/SearchBundle/Listener/SearchIndexer.php
     namespace Acme\SearchBundle\Listener;
@@ -94,21 +97,21 @@ a ``postPersist`` method, which will be called when the event is thrown::
             $entity = $args->getEntity();
             $entityManager = $args->getEntityManager();
             
-            // perhaps you only want to act on some "Product" entity
+            // peut-être vous voulez seulement agir sur une entité « Product »
             if ($entity instanceof Product) {
-                // do something with the Product
+                // fait quelque chose avec le « Product »
             }
         }
     }
 
-In each event, you have access to a ``LifecycleEventArgs`` object, which
-gives you access to both the entity object of the event and the entity manager
-itself.
+Dans chaque évènement, vous avez accès à un objet ``LifecycleEventArgs``,
+qui vous donne accès à l'objet entité de l'évènement ainsi qu'au gestionnaire
+d'entité lui-même.
 
-One important thing to notice is that a listener will be listening for *all*
-entities in your application. So, if you're interested in only handling a
-specific type of entity (e.g. a ``Product`` entity but not a ``BlogPost``
-entity), you should check for the class name of the entity in your method
-(as shown above).
+Une chose importante à noter est qu'un listener va écouter *toutes* les entités
+de votre application. Donc, si vous êtes intéressé de gérer uniquement un type
+spécifique d'entité (par exemple : une entité ``Product`` mais pas une entité
+``BlogPost``), vous devriez vérifier le nom de la classe de votre entité dans
+votre méthode (comme montré ci-dessus).
 
 .. _`The Event System`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/events.html
