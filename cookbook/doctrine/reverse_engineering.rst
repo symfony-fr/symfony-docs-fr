@@ -1,29 +1,35 @@
 .. index::
-   single: Doctrine; Generating entities from existing database
+   single: Doctrine; Générer des entités à partir d'une base de données existante
 
-How to generate Entities from an Existing Database
-==================================================
+Comment générer des Entités à partir d'une base de données existante
+====================================================================
 
-When starting work on a brand new project that uses a database, two different
-situations comes naturally. In most cases, the database model is designed
-and built from scratch. Sometimes, however, you'll start with an existing and
-probably unchangeable database model. Fortunately, Doctrine comes with a bunch
-of tools to help generate model classes from your existing database.
+Lorsque vous commencez à travailler sur un tout nouveau projet qui utilise
+une base de données, deux situations différentes peuvent arriver. Dans la
+plupart des cas, le modèle de base de données est conçu et construit depuis
+zéro. Dans d'autres cas, cependant, vous commencerez avec un modèle de base
+de données existant et probablement inchangeable. Heureusement, Doctrine
+vient avec une série d'outils vous aidant à générer les classes de modèle
+à partir de votre base de données existante.
 
 .. note::
 
-    As the `Doctrine tools documentation`_ says, reverse engineering is a
-    one-time process to get started on a project. Doctrine is able to convert
-    approximately 70-80% of the necessary mapping information based on fields,
-    indexes and foreign key constraints. Doctrine can't discover inverse
-    associations, inheritance types, entities with foreign keys as primary keys
-    or semantical operations on associations such as cascade or lifecycle
-    events. Some additional work on the generated entities will be necessary
-    afterwards to design each to fit your domain model specificities.
+    Comme la `documentation des outils Doctrine`_ le dit, faire du « reverse
+    engineering » est un processus qu'on n'effectue qu'une seule fois lorsqu'on
+    démarre un projet. Doctrine est capable de convertir environ 70-80% des
+    informations de correspondance nécessaires basé sur les champs, les index
+    et les contraintes de clés étrangères. En revanche, Doctrine ne peut pas
+    identifier les associations inverses, les types d'inhéritance, les entités
+    avec clés étrangères en tant que clés primaires ou les opérations sémantiques
+    sur des associations telles que la « cascade » ou les évènements de cycle de
+    vie. Ainsi, du travail additionnel sur les entités générées sera nécessaire
+    par la suite pour finir la conception de chacune afin de satisfaire les
+    spécificités du modèle de votre domaine.
 
-This tutorial assumes you're using a simple blog application with the following
-two tables: ``blog_post`` and ``blog_comment``. A comment record is linked
-to a post record thanks to a foreign key constraint.
+Ce tutoriel assume que vous utilisez une application de blog simple avec les
+deux tables suivantes : ``blog_post`` et ``blog_comment``. Une entrée
+« comment » est liée à une entrée « post » grâce à une contrainte de clé
+étrangère.
 
 .. code-block:: sql
 
@@ -46,32 +52,33 @@ to a post record thanks to a foreign key constraint.
       CONSTRAINT `blog_post_id` FOREIGN KEY (`post_id`) REFERENCES `blog_post` (`id`) ON DELETE CASCADE
     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-Before diving into the recipe, be sure your database connection parameters are
-correctly setup in the ``app/config/parameters.yml`` file (or wherever your
-database configuration is kept) and that you have initialized a bundle that
-will host your future entity class. In this tutorial, we will assume that
-an ``AcmeBlogBundle`` exists and is located under the ``src/Acme/BlogBundle``
-folder.
+Avant d'aller plus loin, assurez-vous que vos paramètres de connexion à la base
+de données sont correctement définis dans le fichier ``app/config/parameters.yml``
+(ou à quelconque endroit que ce soit où votre configuration de base de données est
+conservée) et que vous avez initialisé un bundle qui va contenir votre future classe
+entité. Dans ce tutorial, nous assumerons qu'un ``AcmeBlogBundle`` existe et
+qu'il se situe dans le dossier ``src/Acme/BlogBundle``.
 
-The first step towards building entity classes from an existing database
-is to ask Doctrine to introspect the database and generate the corresponding
-metadata files. Metadata files describe the entity class to generate based on
-tables fields.
+La première étape permettant de construire les classes entité depuis une
+base de données existante est de demander à Doctrine d'introspecter cette
+dernière et de générer les fichiers de méta-données correspondants. Les
+fichiers de méta-données décrivent la classe entité à générer basé sur
+les champs des tables.
 
 .. code-block:: bash
 
     php app/console doctrine:mapping:convert xml ./src/Acme/BlogBundle/Resources/config/doctrine/metadata/orm --from-database --force
 
-This command line tool asks Doctrine to introspect the database and generate
-the XML metadata files under the ``src/Acme/BlogBundle/Resources/config/doctrine/metadata/orm``
-folder of your bundle.
+Cette outil de ligne de commande demande à Doctrine d'introspecter la base de données et de
+générer les fichiers XML de méta-données dans le dossier
+``src/Acme/BlogBundle/Resources/config/doctrine/metadata/orm`` de votre bundle.
 
 .. tip::
 
-    It's also possible to generate metadata class in YAML format by changing the
-    first argument to `yml`.
+    Il est aussi possible de générer les méta-données au format YAML en changeant
+    le premier argument pour `yml`.
 
-The generated ``BlogPost.dcm.xml`` metadata file looks as follows:
+Le fichier de méta-données ``BlogPost.dcm.xml`` généré ressemble à ce qui suit :
 
 .. code-block:: xml
 
@@ -92,17 +99,19 @@ The generated ``BlogPost.dcm.xml`` metadata file looks as follows:
       </entity>
     </doctrine-mapping>
 
-Once the metadata files are generated, you can ask Doctrine to import the
-schema and build related entity classes by executing the following two commands.
+Une fois que les fichiers de méta-données sont générés, vous pouvez demander
+à Doctrine d'importer le schéma et de construire les classes entité qui lui
+sont liées en exécutant les deux commandes suivantes.
 
 .. code-block:: bash
 
     php app/console doctrine:mapping:import AcmeBlogBundle annotation
     php app/console doctrine:generate:entities AcmeBlogBundle
 
-The first command generates entity classes with an annotations mapping, but
-you can of course change the ``annotation`` argument to ``xml`` or ``yml``.
-The newly created ``BlogComment`` entity class looks as follow:
+La première commande génère les classes entité avec des annotations de
+correspondance, mais vous pouvez bien sûr changer l'argument ``annotation``
+pour être ``xml`` ou ``yml``. La classe entité nouvellement créée ressemble
+à ce qui suit :
 
 .. code-block:: php
 
@@ -160,14 +169,14 @@ The newly created ``BlogComment`` entity class looks as follow:
         private $post;
     }
 
-As you can see, Doctrine converts all table fields to pure private and annotated
-class properties. The most impressive thing is that it also discovered the
-relationship with the ``BlogPost`` entity class based on the foreign key constraint.
-Consequently, you can find a private ``$post`` property mapped with a ``BlogPost``
-entity in the ``BlogComment`` entity class.
+Comme vous pouvez le voir, Doctrine convertit tous les champs de la table en propriétés
+privées et annotées de la classe. La chose la plus impressionnante et qu'il
+identifie aussi la relation avec la classe entité ``BlogPost`` basé sur la contrainte
+de clé étrangère. De ce fait, vous pouvez trouver une propriété privée ``$post``
+correspondant à une entité ``BlogPost`` dans la classe entité ``BlogComment``.
 
-The last command generated all getters and setters for your two ``BlogPost`` and
-``BlogComment`` entity class properties. The generated entities are now ready to be
-used. Have fun!
+La dernière commande a généré tous les « getters » et « setters » pour les propriétés
+de vos deux classes entité ``BlogPost`` et ``BlogComment``. Les entités générées
+sont maintenant prêtes à être utilisées. Amusez-vous!
 
-.. _`Doctrine tools documentation`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/tools.html#reverse-engineering
+.. _`documentation des outils Doctrine`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/tools.html#reverse-engineering

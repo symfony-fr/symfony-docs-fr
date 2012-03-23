@@ -1,15 +1,15 @@
-Doctrine Extensions: Timestampable: Sluggable, Translatable, etc.
+Extensions Doctrine: Timestampable, Sluggable, Translatable, etc.
 =================================================================
 
-Doctrine2 is very flexible, and the community has already created a series
-of useful Doctrine extensions to help you with tasks common entity-related
-tasks.
+Doctrine2 est très flexible, et la communauté a déjà créé une série d'extensions
+Doctrine très pratiques afin de vous aider avec les tâches usuelles liées aux
+entités.
 
-One bundle in particular - the `DoctrineExtensionsBundle`_ - provides integration
-with an extensions library that offers `Sluggable`_, `Translatable`_, `Timestampable`_,
-`Loggable`_, and `Tree`_ behaviors.
+Un bundle en particulier - le `DoctrineExtensionsBundle`_ - fournit l'intégration
+d'une bibliothèque d'extensions qui offre des comportements tels `Sluggable`_,
+`Translatable`_, `Timestampable`_, `Loggable`_, et `Tree`_.
 
-See the bundle for more details.
+Voir le bundle pour plus de détails.
 
 .. _`DoctrineExtensionsBundle`: https://github.com/stof/StofDoctrineExtensionsBundle
 .. _`Sluggable`: https://github.com/l3pp4rd/DoctrineExtensions/blob/master/doc/sluggable.md
