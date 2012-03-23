@@ -1,36 +1,39 @@
-How to customize Error Pages
-============================
+Comment personnaliser les pages d'erreur
+========================================
 
-When any exception is thrown in Symfony2, the exception is caught inside the
-``Kernel`` class and eventually forwarded to a special controller,
-``TwigBundle:Exception:show`` for handling. This controller, which lives
-inside the core ``TwigBundle``, determines which error template to display and
-the status code that should be set for the given exception.
+Lorsqu'une quelconque exception est lancée dans Symfony2, cette dernière
+est « capturée » par la classe ``Kernel`` et éventuellement transmise à
+un contrôleur spécial, ``TwigBundle:Exception:show`` pour qu'il la gère.
+Ce contrôleur, qui fait partie du coeur de ``TwigBundle``, détermine quelle
+template d'erreur afficher et le code de statut qui devrait être défini
+pour l'exception donnée.
 
-Error pages can be customized in two different ways, depending on how much
-control you need:
+Les pages d'erreur peuvent être personnalisées de deux manières différentes,
+dépendant du niveau de contrôle que vous souhaitez :
 
-1. Customize the error templates of the different error pages (explained below);
+1. Personnalisez les templates d'erreur des différentes pages d'erreur
+   (expliqué ci-dessous) ;
 
-2. Replace the default exception controller ``TwigBundle::Exception:show``
-   with your own controller and handle it however you want (see
-   :ref:`exception_controller in the Twig reference<config-twig-exception-controller>`);
+2. Remplacez le contrôleur d'exception par défaut ``TwigBundle::Exception:show``
+   par votre propre contrôleur et gérer le comme vous le désirez (voir
+   :ref:`exception_controller dans la référence de Twig<config-twig-exception-controller>`) ;
 
 .. tip::
 
-    The customization of exception handling is actually much more powerful
-    than what's written here. An internal event, ``kernel.exception``, is thrown
-    which allows complete control over exception handling. For more
-    information, see :ref:`kernel-kernel.exception`.
+    La personnalisation de la gestion d'exception est en fait bien plus
+    puissante que ce qui est écrit dans ces lignes. Un évènement interne,
+    ``kernel.exception``, est lancé et permet d'avoir le contrôle complet
+    de la gestion des exceptions. Pour plus d'informations, voir
+    :ref:`kernel-kernel.exception`.
 
-All of the error templates live inside ``TwigBundle``. To override the
-templates, we simply rely on the standard method for overriding templates that
-live inside a bundle. For more information, see
+Tous les templates d'erreur résident dans le ``TwigBundle``. Pour passer
+outre ces templates, nous reposons simplement sur une méthode standard
+qui est à l'intérieur d'un bundle. Pour plus d'informations, voir
 :ref:`overriding-bundle-templates`.
 
-For example, to override the default error template that's shown to the
-end-user, create a new template located at
-``app/Resources/TwigBundle/views/Exception/error.html.twig``:
+Par exemple, pour passer outre le template d'erreur par défaut qui est
+montré à l'utilisateur final, créez un nouveau template situé à cet emplacement
+``app/Resources/TwigBundle/views/Exception/error.html.twig`` :
 
 .. code-block:: html+jinja
 
@@ -48,51 +51,54 @@ end-user, create a new template located at
 
 .. tip::
 
-    If you're not familiar with Twig, don't worry. Twig is a simple, powerful
-    and optional templating engine that integrates with ``Symfony2``. For more
-    information about Twig see :doc:`/book/templating`.
+    Si vous n'êtes pas familier avec Twig, ne vous inquiétez pas. Twig est
+    un moteur de templating simple, puissant et optionnel qui est intégré
+    dans ``Symfony2``. Pour plus d'informations à propos de Twig, voir
+    :doc:`/book/templating`.
 
-In addition to the standard HTML error page, Symfony provides a default error
-page for many of the most common response formats, including JSON
-(``error.json.twig``), XML, (``error.xml.twig``), and even Javascript
-(``error.js.twig``), to name a few. To override any of these templates, just
-create a new file with the same name in the
-``app/Resources/TwigBundle/views/Exception`` directory. This is the standard
-way of overriding any template that lives inside a bundle.
+En plus de la page d'erreur HTML standard, Symfony fournit une page d'erreur
+par défaut pour quasiment tous les formats de réponse les plus communs,
+incluant JSON (``error.json.twig``), XML (``error.xml.twig``), et même
+Javascript (``error.js.twig``), pour n'en nommer que quelques uns. Pour passer
+outre n'importe lequel de ces templates, créez simplement un nouveau fichier
+avec le même nom dans le répertoire ``app/Resources/TwigBundle/views/Exception``.
+C'est la manière standard de passer outre quelconque template qui réside dans
+un bundle.
 
 .. _cookbook-error-pages-by-status-code:
 
-Customizing the 404 Page and other Error Pages
-----------------------------------------------
+Personnaliser la page 404 et les autres pages d'erreur
+------------------------------------------------------
 
-You can also customize specific error templates according to the HTTP status
-code. For instance, create a
-``app/Resources/TwigBundle/views/Exception/error404.html.twig`` template to
-display a special page for 404 (page not found) errors.
+Vous pouvez aussi personnaliser des templates d'erreur spécifiques en vous
+basant sur le code de statut HTTP. Par exemple, créez un template
+``app/Resources/TwigBundle/views/Exception/error404.html.twig`` pour
+afficher une page spéciale pour les erreurs 404 (page non-trouvée).
 
-Symfony uses the following algorithm to determine which template to use:
+Symfony utilise l'algorithme suivant pour déterminer quel template utiliser :
 
-* First, it looks for a template for the given format and status code (like
-  ``error404.json.twig``);
+* Premièrement, il cherche un template pour le format et le code de statut donné
+  (comme ``error404.json.twig``) ;
 
-* If it does not exist, it looks for a template for the given format (like
-  ``error.json.twig``);
+* S'il n'existe pas, il cherche un template pour le format donné (comme
+  ``error.json.twig``) ;
 
-* If it does not exist, it falls back to the HTML template (like
+* S'il n'existe pas, il se rabat sur le template HTML (comme
   ``error.html.twig``).
 
 .. tip::
 
-    To see the full list of default error templates, see the
-    ``Resources/views/Exception`` directory of the ``TwigBundle``. In a
-    standard Symfony2 installation, the ``TwigBundle`` can be found at
-    ``vendor/symfony/src/Symfony/Bundle/TwigBundle``. Often, the easiest way
-    to customize an error page is to copy it from the ``TwigBundle`` into
-    ``app/Resources/TwigBundle/views/Exception`` and then modify it.
+    Pour voir la liste complète des templates d'erreur par défaut, voyez
+    le répertoire ``Resources/views/Exception`` du ``TwigBundle``. Dans
+    une installation standard de Symfony2, le ``TwigBundle`` peut être
+    trouvé à cet emplacement : ``vendor/symfony/src/Symfony/Bundle/TwigBundle``.
+    Souvent, la façon la plus facile de personnaliser une page d'erreur
+    est de la copier depuis le ``TwigBundle`` vers le dossier
+    ``app/Resources/TwigBundle/views/Exception`` et puis de la modifier.
 
 .. note::
 
-    The debug-friendly exception pages shown to the developer can even be
-    customized in the same way by creating templates such as
-    ``exception.html.twig`` for the standard HTML exception page or
-    ``exception.json.twig`` for the JSON exception page.
+    Les pages d'exception aidant au débuggage qui sont montrées au développeur
+    peuvent aussi être personnalisées de la même manière en créant des templates
+    comme ``exception.html.twig`` pour la page d'exception HTML standard
+    ou ``exception.json.twig`` pour la page d'exception JSON.
