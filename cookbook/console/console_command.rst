@@ -1,19 +1,19 @@
-How to create a Console Command
-===============================
+Comment créer une commande pour la Console
+==========================================
 
-The Console page of the Components section (:doc:`/components/console`) covers
-how to create a Console command. This cookbook articles covers the differences
-when creating Console commands within the Symfony2 framework.
+La page Console de la partie Componentes (:doc:`/components/console`) décrit
+comment créer une commande. Cet article du Cookbook aborde les différences
+lorsque vous créer des commandes pour la console avec le framework Symfony2.
 
-Automatically Registering Commands
-----------------------------------
+Enregistrement automatique des commandes
+----------------------------------------
 
-To make the console commands available automatically with Symfony2, create a
-``Command`` directory inside your bundle and create a php file suffixed with
-``Command.php`` for each command that you want to provide. For example, if you
-want to extend the ``AcmeDemoBundle`` (available in the Symfony Standard
-Edition) to greet us from the command line, create ``GreetCommand.php`` and
-add the following to it::
+Pour que les commandes soient automatiquement disponibles dans Symfony2, créez
+un répertoire ``Command`` dans votre bundle et créez un fichier php se terminant
+par ``Command.php`` pour chaque commande que vous voulez créer. Par exemple, si
+vous voulez étendre le bundle ``AcmeDemoBundle`` (disponible dans la Standard
+Edition de Symfony2) pour nous saluer en ligne de commande, créez le fichier
+``GreetCommand.php`` et insérez y le contenu suivant::
 
     // src/Acme/DemoBundle/Command/GreetCommand.php
     namespace Acme\DemoBundle\Command;
@@ -31,8 +31,8 @@ add the following to it::
             $this
                 ->setName('demo:greet')
                 ->setDescription('Greet someone')
-                ->addArgument('name', InputArgument::OPTIONAL, 'Who do you want to greet?')
-                ->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters')
+                ->addArgument('name', InputArgument::OPTIONAL, 'Qui voulez vous saluer??')
+                ->addOption('yell', null, InputOption::VALUE_NONE, 'Si définie, la tâche criera en majuscules')
             ;
         }
 
@@ -53,17 +53,18 @@ add the following to it::
         }
     }
 
-This command will now automatically be available to run:
+Cette commande sera maintenant automatiquement prête à être exécutée :
 
 .. code-block:: bash
 
     app/console demo:greet Fabien
 
-Testing Commands
-----------------
+Tester les commandes
+--------------------
 
-When testing commands used as part of the full framework :class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application`
-should be used instead of :class:`Symfony\\Component\\Console\\Application`::
+Pour tester les commandes utilisées dans le cadre du frameworf, la classe
+:class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application` devrait être
+utilisée au lieu de la classe :class:`Symfony\\Component\\Console\\Application`::
 
     use Symfony\Component\Console\Tester\CommandTester;
     use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -73,7 +74,7 @@ should be used instead of :class:`Symfony\\Component\\Console\\Application`::
     {
         public function testExecute()
         {
-            // mock the Kernel or create one depending on your needs
+            // mockez le Kernel ou créez en un selon vos besoins
             $application = new Application($kernel);
             $application->add(new GreetCommand());
 
@@ -87,14 +88,14 @@ should be used instead of :class:`Symfony\\Component\\Console\\Application`::
         }
     }
 
-Getting Services from the Service Container
--------------------------------------------
+Récupérer des services du Conteneur de services
+-----------------------------------------------
 
-By using :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand` 
-as the base class for the command (instead of the more basic 
-:class:`Symfony\\Component\\Console\\Command\\Command`), you have access to the 
-service container. In other words, you have access to any configured service.
-For example, you could easily extend the task to be translatable::
+En utilisant :class:`Symfony\\Bundle\\FrameworkBundle\\Command\\ContainerAwareCommand`
+comme classe parente de la commande (au lieu de la classe basique
+:class:`Symfony\\Component\\Console\\Command\\Command`), vous avez accès au conteneur
+de services. En d'autres termes, vous avez accès à tous les services configurés.
+Par exemple, vous pouvez facilement étendre la tâche pour gérer les traductions::
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {

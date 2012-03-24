@@ -1,27 +1,29 @@
 .. index::
    pair: Doctrine; DBAL
 
-How to use Doctrine's DBAL Layer
-================================
+Comment utiliser la couche DBAL de Doctrine
+===========================================
 
 .. note::
 
-    This article is about Doctrine DBAL's layer. Typically, you'll work with
-    the higher level Doctrine ORM layer, which simply uses the DBAL behind
-    the scenes to actually communicate with the database. To read more about
-    the Doctrine ORM, see ":doc:`/book/doctrine`".
+    Cet article parle de la couche DBAL de Doctrine. Typiquement, vous
+    allez travailler avec le haut niveau de la couche ORM de Doctrine,
+    qui utilise le DBAL en arrière-plan pour effectivement communiquer
+    avec la base de données. Pour en lire plus à propos de l'ORM Doctrine,
+    voir « :doc:`/book/doctrine` ».
 
-The `Doctrine`_ Database Abstraction Layer (DBAL) is an abstraction layer that
-sits on top of `PDO`_ and offers an intuitive and flexible API for communicating
-with the most popular relational databases. In other words, the DBAL library
-makes it easy to execute queries and perform other database actions.
+La couche d'abstraction de la base de données (i.e. DBAL) de `Doctrine`_ réside
+au sommet de `PDO`_ et offre une API intuitive et flexible pour communiquer
+avec les bases de données relationnelles les plus populaires. En d'autres mots,
+la bibliothèque DBAL rend facile l'exécution de requêtes et autres actions
+sur la base de données.
 
 .. tip::
 
-    Read the official Doctrine `DBAL Documentation`_ to learn all the details
-    and capabilities of Doctrine's DBAL library.
+    Lisez la `Documentation DBAL`_ officielle de Doctrine pour apprendre tous
+    les détails et capacités de la bibliothèque DBAL de Doctrine.
 
-To get started, configure the database connection parameters:
+Pour démarrer, configurez les paramètres de connexion de la base de données :
 
 .. configuration-block::
 
@@ -61,10 +63,11 @@ To get started, configure the database connection parameters:
             ),
         ));
 
-For full DBAL configuration options, see :ref:`reference-dbal-configuration`.
+Pour une liste complète des options de configuration de DBAL, voir
+:ref:`reference-dbal-configuration`.
 
-You can then access the Doctrine DBAL connection by accessing the
-``database_connection`` service:
+Vous pouvez alors accéder à la connexion DBAL de Doctrine en utilisant
+le service ``database_connection`` :
 
 .. code-block:: php
 
@@ -79,12 +82,13 @@ You can then access the Doctrine DBAL connection by accessing the
         }
     }
 
-Registering Custom Mapping Types
---------------------------------
+Déclarer des Types de Correspondance Personnalisés
+--------------------------------------------------
 
-You can register custom mapping types through Symfony's configuration. They
-will be added to all configured connections. For more information on custom
-mapping types, read Doctrine's `Custom Mapping Types`_ section of their documentation.
+Vous pouvez déclarer des types de correspondance personnalisés via la configuration
+de Symfony. Ils seront ajoutés à toutes les connexions configurées. Pour plus
+d'information sur les types de correspondances personnalisés, lisez la section
+`Custom Mapping Types`_ de la documentation de Doctrine.
 
 .. configuration-block::
 
@@ -131,15 +135,16 @@ mapping types, read Doctrine's `Custom Mapping Types`_ section of their document
             ),
         ));
 
-Registering Custom Mapping Types in the SchemaTool
---------------------------------------------------
+Déclarer des Types de Correspondance Personnalisés via le SchemaTool
+--------------------------------------------------------------------
 
-The SchemaTool is used to inspect the database to compare the schema. To
-achieve this task, it needs to know which mapping type needs to be used
-for each database types. Registering new ones can be done through the configuration.
+Le SchemaTool est utilisé pour inspecter la base de données afin d'en comparer
+le schéma. Pour achever cette tâche, il a besoin de connaître quel type de
+correspondance utiliser pour chaque type de base de données. En déclarer de
+nouveaux peut être effectué à travers la configuration.
 
-Let's map the ENUM type (not suppoorted by DBAL by default) to a the ``string``
-mapping type:
+Faisons correspondre le type ENUM (non-supporté par DBAL par défaut) à un type
+``string`` :
 
 .. configuration-block::
 
@@ -185,5 +190,5 @@ mapping type:
 
 .. _`PDO`:           http://www.php.net/pdo
 .. _`Doctrine`:      http://www.doctrine-project.org/projects/dbal/2.0/docs/en
-.. _`DBAL Documentation`: http://www.doctrine-project.org/projects/dbal/2.0/docs/en
+.. _`Documentation DBAL`: http://www.doctrine-project.org/projects/dbal/2.0/docs/en
 .. _`Custom Mapping Types`: http://www.doctrine-project.org/docs/dbal/2.0/en/reference/types.html#custom-mapping-types

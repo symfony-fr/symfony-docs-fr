@@ -5,7 +5,7 @@ Comment utiliser Monolog pour écrire des Logs
 =============================================
 
 Monolog_ est une bibliothèque pour PHP 5.3 servant à écrire des logs
-et utilisée par Symfony2. Elle est inspirée par la bibliothèque
+et utilisée par Symfony2. Elle est inspirée de la bibliothèque
 Python LogBook.
 
 Utilisation
@@ -24,7 +24,7 @@ gestionnaires peuvent être partagés).
 Le gestionnaire par défaut est le ``StreamHandler`` qui écrit les logs
 dans un « stream » (par défaut dans le fichier ``app/logs/prod.log`` dans
 l'environnement de production et dans ``app/logs/dev.log`` dans l'environnment
- de développement).
+de développement).
 
 Monolog est aussi livré avec un puissant gestionnaire intégré pour le « logging »
 en environnement de production : le ``FingersCrossedHandler``. Il vous permet
@@ -37,8 +37,8 @@ Pour « logger » un message, utilisez tout simplement le service logger depuis
 le conteneur dans un contrôleur::
 
     $logger = $this->get('logger');
-    $logger->info('We just got the logger');
-    $logger->err('An error occurred');
+    $logger->info('Nous avons récupéré le logger');
+    $logger->err('Une erreur est survenue');
 
 .. tip::
 
@@ -104,7 +104,7 @@ appelés dans l'ordre où ils sont définis.
 
 .. tip::
 
-    Le gestionnaire nommé "file" ne va pas être inclus dans la pile elle-même
+    Le gestionnaire nommé « file » ne va pas être inclu dans la pile elle-même
     car il est utilisé comme un gestionnaire « imbriqué » du gestionnaire
     ``fingers_crossed``.
 
