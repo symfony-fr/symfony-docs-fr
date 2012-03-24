@@ -78,4 +78,4 @@ Dans Symfony, vous pouvez définir vos fonctions DQL personnalisées comme suit 
             ),
         ));
 
-.. _`DQL User Defined Functions`: http://www.doctrine-project.org/docs/orm/2.0/en/cookbook/dql-user-defined-functions.html
+.. _`DQL User Defined Functions`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/dql-user-defined-functions.html

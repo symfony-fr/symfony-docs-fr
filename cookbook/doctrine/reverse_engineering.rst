@@ -179,4 +179,5 @@ La dernière commande a généré tous les « getters » et « setters » pour l
 de vos deux classes entité ``BlogPost`` et ``BlogComment``. Les entités générées
 sont maintenant prêtes à être utilisées. Amusez-vous!
 
-.. _`documentation des outils Doctrine`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/tools.html#reverse-engineering
+.. _`documentation des outils Doctrine`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/tools.html#reverse-engineering
+

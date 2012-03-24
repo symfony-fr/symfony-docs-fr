@@ -114,4 +114,4 @@ spécifique d'entité (par exemple : une entité ``Product`` mais pas une entit�
 ``BlogPost``), vous devriez vérifier le nom de la classe de votre entité dans
 votre méthode (comme montré ci-dessus).
 
-.. _`The Event System`: http://www.doctrine-project.org/docs/orm/2.0/en/reference/events.html
+.. _`The Event System`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html

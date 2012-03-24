@@ -189,6 +189,6 @@ Faisons correspondre le type ENUM (non-supporté par DBAL par défaut) à un typ
         ));
 
 .. _`PDO`:           http://www.php.net/pdo
-.. _`Doctrine`:      http://www.doctrine-project.org/projects/dbal/2.0/docs/en
-.. _`Documentation DBAL`: http://www.doctrine-project.org/projects/dbal/2.0/docs/en
-.. _`Custom Mapping Types`: http://www.doctrine-project.org/docs/dbal/2.0/en/reference/types.html#custom-mapping-types
+.. _`Doctrine`:      http://www.doctrine-project.org
+.. _`Documentation DBAL`: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
+.. _`Custom Mapping Types`: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#custom-mapping-types
