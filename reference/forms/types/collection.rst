@@ -127,9 +127,9 @@ ressemblera à :
 
 .. code-block:: html
 
-    <input type="email" id="form_emails_$$name$$" name="form[emails][$$name$$]" value="" />
+    <input type="email" id="form_emails___name__" name="form[emails][__name__]" value="" />
 
-En remplaçant ``$$name$$`` par une valeur unique (ex: ``2``), vous pouvez construire
+En remplaçant ``__name__`` par une valeur unique (ex: ``2``), vous pouvez construire
 et insérer des nouveaux champs HTML dans votre formulaire.
 
 Si vous utilisez jQuery, un exemple simple pourrait ressembler à ceci. Si vous rendez
@@ -170,10 +170,10 @@ besoin que du JavaScript :
 
                     // parcourt le template prototype
                     var newWidget = emailList.attr('data-prototype');
-                    // remplace les "$$name$$" utilisés dans l'id et le nom du prototype
+                    // remplace les "__name__" utilisés dans l'id et le nom du prototype
                     // par un nombre unique pour chaque email
                     // le nom de l'attribut final ressemblera à name="contact[emails][2]"
-                    newWidget = newWidget.replace(/\$\$name\$\$/g, emailCount);
+                    newWidget = newWidget.replace(/__name__/g, emailCount);
                     emailCount++;
 
                     // créer une nouvelle liste d'éléments et l'ajoute à notre liste
@@ -284,8 +284,8 @@ Cette option est utile lorsqu'elle est associée à l'option `allow_add`_. Si elle
 est à ``true`` (et que `allow_add`_ est aussi à ``true``), un attribut spécial « prototype »
 sera disponible pour que vous puissiez rendre un exemple de « template » à votre page
 afin de spécifier ce à quoi le nouvel élement doit ressembler. L'attribut ``name``
-donné à cet élément est ``$$name$$``. Cela vous permet d'ajouter un bouton « Ajouter un
-élément » en JavaScript qui parcourt le prototype, remplace ``$$name$$`` par un
+donné à cet élément est ``__name__``. Cela vous permet d'ajouter un bouton « Ajouter un
+élément » en JavaScript qui parcourt le prototype, remplace ``__name__`` par un
 nom unique ou un numéro, et le rend à votre formulaire. Lors de la soumission, il sera
 ajouté à votre tableau de données grâce à l'option `allow_add`_.
 

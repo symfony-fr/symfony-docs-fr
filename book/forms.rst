@@ -1187,6 +1187,8 @@ ce qui suit en haut du template qui rend le formulaire :
 
         {% form_theme form 'AcmeTaskBundle:Form:fields.html.twig' %}
 
+        {% form_theme form 'AcmeTaskBundle:Form:fields.html.twig' 'AcmeTaskBundle:Form:fields2.html.twig' %}
+
         <form ...>
 
     .. code-block:: html+php
@@ -1194,6 +1196,8 @@ ce qui suit en haut du template qui rend le formulaire :
         <!-- src/Acme/TaskBundle/Resources/views/Default/new.html.php -->
 
         <?php $view['form']->setTheme($form, array('AcmeTaskBundle:Form')) ?>
+
+        <?php $view['form']->setTheme($form, array('AcmeTaskBundle:Form', 'AcmeTaskBundle:Form')) ?>
 
         <form ...>
 
@@ -1203,11 +1207,31 @@ quand la fonction ``form_row`` est appelée plus tard dans ce template, elle va
 utiliser le bloc ``field_row`` de votre thème personnalisé (à la place du bloc
 par défaut ``field_row`` qui est délivré avec Symfony).
 
+Votre thème personnalisé n'a pas besoin de surcharger tous les blocks. Lorsqu'il
+affiche un block qui n'est pas surchargé par votre thème personnalisé, le moteur de
+thème se rabattra sur le thème global (défini au niveau du bundle).
+
+Si plusieurs thèmes personnalisés sont fournis, ils seront pris selon l'ordre
+dans lequel ils sont listés avant que le thème global ne soit pris en compte.
+
 Pour personnaliser n'importe quelle portion d'un formulaire, vous devez juste
 réécrire le fragment approprié. Connaître exactement quel bloc ou fichier
 réécrire est le sujet de la prochaine section.
 
-Pour une discussion plus développée, voir :doc:`/cookbook/form/form_customization`.
+.. versionadded:: 2.1
+   Une syntaxe Twig alternative pour ``form_theme`` a été ajoutée dans la version 2.1
+   Elle accepte toute expression Twig valide (la différence la plus importante est
+   l'utilisation d'un tableau pour les thèmes multiples)
+
+   .. code-block:: html+jinja
+
+       {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+
+       {% form_theme form with 'AcmeTaskBundle:Form:fields.html.twig' %}
+
+       {% form_theme form with ['AcmeTaskBundle:Form:fields.html.twig', 'AcmeTaskBundle:Form:fields2.html.twig'] %}
+
+Pour plus de précisions, lisez :doc:`/cookbook/form/form_customization`.
 
 .. index::
    single: Formulaires; Nommage de fragment de template

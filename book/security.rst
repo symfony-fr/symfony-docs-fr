@@ -414,6 +414,7 @@ Ensuite, créez un contrôleur qui va afficher le formulaire de connexion :
                 $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
             } else {
                 $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+                $session->remove(SecurityContext::AUTHENTICATION_ERROR);
             }
             return $this->render('AcmeSecurityBundle:Security:login.html.twig', array(
                 // last username entered by the user
@@ -457,7 +458,7 @@ Il ne nous reste qu'à créer le template correspondant :
                 <input type="hidden" name="_target_path" value="/account" />
             #}
             
-            <input type="submit" name="login" />
+            <button type="submit">login</button>
         </form>
 
     .. code-block:: html+php
@@ -479,7 +480,7 @@ Il ne nous reste qu'à créer le template correspondant :
                 <input type="hidden" name="_target_path" value="/account" />
             -->
             
-            <input type="submit" name="login" />
+            <button type="submit">login</button>
         </form>
 
 .. tip::

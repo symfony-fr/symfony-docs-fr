@@ -521,6 +521,9 @@ disponibles pour les bundles du noyau peuvent être trouvées à :doc:`Reference
    directives ``parameters``, ``services``, et ``imports``. Toutes les autres directives
    sont gérées par une extension du conteneur de service.
 
+Si vous voulez exposer une configuration conviviale dans vos propres bundles, lisez
+l'entrée du cookbook ":doc:`/cookbook/bundles/extensions`".
+
 .. index::
    single: Service Container; Referencing services
 

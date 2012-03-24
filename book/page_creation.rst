@@ -48,8 +48,12 @@ processus en deux étapes.
    Ce tutoriel suppose que vous ayez déjà téléchargé et configuré
    Symfony2 sur votre serveur web. L'URL ci-dessus suppose que ``localhost``
    pointe vers le répertoire ``web`` de votre nouveau projet Symfony2.
-   Pour des instructions détaillées à ce sujet, rendez vous dans la section
-   traitant de la documentation :doc:`Installez Symfony2</book/installation>`.
+   Pour des instructions détaillées à ce sujet, lisez la documentation du serveur
+   web que vous utilisez.
+   Voici les documentations de serveur que vous utilisez probablement :
+
+    * Pour Apache HTTP Server, allez voir la `documentation Apache's DirectoryIndex`_.
+    * Pour Nginx, allez voir `documentation Nginx HttpCoreModule`_.
 
 
 Avant de commencer : Créez un Bundle
@@ -1022,3 +1026,5 @@ rapidement des applications.
 .. _`Twig`: http://twig.sensiolabs.org
 .. _`bundles tiers`: http://symfony2bundles.org/
 .. _`Symfony Standard Edition`: http://symfony.com/download
+.. _`documentation Apache's DirectoryIndex`: http://httpd.apache.org/docs/2.0/mod/mod_dir.html
+.. _`documentation Nginx HttpCoreModule`: http://wiki.nginx.org/HttpCoreModule#location

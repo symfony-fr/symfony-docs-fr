@@ -8,7 +8,7 @@ Le type ``language`` est un sous-ensemble de ``ChoiceType`` qui permet à l'utili
 de choisir une langue dans une liste déroulante. En bonus, les noms de langues sont
 affichés dans la langue de l'utilisateur.
 
-La « valeur » de chaque locale est le code *language* ISO639-1 en deux lettres (ex ``fr``).
+La « valeur » de chaque langue est l'*identifiant de langue Unicode* (ex ``fr`` or ``zh-Hant``)
 
 .. note::
 

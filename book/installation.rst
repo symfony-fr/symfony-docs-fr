@@ -19,7 +19,9 @@ Télécharger une Distribution Symfony2
 .. tip::
     Premièrement, vérifiez que vous avez installé et configuré un serveur web
     (comme Apache) avec PHP 5.3.2 ou supérieur. Pour plus d'informations sur les
-    prérequis Symfony2, lisez le chapitre :doc:`requirements reference</reference/requirements>`.
+    prérequis Symfony2, lisez le chapitre :doc:`pré-requis</reference/requirements>`.
+    Pour plus d'informations sur la manière de configurer la racine web de votre serveur,
+    lisez les documentations suivantes : `Apache`_ | `Nginx`_ .
 
 Les « distributions » Symfony2 sont des applications entièrement fonctionnelles
 qui incluent les librairies du coeur de Symfony2, une sélection de bundles utiles,
@@ -72,17 +74,38 @@ ressemble à ceci :
 Mettre à jour les Vendors
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Finallement, si vous avez téléchargé l'archive « sans vendors », installez les en
-lancant la commande suivante depuis une invite de commande :
+Step 1: Téléchargez `Composer`_ (Le nouveau système de package PHP)
 
 .. code-block:: bash
 
-    php bin/vendors install
+    curl -s http://getcomposer.org/installer | php
 
-Cette commande télécharge toutes les librairies vendor nécessaires - incluant
-Symfony - dans le répertoire ``vendor/``. Pour plus d'informations sur la façon
-dont les librairies tierces sont gérées dans Symfony2, lisez le chapitre
-«:ref:`cookbook-managing-vendor-libraries`».
+Assurez vous d'avoir téléchargé ``composer.phar`` dans le même répertoire
+que celui où se situe le fichier ``composer.json``(par défaut à la racine
+de votre projet Symfony).
+
+Step 2: Install vendors
+
+.. code-block:: bash
+
+    php composer.phar install
+
+Cette commande télécharge toutes les librairies nécessaires - incluant
+Symfony elle-même - dans le répertoire ``vendor/``.
+This command downloads all of the necessary vendor libraries - including
+Symfony itself - into the ``vendor/`` directory.
+
+.. note::
+
+    Si vous n'avez pas installé ``curl``, vous pouvez juste télécharger le fichier ``installer``
+    manuellement à cette adresse http://getcomposer.org/installer. Placez ce fichier dans votre
+    projet puis lancez les commandes :
+
+    .. code-block:: bash
+
+        php installer
+        php composer.phar install
+
 
 Configuration et installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -211,3 +234,6 @@ pour récupérer toutes les librairies nécessaires.
 .. _`http://symfony.com/download`: http://symfony.com/download
 .. _`Git`: http://git-scm.com/
 .. _`GitHub`: http://help.github.com/set-up-git-redirect
+.. _`Composer`: http://getcomposer.org/
+.. _`Apache`: http://httpd.apache.org/docs/current/mod/core.html#documentroot
+.. _`Nginx`: http://wiki.nginx.org/HttpCoreModule#root

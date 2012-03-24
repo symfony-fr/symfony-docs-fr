@@ -65,7 +65,7 @@ Pour utiliser cette classe de chargeur, vous n'avez qu'à adapter votre fichier
 .. code-block:: php
 
     // app/autoload.php
-    require __DIR__.'/../vendor/symfony/src/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
+    require __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
 
     use Symfony\Component\ClassLoader\ApcUniversalClassLoader;
 
