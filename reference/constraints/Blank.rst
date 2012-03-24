@@ -1,26 +1,26 @@
 Blank
 =====
 
-Validates that a value is blank, defined as equal to a blank string or equal
-to ``null``. To force that a value strictly be equal to ``null``, see the
-:doc:`/reference/constraints/Null` constraint. To force that a value is *not*
-blank, see :doc:`/reference/constraints/NotBlank`.
+Valide qu'une valeur est vide, égale à une chaine vide, ou égale à ``null``.
+Pour forcer cette valeur à être strictement égale à ``null``, jetez un oeil à
+la contrainte :doc:`/reference/constraints/Null`. Pour forcer cette valeur à
+ne *pas* être vide, lisez :doc:`/reference/constraints/NotBlank`.
 
 +----------------+-----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                 |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Blank`            |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Blank`            |
 +----------------+-----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\BlankValidator`   |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\BlankValidator`   |
 +----------------+-----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-If, for some reason, you wanted to ensure that the ``firstName`` property
-of an ``Author`` class were blank, you could do the following:
+Si, pour certaines raison, vous voulez vous assurer que la la propriété ``firstName``
+de la classe ``Author`` soit nulle, vous pouvez procéder comme ceci :
 
 .. configuration-block::
 
@@ -51,4 +51,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be blank``
 
-This is the message that will be shown if the value is not blank.
+Ce message s'affiche si la valeur n'est pas vide.

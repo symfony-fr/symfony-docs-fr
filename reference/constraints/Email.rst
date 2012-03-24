@@ -1,22 +1,22 @@
 Email
 =====
 
-Validates that a value is a valid email address. The underlying value is
-cast to a string before being validated.
+Valide que la valeur est une adresse email valide. La donnée finale est convertie
+en une chaine de caractères avant d'être validée.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`property or method<validation-property-target>`               |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 |                | - `checkMX`_                                                        |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Email`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Email`          |
 +----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\EmailValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\EmailValidator` |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -27,7 +27,7 @@ Basic Usage
             properties:
                 email:
                     - Email:
-                        message: The email "{{ value }}" is not a valid email.
+                        message: "{{ value }}" n'est pas un email valide.
                         checkMX: true
 
     .. code-block:: php-annotations
@@ -41,7 +41,7 @@ Basic Usage
         {
             /** 
              * @Assert\Email(
-             *     message = "The email '{{ value }}' is not a valid email.",
+             *     message = "'{{ value }}' n'est pas un email valide.",
              *     checkMX = true
              * )
              */
@@ -56,14 +56,14 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid email address``
 
-This message is shown if the underlying data is not a valid email address.
+Ce message s'affiche si la donnée finale n'est pas une adresse email valide.
 
 checkMX
 ~~~~~~~
 
 **type**: ``Boolean`` **default**: ``false``
 
-If true, then the `checkdnsrr`_ PHP function will be used to check the validity
-of the MX record of the host of the given email.
+Si cette option est définie à true, alors la fonction PHP `checkdnsrr`_ sera utilisée
+pour vérifier la validité du registrement MX du serveur de l'email donné.
 
-.. _`checkdnsrr`: http://www.php.net/manual/en/function.checkdnsrr.php
+.. _`checkdnsrr`: http://www.php.net/manual/fr/function.checkdnsrr.php

@@ -1,24 +1,24 @@
 Locale
 ======
 
-Validates that a value is a valid locale.
+Valide que la valeur est une locale valide.
 
-The "value" for each locale is either the two letter ISO639-1 *language* code
-(e.g. ``fr``), or the language code followed by an underscore (``_``), then
-the ISO3166 *country* code (e.g. ``fr_FR`` for French/France).
+La « valeur » de chaque locale est soit le code *langue* ISO639-1 en deux lettres
+(ex ``fr``), soit le code langue suivi d'un underscore (``_``) puis du code *pays*
+ISO3166 (ex ``fr_FR`` pour Français/France).
 
 +----------------+------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                  |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Locale`            |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Locale`            |
 +----------------+------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\LocaleValidator`   |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\LocaleValidator`   |
 +----------------+------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -53,4 +53,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid locale``
 
-This message is shown if the string is not a valid locale.
+Ce message s'affiche si la valeur n'est pas une locale valide.

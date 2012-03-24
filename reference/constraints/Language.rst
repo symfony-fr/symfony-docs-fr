@@ -1,20 +1,20 @@
 Language
 ========
 
-Validates that a value is a valid language code.
+Valide que la valeur est un code de langue valide.
 
 +----------------+------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                  |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Language`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Language`          |
 +----------------+------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\LanguageValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\LanguageValidator` |
 +----------------+------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -49,4 +49,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid language``
 
-This message is shown if the string is not a valid language code.
+Le message s'affiche si la chaine de caractères n'est pas un code de langue valide.

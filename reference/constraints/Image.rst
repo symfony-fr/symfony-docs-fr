@@ -1,18 +1,18 @@
 Image
 =====
 
-The Image constraint works exactly like the :doc:`File</reference/constraints/File>`
-constraint, except that its `mimeTypes`_ and `mimeTypesMessage` options are
-automatically setup to work for image files specifically.
+La contrainte Image fonctionne exactement comme la contrainte :doc:`File</reference/constraints/File>`,
+sauf que ses options `mimeTypes`_ et `mimeTypesMessage` sont automatiquement définies
+pour fonctionner spécifiquement avec des images.
 
-Additionally, as of Symfony 2.1, it has options so you can validate against
-the width and height of the image.
+De plus, dans la version 2.1 de Symfony, elle a des options qui vous permettent
+de valider une image selon sa largeur et sa hauteur.
 
-See the :doc:`File</reference/constraints/File>` constraint for the bulk of
-the documentation on this constraint.
+Lisez la documentation de la contrainte :doc:`File</reference/constraints/File>`
+pour tout savoir sur cette contrainte.
 
 +----------------+----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`              |
 +----------------+----------------------------------------------------------------------+
 | Options        | - `mimeTypes`_                                                       |
 |                | - `minWidth`_                                                        |
@@ -27,19 +27,20 @@ the documentation on this constraint.
 |                | - `minHeightMessage`_                                                |
 |                | - See :doc:`File</reference/constraints/File>` for inherited options |
 +----------------+----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\File`            |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\File`            |
 +----------------+----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`   |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`   |
 +----------------+----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-This constraint is most commonly used on a property that will be rendered
-in a form as a :doc:`file</reference/forms/types/file>` form type. For example,
-suppose you're creating an author form where you can upload a "headshot"
-image for the author. In your form, the ``headshot`` property would be a
-``file`` type. The ``Author`` class might look as follows::
+Cette contrainte est le plus souvent utilisée sur une propriété qui sera affichée
+sous forme de champ :doc:`file</reference/forms/types/file>` dans un formulaire.
+Par exemple, supposons que vous créer un formulaire Auteur (Author) dans lequel
+vous pouvez uploader une image représentant le « portrait » (headshot en anglais)
+de l'auteur. Dans votre formulaire, la propriété ``headshot`` sera un type ``file``.
+La classe ``Author`` pourrait ressembler à ce qui suit::
 
     // src/Acme/BlogBundle/Entity/Author.php
     namespace Acme\BlogBundle\Entity;
@@ -61,8 +62,8 @@ image for the author. In your form, the ``headshot`` property would be a
         }
     }
 
-To guarantee that the ``headshot`` ``File`` object is a valid image and that
-it is between a certain size, add the following:
+Pour garantir que l'objet ``File`` ``headshot`` est une image valide et dont la
+taille se situe dans une certaine place, ajoutez le code suivant :
 
 .. configuration-block::
 
@@ -134,20 +135,20 @@ it is between a certain size, add the following:
             }
         }
 
-The ``headshot`` property is validated to guarantee that it is a real image
-and that it is between a certain width and height.
+La propriété ``headshot`` est maintenant validée pour garantir qu'il s'agit bien
+d'une image que sa taille respecte une certaine hauteur et une certaine largeur.
 
 Options
 -------
 
-This constraint shares all of its options with the :doc:`File</reference/constraints/File>`
-constraint. It does, however, modify two of the default option values and
-add several other options.
+Cette contrainte partage toutes ses options avec la contrainte :doc:`File</reference/constraints/File>`.
+Cependant, elle modifie les valeurs par défaut de deux options, et possède plusieurs
+autres options en plus.
 
 mimeTypes
 ~~~~~~~~~
 
-**type**: ``array`` or ``string`` **default**: ``image/*``
+**type**: ``array`` ou ``string`` **default**: ``image/*``
 
 mimeTypesMessage
 ~~~~~~~~~~~~~~~~
@@ -155,73 +156,73 @@ mimeTypesMessage
 **type**: ``string`` **default**: ``This file is not a valid image``
 
 .. versionadded:: 2.1
-    All of the min/max width/height options are new to Symfony 2.1.
+    Toutes les options min/max width/height sont une nouveauté de la version 2.1 de Symfony.
 
 minWidth
 ~~~~~~~~
 
 **type**: ``integer``
 
-If set, the width of the image file must be greater than or equal to this
-value in pixels.
+Si cette option est définie, la largeur du fichier image devra être plus grand ou
+égale à cette valeur exprimée en pixels.
 
 maxWidth
 ~~~~~~~~
 
 **type**: ``integer``
 
-If set, the width of the image file must be less than or equal to this
-value in pixels.
+Si cette option est définie, la largeur du fichier image devra être plus petite ou
+égale à cette valeur exprimée en pixels.
 
 minHeight
 ~~~~~~~~~
 
 **type**: ``integer``
 
-If set, the height of the image file must be greater than or equal to this
-value in pixels.
+Si cette option est définie, la hauteur du fichier image devra être plus grande ou
+égale à cette valeur exprimée en pixels.
 
 maxHeight
 ~~~~~~~~~
 
 **type**: ``integer``
 
-If set, the height of the image file must be less than or equal to this
-value in pixels.
+Si cette option est définie, la hauteur du fichier image devra être plus petite ou
+égale à cette valeur exprimée en pixels.
 
 sizeNotDetectedMessage
 ~~~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The size of the image could not be detected``
 
-If the system is unable to determine the size of the image, this error will
-be displayed. This will only occur when at least one of the four size constraint
-options has been set.
+Si le système n'est pas capable de déterminer la taille de l'image, cette erreur
+sera affichée. Elle n'apparaitra que si au moins une des quatres options sur les tailles
+est définie.
 
 maxWidthMessage
 ~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width }}px``
 
-The error message if the width of the image exceeds `maxWidth`_.
+Le message d'erreur si la largeur de l'image excède `maxWidth`_.
 
 minWidthMessage
 ~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The image width is too small ({{ width }}px). Minimum width expected is {{ min_width }}px``
 
-The error message if the width of the image is less than `minWidth`_.
+Le message d'erreur si la largeur de l'image est plus petite que `minWidth`_.
 
 maxHeightMessage
 ~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The image height is too big ({{ height }}px). Allowed maximum height is {{ max_height }}px``
 
-The error message if the height of the image exceeds `maxHeight`_.
+Le message d'erreur si la hauteur de l'image excède `maxHeight`_.
 
 minHeightMessage
 ~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The image height is too small ({{ height }}px). Minimum height expected is {{ min_height }}px``
 
-The error message if the height of the image is less than `minHeight`_.
+Le message d'erreur si la hauteur de l'image est plus petite que `minHeight`_.

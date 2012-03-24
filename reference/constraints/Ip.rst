@@ -1,23 +1,23 @@
 Ip
 ==
 
-Validates that a value is a valid IP address. By default, this will validate
-the value as IPv4, but a number of different options exist to validate as
-IPv6 and many other combinations.
+Valide que la valeur est une adresse IP valide. Par défaut, cela validera la valeur
+comme IPv4, mais différentes options existent pour valider une IPv6 et plusieurs
+autres combinaisons.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `version`_                                                        |
 |                | - `message`_                                                        |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Ip`             |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Ip`             |
 +----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\IpValidator`    |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\IpValidator`    |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -52,36 +52,36 @@ version
 
 **type**: ``string`` **default**: ``4``
 
-This determines exactly *how* the ip address is validated and can take one
-of a variety of different values:
+Cette option détermine *comment* l'adresse IP est validée et elle peut prendre l'une
+de ces différentes valeurs :
 
-**All ranges**
+**Toutes les plages**
 
-* ``4`` - Validates for IPv4 addresses
-* ``6`` - Validates for IPv6 addresses
-* ``all`` - Validates all IP formats
+* ``4`` - Valide une adresse IPv4
+* ``6`` - Valide une adresse IPv6
+* ``all`` - Valide tous les formats d'IP
 
-**No private ranges**
+**Pas de plage d'adresses privées**
 
-* ``4_no_priv`` - Validates for IPv4 but without private IP ranges
-* ``6_no_priv`` - Validates for IPv6 but without private IP ranges
-* ``all_no_priv`` - Validates for all IP formats but without private IP ranges
+* ``4_no_priv`` - Valide une adresse IPv4 mais sans plage d'adresses privées
+* ``6_no_priv`` - Valide une adresse IPv6 mais sans plage d'adresses privées
+* ``all_no_priv`` - Valide tous les formats d'IP mais sans plage d'adresses privées
 
-**No reserved ranges**
+**Pas de plage d'adresses réservées**
 
-* ``4_no_res`` - Validates for IPv4 but without reserved IP ranges
-* ``6_no_res`` - Validates for IPv6 but without reserved IP ranges
-* ``all_no_res`` - Validates for all IP formats but without reserved IP ranges
+* ``4_no_res`` - Valide une adresse IPv4 mais sans plage d'adresses réservées
+* ``6_no_res`` - Valide une adresse IPv6 mais sans plage d'adresses réservées
+* ``all_no_res`` - Valide tous les formats d'IP mais sans plage d'adresses réservées
 
-**Only public ranges**
+**Plage d'adresses publiques seulement**
 
-* ``4_public`` - Validates for IPv4 but without private and reserved ranges
-* ``6_public`` - Validates for IPv6 but without private and reserved ranges
-* ``all_public`` - Validates for all IP formats but without private and reserved ranges
+* ``4_public`` - Valide une adresse IPv4 mais sans plage d'adresses privées ou réservées
+* ``6_public`` - Valide une adresse IPv6 mais sans plage d'adresses privées ou réservées
+* ``all_public`` - Valide tous les formats d'IP mais sans plage d'adresses privées ou réservées
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This is not a valid IP address``
 
-This message is shown if the string is not a valid IP address.
+Ce message s'affiche si la chaine de caractères n'est pas une adresse IP valide.
