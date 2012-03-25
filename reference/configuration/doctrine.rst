@@ -2,8 +2,8 @@
    single: Doctrine; ORM Configuration Reference
    single: Configuration Reference; Doctrine ORM
 
-Configuration de référence
-==========================
+Configuration Reference
+=======================
 
 .. configuration-block::
 
@@ -43,12 +43,12 @@ Configuration de référence
                 default_entity_manager:         default # The first defined is used if not set
                 entity_managers:
                     default:
-                        # Le nom de la connexion DBAL connection (celle par défaut est utilisée si aucune n'est définie)
+                        # The name of a DBAL connection (the one marked as default is used if not set)
                         connection:                     conn1
-                        mappings: # Obligatoire
+                        mappings: # Required
                             AcmeHelloBundle: ~
                         class_metadata_factory_name:    Doctrine\ORM\Mapping\ClassMetadataFactory
-                        # Tous les drivers de cache doivent être un array, apc, xcache ou memcache
+                        # All cache drivers have to be array, apc, xcache or memcache
                         metadata_cache_driver:          array
                         query_cache_driver:             array
                         result_cache_driver:
@@ -117,7 +117,7 @@ Configuration de référence
                         <doctrine:mapping
                             name="DoctrineExtensions"
                             type="xml"
-                            dir="%kernel.root_dir%/../src/vendor/DoctrineExtensions/lib/DoctrineExtensions/Entity"
+                            dir="%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/DoctrineExtensions/Entity"
                             prefix="DoctrineExtensions\Entity"
                             alias="DExt"
                         />
@@ -126,11 +126,11 @@ Configuration de référence
             </doctrine:config>
         </container>
 
-Vue d'ensemble de la configuration
-----------------------------------
+Configuration Overview
+----------------------
 
-L'exemple de configuration suivant montre toutes les valeurs par défaut de
-la configuration de l'ORM :
+This following configuration example shows all the configuration defaults that
+the ORM resolves to:
 
 .. code-block:: yaml
 
@@ -146,17 +146,16 @@ la configuration de l'ORM :
             query_cache_driver: array
             result_cache_driver: array
 
-Il y a beaucoup d'autres options de configuration que vous pouvez utiliser
-pour surcharger certaines classes, mais elles sont uniquement réservées aux
-cas d'utilisation avancés.
+There are lots of other configuration options that you can use to overwrite
+certain classes, but those are for very advanced use-cases only.
 
-Drivers de cache
-~~~~~~~~~~~~~~~~
+Caching Drivers
+~~~~~~~~~~~~~~~
 
-Pour les drivers de cache, vous pouvez spécifier les valeurs « array », « apc », « memcache »
-ou « xcache ».
+For the caching drivers you can specify the values "array", "apc", "memcache"
+or "xcache".
 
-L'exemple suivant montre un aperçu d'une configuration de mise cache:
+The following example shows an overview of the caching configurations:
 
 .. code-block:: yaml
 
@@ -171,16 +170,15 @@ L'exemple suivant montre un aperçu d'une configuration de mise cache:
                 port: 11211
                 instance_class: Memcache
 
-Configuration de mapping
-~~~~~~~~~~~~~~~~~~~~~~~~
+Mapping Configuration
+~~~~~~~~~~~~~~~~~~~~~
 
-Une définition explicite de toutes les entitées associées (ou mappées)
-est l'unique configuration obligatoire de l'ORM et il y a plusieurs
-options de configuration que vous pouvez contrôler. Les options de
-configuration suivantes sont disponibles pour le mapping :
+Explicit definition of all the mapped entities is the only necessary
+configuration for the ORM and there are several configuration options that you
+can control. The following configuration options exist for a mapping:
 
-* ``type`` Peut être ``annotation``, ``xml``, ``yml``, ``php`` ou ``staticphp``.
-  Cela spécifie quel type de métadata votre mapping utilise.
+* ``type`` One of ``annotation``, ``xml``, ``yml``, ``php`` or ``staticphp``.
+  This specifies which type of metadata type your mapping uses.
 
 * ``dir`` Path to the mapping or entity files (depending on the driver). If
   this path is relative it is assumed to be relative to the bundle root. This
@@ -306,4 +304,4 @@ which is the first one defined or the one configured via the
 Each connection is also accessible via the ``doctrine.dbal.[name]_connection``
 service where ``[name]`` if the name of the connection.
 
-.. _DBAL documentation: http://www.doctrine-project.org/docs/dbal/2.0/en
+.. _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
