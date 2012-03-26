@@ -1,24 +1,26 @@
 .. index::
-   single: Bundle; Inheritance
+   single: Bundle; Héritage
 
-How to Override any Part of a Bundle
-====================================
+Comment outrepasser n'importe quelle partie d'un bundle
+=======================================================
 
-This article has not been written yet, but will soon. If you're interested
-in writing this entry, see :doc:`/contributing/documentation/overview`.
+Cet article n'a pas encore été écrit, mais le sera bientôt. Si vous êtes
+intéressé d'écrire cette entrée, voyez :doc:`/contributing/documentation/overview`.
 
-This topic is meant to show how you can override each and every part of a
-bundle, both from your application and from other bundles. This may include:
+Ce sujet a pour but de présenter comment vous pouvez outrepasser toute partie
+d'un bundle, que ce soit depuis votre application ou bien depuis d'autres bundles.
+Ceci pourrait inclure :
 
 * Templates
-* Routing
-* Controllers
+* Routage
+* Contrôleur
 * Services & Configuration
-* Entities & Entity mapping
-* Forms
-* Validation metadata
+* Entités & Correspondance d'Entité
+* Formulaires
+* Méta-données de Validation
 
-In some cases, this may talk about the best practices that a bundle must
-use in order for certain pieces to be overridable (or easily overridable).
-We may also talk about how certain pieces *aren't* really overridable, but
-your best approach at solving your problems anyways.
+Dans certains cas, cet article pourrait parler des bonnes pratiques qu'un
+bundle doit suivre afin que certaines parties puissent être outrepassées.
+Nous pourrions aussi parler du fait que certaines parties *ne sont pas*
+vraiment outrepassables, mais présenter quand même la meilleure approche
+pour résoudre ces problèmes.
