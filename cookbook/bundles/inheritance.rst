@@ -1,20 +1,20 @@
 .. index::
-   single: Bundle; Inheritance
+   single: Bundle; Héritage
 
-How to use Bundle Inheritance to Override parts of a Bundle
-===========================================================
+Comment utiliser l'héritage de bundle pour outrepasser certaines parties d'un bundle
+====================================================================================
 
-When working with third-party bundles, you'll probably come across a situation
-where you want to override a file in that third-party bundle with a file
-in one of your own bundles. Symfony gives you a very convenient way to override
-things like controllers, templates, and other files in a bundle's
-``Resources/`` directory.
+Lorsque vous travaillerez avec des bundles tiers, vous allez probablement rencontrer une
+situation où vous voudrez passer outre un fichier de ce bundle tiers en le remplacant
+par un fichier de l'un de vos propres bundles. Symfony vous fournit une manière très
+pratique d'outrepasser des choses comme des contrôleurs, des templates et d'autres
+fichiers présents dans le dossier ``Resources/`` d'un bundle.
 
-For example, suppose that you're installing the `FOSUserBundle`_, but you
-want to override its base ``layout.html.twig`` template, as well as one of
-its controllers. Suppose also that you have your own ``AcmeUserBundle``
-where you want the overridden files to live. Start by registering the ``FOSUserBundle``
-as the "parent" of your bundle::
+Par exemple, supposons que vous installiez le `FOSUserBundle`_, mais que vous souhaitiez
+outrepasser son template de base ``layout.html.twig``, ainsi que l'un de ses contrôleurs.
+Supposons aussi que vous ayez votre propre ``AcmeUserBundle`` où vous voulez avoir les
+fichiers de substitution. Commencez par déclarer le ``FOSUserBundle`` comme parent de
+votre bundle::
 
     // src/Acme/UserBundle/AcmeUserBundle.php
     namespace Acme\UserBundle;
@@ -29,16 +29,16 @@ as the "parent" of your bundle::
         }
     }
 
-By making this simple change, you can now override several parts of the ``FOSUserBundle``
-simply by creating a file with the same name.
+En effectuant ce simple changement, vous pouvez désormais outrepasser plusieurs parties
+du ``FOSUserBundle`` en créant simplement un fichier ayant le même nom.
 
-Overriding Controllers
-~~~~~~~~~~~~~~~~~~~~~~
+Outrepasser des contrôleurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Suppose you want to add some functionality to the ``registerAction`` of a
-``RegistrationController`` that lives inside ``FOSUserBundle``. To do so,
-just create your own ``RegistrationController.php`` file, override the bundle's
-original method, and change its functionality::
+Supposons que vous vouliez ajouter de la fonctionnalité à ``registerAction``
+du ``RegistrationController`` résidant dans le ``FOSUserBundle``. Pour faire
+cela, créez simplement votre propre fichier ``RegistrationController.php``,
+outrepassez la méthode originale du bundle, et changez sa fonctionnalité::
 
     // src/Acme/UserBundle/Controller/RegistrationController.php
     namespace Acme\UserBundle\Controller;
@@ -59,46 +59,50 @@ original method, and change its functionality::
 
 .. tip::
 
-    Depending on how severely you need to change the behavior, you might
-    call ``parent::registerAction()`` or completely replace its logic with
-    your own.
+    Suivant le degré de changement de fonctionnalité dont vous avez besoin,
+    vous pourriez appeler ``parent::registerAction()`` ou alors remplacer
+    complètement sa logique par la vôtre.
 
 .. note::
 
-    Overriding controllers in this way only works if the bundle refers to
-    the controller using the standard ``FOSUserBundle:Registration:register``
-    syntax in routes and templates. This is the best practice.
+    Outrepasser des contrôleurs de cette façon fonctionne uniquement si le
+    bundle réfère au contrôleur en utilisant la syntaxe standard
+    ``FOSUserBundle:Registration:register`` dans les routes et templates.
+    Ceci est la bonne pratique.
 
-Overriding Resources: Templates, Routing, Validation, etc
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Outrepasser des ressources : templates, routage, validation, etc.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Most resources can also be overridden, simply by creating a file in the same
-location as your parent bundle.
+La plupart des ressources peuvent aussi être outrepassées en créant simplement un
+fichier au même emplacement que dans votre bundle parent.
 
-For example, it's very common to need to override the ``FOSUserBundle``'s
-``layout.html.twig`` template so that it uses your application's base layout.
-Since the file lives at ``Resources/views/layout.html.twig`` in the ``FOSUserBundle``,
-you can create your own file in the same location of ``AcmeUserBundle``.
-Symfony will ignore the file that lives inside the ``FOSUserBundle`` entirely,
-and use your file instead.
+Par exemple, il est très courant d'avoir besoin d'outrepasser le template
+``layout.html.twig`` du ``FOSUserBundle`` afin qu'il utilise le layout de
+base de votre application. Comme le fichier réside à l'emplacement
+``Resources/views/layout.html.twig`` dans le ``FOSUserBundle``, vous pouvez
+créer votre propre fichier au même endroit dans le ``AcmeUserBundle``.
+Symfony va complètement ignorer le fichier étant dans le ``FOSUserBundle``,
+et utiliser le vôtre à la place.
 
-The same goes for routing files, validation configuration and other resources.
+Il en va de même pour les fichiers de routage, de configuration de la validation
+et pour les autres ressources.
 
 .. note::
 
-    The overriding of resources only works when you refer to resources with
-    the ``@FosUserBundle/Resources/config/routing/security.xml`` method.
-    If you refer to resources without using the @BundleName shortcut, they
-    can't be overridden in this way.
+    Outrepasser des ressources fonctionne uniquement lorsque vous référez à
+    des ressources via la méthode ``@FosUserBundle/Resources/config/routing/security.xml``.
+    Si vous référez à des ressources sans utiliser le @NomDuBundle raccourci,
+    ces dernières ne peuvent alors pas être outrepassées.
 
 .. caution::
 
-   Translation files do not work in the same way as described above. All
-   translation files are accumulated into a set of "pools" (one for each)
-   domain. Symfony loads translation files from bundles first (in the order
-   that the bundles are initialized) and then from your ``app/Resources``
-   directory. If the same translation is specified in two resources, the
-   translation from the resource that's loaded last will win.
+   Les fichiers de traduction ne fonctionnent pas de la même manière que
+   décrite ci-dessus. Tous les fichiers de traduction sont accumulés dans
+   un ensemble de « groupements » (un pour chaque domaine). Symfony charge
+   les fichiers de traduction des bundles en premier (dans l'ordre dans
+   lequel les bundles sont initialisés) et ensuite ceux de votre répertoire
+   ``app/Resources``. Si la même traduction est spéficiée dans deux ressources,
+   c'est la traduction venant de la ressource chargée en dernier qui gagnera.
 
 .. _`FOSUserBundle`: https://github.com/friendsofsymfony/fosuserbundle
 
