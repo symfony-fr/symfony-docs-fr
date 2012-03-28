@@ -1,26 +1,26 @@
 .. index::
    single: Session; Database Storage
 
-How to use PdoSessionStorage to store Sessions in the Database
-==============================================================
+Comment stocker les sessions dans la base de données grâce à PdoSessionStorage
+==============================================================================
 
-The default session storage of Symfony2 writes the session information to
-file(s). Most medium to large websites use a database to store the session
-values instead of files, because databases are easier to use and scale in a
-multi-webserver environment.
+Par défaut, Symfony2 stocke les sessions dans des fichiers. La plupart des sites
+de moyenne et grande envegure vont cependant vouloir stocker les sessions dans la base de données
+plutôt que dans des fichiers, car l'usage des bases de données permet plus facilement la
+gestion de la montée en charge dans un environnement multi-serveurs.
 
-Symfony2 has a built-in solution for database session storage called
+Symfony2 incorpore une solution de stockage de sessions dans la base de donnée appelée
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\PdoSessionStorage`.
-To use it, you just need to change some parameters in ``config.yml`` (or the
-configuration format of your choice):
+Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.yml``
+(ou le format de configuration de votre choix):
 
 .. versionadded:: 2.1
-    In Symfony2.1 the class and namespace are slightly modified. You can now 
-    find the `PdoSessionStorage` class in the `Session\\Storage` namespace:
-    ``Symfony\Component\HttpFoundation\Session\Storage\PdoSessionStorage``. Also
-    note the second and third constructor arguments to the class have changed
-    order. Below, you'll notice that ``%session.storage.options%`` and ``%pdo.db_options%``
-    have switched places.
+    Dans Symfony2.1 la classe et l'espace de noms ont évolué. Vous trouvez dorénavant
+    la classe `PdoSessionStorage` dans l'espace `Session\\Storage` :
+    ``Symfony\Component\HttpFoundation\Session\Storage\PdoSessionStorage``.
+    De même, les second et troisième arguments du constructeur ont été permutés.
+    Vous noterez ci-dessous que les arguments ``%session.storage.options%`` et ``%pdo.db_options%``
+    ont échangé leurs positions.
 
 .. configuration-block::
 
@@ -116,21 +116,20 @@ configuration format of your choice):
         ));
         $container->setDefinition('session.storage.pdo', $storageDefinition);
 
-* ``db_table``: The name of the session table in your database
-* ``db_id_col``: The name of the id column in your session table (VARCHAR(255) or larger)
-* ``db_data_col``: The name of the value column in your session table (TEXT or CLOB)
-* ``db_time_col``: The name of the time column in your session table (INTEGER)
+* ``db_table`` : Nom de la table des sessions dans votre base de donnée
+* ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (de type VARCHAR(255) ou plus)
+* ``db_data_col`` : Nom de la colonne des valeurs dans la table des sessions (de type TEXT ou CLOB)
+* ``db_time_col`` : Nom de la colonne temps dans la table des sessions (INTEGER)
 
-Sharing your Database Connection Information
---------------------------------------------
+Partager les informations de connection à la base de données
+------------------------------------------------------------
 
-With the given configuration, the database connection settings are defined for
-the session storage connection only. This is OK when you use a separate
-database for the session data.
+Avec cette configuration, les paramètres de connection à la base de données ne concernent
+que le stockage des sessions. Ceci peut fonctionner si vous dédiez une base de donnée aux sessions.
 
-But if you'd like to store the session data in the same database as the rest
-of your project's data, you can use the connection settings from the
-parameter.ini by referencing the database-related parameters defined there:
+Mais si vous désirez stocker les informations de session dans la même base de données
+que le reste des données du projet, vous pouvez réutiliser les paramètres de connection définis dans
+dans ``parameter.ini`` en référençant lesdits paramètres :
 
 .. configuration-block::
 
@@ -159,14 +158,13 @@ parameter.ini by referencing the database-related parameters defined there:
             '%database_password%',
         ));
 
-Example SQL Statements
-----------------------
+Exemple de statement SQL
+------------------------
 
 MySQL
 ~~~~~
 
-The SQL statement for creating the needed database table might look like the
-following (MySQL):
+Le statement SQL pour la création d'une table de sessions sera probablement proche de :
 
 .. code-block:: sql
 
@@ -180,7 +178,7 @@ following (MySQL):
 PostgreSQL
 ~~~~~~~~~~
 
-For PostgreSQL, the statement should look like this:
+Pour PostgreSQL, ce sera plutôt :
 
 .. code-block:: sql
 
