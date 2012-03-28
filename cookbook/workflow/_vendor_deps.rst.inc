@@ -1,87 +1,85 @@
-Managing Vendor Libraries with bin/vendors and deps
----------------------------------------------------
+Gérer les bibliothèques vendors avec bin/vendors et deps
+-----------------------------------------------------
 
-### How does it work ?
+### Comment ça marche?
 
-Every Symfony project uses a group of third-party "vendor" libraries. One
-way or another the goal is to download these files into your ``vendor/``
-directory and, ideally, to give you some sane way to manage the exact version
-you need for each.
+Chaque projet Symfony utilise des bibliothèques tiers regroupées sous l'appellation
+"vendors". D'une façon ou d'une autre, le but est de vous permettre de télécharger
+ces bibliothèques dans le répertoire  ``vendor/`` et de pouvoir en obtenir la version
+désirée pour chacune.
 
-By default, these libraries are downloaded by running a ``php bin/vendors install``
-"downloader" script. This script reads from the ``deps`` file at the root
-of your project. This is an ini-formatted script, which holds a list of each
-of the external libraries you need, the directory each should be downloaded to,
-and (optionally) the version to be downloaded. The ``bin/vendors`` script
-uses ``git`` to downloaded these, solely because these external libraries
-themselves tend to be stored via git. The ``bin/vendors`` script also reads
-the ``deps.lock`` file, which allows you to pin each library to an exact
-git commit hash.
+Par défaut, ces bibliothèques sont téléchargées en exécutant le script de téléchargement
+``php bin/vendors install``. Ce script utilise le fichier `deps`` situé à la racine
+de votre projet. Ce fichier au format INI contient la liste des bibliothèques nécessaires
+à votre projet, ainsi que le répertoire cible où chacune doit être téléchargée,
+et (de manière optionnelle) la version à télécharger. Le script `bin/vendors``
+utilise ``git`` pour ce téléchargement, car la plupart des bibliothèques
+sont gérées et disponibles via git. Le script ``bin/vendors`` se base également sur
+le fichier ``deps.lock``, lequel vous permet d'arrêter la version à une révision précise.
 
-It's important to realize that these vendor libraries are *not* actually part
-of *your* repository. Instead, they're simply un-tracked files that are downloaded
-into the ``vendor/`` directory by the ``bin/vendors`` script. But since all
-the information needed to download these files is saved in ``deps`` and ``deps.lock``
-(which *are* stored) in our repository), any other developer can use our
-project, run ``php bin/vendors install``, and download the exact same set
-of vendor libraries. This means that you're controlling exactly what each
-vendor library looks like, without needing to actually commit them to *your*
-repository.
+Nota bene: ces bibliothèques "vendor" *ne sont pas* gérées dans votre *dépôt*;
+ce sont de simples fichiers installés (et ignorés du dépôt git) dans le répertoire
+``vendor/`` par le script ``bin/vendors``. Or, puisque toute l'information nécessaire
+pour télécharger ces fichiers est disponible dans ``deps`` et ``deps.lock``
+(qui, eux, *sont* gérés par votre dépôt), tout autre développeur peut utiliser votre
+projet, lancer ``php bin/vendors install``, et obtenir les mêmes bibliothèques (et version).
+Vous contrôlez donc exactement le contenu de chaque bibliothèque, sans avoir besoin
+de le versionner dans votre dépôt.
 
-So, whenever a developer uses your project, he/she should run the ``php bin/vendors install``
-script to ensure that all of the needed vendor libraries are downloaded.
+Ainsi, lorsqu'un développeur veut travailler sur votre projet, il lui suffit de
+lancer le script ``php bin/vendors install`` pour s'assurer que toutes les bibliothèques
+nécessaires sont téléchargées.
 
-.. sidebar:: Upgrading Symfony
+.. sidebar:: Mettre à jour Symfony
 
-    Since Symfony is just a group of third-party libraries and third-party
-    libraries are entirely controlled through ``deps`` and ``deps.lock``,
-    upgrading Symfony means simply upgrading each of these files to match
-    their state in the latest Symfony Standard Edition.
+    Puisque Symfony est une bibliothèque tiers de votre projet et qu'elle est
+    donc gérée entièrement au travers de ``deps`` et``deps.lock``,
+    mettre à jour Symfony signifie simplement mettre à jour
+    ces deux fichiers afin qu'ils correspondent à la dernière version
+    de l'édition standard de Symfony.
 
-    Of course, if you've added new entries to ``deps`` or ``deps.lock``, be sure
-    to replace only the original parts (i.e. be sure not to also delete any of
-    your custom entries).
+    Bien sûr, si vous avez ajouté des entrées aux fichiers ``deps`` ou ``deps.lock``,
+    veillez à ne remplacer que les parties originales afin de ne pas supprimer les entrées
+    supplémentaires.
 
-.. caution::
+.. ::
 
-    There is also a ``php bin/vendors update`` command, but this has nothing
-    to do with upgrading your project and you will normally not need to use
-    it. This command is used to freeze the versions of all of your vendor libraries
-    by updating them to the version specified in ``deps`` and recording it
-    into the ``deps.lock`` file.
+    La command ``php bin/vendors update`` existe mais n'est pas utilisée pour la mise
+    à jour de votre projet. Vous ne l'utiliserez en fait pratiquement jamais.
+    Cette commande permet de bloquer la version de toutes vos bibliothèques vendors
+    en les mettant à jour selon la version spécifiée dans ``deps`` et en inscrivant la révision
+    correspondante dans le fichier `deps.lock``.
 
-### Hacking vendor libraries
+### Hacker les bibliothèques vendor
 
-Sometimes, you want a specific branch, tag, or commit of a library to be downloaded
-or upgraded. You can set that directly to the ``deps`` file :
+Parfois, il est nécessaire de télécharger une version précise (branche, tag) d'une bibliothèque.
+Vous pouvez le faire directement dans le fichier ``deps`` :
 
 .. code-block:: text
 
     [AcmeAwesomeBundle]
         git=http://github.com/johndoe/Acme/AwesomeBundle.git
         target=/bundles/Acme/AwesomeBundle
-        version=the-awesome-version
+        version=ma-version-trop-bien
 
-* The ``git`` option sets the URL of the library. It can use various protocols,
-  like ``http://`` as well as ``git://``. 
+* L'option ``git`` définit l'URL de la bibliothèque. Elle peut utiliser divers protocoles,
+  comme ``http://`` ou ``git://``.
 
-* The ``target`` option specifies where the repository will live : plain Symfony
-  bundles should go under the ``vendor/bundles/Acme`` directory, other third-party
-  libraries usually go to ``vendor/my-awesome-library-name``. The target directory
-  defaults to this last option when not specified.
+* L'option ``target`` définit le répertoire cible, le répertoire dans lequel la bibliothèque va être téléchargée.
+  Par convention, les bundles devraient aller dans le répertoire ``vendor/bundles/Acme``, les autres
+  bibliothèques iront dans ``vendor/ma-biblio-trop-bien``, le répertoire ``vendor`` est
+  également le répertoire cible par défaut.
 
-* The ``version`` option allows you to set a specific revision. You can use a tag
-    (``version=origin/0.42``) or a branch name (``refs/remotes/origin/awesome-branch``).
-    It defaults to ``origin/HEAD``.
+* L'option ``version`` vous permet de définir une révision spécifique. Vous pouvez lui attribuer
+  un nom de tag (``version=origin/0.42``) ou de branche (``refs/remotes/origin/ma-branche-trop-bien``).
+  Version par défaut: ``origin/HEAD``.
 
-### Updating workflow
+### Flux de mise à jour
 
-When you execute the ``php bin/vendors install``, for every library, the script first
-checks if the install directory exists. 
+lors de l'éxécution de ``php bin/vendors install``, le script vérifie d'abord si le répertoire cible
+existe pour chaque bibliothèque. Si ce n'est pas le cas, il effectue un ``git clone``.
 
-If it does not (and ONLY if it does not), it runs a ``git clone``. 
+Puis, il effectue un ``git fetch origin``, puis ``git reset --hard ma-version-trop-bien``.
 
-Then, it does a ``git fetch origin`` and a ``git reset --hard the-awesome-version``. 
-
-This means that the repository will only be cloned once. If you want to perform any
-change of the git remote, you MUST delete the entire target directory, not only its content.
+Le répertoire sera donc cloné une seule et unique fois. Pour faire des changements liés au dépôt distant
+il est nécessaire d'effacer le répertoire cible lui-même, et non seulement son contenu.
