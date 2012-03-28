@@ -1,25 +1,24 @@
 .. index::
    single: Environments; External Parameters
 
-How to Set External Parameters in the Service Container
-=======================================================
+Comment configurer les paramètres externes dans le conteneur de services
+========================================================================
 
-In the chapter :doc:`/cookbook/configuration/environments`, you learned how 
-to manage your application configuration. At times, it may benefit your application 
-to store certain credentials outside of your project code. Database configuration
-is one such example. The flexibility of the symfony service container allows
-you to easily do this.
+Dans le chapitre doc:`/cookbook/configuration/environments`, Vous avez vu
+comment gérer la configuration de votre application. Parfois on aura cependant besoin
+de stocker certaines données hors du code du projet, par exemple des mots de passe, ou des
+paramètres de configuration d'une base de donnée.
+La flexibilité du conteneur de services Symfony vous le permet.
 
-Environment Variables
----------------------
+Variables d'environnement
+-------------------------
 
-Symfony will grab any environment variable prefixed with ``SYMFONY__`` and
-set it as a parameter in the service container.  Double underscores are replaced
-with a period, as a period is not a valid character in an environment variable
-name.
+Symfony va repérer toute variable d'environnement préfixée de ``SYMFONY__`` et
+la stocker en tant que paramètre dans le conteneur de services. les doubles tirets bas sont remplacés
+par un point, le point n'étant pas un caractère permis dans un nom de variable d'environnement.
 
-For example, if you're using Apache, environment variables can be set using
-the following ``VirtualHost`` configuration:
+Par exemple, si vous utilisez Apache, les variables d'environnement peuvent être définies
+par la configuration ``VirtualHost`` suivante:
 
 .. code-block:: apache
 
@@ -38,25 +37,26 @@ the following ``VirtualHost`` configuration:
 
 .. note::
 
-    The example above is for an Apache configuration, using the `SetEnv`_ 
-    directive.  However, this will work for any web server which supports
-    the setting of environment variables.
-    
-    Also, in order for your console to work (which does not use Apache),
-    you must export these as shell variables. On a Unix system, you can run
-    the following:
-    
+    L'example de configuration ci-dessus concerne Apache, à l'aide de la directive
+    `SetEnv`_. Cependant, ceci fonctionnera pour tout serveur permettant la définition
+    de variables d'environnement.
+
+    De même, afin de permettre l'usage de variables d'environnement par la console (sans serveur),
+    il est nécessaire de définir lesdites variables comme des variables shell.
+
+    Sur un système Unix:
+
     .. code-block:: bash
-    
+
         export SYMFONY__DATABASE__USER=user
         export SYMFONY__DATABASE__PASSWORD=secret
 
-Now that you have declared an environment variable, it will be present
-in the PHP ``$_SERVER`` global variable. Symfony then automatically sets all
-``$_SERVER`` variables prefixed with ``SYMFONY__`` as parameters in the service
-container.
+Maintenant que les variables d'environnement ont été déclarées, elles seront présentes
+dans la variable globale ``$_SERVER`` de PHP. Symfony va donc automatiquement recopier
+les valeurs des variables ``$_SERVER`` préfixées de ``SYMFONY__`` en tant que paramètres
+du conteneur de services.
 
-You can now reference these parameters wherever you need them.
+Vous pourrez ainsi faire référence à ces paramètres si nécessaire.
 
 .. configuration-block::
 
@@ -92,12 +92,12 @@ You can now reference these parameters wherever you need them.
             'password' => '%database.password%',
         ));
 
-Constants
----------
+Constantes
+----------
 
-The container also has support for setting PHP constants as parameters. To
-take advantage of this feature, map the name of your constant  to a parameter
-key, and define the type as ``constant``.
+Le conteneur de services permet également la définition de constantes PHP comme paramètres.
+Il suffit de faire correspondre le nom de votre constante à une clé de paramètre
+et de préciser le type ``constant``.
 
     .. code-block:: xml
 
@@ -115,21 +115,21 @@ key, and define the type as ``constant``.
 
 .. note::
 
-    This only works for XML configuration. If you're *not* using XML, simply
-    import an XML file to take advantage of this functionality:
-    
+    Ceci ne fonctionne qu'avec une configuration XML. Si vous *n'utilisez pas* XML
+    pour la configuration, importez un fichier XML pour pouvoir le faire:
+
     .. code-block:: yaml
-    
+
         // app/config/config.yml
         imports:
             - { resource: parameters.xml }
 
-Miscellaneous Configuration
----------------------------
+Diverses considérations
+-----------------------
 
-The ``imports`` directive can be used to pull in parameters stored elsewhere. 
-Importing a PHP file gives you the flexibility to add whatever is needed 
-in the container. The following imports a file named ``parameters.php``.
+La directive ``imports`` peut être utilisée pour récupérer des paramètres stockés ailleurs.
+L'import d'un fichier PHP vous permet un maximum de flexibilité dans le conteneur.
+Le code suivant importe un fichier ``parameters.php``.
 
 .. configuration-block::
 
@@ -153,13 +153,13 @@ in the container. The following imports a file named ``parameters.php``.
 
 .. note::
 
-    A resource file can be one of many types. PHP, XML, YAML, INI, and
-    closure resources are all supported by the ``imports`` directive.
+    Un fichier de rssource peut être de plusieurs types. La directive ``imports`` accepte
+    des ressources de type PHP, XML, YAML, INI, et closure.
 
-In ``parameters.php``, tell the service container the parameters that you wish
-to set. This is useful when important configuration is in a nonstandard
-format. The example below includes a Drupal database's configuration in
-the symfony service container.
+Dans le fichier ``parameters.php``, vous allez indiquer au conteneur de services les paramètres
+que vous désirez définir. Ceci est notamment utile lorsque d'importants éléments de configuration
+sont disponibles dans un format non.standard. L'exemple ci-dessous importe des paramètres de configuration
+de base de données pour Drupal dans le conteneur de services.
 
 .. code-block:: php
 
