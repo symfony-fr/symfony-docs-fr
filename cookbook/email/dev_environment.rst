@@ -1,23 +1,24 @@
-How to Work with Emails During Development
-==========================================
+Comment travailler avec les Emails pendant le Développement
+===========================================================
 
-When developing an application which sends email, you will often
-not want to actually send the email to the specified recipient during
-development. If you are using the ``SwiftmailerBundle`` with Symfony2, you
-can easily achieve this through configuration settings without having to
-make any changes to your application's code at all. There are two main
-choices when it comes to handling email during development: (a) disabling the
-sending of email altogether or (b) sending all email to a specific
-address.
+Lorsque vous développez une application qui envoie des emails, vous
+voudrez souvent que cette dernière n'en envoie pas au destinaire
+spécifié pendant le développement. Si vous utilisez le ``SwiftmailerBundle``
+avec Symfony2, vous pouvez facilement réaliser cela à travers les paramètres
+de configuration sans avoir à faire quelconque changement dans votre code.
+Il y a deux choix principaux possibles lorsqu'on parle de gestion d'email
+durant le développement : (a) désactiver complètement l'envoi d'emails ou
+(b) envoyer tous les emails à une adresse spécifique.
 
-Disabling Sending
------------------
+Désactiver l'Envoi
+------------------
 
-You can disable sending email by setting the ``disable_delivery`` option
-to ``true``. This is the default in the ``test`` environment in the Standard
-distribution. If you do this in the ``test`` specific config then email
-will not be sent when you run tests, but will continue to be sent in the
-``prod`` and ``dev`` environments:
+Vous pouvez désactiver l'envoi d'emails en définissant l'option
+``disable_delivery`` comme étant ``true``. C'est ce qui est fait par défaut
+dans l'environnement ``test`` dans la distribution Standard. Si vous
+faites cela dans la config spécifique ``test``, alors les emails ne seront
+pas envoyés lorsque vous exécuterez les tests, mais continueront d'être
+envoyés dans les environnements ``prod`` et ``dev`` :
 
 .. configuration-block::
 
@@ -46,15 +47,15 @@ will not be sent when you run tests, but will continue to be sent in the
             'disable_delivery'  => "true",
         ));
 
-If you'd also like to disable deliver in the ``dev`` environment, simply
-add this same configuration to the ``config_dev.yml`` file.
+Si vous voulez aussi désactiver l'envoi dans l'environnement ``dev``,
+ajoutez tout simplement la même configuration dans le fichier ``config_dev.yml``.
 
-Sending to a Specified Address
-------------------------------
+Envoyer à une Adresse Spécifiée
+-------------------------------
 
-You can also choose to have all email sent to a specific address, instead
-of the address actually specified when sending the message. This can be done
-via the ``delivery_address`` option:
+Vous pouvez aussi choisir d'avoir tous les emails envoyés à une adresse
+spécifique à la place de l'adresse réellement spécifiée lors de l'envoi
+du message. Ceci peut être accompli via l'option ``delivery_address`` :
 
 .. configuration-block::
 
@@ -83,7 +84,7 @@ via the ``delivery_address`` option:
             'delivery_address'  => "dev@example.com",
         ));
 
-Now, suppose you're sending an email to ``recipient@example.com``.
+Maintenant, supposons que vous envoyiez un email à ``recipient@example.com``.
 
 .. code-block:: php
 
@@ -100,40 +101,44 @@ Now, suppose you're sending an email to ``recipient@example.com``.
         return $this->render(...);
     }
 
-In the ``dev`` environment, the email will instead be sent to ``dev@example.com``.
-Swiftmailer will add an extra header to the email, ``X-Swift-To``, containing
-the replaced address, so you can still see who it would have been sent to.
+Dans l'environnement ``dev``, l'email sera envoyé à la place à ``dev@example.com``.
+Swiftmailer ajoutera un en-tête supplémentaire à l'email, ``X-Swift-To``, contenant
+l'adresse remplacée, afin que vous puissiez toujours voir à qui il aurait été
+envoyé.
 
 .. note::
 
-    In addition to the ``to`` addresses, this will also stop the email being
-    sent to any ``CC`` and ``BCC`` addresses set for it. Swiftmailer will add
-    additional headers to the email with the overridden addresses in them.
-    These are ``X-Swift-Cc`` and ``X-Swift-Bcc`` for the ``CC`` and ``BCC``
-    addresses respectively.
+    En plus des adresses ``to``, cela va aussi stopper les emails envoyés
+    à n'importe quelle adresse des champs ``CC`` et ``BCC``. Swiftmailer
+    ajoutera des en-têtes additionnels à l'email contenant les adresses
+    outrepassées. Ces en-têtes sont respectivement ``X-Swift-Cc`` et
+    ``X-Swift-Bcc`` pour les adresses de ``CC`` et ``BCC``.
 
-Viewing from the Web Debug Toolbar
-----------------------------------
+Voir les informations depuis la Barre d'Outils de Débuggage Web
+---------------------------------------------------------------
 
-You can view any email sent during a single response when you are in the
-``dev`` environment using the Web Debug Toolbar. The email icon in the toolbar
-will show how many emails were sent. If you click it, a report will open
-showing the details of the sent emails.
+Vous pouvez voir tout email envoyé durant une unique réponse lorsque vous
+êtes dans l'environnement ``dev`` via la Barre d'Outils de Débuggage.
+L'icône d'email dans la barre d'outils montrera combien d'emails ont été
+envoyés. Si vous cliquez dessus, un rapport s'ouvrira montrant les détails
+des emails envoyés.
 
-If you're sending an email and then immediately redirecting to another page,
-the web debug toolbar will not display an email icon or a report on the next
-page.
+Si vous envoyez un email et puis redirigez immédiatement vers une autre page,
+la barre d'outils de débuggage n'affichera pas d'icône d'email ni de rapport
+sur la page d'après.
 
-Instead, you can set the ``intercept_redirects`` option to ``true`` in the
-``config_dev.yml`` file, which will cause the redirect to stop and allow
-you to open the report with details of the sent emails.
+A la place, vous pouvez définir l'option ``intercept_redirects`` comme étant
+``true`` dans le fichier ``config_dev.yml``, ce qui va forcer les redirections
+à s'arrêter et à vous permettre d'ouvrir le rapport avec les détails des emails
+envoyés.
 
 .. tip::
 
-    Alternatively, you can open the profiler after the redirect and search
-    by the submit URL used on previous request (e.g. ``/contact/handle``).
-    The profiler's search feature allows you to load the profiler information
-    for any past requests.
+    Sinon, vous pouvez ouvrir le profiler après la redirection et rechercher
+    par l'URL soumise et utilisée lors de la requête précédente (par exemple :
+    ``/contact/handle``). La fonctionnalité de recherche du profiler vous
+    permet de charger les informations du profiler pour toutes les requêtes
+    passées.
 
 .. configuration-block::
 

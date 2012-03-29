@@ -1,18 +1,19 @@
-How to Spool Email
-==================
+Comment utiliser le « Spool » d'Email
+=====================================
 
-When you are using the ``SwiftmailerBundle`` to send an email from a Symfony2
-application, it will default to sending the email immediately. You may, however,
-want to avoid the performance hit of the communication between ``Swiftmailer``
-and the email transport, which could cause the user to wait for the next
-page to load while the email is sending. This can be avoided by choosing
-to "spool" the emails instead of sending them directly. This means that ``Swiftmailer``
-does not attempt to send the email but instead saves the message to somewhere
-such as a file. Another process can then read from the spool and take care
-of sending the emails in the spool. Currently only spooling to file is supported
-by ``Swiftmailer``.
+Quand vous utilisez le ``SwiftmailerBundle`` pour envoyer un email depuis une
+application Symfony2, il va par défaut l'envoyer immédiatement. Vous pourriez,
+cependant, vouloir éviter d'avoir un hit de performance entre le ``Swiftmailer``
+et le transport de l'email, qui pourrait avoir pour conséquence que l'utilisateur
+ait à attendre que la page suivante se charge pendant que l'email est envoyé. Cela
+peut être évité en choisissant d'envoyer les emails en mode « spool » au lieu
+de les envoyer directement. Cela signifie que ``Swiftmailer`` n'essaie pas d'envoyer
+l'email mais à la place sauvegarde le message quelque part comme par exemple
+dans un fichier. Un autre processus peut alors lire depuis le « spool » et
+prendre en charge l'envoi des emails contenus dans ce dernier. Pour le moment,
+seul le « spooling » via un fichier est supporté par ``Swiftmailer``.
 
-In order to use the spool, use the following configuration:
+Afin d'utiliser le « spool », utilisez la configuration suivante :
 
 .. configuration-block::
 
@@ -53,34 +54,36 @@ In order to use the spool, use the following configuration:
 
 .. tip::
 
-    If you want to store the spool somewhere with your project directory,
-    remember that you can use the `%kernel.root_dir%` parameter to reference
-    the project's root:
+    Si vous voulez stocker le « spool » quelque part dans votre répertoire
+    de projet, rappelez-vous que vous pouvez utiliser le paramètre
+    `%kernel.root_dir%` pour référencer la racine du projet :
 
     .. code-block:: yaml
 
         path: %kernel.root_dir%/spool
 
-Now, when your app sends an email, it will not actually be sent but instead
-added to the spool. Sending the messages from the spool is done separately.
-There is a console command to send the messages in the spool:
+Maintenant, quand votre application envoie un email, il ne sera en fait pas
+envoyé mais ajouté au « spool » à la place. L'envoi des messages depuis le
+« spool » est effectué séparément. Il y a une commande de la console pour
+envoyer les messages qui sont dans le « spool » :
 
 .. code-block:: bash
 
     php app/console swiftmailer:spool:send
 
-It has an option to limit the number of messages to be sent:
+Cette commande possède une option pour limiter le nombre de messages
+devant être envoyés :
 
 .. code-block:: bash
 
     php app/console swiftmailer:spool:send --message-limit=10
 
-You can also set the time limit in seconds:
+Vous pouvez aussi définir la limite de temps en secondes :
 
 .. code-block:: bash
 
     php app/console swiftmailer:spool:send --time-limit=10
 
-Of course you will not want to run this manually in reality. Instead, the
-console command should be triggered by a cron job or scheduled task and run
-at a regular interval.
+Bien sûr, vous ne voudrez pas exécuter ceci manuellement dans la réalité.
+A la place, la commande de la console devrait être lancée par une tâche cron
+ou une tâche planifiée et exécutée à intervalle régulier.
