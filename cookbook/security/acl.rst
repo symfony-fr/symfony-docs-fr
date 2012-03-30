@@ -1,39 +1,45 @@
 .. index::
-   single: Security; Access Control Lists (ACLs)
+   single: Sécurité; Access Control Lists (ACLs)
 
-Access Control Lists (ACLs)
-===========================
+Access Control Lists (ACLs) (« liste de contrôle d'accès » en français)
+=======================================================================
 
-In complex applications, you will often face the problem that access decisions
-cannot only be based on the person (``Token``) who is requesting access, but
-also involve a domain object that access is being requested for. This is where
-the ACL system comes in.
+Dans les applications complexes, vous allez souvent rencontrer le problème
+que les décisions d'accès ne peuvent pas uniquement se baser sur la personne
+(``Token``) qui demande l'accès, mais qu'elles impliquent aussi un objet domaine
+auquel l'accès est demandé. C'est là où le système des ACL intervient.
 
-Imagine you are designing a blog system where your users can comment on your
-posts. Now, you want a user to be able to edit his own comments, but not those
-of other users; besides, you yourself want to be able to edit all comments. In
-this scenario, ``Comment`` would be our domain object that you want to
-restrict access to. You could take several approaches to accomplish this using
-Symfony2, two basic approaches are (non-exhaustive):
+Imaginez que vous êtes en train de créer un système de blog dans lequel vos
+utilisateurs peuvent commenter vos posts. Maintenant, vous voulez qu'un
+utilisateur puisse éditer ses propres commentaires, mais pas ceux d'autres
+utilisateurs ; en outre, vous voulez vous-même être capable d'éditer tous
+les commentaires. Dans ce scénario, ``Comment`` serait notre objet domaine
+auquel vous souhaitez restreindre l'accès. Vous devriez considérer plusieurs
+approches pour accomplir cela en utilisant Symfony2 ; les deux approches basiques
+sont (liste non-exhaustive) :
 
-- *Enforce security in your business methods*: Basically, that means keeping a
-  reference inside each ``Comment`` to all users who have access, and then
-  compare these users to the provided ``Token``.
-- *Enforce security with roles*: In this approach, you would add a role for
-  each ``Comment`` object, i.e. ``ROLE_COMMENT_1``, ``ROLE_COMMENT_2``, etc.
+- *Forcer la sécurité dans vos méthodes business* : cela signifie garder une
+  référence dans chaque ``Comment`` de tous les utilisateurs qui ont accès, et
+  alors de comparer ces utilisateurs avec le ``Token`` fourni.
+- *Forcer la sécurité avec des rôles* : avec cette approche, vous ajouteriez
+  un rôle pour chaque objet ``Comment``, i.e. ``ROLE_COMMENT_1``,
+  ``ROLE_COMMENT_2``, etc.
 
-Both approaches are perfectly valid. However, they couple your authorization
-logic to your business code which makes it less reusable elsewhere, and also
-increases the difficulty of unit testing. Besides, you could run into
-performance issues if many users would have access to a single domain object.
+Les deux approches sont parfaitement valides. Cependant, elles associent votre
+logique d'autorisation à votre code business, ce qui rend le tout moins
+réutilisable ailleurs, et qui augmente aussi la difficulté d'effectuer des tests
+unitaires. En outre, vous pourriez rencontrer des problèmes de performance
+si beaucoup d'utilisateurs accédaient à un même et unique objet domaine.
 
-Fortunately, there is a better way, which we will talk about now.
+Heureusement, il y a une meilleure façon de faire, dont nous allons parler
+maintenant.
 
-Bootstrapping
--------------
+Initialisation (« Bootstrapping » en anglais)
+---------------------------------------------
 
-Now, before we finally can get into action, we need to do some bootstrapping.
-First, we need to configure the connection the ACL system is supposed to use:
+Maintenant, avant que nous puissions finalement passer à l'action, nous avons
+besoin d'effectuer certaines initialisations. Premièrement, nous devons
+configurer la connexion que le système d'ACL est supposé utiliser :
 
 .. configuration-block::
 
@@ -61,27 +67,28 @@ First, we need to configure the connection the ACL system is supposed to use:
 
 .. note::
 
-    The ACL system requires at least one Doctrine DBAL connection to be
-    configured. However, that does not mean that you have to use Doctrine for
-    mapping your domain objects. You can use whatever mapper you like for your
-    objects, be it Doctrine ORM, Mongo ODM, Propel, or raw SQL, the choice is 
-    yours.
+    Le système ACL requiert au moins qu'une connexion DBAL Doctrine soit
+    configurée. Cependant, cela ne veut pas dire que vous devez utiliser
+    Doctrine pour faire correspondre vos objets domaine. Vous pouvez utiliser
+    quelconque outil de correspondance de votre choix pour vos objets, que ce
+    soit l'ORM Doctrine, l'ODM Mongo, Propel, ou du SQL brut, le choix reste
+    le vôtre.
 
-After the connection is configured, we have to import the database structure.
-Fortunately, we have a task for this. Simply run the following command:
+Après que la connexion soit configurée, nous devons importer la structure de
+la base de données. Heureusement, nous avons une tâche pour cela. Exécutez
+simplement la commande suivante :
 
 .. code-block:: text
 
     php app/console init:acl
 
-Getting Started
----------------
+Démarrage
+---------
 
-Coming back to our small example from the beginning, let's implement ACL for
-it.
+Revenons à notre petit exemple depuis le début et implémentons ses ACLs.
 
-Creating an ACL, and adding an ACE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Créer un ACL, et ajouter un ACE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -96,7 +103,7 @@ Creating an ACL, and adding an ACE
     {
         $comment = new Comment();
 
-        // setup $form, and bind data
+        // préparation du $form, et liaison des données
         // ...
 
         if ($form->isValid()) {
@@ -104,46 +111,47 @@ Creating an ACL, and adding an ACE
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            // creating the ACL
+            // crée les ACL
             $aclProvider = $this->get('security.acl.provider');
             $objectIdentity = ObjectIdentity::fromDomainObject($comment);
             $acl = $aclProvider->createAcl($objectIdentity);
 
-            // retrieving the security identity of the currently logged-in user
+            // récupère l'identité de sécurité de l'utilisateur actuellement connecté
             $securityContext = $this->get('security.context');
             $user = $securityContext->getToken()->getUser();
             $securityIdentity = UserSecurityIdentity::fromAccount($user);
 
-            // grant owner access
+            // accorde les accès propriétaires
             $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
             $aclProvider->updateAcl($acl);
         }
     }
 
-There are a couple of important implementation decisions in this code snippet.
-For now, I only want to highlight two:
+Il y a plusieurs décisions d'implémentation importantes dans ce petit bout de
+code. Pour le moment, je veux mettre en évidence seulement deux d'entres elles :
 
-First, you may have noticed that ``->createAcl()`` does not accept domain
-objects directly, but only implementations of the ``ObjectIdentityInterface``.
-This additional step of indirection allows you to work with ACLs even when you
-have no actual domain object instance at hand. This will be extremely helpful
-if you want to check permissions for a large number of objects without
-actually hydrating these objects.
+Tout d'abord, vous avez peut-être remarqué que ``->createAcl()`` n'accepte
+pas d'objets de domaine directement, mais uniquement des implémentations de
+``ObjectIdentityInterface``. Cette étape additionnelle d'indirection vous
+permet de travailler avec les ACLs même si vous n'avez pas d'instance d'objet
+domaine sous la main. Cela va être extrêmement utile si vous voulez vérifier
+les permissions pour un grand nombre d'objets sans avoir à les désérialiser.
 
-The other interesting part is the ``->insertObjectAce()`` call. In our
-example, we are granting the user who is currently logged in owner access to
-the Comment. The ``MaskBuilder::MASK_OWNER`` is a pre-defined integer bitmask;
-don't worry the mask builder will abstract away most of the technical details,
-but using this technique we can store many different permissions in one
-database row which gives us a considerable boost in performance.
+L'autre partie intéressante est l'appel à ``->insertObjectAce()``. Dans notre
+exemple, nous accordons à l'utilisateur qui est connecté un accès propriétaire
+au Comment. Le ``MaskBuilder::MASK_OWNER`` est un masque binaire prédéfini ;
+ne vous inquiétez pas, le constructeur de masque va abstraire la plupart des
+détails techniques, mais en utilisant cette technique nous pouvons stocker
+beaucoup de différentes permissions dans une même ligne de base de données ;
+ce qui nous offre un boost considérable au niveau performance.
 
 .. tip::
 
-    The order in which ACEs are checked is significant. As a general rule, you
-    should place more specific entries at the beginning.
+    L'ordre dans lequel les ACEs sont vérifiées est important. En tant que règle
+    générale, vous devriez placer les entrées les plus spécifiques au début.
 
-Checking Access
-~~~~~~~~~~~~~~~
+Vérification des Accès
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -152,36 +160,38 @@ Checking Access
     {
         $securityContext = $this->get('security.context');
 
-        // check for edit access
+        // vérification pour les droits d'accès en édition
         if (false === $securityContext->isGranted('EDIT', $comment))
         {
             throw new AccessDeniedException();
         }
 
-        // retrieve actual comment object, and do your editing here
+        // récupérez l'objet « comment » actuel, et éditez-le ici
         // ...
     }
 
-In this example, we check whether the user has the ``EDIT`` permission.
-Internally, Symfony2 maps the permission to several integer bitmasks, and
-checks whether the user has any of them.
+Dans cet exemple, nous vérifions que l'utilisateur possède la permission
+``EDIT``. En interne, Symfony2 fait correspondre la permission avec
+plusieurs masques binaires, et vérifie si l'utilisateur possède l'un
+d'entre eux.
 
 .. note::
 
-    You can define up to 32 base permissions (depending on your OS PHP might
-    vary between 30 to 32). In addition, you can also define cumulative
-    permissions.
+    Vous pouvez définir jusqu'à 32 permissions de base (dépendant du PHP
+    de votre OS, cela pourrait varier entre 30 et 32). De plus, vous pouvez
+    aussi définir des permissions cumulées.
 
-Cumulative Permissions
-----------------------
+Permissions Cumulées
+--------------------
 
-In our first example above, we only granted the user the ``OWNER`` base
-permission. While this effectively also allows the user to perform any
-operation such as view, edit, etc. on the domain object, there are cases where
-we want to grant these permissions explicitly.
+Dans notre premier exemple ci-dessus, nous avons accordé uniquement la
+permission basique ``OWNER`` à l'utilisateur. Bien que cela permette aussi
+à l'utilisateur d'effectuer n'importe quelle opération telle que la lecture,
+l'édition, etc. sur l'objet domaine, il y a des cas où nous voulons accorder
+ces permissions explicitement.
 
-The ``MaskBuilder`` can be used for creating bit masks easily by combining
-several base permissions:
+Le ``MaskBuilder`` peut être utilisé pour créer des masques binaires facilement
+en combinant plusieurs permissions de base :
 
 .. code-block:: php
 
@@ -194,11 +204,12 @@ several base permissions:
     ;
     $mask = $builder->get(); // int(15)
 
-This integer bitmask can then be used to grant a user the base permissions you
-added above:
+Ce masque binaire représenté par un entier peut ainsi être utilisé pour accorder
+à un utilisateur les permissions de base que vous avez ajouté ci-dessus :
 
 .. code-block:: php
 
     $acl->insertObjectAce(new UserSecurityIdentity('johannes'), $mask);
 
-The user is now allowed to view, edit, delete, and un-delete objects.
+L'utilisateur a désormais le droit de lire, éditer, supprimer, et annuler
+une suppression sur des objets.
