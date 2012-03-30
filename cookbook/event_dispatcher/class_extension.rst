@@ -1,11 +1,12 @@
 .. index::
-   single: Event Dispatcher
+   single: Dispatcher d'Evènements
 
-How to extend a Class without using Inheritance
-===============================================
+Comment étendre une Classe sans utiliser l'Héritage
+===================================================
 
-To allow multiple classes to add methods to another one, you can define the
-magic ``__call()`` method in the class you want to be extended like this:
+Pour permettre à plusieurs classes d'ajouter des méthodes à une autre, vous
+pouvez définir la méthode magique ``__call()`` dans la classe que vous voulez
+étendre comme cela :
 
 .. code-block:: php
 
@@ -15,23 +16,24 @@ magic ``__call()`` method in the class you want to be extended like this:
 
         public function __call($method, $arguments)
         {
-            // create an event named 'foo.method_is_not_found'
+            // crée un évènement nommé 'foo.method_is_not_found'
             $event = new HandleUndefinedMethodEvent($this, $method, $arguments);
             $this->dispatcher->dispatch($this, 'foo.method_is_not_found', $event);
 
-            // no listener was able to process the event? The method does not exist
+            // aucun listener n'a été capable d'analyser l'évènement ? La méthode
+            // n'existe pas
             if (!$event->isProcessed()) {
                 throw new \Exception(sprintf('Call to undefined method %s::%s.', get_class($this), $method));
             }
 
-            // return the listener returned value
+            // retourne la valeur retournée par le listener
             return $event->getReturnValue();
         }
     }
 
-This uses a special ``HandleUndefinedMethodEvent`` that should also be
-created. This is a generic class that could be reused each time you need to
-use this pattern of class extension:
+Cela utilise un évènement ``HandleUndefinedMethodEvent`` spécial qui devrait
+aussi être créé. C'est en fait une classe générique qui pourrait être réutilisée
+chaque fois que vous avez besoin de ce pattern d'extension de classe :
 
 .. code-block:: php
 
@@ -68,7 +70,8 @@ use this pattern of class extension:
         }
 
         /**
-         * Sets the value to return and stops other listeners from being notified
+         * Définit la valeur à retourner et stoppe les autres listeners allant
+         * être notifiés
          */
         public function setReturnValue($val)
         {
@@ -88,8 +91,8 @@ use this pattern of class extension:
         }
     }
 
-Next, create a class that will listen to the ``foo.method_is_not_found`` event
-and *add* the method ``bar()``:
+Ensuite, créez une classe qui va écouter l'évènement ``foo.method_is_not_found``
+et *ajoutez* la méthode ``bar()`` :
 
 .. code-block:: php
 
@@ -97,28 +100,29 @@ and *add* the method ``bar()``:
     {
         public function onFooMethodIsNotFound(HandleUndefinedMethodEvent $event)
         {
-            // we only want to respond to the calls to the 'bar' method
+            // nous voulons répondre seulement aux appels de la méthode 'bar'
             if ('bar' != $event->getMethod()) {
-                // allow another listener to take care of this unknown method
+                // autorise un autre listener à prendre en charge cette méthode
+                // inconnue
                 return;
             }
 
-            // the subject object (the foo instance)
+            // le sujet de l'objet (l'instance foo)
             $foo = $event->getSubject();
 
-            // the bar method arguments
+            // les arguments de la méthode bar
             $arguments = $event->getArguments();
 
-            // do something
+            // faites quelque chose
             // ...
 
-            // set the return value
+            // définit la valeur retournée
             $event->setReturnValue($someValue);
         }
     }
 
-Finally, add the new ``bar`` method to the ``Foo`` class by register an
-instance of ``Bar`` with the ``foo.method_is_not_found`` event:
+Finalement, ajoutez la nouvelle méthode ``bar`` à la classe ``Foo`` en
+déclarant une instance de ``Bar`` avec l'évènement ``foo.method_is_not_found`` :
 
 .. code-block:: php
 
