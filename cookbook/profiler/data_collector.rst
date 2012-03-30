@@ -5,13 +5,13 @@ Comment créer un Collecteur de Données personnalisé
 ===================================================
 
 Le :ref:`Profiler <internals-profiler>` de Symfony2 délègue la collection de
-données aux collecteurs de données. Symfony2 est livré avec quelques uns, mais
-vous pouvez facilement créer le vôtre.
+données aux collecteurs de données. Certains d'entre eux sont fournis avec Symfony2,
+mais vous pouvez facilement créer le vôtre.
 
 Créer un Collecteur de Données Personnalisé
 -------------------------------------------
 
-Créer un collecteur de données personnalisé est aussi simple que d'implémenter
+Créer un collecteur de données personnalisé est aussi simple que d'implémenter la classe
 :class:`Symfony\\Component\\HttpKernel\\DataCollector\\DataCollectorInterface`::
 
     interface DataCollectorInterface
@@ -34,7 +34,7 @@ Créer un collecteur de données personnalisé est aussi simple que d'implément
     }
 
 La méthode ``getName()`` doit retourner un nom unique. Ceci est utilisé pour
-plus tard pour accéder à l'information (voir :doc:`/cookbook/testing/profiling`
+accéder à l'information plus tard (voir :doc:`/cookbook/testing/profiling`
 par exemple).
 
 La méthode ``collect()`` est responsable de stocker les données auxquelles
@@ -143,7 +143,7 @@ Tous les blocs ont accès à l'objet ``collector``.
     script : ``echo base64_encode(file_get_contents($_SERVER['argv'][1]));``.
 
 Pour activer le template, ajoutez un attribut ``template`` au tag
-``data_collector`` dans votre configuration. Par exemple, en assumant que
+``data_collector`` dans votre configuration. Par exemple, en supposant que
 votre template est dans un ``AcmeDebugBundle`` :
 
 .. configuration-block::
