@@ -1,15 +1,15 @@
 .. index::
-   single: Event Dispatcher
+   single: Dispatcher d'Evènements
 
-How to customize a Method Behavior without using Inheritance
-============================================================
+Comment personnaliser le Comportement d'une Méthode sans utiliser l'Héritage
+============================================================================
 
-Doing something before or after a Method Call
----------------------------------------------
+Faire quelque chose avant ou après l'Appel d'une Méthode
+--------------------------------------------------------
 
-If you want to do something just before, or just after a method is called, you
-can dispatch an event respectively at the beginning or at the end of the
-method::
+Si vous souhaitez faire quelque chose juste avant, ou juste après qu'une méthode
+ait été appelée, vous pouvez « dispatcher » un évènement respectivement au
+début ou à la fin d'une méthode::
 
     class Foo
     {
@@ -17,17 +17,18 @@ method::
 
         public function send($foo, $bar)
         {
-            // do something before the method
+            // faites quelque chose avant le début de la méthode
             $event = new FilterBeforeSendEvent($foo, $bar);
             $this->dispatcher->dispatch('foo.pre_send', $event);
 
-            // get $foo and $bar from the event, they may have been modified
+            // récupérez $foo et $bar depuis l'évènement, ils pourraient
+            // avoir été modifiés
             $foo = $event->getFoo();
             $bar = $event->getBar();
-            // the real method implementation is here
+            // l'implémentation réelle est ici
             // $ret = ...;
 
-            // do something after the method
+            // faites quelque chose après la fin de la méthode
             $event = new FilterSendReturnValue($ret);
             $this->dispatcher->dispatch('foo.post_send', $event);
 
@@ -35,22 +36,22 @@ method::
         }
     }
 
-In this example, two events are thrown: ``foo.pre_send``, before the method is
-executed, and ``foo.post_send`` after the method is executed. Each uses a
-custom Event class to communicate information to the listeners of the two
-events. These event classes would need to be created by you and should allow,
-in this example, the variables ``$foo``, ``$bar`` and ``$ret`` to be retrieved
-and set by the listeners.
+Dans cet exemple, deux évènements sont lancés : ``foo.pre_send``, avant que la
+méthode soit exécutée, et ``foo.post_send`` après que la méthode soit exécutée.
+Chacun utilise une classe Event personnalisée pour communiquer des informations
+aux listeners des deux évènements. Ces classes d'évènements devraient être créées
+par vous-même et devraient permettre, dans cet exemple, aux variables ``$foo``,
+``$bar`` et ``$ret`` d'être récupérées et définies par les listeners.
 
-For example, assuming the ``FilterSendReturnValue`` has a ``setReturnValue``
-method, one listener might look like this:
+Par exemple, assumons que ``FilterSendReturnValue`` possède une méthode
+``setReturnValue``, un listener pourrait alors ressembler à ceci :
 
 .. code-block:: php
 
     public function onFooPostSend(FilterSendReturnValue $event)
     {
         $ret = $event->getReturnValue();
-        // modify the original ``$ret`` value
+        // modifie la valeur originale de ``$ret``
 
         $event->setReturnValue($ret);
     }
