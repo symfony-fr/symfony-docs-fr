@@ -1,12 +1,13 @@
 .. index::
-   single: Routing; Scheme requirement
+   single: Routage; Exigence système
 
-How to force routes to always use HTTPS or HTTP
-===============================================
+Comment forcer les routes à toujours utiliser HTTPS ou HTTP
+===========================================================
 
-Sometimes, you want to secure some routes and be sure that they are always
-accessed via the HTTPS protocol. The Routing component allows you to enforce
-the URI scheme via the ``_scheme`` requirement:
+Quelquefois, vous voulez sécuriser certaines routes et être sûr qu'elles
+soient toujours accédées via le protocole HTTPS. Le composant « Routing »
+vous permet de forcer le système de l'URI via la condition requise
+``_scheme`` :
 
 .. configuration-block::
 
@@ -46,31 +47,33 @@ the URI scheme via the ``_scheme`` requirement:
 
         return $collection;
 
-The above configuration forces the ``secure`` route to always use HTTPS.
+La configuration ci-dessus force la route nommée ``secure`` à toujours
+utiliser HTTPS.
 
-When generating the ``secure`` URL, and if the current scheme is HTTP, Symfony
-will automatically generate an absolute URL with HTTPS as the scheme:
+Pendant la génération de l'URL de ``secure``, et si le système actuel est
+HTTP, Symfony va automatiquement générer une URL absolue avec HTTPS comme
+« scheme » :
 
 .. code-block:: text
 
-    # If the current scheme is HTTPS
+    # Si le « scheme » actuel est HTTPS
     {{ path('secure') }}
-    # generates /secure
+    # génère /secure
 
-    # If the current scheme is HTTP
+    # Si le « scheme » actuel est HTTP
     {{ path('secure') }}
-    # generates https://example.com/secure
+    # génère https://example.com/secure
 
-The requirement is also enforced for incoming requests. If you try to access
-the ``/secure`` path with HTTP, you will automatically be redirected to the
-same URL, but with the HTTPS scheme.
+La condition requise est aussi forcée pour les requêtes entrantes. Si vous
+essayez d'accéder au chemin ``/secure`` avec HTTP, vous serez automatiquement
+redirigé à la même URL, mais avec le « scheme » HTTPS.
 
-The above example uses ``https`` for the ``_scheme``, but you can also force a
-URL to always use ``http``.
+Les exemples ci-dessus utilisent ``https`` en tant que ``_scheme``, mais vous
+pouvez aussi forcer une URL à toujours utiliser ``http``.
 
 .. note::
 
-    The Security component provides another way to enforce HTTP or HTTPs via
-    the ``requires_channel`` setting. This alternative method is better suited
-    to secure an "area" of your website (all URLs under ``/admin``) or when
-    you want to secure URLs defined in a third party bundle.
+    Le composant Security fournit une autre façon d'imposer HTTP ou HTTPS via
+    le paramètre ``requires_channel``. Cette méthode alternative est mieux
+    adaptée pour sécuriser une « zone » de votre site web (toutes les URLs dans
+    la zone ``/admin``) ou pour sécuriser les URLs définies dans un bundle tiers.
