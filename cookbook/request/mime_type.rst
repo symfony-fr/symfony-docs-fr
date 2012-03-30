@@ -1,30 +1,31 @@
 .. index::
-   single: Request; Add a request format and mime type
+   single: Requête; Ajouter un format de requête et un type mime
 
-How to register a new Request Format and Mime Type
-==================================================
+Comment déclarer un nouveau Format de Requête et un Type Mime
+=============================================================
 
-Every ``Request`` has a "format" (e.g. ``html``, ``json``), which is used
-to determine what type of content to return in the ``Response``. In fact,
-the request format, accessible via
+Chaque ``Requête`` a un « format » (par exemple : ``html``, ``json``), qui
+est utilisé pour déterminer quel type de contenu retourner dans la ``Réponse``.
+En fait, le format de la requête, accessible via
 :method:`Symfony\\Component\\HttpFoundation\\Request::getRequestFormat`,
-is used to set the MIME type of the ``Content-Type`` header on the ``Response``
-object. Internally, Symfony contains a map of the most common formats (e.g.
-``html``, ``json``) and their associated MIME types (e.g. ``text/html``,
-``application/json``). Of course, additional format-MIME type entries can
-easily be added. This document will show how you can add the ``jsonp`` format
-and corresponding MIME type.
+est utilisé pour définir le type MIME de l'en-tête ``Content-Type`` de
+l'objet ``Response``. En interne, Symfony contient un tableau des formats
+les plus communs (par exemple : ``text/html``, ``application/json``). Bien
+sûr, des types de format MIME additionnels peuvent aisément être ajoutés.
+Ce document va vous montrer comment vous pouvez ajouter le format ``jsonp``
+ainsi que le type MIME correspondant.
 
-Create an ``kernel.request`` Listener
--------------------------------------
+Créez un Listener ``kernel.request``
+------------------------------------
 
-The key to defining a new MIME type is to create a class that will "listen" to
-the ``kernel.request`` event dispatched by the Symfony kernel. The
-``kernel.request`` event is dispatched early in Symfony's request handling
-process and allows you to modify the request object.
+La solution pour définir un nouveau type MIME est de créer une classe qui va
+« écouter » l'évènement ``kernel.request`` « dispatché » (« réparti » en français)
+par le kernel de Symfony. L'évènement ``kernel.request`` est dispatché très tôt dans
+le processus de gestion de la requête de Symfony et vous permet de modifier
+l'objet requête.
 
-Create the following class, replacing the path with a path to a bundle in your
-project::
+Créez la classe suivante, en remplacant le chemin par un chemin vers un bundle de
+votre projet::
 
     // src/Acme/DemoBundle/RequestListener.php
     namespace Acme\DemoBundle;
@@ -40,11 +41,12 @@ project::
         }
     }
 
-Registering your Listener
--------------------------
+Déclarer votre Listener
+-----------------------
 
-As for any other listener, you need to add it in one of your configuration
-file and register it as a listener by adding the ``kernel.event_listener`` tag:
+Comme pour n'importe quel autre listener, vous avez besoin de l'ajouter dans l'un
+de vos fichiers de configuration et de le déclarer comme listener en ajoutant le
+tag ``kernel.event_listener`` :
 
 .. configuration-block::
 
@@ -79,11 +81,12 @@ file and register it as a listener by adding the ``kernel.event_listener`` tag:
         $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest'));
         $container->setDefinition('acme.demobundle.listener.request', $definition);
 
-At this point, the ``acme.demobundle.listener.request`` service has been
-configured and will be notified when the Symfony kernel dispatches the
-``kernel.request`` event.
+A ce point, le service ``acme.demobundle.listener.request`` a été configuré
+et sera notifié lorsque le kernel de Symfony « dispatchera » l'évènement
+``kernel.request``.
 
 .. tip::
 
-    You can also register the listener in a configuration extension class (see
-    :ref:`service-container-extension-configuration` for more information).
+    Vous pouvez aussi déclarer le listener dans une configuration de classe
+    extension (voir :ref:`service-container-extension-configuration` pour
+    plus d'informations).
