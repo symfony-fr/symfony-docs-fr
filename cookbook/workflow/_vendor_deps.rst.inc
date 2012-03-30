@@ -1,12 +1,12 @@
 Gérer les bibliothèques vendors avec bin/vendors et deps
------------------------------------------------------
+--------------------------------------------------------
 
 ### Comment ça marche?
 
-Chaque projet Symfony utilise des bibliothèques tiers regroupées sous l'appellation
-"vendors". D'une façon ou d'une autre, le but est de vous permettre de télécharger
-ces bibliothèques dans le répertoire  ``vendor/`` et de pouvoir en obtenir la version
-désirée pour chacune.
+Chaque projet Symfony utilise des bibliothèques tierces regroupées sous l'appellation
+« vendors ». D'une façon ou d'une autre, le but est de vous permettre de télécharger
+ces bibliothèques dans le répertoire  ``vendor/`` et de pouvoir obtenir pour chacune la
+version désirée.
 
 Par défaut, ces bibliothèques sont téléchargées en exécutant le script de téléchargement
 ``php bin/vendors install``. Ce script utilise le fichier `deps`` situé à la racine
@@ -17,7 +17,7 @@ utilise ``git`` pour ce téléchargement, car la plupart des bibliothèques
 sont gérées et disponibles via git. Le script ``bin/vendors`` se base également sur
 le fichier ``deps.lock``, lequel vous permet d'arrêter la version à une révision précise.
 
-Nota bene: ces bibliothèques "vendor" *ne sont pas* gérées dans votre *dépôt*;
+Nota bene : ces bibliothèques « vendor » *ne sont pas* gérées dans votre *dépôt*;
 ce sont de simples fichiers installés (et ignorés du dépôt git) dans le répertoire
 ``vendor/`` par le script ``bin/vendors``. Or, puisque toute l'information nécessaire
 pour télécharger ces fichiers est disponible dans ``deps`` et ``deps.lock``
@@ -28,12 +28,12 @@ de le versionner dans votre dépôt.
 
 Ainsi, lorsqu'un développeur veut travailler sur votre projet, il lui suffit de
 lancer le script ``php bin/vendors install`` pour s'assurer que toutes les bibliothèques
-nécessaires sont téléchargées.
+nécessaires soient téléchargées.
 
 .. sidebar:: Mettre à jour Symfony
 
-    Puisque Symfony est une bibliothèque tiers de votre projet et qu'elle est
-    donc gérée entièrement au travers de ``deps`` et``deps.lock``,
+    Puisque Symfony est une bibliothèque tierce de votre projet et qu'elle est
+    donc gérée entièrement via ``deps`` et``deps.lock``,
     mettre à jour Symfony signifie simplement mettre à jour
     ces deux fichiers afin qu'ils correspondent à la dernière version
     de l'édition standard de Symfony.
@@ -44,7 +44,7 @@ nécessaires sont téléchargées.
 
 .. ::
 
-    La command ``php bin/vendors update`` existe mais n'est pas utilisée pour la mise
+    La commande ``php bin/vendors update`` existe mais n'est pas utilisée pour la mise
     à jour de votre projet. Vous ne l'utiliserez en fait pratiquement jamais.
     Cette commande permet de bloquer la version de toutes vos bibliothèques vendors
     en les mettant à jour selon la version spécifiée dans ``deps`` et en inscrivant la révision
