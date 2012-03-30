@@ -1,17 +1,17 @@
 .. index::
-   single: Profiling; Data Collector
+   single: Profiling; Collecteur de Données
 
-How to create a custom Data Collector
-=====================================
+Comment créer un Collecteur de Données personnalisé
+===================================================
 
-The Symfony2 :ref:`Profiler <internals-profiler>` delegates data collecting to
-data collectors. Symfony2 comes bundled with a few of them, but you can easily
-create your own.
+Le :ref:`Profiler <internals-profiler>` de Symfony2 délègue la collection de
+données aux collecteurs de données. Symfony2 est livré avec quelques uns, mais
+vous pouvez facilement créer le vôtre.
 
-Creating a Custom Data Collector
---------------------------------
+Créer un Collecteur de Données Personnalisé
+-------------------------------------------
 
-Creating a custom data collector is as simple as implementing the
+Créer un collecteur de données personnalisé est aussi simple que d'implémenter
 :class:`Symfony\\Component\\HttpKernel\\DataCollector\\DataCollectorInterface`::
 
     interface DataCollectorInterface
@@ -33,23 +33,23 @@ Creating a custom data collector is as simple as implementing the
         function getName();
     }
 
-The ``getName()`` method must return a unique name. This is used to access the
-information later on (see :doc:`/cookbook/testing/profiling` for
-instance).
+La méthode ``getName()`` doit retourner un nom unique. Ceci est utilisé pour
+plus tard pour accéder à l'information (voir :doc:`/cookbook/testing/profiling`
+par exemple).
 
-The ``collect()`` method is responsible for storing the data it wants to give
-access to in local properties.
+La méthode ``collect()`` est responsable de stocker les données auxquelles
+elle veut donner accès dans des propriétés locales.
 
 .. caution::
 
-    As the profiler serializes data collector instances, you should not
-    store objects that cannot be serialized (like PDO objects), or you need
-    to provide your own ``serialize()`` method.
+    Comme le profiler sérialise les instances de collecteur de données, vous
+    ne devriez pas stocker des objets ne pouvant pas être sérialisés (comme
+    des objets PDO), ou vous devrez fournir votre propre méthode ``serialize()``.
 
-Most of the time, it is convenient to extend
-:class:`Symfony\\Component\\HttpKernel\\DataCollector\\DataCollector` and
-populate the ``$this->data`` property (it takes care of serializing the
-``$this->data`` property)::
+La plupart du temps, il est pratique d'étendre la classe
+:class:`Symfony\\Component\\HttpKernel\\DataCollector\\DataCollector` et
+de remplir la propriété ``$this->data`` (elle se charge de sérialiser la
+propriété ``$this->data``)::
 
     class MemoryDataCollector extends DataCollector
     {
@@ -73,11 +73,11 @@ populate the ``$this->data`` property (it takes care of serializing the
 
 .. _data_collector_tag:
 
-Enabling Custom Data Collectors
--------------------------------
+Activer les Collecteurs de Données Personnalisés
+------------------------------------------------
 
-To enable a data collector, add it as a regular service in one of your
-configuration, and tag it with ``data_collector``:
+Pour activer un collecteur de données, ajoutez le comme un service ordinaire
+dans l'une de vos configurations, et « taggez » le avec ``data_collector`` :
 
 .. configuration-block::
 
@@ -102,49 +102,49 @@ configuration, and tag it with ``data_collector``:
             ->addTag('data_collector')
         ;
 
-Adding Web Profiler Templates
------------------------------
+Ajouter des Templates de Profiler Web
+-------------------------------------
 
-When you want to display the data collected by your Data Collector in the web
-debug toolbar or the web profiler, create a Twig template following this
-skeleton:
+Quand vous voulez afficher les données collectées par votre Collecteur de Données
+dans la barre d'outils de débuggage ou dans le profiler web, créez un template Twig
+en vous appuyant sur l'exemple suivant :
 
 .. code-block:: jinja
 
     {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
     {% block toolbar %}
-        {# the web debug toolbar content #}
+        {# le contenu de la barre d'outils de débuggage web #}
     {% endblock %}
 
     {% block head %}
-        {# if the web profiler panel needs some specific JS or CSS files #}
+        {# si le « panel » du profiler web nécessite des fichiers JS ou CSS spécifiques #}
     {% endblock %}
 
     {% block menu %}
-        {# the menu content #}
+        {# le contenu du menu #}
     {% endblock %}
 
     {% block panel %}
-        {# the panel content #}
+        {# le contenu du « panel » #}
     {% endblock %}
 
-Each block is optional. The ``toolbar`` block is used for the web debug
-toolbar and ``menu`` and ``panel`` are used to add a panel to the web
-profiler.
+Chaque bloc est optionnel. Le bloc ``toolbar`` est utilisé pour la barre
+d'outils de débuggage web et les blocs ``menu`` et ``panel`` sont utilisés
+pour ajouter un « panel » au profiler web.
 
-All blocks have access to the ``collector`` object.
+Tous les blocs ont accès à l'objet ``collector``.
 
 .. tip::
 
-    Built-in templates use a base64 encoded image for the toolbar (``<img
-    src="src="data:image/png;base64,..."``). You can easily calculate the
-    base64 value for an image with this little script: ``echo
-    base64_encode(file_get_contents($_SERVER['argv'][1]));``.
+    Les templates intégrés utilisent une image encodée en base64 pour la
+    barre d'outils (``<img src="src="data:image/png;base64,..."``). Vous
+    pouvez facilement calculer la valeur en base64 d'une image avec ce petit
+    script : ``echo base64_encode(file_get_contents($_SERVER['argv'][1]));``.
 
-To enable the template, add a ``template`` attribute to the ``data_collector``
-tag in your configuration. For example, assuming your template is in some
-``AcmeDebugBundle``:
+Pour activer le template, ajoutez un attribut ``template`` au tag
+``data_collector`` dans votre configuration. Par exemple, en assumant que
+votre template est dans un ``AcmeDebugBundle`` :
 
 .. configuration-block::
 
