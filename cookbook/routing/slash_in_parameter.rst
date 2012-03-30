@@ -1,26 +1,28 @@
 .. index::
-   single: Routing; Allow / in route parameter
+   single: Routage; Autoriser un / dans un paramètre route
 
-How to allow a "/" character in a route parameter
-=================================================
+Comment autoriser un caractère « / » dans un paramètre route
+============================================================
 
-Sometimes, you need to compose URLs with parameters that can contain a slash 
-``/``. For example, take the classic ``/hello/{name}`` route. By default,
-``/hello/Fabien`` will match this route but not ``/hello/Fabien/Kris``. This
-is because Symfony uses this character as separator between route parts.
+Quelquefois, vous avez besoin de composer des URLs avec des paramètres qui
+peuvent contenir un slash ``/``. Par exemple, prenez la route classique
+``/hello/{name}``. Par défaut, ``/hello/Fabien`` va correspondre à cette
+route mais pas ``/hello/Fabien/Kris``. Cela est dû au fait que Symfony
+utilise ce caractère comme séparateur entre les parties de la route.
 
-This guide covers how you can modify a route so that ``/hello/Fabien/Kris``
-matches the ``/hello/{name}`` route, where ``{name}`` equals ``Fabien/Kris``.
+Ce guide explique comment vous pouvez modifier une route afin que
+``/hello/Fabien/Kris`` corresponde à la route ``/hello/{name}``, où ``{name}``
+équivaut à ``Fabien/Kris``.
 
-Configure the Route
+Configurer la Route
 -------------------
 
-By default, the symfony routing components requires that the parameters 
-match the following regex pattern: ``[^/]+``. This means that all characters 
-are allowed except ``/``. 
+Par défaut, les composants de routage de Symfony requièrent que les paramètres
+correspondent au pattern de regex suivant : ``[^/]+``. Cela veut dire que tous
+les caractères sont autorisés excepté ``/``.
 
-You must explicitly allow ``/`` to be part of your parameter by specifying 
-a more permissive regex pattern.
+Vous devez explicitement autoriser le caractère ``/`` à faire partie de votre
+paramètre en spécifiant un pattern de regex plus permissif.
 
 .. configuration-block::
 
@@ -75,4 +77,4 @@ a more permissive regex pattern.
             }
         }
 
-That's it! Now, the ``{name}`` parameter can contain the ``/`` character.
+C'est tout ! Maintenant, le paramètre ``{name}`` peut contenir le caractère ``/``.
