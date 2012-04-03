@@ -1,7 +1,7 @@
 Comment créer une commande pour la Console
 ==========================================
 
-La page Console de la partie Componentes (:doc:`/components/console`) décrit
+La page Console de la partie Components (:doc:`/components/console`) décrit
 comment créer une commande. Cet article du Cookbook aborde les différences
 lorsque vous créer des commandes pour la console avec le framework Symfony2.
 
@@ -30,7 +30,7 @@ Edition de Symfony2) pour nous saluer en ligne de commande, créez le fichier
         {
             $this
                 ->setName('demo:greet')
-                ->setDescription('Greet someone')
+                ->setDescription('Saluer une personne')
                 ->addArgument('name', InputArgument::OPTIONAL, 'Qui voulez vous saluer??')
                 ->addOption('yell', null, InputOption::VALUE_NONE, 'Si définie, la tâche criera en majuscules')
             ;
@@ -40,9 +40,9 @@ Edition de Symfony2) pour nous saluer en ligne de commande, créez le fichier
         {
             $name = $input->getArgument('name');
             if ($name) {
-                $text = 'Hello '.$name;
+                $text = 'Bonjour '.$name;
             } else {
-                $text = 'Hello';
+                $text = 'Bonjour';
             }
 
             if ($input->getOption('yell')) {
@@ -62,7 +62,7 @@ Cette commande sera maintenant automatiquement prête à être exécutée :
 Tester les commandes
 --------------------
 
-Pour tester les commandes utilisées dans le cadre du frameworf, la classe
+Pour tester les commandes utilisées dans le cadre du framework, la classe
 :class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application` devrait être
 utilisée au lieu de la classe :class:`Symfony\\Component\\Console\\Application`::
 
