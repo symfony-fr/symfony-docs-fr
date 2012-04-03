@@ -1,7 +1,7 @@
 Comment personnaliser les pages d'erreur
 ========================================
 
-Lorsqu'une quelconque exception est lancée dans Symfony2, cette dernière
+Lorsqu'une exception quelconque est lancée dans Symfony2, cette dernière
 est « capturée » par la classe ``Kernel`` et éventuellement transmise à
 un contrôleur spécial, ``TwigBundle:Exception:show`` pour qu'il la gère.
 Ce contrôleur, qui fait partie du coeur de ``TwigBundle``, détermine quelle
@@ -15,7 +15,7 @@ dépendant du niveau de contrôle que vous souhaitez :
    (expliqué ci-dessous) ;
 
 2. Remplacez le contrôleur d'exception par défaut ``TwigBundle::Exception:show``
-   par votre propre contrôleur et gérer le comme vous le désirez (voir
+   par votre propre contrôleur et gérez le comme vous le désirez (voir
    :ref:`exception_controller dans la référence de Twig<config-twig-exception-controller>`) ;
 
 .. tip::
@@ -26,13 +26,13 @@ dépendant du niveau de contrôle que vous souhaitez :
     de la gestion des exceptions. Pour plus d'informations, voir
     :ref:`kernel-kernel.exception`.
 
-Tous les templates d'erreur résident dans le ``TwigBundle``. Pour passer
-outre ces templates, nous reposons simplement sur une méthode standard
-qui est à l'intérieur d'un bundle. Pour plus d'informations, voir
-:ref:`overriding-bundle-templates`.
+Tous les templates d'erreur se trouvent dans le ``TwigBundle``. Pour surcharger
+ces templates, nous utilisons simplement la méthode standard qui permet
+de surcharger un template qui se trouve dans un bundle. Pour plus d'informations,
+voir :ref:`overriding-bundle-templates`.
 
-Par exemple, pour passer outre le template d'erreur par défaut qui est
-montré à l'utilisateur final, créez un nouveau template situé à cet emplacement
+Par exemple, pour surcharger le template d'erreur par défaut qui est
+affiché à l'utilisateur final, créez un nouveau template situé à cet emplacement
 ``app/Resources/TwigBundle/views/Exception/error.html.twig`` :
 
 .. code-block:: html+jinja
@@ -41,11 +41,11 @@ montré à l'utilisateur final, créez un nouveau template situé à cet emplace
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>An Error Occurred: {{ status_text }}</title>
+        <title>Une erreur est survenue : {{ status_text }}</title>
     </head>
     <body>
-        <h1>Oops! An Error Occurred</h1>
-        <h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+        <h1>Oups! Une erreur est survenue</h1>
+        <h2>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</h2>
     </body>
     </html>
 
@@ -59,11 +59,11 @@ montré à l'utilisateur final, créez un nouveau template situé à cet emplace
 En plus de la page d'erreur HTML standard, Symfony fournit une page d'erreur
 par défaut pour quasiment tous les formats de réponse les plus communs,
 incluant JSON (``error.json.twig``), XML (``error.xml.twig``), et même
-Javascript (``error.js.twig``), pour n'en nommer que quelques uns. Pour passer
-outre n'importe lequel de ces templates, créez simplement un nouveau fichier
+Javascript (``error.js.twig``), pour n'en nommer que quelques uns. Pour surcharger
+n'importe lequel de ces templates, créez simplement un nouveau fichier
 avec le même nom dans le répertoire ``app/Resources/TwigBundle/views/Exception``.
-C'est la manière standard de passer outre quelconque template qui réside dans
-un bundle.
+C'est la manière standard de surcharger n'importe quel template qui se trouve
+dans un bundle.
 
 .. _cookbook-error-pages-by-status-code:
 
@@ -73,28 +73,28 @@ Personnaliser la page 404 et les autres pages d'erreur
 Vous pouvez aussi personnaliser des templates d'erreur spécifiques en vous
 basant sur le code de statut HTTP. Par exemple, créez un template
 ``app/Resources/TwigBundle/views/Exception/error404.html.twig`` pour
-afficher une page spéciale pour les erreurs 404 (page non-trouvée).
+afficher une page spéciale pour les erreurs 404 (page non trouvée).
 
 Symfony utilise l'algorithme suivant pour déterminer quel template utiliser :
 
 * Premièrement, il cherche un template pour le format et le code de statut donné
-  (comme ``error404.json.twig``) ;
+  (ex ``error404.json.twig``) ;
 
-* S'il n'existe pas, il cherche un template pour le format donné (comme
+* S'il n'existe pas, il cherche un template pour le format donné (ex
   ``error.json.twig``) ;
 
-* S'il n'existe pas, il se rabat sur le template HTML (comme
+* S'il n'existe pas, il se rabat sur le template HTML (ex
   ``error.html.twig``).
 
 .. tip::
 
-    Pour voir la liste complète des templates d'erreur par défaut, voyez
-    le répertoire ``Resources/views/Exception`` du ``TwigBundle``. Dans
-    une installation standard de Symfony2, le ``TwigBundle`` peut être
-    trouvé à cet emplacement : ``vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle``.
+    Pour voir la liste complète des templates d'erreur par défaut, jetez un
+    oeil au répertoire ``Resources/views/Exception`` du ``TwigBundle``. Dans
+    une installation standard de Symfony2, le ``TwigBundle`` se
+    trouve à cet emplacement : ``vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle``.
     Souvent, la façon la plus facile de personnaliser une page d'erreur
     est de la copier depuis le ``TwigBundle`` vers le dossier
-    ``app/Resources/TwigBundle/views/Exception`` et puis de la modifier.
+    ``app/Resources/TwigBundle/views/Exception``, puis de la modifier.
 
 .. note::
 
