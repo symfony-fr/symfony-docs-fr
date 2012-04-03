@@ -4,8 +4,8 @@
 Comment forcer les routes à toujours utiliser HTTPS ou HTTP
 ===========================================================
 
-Quelquefois, vous voulez sécuriser certaines routes et être sûr qu'elles
-soient toujours accédées via le protocole HTTPS. Le composant « Routing »
+Quelquefois, vous voulez sécuriser certaines routes et être sûr qu'on y
+accède toujours via le protocole HTTPS. Le composant « Routing »
 vous permet de forcer le système de l'URI via la condition requise
 ``_scheme`` :
 
