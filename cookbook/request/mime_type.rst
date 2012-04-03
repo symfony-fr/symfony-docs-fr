@@ -6,7 +6,7 @@ Comment déclarer un nouveau Format de Requête et un Type Mime
 
 Chaque ``Requête`` a un « format » (par exemple : ``html``, ``json``), qui
 est utilisé pour déterminer quel type de contenu retourner dans la ``Réponse``.
-En fait, le format de la requête, accessible via
+En fait, le format de la requête, accessible via la méthode
 :method:`Symfony\\Component\\HttpFoundation\\Request::getRequestFormat`,
 est utilisé pour définir le type MIME de l'en-tête ``Content-Type`` de
 l'objet ``Response``. En interne, Symfony contient un tableau des formats
@@ -81,8 +81,8 @@ tag ``kernel.event_listener`` :
         $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest'));
         $container->setDefinition('acme.demobundle.listener.request', $definition);
 
-A ce point, le service ``acme.demobundle.listener.request`` a été configuré
-et sera notifié lorsque le kernel de Symfony « dispatchera » l'évènement
+A ce stade, le service ``acme.demobundle.listener.request`` a été configuré
+et sera notifié lorsque le kernel de Symfony dispatchera l'évènement
 ``kernel.request``.
 
 .. tip::
