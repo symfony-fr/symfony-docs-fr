@@ -4,14 +4,14 @@
 Comment définir des contrôleurs en tant que Services
 ====================================================
 
-Dans le book (« livre » en français), vous avez appris comment un contrôleur
+Dans le Book, vous avez appris comment un contrôleur
 peut facilement être utilisé lorsqu'il étend la classe de base
 :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`. Bien que
-ceci fonctionne très bien, les contrôleurs peuvent aussi être spécifiés
+ceci fonctionne très bien, les contrôleurs peuvent aussi être définis
 en tant que services.
 
-Pour référer à un contrôleur qui est défini en tant que service, utilisez
-la notation avec point-virgule (:). Par exemple, supposons que nous ayons
+Pour faire référence à un contrôleur qui est défini en tant que service, utilisez
+la notation avec deux-points (:). Par exemple, supposons que nous ayons
 défini un service nommé ``my_controller`` et que nous voulions transmettre
 à une méthode appelée ``indexAction()`` à l'intérieur du service::
 
