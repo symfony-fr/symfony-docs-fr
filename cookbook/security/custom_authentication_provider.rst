@@ -1,53 +1,56 @@
 .. index::
-   single: Security; Custom Authentication Provider
+   single: Sécurité; Fournisseur d'Authentification Personnalisé
 
-How to create a custom Authentication Provider
-==============================================
+Comment créer un Fournisseur d'Authentification Personnalisé
+============================================================
 
-If you have read the chapter on :doc:`/book/security`, you understand the
-distinction Symfony2 makes between authentication and authorization in the
-implementation of security. This chapter discusses the core classes involved
-in the authentication process, and how to implement a custom authentication
-provider. Because authentication and authorization are separate concepts,
-this extension will be user-provider agnostic, and will function with your
-application's user providers, may they be based in memory, a database, or
-wherever else you choose to store them.
+Si vous avez lu le chapitre :doc:`/book/security`, vous comprenez la
+distinction que Symfony2 fait entre authentification et autorisation dans
+l'implémentation de la sécurité. Ce chapitre discute des classes coeurs
+impliquées dans le processus d'authentification, et de comment implémenter
+un fournisseur d'authentification personnalisé. Comme l'authentification et
+l'autorisation sont des concepts séparés, cette extension sera indépendante
+du « fournisseur d'utilisateur », et fonctionnera avec les fournisseurs
+d'utilisateur de votre application, qu'ils soient stockés en mémoire,
+dans une base de données, ou n'importe où ailleurs.
 
-Meet WSSE
----------
+A la rencontre de WSSE
+----------------------
 
-The following chapter demonstrates how to create a custom authentication
-provider for WSSE authentication. The security protocol for WSSE provides
-several security benefits:
+Le chapitre suivant démontre comment créer un fournisseur d'authentification
+personnalisé pour une authentification WSSE. Le protocole de sécurité
+pour WSSE fournit plusieurs avantages concernant la sécurité :
 
-1. Username / Password encryption
-2. Safe guarding against replay attacks
-3. No web server configuration required
+1. Encryption du Nom d'utilisateur / Mot de passe
+2. Sécurité contre les attaques de type « replay »
+3. Aucune configuration de serveur web requise
 
-WSSE is very useful for the securing of web services, may they be SOAP or
-REST.
+WSSE est très utile pour sécuriser des services web, qu'ils soient SOAP
+ou REST.
 
-There is plenty of great documentation on `WSSE`_, but this article will
-focus not on the security protocol, but rather the manner in which a custom
-protocol can be added to your Symfony2 application. The basis of WSSE is
-that a request header is checked for encrypted credentials, verified using
-a timestamp and `nonce`_, and authenticated for the requested user using a
-password digest.
+Il existe de nombreuses et très bonnes documentations sur `WSSE`_, mais
+cet article ne va pas se concentrer sur le protocole de sécurité, mais
+plutôt sur la manière dont un protocole personnalisé peut être ajouté
+à votre application Symfony2. La base de WSSE est qu'un en-tête de requête
+est vérifié pour y trouver des informations de connexions encryptées en
+utilisant un « timestamp » et un « `nonce`_ », et est authentifié pour
+l'utilisateur demandé en utilisant un « digest » du mot de passe.
 
 .. note::
 
-    WSSE also supports application key validation, which is useful for web
-    services, but is outside the scope of this chapter.
+    WSSE supporte aussi la validation par clé d'application, qui est utile
+    pour les services web, mais qui est hors-sujet dans ce chapitre.
 
-The Token
----------
+Le Token
+--------
 
-The role of the token in the Symfony2 security context is an important one.
-A token represents the user authentication data present in the request. Once
-a request is authenticated, the token retains the user's data, and delivers
-this data across the security context. First, we will create our token class.
-This will allow the passing of all relevant information to our authentication
-provider.
+Le rôle du token dans le contexte de sécurité de Symfony2 est important.
+Un token représente les données d'authentification de l'utilisateur
+présentes dans la requête. Une fois qu'une requête est authentifiée, le
+token conserve les données de l'utilisateur, et délivre ces données au
+travers du contexte de sécurité. Premièrement, nous allons créer notre
+classe token. Cela va permettre de passer toutes les informations
+pertinentes à notre fournisseur d'authentification.
 
 .. code-block:: php
 
@@ -70,22 +73,22 @@ provider.
 
 .. note::
 
-    The ``WsseUserToken`` class extends the security component's
-    :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\AbstractToken`
-    class, which provides basic token functionality. Implement the
+    La classe ``WsseUserToken`` étend la classe du composant de sécurité
+    :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\AbstractToken`,
+    qui fournit la fonctionnalité basique du token. Implémentez l'interface
     :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface`
-    on any class to use as a token.
+    dans chaque classe que vous souhaitez utiliser comme token.
 
-The Listener
-------------
+Le Listener
+-----------
 
-Next, you need a listener to listen on the security context. The listener
-is responsible for fielding requests to the firewall and calling the authentication
-provider. A listener must be an instance of
-:class:`Symfony\\Component\\Security\\Http\\Firewall\\ListenerInterface`.
-A security listener should handle the
-:class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent` event, and
-set an authenticated token in the security context if successful.
+Ensuite, vous avez besoin d'un listener pour « écouter » le contexte de
+sécurité. Le listener est responsable de transmettre les requêtes au pare-feu et
+d'appeler le fournisseur d'authentification. Un listener doit être une instance
+de :class:`Symfony\\Component\\Security\\Http\\Firewall\\ListenerInterface`.
+Un listener de sécurité devrait gérer l'évènement
+:class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`, et définir
+un token authentifié dans le contexte de sécurité en cas de succès.
 
 .. code-block:: php
 
@@ -137,7 +140,7 @@ set an authenticated token in the security context if successful.
                             return $event->setResponse($returnValue);
                         }
                     } catch (AuthenticationException $e) {
-                        // you might log something here
+                        // vous pourriez logger quelque chose ici
                     }
                 }
             }
@@ -148,30 +151,32 @@ set an authenticated token in the security context if successful.
         }
     }
 
-This listener checks the request for the expected `X-WSSE` header, matches
-the value returned for the expected WSSE information, creates a token using
-that information, and passes the token on to the authentication manager. If
-the proper information is not provided, or the authentication manager throws
-an :class:`Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException`,
-a 403 Response is returned.
+Ce listener vérifie l'en-tête `X-WSSE` attendu dans la réponse, fait correspondre
+la valeur retournée pour l'information WSSE attendue, crée un token utilisant
+cette information, et passe le token au gestionnaire d'authentification. Si la
+bonne information n'est pas fournie, ou si le gestionnaire d'authentification
+lance une
+:class:`Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException`,
+alors une réponse 403 est retournée.
 
 .. note::
 
-    A class not used above, the
-    :class:`Symfony\\Component\\Security\\Http\\Firewall\\AbstractAuthenticationListener`
-    class, is a very useful base class which provides commonly needed functionality
-    for security extensions. This includes maintaining the token in the session,
-    providing success / failure handlers, login form urls, and more. As WSSE
-    does not require maintaining authentication sessions or login forms, it
-    won't be used for this example.
+    Une classe non utilisée ci-dessus, la classe
+    :class:`Symfony\\Component\\Security\\Http\\Firewall\\AbstractAuthenticationListener`,
+    est une classe de base très utile qui fournit certaines fonctionnalités communes pour
+    les extensions de sécurité. Ceci inclut maintenir le token dans la session, fournir
+    des gestionnaires en cas de succès/échec, des URLs de formulaire de login, et plus
+    encore. Comme WSSE ne requiert pas de maintenir les sessions d'authentification ou
+    les formulaires de login, cela ne sera pas utiliser dans cet exemple.
 
-The Authentication Provider
----------------------------
+Le Fournisseur d'Authentification
+---------------------------------
 
-The authentication provider will do the verification of the ``WsseUserToken``.
-Namely, the provider will verify the ``Created`` header value is valid within
-five minutes, the ``Nonce`` header value is unique within five minutes, and
-the ``PasswordDigest`` header value matches with the user's password.
+Le fournisseur d'authentification va effectuer la vérification du
+``WsseUserToken``. C'est à dire que le fournisseur va vérifier que la valeur
+de l'en-tête ``Created`` est valide dans les cinq minutes, que la valeur de
+l'en-tête ``Nonce`` est unique dans les cinq minutes, et que la valeur de
+l'en-tête ``PasswordDigest`` correspond au mot de passe de l'utilisateur.
 
 .. code-block:: php
 
@@ -212,18 +217,18 @@ the ``PasswordDigest`` header value matches with the user's password.
 
         protected function validateDigest($digest, $nonce, $created, $secret)
         {
-            // Expire timestamp after 5 minutes
+            // Expire le timestamp après 5 minutes
             if (time() - strtotime($created) > 300) {
                 return false;
             }
 
-            // Validate nonce is unique within 5 minutes
+            // Valide que le nonce est unique dans les 5 minutes
             if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 300 < time()) {
                 throw new NonceExpiredException('Previously used nonce detected');
             }
             file_put_contents($this->cacheDir.'/'.$nonce, time());
 
-            // Validate Secret
+            // Valide le Secret
             $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
 
             return $digest === $expected;
@@ -237,21 +242,24 @@ the ``PasswordDigest`` header value matches with the user's password.
 
 .. note::
 
-    The :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface`
-    requires an ``authenticate`` method on the user token, and a ``supports``
-    method, which tells the authentication manager whether or not to use this
-    provider for the given token. In the case of multiple providers, the
-    authentication manager will then move to the next provider in the list.
+    La :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface`
+    requiert une méthode ``authenticate`` sur le token de l'utilisateur ainsi
+    qu'une méthode ``supports``, qui dit au gestionnaire d'authentification
+    d'utiliser ou non ce fournisseur pour le token donné. Dans le cas de
+    fournisseurs multiples, le gestionnaire d'authentification se déplacera
+    alors jusqu'au prochain fournisseur dans la liste.
 
-The Factory
------------
+La Factory (« l'usine » en français)
+------------------------------------
 
-You have created a custom token, custom listener, and custom provider. Now
-you need to tie them all together. How do you make your provider available
-to your security configuration? The answer is by using a ``factory``. A factory
-is where you hook into the security component, telling it the name of your
-provider and any configuration options available for it. First, you must
-create a class which implements
+Vous avez créé un token personnalisé, un listener personnalisé, et un
+fournisseur personnalisé. Maintenant, vous avez besoin de les relier tous
+ensemble. Comment mettez-vous votre fournisseur à disposition de votre
+configuration de sécurité ? La réponse est : en utilisant une ``factory``.
+Une « factory » est là où vous intervenez dans le composant de sécurité en
+lui disant le nom de votre fournisseur ainsi que toutes ses options de
+configuration disponibles. Tout d'abord, vous devez créer une
+classe qui implémente
 :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\SecurityFactoryInterface`.
 
 .. code-block:: php
@@ -295,50 +303,60 @@ create a class which implements
         {}
     }
 
-The :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\SecurityFactoryInterface`
-requires the following methods:
+La :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\SecurityFactoryInterface`
+requiert les méthodes suivantes :
 
-* ``create`` method, which adds the listener and authentication provider
-  to the DI container for the appropriate security context;
+* la méthode ``create``, qui ajoute le listener et le fournisseur
+  d'authentification au conteneur d'Injection de Dépendances pour
+  le contexte de sécurité approprié ;
 
-* ``getPosition`` method, which must be of type ``pre_auth``, ``form``, ``http``,
-  and ``remember_me`` and defines the position at which the provider is called;
+* la méthode ``getPosition``, qui doit être de type ``pre_auth``, ``form``,
+  ``http`` et ``remember_me`` et qui définit le moment auquel le fournisseur
+  est appelé ;
 
-* ``getKey`` method which defines the configuration key used to reference
-  the provider;
+* la méthode ``getKey`` qui définit la clé de configuration utilisée pour
+  référencer le fournisseur ;
 
-* ``addConfiguration`` method, which is used to define the configuration
-  options underneath the configuration key in your security configuration.
-  Setting configuration options are explained later in this chapter.
+* la méthode ``addConfiguration``, qui est utilisée pour définir les
+  options de configuration en dessous de la clé de configuration dans
+  votre configuration de sécurité.
+  Comment définir les options de configuration est expliqué plus tard dans
+  ce chapitre.
 
 .. note::
 
-    A class not used in this example,
+    Une classe non utilisée dans cet exemple,
     :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\AbstractFactory`,
-    is a very useful base class which provides commonly needed functionality
-    for security factories. It may be useful when defining an authentication
-    provider of a different type.
+    est une classe de base très utile qui fournit certaines fonctionnalités
+    communes pour les « factories » de sécurité. Cela pourrait être utile
+    lors de la définition d'un fournisseur d'authentification d'un type
+    différent.
 
-Now that you have created a factory class, the ``wsse`` key can be used as
-a firewall in your security configuration.
+Maintenant que vous avez créé une classe factory, la clé ``wsse`` peut être
+utilisée comme un pare-feu dans votre configuration de sécurité.
 
 .. note::
 
-    You may be wondering "why do we need a special factory class to add listeners
-    and providers to the dependency injection container?". This is a very
-    good question. The reason is you can use your firewall multiple times,
-    to secure multiple parts of your application. Because of this, each
-    time your firewall is used, a new service is created in the DI container.
-    The factory is what creates these new services.
+    Vous vous demandez peut-être « pourquoi avons-nous besoin d'une classe
+    factory spéciale pour ajouter des listeners et fournisseurs à un
+    conteneur d'injection de dépendances ? ». Ceci est une très bonnne
+    question. La raison est que vous pouvez utiliser votre pare-feu
+    plusieurs fois afin de sécuriser plusieurs parties de votre application.
+    Grâce à cela, chaque fois que votre pare-feu est utilisé, un nouveau
+    service est créé dans le conteneur d'injection de dépendances.
+    La factory est ce qui crée ces nouveaux services.
 
 Configuration
 -------------
 
-It's time to see your authentication provider in action. You will need to
-do a few things in order to make this work. The first thing is to add the
-services above to the DI container. Your factory class above makes reference
-to service ids that do not exist yet: ``wsse.security.authentication.provider`` and
-``wsse.security.authentication.listener``. It's time to define those services.
+Il est temps de voir votre fournisseur d'authentification en action. Vous
+allez avoir besoin de faire quelques petites choses afin qu'il fonctionne.
+La première chose est d'ajouter les services ci-dessus dans le conteneur
+d'injection de dépendances. Votre classe factory ci-dessus fait référence
+à des IDs de service qui n'existent pas encore :
+``wsse.security.authentication.provider`` et
+``wsse.security.authentication.listener``. Il est temps de définir ces
+services.
 
 .. configuration-block::
 
@@ -396,10 +414,11 @@ to service ids that do not exist yet: ``wsse.security.authentication.provider`` 
               new Reference('security.authentication.manager'))
         ));
 
-Now that your services are defined, tell your security context about your
-factory. Factories must be included in an individual configuration file,
-at the time of this writing. So, start first by creating the file with the
-factory service, tagged as ``security.listener.factory``:
+Maintenant que vos services sont définis, informez votre contexte de
+sécurité à propos de l'existence de votre factory. Les « factories »
+doivent être inclues dans un fichier de configuration individuel, au
+moment où ces lignes sont écrites. Donc, commencez par créer le fichier
+avec le service de factory, taggé en tant que ``security.listener.factory`` :
 
 .. configuration-block::
 
@@ -428,9 +447,11 @@ factory service, tagged as ``security.listener.factory``:
         </container>
 
 .. versionadded:: 2.1
-    Before 2.1, the factory below was added via ``security.yml`` instead.
+    Avant 2.1, la factory ci-dessous était ajoutée via le fichier
+    ``security.yml`` à la place.
 
-As a final step, add the factory to the security extension in your bundle class.
+En tant que dernière étape, ajoutez la factory à l'extension de sécurité dans
+votre classe bundle.
 
 .. code-block:: php
 
@@ -452,7 +473,8 @@ As a final step, add the factory to the security extension in your bundle class.
         }
     }
 
-You are finished! You can now define parts of your app as under WSSE protection.
+Vous avez terminé ! Vous pouvez maintenant définir des parties de votre
+application comme étant sous la protection de WSSE.
 
 .. code-block:: yaml
 
@@ -462,26 +484,26 @@ You are finished! You can now define parts of your app as under WSSE protection.
                 pattern:   /api/.*
                 wsse:      true
 
-Congratulations!  You have written your very own custom security authentication
-provider!
+Félicitations ! Vous avez écrit votre tout premier fournisseur d'authentification
+de sécurité personnalisé !
 
-A Little Extra
+Un Petit Extra
 --------------
 
-How about making your WSSE authentication provider a bit more exciting? The
-possibilities are endless. Why don't you start by adding some spackle
-to that shine?
+Que diriez-vous de rendre votre fournisseur d'authentification WSSE un peu
+plus excitant ? Les possibilités sont sans fin. Voyons comment nous pouvons
+apporter plus d'éclat à tout cela !
 
 Configuration
 ~~~~~~~~~~~~~
 
-You can add custom options under the ``wsse`` key in your security configuration.
-For instance, the time allowed before expiring the Created header item,
-by default, is 5 minutes. Make this configurable, so different firewalls
-can have different timeout lengths.
+Vous pouvez ajouter des options personnalisées sous la clé ``wsse`` de votre
+configuration de sécurité. Par exemple, le temps alloué avant que l'en-tête
+« Created » expire est, par défaut, 5 minutes. Rendez cela configurable, afin
+que différents pares-feu puissent avoir des longueurs de « timeout » différentes.
 
-You will first need to edit ``WsseFactory`` and define the new option in
-the ``addConfiguration`` method.
+Vous allez tout d'abord avoir besoin d'éditer ``WsseFactory`` puis ensuite
+de définir la nouvelle option dans la méthode ``addConfiguration``.
 
 .. code-block:: php
 
@@ -499,10 +521,10 @@ the ``addConfiguration`` method.
         }
     }
 
-Now, in the ``create`` method of the factory, the ``$config`` argument will
-contain a 'lifetime' key, set to 5 minutes (300 seconds) unless otherwise
-set in the configuration. Pass this argument to your authentication provider
-in order to put it to use.
+Maintenant, dans la méthode ``create`` de la factory, l'argument ``$config``
+va contenir une clé « lifetime », déclarée à 5 minutes (300 secondes) à moins
+qu'elle soit définie ailleurs dans la configuration. Passez cet argument à
+votre fournisseur d'authentification afin qu'il l'utilise.
 
 .. code-block:: php
 
@@ -524,15 +546,16 @@ in order to put it to use.
 
 .. note::
 
-    You'll also need to add a third argument to the ``wsse.security.authentication.provider``
-    service configuration, which can be blank, but will be filled in with
-    the lifetime in the factory. The ``WsseProvider`` class will also now
-    need to accept a third constructor argument - the lifetime - which it
-    should use instead of the hard-coded 300 seconds. These two steps are
-    not shown here.
+    Vous allez aussi avoir besoin d'ajouter un troisième argument à la
+    configuration du service ``wsse.security.authentication.provider``,
+    qui peut être vide, mais qui sera rempli avec la valeur « lifetime »
+    dans la factory. La classe ``WsseProvider`` va maintenant avoir
+    besoin d'accepter un troisième argument dans son constructeur - la
+    valeur « lifetime » - qu'elle devrait utiliser à la place des 300
+    secondes codées en dur. Ces deux étapes ne sont pas montrées ici.
 
-The lifetime of each wsse request is now configurable, and can be
-set to any desirable value per firewall.
+La valeur « lifetime » de chaque requête wsse est maintenant configurable,
+et peut être définie par quelconque valeur que ce soit par pare-feu.
 
 .. code-block:: yaml
 
@@ -542,8 +565,9 @@ set to any desirable value per firewall.
                 pattern:   /api/.*
                 wsse:      { lifetime: 30 }
 
-The rest is up to you! Any relevant configuration items can be defined
-in the factory and consumed or passed to the other classes in the container.
+Le reste dépend de vous ! N'importe quels autres points de configuration
+peuvent être définis dans la factory et consommé ou passé à d'autres
+classes dans le conteneur.
 
 .. _`WSSE`: http://www.xml.com/pub/a/2003/12/17/dive.html
 .. _`nonce`: http://en.wikipedia.org/wiki/Cryptographic_nonce
