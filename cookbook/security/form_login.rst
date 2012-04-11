@@ -1,13 +1,13 @@
-How to customize your Form Login
-================================
+Comment personnaliser votre Formulaire de Login
+===============================================
 
-Using a :ref:`form login<book-security-form-login>` for authentication is
-a common, and flexible, method for handling authentication in Symfony2. Pretty
-much every aspect of the form login can be customized. The full, default
-configuration is shown in the next section.
+Utiliser un :ref:`formulaire de login<book-security-form-login>` est une méthode
+commune et flexible pour gérer l'authentification dans Symfony2. Quasiment chaque
+aspect du formulaire de login peut être personnalisé. La configuration complète
+et par défaut est montrée dans la prochaine section.
 
-Form Login Configuration Reference
-----------------------------------
+Référence de Configuration du Formulaire de Login
+-------------------------------------------------
 
 .. configuration-block::
 
@@ -18,33 +18,38 @@ Form Login Configuration Reference
             firewalls:
                 main:
                     form_login:
-                        # the user is redirected here when he/she needs to login
+                        # l'utilisateur est redirigé ici quand il/elle a besoin de se connecté
                         login_path:                     /login
 
-                        # if true, forward the user to the login form instead of redirecting
+                        # si défini à true, « forward » l'utilisateur vers le formulaire de
+                        # login au lieu de le rediriger
                         use_forward:                    false
 
-                        # submit the login form here
+                        # soumet le formulaire de login vers cette URL
                         check_path:                     /login_check
 
-                        # by default, the login form *must* be a POST, not a GET
+                        # par défaut, le formulaire de login *doit* être un POST,
+                        # et pas un GET
                         post_only:                      true
 
-                        # login success redirecting options (read further below)
+                        # options de redirection lorsque le login a réussi (vous
+                        # pouvez en lire plus ci-dessous)
                         always_use_default_target_path: false
                         default_target_path:            /
                         target_path_parameter:          _target_path
                         use_referer:                    false
 
-                        # login failure redirecting options (read further below)
+                        # options de redirection lorsque le login échoue (vous
+                        # pouvez en lire plus ci-dessous)
                         failure_path:                   null
                         failure_forward:                false
 
-                        # field names for the username and password fields
+                        # noms des champs pour le nom d'utilisateur et le mot
+                        # de passe
                         username_parameter:             _username
                         password_parameter:             _password
 
-                        # csrf token options
+                        # options du token csrf
                         csrf_parameter:                 _csrf_token
                         intention:                      authenticate
 
@@ -96,34 +101,37 @@ Form Login Configuration Reference
             ),
         ));
 
-Redirecting after Success
+Rediriger après un Succès
 -------------------------
 
-You can change where the login form redirects after a successful login using
-the various config options. By default the form will redirect to the URL the
-user requested (i.e. the URL which triggered the login form being shown).
-For example, if the user requested ``http://www.example.com/admin/post/18/edit``
-then after he/she will eventually be sent back to ``http://www.example.com/admin/post/18/edit`` 
-after successfully logging in. This is done by storing the requested URL
-in the session. If no URL is present in the session (perhaps the user went
-directly to the login page), then the user is redirected to the default page,
-which is  ``/`` (i.e. the homepage) by default. You can change this behavior
-in several ways.
+Vous pouvez changer l'URL de redirection après que le formulaire de login
+ait été soumis avec succès via plusieurs options de configuration. Par défaut,
+le formulaire va rediriger l'utilisateur vers l'URL qu'il a demandé (i.e. l'URL
+qui a déclenchée le formulaire de login qui est montré). Par exemple, si
+l'utilisateur a demandé ``http://www.example.com/admin/post/18/edit``, alors
+après, il sera éventuellement redirigé vers ``http://www.example.com/admin/post/18/edit``
+dans le cas d'un succès de connexion. Cela est effectué en stockant l'URL
+demandée dans la session. Si aucune URL n'est présente dans la session (peut-être
+que l'utilisateur a été directement sur la page de login), alors l'utilisateur
+est redirigé vers la page par défaut, qui est ``/`` (i.e. la page d'accueil) par
+défaut. Vous pouvez changer ce comportement de différentes façons.
 
 .. note::
 
-    As mentioned, by default the user is redirected back to the page he originally
-    requested. Sometimes, this can cause problems, like if a background AJAX
-    request "appears" to be the last visited URL, causing the user to be
-    redirected there. For information on controlling this behavior, see
+    Comme précisé, par défaut, l'utilisateur est redirigé vers la page qu'il
+    avait demandé à la base. Quelquefois, cela peut poser des problèmes, comme
+    par exemple si une requête AJAX en arrière-plan « apparaît » comme étant la
+    dernière URL visitée, redirigeant l'utilisateur vers cette dernière. Pour plus
+    d'informations sur comment contrôler ce comportement, voir
     :doc:`/cookbook/security/target_path`.
 
-Changing the Default Page
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Changer la Page par Défaut
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First, the default page can be set (i.e. the page the user is redirected to
-if no previous page was stored in the session). To set it to ``/admin`` use
-the following config:
+Tout d'abord, la page par défaut peut être définie (i.e. la page vers laquelle
+l'utilisateur est redirigée si aucune page n'avait été précédemment stockée
+dans la session). Pour la définir en tant que ``/admin``, utilisez la configuration
+suivante :
 
 .. configuration-block::
 
@@ -160,14 +168,15 @@ the following config:
             ),
         ));
 
-Now, when no URL is set in the session users will be sent to ``/admin``.
+Maintenant, quand aucune URL n'est définie dans la session, l'utilisateur
+va être envoyé vers ``/admin``.
 
-Always Redirect to the Default Page
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Toujours Rediriger vers la Page par Défaut
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can make it so that users are always redirected to the default page regardless
-of what URL they had requested previously by setting the 
-``always_use_default_target_path`` option to true:
+Vous pouvez faire en sorte que les utilisateurs soient toujours redirigés vers la
+page par défaut sans tenir compte de l'URL qu'ils avaient demandée en définissant
+l'option ``always_use_default_target_path`` à « true » :
 
 .. configuration-block::
 
@@ -204,12 +213,13 @@ of what URL they had requested previously by setting the
             ),
         ));
 
-Using the Referring URL
-~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser l'URL référante
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-In case no previous URL was stored in the session, you may wish to try using
-the ``HTTP_REFERER`` instead, as this will often be the same. You can do
-this by setting ``use_referer`` to true (it defaults to false): 
+Dans le cas où aucune URL n'a été stockée dans la session, vous pourriez souhaiter
+essayer d'utiliser ``HTTP_REFERER`` à la place, comme ce dernier sera souvent
+identique. Vous pouvez effectuer cela en définissant ``use_referer`` à « true »
+(par défaut la valeur est « false ») :
 
 .. configuration-block::
 
@@ -247,15 +257,16 @@ this by setting ``use_referer`` to true (it defaults to false):
         ));
 
 .. versionadded:: 2.1
-    As of 2.1, if the referer is equal to the ``login_path`` option, the
-    user will be redirected to the ``default_target_path``.
+    Depuis la version 2.1, si le référant est égal à l'option ``login_path``,
+    l'utilisateur sera redirigé vers le ``default_target_path``.
 
-Control the Redirect URL from inside the Form
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contrôler l'URL de Redirection depuis le Formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also override where the user is redirected to via the form itself by 
-including a hidden field with the name ``_target_path``. For example, to
-redirect to the URL defined by some ``acount`` route, use the following:
+Vous pouvez aussi outrepasser le chemin vers lequel l'utilisateur est redirigé
+via le formulaire lui-même en incluant un champ caché avec le nom ``_target_path``.
+Par exemple, pour rediriger vers l'URL définie par une route ``account``,
+utilisez ce qui suit :
 
 .. configuration-block::
 
@@ -297,10 +308,10 @@ redirect to the URL defined by some ``acount`` route, use the following:
             <input type="submit" name="login" />
         </form>
 
-Now, the user will be redirected to the value of the hidden form field. The
-value attribute can be a relative path, absolute URL, or a route name. You 
-can even change the name of the hidden form field by changing the ``target_path_parameter`` 
-option to another value.
+Maintenant, l'utilisateur va être redirigé vers la valeur du champ caché du
+formulaire. La valeur de l'attribut peut être un chemin relatif, une URL
+absolue, ou un nom de route. Vous pouvez même changer le nom du champ
+caché du formulaire en changeant l'option ``target_path_parameter``.
 
 .. configuration-block::
 
@@ -335,14 +346,15 @@ option to another value.
             ),
         ));
 
-Redirecting on Login Failure
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Redirection en cas d'Echec du Login
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to redirect the user after a successful login, you can also set
-the URL that the user should be redirected to after a failed login (e.g. an
-invalid username or password was submitted). By default, the user is redirected
-back to the login form itself. You can set this to a different URL with the
-following config:
+En plus de la redirection lorsqu'un utilisateur réussit à se connecter, vous
+pouvez aussi définir l'URL vers laquelle l'utilisateur devrait être redirigé
+après un échec lors de la phase de login (par exemple : un nom d'utilisateur
+ou mot de passe non-valide a été soumis). Par défaut, l'utilisateur est
+redirigé vers le formulaire de login lui-même. Vous pouvez définir une URL
+différente en utilisant la configuration suivante :
 
 .. configuration-block::
 
