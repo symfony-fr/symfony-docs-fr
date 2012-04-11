@@ -1,14 +1,16 @@
-How to add "Remember Me" Login Functionality
-============================================
+Comment ajouter la Fonctionnalité de Login « Remember Me »
+==========================================================
 
-Once a user is authenticated, their credentials are typically stored in the
-session. This means that when the session ends they will be logged out and
-have to provide their login details again next time they wish to access the 
-application. You can allow users to choose to stay logged in for longer than 
-the session lasts using a cookie with the ``remember_me`` firewall option. 
-The firewall needs to have a secret key configured, which is used to encrypt 
-the cookie's content. It also has several options with default values which 
-are shown here:
+Une fois qu'un utilisateur est authentifié, ses informations de connexion
+sont généralement stockées dans la session. Cela signifie que lorsque la
+session se termine, cet utilisateur sera déconnecté et devra fournir de nouveau
+ses informations de login la prochaine fois qu'il voudra accéder à
+l'application. Vous pouvez laisser aux utilisateurs la possibilité de choisir
+de rester connecté plus longtemps que la durée d'une session en utilisant
+un cookie avec l'option pare-feu ``remember_me``. Le pare-feu a besoin
+d'avoir une clé secrète configurée, qui est utilisée pour encrypter le
+contenu du cookie. Il possède aussi plusieurs options avec des valeurs
+par défaut qui sont montrées ici :
 
 .. configuration-block::
 
@@ -21,7 +23,7 @@ are shown here:
                     key:      aSecretKey
                     lifetime: 3600
                     path:     /
-                    domain:   ~ # Defaults to the current domain from $_SERVER
+                    domain:   ~ # Prend la valeur par défaut du domaine courant depuis $_SERVER
 
     .. code-block:: xml
 
@@ -32,7 +34,7 @@ are shown here:
                     key="aSecretKey"
                     lifetime="3600"
                     path="/"
-                    domain="" <!-- Defaults to the current domain from $_SERVER -->
+                    domain="" <!-- Prend la valeur par défaut du domaine courant depuis $_SERVER -->
                 />
             </firewall>
         </config>
@@ -46,17 +48,19 @@ are shown here:
                     'key'                     => 'aSecretKey',
                     'lifetime'                => 3600,
                     'path'                    => '/',
-                    'domain'                  => '', // Defaults to the current domain from $_SERVER
+                    'domain'                  => '', // Prend la valeur par défaut du domaine courant depuis $_SERVER
                 )),
             ),
         ));
 
-It's a good idea to provide the user with the option to use or not use the
-remember me functionality, as it will not always be appropriate. The usual
-way of doing this is to add a checkbox to the login form. By giving the checkbox
-the name ``_remember_me``, the cookie will automatically be set when the checkbox
-is checked and the user successfully logs in. So, your specific login form
-might ultimately look like this:
+C'est une bonne idée de fournir la possibilité à l'utilisateur de choisir
+s'il veut utiliser la fonctionnalité « remember me » ou non, comme cela
+ne sera pas toujours approprié. La manière usuelle d'effectuer ceci est
+d'ajouter une « checkbox » au formulaire de login. En donnant le nom
+``_remember_me`` à la « checkbox », le cookie va automatiquement être
+défini lorsque la « checkbox » est cochée et que l'utilisateur s'est
+connecté avec succès. Donc, votre formulaire de login spécifique
+pourrait au final ressembler à cela :
 
 .. configuration-block::
 
@@ -101,54 +105,61 @@ might ultimately look like this:
             <input type="submit" name="login" />
         </form>
 
-The user will then automatically be logged in on subsequent visits while
-the cookie remains valid.
+L'utilisateur va donc être connecté automatiquement lors de ses prochaines
+visites tant que le cookie restera valide.
 
-Forcing the User to Re-authenticate before accessing certain Resources
-----------------------------------------------------------------------
+Forcer l'Utilisateur à se Ré-authentifier avant d'accéder à certaines Ressources
+--------------------------------------------------------------------------------
 
-When the user returns to your site, he/she is authenticated automatically based
-on the information stored in the remember me cookie. This allows the user
-to access protected resources as if the user had actually authenticated upon
-visiting the site.
+Lorsque l'utilisateur retourne sur votre site, il ou elle est authentifié
+automatiquement basé sur les informations stockées dans le cookie
+« remember me ». Cela permet à l'utilisateur d'accéder à des ressources protégées
+comme si l'utilisateur s'était authentifié lors de sa visite sur le site.
 
-In some cases, however, you may want to force the user to actually re-authenticate
-before accessing certain resources. For example, you might allow a "remember me"
-user to see basic account information, but then require them to actually
-re-authenticate before modifying that information.
+Cependant, dans certains cas, vous pourriez vouloir forcer l'utilisateur à se
+ré-authentifier avant d'accéder à certains ressources. Par exemple, vous pourriez
+autoriser un utilisateur avec un cookie « remember me » à voir les informations
+basiques de son compte, mais par contre vous pourriez lui imposer de se
+ré-authentifier avant de modifier cette information.
 
-The security component provides an easy way to do this. In addition to roles 
-explicitly assigned to them, users are automatically given one of the following
-roles depending on how they are authenticated:
+Le composant de sécurité fournit une manière facile d'effectuer cela. En plus
+des rôles qui leurs sont explicitement assignés, les utilisateurs possèdent
+automatiquement l'un des rôles suivants dépendant de la manière dont ils sont
+authentifiés :
 
-* ``IS_AUTHENTICATED_ANONYMOUSLY`` - automatically assigned to a user who is 
-  in a firewall protected part of the site but who has not actually logged in. 
-  This is only possible if anonymous access has been allowed.
+* ``IS_AUTHENTICATED_ANONYMOUSLY`` - automatiquement assigné à un utilisateur
+  qui se trouve dans une zone protégée du site par un pare-feu mais qui ne s'est
+  pas connecté/loggué. Cela est possible uniquement si l'accès anonyme a été
+  autorisé.
 
-* ``IS_AUTHENTICATED_REMEMBERED`` - automatically assigned to a user who
-  was authenticated via a remember me cookie.
+* ``IS_AUTHENTICATED_REMEMBERED`` - automatiquement assigné à un utilisateur
+  qui a été authentifié via un cookie « remember me ».
 
-* ``IS_AUTHENTICATED_FULLY`` - automatically assigned to a user that has
-  provided their login details during the current session.
+* ``IS_AUTHENTICATED_FULLY`` - automatiquement assigné à un utilisateur qui
+  a fourni ses informations de login durant la session courante.
 
-You can use these to control access beyond the explicitly assigned roles.
+Vous pouvez utiliser ces rôles pour contrôler l'accès en plus des autres
+rôles explicitement assignés.
 
 .. note::
 
-    If you have the ``IS_AUTHENTICATED_REMEMBERED`` role, then you also
-    have the ``IS_AUTHENTICATED_ANONYMOUSLY`` role. If you have the ``IS_AUTHENTICATED_FULLY``
-    role, then you also have the other two roles. In other words, these roles
-    represent three levels of increasing "strength" of authentication.
+    Si vous avez le rôle ``IS_AUTHENTICATED_REMEMBERED``, alors vous avez
+    aussi le rôle ``IS_AUTHENTICATED_ANONYMOUSLY``. Si vous avez le rôle
+    ``IS_AUTHENTICATED_FULLY``, alors vous possédez aussi les deux autres
+    rôles. En d'autres termes, ces rôles représentent trois niveaux croissants
+    de « force » d'authentification.
 
-You can use these additional roles for finer grained control over access to 
-parts of a site. For example, you may want you user to be able to view their 
-account at ``/account`` when authenticated by cookie but to have to provide 
-their login details to be able to edit the account details. You can do this
-by securing specific controller actions using these roles. The edit action
-in the controller could be secured using the service context. 
+Vous pouvez utiliser ces rôles additionnels pour effectuer un contrôle d'une
+granularité plus fine sur l'accès à certaines parties d'un site. Par exemple,
+vous pourriez souhaiter que votre utilisateur soit capable de voir son compte en
+se rendant à ``/account`` lorsqu'il est authentifié par cookie, mais qu'il
+doive fournir ses informations de login pour pouvoir éditer les détails de son
+compte. Vous pouvez effectuer ceci en sécurisant certaines actions d'un contrôleur
+spécifique en utilisant ces rôles. L'action « edit » dans le contrôleur
+pourrait être sécurisée en utilisant le contexte du service.
 
-In the following example, the action is only allowed if the user has the 
-``IS_AUTHENTICATED_FULLY`` role.
+Dans l'exemple suivant, l'action est autorisée seulement si l'utilisateur
+possède le rôle ``IS_AUTHENTICATED_FULLY``.
 
 .. code-block:: php
 
@@ -166,8 +177,9 @@ In the following example, the action is only allowed if the user has the
         // ...
     }
 
-You can also choose to install and use the optional JMSSecurityExtraBundle_,
-which can secure your controller using annotations:
+Vous pouvez aussi choisir d'installer et d'utiliser le bundle optionnel
+JMSSecurityExtraBundle_ qui peut sécuriser votre contrôleur en utilisant
+des annotations :
 
 .. code-block:: php
 
@@ -183,25 +195,29 @@ which can secure your controller using annotations:
 
 .. tip::
 
-    If you also had an access control in your security configuration that
-    required the user to have a ``ROLE_USER`` role in order to access any
-    of the account area, then you'd have the following situation:
-    
-    * If a non-authenticated (or anonymously authenticated user) tries to
-      access the account area, the user will be asked to authenticate.
-    
-    * Once the user has entered his username and password, assuming the
-      user receives the ``ROLE_USER`` role per your configuration, the user
-      will have the ``IS_AUTHENTICATED_FULLY`` role and be able to access
-      any page in the account section, including the ``editAction`` controller.
+    Si vous aviez aussi un contrôle d'accès dans votre configuration de
+    sécurité qui requiert qu'un utilisateur possède un rôle ``ROLE_USER``
+    afin d'accéder à n'importe quelle partie de la zone « account », alors
+    vous auriez la situation suivante :
 
-    * If the user's session ends, when the user returns to the site, he will
-      be able to access every account page - except for the edit page - without
-      being forced to re-authenticate. However, when he tries to access the
-      ``editAction`` controller, he will be forced to re-authenticate, since
-      he is not, yet, fully authenticated.
+    * Si un utilisateur non-authentifié (ou authentifié anonymement) essaye
+      d'accéder la zone « account », il sera demandé à cet utilisateur de
+      s'authentifier.
 
-For more information on securing services or methods in this way,
-see :doc:`/cookbook/security/securing_services`.
+    * Une fois que l'utilisateur a entré son nom d'utilisateur et son mot de
+      passe, et en assumant que l'utilisateur recoive le rôle ``ROLE_USER``
+      par votre configuration, ce dernier aura le rôle ``IS_AUTHENTICATED_FULLY``
+      et sera capable d'accéder à n'importe quelle page de la section
+      « account », incluant l'action ``editAction`` du contrôleur.
+
+    * Enfin, assumons que la session de l'utilisateur se termine ; quand ce dernier
+      retourne sur le site, il sera capable d'accéder à chaque page de la partie
+      « account » - excepté la page « edit » - sans être forcé à se
+      ré-authentifié. Cependant, quand il essaye d'accéder à l'action ``editAction``
+      du contrôleur, il sera forcer à se ré-authentifier, puisqu'il n'est pas
+      (encore) totalement authentifié.
+
+Pour plus d'informations sur la sécurisation de services ou de méthodes de cette
+manière, voir :doc:`/cookbook/security/securing_services`.
 
 .. _JMSSecurityExtraBundle: https://github.com/schmittjoh/JMSSecurityExtraBundle
