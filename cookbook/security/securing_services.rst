@@ -1,9 +1,10 @@
-How to secure any Service or Method in your Application
-=======================================================
+Comment sécuriser quelconque Service ou Méthode de votre Application
+====================================================================
 
-In the security chapter, you can see how to :ref:`secure a controller<book-security-securing-controller>`
-by requesting the ``security.context`` service from the Service Container
-and checking the current user's role::
+Dans le chapitre sur la sécurité, vous pouvez voir comment
+:ref:`sécuriser un contrôleur<book-security-securing-controller>` en
+récupérant le service ``security.context`` depuis le Conteneur de
+Service et en vérifiant le rôle actuel de l'utilisateur::
 
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
     // ...
@@ -17,12 +18,13 @@ and checking the current user's role::
         // ...
     }
 
-You can also secure *any* service in a similar way by injecting the ``security.context``
-service into it. For a general introduction to injecting dependencies into
-services see the :doc:`/book/service_container` chapter of the book. For
-example, suppose you have a ``NewsletterManager`` class that sends out emails
-and you want to restrict its use to only users who have some ``ROLE_NEWSLETTER_ADMIN``
-role. Before you add security, the class looks something like this:
+Vous pouvez aussi sécuriser *quelconque* service d'une manière similaire en lui injectant
+le service ``security.context``. Pour une introduction générale sur l'injection
+de dépendances dans un service, voyez le chapitre :doc:`/book/service_container` du
+book. Par exemple, supposons que vous ayez une classe ``NewsletterManager`` qui envoie
+des emails et que vous souhaitiez restreindre son utilisation aux utilisateurs ayant
+un rôle nommé ``ROLE_NEWSLETTER_ADMIN`` uniquement. Avant l'ajout de cette sécurité,
+la classe ressemble à ceci :
 
 .. code-block:: php
 
@@ -33,18 +35,18 @@ role. Before you add security, the class looks something like this:
 
         public function sendNewsletter()
         {
-            // where you actually do the work
+            // c'est ici que vous effectuez le travail
         }
 
         // ...
     }
 
-Your goal is to check the user's role when the ``sendNewsletter()`` method is
-called. The first step towards this is to inject the ``security.context``
-service into the object. Since it won't make sense *not* to perform the security
-check, this is an ideal candidate for constructor injection, which guarantees
-that the security context object will be available inside the ``NewsletterManager``
-class::
+Votre but est de vérifier le rôle de l'utilisateur lorsque la méthode
+``sendNewsletter()`` est appelée. La première étape pour y parvenir est d'injecter
+le service ``security.context`` dans l'objet. Sachant que cela ne ferait pas de sens
+de *ne pas* effectuer une vérification de sécurité, nous avons ici un candidat
+idéal pour l'injection via le constructeur, qui garantit que l'objet du contexte
+de sécurité sera disponible dans la classe ``NewsletterManager``::
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -62,7 +64,7 @@ class::
         // ...
     }
 
-Then in your service configuration, you can inject the service:
+Puis, dans votre configuration de service, vous pouvez injecter le service :
 
 .. configuration-block::
 
@@ -103,8 +105,8 @@ Then in your service configuration, you can inject the service:
             array(new Reference('security.context'))
         ));
 
-The injected service can then be used to perform the security check when the
-``sendNewsletter()`` method is called::
+Le service injecté peut dès lors être utilisé pour effectuer la vérification
+de sécurité lorsque la méthode ``sendNewsletter()`` est appelée::
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -133,20 +135,21 @@ The injected service can then be used to perform the security check when the
         // ...
     }
 
-If the current user does not have the ``ROLE_NEWSLETTER_ADMIN``, they will
-be prompted to log in.
+Si l'utilisateur actuel ne possède pas le rôle ``ROLE_NEWSLETTER_ADMIN``,
+il lui sera demandé de se connecter.
 
-Securing Methods Using Annotations
-----------------------------------
+Sécuriser des Méthodes en Utilisant des Annotations
+---------------------------------------------------
 
-You can also secure method calls in any service with annotations by using the
-optional `JMSSecurityExtraBundle`_ bundle. This bundle is included in the
-Symfony2 Standard Distribution.
+Vous pouvez aussi sécuriser des appels de méthodes dans quelconque service avec
+des annotations en utilisant le bundle optionnel `JMSSecurityExtraBundle`_. Ce
+bundle est inclus dans la Distribution Standard de Symfony2.
 
-To enable the annotations functionality, :ref:`tag<book-service-container-tags>`
-the service you want to secure with the ``security.secure_service`` tag
-(you can also automatically enable this functionality for all services, see
-the :ref:`sidebar<securing-services-annotations-sidebar>` below):
+Pour activer la fonctionnalité des annotations, :ref:`taggez<book-service-container-tags>`
+le service que vous voulez sécuriser avec le tag ``security.secure_service``
+(vous pouvez aussi activer automatiquement cette fonctionnalité pour tous
+les services, voir :ref:`l'encadré<securing-services-annotations-sidebar>`
+ci-dessous) :
 
 .. configuration-block::
 
@@ -186,7 +189,8 @@ the :ref:`sidebar<securing-services-annotations-sidebar>` below):
         $definition->addTag('security.secure_service');
         $container->setDefinition('newsletter_manager', $definition);
 
-You can then achieve the same results as above using an annotation::
+Vous pouvez ainsi parvenir aux mêmes résultats que ci-dessus en utilisant
+une annotation::
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -209,23 +213,24 @@ You can then achieve the same results as above using an annotation::
 
 .. note::
 
-    The annotations work because a proxy class is created for your class
-    which performs the security checks. This means that, whilst you can use
-    annotations on public and protected methods, you cannot use them with
-    private methods or methods marked final.
+    Les annotations fonctionnent car une classe proxy est créée pour votre
+    classe qui effectue les vérifications de sécurité. Cela signifie que vous
+    pouvez utiliser les annotations sur des méthodes « public » ou « protected »,
+    mais que vous ne pouvez pas les utiliser avec des méthodes « private » ou
+    avec des méthodes marquées comme « final »
 
-The ``JMSSecurityExtraBundle`` also allows you to secure the parameters and return
-values of methods. For more information, see the `JMSSecurityExtraBundle`_
-documentation.
+Le ``JMSSecurityExtraBundle`` vous permet aussi de sécuriser les paramètres et
+les valeurs retournées par les méthodes. Pour plus d'informations, voir la
+documentation du `JMSSecurityExtraBundle`_.
 
 .. _securing-services-annotations-sidebar:
 
-.. sidebar:: Activating the Annotations Functionality for all Services
+.. sidebar:: Activer la Fonctionnalité des Annotations pour tous les Services
 
-    When securing the method of a service (as shown above), you can either
-    tag each service individually, or activate the functionality for *all*
-    services at once. To do so, set the ``secure_all_services`` configuration
-    option to true:
+    Quand vous sécurisez la méthode d'un service (comme montré ci-dessus), vous
+    pouvez soit tagger chaque service individuellement, ou activer la
+    fonctionnalité pour *tous* les services en une seule fois. Pour ce faire,
+    définissez l'option de configuration ``secure_all_services`` à « true » :
 
     .. configuration-block::
 
@@ -256,7 +261,8 @@ documentation.
                 'secure_all_services' => true,
             ));
 
-    The disadvantage of this method is that, if activated, the initial page
-    load may be very slow depending on how many services you have defined.
+    Le désavantage de cette méthode est que, si elle est activée, le chargement
+    initial de la page pourrait être très lent selon le nombre de services que
+    vous avez défini.
 
 .. _`JMSSecurityExtraBundle`: https://github.com/schmittjoh/JMSSecurityExtraBundle
