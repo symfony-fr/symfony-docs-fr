@@ -5,7 +5,7 @@ Comment envoyer un Email
 ========================
 
 Envoyer des emails est une tâche classique pour n'importe quelle application web
-et une qui possède des complications et pièges potentiels. A la place de réinventer
+et une qui possède des complications et pièges potentiels. Plutôt que de réinventer
 la roue, une solution pour envoyer des emails est d'utiliser le ``SwiftmailerBundle``,
 qui tire partie de la puissance de la bibliothèque `Swiftmailer`_.
 
@@ -74,7 +74,7 @@ seul paramètre obligatoire de la configuration est ``transport`` :
         ));
 
 La plus grande partie de la configuration de Swiftmailer traite de comment
-les messages eux-mêmes devraient être délivrés.
+les messages eux-mêmes devraient être envoyés.
 
 Les attributs de configuration suivants sont disponibles :
 
@@ -90,14 +90,14 @@ Les attributs de configuration suivants sont disponibles :
   * ``type`` (comment mettre les messages dans une queue, seulement ``file`` est supporté pour le moment)
   * ``path`` (où stocker les messages)
 * ``delivery_address``  (une adresse email où envoyer TOUS les emails)
-* ``disable_delivery``  (définir à true pour désactiver entièrement la livraison des emails)
+* ``disable_delivery``  (définir à true pour désactiver entièrement l'envoi des emails)
 
 Envoyer des Emails
 ------------------
 
 La bibliothèque Swiftmailer fonctionne grâce à la création, la configuration
 et enfin à l'envoi d'objets ``Swift_Message``. Le « mailer » est responsable
-de l'actuelle livraison du message et est accessible via le service ``mailer``.
+de l'envoi réél du message et est accessible via le service ``mailer``.
 Globalement, envoyer un email est assez simple::
 
     public function indexAction($name)
