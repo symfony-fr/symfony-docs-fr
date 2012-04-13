@@ -5,8 +5,8 @@ Lorsque vous développez une application qui envoie des emails, vous
 voudrez souvent que cette dernière n'en envoie pas au destinaire
 spécifié pendant le développement. Si vous utilisez le ``SwiftmailerBundle``
 avec Symfony2, vous pouvez facilement réaliser cela à travers les paramètres
-de configuration sans avoir à faire quelconque changement dans votre code.
-Il y a deux choix principaux possibles lorsqu'on parle de gestion d'email
+de configuration sans avoir à faire de quelconques changements dans votre code.
+Il y a deux choix principaux possibles lorsqu'on parle de gestion d'emails
 durant le développement : (a) désactiver complètement l'envoi d'emails ou
 (b) envoyer tous les emails à une adresse spécifique.
 
@@ -14,9 +14,9 @@ Désactiver l'Envoi
 ------------------
 
 Vous pouvez désactiver l'envoi d'emails en définissant l'option
-``disable_delivery`` comme étant ``true``. C'est ce qui est fait par défaut
+``disable_delivery`` à ``true``. C'est ce qui est fait par défaut
 dans l'environnement ``test`` dans la distribution Standard. Si vous
-faites cela dans la config spécifique ``test``, alors les emails ne seront
+faites cela dans la configuration spécifique ``test``, alors les emails ne seront
 pas envoyés lorsque vous exécuterez les tests, mais continueront d'être
 envoyés dans les environnements ``prod`` et ``dev`` :
 
@@ -50,8 +50,8 @@ envoyés dans les environnements ``prod`` et ``dev`` :
 Si vous voulez aussi désactiver l'envoi dans l'environnement ``dev``,
 ajoutez tout simplement la même configuration dans le fichier ``config_dev.yml``.
 
-Envoyer à une Adresse Spécifiée
--------------------------------
+Envoyer à une Adresse Spécifique
+--------------------------------
 
 Vous pouvez aussi choisir d'avoir tous les emails envoyés à une adresse
 spécifique à la place de l'adresse réellement spécifiée lors de l'envoi
@@ -101,7 +101,7 @@ Maintenant, supposons que vous envoyiez un email à ``recipient@example.com``.
         return $this->render(...);
     }
 
-Dans l'environnement ``dev``, l'email sera envoyé à la place à ``dev@example.com``.
+Dans l'environnement ``dev``, l'email sera envoyé à ``dev@example.com``.
 Swiftmailer ajoutera un en-tête supplémentaire à l'email, ``X-Swift-To``, contenant
 l'adresse remplacée, afin que vous puissiez toujours voir à qui il aurait été
 envoyé.
@@ -111,7 +111,7 @@ envoyé.
     En plus des adresses ``to``, cela va aussi stopper les emails envoyés
     à n'importe quelle adresse des champs ``CC`` et ``BCC``. Swiftmailer
     ajoutera des en-têtes additionnels à l'email contenant les adresses
-    outrepassées. Ces en-têtes sont respectivement ``X-Swift-Cc`` et
+    surchargées. Ces en-têtes sont respectivement ``X-Swift-Cc`` et
     ``X-Swift-Bcc`` pour les adresses de ``CC`` et ``BCC``.
 
 Voir les informations depuis la Barre d'Outils de Débuggage Web
