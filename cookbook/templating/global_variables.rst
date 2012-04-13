@@ -1,11 +1,12 @@
 .. index::
    single: Templating; Global variables
 
-Injecting variables into all templates (i.e. Global Variables)
+Injecter des variables dans tous les modèles (i.e. Variables Global)
 ==============================================================
 
-Sometimes you want a variable to be accessible to all the templates you use.
-This is possible inside your ``app/config/config.yml`` file:
+Parfois vous voulez qu'une variables soit accessible dans tous les modèles
+que vous utilisez. C'est possible à l'intérieur du fichier
+``app/config/config.yml``:
 
 .. code-block:: yaml
 
@@ -15,14 +16,15 @@ This is possible inside your ``app/config/config.yml`` file:
         globals:
             ga_tracking: UA-xxxxx-x
 
-Now, the variable ``ga_tracking`` is available in all Twig templates:
+Maintenant, la variable ``ga_tracking`` est disponibles dans tous les modèles Twig:
 
 .. code-block:: html+jinja
 
     <p>Our google tracking code is: {{ ga_tracking }} </p>
 
-It's that easy! You can also take advantage of the built-in :ref:`book-service-container-parameters`
-system, which lets you isolate or reuse the value:
+C'est aussi simple! Vous pouvez aussi prendre avantage du système intégré
+:ref:`book-service-container-parameters`, qui vous permet d'isoler ou de réutiliser
+une valeur:
 
 .. code-block:: ini
 
@@ -37,12 +39,12 @@ system, which lets you isolate or reuse the value:
         globals:
             ga_tracking: %ga_tracking%
 
-The same variable is available exactly as before.
+La même variables est disponible exactement comme précédemment.
 
-More Complex Global Variables
------------------------------
+Des variables globales complexes
+--------------------------------
 
-If the global variable you want to set is more complicated - say an object -
-then you won't be able to use the above method. Instead, you'll need to create
-a :ref:`Twig Extension<reference-dic-tags-twig-extension>` and return the
-global variable as one of the entries in the ``getGlobals`` method.
+Si vous voulez utiliser une variable globale plus complexe, comme un objet, alors
+vous devez utiliser une autre méthode. Ainsi vous aurez besoin de créer une
+:ref:`Extension Twig<reference-dic-tags-twig-extension>` et de retourner la variable
+globale comme une des valeurs du tableau retourné par la méthode ``getGlobals``.
