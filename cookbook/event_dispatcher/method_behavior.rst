@@ -8,7 +8,7 @@ Faire quelque chose avant ou après l'Appel d'une Méthode
 --------------------------------------------------------
 
 Si vous souhaitez faire quelque chose juste avant, ou juste après qu'une méthode
-ait été appelée, vous pouvez « dispatcher » un évènement respectivement au
+a été appelée, vous pouvez « dispatcher » un évènement respectivement au
 début ou à la fin d'une méthode::
 
     class Foo
@@ -37,13 +37,13 @@ début ou à la fin d'une méthode::
     }
 
 Dans cet exemple, deux évènements sont lancés : ``foo.pre_send``, avant que la
-méthode soit exécutée, et ``foo.post_send`` après que la méthode soit exécutée.
+méthode soit exécutée, et ``foo.post_send`` après que la méthode est exécutée.
 Chacun utilise une classe Event personnalisée pour communiquer des informations
 aux listeners des deux évènements. Ces classes d'évènements devraient être créées
 par vous-même et devraient permettre, dans cet exemple, aux variables ``$foo``,
 ``$bar`` et ``$ret`` d'être récupérées et définies par les listeners.
 
-Par exemple, assumons que ``FilterSendReturnValue`` possède une méthode
+Par exemple, supposons que ``FilterSendReturnValue`` possède une méthode
 ``setReturnValue``, un listener pourrait alors ressembler à ceci :
 
 .. code-block:: php
