@@ -1,19 +1,21 @@
 .. index::
    single: Tests; Profiling
 
-How to use the Profiler in a Functional Test
-============================================
+Comment utiliser le Profiler dans un test fonctionnel
+=====================================================
 
-It's highly recommended that a functional test only tests the Response. But if
-you write functional tests that monitor your production servers, you might
-want to write tests on the profiling data as it gives you a great way to check
-various things and enforce some metrics.
+Il est grandement recommandé qu'un test fonctionnel ne teste que l'objet Response.
+Cependant si vous écrivez des tests qui monitorent vos serveurs de productions, vous
+désirerez peut-être écrire des tests sur les données provenant du profiler. En effet
+celui-ci fourni des méthodes efficaces, permet de contrôler de nombreux comportements
+et d'appliquer certaines métriques.
 
-The Symfony2 :ref:`Profiler <internals-profiler>` gathers a lot of data for
-each request. Use this data to check the number of database calls, the time
-spent in the framework, ... But before writing assertions, always check that
-the profiler is indeed available (it is enabled by default in the ``test``
-environment)::
+Le Profiler de Symfony2 :ref:`Profiler <internals-profiler>` collecte de nombreuses
+informations à chaque requête. Utilisez celle-ci pour vérifier le nombre d'appels
+à la base de donnée, le temps machine dédié au framework, ...
+
+Avant de pouvoir écrire des assertions, vous devez toujours vous assurez que le
+profiler est disponible (il est activé par défaut dans l'environnement de ``test`` )::
 
     class HelloControllerTest extends WebTestCase
     {
@@ -22,23 +24,24 @@ environment)::
             $client = static::createClient();
             $crawler = $client->request('GET', '/hello/Fabien');
 
-            // Write some assertions about the Response
+            // Ecrire des assertions concernant la réponse
             // ...
 
-            // Check that the profiler is enabled
+            // Vérifier que le profiler est activé
             if ($profile = $client->getProfile()) {
-                // check the number of requests
+                // vérifier le nombre de requêtes
                 $this->assertTrue($profile->getCollector('db')->getQueryCount() < 10);
 
-                // check the time spent in the framework
+                // Vérifier le temps utilisé par le framework
                 $this->assertTrue( $profile->getCollector('timer')->getTime() < 0.5);
             }
         }
     }
 
-If a test fails because of profiling data (too many DB queries for instance),
-you might want to use the Web Profiler to analyze the request after the tests
-finish. It's easy to achieve if you embed the token in the error message::
+Si un test échoue à cause des données du profilage (trop d'appels à la bd par
+exemple), vous pouvez utiliser le Profiler Web afin d’analyser la requête après
+les tests terminés. Cela est réalisable simplement en intégrant le token suivant
+dans les messages d'erreurs::
 
     $this->assertTrue(
         $profile->get('db')->getQueryCount() < 30,
@@ -47,16 +50,16 @@ finish. It's easy to achieve if you embed the token in the error message::
 
 .. caution::
 
-     The profiler store can be different depending on the environment
-     (especially if you use the SQLite store, which is the default configured
-     one).
+     Le profiler conserve des données différentes suivant l'environnement utilisé
+     (particulièrement si vous utiliser SQLite, ce qui est la configuration par
+	 défaut).
 
 .. note::
 
-    The profiler information is available even if you insulate the client or
-    if you use an HTTP layer for your tests.
+    Les informations du profiler sont disponibles même si vous isoler un client
+	ou utilisez une couche HTTP particulière pour vos tests.
 
 .. tip::
 
-    Read the API for built-in :doc:`data collectors</cookbook/profiler/data_collector>`
-    to learn more about their interfaces.
+    L'api vous permet de connaitre les méthodes et les interfaces disponibles
+    :doc:`data collectors</cookbook/profiler/data_collector>`.

@@ -1,42 +1,44 @@
 .. index::
    single: Tests; Doctrine
 
-How to test Doctrine Repositories
-=================================
+Comment tester les dépôts doctrines
+===================================
 
-Unit testing Doctrine repositories in a Symfony project is not a straightforward
-task. Indeed, to load a repository you need to load your entities, an entity
-manager, and some other stuff like a connection.
+Les tests unitaires des dépôts Doctrines à l’intérieur d'un projet Symfony
+est un tache aisée qui demande cependant une préparation minutieuse. Ainsi
+vous devez charger le dépot pour vos entités, un gestionnaire d'entité
+(entity manager) ainsi que différents objets comme entre autre une connexion.
 
-To test your repository, you have two different options:
+Pour tester votre dépôt, vous avez deux options:
 
-1) **Functional test**: This includes using a real database connection with
-   real database objects. It's easy to setup and can test anything, but is
-   slower to execute. See :ref:`cookbook-doctrine-repo-functional-test`.
+1) **Test fonctionnel**: Cela inclus l'utilisation d'un base de donnée réelle.
+   C'est simple à réaliser, vous permet de tester de tout tester mais est en
+   contrepartie relativement lent à l’exécution.
+   See :ref:`cookbook-doctrine-repo-functional-test`.
 
-2) **Unit test**: Unit testing is faster to run and more precise in how you
-   test. It does require a little bit more setup, which is covered in this
-   document. It can also only test methods that, for example, build queries,
-   not methods that actually execute them.
+2) **Test unitaire**: Les test unitaires sont plus rapides et précis. Ils requièrent
+   une configuration plus approfondie, que nous détaillerons dans ce document. Ils
+   peuvent tester les méthodes créant les requêtes sans la possibilités d’exécuter
+   celles-ci.
 
-Unit Testing
-------------
+Test Unitaires
+--------------
 
-As Symfony and Doctrine share the same testing framework, it's quite easy to
-implement unit tests in your Symfony project. The ORM comes with its own set
-of tools to ease the unit testing and mocking of everything you need, such as
-a connection, an entity manager, etc. By using the testing components provided
-by Doctrine - along with some basic setup - you can leverage Doctrine's tools
-to unit test your repositories.
+Symfony et Doctrine partageant le même framework de test, il est facile d'implémenter
+des tests unitaires dans vos projets. L'ORM est fourni avec son propre jeu d'outils
+facilitant les test unitaires vous permettant de vous abstraire de l'obligation de 
+créer une connexion, un gestionnaire d'entité, etc. En utilisant les composants 
+fournis par Doctrine - et une configuration simple - vous pouvez utiliser les outils
+Doctrine's pour réaliser des tests unitaires sur vos dépôts.
 
-Keep in mind that if you want to test the actual execution of your queries,
-you'll need a functional test (see :ref:`cookbook-doctrine-repo-functional-test`).
-Unit testing is only possible when testing a method that builds a query.
+Garder à l'esprit que si vous voulez tester l’exécution de requêtes sur vos bases de
+données, vous devez réaliser des tests fonctionnels (voir la fin de ce cookbook ainsi
+que :ref:`cookbook-doctrine-repo-functional-test`).
 
-Setup
-~~~~~
+Configuration
+~~~~~~~~~~~~~
 
-First, you need to add the ``Doctrine\Tests`` namespace to your autoloader::
+Premièrement vous devez ajouter l'espace de nom ``Doctrine\Tests`` à votre autoloader::
 
     // app/autoload.php
     $loader->registerNamespaces(array(
@@ -44,12 +46,11 @@ First, you need to add the ``Doctrine\Tests`` namespace to your autoloader::
         'Doctrine\\Tests'                => __DIR__.'/../vendor/doctrine/orm/tests',
     ));
 
-Next, you will need to setup an entity manager in each test so that Doctrine
-will be able to load your entities and repositories for you.
+Ensuite, configurez un gestionnaire d'entité dans chaque test afin que Doctrine soit 
+capable de charger entités et dépôts.
 
-As Doctrine is not able by default to load annotation metadata from your
-entities, you'll need to configure the annotation reader to be able to parse
-and load the entities::
+Par défaut, Doctrine ne chargera pas les méta données d'annotation pour vos entités,
+vous devez donc configurer le lecteur d'annotations  si vous les utiliser::
 
     // src/Acme/ProductBundle/Tests/Entity/ProductRepositoryTest.php
     namespace Acme\ProductBundle\Tests\Entity;
@@ -87,25 +88,25 @@ and load the entities::
         }
     }
 
-If you look at the code, you can notice:
+En observant ces lignes, vous pouvez remarquer que:
 
-* You extend from ``\Doctrine\Tests\OrmTestCase``, which provide useful methods
-  for unit testing;
+* La classe hérite de ``\Doctrine\Tests\OrmTestCase`` qui fourni de nombreuses 
+  méthodes utiles au test unitaires.
 
-* You need to setup the ``AnnotationReader`` to be able to parse and load the
-  entities;
+* Vous avez inclus le gestionnaire d'annotation ``AnnotationReader`` afin
+  qu'il réalise l'analyse syntaxique de vos entités.
 
-* You create the entity manager by calling ``_getTestEntityManager``, which
-  returns a mocked entity manager with a mocked connection.
+* Vous avez créer un gestionnaire d'entité en appelant ``_getTestEntityManager``.
+  Cette méthode vous fourni un gestionnaire virtuel n'ayant pas besoin de connection.
 
-That's it! You're ready to write units tests for your Doctrine repositories.
+Voilà! Vous êtes maintenant prêt à écrire les tests unitaires de vos dépôts Doctrine.
 
-Writing your Unit Test
-~~~~~~~~~~~~~~~~~~~~~~
+Ecrire vos test unitaires
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Remember that Doctrine repository methods can only be tested if they are
-building and returning a query (but not actually executing a query). Take
-the following example::
+Rappelez vous que les méthodes des dépôts Doctrine ne peuvent être testées qui si 
+les dépots ont été construits et que les tests retournent des requêtes sans les 
+exécuter. Prenez l’exemple suivant::
 
     // src/Acme/StoreBundle/Entity/ProductRepository
     namespace Acme\StoreBundle\Entity;
@@ -122,8 +123,8 @@ the following example::
         }
     }
 
-In this example, the method is returning a ``QueryBuilder`` instance. You
-can test the result of this method in a variety of ways::
+Ici, la méthode retourne une instance de ``QueryBuilder``. Vous pouvez tester le
+résultat par différents moyens::
 
     class ProductRepositoryTest extends \Doctrine\Tests\OrmTestCase
     {
@@ -139,13 +140,13 @@ can test the result of this method in a variety of ways::
         }
      }
 
-In this test, you dissect the ``QueryBuilder`` object, looking that each
-part is as you'd expect. If you were adding other things to the query builder,
-you might check the dql parts: ``select``, ``from``, ``join``, ``set``, ``groupBy``,
-``having``, or ``orderBy``.
+Dans ce test vous analyser l'objet ``QueryBuilder``, et vérifier chacune des parties
+dont le résultats . Si vous ajoutez des paramètres au constructeur de requête (query
+builder), vous pourrez vérifier les modifications sur chacuns des ensembles DQL suivant:
+``select``, ``from``, ``join``, ``set``, ``groupBy``, ``having``, or ``orderBy``.
 
-If you only have a raw ``Query`` object or prefer to test the actual query,
-you can test the DQL query string directly::
+Si vous voulez vérifier l'exactitude de la syntaxe d'une requête complète ou la requête
+actuelle vous pouvez tester la chaîne de caractère générée en une requête DQL directement::
 
     public function testCreateSearchByNameQueryBuilder()
     {
@@ -163,12 +164,12 @@ you can test the DQL query string directly::
 
 .. _cookbook-doctrine-repo-functional-test:
 
-Functional Testing
+Tests fonctionnels
 ------------------
 
-If you need to actually execute a query, you will need to boot the kernel
-to get a valid connection. In this case, you'll extend the ``WebTestCase``,
-which makes all of this quite easy::
+Si vous avez besoin de tester l’exécution d'une requête, vous devez démarrer le kernel
+afin d'obtenir une connexion valide. Dans ce cas, votre classe doit héritée de ``WebTestCase``,
+une classe qui simplifiera les processus de test::
 
     // src/Acme/ProductBundle/Tests/Entity/ProductRepositoryFunctionalTest.php
     namespace Acme\ProductBundle\Tests\Entity;

@@ -1,29 +1,32 @@
 .. index::
    single: Tests; HTTP Authentication
 
-How to simulate HTTP Authentication in a Functional Test
-========================================================
+Comment simuler une authentification HTTP dans un test fonctionnel
+==================================================================
 
-If your application needs HTTP authentication, pass the username and password
-as server variables to ``createClient()``::
+Si votre application requiert une authentification HTTP, vous pouvez transmettre
+le nom d'utilisateur et le mot de passe comme variable serveurs à la méthode  ``createClient()``::
 
     $client = static::createClient(array(), array(
         'PHP_AUTH_USER' => 'username',
         'PHP_AUTH_PW'   => 'pa$$word',
     ));
 
-You can also override it on a per request basis::
+Vous pouvez aussi les surcharger directement dans l'objet requête ::
 
     $client->request('DELETE', '/post/12', array(), array(
         'PHP_AUTH_USER' => 'username',
         'PHP_AUTH_PW'   => 'pa$$word',
     ));
 
-When your application is using a ``form_login``, you can simplify your tests
-by allowing your test configuration to make use of HTTP authentication. This
-way you can use the above to authenticate in tests, but still have your users
-login via the normal ``form_login``. The trick is to include the ``http_basic``
-key in your firewall, along with the ``form_login`` key:
+Quand votre application utilise une ``formulaire de connexion``, san permettre
+l'authentification HTTP, vous pouvez effectuer vos tests plus simplement en 
+permettant à la configuration de test d'utiliser l'authentification HTTP. De
+cette manière vous l'authentification HTTP sera disponible dans de vos tests 
+tout en conservant le formulaire de connexion pour les utilisateurs réels.
+Pour cela, dans la configuration de test vous devez inclure la clef
+``http_basic``dans votre pare-feu Symfony, à l'intérieur du conteneur traitant 
+le ``formulaire de connexion``:
 
 .. configuration-block::
 
@@ -32,5 +35,5 @@ key in your firewall, along with the ``form_login`` key:
         # app/config/config_test.yml
         security:
             firewalls:
-                your_firewall_name:
+                ``firewall_du_formulaire``:
                     http_basic:
