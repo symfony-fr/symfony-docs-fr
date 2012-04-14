@@ -1,26 +1,26 @@
 .. index::
     single: Web Services; SOAP
 
-How to Create a SOAP Web Service in a Symfony2 Controller
-=========================================================
+Comment créer des web services SOAP à l'intérieur d'un contrôleur Symfony2
+==========================================================================
 
-Setting up a controller to act as a SOAP server is simple with a couple 
-tools.  You must, of course, have the `PHP SOAP`_ extension installed.  
-As the PHP SOAP extension can not currently generate a WSDL, you must either 
-create one from scratch or use a 3rd party generator.
+Configurer un contrôleur afin qu'il agisse comme un serveur est réalisé simplement
+avec quelques outils. Vous devez, bien sur, avoir installer l'extension `PHP SOAP`_.  
+Comme l'extension PHP SOAP ne peut actuellement générer un WSDL, vous devez soit
+en créer un soit utiliser un générateur provenant d'une librairie tierce.
 
 .. note::
 
-    There are several SOAP server implementations available for use with 
-    PHP. `Zend SOAP`_ and `NuSOAP`_ are two examples. Although we use 
-    the PHP SOAP extension in our examples, the general idea should still 
-    be applicable to other implementations.
+    Il existe de nombreuses implémentations disponibles de serveur SOAP compatible 
+    avec PHP. `Zend SOAP`_ et `NuSOAP`_ en sont deux exemples. Bien que nous
+    utilisions l'extension PHP SOAP dans nos exemples, l'idée générale devrait 
+    être applicable aux autres implementations.
 
-SOAP works by exposing the methods of a PHP object to an external entity
-(i.e. the person using the SOAP service). To start, create a class - ``HelloService`` -
-which represents the functionality that you'll expose in your SOAP service.
-In this case, the SOAP service will allow the client to call a method called
-``hello``, which happens to send an email::
+SOAP fonctionne en exposant les méthodes d'un objet PHP à une entité externe (i.e.
+le programme utilisant le service SOAP). Pour commencer, créer une classe - ``HelloService`` -
+qui représente les fonctionnalités que vous mettrez à disposition dans votre service SOAP.
+Dans ce cas, le service SOAP permettra à un client d'appeler la méthode nommée ``hello``, 
+qui engendrera l'envoi d'un courriel::
 
     namespace Acme\SoapBundle;
 
@@ -48,10 +48,10 @@ In this case, the SOAP service will allow the client to call a method called
         }
     }
 
-Next, you can train Symfony to be able to create an instance of this class.
-Since the class sends an e-mail, it's been designed to accept a ``Swift_Mailer``
-instance. Using the Service Container, we can configure Symfony to construct
-a ``HelloService`` object properly:
+Ensuite, vous devrez permettre à Symfony de créer une instance de cette classe.
+Comme la classe envoi un courriel, le service prendra comme argument une instance
+``Swift_Mailer``. En utilisant le conteneur de service, nous pouvons configurer 
+Symfony et lui permettre de construire l'objet ``HelloService`` adéquat:
 
 .. configuration-block::
 
@@ -72,9 +72,9 @@ a ``HelloService`` object properly:
          </service>
         </services>
 
-Below is an example of a controller that is capable of handling a SOAP 
-request.  If ``indexAction()`` is accessible via the route ``/soap``, then the 
-WSDL document can be retrieved via ``/soap?wsdl``.
+Voici un exemple de contrôleur capable de négocier les requête d'un webservice SOAP.
+Si ``indexAction()`` est accessible via la route ``/soap``, alors le document 
+WSDL peut être atteint via ``/soap?wsdl``.
 
 .. code-block:: php
 
@@ -100,25 +100,22 @@ WSDL document can be retrieved via ``/soap?wsdl``.
         }
     }
 
-Take note of the calls to ``ob_start()`` and ``ob_get_clean()``.  These
-methods control `output buffering`_ which allows you to "trap" the echoed 
-output of ``$server->handle()``. This is necessary because Symfony expects
-your controller to return a ``Response`` object with the output as its "content".
-You must also remember to set the "Content-Type" header to "text/xml", as
-this is what the client  will expect.  So, you use ``ob_start()`` to start
-buffering the STDOUT and use  ``ob_get_clean()`` to dump the echoed output
-into the content of the Response and clear the output buffer.  Finally, you're
-ready to return the ``Response``.
+Observez les appels à ``ob_start()`` and ``ob_get_clean()``.  ces méthodes contrôlent
+`le tampon de sortie`_ qui vous permettent d'intercepter et d'enregistrer les flux de sorties 
+de la méthode ``$server->handle()``. Cela est nécessaire car Symfony attends de votre
+contrôleur un objet ``Response`` contenant ce flux. Vous devez aussi définir l'entête
+HTTP "Content-Type" comme "text/xml", cette information en priorité étant à destination
+du client.
 
-Below is an example calling the service using `NuSOAP`_ client.  This example 
-assumes that the ``indexAction`` in the controller above is accessible via the
+Ci-dessous vous pouvez trouver un exemple intégrant un client `NuSOAP`_, présumant
+que le ``indexAction`` présent dans le contrôleur précédent est accessible via la
 route ``/soap``::
 
     $client = new \soapclient('http://example.com/app.php/soap?wsdl', true);
     
     $result = $client->call('hello', array('name' => 'Scott'));
 
-An example WSDL is below.
+Un example d'un flux WSDL résultant:
 
 .. code-block:: xml
 
