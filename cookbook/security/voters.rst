@@ -1,25 +1,27 @@
 .. index::
-   single: Security, Voters
+   single: Sécurité, Voteurs
 
-How to implement your own Voter to blacklist IP Addresses
-=========================================================
+Comment implémenter votre propre Voteur pour ajouter des Adresses IP sur une liste noire
+========================================================================================
 
-The Symfony2 security component provides several layers to authenticate users.
-One of the layers is called a `voter`. A voter is a dedicated class that checks
-if the user has the rights to be connected to the application. For instance,
-Symfony2 provides a layer that checks if the user is fully authenticated or if
-it has some expected roles.
+Le composant de sécurité de Symfony2 fournit plusieurs couches pour authentifier
+les utilisateurs. L'une de ces couches est appelée un `voteur`. Un voteur est
+une classe dédiée qui vérifie si l'utilisateur possède les droits nécessaires
+pour se connecter à l'application. Par exemple, Symfony2 fournit une couche
+qui vérifie si l'utilisateur est totalement authentifié ou s'il possède quelques
+rôles attendus.
 
-It is sometimes useful to create a custom voter to handle a specific case not
-handled by the framework. In this section, you'll learn how to create a voter
-that will allow you to blacklist users by their IP.
+Il est parfois utile de créer un voteur personnalisé pour gérer un cas spécifique
+non-géré par le framework. Dans cette section, vous allez apprendre comment créer
+un voteur qui vous permettra d'ajouter des utilisateurs sur une liste noire suivant
+leur adresse IP.
 
-The Voter Interface
--------------------
+L'Interface Voter
+-----------------
 
-A custom voter must implement
+Un voteur personnalisé doit implémenter
 :class:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface`,
-which requires the following three methods:
+qui requiert les trois méthodes suivantes :
 
 .. code-block:: php
 
@@ -31,31 +33,34 @@ which requires the following three methods:
     }
 
 
-The ``supportsAttribute()`` method is used to check if the voter supports
-the given user attribute (i.e: a role, an acl, etc.).
+La méthode ``supportsAttribute()`` est utilisée pour vérifier si le voteur
+supporte l'attribut de l'utilisateur donné (i.e. un rôle, une ACL, etc.).
 
-The ``supportsClass()`` method is used to check if the voter supports the
-current user token class.
+La méthode ``supportsClass()`` est utilisée pour vérifier si le voteur
+supporte la classe du token de l'utilisateur courant.
 
-The ``vote()`` method must implement the business logic that verifies whether
-or not the user is granted access. This method must return one of the following
-values:
+La méthode ``vote()`` doit implémenter la logique métier qui vérifie si oui
+ou non un utilisateur est autorisé à accéder à l'application. Cette méthode
+doit retourner l'une des valeurs suivantes :
 
-* ``VoterInterface::ACCESS_GRANTED``: The user is allowed to access the application
-* ``VoterInterface::ACCESS_ABSTAIN``: The voter cannot decide if the user is granted or not
-* ``VoterInterface::ACCESS_DENIED``: The user is not allowed to access the application
+* ``VoterInterface::ACCESS_GRANTED``: L'utilisateur est autorisé à accéder à l'application
+* ``VoterInterface::ACCESS_ABSTAIN``: Le voteur ne peut pas décider si l'utilisateur est
+  oui ou non autorisé à accéder à l'application
+* ``VoterInterface::ACCESS_DENIED``: L'utilisateur n'est pas autorisé à accéder à
+  l'application
 
-In this example, we will check if the user's IP address matches against a list of
-blacklisted addresses. If the user's IP is blacklisted, we will return 
-``VoterInterface::ACCESS_DENIED``, otherwise we will return 
-``VoterInterface::ACCESS_ABSTAIN`` as this voter's purpose is only to deny
-access, not to grant access.
+Dans cet exemple, nous allons vérifier si l'adresse IP de l'utilisateur correspond
+à l'une des adresses de la liste noire. Si c'est le cas, nous retournerons
+``VoterInterface::ACCESS_DENIED``, sinon nous retournerons
+``VoterInterface::ACCESS_ABSTAIN`` comme le but de ce voteur est uniquement de
+refuser l'accès, et non pas de l'autoriser.
 
-Creating a Custom Voter
------------------------
+Créer un Voteur personnalisé
+----------------------------
 
-To blacklist a user based on its IP, we can use the ``request`` service
-and compare the IP address against a set of blacklisted IP addresses:
+Pour ajouter un utilisateur sur la liste noire en se basant sur son IP, nous
+pouvons utiliser le service ``request`` et comparer l'adresse IP avec un
+ensemble d'adresses IP de la liste noire :
 
 .. code-block:: php
 
@@ -75,13 +80,13 @@ and compare the IP address against a set of blacklisted IP addresses:
 
         public function supportsAttribute($attribute)
         {
-            // we won't check against a user attribute, so we return true
+            // nous n'allons pas vérifier l'attribut de l'utilisateur, alors nous retournons true
             return true;
         }
 
         public function supportsClass($class)
         {
-            // our voter supports all type of token classes, so we return true
+            // notre voteur supporte tous les types de classes de token, donc nous retournons true
             return true;
         }
 
@@ -96,14 +101,15 @@ and compare the IP address against a set of blacklisted IP addresses:
         }
     }
 
-That's it! The voter is done. The next step is to inject the voter into
-the security layer. This can be done easily through the service container.
+C'est tout ! Votre voteur est terminé. La prochaine étape est d'injecter
+le voteur dans la couche de sécurité. Cela peut être effectué facilement
+à l'aide du conteneur de service.
 
-Declaring the Voter as a Service
+Déclarer le Voteur comme Service
 --------------------------------
 
-To inject the voter into the security layer, we must declare it as a service,
-and tag it as a "security.voter":
+Pour injecter le voteur dans la couche de sécurité, nous devons le déclarer
+en tant que service, et le tagger comme un « security.voter » :
 
 .. configuration-block::
 
@@ -154,25 +160,26 @@ and tag it as a "security.voter":
 
 .. tip::
 
-   Be sure to import this configuration file from your main application
-   configuration file (e.g. ``app/config/config.yml``). For more information
-   see :ref:`service-container-imports-directive`. To read more about defining
-   services in general, see the :doc:`/book/service_container` chapter.
+   Soyez sûr d'importer ce fichier de configuration depuis le fichier de configuration
+   de votre application principale (par exemple : ``app/config/config.yml``). Pour plus
+   d'informations, voyez :ref:`service-container-imports-directive`. Pour en savoir plus
+   concernant la définition de services en général, voyez le chapitre
+   :doc:`/book/service_container`.
 
-Changing the Access Decision Strategy
--------------------------------------
+Changer la Stratégie de Décision d'Accès
+----------------------------------------
 
-In order for the new voter to take effect, we need to change the default access
-decision strategy, which, by default, grants access if *any* voter grants
-access.
+Afin que votre nouveau voteur soit utilisé, nous devons changer la stratégie de
+décision d'accès par défaut, qui d'habitude autorise l'accès si *quelconque*
+voteur autorise l'accès.
 
-In our case, we will choose the ``unanimous`` strategy. Unlike the ``affirmative``
-strategy (the default), with the ``unanimous`` strategy, if only one voter
-denies access (e.g. the ``ClientIpVoter``), access is not granted to the
-end user.
+Dans notre cas, nous allons choisir la stratégie ``unanimous``. Contrairement
+à la stratégie par défaut ``affirmative``, avec la stratégie ``unanimous``, si
+seulement un voteur refuse l'accès (par exemple : le ``ClientIpVoter``), alors
+l'accès n'est pas autorisé pour l'utilisateur final.
 
-To do that, override the default ``access_decision_manager`` section of your
-application configuration file with the following code.
+Pour faire cela, outrepassez la section par défaut ``access_decision_manager``
+du fichier de configuration de votre application avec le code suivant.
 
 .. configuration-block::
 
@@ -181,8 +188,9 @@ application configuration file with the following code.
         # app/config/security.yml
         security:
             access_decision_manager:
-                # Strategy can be: affirmative, unanimous or consensus
+                # La valeur de « Strategy » peut être : affirmative, unanimous ou consensus
                 strategy: unanimous
 
-That's it! Now, when deciding whether or not a user should have access,
-the new voter will deny access to any user in the list of blacklisted IPs.
+C'est tout ! Maintenant, lors de la décision de savoir si oui ou non un utilisateur
+devrait avoir accès, le nouveau voteur va refuser l'accès à quiconque possédant une IP
+qui se trouve dans la liste noire.

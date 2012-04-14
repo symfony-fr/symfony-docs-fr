@@ -1,10 +1,11 @@
-How to force HTTPS or HTTP for Different URLs
-=============================================
+Comment forcer HTTPS ou HTTP pour des URLs Différentes
+======================================================
 
-You can force areas of your site to use the ``HTTPS`` protocol in the security
-config. This is done through the ``access_control`` rules using the ``requires_channel``
-option. For example, if you want to force all URLs starting with ``/secure``
-to use ``HTTPS`` then you could use the following config:
+Vous pouvez forcer certaines parties de votre site à utiliser le protocole ``HTTPS``
+dans la configuration de la sécurité. Cela s'effectue grâce aux règles
+``access_control`` en utilisant l'option ``requires_channel``. Par exemple, si vous
+voulez forcer toutes les URLs commençant par ``/secure`` à utiliser ``HTTPS``, alors
+vous pourriez utiliser la configuration suivante :
 
 .. configuration-block::
 
@@ -30,10 +31,10 @@ to use ``HTTPS`` then you could use the following config:
                 ),
             ),
 
-The login form itself needs to allow anonymous access otherwise users will
-be unable to authenticate. To force it to use ``HTTPS`` you can still use
-``access_control`` rules by using the ``IS_AUTHENTICATED_ANONYMOUSLY`` 
-role:
+Le formulaire de login lui-même a besoin d'autoriser un accès anonyme, sinon
+les utilisateurs seront incapables de s'authentifier. Pour le forcer à utiliser
+``HTTPS`` vous pouvez toujours utiliser les règles de ``access_control`` en
+vous servant du rôle ``IS_AUTHENTICATED_ANONYMOUSLY`` :
 
 .. configuration-block::
 
@@ -61,5 +62,6 @@ role:
                 ),
             ),
 
-It is also possible to specify using ``HTTPS`` in the routing configuration
-see :doc:`/cookbook/routing/scheme` for more details.
+Il est aussi possible de spécifier l'utilisation d'``HTTPS`` dans la
+configuration de routage ; voir :doc:`/cookbook/routing/scheme` pour
+plus de détails.
