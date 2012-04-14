@@ -1,75 +1,81 @@
-How to work with Scopes
-=======================
+Comment définir des champs d'applications (scopes) pour vos services
+====================================================================
 
-This entry is all about scopes, a somewhat advanced topic related to the
-:doc:`/book/service_container`. If you've ever gotten an error mentioning
-"scopes" when creating services, or need to create a service that depends
-on the `request` service, then this entry is for you.
+Nous traiterons ici des champs d'applications ou scopes, un sujet d'un niveau
+avancé en relation avec :doc:`/book/service_container`. Si vous avez déjà 
+observé une erreur mentionnant le terme "scopes" quand vous créez vos services,
+ou avez eu besoin de créer de services qui dépendent du service `request`,
+cet article est fait pour vous.
 
-Understanding Scopes
---------------------
+Comprendre les champs d'applications
+------------------------------------
 
-The scope of a service controls how long an instance of a service is used
-by the container. The Dependency Injection component provides two generic
-scopes:
+Le champs d'application d'un service contrôle les interactions d'une instance
+de ce service avec son conteneur. Le composant d'injection de dépendance 
+fourni deux champs d'application génériques:
 
-- `container` (the default one): The same instance is used each time you
-  request it from this container.
+- `container` (valeur par défaut): La même instance est utilisé à chaque 
+  requête.
 
-- `prototype`: A new instance is created each time you request the service.
+- `prototype`: Une nouvelle instance est créer à chaque requête.
 
-The FrameworkBundle also defines a third scope: `request`. This scope is
-tied to the request, meaning a new instance is created for each subrequest
-and is unavailable outside the request (for instance in the CLI).
+Le FrameworkBundle définit lui un troisième champs d'application: `request`. 
+Celui-ci le lie à la requête. Ainsi pour chaque sous-requête une nouvelle
+instance est créée. La conséquence est qu'il est indisponible en dehors 
+de la requête (en ligne de commande par example).
 
-Scopes add a constraint on the dependencies of a service: a service cannot
-depend on services from a narrower scope. For example, if you create a generic
-`my_foo` service, but try to inject the `request` component, you'll receive
-a :class:`Symfony\\Component\\DependencyInjection\\Exception\\ScopeWideningInjectionException`
-when compiling the container. Read the sidebar below for more details.
+Les champs d'applications ajoutent une contrainte sur les dépendances d'un 
+services : un service ne peut pas dépendre d'un champs d'application moins large.
+Par example, si vous créez un service generique `my_foo`, mais essayez d'injecter
+le composant `request`, vous recevrez une 
+:class:`Symfony\\Component\\DependencyInjection\\Exception\\ScopeWideningInjectionException`
+au moment de la compilation du conteneur. Pour plus de détails lisez les notes dans
+la barre latérale.
 
-.. sidebar:: Scopes and Dependencies
+.. sidebar:: Champs d'application et dépendances
 
-    Imagine you've configured a `my_mailer` service. You haven't configured
-    the scope of the service, so it defaults to `container`. In other words,
-    everytime you ask the container for the `my_mailer` service, you get
-    the same object back. This is usually how you want your services to work.
+    Imaginez que vous avez configurer un service `my_mailer`, sans configurer de
+    champs d'application pour ce service, par défaut il sera réglé sur `container`.
+    Ainsi chaque fois que vous appelerez le conteneur du service `my_mailer`, vous
+    recevrez le même objet. Ce qui est habituel dans l'utilisation d'un service.
     
-    Imagine, however, that you need the `request` service in your `my_mailer`
-    service, maybe because you're reading the URL of the current request.
-    So, you add it as a constructor argument. Let's look at why this presents
-    a problem:
+    Imaginez cependant que vous ayez besoin du service `request` dans votre service
+    `my_mailer`, peut être parce que vous lisez une URL de la requête courante.
+    Vous l'ajouter comme un argument du constructeur. Observons quelles pourraient
+	être les conséquences:
 
-    * When requesting `my_mailer`, an instance of `my_mailer` (let's call
-      it *MailerA*) is created and the `request` service (let's call it
-      *RequestA*) is passed to it. Life is good!
+    * Quand vous appelez `my_mailer`, une instance de `my_mailer` (appelons le
+      *MailerA*) est créer et un service `request` (*RequestA*) lui est envoyé.
+      Facile!
 
-    * You've now made a subrequest in Symfony, which is a fancy way of saying
-      that you've called, for example, the `{% render ... %}` Twig function,
-      which executes another controller. Internally, the old `request` service
-      (*RequestA*) is actually replaced by a new request instance (*RequestB*).
-      This happens in the background, and it's totally normal.
+    * Vous effectué maintenant une sous requête dans Symfony, ce qui est une façon
+      sympatique de dire que vous avez appelez, par exemple, la fonction twig
+      `{% render ... %}`, à partir d'un autre controleur. En interne, l'ancien service
+      `request` (*RequestA*) est remplacer ainsi par une nouvel instance (*RequestB*).
+      Cela se déroule en arrière plan et est tout à fait normal.
 
-    * In your embedded controller, you once again ask for the `my_mailer`
-      service. Since your service is in the `container` scope, the same
-      instance (*MailerA*) is just re-used. But here's the problem: the
-      *MailerA* instance still contains the old *RequestA* object, which
-      is now **not** the correct request object to have (*RequestB* is now
-      the current `request` service). This is subtle, but the mis-match could
-      cause major problems, which is why it's not allowed.
+    * Dans votre contrôleur intégré, vous interrogez une nouvelle fois le service
+     `my_mailer`. Votre service ayant le champ d'application `container`, la 
+      même  instance (*MailerA*) est réutilisée. Et voilà le problème: l'instance
+      *MailerA* contient toujours l'ancien objet *RequestA*, qui *n'est plus* maintenant 
+      l'objet requête mis à jour (*RequestB* est maintenant le service courant `request`).
+      C'est subtile mais l'erreur pourrait engendrer des problèmes majeurs, et
+	  cela explique pourquoi cela est interdit.
 
-      So, that's the reason *why* scopes exists, and how they can cause
-      problems. Keep reading to find out the common solutions.
+      Ainsi, voilà pourquoi les champs d'applications existent, et comment il peuvent
+      causer des problèmes. En continuant cette lecture nous vous indiquerons les 
+      solutions préconisées.
 
 .. note::
 
-    A service can of course depend on a service from a wider scope without
-    any issue. 
+    Un service peut bien entendu dépendre d'un service provenant d'un champs
+	d'application plus étendu. 
 
-Setting the Scope in the Definition
------------------------------------
+Configurer le champs d'application dans la définition
+-----------------------------------------------------
 
-The scope of a service is defined in the definition of the service:
+Le champs d'application d'un service est indiqué dans la définition de ce service
+à l'aide du paramètre *scope*:
 
 .. configuration-block::
 
@@ -98,23 +104,26 @@ The scope of a service is defined in the definition of the service:
             new Definition('Acme\HelloBundle\Mail\GreetingCardManager')
         )->setScope('request');
 
-If you don't specify the scope, it defaults to `container`, which is what
-you want most of the time. Unless your service depends on another service
-that's scoped to a narrower scope (most commonly, the `request` service),
-you probably don't need to set the scope.
+Si vous n'indiquez pas ce paramètre, il sera lié par défaut au `conteneur`, ce qui
+est le fonctionnement habituel d'un service. A moins que votre service ne dépende
+d'un autre service qui soit dans un champs d'application plus restreint (le plus 
+courant étant `request`), vous n'aurez probablement pas à modifier votre
+configuration.
 
-Using a Service from a narrower Scope
--------------------------------------
+Utiliser un service provenant d'un champs d'application restreint
+-----------------------------------------------------------------
 
-If your service depends on a scoped service, the best solution is to put
-it in the same scope (or a narrower one). Usually, this means putting your
-new service in the `request` scope.
+Si votre service dépends d'un autre service au champs d'application déterminé,
+la meilleure solution est de définir le même champs d'application pour celui-ci
+(ou un champs d'application encore plus restreint). Habituellement, cela implique
+de placer votre service dans le champs d'application `request`.
 
-But this is not always possible (for instance, a twig extension must be in
-the `container` scope as the Twig environment needs it as a dependency).
-In these cases, you should pass the entire container into your service and
-retrieve your dependency from the container each time we need it to be sure
-you have the right instance::
+Mais celà n'est pas toujours possible (par exemple, un extension twig doit être 
+dans le champs d'application `conteneur` au regard de l’environnement Twig 
+dont elle est dépendante). Dans ces cas de figure, vous devrez configurer votre
+conteneur en tant que service et charger les dépendances provenant d'un champs
+d'application restreint à chaque appel, afin d'être certain d'obtenir les instances
+mises à jour::
 
     namespace Acme\HelloBundle\Mail;
 
@@ -132,18 +141,18 @@ you have the right instance::
         public function sendEmail()
         {
             $request = $this->container->get('request');
-            // Do something using the request here
+            // Utilisez la requête ici
         }
     }
 
 .. caution::
 
-    Take care not to store the request in a property of the object for a
-    future call of the service as it would be the same issue described
-    in the first section (except that symfony cannot detect that you are
-    wrong).
+    Faites attention à ne pas enregistrer la requête dans une propriété de 
+    votre objet pour un appel futur cela engendrerait les mêmes inconsistances
+    que celles décrites précédemment (excepté que dans ce cas, Symfony ne pourrait 
+	détecter cette erreur).
 
-The service config for this class would look something like this:
+La configuration du service pour cette classe :
 
 .. configuration-block::
 
@@ -190,11 +199,11 @@ The service config for this class would look something like this:
 
 .. note::
 
-    Injecting the whole container into a service is generally not a good
-    idea (only inject what you need). In some rare cases, it's necessary
-    when you have a service in the ``container`` scope that needs a service
-    in the ``request`` scope.
+    Injecter le container entier dans un service est généralement à proscrire
+    (injectez seulement les paramètres utiles). Dans quelques rares cas, cela est 
+    nécessaire,. Ainsi quand vous avez un service dans un champs d'application
+	``container`` qui a besoin d'un service du champs d'application ``request``.
 
-If you define a controller as a service then you can get the ``Request`` object
-without injecting the container by having it passed in as an argument of your
-action method. See :ref:`book-controller-request-argument` for details.
+Si vous définissez un contrôleur comme un service alors vous pourrez appelez l'objet
+``Request`` sans injecter le conteneur comme un argument de votre méthode action.
+Voir :ref:`book-controller-request-argument` pour les détails.

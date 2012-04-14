@@ -1,16 +1,19 @@
-How to Use a Factory to Create Services
-=======================================
+Comment utiliser une Fabrique pour créer des Services
+=====================================================
 
-Symfony2's Service Container provides a powerful way of controlling the 
-creation of objects, allowing you to specify arguments passed to the constructor
-as well as calling methods and setting parameters. Sometimes, however, this
-will not provide you with everything you need to construct your objects.
-For this situation, you can use a factory to create the object and tell the
-service container to call a method on the factory rather than directly instantiating
-the object.
+Le conteneur de service intégré dans Symfony2 fournit une méthode puissante 
+permettant de contrôler la création des objets. Il vous permet en effet de 
+spécifier des arguments à passer au contrôleur aussi bien que d'appeler des 
+méthodes ou de configurer des paramètres. Parfois, cependant, cela ne vous
+fournit pas tout ce dont vous avez besoin pour construire vos objets. Dans cette 
+situation vous pouvez alors utiliser une fabrique pour créer l'objet.
 
-Suppose you have a factory that configures and returns a new NewsletterManager
-object::
+Le comportement sera alors d'avertir le conteneur de service afin qu'il appelle
+une méthode de la fabrique qui s'occupera de créer l'objet plutôt que de 
+l'instancier directement.
+
+Supposons que vous ayez une fabrique qui configure et retourne un nouvel objet 
+NewsletterManager ::
 
     namespace Acme\HelloBundle\Newsletter;
 
@@ -26,9 +29,9 @@ object::
         }
     }
 
-To make the ``NewsletterManager`` object available as a service, you can
-configure the service container to use the ``NewsletterFactory`` factory
-class:
+Afin de créer le nouvel objet ``NewsletterManager`` et de le rendre disponible
+en tant que service, vous pouvez configurer un conteneur de service pour qu'il
+utilise la fabrique ``NewsletterFactory`` :
 
 .. configuration-block::
 
@@ -79,10 +82,9 @@ class:
             'get'
         );
 
-When you specify the class to use for the factory (via ``factory_class``)
-the method will be called statically. If the factory itself should be instantiated
-and the resulting object's method called (as in this example), configure the
-factory itself as a service:
+Quand vous précisez la classe à utiliser comme fabrique (via ``factory_class``),
+la méthode sera appelé statiquement (ici ``get``). Si la fabrique elle-même doit
+être instanciée, elle sera elle-aussi définie comme un service:
 
 .. configuration-block::
 
@@ -141,15 +143,16 @@ factory itself as a service:
 
 .. note::
 
-   The factory service is specified by its id name and not a reference to 
-   the service itself. So, you do not need to use the @ syntax.
+   Le service fabrique est préciser par son identifiant et non par sa classe.
+   Vous n'avez donc pas besoin d'utiliser la syntaxe utilisant l'arobase(@).
 
-Passing Arguments to the Factory Method
----------------------------------------
+Transmettre des arguments à la méthode fabrique
+-----------------------------------------------
 
-If you need to pass arguments to the factory method, you can use the ``arguments``
-options inside the service container. For example, suppose the ``get`` method
-in the previous example takes the ``templating`` service as an argument:
+Si vous avez besoin de transmettre des arguments à la méthode fabrique, vous 
+pouvez utiliser l'option ``arguments`` à l'intérieur du conteneur de service.
+Ainsi, supposons que la méthode ``get`` de l’exemple précédent demande
+le service ``templating`` comme argument:
 
 .. configuration-block::
 
