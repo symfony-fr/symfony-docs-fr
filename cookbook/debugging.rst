@@ -1,32 +1,33 @@
 .. index::
    single: Debugging
 
-How to optimize your development Environment for debugging
-==========================================================
+Comment optimiser votre environnement pour le debuggage
+=======================================================
 
-When you work on a Symfony project on your local machine, you should use the
-``dev`` environment (``app_dev.php`` front controller). This environment
-configuration is optimized for two main purposes:
+Quand vous travaillez sur une projet Symfony sur votre machine locale, vous
+devriez utiliser l'environnement ``dev`` (correspondant au controleur frontale
+``app_dev.php``). Cet environnement est optimisé dans l'optique de :
 
-* Give the developer accurate feedback whenever something goes wrong (web
-  debug toolbar, nice exception pages, profiler, ...);
+* Donner au développeur des informations rapides et claires si quelque chose ne
+se déroulait pas comme prévu (à l'aide de la web debug toolbar, d'exceptions
+documentés et présentée clairement, du profiler, ...);
 
-* Be as similar as possible as the production environment to avoid problems
-  when deploying the project.
+* Etre aussi similaire que possible à l'environnement de production afin de
+préparer le déploiement du projet.
 
 .. _cookbook-debugging-disable-bootstrap:
 
-Disabling the Bootstrap File and Class Caching
-----------------------------------------------
+Désactiver le bootstrap et le cache des classes
+-----------------------------------------------
 
-And to make the production environment as fast as possible, Symfony creates
-big PHP files in your cache containing the aggregation of PHP classes your
-project needs for every request. However, this behavior can confuse your IDE
-or your debugger. This recipe shows you how you can tweak this caching
-mechanism to make it friendlier when you need to debug code that involves
-Symfony classes.
+Pour rendre l'environnement de production aussi rapide que possible, Symfony
+crée de longs fichiers PHP, dans le dossier cache, qui correspondent à
+l'aggrégation des classes PHP dont votre projet a besoin à chaque requête.
+Cependant, ce comportement peut désorienter votre ide ou votre debugger. Nous
+allons vous montrer ici comment modifier le mécanisme de cache afin qu'il
+permette un débugage des classes intégrées à Symfony.
 
-The ``app_dev.php`` front controller reads as follows by default::
+Le controller frontal ``app_dev.php`` se compose par défaut de::
 
     // ...
 
@@ -39,9 +40,9 @@ The ``app_dev.php`` front controller reads as follows by default::
     $kernel->loadClassCache();
     $kernel->handle(Request::createFromGlobals())->send();
 
-To make you debugger happier, disable all PHP class caches by removing the
-call to ``loadClassCache()`` and by replacing the require statements like
-below::
+Pour faciliter le travail du debugger, désactiver le cache des classes PHP en
+omettant l'appel ``loadClassCache()`` et en replaçant les fichiers requis comme
+ceci::
 
     // ...
 
@@ -58,11 +59,12 @@ below::
 
 .. tip::
 
-    If you disable the PHP caches, don't forget to revert after your debugging
-    session.
+    Si vous désactivez le cache des classes, n'oublier pas de revenir au
+	réglages initiaux après votre session de débuggage.
 
-Some IDEs do not like the fact that some classes are stored in different
-locations. To avoid problems, you can either tell your IDE to ignore the PHP
-cache files, or you can change the extension used by Symfony for these files::
+Certain IDE n'apprécie pas que certaines classes soient enregistrées dans
+différents emplacements. Pour prévenir ces problèmes, vous pouvez désactiver la
+lecture du dossier cache dans votre IDE, ou changer l'extension utilisée par
+Symfony pour ces fichiers::
 
     $kernel->loadClassCache('classes', '.php.cache');
