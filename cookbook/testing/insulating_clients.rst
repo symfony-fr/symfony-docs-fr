@@ -1,11 +1,11 @@
 .. index::
    single: Tests
 
-How to test the Interaction of several Clients
-==============================================
+Comment tester les interactions de multiples clients
+=====================================================
 
-If you need to simulate an interaction between different Clients (think of a
-chat for instance), create several Clients::
+Si vous avez besoin de simuler des interaction entre différents clients (pour
+un tchat par example), créer plusieurs clients::
 
     $harry = static::createClient();
     $sally = static::createClient();
@@ -16,9 +16,9 @@ chat for instance), create several Clients::
     $this->assertEquals(201, $harry->getResponse()->getStatusCode());
     $this->assertRegExp('/Hello/', $sally->getResponse()->getContent());
 
-This works except when your code maintains a global state or if it depends on
-third-party libraries that has some kind of global state. In such a case, you
-can insulate your clients::
+Cependant cela ne fonctionnera que si vous ne maintenez pas dans votre application
+un état global et si aucune des bibliothèques tierces en liaison n'utilise de
+techniques requierant des états globaux. Dans ces cas vous devrez isoler les clients::
 
     $harry = static::createClient();
     $sally = static::createClient();
@@ -32,10 +32,11 @@ can insulate your clients::
     $this->assertEquals(201, $harry->getResponse()->getStatusCode());
     $this->assertRegExp('/Hello/', $sally->getResponse()->getContent());
 
-Insulated clients transparently execute their requests in a dedicated and
-clean PHP process, thus avoiding any side-effects.
+L'isolation est invisible pour chacun des clients qui executent leurs requêtes
+respectives dans un processus PHP dédié, vous garantissant de tout effet de
+bord.
 
 .. tip::
 
-    As an insulated client is slower, you can keep one client in the main
-    process, and insulate the other ones.
+    Comme un client isolé est plus lent, vous pouvez garder un client dans le
+	processus principal et n'isoler que les autres.
