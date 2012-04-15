@@ -1,24 +1,31 @@
-Submitting a Patch
-==================
+Soumettre un correctif
+======================
 
-Patches are the best way to provide a bug fix or to propose enhancements to
+Les patches représentent la meilleur façon de fournir une correction de bug ou 
+de proposer des améliorations à Symfony2.
+
+Check-Liste
+-----------
+
+Le propos de cet check-liste est de s'assurer que les contributions seront 
+examinées sans émettre des remarques purement formelles entrainant un
+ralentissement du processus d'intégration de nouvelles fonctionnalités ou
+d'élimination des erreurs, permettant ainsi une évolution rapide du framework 
 Symfony2.
 
-Check List
-----------
+Il est conseillé de réaliser une requête en anglais, si cependant un mot ou une
+expression ne trouvait pas de traduction, nous vous conseillons, d'écrire en
+anglais la majorité de la requête et d'inclure en français les seuls passages 
+intraduisibles.
 
-The purpose of the check list is to ensure that contributions may be reviewed
-without needless feedback loops to ensure that your contributions can be included
-into Symfony2 as quickly as possible.
-
-The pull request title should be prefixed with the component name or bundle
-it relates to.
+Le titre de la requête (pull request) doit être préfixé avec le nom du composant
+ou du bundle en relation.
 
 .. code-block:: text
 
-    [Component] Short title description here.
+    [Composant] Courte description.
 
-An example title might look like this:
+Un example de titre pourrait ressembler à ceci:
 
 .. code-block:: text
 
@@ -26,11 +33,10 @@ An example title might look like this:
 
 .. tip::
 
-    Please use the title with "[WIP]" if the submission is not yet completed
-    or the tests are incomplete or not yet passing.
+    Utiliser le préfixe "[WIP]" afin de mentionner une soumission incomplète ou
+    dont les tests n'ont pas encore été effectués.
 
-All pull requests should include the following template in the request
-description:
+Toute requete devrait inclure le template suivant dans sa description:
 
 .. code-block:: text
 
@@ -41,47 +47,48 @@ description:
     Fixes the following tickets: [comma separated list of tickets fixed by the PR]
     Todo: [list of todos pending]
     
-An example submission could now look as follows:
+Un example de champ descriptif pourrait donc ressembler à ceci:
 
 .. code-block:: text
 
-    Bug fix: no
-    Feature addition: yes
-    Backwards compatibility break: no
-    Symfony2 tests pass: yes
-    Fixes the following tickets: -
-    Todo: -
+   Bug fix: no
+   Feature addition: yes
+   Backwards compatibility break: no
+   Symfony2 tests pass: yes
+   Fixes the following tickets: -
+   Todo: -
 
-Thank you for including the filled out template in your submission!
-
-.. tip::
-
-    All feature addition's should be sent to the "master" branch, while all
-    bug fixes should be sent to the oldest still active branch. Furthermore
-    submissions should, as a rule of thumb, not break backwards compatibility.
+Merci d'inclure ce template à chacune de vos soumissions!
 
 .. tip::
 
-    To automatically get your feature branch tested, you can add your fork to
-    `travis-ci.org`_. Just login using your github.com account and then simply
-    flip a single switch to enable automated testing. In your pull request,
-    instead of specifying "*Symfony2 tests pass: [yes|no]*", you can link to
-    the `travis-ci.org status icon`_. For more details, see the
-    `travis-ci.org Getting Started Guide`_.
+   Tout ajout de nouvelles fonctionnalités doit être envoyé à la branche master,
+   tandis les corrections de bug doivent être envoyées à la branche active 
+   la plus ancienne (sauf bien entendu si cette correction ne concernent qu'une
+   version    particulière). De plus toute soumission devra conserver la
+   compatibilité ascendante du framework.
 
-Initial Setup
--------------
+.. tip::
 
-Before working on Symfony2, setup a friendly environment with the following
-software:
+   Afin que l'ajout d'une fonctionalité puisse être testé automatiquement, sur 
+   la branche destinatrice, vous pouvez ajouter votre "fork" à `travis-ci.org`_.
+   Identifié vous en utilisant votre compte github.com et ensuite actionnez un
+   simple bouton afin d'activer les tests automatisés. Ainsi à la place d'
+   indiquer, dans votre requête "*Symfony2 tests pass: [yes|no]*", vous pouvez 
+   ajouter un liens vers `travis-ci.org status icon`_. Pour plus de détails, 
+   consulté `travis-ci.org Getting Started Guide`_.
+
+Un environnement de travail agréable
+------------------------------------
+
+Avant de travailler sur Symfony2, configurer un environnement de travail
+agréable à l'aide des logiciels suivant :
 
 * Git;
-
 * PHP version 5.3.2 or above;
-
 * PHPUnit 3.6.4 or above.
 
-Set up your user information with your real name and a working email address:
+Configurer votre compte git à l'aide des commandes suivantes
 
 .. code-block:: bash
 
@@ -90,79 +97,79 @@ Set up your user information with your real name and a working email address:
 
 .. tip::
 
-    If you are new to Git, we highly recommend you to read the excellent and
-    free `ProGit`_ book.
+    Si vous avez commencé à apprendre git, nous vous recommendons chaudement de 
+    lire l'excellent et gratuit `ProGit`_.
 
 .. tip::
 
-    Windows users: when installing Git, the installer will ask what to do with
-    line endings and suggests to replace all Lf by CRLF. This is the wrong
-    setting if you wish to contribute to Symfony! Selecting the as-is method is
-    your best choice, as git will convert your line feeds to the ones in the
-    repository. If you have already installed Git, you can check the value of
-    this setting by typing:
+    Utilisateurs windows: quand vous installer git, il vous est demander comment
+    git doit traiter les fins de ligne (line ending), le choix par défaut est de
+    remplacer tous les Lf par des CRLF. Si vous voulez contribuer à Symfony, il
+    vous faudra sélectionner la méthod as-is afin que git convertissent vos 
+    contributions dans votre dépot. Si vous avez déjà installé git, vous pouvez
+    vérifier votre réglage grace à la commande:
 
     .. code-block:: bash
 
         $ git config core.autocrlf
 
-    This will return either "false", "input" or "true", "true" and "false" being
-    the wrong values. Set it to another value by typing:
+    Cela retournant "false", "input" ou "true", "input" est la valeur attendu.
+    Si ce n'était pas la valeur renvoyée, vous pouvez la modifier grâce à cette
+    commande:
 
     .. code-block:: bash
 
         $ git config --global core.autocrlf input
 
-    Replace --global by --local if you want to set it only for the active
-    repository
+    Remplacer --global par --local si vous désirez n'activer cette option que
+    dans votre dépot actuel.
 
-Get the Symfony2 source code:
+Obtenir le code source de Symfony2:
 
-* Create a `GitHub`_ account and sign in;
-
-* Fork the `Symfony2 repository`_ (click on the "Fork" button);
-
-* After the "hardcore forking action" has completed, clone your fork locally
-  (this will create a `symfony` directory):
+* Créer un compte `GitHub`_ et connectez vous;
+* Forker le `Symfony2 repository`_ (cliquer sur le bouton "Fork");
+* Après que l'action "hardcore forking" soit terminée, clonez votre fork 
+  localement (cela créera un répertoire `symfony`):
 
 .. code-block:: bash
 
       $ git clone git@github.com:USERNAME/symfony.git
 
-* Add the upstream repository as ``remote``:
+* Ajouter un dépot distant à l'aide de la commande:
 
 .. code-block:: bash
 
       $ cd symfony
       $ git remote add upstream git://github.com/symfony/symfony.git
 
-Now that Symfony2 is installed, check that all unit tests pass for your
-environment as explained in the dedicated :doc:`document <tests>`.
+Maintenant que Symfony2 est installé, vérifiez que tous les tests unitaires 
+réussissent dans votre environnement comme c'est expliqué dans la documentation  
+dédiée :doc:`document <tests>`.
 
-Working on a Patch
-------------------
+Travailler sur un patch
+-----------------------
 
-Each time you want to work on a patch for a bug or on an enhancement, you need
-to create a topic branch.
+Chaque fois que vous voulez travailler sur un patch pour une correction de bug
+ou une amélioration, vous aurez besoin de créer une branche particulière.
 
-The branch should be based on the `master` branch if you want to add a new
-feature. But if you want to fix a bug, use the oldest but still maintained
-version of Symfony where the bug happens (like `2.0`).
+Cette branche doit être basée sur la branche master pour une nouvelle 
+fonctionnalité, sur la branche active la plus ancienne dans laquel le bug est
+présent pour une correction de bug (ex. `2.0`).
 
-Create the topic branch with the following command:
+Pour un ajout, créez la branche nommée à l'aide la commande suivante:
 
 .. code-block:: bash
 
     $ git checkout -b BRANCH_NAME master
 
-Or, if you want to provide a bugfix for the 2.0 branch, you need to first track
-the remote `2.0` branch locally:
+Où, si vous voulez fournir une correction de bug pour la branche 2.0, vous devez
+d'abord télécharger la branche distance `2.0` localement:
 
 .. code-block:: bash
 
     $ git checkout -t origin/2.0
 
-Then you can create a new branch off the 2.0 branch to work on the bugfix:
+Avant de créer une nouvelle branche à partir de celle-ci:
 
 .. code-block:: bash
 
@@ -170,72 +177,72 @@ Then you can create a new branch off the 2.0 branch to work on the bugfix:
 
 .. tip::
 
-    Use a descriptive name for your branch (`ticket_XXX` where `XXX` is the
-    ticket number is a good convention for bug fixes).
+   Utiliser un nom descriptif pour votre branche (`ticket_XXX` où `XXX` est
+   le numéro indiqué dans la déclaration de bug est une convention efficace).
 
-The above checkout commands automatically switch the code to the newly created
-branch (check the branch you are working on with `git branch`).
+Les commandes précédentes vous positionnent automatiquement dans la branche
+créée (vérifier la branche active à l'aide de `git branch`).
 
-Work on the code as much as you want and commit as much as you want; but keep
-in mind the following:
+Travailler sur le code autant que vous le désirez and commiter aussi souvent que
+vous le voulez mais garder à l'esprit de:
 
-* Follow the coding :doc:`standards <standards>` (use `git diff --check` to
-  check for trailing spaces);
-
-* Add unit tests to prove that the bug is fixed or that the new feature
-  actually works;
-
-* Do atomic and logically separate commits (use the power of `git rebase` to
-  have a clean and logical history);
-
-* Write good commit messages.
+* Respecter les :doc:`standards <standards>` (utiliser `git diff --check` pour
+  vérifier les espaces en bout de ligne);
+* Ajouter des test unitaires afin de prouver que le bug est corrigé ou que l'
+  ajout est fonctionnel;
+* Réaliser des "commits" automique et séparer logiquement ceux-ci (utiliser le 
+  pouvoir du `git rebase` afin d'éclaircir votre historique);
+* Ecriver des messages parlant pour chacun des commits.
 
 .. tip::
 
-    A good commit message is composed of a summary (the first line),
-    optionally followed by a blank line and a more detailed description. The
-    summary should start with the Component you are working on in square
-    brackets (``[DependencyInjection]``, ``[FrameworkBundle]``, ...). Use a
-    verb (``fixed ...``, ``added ...``, ...) to start the summary and don't
-    add a period at the end.
+   Un bon message de commit est composé d'un résumé succint (la première ligne),
+   suivi optionnellement par une ligne vide et par une description détaillée. 
+   le résumé commence avec le composant sur lequel vous êtes en train de
+   travailler entre crochets (``[DependencyInjection]``, ``[FrameworkBundle]``,
+   ...). Utiliser un verbe (``fixed ...``, ``added ...``, ...) pour commencer
+   votre résumé et n'ajouter pas de point.
 
-Submitting a Patch
-------------------
+Soumettre une requête
+---------------------
 
-Before submitting your patch, update your branch (needed if it takes you a
-while to finish your changes):
+Avant de soumettre un correctif, mettez à jour votre branche (requis si vous 
+avez pris du temps à écrire votre correctif):
 
 .. code-block:: bash
 
-    $ git checkout master
-    $ git fetch upstream
-    $ git merge upstream/master
-    $ git checkout BRANCH_NAME
-    $ git rebase master
+   $ git checkout master
+   $ git fetch upstream
+   $ git merge upstream/master
+   $ git checkout BRANCH_NAME
+   $ git rebase master
 
 .. tip::
 
-    Replace `master` with `2.0` if you are working on a bugfix
+   Remplacer `master` par la version cible (ex. `2.0`) si vous travailler sur
+   un correctif de bug.
 
-When doing the ``rebase`` command, you might have to fix merge conflicts.
-``git status`` will show you the *unmerged* files. Resolve all the conflicts,
-then continue the rebase:
+Quand vous effectuez la commande ``rebase``, vous pouvez avoir besoin de fixer
+des conflit de fusion. La commande ``git status`` vous montrera les fichiers 
+non fusionnés *unmerged*. Résolvez tous les conflits et continuez le rebase:
 
 .. code-block:: bash
 
-    $ git add ... # add resolved files
+    $ git add ... # Ajouter les fichiers dont le conflit est résolus
     $ git rebase --continue
 
-Check that all tests still pass and push your branch remotely:
+Vérifiez à nouveau que tous les tests fonctionnent et envoyez (push) les
+modifications effectuées sur votre branche:
 
 .. code-block:: bash
 
     $ git push origin BRANCH_NAME
 
-You can now discuss your patch on the `dev mailing-list`_ or make a pull
-request (they must be done on the ``symfony/symfony`` repository). To ease the
-core team work, always include the modified components in your pull request
-message, like in:
+Vous pouvez maintenant entamer une discussion à propos de votre correctif sur la 
+`liste de diffusion dédiée aux développements`_ ou effectuer une requête d'ajout
+(pull request). (sur le dépot ``symfony/symfony``). Afin de faciliter le travail
+de l'équipe centrale, incluez toujours les composants modifiés dans votre
+requête de cette manière:
 
 .. code-block:: text
 
@@ -244,17 +251,18 @@ message, like in:
 
 .. tip::
 
-    Take care to point your pull request towards ``symfony:2.0`` if you want
-    the core team to pull a bugfix based on the 2.0 branch.
+    Prenez soin d'indiquer comme cible (range) ``symfony:2.0`` si vous émettez
+    un correctif de bug basé sur la branche 2.0.
 
-If you are going to send an email to the mailing-list, don't forget to
-reference you branch URL (``https://github.com/USERNAME/symfony.git
-BRANCH_NAME``) or the pull request URL.
+Si vous envoyez un mail à la mailing liste, n'oubliez pas d'indiquer l'URL de 
+référence de votre branche (ex. ``https://github.com/USERNAME/symfony.git/BRANCH_NAME``)
+ou l'URL de votre requête.
 
-Based on the feedback from the mailing-list or via the pull request on GitHub,
-you might need to rework your patch. Before re-submitting the patch, rebase
-with upstream/master or upstream/2.0, don't merge; and force the push to the
-origin:
+En vous appuyant sur les retours de la liste de diffusion ou via les
+commentaires de votre requête, vous pourrez être amené à corriger votre patch.
+Avant de soumettre à nouveau celui-ci, pensez à ``rebaser`` votre dépot avec
+upstream/master ou upstream/2.0, ne fusionner pas, et forcé l'envoi (push) vers 
+``origin``:
 
 .. code-block:: bash
 
@@ -263,20 +271,22 @@ origin:
 
 .. note::
 
-    when doing a push -f (or --force), always specify the branch name explicitly
-    to avoid messing other branches in the repo (--force tells git that you
-    really want to mess with things so do it carefully).
+    quand vous effectuer un envoi avec l'option -f (ou --force), préciser
+    toujours le nom de la branche explicitement pour éviter de cibler une autre 
+    branches du dépot (--force réalise des actions sans controle, utilisez le
+    avec attention).
 
-Often, moderators will ask you to "squash" your commits. This means you will
-convert many commits to one commit. To do this, use the rebase command:
+Souvent, les modérateurs vous demanderons de "squasher" vos ``commits``. Cela
+implique en fait de convertir de nombreux commits en une seule et unique
+modification. Afin d'effectuer ceci, utiliser la commande rebase:
 
 .. code-block:: bash
 
     $ git rebase -i head~3
     $ git push -f origin BRANCH_NAME
 
-The number 3 here must equal the amount of commits in your branch. After you
-type this command, an editor will popup showing a list of commits:
+Le nombre 3 correspond au nombre de commits effectué sur votre branche. Après 
+cette commande, un éditeur s'ouvrira vous montrant une liste de commits:
 
 .. code-block:: text
 
@@ -284,26 +294,27 @@ type this command, an editor will popup showing a list of commits:
     pick 7fc64b4 second commit
     pick 7d33018 third commit
 
-To squash all commits into the first one, remove the word "pick" before the
-second and the last commits, and replace it by the word "squash" or just "s".
-When you save, git will start rebasing, and if succesful, will ask you to edit
-the commit message, which by default is a listing of the commit messages of all
-the commits. When you finish, execute the push command.
+Pour fusionner l'ensemble des commits en un seul, supprimer le mot "pick" avant 
+le second et le dernier commit, et replacé le par le mot "squash" ou juste par
+"s". Une fois sauvegarder, git commencera le ``rebasing``, et si celui-ci est 
+réussi, vous demandera d'éditer le message de commit, qui par défaut est un 
+listing de tous les messages précédents. Une fois terminé, executer la commande
+push.
 
 .. note::
 
-    All patches you are going to submit must be released under the MIT
-    license, unless explicitly specified in the code.
+    Tous les correctifs que vous produirez devront être réaliser sous la license
+    MIT license, à moins que vous ne le précisiez explicitement dans votre code.
 
-All bug fixes merged into maintenance branches are also merged into more
-recent branches on a regular basis. For instance, if you submit a patch for
-the `2.0` branch, the patch will also be applied by the core team on the
-`master` branch.
+Tous les correctifs intégrés à la branche 2.0 seront fusionnés dans les branches 
+de maintenance plus récentes. Par exemple, si vous soumettez une correction
+pour la branche `2.0`, celui-ci sera aussi appliqué par l'équipe centrale sur la
+branche `master`.
 
-.. _ProGit:              http://progit.org/
-.. _GitHub:              https://github.com/signup/free
-.. _Symfony2 repository: https://github.com/symfony/symfony
-.. _dev mailing-list:    http://groups.google.com/group/symfony-devs
-.. _travis-ci.org:       http://travis-ci.org
-.. _`travis-ci.org status icon`: http://about.travis-ci.org/docs/user/status-images/
-.. _`travis-ci.org Getting Started Guide`: http://about.travis-ci.org/docs/user/getting-started/
+.. _ProGit:                                       http://progit.org/
+.. _GitHub:                                       https://github.com/signup/free
+.. _Symfony2 repository:                          https://github.com/symfony/symfony
+.. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
+.. _travis-ci.org:                                http://travis-ci.org
+.. _`travis-ci.org status icon`:                  http://about.travis-ci.org/docs/user/status-images/
+.. _`travis-ci.org Getting Started Guide`:        http://about.travis-ci.org/docs/user/getting-started/

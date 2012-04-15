@@ -15,7 +15,7 @@
   * :doc:`Translations </contributing/documentation/translations>`
   * :doc:`License </contributing/documentation/license>`
 
-* **Community**
+* **Communauté**
 
   * :doc:`IRC Meetings </contributing/community/irc>`
   * :doc:`Other Resources </contributing/community/other>`
