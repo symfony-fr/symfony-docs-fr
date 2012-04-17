@@ -1,11 +1,11 @@
 .. index::
    single: Configuration Reference; WebProfiler
 
-WebProfilerBundle Configuration
-===============================
+Configuration du WebProfilerBundle 
+==================================
 
-Full Default Configuration
---------------------------
+Configuration complète par défaut
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. configuration-block::
 
@@ -13,11 +13,11 @@ Full Default Configuration
 
         web_profiler:
             
-            # display secondary information, disable to make the toolbar shorter
+            # affiche les informations secondaire pour raccourcir la barre de debug
             verbose:             true
 
-            # display the web debug toolbar at the bottom of pages with a summary of profiler info
+            # affiche la barre de debug en bas des pages avec un sommaire des informations du profiler
             toolbar:             false
 
-            # gives you the opportunity to look at the collected data before following the redirect
+            # vous donne une occasion de regarder les données avant de suivre une redirection
             intercept_redirects: false
