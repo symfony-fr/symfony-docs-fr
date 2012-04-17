@@ -4,15 +4,15 @@
 Comment optimiser votre environnement pour le debuggage
 =======================================================
 
-Quand vous travaillez sur une projet Symfony sur votre machine locale, vous
-devriez utiliser l'environnement ``dev`` (correspondant au controleur frontale
-``app_dev.php``). Cet environnement est optimisé dans l'optique de :
+Quand vous travaillez sur un projet Symfony sur votre machine locale, vous
+devriez utiliser l'environnement ``dev`` (correspondant au contrôleur frontal
+``app_dev.php``). Cet environnement est optimisé pour :
 
 * Donner au développeur des informations rapides et claires si quelque chose ne
-se déroulait pas comme prévu (à l'aide de la web debug toolbar, d'exceptions
-documentés et présentée clairement, du profiler, ...);
+se déroule pas comme prévu (à l'aide de la web debug toolbar, d'exceptions
+documentées et présentées clairement, du profiler, ...);
 
-* Etre aussi similaire que possible à l'environnement de production afin de
+* Etre aussi proche que possible à l'environnement de production afin de
 préparer le déploiement du projet.
 
 .. _cookbook-debugging-disable-bootstrap:
@@ -21,13 +21,13 @@ Désactiver le bootstrap et le cache des classes
 -----------------------------------------------
 
 Pour rendre l'environnement de production aussi rapide que possible, Symfony
-crée de longs fichiers PHP, dans le dossier cache, qui correspondent à
+crée de longs fichiers PHP dans le dossier cache, qui correspondent à
 l'aggrégation des classes PHP dont votre projet a besoin à chaque requête.
-Cependant, ce comportement peut désorienter votre ide ou votre debugger. Nous
+Cependant, ce comportement peut désorienter votre IDE ou votre debugger. Nous
 allons vous montrer ici comment modifier le mécanisme de cache afin qu'il
-permette un débugage des classes intégrées à Symfony.
+permette un débuggage des classes intégrées à Symfony.
 
-Le controller frontal ``app_dev.php`` se compose par défaut de::
+Le contrôleur frontal ``app_dev.php`` se compose par défaut du code suivant::
 
     // ...
 
@@ -40,8 +40,8 @@ Le controller frontal ``app_dev.php`` se compose par défaut de::
     $kernel->loadClassCache();
     $kernel->handle(Request::createFromGlobals())->send();
 
-Pour faciliter le travail du debugger, désactiver le cache des classes PHP en
-omettant l'appel ``loadClassCache()`` et en replaçant les fichiers requis comme
+Pour faciliter le travail du debugger, désactivez le cache des classes PHP en
+supprimant l'appel ``loadClassCache()`` et en replaçant les fichiers requis comme
 ceci::
 
     // ...
@@ -59,10 +59,10 @@ ceci::
 
 .. tip::
 
-    Si vous désactivez le cache des classes, n'oublier pas de revenir au
-	réglages initiaux après votre session de débuggage.
+    Si vous désactivez le cache des classes, n'oubliez pas de revenir aux
+    réglages initiaux après votre session de débuggage.
 
-Certain IDE n'apprécie pas que certaines classes soient enregistrées dans
+Certains IDEs n'apprécient pas que certaines classes soient enregistrées à
 différents emplacements. Pour prévenir ces problèmes, vous pouvez désactiver la
 lecture du dossier cache dans votre IDE, ou changer l'extension utilisée par
 Symfony pour ces fichiers::
