@@ -1,8 +1,8 @@
 .. index::
    pair: Twig; Configuration Reference
 
-TwigBundle Configuration Reference
-==================================
+Configuration de référence du TwigBundle
+========================================
 
 .. configuration-block::
 
@@ -29,7 +29,7 @@ TwigBundle Configuration Reference
                     type:                 ~
                     value:                ~
             autoescape:           ~
-            base_template_class:  ~ # Example: Twig_Template
+            base_template_class:  ~ # Exemple: Twig_Template
             cache:                %kernel.cache_dir%/twig
             charset:              %kernel.charset%
             debug:                %kernel.debug%
@@ -85,11 +85,12 @@ exception_controller
 
 **type**: ``string`` **default**: ``Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController::showAction``
 
-This is the controller that is activated after an exception is thrown anywhere
-in your application. The default controller
+C'est le contrôleur qui est activé après qu'une exception est lancée dans votre
+application. Le contrôleur par défaut 
 (:class:`Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController`)
-is what's responsible for rendering specific templates under different error
-conditions (see :doc:`/cookbook/controller/error_pages`). Modifying this
-option is advanced. If you need to customize an error page you should use
-the previous link. If you need to perform some behavior on an exception,
-you should add a listener to the ``kernel.exception`` event (see :ref:`dic-tags-kernel-event-listener`).
+est responsable de l'affichage de templates spécifiques en cas d'erreurs
+(voir :doc:`/cookbook/controller/error_pages`). Modifier cette option est
+assez compliqué. Si vous avez besoin de personnaliser une page d'erreur,
+vous devriez utiliser le lien ci-dessus. Si vous avez besoin d'ajouter un
+comportement sur une exception, vous devriez ajouter un écouteur sur l'évènement
+``kernel.exception`` (voir :ref:`dic-tags-kernel-event-listener`).
