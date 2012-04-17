@@ -1,8 +1,8 @@
 .. index::
    pair: Monolog; Configuration Reference
 
-Configuration Reference
-=======================
+Configuration de référence
+==========================
 
 .. configuration-block::
 
@@ -47,7 +47,7 @@ Configuration Reference
                     to_email:             ~
                     subject:              ~
                     email_prototype:
-                        id:     ~ # Required (when the email_prototype is used)
+                        id:     ~ # Requis (lorsque email_prototype est utilisé)
                         method: ~
                     formatter:            ~
 
@@ -83,7 +83,6 @@ Configuration Reference
         </container>
 
 .. note::
-
-    When the profiler is enabled, a handler is added to store the logs'
-    messages in the profiler. The profiler uses the name "debug" so it
-    is reserved and cannot be used in the configuration.
+    Lorsque le profiler est activé, un gestionnaire est ajouté pour stocker
+   les logs dans le profiler. Le profiler utilise le nom « debug » donc
+	il est réservé et ne peut pas être utilisé dans le configuration.
