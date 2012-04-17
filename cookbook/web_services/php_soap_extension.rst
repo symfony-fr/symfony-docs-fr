@@ -5,19 +5,19 @@ Comment créer des web services SOAP à l'intérieur d'un contrôleur Symfony2
 ==========================================================================
 
 Configurer un contrôleur afin qu'il agisse comme un serveur est réalisé simplement
-avec quelques outils. Vous devez, bien sur, avoir installer l'extension `PHP SOAP`_.  
-Comme l'extension PHP SOAP ne peut actuellement générer un WSDL, vous devez soit
-en créer un soit utiliser un générateur provenant d'une librairie tierce.
+avec quelques outils. Vous devez, bien sûr, avoir installé l'extension `PHP SOAP`_.
+Comme l'extension PHP SOAP ne peut actuellement pas générer un WSDL, vous devez soit
+en créer un, soit utiliser un générateur provenant d'une librairie tierce.
 
 .. note::
 
-    Il existe de nombreuses implémentations disponibles de serveur SOAP compatible 
+    Il existe de nombreuses implémentations de serveur SOAP disponibles compatibles
     avec PHP. `Zend SOAP`_ et `NuSOAP`_ en sont deux exemples. Bien que nous
-    utilisions l'extension PHP SOAP dans nos exemples, l'idée générale devrait 
+    utilisions l'extension PHP SOAP dans nos exemples, l'idée générale devrait
     être applicable aux autres implementations.
 
-SOAP fonctionne en exposant les méthodes d'un objet PHP à une entité externe (i.e.
-le programme utilisant le service SOAP). Pour commencer, créer une classe - ``HelloService`` -
+SOAP fonctionne en exposant les méthodes d'un objet PHP à une entité externe (c'est-à-dire
+le programme utilisant le service SOAP). Pour commencer, créez une classe - ``HelloService`` -
 qui représente les fonctionnalités que vous mettrez à disposition dans votre service SOAP.
 Dans ce cas, le service SOAP permettra à un client d'appeler la méthode nommée ``hello``, 
 qui engendrera l'envoi d'un courriel::
@@ -39,19 +39,19 @@ qui engendrera l'envoi d'un courriel::
             $message = \Swift_Message::newInstance()
                                     ->setTo('me@example.com')
                                     ->setSubject('Hello Service')
-                                    ->setBody($name . ' says hi!');
+                                    ->setBody($name . ' dit bonjour !');
 
             $this->mailer->send($message);
 
 
-            return 'Hello, ' . $name;
+            return 'Bonjour, ' . $name;
         }
     }
 
 Ensuite, vous devrez permettre à Symfony de créer une instance de cette classe.
-Comme la classe envoi un courriel, le service prendra comme argument une instance
+Comme la classe envoie un courriel, le service prendra comme argument une instance
 ``Swift_Mailer``. En utilisant le conteneur de service, nous pouvons configurer 
-Symfony et lui permettre de construire l'objet ``HelloService`` adéquat:
+Symfony et lui permettre de construire l'objet ``HelloService`` adéquat :
 
 .. configuration-block::
 
@@ -61,18 +61,18 @@ Symfony et lui permettre de construire l'objet ``HelloService`` adéquat:
         services:
             hello_service:
                 class: Acme\DemoBundle\Services\HelloService
-                arguments: [mailer]
+                arguments: [@mailer]
 
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
         <services>
          <service id="hello_service" class="Acme\DemoBundle\Services\HelloService">
-          <argument>mailer</argument>
+          <argument type="service" id="mailer"/>
          </service>
         </services>
 
-Voici un exemple de contrôleur capable de négocier les requête d'un webservice SOAP.
+Voici un exemple de contrôleur capable de gérer une requête SOAP.
 Si ``indexAction()`` est accessible via la route ``/soap``, alors le document 
 WSDL peut être atteint via ``/soap?wsdl``.
 
@@ -100,22 +100,24 @@ WSDL peut être atteint via ``/soap?wsdl``.
         }
     }
 
-Observez les appels à ``ob_start()`` and ``ob_get_clean()``.  ces méthodes contrôlent
-`le tampon de sortie`_ qui vous permettent d'intercepter et d'enregistrer les flux de sorties 
-de la méthode ``$server->handle()``. Cela est nécessaire car Symfony attends de votre
-contrôleur un objet ``Response`` contenant ce flux. Vous devez aussi définir l'entête
-HTTP "Content-Type" comme "text/xml", cette information en priorité étant à destination
-du client.
+Notez les appels à ``ob_start()`` et ``ob_get_clean()``. Ces méthodes contrôlent
+`le tampon de sortie`_ qui vous permettent «  d'intercepter » les flux de sortie
+de la méthode ``$server->handle()``. Cela est nécessaire car Symfony attend de votre
+contrôleur un objet ``Response`` contenant ce flux. Rappelez vous aussi de définir l'entête
+HTTP « Content-Type » comme « text/xml » puisque c'est ce à quoi le client s'attendra.
+Vous utilisez donc ``ob_start()`` pour commencer la mise en tampon de STDOUT et utilisez
+``ob_get_clean()`` pour mettre la sortie dans le contenu de la Réponse et vider le tampon
+de sortie. Finalement, vous êtes prêt à retourner l'objet ``Response``.
 
-Ci-dessous vous pouvez trouver un exemple intégrant un client `NuSOAP`_, présumant
-que le ``indexAction`` présent dans le contrôleur précédent est accessible via la
+Voici un exemple qui appelle un service en utilisant le client `NuSOAP`_. Cet exemple
+suppose que le ``indexAction`` présent dans le contrôleur ci-dessus est accessible via la
 route ``/soap``::
 
     $client = new \soapclient('http://example.com/app.php/soap?wsdl', true);
     
     $result = $client->call('hello', array('name' => 'Scott'));
 
-Un example d'un flux WSDL résultant:
+Un exemple d'un flux WSDL :
 
 .. code-block:: xml
 
@@ -170,7 +172,7 @@ Un example d'un flux WSDL résultant:
     </definitions>
 
 
-.. _`PHP SOAP`:          http://php.net/manual/en/book.soap.php
+.. _`PHP SOAP`:          http://php.net/manual/fr/book.soap.php
 .. _`NuSOAP`:            http://sourceforge.net/projects/nusoap
-.. _`output buffering`:  http://php.net/manual/en/book.outcontrol.php
-.. _`Zend SOAP`:         http://framework.zend.com/manual/en/zend.soap.server.html
+.. _`le tampon de sortie`:  http://php.net/manual/fr/book.outcontrol.php
+.. _`Zend SOAP`:         http://framework.zend.com/manual/fr/zend.soap.server.html
