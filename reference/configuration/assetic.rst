@@ -1,11 +1,11 @@
 .. index::
    pair: Assetic; Configuration Reference
 
-AsseticBundle Configuration Reference
-=====================================
+Configuration de Référence d'AsseticBundle
+==========================================
 
-Full Default Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuration complète par défaut
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. configuration-block::
 
@@ -21,7 +21,7 @@ Full Default Configuration
             sass:                 /usr/bin/sass
             bundles:
 
-                # Defaults (all currently registered bundles):
+                # Par défaut (tous les bundles enregistrés):
                 - FrameworkBundle
                 - SecurityBundle
                 - TwigBundle
