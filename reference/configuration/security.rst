@@ -1,17 +1,17 @@
 .. index::
    single: Security; Configuration Reference
 
-Security Configuration Reference
-================================
+Configuration de référence de la Sécurité 
+=========================================
 
-The security system is one of the most powerful parts of Symfony2, and can
-largely be controlled via its configuration.
+Le système de sécurité est l'une des parties les plus puissantes de Symfony2,
+et il peut être en grande partie contrôlé via sa configuration.
 
-Full Default Configuration
---------------------------
+Configuration complète par défaut
+---------------------------------
 
-The following is the full default configuration for the security system.
-Each part will be explained in the next section.
+Voici la configuration complète par défaut du système de sécurité.
+Chaque partie sera expliquée dans la section suivante.
 
 .. configuration-block::
 
@@ -35,7 +35,7 @@ Each part will be explained in the next section.
                 allow_if_equal_granted_denied: true
 
             acl:
-                connection: default # any name configured in doctrine.dbal section
+                connection: default # n'importe quel nom configuré dans la section doctrine.dbal
                 tables:
                     class: acl_classes
                     entry: acl_entries
@@ -146,53 +146,57 @@ Each part will be explained in the next section.
 
 .. _reference-security-firewall-form-login:
 
-Form Login Configuration
-------------------------
+Configuration du formulaire de login
+------------------------------------
 
-When using the ``form_login`` authentication listener beneath a firewall,
-there are several common options for configuring the "form login" experience:
+Lorsque vous utilisez l'écouteur d'authentification ``form_login`` derrière
+un firewall, il y a plusieurs options communes pour configurer l'utilisation
+du « formulaire de login ».
 
-The Login Form and Process
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Le formulaire d'authentification et son traitement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *   ``login_path`` (type: ``string``, default: ``/login``)
-    This is the URL that the user will be redirected to (unless ``use_forward``
-    is set to ``true``) when he/she tries to access a protected resource
-    but isn't fully authenticated.
-
-    This URL **must** be accessible by a normal, un-authenticated user, else
-    you may create a redirect loop. For details, see
-    ":ref:`Avoid Common Pitfalls<book-security-common-pitfalls>`".
+    C'est l'URL vers laquelle l'utilisateur sera redirigé (à moins que ``use_forward``
+   ne soit défini à ``true``) lorsqu'il tente d'accéder à une ressource protégée
+	sans être complètement authentifié.
+	
+	Cette URL **doit** être accessible par un utilisateur normal non authentifié,
+	sinon vous pourriez créer une boucle de redirections. Pour plus de détails,
+	lisez « :ref:`Eviter les pièges classiques<book-security-common-pitfalls>` ».
 
 *   ``check_path`` (type: ``string``, default: ``/login_check``)
-    This is the URL that your login form must submit to. The firewall will
-    intercept any requests (``POST`` requests only, be default) to this URL
-    and process the submitted login credentials.
+    C'est l'URL à laquelle votre formulaire doit être soumis. Le firewall
+	interceptera toute requête (par défaut seulement les requêtes ``POST``)
+	envoyée à cette URL et traitera les credentials soumis.
     
-    Be sure that this URL is covered by your main firewall (i.e. don't create
-    a separate firewall just for ``check_path`` URL).
+	Assurez vous que cette URL est couverte par votre firewall principal
+	(c'est-à-dire que vous ne devez pas créer de firewall séparé pour l'URL
+    ``check_path``).
 
 *   ``use_forward`` (type: ``Boolean``, default: ``false``)
-    If you'd like the user to be forwarded to the login form instead of being
-    redirected, set this option to ``true``.
+    Si vous voulez que l'utilisateur soit « forwardé » vers le formulaire
+	d'authentification au lieu d'être redirigé, définissez cette option à ``true``.
 
 *   ``username_parameter`` (type: ``string``, default: ``_username``)
-    This is the field name that you should give to the username field of
-    your login form. When you submit the form to ``check_path``, the security
-    system will look for a POST parameter with this name.
+    C'est le nom de champ que vous devez donner au champ nom
+	d'utilisateur de votre formulaire de connexion. Lorsque vous soumettrez
+	le formulaire à l'URL ``check_path``, le système de sécurité cherchera
+	un paramètre POST avec ce nom.
 
 *   ``password_parameter`` (type: ``string``, default: ``_password``)
-    This is the field name that you should give to the password field of
-    your login form. When you submit the form to ``check_path``, the security
-    system will look for a POST parameter with this name.
+    C'est le nom de champ que vous devez donner au champ « mot de passe »
+	de votre formulaire de connexion. Lorsque vous soumettrez
+	le formulaire à l'URL ``check_path``, le système de sécurité cherchera
+	un paramètre POST avec ce nom.
 
 *   ``post_only`` (type: ``Boolean``, default: ``true``)
-    By default, you must submit your login form to the ``check_path`` URL
-    as a POST request. By setting this option to ``false``, you can send a
-    GET request to the ``check_path`` URL.
+    Par défaut, vous devez soumettre votre formulaire à l'URL ``check_path``
+	avec une requête POST. En définissant cette option à ``false``, vous
+	pouvez également envoyer une requête GET.
 
-Redirecting after Login
-~~~~~~~~~~~~~~~~~~~~~~~
+Rediriger après authentification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ``always_use_default_target_path`` (type: ``Boolean``, default: ``false``)
 * ``default_target_path`` (type: ``string``, default: ``/``)
