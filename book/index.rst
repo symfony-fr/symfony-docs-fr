@@ -1,5 +1,5 @@
-Book
-====
+Le Book
+=======
 
 .. toctree::
     :hidden:

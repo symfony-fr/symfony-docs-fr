@@ -44,12 +44,6 @@ ont été supprimées pour se concentrer sur les méthodes les plus importantes
 qui viennent de l'interface
  :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 
-.. versionadded:: 2.1
-
-    Dans Symfony2.1, la méthode ``equals`` a été supprimée de ``UserInterface``.
-    Si vous avez besoin d'outrepasser l'implémentation par défaut de la logique
-    de comparaison, implémentez la nouvelle interface
-    :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface`.
 
 .. code-block:: php
 
@@ -144,14 +138,6 @@ qui viennent de l'interface
         public function eraseCredentials()
         {
         }
-
-        /**
-         * @inheritDoc
-         */
-        public function equals(UserInterface $user)
-        {
-            return $this->username === $user->getUsername();
-        }
     }
 
 Afin d'utiliser une instance de la classe ``AcmeUserBundle:User`` dans la couche
@@ -166,6 +152,29 @@ force la classe à implémenter les cinq méthodes suivantes :
 
 Pour plus de détails sur chacune d'entre elles, voir
 :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
+
+.. versionadded:: 2.1
+
+    Dans Symfony2.1, la méthode ``equals`` a été supprimée de ``UserInterface``.
+    Si vous avez besoin d'outrepasser l'implémentation par défaut de la logique
+    de comparaison, implémentez la nouvelle interface
+    :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface` et
+    implémentez la méthode ``isEqualTo``;
+
+.. code-block:: php
+
+    // src/Acme/UserBundle/Entity/User.php
+
+    namespace Acme\UserBundle\Entity;
+
+    use Symfony\Component\Security\Core\User\EquatableInterface;
+
+    // ...
+
+    public function isEqualTo(UserInterface $user)
+    {
+        return $this->username === $user->getUsername();
+    }
 
 Ci-dessous est un export de ma table ``User`` depuis MySQL. Pour des détails sur
 comment créer des entrées utilisateur et encoder leur mot de passe, voir le

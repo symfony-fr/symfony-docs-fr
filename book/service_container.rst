@@ -224,6 +224,15 @@ Le résultat final est exactement le même que précédemment - la différence e
 faut chercher des paramètres avec ces noms. Quand le conteneur est construit, il
 cherche la valeur de chaque paramètre et l'utilise dans la définition du service.
 
+.. note::
+
+    Le signe pourcent au sein d'un paramètre ou d'un argument, et qui fait partie
+    de la chaine de caractères, doit être échappé par un autre signe pourcent :
+
+    .. code-block:: xml
+
+        <argument type="string">http://symfony.com/?foo=%%s&bar=%%d</argument>
+
 Le but des paramètres est de fournir l'information dans les services. Bien sûr,
 il n'y avait rien de mal à définir le service sans utiliser de paramètre.
 Les paramètres, cependant, ont plusieurs avantages :
@@ -336,9 +345,8 @@ Bien sûr, puisque la classe ``Mailer`` elle-même vit à l'intérieur de ``Acme
 il est plus logique de mettre la définition du conteneur ``my_mailer`` à l'intérieur du
 bundle aussi.
 
-Tout d'abord, déplacez la définition du conteneur ``my_mailer`` dans un nouveau fichier de ressource
-de conteneur à l'intérieur d' ``AcmeHelloBundle``. Si les répertoires ``Resources`` ou
-``Resources/config`` n'existent pas, créez-les.
+Tout d'abord, déplacez la définition du conteneur ``my_mailer`` dans un nouveau fichier de ressource de conteneur à l'intérieur d' ``AcmeHelloBundle``. Si les répertoires ``Resources``
+ou ``Resources/config`` n'existent pas, créez-les.
 
 .. configuration-block::
 
@@ -522,7 +530,7 @@ disponibles pour les bundles du noyau peuvent être trouvées à :doc:`Reference
    sont gérées par une extension du conteneur de service.
 
 Si vous voulez exposer une configuration conviviale dans vos propres bundles, lisez
-l'entrée du cookbook ":doc:`/cookbook/bundles/extensions`".
+l'entrée du cookbook ":doc:`/cookbook/bundles/extension`".
 
 .. index::
    single: Service Container; Referencing services

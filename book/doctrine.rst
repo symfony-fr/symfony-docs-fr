@@ -1354,7 +1354,7 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
         * Une chaîne de longueur 150 qui sera persistée vers une colonne "email_address"
         * et a un index unique.
         *
-        * @ORM\Column(name="email_address", unique="true", length="150")
+        * @ORM\Column(name="email_address", unique="true", length=150)
         */
         protected $email;
 

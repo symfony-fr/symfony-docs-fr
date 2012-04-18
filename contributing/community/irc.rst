@@ -1,66 +1,60 @@
-Réunions IRC
+IRC Meetings
 ============
 
-Le propos de ces réunions est de discuter d'un sujet en temps réel avec de
-nombreux développeurs de Symfony2.
+The purpose of this meeting is to discuss topics in real time with many of the
+Symfony2 devs.
 
-Tout le monde peut proposer un sujet sur la liste de diffusion `symfony-dev`_ 
-jusqu'à 24h avant le début de la réunion avec un message composé idéalement par
-des informations préparées, pertinentes et mises à disposition par sur le net.
-24 heures avant la réunion un lien vers un `doodle`_ sera envoyé comprenant la
-liste des sujets proposés. Tout le monde peut voter sur le sujet jusqu'au
-début de la réunion cela afin de définir l'ordre de l'agenda. Chaque sujet sera
-limité à 15 minutes et la réunion à une heure, laissant ainsi le temps
-nécessaire pour aborder 4 sujets.
+Anyone may propose topics on the `symfony-dev`_ mailing-list until 24 hours
+before the meeting, ideally including well prepared relevant information via
+some URL. 24 hours before the meeting a link to a `doodle`_ will be posted
+including a list of all proposed topics. Anyone can vote on the topics until
+the beginning of the meeting to define the order in the agenda. Each topic
+will be timeboxed to 15mins and the meeting lasts one hour, leaving enough
+time for at least 4 topics.
 
 .. caution::
 
-   Noter que le but attendu d'une réunion n'est pas de trouver des solutions 
-   finalisées, mais bien plus de s'assurer qu'il existe une compréhension
-   commune d'un problème particulier et ainsi de faire progresser la discussion
-   à l'aide d'un outil de communication en temps réel apportant intrinsèquement
-   des avantages aux échanges de points de vue.
+    Note that its not the expected goal of them meeting to find final
+    solutions, but more to ensure that there is a common understanding of the
+    issue at hand and move the discussion forward in ways which are hard to
+    achieve with less real time communication tools.
 
-Ces réunions sont conduites chaque jeudi à 17:00 CET (+01:00) sur le channel
-#symfony-dev sur le serveur IRC Freenode.
+Meetings will happen each Thursday at 17:00 CET (+01:00) on the #symfony-dev
+channel on the Freenode IRC server.
 
-Les `logs`_  IRC sont ensuite publiés sur le wiki, en incluant un court résumé
-pour chacun des sujets abordés. Des tickets sont créés pour chacune des taches
-ou chacun des problèmes identifiés pednant la réunion et référencés dans le
-résumé.
+The IRC `logs`_ will later be published on the trac wiki, which will include a
+short summary for each of the topics. Tickets will be created for any tasks or
+issues identified during the meeting and referenced in the summary.
 
-Quelques lignes directrices et informations concernant la participation:
+Some simple guidelines and pointers for participation:
 
-* il est possible de changer vos votes jusqu'au début de la réunion en cliquant
-  sur "Edit an entry";
-* Le doodle sera fermé aux votes au début de la réunion;
-* L'agenda est défini par les sujets ayant le plus de votes dans le doodle, ou 
-  dans le cas d'une égalité par l'ordre des propositions (premier proposé,
-  premier traité);
-* Au début de la réunion une personne s'identifiera comme modérateur;
-* Le modérateur doit s'assurer essentiellement de la limite de temps de 15min
-  par sujet ainsi que de l'identification clair des résultats et actions à
-  mettre en oeuvre;
-* Habituellement le moderateur écrira aussi le résumé et créera les tickets à 
-  moins que ceux ci ne soient déjà réalisés, ou que quelqu'un se propose de les
-  faire;
-* Toute personne peut joindre la réunion et vous êtes explicitement inviter à
-  participer;
-* Idéalement chacun doit se familiariser avec les sujets abordés avant la
-  réunion;
-* Quand un nouveau sujet est abordé l'auteur est invité à présenté le sujet en 
-  quelques mots;
-* Chacun peut ensuite commenter le sujet suivant sa propre vision;
-* Suivant le nombre de personnes participantes vous devez vous retenir d'exposer
-  des arguments trop spécifiques et/ou ardus;
-* Rappelez vous que les `logs`_ IRC seront publiés, et que de nombreuses
-  personnes pourront relire vos commentaires;
-* Vous êtes inviter à prendre la responsabilité des actions principales ou
-  complémentaires définies lors de la réunion.
+* It's possible to change votes until the beginning of the meeting by clicking
+  on "Edit an entry";
+* The doodle will be closed for voting at the beginning of the meeting;
+* Agenda is defined by which topics got the most votes in the doodle, or
+  whichever was proposed first in case of a tie;
+* At the beginning of the meeting one person will identify him/herself as the
+  moderator;
+* The moderator is essentially responsible for ensuring the 15min timebox and
+  ensuring that tasks are clearly identified;
+* Usually the moderator will also handle writing the summary and creating trac
+  tickets unless someone else steps up;
+* Anyone can join and is explicitly invited to participate;
+* Ideally one should familiarize oneself with the proposed topic before the
+  meeting;
+* When starting on a new topic the proposer is invited to start things off
+  with a few words;
+* Anyone can then comment as they see fit;
+* Depending on how many people participate one should potentially retrain
+  oneself from pushing a specific argument too hard;
+* Remember the IRC `logs`_ will be published later on, so people have the
+  chance to review comments later on once more;
+* People are encouraged to raise their hand to take on tasks defined during
+  the meeting.
 
-Un `exemple`_ de doodle.
+Here is an `example`_ doodle.
 
 .. _symfony-dev: http://groups.google.com/group/symfony-devs
 .. _doodle:      http://doodle.com
 .. _logs:        http://trac.symfony-project.org/wiki/Symfony2IRCMeetingLogs
-.. _exemple:     http://doodle.com/4cnzme7xys3ay53w
+.. _example:     http://doodle.com/4cnzme7xys3ay53w

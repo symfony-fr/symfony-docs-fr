@@ -20,7 +20,7 @@ par défaut qui sont montrées ici :
         firewalls:
             main:
                 remember_me:
-                    key:      aSecretKey
+                    key:      %secret%
                     lifetime: 3600
                     path:     /
                     domain:   ~ # Prend la valeur par défaut du domaine courant depuis $_SERVER
@@ -31,10 +31,10 @@ par défaut qui sont montrées ici :
         <config>
             <firewall>
                 <remember-me
-                    key="aSecretKey"
-                    lifetime="3600"
-                    path="/"
-                    domain="" <!-- Prend la valeur par défaut du domaine courant depuis $_SERVER -->
+                    key      = "%secret%"
+                    lifetime = "3600"
+                    path     = "/"
+                    domain   = "" <!-- Prend la valeur par défaut du domaine courant depuis $_SERVER -->
                 />
             </firewall>
         </config>
@@ -45,7 +45,7 @@ par défaut qui sont montrées ici :
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'main' => array('remember_me' => array(
-                    'key'                     => 'aSecretKey',
+                    'key'                     => '%secret%',
                     'lifetime'                => 3600,
                     'path'                    => '/',
                     'domain'                  => '', // Prend la valeur par défaut du domaine courant depuis $_SERVER
@@ -93,7 +93,7 @@ pourrait au final ressembler à cela :
 
         <form action="<?php echo $view['router']->generate('login_check') ?>" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" 
+            <input type="text" id="username"
                    name="_username" value="<?php echo $last_username ?>" />
 
             <label for="password">Password:</label>

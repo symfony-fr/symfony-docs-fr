@@ -1,83 +1,83 @@
-Participer à la Documentation
-=============================
+Contributing to the Documentation
+=================================
 
-La documentation est aussi importante que le code. Elle suit exactement les 
-mêmes principes:
-DRY, testée, facile à maintenir, extensible, optimisée, et factorisée dans un
-soucis de concision.
+Documentation is as important as code. It follows the exact same principles:
+DRY, tests, ease of maintenance, extensibility, optimization, and refactoring
+just to name a few. And of course, documentation has bugs, typos, hard to read
+tutorials, and more.
 
-Contribuer
-----------
+Contributing
+------------
 
-Avant de contribuer, vous devez devenir familier avec le language utilisé
-:doc:`markup rest<format>` dans la documentation.
+Before contributing, you need to become familiar with the :doc:`markup
+language <format>` used by the documentation.
 
-La documentation Symfony2 est hébergé sur GitHub:
+The Symfony2 documentation is hosted on GitHub:
 
 .. code-block:: text
 
     https://github.com/symfony/symfony-docs
 
-Si vous voulez soumetter un correctif, `forker`_ le dépot offciel sur GitHub et
-cloner votre dépot:
+If you want to submit a patch, `fork`_ the official repository on GitHub and
+then clone your fork:
 
 .. code-block:: bash
 
     $ git clone git://github.com/YOURUSERNAME/symfony-docs.git
 
-A moins que vous ne documentiez une fonctionnalité nouvelle, vos changements
-doivent être basé sur la branche 2.0 plutôt que sur la branche master. Pour
-effectuer ceci ``checkouter`` la branche 2.0:
+Unless you're documenting a feature that's new to Symfony 2.1, you changes
+should be based on the 2.0 branch instead of the master branch. To do this
+checkout the 2.0 branch before the next step:
 
 .. code-block:: bash
 
     $ git checkout 2.0
 
 
-Ensuite, créez une branche dédiée pour vos changement:
+Next, create a dedicated branch for your changes (for organization):
 
 .. code-block:: bash
 
     $ git checkout -b improving_foo_and_bar
 
-Vous pouvez maintenant appliquer vos changements directement à cette branche et 
-les transmettre (commit). Ensuite, envoyer cette branche à *votre* dépot et
-inititier une requête (pull request). Celle-ci devra être entre votre branche
-``improving_foo_and_bar`` et la branche symfony-docs ``master``.
+You can now make your changes directly to this branch and commit them. When
+you're done, push this branch to *your* GitHub fork and initiate a pull request.
+The pull request will be between your ``improving_foo_and_bar`` branch and
+the ``symfony-docs`` ``master`` branch.
 
 .. image:: /images/docs-pull-request.png
    :align: center
 
-Si vous avez basé vos changement sur la branche 2.0 vous devez suivre le lien
- de commit et changer la branche de base vers @2.0 (range):
+If you have made your changes based
+on the 2.0 branch then you need to follow the change commit link and change
+the base branch to be @2.0:
 
 .. image:: /images/docs-pull-request-change-base.png
    :align: center
 
-GitHub traite en détail les requêtes de mise à jour ou `pull requests`_ .
+GitHub covers the topic of `pull requests`_ in detail.
 
 .. note::
 
-    La documentation Symfony2 est sous licence Creative Commons
+    The Symfony2 documentation is licensed under a Creative Commons
     Attribution-Share Alike 3.0 Unported :doc:`License <license>`.
 
-Signaler une erreur
--------------------
+Reporting an Issue
+------------------
 
-La contribution la plus facile que vous pouvez effectuer est de signaler une 
-erreur: une typo, une grammaire imparfaite, un example de code erroné, une 
-explication manquante...
+The most easy contribution you can make is reporting issues: a typo, a grammar
+mistake, a bug in code example, a missing explanation, and so on.
 
-Etapes:
+Steps:
 
-* Soumettez un bogue dans le gestionnaire de bogues;
+* Submit a bug in the bug tracker;
 
-* *(optionel)* Proposer un correctif.
+* *(optional)* Submit a patch.
 
-Traductions
+Translating
 -----------
 
-Lisez la documentation dédiée :doc:`traductions <translations>`.
+Read the dedicated :doc:`document <translations>`.
 
-.. _`forker`: http://help.github.com/fork-a-repo/
+.. _`fork`: http://help.github.com/fork-a-repo/
 .. _`pull requests`: http://help.github.com/pull-requests/

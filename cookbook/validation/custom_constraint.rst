@@ -61,7 +61,8 @@ dans l’exemple suivant, avec la classe ``ProtocolValidator``:
     {
         public function isValid($value, Constraint $constraint)
         {
-            if (in_array($value, $constraint->protocols));
+            if (in_array($value, $constraint->protocols)){
+                $this->setMessage($constraint->message, array('%protocols%' => $constraint->protocols));
 
                 return true;
             }
@@ -70,8 +71,13 @@ dans l’exemple suivant, avec la classe ``ProtocolValidator``:
         }
     }
 
-Validateurs de contraintes avec dépendances
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. note::
+
+    N'oubliez pas d'appeler ``setMessage`` pour construire un message d'erreur
+    lorsque la valeur est invalide.
+
+Contraintes de validation avec dépendances
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si votre validateur possède des dépendances, comme une connexion à une base de données,
 il faudra le configurer comme un service dans le conteneur d'injection de dépendance.
@@ -115,3 +121,32 @@ validateur de contrainte est défini comme un service, il est important de
 surcharger la méthode ``validatedBy()`` afin qu'elle renvoie l'alias utilisé pour
 définir le service, autrement Symfony2 n'utilisera pas le service de validation,
 et instanciera la classe, sans injecter les dépendances requises.
+
+Contrainte de validation de classe
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Outre la validation d'une propriété de classe, une contrainte peut avoir une portée
+de classe en renseignant une cible::
+
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
+    }
+
+Avec ceci, la méthode ``isValid()`` du validateur prend un objet comme premier argument::
+
+    class ProtocolClassValidator extends ConstraintValidator
+    {
+        public function isValid($protocol, Constraint $constraint)
+        {
+            if ($protocol->getFoo() != $protocol->getBar()) {
+
+                // associe le message d'erreur à la propriété foo
+                $this->context->addViolationAtSubPath('foo', $constraint->getMessage(), array(), null);
+
+                return true;
+            }
+ 
+            return false;
+        }   
+    }

@@ -1,5 +1,5 @@
-Contribuer au Code
-==================
+Contributing Code
+=================
 
 .. toctree::
     :maxdepth: 2

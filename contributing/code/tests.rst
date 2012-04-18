@@ -1,15 +1,13 @@
-Effectuer les tests Symfony2
-============================
+Running Symfony2 Tests
+======================
 
-Avant de soumettre un :doc:`patch <patches>` pour inclusion, vous avez besoin de
-lancer la suite de test intégrée dans Symfony2 afin de vérifier que tout est 
-fonctionnel.
+Before submitting a :doc:`patch <patches>` for inclusion, you need to run the
+Symfony2 test suite to check that you have not broken anything.
 
 PHPUnit
 -------
 
-Afin de lancer la suite de test Symfony2, `installer`_ PHPUnit 3.6.4 ou plus
-récent:
+To run the Symfony2 test suite, `install`_ PHPUnit 3.6.4 or later first:
 
 .. code-block:: bash
 
@@ -18,22 +16,22 @@ récent:
     $ pear channel-discover pear.symfony-project.com
     $ pear install phpunit/PHPUnit
 
-Dépendences optionnelles
-------------------------
+Dependencies (optional)
+-----------------------
 
-Pour lancer la suite de tests entière, incluant les tests dépendants de
-bibliothèques externes, Symfony2 doit pouvoir auto-charger celles-ci. Par
-défaut, elles sont auto-chargés depuis le répertoire `vendor/` dans le dossier
-racine (vérifier `autoload.php.dist` et `autoload.php`).
+To run the entire test suite, including tests that depend on external
+dependencies, Symfony2 needs to be able to autoload them. By default, they are
+autoloaded from `vendor/` under the main root directory (see
+`autoload.php.dist`).
 
-La suite de test à besoin des bibliothèques tierces suivantes:
+The test suite needs the following third-party libraries:
 
 * Doctrine
 * Swiftmailer
 * Twig
 * Monolog
 
-Pour les installer, lancer le script `vendors` :
+To install them all, run the `vendors` script:
 
 .. code-block:: bash
 
@@ -41,52 +39,51 @@ Pour les installer, lancer le script `vendors` :
 
 .. note::
 
-    Noter que les tests prennent un certain temps pour s'effectuer.
+    Note that the script takes some time to finish.
 
-Après l'installation, vous pouvez mettre à jour les fournisseurs externes
-(vendors) avec la commande suivante:
+After installation, you can update the vendors to their latest version with
+the follow command:
 
 .. code-block:: bash
 
     $ php vendors.php update
 
-Lancement
----------
+Running
+-------
 
-Premièrement, mettez à jour les fournisseurs (voir précédemment).
+First, update the vendors (see above).
 
-Ensuite, lancer la suite de tests depuis la racine de Symfony2 à l'aide de la
-commande suivante:
+Then, run the test suite from the Symfony2 root directory with the following
+command:
 
 .. code-block:: bash
 
     $ phpunit
 
-La sortie devrait indiquée `OK`. Si ce n'était pas les cas, vous devez étudier
-les résultats afin de comprendre en quoi vos modifications ont altéré les 
-résultats des tests.
+The output should display `OK`. If not, you need to figure out what's going on
+and if the tests are broken because of your modifications.
 
 .. tip::
 
-    Lancer la suite de tests avant d'appliquer vos modifications afin de
-    vérifier qu'ils fonctionnent sur votre configuration.
+    Run the test suite before applying your modifications to check that they
+    run fine on your configuration.
 
-Couverture du code
-------------------
+Code Coverage
+-------------
 
-Si vous ajouter de nouvelles fonctionnalités, vous devez également vérifier que
-le code ajouté est couvert en utilisant:
+If you add a new feature, you also need to check the code coverage by using
+the `coverage-html` option:
 
 .. code-block:: bash
 
     $ phpunit --coverage-html=cov/
 
-Vérifier la couverture de code en ouvrant la page générée `cov/index.html` dans
-un navigateur web.
+Check the code coverage by opening the generated `cov/index.html` page in a
+browser.
 
 .. tip::
 
-    La couverture de code ne fonctionne que si vous avez activé XDebug et
-    installé toutes les dépendances.
+    The code coverage only works if you have XDebug enabled and all
+    dependencies installed.
 
-.. _installer: http://www.phpunit.de/manual/current/en/installation.html
+.. _install: http://www.phpunit.de/manual/current/en/installation.html

@@ -204,7 +204,7 @@ type
 
 C'est le type de champ pour chaque item dans la collection (ex: ``text``, ``choice``,
 etc). Par exemple, si vous avez un tableau d'adresses email, vous utiliserez le type 
-:doc`email</reference/forms/types/email>`. Si vous voulez imbriquer une collection
+:doc:`email</reference/forms/types/email>`. Si vous voulez imbriquer une collection
 d'un autre formulaire, créez une nouvelle instance de votre type de formulaire et passez
 la dans cette option.
 
@@ -214,7 +214,7 @@ options
 **type**: ``array`` **default**: ``array()``
 
 C'est le tableau qui est passé au type formulaire spécifié dans l'option `type`_.
-Par exemple, si vous utilisez le type :doc`choice</reference/forms/types/choice>`
+Par exemple, si vous utilisez le type :doc:`choice</reference/forms/types/choice>`
 dans l'option `type`_ (pa exemple pour une collection de menus déroulants), alors
 vous devrez au moins passer l'option ``choices`` au type sous-jacent::
 

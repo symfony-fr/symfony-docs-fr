@@ -1340,6 +1340,7 @@ En savoir plus grâce au Cookbook
 
 * :doc:`/cookbook/templating/PHP`
 * :doc:`/cookbook/controller/error_pages`
+* :doc:`/cookbook/templating/twig_extension`
 
 .. _`Twig`: http://twig.sensiolabs.org
 .. _`KnpBundles.com`: http://knpbundles.com

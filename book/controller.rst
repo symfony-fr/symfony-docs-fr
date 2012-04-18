@@ -693,7 +693,7 @@ Par exemple, imaginez que vous traitiez la soumission d'un formulaire :
         if ($form->isValid()) {
             // effectue le traitement du formulaire
 
-            $this->get('session')->setFlash('notice', 'Vos changements ont été sauvegardés!');
+            $this->get('session')->getFlashBag()->add('notice', 'Vos changements ont été sauvegardés!');
 
             return $this->redirect($this->generateUrl(...));
         }
@@ -712,19 +712,19 @@ pour délivrer le message ``notice`` :
 
     .. code-block:: html+jinja
 
-        {% if app.session.hasFlash('notice') %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
             <div class="flash-notice">
-                {{ app.session.flash('notice') }}
+                {{ flashMessage }}
             </div>
-        {% endif %}
+        {% endfor %}
 
     .. code-block:: php
     
-        <?php if ($view['session']->hasFlash('notice')): ?>
+        <?php foreach ($view['session']->getFlashBag()->get('notice') as $message): ?>
             <div class="flash-notice">
-                <?php echo $view['session']->getFlash('notice') ?>
+                <?php echo "<div class='flash-error'>$message</div>" ?>
             </div>
-        <?php endif; ?>
+        <?php endforeach; ?>
 
 De par leur conception, les messages flash sont faits pour durer pendant exactement une
 requête (ils « disparaissent en un éclair/flash »). Ils sont conçus pour être utilisés

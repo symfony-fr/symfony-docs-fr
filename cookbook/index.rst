@@ -1,5 +1,5 @@
-Cookbook
-========
+Le Cookbook
+===========
 
 .. toctree::
     :hidden:
@@ -72,6 +72,7 @@ Cookbook
 
     templating/global_variables
     templating/PHP
+    templating/twig_extension
 
     logging/monolog
     logging/monolog_email

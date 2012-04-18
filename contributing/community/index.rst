@@ -1,5 +1,5 @@
-Communauté
-==========
+Community
+=========
 
 .. toctree::
     :maxdepth: 2

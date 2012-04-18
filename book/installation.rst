@@ -230,7 +230,7 @@ de code. C'est plutôt bien (en fait c'est génial !) car lorsque quelqu'un clon
 récupère le projet, il lui suffit de lancer la commande ``php bin/vendors install``
 pour récupérer toutes les librairies nécessaires.
 
-.. _`activer le support ACL`: https://help.ubuntu.com/community/FilePermissions#ACLs
+.. _`activer le support ACL`: https://help.ubuntu.com/community/FilePermissionsACLs
 .. _`http://symfony.com/download`: http://symfony.com/download
 .. _`Git`: http://git-scm.com/
 .. _`GitHub`: http://help.github.com/set-up-git-redirect

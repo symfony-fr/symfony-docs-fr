@@ -115,10 +115,10 @@ templating
 assets_base_urls
 ................
 
-**default**: ``{ http: [], https: [] }``
+**default**: ``{ http: [], ssl: [] }``
 
 This option allows you to define base URL's to be used for assets referenced
-from ``http`` and ``https`` pages. A string value may be provided in lieu of a
+from ``http`` and ``ssl`` (``https``) pages. A string value may be provided in lieu of a
 single-element array. If multiple base URL's are provided, Symfony2 will select
 one from the collection each time it generates an asset's path.
 

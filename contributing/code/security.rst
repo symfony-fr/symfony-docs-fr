@@ -1,24 +1,21 @@
-Signaler une faille de sécurité
-===============================
+Reporting a Security Issue
+==========================
 
-Une faille de sécurité dans Symfony2? N'utiliser pas la liste de diffusion ou le
-gestionnaire de bugs. Toutes les failles de sécurités doivent être transmises à
-**security [at]symfony-project.com**. Les courriels envoyés à cette adresse sont
-retransmis à l'équipe centrale de Symfony à l'aide d'une liste de diffusion
-privée.
+Found a security issue in Symfony2? Don't use the mailing-list or the bug
+tracker. All security issues must be sent to **security [at]
+symfony-project.com** instead. Emails sent to this address are forwarded to
+the Symfony core-team private mailing-list.
 
-Pour chaque rapport, nous essayons dans un premier temps de confirmer la
-vulnaribiilité. Si elle est vérifiée, l'équipe centrale travaille sur une
-solution en suivant ces étapes:
+For each report, we first try to confirm the vulnerability. When it is
+confirmed, the core-team works on a solution following these steps:
 
-1. Envoi d'un accusé de réception au rapporteur;
-2. Travail sur un correctif;
-3. Ecriture d'un message décrivant la vulnérabilité, les utilisations possibles,
-   et des moyens mis à disposition pour y pallier;
-4. Application du correctif sur toutes les versions maintenues de Symfony;
-5. Publication du message sur le blog officiel de Symfony.
+1. Send an acknowledgement to the reporter;
+2. Work on a patch;
+3. Write a post describing the vulnerability, the possible exploits, and how
+   to patch/upgrade affected applications;
+4. Apply the patch to all maintained versions of Symfony;
+5. Publish the post on the official Symfony blog.
 
 .. note::
 
-   Tant que nous travaillons sur un correctif, s'il vous plait, ne révélez pas
-   publiquement cette faille.
+    While we are working on a patch, please do not reveal the issue publicly.

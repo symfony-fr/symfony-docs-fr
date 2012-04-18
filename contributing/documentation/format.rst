@@ -1,9 +1,8 @@
 Documentation Format
 ====================
 
-La documentation Symfony2 utilise comme format d'écriture `reStructuredText`_ 
-et comme constructeur `Sphinx`_ pour produire les documents dans d'autres 
-formats (HTML, PDF, ...).
+The Symfony2 documentation uses `reStructuredText`_ as its markup language and
+`Sphinx`_ for building the output (HTML, PDF, ...).
 
 reStructuredText
 ----------------
@@ -11,30 +10,28 @@ reStructuredText
 reStructuredText "is an easy-to-read, what-you-see-is-what-you-get plaintext
 markup syntax and parser system".
 
-Vous pouvez apprendre la syntaxe rst en lisant la documentation existante
-Symfony2 `documents`_ ou en lisant `reStructuredText Primer`_ sur le site web de
-Sphinx.
+You can learn more about its syntax by reading existing Symfony2 `documents`_
+or by reading the `reStructuredText Primer`_ on the Sphinx website.
 
-Si vous êtes familier avec Markdown, soyez attentif à certaines tournures
-d'apparences similaires mais dont le comportement diffèrent:
+If you are familiar with Markdown, be careful as things as sometimes very
+similar but different:
 
-* Les listes commencent au début de la ligne (aucune indentation n'est permise);
+* Lists starts at the beginning of a line (no indentation is allowed);
 
-* Les lignes de codes utilisent des double ticks (````like this````).
+* Inline code blocks use double-ticks (````like this````).
 
 Sphinx
 ------
 
-Sphinx est le systeme de construction ajoutant certaines fonctionnalités
-agréables permettant de créer une documentation à partir de documents 
-reStructuredText. Il ajoute de nouvelles directives et des fonctions comme le
-standard reST `markup`_.
+Sphinx is a build system that adds some nice tools to create documentation
+from reStructuredText documents. As such, it adds new directives and
+interpreted text roles to standard reST `markup`_.
 
-Syntaxe Colorée
-~~~~~~~~~~~~~~~
+Syntax Highlighting
+~~~~~~~~~~~~~~~~~~~
 
-Tout example de code utilise PHP comme schéma de coloration par défaut. Vous
-pouvez changer cela à l'aide de la directive ``code-block`` :
+All code examples uses PHP as the default highlighted language. You can change
+it with the ``code-block`` directive:
 
 .. code-block:: rst
 
@@ -42,8 +39,8 @@ pouvez changer cela à l'aide de la directive ``code-block`` :
 
         { foo: bar, bar: { foo: bar, bar: baz } }
 
-Si votre code PHP débute par ``<?php``, vous devrez utiliser ``html+php`` comme
-pseudo-language de coloration:
+If your PHP code begins with ``<?php``, then you need to use ``html+php`` as
+the highlighted pseudo-language:
 
 .. code-block:: rst
 
@@ -53,15 +50,14 @@ pseudo-language de coloration:
 
 .. note::
 
-    Une liste des langages supportés ainsi que leurs noms respectifs est
-	disponible sur le site web `Pygments`_.
+    A list of supported languages is available on the `Pygments website`_.
 
-Blocs de configurations
-~~~~~~~~~~~~~~~~~~~~~~~
+Configuration Blocks
+~~~~~~~~~~~~~~~~~~~~
 
-Si vous affichez une configuration, vous devez utiliser la directive
-``configuration-block`` dans tous les formats de configuration reconnus
-(``PHP``, ``YAML``, et ``XML``)
+Whenever you show a configuration, you must use the ``configuration-block``
+directive to show the configuration in all supported configuration formats
+(``PHP``, ``YAML``, and ``XML``)
 
 .. code-block:: rst
 
@@ -79,7 +75,7 @@ Si vous affichez une configuration, vous devez utiliser la directive
 
             // Configuration in PHP
 
-Le code précédent sera rendu comme cela:
+The previous reST snippet renders as follow:
 
 .. configuration-block::
 
@@ -95,57 +91,56 @@ Le code précédent sera rendu comme cela:
 
         // Configuration in PHP
 
-La liste des formats supportés:
+The current list of supported formats are the following:
 
-+-----------------------+-------------+
-| Identifiant du Format | Affichage   |
-+=======================+=============+
-| html                  | HTML        |
-+-----------------------+-------------+
-| xml                   | XML         |
-+-----------------------+-------------+
-| php                   | PHP         |
-+-----------------------+-------------+
-| yaml                  | YAML        |
-+-----------------------+-------------+
-| jinja                 | Twig        |
-+-----------------------+-------------+
-| html+jinja            | Twig        |
-+-----------------------+-------------+
-| jinja+html            | Twig        |
-+-----------------------+-------------+
-| php+html              | PHP         |
-+-----------------------+-------------+
-| html+php              | PHP         |
-+-----------------------+-------------+
-| ini                   | INI         |
-+-----------------------+-------------+
-| php-annotations       | Annotations |
-+-----------------------+-------------+
++-----------------+-------------+
+| Markup format   | Displayed   |
++=================+=============+
+| html            | HTML        |
++-----------------+-------------+
+| xml             | XML         |
++-----------------+-------------+
+| php             | PHP         |
++-----------------+-------------+
+| yaml            | YAML        |
++-----------------+-------------+
+| jinja           | Twig        |
++-----------------+-------------+
+| html+jinja      | Twig        |
++-----------------+-------------+
+| jinja+html      | Twig        |
++-----------------+-------------+
+| php+html        | PHP         |
++-----------------+-------------+
+| html+php        | PHP         |
++-----------------+-------------+
+| ini             | INI         |
++-----------------+-------------+
+| php-annotations | Annotations |
++-----------------+-------------+
 
-Tester une Documentation
-~~~~~~~~~~~~~~~~~~~~~~~~
+Testing Documentation
+~~~~~~~~~~~~~~~~~~~~~
 
-Afin de tester une documentation avant de la proposer:
+To test documentation before a commit:
 
-* Installer `Sphinx`_;
+* Install `Sphinx`_;
 
-* Exécuter l'installateur `Sphinx quick setup`_;
+* Run the `Sphinx quick setup`_;
 
-* Installer l'extension concernantes les blocs de configuration (voir plus bas);
+* Install the configuration-block Sphinx extension (see below);
 
-* Executez ``make html`` et contrôlez le code HTML généré dans le répertoire
-  ``build``.
+* Run ``make html`` and view the generated HTML in the ``build`` directory.
 
-Installer l'extension concernant les blocs de configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installing the configuration-block Sphinx extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Télécharger l'extension depuis le dépot `configuration-block source`_
+* Download the extension from the `configuration-block source`_ repository
 
-* Copier ``configurationblock.py`` vers le dossier ``_exts`` dans le répertoire
-  racine (où se trouve ``conf.py``)
+* Copy the ``configurationblock.py`` to the ``_exts`` folder under your
+   source folder (where ``conf.py`` is located)
 
-* Ajouter les indications suivantes au fichier ``conf.py``:
+* Add the following to the ``conf.py`` file:
 
 .. code-block:: py
     
@@ -161,6 +156,6 @@ Installer l'extension concernant les blocs de configuration
 .. _documents:                  http://github.com/symfony/symfony-docs
 .. _reStructuredText Primer:    http://sphinx.pocoo.org/rest.html
 .. _markup:                     http://sphinx.pocoo.org/markup/
-.. _Pygments:                   http://pygments.org/languages/
+.. _Pygments website:           http://pygments.org/languages/
 .. _configuration-block source: https://github.com/fabpot/sphinx-php
 .. _Sphinx quick setup:         http://sphinx.pocoo.org/tutorial.html#setting-up-the-documentation-sources

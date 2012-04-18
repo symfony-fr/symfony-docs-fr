@@ -416,7 +416,7 @@ bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefau
 
 .. code-block:: php
 
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'validation_groups' => array('registration')
@@ -439,7 +439,7 @@ comme un tableau callbak, ou une ``Closure`` :
 
 .. code-block:: php
 
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'validation_groups' => array('Acme\\AcmeBundle\\Entity\\Client', 'determineValidationGroups'),
@@ -453,7 +453,7 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
 
 .. code-block:: php
 
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'validation_groups' => function(FormInterface $form) {
@@ -600,12 +600,10 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ :
   Ceci est très utile car votre validation côté client va automatiquement
   correspondre à vos règles de validation.
 
-* ``min_length`` : Si le champ est de type texte, alors l'option ``min_length``
-  peut être devinée grâce aux contraintes de validation (si ``MinLength`` ou ``Min``
+* ``max_length`` : Si le champ est de type texte, alors l'option ``max_length``
+  peut être devinée grâce aux contraintes de validation (si ``MaxLength`` ou ``Max``
   est utilisée) ou grâce aux métadonnées de Doctrine (via la longueur du champ).
 
-* ``max_length`` : Similaire à ``min_length``, la longueur maximale peut aussi
-  être prédite.
 
 .. note::
 
@@ -616,7 +614,7 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ :
 Si vous voulez changer une des valeurs prédites, vous pouvez l'outrepasser en
 passant l'option au tableau des options de champ ::
 
-    ->add('task', null, array('min_length' => 4))
+    ->add('task', null, array('max_length' => 4))
 
 .. index::
    single: Formulaires; Rendu dans un Template
@@ -893,7 +891,7 @@ manière de créer des formulaires, mais le choix final vous revient.
     
     .. code-block:: php
 
-        public function getDefaultOptions(array $options)
+        public function getDefaultOptions()
         {
             return array(
                 'data_class' => 'Acme\TaskBundle\Entity\Task',
@@ -1041,7 +1039,7 @@ puisse être modifié par l'utilisateur :
             $builder->add('name');
         }
 
-        public function getDefaultOptions(array $options)
+        public function getDefaultOptions()
         {
             return array(
                 'data_class' => 'Acme\TaskBundle\Entity\Category',
@@ -1483,7 +1481,7 @@ Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple 
     {
         // ...
     
-        public function getDefaultOptions(array $options)
+        public function getDefaultOptions()
         {
             return array(
                 'data_class'      => 'Acme\TaskBundle\Entity\Task',
@@ -1619,7 +1617,7 @@ surchargez la méthode ``getDefaultOptions`` pour les spécifier :
     {
         // ...
 
-        public function getDefaultOptions(array $options)
+        public function getDefaultOptions()
         {
             $collectionConstraint = new Collection(array(
                 'name' => new MinLength(5),

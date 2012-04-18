@@ -1,17 +1,17 @@
 Conventions
 ===========
 
-Le document :doc:`standards` décrit les coventions syntaxiques définis pour les
-projets Symfony2 et les bundles internes ou de tierce partie. ce document décrit
-les standards et conventions utilisés dans le coeur du framework afin de lui 
-apporter consistence et prédictibilité. Vous êtes encouragés à suivre ceux-ci
-dans votre propre code, mais n'y êtes pas tenu.
+The :doc:`standards` document describes the coding standards for the Symfony2
+projects and the internal and third-party bundles. This document describes
+coding standards and conventions used in the core framework to make it more
+consistent and predictable. You are encouraged to follow them in your own
+code, but you don't need to.
 
-Nom des Méthodes
-----------------
+Method Names
+------------
 
-Quand un objet a une relation conventionnelle avec d'autres conteneurs (objets,
-paramètres, ...), les noms des méthodes utilisent un schéma pré-établi:
+When an object has a "main" many relation with related "things"
+(objects, parameters, ...), the method names are normalized:
 
   * ``get()``
   * ``set()``
@@ -26,56 +26,53 @@ paramètres, ...), les noms des méthodes utilisent un schéma pré-établi:
   * ``count()``
   * ``keys()``
 
-L'utilisation de ces méthodes est seulement autorisé quand il est certain que 
-la relation décrite est la relation principale:
+The usage of these methods are only allowed when it is clear that there
+is a main relation:
 
-* un ``CookieJar`` possède de nombreux objects ``Cookie``;
+* a ``CookieJar`` has many ``Cookie`` objects;
 
-* un service ``Container`` a de nombreux services et de nombreux paramètres
-  (comme le service est sa relation principale, nous utilisons cette convention
-  pour cette relation);
+* a Service ``Container`` has many services and many parameters (as services
+  is the main relation, we use the naming convention for this relation);
 
-* un Console ``Input`` a de nombreux arguments et de nombreuses options. Il
-  n'existe pas de relation principale, la convention de nom ne s'applique donc
-  pas.
+* a Console ``Input`` has many arguments and many options. There is no "main"
+  relation, and so the naming convention does not apply.
 
-Pour de nombreuses relations dans lesquelles la convention de nom ne s'applique
-pas, les méthodes suivantes doivent être utilisées en remplacement 
-(``XXX`` est le nom de la chose en relation):
+For many relations where the convention does not apply, the following methods
+must be used instead (where ``XXX`` is the name of the related thing):
 
-+----------------------+-------------------+
-| Relation principale  | Autre Relations   |
-+======================+===================+
-| ``get()``            | ``getXXX()``      |
-+----------------------+-------------------+
-| ``set()``            | ``setXXX()``      |
-+----------------------+-------------------+
-| n/a                  | ``replaceXXX()``  |
-+----------------------+-------------------+
-| ``has()``            | ``hasXXX()``      |
-+----------------------+-------------------+
-| ``all()``            | ``getXXXs()``     |
-+----------------------+-------------------+
-| ``replace()``        | ``setXXXs()``     |
-+----------------------+-------------------+
-| ``remove()``         | ``removeXXX()``   |
-+----------------------+-------------------+
-| ``clear()``          | ``clearXXX()``    |
-+----------------------+-------------------+
-| ``isEmpty()``        | ``isEmptyXXX()``  |
-+----------------------+-------------------+
-| ``add()``            | ``addXXX()``      |
-+----------------------+-------------------+
-| ``register()``       | ``registerXXX()`` |
-+----------------------+-------------------+
-| ``count()``          | ``countXXX()``    |
-+----------------------+-------------------+
-| ``keys()``           | n/a               |
-+----------------------+-------------------+
++----------------+-------------------+
+| Main Relation  | Other Relations   |
++================+===================+
+| ``get()``      | ``getXXX()``      |
++----------------+-------------------+
+| ``set()``      | ``setXXX()``      |
++----------------+-------------------+
+| n/a            | ``replaceXXX()``  |
++----------------+-------------------+
+| ``has()``      | ``hasXXX()``      |
++----------------+-------------------+
+| ``all()``      | ``getXXXs()``     |
++----------------+-------------------+
+| ``replace()``  | ``setXXXs()``     |
++----------------+-------------------+
+| ``remove()``   | ``removeXXX()``   |
++----------------+-------------------+
+| ``clear()``    | ``clearXXX()``    |
++----------------+-------------------+
+| ``isEmpty()``  | ``isEmptyXXX()``  |
++----------------+-------------------+
+| ``add()``      | ``addXXX()``      |
++----------------+-------------------+
+| ``register()`` | ``registerXXX()`` |
++----------------+-------------------+
+| ``count()``    | ``countXXX()``    |
++----------------+-------------------+
+| ``keys()``     | n/a               |
++----------------+-------------------+
 
 .. note::
 
-   Notez que si "setXXX" et "replaceXXX" sont très similairs,  il y'a tout de
-   même une différence notable: "setXXX" peut remplacer, ou ajouter de nouveaux 
-   éléments à une relation. "replaceXXX" à l'interdiction d'ajouter des éléments,
-   et devrait émettre une exception si l'élément identifié n'existe pas.
+    While "setXXX" and "replaceXXX" are very similar, there is one notable 
+    difference: "setXXX" may replace, or add new elements to the relation. 
+    "replaceXXX" on the other hand is specifically forbidden to add new 
+    elements, but most throw an exception in these cases.
