@@ -9,7 +9,7 @@ de moyenne et grande envegure vont cependant vouloir stocker les sessions dans l
 plutôt que dans des fichiers, car l'usage des bases de données permet plus facilement la
 gestion de la montée en charge dans un environnement multi-serveurs.
 
-Symfony2 incorpore une solution de stockage de sessions dans la base de donnée appelée
+Symfony2 incorpore une solution de stockage de sessions dans la base de données appelée
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\PdoSessionStorage`.
 Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.yml``
 (ou le format de configuration de votre choix):
@@ -116,7 +116,7 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         ));
         $container->setDefinition('session.storage.pdo', $storageDefinition);
 
-* ``db_table`` : Nom de la table des sessions dans votre base de donnée
+* ``db_table`` : Nom de la table des sessions dans votre base de données
 * ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (de type VARCHAR(255) ou plus)
 * ``db_data_col`` : Nom de la colonne des valeurs dans la table des sessions (de type TEXT ou CLOB)
 * ``db_time_col`` : Nom de la colonne temps dans la table des sessions (INTEGER)
@@ -124,11 +124,11 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
 Partager les informations de connection à la base de données
 ------------------------------------------------------------
 
-Avec cette configuration, les paramètres de connection à la base de données ne concernent
-que le stockage des sessions. Ceci peut fonctionner si vous dédiez une base de donnée aux sessions.
+Avec cette configuration, les paramètres de connexion à la base de données ne concernent
+que le stockage des sessions. Ceci peut fonctionner si vous dédiez une base de données aux sessions.
 
 Mais si vous désirez stocker les informations de session dans la même base de données
-que le reste des données du projet, vous pouvez réutiliser les paramètres de connection définis dans
+que le reste des données du projet, vous pouvez réutiliser les paramètres de connexion définis dans
 dans ``parameter.ini`` en référençant lesdits paramètres :
 
 .. configuration-block::
@@ -158,13 +158,13 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
             '%database_password%',
         ));
 
-Exemple de statement SQL
-------------------------
+Exemple d'instruction SQL
+-------------------------
 
 MySQL
 ~~~~~
 
-Le statement SQL pour la création d'une table de sessions sera probablement proche de :
+L'instruction SQL pour la création d'une table de sessions sera probablement proche de :
 
 .. code-block:: sql
 
