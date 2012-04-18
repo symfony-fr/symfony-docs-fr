@@ -7,7 +7,7 @@ Comment configurer les paramètres externes dans le conteneur de services
 Dans le chapitre doc:`/cookbook/configuration/environments`, Vous avez vu
 comment gérer la configuration de votre application. Parfois on aura cependant besoin
 de stocker certaines données hors du code du projet, par exemple des mots de passe, ou des
-paramètres de configuration d'une base de donnée.
+paramètres de configuration d'une base de données.
 La flexibilité du conteneur de services Symfony vous le permet.
 
 Variables d'environnement
@@ -37,7 +37,7 @@ par la configuration ``VirtualHost`` suivante:
 
 .. note::
 
-    L'example de configuration ci-dessus concerne Apache, à l'aide de la directive
+    L'exemple de configuration ci-dessus concerne Apache, à l'aide de la directive
     `SetEnv`_. Cependant, ceci fonctionnera pour tout serveur permettant la définition
     de variables d'environnement.
 
@@ -153,12 +153,12 @@ Le code suivant importe un fichier ``parameters.php``.
 
 .. note::
 
-    Un fichier de rssource peut être de plusieurs types. La directive ``imports`` accepte
+    Un fichier de ressource peut être de plusieurs types. La directive ``imports`` accepte
     des ressources de type PHP, XML, YAML, INI, et closure.
 
 Dans le fichier ``parameters.php``, vous allez indiquer au conteneur de services les paramètres
 que vous désirez définir. Ceci est notamment utile lorsque d'importants éléments de configuration
-sont disponibles dans un format non.standard. L'exemple ci-dessous importe des paramètres de configuration
+sont disponibles dans un format non standard. L'exemple ci-dessous importe des paramètres de configuration
 de base de données pour Drupal dans le conteneur de services.
 
 .. code-block:: php
