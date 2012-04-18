@@ -1,25 +1,25 @@
 NotNull
 =======
 
-Validates that a value is not strictly equal to ``null``. To ensure that
-a value is simply not blank (not a blank string), see the  :doc:`/reference/constraints/NotBlank`
-constraint.
+Valide qu'une valeur n'est strictement pas égale à ``null``. Pour vous assurer qu'une
+valeur ne soit simplement pas vide (pas une chaine de caractères vide), lisez la
+documentation de la contrainte :doc:`/reference/constraints/NotBlank`.
 
 +----------------+-----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                 |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\NotNull`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\NotNull`          |
 +----------------+-----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\NotNullValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\NotNullValidator` |
 +----------------+-----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-If you wanted to ensure that the ``firstName`` property of an ``Author`` class
-were not strictly equal to ``null``, you would:
+Si vous voulez vous assurer que la propriété ``firstName`` d'une classe ``Author``
+ne soit strictement pas égale à ``null``, ajoutez le code suivant :
 
 .. configuration-block::
 
@@ -50,4 +50,4 @@ message
 
 **type**: ``string`` **default**: ``This value should not be null``
 
-This is the message that will be shown if the value is ``null``.
+Le message qui sera affiché si la valeur est égale à ``null``.

@@ -1,25 +1,25 @@
 NotBlank
 ========
 
-Validates that a value is not blank, defined as not equal to a blank string
-and also not equal to ``null``. To force that a value is simply not equal to
-``null``, see the :doc:`/reference/constraints/NotNull` constraint.
+Valide qu'une valeur n'est pas vide, pas égale à une chaine de caractères vide,
+et pas égale à ``null``. Pour forcer une valeur à ne pas être simplement égale
+à ``null``, lisez la documentation de la contrainte :doc:`/reference/constraints/NotNull`.
 
 +----------------+------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                  |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\NotBlank`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\NotBlank`          |
 +----------------+------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\NotBlankValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\NotBlankValidator` |
 +----------------+------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-If you wanted to ensure that the ``firstName`` property of an ``Author`` class
-were not blank, you could do the following:
+Si vous voulez vous assurer que la propriété ``firstName`` d'une classe ``Author``
+ne soit pas vide, ajoutez le code suivant :
 
 .. configuration-block::
 
@@ -50,4 +50,4 @@ message
 
 **type**: ``string`` **default**: ``This value should not be blank``
 
-This is the message that will be shown if the value is blank.
+Le message qui sera affiché si la valeur est vide.

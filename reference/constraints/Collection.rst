@@ -1,17 +1,17 @@
 Collection
 ==========
 
-This constraint is used when the underlying data is a collection (i.e. an
-array or an object that implements ``Traversable`` and ``ArrayAccess``),
-but you'd like to validate different keys of that collection in different
-ways. For example, you might validate the ``email`` key using the ``Email``
-constraint and the ``inventory`` key of the collection with the ``Min`` constraint.
+Cette contrainte est utilisée lorsque l'objet sous-jacent est une collection
+(c'est-à-dire un tableau ou un objet qui implémentent ``Traversable`` et ``ArrayAccess``),
+mais vous aimeriez valider les différentes clés de cette collection de différentes
+manières. Par exemple, vous pourriez valider la clé ``email`` en utilisant la contrainte
+``Email`` et la clé ``inventory`` avec la contrainte ``Min``.
 
-This constraint can also make sure that certain collection keys are present
-and that extra keys are not present.
+Cette contrainte permet également de s'assurer que certaines clés de la collection
+sont bien présente et que des clés supplémentaires ne le sont pas.
 
 +----------------+--------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                    |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                  |
 +----------------+--------------------------------------------------------------------------+
 | Options        | - `fields`_                                                              |
 |                | - `allowExtraFields`_                                                    |
@@ -19,16 +19,16 @@ and that extra keys are not present.
 |                | - `allowMissingFields`_                                                  |
 |                | - `missingFieldsMessage`_                                                |
 +----------------+--------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Collection`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Collection`          |
 +----------------+--------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\CollectionValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\CollectionValidator` |
 +----------------+--------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-The ``Collection`` constraint allows you to validate the different keys of
-a collection individually. Take the following example::
+La contrainte ``Collection`` vous permet de valider les différentes clés
+d'une collection individuellement. Prenez l'exemple suivant::
 
     namespace Acme\BlogBundle\Entity;
     
@@ -45,9 +45,9 @@ a collection individually. Take the following example::
         }
     }
 
-To validate that the ``personal_email`` element of the ``profileData`` array
-property is a valid email address and that the ``short_bio`` element is not
-blank but is no longer than 100 characters in length, you would do the following:
+Pour valider que l'élément ``personal_email`` de la propriété ``profileData``
+soit une adresse email valide et que l'élement ``short_bio`` soit rempli
+et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci :
 
 .. configuration-block::
 
@@ -62,7 +62,7 @@ blank but is no longer than 100 characters in length, you would do the following
                             - NotBlank
                             - MaxLength:
                                 limit:   100
-                                message: Your short bio is too long!
+                                message: Votre bio est trop longue!
                     allowMissingfields: true
 
     .. code-block:: php-annotations
@@ -80,7 +80,7 @@ blank but is no longer than 100 characters in length, you would do the following
              *             @Assert\NotBlank(),
              *             @Assert\MaxLength(
              *                 limit = 100,
-             *                 message = "Your bio is too long!"
+             *                 message = "Votre bio est trop longue!"
              *             )
              *         }
              *     },
@@ -107,7 +107,7 @@ blank but is no longer than 100 characters in length, you would do the following
                             <constraint name="NotBlank" />
                             <constraint name="MaxLength">
                                 <option name="limit">100</option>
-                                <option name="message">Your bio is too long!</option>
+                                <option name="message">Votre bio est trop longue!</option>
                             </constraint>
                         </value>
                     </option>
@@ -140,20 +140,20 @@ blank but is no longer than 100 characters in length, you would do the following
             }
         }
 
-Presence and Absence of Fields
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Présence et Absence de champs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, this constraint validates more than simply whether or not the
-individual fields in the collection pass their assigned constraints. In fact,
-if any keys of a collection are missing or if there are any unrecognized
-keys in the collection, validation errors will be thrown.
+Par défaut, cette contrainte valide plus que le simple fait que les champs
+individuels de la collection respectent leurs contraintes respectives.
+En fait, si des clés de la collection sont manquantes, ou s'il y a des clés
+non reconnues, une erreur de validation sera affichée.
 
-If you would like to allow for keys to be absent from the collection or if
-you would like "extra" keys to be allowed in the collection, you can modify
-the `allowMissingFields`_ and `allowExtraFields`_ options respectively. In
-the above example, the ``allowMissingFields`` option was set to true, meaning
-that if either of the ``personal_email`` or ``short_bio`` elements were missing
-from the ``$personalData`` property, no validation error would occur.
+Si vous voulez autoriser des clés à être absentes de la collection  ou si vous
+voulez autoriser des clés « extra » (en plus), vous pouvez modifier respectivement
+les options `allowMissingFields`_ et `allowExtraFields`_. Dans l'exemple ci-dessus,
+l'option ``allowMissingFields`` a été définie à true, ce qui veut dire que si
+l'un des élements ``personal_email`` ou ``short_bio`` était manquant dans la
+propriété ``$personalData``, aucune erreur de validation ne se serait produite.
 
 Options
 -------
@@ -163,40 +163,40 @@ fields
 
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
 
-This option is required, and is an associative array defining all of the
-keys in the collection and, for each key, exactly which validator(s) should
-be executed against that element of the collection.
+Cette option est requise et est un tableau associatif qui définit toutes les
+clés de la collection et, pour chaque clé, quel(s) validateur(s) doit être
+exécuté.
 
 allowExtraFields
 ~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: false
 
-If this option is set to ``false`` and the underlying collection contains
-one or more elements that are not included in the `fields`_ option, a validation
-error will be returned. If set to ``true``, extra fields are ok.
+Si cette option est définie à ``false`` et que la collection contient un ou plusieurs
+éléments qui ne sont pas inclus dans l'option `fields`_, une erreur de validation sera
+retournée. Si elle est définie à ``true``, les champs en plus seront tolérés.
 
 extraFieldsMessage
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: ``The fields {{ fields }} were not expected``
 
-The message shown if `allowExtraFields`_ is false and an extra field is detected.
+Le message affiché si `allowExtraFields`_ est à false et que des champs supplémentaires
+sont détectés.
 
 allowMissingFields
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: false
 
-If this option is set to ``false`` and one or more fields from the `fields`_
-option are not present in the underlying collection, a validation error will
-be returned. If set to ``true``, it's ok if some fields in the `fields_`
-option are not present in the underlying collection.
+Si cette option est définie à ``false`` et qu'un ou plusieurs champs de l'option `fields`_
+sont manquants, une erreur de validation sera retournée. Si elle est définie à ``true``,
+ce n'est pas grave si des champs de l'option `fields_` sont absents de la collection.
 
 missingFieldsMessage
 ~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: ``The fields {{ fields }} are missing``
 
-The message shown if `allowMissingFields`_ is false and one or more fields
-are missing from the underlying collection.
+Le message affiché si `allowMissingFields`_ est à false et qu'un ou plusieurs champs
+sont absents de la collection.

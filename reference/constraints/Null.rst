@@ -1,25 +1,27 @@
 Null
 ====
 
-Validates that a value is exactly equal to ``null``. To force that a property
-is simply blank (blank string or ``null``), see the  :doc:`/reference/constraints/Blank`
-constraint. To ensure that a property is not null, see :doc:`/reference/constraints/NotNull`.
+Valide qu'une valeur est exactement égale à ``null``. Pour vous assurer qu'une
+propriété soit simplement vide (une chaine de caractères vide ou ``null``), lisez la
+documentation de la contrainte :doc:`/reference/constraints/Blank`.
+Pour vous assurer qu'une propriété ne soit pas nulle, lisez :doc:`/reference/constraints/NotNull`.
+
 
 +----------------+-----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                 |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Null`             |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Null`             |
 +----------------+-----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\NullValidator`    |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\NullValidator`    |
 +----------------+-----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-If, for some reason, you wanted to ensure that the ``firstName`` property
-of an ``Author`` class exactly equal to ``null``, you could do the following:
+Si vous voulez vous assurer que la propriété ``firstName`` d'une classe ``Author``
+soit exactement égale à ``null``, ajoutez le code suivant :
 
 .. configuration-block::
 
@@ -54,4 +56,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be null``
 
-This is the message that will be shown if the value is not ``null``.
+Le message qui sera affiché si la valeur n'est pas égale à ``null``.

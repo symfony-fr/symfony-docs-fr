@@ -1,23 +1,25 @@
 File
 ====
 
-Validates that a value is a valid "file", which can be one of the following:
+Valide qu'une valeur est un « fichier » valide, qui peut être l'un des formats
+suivants :
 
-* A string (or object with a ``__toString()`` method) path to an existing file;
+* Une chaine de caractères (ou un objet avec une méthode ``__toString()``) qui
+   représente un chemin vers un fichier existant;
 
-* A valid :class:`Symfony\\Component\\HttpFoundation\\File\\File` object
-  (including objects of class :class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`).
+* Un objet :class:`Symfony\\Component\\HttpFoundation\\File\\File` valide
+  (ce qui inclut les objets de la classe :class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`).
 
-This constraint is commonly used in forms with the :doc:`file</reference/forms/types/file>`
-form type.
+Cette contrainte est souvent utilisée dans les formulaires avec le type de champ
+:doc:`file</reference/forms/types/file>`.
 
 .. tip::
 
-    If the file you're validating is an image, try the :doc:`Image</reference/constraints/Image>`
-    constraint.
+    Si le fichier que vous validez est une image, essayez la contrainte
+    :doc:`Image</reference/constraints/Image>`.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `maxSize`_                                                        |
 |                | - `mimeTypes`_                                                      |
@@ -29,19 +31,19 @@ form type.
 |                | - `uploadFormSizeErrorMessage`_                                     |
 |                | - `uploadErrorMessage`_                                             |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\File`           |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\File`           |
 +----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`  |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`  |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-This constraint is most commonly used on a property that will be rendered
-in a form as a :doc:`file</reference/forms/types/file>` form type. For example,
-suppose you're creating an author form where you can upload a "bio" PDF for
-the author. In your form, the ``bioFile`` property would be a ``file`` type.
-The ``Author`` class might look as follows::
+Cette contrainte est souvent utilisée sur une propriété qui est affichée dans
+un formulaire avec le type de champ :doc:`file</reference/forms/types/file>`.
+Par exemple, supposons que vous créez un formulaire Auteur où vous pouvez
+uploader une « bio » au format PDF. Dans votre formulaire, la propriété
+``bioFile`` sera un type ``file``. La classe ``Author`` ressemblerait à ceci::
 
     // src/Acme/BlogBundle/Entity/Author.php
     namespace Acme\BlogBundle\Entity;
@@ -63,8 +65,9 @@ The ``Author`` class might look as follows::
         }
     }
 
-To guarantee that the ``bioFile`` ``File`` object is valid, and that it is
-below a certain file size and a valid PDF, add the following:
+Pour garantir que l'objet ``File`` ``bioFile`` soit valide, et que le fichier
+soit plus petit qu'une certaine taille et soit au format PDF, ajoutez le code
+suivant :
 
 .. configuration-block::
 
@@ -77,7 +80,7 @@ below a certain file size and a valid PDF, add the following:
                     - File:
                         maxSize: 1024k
                         mimeTypes: [application/pdf, application/x-pdf]
-                        mimeTypesMessage: Please upload a valid PDF
+                        mimeTypesMessage: Choisissez un fichier PDF valide
                         
 
     .. code-block:: php-annotations
@@ -91,7 +94,7 @@ below a certain file size and a valid PDF, add the following:
              * @Assert\File(
              *     maxSize = "1024k",
              *     mimeTypes = {"application/pdf", "application/x-pdf"},
-             *     mimeTypesMessage = "Please upload a valid PDF"
+             *     mimeTypesMessage = "Choisissez un fichier PDF valide"
              * )
              */
             protected $bioFile;
@@ -108,7 +111,7 @@ below a certain file size and a valid PDF, add the following:
                         <value>application/pdf</value>
                         <value>application/x-pdf</value>
                     </option>
-                    <option name="mimeTypesMessage">Please upload a valid PDF</option>
+                    <option name="mimeTypesMessage">Choisissez un fichier PDF valide</option>
                 </constraint>
             </property>
         </class>
@@ -133,14 +136,14 @@ below a certain file size and a valid PDF, add the following:
                         'application/pdf',
                         'application/x-pdf',
                     ),
-                    'mimeTypesMessage' => 'Please upload a valid PDF',
+                    'mimeTypesMessage' => 'Choisissez un fichier PDF valide',
                 )));
             }
         }
 
-The ``bioFile`` property is validated to guarantee that it is a real file.
-Its size and mime type are also validated because the appropriate options
-have been specified.
+La propriété ``bioFile`` est validée pour garantir qu'il s'agisse bien d'un
+fichier. Sa taille et son type MIME sont également validés car les options
+correspondantes ont été spécifiées.
 
 Options
 -------
@@ -150,80 +153,83 @@ maxSize
 
 **type**: ``mixed``
 
-If set, the size of the underlying file must be below this file size in order
-to be valid. The size of the file can be given in one of the following formats:
+Si cette option est définie, la taille du fichier doit être inférieure à la taille
+spécifiée pour être valide. La taille du fichier peut être donnée dans l'un des formats
+suivants :
 
-* **bytes**: To specify the ``maxSize`` in bytes, pass a value that is entirely
-  numeric (e.g. ``4096``);
+* **octets**: Pour spécifier l'option ``maxSize`` en octets, entrez la valeur en numérique
+  seulement (ex ``4096``);
 
-* **kilobytes**: To specify the ``maxSize`` in kilobytes, pass a number and
-  suffix it with a lowercase "k" (e.g. ``200k``);
+* **kilooctets**: Pour spécifier l'option ``maxSize`` en kilooctets, entrez la valeur numérique
+  et ajoutez le suffixe « k » en minuscule (ex ``200k``);
 
-* **megabytes**: To specify the ``maxSize`` in megabytes, pass a number and
-  suffix it with a capital "M" (e.g. ``4M``).
+* **megaoctet**: Pour spécifier l'option ``maxSize`` en megaoctets, entrez la valeur numérique
+  et ajoutez le suffixe « M » en majuscule (ex ``200M``);
 
 mimeTypes
 ~~~~~~~~~
 
-**type**: ``array`` or ``string``
+**type**: ``array`` ou ``string``
 
-If set, the validator will check that the mime type of the underlying file
-is equal to the given mime type (if a string) or exists in the collection
-of given mime types (if an array).
+Si elle cette option est définie, le validateur vérifiera que le type MIME
+du fichier envoyé correspond au type MIME donné (s'il est défini sous forme
+de chaine de caractères) ou s'il existe dans la collection de types MIME
+donnés (s'ils sont définis comme tableau).
 
 maxSizeMessage
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file is too large ({{ size }}). Allowed maximum size is {{ limit }}``
 
-The message displayed if the file is larger than the `maxSize`_ option.
+Le message affiché si le fichier uploadé est plus lourd que l'option `maxSize`_.
 
 mimeTypesMessage
 ~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}``
 
-The message displayed if the mime type of the file is not a valid mime type
-per the `mimeTypes`_ option.
+Le message affiché si le type MIME du fichier ne correspond pas au(x) type(s) MIME
+autorisé(s) par l'option `mimeTypes`_.
 
 notFoundMessage
 ~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file could not be found``
 
-The message displayed if no file can be found at the given path. This error
-is only likely if the underlying value is a string path, as a ``File`` object
-cannot be constructed with an invalid file path.
+Le message affiché si aucun fichier ne correspond au chemin donné. Cette
+erreur n'est possible que si la valeur sous-jacente est un chemin sous forme
+de chaine de caractères, puisque l'objet ``File`` ne pourra pas être construit à partir
+d'un chemin invalide.
 
 notReadableMessage
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file is not readable``
 
-The message displayed if the file exists, but the PHP ``is_readable`` function
-fails when passed the path to the file.
+Le message affiché si le fichier existe, mais que la fonction PHP ``is_readable``
+échoue à passer le chemin au fichier.
 
 uploadIniSizeErrorMessage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file is too large. Allowed maximum size is {{ limit }}``
 
-The message that is displayed if the uploaded file is larger than the ``upload_max_filesize``
-PHP.ini setting.
+Le message affiché si le fichier uploadé est plus lourd que le maximum défini dans le paramètre
+``upload_max_filesize`` du PHP.ini.
 
 uploadFormSizeErrorMessage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file is too large``
 
-The message that is displayed if the uploaded file is larger than allowed
-by the HTML file input field.
+Le message affiché si le fichier uploadé est plus lourd que le maximum
+autorisé dans champ HTML input file.
 
 uploadErrorMessage
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file could not be uploaded``
 
-The message that is displayed if the uploaded file could not be uploaded
-for some unknown reason, such as the file upload failed or it couldn't be written
-to disk.
+Le message affiché si le fichier ne peut pas être uploadé pour une raison
+quelconque, par exemple si l'upload échoue ou qu'il est impossible d'écrire
+sur le disque.

@@ -1,25 +1,25 @@
 Time
 ====
 
-Validates that a value is a valid time, meaning either a ``DateTime`` object
-or a string (or an object that can be cast into a string) that follows
-a valid "HH:MM:SS" format.
+Valide qu'une valeur est une heure valide, c'est-à-dire soit un objet ``DateTime``,
+soit une chaine de caractères (ou un objet converti en chaine de caractères) qui 
+respecte un format « HH:MM:SS » valide.
 
 +----------------+------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                  |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Time`              |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Time`              |
 +----------------+------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\TimeValidator`     |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\TimeValidator`     |
 +----------------+------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-Suppose you have an Event class, with a ``startAt`` field that is the time
-of the day when the event starts:
+Supposons que vous avez une classe Event, avec un champ ``startAt`` qui est
+l'heure à laquelle l'évènement commence :
 
 .. configuration-block::
 
@@ -54,4 +54,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid time``
 
-This message is shown if the underlying data is not a valid time.
+Le message qui est affiché si la donnée n'est pas une heure valide.

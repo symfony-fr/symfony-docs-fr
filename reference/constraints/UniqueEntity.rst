@@ -1,28 +1,29 @@
 UniqueEntity
 ============
 
-Validates that a particular field (or fields) in a Doctrine entity are unique.
-This is commonly used, for example, to prevent a new user to register using
-an email address that already exists in the system.
+Valide qu'un champ particulier (ou plusieurs champs) d'une entité Doctrine sont
+uniques.
+C'est souvent utilisé, par exemple, pour éviter qu'un nouvel utilisateur ne
+s'enregistre avec une adresse email qui existe déjà dans le système.
 
 +----------------+-------------------------------------------------------------------------------------+
-| Applies to     | :ref:`class<validation-class-target>`                                               |
+| S'applique à   | :ref:`classe<validation-class-target>`                                              |
 +----------------+-------------------------------------------------------------------------------------+
 | Options        | - `fields`_                                                                         |
 |                | - `message`_                                                                        |
 |                | - `em`_                                                                             |
 +----------------+-------------------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity`            |
+| Classe         | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity`            |
 +----------------+-------------------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity\\Validator` |
+| Validateur     | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity\\Validator` |
 +----------------+-------------------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-Suppose you have an ``AcmeUserBundle`` with a ``User`` entity that has an
-``email`` field. You can use the ``Unique`` constraint to guarantee that the
-``email`` field remains unique between all of the constrains in your user table:
+Supposons que vous avez un ``AcmeUserBundle`` avec une entité ``User`` qui
+a un champ ``email``. Vous pouvez utiliser la contrainte ``Unique`` pour garantir
+que le champ ``email``soit unique dans votre table d'utilisateurs :
 
 .. configuration-block::
 
@@ -32,7 +33,7 @@ Suppose you have an ``AcmeUserBundle`` with a ``User`` entity that has an
         use Symfony\Component\Validator\Constraints as Assert;
         use Doctrine\ORM\Mapping as ORM;
 
-        // DON'T forget this use statement!!!
+        // N'OUBLIEZ pas d'inclure ce use !
         use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
         /**
@@ -67,7 +68,7 @@ Suppose you have an ``AcmeUserBundle`` with a ``User`` entity that has an
         <class name="Acme\UserBundle\Entity\Author">
             <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
                 <option name="fields">email</option>
-                <option name="message">This email already exists.</option>
+                <option name="message">Cet email existe déjà.</option>
             </constraint>
              <property name="email">
                 <constraint name="Email" />
@@ -82,23 +83,23 @@ fields
 
 **type**: ``array``|``string`` [:ref:`default option<validation-default-option>`]
 
-This required option is the field (or list of fields) on which this entity
-should be unique. For example, you could specify that both the email and
-name fields in the ``User`` example above should be unique.
+Cette option obligatoire est le champ (ou la liste de champs) qui sont
+uniques pour l'entité. Par exemple, vous pouvez spécifier que les champs
+email et nom d'un utilisateur doivent être uniques.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value is already used.``
 
-The message that's displayed with this constraint fails.
+Le message qui sera affiché si la validation échoue.
 
 em
 ~~
 
 **type**: ``string``
 
-The name of the entity manager to use for making the query to determine the
-uniqueness. If left blank, the correct entity manager will determined for
-this class. For that reason, this option should probably not need to be
-used.
+Le nom du gestionnaire d'entité (entity manager) à utiliser pour faire la
+requête qui déterminera l'unicité. Si elle est vide, le gestionnaire sera
+déterminé automatiquement pour cette classe. Pour cette raison, vous n'aurez
+probablement pas besoin d'utiliser cette option.

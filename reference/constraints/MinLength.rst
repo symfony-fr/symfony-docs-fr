@@ -1,22 +1,23 @@
 MinLength
 =========
 
-Validates that the length of a string is at least as long as the given limit.
+Valide que la longueur d'une chaine de caractères est au moins supérieure à la
+limite donnée.
 
 +----------------+-------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                   |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                 |
 +----------------+-------------------------------------------------------------------------+
 | Options        | - `limit`_                                                              |
 |                | - `message`_                                                            |
 |                | - `charset`_                                                            |
 +----------------+-------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\MinLength`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\MinLength`          |
 +----------------+-------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\MinLengthValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\MinLengthValidator` |
 +----------------+-------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -26,7 +27,7 @@ Basic Usage
         Acme\BlogBundle\Entity\Blog:
             properties:
                 firstName:
-                    - MinLength: { limit: 3, message: "Your name must have at least {{ limit }} characters." }
+                    - MinLength: { limit: 3, message: "Votre nom doit faire au moins {{ limit }} caractères." }
 
     .. code-block:: php-annotations
 
@@ -38,7 +39,7 @@ Basic Usage
             /**
              * @Assert\MinLength(
              *     limit=3,
-             *     message="Your name must have at least {{ limit }} characters."
+             *     message="Votre nom doit faire au moins {{ limit }} caractères."
              * )
              */
             protected $summary;
@@ -51,7 +52,7 @@ Basic Usage
             <property name="summary">
                 <constraint name="MinLength">
                     <option name="limit">3</option>
-                    <option name="message">Your name must have at least {{ limit }} characters.</option>
+                    <option name="message">Votre nom doit faire au moins {{ limit }} caractères.</option>
                 </constraint>
             </property>
         </class>
@@ -64,24 +65,26 @@ limit
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "min" value. Validation will fail if the length
-of the give string is **less** than this number.
+Cette option obligatoire est la valeur « minimale». La validation échouera
+si la longueur de la chaine de caractères donnée est **inférieure** à ce
+nombre.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value is too short. It should have {{ limit }} characters or more``
 
-The message that will be shown if the underlying string has a length that
-is shorter than the `limit`_ option.
+Le message qui sera affiché si la longueur de la chaine de caractères est
+inférieure à l'option `limit`_.
 
 charset
 ~~~~~~~
 
 **type**: ``charset`` **default**: ``UTF-8``
 
-If the PHP extension "mbstring" is installed, then the PHP function `mb_strlen`_
-will be used to calculate the length of the string. The value of the ``charset``
-option is passed as the second argument to that function.
 
-.. _`mb_strlen`: http://php.net/manual/en/function.mb-strlen.php
+Si l'extension PHP « mbstring » est installée, alors la fonction PHP `mb_strlen`_
+sera utilisée pour calculer la longueur de la chaine. La valeur de l'option
+``charset`` est passée comme second argument de cette fonction.
+
+.. _`mb_strlen`: http://php.net/manual/fr/function.mb-strlen.php

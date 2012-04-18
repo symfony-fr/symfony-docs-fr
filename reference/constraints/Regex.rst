@@ -1,27 +1,27 @@
 Regex
 =====
 
-Validates that a value matches a regular expression.
+Valide qu'une valeur correspond à une expression régulière.
 
 +----------------+-----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                 |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `pattern`_                                                          |
 |                | - `match`_                                                            |
 |                | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Regex`            |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Regex`            |
 +----------------+-----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\RegexValidator`   |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\RegexValidator`   |
 +----------------+-----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-Suppose you have a ``description`` field and you want to verify that it begins
-with a valid word character. The regular expression to test for this would
-be ``/^\w+/``, indicating that you're looking for at least one or more word
-characters at the beginning of your string:
+Supposons que vous avez un champ ``description`` et que vous voulez vérifier
+qu'il commence bien par un caractère alphabnumérique. L'expression régulière
+qui teste cela serait ``/^\w+/``, indiquant que vous cherchez au moins un ou
+plusieurs caractères alphanumériques au début de votre chaine :
 
 .. configuration-block::
 
@@ -48,10 +48,10 @@ characters at the beginning of your string:
             protected $description;
         }
 
-Alternatively, you can set the `match`_ option to ``false`` in order to assert
-that a given string does *not* match. In the following example, you'll assert
-that the ``firstName`` field does not contain any numbers and give it a custom
-message:
+Alternativement, vous pouvez définir l'option `match`_ à ``false`` pour
+vérifier qu'une chaine donnée ne correspond *pas*. Dans l'exemple suivant,
+vous vérifiez que le champ ``firstName`` ne contient pas de nombre et vous
+personnalisez également le message :
 
 .. configuration-block::
 
@@ -64,7 +64,7 @@ message:
                     - Regex:
                         pattern: "/\d/"
                         match:   false
-                        message: Your name cannot contain a number
+                        message: Votre nom ne peux pas contenir de nombre
 
     .. code-block:: php-annotations
 
@@ -79,7 +79,7 @@ message:
              * @Assert\Regex(
              *     pattern="/\d/",
              *     match=false,
-             *     message="Your name cannot contain a number"
+             *     message="Votre nom ne peux pas contenir de nombre"
              * )
              */
             protected $firstName;
@@ -93,27 +93,28 @@ pattern
 
 **type**: ``string`` [:ref:`default option<validation-default-option>`]
 
-This required option is the regular expression pattern that the input will
-be matched against. By default, this validator will fail if the input string
-does *not* match this regular expression (via the `preg_match`_ PHP function).
-However, if `match`_ is set to false, then validation will fail if the input
-string *does* match this pattern.
+Cette option obligatoire est le masque (pattern) de l'expression régulière
+à laquelle doit correspondre la donnée. Par défaut, le validateur échouera
+si la chaine de caractères *ne correspond pas* à cette expression régulière
+(via la fonction PHP `preg_match`_).
+Toutefois, si l'option `match`_ est définie à false, la validation échouera
+si la chaine *correspond* à l'expression régulière.
 
 match
 ~~~~~
 
 **type**: ``Boolean`` default: ``true``
 
-If ``true`` (or not set), this validator will pass if the given string matches
-the given `pattern`_ regular expression. However, when this option is set
-to ``false``, the opposite will occur: validation will pass only if the given
-string does **not** match the `pattern`_ regular expression.
+Si cette option est à ``true`` (ou non définie), la validation passera si la chaine
+donnée correspond au `pattern`_ de l'expression régulière. Toutefois, si cette option
+est définir à ``false``, l'inverse se passera : la validation passera uniquement si
+la chaine donnée ne correspond **pas** au `pattern`_ de l'expression régulière.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value is not valid``
 
-This is the message that will be shown if this validator fails.
+Le message qui sera affiché si la validation échoue.
 
-.. _`preg_match`: http://php.net/manual/en/function.preg-match.php
+.. _`preg_match`: http://php.net/manual/fr/function.preg-match.php

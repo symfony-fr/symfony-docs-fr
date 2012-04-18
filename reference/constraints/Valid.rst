@@ -1,24 +1,24 @@
 Valid
 =====
 
-This constraint is used to enable validation on objects that are embedded
-as properties on an object being validated. This allows you to validate an
-object and all sub-objects associated with it.
+Cette contrainte est utilisée pour activer la validation sur les objets
+imbriqués dans un objet qui doit être validé. Cela vous permet de valider
+un objet et les sous-objets qui lui sont associés.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `traverse`_                                                       |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Type`           |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Type`           |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-In the following example, we create two classes ``Author`` and ``Address``
-that both have constraints on their properties. Furthermore, ``Author`` stores
-an ``Address`` instance in the ``$address`` property.
+Dans l'exemple suivant, nous créons deux classes ``Author`` et ``Address``
+qui ont toutes les deux des contraintes sur leurs propriétés. De plus, 
+l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$address``.
 
 .. code-block:: php
 
@@ -161,9 +161,9 @@ an ``Address`` instance in the ``$address`` property.
             }
         }
 
-With this mapping, it is possible to successfully validate an author with an
-invalid address. To prevent that, add the ``Valid`` constraint to the ``$address``
-property.
+Avec cette configuration, il est possible de valider un auteur dont l'adresse serait
+incorrecte. Pour éviter ceci, ajouter la contrainte ``Valid`` à la propriété
+``$address``.
 
 .. configuration-block::
 
@@ -215,11 +215,11 @@ property.
             }
         }
 
-If you validate an author with an invalid address now, you can see that the
-validation of the ``Address`` fields failed.
+Maintenant, si vous validez un auteur avec une adresse incorrecte, vous verrez
+que la validation du champ ``Address`` échouera.
 
     Acme\HelloBundle\Author.address.zipCode:
-    This value is too long. It should have 5 characters or less
+    Cette valeur est trop longue. 5 caractères maximum sont autorisés
 
 Options
 -------
@@ -229,6 +229,6 @@ traverse
 
 **type**: ``string`` **default**: ``true``
 
-If this constraint is applied to a property that holds an array of objects,
-then each object in that array will be validated only if this option is set
-to ``true``.
+Si cette contrainte est appliquée à une propriété qui contient un tableau
+d'objets, alors chaque objet du tableau sera validé si cette option est
+définie à ``true``.

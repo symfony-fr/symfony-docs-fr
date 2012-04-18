@@ -1,25 +1,25 @@
 Min
 ===
 
-Validates that a given number is *greater* than some minimum number.
+Valide qu'un nombre donné est *supérieur* à un nombre minimum.
 
 +----------------+--------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`              |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`            |
 +----------------+--------------------------------------------------------------------+
 | Options        | - `limit`_                                                         |
 |                | - `message`_                                                       |
 |                | - `invalidMessage`_                                                |
 +----------------+--------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Min`           |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Min`           |
 +----------------+--------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\MinValidator`  |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\MinValidator`  |
 +----------------+--------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-To verify that the "age" field of a class is "18" or greater, you might add
-the following:
+Pour vérifier qu'un champ « âge » d'une classe est supérieur ou égal à « 18 »,
+vous pourriez utiliser le code suivant :
 
 .. configuration-block::
 
@@ -29,7 +29,7 @@ the following:
         Acme\EventBundle\Entity\Participant:
             properties:
                 age:
-                    - Min: { limit: 18, message: You must be 18 or older to enter. }
+                    - Min: { limit: 18, message: Vous devez avoir au moins 18 ans pour entrer. }
 
     .. code-block:: php-annotations
 
@@ -39,7 +39,7 @@ the following:
         class Participant
         {
             /**
-             * @Assert\Min(limit = "18", message = "You must be 18 or older to enter")
+             * @Assert\Min(limit = "18", message = "Vous devez avoir au moins 18 ans pour entrer")
              */
              protected $age;
         }
@@ -52,23 +52,22 @@ limit
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "min" value. Validation will fail if the given
-value is **less** than this min value.
+Cette option obligatoire est la valeur « minimale ». La validation échouera
+si la valeur donnée est **inférieure** à cette valeur minimale.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be {{ limit }} or more``
 
-The message that will be shown if the underlying value is less than the `limit`_
-option.
+Le message qui sera affiché si la valeur est inférieure à l'option `limit`_.
 
 invalidMessage
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be a valid number``
 
-The message that will be shown if the underlying value is not a number (per
-the `is_numeric`_ PHP function).
+Le message qui sera affiché si la valeur soumise n'est pas un nombre (pour la fonction
+PHP `is_numeric`_).
 
-.. _`is_numeric`: http://www.php.net/manual/en/function.is-numeric.php
+.. _`is_numeric`: http://www.php.net/manual/fr/function.is-numeric.php

@@ -1,23 +1,23 @@
 Type
 ====
 
-Validates that a value is of a specific data type. For example, if a variable
-should be an array, you can use this constraint with the ``array`` type option
-to validate this.
+Valide qu'une valeur est d'un type spécifique. Par exemple, si une variable doit
+être un tableau, vous pouvez utiliser cette contrainte avec l'option type défini
+comme ``array`` pour la valider.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - :ref:`type<reference-constraint-type-type>`                       |
 |                | - `message`_                                                        |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Type`           |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Type`           |
 +----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\TypeValidator`  |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\TypeValidator`  |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -29,7 +29,7 @@ Basic Usage
                 age:
                     - Type:
                         type: integer
-                        message: The value {{ value }} is not a valid {{ type }}.
+                        message: La valeur {{ value }} n'est pas un type {{ type }} valide.
 
     .. code-block:: php-annotations
 
@@ -41,7 +41,7 @@ Basic Usage
        class Author
        {
            /**
-            * @Assert\Type(type="integer", message="The value {{ value }} is not a valid {{ type }}.")
+            * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide.")
             */
             protected $age;
        }
@@ -56,8 +56,8 @@ type
 
 **type**: ``string`` [:ref:`default option<validation-default-option>`]
 
-This required option is the fully qualified class name or one of the PHP datatypes
-as determined by PHP's ``is_`` functions.
+Cette option obligatoire est le nom de classe de l'un des types de données PHP
+déterminés par les fonctions PHP ``is_``.
 
   * `array <http://php.net/is_array>`_
   * `bool <http://php.net/is_bool>`_
@@ -80,4 +80,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be of type {{ type }}``
 
-The message if the underlying data is not of the given type.
+Le message qui sera affiché si la donnée n'est pas du bon type.

@@ -1,21 +1,21 @@
 Url
 ===
 
-Validates that a value is a valid URL string.
+Valide qu'une valeur est une URL valide.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 |                | - `protocols`_                                                      |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Url`            |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Url`            |
 +----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\UrlValidator`   |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\UrlValidator`   |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -50,13 +50,14 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid URL``
 
-This message is shown if the URL is invalid.
+Le message qui sera affiché si l'URL n'est pas valide.
 
 protocols
 ~~~~~~~~~
 
 **type**: ``array`` **default**: ``array('http', 'https')``
 
-The protocols that will be considered to be valid. For example, if you also
-needed ``ftp://`` type URLs to be valid, you'd redefine the ``protocols``
-array, listing ``http``, ``https``, and also ``ftp``.
+Cette option définit les protocoles considérés comme valides. Par exemple,
+si vous avez besoin de considérer les URLs du type ``ftp://`` comme valides,
+vous devrez redéfinir le tableau ``protocols`` en listant ``http``, ``https``,
+mais aussi ``ftp``.

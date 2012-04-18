@@ -1,24 +1,24 @@
 All
 ===
 
-When applied to an array (or Traversable object), this constraint allows
-you to apply a collection of constraints to each element of the array.
+Quand elle est appliquée à un tableau (ou un objet Traversable), cette contrainte vous
+permet d'appliquer un ensemble de contraintes à chaque élément du tableau.
 
 +----------------+------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                  |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `constraints`_                                                       |
 +----------------+------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\All`               |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\All`               |
 +----------------+------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\AllValidator`      |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\AllValidator`      |
 +----------------+------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-Suppose that you have an array of strings, and you want to validate each
-entry in that array:
+Supposons que vous avez un tableau de chaines de caractères, et que vous
+voulez valider chaque entrée du tableau :
 
 .. configuration-block::
 
@@ -50,8 +50,8 @@ entry in that array:
             protected $favoriteColors = array();
        }
 
-Now, each entry in the ``favoriteColors`` array will be validated to not
-be blank and to be at least 5 characters long.
+Maintenant, chaque entrée du tableau ``favoriteColors`` sera validée
+pour ne pas être vide et faire au moins 5 caractères.
 
 Options
 -------
@@ -61,5 +61,5 @@ constraints
 
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
 
-This required option is the array of validation constraints that you want
-to apply to each element of the underlying array.
+Cette option obligatoire est le tableau de contraintes de validation que
+vous voulez appliquer à chaque élément du tableau sous-jacent.

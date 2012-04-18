@@ -1,22 +1,22 @@
 MaxLength
 =========
 
-Validates that the length of a string is not larger than the given limit.
+Valide que la longueur d'une chaine de caractères est inférieure à la limite donnée.
 
 +----------------+-------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                   |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                 |
 +----------------+-------------------------------------------------------------------------+
 | Options        | - `limit`_                                                              |
 |                | - `message`_                                                            |
 |                | - `charset`_                                                            |
 +----------------+-------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\MaxLength`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\MaxLength`          |
 +----------------+-------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\MaxLengthValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\MaxLengthValidator` |
 +----------------+-------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
 .. configuration-block::
 
@@ -60,24 +60,25 @@ limit
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "max" value. Validation will fail if the length
-of the give string is **greater** than this number.
+Cette option obligatoire est la longueur « maximale ». La validation échouera
+si la longueur de la chaine de caractères donnée est **supérieure** à cette
+valeur.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value is too long. It should have {{ limit }} characters or less``
 
-The message that will be shown if the underlying string has a length that
-is longer than the `limit`_ option.
+Le message qui sera affiché si la longueur de la chaine de caractères donnée est
+supérieure à l'option `limit`_.
 
 charset
 ~~~~~~~
 
 **type**: ``charset`` **default**: ``UTF-8``
 
-If the PHP extension "mbstring" is installed, then the PHP function `mb_strlen`_
-will be used to calculate the length of the string. The value of the ``charset``
-option is passed as the second argument to that function.
+Si l'extension PHP « mbstring » est installée, alors la fonction PHP `mb_strlen`_
+sera utilisée pour calculer la longueur de la chaine. La valeur de l'option
+``charset`` est passée comme second argument de cette fonction.
 
-.. _`mb_strlen`: http://php.net/manual/en/function.mb-strlen.php
+.. _`mb_strlen`: http://php.net/manual/fr/function.mb-strlen.php

@@ -1,12 +1,12 @@
 Choice
 ======
 
-This constraint is used to ensure that the given value is one of a given
-set of *valid* choices. It can also be used to validate that each item in
-an array of items is one of those valid choices.
+Cette contrainte est utilisée pour s'assurer qu'une valeur donnée fait partie
+d'un ensemble de choix *valides*. Elle peut aussi être utilisée pour valider
+que chaque item d'un tableau d'items est l'un des choix valides.
 
 +----------------+-----------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                 |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `choices`_                                                          |
 |                | - `callback`_                                                         |
@@ -19,20 +19,20 @@ an array of items is one of those valid choices.
 |                | - `maxMessage`_                                                       |
 |                | - `strict`_                                                           |
 +----------------+-----------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Choice`           |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Choice`           |
 +----------------+-----------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\ChoiceValidator`  |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\ChoiceValidator`  |
 +----------------+-----------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-The basic idea of this constraint is that you supply it with an array of
-valid values (this can be done in several ways) and it validates that the
-value of the given property exists in that array.
+L'idée principale de cette contrainte est que fournissez un tableau de valeurs
+valides (cela peut être fait de différentes manières) et elle valide que la
+valeur d'une propriété données est bien dans ce tableau.
 
-If your valid choice list is simple, you can pass them in directly via the
-`choices`_ option:
+Si votre liste de choix valides est simple, vous pouvez la passer directement
+via l'option `choices`_ :
 
 .. configuration-block::
 
@@ -44,7 +44,7 @@ If your valid choice list is simple, you can pass them in directly via the
                 gender:
                     - Choice:
                         choices:  [male, female]
-                        message:  Choose a valid gender.
+                        message:  Choisissez un sexe valide.
 
     .. code-block:: xml
 
@@ -56,7 +56,7 @@ If your valid choice list is simple, you can pass them in directly via the
                         <value>male</value>
                         <value>female</value>
                     </option>
-                    <option name="message">Choose a valid gender.</option>
+                    <option name="message">Choisissez un sexe valide.</option>
                 </constraint>
             </property>
         </class>
@@ -69,7 +69,7 @@ If your valid choice list is simple, you can pass them in directly via the
         class Author
         {
             /**
-             * @Assert\Choice(choices = {"male", "female"}, message = "Choose a valid gender.")
+             * @Assert\Choice(choices = {"male", "female"}, message = "Choisissez un sexe valide.")
              */
             protected $gender;
         }
@@ -88,18 +88,18 @@ If your valid choice list is simple, you can pass them in directly via the
             {
                 $metadata->addPropertyConstraint('gender', new Choice(array(
                     'choices' => array('male', 'female'),
-                    'message' => 'Choose a valid gender',
+                    'message' => 'Choisissez un sexe valide.',
                 )));
             }
         }
 
-Supplying the Choices with a Callback Function
-----------------------------------------------
+Fournir les choix par une fonction callback
+-------------------------------------------
 
-You can also use a callback function to specify your options. This is useful
-if you want to keep your choices in some central location so that, for example,
-you can easily access those choices for validation or for building a select
-form element.
+Vous pouvez aussi utiliser une fonction callback pour spécifier vos options. C'est
+utile si vous voulez garder vos choix dans un endroit centralisé pour, par exemple,
+avoir accès facilement à ces choix pour la validation ou pour construire des listes
+déroulantes pour les formulaires.
 
 .. code-block:: php
 
@@ -112,8 +112,8 @@ form element.
         }
     }
 
-You can pass the name of this method to the `callback_` option of the ``Choice``
-constraint.
+Vous pouvez passer le nom de cette méthode à l'option `callback_` de la contrainte
+``Choice``.
 
 .. configuration-block::
 
@@ -149,8 +149,8 @@ constraint.
             </property>
         </class>
 
-If the static callback is stored in a different class, for example ``Util``,
-you can pass the class name and the method as an array.
+Si le callback statique est stocké dans une classe différente, par exemple
+``Util``, vous pouvez passer le nom de la classe et la méthode dans un tableau.
 
 .. configuration-block::
 
@@ -189,97 +189,96 @@ you can pass the class name and the method as an array.
             protected $gender;
         }
 
-Available Options
------------------
+Options disponibles
+-------------------
 
 choices
 ~~~~~~~
 
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
-
-A required option (unless `callback`_ is specified) - this is the array
-of options that should be considered in the valid set. The input value
-will be matched against this array.
+Cette option obligatoire (à moins que `callback`_ soit spécifiée)
+représente le tableau d'options qui doit être considéré comme un
+ensemble valide. La donnée soumise sera comparée à ce tableau.
 
 callback
 ~~~~~~~~
 
 **type**: ``string|array|Closure``
 
-This is a callback method that can be used instead of the `choices`_ option
-to return the choices array. See `Supplying the Choices with a Callback Function`_
-for details on its usage.
+C'est la méthode callback qui peut être utilisée au lieu de l'option `choices`_
+pour retourner le tableau de choix. Lisez `Fournir les choix par une fonction callback`_
+pour plus d'informations sur son utilisation.
 
 multiple
 ~~~~~~~~
 
 **type**: ``Boolean`` **default**: ``false``
 
-If this option is true, the input value is expected to be an array instead
-of a single, scalar value. The constraint will check that each value of
-the input array can be found in the array of valid choices. If even one
-of the input values cannot be found, the validation will fail.
+Si cette option est définie à true, la valeur soumise attendue est un tableau
+et non plus une simple valeur. La contrainte vérifiera que chaque valeur du tableau
+soumis se trouve dans le tableau de choix valides. Si une seule des valeurs soumises
+n'est pas trouvée, la validation échouera.
 
 min
 ~~~
 
 **type**: ``integer``
 
-If the ``multiple`` option is true, then you can use the ``min`` option
-to force at least XX number of values to be selected. For example, if
-``min`` is 3, but the input array only contains 2 valid items, the validation
-will fail.
+Si l'option ``multiple`` est à true, alors vous pouvez utiliser l'option ``min``
+pour forcer qu'au moins XX valeurs doivent être sélectionnées. Par exemple,
+si ``min`` vaut 3 et si le tableau soumis contient 2 items valides, la validation
+échouera.
 
 max
 ~~~
 
 **type**: ``integer``
 
-If the ``multiple`` option is true, then you can use the ``max`` option
-to force no more than XX number of values to be selected. For example, if
-``max`` is 3, but the input array contains 4 valid items, the validation
-will fail.
+Si l'option ``multiple`` est à true, alors vous pouvez utiliser l'option ``max``
+pour forcer que XX valeurs peuvent être sélectionnées au maximum. Par exemple,
+si ``max`` vaut 3 et si le tableau soumis contient 4 items valides, la validation
+échouera.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``The value you selected is not a valid choice``
 
-This is the message that you will receive if the ``multiple`` option is set
-to ``false``, and the underlying value is not in the valid array of choices.
+C'est le message que vous verrez si l'option ``multiple`` est définie à ``false``,
+et que la valeur soumise n'est pas dans le tableau de choix valides.
 
 multipleMessage
 ~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``One or more of the given values is invalid``
 
-This is the message that you will receive if the ``multiple`` option is set
-to ``true``, and one of the values on the underlying array being checked
-is not in the array of valid choices.
+C'est le message que vous verrez si l'option ``multiple`` est définie à ``true``,
+et que l'une des valeurs du tableau soumis n'est pas dans le tableau de valeurs
+valides.
 
 minMessage
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``You must select at least {{ limit }} choices``
 
-This is the validation error message that's displayed when the user chooses
-too few choices per the `min`_ option.
+C'est le message d'erreur qui est affiché quand l'utilisateur choisit trop peu de choix
+(en fonction de l'option `min`_).
 
 maxMessage
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``You must select at most {{ limit }} choices``
 
-This is the validation error message that's displayed when the user chooses
-too many options per the `max`_ option.
+C'est le message d'erreur qui est affiché quand l'utilisateur choisit trop de choix
+(en fonction de l'option `max`_).
 
 strict
 ~~~~~~
 
 **type**: ``Boolean`` **default**: ``false``
 
-If true, the validator will also check the type of the input value. Specifically,
-this value is passed to as the third argument to the PHP `in_array`_ method
-when checking to see if a value is in the valid choices array.
+Si cette option est à true, le validateur vérifiera également le type de la donnée soumise.
+Spécifiquement, cette valeur est passée comme troisième argument de la méthode PHP `in_array`_
+lorsque vous vérifiez qu'une valeur est bien dans le tableau de choix valides.
 
 .. _`in_array`: http://php.net/manual/en/function.in-array.php

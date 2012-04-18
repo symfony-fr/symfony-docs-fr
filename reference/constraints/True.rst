@@ -1,29 +1,29 @@
 True
 ====
 
-Validates that a value is ``true``. Specifically, this checks to see if
-the value is exactly ``true``, exactly the integer ``1``, or exactly the
-string "``1``".
+Valide qu'une valeur est ``vraie`` (true). Spécifiquement, cette contrainte
+vérifie que la valeur est exactement ``true``, exactement l'entier ``1``, ou exactement
+la chaine de caractère « ``1`` ».
 
-Also see :doc:`False <False>`.
+Lisez également :doc:`False <False>`.
 
 +----------------+---------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`               |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 +----------------+---------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\True`           |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\True`           |
 +----------------+---------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\TrueValidator`  |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\TrueValidator`  |
 +----------------+---------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-This constraint can be applied to properties (e.g. a ``termsAccepted`` property
-on a registration model) or to a "getter" method. It's most powerful in the
-latter case, where you can assert that a method returns a true value. For
-example, suppose you have the following method:
+Cette contrainte peut être appliquée à une propriété (ex une propriété ``termsAccepted``
+d'un formulaire d'inscription) ou une méthode « getter ». Elle est plus puissante dans le
+second cas, où vous pouvez vérifier que la méthode retourne true. Par exemple, supposons
+que vous avez la méthode suivante :
 
 .. code-block:: php
 
@@ -40,7 +40,7 @@ example, suppose you have the following method:
         }
     }
 
-Then you can constrain this method with ``True``.
+Vous pouvez appliquer la contrainte ``True`` à cette méthode.
 
 .. configuration-block::
 
@@ -50,7 +50,7 @@ Then you can constrain this method with ``True``.
         Acme\BlogBundle\Entity\Author:
             getters:
                 tokenValid:
-                    - "True": { message: "The token is invalid" }
+                    - "True": { message: "Le token est invalide" }
 
     .. code-block:: php-annotations
 
@@ -62,7 +62,7 @@ Then you can constrain this method with ``True``.
             protected $token;
 
             /**
-             * @Assert\True(message = "The token is invalid")
+             * @Assert\True(message = "Le token est invalide")
              */
             public function isTokenValid()
             {
@@ -82,7 +82,7 @@ Then you can constrain this method with ``True``.
             <class name="Acme\BlogBundle\Entity\Author">
                 <getter property="tokenValid">
                     <constraint name="True">
-                        <option name="message">The token is invalid...</option>
+                        <option name="message">Le token est invalide</option>
                     </constraint>
                 </getter>
             </class>
@@ -101,7 +101,7 @@ Then you can constrain this method with ``True``.
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addGetterConstraint('tokenValid', new True(array(
-                    'message' => 'The token is invalid',
+                    'message' => 'Le token est invalide',
                 )));
             }
 
@@ -111,7 +111,7 @@ Then you can constrain this method with ``True``.
             }
         }
 
-If the ``isTokenValid()`` returns false, the validation will fail.
+Si la méthode ``isTokenValid()`` retourne false, la validation échouera.
 
 Options
 -------
@@ -121,4 +121,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be true``
 
-This message is shown if the underlying data is not true.
+Le message qui sera affiché si la donnée ne vaut pas true.
