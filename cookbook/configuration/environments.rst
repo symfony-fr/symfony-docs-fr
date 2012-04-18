@@ -4,11 +4,11 @@
 Comment Maîtriser et Créer de nouveaux Environnements
 =====================================================
 
-Chaque application est une combinaison de code et d'un ensemble de configuration
+Chaque application est une combinaison de code et d'un ensemble de configurations
 qui dicte comment ce code doit fonctionner. La configuration peut définir la
-base de données étant utilisée, si oui ou non quelque chose doit être caché, ou
+base de données étant utilisée, si oui ou non quelque chose doit être mis en cache, ou
 à quel point le « logging » doit être détaillé. Dans Symfony2, l'idée
-d'« environnements » repose sur le fait que la même base de code puisse être
+d'« environnements » repose sur le fait que la même base de code peut être
 exécutée en utilisant des configurations diverses et variées. Par exemple,
 l'environnement ``dev`` devrait utiliser une configuration qui rend le
 développement facile et sympa, alors que l'environnement de ``prod`` devrait
@@ -21,7 +21,7 @@ Environnements Différents, Fichiers de Configuration Différents
 ---------------------------------------------------------------
 
 Une application Symfony2 typique démarre avec trois environnements : ``dev``,
-``prod``, et ``test``. Comme discuté, chaque « environnement » représente
+``prod``, et ``test``. Comme nous l'avons vu, chaque « environnement » représente
 simplement une façon d'exécuter la même base de code avec des configurations
 différentes. Ainsi, cela ne devrait pas être une suprise pour vous que chaque
 environnement charge son propre fichier de configuration. Si vous utilisez
@@ -50,8 +50,8 @@ Cela fonctionne grâce à un simple standard utilisé par défaut dans la classe
     }
 
 Comme vous pouvez le voir, lorsque Symfony2 est chargé, il utilise l'environnement
-donné pour déterminer quel fichier de configuration charger. Cela accomplit
-le but d'avoir des environnements multiples d'une manière élégante, puissante
+donné pour déterminer quel fichier de configuration charger. Cela permet
+d'avoir des environnements multiples d'une manière élégante, puissante
 et transparente.
 
 Bien sûr, dans la réalité, chaque environnement diffère seulement quelque peu
@@ -85,7 +85,7 @@ et vous verrez facilement comment ceci est accompli :
 Pour partager une configuration commune, chaque fichier de configuration d'un
 environnement importe en premier lieu un fichier de configuration central
 (``config.yml``). Le reste du fichier peut ainsi dévier de la configuration
-par défaut en outrepassant des paramètres individuels. Par exemple, par défaut,
+par défaut en surchargeant des paramètres individuels. Par exemple, par défaut,
 la barre d'outils ``web_profiler`` est désactivée. Cependant, en environnement
 ``dev``, la barre d'outils est activée en modifiant la valeur par défaut dans
 le fichier de configuration ``dev`` :
@@ -141,9 +141,9 @@ soit ``app_dev.php`` (pour l'environnement ``dev``) :
 
 .. note::
 
-   Les URLs données assument que votre serveur web est configuré pour utiliser
-   le répertoire ``web/`` de l'application en tant que sa racine. Lisez-en plus
-   via :doc:`Installer Symfony2</book/installation>`.
+   Les URLs données supposent que votre serveur web est configuré pour utiliser
+   le répertoire ``web/`` de l'application en tant que racine. Lisez-en plus
+   sur :doc:`Installer Symfony2</book/installation>`.
 
 Si vous ouvrez l'un de ces fichiers, vous allez rapidement voir que l'environnement
 utilisé pour chacun est explicitement défini :
@@ -170,7 +170,7 @@ et en changeant la chaîne de caractères de l'environnement.
 
    L'environnement de ``test`` est utilisé lorsque vous écrivez des tests
    fonctionnels et n'est pas accessible directement dans le navigateur via
-   un contrôleur frontal. En d'autres mots, comparé aux autres environnements,
+   un contrôleur frontal. En d'autres termes, comparé aux autres environnements,
    il n'y a pas de fichier de contrôleur frontal ``app_test.php``.
 
 .. index::
@@ -232,7 +232,7 @@ chaîne de caractères qui correspond à un ensemble de configurations, créer u
 nouvel environnement est assez facile.
 
 Par exemple, supposons qu'avant un déploiement, vous ayez besoin d'effectuer
-des essais sur votre application. Une manière de procéder de la sorte est
+des essais sur votre application. Une manière de faire cela est
 d'utiliser presque les mêmes paramètres qu'en production, mais avec le
 ``web_profiler`` de Symfony2 activé. Cela permet à Symfony2 d'enregistrer
 des informations à propos de votre application lorsque vous effectuez vos essais.
