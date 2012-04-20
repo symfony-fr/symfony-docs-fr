@@ -1,9 +1,9 @@
 .. index::
-   single: Doctrine; ORM Configuration Reference
-   single: Configuration Reference; Doctrine ORM
+   single: Doctrine; Configuration de Référence de l'ORM
+   single: Configuration de Référence; ORM Doctrine
 
-Configuration Reference
-=======================
+Configuration de Référence
+==========================
 
 .. configuration-block::
 
@@ -40,15 +40,15 @@ Configuration Reference
                 auto_generate_proxy_classes:    false
                 proxy_namespace:                Proxies
                 proxy_dir:                      %kernel.cache_dir%/doctrine/orm/Proxies
-                default_entity_manager:         default # The first defined is used if not set
+                default_entity_manager:         default # Le premier défini est utilisé si non défini
                 entity_managers:
                     default:
-                        # The name of a DBAL connection (the one marked as default is used if not set)
+                        # Le nom de la connexion DBAL (celle marquée comme « par défaut » est utilisée si non définie)
                         connection:                     conn1
                         mappings: # Required
                             AcmeHelloBundle: ~
                         class_metadata_factory_name:    Doctrine\ORM\Mapping\ClassMetadataFactory
-                        # All cache drivers have to be array, apc, xcache or memcache
+                        # Tous les « drivers » de cache doivent être array, apc, xcache ou memcache
                         metadata_cache_driver:          array
                         query_cache_driver:             array
                         result_cache_driver:
@@ -126,18 +126,19 @@ Configuration Reference
             </doctrine:config>
         </container>
 
-Configuration Overview
-----------------------
+Aperçu global de la Configuration
+---------------------------------
 
-This following configuration example shows all the configuration defaults that
-the ORM resolves to:
+L'exemple de configuration suivant montre toutes les options de configuration
+par défaut que l'ORM utilise si non définies :
 
 .. code-block:: yaml
 
     doctrine:
         orm:
             auto_mapping: true
-            # the standard distribution overrides this to be true in debug, false otherwise
+            # la distribution standard outrepasse ceci pour être à « true » en mode débuggage,
+            # « false » sinon
             auto_generate_proxy_classes: false
             proxy_namespace: Proxies
             proxy_dir: %kernel.cache_dir%/doctrine/orm/Proxies
@@ -146,16 +147,17 @@ the ORM resolves to:
             query_cache_driver: array
             result_cache_driver: array
 
-There are lots of other configuration options that you can use to overwrite
-certain classes, but those are for very advanced use-cases only.
+Il y a beaucoup d'autres options de configuration que vous pouvez utiliser
+pour outrepasser certaines classes, mais celles-ci sont réservées seulement à
+des cas d'utilisation très avancés.
 
-Caching Drivers
-~~~~~~~~~~~~~~~
+Drivers de Cache
+~~~~~~~~~~~~~~~~
 
-For the caching drivers you can specify the values "array", "apc", "memcache"
-or "xcache".
+Pour les drivers de cache, vous pouvez spécifier les valeurs « array », « apc »,
+« memcache » ou « xcache ».
 
-The following example shows an overview of the caching configurations:
+L'exemple suivant montre un aperçu global des options de configuration du cache :
 
 .. code-block:: yaml
 
@@ -170,56 +172,64 @@ The following example shows an overview of the caching configurations:
                 port: 11211
                 instance_class: Memcache
 
-Mapping Configuration
-~~~~~~~~~~~~~~~~~~~~~
+Configuration des Correspondances
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Explicit definition of all the mapped entities is the only necessary
-configuration for the ORM and there are several configuration options that you
-can control. The following configuration options exist for a mapping:
+Avoir des définitions explicites pour toutes les correspondances d'entités
+est l'unique configuration nécessaire pour l'ORM et il y a plusieurs options
+de configuration que vous pouvez contrôler. Les options de configuration
+suivantes existent pour les correspondances d'entités :
 
-* ``type`` One of ``annotation``, ``xml``, ``yml``, ``php`` or ``staticphp``.
-  This specifies which type of metadata type your mapping uses.
+* ``type`` Une valeur parmi ``annotation``, ``xml``, ``yml``, ``php``
+  ou ``staticphp``.
+  Cela spécifie quel type de métadonnées vos correspondances utilisent.
 
-* ``dir`` Path to the mapping or entity files (depending on the driver). If
-  this path is relative it is assumed to be relative to the bundle root. This
-  only works if the name of your mapping is a bundle name. If you want to use
-  this option to specify absolute paths you should prefix the path with the
-  kernel parameters that exist in the DIC (for example %kernel.root_dir%).
+* ``dir`` Chemin vers les correspondances ou fichiers d'entités (dépend du
+  « driver »). Si ce chemin est relatif, alors on assume qu'il est relatif
+  par rapport à la racine du bundle. Si vous voulez utiliser cette option
+  pour spécifier des chemins absolus vous devriez préfixer le chemin avec
+  les paramètres du « kernel » qui existent dans le DIC (par exemple :
+  %kernel.root_dir%).
 
-* ``prefix`` A common namespace prefix that all entities of this mapping
-  share. This prefix should never conflict with prefixes of other defined
-  mappings otherwise some of your entities cannot be found by Doctrine. This
-  option defaults to the bundle namespace + ``Entity``, for example for an
-  application bundle called ``AcmeHelloBundle`` prefix would be
-  ``Acme\HelloBundle\Entity``.
+* ``prefix`` Un préfixe commun d'espace de noms que toutes les entités de
+  cette correspondance partagent. Le préfixe ne doit jamais être en
+  conflit avec des préfixes d'autres correspondances d'entités définies
+  sinon certaines de vos entités ne seront pas trouvées par Doctrine. La
+  valeur par défaut de cette option est l'espace de noms du bundle + ``Entity``,
+  par exemple pour un bundle applicatif nommé ``AcmeHelloBundle``, le préfixe
+  devrait être ``Acme\HelloBundle\Entity``.
 
-* ``alias`` Doctrine offers a way to alias entity namespaces to simpler,
-  shorter names to be used in DQL queries or for Repository access. When using
-  a bundle the alias defaults to the bundle name.
+* ``alias`` Doctrine offre une façon de créer des alias pour les espaces de
+  noms afin d'avoir des noms plus simples et plus courts à utiliser dans les
+  requêtes DQL ou dans les accès à un Repository. Quand vous utilisez un bundle,
+  l'alias par défaut est le nom du bundle.
 
-* ``is_bundle`` This option is a derived value from ``dir`` and by default is
-  set to true if dir is relative proved by a ``file_exists()`` check that
-  returns false. It is false if the existence check returns true. In this case
-  an absolute path was specified and the metadata files are most likely in a
-  directory outside of a bundle.
+* ``is_bundle`` Cette option est une valeur dérivée de ``dir`` et est par
+  défaut définie comme « true » si « dir » est prouvé comme existant grâce
+  à une vérification via ``file_exists()`` qui retourne « false ». Cela est
+  « false » si la vérification de présence retourne « true ». Dans ce cas,
+  un chemin absolu était spécifié et les fichiers de métadonnées sont très
+  certainement dans un répertoire en dehors de celui du bundle.
 
 .. index::
-    single: Configuration; Doctrine DBAL
-    single: Doctrine; DBAL configuration
+    single: Configuration; DBAL Doctrine
+    single: Doctrine; Configuration du DBAL
 
 .. _`reference-dbal-configuration`:
 
-Doctrine DBAL Configuration
----------------------------
+Configuration du DBAL Doctrine
+------------------------------
 
 .. note::
 
-    DoctrineBundle supports all parameters that default Doctrine drivers
-    accept, converted to the XML or YAML naming standards that Symfony
-    enforces. See the Doctrine `DBAL documentation`_ for more information.
+    Le DoctrineBundle supporte tous les paramètres que les drivers Doctrine
+    acceptent par défaut, convertis en XML ou YML selon les standards de
+    nommage que Symfony force à utiliser. Voir la `Documentation DBAL`_ de
+    Doctrine pour plus d'informations.
 
-Besides default Doctrine options, there are some Symfony-related ones that you
-can configure. The following block shows all possible configuration keys:
+A côté des options de Doctrine par défaut, il y en a quelques unes liées à
+Symfony que vous pouvez configurer. Le bloc suivant montre toutes les clés
+de configuration possibles :
 
 .. configuration-block::
 
@@ -277,8 +287,8 @@ can configure. The following block shows all possible configuration keys:
             </doctrine:dbal>
         </doctrine:config>
 
-If you want to configure multiple connections in YAML, put them under the
-``connections`` key and give them a unique name:
+Si vous voulez configurer plusieurs connexions en YAML, mettez-les sous la
+clé ``connections`` et donnez leurs un nom unique :
 
 .. code-block:: yaml
 
@@ -297,11 +307,10 @@ If you want to configure multiple connections in YAML, put them under the
                     password:         null
                     host:             localhost
 
-The ``database_connection`` service always refers to the *default* connection,
-which is the first one defined or the one configured via the
-``default_connection`` parameter.
+Le service ``database_connection`` réfère toujours à la connexion *default*,
+qui est la première définie ou celle configurée via le paramètre ``default_connection``.
 
-Each connection is also accessible via the ``doctrine.dbal.[name]_connection``
-service where ``[name]`` if the name of the connection.
+Chaque connexion est aussi accessible via le service ``doctrine.dbal.[name]_connection``
+où ``[name]`` est le nom de la connexion.
 
-.. _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
+.. _Documentation DBAL: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
