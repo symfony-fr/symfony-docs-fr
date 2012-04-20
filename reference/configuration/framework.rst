@@ -1,16 +1,16 @@
 .. index::
    single: Configuration Reference; Framework
 
-FrameworkBundle Configuration ("framework")
-===========================================
+Configuration du FrameworkBundle ("framework")
+==============================================
 
-This reference document is a work in progress. It should be accurate, but
-all options are not yet fully covered.
+Ce document de référence est un travail en cours. Il devrait être exact, mais
+toutes les options ne sont pas encore totalement décrites.
 
-The ``FrameworkBundle`` contains most of the "base" framework functionality
-and can be configured under the ``framework`` key in your application configuration.
-This includes settings related to sessions, translation, forms, validation,
-routing and more.
+Le ``FrameworkBundle`` contient la majeure partie de la fonctionnalité « de base »
+du framework et peut être configuré sous la clé ``framework`` dans la configuration
+de votre application. Cela inclut la définition de paramètres liée aux sessions,
+à la traduction, aux formulaires, à la validation, au routage et plus encore.
 
 Configuration
 -------------
@@ -34,49 +34,53 @@ Configuration
 charset
 ~~~~~~~
 
-**type**: ``string`` **default**: ``UTF-8``
+**type**: ``string`` **par défaut**: ``UTF-8``
 
-The character set that's used throughout the framework. It becomes the service
-container parameter named ``kernel.charset``.
+Le jeu de caractères étant utilisé au travers du framework. Ce dernier devient le
+paramètre du conteneur de service nommé ``kernel.charset``.
 
 secret
 ~~~~~~
 
-**type**: ``string`` **required**
+**type**: ``string`` **requis**
 
-This is a string that should be unique to your application. In practice,
-it's used for generating the CSRF tokens, but it could be used in any other
-context where having a unique string is useful. It becomes the service container
-parameter named ``kernel.secret``.
+Ceci est une chaîne de caractères qui devrait être unique à votre application.
+En pratique, elle est utilisée pour générer les jetons CSRF, mais elle pourrait
+être utilisée dans un autre contexte où avoir une chaîne de caractères unique
+est utile. Ceci devient le paramètre du conteneur de service nommé
+``kernel.secret``.
 
 ide
 ~~~
 
-**type**: ``string`` **default**: ``null``
+**type**: ``string`` **par défaut**: ``null``
 
-If you're using an IDE like TextMate or Mac Vim, then Symfony can turn all
-of the file paths in an exception message into a link, which will open that
-file in your IDE.
+Si vous utilisez un IDE (« Integrated Development Environment », ou « Environnement
+de Développement Intégré » en français) comme TextMate ou Mac Vim, alors Symfony
+peut par exemple transformer tous les chemins de fichier d'un message d'exception
+en un lien, qui va ouvrir ce fichier dans votre IDE.
 
-If you use TextMate or Mac Vim, you can simply use one of the following built-in
-values:
+Si vous utilisez TextMate ou Mac Vim, vous pouvez simplement utiliser l'une des
+valeurs prédéfinies suivantes :
 
 * ``textmate``
 * ``macvim``
 
-You can also specify a custom file link string. If you do this, all percentage
-signs (``%``) must be doubled to escape that character. For example, the
-full TextMate string would look like this:
+Vous pouvez aussi spécifier une chaîne de caractères personnalisée représentant
+un lien vers un fichier. Si vous faites ceci, tous les symboles pourcentage
+(``%``) doivent être doublés pour échapper ce caractère. Par exemple, la chaîne
+de caractères complète pour TextMate ressemblerait à cela :
 
 .. code-block:: yaml
 
     framework:
         ide:  "txmt://open?url=file://%%f&line=%%l"
 
-Of course, since every developer uses a different IDE, it's better to set
-this on a system level. This can be done by setting the ``xdebug.file_link_format``
-PHP.ini value to the file link string. If this configuration value is set, then
-the ``ide`` option does not need to be specified.
+Bien sûr, comme chaque développeur utilise un IDE différent, il est préférable
+de définir ceci au niveau du système. Cela peut être effectué en définissant
+la valeur ``xdebug.file_link_format`` du fichier PHP.ini comme étant la
+chaîne de caractères du lien vers le fichier. Si cette valeur de configuration
+est définie, alors l'option ``ide`` n'a pas besoin d'être spécifiée.
 
 .. _reference-framework-test:
 
@@ -85,10 +89,11 @@ test
 
 **type**: ``Boolean``
 
-If this configuration parameter is present (and not ``false``), then the
-services related to testing your application (e.g. ``test.client``) are loaded.
-This setting should be present in your ``test`` environment (usually via
-``app/config/config_test.yml``). For more information, see :doc:`/book/testing`.
+Si ce paramètre de configuration est présent (et pas défini comme ``false``),
+alors les services liés au test de votre application (par exemple :
+``test.client``) sont chargés. Ce paramètre devrait être présent dans votre
+environnement ``test`` (généralement via ``app/config/config_test.yml``).
+Pour plus d'informations, voir :doc:`/book/testing`.
 
 .. _reference-framework-form:
 
@@ -104,10 +109,11 @@ session
 lifetime
 ........
 
-**type**: ``integer`` **default**: ``0``
+**type**: ``integer`` **par défaut**: ``0``
 
-This determines the lifetime of the session - in seconds. By default it will use
-``0``, which means the cookie is valid for the length of the browser session.
+Ceci détermine la durée de vie de la session - en secondes. Par défaut, cette
+valeur sera définie à ``0``, ce qui signifie que le cookie est valide pour la
+durée de la session du navigateur.
 
 templating
 ~~~~~~~~~~
@@ -117,17 +123,19 @@ assets_base_urls
 
 **default**: ``{ http: [], ssl: [] }``
 
-This option allows you to define base URL's to be used for assets referenced
-from ``http`` and ``ssl`` (``https``) pages. A string value may be provided in lieu of a
-single-element array. If multiple base URL's are provided, Symfony2 will select
-one from the collection each time it generates an asset's path.
+Cette option vous permet de définir la base des URLs à utiliser pour les fichiers
+référencés depuis des pages ``http`` et ``ssl`` (``https``). Une valeur exprimée
+via une chaîne de caractères pourrait être fournie à la place d'un tableau.
+Si plusieurs bases d'URL sont fournies, Symfony2 va sélectionner l'une d'entre
+elles chaque fois qu'il génère un chemin vers un fichier.
 
-For your convenience, ``assets_base_urls`` can be set directly with a string or
-array of strings, which will be automatically organized into collections of base
-URL's for ``http`` and ``https`` requests. If a URL starts with ``https://`` or
-is `protocol-relative`_ (i.e. starts with `//`) it will be added to both
-collections. URL's starting with ``http://`` will only be added to the
-``http`` collection.
+Pour votre confort, la valeur de ``assets_base_urls`` peut être définie
+directement avec une chaîne de caractères ou avec un tableau de chaînes de
+caractères, qui sera automatiquement organisé en une collection de bases d'URL
+pour les requêtes ``http`` et ``https`. Si une URL commence par ``https://`` ou
+est `relative à un protocole`_ (par exemple : commence avec `//`) elle sera
+ajoutée aux deux collections. Les URLs commençant par ``http://`` seront
+ajoutées uniquement à la collection ``http``.
 
 .. versionadded:: 2.1
 
@@ -146,12 +154,13 @@ assets_version
 
 **type**: ``string``
 
-This option is used to *bust* the cache on assets by globally adding a query
-parameter to all rendered asset paths (e.g. ``/images/logo.png?v2``). This
-applies only to assets rendered via the Twig ``asset`` function (or PHP equivalent)
-as well as assets rendered with Assetic.
+Cette option est utilisée pour *invalider* le cache de fichiers en ajoutant
+de façon globale un paramètre de requête à tous les chemins de fichier
+rendus (par exemple : ``/images/logo.png?v2``). Cela s'applique uniquement
+aux fichiers rendus via la fonction ``asset`` de Twig (ou son équivalent PHP)
+ainsi qu'aux fichiers rendus avec Assetic.
 
-For example, suppose you have the following:
+Par exemple, supposons que vous ayez ce qui suit :
 
 .. configuration-block::
 
@@ -163,8 +172,8 @@ For example, suppose you have the following:
 
         <img src="<?php echo $view['assets']->getUrl('images/logo.png') ?>" alt="Symfony!" />
 
-By default, this will render a path to your image such as ``/images/logo.png``.
-Now, activate the ``assets_version`` option:
+Par défaut, cela va retourner un chemin vers votre image tel ``/images/logo.png``.
+Maintenant, activez l'option ``assets_version`` :
 
 .. configuration-block::
 
@@ -193,50 +202,58 @@ Now, activate the ``assets_version`` option:
             ),
         ));
 
-Now, the same asset will be rendered as ``/images/logo.png?v2`` If you use
-this feature, you **must** manually increment the ``assets_version`` value
-before each deployment so that the query parameters change.
+Maintenant, le même fichier sera rendu tel ``/images/logo.png?v2``. Si vous
+utilisez cette fonctionnalité, vous **devez** manuellement incrémenter la
+valeur de ``assets_version`` avant chaque déploiement afin que le paramètre
+de la requête change.
 
-You can also control how the query string works via the `assets_version_format`_
-option.
+Vous pouvez aussi contrôler comment la chaîne de caractères de la requête
+fonctionne via l'option `assets_version_format`_.
 
 assets_version_format
 .....................
 
-**type**: ``string`` **default**: ``%%s?%%s``
+**type**: ``string`` **par défaut**: ``%%s?%%s``
 
-This specifies a `sprintf()`_ pattern that will be used with the `assets_version`_
-option to construct an asset's path. By default, the pattern adds the asset's
-version as a query string. For example, if ``assets_version_format`` is set to
-``%%s?version=%%s`` and ``assets_version`` is set to ``5``, the asset's path
-would be ``/images/logo.png?version=5``.
+Cela spécifie un « pattern » de `sprintf()`_ qui va être utilisé avec l'option
+`assets_version`_ pour construire un chemin vers un fichier. Par défaut, le
+« pattern » ajoute la version du fichier en tant que chaîne de caractères dans
+la requête. Par exemple, si ``assets_version_format`` est défini avec la valeur
+``%%s?version=%%s`` et que ``assets_version`` est défini avec ``5``, le chemin
+du fichier serait ``/images/logo.png?version=5``.
 
 .. note::
 
-    All percentage signs (``%``) in the format string must be doubled to escape
-    the character. Without escaping, values might inadvertently be interpretted
-    as :ref:`book-service-container-parameters`.
+    Tous les symboles pourcentage (``%``) dans la chaîne de caractères du format
+    doivent être doublés pour échapper le caractère. Sans échappement, les
+    valeurs pourraient être interprétées par inadvertance comme des
+    :ref:`book-service-container-parameters`.
 
 .. tip::
 
-    Some CDN's do not support cache-busting via query strings, so injecting the
-    version into the actual file path is necessary. Thankfully, ``assets_version_format``
-    is not limited to producing versioned query strings.
+    Certains CDNs (« Content Delivery Network ») ne supporte pas l'invalidation
+    du cache via des chaînes de caractères de requête, alors l'injection de
+    la version dans le chemin du fichier actuel est nécessaire. Heureusement,
+    ``assets_version_format`` n'est pas limité à la production de chaînes de
+    caractères de requête versionnées.
 
-    The pattern receives the asset's original path and version as its first and
-    second parameters, respectively. Since the asset's path is one parameter, we
-    cannot modify it in-place (e.g. ``/images/logo-v5.png``); however, we can
-    prefix the asset's path using a pattern of ``version-%%2$s/%%1$s``, which
-    would result in the path ``version-5/images/logo.png``.
+    Le pattern reçoit respectivement le chemin original du fichier et la version
+    en tant que premier et second paramètres. Comme le chemin du fichier est un
+    paramètre, nous ne pouvons pas le modifier sur place (par exemple :
+    ``/images/logo-v5.png``); cependant, nous pouvons préfixer le chemin du
+    fichier en utilisant un pattern comme ``version-%%2$s/%%1$s``, qui donnerait
+    un chemin tel ``version-5/images/logo.png``.
 
-    URL rewrite rules could then be used to disregard the version prefix before
-    serving the asset. Alternatively, you could copy assets to the appropriate
-    version path as part of your deployment process and forgot any URL rewriting.
-    The latter option is useful if you would like older asset versions to remain
-    accessible at their original URL.
+    Des règles de réécriture d'URL pourraient alors être utilisées afin de ne pas
+    tenir compte du préfixe de version avant de servir le fichier. Une autre
+    alternative pourrait être de copier les fichiers dans le répertoire approprié
+    de la version lors de votre procédure de déploiement et ainsi de ne pas
+    avoir à créer quelconque règle de réécriture d'URL. La dernière option est
+    utile si vous souhaitez laisser les anciennes versions des fichiers
+    accessibles depuis leur URL originale.
 
-Full Default Configuration
---------------------------
+Toutes les Options de Configuration par Défaut
+----------------------------------------------
 
 .. configuration-block::
 
@@ -336,5 +353,5 @@ Full Default Configuration
                 file_cache_dir:       %kernel.cache_dir%/annotations
                 debug:                true
 
-.. _`protocol-relative`: http://tools.ietf.org/html/rfc3986#section-4.2
+.. _`relative à un protocole`: http://tools.ietf.org/html/rfc3986#section-4.2
 .. _`sprintf()`: http://php.net/manual/en/function.sprintf.php
