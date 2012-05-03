@@ -5,7 +5,7 @@ Structure de Bundle et Bonnes Pratiques
 ===========================================
 
 Un bundle est un répertoire qui a une structure bien définie et qui peut
-héberger tout : des classes jusqu'à des contrôleurs ou encore des ressources
+héberger à peu près tout : des classes aux contrôleurs en passant par les ressources
 web. Même si les bundles sont très flexibles, vous devriez suivre quelques unes
 des bonnes pratiques si vous voulez les distribuer.
 
@@ -58,18 +58,18 @@ le nom de la classe.
 
 .. note::
 
-    Les Bundles coeurs de Symfony2 ne préfixent pas la classe Bundle avec
+    Les Bundles du coeur de Symfony2 ne préfixent pas la classe Bundle avec
     ``Symfony`` et ajoutent toujours un sous-espace de noms ``Bundle`` ;
     par exemple : :class:`Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle`.
 
-Chaque bundle possède un alias, qui est la version raccourci en miniscules du
+Chaque bundle possède un alias, qui est la version raccourcie en miniscules du
 nom du bundle en utilisant des tirets bas (``acme_hello`` pour ``AcmeHelloBundle``,
 ou ``acme_social_blog`` pour ``Acme\Social\BlogBundle`` par exemple). Cet alias
 est utilisé pour renforcer l'unicité à l'intérieur d'un bundle (voir ci-dessous
 pour des exemples d'utilisation).
 
-Structure de Répertoire
------------------------
+Structure de Répertoires
+------------------------
 
 La structure basique du répertoire d'un bundle ``HelloBundle`` doit être
 comme suit :
@@ -111,7 +111,7 @@ peuvent être définis pour les fichiers non-stratégiques et moins utilisés.
 
 Le répertoire du bundle est en lecture seule. Si vous avez besoin d'écrire des
 fichiers temporaires, stockez-les dans le dossier ``cache/` ou ``log/`` de
-l'application hébergeant votre bundle. Des outils peuvent générés des fichiers
+l'application hébergeant votre bundle. Des outils peuvent générer des fichiers
 dans la structure du répertoire du bundle, mais uniquement si les fichiers
 générés vont faire partie du répertoire.
 
@@ -174,8 +174,8 @@ CSS, ou quelconque autre langage.
 Tests
 -----
 
-Un bundle devrait venir avec une suite de tests écrite avec PHPUnit et
-stockée dans le répertoire ``Tests/``. Les tests devraient suivre les principes
+Un bundle devrait venir avec un ensemble de tests écrits avec PHPUnit et
+stockés dans le répertoire ``Tests/``. Les tests devraient suivre les principes
 suivants :
 
 * La suite de tests doit être exécutable avec une simple commande ``phpunit``
@@ -192,7 +192,7 @@ suivants :
 Documentation
 -------------
 
-Toutes les classes et fonctions doivent venir avec une PHPDoc complète.
+Toutes les classes et fonctions doivent contenir une PHPDoc complète.
 
 Une documentation complète devrait aussi être fournie dans le format
 :doc:`reStructuredText</contributing/documentation/format>`, dans le
@@ -288,7 +288,7 @@ conteneur::
 
     $container->getParameter('acme_hello.email.from');
 
-Même si ce mécanisme est assez simple, vous êtes grandement encouragé d'utiliser
+Même si ce mécanisme est assez simple, vous êtes grandement encouragé à utiliser
 la configuration sémantique décrite dans le cookbook.
 
 .. note::
