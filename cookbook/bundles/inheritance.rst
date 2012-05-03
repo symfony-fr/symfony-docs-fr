@@ -1,17 +1,17 @@
 .. index::
    single: Bundle; Héritage
 
-Comment utiliser l'héritage de bundle pour outrepasser certaines parties d'un bundle
-====================================================================================
+Comment utiliser l'héritage de bundle pour surcharger certaines parties d'un bundle
+===================================================================================
 
 Lorsque vous travaillerez avec des bundles tiers, vous allez probablement rencontrer une
-situation où vous voudrez passer outre un fichier de ce bundle tiers en le remplacant
+situation où vous voudrez surcharger un fichier de ce bundle tiers en le remplacant
 par un fichier de l'un de vos propres bundles. Symfony vous fournit une manière très
-pratique d'outrepasser des choses comme des contrôleurs, des templates et d'autres
+pratique de surcharger des fichiers comme des contrôleurs, des templates et d'autres
 fichiers présents dans le dossier ``Resources/`` d'un bundle.
 
-Par exemple, supposons que vous installiez le `FOSUserBundle`_, mais que vous souhaitiez
-outrepasser son template de base ``layout.html.twig``, ainsi que l'un de ses contrôleurs.
+Par exemple, supposons que vous installiez le `FOSUserBundle`_, mais que vous souhaitez
+surcharger son template de base ``layout.html.twig``, ainsi que l'un de ses contrôleurs.
 Supposons aussi que vous ayez votre propre ``AcmeUserBundle`` où vous voulez avoir les
 fichiers de substitution. Commencez par déclarer le ``FOSUserBundle`` comme parent de
 votre bundle::
@@ -29,16 +29,16 @@ votre bundle::
         }
     }
 
-En effectuant ce simple changement, vous pouvez désormais outrepasser plusieurs parties
+En effectuant ce simple changement, vous pouvez désormais surcharger plusieurs parties
 du ``FOSUserBundle`` en créant simplement un fichier ayant le même nom.
 
-Outrepasser des contrôleurs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Surcharger des contrôleurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposons que vous vouliez ajouter de la fonctionnalité à ``registerAction``
 du ``RegistrationController`` résidant dans le ``FOSUserBundle``. Pour faire
 cela, créez simplement votre propre fichier ``RegistrationController.php``,
-outrepassez la méthode originale du bundle, et changez sa fonctionnalité::
+surcharger la méthode originale du bundle, et changez sa fonctionnalité::
 
     // src/Acme/UserBundle/Controller/RegistrationController.php
     namespace Acme\UserBundle\Controller;
@@ -65,18 +65,18 @@ outrepassez la méthode originale du bundle, et changez sa fonctionnalité::
 
 .. note::
 
-    Outrepasser des contrôleurs de cette façon fonctionne uniquement si le
+    Surcharger des contrôleurs de cette façon fonctionne uniquement si le
     bundle réfère au contrôleur en utilisant la syntaxe standard
     ``FOSUserBundle:Registration:register`` dans les routes et templates.
     Ceci est la bonne pratique.
 
-Outrepasser des ressources : templates, routage, validation, etc.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Surcharger des ressources : templates, routage, validation, etc.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La plupart des ressources peuvent aussi être outrepassées en créant simplement un
+La plupart des ressources peuvent aussi être surchargées en créant simplement un
 fichier au même emplacement que dans votre bundle parent.
 
-Par exemple, il est très courant d'avoir besoin d'outrepasser le template
+Par exemple, il est très courant d'avoir besoin de surcharger le template
 ``layout.html.twig`` du ``FOSUserBundle`` afin qu'il utilise le layout de
 base de votre application. Comme le fichier réside à l'emplacement
 ``Resources/views/layout.html.twig`` dans le ``FOSUserBundle``, vous pouvez
@@ -89,15 +89,15 @@ et pour les autres ressources.
 
 .. note::
 
-    Outrepasser des ressources fonctionne uniquement lorsque vous référez à
+    Surcharger des ressources fonctionne uniquement lorsque vous référez à
     des ressources via la méthode ``@FosUserBundle/Resources/config/routing/security.xml``.
-    Si vous référez à des ressources sans utiliser le @NomDuBundle raccourci,
-    ces dernières ne peuvent alors pas être outrepassées.
+    Si vous référez à des ressources sans utiliser le raccourci @NomDuBundle,
+    ces dernières ne peuvent alors pas être surchargées.
 
 .. caution::
 
    Les fichiers de traduction ne fonctionnent pas de la même manière que
-   décrite ci-dessus. Tous les fichiers de traduction sont accumulés dans
+   celle décrite ci-dessus. Tous les fichiers de traduction sont accumulés dans
    un ensemble de « groupements » (un pour chaque domaine). Symfony charge
    les fichiers de traduction des bundles en premier (dans l'ordre dans
    lequel les bundles sont initialisés) et ensuite ceux de votre répertoire
