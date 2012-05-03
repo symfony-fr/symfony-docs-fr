@@ -2,12 +2,12 @@
    single: Configuration; Sémantique
    single: Bundle; Configuration d'Extension
 
-Comment exposer une Configuration Sémantique pour un Bundle
+Comment exposer une configuration sémantique pour un Bundle
 ===========================================================
 
 Si vous ouvrez le fichier de configuration de votre application (en général
 ``app/config/config.yml``), vous allez y trouver un certain nombre de différents
-« espaces de nom » de configuration, tel que ``framework``, ``twig``, et ``doctrine``.
+« espaces de noms » de configuration, tel que ``framework``, ``twig``, et ``doctrine``.
 Chacun d'entre eux configure un bundle spécifique, vous permettant de paramétrer des
 choses à un haut niveau et ainsi de laisser le bundle effectuer tous les changements
 qui restent ; ces derniers étant complexes et de bas niveau.
@@ -41,7 +41,7 @@ l'intégration d'autres composants liés :
 Lorsque vous créez un bundle, vous avez deux choix concernant la gestion de la
 configuration :
 
-1. **Configuration Normale des Services** (*facile*) :
+1. **Configuration normale des services** (*facile*) :
 
     Vous pouvez spécifier vos services dans un fichier de configuration (par
     exemple : ``services.yml``) qui se trouve dans votre bundle et puis l'importer
@@ -49,17 +49,17 @@ configuration :
     facile, rapide et totalement efficace. Si vous utilisez des
     :ref:`paramètres<book-service-container-parameters>`, alors vous avez toujours
     la flexibilité de personnaliser votre bundle depuis la configuration de
-    votre application. Voir « :ref:`service-container-imports-directive`" » pour
+    votre application. Lisez « :ref:`service-container-imports-directive`" » pour
     plus de détails.
 
-2. **Exposer la Configuration Sémantique** (*avancé*) :
+2. **Exposer la configuration sémantique** (*avancé*) :
 
     C'est la manière dont la configuration est faite pour les bundles coeurs
     (comme décrit ci-dessus). L'idée de base est que, à la place d'avoir
-    l'utilisateur qui outrepasse les paramètres individuels, vous laissez
+    l'utilisateur qui surcharge les paramètres individuels, vous laissez
     l'utilisateur configurer seulement certaines options spécifiquement créées.
     En tant que développeur du bundle, vous analysez donc cette configuration
-    et charger les services dans une classe « Extension ». Avec cette méthode,
+    et chargez les services dans une classe « Extension ». Avec cette méthode,
     vous n'aurez pas besoin d'importer quelconque ressource de configuration
     depuis la configuration principale de votre application : la classe
     Extension peut gérer tout cela.
@@ -73,13 +73,13 @@ besoin est.
 La seconde méthode possède plusieurs avantages spécifiques :
 
 * Beaucoup plus puissante que de définir simplement des paramètres : une valeur
-  d'option spécifique pourrait déclencher la création de beaucoup de définitions
+  d'option spécifique pourrait déclencher la création de plusieurs définitions
   de services ;
 
 * Possibilité d'avoir une hiérarchie dans la configuration ;
 
 * Fusion intelligente quand plusieurs fichiers de configuration (par
-  exemple : ``config_dev.yml`` et ``config.yml``) s'outrepassent entre eux ;
+  exemple : ``config_dev.yml`` et ``config.yml``) se surchargent entre eux ;
 
 * Validation de la configuration (si vous utilisez une
   :ref:`Classe de Configuration<cookbook-bundles-extension-config-class>`) ;
@@ -87,13 +87,13 @@ La seconde méthode possède plusieurs avantages spécifiques :
 * Autocomplétion via l'IDE lorsque vous créez un XSD et que les développeurs
   utilisent XML.
 
-.. sidebar:: Outrepasser les paramètres d'un bundle
+.. sidebar:: Surcharger les paramètres d'un bundle
 
     Si un Bundle fournit une classe d'Extension, alors vous *ne* devriez
-    généralement *pas* outrepasser quelconque de ses paramètres de conteneur
+    généralement *pas* surcharger l'un de ses paramètres de conteneur
     de service. L'idée est que si une classe d'Extension est présente, chaque
     paramètre qui doit être configurable devrait être présent dans la configuration
-    rendu accessible par cette classe. En d'autres mots, la classe d'extension
+    rendue accessible par cette classe. En d'autres termes, la classe d'extension
     définit tous les paramètres publics de configuration supportés pour lesquels
     une rétro-compatibilité sera maintenue.
 
@@ -101,7 +101,7 @@ La seconde méthode possède plusieurs avantages spécifiques :
    single: Bundles; Extension
    single: Injection de Dépendances, Extension
 
-Créer une Classe d'Extension
+Créer une classe d'Extension
 ----------------------------
 
 Si vous choisissez d'exposer une configuration sémantique pour votre bundle,
@@ -141,14 +141,14 @@ Par exemple, la classe d'Extension de ``AcmeHelloBundle`` serait nommée
     configuration.
 
 La présence de la classe précédente signifie que vous pouvez maintenant définir
-un espace de nom de configuration ``acme_hello`` dans n'importe quel fichier de
-configuration. L'espace de nom ``acme_hello`` est construit sur la base du nom
+un espace de noms de configuration ``acme_hello`` dans n'importe quel fichier de
+configuration. L'espace de noms ``acme_hello`` est construit sur la base du nom
 de la classe d'extension en enlevant le mot ``Extension`` et en passant le reste
-du nom en minuscules avec des tirets bas. En d'autres termes, ``AcmeHelloExtension``
+du nom en minuscules avec des tirets bas (underscores). En d'autres termes, ``AcmeHelloExtension``
 devient ``acme_hello``.
 
 Vous pouvez immédiatement commencer à spécifier la configuration sous cet espace
-de nom :
+de noms :
 
 .. configuration-block::
 
@@ -181,16 +181,16 @@ de nom :
 
     Si vous suivez les conventions de nommage décrites ci-dessus, alors la
     méthode ``load()`` du code de votre extension est toujours appelée tant
-    que votre bundle est déclaré dans le Kernel. En d'autres mots, même si
-    l'utilisateur ne fournit aucune configuration (i.e. l'entrée ``acme_hello``
-    n'apparaît même pas), la méthode ``load()`` sera appelée avec en argument
-    un tableau ``$configs`` vide. Vous pouvez toujours fournir des valeurs
-    par défaut si vous le voulez.
+    que votre bundle est déclaré dans le Kernel. En d'autres termes, même si
+    l'utilisateur ne fournit aucune configuration (c-a-d que l'entrée ``acme_hello``
+    n'apparaît même pas), la méthode ``load()`` sera appelée avec
+    un tableau ``$configs`` vide comme argument . Vous pouvez toujours fournir des
+    valeurs par défaut si vous le voulez.
 
 Analyser le tableau ``$configs``
 --------------------------------
 
-Chaque fois qu'un utilisateur inclut l'espace de nom ``acme_hello`` dans un
+Chaque fois qu'un utilisateur inclut l'espace de noms ``acme_hello`` dans un
 fichier de configuration, la configuration incluse dans cet espace est ajoutée
 à un tableau de configurations et passée à la méthode ``load()`` de votre
 extension (Symfony2 convertit automatiquement XML et YAML en un tableau).
@@ -279,23 +279,23 @@ vous pourriez simplement les fusionner manuellement::
 
 .. caution::
 
-    Assurez-vous que la techique de fusion ci-dessus fait du sens pour votre
-    bundle. Ceci est juste un exemple et vous devriez être attentif de ne pas
+    Assurez-vous que la techique de fusion ci-dessus ait sens pour votre
+    bundle. Ceci est juste un exemple et vous devriez être attentif à ne pas
     l'utiliser aveuglément.
 
-Utiliser la Méthode ``load()``
+Utiliser la méthode ``load()``
 ------------------------------
 
-Dans la méthode ``load()``, la variable ``$container`` réfère à un conteneur
-qui connaît uniquement cet espace de nom de configuration (i.e. il ne contient
+Dans la méthode ``load()``, la variable ``$container`` fait référence à un conteneur
+qui connaît uniquement cet espace de noms de configuration (c-a-d qu'il ne contient
 pas d'informations de service chargées depuis d'autres bundles). Le but de la
-méthode ``load()`` est de manipuler le conteneur, en ajoutant et configurant
+méthode ``load()`` est de manipuler le conteneur, en ajoutant et en configurant
 n'importe quelles méthodes ou services nécessaires à votre bundle.
 
-Charger des Ressources de Configuration Externes
+Charger des ressources de configuration externes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Une chose usuelle à faire est de charger un fichier de configuration externe
+Une chose commune à faire est de charger un fichier de configuration externe
 qui pourrait contenir l'ensemble des services nécessaires à votre bundle. Par
 exemple, supposons que vous ayez un fichier ``services.xml`` contenant la plupart
 des configurations de service de votre bundle::
@@ -311,7 +311,7 @@ des configurations de service de votre bundle::
         $loader->load('services.xml');
     }
 
-Vous pourriez même faire ceci conditionnellement, basé sur l'une des valeurs de
+Vous pourriez même faire ceci conditionnellement, en vous basant sur l'une des valeurs de
 configuration. Par exemple, supposons que vous vouliez charger un ensemble de
 services seulement si une option ``enabled`` est passée et définie comme « true »::
 
@@ -326,12 +326,12 @@ services seulement si une option ``enabled`` est passée et définie comme « tr
         }
     }
 
-Configurer les Services et Définir les Paramètres
+Configurer les services et définir les paramètres
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une fois que vous avez chargé des configurations de service, vous pourriez
-avoir besoin de modifier la configuration basé sur certaines valeurs en
-entrée. Par exemple, supposons que vous ayez un service dont le premier
+avoir besoin de modifier la configuration basée sur certaines valeurs saisies.
+Par exemple, supposons que vous ayez un service dont le premier
 argument est une chaîne de caractères « type » que le service va utiliser
 en interne. Vous voudriez que ceci soit facilement configurable par
 l'utilisateur du bundle, donc dans votre fichier de configuration du services
@@ -358,7 +358,7 @@ paramètre vide - ``acme_hello.my_service_type`` - en tant que premier argument 
 
 Mais pourquoi définir un paramètre vide et puis le passer à votre service ?
 La réponse est que vous allez définir ce paramètre dans votre classe d'extension,
-basé sur les valeurs de configuration en entrée. Par exemple, supposons que vous
+en vous basant sur les valeurs de configuration saisies. Par exemple, supposons que vous
 souhaitiez autoriser l'utilisateur à définir cette option *type* via une clé
 nommée ``my_type``. Pour effectuer cela, ajoutez ce qui suit à la méthode
 ``load()``::
@@ -413,7 +413,7 @@ la valeur de configuration ``my_type`` :
             // ...
         ));
 
-Paramètres Globaux
+Paramètres globaux
 ~~~~~~~~~~~~~~~~~~
 
 Lorsque vous configurez le conteneur, soyez conscient que vous avez à
@@ -432,11 +432,11 @@ disposition les paramètres globaux suivants :
 .. caution::
 
     Tous les noms de paramètres et services commençant par un ``_`` sont réservés
-    pour le framework, et les nouveaux ne doivent pas être définis par des bundles.
+    pour le framework, et aucun autre ne doit être défini par des bundles.
 
 .. _cookbook-bundles-extension-config-class:
 
-Validation et Fusion avec une Classe de Configuration
+Validation et fusion avec une classe de configuration
 -----------------------------------------------------
 
 Jusqu'ici, vous avez effectué la fusion de vos tableaux de configuration
@@ -447,14 +447,13 @@ validation, les valeurs par défaut, et la normalisation des formats.
 
 .. note::
 
-    La normalisation des formats réfère au fait que certains formats -
+    La normalisation des formats se réfère au fait que certains formats -
     principalement XML - résultent en de légères différences concernant
     les tableaux de configuration et que ces tableaux ont besoin d'être
     « normalisés » afin de correspondre avec tout le reste.
 
 Pour profiter de ce système, vous allez créer une classe de ``Configuration``
-et construire un arbre (« tree » en anglais) qui définit votre configuration
-dans cette classe::
+et construire un arbre qui définit votre configuration dans cette classe::
 
     // src/Acme/HelloBundle/DependencyInjection/Configuration.php
     namespace Acme\HelloBundle\DependencyInjection;
@@ -519,7 +518,7 @@ configuration yaml par défaut du bundle.
 Tant que votre configuration de bundle est située à l'emplacement standard
 (``YourBundle\DependencyInjection\Configuration``) et qu'elle n'a pas de
 ``__constructor()``, cela fonctionnera automatiquement. Si vous avez
-quelque chose de différent, votre classe ``Extension`` devra outrepasser
+quelque chose de différent, votre classe ``Extension`` devra surcharger
 la méthode ``Extension::getConfiguration()``. Cette dernière devant
 retourner une instance de votre ``Configuration``.
 
@@ -565,13 +564,13 @@ Quand vous créez une extension, suivez ces conventions simples :
 
 * L'extension doit être stockée dans le sous-espace de noms ``DependencyInjection`` ;
 
-* L'extension doit être nommée après le nom du bundle et suffixée avec ``Extension``
+* L'extension doit être nommée d'après le nom du bundle et suffixée avec ``Extension``
   (``AcmeHelloExtension`` pour ``AcmeHelloBundle``) ;
 
 * L'extension devrait fournir un schéma XSD.
 
 Si vous suivez ces conventions simples, vos extensions seront déclarées
-automatiquement par Symfony2. Si non, réécrivez la méthode
+automatiquement par Symfony2. Sinon, réécrivez la méthode
 :method:`Symfony\\Component\\HttpKernel\\Bundle\\Bundle::build` de Bundle
 dans votre bundle::
 
