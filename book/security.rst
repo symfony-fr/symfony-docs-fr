@@ -397,7 +397,7 @@ Ensuite, créez un contrôleur qui va afficher le formulaire de connexion :
 
 .. code-block:: php
 
-    // src/Acme/SecurityBundle/Controller/Main;
+    // src/Acme/SecurityBundle/Controller/SecurityController.php;
     namespace Acme\SecurityBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;

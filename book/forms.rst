@@ -938,7 +938,7 @@ lorsque ce dernier est valide :
 .. code-block:: php
 
     if ($form->isValid()) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($task);
         $em->flush();
 

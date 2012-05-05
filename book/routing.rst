@@ -109,6 +109,11 @@ Ceci est le but du routeur Symfony2 : faire correspondre l'URL d'une requête
 à un contrôleur. Tout au long du chemin, vous allez apprendre toutes sortes
 d'astuces qui rendent même facile la création des URLs les plus complexes.
 
+.. versionadded:: 2.1
+
+    Depuis Symfony 2.1, le composant de routage accepte également les
+    valeurs Unicode comme: /Жени/
+
 .. index::
    single: Routage; Sous le capot
 

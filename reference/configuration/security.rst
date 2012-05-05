@@ -69,9 +69,6 @@ Chaque partie sera expliquée dans la section suivante.
                 entity_provider_name:
                     entity: { class: SecurityBundle:User, property: username }
 
-            factories:
-                MyFactory: %kernel.root_dir%/../src/Acme/DemoBundle/Resources/config/security_factories.xml
-
             firewalls:
                 somename:
                     pattern: .*

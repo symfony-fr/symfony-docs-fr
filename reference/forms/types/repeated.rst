@@ -14,6 +14,8 @@ ou son email pour vérifier qu'ils sont justes.
 +-------------+------------------------------------------------------------------------+
 | Options     | - `type`_                                                              |
 |             | - `options`_                                                           |
+|             | - `first_options`_                                                     |
+|             | - `second_options`_                                                    |
 |             | - `first_name`_                                                        |
 |             | - `second_name`_                                                       |
 +-------------+------------------------------------------------------------------------+
@@ -34,7 +36,9 @@ Exemple d'utilisation
     $builder->add('password', 'repeated', array(
         'type' => 'password',
         'invalid_message' => 'Les mots de passe doivent correspondre',
-        'options' => array('label' => 'Password'),
+        'options' => array('required' => true),
+        'first_options'  => array('label' => 'Mot de passe'),
+        'second_options' => array('label' => 'Mot de passe (validation)'),
     ));
 
 Lors de la soumission réussie d'un formulaire, la valeur saisie dans les deux
@@ -79,6 +83,35 @@ termes, ce sont les options qui personnalisent les types de champs individuellem
 Par exemple, si l'option ``type`` est définie comme ``password``, ce tableau peut
 contenir les options ``always_empty`` ou ``required``, c'est-à-dire deux options qui
 sont supportées par le type de champ ``password``.
+
+first_options
+~~~~~~~~~~~~~
+
+**type**: ``array`` **default**: ``array()``
+
+.. versionadded:: 2.1
+    L'option ``first_options`` est une nouveauté de Symfony 2.1.
+
+Option additionnelle (elle sera fusionnée avec `options` ci-dessus) qui devrait
+être passée *uniquement* au premier champ. Elle est essentiellement utile pour
+personnaliser le libellé::
+
+    $builder->add('password', 'repeated', array(
+        'first_options'  => array('label' => 'Mot de passe'),
+        'second_options' => array('label' => 'Mot de passe (validation)'),
+    ));
+
+second_options
+~~~~~~~~~~~~~~
+
+**type**: ``array`` **default**: ``array()``
+
+.. versionadded:: 2.1
+    L'option ``second_options`` est une nouveauté de Symfony 2.1.
+
+Option additionnelle (elle sera fusionnée avec `options` ci-dessus) qui devrait
+être passée *uniquement* au premier champ. Elle est essentiellement utile pour
+personnaliser le libellé (voir `first_options`_).
 
 first_name
 ~~~~~~~~~~

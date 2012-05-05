@@ -45,7 +45,7 @@ Configuration Initiale du Projet
 Pour démarrer, vous aurez besoin de télécharger Symfony2 et d'effectuer la
 configuration basique de Subversion :
 
-1. Téléchargez `Symfony2 Standard Edition`_ sans les « vendors ».
+1. Téléchargez `Symfony2 Standard Edition`_ avec ou sans les « vendors ».
 
 2. Dézippez/détarez la distribution. Cela va créer un dossier nommé Symfony
    avec votre nouvelle structure de projet, les fichiers de configuration, etc.

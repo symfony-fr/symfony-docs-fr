@@ -415,43 +415,12 @@ services.
         ));
 
 Maintenant que vos services sont définis, informez votre contexte de
-sécurité à propos de l'existence de votre factory. Les « factories »
-doivent être inclues dans un fichier de configuration individuel, au
-moment où ces lignes sont écrites. Donc, commencez par créer le fichier
-avec le service de factory, taggé en tant que ``security.listener.factory`` :
+sécurité de l'existence de votre factory dans la classe de votre bundle :
 
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # src/Acme/DemoBundle/Resources/config/security_factories.yml
-        services:
-            security.authentication.factory.wsse:
-                class:  Acme\DemoBundle\DependencyInjection\Security\Factory\WsseFactory
-                tags:
-                    - { name: security.listener.factory }
-
-    .. code-block:: xml
-
-        <!-- src/Acme/DemoBundle/Resources/config/security_factories.xml -->
-        <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-            <services>
-                <service id="security.authentication.factory.wsse"
-                  class="Acme\DemoBundle\DependencyInjection\Security\Factory\WsseFactory" public="false">
-                    <tag name="security.listener.factory" />
-                </service>
-            </services>
-        </container>
 
 .. versionadded:: 2.1
     Avant 2.1, la factory ci-dessous était ajoutée via le fichier
     ``security.yml`` à la place.
-
-En tant que dernière étape, ajoutez la factory à l'extension de sécurité dans
-votre classe bundle.
 
 .. code-block:: php
 

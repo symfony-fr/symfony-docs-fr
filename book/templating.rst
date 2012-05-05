@@ -223,7 +223,7 @@ Tout d'abord, construisez un fichier layout :
             </head>
             <body>
                 <div id="sidebar">
-                    <?php if ($view['slots']->has('sidebar'): ?>
+                    <?php if ($view['slots']->has('sidebar')): ?>
                         <?php $view['slots']->output('sidebar') ?>
                     <?php else: ?>
                         <ul>
@@ -841,7 +841,7 @@ Liens vers des Fichiers
 Les templates font aussi très souvent référence à des images, du Javascript, des
 feuilles de style et d'autres fichiers. Bien sûr vous pouvez coder en dur le chemin
 vers ces fichiers (``/images/logo.png`` par exemple), mais Symfony2 fournit une
-façon de faire plus souple via la fonction ``assets`` de Twig :
+façon de faire plus souple via la fonction ``asset`` de Twig :
 
 .. configuration-block::
 

@@ -566,7 +566,7 @@ Voici la même application, en utilisant cette fois-ci Symfony2 :
     {
         public function listAction()
         {
-            $posts = $this->get('doctrine')->getEntityManager()
+            $posts = $this->get('doctrine')->getManager()
                 ->createQuery('SELECT p FROM AcmeBlogBundle:Post p')
                 ->execute();
 
@@ -576,7 +576,7 @@ Voici la même application, en utilisant cette fois-ci Symfony2 :
         public function showAction($id)
         {
             $post = $this->get('doctrine')
-                ->getEntityManager()
+                ->getManager()
                 ->getRepository('AcmeBlogBundle:Post')
                 ->find($id);
             

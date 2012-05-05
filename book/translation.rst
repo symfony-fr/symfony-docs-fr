@@ -21,10 +21,10 @@ une fonction capable de traduire le texte (ou « message ») dans la langue de l'u
 .. note::
 
     Le terme *locale* désigne en gros la langue et le pays de l'utilisateur. Cela
-    peut être n'importe quelle chaîne de caractères que votre application va utiliser ensuite
+    peut être n'importe quelle chaîne de caractères que votre application va utiliser
     pour gérer les traductions et autres différences de format (par ex. format de monnaie).
-    Nous recommandons le code *langue* ISO639-1, un « underscore » (``_``), et ensuite le code
-    *pays* ISO3166 (par ex. ``fr_FR`` pour Français/France).
+    Nous recommandons le code *langue* `ISO639-1`_, un « underscore » (``_``), et ensuite le code
+    *pays* `ISO3166 Alpha-2`_ (par ex. ``fr_FR`` pour Français/France).
 
 Dans ce chapitre, nous allons apprendre comment préparer une application à gérer de multiples
 locales et ensuite comment créer des traductions pour plusieurs locales. Dans l'ensemble,
@@ -284,13 +284,16 @@ système de fichiers et reconnues par Symfony, grâce à certaines conventions.
 Emplacements des Traductions et Conventions de Nommage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Symfony2 cherche les fichiers de messages (i.e. traductions) à deux endroits :
+Symfony2 cherche les fichiers de messages (c-a-d les traductions) aux endroits suivants :
 
-* Pour les traductions trouvées dans un bundle, les fichiers de traductions
-  correspondants doivent se situer dans le répertoire ``Resources/translations/`` du bundle ;
+* Le répertoire ``<répertoire racine du noyau>/Resources/translations``;
 
-* Pour surcharger n'importe quelle traduction du bundle, placez les fichiers dans le
-  répertoire ``app/Resources/translations``.
+* Le répertoire ``<répertoire racine du noyau>/Resources/<nom du bundle>/translations``;
+
+* Le répertoire ``Resources/translations/`` du bundle.
+
+Les répertoire sont listés par ordre de priorité. Cela signifie que vous pouvez
+surcharger les messages de traduction d'un bundle dans l'un des deux premiers répertoires.
 
 Le nom des fichiers de traductions est aussi important puisque Symfony2 utilise une convention
 pour déterminer les détails à propos des traductions. Chaque fichier de messages doit être nommé
@@ -1001,3 +1004,5 @@ n'a plus besoin d'être un processus douloureux et se résume simplement à quelque
 .. _`strtr function`: http://www.php.net/manual/fr/function.strtr.php
 .. _`ISO 31-11`: http://en.wikipedia.org/wiki/ISO_31-11
 .. _`Translatable Extension`: https://github.com/l3pp4rd/DoctrineExtensions
+.. _`ISO3166 Alpha-2`: http://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage
+.. _`ISO639-1`: http://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1

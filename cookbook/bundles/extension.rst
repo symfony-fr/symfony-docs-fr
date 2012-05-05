@@ -483,14 +483,10 @@ forcer la validation. Si n'importe quelle autre option que ``my_type`` est
 passée, l'utilisateur sera notifié avec une exception disant qu'une option
 non-supportée a été passée::
 
-    use Symfony\Component\Config\Definition\Processor;
-    // ...
-
     public function load(array $configs, ContainerBuilder $container)
     {
-        $processor = new Processor();
         $configuration = new Configuration();
-        $config = $processor->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
         // ...
     }

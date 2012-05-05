@@ -479,20 +479,16 @@ lisez la documentation du cookbook :doc:`/cookbook/testing/profiling`.
 Redirection
 ~~~~~~~~~~~
 
-Lorsqu'une requête retourne une réponse redirigée, le client la suit automatiquement.
-Si vous voulez examiner la Réponse avant qu'elle soit redirigée, vous pouvez forcer
-le client à ne pas suivre la redirection grâce à la méthode ``followRedirects()`` :
-
-.. code-block:: php
-
-    $client->followRedirects(false);
-
-Lorsque le client ne suit pas les redirections, vous pouvez le forcer grâce à la
-méthode ``followRedirect()`` :
-
-.. code-block:: php
+Lorsqu'une requête retourne une réponse redirigée, le client ne la suit
+pas automatiquement. Vous pouvez examiner la réponse puis forcer une redirection
+grâce à la méthode ``followRedirect()``::
 
     $crawler = $client->followRedirect();
+
+Si vous voulez que le client suive automatiquement tous les redirections,
+vous pouvez le forcer avec la méthode ``followRedirects()``::
+
+    $client->followRedirects();
 
 .. index::
    single: Tests; Crawler

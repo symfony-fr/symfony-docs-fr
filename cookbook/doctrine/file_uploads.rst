@@ -156,7 +156,7 @@ Le contrôleur suivant vous montre comment gérer le processus en entier::
         if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
 
                 $em->persist($document);
                 $em->flush();
@@ -194,7 +194,7 @@ classe ``Document`` que vous allez créer dans un moment pour gérer l'upload
 de fichier::
 
     if ($form->isValid()) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $document->upload();
 

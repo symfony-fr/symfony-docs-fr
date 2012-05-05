@@ -388,7 +388,7 @@ suivante au ``DefaultController`` du bundle :
         $product->setPrice('19.99');
         $product->setDescription('Lorem ipsum dolor');
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($product);
         $em->flush();
 
@@ -540,7 +540,7 @@ une action de mise à jour dans un contrôleur :
 
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('AcmeStoreBundle:Product')->find($id);
 
         if (!$product) {
@@ -611,7 +611,7 @@ Imaginons que vous souhaitez récupérer tous les produits dont le prix est sup�
 
 .. code-block:: php
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $query = $em->createQuery(
         'SELECT p FROM AcmeStoreBundle:Product p WHERE p.price > :price ORDER BY p.price ASC'
     )->setParameter('price', '19.99');
@@ -786,7 +786,7 @@ ordre alphabétique.
     {
         public function findAllOrderedByName()
         {
-            return $this->getEntityManager()
+            return $this->getManager()
                 ->createQuery('SELECT p FROM AcmeStoreBundle:Product p ORDER BY p.name ASC')
                 ->getResult();
         }
@@ -794,14 +794,14 @@ ordre alphabétique.
 
 .. tip::
 
-    Vous pouvez accéder au gestionnaire d'entités par ``$this->getEntityManager()`` à
+    Vous pouvez accéder au gestionnaire d'entités par ``$this->getManager()`` à
     l'intérieur du dépôt.
 
 Vous pouvez alors utiliser cette nouvelle méthode comme les méthodes par défaut du dépôt :
 
 .. code-block:: php
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $products = $em->getRepository('AcmeStoreBundle:Product')
                 ->findAllOrderedByName();
 
@@ -1002,7 +1002,7 @@ Maintenant, regardons le code en action. Imaginez que vous êtes dans un contrô
             // relate this product to the category
             $product->setCategory($category);
             
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->persist($product);
             $em->flush();
@@ -1130,7 +1130,7 @@ une jointure dans la requête originale. Ajouter le code suivant à la classe
     
     public function findOneByIdJoinedToCategory($id)
     {
-        $query = $this->getEntityManager()
+        $query = $this->getManager()
             ->createQuery('
                 SELECT p, c FROM AcmeStoreBundle:Product p
                 JOIN p.category c

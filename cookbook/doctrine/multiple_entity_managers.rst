@@ -51,10 +51,10 @@ gestionnaire d'entité par défaut (i.e. ``default``) est retourné::
         public function indexAction()
         {
             // les deux retournent le gestionnaire d'entité "default"
-            $em = $this->get('doctrine')->getEntityManager();
-            $em = $this->get('doctrine')->getEntityManager('default');
+            $em = $this->get('doctrine')->getManager();
+            $em = $this->get('doctrine')->getManager('default');
             
-            $customerEm =  $this->get('doctrine')->getEntityManager('customer');
+            $customerEm =  $this->get('doctrine')->getManager('customer');
         }
     }
 

@@ -95,7 +95,7 @@ l'évènement est lancé::
         public function postPersist(LifecycleEventArgs $args)
         {
             $entity = $args->getEntity();
-            $entityManager = $args->getEntityManager();
+            $entityManager = $args->getManager();
             
             // peut-être vous voulez seulement agir sur une entité « Product »
             if ($entity instanceof Product) {
