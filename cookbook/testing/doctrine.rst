@@ -1,44 +1,47 @@
 .. index::
    single: Tests; Doctrine
 
-Comment tester les dépôts doctrines
-===================================
+Comment tester les dépôts Doctrine
+==================================
 
-Les tests unitaires des dépôts Doctrines à l’intérieur d'un projet Symfony
-est un tache aisée qui demande cependant une préparation minutieuse. Ainsi
-vous devez charger le dépot pour vos entités, un gestionnaire d'entité
-(entity manager) ainsi que différents objets comme entre autre une connexion.
+Test de manière unitaire les dépôts Doctrine à l’intérieur d'un projet Symfony
+n'est pas une tâche aisée et demande une préparation minutieuse. Ainsi, pour charger
+un dépôt vous devez charger vos entités, un gestionnaire d'entité ainsi que différents
+objets comme entre autres une connexion.
 
-Pour tester votre dépôt, vous avez deux options:
+Pour tester votre dépôt, vous avez deux options :
 
-1) **Test fonctionnel**: Cela inclus l'utilisation d'un base de donnée réelle.
-   C'est simple à réaliser, vous permet de tester de tout tester mais est en
-   contrepartie relativement lent à l’exécution.
-   See :ref:`cookbook-doctrine-repo-functional-test`.
+1) **Test fonctionnel** : Cela inclut l'utilisation d'une connexion à une base de
+   donnée réelle avec des objets réels. C'est simple à réaliser et vous permet de
+   tout tester mais est en contrepartie relativement lent à l’exécution.
+   Voir :ref:`cookbook-doctrine-repo-functional-test`.
 
-2) **Test unitaire**: Les test unitaires sont plus rapides et précis. Ils requièrent
-   une configuration plus approfondie, que nous détaillerons dans ce document. Ils
-   peuvent tester les méthodes créant les requêtes sans la possibilités d’exécuter
-   celles-ci.
+2) **Test unitaire**: Tester de manière unitaire est plus rapide à exécuter et plus précis
+   quant à la manière dont vous effectuez vos tests. Cela requiert une configuration
+   plus approfondie, que nous détaillerons dans ce document. Cette façon permer de tester
+   uniquement les méthodes qui, par exemple, créent des requêtes sans devoir exécuter les
+   méthodes qui les appellent pour autant.
 
-Test Unitaires
---------------
+Tests Unitaires
+---------------
 
 Symfony et Doctrine partageant le même framework de test, il est facile d'implémenter
-des tests unitaires dans vos projets. L'ORM est fourni avec son propre jeu d'outils
-facilitant les test unitaires vous permettant de vous abstraire de l'obligation de 
-créer une connexion, un gestionnaire d'entité, etc. En utilisant les composants 
+des tests unitaires dans vos projets. L'ORM est fourni avec son propre ensemble d'outils
+facilitant les test unitaires vous permettant de vous abstraire de l'obligation de
+créer une connexion, un gestionnaire d'entité, etc. En utilisant les composants
 fournis par Doctrine - et une configuration simple - vous pouvez utiliser les outils
-Doctrine's pour réaliser des tests unitaires sur vos dépôts.
+Doctrine pour réaliser des tests unitaires sur vos dépôts.
 
-Garder à l'esprit que si vous voulez tester l’exécution de requêtes sur vos bases de
+Gardez à l'esprit que si vous voulez tester l’exécution de requêtes sur vos bases de
 données, vous devez réaliser des tests fonctionnels (voir la fin de ce cookbook ainsi
 que :ref:`cookbook-doctrine-repo-functional-test`).
+Tester de manière unitaire est seulement possible lorsque vous testez une méthode qui
+construit une requête.
 
 Configuration
 ~~~~~~~~~~~~~
 
-Premièrement vous devez ajouter l'espace de nom ``Doctrine\Tests`` à votre autoloader::
+Premièrement vous devez ajouter l'espace de noms ``Doctrine\Tests`` à votre autoloader::
 
     // app/autoload.php
     $loader->registerNamespaces(array(
@@ -46,11 +49,12 @@ Premièrement vous devez ajouter l'espace de nom ``Doctrine\Tests`` à votre aut
         'Doctrine\\Tests'                => __DIR__.'/../vendor/doctrine/orm/tests',
     ));
 
-Ensuite, configurez un gestionnaire d'entité dans chaque test afin que Doctrine soit 
+Ensuite, configurez un gestionnaire d'entité dans chaque test afin que Doctrine soit
 capable de charger entités et dépôts.
 
-Par défaut, Doctrine ne chargera pas les méta données d'annotation pour vos entités,
-vous devez donc configurer le lecteur d'annotations  si vous les utiliser::
+Par défaut, Doctrine ne chargera pas les métadonnées d'annotations pour vos entités,
+vous devez donc configurer le lecteur d'annotations afin de pouvoir analyser et charger
+les entités::
 
     // src/Acme/ProductBundle/Tests/Entity/ProductRepositoryTest.php
 
@@ -79,7 +83,7 @@ vous devez donc configurer le lecteur d'annotations  si vous les utiliser::
             $reader->setEnableParsePhpImports(true);
 
 
-            // provide the namespace of the entities you want to tests
+            // fournit l'espace de noms des entités que vous voulez tester
             $metadataDriver = new AnnotationDriver($reader, 'Acme\\StoreBundle\\Entity');
 
             $this->em = $this->_getTestEntityManager();
@@ -95,22 +99,22 @@ vous devez donc configurer le lecteur d'annotations  si vous les utiliser::
 
 En observant ces lignes, vous pouvez remarquer que:
 
-* La classe hérite de ``\Doctrine\Tests\OrmTestCase`` qui fourni de nombreuses 
-  méthodes utiles au test unitaires.
+* La classe hérite de ``\Doctrine\Tests\OrmTestCase`` qui fournit de nombreuses
+  méthodes utiles aux tests unitaires.
 
 * Vous avez inclus le gestionnaire d'annotation ``AnnotationReader`` afin
   qu'il réalise l'analyse syntaxique de vos entités.
 
-* Vous avez créer un gestionnaire d'entité en appelant ``_getTestEntityManager``.
-  Cette méthode vous fourni un gestionnaire virtuel n'ayant pas besoin de connection.
+* Vous avez créé un gestionnaire d'entité en appelant ``_getTestEntityManager``.
+  Cette méthode vous fournit un gestionnaire virtuel n'ayant pas besoin de connexion.
 
 Voilà! Vous êtes maintenant prêt à écrire les tests unitaires de vos dépôts Doctrine.
 
-Ecrire vos test unitaires
+Ecrire vos tests unitaires
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Rappelez vous que les méthodes des dépôts Doctrine ne peuvent être testées qui si 
-les dépots ont été construits et que les tests retournent des requêtes sans les 
+Rappelez-vous que les méthodes des dépôts Doctrine ne peuvent être testées qui si
+les dépots ont été construits et que les tests retournent des requêtes sans les
 exécuter. Prenez l’exemple suivant::
 
     // src/Acme/StoreBundle/Entity/ProductRepository.php
@@ -160,13 +164,13 @@ résultat par différents moyens::
         }
      }
 
-Dans ce test vous analyser l'objet ``QueryBuilder``, et vérifier chacune des parties
-dont le résultats . Si vous ajoutez des paramètres au constructeur de requête (query
-builder), vous pourrez vérifier les modifications sur chacuns des ensembles DQL suivant:
+Dans ce test, vous analysez l'objet ``QueryBuilder``, et vérifiez que chacune des parties
+correspond au résultat attendu. Si vous ajoutez des paramètres au constructeur de requête,
+vous pourrez vérifier les modifications sur chacuns des ensembles DQL suivants:
 ``select``, ``from``, ``join``, ``set``, ``groupBy``, ``having``, or ``orderBy``.
 
 Si vous voulez vérifier l'exactitude de la syntaxe d'une requête complète ou la requête
-actuelle vous pouvez tester la chaîne de caractère générée en une requête DQL directement::
+actuelle, vous pouvez tester la chaîne de caractères générée en une requête DQL directement::
 
     public function testCreateSearchByNameQueryBuilder()
     {
@@ -216,7 +220,7 @@ une classe qui simplifiera les processus de test::
 
         public function testProductByCategoryName()
         {
-            $results = $this->em 
+            $results = $this->em
                 ->getRepository('AcmeStoreBundle:Product')
                 ->searchProductsByNameQuery('foo')
                 ->getResult()
