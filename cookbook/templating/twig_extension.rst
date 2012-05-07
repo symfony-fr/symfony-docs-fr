@@ -1,27 +1,29 @@
 .. index::
-   single: Twig extensions
+   single: Extensions Twig
    
-How to write a custom Twig Extension
-====================================
+Comment écrire une Extension Twig personnalisée
+===============================================
 
-The main motivation for writing an extension is to move often used code
-into a reusable class like adding support for internationalization. 
-An extension can define tags, filters, tests, operators, global variables,
-functions, and node visitors.
+La motivation principale d'écrire une extension est de déplacer du code
+souvent utilisé dans une classe réutilisable comme ajouter le support pour
+l'internationalisation.
+Une extension peut définir des tags, des filtres, des tests, des opérateurs,
+des variables globales, des fonctions et des noeuds visiteurs.
 
-Creating an extension also makes for a better separation of code that is
-executed at compilation time and code needed at runtime. As such, it makes
-your code faster.
+Créer une extension permet aussi une meilleure séparation du code qui est
+exécuté au moment de la compilation et du code nécessaire lors de l'exécution.
+De ce fait, cela rend votre code plus rapide.
 
 .. tip::
 
-    Before writing your own extensions, have a look at the `Twig official extension repository`_.
-    
-Create the Extension Class
---------------------------    
+    Avant d'écrire vos propres extensions, jetez un oeil au `dépôt officiel des extensions Twig`_.
 
-To get your custom functionality you must first create a Twig Extension class. 
-As an example we will create a price filter to format a given number into price::
+Créer la Classe Extension
+-------------------------
+
+Pour avoir votre fonctionnalité personnalisée, vous devez créer en premier lieu
+une classe Extension Twig. En tant qu'exemple, nous allons créer un filtre « prix »
+afin de formater un nombre donné en un prix::
 
     // src/Acme/DemoBundle/Twig/AcmeExtension.php
 
@@ -56,12 +58,14 @@ As an example we will create a price filter to format a given number into price:
     
 .. tip::
 
-    Along with custom filters, you can also add custom `functions` and register `global variables`.    
-     
-Register an Extension as a Service
-----------------------------------
+    Dans le même style que les filtres personnalisés, vous pouvez aussi ajouter des `fonctions`
+    personnalisées et définir des `variables globales`.
 
-Now you must let Service Container know about your newly created Twig Extension:
+Définir une Extension en tant que Service
+-----------------------------------------
+
+Maintenant, vous devez informer le Conteneur de Service de l'existence de votre
+Extension Twig nouvellement créée :
 
 .. configuration-block::
 
@@ -94,35 +98,39 @@ Now you must let Service Container know about your newly created Twig Extension:
          
 .. note::
 
-   Keep in mind that Twig Extensions are not lazily loaded. This means that 
-   there's a higher chance that you'll get a **CircularReferenceException**
-   or a **ScopeWideningInjectionException** if any services 
-   (or your Twig Extension in this case) are dependent on the request service.
-   For more information take a look at :doc:`/cookbook/service_container/scopes`.
+   Gardez en mémoire que les Extensions Twig ne sont pas chargées de manière
+   paresseuse (« lazy loading » en anglais). Cela signifie qu'il y a de grandes
+   chances que vous obteniez une **CircularReferenceException** ou une
+   **ScopeWideningInjectionException** si quelconques services (ou votre
+   Extension Twig dans ce cas) sont dépendants du service de requête.
+   Pour plus d'informations, jetez un oeil sur
+   :doc:`/cookbook/service_container/scopes`.
                 
-Using the custom Extension
---------------------------
+Utiliser l'Extension personnalisée
+----------------------------------
 
-Using your newly created Twig Extension is no different than any other:
+Utiliser votre Extension Twig nouvellement créée n'est en rien différent
+des autres :
 
 .. code-block:: jinja
 
-    {# outputs $5,500.00 #}
+    {# affiche $5,500.00 #}
     {{ '5500' | price }}
     
-Passing other arguments to your filter:
+Passez d'autres arguments à votre filtre :
 
 .. code-block:: jinja
     
-    {# outputs $5500,2516 #}
+    {# affiche $5500,2516 #}
     {{ '5500.25155' | price(4, ',', '') }}
     
-Learning further
-----------------
-    
-For a more in-depth look into Twig Extensions, please take a look at the `Twig extensions documentation`_.
-     
-.. _`Twig official extension repository`: http://github.com/fabpot/Twig-extensions
-.. _`Twig extensions documentation`: http://twig.sensiolabs.org/doc/extensions.html
-.. _`global variables`: http://twig.sensiolabs.org/doc/extensions.html#globals
-.. _`functions`: http://twig.sensiolabs.org/doc/extensions.html#functions
+En savoir plus
+--------------
+
+Pour étudier le sujet des Extensions Twig plus en profondeur, veuillez jeter un coup d'oeil à
+la `documentation des extensions Twig`_.
+
+.. _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions
+.. _`documentation des extensions Twig`: http://twig.sensiolabs.org/doc/extensions.html
+.. _`variables globales`: http://twig.sensiolabs.org/doc/extensions.html#globals
+.. _`fonctions`: http://twig.sensiolabs.org/doc/extensions.html#functions
