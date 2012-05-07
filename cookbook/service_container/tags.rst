@@ -1,26 +1,25 @@
 .. index::
    single: Service Container; Tags
 
-Comment utiliser les tags dans vos services
-===========================================
+Comment faire pour que vos services utilisent des Tags
+======================================================
 
 De nombreux services du coeur de Symfony2 dépendent de tags permettant d'indiquer
-quel services doivent être charger, de notifier des évènements, ou de permettre
+quels services doivent être chargés, notifiés de certains évènements, ou de permettre
 d'autres traitements particuliers. Par exemple, Twig utilise le tag ``twig.extension``
 pour charger les extensions ``extra``.
 
 Vous pouvez aussi utiliser les tags dans vos propres bundles. Par exemple, vos
 services implémentent une collection comprenant de nombreuses stratégies
-alternatives qui seront successivement essayées jusqu'à ce que l'une d'elle 
-réussisse.
+alternatives qui seront essayées jusqu'à ce que l'une d'elles réussisse.
 
-Dans cet article, nous allons utiliser l'example de la "chaine de transport", une
-collection de classe implémentant ``\Swift_Transport``. En utilisant cette chaine, 
-la classe Swift mailer essaira différents protocoles, jusqu'à ce que l'un de
-ceux-ci soit un succès. Nous nous concentrerons ici particulièrement sur 
+Dans cet article, nous allons utiliser l'exemple de la « chaîne de transport », une
+collection de classe implémentant ``\Swift_Transport``. En utilisant cette chaîne,
+la classe Swift mailer essaiera différents protocoles, jusqu'à ce que l'un de
+ceux-ci fonctionne avec succès. Ici, nous nous concentrerons particulièrement sur
 l'injection de dépendance.
 
-Pour commencer, définissons la classe ``TransportChain``::
+Pour commencer, définissez la classe ``TransportChain``::
 
     namespace Acme\MailerBundle;
     
@@ -39,7 +38,7 @@ Pour commencer, définissons la classe ``TransportChain``::
         }
     }
 
-Définissons ensuite cette chaîne comme un service:
+Définissez ensuite cette chaîne comme un service :
 
 .. configuration-block::
 
@@ -74,13 +73,13 @@ Définissons ensuite cette chaîne comme un service:
         
         $container->setDefinition('acme_mailer.transport_chain', new Definition('%acme_mailer.transport_chain.class%'));
 
-Définissons les services avec un tag personnalisé
--------------------------------------------------
+Définissez les services avec un tag personnalisé
+------------------------------------------------
 
 Nous voulons à présent que de nombreuses instances de la classe 
-``\Swift_Transport`` soient ajoutées automatiquement les unes à la suites des 
+``\Swift_Transport`` soient ajoutées automatiquement les unes à la suite des
 autres en utilisant la méthode ``addTransport()``. Nous définissons donc pour 
-cela la configuration suivante:
+cela la configuration suivante :
 
 .. configuration-block::
 
@@ -88,7 +87,7 @@ cela la configuration suivante:
 
         # src/Acme/MailerBundle/Resources/config/services.yml
         services:
-		    #...
+            #...
             acme_mailer.transport.smtp:
                 class: \Swift_SmtpTransport
                 arguments:
@@ -125,8 +124,8 @@ cela la configuration suivante:
         $definitionSendmail->addTag('acme_mailer.transport');
         $container->setDefinition('acme_mailer.transport.sendmail', $definitionSendmail);
 
-Notés les tags nommés "acme_mailer.transport". Nous voulons que le bundle reconnaissent
-ces transports et les ajoutent à la chaîne de lui même. Nous commencerons donc
+Notez les tags nommés "acme_mailer.transport". Nous voulons que le bundle reconnaisse
+ces transports et les ajoute à la chaîne par lui-même. Nous commencerons donc
 par ajouter une méthode ``build()`` à la classe ``AcmeMailerBundle``::
 
     namespace Acme\MailerBundle;
@@ -149,7 +148,7 @@ par ajouter une méthode ``build()`` à la classe ``AcmeMailerBundle``::
 Créer un ``CompilerPass``
 -------------------------
 
-Vous allez indiquer une référence à la classes ``TransportCompilerPass``. Cette
+Vous allez indiquer une référence à la classe ``TransportCompilerPass``. Cette
 classe s'assure que tous les services avec un tag ``acme_mailer.transport``
 sont ajoutés à la class ``TransportChain`` en appelant la méthode ``addTransport()``::
 
@@ -176,26 +175,26 @@ sont ajoutés à la class ``TransportChain`` en appelant la méthode ``addTransp
     }
 
 La méthode ``process()``  vérifie l'existence du service ``acme_mailer.transport_chain``,
-puis parcoure tous les services taggués ``acme_mailer.transport``. Elle ajoute à la 
+puis parcourt tous les services taggués ``acme_mailer.transport``. Elle ajoute à la
 définition du service ``acme_mailer.transport_chain`` un appel à ``addTransport()`` 
-pour chaque service "acme_mailer.transport" trouvé. Le premier argument de chacun
+pour chaque service « acme_mailer.transport » trouvé. Le premier argument de chacun
 de ces appels sera le service de transport de mail lui-même.
 
 .. note::
 
     Par convention, les noms des tags sont composés par le nom du bundle (lettres
-	minuscules avec des soulignements comme séparateurs), suivi par un point, et
-	terminer par le nom réel du service, dans ce cas le tag "transport". Ainsi
-	le bundle AcmeMailerBundle deviendra: ``acme_mailer.transport``.
+    minuscules avec des soulignements comme séparateurs), suivi par un point, et
+    terminer par le nom réel du service, dans ce cas le tag "transport". Ainsi
+    le bundle AcmeMailerBundle deviendra : ``acme_mailer.transport``.
 
 La définition compilée du service
 ---------------------------------
 
-Ajouter le ``compileur`` resultera en une génération automatique des lignes de
-codes suivantes dans le container de service compilé. Si vous travaillez dans
-l'environnement de développement, ouvrez le fichier ``app/cache/dev/appDevDebugProjectContainer.php``
-et observer la méthode ``getTransportChainService()``. Elle devrait ressembler
-à ceci::
+Ajouter le ``compileur`` résultera en une génération automatique des lignes de
+codes suivantes dans le conteneur de service compilé. Si vous travaillez dans
+l'environnement de développement, ouvrez le fichier
+``app/cache/dev/appDevDebugProjectContainer.php`` et observez la méthode
+``getTransportChainService()``. Elle devrait ressembler à ceci::
 
     protected function getAcmeMailer_TransportChainService()
     {
