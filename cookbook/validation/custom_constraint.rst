@@ -1,13 +1,13 @@
 .. index::
    single: Validation; Custom constraints
 
-Comment créer un contrainte de validation personnalisée
--------------------------------------------------------
+Comment créer une Contrainte de Validation Personnalisée
+--------------------------------------------------------
 
-Vous pouvez créer une contrainte personnalisée en étandant la classe
+Vous pouvez créer une contrainte personnalisée en étendant la classe
 :class:`Symfony\\Component\\Validator\\Constraint`. Les options pour vos
-contraintes sont représentées par les propriétés public sur la classe. Par
-exemple, la contrainte :doc:`Url</reference/constraints/Url>` inclue
+contraintes sont représentées par les propriétés publiques de la classe. Par
+exemple, la contrainte :doc:`Url</reference/constraints/Url>` inclut
 les propriétés ``message`` et ``protocols``:
 
 .. code-block:: php
@@ -30,10 +30,9 @@ les propriétés ``message`` et ``protocols``:
     L'annotation ``@Annotation`` est nécessaire pour cette nouvelle contrainte 
     afin de la rendre disponible via les annotations dans les autres classes.
 
-Comme vous pouvez le voir, une classe "contrainte" est minimale. La validation est
-réalisée par une autre classe validatrice ("constraint validator"). La classe de 
-validation est défini par l'implémentation de la méthode ``validatedBy()``, incluant
-une logique prédéfinie:
+Comme vous pouvez le voir, une classe « contrainte » est minimale. La validation est
+réalisée par un autre validateur de contrainte. La classe de validation est définie
+par l'implémentation de la méthode ``validatedBy()``, incluant une logique prédéfinie :
 
 .. code-block:: php
 
@@ -43,11 +42,11 @@ une logique prédéfinie:
         return get_class($this).'Validator';
     }
 
-Si vous créer une contrainte personnalisée (ex: ``MyConstraint``), Symfony2
-recherchera automatiquement une autre classe, ``MyConstraintValidator`` réalisant
-la validation (gabarit de recherche: ``ClasseContrainte`` + ``Validator``).
+Si vous créez une contrainte personnalisée (ex: ``MyConstraint``), Symfony2
+recherchera automatiquement une autre classe, ``MyConstraintValidator`` lorsqu'il
+effectue la validation.
 
-La classe validante ne requiert qu'une méthode: ``isValid``. Cela est observable
+La classe validatrice ne requiert qu'une méthode : ``isValid``. Vous pouvez observer cela
 dans l’exemple suivant, avec la classe ``ProtocolValidator``:
 
 .. code-block:: php
@@ -74,14 +73,14 @@ dans l’exemple suivant, avec la classe ``ProtocolValidator``:
 .. note::
 
     N'oubliez pas d'appeler ``setMessage`` pour construire un message d'erreur
-    lorsque la valeur est invalide.
+    lorsque la valeur est non-valide.
 
 Contraintes de validation avec dépendances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si votre validateur possède des dépendances, comme une connexion à une base de données,
-il faudra le configurer comme un service dans le conteneur d'injection de dépendance.
-Ce service doit inclure le tag ``validator.constraint_validator`` et un attribut ``alias``:
+il faudra le configurer comme un service dans le conteneur d'injection de dépendances.
+Ce service doit inclure le tag ``validator.constraint_validator`` et un attribut ``alias`` :
 
 .. configuration-block::
 
@@ -119,7 +118,7 @@ Comme mentionné précédemment, Symfony2 recherchera automatiquement une classe
 nommée d'après le nom de la contrainte et suffixée par ``Validator``.  Si votre
 validateur de contrainte est défini comme un service, il est important de
 surcharger la méthode ``validatedBy()`` afin qu'elle renvoie l'alias utilisé pour
-définir le service, autrement Symfony2 n'utilisera pas le service de validation,
+définir le service ; autrement, Symfony2 n'utilisera pas le service de validation,
 et instanciera la classe, sans injecter les dépendances requises.
 
 Contrainte de validation de classe
