@@ -1,3 +1,6 @@
+.. index::
+   single: Assetic; Apply Filters
+
 Comment appliquer un filtre Assetic à une extension de fichier spécifique
 =========================================================================
 

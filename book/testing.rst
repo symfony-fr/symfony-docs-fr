@@ -168,7 +168,7 @@ son ``DemoController`` (`DemoControllerTest`_) :
 
     .. code-block:: xml
 
-        <phpunit
+        <phpunit>
             <!-- ... -->
             <php>
                 <server name="KERNEL_DIR" value="/path/to/your/app/" />

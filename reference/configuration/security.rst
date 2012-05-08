@@ -111,7 +111,7 @@ Chaque partie sera expliquée dans la section suivante.
                         lifetime: 3600 # in seconds
                         path: /foo
                         domain: somedomain.foo
-                        secure: true
+                        secure: false
                         httponly: true
                         always_remember_me: false
                         remember_me_parameter: _remember_me

@@ -20,7 +20,7 @@ par défaut qui sont montrées ici :
         firewalls:
             main:
                 remember_me:
-                    key:      %secret%
+                    key:      "%secret%"
                     lifetime: 3600
                     path:     /
                     domain:   ~ # Prend la valeur par défaut du domaine courant depuis $_SERVER

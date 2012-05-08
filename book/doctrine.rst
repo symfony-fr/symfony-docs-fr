@@ -1,8 +1,8 @@
 .. index::
    single: Doctrine
 
-Doctrine et les bases de données (« Le Modèle »)
-================================================
+Doctrine et les bases de données
+================================
 
 Voyons les choses en face, les tâches les plus complexes pour n'importe quelle 
 application impliquent de lire et de faire persister des informations dans une base 

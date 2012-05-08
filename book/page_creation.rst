@@ -754,15 +754,15 @@ selon le format que vous préférez :
             - { resource: security.yml }
         
         framework:
-            secret:          %secret%
+            secret:          "%secret%"
             charset:         UTF-8
             router:          { resource: "%kernel.root_dir%/config/routing.yml" }
             #...
 
         # Twig Configuration
         twig:
-            debug:            %kernel.debug%
-            strict_variables: %kernel.debug%
+            debug:            "%kernel.debug%"
+            strict_variables: "%kernel.debug%"
 
         # ...
 

@@ -295,6 +295,11 @@ Symfony2 cherche les fichiers de messages (c-a-d les traductions) aux endroits s
 Les répertoire sont listés par ordre de priorité. Cela signifie que vous pouvez
 surcharger les messages de traduction d'un bundle dans l'un des deux premiers répertoires.
 
+Le système de surcharge se base sur les clés : seules les clés surchargées ont
+besoin d'être listées dans un fichier de plus grande priorité. Quand une clé n'est
+pas trouvée dans un fichier de traductions, le service Translator cherchera automatiquement
+dans les fichiers de moindre priorité.
+
 Le nom des fichiers de traductions est aussi important puisque Symfony2 utilise une convention
 pour déterminer les détails à propos des traductions. Chaque fichier de messages doit être nommé
 selon le schéma suivant : ``domaine.locale.format`` :
@@ -331,7 +336,7 @@ Créer les Traductions
 Le fait de créer des fichiers de traduction est une partie importante de la 
 « localisation » (souvent abrégée `L10n`_). Les fichiers de traduction consistent
 en une série de paires id-traduction pour un domaine et une locale donnés.
-L'id est l'identifiant de la traduction individuelle, et peut
+La source est l'identifiant de la traduction individuelle, et peut
 être le message dans la locale principale (par exemple « Symfony is great ») de votre application
 ou un identificateur unique (par exemple « symfony2.great » - voir l'encadré ci-dessous) :
 
@@ -868,6 +873,8 @@ Traduire le Contenu d'une Base de Données
 La traduction du contenu de bases de données devrait être traitée par Doctrine grâce
 à l'extension `Translatable Extension`_. Pour plus d'informations, voir la documentation
 pour cette bibliothèque.
+
+.. _book-translation-constraint-messages:
 
 Traduire les messages de contraintes
 ------------------------------------

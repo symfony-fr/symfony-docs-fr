@@ -461,6 +461,13 @@ Si jamais vous n'êtes pas certain de la façon dont spécifier une option, soit vé
 pour la contrainte concernée, soit jouez la sécurité en passant toujours dans un tableau d'options
 (la première méthode indiquée ci-dessus).
 
+
+Traduction des messages de contrainte
+-------------------------------------
+ 
+Pour des informations sur la traduction des messages de contrainte,
+allez voir :ref:`book-translation-constraint-messages`.
+
 .. index::
    single: Validation; Constraint targets
 

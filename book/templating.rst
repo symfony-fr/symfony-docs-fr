@@ -1080,6 +1080,11 @@ répertoire ``Resources/views`` du bundle lui-même. Ce qui signifie que tous le
 templates d'un bundle peuvent être surchargés à condition de les placer dans le
 bon sous-répertoire de ``app/Resources``.
 
+.. note::
+    
+    Vous pouvez également surcharger les templates provenant d'un bundle grâce
+    à l'héritage de bundle. Pour plus d'informations, voir :doc:`/cookbook/bundles/inheritance`.
+
 .. _templating-overriding-core-templates:
 
 .. index::
@@ -1348,5 +1353,5 @@ En savoir plus grâce au Cookbook
 .. _`Output Escaping`: http://twig.sensiolabs.org/doc/api.html#escaper-extension
 .. _`tags`: http://twig.sensiolabs.org/doc/tags/index.html
 .. _`filtres`: http://twig.sensiolabs.org/doc/filters/index.html
-.. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/extensions.html
+.. _`ajouter vos propres extensions`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
 .. _`hinclude.js`: http://mnot.github.com/hinclude/

@@ -19,6 +19,8 @@ que vous pouvez utiliser pour vos nombres.
 | héritées    | - `label`_                                                           |
 |             | - `read_only`_                                                       |
 |             | - `error_bubbling`_                                                  |
+|             | - `invalid_message`_                                                 |
+|             | - `invalid_message_parameters`_                                      |
 +-------------+----------------------------------------------------------------------+
 | Type parent | :doc:`field</reference/forms/types/field>`                           |
 +-------------+----------------------------------------------------------------------+
@@ -85,3 +87,7 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc

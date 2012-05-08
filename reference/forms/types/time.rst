@@ -25,6 +25,9 @@ secondes) ou une série de listes déroulantes. La donnée finale peut être stockée
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
+| Options              | - `invalid_message`_                                                        |
+| héritées             | - `invalid_message_parameters`_                                             |
++----------------------+-----------------------------------------------------------------------------+
 | Type parent          | form                                                                        |
 +----------------------+-----------------------------------------------------------------------------+
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimeType`          |
@@ -104,3 +107,12 @@ la valeur qui provient du formulaire sera également normalisée selon ce format.
 .. include:: /reference/forms/types/options/data_timezone.rst.inc
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
+
+Options héritées
+----------------
+
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+
+.. include:: /reference/forms/types/options/invalid_message.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc

@@ -31,6 +31,9 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
+| Options              | - `invalid_message`_                                                        |
+| héritées             | - `invalid_message_parameters`_                                             |
++----------------------+-----------------------------------------------------------------------------+
 | Type parent          | ``field`` (si texte), ``form`` sinon                                        |
 +----------------------+-----------------------------------------------------------------------------+
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType`          |
@@ -102,6 +105,8 @@ la valeur « vide»::
 
 .. include:: /reference/forms/types/options/days.rst.inc
 
+.. _reference-forms-type-date-format:
+
 .. include:: /reference/forms/types/options/date_format.rst.inc
 
 .. include:: /reference/forms/types/options/date_pattern.rst.inc
@@ -109,3 +114,12 @@ la valeur « vide»::
 .. include:: /reference/forms/types/options/data_timezone.rst.inc
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
+
+Options héritées
+----------------
+
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+
+.. include:: /reference/forms/types/options/invalid_message.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc

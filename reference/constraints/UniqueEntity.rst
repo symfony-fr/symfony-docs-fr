@@ -15,7 +15,7 @@ s'enregistre avec une adresse email qui existe déjà dans le système.
 +----------------+-------------------------------------------------------------------------------------+
 | Classe         | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity`            |
 +----------------+-------------------------------------------------------------------------------------+
-| Validateur     | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity\\Validator` |
+| Validateur     | :class:`Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntityValidator` |
 +----------------+-------------------------------------------------------------------------------------+
 
 Utilisation de base
@@ -84,8 +84,15 @@ fields
 **type**: ``array``|``string`` [:ref:`default option<validation-default-option>`]
 
 Cette option obligatoire est le champ (ou la liste de champs) qui sont
-uniques pour l'entité. Par exemple, vous pouvez spécifier que les champs
-email et nom d'un utilisateur doivent être uniques.
+uniques pour l'entité. Par exemple, si vous spécifiez les champs
+``email`` et ``name`` dans la même contrainte ``UniqueEntity``, alors vous êtes
+assuré que chaque combinaison de ces deux champs est unique (deux utilisateurs
+peuvent donc avoir le même email tant qu'il n'ont pas aussi le même nom).
+
+Si vous voulez que deux champs soient unique de façon individuelle (c'est-à-dire
+que ``email`` est unique *et* que ``name`` est unique), vous utilisez deux
+entrées ``UniqueEntity``, une pour chaque champ.
+
 
 message
 ~~~~~~~

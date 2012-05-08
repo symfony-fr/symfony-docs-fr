@@ -131,4 +131,4 @@ documentation.
     * :doc:`spool`
 
 .. _`Swiftmailer`: http://www.swiftmailer.org/
-.. _`Création de Messages`: http://swiftmailer.org/docs/messages
+.. _`Création de Messages`: http://swiftmailer.org/docs/messages.html

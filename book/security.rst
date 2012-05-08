@@ -63,12 +63,15 @@ login/mot de passe) :
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
+        <?xml version="1.0" encoding="UTF-8"?>
+
         <srv:container xmlns="http://symfony.com/schema/dic/security"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
             
+            <!-- app/config/security.xml -->
+
             <config>
                 <firewall name="secured_area" pattern="^/">
                     <anonymous />
@@ -254,6 +257,16 @@ ou les authentifications via Twitter. Quel que soit la méthode d'authentificati
 Utilisation d'un formulaire de connexion traditionnel
 -----------------------------------------------------
 
+.. tip::
+
+    Dans cette secion, vous apprendre comment créer un formulaire de connexion basique
+    qui continue d'utilisez les utilisateurs codés en dur que vous avez défini dans le
+    fichier ``security.yml``.
+
+    Pour charger les utilisateurs de la base de données, lisez :doc:`/cookbook/security/entity_provider`.
+    En lisant cet article et cette secion, vous pouvez créer un système de connexion
+    complet qui charge les utilisateurs dans la base de données.
+
 Pour l'instant, vous avez vu comment protéger votre application derrière un pare-feu et
 ensuite comment protéger l'accès à certaines zones en utilisant les rôles. En utilisant 
 l'authentification HTTP, vous pouvez sans effort profiter de la boite login/mot de passe
@@ -282,11 +295,14 @@ D'abord, activez le formulaire de connexion (« form login ») de votre pare-feu
 
     .. code-block:: xml
     
-        <!-- app/config/security.xml -->
+        <?xml version="1.0" encoding="UTF-8"?>
+
         <srv:container xmlns="http://symfony.com/schema/dic/security"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:srv="http://symfony.com/schema/dic/services"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+            
+            <!-- app/config/security.xml -->
             
             <config>
                 <firewall name="secured_area" pattern="^/">

@@ -197,11 +197,11 @@ Toutes les Options de Configuration par Défaut
             auth_mode:            ~
             spool:
                 type:                 file
-                path:                 %kernel.cache_dir%/swiftmailer/spool
+                path:                 "%kernel.cache_dir%/swiftmailer/spool"
             sender_address:       ~
             antiflood:
                 threshold:            99
                 sleep:                0
             delivery_address:     ~
             disable_delivery:     ~
-            logging:              %kernel.debug%
+            logging:              "%kernel.debug%"

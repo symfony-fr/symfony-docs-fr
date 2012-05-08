@@ -29,6 +29,8 @@ contient par défaut les 120 années précédant l'année courante.
 |                      | - `pattern`_                                                                                                           |
 |                      | - `data_timezone`_                                                                                                     |
 |                      | - `user_timezone`_                                                                                                     |
+|                      | - `invalid_message`_                                                                                                   |
+|                      | - `invalid_message_parameters`_                                                                                        |
 +----------------------+------------------------------------------------------------------------------------------------------------------------+
 | Type parent          | :doc:`date</reference/forms/types/date>`                                                                               |
 +----------------------+------------------------------------------------------------------------------------------------------------------------+
@@ -66,3 +68,9 @@ Ces options héritent du type :doc:`date</reference/forms/types/date>` :
 .. include:: /reference/forms/types/options/data_timezone.rst.inc
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
+
+Ces options héritent du type :doc:`date</reference/forms/types/field>` :
+
+.. include:: /reference/forms/types/options/invalid_message.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc

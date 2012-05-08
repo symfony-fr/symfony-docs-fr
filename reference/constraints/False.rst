@@ -27,7 +27,7 @@ dynamique ``invalidStates``. Premièrement, vous créerez une méthode « getter »::
 
     protected $state;
 
-    protectd $invalidStates = array();
+    protected $invalidStates = array();
 
     public function isStateInvalid()
     {

@@ -96,7 +96,7 @@ d'être loggées sur le serveur en même temps qu'elles sont envoyées par email
                     members: [streamed, buffered]
                 streamed:
                     type:  stream
-                    path:  %kernel.logs_dir%/%kernel.environment%.log
+                    path:  "%kernel.logs_dir%/%kernel.environment%.log"
                     level: debug
                 buffered:
                     type:    buffer

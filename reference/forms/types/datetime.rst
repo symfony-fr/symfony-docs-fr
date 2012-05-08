@@ -30,6 +30,9 @@ réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau.
 |                      | - `data_timezone`_                                                          |
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
+| Options              | - `invalid_message`_                                                        |
+| héritées             | - `invalid_message_parameters`_                                             |
++----------------------+-----------------------------------------------------------------------------+
 | Type parent          | :doc:`form</reference/forms/types/form>`                                    |
 +----------------------+-----------------------------------------------------------------------------+
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\DateTimeType`      |
@@ -73,6 +76,8 @@ date_format
 **type**: ``integer`` ou ``string`` **default**: ``IntlDateFormatter::MEDIUM``
 
 Définit l'option ``format`` qui sera passée au champ date.
+Jetez un oeil à :ref:`l'option format du type date<reference-forms-type-date-format>`
+pour plus de détails.
 
 .. include:: /reference/forms/types/options/hours.rst.inc
 
@@ -91,3 +96,12 @@ Définit l'option ``format`` qui sera passée au champ date.
 .. include:: /reference/forms/types/options/data_timezone.rst.inc
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
+
+Options héritées
+----------------
+
+Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+
+.. include:: /reference/forms/types/options/invalid_message.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc

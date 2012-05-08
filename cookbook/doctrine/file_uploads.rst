@@ -311,6 +311,19 @@ La classe effectue maintenant tout ce dont vous avez besoin : elle génère un n
 de fichier unique avant de le persister, déplace le fichier après avoir persisté
 l'entité, et efface le fichier si l'entité est supprimée.
 
+Maintenant que le déplacement du fichier est automatiquement pris en charge
+par l'entité, l'appel de la méthode ``$document->upload()`` devrait être
+supprimé du contrôleur::
+
+    if ($form->isValid()) {
+        $em = $this->getDoctrine()->getEntityManager();
+ 
+        $em->persist($document);
+        $em->flush();
+ 
+        $this->redirect('...');
+    }
+
 .. note::
 
     Les évènements de callback ``@ORM\PrePersist()`` et ``@ORM\PostPersist()``
@@ -343,6 +356,9 @@ légèrement différente car vous devez sauvegarder l'extension dans la proprié
      */
     class Document
     {
+        // propriété utilisé temporairement pour la suppression   
+        private $filenameForRemove;    
+
         /**
          * @ORM\PrePersist()
          * @ORM\PreUpdate()
@@ -373,13 +389,22 @@ légèrement différente car vous devez sauvegarder l'extension dans la proprié
         }
 
         /**
+         * @ORM\PreRemove()
+         */
+        public function storeFilenameForRemove()
+        {
+            $this->filenameForRemove = $this->getAbsolutePath();
+        }
+
+        /**
          * @ORM\PostRemove()
          */
         public function removeUpload()
         {
-            if ($file = $this->getAbsolutePath()) {
-                unlink($file);
+            if ($this->filenameForRemove) {
+                unlink($this->filenameForRemove);
             }
+        }
         }
 
         public function getAbsolutePath()
@@ -387,3 +412,9 @@ légèrement différente car vous devez sauvegarder l'extension dans la proprié
             return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
         }
     }
+
+Vous noterez que dans ce cas, vous devez effectuer un peu plus de travail pour
+supprimer le fichier. Avant qu'il soit supprimé, vous devez stocker le chemin
+du fichier (puisqu'il dépend de l'id). Ensuite, une fois que l'objet est bien
+complètement supprimé de la base de données, vous pouvez supprimer le fichier
+en toute sécurité (dans ``PostRemove``).

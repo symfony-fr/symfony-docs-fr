@@ -203,7 +203,7 @@ et en changeant la chaîne de caractères de l'environnement.
 
             doctrine:
                dbal:
-                   logging:  %kernel.debug%
+                   logging:  "%kernel.debug%"
                    # ...
 
         .. code-block:: xml

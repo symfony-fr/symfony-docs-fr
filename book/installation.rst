@@ -92,8 +92,6 @@ Step 2: Install vendors
 
 Cette commande télécharge toutes les librairies nécessaires - incluant
 Symfony elle-même - dans le répertoire ``vendor/``.
-This command downloads all of the necessary vendor libraries - including
-Symfony itself - into the ``vendor/`` directory.
 
 .. note::
 
@@ -106,6 +104,24 @@ Symfony itself - into the ``vendor/`` directory.
         php installer
         php composer.phar install
 
+.. tip::
+
+  Lorsque vous exécutez ``php composer.phar install`` ou ``php composer.phar update``,le Composer
+  exécutera les commandes install/update pour vider le cache et installer les ressources (assets).
+  Par défaut, les ressources seront copiées dans le répertoire ``web``. Pour créer des liens
+  symboliques plutôt que de copier les ressources, vous pouvez ajouter une entrée dans le noeud
+  ``extra`` du fichier composer.json avec la clé `symfony-assets-install`` et la valeur ``symlink`` :
+
+  .. code-block:: json
+ 
+      "extra": {
+          "symfony-app-dir": "app", 
+          "symfony-web-dir": "web", 
+          "symfony-assets-install": "symlink" 
+      }
+  
+  Si vous définissez ``relative`` au lieu de ``symlink`` pour symfony-assets-install, la commande
+  génèrera des liens symboliques relatifs.
 
 Configuration et installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

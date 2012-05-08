@@ -230,7 +230,7 @@ requêtes « master », ajoutez le code suivant au début de votre méthode list
 .. tip::
 
     Si vous n'êtes pas encore familier avec le « Dispatcher d'Evènements » de
-    Symfony2, lisez la section :doc:`/components/event_dispatcher` en premier.
+    Symfony2, lisez d'abord la section  :doc:`Documentation du composant Event Dispatcher</components/event_dispatcher/introduction>`.
 
 .. index::
    single: Evènement; kernel.request
@@ -384,7 +384,7 @@ Le Dispatcher d'Evènements
 
 Le dispatcher d'évènements est un composant autonome qui est responsable
 d'une bonne partie de la logique sous-jacente et du flux d'une requête Symfony.
-Pour plus d'informations, lisez la :doc:`documentation du composant Event Dispatcher</components/event_dispatcher>`.
+Pour plus d'informations, lisez la :doc:`documentation du composant Event Dispatcher</components/event_dispatcher/introduction>`.
 
 .. index::
    single: Profiler

@@ -1,3 +1,6 @@
+.. index::
+   single: Assetic; YUI Compressor
+
 Comment minifier les JavaScripts et les feuilles de style avec YUI Compressor
 =============================================================================
 

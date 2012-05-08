@@ -34,7 +34,7 @@ Configuration de référence
                     priority:             0
                     level:                DEBUG
                     bubble:               true
-                    path:                 %kernel.logs_dir%/%kernel.environment%.log
+                    path:                 "%kernel.logs_dir%/%kernel.environment%.log"
                     ident:                false
                     facility:             user
                     max_files:            0
@@ -43,6 +43,9 @@ Configuration de référence
                     buffer_size:          0
                     handler:              ~
                     members:              []
+                    channels:
+                        type:     ~
+                        elements: ~
                     from_email:           ~
                     to_email:             ~
                     subject:              ~

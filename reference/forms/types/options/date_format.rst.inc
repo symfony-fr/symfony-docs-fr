@@ -7,8 +7,9 @@ Option passée à la classe ``IntlDateFormatter``, utilisée pour formatter
 la saisie de l'utilisateur au bon format. C'est essentiel quand l'option
 `widget`_  est définie comme ``single_text``, et elle définira la manière
 dont l'utilisateur devra saisir ses données. 
-Par défaut, le format est déterminé selon la locale de l'utilisateur, mais
-vous pouvez la surcharger en passant le format sous forme de chaine de
+Par défaut, le format est déterminé selon la locale de l'utilisateur, ce qui
+signifie que le *format attendu sera différent pour différents utilisateurs*.
+Vous pouvez la surcharger en passant le format sous forme de chaine de
 caractères.
 
 Pour plus d'informations sur les formats valides, lisez `Syntaxe des formats Date/Time`_.
