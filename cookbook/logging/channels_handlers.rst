@@ -1,28 +1,30 @@
 .. index::
    single: Logging
 
-How to log Messages to different Files
-======================================
+Comment Logger des Messages dans différents Fichiers
+====================================================
 
 .. versionadded:: 2.1
-    The ability to specify channels for a specific handler was added to
-    the MonologBundle for Symfony 2.1.
+    La possibilité de spécifier des canaux pour un gestionnaire spécifique
+    a été ajouté au MonologBundle dans Symfony 2.1.
 
-The Symfony Standard Edition contains a bunch of channels for logging: ``doctrine``,
-``event``, ``security`` and ``request``. Each channel corresponds to a logger
-service (``monolog.logger.XXX``) in the container and is injected to the
-concerned service. The purpose of channels is to be able to organize different
-types of log messages.
+L'Edition Standard de Symfony contient plusieurs canaux pour le logging :
+``doctrine``, ``event``, ``security`` et ``request``. Chaque canal correspond
+à un service de « logger » (``monolog.logger.XXX``) dans le conteneur et est
+injecté dans le service concerné. Le but des canaux est d'être capable d'organiser
+différents types de messages de logging.
 
-By default, Symfony2 logs every messages into a single file (regardless of
-the channel).
+Par défaut, Symfony2 loggue tous les messages dans un fichier unique (peu
+importe le canal).
 
-Switching a Channel to a different Handler
-------------------------------------------
+Transférer un Canal vers un Gestionnaire différent
+--------------------------------------------------
 
-Now, suppose you want to log the ``doctrine`` channel to a different file.
+Maintenant, supposons que vous vouliez logguer le canal ``doctrine`` dans
+un fichier différent.
 
-To do so, just create a new handler and configure it like this:
+Pour faire cela, créez simplement un nouveau gestionnaire et configurez-le
+comme ceci :
 
 .. configuration-block::
 
@@ -59,30 +61,30 @@ To do so, just create a new handler and configure it like this:
             </monolog:handlers>
         </monolog:config>
 
-Yaml specification
+Spécification Yaml
 ------------------
 
-You can specify the configuration by many forms:
+Vous pouvez spécifier la configuration de différentes façons :
 
 .. code-block:: yaml
 
-    channels: ~    # Include all the channels
+    channels: ~    # Inclus tous les canaux
 
-    channels: foo  # Include only channel "foo"
-    channels: !foo # Include all channels, except "foo"
+    channels: foo  # Inclus seulement le canal "foo"
+    channels: !foo # Inclus tous les canaux, excepté "foo"
 
-    channels: [foo, bar]   # Include only channels "foo" and "bar"
-    channels: [!foo, !bar] # Include all channels, except "foo" and "bar"
+    channels: [foo, bar]   # Inclus seulement les canaux "foo" et "bar"
+    channels: [!foo, !bar] # Inclus tous les canaux, excepté "foo" et "bar"
 
     channels:
-        type:     inclusive # Include only those listed below
+        type:     inclusive # Inclus seulement ceux listés ci-dessous
         elements: [ foo, bar ]
     channels:
-        type:     exclusive # Include all, except those listed below
+        type:     exclusive # Inclus tous, excepté ceux listés ci-dessous
         elements: [ foo, bar ]
 
 
-Learn more from the Cookbook
-----------------------------
+En savoir plus grâce au Cookbook
+--------------------------------
 
 * :doc:`/cookbook/logging/monolog`
