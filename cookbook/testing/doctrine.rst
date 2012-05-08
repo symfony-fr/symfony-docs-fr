@@ -1,8 +1,8 @@
 .. index::
    single: Tests; Doctrine
 
-Comment tester les dépôts doctrines
-===================================
+Comment tester les dépôts Doctrine
+==================================
 
 Les tests unitaires des dépôts Doctrines à l’intérieur d'un projet Symfony
 ne sont pas recommandés. Lorsque vous travaillez avec un dépôt, vous
@@ -43,7 +43,7 @@ une classe qui simplifiera les processus de test::
 
         public function testProductByCategoryName()
         {
-            $results = $this->em 
+            $results = $this->em
                 ->getRepository('AcmeStoreBundle:Product')
                 ->searchProductsByNameQuery('foo')
                 ->getResult()
