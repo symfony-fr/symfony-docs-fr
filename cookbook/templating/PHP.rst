@@ -1,22 +1,20 @@
 .. index::
    single: PHP Templates
 
-Comment utiliser PHP plutôt que TWIG dans les modèles
-=====================================================
+Comment utiliser PHP plutôt que Twig dans les templates
+=======================================================
 
 Même si Symfony2 utilise Twig en tant que moteur de rendu par défaut, vous
 pouvez utiliser du code PHP si vous le désirez. Ces deux moteurs de rendu
 sont en effet supportés à part égal au sein de Symfony2. Symfony2 ajoute
-même à PHP quelques possibilités agréables permettant d'écrire des modèles
+même à PHP quelques possibilités utiles permettant d'écrire des modèles
 encore plus puissants.
 
-NdT: Un modèle se traduit en anglais par template.
-
-Rendu des modèles PHP
----------------------
+Rendu des templates PHP
+-----------------------
 
 Si vous voulez utiliser le moteur de rendu PHP, il vous faut d'abord vous
-assurer d'activer celui-ci dans votre le fichier de configuration de votre
+assurer d'activer celui-ci dans le fichier de configuration de votre
 application:
 
 .. configuration-block::
@@ -48,11 +46,11 @@ application:
             ),
         ));
 
-Vous pouvez maintenant utiliser le moteur de rendu utilisant des modèles PHP
-plutôt que des modèles Twig simplement en utilisant l'extension ``.php`` dans
-le nom de vos modèles à la place ide l'extension ``.twig``.
+Vous pouvez maintenant utiliser le moteur de rendu en utilisant des templates PHP
+plutôt que des templates Twig simplement en utilisant l'extension ``.php`` dans
+le nom de vos templates à la place de l'extension ``.twig``.
 
-Le contrôleur suivant restitue ainsi le modèle ``index.html.php`` ::
+Le contrôleur suivant délivre ainsi le template ``index.html.php`` ::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
 
@@ -65,15 +63,15 @@ Le contrôleur suivant restitue ainsi le modèle ``index.html.php`` ::
   single: Templating; Layout
   single: Layout
 
-Modèles de décorations
-----------------------
+Templates de décorations
+------------------------
 
-Très souvent les modèles au sein d'un même projets partagent des composants communs
-comme le bien connu entête (header) ou le pied de page (footer). Chez Symfony, nous
-aimons penser à ce problème différemment: un modèle peut être décoré par un autre.
+Très souvent, les templates au sein d'un même projet partagent des composants communs
+comme l'en-tête bien connu ou le pied de page. Chez Symfony, nous aimons penser à ce
+problème différemment : un template peut être décoré par un autre.
 
-Le modèle ``index.html.php`` est décoré par ``layout.html.php``, grace à l'appel
- ``extend()`` :
+Le template ``index.html.php`` est décoré par ``layout.html.php``, grâce à l'appel
+de la méthode ``extend()`` :
 
 .. code-block:: html+php
 
@@ -82,13 +80,13 @@ Le modèle ``index.html.php`` est décoré par ``layout.html.php``, grace à l'a
 
     Hello <?php echo $name ?>!
 
-La notation ``AcmeHelloBundle::layout.html.php`` vous parait peut être familière,
-c'est en effet la même notation qui est utilisée pour référencer un modèle à
-l'intérieur d'un controleur. La partie ``::`` s'expliquant simplement par l'absence
+La notation ``AcmeHelloBundle::layout.html.php`` vous parait peut être familière ;
+c'est en effet la même notation qui est utilisée pour référencer un template à
+l'intérieur d'un contrôleur. La partie ``::`` s'expliquant simplement par l'absence
 d'un sous-dossier correspondant habituellement au contrôleur et qui sera donc
 cherché directement à la racine du dossier ``views/``.
 
-Maintenant regardons d'un peu plus prêt le fichier ``layout.html.php`` :
+Maintenant, regardons d'un peu plus près le fichier ``layout.html.php`` :
 
 .. code-block:: html+php
 
@@ -100,10 +98,10 @@ Maintenant regardons d'un peu plus prêt le fichier ``layout.html.php`` :
     <?php $view['slots']->output('_content') ?>
 
 Le décorateur ou layout est lui-même décoré par un autre (``::base.html.php``).
-Symfony2 supporte en effet de multiples niveau de décoration: un décorateur
+Symfony2 supporte en effet de multiples niveaux de décoration : un décorateur
 peut lui-même être décoré par un autre, et celà indéfinimment. Quand la partie
-bundle du nom du modèle est vide, les vues sont recherchées dans le dossier
-``app/Resources/views/``. Ce dossier enregistre donc les vues globales utilisées
+bundle du nom du template est vide, les vues sont recherchées dans le dossier
+``app/Resources/views/``. Ce dossier contient donc les vues globales utilisées
 dans tout le projet.
 
 .. code-block:: html+php
@@ -121,12 +119,12 @@ dans tout le projet.
     </html>
 
 Pour les deux décorateurs, l'expression ``$view['slots']->output('_content')``
-est remplacé par le contenu du modèle fils, respectivement ``index.html.php`` et
-``layout.html.php`` (voir la section prochaine sur les slots).
+est remplacée par le contenu du template fils, respectivement ``index.html.php`` et
+``layout.html.php`` (voir la prochaine section sur les slots).
 
 Comme vous pouvez le voir, Symfony2 fourni des méthodes sur l'objet ``$view``. Dans un
-modèle, la variable ``$view`` est toujours disponible et réfère à un objet fournissant
-une suite de méthodes rendant le moteur de rendu puissant.
+template, la variable ``$view`` est toujours disponible et réfère à un objet fournissant
+un ensemble de méthodes rendant le moteur de rendu puissant.
 
 .. index::
    single: Templating; Slot
@@ -135,9 +133,9 @@ une suite de méthodes rendant le moteur de rendu puissant.
 Travailler avec les slots
 -------------------------
 
-Un slot est un bout de code défini dans un modèle et réutilisable dans tous les
-décorateurs de ce modèle. Ainsi dans le modèle ``index.html.php`` un slot
- ``title`` correspond à :
+Un slot est un bout de code défini dans un template et réutilisable dans tous les
+décorateurs de ce template. Ainsi dans le template ``index.html.php`` un slot
+``title`` correspond à :
 
 .. code-block:: html+php
 
@@ -148,7 +146,7 @@ décorateurs de ce modèle. Ainsi dans le modèle ``index.html.php`` un slot
 
     Hello <?php echo $name ?>!
 
-Le décorateur de base a déjà le code pour afficher le titre dans le header html:
+Le décorateur de base a déjà le code pour afficher le titre dans le header html :
 
 .. code-block:: html+php
 
@@ -158,11 +156,11 @@ Le décorateur de base a déjà le code pour afficher le titre dans le header ht
         <title><?php $view['slots']->output('title', 'Hello Application') ?></title>
     </head>
 
-La méthode ``output()`` insert le contenu d'un slot and optionnellement prends une
+La méthode ``output()`` insert le contenu d'un slot et optionnellement prend une
 valeur par défaut si le slot n'est pas défini. ``_content`` est quand à lui un
-slot special qui contient le rendu du modèle enfant.
+slot special qui contient le rendu du template enfant.
 
-Pour les slots plus prolixes, il existe aussi une syntaxe étendue:
+Pour les slots plus longs, il existe aussi une syntaxe étendue :
 
 .. code-block:: html+php
 
@@ -173,20 +171,20 @@ Pour les slots plus prolixes, il existe aussi une syntaxe étendue:
 .. index::
    single: Templating; Include
 
-Inclure d'autres modèles
-------------------------
+Inclure d'autres templates
+--------------------------
 
-La meilleure voie pour partager une part d'un modèle est de définir un modèle qui
+La meilleure façon de partager une partie d'un template est de définir un template qui
 pourra être inclus dans d'autres.
 
-Créer un modèle ``hello.html.php`` :
+Créez un template ``hello.html.php`` :
 
 .. code-block:: html+php
 
     <!-- src/Acme/HelloBundle/Resources/views/Hello/hello.html.php -->
     Hello <?php echo $name ?>!
 
-Et changer le modèle ``index.html.php`` pour qu'il comporte :
+Et changez le template ``index.html.php`` pour qu'il comporte :
 
 .. code-block:: html+php
 
@@ -195,7 +193,7 @@ Et changer le modèle ``index.html.php`` pour qu'il comporte :
 
     <?php echo $view->render('AcmeHelloBundle:Hello:hello.html.php', array('name' => $name)) ?>
 
-La méthode ``render()`` évalue et retourne le contenu d'un autre modèle (c'est
+La méthode ``render()`` évalue et retourne le contenu d'un autre template (c'est
 exactement la même méthode que celle utilisée dans le contrôleur).
 
 .. index::
@@ -204,20 +202,20 @@ exactement la même méthode que celle utilisée dans le contrôleur).
 Intégrer d'autre contrôleurs
 ----------------------------
 
-Intégrer le résultat d'un contrôleur dans un modèle peut être très utile afin de
+Intégrer le résultat d'un contrôleur dans un template peut être très utile afin de
 factoriser certaines partie de l'application, en particulier lors de traitements
-Ajax, ou quand les modèles intégrés ont besoin de certaines variables non-incluses
-dans le modèle principal.
+Ajax, ou quand les templates intégrés ont besoin de certaines variables non-incluses
+dans le template principal.
 
-Si vous créer une action nommé ``fancy``, et voulez l'inclure dans le modèle
-``index.html.php``, utiliser simplement le code suivant:
+Si vous créez une action nommée ``fancy``, et que vous voulez l'inclure dans le template
+``index.html.php``, utilisez simplement le code suivant :
 
 .. code-block:: html+php
 
     <!-- src/Acme/HelloBundle/Resources/views/Hello/index.html.php -->
     <?php echo $view['actions']->render('AcmeHelloBundle:Hello:fancy', array('name' => $name, 'color' => 'green')) ?>
 
-Ici, la chaîne de caractère ``AcmeHelloBundle:Hello:fancy`` fait référence à l'action
+Ici, la chaîne de caractères ``AcmeHelloBundle:Hello:fancy`` fait référence à l'action
 ``fancy`` du contrôleur ``Hello`` ::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
@@ -235,29 +233,29 @@ Ici, la chaîne de caractère ``AcmeHelloBundle:Hello:fancy`` fait référence �
         // ...
     }
 
-Mais où est défini le tableau d'éléments ``$view['actions']``? Comme ``$view['slots']``,
-c'est un assitant modèle et la section suivantes vous en apprendra plus à son propos.
+Mais où est défini le tableau d'éléments ``$view['actions']`` ? Comme ``$view['slots']``,
+c'est un template « helper » et la section suivante vous en apprendra plus à son propos.
 
 .. index::
    single: Templating; Helpers
 
-Utiliser les assitants du modèle (ou template helper)
------------------------------------------------------
+Utiliser les templates « helpers »
+----------------------------------
 
-Le système de rendu par modèle utiliser par Symfony peut être étendu facilement
-grace à des assitants. Les assitants sont des objets PHP qui fournissent des
-possibilités utiles dans le contextes des modèles. ``actions`` et ``slots``
-sont ainsi deux des nombreux assitants intégrés à Symfony2.
+Le système de rendu par template utilisé par Symfony peut être étendu facilement
+grace à des « helpers ». Les « helpers » sont des objets PHP qui fournissent des
+possibilités utiles dans le contexte des templates. ``actions`` et ``slots``
+sont ainsi deux des nombreux « helpers » intégrés dans Symfony2.
 
 Créer des liens entre les pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A l'intérieur d'une application web créer des liens entre les pages nécessite
+A l'intérieur d'une application web, créez des liens entre les pages nécessite
 d'utiliser des méthode propres à l'application si l'on souhaite conserver une
-évolutivité et une maintenabilité sans faille. Ainsi l'utilisation d'un assitant
-``router`` à l'intérieur des modèle permets de générer des URLs basées sur la
-configuration du routage. De cette façon toutes les urls peuvent facilement être
-mise à jour directement en changeant simplement la configuration:
+évolutivité et une maintenabilité sans failles. Ainsi l'utilisation d'un « helper »
+``router`` à l'intérieur des template permet de générer des URLs basées sur la
+configuration du routage. De cette façon, toutes les URLs peuvent facilement être
+mises à jour directement en changeant simplement la configuration:
 
 .. code-block:: html+php
 
@@ -265,10 +263,10 @@ mise à jour directement en changeant simplement la configuration:
         Greet Thomas!
     </a>
 
-La méthode ``generate()``  prends comme arguments le nom de la route et un tableau
-de paramètres. Le nom de la route est la clef principal sous laquelle celle-ci
-est défini, les paramètres sont des valeurs remplaçant les paramètres incluent
-dans celle-ci:
+La méthode ``generate()``  prend comme arguments le nom de la route et un tableau
+de paramètres. Le nom de la route est la clé principale sous laquelle celle-ci
+est définie, les paramètres sont des valeurs remplaçant les paramètres inclus
+dans celle-ci :
 
 .. code-block:: yaml
 
@@ -277,11 +275,11 @@ dans celle-ci:
         pattern:  /hello/{name}
         defaults: { _controller: AcmeHelloBundle:Hello:index }
 
-Utiliser des atouts (assets): images, JavaScripts, et feuilles de styles
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser des « assets » : images, JavaScripts, et feuilles de style
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Que serait internet sans image, sans javascript ou sans feuille de style?
-Symfony2 fourni le tag ``assets`` pour les utiliser facilement:
+Que serait Internet sans images, sans JavaScript ou sans feuille de style ?
+Symfony2 fourni le tag ``assets`` pour les utiliser facilement :
 
 .. code-block:: html+php
 
@@ -289,20 +287,20 @@ Symfony2 fourni le tag ``assets`` pour les utiliser facilement:
 
     <img src="<?php echo $view['assets']->getUrl('images/logo.png') ?>" />
 
-Les assitants ``assets`` ont pour but principaux de rendre votre application plus
+Les « helpers » ``assets`` ont pour but principal de rendre votre application plus
 portable. Grâce à ceux-ci, vous pouvez déplacer le répertoire principal de votre
-application où vous le souhaiter à l'intérieur d'un dossier web sans changer
-quoique ce soit dans le code de vos modèles.
+application où vous le souhaitez à l'intérieur d'un dossier web sans changer
+quoique ce soit dans le code de vos templates.
 
-Sécurisation des sorties (échappement des variables)
-----------------------------------------------------
+Echappement des variables de sortie (« Output Escaping » en anglais)
+--------------------------------------------------------------------
 
-Quand vous utiliser les modèles, les variables peuvent être conservée tant qu'elles ne
-sont pas afficher à l'utilisateur::
+Quand vous utilisez des templates, les variables peuvent être conservées tant qu'elles ne
+sont pas affichées à l'utilisateur::
 
     <?php echo $view->escape($var) ?>
 
-Par défaut, la méthode ``escape()`` assumes que la variable est affichée dans un context
+Par défaut, la méthode ``escape()`` assume que la variable est affichée dans un contexte
 HTML. Le second argument vous permet de définir le contexte. Par exemple, pour afficher
 cette variable dans un script JavaScript, il est possible d'utiliser le contexte ``js``::
 

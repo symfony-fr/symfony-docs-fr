@@ -1,10 +1,10 @@
-Comment gérer les dépendances communes avec un service parent
-=============================================================
+Comment Gérer les Dépendances Communes avec des Services Parents
+================================================================
 
 En ajoutant plus de fonctionnalités à votre application, vous pouvez 
 commencer à observer des classes qui partagent certaines dépendances. Par 
 exemple, vous pouvez avoir un gestionnaire de newsletter qui utilise des 
-mutateurs pour injecter ses dépendances::
+« setters » pour injecter ses dépendances::
 
     namespace Acme\HelloBundle\Mail;
 
@@ -28,7 +28,7 @@ mutateurs pour injecter ses dépendances::
         // ...
     }
 
-Tout autant qu'une classe GreetingCard qui partage les mêmes dépendances::
+et de même une classe GreetingCard qui partage les mêmes dépendances::
 
     namespace Acme\HelloBundle\Mail;
 
@@ -142,10 +142,10 @@ le service config pour ces classes devrait être alors :
         ));
 
 Beaucoup de répétitions sont alors présentes tant dans les deux classes, que dans
-la configuration. Cela implique que si vous changer par exemple, le ``Mailer`` de
-la classe ``EmailFormatter`` vous devez modifier la configuration en deux endroits.
-De la même façon, si vous avez besoin d'effectuer des changement sur les mutateurs
-(setMailer ou setEmailFormatter) vous auriez besoin de modifier les deux classes.
+la configuration. Cela implique que si vous changez par exemple le ``Mailer`` de
+la classe ``EmailFormatter``, vous devez modifier la configuration en deux endroits.
+De la même façon, si vous avez besoin d'effectuer des changement sur les « setters »
+(setMailer ou setEmailFormatter), vous auriez besoin de modifier les deux classes.
 La solution classique est alors d'extraire ces méthode dans une classe parente des
 deux classes précédentes::
 
@@ -191,7 +191,7 @@ et::
     }
 
 De façon similaire, le conteneur de service supporte aussi l'héritage de service
-au travers de clefs de configuration ainsi vous pouvez réduire les répétition en
+au travers de clés de configuration ; ainsi vous pouvez réduire les répétitions en
 spécifiant un parent pour un service particulier.
 
 .. configuration-block::
@@ -287,20 +287,20 @@ spécifiant un parent pour un service particulier.
         );
 
 Dans ce contexte, un service ``parent`` implique que les arguments et les méthodes appelées
-par le service parent devront être disponible dans le service enfant. Les mutateurs définis
+par le service parent devront être disponibles dans le service enfant. Les « setters » définis
 seront ainsi appelés au moment où le service enfant sera instancié.
 
 .. note::
 
-   Si vous supprimer la clef parent de la configuration, les services seront toujours
-   instanciés et étendront toujours leurs classe mère ( ici``MailManager``). La différence
-   étant que les ``appels`` aux mutateurs (setMailer et setEmailFormatter) ne seront plus 
+   Si vous supprimez la clé parente de la configuration, les services seront toujours
+   instanciés et étendront toujours leur classe mère (ici ``MailManager``). La différence
+   étant que les ``appels`` aux « setters » (setMailer et setEmailFormatter) ne seront plus
    effectués au moment de l'instanciation.
 
-La classe parent est défini comme abstraite  afin de ne pas être instancier directement.
+La classe parente est définie comme abstraite  afin de ne pas être instanciée directement.
 La mention abstraite dans le fichier de configuration permet de créer un service qui ne sera
-pas activé et sera seulement utilisé en tant que parent. En d'autre termes, il apparait plus 
-comme un prototype que comme un service à part entière.
+pas activé et qui sera seulement utilisé en tant que parent. En d'autre termes, il apparaît
+plus comme un prototype que comme un service à part entière.
 
 Surcharger les dépendances parentes
 -----------------------------------
@@ -308,9 +308,9 @@ Surcharger les dépendances parentes
 Vous pourriez avoir besoin de surcharger les arguments ou les méthodes 
 provenant d'un service parent et transmises à un seul service enfant.
 En ajoutant les appels de méthodes au service enfant, les dépendances 
-assignées par un parent peuvent être surcharger. Ainsi qi vous avez besoin
-de définir une dépendance différentes à la classe ``NewsletterManager``,
-la configuration deviendrait:
+assignées par un parent peuvent être surchargées. Ainsi, que vous avez besoin
+de définir une dépendance différente à la classe ``NewsletterManager``,
+la configuration deviendrait :
 
 .. configuration-block::
 
@@ -418,20 +418,20 @@ la configuration deviendrait:
             '%greeting_card_manager.class%'
         );
 
-La classe ``GreetingCardManager`` recevra les même arguments qu'avant,
-mais la classe ``NewsletterManager`` recevra une instance de ``my_alternative_mailer``
-à la place du service ``my_mailer``.
+La classe ``GreetingCardManager`` recevra les même arguments qu'avant, mais la classe
+``NewsletterManager`` recevra une instance de ``my_alternative_mailer`` à la place du
+service ``my_mailer``.
 
 Collections de Dépendances
----------------------------
+--------------------------
 
-Surcharger les mutateurs, comme dans l'example précédent, provoque deux appels,
+Surcharger les « setters », comme dans l'exemple précédent, provoque deux appels,
 l'un pour la définition parente, l'autre pour la définition de l'enfant. Dans 
 ce cas particulier cela n'aura pas d'incidence, les objets mailer étant simplement
 remplacés.
 
 Dans certains cas cependant, cela peut causer un problème (utilisation de variables
-statiques, appels internes avec mutations, ajouts, enregistrement dans une collection,...), 
+statiques, appels internes avec mutations, ajouts, enregistrement dans une collection, ...),
 comme dans la classe suivante::
 
     namespace Acme\HelloBundle\Mail;
@@ -450,7 +450,7 @@ comme dans la classe suivante::
         // ...
     }
 
-Si vous avez une configuration tel que celle-ci:
+Si vous avez une configuration telle que celle-ci:
 
 .. configuration-block::
 
