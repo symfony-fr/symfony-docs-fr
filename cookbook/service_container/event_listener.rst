@@ -1,18 +1,20 @@
 .. index::
-   single: Events; Create Listener
+   single: Evénements; Créer un Listener
 
-How to create an Event Listener
-===============================
+Comment créer un « Listener » (« écouteur » en français) d'Evénement
+====================================================================
 
-Symfony has various events and hooks that can be used to trigger custom
-behavior in your application. Those events are thrown by the HttpKernel 
-component and can be viewed in the :class:`Symfony\\Component\\HttpKernel\\KernelEvents` class. 
+Symfony possède divers événements et « hooks » qui peuvent être utilisés
+pour déclencher un comportement personnalisé dans votre application. Ces
+événements sont lancés par le composant HttpKernel et peuvent être consultés
+dans la classe :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
-To hook into an event and add your own custom logic, you have to  create
-a service that will act as an event listener on that event. In this entry,
-we will create a service that will act as an Exception Listener, allowing
-us to modify how exceptions are shown by  our application. The ``KernelEvents::EXCEPTION``
-event is just one of the core kernel events::
+Afin de personnaliser un événement avec votre propre logique, vous devez créer
+un service qui va agir en tant que « listener » d'événement pour cet événement.
+Dans cet article, nous allons créer un service qui agit en tant que « Listener »
+d'Exception, nous permettant de modifier comment les exceptions sont montrées par
+notre application. L'événement ``KernelEvents::EXCEPTION`` est l'un des événements
+du coeur du noyau::
 
     // src/Acme/DemoBundle/Listener/AcmeExceptionListener.php
     namespace Acme\DemoBundle\Listener;
@@ -23,28 +25,30 @@ event is just one of the core kernel events::
     {
         public function onKernelException(GetResponseForExceptionEvent $event)
         {
-            // We get the exception object from the received event
+            // nous récupérons l'objet exception depuis l'événement reçu
             $exception = $event->getException();
             $message = 'My Error says: ' . $exception->getMessage();
             
-            // Customize our response object to display our exception details
+            // personnalise notre objet réponse pour afficher les détails de notre exception
             $response->setContent($message);
             $response->setStatusCode($exception->getStatusCode());
             
-            // Send our modified response object to the event
+            // envoie notre objet réponse modifié à l'événement
             $event->setResponse($response);
         }
     }
 
 .. tip::
 
-    Each event receives a slightly different type of ``$event`` object. For
-    the ``kernel.exception`` event, it is :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`.
-    To see what type of object each event listener receives, see :class:`Symfony\\Component\\HttpKernel\\KernelEvents`,
+    Chaque événement reçoit un objet de type ``$event`` légèrement différent.
+    Pour l'événement ``kernel.exception``, c'est
+    :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`.
+    Pour voir quel type d'objet chaque « listener » d'événement reçoit, voir
+    :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
-Now that the class is created, we just need to register it as a service and
-and notify Symfony that it is a "listener" on the ``kernel.exception`` event
-by using a special "tag":
+Maintenant que la classe est créée, nous devons juste la définir en tant que
+service et notifier Symfony que c'est un « listener » de l'événement
+``kernel.exception`` en utilisant un « tag » spécifique :
 
 .. configuration-block::
 
@@ -71,7 +75,8 @@ by using a special "tag":
         
 .. note::
 
-    There is an additional tag option ``priority`` that is optional and defaults
-    to 0. This value can be from -255 to 255, and the listeners will be executed
-    in the order of their priority. This is useful when you need to guarantee
-    that one listener is executed before another.
+    Il y a une autre option ``priority`` pour le tag qui est optionnelle et qui
+    par défaut a pour valeur 0. Cette valeur peut aller de -255 à 255, et les
+    « listeners » seront exécutés dans cet ordre de priorité. Cela est utile
+    lorsque vous avez besoin de garantir qu'un « listener » est exécuté avant un
+    autre.
