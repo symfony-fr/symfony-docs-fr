@@ -3,7 +3,7 @@ Définir des Fonctions DQL Personnalisées
 
 Doctrine vous permet de spécifier des fonctions DQL personnalisées. Pour plus
 d'informations à ce sujet, lisez l'article du cookbook de Doctrine
-« `DQL User Defined Functions`_ ».
+« `Fonctions DQL définies par l'utilisateur`_ ».
 
 Dans Symfony, vous pouvez définir vos fonctions DQL personnalisées comme suit :
 
@@ -78,4 +78,4 @@ Dans Symfony, vous pouvez définir vos fonctions DQL personnalisées comme suit 
             ),
         ));
 
-.. _`DQL User Defined Functions`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/dql-user-defined-functions.html
+.. _`Fonctions DQL définies par l'utilisateur`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/dql-user-defined-functions.html
