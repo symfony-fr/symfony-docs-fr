@@ -5,8 +5,8 @@ Comment écrire une Extension Twig personnalisée
 ===============================================
 
 La motivation principale d'écrire une extension est de déplacer du code
-souvent utilisé dans une classe réutilisable comme ajouter le support pour
-l'internationalisation.
+souvent utilisé dans une classe réutilisable, comme par exemple ajouter le support
+pour l'internationalisation.
 Une extension peut définir des tags, des filtres, des tests, des opérateurs,
 des variables globales, des fonctions et des noeuds visiteurs.
 
@@ -127,7 +127,7 @@ Passez d'autres arguments à votre filtre :
 En savoir plus
 --------------
 
-Pour étudier le sujet des Extensions Twig plus en profondeur, veuillez jeter un coup d'oeil à
+Pour étudier le sujet des Extensions Twig plus en détail, veuillez jeter un coup d'oeil à
 la `documentation des extensions Twig`_.
 
 .. _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions
