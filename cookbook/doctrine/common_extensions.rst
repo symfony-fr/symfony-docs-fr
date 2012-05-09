@@ -11,7 +11,7 @@ l'intégration de fonctionnalités pour les comportements (Behaviors) `Sluggable
 
 L'utilisation de chacune de ces extensions est expliquée dans son dépôt.
 
-Toutefois, pour installer/activer chacune extension, vous devez enregistrer
+Toutefois, pour installer/activer chaque extension, vous devez enregistrer
 et activer un :doc:`Ecouteur d'évènement (Event Listener)</cookbook/doctrine/event_listeners_subscribers>`.
 Pour faire cela, vous avez deux possibilités :
 
