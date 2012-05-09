@@ -1,17 +1,18 @@
-Symfony2 License
+License Symfony2
 ================
 
-Symfony2 is released under the MIT license.
+Symfony2 est réalisé sous licence MIT.
 
-According to `Wikipedia`_:
+D'après `Wikipedia`_:
 
-    "It is a permissive license, meaning that it permits reuse within
-    proprietary software on the condition that the license is distributed with
-    that software. The license is also GPL-compatible, meaning that the GPL
-    permits combination and redistribution with software that uses the MIT
-    License."
+   "C'est une licence de logiciel libre et open source, non copyleft, permettant
+   donc d'inclure des modifications sous d'autres licences,    y compris non 
+   libres. La licence donne à toute personne recevant le logiciel le droit
+   illimité de l'utiliser, le copier, le modifier, le fusionner, le publier,
+   le distribuer, le vendre et de changer sa licence. La seule obligation est de
+   mettre le nom des auteurs avec la notice de copyright."
 
-The License
+La License
 -----------
 
 Copyright (c) 2004-2011 Fabien Potencier
