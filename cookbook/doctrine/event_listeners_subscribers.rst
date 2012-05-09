@@ -3,7 +3,7 @@
 Enregistrer des listeners (« écouteurs » en français) et des souscripteurs d'évènement
 ======================================================================================
 
-Doctrine vient avec un riche système d'évènement qui lance des évènements à
+Doctrine est fourni avec un riche système d'évènement qui lance des évènements à
 chaque fois - ou presque - que quelque chose se passe dans le système. Pour vous,
 cela signifie que vous pouvez créer arbitrairement des :doc:`services</book/service_container>`
 et dire à Doctrine de notifier ces objets à chaque fois qu'une certaine
@@ -14,16 +14,16 @@ qu'un objet est sauvegardé dans votre base de données.
 Doctrine définit deux types d'objets qui peuvent « écouter » des évènements
 Doctrine : les listeners et les souscripteurs d'évènement. Les deux sont très
 similaires, mais les listeners sont un peu plus simples. Pour plus d'informations,
-voir `The Event System`_ sur le site de Doctrine.
+voir `Le système d'évènements`_ sur le site de Doctrine.
 
 Configurer le listener/souscripteur d'évènement
 -----------------------------------------------
 
 Pour spécifier à un service d'agir comme un listener d'évènements ou comme un
 souscripteur, vous devez simplement le :ref:`tagger<book-service-container-tags>`
-avec un nom approprié. Dépendant de votre cas, vous pouvez placer un listener
+avec un nom approprié. Selon votre cas, vous pouvez placer un listener
 dans chaque connexion DBAL et gestionnaire d'entité ORM ou juste dans une connexion
-DBAL spécifique et tous les gestionnaires d'entité qui utilise cette connexion.
+DBAL spécifique et tous les gestionnaires d'entité qui utilisent cette connexion.
 
 .. configuration-block::
 
@@ -106,12 +106,12 @@ l'évènement est lancé::
 
 Dans chaque évènement, vous avez accès à un objet ``LifecycleEventArgs``,
 qui vous donne accès à l'objet entité de l'évènement ainsi qu'au gestionnaire
-d'entité lui-même.
+d'entités lui-même.
 
 Une chose importante à noter est qu'un listener va écouter *toutes* les entités
-de votre application. Donc, si vous êtes intéressé de gérer uniquement un type
+de votre application. Donc, si vous n'êtes intéressé que de gérer uniquement un type
 spécifique d'entité (par exemple : une entité ``Product`` mais pas une entité
 ``BlogPost``), vous devriez vérifier le nom de la classe de votre entité dans
 votre méthode (comme montré ci-dessus).
 
-.. _`The Event System`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html
+.. _`Le système d'évènements`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html
