@@ -6,17 +6,17 @@ Comment utiliser la couche DBAL de Doctrine
 
 .. note::
 
-    Cet article parle de la couche DBAL de Doctrine. Typiquement, vous
+    Cet article traite de la couche DBAL de Doctrine. Typiquement, vous
     allez travailler avec le haut niveau de la couche ORM de Doctrine,
     qui utilise le DBAL en arrière-plan pour effectivement communiquer
     avec la base de données. Pour en lire plus à propos de l'ORM Doctrine,
     voir « :doc:`/book/doctrine` ».
 
-La couche d'abstraction de la base de données (i.e. DBAL) de `Doctrine`_ réside
-au sommet de `PDO`_ et offre une API intuitive et flexible pour communiquer
-avec les bases de données relationnelles les plus populaires. En d'autres mots,
-la bibliothèque DBAL rend facile l'exécution de requêtes et autres actions
-sur la base de données.
+La couche d'abstraction de la base de données (DBAL pour DataBase Abstraction Layer)
+de `Doctrine`_ se situe au plus haut niveau de `PDO`_ et offre une API intuitive et flexible
+pour communiquer avec les bases de données relationnelles les plus populaires.
+En d'autres termes, la bibliothèque DBAL rend facile l'exécution de requêtes et autres
+actions sur la base de données.
 
 .. tip::
 
@@ -87,8 +87,8 @@ Déclarer des Types de Correspondance Personnalisés
 
 Vous pouvez déclarer des types de correspondance personnalisés via la configuration
 de Symfony. Ils seront ajoutés à toutes les connexions configurées. Pour plus
-d'information sur les types de correspondances personnalisés, lisez la section
-`Custom Mapping Types`_ de la documentation de Doctrine.
+d'informations sur les types de correspondances personnalisés, lisez la section
+`types de correspondances personnalisés`_ de la documentation de Doctrine.
 
 .. configuration-block::
 
@@ -139,9 +139,9 @@ Déclarer des Types de Correspondance Personnalisés via le SchemaTool
 --------------------------------------------------------------------
 
 Le SchemaTool est utilisé pour inspecter la base de données afin d'en comparer
-le schéma. Pour achever cette tâche, il a besoin de connaître quel type de
+le schéma. Pour effectuer cette tâche, il a besoin de connaître quel type de
 correspondance utiliser pour chaque type de base de données. En déclarer de
-nouveaux peut être effectué à travers la configuration.
+nouveaux peut être effectué grâce à la configuration.
 
 Faisons correspondre le type ENUM (non-supporté par DBAL par défaut) à un type
 ``string`` :
@@ -155,7 +155,7 @@ Faisons correspondre le type ENUM (non-supporté par DBAL par défaut) à un typ
             dbal:
                 connections:
                     default:
-                        // Other connections parameters
+                        // Autres paramètres de connexion
                         mapping_types:
                             enum: string
 
@@ -191,4 +191,4 @@ Faisons correspondre le type ENUM (non-supporté par DBAL par défaut) à un typ
 .. _`PDO`:           http://www.php.net/pdo
 .. _`Doctrine`:      http://www.doctrine-project.org
 .. _`Documentation DBAL`: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
-.. _`Custom Mapping Types`: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#custom-mapping-types
+.. _`types de correspondances personnalisés`: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#custom-mapping-types
