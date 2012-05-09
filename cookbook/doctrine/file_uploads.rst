@@ -2,21 +2,21 @@ Comment gérer les uploads de fichier avec Doctrine
 ==================================================
 
 Gérer les uploads de fichier avec les entités Doctrine n'est en rien différent
-que de gérer n'importe quel autre upload. En d'autres termes, vous êtes libre
+de gérer n'importe quel autre upload. En d'autres termes, vous êtes libre
 de déplacer le fichier via votre contrôleur après avoir géré la soumission du
 formulaire. Pour voir des exemples, référez-vous à la page de
 :doc:`référence du type fichier</reference/forms/types/file>`.
 
 Si vous le choisissez, vous pouvez aussi intégrer l'upload de fichier dans le
-cycle de vie de votre entité (i.e. création, mise à jour et suppression). Dans
+cycle de vie de votre entité (c-a-d création, mise à jour et suppression). Dans
 ce cas, lorsque votre entité est créée, mise à jour et supprimée de Doctrine,
 les processus d'upload et de suppression du fichier se feront de manière
 automatique (sans avoir besoin de faire quoi que ce soit dans votre contrôleur).
 
 Pour que cela fonctionne, vous allez avoir besoin de prendre en compte un
-certain nombre de détails qui vont être couverts dans cet article du cookbook.
+certain nombre de détails qui vont être couverts dans cet article du Cookbook.
 
-Installation Basique
+Installation basique
 --------------------
 
 Tout d'abord, créez une classe Entité Doctrine simple avec laquelle nous
@@ -85,7 +85,7 @@ lui peut être utilisé dans un template pour ajouter un lien vers le fichier up
 
     Si vous ne l'avez pas déjà fait, vous devriez probablement lire la
     documentation du type :doc:`fichier</reference/forms/types/file>` en
-    premier afin de comprendre comment le processus basique d'upload
+    premier afin de comprendre comment le processus de base de l'upload
     fonctionne.
 
 .. note::
