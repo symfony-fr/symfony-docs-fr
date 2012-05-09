@@ -6,10 +6,10 @@ Comment générer des Entités à partir d'une base de données existante
 
 Lorsque vous commencez à travailler sur un tout nouveau projet qui utilise
 une base de données, deux situations différentes peuvent arriver. Dans la
-plupart des cas, le modèle de base de données est conçu et construit depuis
+plupart des cas, le modèle de base de données est conçu et construit de
 zéro. Dans d'autres cas, cependant, vous commencerez avec un modèle de base
 de données existant et probablement inchangeable. Heureusement, Doctrine
-vient avec une série d'outils vous aidant à générer les classes de modèle
+est fourni avec une série d'outils vous aidant à générer les classes de modèle
 à partir de votre base de données existante.
 
 .. note::
@@ -17,7 +17,7 @@ vient avec une série d'outils vous aidant à générer les classes de modèle
     Comme la `documentation des outils Doctrine`_ le dit, faire du « reverse
     engineering » est un processus qu'on n'effectue qu'une seule fois lorsqu'on
     démarre un projet. Doctrine est capable de convertir environ 70-80% des
-    informations de correspondance nécessaires basé sur les champs, les index
+    informations de correspondance nécessaires en se basant sur les champs, les index
     et les contraintes de clés étrangères. En revanche, Doctrine ne peut pas
     identifier les associations inverses, les types d'inhéritance, les entités
     avec clés étrangères en tant que clés primaires ou les opérations sémantiques
@@ -26,7 +26,7 @@ vient avec une série d'outils vous aidant à générer les classes de modèle
     par la suite pour finir la conception de chacune afin de satisfaire les
     spécificités du modèle de votre domaine.
 
-Ce tutoriel assume que vous utilisez une application de blog simple avec les
+Ce tutoriel suppose que vous utilisez une application de blog simple avec les
 deux tables suivantes : ``blog_post`` et ``blog_comment``. Une entrée
 « comment » est liée à une entrée « post » grâce à une contrainte de clé
 étrangère.
@@ -56,13 +56,13 @@ Avant d'aller plus loin, assurez-vous que vos paramètres de connexion à la bas
 de données sont correctement définis dans le fichier ``app/config/parameters.yml``
 (ou à quelconque endroit que ce soit où votre configuration de base de données est
 conservée) et que vous avez initialisé un bundle qui va contenir votre future classe
-entité. Dans ce tutorial, nous assumerons qu'un ``AcmeBlogBundle`` existe et
+entité. Dans ce tutorial, nous supposerons qu'un ``AcmeBlogBundle`` existe et
 qu'il se situe dans le dossier ``src/Acme/BlogBundle``.
 
 La première étape permettant de construire les classes entité depuis une
 base de données existante est de demander à Doctrine d'introspecter cette
 dernière et de générer les fichiers de méta-données correspondants. Les
-fichiers de méta-données décrivent la classe entité à générer basé sur
+fichiers de méta-données décrivent la classe entité à générer en se basant sur
 les champs des tables.
 
 .. code-block:: bash
@@ -170,7 +170,7 @@ pour être ``xml`` ou ``yml``. La classe entité nouvellement créée ressemble
     }
 
 Comme vous pouvez le voir, Doctrine convertit tous les champs de la table en propriétés
-privées et annotées de la classe. La chose la plus impressionnante et qu'il
+privées et annotées de la classe. La chose la plus impressionnante est qu'il
 identifie aussi la relation avec la classe entité ``BlogPost`` basé sur la contrainte
 de clé étrangère. De ce fait, vous pouvez trouver une propriété privée ``$post``
 correspondant à une entité ``BlogPost`` dans la classe entité ``BlogComment``.
