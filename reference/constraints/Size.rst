@@ -1,10 +1,10 @@
 Size
 ====
 
-Validates that a given number is *between* some minimum and maximum number.
+Valider qu'un nombre donné se situe *entre* un nombre minimum et un nombre maximum.
 
 +----------------+--------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`              |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`            |
 +----------------+--------------------------------------------------------------------+
 | Options        | - `min`_                                                           |
 |                | - `max`_                                                           |
@@ -12,16 +12,16 @@ Validates that a given number is *between* some minimum and maximum number.
 |                | - `maxMessage`_                                                    |
 |                | - `invalidMessage`_                                                |
 +----------------+--------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\Size`          |
+| Classe      | :class:`Symfony\\Component\\Validator\\Constraints\\Size`          |
 +----------------+--------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\SizeValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\SizeValidator` |
 +----------------+--------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-To verify that the "height" field of a class is between "120" and "180", you might add
-the following:
+Pour vérifier qu'un champ « hauteur » (« height » en anglais) se situe entre « 120 » et
+« 180 », vous pouvez procéder comme suit :
 
 .. configuration-block::
 
@@ -34,8 +34,8 @@ the following:
                     - Size:
                         min: 120
                         max: 180
-                        minMessage: You must be at least 120cm tall to enter
-                        maxMessage: You cannot be taller than 180cm to enter
+                        minMessage: Vous devez mesurer au moins 120cm pour entrer
+                        maxMessage: Vous ne devez pas mesurer plus de 180cm pour entrer
 
     .. code-block:: php-annotations
 
@@ -48,8 +48,8 @@ the following:
              * @Assert\Size(
              *      min = "120",
              *      max = "180",
-             *      minMessage = "You must be at least 120cm tall to enter",
-             *      maxMessage="You cannot be taller than 180cm to enter"
+             *      minMessage = "Vous devez mesurer au moins 120cm pour entrer",
+             *      maxMessage="Vous ne devez pas mesurer plus de 180cm pour entrer"
              * )
              */
              protected $height;
@@ -63,39 +63,37 @@ min
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "min" value. Validation will fail if the given
-value is **less** than this min value.
+Cette option obligatoire est la valeur « minimale ». La validation échouera
+si la donnée saisie est **plus petite** que cette valeur minimale.
 
 max
 ~~~
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "max" value. Validation will fail if the given
-value is **greater** than this max value.
+Cette option obligatoire est la valeur « maximale ». La validation échouera
+si la donnée saisie est **plus grande** que cette valeur maximale.
 
 minMessage
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be {{ limit }} or more.``
 
-The message that will be shown if the underlying value is less than the `min`_
-option.
+Le message qui sera affiché si la donnée saisie est inférieure à l'option `min`_.
 
 maxMessage
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be {{ limit }} or less.``
 
-The message that will be shown if the underlying value is more than the `max`_
-option.
+Le message qui sera affiché si la donnée saisie est supérieure à l'option `max`_.
 
 invalidMessage
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be a valid number.``
 
-The message that will be shown if the underlying value is not a number (per
-the `is_numeric`_ PHP function).
+Le message qui sera affiché si la donnée saisie n'est pas un nombre (pour
+la fonction PHP `is_numeric`_).
 
-.. _`is_numeric`: http://www.php.net/manual/en/function.is-numeric.php
+.. _`is_numeric`: http://www.php.net/manual/fr/function.is-numeric.php
