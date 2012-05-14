@@ -1,7 +1,7 @@
 .. index::
    single: Evénements; Créer un Listener
 
-Comment créer un « Listener » (« écouteur » en français) d'Evénement
+Comment créer un « listener » (« écouteur » en français) d'evénement
 ====================================================================
 
 Symfony possède divers événements et « hooks » qui peuvent être utilisés
@@ -12,7 +12,7 @@ dans la classe :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 Afin de personnaliser un événement avec votre propre logique, vous devez créer
 un service qui va agir en tant que « listener » d'événement pour cet événement.
 Dans cet article, nous allons créer un service qui agit en tant que « Listener »
-d'Exception, nous permettant de modifier comment les exceptions sont montrées par
+d'Exception, nous permettant de modifier comment les exceptions sont affichées par
 notre application. L'événement ``KernelEvents::EXCEPTION`` est l'un des événements
 du coeur du noyau::
 
@@ -43,8 +43,8 @@ du coeur du noyau::
     Chaque événement reçoit un objet de type ``$event`` légèrement différent.
     Pour l'événement ``kernel.exception``, c'est
     :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`.
-    Pour voir quel type d'objet chaque « listener » d'événement reçoit, voir
-    :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
+    Pour voir quel est le type d'objet que chaque « listener » d'événement reçoit,
+    voyez :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
 Maintenant que la classe est créée, nous devons juste la définir en tant que
 service et notifier Symfony que c'est un « listener » de l'événement
@@ -76,7 +76,7 @@ service et notifier Symfony que c'est un « listener » de l'événement
 .. note::
 
     Il y a une autre option ``priority`` pour le tag qui est optionnelle et qui
-    par défaut a pour valeur 0. Cette valeur peut aller de -255 à 255, et les
+    a pour valeur par défaut 0. Cette valeur peut aller de -255 à 255, et les
     « listeners » seront exécutés dans cet ordre de priorité. Cela est utile
     lorsque vous avez besoin de garantir qu'un « listener » est exécuté avant un
     autre.
