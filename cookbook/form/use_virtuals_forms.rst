@@ -78,8 +78,7 @@ Commencez par créer un ``CompanyType`` et un ``CustomerType``::
     }
 
 Maintenant, nous devons gérer les quatre champs dupliqués. Vous pouvez
-voir ci-dessous un (simple) type de formulaire « location » (« lieu » en
-français)::
+voir ci-dessous un (simple) type de formulaire « location »::
 
     // src/Acme/HelloBundle/Form/Type/LocationType.php
     namespace Acme\HelloBundle\Form\Type;
@@ -129,13 +128,13 @@ Voyez le résultat::
         $builder->add('bar', new LocationType());
     }
 
-Avec l'option « virtual » définie comme « false » (comportement par défaut),
+Avec l'option « virtual » définie à « false » (comportement par défaut),
 le composant Form s'attend à ce que chaque objet sous-jacent ait une propriété
 ``foo`` (ou ``bar``) qui soit un objet ou un tableau contenant les quatre
 champs du lieu. Bien sûr, nous n'avons pas cet objet/tableau dans nos
 entités et nous ne le voulons pas.
 
-Avec l'option « virtual » définie comme « true », le composant Form ne s'occupe pas
+Avec l'option « virtual » définie à « true », le composant Form ne s'occupe pas
 de la propriété ``foo`` (ou ``bar``), et à la place « récupère » et « définit » (« gets »
 et « sets » en anglais) les 4 champs du lieu directement sur l'objet sous-jacent.
 
