@@ -1,12 +1,12 @@
 .. index::
    single: Logging
 
-Comment Logger des Messages dans différents Fichiers
+Comment loguer des messages dans différents fichiers
 ====================================================
 
 .. versionadded:: 2.1
     La possibilité de spécifier des canaux pour un gestionnaire spécifique
-    a été ajouté au MonologBundle dans Symfony 2.1.
+    a été ajoutée au MonologBundle dans Symfony 2.1.
 
 L'Edition Standard de Symfony contient plusieurs canaux pour le logging :
 ``doctrine``, ``event``, ``security`` et ``request``. Chaque canal correspond
@@ -14,13 +14,13 @@ L'Edition Standard de Symfony contient plusieurs canaux pour le logging :
 injecté dans le service concerné. Le but des canaux est d'être capable d'organiser
 différents types de messages de logging.
 
-Par défaut, Symfony2 loggue tous les messages dans un fichier unique (peu
+Par défaut, Symfony2 logue tous les messages dans un fichier unique (peu
 importe le canal).
 
-Transférer un Canal vers un Gestionnaire différent
+Transférer un canal vers un gestionnaire différent
 --------------------------------------------------
 
-Maintenant, supposons que vous vouliez logguer le canal ``doctrine`` dans
+Maintenant, supposons que vous vouliez loguer le canal ``doctrine`` dans
 un fichier différent.
 
 Pour faire cela, créez simplement un nouveau gestionnaire et configurez-le
