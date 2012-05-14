@@ -1,7 +1,7 @@
 Size
 ====
 
-Valider qu'un nombre donné se situe *entre* un nombre minimum et un nombre maximum.
+Valide qu'un nombre donné se situe *entre* un nombre minimum et un nombre maximum.
 
 +----------------+--------------------------------------------------------------------+
 | S'applique à   | :ref:`propriété ou méthode<validation-property-target>`            |
@@ -12,7 +12,7 @@ Valider qu'un nombre donné se situe *entre* un nombre minimum et un nombre maxi
 |                | - `maxMessage`_                                                    |
 |                | - `invalidMessage`_                                                |
 +----------------+--------------------------------------------------------------------+
-| Classe      | :class:`Symfony\\Component\\Validator\\Constraints\\Size`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Size`          |
 +----------------+--------------------------------------------------------------------+
 | Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\SizeValidator` |
 +----------------+--------------------------------------------------------------------+
