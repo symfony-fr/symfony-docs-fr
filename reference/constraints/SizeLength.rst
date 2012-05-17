@@ -1,10 +1,11 @@
 SizeLength
 ==========
 
-Validates that a given string length is *between* some minimum and maximum value according to the provided charset.
+Valide que la longueur de la chaine de caractères donnée se situe *entre* une valeur minimum et
+une valeur maximum selon le charset fourni.
 
 +----------------+--------------------------------------------------------------------------+
-| Applies to     | :ref:`property or method<validation-property-target>`                    |
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                  |
 +----------------+--------------------------------------------------------------------------+
 | Options        | - `min`_                                                                 |
 |                | - `max`_                                                                 |
@@ -13,16 +14,16 @@ Validates that a given string length is *between* some minimum and maximum value
 |                | - `maxMessage`_                                                          |
 |                | - `exactMessage`_                                                        |
 +----------------+--------------------------------------------------------------------------+
-| Class          | :class:`Symfony\\Component\\Validator\\Constraints\\SizeLength`          |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\SizeLength`          |
 +----------------+--------------------------------------------------------------------------+
-| Validator      | :class:`Symfony\\Component\\Validator\\Constraints\\SizeLengthValidator` |
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\SizeLengthValidator` |
 +----------------+--------------------------------------------------------------------------+
 
-Basic Usage
------------
+Utilisation de base
+-------------------
 
-To verify that the ``firstName`` field length of a class is between "2" and
-"50", you might add the following:
+Pour vérifier que la longueur du champ ``firstName`` d'une classe se situe entre
+« 2 » et « 50 », vous pouvez procéder comme suit :
 
 .. configuration-block::
 
@@ -35,8 +36,8 @@ To verify that the ``firstName`` field length of a class is between "2" and
                     - SizeLength:
                         min: 2
                         max: 50
-                        minMessage: Your first name must be at least 2 characters length
-                        maxMessage: Your first name cannot be longer than than 50 characters length
+                        minMessage: Votre nom doit faire au moins 2 caractères
+                        maxMessage: Votre nom ne peut pas être plus long que 50 caractères
 
     .. code-block:: php-annotations
 
@@ -49,8 +50,8 @@ To verify that the ``firstName`` field length of a class is between "2" and
              * @Assert\SizeLength(
              *      min = "2",
              *      max = "50",
-             *      minMessage = "Your first name must be at least 2 characters length",
-             *      maxMessage="Your first name cannot be longer than than 50 characters length"
+             *      minMessage = "Votre nom doit faire au moins 2 caractères",
+             *      maxMessage="Votre nom ne peut pas être plus long que 50 caractères"
              * )
              */
              protected $firstName;
@@ -64,29 +65,29 @@ min
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "min" length value. Validation will fail if the given
-value's length is **less** than this min value.
+Cette option obligatoire est la valeur de la longueur « minimale ». La validation échouera
+si la longueur de la donnée saisie est **plus petite** que cette valeur minimale.
 
 max
 ~~~
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-This required option is the "max" length value. Validation will fail if the given
-value's length is **greater** than this max value.
+Cette option obligatoire est la valeur de la longueur « maximale ». La validation échouera
+si la longueur de la donnée saisie est **plus grande** que cette valeur maximale.
 
 charset
 ~~~~~~~
 
 **type**: ``string``  **default**: ``UTF-8``
 
-The charset to be used when computing value's length. The `grapheme_strlen`_ PHP
-function is used if available. If not, the the `mb_strlen`_ PHP function
-is used if available. If neither are available, the `strlen`_ PHP function
-is used.
+Le charset qui sera utilisé pour calculer la longueur de la valeur. La fonction
+PHP `grapheme_strlen`_ est utilisée si elle est disponible. Sinon, la fonction PHP
+`mb_strlen`_ est utilisée si elle est disponible. Si aucune de ces deux fonctions
+n'est disponible, la fonction `strlen`_ est utilisée.
 
-.. _`grapheme_strlen`: http://www.php.net/manual/en/function.grapheme_strlen.php
-.. _`mb_strlen`: http://www.php.net/manual/en/function.mb_strlen.php
+.. _`grapheme_strlen`: http://www.php.net/manual/en/function.grapheme-strlen.php
+.. _`mb_strlen`: http://www.php.net/manual/en/function.mb-strlen.php
 .. _`strlen`: http://www.php.net/manual/en/function.strlen.php
 
 minMessage
@@ -94,21 +95,21 @@ minMessage
 
 **type**: ``string`` **default**: ``This value is too short. It should have {{ limit }} characters or more.``
 
-The message that will be shown if the underlying value's length is less than the `min`_
-option.
+Le message qui sera affiché si la longueur de la valeur saisie est inférieure à
+l'option `min`_.
 
 maxMessage
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value is too long. It should have {{ limit }} characters or less.``
 
-The message that will be shown if the underlying value's length is more than the `max`_
-option.
+Le message qui sera affiché si la longueur de la valeur saisie est supérieure à
+l'option `max`_.
 
 exactMessage
 ~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should have exactly {{ limit }} characters.``
 
-The message that will be shown if min and max values are equal and the underlying
-value's length is not exactly this value.
+Le message qui sera affiché si les valeurs min et max sont égales, et que la longueur
+de la valeur soumise n'est pas exactement cette valeur.
