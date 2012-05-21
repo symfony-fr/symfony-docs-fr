@@ -1,12 +1,12 @@
 Choice
 ======
 
-Cette contrainte est utilisée pour s'assurer qu'une valeur donnée fait partie
-d'un ensemble de choix *valides*. Elle peut aussi être utilisée pour valider
+Cette contrainte est utilisÃ©e pour s'assurer qu'une valeur donnÃ©e fait partie
+d'un ensemble de choix *valides*. Elle peut aussi Ãªtre utilisÃ©e pour valider
 que chaque item d'un tableau d'items est l'un des choix valides.
 
 +----------------+-----------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `choices`_                                                          |
 |                | - `callback`_                                                         |
@@ -27,9 +27,9 @@ que chaque item d'un tableau d'items est l'un des choix valides.
 Utilisation de base
 -------------------
 
-L'idée principale de cette contrainte est que fournissez un tableau de valeurs
-valides (cela peut être fait de différentes manières) et elle valide que la
-valeur d'une propriété données est bien dans ce tableau.
+L'idÃ©e principale de cette contrainte est que fournissez un tableau de valeurs
+valides (cela peut Ãªtre fait de diffÃ©rentes maniÃ¨res) et elle valide que la
+valeur d'une propriÃ©tÃ© donnÃ©es est bien dans ce tableau.
 
 Si votre liste de choix valides est simple, vous pouvez la passer directement
 via l'option `choices`_ :
@@ -96,10 +96,10 @@ via l'option `choices`_ :
 Fournir les choix par une fonction callback
 -------------------------------------------
 
-Vous pouvez aussi utiliser une fonction callback pour spécifier vos options. C'est
-utile si vous voulez garder vos choix dans un endroit centralisé pour, par exemple,
-avoir accès facilement à ces choix pour la validation ou pour construire des listes
-déroulantes pour les formulaires.
+Vous pouvez aussi utiliser une fonction callback pour spÃ©cifier vos options. C'est
+utile si vous voulez garder vos choix dans un endroit centralisÃ© pour, par exemple,
+avoir accÃ¨s facilement Ã  ces choix pour la validation ou pour construire des listes
+dÃ©roulantes pour les formulaires.
 
 .. code-block:: php
 
@@ -112,7 +112,7 @@ déroulantes pour les formulaires.
         }
     }
 
-Vous pouvez passer le nom de cette méthode à l'option `callback_` de la contrainte
+Vous pouvez passer le nom de cette mÃ©thode Ã  l'option `callback_` de la contrainte
 ``Choice``.
 
 .. configuration-block::
@@ -149,8 +149,8 @@ Vous pouvez passer le nom de cette méthode à l'option `callback_` de la contrain
             </property>
         </class>
 
-Si le callback statique est stocké dans une classe différente, par exemple
-``Util``, vous pouvez passer le nom de la classe et la méthode dans un tableau.
+Si le callback statique est stockÃ© dans une classe diffÃ©rente, par exemple
+``Util``, vous pouvez passer le nom de la classe et la mÃ©thode dans un tableau.
 
 .. configuration-block::
 
@@ -196,16 +196,16 @@ choices
 ~~~~~~~
 
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
-Cette option obligatoire (à moins que `callback`_ soit spécifiée)
-représente le tableau d'options qui doit être considéré comme un
-ensemble valide. La donnée soumise sera comparée à ce tableau.
+Cette option obligatoire (Ã  moins que `callback`_ soit spÃ©cifiÃ©e)
+reprÃ©sente le tableau d'options qui doit Ãªtre considÃ©rÃ© comme un
+ensemble valide. La donnÃ©e soumise sera comparÃ©e Ã  ce tableau.
 
 callback
 ~~~~~~~~
 
 **type**: ``string|array|Closure``
 
-C'est la méthode callback qui peut être utilisée au lieu de l'option `choices`_
+C'est la mÃ©thode callback qui peut Ãªtre utilisÃ©e au lieu de l'option `choices`_
 pour retourner le tableau de choix. Lisez `Fournir les choix par une fonction callback`_
 pour plus d'informations sur son utilisation.
 
@@ -214,37 +214,37 @@ multiple
 
 **type**: ``Boolean`` **default**: ``false``
 
-Si cette option est définie à true, la valeur soumise attendue est un tableau
-et non plus une simple valeur. La contrainte vérifiera que chaque valeur du tableau
+Si cette option est dÃ©finie Ã  true, la valeur soumise attendue est un tableau
+et non plus une simple valeur. La contrainte vÃ©rifiera que chaque valeur du tableau
 soumis se trouve dans le tableau de choix valides. Si une seule des valeurs soumises
-n'est pas trouvée, la validation échouera.
+n'est pas trouvÃ©e, la validation Ã©chouera.
 
 min
 ~~~
 
 **type**: ``integer``
 
-Si l'option ``multiple`` est à true, alors vous pouvez utiliser l'option ``min``
-pour forcer qu'au moins XX valeurs doivent être sélectionnées. Par exemple,
+Si l'option ``multiple`` est Ã  true, alors vous pouvez utiliser l'option ``min``
+pour forcer qu'au moins XX valeurs doivent Ãªtre sÃ©lectionnÃ©es. Par exemple,
 si ``min`` vaut 3 et si le tableau soumis contient 2 items valides, la validation
-échouera.
+Ã©chouera.
 
 max
 ~~~
 
 **type**: ``integer``
 
-Si l'option ``multiple`` est à true, alors vous pouvez utiliser l'option ``max``
-pour forcer que XX valeurs peuvent être sélectionnées au maximum. Par exemple,
+Si l'option ``multiple`` est Ã  true, alors vous pouvez utiliser l'option ``max``
+pour forcer que XX valeurs peuvent Ãªtre sÃ©lectionnÃ©es au maximum. Par exemple,
 si ``max`` vaut 3 et si le tableau soumis contient 4 items valides, la validation
-échouera.
+Ã©chouera.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``The value you selected is not a valid choice``
 
-C'est le message que vous verrez si l'option ``multiple`` est définie à ``false``,
+C'est le message que vous verrez si l'option ``multiple`` est dÃ©finie Ã  ``false``,
 et que la valeur soumise n'est pas dans le tableau de choix valides.
 
 multipleMessage
@@ -252,7 +252,7 @@ multipleMessage
 
 **type**: ``string`` **default**: ``One or more of the given values is invalid``
 
-C'est le message que vous verrez si l'option ``multiple`` est définie à ``true``,
+C'est le message que vous verrez si l'option ``multiple`` est dÃ©finie Ã  ``true``,
 et que l'une des valeurs du tableau soumis n'est pas dans le tableau de valeurs
 valides.
 
@@ -261,7 +261,7 @@ minMessage
 
 **type**: ``string`` **default**: ``You must select at least {{ limit }} choices``
 
-C'est le message d'erreur qui est affiché quand l'utilisateur choisit trop peu de choix
+C'est le message d'erreur qui est affichÃ© quand l'utilisateur choisit trop peu de choix
 (en fonction de l'option `min`_).
 
 maxMessage
@@ -269,7 +269,7 @@ maxMessage
 
 **type**: ``string`` **default**: ``You must select at most {{ limit }} choices``
 
-C'est le message d'erreur qui est affiché quand l'utilisateur choisit trop de choix
+C'est le message d'erreur qui est affichÃ© quand l'utilisateur choisit trop de choix
 (en fonction de l'option `max`_).
 
 strict
@@ -277,8 +277,8 @@ strict
 
 **type**: ``Boolean`` **default**: ``false``
 
-Si cette option est à true, le validateur vérifiera également le type de la donnée soumise.
-Spécifiquement, cette valeur est passée comme troisième argument de la méthode PHP `in_array`_
-lorsque vous vérifiez qu'une valeur est bien dans le tableau de choix valides.
+Si cette option est Ã  true, le validateur vÃ©rifiera Ã©galement le type de la donnÃ©e soumise.
+SpÃ©cifiquement, cette valeur est passÃ©e comme troisiÃ¨me argument de la mÃ©thode PHP `in_array`_
+lorsque vous vÃ©rifiez qu'une valeur est bien dans le tableau de choix valides.
 
 .. _`in_array`: http://php.net/manual/en/function.in-array.php

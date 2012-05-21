@@ -5,25 +5,25 @@ Type de champ Country
 =====================
 
 Le type ``country`` est un sous-ensemble de ``ChoiceType`` qui affiche la liste
-des pays du monde. Et en bonus, les noms des pays sont affichés dans la langue de
+des pays du monde. Et en bonus, les noms des pays sont affichÃ©s dans la langue de
 l'utilisateur.
 
-La « valeur » de chaque pays est son code en 2 lettres.
+La Â« valeur Â» de chaque pays est son code en 2 lettres.
 
 .. note::
 
-   La locale de l'utilisateur est retournée par la méthode `Locale::getDefault()`_
+   La locale de l'utilisateur est retournÃ©e par la mÃ©thode `Locale::getDefault()`_
 
-Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options
+Contrairement au type ``choice``, vous n'avez pas besoin de spÃ©cifier les options
 ``choices`` ou ``choice_list`` puisque le type retourne automatiquement la liste
-de tous les pays du monde. Vous *pouvez* spécifier ces options manuellement, mais alors
-vous devriez plutôt utiliser directement le type ``choice``.
+de tous les pays du monde. Vous *pouvez* spÃ©cifier ces options manuellement, mais alors
+vous devriez plutÃ´t utiliser directement le type ``choice``.
 
 +-------------+------------------------------------------------------------------------+
-| Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
+| Rendu comme | peut Ãªtre diffÃ©rentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
-| héritées    | - `expanded`_                                                          |
+| hÃ©ritÃ©es    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
@@ -36,10 +36,10 @@ vous devriez plutôt utiliser directement le type ``choice``.
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType`  |
 +-------------+------------------------------------------------------------------------+
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
+Ces options hÃ©ritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -51,7 +51,7 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

@@ -1,10 +1,10 @@
 MaxLength
 =========
 
-Valide que la longueur d'une chaine de caractères est inférieure à la limite donnée.
+Valide que la longueur d'une chaine de caractÃ¨res est infÃ©rieure Ã  la limite donnÃ©e.
 
 +----------------+-------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                 |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                 |
 +----------------+-------------------------------------------------------------------------+
 | Options        | - `limit`_                                                              |
 |                | - `message`_                                                            |
@@ -60,8 +60,8 @@ limit
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-Cette option obligatoire est la longueur « maximale ». La validation échouera
-si la longueur de la chaine de caractères donnée est **supérieure** à cette
+Cette option obligatoire est la longueur Â« maximale Â». La validation Ã©chouera
+si la longueur de la chaine de caractÃ¨res donnÃ©e est **supÃ©rieure** Ã  cette
 valeur.
 
 message
@@ -69,16 +69,16 @@ message
 
 **type**: ``string`` **default**: ``This value is too long. It should have {{ limit }} characters or less``
 
-Le message qui sera affiché si la longueur de la chaine de caractères donnée est
-supérieure à l'option `limit`_.
+Le message qui sera affichÃ© si la longueur de la chaine de caractÃ¨res donnÃ©e est
+supÃ©rieure Ã  l'option `limit`_.
 
 charset
 ~~~~~~~
 
 **type**: ``charset`` **default**: ``UTF-8``
 
-Si l'extension PHP « mbstring » est installée, alors la fonction PHP `mb_strlen`_
-sera utilisée pour calculer la longueur de la chaine. La valeur de l'option
-``charset`` est passée comme second argument de cette fonction.
+Si l'extension PHP Â« mbstring Â» est installÃ©e, alors la fonction PHP `mb_strlen`_
+sera utilisÃ©e pour calculer la longueur de la chaine. La valeur de l'option
+``charset`` est passÃ©e comme second argument de cette fonction.
 
 .. _`mb_strlen`: http://php.net/manual/fr/function.mb-strlen.php

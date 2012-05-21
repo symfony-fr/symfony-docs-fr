@@ -1,11 +1,11 @@
 All
 ===
 
-Quand elle est appliquée à un tableau (ou un objet Traversable), cette contrainte vous
-permet d'appliquer un ensemble de contraintes à chaque élément du tableau.
+Quand elle est appliquÃ©e Ã  un tableau (ou un objet Traversable), cette contrainte vous
+permet d'appliquer un ensemble de contraintes Ã  chaque Ã©lÃ©ment du tableau.
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `constraints`_                                                       |
 +----------------+------------------------------------------------------------------------+
@@ -17,8 +17,8 @@ permet d'appliquer un ensemble de contraintes à chaque élément du tableau.
 Utilisation de base
 -------------------
 
-Supposons que vous avez un tableau de chaines de caractères, et que vous
-voulez valider chaque entrée du tableau :
+Supposons que vous avez un tableau de chaines de caractÃ¨res, et que vous
+voulez valider chaque entrÃ©e du tableau :
 
 .. configuration-block::
 
@@ -50,8 +50,8 @@ voulez valider chaque entrée du tableau :
             protected $favoriteColors = array();
        }
 
-Maintenant, chaque entrée du tableau ``favoriteColors`` sera validée
-pour ne pas être vide et faire au moins 5 caractères.
+Maintenant, chaque entrÃ©e du tableau ``favoriteColors`` sera validÃ©e
+pour ne pas Ãªtre vide et faire au moins 5 caractÃ¨res.
 
 Options
 -------
@@ -62,4 +62,4 @@ constraints
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
 
 Cette option obligatoire est le tableau de contraintes de validation que
-vous voulez appliquer à chaque élément du tableau sous-jacent.
+vous voulez appliquer Ã  chaque Ã©lÃ©ment du tableau sous-jacent.

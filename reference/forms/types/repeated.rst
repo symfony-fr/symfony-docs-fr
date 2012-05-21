@@ -4,13 +4,13 @@
 Type de champ Repeated
 ======================
 
-C'est un « groupe » spécial de champs qui crée deux champs identiques dont les valeurs
+C'est un Â« groupe Â» spÃ©cial de champs qui crÃ©e deux champs identiques dont les valeurs
 doivent correspondre (sinon une erreur de validation s'affiche). L'usage le plus commun
 est lorsque vous avez besoin que l'utilisateur tape une nouvelle fois son mot de passe
-ou son email pour vérifier qu'ils sont justes.
+ou son email pour vÃ©rifier qu'ils sont justes.
 
 +-------------+------------------------------------------------------------------------+
-| Rendu comme | Champ input ``text`` par défaut, mais voyez l'option `type`_ option    |
+| Rendu comme | Champ input ``text`` par dÃ©faut, mais voyez l'option `type`_ option    |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `type`_                                                              |
 |             | - `options`_                                                           |
@@ -20,7 +20,7 @@ ou son email pour vérifier qu'ils sont justes.
 |             | - `second_name`_                                                       |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `invalid_message`_                                                   |
-| héritées    | - `invalid_message_parameters`_                                        |
+| hÃ©ritÃ©es    | - `invalid_message_parameters`_                                        |
 |             | - `error_bubbling`_                                                    |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`field</reference/forms/types/form>`                              |
@@ -41,26 +41,26 @@ Exemple d'utilisation
         'second_options' => array('label' => 'Mot de passe (validation)'),
     ));
 
-Lors de la soumission réussie d'un formulaire, la valeur saisie dans les deux
-champs « password » devient la donnée de la clé ``password``. En d'autres termes,
-même si deux champs sont soumis en réalité, la donnée finale du formulaire est juste
-la valeur unique dont vous avez besoin (généralement une chaine de caractères).
+Lors de la soumission rÃ©ussie d'un formulaire, la valeur saisie dans les deux
+champs Â« password Â» devient la donnÃ©e de la clÃ© ``password``. En d'autres termes,
+mÃªme si deux champs sont soumis en rÃ©alitÃ©, la donnÃ©e finale du formulaire est juste
+la valeur unique dont vous avez besoin (gÃ©nÃ©ralement une chaine de caractÃ¨res).
 
-L'option la plus importante est ``type``, qui peut être n'importe quel type de champ
-et qui détermine le réel type des deux champs sous-jacents. L'option ``options`` est passée
-à chacun de ces deux champs ce qui signifie, dans cet exemple, que toute option
-supportée par le type ``password`` peut être passée dans ce tableau.
+L'option la plus importante est ``type``, qui peut Ãªtre n'importe quel type de champ
+et qui dÃ©termine le rÃ©el type des deux champs sous-jacents. L'option ``options`` est passÃ©e
+Ã  chacun de ces deux champs ce qui signifie, dans cet exemple, que toute option
+supportÃ©e par le type ``password`` peut Ãªtre passÃ©e dans ce tableau.
 
 Validation
 ~~~~~~~~~~
 
-L'une des fonctionnalités clé du champ ``repeated`` est sa validation interne
-(vous n'avez rien besoin de faire pour l'activer) qui force les 2 champs à avoir
-la même valeur. Si les deux valeurs ne sont pas identiques, une erreur sera
-envoyée à l'utilisateur.
+L'une des fonctionnalitÃ©s clÃ© du champ ``repeated`` est sa validation interne
+(vous n'avez rien besoin de faire pour l'activer) qui force les 2 champs Ã  avoir
+la mÃªme valeur. Si les deux valeurs ne sont pas identiques, une erreur sera
+envoyÃ©e Ã  l'utilisateur.
 
-L'option ``invalid_message`` est utilisée pour personnaliser l'erreur qui
-sera affichée si les deux valeurs ne correspondent pas.
+L'option ``invalid_message`` est utilisÃ©e pour personnaliser l'erreur qui
+sera affichÃ©e si les deux valeurs ne correspondent pas.
 
 Field Options
 -------------
@@ -71,18 +71,18 @@ type
 **type**: ``string`` **default**: ``text``
 
 Les deux champs sous-jacents auront ce type de champ. Par exemple, passer le
-type ``password`` retournera deux champs « mot de passe ».
+type ``password`` retournera deux champs Â« mot de passe Â».
 
 options
 ~~~~~~~
 
 **type**: ``array`` **default**: ``array()``
 
-Ce tableau d'options sera passé à chacun des deux champs sous-jacents. En d'autres
+Ce tableau d'options sera passÃ© Ã  chacun des deux champs sous-jacents. En d'autres
 termes, ce sont les options qui personnalisent les types de champs individuellement.
-Par exemple, si l'option ``type`` est définie comme ``password``, ce tableau peut
-contenir les options ``always_empty`` ou ``required``, c'est-à-dire deux options qui
-sont supportées par le type de champ ``password``.
+Par exemple, si l'option ``type`` est dÃ©finie comme ``password``, ce tableau peut
+contenir les options ``always_empty`` ou ``required``, c'est-Ã -dire deux options qui
+sont supportÃ©es par le type de champ ``password``.
 
 first_options
 ~~~~~~~~~~~~~
@@ -90,11 +90,11 @@ first_options
 **type**: ``array`` **default**: ``array()``
 
 .. versionadded:: 2.1
-    L'option ``first_options`` est une nouveauté de Symfony 2.1.
+    L'option ``first_options`` est une nouveautÃ© de Symfony 2.1.
 
-Option additionnelle (elle sera fusionnée avec `options` ci-dessus) qui devrait
-être passée *uniquement* au premier champ. Elle est essentiellement utile pour
-personnaliser le libellé::
+Option additionnelle (elle sera fusionnÃ©e avec `options` ci-dessus) qui devrait
+Ãªtre passÃ©e *uniquement* au premier champ. Elle est essentiellement utile pour
+personnaliser le libellÃ©::
 
     $builder->add('password', 'repeated', array(
         'first_options'  => array('label' => 'Mot de passe'),
@@ -107,34 +107,34 @@ second_options
 **type**: ``array`` **default**: ``array()``
 
 .. versionadded:: 2.1
-    L'option ``second_options`` est une nouveauté de Symfony 2.1.
+    L'option ``second_options`` est une nouveautÃ© de Symfony 2.1.
 
-Option additionnelle (elle sera fusionnée avec `options` ci-dessus) qui devrait
-être passée *uniquement* au premier champ. Elle est essentiellement utile pour
-personnaliser le libellé (voir `first_options`_).
+Option additionnelle (elle sera fusionnÃ©e avec `options` ci-dessus) qui devrait
+Ãªtre passÃ©e *uniquement* au premier champ. Elle est essentiellement utile pour
+personnaliser le libellÃ© (voir `first_options`_).
 
 first_name
 ~~~~~~~~~~
 
 **type**: ``string`` **default**: ``first``
 
-C'est le nom de champ qui sera utilisé par le premier champ. Ce n'est en fait
-pas très important puisque la donnée saisie dans les deux champs sera disponible
-en utilisant la clé du champ ``repeated`` lui-même (ex ``password``).
-Cependant, si vous ne spécifiez pas de libellé, ce nom de champ est utilisé pour
-deviner le libellé à votre place.
+C'est le nom de champ qui sera utilisÃ© par le premier champ. Ce n'est en fait
+pas trÃ¨s important puisque la donnÃ©e saisie dans les deux champs sera disponible
+en utilisant la clÃ© du champ ``repeated`` lui-mÃªme (ex ``password``).
+Cependant, si vous ne spÃ©cifiez pas de libellÃ©, ce nom de champ est utilisÃ© pour
+deviner le libellÃ© Ã  votre place.
 
 second_name
 ~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``second``
 
-Le même que ``first_name``, mais pour le second champ.
+Le mÃªme que ``first_name``, mais pour le second champ.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

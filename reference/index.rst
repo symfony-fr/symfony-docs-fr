@@ -1,4 +1,4 @@
-Documents de Référence
+Documents de RÃ©fÃ©rence
 ======================
 
 .. toctree::

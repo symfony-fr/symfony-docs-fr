@@ -1,10 +1,10 @@
 Max
 ===
 
-Valide qu'un nombre donné est *inférieur* à un nombre maximum.
+Valide qu'un nombre donnÃ© est *infÃ©rieur* Ã  un nombre maximum.
 
 +----------------+--------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`            |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`            |
 +----------------+--------------------------------------------------------------------+
 | Options        | - `limit`_                                                         |
 |                | - `message`_                                                       |
@@ -18,7 +18,7 @@ Valide qu'un nombre donné est *inférieur* à un nombre maximum.
 Utilisation de base
 -------------------
 
-Pour vérifier qu'un champ « âge » d'une classe n'est pas supérieur à « 50 »,
+Pour vÃ©rifier qu'un champ Â« Ã¢ge Â» d'une classe n'est pas supÃ©rieur Ã  Â« 50 Â»,
 vous pourriez ajouter le code suivant :
 
 .. configuration-block::
@@ -52,22 +52,22 @@ limit
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-Cette option obligatoire est la valeur « maximale ». La validation échouera
-si la valeur soumise est **supérieure** à cette valeur maximale.
+Cette option obligatoire est la valeur Â« maximale Â». La validation Ã©chouera
+si la valeur soumise est **supÃ©rieure** Ã  cette valeur maximale.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be {{ limit }} or less``
 
-Le message qui sera affiché si la valeur est supérieur à l'option `limit`_.
+Le message qui sera affichÃ© si la valeur est supÃ©rieur Ã  l'option `limit`_.
 
 invalidMessage
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be a valid number``
 
-Le message qui sera affiché si la valeur soumise n'est pas un nombre
+Le message qui sera affichÃ© si la valeur soumise n'est pas un nombre
 (pour la fonction PHP `is_numeric`_).
 
 .. _`is_numeric`: http://www.php.net/manual/fr/function.is-numeric.php

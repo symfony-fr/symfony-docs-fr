@@ -1,7 +1,7 @@
 .. index::
    single: Forms; Types Reference
 
-Types de formulaire de référence
+Types de formulaire de rÃ©fÃ©rence
 ================================
 
 .. toctree::
@@ -38,14 +38,14 @@ Types de formulaire de référence
    types/timezone
    types/url
 
-Un formulaire est composé de *champs*, chacun d'eux étant construit à l'aide
+Un formulaire est composÃ© de *champs*, chacun d'eux Ã©tant construit Ã  l'aide
 d'un *type* de champ (ex le type ``text``, le type ``choice``, etc). Symfony2
-est fourni d'office avec un large choix de types de champ qui peuvent être utilisés
+est fourni d'office avec un large choix de types de champ qui peuvent Ãªtre utilisÃ©s
 dans votre application.
 
-Types de champ supportés
+Types de champ supportÃ©s
 ------------------------
 
-Les types de champ suivants sont nativement supportés dans Symfony2 :
+Les types de champ suivants sont nativement supportÃ©s dans Symfony2 :
 
 .. include:: /reference/forms/types/map.rst.inc

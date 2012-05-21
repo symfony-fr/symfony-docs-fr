@@ -4,14 +4,14 @@
 Type de champ Integer
 =====================
 
-Affiche un champ input « number ». De façon basique, c'est un champ texte qui sait bien 
-gérer les données entières d'un formulaire. Le champ input ``number`` ressemble à
-un champ texte, excepté que, si le navigateur supporte l'HTML5, il aura des fonctionnalités
-supplémentaires.
+Affiche un champ input Â« number Â». De faÃ§on basique, c'est un champ texte qui sait bien 
+gÃ©rer les donnÃ©es entiÃ¨res d'un formulaire. Le champ input ``number`` ressemble Ã 
+un champ texte, exceptÃ© que, si le navigateur supporte l'HTML5, il aura des fonctionnalitÃ©s
+supplÃ©mentaires.
 
-Ce champ a différentes options permettant de définir comment gérer les valeurs qui
-ne sont pas des entiers. Par défaut, toutes les valeurs non entières (ex: 6,78)
-seront arrondies à l'entier inférieur (ex: 6).
+Ce champ a diffÃ©rentes options permettant de dÃ©finir comment gÃ©rer les valeurs qui
+ne sont pas des entiers. Par dÃ©faut, toutes les valeurs non entiÃ¨res (ex: 6,78)
+seront arrondies Ã  l'entier infÃ©rieur (ex: 6).
 
 +-------------+-----------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``text``                                              |
@@ -20,7 +20,7 @@ seront arrondies à l'entier inférieur (ex: 6).
 |             | - `grouping`_                                                         |
 +-------------+-----------------------------------------------------------------------+
 | Options     | - `required`_                                                         |
-| héritées    | - `label`_                                                            |
+| hÃ©ritÃ©es    | - `label`_                                                            |
 |             | - `read_only`_                                                        |
 |             | - `error_bubbling`_                                                   |
 |             | - `invalid_message`_                                                  |
@@ -39,27 +39,27 @@ rounding_mode
 
 **type**: ``integer`` **default**: ``IntegerToLocalizedStringTransformer::ROUND_DOWN``
 
-Par défaut, si l'utilisateur entre un nombre qui n'est pas entier, il sera arrondi
-à l'entier inférieur. Il y a plusieurs autres méthodes pour arrondir, et chacune
+Par dÃ©faut, si l'utilisateur entre un nombre qui n'est pas entier, il sera arrondi
+Ã  l'entier infÃ©rieur. Il y a plusieurs autres mÃ©thodes pour arrondir, et chacune
 est une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\IntegerToLocalizedStringTransformer`:
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Mode pour arrondir jusqu'à zéro.
+*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Mode pour arrondir jusqu'Ã  zÃ©ro.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Mode pour arrondir jusqu'à
-    l'infini négatif.
+*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Mode pour arrondir jusqu'Ã 
+    l'infini nÃ©gatif.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_UP`` Mode pour arrondir en partant
-    de zéro.
+    de zÃ©ro.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Mode pour arrondir jusqu'à
+*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Mode pour arrondir jusqu'Ã 
     l'infini positif.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

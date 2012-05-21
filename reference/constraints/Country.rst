@@ -4,7 +4,7 @@ Country
 Valide qu'une valeur est un code de pays en deux-lettres. 
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
@@ -49,4 +49,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid country``
 
-Ce message s'affiche si la chaine de caractères n'est pas un code pays valide.
+Ce message s'affiche si la chaine de caractÃ¨res n'est pas un code pays valide.

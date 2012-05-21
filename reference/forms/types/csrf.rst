@@ -26,14 +26,14 @@ csrf_provider
 
 **type**: ``Symfony\Component\Form\CsrfProvider\CsrfProviderInterface``
 
-L'objet ``CsrfProviderInterface`` qui doit générer le CSRF token.
-S'il n'est pas défini, la valeur par défaut est le provider par défaut.
+L'objet ``CsrfProviderInterface`` qui doit gÃ©nÃ©rer le CSRF token.
+S'il n'est pas dÃ©fini, la valeur par dÃ©faut est le provider par dÃ©faut.
 
 intention
 ~~~~~~~~~
 
 **type**: ``string``
 
-Un identifiant unique facultatif pour générer le CSRF token.
+Un identifiant unique facultatif pour gÃ©nÃ©rer le CSRF token.
 
 .. include:: /reference/forms/types/options/property_path.rst.inc

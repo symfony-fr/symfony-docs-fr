@@ -4,13 +4,13 @@
 Type de champ Textarea
 ======================
 
-Retourne un élément HTML ``textarea``. 
+Retourne un Ã©lÃ©ment HTML ``textarea``. 
 
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | Balise ``textarea``                                                    |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `max_length`_                                                        |
-| héritées    | - `required`_                                                          |
+| hÃ©ritÃ©es    | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `trim`_                                                              |
 |             | - `read_only`_                                                         |
@@ -21,10 +21,10 @@ Retourne un élément HTML ``textarea``.
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType` |
 +-------------+------------------------------------------------------------------------+
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 
@@ -37,4 +37,3 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
-

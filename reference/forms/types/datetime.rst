@@ -4,14 +4,14 @@
 Type de champ Datetime
 ======================
 
-Ce type de champ permet à l'utilisateur de manipuler une donnée qui représente
+Ce type de champ permet Ã  l'utilisateur de manipuler une donnÃ©e qui reprÃ©sente
 une date et une heure (ex: ``1984-06-05 12:15:30``).
 
-Il peut être rendu comme un input text ou des balises select. Le format de la donnée
-réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau.
+Il peut Ãªtre rendu comme un input text ou des balises select. Le format de la donnÃ©e
+rÃ©elle peut Ãªtre un objet ``DateTime``, une string, un timestamp ou un tableau.
 
 +----------------------+-----------------------------------------------------------------------------+
-| Type de données      | peut être ``DateTime``, une chaine de caractères, un timestamp,             |
+| Type de donnÃ©es      | peut Ãªtre ``DateTime``, une chaine de caractÃ¨res, un timestamp,             |
 |                      | ou un tableau (voir l'option ``input``)                                     |
 +----------------------+-----------------------------------------------------------------------------+
 | Rendu comme          | simple champ texte ou trois champs select                                   |
@@ -31,7 +31,7 @@ réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau.
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `invalid_message`_                                                        |
-| héritées             | - `invalid_message_parameters`_                                             |
+| hÃ©ritÃ©es             | - `invalid_message_parameters`_                                             |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | :doc:`form</reference/forms/types/form>`                                    |
 +----------------------+-----------------------------------------------------------------------------+
@@ -46,38 +46,38 @@ date_widget
 
 **type**: ``string`` **default**: ``choice``
 
-Définit l'option ``widget`` pour le type :doc:`date</reference/forms/types/date>`
+DÃ©finit l'option ``widget`` pour le type :doc:`date</reference/forms/types/date>`
 
 time_widget
 ~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``choice``
 
-Définit l'option ``widget`` pour le type :doc:`time</reference/forms/types/time>`
+DÃ©finit l'option ``widget`` pour le type :doc:`time</reference/forms/types/time>`
 
 input
 ~~~~~
 
 **type**: ``string`` **default**: ``datetime``
 
-Le format de la donnée *finale* - c'est-à-dire le format sous lequel la date
-est stockée dans l'objet. Les valeurs valides sont :
+Le format de la donnÃ©e *finale* - c'est-Ã -dire le format sous lequel la date
+est stockÃ©e dans l'objet. Les valeurs valides sont :
 
 * ``string`` (ex: ``2011-06-05 12:15:00``)
 * ``datetime`` (un objet ``DateTime``)
 * ``array`` (ex: ``array(2011, 06, 05, 12, 15, 0)``)
 * ``timestamp`` (ex: ``1307276100``)
 
-La valeur provenant du formulaire sera aussi normalisée dans ce format.
+La valeur provenant du formulaire sera aussi normalisÃ©e dans ce format.
 
 date_format
 ~~~~~~~~~~~
 
 **type**: ``integer`` ou ``string`` **default**: ``IntlDateFormatter::MEDIUM``
 
-Définit l'option ``format`` qui sera passée au champ date.
-Jetez un oeil à :ref:`l'option format du type date<reference-forms-type-date-format>`
-pour plus de détails.
+DÃ©finit l'option ``format`` qui sera passÃ©e au champ date.
+Jetez un oeil Ã  :ref:`l'option format du type date<reference-forms-type-date-format>`
+pour plus de dÃ©tails.
 
 .. include:: /reference/forms/types/options/hours.rst.inc
 
@@ -97,10 +97,10 @@ pour plus de détails.
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

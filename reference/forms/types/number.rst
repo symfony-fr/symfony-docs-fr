@@ -4,8 +4,8 @@
 Type de champ Number
 ====================
 
-Rend un champ input texte spécialisé dans la gestion des nombres. Ce type propose
-différentes options pour gérer la précision, les arrondis, et les regroupements
+Rend un champ input texte spÃ©cialisÃ© dans la gestion des nombres. Ce type propose
+diffÃ©rentes options pour gÃ©rer la prÃ©cision, les arrondis, et les regroupements
 que vous pouvez utiliser pour vos nombres.
 
 +-------------+----------------------------------------------------------------------+
@@ -16,7 +16,7 @@ que vous pouvez utiliser pour vos nombres.
 |             | - `grouping`_                                                        |
 +-------------+----------------------------------------------------------------------+
 | Options     | - `required`_                                                        |
-| héritées    | - `label`_                                                           |
+| hÃ©ritÃ©es    | - `label`_                                                           |
 |             | - `read_only`_                                                       |
 |             | - `error_bubbling`_                                                  |
 |             | - `invalid_message`_                                                 |
@@ -35,50 +35,50 @@ precision
 
 **type**: ``integer`` **default**: Locale-specific (usually around ``3``)
 
-Cette option spécifie combien de décimales seront autorisées après que le champ
+Cette option spÃ©cifie combien de dÃ©cimales seront autorisÃ©es aprÃ¨s que le champ
 aura arrondi la valeur soumise (via ``rounding_mode``). Par exemple, si ``precision``
-est définie à ``2``, une valeur soumise de ``20.123`` sera arrondie, par exemple,
-``20.12`` (cela dépendra de votre ``rounding_mode``).
+est dÃ©finie Ã  ``2``, une valeur soumise de ``20.123`` sera arrondie, par exemple,
+``20.12`` (cela dÃ©pendra de votre ``rounding_mode``).
 
 rounding_mode
 ~~~~~~~~~~~~~
 
 **type**: ``integer`` **default**: ``IntegerToLocalizedStringTransformer::ROUND_HALFUP``
 
-Si le nombre soumis a besoin d'être arrondi (et en se basant sur l'option ``precision``),
-vous avez plusieurs options configurables pour gérer cet arrondi. Chaque option est
+Si le nombre soumis a besoin d'Ãªtre arrondi (et en se basant sur l'option ``precision``),
+vous avez plusieurs options configurables pour gÃ©rer cet arrondi. Chaque option est
 une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\DataTransformer\\IntegerToLocalizedStringTransformer`:
     
-*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Mode pour arrondir jusqu'à
-    zéro.    
+*   ``IntegerToLocalizedStringTransformer::ROUND_DOWN`` Mode pour arrondir jusqu'Ã 
+    zÃ©ro.    
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Mode pour arrondir jusqu'à
-    l'infini négatif.
+*   ``IntegerToLocalizedStringTransformer::ROUND_FLOOR`` Mode pour arrondir jusqu'Ã 
+    l'infini nÃ©gatif.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_UP`` Mode pour arrondir en partant
-    de zéro.
+    de zÃ©ro.
 
-*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Mode pour arrondir jusqu'à
+*   ``IntegerToLocalizedStringTransformer::ROUND_CEILING`` Mode pour arrondir jusqu'Ã 
     l'infini positif.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFDOWN`` Mode pour arrondir
-    au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
-	arrondi au voisin inférieur.
+    au Â« voisin le plus proche Â». Si les deux voisins sont Ã©quidistants, alors c'est
+    arrondi au voisin infÃ©rieur.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFEVEN`` Mode pour arrondir
-    au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
+    au Â« voisin le plus proche Â». Si les deux voisins sont Ã©quidistants, alors c'est
 	arrondi au voisin pair.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFUP`` Mode pour arrondir
-    au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
-	arrondi au voisin supérieur.
+    au Â« voisin le plus proche Â». Si les deux voisins sont Ã©quidistants, alors c'est
+	arrondi au voisin supÃ©rieur.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Option héritées
+Option hÃ©ritÃ©es
 ---------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

@@ -1,12 +1,12 @@
 Time
 ====
 
-Valide qu'une valeur est une heure valide, c'est-à-dire soit un objet ``DateTime``,
-soit une chaine de caractères (ou un objet converti en chaine de caractères) qui 
-respecte un format « HH:MM:SS » valide.
+Valide qu'une valeur est une heure valide, c'est-Ã -dire soit un objet ``DateTime``,
+soit une chaine de caractÃ¨res (ou un objet converti en chaine de caractÃ¨res) qui 
+respecte un format Â« HH:MM:SS Â» valide.
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
@@ -19,7 +19,7 @@ Utilisation de base
 -------------------
 
 Supposons que vous avez une classe Event, avec un champ ``startAt`` qui est
-l'heure à laquelle l'évènement commence :
+l'heure Ã  laquelle l'Ã©vÃ¨nement commence :
 
 .. configuration-block::
 
@@ -54,4 +54,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid time``
 
-Le message qui est affiché si la donnée n'est pas une heure valide.
+Le message qui est affichÃ© si la donnÃ©e n'est pas une heure valide.

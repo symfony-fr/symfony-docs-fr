@@ -1,24 +1,24 @@
 Callback
 ========
 
-Le but de l'assertion Callback est de vous permettre de créer entièrement des
-règles de validation personnalisées et d'assigner des erreurs de validation à
-des champs spécifiques de votre objet. Si vous utilisez la validation de formulaires,
-cela signifie que vous pouvez faire en sorte que ces erreurs personnalisées s'affichent
-à côté d'un champ spécifique plutôt qu'en haut de votre formulaire.
+Le but de l'assertion Callback est de vous permettre de crÃ©er entiÃ¨rement des
+rÃ¨gles de validation personnalisÃ©es et d'assigner des erreurs de validation Ã 
+des champs spÃ©cifiques de votre objet. Si vous utilisez la validation de formulaires,
+cela signifie que vous pouvez faire en sorte que ces erreurs personnalisÃ©es s'affichent
+Ã  cÃ´tÃ© d'un champ spÃ©cifique plutÃ´t qu'en haut de votre formulaire.
 
-Cela fonctionne en spécifiant des méthodes *callback*, chacune d'elles étant appelée
-durant le processus de validation. Chacune de ces méthode peut faire toute
-sorte de choses, incluant la création et l'assignation d'erreurs de validation.
+Cela fonctionne en spÃ©cifiant des mÃ©thodes *callback*, chacune d'elles Ã©tant appelÃ©e
+durant le processus de validation. Chacune de ces mÃ©thode peut faire toute
+sorte de choses, incluant la crÃ©ation et l'assignation d'erreurs de validation.
 
 .. note::
     
-	Une méthode callback elle-même n'*échoue* pas et ne retourne aucune valeur.
-	Au lieu de cela, comme vous le verrez dans l'exemple, cette méthode a le
-	pouvoir d'ajouter directement des « violations » de validateur.
+    Une mÃ©thode callback elle-mÃªme n'*Ã©choue* pas et ne retourne aucune valeur.
+	Au lieu de cela, comme vous le verrez dans l'exemple, cette mÃ©thode a le
+	pouvoir d'ajouter directement des Â« violations Â» de validateur.
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`classe<validation-class-target>`                                  |
+| S'applique Ã    | :ref:`classe<validation-class-target>`                                  |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `methods`_                                                           |
 +----------------+------------------------------------------------------------------------+
@@ -63,12 +63,12 @@ Configuration
         {
         }
 
-La méthode Callback
+La mÃ©thode Callback
 -------------------
 
-Un objet spécial ``ExecutionContext`` est passé à la méthode callback. Vous
-pouvez définir des « violations » directement sur cet objet et déterminer à
-quel champ ces erreurs seront attribuées::
+Un objet spÃ©cial ``ExecutionContext`` est passÃ© Ã  la mÃ©thode callback. Vous
+pouvez dÃ©finir des Â« violations Â» directement sur cet objet et dÃ©terminer Ã 
+quel champ ces erreurs seront attribuÃ©es::
 
     // ...
     use Symfony\Component\Validator\ExecutionContext;
@@ -80,10 +80,10 @@ quel champ ces erreurs seront attribuées::
     
         public function isAuthorValid(ExecutionContext $context)
         {
-            // Vous avez un tableau de « faux noms »
+            // Vous avez un tableau de Â« faux noms Â»
             $fakeNames = array();
         
-            // vérifie si le nom est un faux
+            // vÃ©rifie si le nom est un faux
             if (in_array($this->getFirstName(), $fakeNames)) {
                 $context->addViolationAtSubPath('firstname', 'This name sounds totally fake!', array(), null);
             }
@@ -95,21 +95,21 @@ Options
 methods
 ~~~~~~~
 
-**type**: ``array`` **default**: ``array()`` [:ref:`option par défaut<validation-default-option>`]
+**type**: ``array`` **default**: ``array()`` [:ref:`option par dÃ©faut<validation-default-option>`]
 
-Il s'agit d'un tableau de méthodes qui doivent être exécutées durant le
-processus de validation. Chacune de ces méthodes peut avoir l'un des formats
+Il s'agit d'un tableau de mÃ©thodes qui doivent Ãªtre exÃ©cutÃ©es durant le
+processus de validation. Chacune de ces mÃ©thodes peut avoir l'un des formats
 suivants :
 
-1) **Nom de la méthode en chaine de caractères**
+1) **Nom de la mÃ©thode en chaine de caractÃ¨res**
 
-    Si le nom de la méthode est une simple chaine de caractères (ex ``isAuthorValid``), cette
-	méthode sera appelée sur le même objet que celui qui est en train d'être validé
+    Si le nom de la mÃ©thode est une simple chaine de caractÃ¨res (ex ``isAuthorValid``), cette
+	mÃ©thode sera appelÃ©e sur le mÃªme objet que celui qui est en train d'Ãªtre validÃ©
 	et ``ExecutionContext`` sera le seul argument (voyez l'exemple ci-dessus).
 
 2) **Tableau statique**
 
-    Chaque méthode peut également être spécifiée sous forme de tableau standard :
+    Chaque mÃ©thode peut Ã©galement Ãªtre spÃ©cifiÃ©e sous forme de tableau standard :
 
     .. configuration-block::
 
@@ -155,8 +155,8 @@ suivants :
                 }
             }
     
-	Dans ce cas, la méthode statique ``isAuthorValid`` sera appelée sur la classe
-    ``Acme\BlogBundle\MyStaticValidatorClass``. Deux objets sont passés en paramètre,
+	Dans ce cas, la mÃ©thode statique ``isAuthorValid`` sera appelÃ©e sur la classe
+    ``Acme\BlogBundle\MyStaticValidatorClass``. Deux objets sont passÃ©s en paramÃ¨tre,
     l'objet en cours de validation (ex ``Author``) et le ``ExecutionContext``::
 
         namespace Acme\BlogBundle;
@@ -174,9 +174,9 @@ suivants :
 
     .. tip::
         
-		Si vous spécifiez votre contrainte ``Callback`` via PHP, alors vous avez
-		également le choix de faire votre callback en closure PHP, ou en non statique.
-		Il n'est, en revanche, *pas* possible de spécifier un :term:`service` comme
+		Si vous spÃ©cifiez votre contrainte ``Callback`` via PHP, alors vous avez
+		Ã©galement le choix de faire votre callback en closure PHP, ou en non statique.
+		Il n'est, en revanche, *pas* possible de spÃ©cifier un :term:`service` comme
 		contrainte. Pour valider en utilisant un service, vous devriez
-        :doc:`créer une contrainte de validation personnalisée</cookbook/validation/custom_constraint>`
-        et ajouter cette nouvelle contrainte à votre classe.
+        :doc:`crÃ©er une contrainte de validation personnalisÃ©e</cookbook/validation/custom_constraint>`
+        et ajouter cette nouvelle contrainte Ã  votre classe.

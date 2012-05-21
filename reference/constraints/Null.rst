@@ -1,14 +1,14 @@
 Null
 ====
 
-Valide qu'une valeur est exactement égale à ``null``. Pour vous assurer qu'une
-propriété soit simplement vide (une chaine de caractères vide ou ``null``), lisez la
+Valide qu'une valeur est exactement Ã©gale Ã  ``null``. Pour vous assurer qu'une
+propriÃ©tÃ© soit simplement vide (une chaine de caractÃ¨res vide ou ``null``), lisez la
 documentation de la contrainte :doc:`/reference/constraints/Blank`.
-Pour vous assurer qu'une propriété ne soit pas nulle, lisez :doc:`/reference/constraints/NotNull`.
+Pour vous assurer qu'une propriÃ©tÃ© ne soit pas nulle, lisez :doc:`/reference/constraints/NotNull`.
 
 
 +----------------+-----------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
@@ -20,8 +20,8 @@ Pour vous assurer qu'une propriété ne soit pas nulle, lisez :doc:`/reference/con
 Utilisation de base
 -------------------
 
-Si vous voulez vous assurer que la propriété ``firstName`` d'une classe ``Author``
-soit exactement égale à ``null``, ajoutez le code suivant :
+Si vous voulez vous assurer que la propriÃ©tÃ© ``firstName`` d'une classe ``Author``
+soit exactement Ã©gale Ã  ``null``, ajoutez le code suivant :
 
 .. configuration-block::
 
@@ -56,4 +56,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be null``
 
-Le message qui sera affiché si la valeur n'est pas égale à ``null``.
+Le message qui sera affichÃ© si la valeur n'est pas Ã©gale Ã  ``null``.
