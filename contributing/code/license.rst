@@ -13,7 +13,7 @@ D'après `Wikipedia`_:
    mettre le nom des auteurs avec la notice de copyright."
 
 La License
------------
+----------
 
 Copyright (c) 2004-2011 Fabien Potencier
 
@@ -35,4 +35,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-.. _Wikipedia: http://en.wikipedia.org/wiki/MIT_License
+.. _Wikipedia: http://fr.wikipedia.org/wiki/MIT_License
