@@ -1,17 +1,17 @@
 Conventions
 ===========
 
-Le document :doc:`standards` décrit les coventions syntaxiques définis pour les
-projets Symfony2 et les bundles internes ou de tierce partie. ce document décrit
+Le document :doc:`standards` décrit les conventions syntaxiques définies pour les
+projets Symfony2 et les bundles internes ou tiers. Ce document décrit
 les standards et conventions utilisés dans le coeur du framework afin de lui 
-apporter consistence et prédictibilité. Vous êtes encouragés à suivre ceux-ci
-dans votre propre code, mais n'y êtes pas tenu.
+apporter consistence et prédictibilité. Vous êtes encouragés à les suivre
+dans votre propre code, mais n'êtes pas obligé.
 
 Nom des Méthodes
 ----------------
 
-Quand un objet a une relation conventionnelle avec d'autres conteneurs (objets,
-paramètres, ...), les noms des méthodes utilisent un schéma pré-établi:
+Quand un objet a une relation many « principale » avec d'autres « choses » (objets,
+paramètres, ...), les noms des méthodes sont normalisés :
 
   * ``get()``
   * ``set()``
@@ -29,18 +29,18 @@ paramètres, ...), les noms des méthodes utilisent un schéma pré-établi:
 L'utilisation de ces méthodes est seulement autorisé quand il est certain que 
 la relation décrite est la relation principale:
 
-* un ``CookieJar`` possède de nombreux objects ``Cookie``;
+* un ``CookieJar`` possède de nombreux objets ``Cookie``;
 
 * un service ``Container`` a de nombreux services et de nombreux paramètres
   (comme le service est sa relation principale, nous utilisons cette convention
-  pour cette relation);
+  de nommage pour cette relation);
 
-* un Console ``Input`` a de nombreux arguments et de nombreuses options. Il
-  n'existe pas de relation principale, la convention de nom ne s'applique donc
+* une ``commande`` de Console a de nombreux arguments et de nombreuses options. Il
+  n'existe pas de relation principale, la convention de nommage ne s'applique donc
   pas.
 
-Pour de nombreuses relations dans lesquelles la convention de nom ne s'applique
-pas, les méthodes suivantes doivent être utilisées en remplacement 
+Pour les relations où la convention de nommage ne s'applique
+pas, les méthodes suivantes doivent être utilisées 
 (``XXX`` est le nom de la chose en relation):
 
 +----------------------+-------------------+
@@ -75,7 +75,7 @@ pas, les méthodes suivantes doivent être utilisées en remplacement
 
 .. note::
 
-   Notez que si "setXXX" et "replaceXXX" sont très similairs,  il y'a tout de
-   même une différence notable: "setXXX" peut remplacer, ou ajouter de nouveaux 
-   éléments à une relation. "replaceXXX" à l'interdiction d'ajouter des éléments,
-   et devrait émettre une exception si l'élément identifié n'existe pas.
+   Notez que si « setXXX » et « replaceXXX » sont très similaires,  il y a tout de
+   même une différence notable : « setXXX » peut remplacer, ou ajouter de nouveaux 
+   éléments à une relation. Avec « replaceXXX », il est interdit d'ajouter des éléments,
+   et une exception est lancée si l'élément identifié n'existe pas.
