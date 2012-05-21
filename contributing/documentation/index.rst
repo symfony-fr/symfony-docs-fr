@@ -1,5 +1,5 @@
-Contributing Documentation
-==========================
+Participer à la Documentation
+=============================
 
 .. toctree::
     :maxdepth: 2

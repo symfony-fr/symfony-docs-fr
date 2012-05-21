@@ -1,5 +1,5 @@
-Contributing
-============
+Contribuer
+==========
 
 .. toctree::
     :hidden:
