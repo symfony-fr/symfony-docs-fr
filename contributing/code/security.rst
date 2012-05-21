@@ -1,15 +1,15 @@
 Signaler une faille de sécurité
 ===============================
 
-Une faille de sécurité dans Symfony2? N'utiliser pas la liste de diffusion ou le
-gestionnaire de bugs. Toutes les failles de sécurités doivent être transmises à
-**security [at]symfony-project.com**. Les courriels envoyés à cette adresse sont
-retransmis à l'équipe centrale de Symfony à l'aide d'une liste de diffusion
-privée.
+Vous avez trouvé une faille de sécurité dans Symfony2 ? N'utilisez pas la liste
+de diffusion ou le gestionnaire de bugs. Toutes les failles de sécurités doivent
+être transmises à **security [at]symfony-project.com**. Les courriels envoyés
+à cette adresse sont retransmis à l'équipe centrale de Symfony à l'aide d'une
+liste de diffusion privée.
 
 Pour chaque rapport, nous essayons dans un premier temps de confirmer la
-vulnaribiilité. Si elle est vérifiée, l'équipe centrale travaille sur une
-solution en suivant ces étapes:
+vulnérabilité. Si elle est vérifiée, l'équipe centrale travaille sur une
+solution en suivant ces étapes :
 
 1. Envoi d'un accusé de réception au rapporteur;
 2. Travail sur un correctif;
