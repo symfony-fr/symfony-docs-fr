@@ -1,20 +1,19 @@
 Standards syntaxiques
 =====================
 
-Quand vous contribuez au code source de Symfony2, vous devez suivre une syntaxe
-standard, celle-ci est défini dans ce document.
-
-Pour simplifier, la règle d'or est : **Imiter le code existant de Symfony2**.
-De nombreux Bundles open-source et bibliothèques utilisés au sein de Symfony2 
-suivent les mêmes lignes de conduites, vous devez donc les suivre vous aussi.
+Quand vous contribuez au code source de Symfony2, vous devez suivre ses
+conventions de codage. Pour simplifier, la règle d'or est : **Imiter le code
+existant de Symfony2**. De nombreux bundles open-source et bibliothèques utilisés
+au sein de Symfony2 suivent les mêmes lignes de conduites, vous devez donc
+les suivre vous aussi.
 
 Rappelez vous que l'avantage principal d'un standard est que toutes les parties
-du code source résultants se ressemblent et semblent ainsi familières, ce n'est
+du code source résultant se ressemblent et semblent ainsi familières, ce n'est
 pas que telle technique soit plus lisible qu'une autre.
 
 Comme une image - ou un peu de code - est plus efficace que des milliers de
-mots, voici un court example contenant les plus courantes tournures décrites
-plus haut:
+mots, voici un court exemple contenant les plus courantes conventions décrites
+ci-dessous :
 
 .. code-block:: php
 
@@ -65,72 +64,70 @@ plus haut:
 Structure
 ---------
 
-* Ne jamais utiliser de tag court (`<?`);
+* N'utilisez jamais de tag court (`<?`);
 
-* Ne jamais clotûrer un fichier comprenant une classe par le tag de fin php
-  `?>`;
+* Ne clôturez jamais un fichier de classe par le tag de fin php `?>`;
 
-* L'indentation doit être réaliser par pallier de 4 espaces (les tabulations ne
-  sont pas permises);
+* L'indentation doit être réalisée par des groupes de 4 espaces (les
+  tabulations ne sont pas permises);
 
-* Utiliser le caractère (linefeed :`0x0A`) pour terminer vos lignes;
+* Utilisez le caractère saut de ligne (`0x0A`) pour terminer vos lignes;
 
-* Ajouter un espace après chaque virgule séparatrice;
+* Ajoutez un espace après chaque virgule séparatrice;
 
-* N'utiliser pas d'espace après une parenthèse ouvrante ou avant d'en fermer
+* N'utilisez pas d'espace après une parenthèse ouvrante ou avant d'en fermer
   une;
 
-* Ajouter un espace autour des opérateurs (`==`, `&&`, ...);
+* Ajoutez un espace autour des opérateurs (`==`, `&&`, ...);
 
-* Ajouter un espace avant d'ouvrir une parenthèse suivant une mot-clef de
+* Ajouter un espace avant d'ouvrir une parenthèse suivant un mot-clef de
   contrôle (`if`, `else`, `for`, `while`, ...);
 
-* Ajouter une ligne vide avant l'expression de retour `return`, à moins que le
+* Ajoutez une ligne vide avant l'expression de retour `return`, à moins que le
   retour soit seul à l'intérieur du groupe parent (comme une expression `if`);
 
-* N'ajouter pas d'espace à la fin de vos lignes;
+* N'ajoutez pas d'espace à la fin de vos lignes;
 
-* Utiliser les accolades pour indiquer les structures de contrôle quelque soit
+* Utilisez les accolades pour indiquer les structures de contrôle quel que soit
   le nombre d'expressions qu'elles entourent.
 
-* Ajouter les accolades sur des lignes séparées pour les classes, méthodes et
+* Ajoutez les accolades sur des lignes séparées pour les classes, méthodes et
   déclarations de fonctions;
 
-* Séparer les expressions conditionnelles (`if`, `else`, ...) et les accolades
+* Séparez les expressions conditionnelles (`if`, `else`, ...) et les accolades
   ouvrantes avec un seul espace, sans ligne vide.
 
-* Déclarer la visibilité de chacunes des méthodes et des propriétés intégrées
-  dans vos classes (l'usage de `var` est interdit);
+* Déclarez la visibilité de chacunes de vos classes, méthodes et propriétés
+  (l'usage de `var` est interdit);
 
-* Utiliser le bas-de-casse pour les constantes native: `false`, `true`, et
+* Utilisez les minuscules pour les constantes native PHP: `false`, `true`, et
   `null`. De même pour `array()`;
 
-* Utiliser les majuscules pour les constantes en séparant les mots avec des 
-  sous-tirets;
+* Utilisez les majuscules pour les constantes en séparant les mots avec des 
+  sous-tirets (underscores);
 
 * Définissez une classe par fichier - cela ne s'applique pas à vos classes
-  privées qui ne sont pas appelé à être instanciée en dehors du fichier dans 
-  lequel elles sont présentes. Elles ne sont pas concernés par le standard
-  PSR-0;
+  de helper privées qui ne sont pas appelées à être instanciée de l'extérieur.
+  Elles ne sont pas concernées par le standard PSR-0;
 
-* Déclarer les propriétés de vos classes avant les méthodes;
+* Déclarez les propriétés de vos classes avant les méthodes;
 
-* Déclarer d'abord les méthodes publiques puis les protegées, et finalement les
+* Déclarez d'abord les méthodes publiques puis les protegées, et finalement les
   privées.
 
-Conventions de dénomination
----------------------------
+Conventions de nommage
+----------------------
 
-* Utiliser le camelCase, pas de sous-tiret, pour les variables, les fonctions,
-  les noms méthodes et les arguments;
+* Utilisez le camelCase, pas de underscore, pour les variables,
+  les noms de méthodes et de fonctions, et les arguments;
 
-* Utilser les sous-tirets pour les options, les noms des paramètres;
+* Utilsez les underscores pour les options, les noms des paramètres;
 
-* Utiliser les espaces de nom pour toutes vos classes;
+* Utilisez les espaces de nom pour toutes vos classes;
 
 * Suffixez les interfaces avec `Interface`;
 
-* Utiliser des caractères alphanumeriques et des sous-tirets pour les noms de
+* Utilisez des caractères alphanumériques et des underscores pour les noms de
   fichier;
 
 * Pensez à consulter la documentation :doc:`conventions` pour obtenir des
@@ -139,9 +136,9 @@ Conventions de dénomination
 Documentation
 -------------
 
-* Ajouter les blocs PHPDoc pour toutes les classes, méthodes, et fonctions;
+* Ajoutez les blocs PHPDoc pour toutes les classes, méthodes, et fonctions;
 
-* Omettre le tag `@return` si la méthode ne retourne rien;
+* Omettez le tag `@return` si la méthode ne retourne rien;
 
 * Les annotations `@package` et `@subpackage` ne sont pas utilisées.
 
