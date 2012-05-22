@@ -2,20 +2,20 @@
 
   * :doc:`Bugs </contributing/code/bugs>`
   * :doc:`Patches </contributing/code/patches>`
-  * :doc:`Security </contributing/code/security>`
+  * :doc:`Sécurité </contributing/code/security>`
   * :doc:`Tests </contributing/code/tests>`
-  * :doc:`Coding Standards</contributing/code/standards>`
-  * :doc:`Code Conventions</contributing/code/conventions>`
-  * :doc:`License </contributing/code/license>`
+  * :doc:`Standards syntaxiques</contributing/code/standards>`
+  * :doc:`Conventions de codage</contributing/code/conventions>`
+  * :doc:`Licence </contributing/code/license>`
 
 * **Documentation**
 
-  * :doc:`Overview </contributing/documentation/overview>`
+  * :doc:`Résumé </contributing/documentation/overview>`
   * :doc:`Format </contributing/documentation/format>`
-  * :doc:`Translations </contributing/documentation/translations>`
+  * :doc:`Traductions </contributing/documentation/translations>`
   * :doc:`License </contributing/documentation/license>`
 
 * **Communauté**
 
-  * :doc:`IRC Meetings </contributing/community/irc>`
-  * :doc:`Other Resources </contributing/community/other>`
+  * :doc:`Réunions IRC </contributing/community/irc>`
+  * :doc:`Autres ressources </contributing/community/other>`
