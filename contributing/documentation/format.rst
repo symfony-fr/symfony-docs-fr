@@ -1,39 +1,38 @@
-Documentation Format
-====================
+Format de Documentation 
+=======================
 
-La documentation Symfony2 utilise comme format d'écriture `reStructuredText`_ 
-et comme constructeur `Sphinx`_ pour produire les documents dans d'autres 
-formats (HTML, PDF, ...).
+La documentation Symfony2 utilise `reStructuredText`_ comme format d'écriture  
+et `Sphinx`_ pour produire les documents dans d'autres formats (HTML, PDF, ...).
 
 reStructuredText
 ----------------
 
-reStructuredText "is an easy-to-read, what-you-see-is-what-you-get plaintext
-markup syntax and parser system".
+reStructuredText « est une syntaxe ce-que-vous-voyez-est-ce-que-vous-obtenez (wysiwyg) facile à lire 
+et un analyseur (parser) ».
 
-Vous pouvez apprendre la syntaxe rst en lisant la documentation existante
-Symfony2 `documents`_ ou en lisant `reStructuredText Primer`_ sur le site web de
+Vous pouvez apprendre la syntaxe rst en lisant la `documentation`_ Symfony2
+existante ou en lisant `les bases de reStructuredText`_ sur le site de
 Sphinx.
 
-Si vous êtes familier avec Markdown, soyez attentif à certaines tournures
-d'apparences similaires mais dont le comportement diffèrent:
+Si vous êtes familier avec Markdown, soyez attentif à certains concepts
+qui semblent très similaires mais sont diffèrents :
 
 * Les listes commencent au début de la ligne (aucune indentation n'est permise);
 
-* Les lignes de codes utilisent des double ticks (````like this````).
+* Les lignes de codes utilisent des double ticks (````comme ceci````).
 
 Sphinx
 ------
 
-Sphinx est le systeme de construction ajoutant certaines fonctionnalités
-agréables permettant de créer une documentation à partir de documents 
+Sphinx est un système de génération qui ajoute certaines fonctionnalités
+sympas permettant de créer une documentation à partir de documents 
 reStructuredText. Il ajoute de nouvelles directives et des fonctions comme le
 standard reST `markup`_.
 
 Coloration syntaxique
 ~~~~~~~~~~~~~~~~~~~~~
 
-Tout example de code utilise PHP comme schéma de coloration par défaut. Vous
+Tout exemple de code utilise PHP comme schéma de coloration syntaxique par défaut. Vous
 pouvez changer cela à l'aide de la directive ``code-block`` :
 
 .. code-block:: rst
@@ -43,7 +42,7 @@ pouvez changer cela à l'aide de la directive ``code-block`` :
         { foo: bar, bar: { foo: bar, bar: baz } }
 
 Si votre code PHP débute par ``<?php``, vous devrez utiliser ``html+php`` comme
-pseudo-language de coloration:
+pseudo-language de coloration :
 
 .. code-block:: rst
 
@@ -60,7 +59,7 @@ Blocs de configurations
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous affichez une configuration, vous devez utiliser la directive
-``configuration-block`` dans tous les formats de configuration reconnus
+``configuration-block`` dans tous les formats de configuration supportés
 (``PHP``, ``YAML``, et ``XML``)
 
 .. code-block:: rst
@@ -79,7 +78,7 @@ Si vous affichez une configuration, vous devez utiliser la directive
 
             // Configuration in PHP
 
-Le code précédent sera rendu comme cela:
+Le code reST précédent sera affiché comme cela :
 
 .. configuration-block::
 
@@ -95,7 +94,7 @@ Le code précédent sera rendu comme cela:
 
         // Configuration in PHP
 
-La liste des formats supportés:
+La liste des formats supportés :
 
 +-----------------------+-------------+
 | Identifiant du Format | Affichage   |
@@ -126,26 +125,26 @@ La liste des formats supportés:
 Tester une Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Afin de tester une documentation avant de la proposer:
+Afin de tester une documentation avant de la proposer :
 
-* Installer `Sphinx`_;
+* Installez `Sphinx`_;
 
-* Exécuter l'installateur `Sphinx quick setup`_;
+* Exécutez l'installeur `Installation rapide de Sphinx`_;
 
-* Installer l'extension concernantes les blocs de configuration (voir plus bas);
+* Installez les extensions Sphinx (voir plus bas);
 
-* Executez ``make html`` et contrôlez le code HTML généré dans le répertoire
+* Executez ``make html`` et relisez le code HTML généré dans le répertoire
   ``build``.
 
-Installer l'extension concernant les blocs de configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Installer les extensions Sphinx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Télécharger l'extension depuis le dépot `configuration-block source`_
 
-* Copier ``configurationblock.py`` vers le dossier ``_exts`` dans le répertoire
+* Copiez le répertoire ``sensio`` vers le dossier ``_exts`` dans le répertoire
   racine (où se trouve ``conf.py``)
 
-* Ajouter les indications suivantes au fichier ``conf.py``:
+* Ajouter les instructions suivantes au fichier ``conf.py`` :
 
 .. code-block:: py
     
@@ -153,14 +152,24 @@ Installer l'extension concernant les blocs de configuration
     sys.path.append(os.path.abspath('_exts'))
     
     # ...
-    # add configurationblock to the list of extensions
-    extensions = ['configurationblock']
+    # ajoute les extensions à la liste des extensions
+    extensions = [..., 'sensio.sphinx.refinclude', 'sensio.sphinx.configurationblock', 'sensio.sphinx.phpcode']
+
+    # active la coloration syntaxique par défaut pour le code PHP qui n'est pas entre ``<?php ... ?>``
+    lexers['php'] = PhpLexer(startinline=True)
+    lexers['php-annotations'] = PhpLexer(startinline=True)
+
+    # ajoute PHP comme domaine principal
+    primary_domain = 'php'
+    
+    # Ajoute les urls pour les liens vers l'API
+    api_url = 'http://api.symfony.com/master/%s'
 
 .. _reStructuredText:           http://docutils.sf.net/rst.html
 .. _Sphinx:                     http://sphinx.pocoo.org/
-.. _documents:                  http://github.com/symfony/symfony-docs
-.. _reStructuredText Primer:    http://sphinx.pocoo.org/rest.html
+.. _documentation:                  http://github.com/symfony/symfony-docs
+.. _les bases de reStructuredText:    http://sphinx.pocoo.org/rest.html
 .. _markup:                     http://sphinx.pocoo.org/markup/
 .. _Pygments:                   http://pygments.org/languages/
 .. _configuration-block source: https://github.com/fabpot/sphinx-php
-.. _Sphinx quick setup:         http://sphinx.pocoo.org/tutorial.html#setting-up-the-documentation-sources
+.. _Installation rapide de Sphinx:         http://sphinx.pocoo.org/tutorial.html#setting-up-the-documentation-sources
