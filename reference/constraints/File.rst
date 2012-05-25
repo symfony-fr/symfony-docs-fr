@@ -1,16 +1,16 @@
 File
 ====
 
-Valide qu'une valeur est un « fichier » valide, qui peut être l'un des formats
+Valide qu'une valeur est un Â« fichier Â» valide, qui peut Ãªtre l'un des formats
 suivants :
 
-* Une chaine de caractères (ou un objet avec une méthode ``__toString()``) qui
-   représente un chemin vers un fichier existant;
+* Une chaine de caractÃ¨res (ou un objet avec une mÃ©thode ``__toString()``) qui
+   reprÃ©sente un chemin vers un fichier existant;
 
 * Un objet :class:`Symfony\\Component\\HttpFoundation\\File\\File` valide
   (ce qui inclut les objets de la classe :class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`).
 
-Cette contrainte est souvent utilisée dans les formulaires avec le type de champ
+Cette contrainte est souvent utilisÃ©e dans les formulaires avec le type de champ
 :doc:`file</reference/forms/types/file>`.
 
 .. tip::
@@ -19,7 +19,7 @@ Cette contrainte est souvent utilisée dans les formulaires avec le type de champ
     :doc:`Image</reference/constraints/Image>`.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `maxSize`_                                                        |
 |                | - `mimeTypes`_                                                      |
@@ -39,11 +39,11 @@ Cette contrainte est souvent utilisée dans les formulaires avec le type de champ
 Utilisation de base
 -------------------
 
-Cette contrainte est souvent utilisée sur une propriété qui est affichée dans
+Cette contrainte est souvent utilisÃ©e sur une propriÃ©tÃ© qui est affichÃ©e dans
 un formulaire avec le type de champ :doc:`file</reference/forms/types/file>`.
-Par exemple, supposons que vous créez un formulaire Auteur où vous pouvez
-uploader une « bio » au format PDF. Dans votre formulaire, la propriété
-``bioFile`` sera un type ``file``. La classe ``Author`` ressemblerait à ceci::
+Par exemple, supposons que vous crÃ©ez un formulaire Auteur oÃ¹ vous pouvez
+uploader une Â« bio Â» au format PDF. Dans votre formulaire, la propriÃ©tÃ©
+``bioFile`` sera un type ``file``. La classe ``Author`` ressemblerait Ã  ceci::
 
     // src/Acme/BlogBundle/Entity/Author.php
     namespace Acme\BlogBundle\Entity;
@@ -141,9 +141,9 @@ suivant :
             }
         }
 
-La propriété ``bioFile`` est validée pour garantir qu'il s'agisse bien d'un
-fichier. Sa taille et son type MIME sont également validés car les options
-correspondantes ont été spécifiées.
+La propriÃ©tÃ© ``bioFile`` est validÃ©e pour garantir qu'il s'agisse bien d'un
+fichier. Sa taille et son type MIME sont Ã©galement validÃ©s car les options
+correspondantes ont Ã©tÃ© spÃ©cifiÃ©es.
 
 Options
 -------
@@ -153,52 +153,52 @@ maxSize
 
 **type**: ``mixed``
 
-Si cette option est définie, la taille du fichier doit être inférieure à la taille
-spécifiée pour être valide. La taille du fichier peut être donnée dans l'un des formats
+Si cette option est dÃ©finie, la taille du fichier doit Ãªtre infÃ©rieure Ã  la taille
+spÃ©cifiÃ©e pour Ãªtre valide. La taille du fichier peut Ãªtre donnÃ©e dans l'un des formats
 suivants :
 
-* **octets**: Pour spécifier l'option ``maxSize`` en octets, entrez la valeur en numérique
+* **octets**: Pour spÃ©cifier l'option ``maxSize`` en octets, entrez la valeur en numÃ©rique
   seulement (ex ``4096``);
 
-* **kilooctets**: Pour spécifier l'option ``maxSize`` en kilooctets, entrez la valeur numérique
-  et ajoutez le suffixe « k » en minuscule (ex ``200k``);
+* **kilooctets**: Pour spÃ©cifier l'option ``maxSize`` en kilooctets, entrez la valeur numÃ©rique
+  et ajoutez le suffixe Â« k Â» en minuscule (ex ``200k``);
 
-* **megaoctet**: Pour spécifier l'option ``maxSize`` en megaoctets, entrez la valeur numérique
-  et ajoutez le suffixe « M » en majuscule (ex ``200M``);
+* **megaoctet**: Pour spÃ©cifier l'option ``maxSize`` en megaoctets, entrez la valeur numÃ©rique
+  et ajoutez le suffixe Â« M Â» en majuscule (ex ``200M``);
 
 mimeTypes
 ~~~~~~~~~
 
 **type**: ``array`` ou ``string``
 
-Si elle cette option est définie, le validateur vérifiera que le type MIME
-du fichier envoyé correspond au type MIME donné (s'il est défini sous forme
-de chaine de caractères) ou s'il existe dans la collection de types MIME
-donnés (s'ils sont définis comme tableau).
+Si elle cette option est dÃ©finie, le validateur vÃ©rifiera que le type MIME
+du fichier envoyÃ© correspond au type MIME donnÃ© (s'il est dÃ©fini sous forme
+de chaine de caractÃ¨res) ou s'il existe dans la collection de types MIME
+donnÃ©s (s'ils sont dÃ©finis comme tableau).
 
 maxSizeMessage
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file is too large ({{ size }}). Allowed maximum size is {{ limit }}``
 
-Le message affiché si le fichier uploadé est plus lourd que l'option `maxSize`_.
+Le message affichÃ© si le fichier uploadÃ© est plus lourd que l'option `maxSize`_.
 
 mimeTypesMessage
 ~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}``
 
-Le message affiché si le type MIME du fichier ne correspond pas au(x) type(s) MIME
-autorisé(s) par l'option `mimeTypes`_.
+Le message affichÃ© si le type MIME du fichier ne correspond pas au(x) type(s) MIME
+autorisÃ©(s) par l'option `mimeTypes`_.
 
 notFoundMessage
 ~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file could not be found``
 
-Le message affiché si aucun fichier ne correspond au chemin donné. Cette
+Le message affichÃ© si aucun fichier ne correspond au chemin donnÃ©. Cette
 erreur n'est possible que si la valeur sous-jacente est un chemin sous forme
-de chaine de caractères, puisque l'objet ``File`` ne pourra pas être construit à partir
+de chaine de caractÃ¨res, puisque l'objet ``File`` ne pourra pas Ãªtre construit Ã  partir
 d'un chemin invalide.
 
 notReadableMessage
@@ -206,15 +206,15 @@ notReadableMessage
 
 **type**: ``string`` **default**: ``The file is not readable``
 
-Le message affiché si le fichier existe, mais que la fonction PHP ``is_readable``
-échoue à passer le chemin au fichier.
+Le message affichÃ© si le fichier existe, mais que la fonction PHP ``is_readable``
+Ã©choue Ã  passer le chemin au fichier.
 
 uploadIniSizeErrorMessage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file is too large. Allowed maximum size is {{ limit }}``
 
-Le message affiché si le fichier uploadé est plus lourd que le maximum défini dans le paramètre
+Le message affichÃ© si le fichier uploadÃ© est plus lourd que le maximum dÃ©fini dans le paramÃ¨tre
 ``upload_max_filesize`` du PHP.ini.
 
 uploadFormSizeErrorMessage
@@ -222,14 +222,14 @@ uploadFormSizeErrorMessage
 
 **type**: ``string`` **default**: ``The file is too large``
 
-Le message affiché si le fichier uploadé est plus lourd que le maximum
-autorisé dans champ HTML input file.
+Le message affichÃ© si le fichier uploadÃ© est plus lourd que le maximum
+autorisÃ© dans champ HTML input file.
 
 uploadErrorMessage
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``The file could not be uploaded``
 
-Le message affiché si le fichier ne peut pas être uploadé pour une raison
-quelconque, par exemple si l'upload échoue ou qu'il est impossible d'écrire
+Le message affichÃ© si le fichier ne peut pas Ãªtre uploadÃ© pour une raison
+quelconque, par exemple si l'upload Ã©choue ou qu'il est impossible d'Ã©crire
 sur le disque.

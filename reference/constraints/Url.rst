@@ -4,7 +4,7 @@ Url
 Valide qu'une valeur est une URL valide.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 |                | - `protocols`_                                                      |
@@ -50,14 +50,14 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid URL``
 
-Le message qui sera affiché si l'URL n'est pas valide.
+Le message qui sera affichÃ© si l'URL n'est pas valide.
 
 protocols
 ~~~~~~~~~
 
 **type**: ``array`` **default**: ``array('http', 'https')``
 
-Cette option définit les protocoles considérés comme valides. Par exemple,
-si vous avez besoin de considérer les URLs du type ``ftp://`` comme valides,
-vous devrez redéfinir le tableau ``protocols`` en listant ``http``, ``https``,
+Cette option dÃ©finit les protocoles considÃ©rÃ©s comme valides. Par exemple,
+si vous avez besoin de considÃ©rer les URLs du type ``ftp://`` comme valides,
+vous devrez redÃ©finir le tableau ``protocols`` en listant ``http``, ``https``,
 mais aussi ``ftp``.

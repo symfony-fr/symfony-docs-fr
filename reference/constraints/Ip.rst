@@ -1,12 +1,12 @@
 Ip
 ==
 
-Valide que la valeur est une adresse IP valide. Par défaut, cela validera la valeur
-comme IPv4, mais différentes options existent pour valider une IPv6 et plusieurs
+Valide que la valeur est une adresse IP valide. Par dÃ©faut, cela validera la valeur
+comme IPv4, mais diffÃ©rentes options existent pour valider une IPv6 et plusieurs
 autres combinaisons.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `version`_                                                        |
 |                | - `message`_                                                        |
@@ -52,8 +52,8 @@ version
 
 **type**: ``string`` **default**: ``4``
 
-Cette option détermine *comment* l'adresse IP est validée et elle peut prendre l'une
-de ces différentes valeurs :
+Cette option dÃ©termine *comment* l'adresse IP est validÃ©e et elle peut prendre l'une
+de ces diffÃ©rentes valeurs :
 
 **Toutes les plages**
 
@@ -61,27 +61,27 @@ de ces différentes valeurs :
 * ``6`` - Valide une adresse IPv6
 * ``all`` - Valide tous les formats d'IP
 
-**Pas de plage d'adresses privées**
+**Pas de plage d'adresses privÃ©es**
 
-* ``4_no_priv`` - Valide une adresse IPv4 mais sans plage d'adresses privées
-* ``6_no_priv`` - Valide une adresse IPv6 mais sans plage d'adresses privées
-* ``all_no_priv`` - Valide tous les formats d'IP mais sans plage d'adresses privées
+* ``4_no_priv`` - Valide une adresse IPv4 mais sans plage d'adresses privÃ©es
+* ``6_no_priv`` - Valide une adresse IPv6 mais sans plage d'adresses privÃ©es
+* ``all_no_priv`` - Valide tous les formats d'IP mais sans plage d'adresses privÃ©es
 
-**Pas de plage d'adresses réservées**
+**Pas de plage d'adresses rÃ©servÃ©es**
 
-* ``4_no_res`` - Valide une adresse IPv4 mais sans plage d'adresses réservées
-* ``6_no_res`` - Valide une adresse IPv6 mais sans plage d'adresses réservées
-* ``all_no_res`` - Valide tous les formats d'IP mais sans plage d'adresses réservées
+* ``4_no_res`` - Valide une adresse IPv4 mais sans plage d'adresses rÃ©servÃ©es
+* ``6_no_res`` - Valide une adresse IPv6 mais sans plage d'adresses rÃ©servÃ©es
+* ``all_no_res`` - Valide tous les formats d'IP mais sans plage d'adresses rÃ©servÃ©es
 
 **Plage d'adresses publiques seulement**
 
-* ``4_public`` - Valide une adresse IPv4 mais sans plage d'adresses privées ou réservées
-* ``6_public`` - Valide une adresse IPv6 mais sans plage d'adresses privées ou réservées
-* ``all_public`` - Valide tous les formats d'IP mais sans plage d'adresses privées ou réservées
+* ``4_public`` - Valide une adresse IPv4 mais sans plage d'adresses privÃ©es ou rÃ©servÃ©es
+* ``6_public`` - Valide une adresse IPv6 mais sans plage d'adresses privÃ©es ou rÃ©servÃ©es
+* ``all_public`` - Valide tous les formats d'IP mais sans plage d'adresses privÃ©es ou rÃ©servÃ©es
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This is not a valid IP address``
 
-Ce message s'affiche si la chaine de caractères n'est pas une adresse IP valide.
+Ce message s'affiche si la chaine de caractÃ¨res n'est pas une adresse IP valide.

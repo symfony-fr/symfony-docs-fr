@@ -11,7 +11,7 @@ Le champ ``email`` est un champ texte qui est rendu en utilisant la balise HTML5
 | Rendu comme | Champ ``input`` ``email`` (balise texte)                            |
 +-------------+---------------------------------------------------------------------+
 | Options     | - `max_length`_                                                     |
-| héritées    | - `required`_                                                       |
+| hÃ©ritÃ©es    | - `required`_                                                       |
 |             | - `label`_                                                          |
 |             | - `trim`_                                                           |
 |             | - `read_only`_                                                      |
@@ -22,10 +22,10 @@ Le champ ``email`` est un champ texte qui est rendu en utilisant la balise HTML5
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType` |
 +-------------+---------------------------------------------------------------------+
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

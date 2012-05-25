@@ -1,16 +1,16 @@
 .. index::
    single: Assetic; Introduction
 
-Comment utiliser Assetic pour gérer vos ressources
+Comment utiliser Assetic pour gÃ©rer vos ressources
 ==================================================
 
 Assetic associe deux concepts majeurs : les ressources et les filtres. Les ressources
 sont des fichiers comme les feuilles de style, les JavaScript et les images. Les
-filtres peuvent être appliqués à ces fichiers avant qu'ils soient servis au
-navigateur. Cela permet de gérer séparemment les fichiers ressources qui sont stockés
-par l'application des fichiers qui sont réellement présentés à l'utilisateur.
+filtres peuvent Ãªtre appliquÃ©s Ã  ces fichiers avant qu'ils soient servis au
+navigateur. Cela permet de gÃ©rer sÃ©paremment les fichiers ressources qui sont stockÃ©s
+par l'application des fichiers qui sont rÃ©ellement prÃ©sentÃ©s Ã  l'utilisateur.
 
-Sans Assetic, vous servez directement les fichiers qui sont stockés dans votre
+Sans Assetic, vous servez directement les fichiers qui sont stockÃ©s dans votre
 application :
 
 .. configuration-block::
@@ -24,13 +24,13 @@ application :
         <script src="<?php echo $view['assets']->getUrl('js/script.js') ?>"
                 type="text/javascript" />
 
-Mais *avec* Assetic, vous pouvez manipuler ces ressources de la manière dont
-vous le désirez (ou les charger où vous le voulez) avant de les	servir. Cela
+Mais *avec* Assetic, vous pouvez manipuler ces ressources de la maniÃ¨re dont
+vous le dÃ©sirez (ou les charger oÃ¹ vous le voulez) avant de les    servir. Cela
 signifie que vous pouvez :
 
 * Minifier et combiner toutes vos CSS ou vos fichiers JavaScript
 
-* Exécuter tous (ou juste une partie) vos fichiers CSS ou JS en passant par des
+* ExÃ©cuter tous (ou juste une partie) vos fichiers CSS ou JS en passant par des
   compilateurs comme LESS, SASS ou CoffeeScript.
 
 * Optimiser vos images
@@ -38,8 +38,8 @@ signifie que vous pouvez :
 Ressources
 ----------
 
-Utiliser Assetic plutôt que servir les fichiers directement offre de nombreux avantages.
-Les fichiers n'ont pas besoin d'être stockés là où il seront servis, et peuvent
+Utiliser Assetic plutÃ´t que servir les fichiers directement offre de nombreux avantages.
+Les fichiers n'ont pas besoin d'Ãªtre stockÃ©s lÃ  oÃ¹ il seront servis, et peuvent
 provenir de plusieurs sources, notamment d'un bundle :
 
 .. configuration-block::
@@ -61,7 +61,7 @@ provenir de plusieurs sources, notamment d'un bundle :
 
 .. tip::
 
-    Pour inclure une feuille de style, vous pouvez utiliser le même procédé que
+    Pour inclure une feuille de style, vous pouvez utiliser le mÃªme procÃ©dÃ© que
 	ci-dessus, sauf que vous utiliserez le tag `stylesheets` :
 
     .. configuration-block::
@@ -81,9 +81,9 @@ provenir de plusieurs sources, notamment d'un bundle :
             <link rel="stylesheet" href="<?php echo $view->escape($url) ?>" />
             <?php endforeach; ?>
 
-Dans cet exemple, tous les fichiers du répertoire ``Resources/public/js/`` du bundle
-``AcmeFooBundle`` seront chargés et servis depuis un autre répertoire. La balise
-réellement générée pourrait ressembler à ceci :
+Dans cet exemple, tous les fichiers du rÃ©pertoire ``Resources/public/js/`` du bundle
+``AcmeFooBundle`` seront chargÃ©s et servis depuis un autre rÃ©pertoire. La balise
+rÃ©ellement gÃ©nÃ©rÃ©e pourrait ressembler Ã  ceci :
 
 .. code-block:: html
 
@@ -91,22 +91,22 @@ réellement générée pourrait ressembler à ceci :
 
 .. note::
     
-	C'est un point essentiel : une fois que vous laissez Assetic gérer vos ressources,
-	les fichiers sont servis depuis différents emplacements. Cela *peut* poser des
-	problèmes avec les CSS qui utilisent des images référencées par des chemins
-	relatifs. Pourtant, ce problème peut être résolu en utilisant le filtre
-	``cssrewrite`` qui met à jour les chemins dans les fichiers CSS pour prendre
+	C'est un point essentiel : une fois que vous laissez Assetic gÃ©rer vos ressources,
+	les fichiers sont servis depuis diffÃ©rents emplacements. Cela *peut* poser des
+	problÃ¨mes avec les CSS qui utilisent des images rÃ©fÃ©rencÃ©es par des chemins
+	relatifs. Pourtant, ce problÃ¨me peut Ãªtre rÃ©solu en utilisant le filtre
+	``cssrewrite`` qui met Ã  jour les chemins dans les fichiers CSS pour prendre
     en compte leur nouvel emplacement.
 
 Combiner des ressources
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi combiner plusieurs fichiers en un seul. Cela aide à réduire le
-nombre de requêtes HTTP, ce qui est très important pour les performances. Cela
-vous permet aussi de maintenir les fichiers plus facilement en les découpants
-en petites parties faciles à gérer. Cela peut être un plus pour la réusabilité
-de votre projet puisque vous pouvez facilement séparer les fichiers spécifiques
-au projet des fichiers qui peuvent être réutilisés dans d'autres applications,
+Vous pouvez aussi combiner plusieurs fichiers en un seul. Cela aide Ã  rÃ©duire le
+nombre de requÃªtes HTTP, ce qui est trÃ¨s important pour les performances. Cela
+vous permet aussi de maintenir les fichiers plus facilement en les dÃ©coupants
+en petites parties faciles Ã  gÃ©rer. Cela peut Ãªtre un plus pour la rÃ©usabilitÃ©
+de votre projet puisque vous pouvez facilement sÃ©parer les fichiers spÃ©cifiques
+au projet des fichiers qui peuvent Ãªtre rÃ©utilisÃ©s dans d'autres applications,
 mais toujours les servir comme un fichier unique :
 
 .. configuration-block::
@@ -131,20 +131,20 @@ mais toujours les servir comme un fichier unique :
         <?php endforeach; ?>
 
 En environnement de `dev`, chaque fichier est toujours servi individuellement
-pour que vous puissiez débugguer plus facilement. Cependant, en environnement de
-`prod`, ils seront affichés dans une unique balise `script`.
+pour que vous puissiez dÃ©bugguer plus facilement. Cependant, en environnement de
+`prod`, ils seront affichÃ©s dans une unique balise `script`.
 
 .. tip::
 
-    Si vous découvrez Assetic et essayez d'utiliser votre application en
-    environnement de ``prod`` (en utilisant le contrôleur ``app.php``), vous
+    Si vous dÃ©couvrez Assetic et essayez d'utiliser votre application en
+    environnement de ``prod`` (en utilisant le contrÃ´leur ``app.php``), vous
     verrez probablement que vos CSS et JS plantent. Pas de panique ! C'est
-    fait exprès. Pour plus de détails sur l'utilisation d'Assetic en
+    fait exprÃ¨s. Pour plus de dÃ©tails sur l'utilisation d'Assetic en
     environnement de `prod`, lisez :ref:`cookbook-assetic-dumping`.
 
-Et combiner les fichiers ne s'applique pas uniquement à *vos* fichiers. Vous
+Et combiner les fichiers ne s'applique pas uniquement Ã  *vos* fichiers. Vous
 pouvez aussi utiliser Assetic pour combiner les ressources tierces, comme jQuery,
-à vos fichiers dans un fichier unique :
+Ã  vos fichiers dans un fichier unique :
 
 .. configuration-block::
 
@@ -168,28 +168,28 @@ pouvez aussi utiliser Assetic pour combiner les ressources tierces, comme jQuery
 Filtres
 -------
 
-Une fois qu'elles sont gérées par Assetic, vous pouvez appliquer des filtres
-à vos ressources avant qu'elles soient servies. Cela inclut les filtres qui
-compressent vos ressources pour réduire la taille des fichiers (pour de
+Une fois qu'elles sont gÃ©rÃ©es par Assetic, vous pouvez appliquer des filtres
+Ã  vos ressources avant qu'elles soient servies. Cela inclut les filtres qui
+compressent vos ressources pour rÃ©duire la taille des fichiers (pour de
 meilleures performances). D'autres filtres peuvent compiler des fichiers
 CoffeeScript en JavaScript ou couvertir vos fichiers SASS en CSS.
-En fait, Assetic possède une longue liste de filtres.
+En fait, Assetic possÃ¨de une longue liste de filtres.
 
 Plusieurs de ces filtres ne font pas le travail directement, mais utilisent
 des librairies tierces pour faire le gros du travail. Cela signifie que vous
 devrez souvent installer une librairie tierce pour utiliser un filtre. Le grand
-avantage d'utiliser Assetic pour faire appel à ces librairies (plutôt que de les
-utiliser directement) est qu'au lieu de les exécuter à la main après avoir modifié
-les fichiers, Assetic prendra tout en charge pour vous, et supprimera définitivement
-cette étape du processus de développement et de déploiement.
+avantage d'utiliser Assetic pour faire appel Ã  ces librairies (plutÃ´t que de les
+utiliser directement) est qu'au lieu de les exÃ©cuter Ã  la main aprÃ¨s avoir modifiÃ©
+les fichiers, Assetic prendra tout en charge pour vous, et supprimera dÃ©finitivement
+cette Ã©tape du processus de dÃ©veloppement et de dÃ©ploiement.
 
-Pour utiliser un filtre, vous aurez d'abord besoin de le spécifier dans la
+Pour utiliser un filtre, vous aurez d'abord besoin de le spÃ©cifier dans la
 configuration d'Assetic. Ajouter un filtre dans la configuration ne signifie
-pas qu'il est utilisé, mais juste qu'il est prêt à l'être (nous allons l'utiliser
+pas qu'il est utilisÃ©, mais juste qu'il est prÃªt Ã  l'Ãªtre (nous allons l'utiliser
 ci-dessous).
 
 Par exemple, pour utiliser le JavaScript YUI Compressor, la configuration
-suivante doit être ajoutée :
+suivante doit Ãªtre ajoutÃ©e :
 
 .. configuration-block::
 
@@ -243,16 +243,16 @@ le dans votre template :
         <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
-Vous pouvez trouver un guide plus détaillé sur la configuration et l'utilisation
+Vous pouvez trouver un guide plus dÃ©taillÃ© sur la configuration et l'utilisation
 des filtres Assetic ainsi que des informations sur le mode debug d'Assetic
 en lisant :doc:`/cookbook/assetic/yuicompressor`.
 
-Contrôler l'URL utilisée
+ContrÃ´ler l'URL utilisÃ©e
 ------------------------
 
-Si vous le voulez, vous pouvez contrôler les URLs générées par Assetic.
+Si vous le voulez, vous pouvez contrÃ´ler les URLs gÃ©nÃ©rÃ©es par Assetic.
 Cela se fait dans le template, et le chemin est relatif par rapport
-à la racine publique :
+Ã  la racine publique :
 
 .. configuration-block::
 
@@ -277,10 +277,10 @@ Cela se fait dans le template, et le chemin est relatif par rapport
 
 .. note::
 
-    Symfony contient également une méthode pour le *cache busting* (technique
-    empêchant la mise en cache), où l'URL générée par Assetic contient un
-    paramètre qui peut être incrémenté, via la configuration, à chaque
-    déploiement. Pour plus d'informations, lisez l'option de configuration
+    Symfony contient Ã©galement une mÃ©thode pour le *cache busting* (technique
+    empÃªchant la mise en cache), oÃ¹ l'URL gÃ©nÃ©rÃ©e par Assetic contient un
+    paramÃ¨tre qui peut Ãªtre incrÃ©mentÃ©, via la configuration, Ã  chaque
+    dÃ©ploiement. Pour plus d'informations, lisez l'option de configuration
     :ref:`ref-framework-assets-version`.
 
 .. _cookbook-assetic-dumping:
@@ -288,26 +288,26 @@ Cela se fait dans le template, et le chemin est relatif par rapport
 Exporter les ressources
 -----------------------
 
-En environnement de ``dev``, Assetic génère des chemins vers des fichiers CSS et
+En environnement de ``dev``, Assetic gÃ©nÃ¨re des chemins vers des fichiers CSS et
 JavaScript qui n'existent pas physiquement sur votre ordinateur. Mais ils sont
-néanmoins affichés car un contrôleur interne de Symfony ouvre les fichiers et
-sert leur contenu (après avoir exécuté tous les filtres).
+nÃ©anmoins affichÃ©s car un contrÃ´leur interne de Symfony ouvre les fichiers et
+sert leur contenu (aprÃ¨s avoir exÃ©cutÃ© tous les filtres).
 
-Cette manière dynamique de servir des ressources traitées est géniale car
-cela signifie que vous pouvez immédiatement voir les modifications que vous
-apportez à vos fichiers. Mais l'inconvénient et que cela peut parfois être
-un peu plus lent. Si vous utilisez beaucoup de filtres, cela peut être
-carrément frustrant.
+Cette maniÃ¨re dynamique de servir des ressources traitÃ©es est gÃ©niale car
+cela signifie que vous pouvez immÃ©diatement voir les modifications que vous
+apportez Ã  vos fichiers. Mais l'inconvÃ©nient et que cela peut parfois Ãªtre
+un peu plus lent. Si vous utilisez beaucoup de filtres, cela peut Ãªtre
+carrÃ©ment frustrant.
 
-Heureusement, Assetic fournit une méthode pour exporter vos ressources vers
-des fichiers réels au lieu de les générer dynamiquement.
+Heureusement, Assetic fournit une mÃ©thode pour exporter vos ressources vers
+des fichiers rÃ©els au lieu de les gÃ©nÃ©rer dynamiquement.
 
 
 Exporter les ressources en environnement de ``prod``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-En environnement de ``prod``, vos fichiers JS et CSS sont représentés chacun
-par une balise unique. En d'autres termes, plutôt que de voir chacun des fichiers
+En environnement de ``prod``, vos fichiers JS et CSS sont reprÃ©sentÃ©s chacun
+par une balise unique. En d'autres termes, plutÃ´t que de voir chacun des fichiers
 JavaScript que vous incluez dans votre code source, vous verrez probablement quelque
 chose comme ceci :
 
@@ -315,33 +315,33 @@ chose comme ceci :
 
     <script src="/app_dev.php/js/abcd123.js"></script>
 
-De plus, ce fichier n'existe **pas** vraiment et n'est pas non plus affiché
+De plus, ce fichier n'existe **pas** vraiment et n'est pas non plus affichÃ©
 dynamiquement par Symfony (car les ressources sont en environnement de ``dev``).
-C'est fait exprès : laisser Symfony générer ces fichiers dynamiquement en production
+C'est fait exprÃ¨s : laisser Symfony gÃ©nÃ©rer ces fichiers dynamiquement en production
 serait tout simplement trop lent.
 
-Au lieu de cela, chaque fois que vous exécutez votre application dans l'environnement
-de ``prod`` (et par conséquent, chaque fois que vous déployez), vous devriez lancer
+Au lieu de cela, chaque fois que vous exÃ©cutez votre application dans l'environnement
+de ``prod`` (et par consÃ©quent, chaque fois que vous dÃ©ployez), vous devriez lancer
 la commande suivante :
 
 .. code-block:: bash
 
     php app/console assetic:dump --env=prod --no-debug
 
-Cela génèrera physiquement et écrira chaque fichier dont vous avez besoin
-(ex ``/js/abcd123.js``). Si vous mettez à jour vos ressources, vous aurez besoin
-de relancer cette commande pour regénérer vos fichiers.
+Cela gÃ©nÃ¨rera physiquement et Ã©crira chaque fichier dont vous avez besoin
+(ex ``/js/abcd123.js``). Si vous mettez Ã  jour vos ressources, vous aurez besoin
+de relancer cette commande pour regÃ©nÃ©rer vos fichiers.
 
 Exporter les ressources en environnement de ``dev``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Par défaut, chaque chemin de ressource généré en environnement de ``dev``
-est pris en charge dynamiquement par Symfony. Cela n'a pas d'inconvénient
-(vous pouvez voir vos changements immédiatement), sauf que les ressources
-peuvent être chargées plus lentement. Si vous trouvez que vos ressources sont
-chargés trop lentement, suivez ce guide
+Par dÃ©faut, chaque chemin de ressource gÃ©nÃ©rÃ© en environnement de ``dev``
+est pris en charge dynamiquement par Symfony. Cela n'a pas d'inconvÃ©nient
+(vous pouvez voir vos changements immÃ©diatement), sauf que les ressources
+peuvent Ãªtre chargÃ©es plus lentement. Si vous trouvez que vos ressources sont
+chargÃ©s trop lentement, suivez ce guide
 
-Premièrement, dites à Symfony de ne plus essayer de traiter ces fichiers
+PremiÃ¨rement, dites Ã  Symfony de ne plus essayer de traiter ces fichiers
 dynamiquement. Apportez les modifications suivantes dans le fichier ``config_dev.yml`` :
 
 .. configuration-block::
@@ -364,7 +364,7 @@ dynamiquement. Apportez les modifications suivantes dans le fichier ``config_dev
             'use_controller' => false,
         ));
 
-Ensuite, puisque Symfony ne génère plus ces fichiers pour vous, vous
+Ensuite, puisque Symfony ne gÃ©nÃ¨re plus ces fichiers pour vous, vous
 aurez besoin de les exporter manuellement. Pour ce faire, lancez la commande
 suivante :
 
@@ -372,19 +372,19 @@ suivante :
 
     php app/console assetic:dump
 
-Elle écrit physiquement tous les fichiers de ressource dont vous avez
-besoin pour l'environnement de ``dev``. Le gros inconvénient est que vous
+Elle Ã©crit physiquement tous les fichiers de ressource dont vous avez
+besoin pour l'environnement de ``dev``. Le gros inconvÃ©nient est que vous
 devrez faire cela chaque fois que vous modifiez une ressource. Heureusement,
-en passant l'option ``--watch``, la commande regénèrera automatiquement les
-ressources *modifiées* :
+en passant l'option ``--watch``, la commande regÃ©nÃ¨rera automatiquement les
+ressources *modifiÃ©es* :
 
 .. code-block:: bash
 
     php app/console assetic:dump --watch
 
-Lancer cette commande en environnement de ``dev`` peut générer un florilège
-de fichiers. Pour conserver votre projet bien organisé, il peut être intéressant
-de mettre les fichiers générés dans un répertoire séparé (ex ``/js/compiled``) :
+Lancer cette commande en environnement de ``dev`` peut gÃ©nÃ©rer un florilÃ¨ge
+de fichiers. Pour conserver votre projet bien organisÃ©, il peut Ãªtre intÃ©ressant
+de mettre les fichiers gÃ©nÃ©rÃ©s dans un rÃ©pertoire sÃ©parÃ© (ex ``/js/compiled``) :
 
 .. configuration-block::
 

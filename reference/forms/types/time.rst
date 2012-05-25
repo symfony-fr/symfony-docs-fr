@@ -6,15 +6,15 @@ Type de champ Time
 
 Un champ pour saisir un temps.
 
-Ce champ peut être affiché comme champ texte, une série de champs texte (ex heures, minutes,
-secondes) ou une série de listes déroulantes. La donnée finale peut être stockée comme un objet
-``DateTime``, une chaine de caractères, un timestamp ou un tableau.
+Ce champ peut Ãªtre affichÃ© comme champ texte, une sÃ©rie de champs texte (ex heures, minutes,
+secondes) ou une sÃ©rie de listes dÃ©roulantes. La donnÃ©e finale peut Ãªtre stockÃ©e comme un objet
+``DateTime``, une chaine de caractÃ¨res, un timestamp ou un tableau.
 
 +----------------------+-----------------------------------------------------------------------------+
-| Type de donnée       | Peut être un objet``DateTime``, une chaine de caractère, un timestamp,      |
+| Type de donnÃ©e       | Peut Ãªtre un objet``DateTime``, une chaine de caractÃ¨re, un timestamp,      |
 |                      | ou un tableau (voir l'option ``input`` )                                    |
 +----------------------+-----------------------------------------------------------------------------+
-| Rendu comme          | peut être différentes balises (voir plus bas)                               |
+| Rendu comme          | peut Ãªtre diffÃ©rentes balises (voir plus bas)                               |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `widget`_                                                                 |
 |                      | - `input`_                                                                  |
@@ -26,7 +26,7 @@ secondes) ou une série de listes déroulantes. La donnée finale peut être stockée
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `invalid_message`_                                                        |
-| héritées             | - `invalid_message_parameters`_                                             |
+| hÃ©ritÃ©es             | - `invalid_message_parameters`_                                             |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | form                                                                        |
 +----------------------+-----------------------------------------------------------------------------+
@@ -36,12 +36,12 @@ secondes) ou une série de listes déroulantes. La donnée finale peut être stockée
 Utilisation basique
 -------------------
 
-Ce type de champ est entièrement configurable mais très facile à utiliser. Les options
+Ce type de champ est entiÃ¨rement configurable mais trÃ¨s facile Ã  utiliser. Les options
 les plus importantes sont ``input`` et ``widget``.
 
-Supposez que vous avec un champ ``startTime`` dont la donnée sous-jacente est un objet
-``DateTime``. L'exemple suivant configure le type ``time`` pour que le champ soit composé
-de trois listes déroulantes :
+Supposez que vous avec un champ ``startTime`` dont la donnÃ©e sous-jacente est un objet
+``DateTime``. L'exemple suivant configure le type ``time`` pour que le champ soit composÃ©
+de trois listes dÃ©roulantes :
 
 .. code-block:: php
 
@@ -50,9 +50,9 @@ de trois listes déroulantes :
         'widget' => 'choice',
     ));
 
-L'option ``input`` *doit* être changée pour correspondre au type de donnée date sous-jacent.
-Par exemple, si la données du champ ``startTime`` est un timestamp unix, vous devrez définir
-l'option ``input`` à ``timestamp`` :
+L'option ``input`` *doit* Ãªtre changÃ©e pour correspondre au type de donnÃ©e date sous-jacent.
+Par exemple, si la donnÃ©es du champ ``startTime`` est un timestamp unix, vous devrez dÃ©finir
+l'option ``input`` Ã  ``timestamp`` :
 
 .. code-block:: php
 
@@ -72,13 +72,13 @@ widget
 **type**: ``string`` **default**: ``choice``
 
 
-Cette option définit la manière dont le champ doit être affiché. Les choix suivants sont possibles :
+Cette option dÃ©finit la maniÃ¨re dont le champ doit Ãªtre affichÃ©. Les choix suivants sont possibles :
 
-* ``choice``: rend deux (ou trois si `with_seconds`_ est à true) listes déroulantes.
+* ``choice``: rend deux (ou trois si `with_seconds`_ est Ã  true) listes dÃ©roulantes.
 
 * ``text``: rend deux ou trois champs input texte (heures, minutes, secondes).
 
-* ``single_text``: rend un simple input texte. La donnée saisie sera validée en fonction
+* ``single_text``: rend un simple input texte. La donnÃ©e saisie sera validÃ©e en fonction
   du format ``hh:mm`` (ou ``hh:mm:ss`` si vous utilisez les secondes).
 
 input
@@ -86,15 +86,15 @@ input
 
 **type**: ``string`` **default**: ``datetime``
 
-Le format de la donnée *finale*, c'est-à-dire le format dans lequel la donnée
-sera stockée dans votre objet. Les valeurs autorisées sont :
+Le format de la donnÃ©e *finale*, c'est-Ã -dire le format dans lequel la donnÃ©e
+sera stockÃ©e dans votre objet. Les valeurs autorisÃ©es sont :
 
 * ``string`` (ex ``12:17:26``)
 * ``datetime`` (un objet``DateTime``)
 * ``array`` (ex ``array('hour' => 12, 'minute' => 17, 'second' => 26)``)
 * ``timestamp`` (ex ``1307232000``)
 
-la valeur qui provient du formulaire sera également normalisée selon ce format.
+la valeur qui provient du formulaire sera Ã©galement normalisÃ©e selon ce format.
 
 .. include:: /reference/forms/types/options/with_seconds.rst.inc
 
@@ -108,10 +108,10 @@ la valeur qui provient du formulaire sera également normalisée selon ce format.
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

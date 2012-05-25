@@ -1,13 +1,13 @@
 Blank
 =====
 
-Valide qu'une valeur est vide, égale à une chaine vide, ou égale à ``null``.
-Pour forcer cette valeur à être strictement égale à ``null``, jetez un oeil à
-la contrainte :doc:`/reference/constraints/Null`. Pour forcer cette valeur à
-ne *pas* être vide, lisez :doc:`/reference/constraints/NotBlank`.
+Valide qu'une valeur est vide, Ã©gale Ã  une chaine vide, ou Ã©gale Ã  ``null``.
+Pour forcer cette valeur Ã  Ãªtre strictement Ã©gale Ã  ``null``, jetez un oeil Ã 
+la contrainte :doc:`/reference/constraints/Null`. Pour forcer cette valeur Ã 
+ne *pas* Ãªtre vide, lisez :doc:`/reference/constraints/NotBlank`.
 
 +----------------+-----------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
@@ -19,8 +19,8 @@ ne *pas* être vide, lisez :doc:`/reference/constraints/NotBlank`.
 Utilisation de base
 -------------------
 
-Si, pour certaines raison, vous voulez vous assurer que la la propriété ``firstName``
-de la classe ``Author`` soit nulle, vous pouvez procéder comme ceci :
+Si, pour certaines raison, vous voulez vous assurer que la la propriÃ©tÃ© ``firstName``
+de la classe ``Author`` soit nulle, vous pouvez procÃ©der comme ceci :
 
 .. configuration-block::
 

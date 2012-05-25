@@ -4,7 +4,7 @@ Language
 Valide que la valeur est un code de langue valide.
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
@@ -49,4 +49,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid language``
 
-Le message s'affiche si la chaine de caractères n'est pas un code de langue valide.
+Le message s'affiche si la chaine de caractÃ¨res n'est pas un code de langue valide.

@@ -4,12 +4,12 @@
 Type de champ Percent
 =====================
 
-Le type ``percent`` rend un champ input texte spécialisé dans la gestion de pourcentages.
-Si votre pourcentage est stocké comme décimale (ex ``0,95``),
-vous pouvez utiliser ce champ directement. Si vous stockez votre données comme nombre
-(ex ``95``), vous devriez définir l'option ``type`` à ``integer``.
+Le type ``percent`` rend un champ input texte spÃ©cialisÃ© dans la gestion de pourcentages.
+Si votre pourcentage est stockÃ© comme dÃ©cimale (ex ``0,95``),
+vous pouvez utiliser ce champ directement. Si vous stockez votre donnÃ©es comme nombre
+(ex ``95``), vous devriez dÃ©finir l'option ``type`` Ã  ``integer``.
 
-Ce champ ajoute le signe pourcentage "``%``" après l'input.
+Ce champ ajoute le signe pourcentage "``%``" aprÃ¨s l'input.
 
 +-------------+-----------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``text``                                              |
@@ -18,7 +18,7 @@ Ce champ ajoute le signe pourcentage "``%``" après l'input.
 |             | - `precision`_                                                        |
 +-------------+-----------------------------------------------------------------------+
 | Options     | - `required`_                                                         |
-| héritées    | - `label`_                                                            |
+| hÃ©ritÃ©es    | - `label`_                                                            |
 |             | - `read_only`_                                                        |
 |             | - `error_bubbling`_                                                   |
 |             | - `invalid_message`_                                                  |
@@ -37,32 +37,32 @@ type
 
 **type**: ``string`` **default**: ``fractional``
 
-Cette option contrôle la façon dont vos données sont stockées dans l'objet. Par exemple,
-un pourcentage correspondant à « 55% », peut être stocké comme ``0,55`` ou ``55`` dans votre
-objet. Les deux « types » gèrent ces deux cas :
+Cette option contrÃ´le la faÃ§on dont vos donnÃ©es sont stockÃ©es dans l'objet. Par exemple,
+un pourcentage correspondant Ã  Â« 55% Â», peut Ãªtre stockÃ© comme ``0,55`` ou ``55`` dans votre
+objet. Les deux Â« types Â» gÃ¨rent ces deux cas :
     
 *   ``fractional``
-    Si votre donnée est stockée au format décimal (ex ``0,55``), utilisez ce type.
-    La donnée sera multipliée par ``100`` avant d'être affichée à l'utilisateur (ex ``55``).
-	La valeur soumise sera divisée par ``100`` lors de la soumission du formulaire pour que
-	la valeur soit stockée au format décimal (``0,55``);
+    Si votre donnÃ©e est stockÃ©e au format dÃ©cimal (ex ``0,55``), utilisez ce type.
+    La donnÃ©e sera multipliÃ©e par ``100`` avant d'Ãªtre affichÃ©e Ã  l'utilisateur (ex ``55``).
+    La valeur soumise sera divisÃ©e par ``100`` lors de la soumission du formulaire pour que
+	la valeur soit stockÃ©e au format dÃ©cimal (``0,55``);
 
 *   ``integer``
-    Si votre donnée est stockée comme integer (ex 55), utilisez cette
-	option. La valeur brute (``55``) est affichée à l'utilisateur et stockée dans votre objet.
-	Notez que cela ne fonctionne que pour les valeurs entières.
+    Si votre donnÃ©e est stockÃ©e comme integer (ex 55), utilisez cette
+	option. La valeur brute (``55``) est affichÃ©e Ã  l'utilisateur et stockÃ©e dans votre objet.
+	Notez que cela ne fonctionne que pour les valeurs entiÃ¨res.
 
 precision
 ~~~~~~~~~
 
 **type**: ``integer`` **default**: ``0``
 
-Par défaut, les nombres sont arrondis. Pour autoriser les décimales, utilisez cette option.
+Par dÃ©faut, les nombres sont arrondis. Pour autoriser les dÃ©cimales, utilisez cette option.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

@@ -4,13 +4,13 @@
 Type de champ Radio
 ===================
 
-Crée un simple bouton radio. Il devrait toujours être utilisé pour un champ
-dont la valeur est booléenne. : si le bouton radio est sélectionné, le champ sera
-défini à true, sinon, la valeur sera définie à false.
+CrÃ©e un simple bouton radio. Il devrait toujours Ãªtre utilisÃ© pour un champ
+dont la valeur est boolÃ©enne. : si le bouton radio est sÃ©lectionnÃ©, le champ sera
+dÃ©fini Ã  true, sinon, la valeur sera dÃ©finie Ã  false.
 
-Le type ``radio`` n'est généralement pas utilisé directement. Le plus souvent, il 
-est utilisé indirectement par d'autres types comme le type :doc:`Choice</reference/forms/types/choice>`.
-Si vous voulez avoir un champ Booléen, utilisez :doc:`checkbox</reference/forms/types/checkbox>`.
+Le type ``radio`` n'est gÃ©nÃ©ralement pas utilisÃ© directement. Le plus souvent, il 
+est utilisÃ© indirectement par d'autres types comme le type :doc:`Choice</reference/forms/types/choice>`.
+Si vous voulez avoir un champ BoolÃ©en, utilisez :doc:`checkbox</reference/forms/types/checkbox>`.
 
 +-------------+---------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``radio``                                           | 
@@ -18,7 +18,7 @@ Si vous voulez avoir un champ Booléen, utilisez :doc:`checkbox</reference/forms/
 | Options     | - `value`_                                                          |
 +-------------+---------------------------------------------------------------------+
 | Options     | - `required`_                                                       |
-| héritées    | - `label`_                                                          |
+| hÃ©ritÃ©es    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
@@ -35,13 +35,13 @@ value
 
 **type**: ``mixed`` **default**: ``1``
 
-La valeur qui est effectivement utilisée comme valeur pour le radio bouton. Cela
-n'affecte pas la valeur qui est définie dans votre objet.
+La valeur qui est effectivement utilisÃ©e comme valeur pour le radio bouton. Cela
+n'affecte pas la valeur qui est dÃ©finie dans votre objet.
 
-Options héritées
+Options hÃ©ritÃ©es
 -----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

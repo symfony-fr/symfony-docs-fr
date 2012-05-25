@@ -4,21 +4,21 @@
 Type de champ Date
 ==================
 
-Un champ qui permet à l'utilisateur de modifier une date via différents éléments
+Un champ qui permet Ã  l'utilisateur de modifier une date via diffÃ©rents Ã©lÃ©ments
 HTML.
 
-Les données utilisées par ce type de champ peuvent être un objet ``DateTime``,
-une chaine de caractères, un timestamp ou un tableau. Tant que l'option `input`_
-est correctement définie, le champ s'occupera de tous les détails.
+Les donnÃ©es utilisÃ©es par ce type de champ peuvent Ãªtre un objet ``DateTime``,
+une chaine de caractÃ¨res, un timestamp ou un tableau. Tant que l'option `input`_
+est correctement dÃ©finie, le champ s'occupera de tous les dÃ©tails.
 
-Le champ peut être rendu comme un simple champ texte, trois champs texte (mois,
-jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
+Le champ peut Ãªtre rendu comme un simple champ texte, trois champs texte (mois,
+jour et annÃ©e) ou comme trois listes dÃ©roulantes (voyez l'option `widget_`).
 
 +----------------------+-----------------------------------------------------------------------------+
-| Type de données      | peut être ``DateTime``, une chaine de caractères, un timestamp, ou un       |
+| Type de donnÃ©es      | peut Ãªtre ``DateTime``, une chaine de caractÃ¨res, un timestamp, ou un       |
 |                      | tableau (voir l'option ``input``)                                           |
 +----------------------+-----------------------------------------------------------------------------+
-| Rendu comme          | champ texte unique, trois champs textes, ou trois listes déroulantes        |
+| Rendu comme          | champ texte unique, trois champs textes, ou trois listes dÃ©roulantes        |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `widget`_                                                                 |
 |                      | - `input`_                                                                  |
@@ -32,7 +32,7 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 |                      | - `user_timezone`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `invalid_message`_                                                        |
-| héritées             | - `invalid_message_parameters`_                                             |
+| hÃ©ritÃ©es             | - `invalid_message_parameters`_                                             |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | ``field`` (si texte), ``form`` sinon                                        |
 +----------------------+-----------------------------------------------------------------------------+
@@ -42,12 +42,12 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 Utilisation basique
 -------------------
 
-Ce type de champ est entièrement configurable mais très facile à utiliser. Les options
+Ce type de champ est entiÃ¨rement configurable mais trÃ¨s facile Ã  utiliser. Les options
 les plus importantes sont ``input`` et ``widget``.
 
 Supposons que vous ayez un champ ``publishedAt`` dont la date est un objet ``DateTime``.
 L'exemple suivant montre comment configurer le type ``date`` pour que le champ soit
-rendu comme trois différents champs Choice (listes déroulantes) :
+rendu comme trois diffÃ©rents champs Choice (listes dÃ©roulantes) :
 
 .. code-block:: php
 
@@ -56,9 +56,9 @@ rendu comme trois différents champs Choice (listes déroulantes) :
         'widget' => 'choice',
     ));
 
-L'option ``input`` *doit* être changée pour correspondre au type de donnée de la date.
-Par exemple, si la donnée du champ ``publishedAt`` est un timestamp unix, vous
-aurez besoin de définir ``input`` à ``timestamp``:
+L'option ``input`` *doit* Ãªtre changÃ©e pour correspondre au type de donnÃ©e de la date.
+Par exemple, si la donnÃ©e du champ ``publishedAt`` est un timestamp unix, vous
+aurez besoin de dÃ©finir ``input`` Ã  ``timestamp``:
 
 .. code-block:: php
 
@@ -84,16 +84,16 @@ empty_value
 
 **type**: ``string`` ou ``array``
 
-Si votre option Widget est définie à ``choice``, alors ce champ sera représenté comme
-une série de listes déroulantes (``select``). L'option ``empty_value`` peut être
-utilisée pour définir un choix « vide » en haut de chaque liste déroulante::
+Si votre option Widget est dÃ©finie Ã  ``choice``, alors ce champ sera reprÃ©sentÃ© comme
+une sÃ©rie de listes dÃ©roulantes (``select``). L'option ``empty_value`` peut Ãªtre
+utilisÃ©e pour dÃ©finir un choix Â« vide Â» en haut de chaque liste dÃ©roulante::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => '',
     ));
 
-Sinon, vous pouvez aussi spécifier une chaine de caractères qui sera affichée pour
-la valeur « vide»::
+Sinon, vous pouvez aussi spÃ©cifier une chaine de caractÃ¨res qui sera affichÃ©e pour
+la valeur Â« videÂ»::
 
     $builder->add('dueDate', 'date', array(
         'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day')
@@ -115,10 +115,10 @@ la valeur « vide»::
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

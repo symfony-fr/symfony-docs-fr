@@ -4,26 +4,26 @@
 Type de champ Language
 ======================
 
-Le type ``language`` est un sous-ensemble de ``ChoiceType`` qui permet à l'utilisateur
-de choisir une langue dans une liste déroulante. En bonus, les noms de langues sont
-affichés dans la langue de l'utilisateur.
+Le type ``language`` est un sous-ensemble de ``ChoiceType`` qui permet Ã  l'utilisateur
+de choisir une langue dans une liste dÃ©roulante. En bonus, les noms de langues sont
+affichÃ©s dans la langue de l'utilisateur.
 
-La « valeur » de chaque langue est l'*identifiant de langue Unicode* (ex ``fr`` or ``zh-Hant``)
+La Â« valeur Â» de chaque langue est l'*identifiant de langue Unicode* (ex ``fr`` or ``zh-Hant``)
 
 .. note::
 
-   La locale de votre utilisateur est devinée en utilisant `Locale::getDefault()`_
+   La locale de votre utilisateur est devinÃ©e en utilisant `Locale::getDefault()`_
 
-Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options
+Contrairement au type ``choice``, vous n'avez pas besoin de spÃ©cifier les options
 ``choices`` ou ``choice_list`` puisque ce type de champ utilise automatiquement
-la liste des langues. Vous *pouvez* spécifier l'une ou l'autre de ces options manuellement,
-mais alors vous devriez plutôt utiliser directement le type ``choice``.
+la liste des langues. Vous *pouvez* spÃ©cifier l'une ou l'autre de ces options manuellement,
+mais alors vous devriez plutÃ´t utiliser directement le type ``choice``.
 
 +-------------+------------------------------------------------------------------------+
-| Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
+| Rendu comme | peut Ãªtre diffÃ©rentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
-| héritées    | - `expanded`_                                                          |
+| hÃ©ritÃ©es    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
@@ -36,10 +36,10 @@ mais alors vous devriez plutôt utiliser directement le type ``choice``.
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType` |
 +-------------+------------------------------------------------------------------------+
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -51,7 +51,7 @@ Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

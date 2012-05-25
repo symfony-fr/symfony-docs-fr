@@ -1,12 +1,12 @@
 NotNull
 =======
 
-Valide qu'une valeur n'est strictement pas égale à ``null``. Pour vous assurer qu'une
-valeur ne soit simplement pas vide (pas une chaine de caractères vide), lisez la
+Valide qu'une valeur n'est strictement pas Ã©gale Ã  ``null``. Pour vous assurer qu'une
+valeur ne soit simplement pas vide (pas une chaine de caractÃ¨res vide), lisez la
 documentation de la contrainte :doc:`/reference/constraints/NotBlank`.
 
 +----------------+-----------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `message`_                                                          |
 +----------------+-----------------------------------------------------------------------+
@@ -18,8 +18,8 @@ documentation de la contrainte :doc:`/reference/constraints/NotBlank`.
 Utilisation de base
 -------------------
 
-Si vous voulez vous assurer que la propriété ``firstName`` d'une classe ``Author``
-ne soit strictement pas égale à ``null``, ajoutez le code suivant :
+Si vous voulez vous assurer que la propriÃ©tÃ© ``firstName`` d'une classe ``Author``
+ne soit strictement pas Ã©gale Ã  ``null``, ajoutez le code suivant :
 
 .. configuration-block::
 
@@ -50,4 +50,4 @@ message
 
 **type**: ``string`` **default**: ``This value should not be null``
 
-Le message qui sera affiché si la valeur est égale à ``null``.
+Le message qui sera affichÃ© si la valeur est Ã©gale Ã  ``null``.

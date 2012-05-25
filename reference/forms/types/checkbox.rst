@@ -4,9 +4,9 @@
 Type de champ Checkbox
 ======================
 
-Crée un unique champ de type input checkbox. Cela devrait toujours ête utilisé pour
-un champ qui a une valeur booléenne : si la checkbox est cochée, le champ sera
-défini à true. Si la checkbox n'est pas cochée, le champ sera défini à false.
+CrÃ©e un unique champ de type input checkbox. Cela devrait toujours Ãªte utilisÃ© pour
+un champ qui a une valeur boolÃ©enne : si la checkbox est cochÃ©e, le champ sera
+dÃ©fini Ã  true. Si la checkbox n'est pas cochÃ©e, le champ sera dÃ©fini Ã  false.
 
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``text``                                               |
@@ -14,7 +14,7 @@ défini à true. Si la checkbox n'est pas cochée, le champ sera défini à false.
 | Options     | - `value`_                                                             |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `required`_                                                          |
-| héritées    | - `label`_                                                             |
+| hÃ©ritÃ©es    | - `label`_                                                             |
 |             | - `read_only`_                                                         |
 |             | - `error_bubbling`_                                                    |
 +-------------+------------------------------------------------------------------------+
@@ -41,13 +41,13 @@ value
 
 **type**: ``mixed`` **default**: ``1``
 
-La valeur qui est effectivement utilisée comme valeur de la checkbox. Cela n'affecte
-pas la valeur qui est définie sur votre objet.
+La valeur qui est effectivement utilisÃ©e comme valeur de la checkbox. Cela n'affecte
+pas la valeur qui est dÃ©finie sur votre objet.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

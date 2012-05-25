@@ -3,12 +3,12 @@ Locale
 
 Valide que la valeur est une locale valide.
 
-La « valeur » de chaque locale est soit le code *langue* ISO639-1 en deux lettres
+La Â« valeur Â» de chaque locale est soit le code *langue* ISO639-1 en deux lettres
 (ex ``fr``), soit le code langue suivi d'un underscore (``_``) puis du code *pays*
-ISO3166 (ex ``fr_FR`` pour Français/France).
+ISO3166 (ex ``fr_FR`` pour FranÃ§ais/France).
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+

@@ -1,14 +1,14 @@
 True
 ====
 
-Valide qu'une valeur est ``vraie`` (true). Spécifiquement, cette contrainte
-vérifie que la valeur est exactement ``true``, exactement l'entier ``1``, ou exactement
-la chaine de caractère « ``1`` ».
+Valide qu'une valeur est ``vraie`` (true). SpÃ©cifiquement, cette contrainte
+vÃ©rifie que la valeur est exactement ``true``, exactement l'entier ``1``, ou exactement
+la chaine de caractÃ¨re Â« ``1`` Â».
 
-Lisez également :doc:`False <False>`.
+Lisez Ã©galement :doc:`False <False>`.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 +----------------+---------------------------------------------------------------------+
@@ -20,10 +20,10 @@ Lisez également :doc:`False <False>`.
 Utilisation de base
 -------------------
 
-Cette contrainte peut être appliquée à une propriété (ex une propriété ``termsAccepted``
-d'un formulaire d'inscription) ou une méthode « getter ». Elle est plus puissante dans le
-second cas, où vous pouvez vérifier que la méthode retourne true. Par exemple, supposons
-que vous avez la méthode suivante :
+Cette contrainte peut Ãªtre appliquÃ©e Ã  une propriÃ©tÃ© (ex une propriÃ©tÃ© ``termsAccepted``
+d'un formulaire d'inscription) ou une mÃ©thode Â« getter Â». Elle est plus puissante dans le
+second cas, oÃ¹ vous pouvez vÃ©rifier que la mÃ©thode retourne true. Par exemple, supposons
+que vous avez la mÃ©thode suivante :
 
 .. code-block:: php
 
@@ -40,7 +40,7 @@ que vous avez la méthode suivante :
         }
     }
 
-Vous pouvez appliquer la contrainte ``True`` à cette méthode.
+Vous pouvez appliquer la contrainte ``True`` Ã  cette mÃ©thode.
 
 .. configuration-block::
 
@@ -111,7 +111,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
             }
         }
 
-Si la méthode ``isTokenValid()`` retourne false, la validation échouera.
+Si la mÃ©thode ``isTokenValid()`` retourne false, la validation Ã©chouera.
 
 Options
 -------
@@ -121,4 +121,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be true``
 
-Le message qui sera affiché si la donnée ne vaut pas true.
+Le message qui sera affichÃ© si la donnÃ©e ne vaut pas true.

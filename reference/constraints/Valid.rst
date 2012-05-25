@@ -1,12 +1,12 @@
 Valid
 =====
 
-Cette contrainte est utilisée pour activer la validation sur les objets
-imbriqués dans un objet qui doit être validé. Cela vous permet de valider
-un objet et les sous-objets qui lui sont associés.
+Cette contrainte est utilisÃ©e pour activer la validation sur les objets
+imbriquÃ©s dans un objet qui doit Ãªtre validÃ©. Cela vous permet de valider
+un objet et les sous-objets qui lui sont associÃ©s.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `traverse`_                                                       |
 +----------------+---------------------------------------------------------------------+
@@ -16,9 +16,9 @@ un objet et les sous-objets qui lui sont associés.
 Utilisation de base
 -------------------
 
-Dans l'exemple suivant, nous créons deux classes ``Author`` et ``Address``
-qui ont toutes les deux des contraintes sur leurs propriétés. De plus, 
-l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$address``.
+Dans l'exemple suivant, nous crÃ©ons deux classes ``Author`` et ``Address``
+qui ont toutes les deux des contraintes sur leurs propriÃ©tÃ©s. De plus, 
+l'objet ``Author`` stocke une instance d'``Address`` dans sa propriÃ©tÃ© ``$address``.
 
 .. code-block:: php
 
@@ -162,7 +162,7 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addres
         }
 
 Avec cette configuration, il est possible de valider un auteur dont l'adresse serait
-incorrecte. Pour éviter ceci, ajouter la contrainte ``Valid`` à la propriété
+incorrecte. Pour Ã©viter ceci, ajouter la contrainte ``Valid`` Ã  la propriÃ©tÃ©
 ``$address``.
 
 .. configuration-block::
@@ -216,10 +216,10 @@ incorrecte. Pour éviter ceci, ajouter la contrainte ``Valid`` à la propriété
         }
 
 Maintenant, si vous validez un auteur avec une adresse incorrecte, vous verrez
-que la validation du champ ``Address`` échouera.
+que la validation du champ ``Address`` Ã©chouera.
 
     Acme\HelloBundle\Author.address.zipCode:
-    Cette valeur est trop longue. 5 caractères maximum sont autorisés
+    Cette valeur est trop longue. 5 caractÃ¨res maximum sont autorisÃ©s
 
 Options
 -------
@@ -229,6 +229,6 @@ traverse
 
 **type**: ``string`` **default**: ``true``
 
-Si cette contrainte est appliquée à une propriété qui contient un tableau
-d'objets, alors chaque objet du tableau sera validé si cette option est
-définie à ``true``.
+Si cette contrainte est appliquÃ©e Ã  une propriÃ©tÃ© qui contient un tableau
+d'objets, alors chaque objet du tableau sera validÃ© si cette option est
+dÃ©finie Ã  ``true``.

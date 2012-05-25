@@ -4,11 +4,11 @@
 Type de champ Money
 ===================
 
-Rend un champ input texte spécialisé dans la gestion des données monétaires.
+Rend un champ input texte spÃ©cialisÃ© dans la gestion des donnÃ©es monÃ©taires.
 
-Ce type de champ vous permet de spécifier une devise, dont le symbole sera affiché
-à côté du champ texte. Il y a plusieurs autres options pour personnaliser la façon
-dont les données en entrée et en sortie seront prises en charge.
+Ce type de champ vous permet de spÃ©cifier une devise, dont le symbole sera affichÃ©
+Ã  cÃ´tÃ© du champ texte. Il y a plusieurs autres options pour personnaliser la faÃ§on
+dont les donnÃ©es en entrÃ©e et en sortie seront prises en charge.
 
 +-------------+---------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``text``                                            |
@@ -19,7 +19,7 @@ dont les données en entrée et en sortie seront prises en charge.
 |             | - `grouping`_                                                       |
 +-------------+---------------------------------------------------------------------+
 | Options     | - `required`_                                                       |
-| héritées    | - `label`_                                                          |
+| hÃ©ritÃ©es    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 |             | - `invalid_message`_                                                |
@@ -38,46 +38,46 @@ currency
 
 **type**: ``string`` **default**: ``EUR``
 
-Définit la devise dans laquelle la somme est spécifiée. Cela détermine quel symbole
-monétaire sera affiché dans le champ texte. Selon la devise choisie, le symbole
-s'affichera avant ou après la donnée dans le champ texte.
+DÃ©finit la devise dans laquelle la somme est spÃ©cifiÃ©e. Cela dÃ©termine quel symbole
+monÃ©taire sera affichÃ© dans le champ texte. Selon la devise choisie, le symbole
+s'affichera avant ou aprÃ¨s la donnÃ©e dans le champ texte.
 
-Cette option peut aussi être définie à false pour cacher le symbole monétaire.
+Cette option peut aussi Ãªtre dÃ©finie Ã  false pour cacher le symbole monÃ©taire.
 
 divisor
 ~~~~~~~
 
 **type**: ``integer`` **default**: ``1``
 
-Si, pour une raison quelconque, vous avez besoin de diviser votre valeur de départ par un
-nombre avant de le rendre à l'utilisateur, vous pouvez utiliser l'option ``divisor``.
+Si, pour une raison quelconque, vous avez besoin de diviser votre valeur de dÃ©part par un
+nombre avant de le rendre Ã  l'utilisateur, vous pouvez utiliser l'option ``divisor``.
 Par exemple::
 
     $builder->add('price', 'money', array(
         'divisor' => 100,
     ));
 
-Dans ce cas, si le champ ``price`` est défini à ``9900``, alors c'est en fait la valeur
-``99`` qui sera affichée à l'utilisateur. Lorsque l'utilisateur soumettra la valeur
-``99``, elle sera automatiquement multipliée par ``100`` et ``9900`` sera la valeur
-finalement stockée dans votre projet.
+Dans ce cas, si le champ ``price`` est dÃ©fini Ã  ``9900``, alors c'est en fait la valeur
+``99`` qui sera affichÃ©e Ã  l'utilisateur. Lorsque l'utilisateur soumettra la valeur
+``99``, elle sera automatiquement multipliÃ©e par ``100`` et ``9900`` sera la valeur
+finalement stockÃ©e dans votre projet.
 
 precision
 ~~~~~~~~~
 
 **type**: ``integer`` **default**: ``2``
 
-Si pour une raison quelconque vous avez besoin d'une autre précision que 2 décimales,
+Si pour une raison quelconque vous avez besoin d'une autre prÃ©cision que 2 dÃ©cimales,
 vous pouvez modifier cette option. Vous n'aurez probablement pas besoin de le faire
-à moins, par exemple, que vous ne vouliez arrondir au dollar le plus proche (dans
-ce cas, définissez la précision à ``0``).
+Ã  moins, par exemple, que vous ne vouliez arrondir au dollar le plus proche (dans
+ce cas, dÃ©finissez la prÃ©cision Ã  ``0``).
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
