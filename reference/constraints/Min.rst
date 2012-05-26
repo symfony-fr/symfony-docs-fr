@@ -1,10 +1,10 @@
 Min
 ===
 
-Valide qu'un nombre donné est *supérieur* à un nombre minimum.
+Valide qu'un nombre donnÃ© est *supÃ©rieur* Ã  un nombre minimum.
 
 +----------------+--------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`            |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`            |
 +----------------+--------------------------------------------------------------------+
 | Options        | - `limit`_                                                         |
 |                | - `message`_                                                       |
@@ -18,7 +18,7 @@ Valide qu'un nombre donné est *supérieur* à un nombre minimum.
 Utilisation de base
 -------------------
 
-Pour vérifier qu'un champ « âge » d'une classe est supérieur ou égal à « 18 »,
+Pour vÃ©rifier qu'un champ Â« Ã¢ge Â» d'une classe est supÃ©rieur ou Ã©gal Ã  Â« 18 Â»,
 vous pourriez utiliser le code suivant :
 
 .. configuration-block::
@@ -52,22 +52,22 @@ limit
 
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
-Cette option obligatoire est la valeur « minimale ». La validation échouera
-si la valeur donnée est **inférieure** à cette valeur minimale.
+Cette option obligatoire est la valeur Â« minimale Â». La validation Ã©chouera
+si la valeur donnÃ©e est **infÃ©rieure** Ã  cette valeur minimale.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be {{ limit }} or more``
 
-Le message qui sera affiché si la valeur est inférieure à l'option `limit`_.
+Le message qui sera affichÃ© si la valeur est infÃ©rieure Ã  l'option `limit`_.
 
 invalidMessage
 ~~~~~~~~~~~~~~
 
 **type**: ``string`` **default**: ``This value should be a valid number``
 
-Le message qui sera affiché si la valeur soumise n'est pas un nombre (pour la fonction
+Le message qui sera affichÃ© si la valeur soumise n'est pas un nombre (pour la fonction
 PHP `is_numeric`_).
 
 .. _`is_numeric`: http://www.php.net/manual/fr/function.is-numeric.php

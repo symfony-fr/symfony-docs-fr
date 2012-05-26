@@ -5,7 +5,7 @@ Type de champ Search
 ====================
 
 Cela retourne un champ ``<input type="search" />`` qui est un champ texte 
-avec une fonctionnalité spéciale supportée par certains navigateurs.
+avec une fonctionnalitÃ© spÃ©ciale supportÃ©e par certains navigateurs.
 
 Apprenez en plus sur le champ input Search sur `DiveIntoHTML5.info`_
 
@@ -13,7 +13,7 @@ Apprenez en plus sur le champ input Search sur `DiveIntoHTML5.info`_
 | Rendu comme | Champ ``input search``                                               |
 +-------------+----------------------------------------------------------------------+
 | Options     | - `max_length`_                                                      |
-| héritées    | - `required`_                                                        |
+| hÃ©ritÃ©es    | - `required`_                                                        |
 |             | - `label`_                                                           |
 |             | - `trim`_                                                            |
 |             | - `read_only`_                                                       |
@@ -24,10 +24,10 @@ Apprenez en plus sur le champ input Search sur `DiveIntoHTML5.info`_
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType` |
 +-------------+----------------------------------------------------------------------+
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

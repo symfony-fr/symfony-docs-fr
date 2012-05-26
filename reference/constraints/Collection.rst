@@ -1,17 +1,17 @@
 Collection
 ==========
 
-Cette contrainte est utilisée lorsque l'objet sous-jacent est une collection
-(c'est-à-dire un tableau ou un objet qui implémentent ``Traversable`` et ``ArrayAccess``),
-mais vous aimeriez valider les différentes clés de cette collection de différentes
-manières. Par exemple, vous pourriez valider la clé ``email`` en utilisant la contrainte
-``Email`` et la clé ``inventory`` avec la contrainte ``Min``.
+Cette contrainte est utilisÃ©e lorsque l'objet sous-jacent est une collection
+(c'est-Ã -dire un tableau ou un objet qui implÃ©mentent ``Traversable`` et ``ArrayAccess``),
+mais vous aimeriez valider les diffÃ©rentes clÃ©s de cette collection de diffÃ©rentes
+maniÃ¨res. Par exemple, vous pourriez valider la clÃ© ``email`` en utilisant la contrainte
+``Email`` et la clÃ© ``inventory`` avec la contrainte ``Min``.
 
-Cette contrainte permet également de s'assurer que certaines clés de la collection
-sont bien présente et que des clés supplémentaires ne le sont pas.
+Cette contrainte permet Ã©galement de s'assurer que certaines clÃ©s de la collection
+sont bien prÃ©sente et que des clÃ©s supplÃ©mentaires ne le sont pas.
 
 +----------------+--------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                  |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                  |
 +----------------+--------------------------------------------------------------------------+
 | Options        | - `fields`_                                                              |
 |                | - `allowExtraFields`_                                                    |
@@ -27,7 +27,7 @@ sont bien présente et que des clés supplémentaires ne le sont pas.
 Utilisation de base
 -------------------
 
-La contrainte ``Collection`` vous permet de valider les différentes clés
+La contrainte ``Collection`` vous permet de valider les diffÃ©rentes clÃ©s
 d'une collection individuellement. Prenez l'exemple suivant::
 
     namespace Acme\BlogBundle\Entity;
@@ -45,9 +45,9 @@ d'une collection individuellement. Prenez l'exemple suivant::
         }
     }
 
-Pour valider que l'élément ``personal_email`` de la propriété ``profileData``
-soit une adresse email valide et que l'élement ``short_bio`` soit rempli
-et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci :
+Pour valider que l'Ã©lÃ©ment ``personal_email`` de la propriÃ©tÃ© ``profileData``
+soit une adresse email valide et que l'Ã©lement ``short_bio`` soit rempli
+et d'une longueur de moins de 100 caractÃ¨res, vous pouvez procÃ©der comme ceci :
 
 .. configuration-block::
 
@@ -140,20 +140,20 @@ et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci :
             }
         }
 
-Présence et Absence de champs
+PrÃ©sence et Absence de champs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Par défaut, cette contrainte valide plus que le simple fait que les champs
+Par dÃ©faut, cette contrainte valide plus que le simple fait que les champs
 individuels de la collection respectent leurs contraintes respectives.
-En fait, si des clés de la collection sont manquantes, ou s'il y a des clés
-non reconnues, une erreur de validation sera affichée.
+En fait, si des clÃ©s de la collection sont manquantes, ou s'il y a des clÃ©s
+non reconnues, une erreur de validation sera affichÃ©e.
 
-Si vous voulez autoriser des clés à être absentes de la collection  ou si vous
-voulez autoriser des clés « extra » (en plus), vous pouvez modifier respectivement
+Si vous voulez autoriser des clÃ©s Ã  Ãªtre absentes de la collection  ou si vous
+voulez autoriser des clÃ©s Â« extra Â» (en plus), vous pouvez modifier respectivement
 les options `allowMissingFields`_ et `allowExtraFields`_. Dans l'exemple ci-dessus,
-l'option ``allowMissingFields`` a été définie à true, ce qui veut dire que si
-l'un des élements ``personal_email`` ou ``short_bio`` était manquant dans la
-propriété ``$personalData``, aucune erreur de validation ne se serait produite.
+l'option ``allowMissingFields`` a Ã©tÃ© dÃ©finie Ã  true, ce qui veut dire que si
+l'un des Ã©lements ``personal_email`` ou ``short_bio`` Ã©tait manquant dans la
+propriÃ©tÃ© ``$personalData``, aucune erreur de validation ne se serait produite.
 
 Options
 -------
@@ -163,34 +163,34 @@ fields
 
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
 
-Cette option est requise et est un tableau associatif qui définit toutes les
-clés de la collection et, pour chaque clé, quel(s) validateur(s) doit être
-exécuté.
+Cette option est requise et est un tableau associatif qui dÃ©finit toutes les
+clÃ©s de la collection et, pour chaque clÃ©, quel(s) validateur(s) doit Ãªtre
+exÃ©cutÃ©.
 
 allowExtraFields
 ~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: false
 
-Si cette option est définie à ``false`` et que la collection contient un ou plusieurs
-éléments qui ne sont pas inclus dans l'option `fields`_, une erreur de validation sera
-retournée. Si elle est définie à ``true``, les champs en plus seront tolérés.
+Si cette option est dÃ©finie Ã  ``false`` et que la collection contient un ou plusieurs
+Ã©lÃ©ments qui ne sont pas inclus dans l'option `fields`_, une erreur de validation sera
+retournÃ©e. Si elle est dÃ©finie Ã  ``true``, les champs en plus seront tolÃ©rÃ©s.
 
 extraFieldsMessage
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: ``The fields {{ fields }} were not expected``
 
-Le message affiché si `allowExtraFields`_ est à false et que des champs supplémentaires
-sont détectés.
+Le message affichÃ© si `allowExtraFields`_ est Ã  false et que des champs supplÃ©mentaires
+sont dÃ©tectÃ©s.
 
 allowMissingFields
 ~~~~~~~~~~~~~~~~~~
 
 **type**: ``Boolean`` **default**: false
 
-Si cette option est définie à ``false`` et qu'un ou plusieurs champs de l'option `fields`_
-sont manquants, une erreur de validation sera retournée. Si elle est définie à ``true``,
+Si cette option est dÃ©finie Ã  ``false`` et qu'un ou plusieurs champs de l'option `fields`_
+sont manquants, une erreur de validation sera retournÃ©e. Si elle est dÃ©finie Ã  ``true``,
 ce n'est pas grave si des champs de l'option `fields_` sont absents de la collection.
 
 missingFieldsMessage
@@ -198,5 +198,5 @@ missingFieldsMessage
 
 **type**: ``Boolean`` **default**: ``The fields {{ fields }} are missing``
 
-Le message affiché si `allowMissingFields`_ est à false et qu'un ou plusieurs champs
+Le message affichÃ© si `allowMissingFields`_ est Ã  false et qu'un ou plusieurs champs
 sont absents de la collection.

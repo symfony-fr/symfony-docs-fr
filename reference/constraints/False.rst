@@ -1,14 +1,14 @@
 False
 =====
 
-Valide que la valeur est ``false``. Spécifiquement, cette contrainte vérifie que la
+Valide que la valeur est ``false``. SpÃ©cifiquement, cette contrainte vÃ©rifie que la
 valeur est exactement ``false``, exactement l'entier ``0``, ou exactement la chaine
-de caractères « ``0`` ».
+de caractÃ¨res Â« ``0`` Â».
 
-Vous pouvez également voir :doc:`True <True>`.
+Vous pouvez Ã©galement voir :doc:`True <True>`.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 +----------------+---------------------------------------------------------------------+
@@ -20,10 +20,10 @@ Vous pouvez également voir :doc:`True <True>`.
 Utilisation de base
 -------------------
 
-La contrainte ``False`` s'applique à une propriété ou à une méthode « getter » mais
-elle est le plus souvent utilisée dans le dernier cas. Par exemple, supposons 
-que vous voulez garantir qu'une propriété ``state`` n'est *pas* dans un tableau
-dynamique ``invalidStates``. Premièrement, vous créerez une méthode « getter »::
+La contrainte ``False`` s'applique Ã  une propriÃ©tÃ© ou Ã  une mÃ©thode Â« getter Â» mais
+elle est le plus souvent utilisÃ©e dans le dernier cas. Par exemple, supposons 
+que vous voulez garantir qu'une propriÃ©tÃ© ``state`` n'est *pas* dans un tableau
+dynamique ``invalidStates``. PremiÃ¨rement, vous crÃ©erez une mÃ©thode Â« getter Â»::
 
     protected $state;
 
@@ -34,7 +34,7 @@ dynamique ``invalidStates``. Premièrement, vous créerez une méthode « getter »::
         return in_array($this->state, $this->invalidStates);
     }
 
-Dans ce cas, l'objet sous-jacent n'est valide que si la méthode ``isStateInvalid``
+Dans ce cas, l'objet sous-jacent n'est valide que si la mÃ©thode ``isStateInvalid``
 retourne **false** :
 
 .. configuration-block::
@@ -46,7 +46,7 @@ retourne **false** :
             getters:
                 stateInvalid:
                     - "False":
-                        message: Vous avez saisi un état non valide.
+                        message: Vous avez saisi un Ã©tat non valide.
 
     .. code-block:: php-annotations
 
@@ -58,7 +58,7 @@ retourne **false** :
             /**
              * @Assert\False()
              */
-             public function isStateInvalid($message = "Vous avez saisi un état non valide.")
+             public function isStateInvalid($message = "Vous avez saisi un Ã©tat non valide.")
              {
                 // ...
              }
@@ -67,7 +67,7 @@ retourne **false** :
 .. caution::
 
     Si vous utilisez YAML, assurez vous de bien mettre les guillemets autour de
-	``False`` (``"False"``), sinon YAML le convertira en Booléen.
+    ``False`` (``"False"``), sinon YAML le convertira en BoolÃ©en.
 
 Options
 -------
@@ -77,4 +77,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be false``
 
-Ce message s'affiche si la données n'est pas à false.
+Ce message s'affiche si la donnÃ©es n'est pas Ã  false.

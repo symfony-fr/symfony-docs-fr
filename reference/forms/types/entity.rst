@@ -4,13 +4,13 @@
 Type de champ Entity
 ====================
 
-Un champ ``choice`` spécial qui est conçu pour charger ses options d'une entité
-Doctrine. Par exemple, si vous avez une entité ``Category``, vous pourrez utiliser
+Un champ ``choice`` spÃ©cial qui est conÃ§u pour charger ses options d'une entitÃ©
+Doctrine. Par exemple, si vous avez une entitÃ© ``Category``, vous pourrez utiliser
 ce champ pour afficher une liste ``select`` de tout ou de certains objets ``Category``
-depuis la base de données.
+depuis la base de donnÃ©es.
 
 +-------------+----------------------------------------------------------------------+
-| Rendu comme | peut être plusieurs balises (voir :ref:`forms-reference-choice-tags`)|
+| Rendu comme | peut Ãªtre plusieurs balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+----------------------------------------------------------------------+
 | Options     | - `class`_                                                           |
 |             | - `property`_                                                        |
@@ -18,7 +18,7 @@ depuis la base de données.
 |             | - `em`_                                                              |
 +-------------+----------------------------------------------------------------------+
 | Options     | - `required`_                                                        |
-| héritées    | - `label`_                                                           |
+| hÃ©ritÃ©es    | - `label`_                                                           |
 |             | - `multiple`_                                                        |
 |             | - `expanded`_                                                        |
 |             | - `preferred_choices`_                                               |
@@ -34,23 +34,23 @@ depuis la base de données.
 Utilisation de base
 -------------------
 
-Le type ``entity`` n'a qu'une seule option obligatoire : l'entité qui doit être listée
+Le type ``entity`` n'a qu'une seule option obligatoire : l'entitÃ© qui doit Ãªtre listÃ©e
 dans le champ Choice::
 
     $builder->add('users', 'entity', array(
         'class' => 'AcmeHelloBundle:User',
     ));
 
-Dans ce cas, tout les objets ``User`` seront chargés depuis la base de données et seront
-affichés soit comme une balise ``select``, soit un ensemble de boutons radio ou de checkboxes
-(cela dépendra des valeurs des options ``multiple`` et ``expanded``).
+Dans ce cas, tout les objets ``User`` seront chargÃ©s depuis la base de donnÃ©es et seront
+affichÃ©s soit comme une balise ``select``, soit un ensemble de boutons radio ou de checkboxes
+(cela dÃ©pendra des valeurs des options ``multiple`` et ``expanded``).
 
-Utiliser une requête personnalisée pour les entités
+Utiliser une requÃªte personnalisÃ©e pour les entitÃ©s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si vous avez besoin de spécifier une requête personnalisée à utiliser pour charger
-les entitées (par exemple si vous ne voulez que certaines entités, ou que vous voulez
-les classer), utilisez l'option ``query_builder``. La façon la plus simple d'utiliser
+Si vous avez besoin de spÃ©cifier une requÃªte personnalisÃ©e Ã  utiliser pour charger
+les entitÃ©es (par exemple si vous ne voulez que certaines entitÃ©s, ou que vous voulez
+les classer), utilisez l'option ``query_builder``. La faÃ§on la plus simple d'utiliser
 cette option est la suivante::
 
     use Doctrine\ORM\EntityRepository;
@@ -74,7 +74,7 @@ class
 
 **type**: ``string`` **obligatoire*
 
-La classe de votre entité (ex: ``AcmeStoreBundle:Category``). Cela peut être
+La classe de votre entitÃ© (ex: ``AcmeStoreBundle:Category``). Cela peut Ãªtre
 le nom complet de la classe (ex: ``Acme\StoreBundle\Entity\Category``) ou son alias
 (voir ci-dessus).
 
@@ -83,33 +83,33 @@ property
 
 **type**: ``string``
 
-C'est la propriété qui doit être utilisée pour afficher l'entité sous forme de
-texte dans l'élément HTML. Si vous le laissez vite, l'objet entité sera converti
-en texte et devra alors implémenter la méthode ``__toString()``.
+C'est la propriÃ©tÃ© qui doit Ãªtre utilisÃ©e pour afficher l'entitÃ© sous forme de
+texte dans l'Ã©lÃ©ment HTML. Si vous le laissez vite, l'objet entitÃ© sera converti
+en texte et devra alors implÃ©menter la mÃ©thode ``__toString()``.
 
 query_builder
 ~~~~~~~~~~~~~
 
 **type**: ``Doctrine\ORM\QueryBuilder`` or a Closure
 
-Si elle est spécifiée, cette option sera utilisée pour requêter un sous-ensemble
-d'objets (et leur classement) qui sera affiché dans le champ. La valeur de cette
-option peut être soit un objet ``QueryBuilder`` soit une Closure. Si vous utilisez
+Si elle est spÃ©cifiÃ©e, cette option sera utilisÃ©e pour requÃªter un sous-ensemble
+d'objets (et leur classement) qui sera affichÃ© dans le champ. La valeur de cette
+option peut Ãªtre soit un objet ``QueryBuilder`` soit une Closure. Si vous utilisez
 une Closure, elle ne doit prendre qu'un seul argument qui est l'objet ``EntityRepository``
-de l'entité.
+de l'entitÃ©.
 
 em
 ~~
 
-**type**: ``string`` **default**: le gestionnaire d'entité par défaut
+**type**: ``string`` **default**: le gestionnaire d'entitÃ© par dÃ©faut
 
-Si elle est spécifiée, cette option définit le gestionnaire d'entité (entity manager)
-qui sera utilisé pour charger les objets au lieu du gestionnaire par défaut.
+Si elle est spÃ©cifiÃ©e, cette option dÃ©finit le gestionnaire d'entitÃ© (entity manager)
+qui sera utilisÃ© pour charger les objets au lieu du gestionnaire par dÃ©faut.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -119,7 +119,7 @@ Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

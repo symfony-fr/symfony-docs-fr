@@ -4,13 +4,13 @@
 Type de champ Text
 ==================
 
-Le champ texte représente le plus basique des champs input texte.
+Le champ texte reprÃ©sente le plus basique des champs input texte.
 
 +-------------+--------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``text``                                           |
 +-------------+--------------------------------------------------------------------+
 | Options     | - `max_length`_                                                    |
-| héritées    | - `required`_                                                      |
+| hÃ©ritÃ©es    | - `required`_                                                      |
 |             | - `label`_                                                         |
 |             | - `trim`_                                                          |
 |             | - `read_only`_                                                     |
@@ -22,10 +22,10 @@ Le champ texte représente le plus basique des champs input texte.
 +-------------+--------------------------------------------------------------------+
 
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

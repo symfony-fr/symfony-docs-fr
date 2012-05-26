@@ -1,32 +1,32 @@
 .. index::
    single: Forms; Twig form function reference
 
-Fonctions de template de formulaire Twig de référence
+Fonctions de template de formulaire Twig de rÃ©fÃ©rence
 =====================================================
 
-Cette documentation de référence liste toutes les fonctions Twig possibles
-pour rendre des formulaires. Plusieurs fonctions différentes sont disponibles,
-chacune étant chargée de rendre une partie du formulaire (ex libellés, erreurs,
+Cette documentation de rÃ©fÃ©rence liste toutes les fonctions Twig possibles
+pour rendre des formulaires. Plusieurs fonctions diffÃ©rentes sont disponibles,
+chacune Ã©tant chargÃ©e de rendre une partie du formulaire (ex libellÃ©s, erreurs,
 widgets, etc).
 
 form_label(form.name, label, variables)
 ---------------------------------------
 
-Affiche le libellé d'un champ donné. Le second paramètre, facultatif, vous permet
-de spécifier le libellé que vous voulez afficher.
+Affiche le libellÃ© d'un champ donnÃ©. Le second paramÃ¨tre, facultatif, vous permet
+de spÃ©cifier le libellÃ© que vous voulez afficher.
 
 .. code-block:: jinja
 
     {{ form_label(form.name) }}
 
-    {# Ces deux syntaxes sont équivalentes #}
+    {# Ces deux syntaxes sont Ã©quivalentes #}
     {{ form_label(form.name, 'Votre nom', { 'attr': {'class': 'foo'} }) }}
     {{ form_label(form.name, null, { 'label': 'Votre nom', 'attr': {'class': 'foo'} }) }}
 
 form_errors(form.name)
 ----------------------
 
-Affiche toutes les erreurs d'un champ donné.
+Affiche toutes les erreurs d'un champ donnÃ©.
 
 .. code-block:: jinja
 
@@ -38,39 +38,39 @@ Affiche toutes les erreurs d'un champ donné.
 form_widget(form.name, variables)
 ---------------------------------
 
-Affiche le widget HTML d'un champ donné. Si vous l'appliquez au formulaire entier
-ou à une collection de champs, chaque item du formulaire sera affiché.
+Affiche le widget HTML d'un champ donnÃ©. Si vous l'appliquez au formulaire entier
+ou Ã  une collection de champs, chaque item du formulaire sera affichÃ©.
 
 .. code-block:: jinja
 
     {# affiche un widget, et lui affecte la classe "foo" #}
     {{ form_widget(form.name, { 'attr': {'class': 'foo'} }) }}
 
-Le deuxième argument de ``form_widget`` est un tableau de variables. La variable
-la plus commune est ``attr``, qui est un tableau d'attibuts HTML à appliquer au widget.
-Dans certains cas, des types ont aussi des options liées au template. C'est au cas par cas.
+Le deuxiÃ¨me argument de ``form_widget`` est un tableau de variables. La variable
+la plus commune est ``attr``, qui est un tableau d'attibuts HTML Ã  appliquer au widget.
+Dans certains cas, des types ont aussi des options liÃ©es au template. C'est au cas par cas.
 
 form_row(form.name, variables)
 ------------------------------
 
-Affiche le « row » (bloc) d'un champ donné, qui est la combinaison du libellé, des erreurs
+Affiche le Â« row Â» (bloc) d'un champ donnÃ©, qui est la combinaison du libellÃ©, des erreurs
 et du widget.
 
 .. code-block:: jinja
 
-    {# affiche un bloc de champ, mais affiche « foo » comme libellé #}
+    {# affiche un bloc de champ, mais affiche Â« foo Â» comme libellÃ© #}
     {{ form_row(form.name, { 'label': 'foo' }) }}
 
-Le deuxième argument de ``form_row`` est un tableau de variables. Les templates fournis dans
-Symfony ne permettent que de surcharger le libellé, comme vous le voyez dans l'exemple ci-dessus.
+Le deuxiÃ¨me argument de ``form_row`` est un tableau de variables. Les templates fournis dans
+Symfony ne permettent que de surcharger le libellÃ©, comme vous le voyez dans l'exemple ci-dessus.
 
 form_rest(form, variables)
 --------------------------
 
-Cette fonction affiche tous les champs d'un formulaire donné qui n'ont pas encore été
-affichés. C'est une bonne pratique que de toujours utiliser cette fonction quelque part
-dans votre formulaire puisqu'elle affichera tous les champs cachés et vous permettra
-de mieux vous rendre compte des champs que vous aurez oublié (car ils seront alors affichés).
+Cette fonction affiche tous les champs d'un formulaire donnÃ© qui n'ont pas encore Ã©tÃ©
+affichÃ©s. C'est une bonne pratique que de toujours utiliser cette fonction quelque part
+dans votre formulaire puisqu'elle affichera tous les champs cachÃ©s et vous permettra
+de mieux vous rendre compte des champs que vous aurez oubliÃ© (car ils seront alors affichÃ©s).
 
 .. code-block:: jinja
 

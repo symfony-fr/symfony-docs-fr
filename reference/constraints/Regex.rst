@@ -1,10 +1,10 @@
 Regex
 =====
 
-Valide qu'une valeur correspond à une expression régulière.
+Valide qu'une valeur correspond Ã  une expression rÃ©guliÃ¨re.
 
 +----------------+-----------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`               |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`               |
 +----------------+-----------------------------------------------------------------------+
 | Options        | - `pattern`_                                                          |
 |                | - `match`_                                                            |
@@ -18,10 +18,10 @@ Valide qu'une valeur correspond à une expression régulière.
 Utilisation de base
 -------------------
 
-Supposons que vous avez un champ ``description`` et que vous voulez vérifier
-qu'il commence bien par un caractère alphabnumérique. L'expression régulière
+Supposons que vous avez un champ ``description`` et que vous voulez vÃ©rifier
+qu'il commence bien par un caractÃ¨re alphabnumÃ©rique. L'expression rÃ©guliÃ¨re
 qui teste cela serait ``/^\w+/``, indiquant que vous cherchez au moins un ou
-plusieurs caractères alphanumériques au début de votre chaine :
+plusieurs caractÃ¨res alphanumÃ©riques au dÃ©but de votre chaine :
 
 .. configuration-block::
 
@@ -48,10 +48,10 @@ plusieurs caractères alphanumériques au début de votre chaine :
             protected $description;
         }
 
-Alternativement, vous pouvez définir l'option `match`_ à ``false`` pour
-vérifier qu'une chaine donnée ne correspond *pas*. Dans l'exemple suivant,
-vous vérifiez que le champ ``firstName`` ne contient pas de nombre et vous
-personnalisez également le message :
+Alternativement, vous pouvez dÃ©finir l'option `match`_ Ã  ``false`` pour
+vÃ©rifier qu'une chaine donnÃ©e ne correspond *pas*. Dans l'exemple suivant,
+vous vÃ©rifiez que le champ ``firstName`` ne contient pas de nombre et vous
+personnalisez Ã©galement le message :
 
 .. configuration-block::
 
@@ -93,28 +93,28 @@ pattern
 
 **type**: ``string`` [:ref:`default option<validation-default-option>`]
 
-Cette option obligatoire est le masque (pattern) de l'expression régulière
-à laquelle doit correspondre la donnée. Par défaut, le validateur échouera
-si la chaine de caractères *ne correspond pas* à cette expression régulière
+Cette option obligatoire est le masque (pattern) de l'expression rÃ©guliÃ¨re
+Ã  laquelle doit correspondre la donnÃ©e. Par dÃ©faut, le validateur Ã©chouera
+si la chaine de caractÃ¨res *ne correspond pas* Ã  cette expression rÃ©guliÃ¨re
 (via la fonction PHP `preg_match`_).
-Toutefois, si l'option `match`_ est définie à false, la validation échouera
-si la chaine *correspond* à l'expression régulière.
+Toutefois, si l'option `match`_ est dÃ©finie Ã  false, la validation Ã©chouera
+si la chaine *correspond* Ã  l'expression rÃ©guliÃ¨re.
 
 match
 ~~~~~
 
 **type**: ``Boolean`` default: ``true``
 
-Si cette option est à ``true`` (ou non définie), la validation passera si la chaine
-donnée correspond au `pattern`_ de l'expression régulière. Toutefois, si cette option
-est définir à ``false``, l'inverse se passera : la validation passera uniquement si
-la chaine donnée ne correspond **pas** au `pattern`_ de l'expression régulière.
+Si cette option est Ã  ``true`` (ou non dÃ©finie), la validation passera si la chaine
+donnÃ©e correspond au `pattern`_ de l'expression rÃ©guliÃ¨re. Toutefois, si cette option
+est dÃ©finir Ã  ``false``, l'inverse se passera : la validation passera uniquement si
+la chaine donnÃ©e ne correspond **pas** au `pattern`_ de l'expression rÃ©guliÃ¨re.
 
 message
 ~~~~~~~
 
 **type**: ``string`` **default**: ``This value is not valid``
 
-Le message qui sera affiché si la validation échoue.
+Le message qui sera affichÃ© si la validation Ã©choue.
 
 .. _`preg_match`: http://php.net/manual/fr/function.preg-match.php

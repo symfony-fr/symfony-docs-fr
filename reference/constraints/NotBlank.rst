@@ -1,12 +1,12 @@
 NotBlank
 ========
 
-Valide qu'une valeur n'est pas vide, pas égale à une chaine de caractères vide,
-et pas égale à ``null``. Pour forcer une valeur à ne pas être simplement égale
-à ``null``, lisez la documentation de la contrainte :doc:`/reference/constraints/NotNull`.
+Valide qu'une valeur n'est pas vide, pas Ã©gale Ã  une chaine de caractÃ¨res vide,
+et pas Ã©gale Ã  ``null``. Pour forcer une valeur Ã  ne pas Ãªtre simplement Ã©gale
+Ã  ``null``, lisez la documentation de la contrainte :doc:`/reference/constraints/NotNull`.
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `message`_                                                           |
 +----------------+------------------------------------------------------------------------+
@@ -18,7 +18,7 @@ et pas égale à ``null``. Pour forcer une valeur à ne pas être simplement égale
 Utilisation de base
 -------------------
 
-Si vous voulez vous assurer que la propriété ``firstName`` d'une classe ``Author``
+Si vous voulez vous assurer que la propriÃ©tÃ© ``firstName`` d'une classe ``Author``
 ne soit pas vide, ajoutez le code suivant :
 
 .. configuration-block::
@@ -50,4 +50,4 @@ message
 
 **type**: ``string`` **default**: ``This value should not be blank``
 
-Le message qui sera affiché si la valeur est vide.
+Le message qui sera affichÃ© si la valeur est vide.

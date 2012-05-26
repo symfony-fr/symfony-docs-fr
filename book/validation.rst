@@ -4,15 +4,15 @@
 Validation
 ==========
 
-La validation est une tâche très commune dans les applications web. Les données 
-saisies dans les formulaires doivent être validées. Les données doivent également
-être validées avant d'être écrites dans une base de données ou transmises à un
+La validation est une tÃ¢che trÃ¨s commune dans les applications web. Les donnÃ©es 
+saisies dans les formulaires doivent Ãªtre validÃ©es. Les donnÃ©es doivent Ã©galement
+Ãªtre validÃ©es avant d'Ãªtre Ã©crites dans une base de donnÃ©es ou transmises Ã  un
 service Web.
 
-Symfony2 est livré avec un composant `Validator`_ qui rend cette tâche facile et
-transparente. Ce composant est basé sur la `spécification JSR303`_.
-Quoi ? Une spécification Java en PHP? Vous avez bien entendu, mais ce n'est pas
-aussi terrible que ça en a l'air. Regardons comment elle peut être utilisée en PHP.
+Symfony2 est livrÃ© avec un composant `Validator`_ qui rend cette tÃ¢che facile et
+transparente. Ce composant est basÃ© sur la `spÃ©cification JSR303`_.
+Quoi ? Une spÃ©cification Java en PHP? Vous avez bien entendu, mais ce n'est pas
+aussi terrible que Ã§a en a l'air. Regardons comment elle peut Ãªtre utilisÃ©e en PHP.
 
 .. index:
    single: Validation; Les bases
@@ -20,8 +20,8 @@ aussi terrible que ça en a l'air. Regardons comment elle peut être utilisée en P
 Les Bases de la Validation
 --------------------------
 
-La meilleure façon de comprendre la validation est de la voir en action. Pour
-commencer, supposons que vous avez créé un bon vieil objet PHP que vous avez
+La meilleure faÃ§on de comprendre la validation est de la voir en action. Pour
+commencer, supposons que vous avez crÃ©Ã© un bon vieil objet PHP que vous avez
 besoin d'utiliser quelque part dans votre application :
 
 .. code-block:: php
@@ -34,14 +34,14 @@ besoin d'utiliser quelque part dans votre application :
         public $name;
     }
 
-Jusqu'à présent, c'est juste une classe ordinaire qui est utile dans votre application.
-L'objectif de la validation est de vous dire si oui ou non les données d'un objet
-sont valides. Pour que cela fonctionne, vous allez configurer une liste de règles
-(appelée :ref:`constraints<validation-constraints>`) que l'objet doit respecter pour
-être valide. Ces règles peuvent être spécifiées via un certain nombre de formats
+Jusqu'Ã  prÃ©sent, c'est juste une classe ordinaire qui est utile dans votre application.
+L'objectif de la validation est de vous dire si oui ou non les donnÃ©es d'un objet
+sont valides. Pour que cela fonctionne, vous allez configurer une liste de rÃ¨gles
+(appelÃ©e :ref:`constraints<validation-constraints>`) que l'objet doit respecter pour
+Ãªtre valide. Ces rÃ¨gles peuvent Ãªtre spÃ©cifiÃ©es via un certain nombre de formats
 (YAML, XML, les annotations, ou PHP).
 
-Par exemple, pour garantir que la propriété ``$name`` ne soit pas vide, ajoutez le code
+Par exemple, pour garantir que la propriÃ©tÃ© ``$name`` ne soit pas vide, ajoutez le code
 suivant :
 
 .. configuration-block::
@@ -101,21 +101,21 @@ suivant :
 
 .. tip::
 
-    Les propriétés protégées et privées peuvent également être validées, ainsi
-    que les méthodes « getter » (voir validator-constraint-targets).
-	
+    Les propriÃ©tÃ©s protÃ©gÃ©es et privÃ©es peuvent Ã©galement Ãªtre validÃ©es, ainsi
+    que les mÃ©thodes Â« getter Â» (voir validator-constraint-targets).
+    
 .. index::
    single: Validation; Utiliser le validator
 
 Utiliser le Service ``validator``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensuite, pour vraiment valider un objet ``Author``, utilisez la méthode ``validate``
+Ensuite, pour vraiment valider un objet ``Author``, utilisez la mÃ©thode ``validate``
 du service validator (class :class:`Symfony\\Component\\Validator\\Validator`).
-Le travail du ``validator`` est simple : lire les contraintes (règles) d'une classe
-et vérifier si les données sur l'objet satisfont ces contraintes ou non. Si la
-validation échoue, un tableau d'erreurs est retourné. Prenez cet exemple simple
-d'une action d'un contrôleur :
+Le travail du ``validator`` est simple : lire les contraintes (rÃ¨gles) d'une classe
+et vÃ©rifier si les donnÃ©es sur l'objet satisfont ces contraintes ou non. Si la
+validation Ã©choue, un tableau d'erreurs est retournÃ©. Prenez cet exemple simple
+d'une action d'un contrÃ´leur :
 
 .. code-block:: php
 
@@ -138,24 +138,24 @@ d'une action d'un contrôleur :
         }
     }
 
-Si la propriété ``$name`` est vide, vous allez voir le message d'erreur suivant :
+Si la propriÃ©tÃ© ``$name`` est vide, vous allez voir le message d'erreur suivant :
 
 .. code-block:: text
 
     Acme\BlogBundle\Author.name:
         This value should not be blank
 
-Si vous insérez une valeur dans la propriété ``name``, le message de succès va apparaître.
+Si vous insÃ©rez une valeur dans la propriÃ©tÃ© ``name``, le message de succÃ¨s va apparaÃ®tre.
 
 .. tip::
 
-	La plupart du temps, vous n'aurez pas à interagir directement avec le
-        service ``validator`` ou besoin de vous inquiéter concernant l'affichage des erreurs.
+	La plupart du temps, vous n'aurez pas Ã  interagir directement avec le
+        service ``validator`` ou besoin de vous inquiÃ©ter concernant l'affichage des erreurs.
         La plupart du temps, vous allez utiliser la validation indirectement lors
-        de la soumission des données du formulaire. Pour plus d'informations,
+        de la soumission des donnÃ©es du formulaire. Pour plus d'informations,
         consultez le :ref:`book-validation-forms`.
     
-Vous pouvez aussi passer une collection d'erreur à un template.
+Vous pouvez aussi passer une collection d'erreur Ã  un template.
 
 .. code-block:: php
 
@@ -167,7 +167,7 @@ Vous pouvez aussi passer une collection d'erreur à un template.
         // ...
     }
 
-A l'intérieur d'un template, vous pouvez afficher la liste des erreurs comme
+A l'intÃ©rieur d'un template, vous pouvez afficher la liste des erreurs comme
 vous voulez :
 	
 
@@ -197,8 +197,8 @@ vous voulez :
 
 .. note::
 
-    Chaque erreur de validation (appelée une « violation de contrainte »), est
-    représentée par un objet :class:`Symfony\\Component\\Validator\\ConstraintViolation`.
+    Chaque erreur de validation (appelÃ©e une Â« violation de contrainte Â»), est
+    reprÃ©sentÃ©e par un objet :class:`Symfony\\Component\\Validator\\ConstraintViolation`.
 
 .. index::
    single: Validation; Validation et formulaires
@@ -208,12 +208,12 @@ vous voulez :
 Validation et Formulaires
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le service ``validator`` peut être utilisé à tout moment pour valider n'importe
-quel objet. En réalité, vous travaillerez le plus souvent avec le ``validator``
-indirectement lorsque vous utilisez les formulaires. La bibliothèque de formulaires
+Le service ``validator`` peut Ãªtre utilisÃ© Ã  tout moment pour valider n'importe
+quel objet. En rÃ©alitÃ©, vous travaillerez le plus souvent avec le ``validator``
+indirectement lorsque vous utilisez les formulaires. La bibliothÃ¨que de formulaires
 de Symfony utilise le service ``validator`` en interne pour valider l'objet
-après que les valeurs ont été soumises. Les violations de contraintes sur
-l'objet sont converties en objets ``FieldError`` qui peuvent être facilement affichés
+aprÃ¨s que les valeurs ont Ã©tÃ© soumises. Les violations de contraintes sur
+l'objet sont converties en objets ``FieldError`` qui peuvent Ãªtre facilement affichÃ©s
 dans votre formulaire. Le processus de soumission d'un formulaire typique ressemble
 au code suivant :
 
@@ -244,7 +244,7 @@ au code suivant :
 
 .. note::
 
-    Cet exemple utilise une classe de formulaire ``AuthorType``, qui n'est pas montrée ici.
+    Cet exemple utilise une classe de formulaire ``AuthorType``, qui n'est pas montrÃ©e ici.
 	
 Pour plus d'informations, voir le chapitre :doc:`Forms</book/forms>`.
 
@@ -256,8 +256,8 @@ Pour plus d'informations, voir le chapitre :doc:`Forms</book/forms>`.
 Configuration
 -------------
 
-Le validateur Symfony2 est activée par défaut, mais vous devez activer explicitement
-les annotations, si vous voulez les utiliser pour spécifier vos contraintes :
+Le validateur Symfony2 est activÃ©e par dÃ©faut, mais vous devez activer explicitement
+les annotations, si vous voulez les utiliser pour spÃ©cifier vos contraintes :
 
 .. configuration-block::
 
@@ -289,25 +289,25 @@ les annotations, si vous voulez les utiliser pour spécifier vos contraintes :
 Contraintes
 -----------
 
-Le ``validator`` est conçu pour valider des objets selon des *contraintes* 
-(règles). Afin de valider un objet, il suffit d'associer une ou plusieurs contraintes
-à sa classe et ensuite de le passer au service ``validator``.
+Le ``validator`` est conÃ§u pour valider des objets selon des *contraintes* 
+(rÃ¨gles). Afin de valider un objet, il suffit d'associer une ou plusieurs contraintes
+Ã  sa classe et ensuite de le passer au service ``validator``.
 
-Dans les coulisses, une contrainte est simplement un objet PHP qui déclare une règle.
-Dans la vraie vie, une contrainte pourrait être : « Le gâteau ne doit pas être brûlé ».
+Dans les coulisses, une contrainte est simplement un objet PHP qui dÃ©clare une rÃ¨gle.
+Dans la vraie vie, une contrainte pourrait Ãªtre : Â« Le gÃ¢teau ne doit pas Ãªtre brÃ»lÃ© Â».
 En Symfony2, les contraintes sont similaires : ce sont des garanties qu'une condition
-est vraie. Pour une valeur donnée, une contrainte vous dira si cette valeur obéit 
-aux règles ou non.
+est vraie. Pour une valeur donnÃ©e, une contrainte vous dira si cette valeur obÃ©it 
+aux rÃ¨gles ou non.
  
 
-Contraintes supportées
+Contraintes supportÃ©es
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Symfony2 est fourni avec un grand nombre des contraintes les plus utiles habituellement.
 
 .. include:: /reference/constraints/map.rst.inc
 
-Vous pouvez aussi créer vos propres contraintes. Ce sujet est abordé dans l'article «:doc:`/cookbook/validation/custom_constraint`» du cookbook.
+Vous pouvez aussi crÃ©er vos propres contraintes. Ce sujet est abordÃ© dans l'article Â«:doc:`/cookbook/validation/custom_constraint`Â» du cookbook.
 
 .. index::
    single: Validation; Constraints configuration
@@ -320,8 +320,8 @@ Configuration de contraintes
 Certaines contraintes, comme :doc:`NotBlank</reference/constraints/NotBlank>`,
 sont simples alors que d'autres, comme la contrainte :doc:`Choice</reference/constraints/Choice>`
 ont plusieurs options de configuration disponibles. Supposons que la classe
-``Author`` a une autre propriété, ``gender`` qui peut prendre comme valeur
-« homme » ou « femme » :
+``Author`` a une autre propriÃ©tÃ©, ``gender`` qui peut prendre comme valeur
+Â« homme Â» ou Â« femme Â» :
 
 .. configuration-block::
 
@@ -392,10 +392,10 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
 
 .. _validation-default-option:
 
-Les options d'une contrainte peuvent toujours être passées en tant que tableau. Certaines contraintes,
-cependant, vous permettent également de passer la valeur d'une option « *par défaut* »
+Les options d'une contrainte peuvent toujours Ãªtre passÃ©es en tant que tableau. Certaines contraintes,
+cependant, vous permettent Ã©galement de passer la valeur d'une option Â« *par dÃ©faut* Â»
 au lieu du tableau. Dans le cas de la contrainte ``Choice``, les options de ``choices``
-peuvent être spécifiées de cette manière.
+peuvent Ãªtre spÃ©cifiÃ©es de cette maniÃ¨re.
 
 .. configuration-block::
 
@@ -457,9 +457,9 @@ peuvent être spécifiées de cette manière.
 Ceci a pour unique but de rendre la configuration de l'option la plus probable
 plus courte et plus rapide.
 
-Si jamais vous n'êtes pas certain de la façon dont spécifier une option, soit vérifiez la documentation de l'API
-pour la contrainte concernée, soit jouez la sécurité en passant toujours dans un tableau d'options
-(la première méthode indiquée ci-dessus).
+Si jamais vous n'Ãªtes pas certain de la faÃ§on dont spÃ©cifier une option, soit vÃ©rifiez la documentation de l'API
+pour la contrainte concernÃ©e, soit jouez la sÃ©curitÃ© en passant toujours dans un tableau d'options
+(la premiÃ¨re mÃ©thode indiquÃ©e ci-dessus).
 
 
 Traduction des messages de contrainte
@@ -476,9 +476,9 @@ allez voir :ref:`book-translation-constraint-messages`.
 Objectifs des contraintes
 -------------------------
 
-Les contraintes peuvent être appliquées à une propriété de classe (par ex. ``name``) ou une
-méthode publique getter (par ex. ``getFullName``). La première méthode est la plus
-commune et facile à utiliser, mais la seconde vous permet de spécifier des règles
+Les contraintes peuvent Ãªtre appliquÃ©es Ã  une propriÃ©tÃ© de classe (par ex. ``name``) ou une
+mÃ©thode publique getter (par ex. ``getFullName``). La premiÃ¨re mÃ©thode est la plus
+commune et facile Ã  utiliser, mais la seconde vous permet de spÃ©cifier des rÃ¨gles
 de validation plus complexes.
 
 .. index::
@@ -486,12 +486,12 @@ de validation plus complexes.
 
 .. _validation-property-target:
 
-Propriétés
+PropriÃ©tÃ©s
 
-Valider des propriétés de classe est la technique de validation la plus basique. Symfony2
-vous permet de valider des propriétés privées, protégées ou publiques. Le prochain
-exemple vous montre comment configurer la propriété ``$firstName`` d'une classe ``Author``
-pour avoir au moins 3 caractères.
+Valider des propriÃ©tÃ©s de classe est la technique de validation la plus basique. Symfony2
+vous permet de valider des propriÃ©tÃ©s privÃ©es, protÃ©gÃ©es ou publiques. Le prochain
+exemple vous montre comment configurer la propriÃ©tÃ© ``$firstName`` d'une classe ``Author``
+pour avoir au moins 3 caractÃ¨res.
 
 .. configuration-block::
 
@@ -553,16 +553,16 @@ pour avoir au moins 3 caractères.
 Getters
 ~~~~~~~
 
-Les contraintes peuvent également être appliquées à la valeur de retour d'une méthode. Symfony2
-vous permet d'ajouter une contrainte à toute méthode publique dont le nom commence par
-« get » ou « is ». Dans ce guide, ces deux types de méthodes sont désignées 
-comme « getters ».
+Les contraintes peuvent Ã©galement Ãªtre appliquÃ©es Ã  la valeur de retour d'une mÃ©thode. Symfony2
+vous permet d'ajouter une contrainte Ã  toute mÃ©thode publique dont le nom commence par
+Â« get Â» ou Â« is Â». Dans ce guide, ces deux types de mÃ©thodes sont dÃ©signÃ©es 
+comme Â« getters Â».
 
 L'avantage de cette technique est qu'elle vous permet de valider votre objet
 dynamiquement. Par exemple, supposons que vous voulez vous assurer qu'un champ
-mot de passe ne correspond pas au prénom de l'utilisateur (pour des raisons de sécurité).
-Vous pouvez le faire en créant une méthode ``isPasswordLegal``, puis en spécifiant que
-cette méthode doit retourner ``true`` :
+mot de passe ne correspond pas au prÃ©nom de l'utilisateur (pour des raisons de sÃ©curitÃ©).
+Vous pouvez le faire en crÃ©ant une mÃ©thode ``isPasswordLegal``, puis en spÃ©cifiant que
+cette mÃ©thode doit retourner ``true`` :
 
 .. configuration-block::
 
@@ -572,7 +572,7 @@ cette méthode doit retourner ``true`` :
         Acme\BlogBundle\Entity\Author:
             getters:
                 passwordLegal:
-                    - "True": { message: "Le mot de passe et le prénom doivent être différents" }
+                    - "True": { message: "Le mot de passe et le prÃ©nom doivent Ãªtre diffÃ©rents" }
 
     .. code-block:: php-annotations
 
@@ -582,7 +582,7 @@ cette méthode doit retourner ``true`` :
         class Author
         {
             /**
-             * @Assert\True(message = "Le mot de passe et le prénom doivent être différents")
+             * @Assert\True(message = "Le mot de passe et le prÃ©nom doivent Ãªtre diffÃ©rents")
              */
             public function isPasswordLegal()
             {
@@ -596,7 +596,7 @@ cette méthode doit retourner ``true`` :
         <class name="Acme\BlogBundle\Entity\Author">
             <getter property="passwordLegal">
                 <constraint name="True">
-                    <option name="message">Le mot de passe et le prénom doivent être différents</option>
+                    <option name="message">Le mot de passe et le prÃ©nom doivent Ãªtre diffÃ©rents</option>
                 </constraint>
             </getter>
         </class>
@@ -612,12 +612,12 @@ cette méthode doit retourner ``true`` :
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addGetterConstraint('passwordLegal', new True(array(
-                    'message' => 'Le mot de passe et le prénom doivent être différents',
+                    'message' => 'Le mot de passe et le prÃ©nom doivent Ãªtre diffÃ©rents',
                 )));
             }
         }
 
-Maintenant, créez la méthode ``isPasswordLegal()``, et faites ce dont vous avez besoin:: 
+Maintenant, crÃ©ez la mÃ©thode ``isPasswordLegal()``, et faites ce dont vous avez besoin:: 
 
     public function isPasswordLegal()
     {
@@ -626,9 +626,9 @@ Maintenant, créez la méthode ``isPasswordLegal()``, et faites ce dont vous avez 
 
 .. note::
 
-    Les plus perspicaces d'entre vous auront remarqué que le préfixe du getter
-    (« get » ou « is ») est omis dans le mapping. Cela vous permet de déplacer la
-    contrainte sur une propriété du même nom plus tard (ou vice versa) sans
+    Les plus perspicaces d'entre vous auront remarquÃ© que le prÃ©fixe du getter
+    (Â« get Â» ou Â« is Â») est omis dans le mapping. Cela vous permet de dÃ©placer la
+    contrainte sur une propriÃ©tÃ© du mÃªme nom plus tard (ou vice versa) sans
     changer votre logique de validation.
 	
 .. _validation-class-target:
@@ -636,10 +636,10 @@ Maintenant, créez la méthode ``isPasswordLegal()``, et faites ce dont vous avez 
 Classes	
 ~~~~~~~
 
-Certaines contraintes s'appliquent à toute la classe qui est validée. Par exemple,
+Certaines contraintes s'appliquent Ã  toute la classe qui est validÃ©e. Par exemple,
 la contrainte :doc:`Callback</reference/constraints/Callback>` est une contrainte
-générique qui s'applique à la classe elle-même. Lorsque cette classe est validée,
-les méthodes spécifiées par cette contrainte sont simplement exécutées pour personnaliser
+gÃ©nÃ©rique qui s'applique Ã  la classe elle-mÃªme. Lorsque cette classe est validÃ©e,
+les mÃ©thodes spÃ©cifiÃ©es par cette contrainte sont simplement exÃ©cutÃ©es pour personnaliser
 encore plus la validation
 	
 .. _book-validation-validation-groups:
@@ -647,15 +647,15 @@ encore plus la validation
 Groupes de Validation
 ---------------------
 
-Jusqu'ici, vous avez été en mesure d'ajouter des contraintes à une classe et demander si oui ou
-non cette classe satisfait toutes les contraintes définies. Dans certains cas, cependant,
+Jusqu'ici, vous avez Ã©tÃ© en mesure d'ajouter des contraintes Ã  une classe et demander si oui ou
+non cette classe satisfait toutes les contraintes dÃ©finies. Dans certains cas, cependant,
 vous aurez besoin de valider un objet en ne prenant en compte que *certaines* des contraintes
 de la classe. Pour ce faire, vous pouvez organiser chaque contrainte en un ou plusieurs
-« groupes de validation », et ensuite appliquer la validation sur un groupe de
+Â« groupes de validation Â», et ensuite appliquer la validation sur un groupe de
 contraintes seulement.
 
-Par exemple, supposons que vous avez une classe  ``User``, qui est utilisée à la fois quand un
-utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tard : 
+Par exemple, supposons que vous avez une classe  ``User``, qui est utilisÃ©e Ã  la fois quand un
+utilisateur s'enregistre et quand un utilisateur met Ã  jour son profil plus tard : 
 
 .. configuration-block::
 
@@ -760,19 +760,19 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tard
 
 Avec cette configuration, il y a deux groupes de validation :
 
-* ``Default`` - contient les contraintes non affectées à tout autre groupe ;
+* ``Default`` - contient les contraintes non affectÃ©es Ã  tout autre groupe ;
 
 * ``registration`` - contient les contraintes sur les champs ``email`` and ``password``
   seulement.
 
-Pour dire au validateur d'utiliser un groupe spécifique, passer un ou plusieurs noms de groupe
-comme deuxième argument de la méthode ``validate()`` ::
+Pour dire au validateur d'utiliser un groupe spÃ©cifique, passer un ou plusieurs noms de groupe
+comme deuxiÃ¨me argument de la mÃ©thode ``validate()`` ::
 
     $errorList = $validator->validate($author, array('registration'));
 
-Bien sûr, vous travaillerez bien souvent indirectement avec la validation via la bibliothèque de
-formulaire. Pour plus d'informations sur la façon d'utiliser les groupes de validation
-à l'intérieur des formulaires, voir :ref:`book-forms-validation-groups`.
+Bien sÃ»r, vous travaillerez bien souvent indirectement avec la validation via la bibliothÃ¨que de
+formulaire. Pour plus d'informations sur la faÃ§on d'utiliser les groupes de validation
+Ã  l'intÃ©rieur des formulaires, voir :ref:`book-forms-validation-groups`.
 
 .. index::
    single: Validation; Validating raw values
@@ -783,9 +783,9 @@ Valider des valeurs et des tableaux
 -----------------------------------
 
 Jusqu'ici, vous avez vu comment valider des objets entiers. Mais souvent,
-vous voudrez juste valider une simple valeur, comme par exemple vérifier qu'une
-chaine de caractères est une adresse email valide. C'est en fait très facile à
-faire. Dans un contrôleur, ça ressemble à ceci::
+vous voudrez juste valider une simple valeur, comme par exemple vÃ©rifier qu'une
+chaine de caractÃ¨res est une adresse email valide. C'est en fait trÃ¨s facile Ã 
+faire. Dans un contrÃ´leur, Ã§a ressemble Ã  ceci::
 
     // Ajouter ceci en haut de votre classe
     use Symfony\Component\Validator\Constraints\Email;
@@ -793,7 +793,7 @@ faire. Dans un contrôleur, ça ressemble à ceci::
     public function addEmailAction($email)
     {
         $emailConstraint = new Email();
-        // toutes les "options" de contrainte sont définies comme suit
+        // toutes les "options" de contrainte sont dÃ©finies comme suit
         $emailConstraint->message = 'Invalid email address';
 
         // utiliser le validator pour valider la valeur
@@ -812,24 +812,24 @@ faire. Dans un contrôleur, ça ressemble à ceci::
     }
 
 En appelant ``validateValue`` du validator, vous pouvez passer une valeur brute et
-l'objet contrainte dont vous voulez valider la valeur. Une liste complète des
+l'objet contrainte dont vous voulez valider la valeur. Une liste complÃ¨te des
 contraintes disponibles - ainsi que le nom de classe complet de chaque contrainte -
 est disponible dans le chapitre :doc:`contraintes</reference/constraints>`.
 
-La méthode ``validateValue`` retourne un objet :class:`Symfony\\Component\\Validator\\ConstraintViolationList`
+La mÃ©thode ``validateValue`` retourne un objet :class:`Symfony\\Component\\Validator\\ConstraintViolationList`
 qui se comporte comme un tableau d'erreurs. Chaque erreur de la collection est un
 objet :class:`Symfony\\Component\\Validator\\ConstraintViolation`, qui contient
-le message d'erreur dans sa méthode `getMessage`.
+le message d'erreur dans sa mÃ©thode `getMessage`.
 
 Le mot de la fin
 ----------------
 
-Le ``validator`` de Symfony2 est un outil puissant qui peut être un atout pour
-garantir que les données de n'importe quel objet est « valide ». La puissance
-de la validation réside dans les « contraintes », qui sont des règles que vous
-pouvez appliquer aux propriétés ou aux méthodes getter de votre objet. Et tandis
-que vous utiliserez plus communément le système de validation indirectement
-lors de l'utilisation des formulaires, n'oubliez pas qu'il peut être utilisé partout
+Le ``validator`` de Symfony2 est un outil puissant qui peut Ãªtre un atout pour
+garantir que les donnÃ©es de n'importe quel objet est Â« valide Â». La puissance
+de la validation rÃ©side dans les Â« contraintes Â», qui sont des rÃ¨gles que vous
+pouvez appliquer aux propriÃ©tÃ©s ou aux mÃ©thodes getter de votre objet. Et tandis
+que vous utiliserez plus communÃ©ment le systÃ¨me de validation indirectement
+lors de l'utilisation des formulaires, n'oubliez pas qu'il peut Ãªtre utilisÃ© partout
 pour valider n'importe quel objet.
 
 En savoir plus avec le Cookbook
@@ -838,4 +838,4 @@ En savoir plus avec le Cookbook
 * :doc:`/cookbook/validation/custom_constraint`
 
 .. _Validator: https://github.com/symfony/Validator
-.. _spécification JSR303: http://jcp.org/en/jsr/detail?id=303
+.. _spÃ©cification JSR303: http://jcp.org/en/jsr/detail?id=303

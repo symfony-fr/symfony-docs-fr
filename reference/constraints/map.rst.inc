@@ -1,8 +1,9 @@
-Basic Constraints
-~~~~~~~~~~~~~~~~~
+Contraintes de bases
+~~~~~~~~~~~~~~~~~~~~
 
-These are the basic constraints: use them to assert very basic things about
-the value of properties or the return value of methods on your object.
+Utiliser les contraintes de bases afin de vérifier des données basiques à propos 
+de la valeur d'une propriété ou de la valeur retournée par une méthode de votre
+objet.
 
 * :doc:`NotBlank </reference/constraints/NotBlank>`
 * :doc:`Blank </reference/constraints/Blank>`
@@ -12,8 +13,8 @@ the value of properties or the return value of methods on your object.
 * :doc:`False </reference/constraints/False>`
 * :doc:`Type </reference/constraints/Type>`
 
-String Constraints
-~~~~~~~~~~~~~~~~~~
+Constraintes sur les chaines de caractères
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Email </reference/constraints/Email>`
 * :doc:`MinLength </reference/constraints/MinLength>`
@@ -22,21 +23,21 @@ String Constraints
 * :doc:`Regex </reference/constraints/Regex>`
 * :doc:`Ip </reference/constraints/Ip>`
 
-Number Constraints
-~~~~~~~~~~~~~~~~~~
+Constraintes sur les nombres
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Max </reference/constraints/Max>`
 * :doc:`Min </reference/constraints/Min>`
 
-Date Constraints
-~~~~~~~~~~~~~~~~
+Constraintes sur les dates
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Date </reference/constraints/Date>`
 * :doc:`DateTime </reference/constraints/DateTime>`
 * :doc:`Time </reference/constraints/Time>`
 
-Collection Constraints
-~~~~~~~~~~~~~~~~~~~~~~
+Constraintes sur les collections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Choice </reference/constraints/Choice>`
 * :doc:`Collection </reference/constraints/Collection>`
@@ -45,14 +46,14 @@ Collection Constraints
 * :doc:`Locale </reference/constraints/Locale>`
 * :doc:`Country </reference/constraints/Country>`
 
-File Constraints
-~~~~~~~~~~~~~~~~
+Constraintes sur les fichiers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`File </reference/constraints/File>`
 * :doc:`Image </reference/constraints/Image>`
 
-Other Constraints
-~~~~~~~~~~~~~~~~~
+Autres Constraintes
+~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Callback </reference/constraints/Callback>`
 * :doc:`All </reference/constraints/All>`

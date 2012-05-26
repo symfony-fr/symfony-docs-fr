@@ -1,12 +1,12 @@
 Type
 ====
 
-Valide qu'une valeur est d'un type spécifique. Par exemple, si une variable doit
-être un tableau, vous pouvez utiliser cette contrainte avec l'option type défini
+Valide qu'une valeur est d'un type spÃ©cifique. Par exemple, si une variable doit
+Ãªtre un tableau, vous pouvez utiliser cette contrainte avec l'option type dÃ©fini
 comme ``array`` pour la valider.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`             |
 +----------------+---------------------------------------------------------------------+
 | Options        | - :ref:`type<reference-constraint-type-type>`                       |
 |                | - `message`_                                                        |
@@ -56,8 +56,8 @@ type
 
 **type**: ``string`` [:ref:`default option<validation-default-option>`]
 
-Cette option obligatoire est le nom de classe de l'un des types de données PHP
-déterminés par les fonctions PHP ``is_``.
+Cette option obligatoire est le nom de classe de l'un des types de donnÃ©es PHP
+dÃ©terminÃ©s par les fonctions PHP ``is_``.
 
   * `array <http://php.net/is_array>`_
   * `bool <http://php.net/is_bool>`_
@@ -80,4 +80,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be of type {{ type }}``
 
-Le message qui sera affiché si la donnée n'est pas du bon type.
+Le message qui sera affichÃ© si la donnÃ©e n'est pas du bon type.

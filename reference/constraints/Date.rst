@@ -1,13 +1,13 @@
 Date
 ====
 
-Valide qu'une valeur est une date valide, c'est-à-dire soit un objet ``DateTime``,
-soit une chaine de caractères (ou un objet qui peut être converti en chaine de caractères)
+Valide qu'une valeur est une date valide, c'est-Ã -dire soit un objet ``DateTime``,
+soit une chaine de caractÃ¨res (ou un objet qui peut Ãªtre converti en chaine de caractÃ¨res)
 qui respecte un format valide YYYY-MM-DD.
 
 
 +----------------+--------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`            |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`            |
 +----------------+--------------------------------------------------------------------+
 | Options        | - `message`_                                                       |
 +----------------+--------------------------------------------------------------------+
@@ -50,4 +50,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid date``
 
-Ce message s'affiche si la donnée finale n'est pas une date valide.
+Ce message s'affiche si la donnÃ©e finale n'est pas une date valide.

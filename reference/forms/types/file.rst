@@ -4,13 +4,13 @@
 Le type de champ File
 =====================
 
-Le type ``file`` représente un input File dans votre formulaire.
+Le type ``file`` reprÃ©sente un input File dans votre formulaire.
 
 +-------------+---------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``file``                                            |
 +-------------+---------------------------------------------------------------------+
 | Options     | - `required`_                                                       |
-| héritées    | - `label`_                                                          |
+| hÃ©ritÃ©es    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
@@ -22,7 +22,7 @@ Le type ``file`` représente un input File dans votre formulaire.
 Utilisation de base
 -------------------
 
-Imaginons que vous avez défini ce formulaire :
+Imaginons que vous avez dÃ©fini ce formulaire :
 
 .. code-block:: php
 
@@ -31,11 +31,11 @@ Imaginons que vous avez défini ce formulaire :
 .. caution::
 
     N'oubliez pas d'ajouter l'attribut ``enctype`` dans la balise form : 
-	``<form action="#" method="post" {{ form_enctype(form) }}>``.
+    ``<form action="#" method="post" {{ form_enctype(form) }}>``.
 
 Lorsque le formulaire est soumis, le champ ``attachment`` sera une instance de
-:class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`. Elle peut être
-utilisée pour déplacer le fichier ``attachment`` vers son emplacement définitif :
+:class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`. Elle peut Ãªtre
+utilisÃ©e pour dÃ©placer le fichier ``attachment`` vers son emplacement dÃ©finitif :
 
 .. code-block:: php
 
@@ -56,32 +56,32 @@ utilisée pour déplacer le fichier ``attachment`` vers son emplacement définitif 
         // ...
     }
 
-La méthode ``move()`` prend un répertoire et un nom de fichier comme arguments.
-Vous pouvez calculer le nom de fichier grâce à l'une des méthodes suivantes::
+La mÃ©thode ``move()`` prend un rÃ©pertoire et un nom de fichier comme arguments.
+Vous pouvez calculer le nom de fichier grÃ¢ce Ã  l'une des mÃ©thodes suivantes::
 
     // utiliser le nom de fichier original
     $file->move($dir, $file->getClientOriginalName());
 
-    // générer un nom aléatoire et essayer de deviner l'extension (plus sécurisé)
+    // gÃ©nÃ©rer un nom alÃ©atoire et essayer de deviner l'extension (plus sÃ©curisÃ©)
     $extension = $file->guessExtension();
     if (!$extension) {
-        // l'extension n'a pas été trouvée
+        // l'extension n'a pas Ã©tÃ© trouvÃ©e
         $extension = 'bin';
     }
     $file->move($dir, rand(1, 99999).'.'.$extension);
 
-Utiliser le nom original via la méthode ``getClientOriginalName()`` n'est pas sécurisé
-car il a pu être manipulé par l'utilisateur. De plus, il peut contenir des caractères
-qui ne sont pas tolérés dans les noms de fichiers. Il est recommandé de nettoyer
+Utiliser le nom original via la mÃ©thode ``getClientOriginalName()`` n'est pas sÃ©curisÃ©
+car il a pu Ãªtre manipulÃ© par l'utilisateur. De plus, il peut contenir des caractÃ¨res
+qui ne sont pas tolÃ©rÃ©s dans les noms de fichiers. Il est recommandÃ© de nettoyer
 le nom avant de l'utiliser.
 
 Lisez le chapitre :doc:`cookbook </cookbook/doctrine/file_uploads>` pour avoir un
-exemple d'upload de fichier associé à une entité Doctrine.
+exemple d'upload de fichier associÃ© Ã  une entitÃ© Doctrine.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

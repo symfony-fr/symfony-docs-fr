@@ -43,7 +43,7 @@ Champs de type Groupe
 * :doc:`collection</reference/forms/types/collection>`
 * :doc:`repeated</reference/forms/types/repeated>`
 
-Champs cachés
+Champs cachÃ©s
 ~~~~~~~~~~~~~
 
 * :doc:`hidden</reference/forms/types/hidden>`

@@ -12,7 +12,7 @@ Le champ ``password`` rend un input texte de type password.
 | Options     | - `always_empty`_                                                      |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `max_length`_                                                        |
-| héritées    | - `required`_                                                          |
+| hÃ©ritÃ©es    | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `trim`_                                                              |
 |             | - `read_only`_                                                         |
@@ -31,17 +31,17 @@ always_empty
 
 **type**: ``Boolean`` **default**: ``true``
 
-Si cette option est définie à true, le champ sera *toujours* rendu vide, même si
-le champ correspondant a une valeur. Si elle est définie à false, alors le champ
+Si cette option est dÃ©finie Ã  true, le champ sera *toujours* rendu vide, mÃªme si
+le champ correspondant a une valeur. Si elle est dÃ©finie Ã  false, alors le champ
 password sera rendu avec l'attribut ``value`` correctement rempli avec la vraie valeur.
 
 Plus simplement, si pour une raison quelconque vous voulez afficher le champ password
-*avec* sa valeur déjà préremplie, définissez cette option à false.
+*avec* sa valeur dÃ©jÃ  prÃ©remplie, dÃ©finissez cette option Ã  false.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont hÃ©ritÃ©es du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 

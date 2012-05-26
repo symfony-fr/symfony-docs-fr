@@ -4,22 +4,22 @@
 Type de champ Timezone
 ======================
 
-Le type ``timezone`` est un sous-ensemble du type ``ChoiceType`` qui permet à l'utilisateur
+Le type ``timezone`` est un sous-ensemble du type ``ChoiceType`` qui permet Ã  l'utilisateur
 de choisir parmi les fuseaux horaires possibles.
 
-La « valeur » de chaque fuseau horaire est le nom complet du fuseau, comme ``America/Chicago``
+La Â« valeur Â» de chaque fuseau horaire est le nom complet du fuseau, comme ``America/Chicago``
 ou ``Europe/Istanbul``.
 
-Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options ``choices`` ou
+Contrairement au type ``choice``, vous n'avez pas besoin de spÃ©cifier les options ``choices`` ou
 ``choice_list`` puisque le type de champs utilise automatiquement la liste des fuseaux.
-Vous *pouvez* spécifier l'une ou l'autre de ces options manuellement, mais vous devriez
+Vous *pouvez* spÃ©cifier l'une ou l'autre de ces options manuellement, mais vous devriez
 alors utiliser directement le type ``choice``.
 
 +-------------+------------------------------------------------------------------------+
-| Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
+| Rendu comme | peut Ãªtre diffÃ©rentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
-| héritées    | - `expanded`_                                                          |
+| hÃ©ritÃ©es    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
@@ -32,10 +32,10 @@ alors utiliser directement le type ``choice``.
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType` |
 +-------------+------------------------------------------------------------------------+
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
+Ces options hÃ©ritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
@@ -45,7 +45,7 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 

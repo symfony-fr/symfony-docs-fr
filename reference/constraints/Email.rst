@@ -1,11 +1,11 @@
 Email
 =====
 
-Valide que la valeur est une adresse email valide. La donnée finale est convertie
-en une chaine de caractères avant d'être validée.
+Valide que la valeur est une adresse email valide. La donnÃ©e finale est convertie
+en une chaine de caractÃ¨res avant d'Ãªtre validÃ©e.
 
 +----------------+---------------------------------------------------------------------+
-| S'applique à   | :ref:`property or method<validation-property-target>`               |
+| S'applique Ã    | :ref:`property or method<validation-property-target>`               |
 +----------------+---------------------------------------------------------------------+
 | Options        | - `message`_                                                        |
 |                | - `checkMX`_                                                        |
@@ -74,14 +74,14 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid email address``
 
-Ce message s'affiche si la donnée finale n'est pas une adresse email valide.
+Ce message s'affiche si la donnÃ©e finale n'est pas une adresse email valide.
 
 checkMX
 ~~~~~~~
 
 **type**: ``Boolean`` **default**: ``false``
 
-Si cette option est définie à true, alors la fonction PHP `checkdnsrr`_ sera utilisée
-pour vérifier la validité du registrement MX du serveur de l'email donné.
+Si cette option est dÃ©finie Ã  true, alors la fonction PHP `checkdnsrr`_ sera utilisÃ©e
+pour vÃ©rifier la validitÃ© du registrement MX du serveur de l'email donnÃ©.
 
 .. _`checkdnsrr`: http://www.php.net/manual/fr/function.checkdnsrr.php

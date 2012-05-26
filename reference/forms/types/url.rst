@@ -4,8 +4,8 @@
 Type de champ Url
 =================
 
-Le champ ``url`` est un champ texte qui préfixe la valeur soumise par un protocole
-donné (ex ``http://``) si la valeur n'a pas déjà un protocole.
+Le champ ``url`` est un champ texte qui prÃ©fixe la valeur soumise par un protocole
+donnÃ© (ex ``http://``) si la valeur n'a pas dÃ©jÃ  un protocole.
 
 +-------------+-------------------------------------------------------------------+
 | Rendu comme | Champ ``input url``                                               |
@@ -13,7 +13,7 @@ donné (ex ``http://``) si la valeur n'a pas déjà un protocole.
 | Options     | - `default_protocol`_                                             |
 +-------------+-------------------------------------------------------------------+
 | Options     | - `max_length`_                                                   |
-| héritées    | - `required`_                                                     |
+| hÃ©ritÃ©es    | - `required`_                                                     |
 |             | - `label`_                                                        |
 |             | - `trim`_                                                         |
 |             | - `read_only`_                                                    |
@@ -33,13 +33,13 @@ default_protocol
 **type**: ``string`` **default**: ``http``
 
 Si une valeur soumise ne commence pas un protocole (ex ``http://``,
-``ftp://``, etc), ce protocole sera ajouté au début de la chaine de caractères
-lorsque les données seront associées au formulaire.
+``ftp://``, etc), ce protocole sera ajoutÃ© au dÃ©but de la chaine de caractÃ¨res
+lorsque les donnÃ©es seront associÃ©es au formulaire.
 
-Options héritées
+Options hÃ©ritÃ©es
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options hÃ©ritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 
