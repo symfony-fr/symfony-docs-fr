@@ -5,7 +5,5 @@ Conteneur de Service
     :maxdepth: 2
 
     event_listener
-    factories
-    parentservices
     scopes
-    tags
+    compiler_passes

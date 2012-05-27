@@ -46,8 +46,9 @@ Toute requete devrait inclure le template suivant dans sa description:
     Symfony2 tests pass: [yes|no]
     Fixes the following tickets: [comma separated list of tickets fixed by the PR]
     Todo: [list of todos pending]
+    License of the code: MIT
     
-Un example de champ descriptif pourrait donc ressembler à ceci:
+Un exemple de champ descriptif pourrait donc ressembler à ceci:
 
 .. code-block:: text
 
@@ -55,10 +56,15 @@ Un example de champ descriptif pourrait donc ressembler à ceci:
    Feature addition: yes
    Backwards compatibility break: no
    Symfony2 tests pass: yes
-   Fixes the following tickets: -
+   Fixes the following tickets: #12, #43
    Todo: -
 
 Merci d'inclure ce template à chacune de vos soumissions!
+
+..note::
+
+    Tout patch que vous allez soumettre doit être sous licence MIT, sauf
+    si explicitement spécifié dans le code
 
 .. tip::
 
@@ -67,6 +73,21 @@ Merci d'inclure ce template à chacune de vos soumissions!
    la plus ancienne (sauf bien entendu si cette correction ne concernent qu'une
    version    particulière). De plus toute soumission devra conserver la
    compatibilité ascendante du framework.
+
+Lorsque votre pull request ne concerne pas une correction de bug (par exemple
+si vous ajoutez une nouvelle fonctionnalité ou en changez une existante), votre
+pull request doit également inclure ce qui suit :
+
+
+* Un résumé justifiant les changements dans la description de la pull request;
+
+* Une explication des changements dans le(s) bon(s) fichier(s) CHANGELOG;
+
+* Si les changements ne sont pas rétrocompatibles, une explication sur comment migrer
+  une application dans le(s) bon(s) fichier(s) UPGRADE.
+
+En plus, vous devrez aussi envoyer une pull request vers le `dépôt de la documentation`_
+pour mettre à jour la documentation.
 
 .. tip::
 
@@ -238,6 +259,11 @@ modifications effectuées sur votre branche:
 
     $ git push origin BRANCH_NAME
 
+.. note::
+    
+    Ne corrigez jamais les conventions de codage dans vos pull request car cela
+    rend le travail de relecture de nos équipes plus difficile.
+
 Vous pouvez maintenant entamer une discussion à propos de votre correctif sur la 
 `liste de diffusion dédiée aux développements`_ ou effectuer une requête d'ajout
 (pull request). (sur le dépot ``symfony/symfony``). Afin de faciliter le travail
@@ -246,8 +272,8 @@ requête de cette manière:
 
 .. code-block:: text
 
-    [Yaml] foo bar
-    [Form] [Validator] [FrameworkBundle] foo bar
+    [Yaml] Correction de quelque chose
+    [Form] [Validator] [FrameworkBundle] Ajout de quelque chose
 
 .. tip::
 
@@ -260,7 +286,10 @@ ou l'URL de votre requête.
 
 En vous appuyant sur les retours de la liste de diffusion ou via les
 commentaires de votre requête, vous pourrez être amené à corriger votre patch.
-Avant de soumettre à nouveau celui-ci, pensez à ``rebaser`` votre dépot avec
+
+Avant de soumettre à nouveau celui-ci, fusionnez tout les commits non pertinents
+(voir ci-dessous) qui concernent les corrections de conventions de codage ou la
+corrections d'erreurs d'inattention dans votre code, puis faites un rebase avec
 upstream/master ou upstream/2.0, ne fusionner pas, et forcé l'envoi (push) vers 
 ``origin``:
 
@@ -282,7 +311,7 @@ modification. Afin d'effectuer ceci, utiliser la commande rebase:
 
 .. code-block:: bash
 
-    $ git rebase -i head~3
+    $ git rebase -i HEAD~3
     $ git push -f origin BRANCH_NAME
 
 Le nombre 3 correspond au nombre de commits effectué sur votre branche. Après 
@@ -301,11 +330,6 @@ réussi, vous demandera d'éditer le message de commit, qui par défaut est un
 listing de tous les messages précédents. Une fois terminé, executer la commande
 push.
 
-.. note::
-
-    Tous les correctifs que vous produirez devront être réaliser sous la license
-    MIT license, à moins que vous ne le précisiez explicitement dans votre code.
-
 Tous les correctifs intégrés à la branche 2.0 seront fusionnés dans les branches 
 de maintenance plus récentes. Par exemple, si vous soumettez une correction
 pour la branche `2.0`, celui-ci sera aussi appliqué par l'équipe centrale sur la
@@ -317,4 +341,5 @@ branche `master`.
 .. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
 .. _travis-ci.org:                                http://travis-ci.org
 .. _`travis-ci.org status icon`:                  http://about.travis-ci.org/docs/user/status-images/
-.. _`travis-ci.org Getting Started Guide`:        http://about.travis-ci.org/docs/user/getting-started/
+.. _`travis-ci.org Getting Started Guide`: http://about.travis-ci.org/docs/user/getting-started/
+.. _`dépôt de la documentation`: https://github.com/symfony/symfony-docs

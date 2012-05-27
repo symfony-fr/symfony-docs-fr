@@ -859,7 +859,7 @@ manuellement la locale à utiliser pour la traduction :
         'fr_FR',
     );
 
-    $this->get('translator')->trans(
+    $this->get('translator')->transChoice(
         '{0} There is no apples|{1} There is one apple|]1,Inf[ There are %count% apples',
         10,
         array('%count%' => 10),

@@ -139,5 +139,15 @@ n'est pas actif.
         <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
+.. tip::
+    
+    Plutôt que d'ajouter le filtre à la balise asset, vous pouvez aussi
+    l'activer de façon globale en ajoutant l'attribut apply-to à la configuration
+    du filtre, par exemple ``apply_to: "\.js$"`` pour le filtre yui_js.
+    Pour que le filtre ne s'applique qu'en production, ajoutez le au fichier
+    config_prod au lieu du fichier de configuration commun. Pour plus de détails
+    sur comment appliquer des filtres en fonction des extensions de fichiers, lisez
+    :ref:`cookbook-assetic-apply-to`.
+
 .. _`YUI Compressor`: http://developer.yahoo.com/yui/compressor/
 .. _`Téléchargez le JAR`: http://yuilibrary.com/downloads/#yuicompressor

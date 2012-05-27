@@ -30,10 +30,10 @@ profiler est disponible (il est activé par défaut dans l'environnement de ``te
             // Vérifier que le profiler est activé
             if ($profile = $client->getProfile()) {
                 // vérifier le nombre de requêtes
-                $this->assertTrue($profile->getCollector('db')->getQueryCount() < 10);
+                $this->assertLessThan(10, $profile->getCollector('db')->getQueryCount());
 
                 // Vérifier le temps utilisé par le framework
-                $this->assertTrue( $profile->getCollector('timer')->getTime() < 0.5);
+                $this->assertLessThan(0.5, $profile->getCollector('timer')->getTime());
             }
         }
     }
@@ -43,8 +43,9 @@ par exemple), vous pouvez utiliser le Profiler Web afin d’analyser la requête
 les tests soient terminés. Cela est réalisable simplement en intégrant le token suivant
 dans les messages d'erreurs::
 
-    $this->assertTrue(
-        $profile->get('db')->getQueryCount() < 30,
+    $this->assertLessThan(
+        30,
+        $profile->get('db')->getQueryCount(),
         sprintf('Checks that query count is less than 30 (token %s)', $profile->getToken())
     );
 

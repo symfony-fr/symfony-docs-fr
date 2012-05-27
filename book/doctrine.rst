@@ -260,7 +260,10 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
     le nom de la classe de votre entité est ``Group``, alors, par défaut, le nom
     de la table correspondante sera ``group``, ce qui causera des problèmes SQL
     avec certains moteurs. Lisez la documentation sur les `Mots-clé SQL réservés`_ de
-    Doctrine pour savoir comment échapper ces noms.
+    Doctrine pour savoir comment échapper ces noms. Alternativement, si vous êtes libre
+    de choisir votre schéma de base de données, vous pouvez simplement utiliser un autre
+    nom de table ou de colonne. Lisez les documentations de Doctrine `Classes persistantes`_
+    et `Mapping de propriétés`_.
 
 .. note::
 
@@ -1466,4 +1469,6 @@ suivant :
 .. _`Property Mapping documentation`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html#property-mapping
 .. _`Lifecycle Events documentation`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#lifecycle-events
 .. _`Mots-clé SQL réservés`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html#quoting-reserved-words
+.. _`Classes persistantes`: http://docs.doctrine-project.org/projects/doctrine-orm/en/2.1/reference/basic-mapping.html#persistent-classes
+.. _`Mapping de propriétés`: http://docs.doctrine-project.org/projects/doctrine-orm/en/2.1/reference/basic-mapping.html#property-mapping
 

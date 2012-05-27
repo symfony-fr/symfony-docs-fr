@@ -20,7 +20,7 @@ Voici la liste des pré-requis obligatoires et optionnels.
 Obligatoires
 ------------
 
-* PHP doit être au minimum à la version PHP 5.3.2
+* PHP doit être au minimum à la version PHP 5.3.3
 * JSON doit être activé
 * ctype doit être activé
 * Votre PHP.ini doit avoir le paramètre date.timezone défini.

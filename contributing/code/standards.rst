@@ -11,6 +11,8 @@ Rappelez vous que l'avantage principal d'un standard est que toutes les parties
 du code source résultant se ressemblent et semblent ainsi familières, ce n'est
 pas que telle technique soit plus lisible qu'une autre.
 
+Symfony suit les standards définis par les documents PSR-0, PSR-1 et PSR-2
+
 Comme une image - ou un peu de code - est plus efficace que des milliers de
 mots, voici un court exemple contenant les plus courantes conventions décrites
 ci-dessous :
@@ -64,47 +66,18 @@ ci-dessous :
 Structure
 ---------
 
-* N'utilisez jamais de tag court (`<?`);
-
-* Ne clôturez jamais un fichier de classe par le tag de fin php `?>`;
-
-* L'indentation doit être réalisée par des groupes de 4 espaces (les
-  tabulations ne sont pas permises);
-
-* Utilisez le caractère saut de ligne (`0x0A`) pour terminer vos lignes;
-
 * Ajoutez un espace après chaque virgule séparatrice;
 
-* N'utilisez pas d'espace après une parenthèse ouvrante ou avant d'en fermer
-  une;
-
 * Ajoutez un espace autour des opérateurs (`==`, `&&`, ...);
-
-* Ajouter un espace avant d'ouvrir une parenthèse suivant un mot-clef de
-  contrôle (`if`, `else`, `for`, `while`, ...);
 
 * Ajoutez une ligne vide avant l'expression de retour `return`, à moins que le
   retour soit seul à l'intérieur du groupe parent (comme une expression `if`);
 
-* N'ajoutez pas d'espace à la fin de vos lignes;
-
 * Utilisez les accolades pour indiquer les structures de contrôle quel que soit
   le nombre d'expressions qu'elles entourent.
 
-* Ajoutez les accolades sur des lignes séparées pour les classes, méthodes et
-  déclarations de fonctions;
-
-* Séparez les expressions conditionnelles (`if`, `else`, ...) et les accolades
-  ouvrantes avec un seul espace, sans ligne vide.
-
 * Déclarez la visibilité de chacunes de vos classes, méthodes et propriétés
   (l'usage de `var` est interdit);
-
-* Utilisez les minuscules pour les constantes native PHP: `false`, `true`, et
-  `null`. De même pour `array()`;
-
-* Utilisez les majuscules pour les constantes en séparant les mots avec des 
-  sous-tirets (underscores);
 
 * Définissez une classe par fichier - cela ne s'applique pas à vos classes
   de helper privées qui ne sont pas appelées à être instanciée de l'extérieur.

@@ -582,9 +582,7 @@ un template.
 
 La solution consiste simplement à imbriquer les résultats d'un contrôleur dans un
 template. Dans un premier temps, créez un contrôleur qui retourne un certain
-nombre d'articles récents :
-
-.. code-block:: php
+nombre d'articles récents::
 
     // src/Acme/ArticleBundle/Controller/ArticleController.php
 
@@ -966,15 +964,11 @@ Le coeur du système de template dans Symfony2 est le ``moteur`` de template (``
 objet spécial est responsable de rendre des templates et de retourner leur
 contenu. Quand vous effectuez le rendu d'un template à travers un contrôleur
 par exemple, vous utilisez en effet le service de moteur de template. Par
-exemple :
-
-.. code-block:: php
+exemple::
 
     return $this->render('AcmeArticleBundle:Article:index.html.twig');
 
-est équivalent à
-
-.. code-block:: php
+est équivalent à::
 
     $engine = $this->container->get('templating');
     $content = $engine->render('AcmeArticleBundle:Article:index.html.twig');
@@ -1276,9 +1270,7 @@ n'est pas rendu différemment en se basant sur ce format.
 
 Dans beaucoup de cas, vous pourriez vouloir autoriser un simple contrôleur à
 rendre plusieurs formats en se basant sur le « request format ». Pour cette
-raison, un pattern commun est de procéder comme cela :
-
-.. code-block:: php
+raison, un pattern commun est de procéder comme cela::
 
     public function indexAction()
     {
@@ -1320,9 +1312,7 @@ chaque fois que vous avez besoin de générer du contenu de répresentation en
 HTML, XML ou tout autre format. Et bien que les templates soient un moyen commun
 de générer du contenu dans un contrôleur, leur utilisation n'est pas
 systèmatique. L'objet ``Response`` retourné par un contrôleur peut être créé
-avec ou sans utilisation de template :
-
-.. code-block:: php
+avec ou sans utilisation de template::
 
     // création d'un objet Response qui contient le rendu d'un template
     $response = $this->render('AcmeArticleBundle:Article:index.html.twig');

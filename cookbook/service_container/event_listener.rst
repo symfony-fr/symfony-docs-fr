@@ -80,3 +80,38 @@ service et notifier Symfony que c'est un « listener » de l'événement
     « listeners » seront exécutés dans cet ordre de priorité. Cela est utile
     lorsque vous avez besoin de garantir qu'un « listener » est exécuté avant un
     autre.
+
+
+Evènement de requête, vérification des types
+--------------------------------------------
+
+Une même page peut faire plusieurs requêtes (une requête principale et plusieurs
+sous-requêtes, c'est pourquoi, lorsque vous travaillez avec l'évènement ``KernelEvents::REQUEST``,
+vous pourriez avoir besoin de vérifier le type de la requête. Cela peut être effectué
+très facilement comme ceci::
+
+    // src/Acme/DemoBundle/Listener/AcmeRequestListener.php
+    namespace Acme\DemoBundle\Listener;
+
+    use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+    use Symfony\Component\HttpKernel\HttpKernel;
+
+    class AcmeRequestListener
+    {
+        public function onKernelRequest(GetResponseEvent $event)
+        {
+            if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
+                // ne rien faire si c'est la requête principale
+                return;
+             }
+ 
+            // votre code
+            }
+        } 
+    }
+   
+.. tip::
+
+    Deux types de requête sont disponibles dans l'interface
+    :class:`Symfony\\Component\\HttpKernel\\HttpKernelInterface` :
+    ``HttpKernelInterface::MASTER_REQUEST`` et ``HttpKernelInterface::SUB_REQUEST``.

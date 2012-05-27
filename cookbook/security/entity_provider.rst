@@ -241,7 +241,7 @@ entrées d'entité « User » de la base de données :
                 - { path: ^/admin, roles: ROLE_ADMIN }
 
 La section ``encoders`` associe l'encodeur de mot de passe ``sha1`` à la classe
-entité. Cela signifie que Symfony va s'attendre à ce que le mot de passe encodé
+entité. Cela signifie que Symfony va s'attendre à ce que le mot de passe stocké
 dans la base de données soit encodé à l'aide de cet algorithme. Pour des détails
 sur comment créer un nouvel objet « User » avec un mot de passe encrypté
 correctement, voyez la section :ref:`book-security-encoding-user-password` du

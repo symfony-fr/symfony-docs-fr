@@ -77,13 +77,13 @@ configuration basique de Subversion :
 
         $ svn propset svn:ignore "vendor" .
         $ svn propset svn:ignore "bootstrap*" app/
-        $ svn propset svn:ignore "parameters.ini" app/config/
+        $ svn propset svn:ignore "parameters.yml" app/config/
         $ svn propset svn:ignore "*" app/cache/
         $ svn propset svn:ignore "*" app/logs/
 
         $ svn propset svn:ignore "bundles" web
 
-        $ svn ci -m "commit basic symfony ignore list (vendor, app/bootstrap*, app/config/parameters.ini, app/cache/*, app/logs/*, web/bundles)"
+        $ svn ci -m "commit basic symfony ignore list (vendor, app/bootstrap*, app/config/parameters.yml, app/cache/*, app/logs/*, web/bundles)"
 
 6. Le reste des fichiers peut maintenant être ajouté et committé dans le projet :
 
@@ -92,12 +92,12 @@ configuration basique de Subversion :
         $ svn add --force .
         $ svn ci -m "add basic Symfony Standard 2.X.Y"
 
-7. Copiez ``app/config/parameters.ini`` vers ``app/config/parameters.ini.dist``.
-   Le fichier ``parameters.ini`` est ignoré par svn (voir ci-dessus) afin que les
+7. Copiez ``app/config/parameters.yml`` vers ``app/config/parameters.yml.dist``.
+   Le fichier ``parameters.yml`` est ignoré par svn (voir ci-dessus) afin que les
    paramètres spécifiques à la machine comme les mots de passe de base de données ne
-   soient pas committés. En créant le fichier ``parameters.ini.dist``, les
+   soient pas committés. En créant le fichier ``parameters.yml.dist``, les
    nouveaux développeurs peuvent rapidement cloner le projet, copier ce fichier
-   vers ``parameters.ini``, l'adapter, et commencer à developper.
+   vers ``parameters.yml``, l'adapter, et commencer à développer.
 
 8. Finalement, téléchargez toutes les bibliothèques tierces :
 

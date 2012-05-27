@@ -1,5 +1,5 @@
-Formulaires
-===========
+Form
+====
 
 .. toctree::
     :maxdepth: 2

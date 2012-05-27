@@ -154,7 +154,7 @@ son ``DemoController`` (`DemoControllerTest`_) :
 
             $crawler = $client->request('GET', '/demo/hello/Fabien');
 
-            $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);
+            $this->assertGreaterThan(0, $crawler->filter('html:contains("Hello Fabien")')->count());
         }
     }
 
@@ -232,7 +232,7 @@ qu'elle fasse. Utilisez le Crawler pour faire des assertions sur le DOM :
 .. code-block:: php
 
     // affirme que la réponse correspond au sélecteur CSS donné
-    $this->assertTrue($crawler->filter('h1')->count() > 0);
+    $this->assertGreaterThan(0, $crawler->filter('h1')->count());
 
 Ou alors, testez directement le contenu de la Réponse si vous voulez
 juste vérifier qu'il contient un certain texte, ou si la Réponse n'est pas un
@@ -278,7 +278,7 @@ document XML/HTML :
 .. index::
    single: Tests; Assertions
 
-.. sidebar: Assertions Utiles
+.. sidebar:: Assertions Utiles
     
     Afin que vous démarriez plus rapidement, voici une liste des
     assertions les plus communes et utiles :
@@ -286,10 +286,10 @@ document XML/HTML :
     .. code-block:: php
 
         // Vérifie qu'il y a au moins une balise h2 dans la classe "subtitle"
-        $this->assertTrue($crawler->filter('h2.subtitle')->count() > 0);
+        $this->assertGreaterThan(0, $crawler->filter('h2.subtitle')->count());
 
         // Vérifie qu'il y a exactement 4 balises h2 sur la page
-        $this->assertEquals(4, $crawler->filter('h2')->count());
+        $this->assertCount(4, $crawler->filter('h2')->count());
 
         // Vérifie que l'entête "Content-Type" vaut "application/json"
         $this->assertTrue($client->getResponse()->headers->contains('Content-Type', 'application/json'));

@@ -46,7 +46,7 @@ Si vous créez une contrainte personnalisée (ex: ``MyConstraint``), Symfony2
 recherchera automatiquement une autre classe, ``MyConstraintValidator`` lorsqu'il
 effectue la validation.
 
-La classe validatrice ne requiert qu'une méthode : ``isValid``. Vous pouvez observer cela
+La classe validatrice ne requiert qu'une méthode : ``validate``. Vous pouvez observer cela
 dans l’exemple suivant, avec la classe ``ProtocolValidator``:
 
 .. code-block:: php
@@ -58,22 +58,28 @@ dans l’exemple suivant, avec la classe ``ProtocolValidator``:
 
     class ProtocolValidator extends ConstraintValidator
     {
-        public function isValid($value, Constraint $constraint)
+        public function validate($value, Constraint $constraint)
         {
-            if (in_array($value, $constraint->protocols)){
-                $this->setMessage($constraint->message, array('%protocols%' => $constraint->protocols));
-
-                return true;
+            if (!in_array($value, $constraint->protocols)){
+                $this->context->addViolation($constraint->message, array('%protocols%' => $constraint->protocols));
             }
-
-            return false;
         }
     }
 
 .. note::
 
-    N'oubliez pas d'appeler ``setMessage`` pour construire un message d'erreur
-    lorsque la valeur est non-valide.
+    La méthode ``validate`` ne retourne pas de valeur; à la place, elle ajoute
+    des violations de contraintes à la propriété ``context`` du validateur grâce
+    à l'appel à la méthode ``addViolation`` dans le cas d'erreurs de validation.
+    Par conséquent, une valeur peut être considérée comme validée si aucune
+    violation de contrainte n'est ajoutée au contexte. Le premier paramètre de l'appel
+    à ``addViolation`` est le message d'erreur utilisé pour la violation.
+
+.. versionadded:: 2.1
+ 
+    La méthode ``isValid`` est dépréciée au profit de ``validate`` dans Symfony 2.1. La
+    méthode ``setMessage`` est également dépréciée, en faveur de l'appel à la méthode
+    ``addViolation`` du contexte.
 
 Contraintes de validation avec dépendances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,20 +138,20 @@ de classe en renseignant une cible::
         return self::CLASS_CONSTRAINT;
     }
 
-Avec ceci, la méthode ``isValid()`` du validateur prend un objet comme premier argument::
+Avec ceci, la méthode ``validate()`` du validateur prend un objet comme premier argument::
 
     class ProtocolClassValidator extends ConstraintValidator
     {
-        public function isValid($protocol, Constraint $constraint)
+        public function validate($protocol, Constraint $constraint)
         {
             if ($protocol->getFoo() != $protocol->getBar()) {
 
                 // associe le message d'erreur à la propriété foo
                 $this->context->addViolationAtSubPath('foo', $constraint->getMessage(), array(), null);
 
-                return true;
+                return false;
             }
  
-            return false;
+            return true;
         }   
     }

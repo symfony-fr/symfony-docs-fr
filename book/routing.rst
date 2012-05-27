@@ -1145,7 +1145,7 @@ depuis les templates.
 
     .. code-block:: javascript
 	
-        var url = Routing.generate('blog_show', { "slug": 'my-blog-post});
+        var url = Routing.generate('blog_show', { "slug": 'my-blog-post'});
 
     Pour plus d'informations, lisez la documentation du bundle.
 

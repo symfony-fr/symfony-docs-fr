@@ -1086,11 +1086,11 @@ des paramètres supplémentaires (au-delà du paramètre ``name``).
 * translation.loader
 * validator.constraint_validator
 
-Apprenez en plus en lisant le Cookbook
---------------------------------------
+Apprenez en plus
+----------------
 
-* :doc:`/cookbook/service_container/factories`
-* :doc:`/cookbook/service_container/parentservices`
+* :doc:`/components/dependency_injection/factories`
+* :doc:`/components/dependency_injection/parentservices`
 * :doc:`/cookbook/controller/service`
 
 .. _`service-oriented architecture`: http://wikipedia.org/wiki/Service-oriented_architecture

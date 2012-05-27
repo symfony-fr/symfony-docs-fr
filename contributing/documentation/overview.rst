@@ -49,7 +49,7 @@ inititier une requête (pull request). Celle-ci devra être entre votre branche
    :align: center
 
 Si vous avez basé vos changement sur la branche 2.0 vous devez suivre le lien
- de commit et changer la branche de base vers @2.0 (range):
+ de commit et changer la branche de base vers @2.0 :
 
 .. image:: /images/docs-pull-request-change-base.png
    :align: center
@@ -59,7 +59,16 @@ GitHub traite en détail les requêtes de mise à jour ou `pull requests`_ .
 .. note::
 
     La documentation Symfony2 est sous licence Creative Commons
-    Attribution-Share Alike 3.0 Unported :doc:`License <license>`.
+    Attribution-Share Alike 3.0 Unported :doc:`Licence <license>`.
+
+.. tip::
+		
+		Vos changements apparaissent sur le site symfony.com moins de 15 minutes
+		après que l'équipe de documentation a mergé votre pull request. Vous pouvez
+		vérifier si vos changements ont introduit des erreurs de syntaxe en allant
+		sur la page `Erreurs de génération de la documentation`_ (elle est mise à
+		jour chaque nuit à 3h du matin quand le serveur génère la documentation).
+
 
 Signaler une erreur
 -------------------
@@ -81,3 +90,4 @@ Lisez la documentation dédiée :doc:`traductions <translations>`.
 
 .. _`forker`: http://help.github.com/fork-a-repo/
 .. _`pull requests`: http://help.github.com/pull-requests/
+.. _`Erreurs de génération de la documentation`: http://symfony.com/doc/build_errors

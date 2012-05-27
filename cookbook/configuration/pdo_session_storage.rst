@@ -150,7 +150,7 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
             <argument>%database_password%</argument>
         </service>
 
-    .. code-block:: xml
+    .. code-block:: php
 
         $pdoDefinition = new Definition('PDO', array(
             'mysql:dbname=%database_name%',
@@ -186,5 +186,5 @@ Pour PostgreSQL, ce sera plutôt :
         session_id character varying(255) NOT NULL,
         session_value text NOT NULL,
         session_time integer NOT NULL,
-        CONSTRAINT session_pkey PRIMARY KEY (session_id),
+        CONSTRAINT session_pkey PRIMARY KEY (session_id)
     );

@@ -18,7 +18,7 @@ Télécharger une Distribution Symfony2
 
 .. tip::
     Premièrement, vérifiez que vous avez installé et configuré un serveur web
-    (comme Apache) avec PHP 5.3.2 ou supérieur. Pour plus d'informations sur les
+    (comme Apache) avec PHP 5.3.3 ou supérieur. Pour plus d'informations sur les
     prérequis Symfony2, lisez le chapitre :doc:`pré-requis</reference/requirements>`.
     Pour plus d'informations sur la manière de configurer la racine web de votre serveur,
     lisez les documentations suivantes : `Apache`_ | `Nginx`_ .
@@ -175,6 +175,11 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
         sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
         sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
 
+    Notez que tout les serveurs web n'utilisent pas l'utilisateur ``www-data``. Vous devez
+    vérifier quel utilisateur votre serveur web utilise et le remplacer dans la commande
+    ci-dessus si besoin. Cela peut être fait en vérifiant la liste des processus pour voir
+    quel utilisateur éxécute votre serveur web.
+
     **3. Sans utiliser l'ACL**
 
     Si vous n'avez pas les droits de changer les accès aux répertoires, vous aurez
@@ -252,4 +257,4 @@ pour récupérer toutes les librairies nécessaires.
 .. _`GitHub`: http://help.github.com/set-up-git-redirect
 .. _`Composer`: http://getcomposer.org/
 .. _`Apache`: http://httpd.apache.org/docs/current/mod/core.html#documentroot
-.. _`Nginx`: http://wiki.nginx.org/HttpCoreModule#root
+.. _`Nginx`: http://wiki.nginx.org/Symfony

@@ -1,7 +1,8 @@
 Gérer les bibliothèques vendors avec bin/vendors et deps
 --------------------------------------------------------
 
-### Comment ça marche?
+Comment ça marche ?
+~~~~~~~~~~~~~~~~~~~
 
 Chaque projet Symfony utilise des bibliothèques tierces regroupées sous l'appellation
 « vendors ». D'une façon ou d'une autre, le but est de vous permettre de télécharger
@@ -50,7 +51,8 @@ nécessaires soient téléchargées.
     en les mettant à jour selon la version spécifiée dans ``deps`` et en inscrivant la révision
     correspondante dans le fichier `deps.lock``.
 
-### Hacker les bibliothèques vendor
+Hacker les bibliothèques vendor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Parfois, il est nécessaire de télécharger une version précise (branche, tag) d'une bibliothèque.
 Vous pouvez le faire directement dans le fichier ``deps`` :
@@ -74,7 +76,8 @@ Vous pouvez le faire directement dans le fichier ``deps`` :
   un nom de tag (``version=origin/0.42``) ou de branche (``refs/remotes/origin/ma-branche-trop-bien``).
   Version par défaut: ``origin/HEAD``.
 
-### Flux de mise à jour
+Flux de mise à jour
+~~~~~~~~~~~~~~~~~~~
 
 lors de l'éxécution de ``php bin/vendors install``, le script vérifie d'abord si le répertoire cible
 existe pour chaque bibliothèque. Si ce n'est pas le cas, il effectue un ``git clone``.

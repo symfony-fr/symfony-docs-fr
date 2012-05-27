@@ -102,6 +102,8 @@ fichier en sortie :
 Les deux fichiers seront maintenant délivrés comme un unique fichier compilé
 en JavaScript.
 
+.. _cookbook-assetic-apply-to:
+
 Filtrer en se basant sur les extensions
 ---------------------------------------
 

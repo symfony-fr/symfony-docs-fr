@@ -82,8 +82,15 @@ développer, en committant les nouveaux changements dans votre dépôt git.
 
     votre projet va contenir l'historique git complet de tous les bundles
     et de toutes les bibliothèques définies dans le fichier ``deps``. Cela
-    peut aller jusqu'à 100 Mo ! Vous pouvez supprimer les répertoires d'historique
-    git avec la commande suivante :
+    peut aller jusqu'à 100 Mo ! Vous pouvez sauvegarder la version actuelle
+    de chaque dépendance avec la commande :
+
+    .. code-block:: bash
+
+        $ php bin/vendors lock
+
+    pmuis vous pouvez supprimer les répertoires d'historique git avec la commande
+    suivante :
 
     .. code-block:: bash
 

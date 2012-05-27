@@ -139,7 +139,7 @@ Afin de tester une documentation avant de la proposer :
 Installer les extensions Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Télécharger l'extension depuis le dépot `configuration-block source`_
+* Télécharger l'extension depuis le dépot `source`_
 
 * Copiez le répertoire ``sensio`` vers le dossier ``_exts`` dans le répertoire
   racine (où se trouve ``conf.py``)
@@ -171,5 +171,5 @@ Installer les extensions Sphinx
 .. _les bases de reStructuredText:    http://sphinx.pocoo.org/rest.html
 .. _markup:                     http://sphinx.pocoo.org/markup/
 .. _Pygments:                   http://pygments.org/languages/
-.. _configuration-block source: https://github.com/fabpot/sphinx-php
+.. _source: https://github.com/fabpot/sphinx-php
 .. _Installation rapide de Sphinx:         http://sphinx.pocoo.org/tutorial.html#setting-up-the-documentation-sources
