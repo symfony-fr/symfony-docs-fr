@@ -1,24 +1,26 @@
 .. index::
-   single: Form; Custom field type
+   single: Form; Type de champ personnalisé
 
-How to Create a Custom Form Field Type
-======================================
+Comment Créer un Type de Champ de Formulaire Personnalisé
+=========================================================
 
-Symfony comes with a bunch of core field types available for building forms.
-However there are situations where we want to create a custom form field
-type for a specific purpose. This recipe assumes we need a field definition
-that holds a person's gender, based on the existing choice field. This section
-explains how the field is defined, how we can customize its layout and finally,
-how we can register it for use in our application.
+Symfony est livré avec un ensemble de types de champ essentiels disponible
+pour construire des formulaires. Cependant, il y a des situations où nous
+voulons créer un type de champ de formulaire personnalisé pour un besoin
+spécifique. Cet article assume que nous avons besoin d'une définition de
+champ qui s'occupe du sexe/genre d'une personne, basé sur le champ existant
+« choice ». Cette section explique comment le champ est défini, comment nous
+pouvons personnaliser son affichage et, finalement, comment nous pouvons le
+déclarer afin de pouvoir l'utiliser dans notre application.
 
-Defining the Field Type
------------------------
+Définir le Type de Champ
+------------------------
 
-In order to create the custom field type, first we have to create the class
-representing the field. In our situation the class holding the field type
-will be called `GenderType` and the file will be stored in the default location
-for form fields, which is ``<BundleName>\Form\Type``. Make sure the field extends
-:class:`Symfony\\Component\\Form\\AbstractType`::
+Afin de créer le type de champ personnalisé, nous devons créer tout d'abord la
+classe représentant le champ. Dans notre situation, la classe s'occupant du
+type de champ sera nommée `GenderType` et le fichier sera stocké dans le répertoire
+par défaut pour les champs de formulaire, c'est à dire ``<BundleName>\Form\Type``.
+Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`::
 
     # src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -51,58 +53,66 @@ for form fields, which is ``<BundleName>\Form\Type``. Make sure the field extend
 
 .. tip::
 
-    The location of this file is not important - the ``Form\Type`` directory
-    is just a convention.
+    L'endroit où est stocké ce fichier n'est pas important - le répertoire
+    ``Form\Type`` est seulement une convention.
 
-Here, the return value of the ``getParent`` function indicates that we're
-extending the ``choice`` field type. This means that, by default, we inherit
-all of the logic and rendering of that field type. To see some of the logic,
-check out the `ChoiceType`_ class. There are three methods that are particularly
-important:
+Ici, la valeur retournée par la fonction ``getParent`` indique que nous
+étendons le type de champ ``choice``. Cela signifie que, par défaut, nous
+héritons de toute la logique et du rendu de l'affichage de ce type de champ.
+Pour avoir un aperçu de cette logique, jetez un oeil à la classe `ChoiceType`_.
+Il y a trois méthodes qui sont particulièrement importantes :
 
-* ``buildForm()`` - Each field type has a ``buildForm`` method, which is where
-  you configure and build any field(s). Notice that this is the same method
-  you use to setup *your* forms, and it works the same here.
+* ``buildForm()`` - Chaque type de champ possède une méthode ``buildForm``, qui
+  est l'endroit où vous configurez et construisez n'importe quel(s) champ(s). Notez
+  que c'est la même méthode que vous utilisez pour initialiser *vos* formulaires,
+  et cela fonctionne de la même manière ici.
 
-* ``buildView()`` - This method is used to set any extra variables you'll
-  need when rendering your field in a template. For example, in `ChoiceType`_,
-  a ``multiple`` variable is set and used in the template to set (or not
-  set) the ``multiple`` attribute on the ``select`` field. See `Creating a Template for the Field`_
-  for more details.
+* ``buildView()`` - Cette méthode est utilisée pour définir quelconques
+  variables supplémentaires dont vous aurez besoin lors du rendu de votre
+  champ dans un template. Par exemple, dans `ChoiceType`_, une variable
+  ``multiple`` est définie et utilisée dans le template pour définir (ou
+  ne pas définir) l'attribut ``multiple`` pour le champ ``select``. Voir
+  `Créer un Template pour le Champ`_ pour plus de détails.
 
-* ``getDefaultOptions()`` - This defines options for your form type that
-  can be used in ``buildForm()`` and ``buildView()``. There are a lot of
-  options common to all fields (see `FieldType`_), but you can create any
-  others that you need here.
+* ``getDefaultOptions()`` - Cette méthode définit des options pour votre
+  formulaire qui peuvent être utilisées dans ``buildForm()`` et
+  ``buildView()``. Il y a beaucoup d'options communes à tous les champs
+  (voir `FieldType`_), mais vous pouvez créer ici n'importe quelle autre dont
+  vous pourriez avoir besoin.
 
 .. tip::
 
-    If you're creating a field that consists of many fields, then be sure
-    to set your "parent" type as ``form`` or something that extends ``form``.
-    Also, if you need to modify the "view" of any of your child types from
-    your parent type, use the ``buildViewBottomUp()`` method.
+    Si vous créez un champ qui se compose de beaucoup de champs, alors
+    assurez-vous de définir votre type « parent » en tant que ``form``
+    ou quelque chose qui étend ``form``. Aussi, si vous avez besoin de
+    modifier la « vue » (« view » en anglais) de n'importe lequel de vos
+    types enfants depuis votre type parent, utilisez la méthode
+    ``buildViewBottomUp()``.
 
-The ``getName()`` method returns an identifier which should be unique in
-your application. This is used in various places, such as when customizing
-how your form type will be rendered.
+La méthode ``getName()`` retourne un identifiant qui devrait être unique
+dans votre application. Ce dernier est utilisé dans différents endroits,
+comme par exemple lorsque vous personnalisez la manière dont votre formulaire
+sera rendu.
 
-The goal of our field was to extend the choice type to enable selection of
-a gender. This is achieved by fixing the ``choices`` to a list of possible
-genders.
+Le but de votre champ était d'étendre le type « choice » afin d'activer
+la sélection du sexe/genre. Cela est accompli en définissant ``choices``
+par une liste de genres possibles.
 
-Creating a Template for the Field
----------------------------------
+Créer un Template pour le Champ
+-------------------------------
 
-Each field type is rendered by a template fragment, which is determined in
-part by the value of your ``getName()`` method. For more information, see
-:ref:`cookbook-form-customization-form-themes`.
+Chaque type de champ est rendu par un fragment de template, qui est déterminé
+en partie par la valeur retournée par votre méthode ``getName()``. Pour plus
+d'informations, voir :ref:`cookbook-form-customization-form-themes`.
 
-In this case, since our parent field is ``choice``, we don't *need* to do
-any work as our custom field type will automatically be rendered like a ``choice``
-type. But for the sake of this example, let's suppose that when our field
-is "expanded" (i.e. radio buttons or checkboxes, instead of a select field),
-we want to always render it in a ``ul`` element. In your form theme template
-(see above link for details), create a ``gender_widget`` block to handle this:
+Dans ce cas, comme notre champ parent est ``choice``, nous n'avons pas
+*besoin* de faire quoi que ce soit car notre type de champ personnalisé
+sera automatiquement rendu comme un type ``choice``. Mais pour le bien
+fondé de cet exemple, supposons que quand notre champ est « étendu » (i.e.
+boutons radio ou checkbox, à la place d'un champ « select »), nous souhaitons
+toujours l'afficher dans un élément ``ul``. Dans le template de votre thème de
+formulaire (voir le lien ci-dessus pour plus de détails), créez un bloc
+``gender_widget`` pour gérer ceci :
 
 .. code-block:: html+jinja
 
@@ -120,7 +130,7 @@ we want to always render it in a ``ul`` element. In your form theme template
             {% endfor %}
             </ul>
         {% else %}
-            {# just let the choice widget render the select tag #}
+            {# laisse le widget choice afficher la balise select #}
             {{ block('choice_widget') }}
         {% endif %}
     {% endspaceless %}
@@ -128,10 +138,11 @@ we want to always render it in a ``ul`` element. In your form theme template
 
 .. note::
 
-    Make sure the correct widget prefix is used. In this example the name should
-    be ``gender_widget``, according to the value returned by ``getName``.
-    Further, the main config file should point to the custom form template
-    so that it's used when rendering all forms.
+    Assurez-vous que c'est le bon préfixe du widget qui est utilisé. Dans cet
+    exemple, le nom devrait être ``gender_widget``, si l'on se fie à la valeur
+    retournée par ``getName``. De plus, le fichier de configuration principal
+    devrait pointer vers le template du formulaire personnalisé afin qu'il soit
+    utilisé lors de l'affichage de tous les formulaires.
 
     .. code-block:: yaml
 
@@ -142,11 +153,11 @@ we want to always render it in a ``ul`` element. In your form theme template
                 resources:
                     - 'AcmeDemoBundle:Form:fields.html.twig'
 
-Using the Field Type
---------------------
+Utiliser le Type de Champ
+-------------------------
 
-You can now use your custom field type immediately, simply by creating a
-new instance of the type in one of your forms::
+Vous pouvez dès lors utiliser votre type de champ personnalisé en créant
+tout simplement une nouvelle instance du type dans l'un de vos formulaires::
 
     // src/Acme/DemoBundle/Form/Type/AuthorType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -164,17 +175,20 @@ new instance of the type in one of your forms::
         }
     }
 
-But this only works because the ``GenderType()`` is very simple. What if
-the gender codes were stored in configuration or in a database? The next
-section explains how more complex field types solve this problem.
+Mais cela fonctionne uniquement car le ``GenderType()`` est très simple.
+Que se passerait-il si les différents genres étaient stockés dans un fichier
+de configuration ou dans une base de données ? La prochaine section explique
+comment des types de champ plus complexes peuvent résoudre ce problème.
 
-Creating your Field Type as a Service
--------------------------------------
+Créer votre Type de Champ en tant que Service
+---------------------------------------------
 
-So far, this entry has assumed that you have a very simple custom field type.
-But if you need access to configuration, a database connection, or some other
-service, then you'll want to register your custom type as a service. For
-example, suppose that we're storing the gender parameters in configuration:
+Jusqu'ici, cet article a assumé que vous aviez un type de champ personnalisé
+très simple. Mais si vous avez besoin d'accéder à la configuration, à une
+connexion à la base de données, ou quelconque autre service, alors vous
+allez vouloir déclarer votre type personnalisé en tant que service. Par
+exemple, supposons que nous stockions les paramètres du sexe/genre dans une
+configuration :
 
 .. configuration-block::
 
@@ -196,9 +210,9 @@ example, suppose that we're storing the gender parameters in configuration:
             </parameter>
         </parameters>
 
-To use the parameter, we'll define our custom field type as a service, injecting
-the ``genders`` parameter value as the first argument to its to-be-created
-``__construct`` function:
+Pour utiliser ce paramètre, nous allons définir notre type de champ personnalisé
+en tant que service, en injectant la valeur du paramètre ``genders`` en tant que
+premier argument de la fonction ``__construct`` (devant être créée) :
 
 .. configuration-block::
 
@@ -223,13 +237,14 @@ the ``genders`` parameter value as the first argument to its to-be-created
 
 .. tip::
 
-    Make sure the services file is being imported. See :ref:`service-container-imports-directive`
-    for details.
+    Assurez-vous que le fichier des services est importé. Voir
+    :ref:`service-container-imports-directive` pour plus de détails.
 
-Be sure that the ``alias`` attribute of the tag corresponds with the value
-returned by the ``getName`` method defined earlier. We'll see the importance
-of this in a moment when we use the custom field type. But first, add a ``__construct``
-argument to ``GenderType``, which receives the gender configuration::
+Soyez sûr que l'attribut ``alias`` du tag corresponde à la valeur retournée
+par la méthode ``getName`` définie plus tôt. Nous allons voir l'importance de
+cela dans un moment quand nous utiliserons le type de champ personnalisé.
+Mais tout d'abord, ajoutez une méthode ``__construct`` à ``GenderType``,
+qui reçoit la configuration du sexe/genre::
 
     # src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -254,9 +269,10 @@ argument to ``GenderType``, which receives the gender configuration::
         // ...
     }
 
-Great! The ``GenderType`` is now fueled by the configuration parameters and
-registered as a service. And because we used the ``form.type`` alias in its
-configuration, using the field is now much easier::
+Super ! Le ``GenderType`` est maintenant « rempli » par les paramètres de
+la configuration et déclaré en tant que service. Et parce que nous avons
+utilisé l'alias ``form.type`` dans sa configuration, utiliser le champ est
+maintenant beaucoup plus facile::
 
     // src/Acme/DemoBundle/Form/Type/AuthorType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -272,8 +288,9 @@ configuration, using the field is now much easier::
         }
     }
 
-Notice that instead of instantiating a new instance, we can just refer to
-it by the alias used in our service configuration, ``gender``. Have fun!
+Notez qu'à la place d'instancier une nouvelle instance, nous pouvons simplement
+y référer grâce à l'alias utilisé dans la configuration de notre service, ``gender``.
+Amusez-vous !
 
 .. _`ChoiceType`: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Extension/Core/Type/ChoiceType.php
 .. _`FieldType`: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Extension/Core/Type/FieldType.php
