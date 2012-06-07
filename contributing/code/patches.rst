@@ -1,8 +1,121 @@
 Soumettre un correctif
 ======================
 
-Les patches représentent la meilleur façon de fournir une correction de bug ou 
+Les patches représentent la meilleure manière de fournir une correction de bug ou 
 de proposer des améliorations à Symfony2.
+
+Step 1: Configurer votre environnement
+--------------------------------------
+
+Installer les logiciels
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Avant de travailler sur Symfony2, installer un environnement avec les
+logiciels suivants :
+
+* Git;
+* PHP version 5.3.3 ou supérieur;
+* PHPUnit 3.6.4 ou supérieur.
+
+Configurer Git
+~~~~~~~~~~~~~~
+
+Spécifiez vos informations personnelles en définissant votre nom et une adresse
+email fonctionnelle :
+
+.. code-block:: bash
+
+    $ git config --global user.name "Votre nom"
+    $ git config --global user.email votre_email@exemple.com
+
+.. tip::
+
+    Si vous découvrez Git, nous vous recommandons de lire l'excellent livre
+    gratuit `ProGit`_.
+
+.. tip::
+
+    Pour les utilisateurs Windows : en installant Git, l'installeur vous demandera
+    quoi faire avec les fins de lignes, et vous suggérera de remplacer tout les
+    saut de lignes (LF pour Line Feed) par des fins de lignes (CRLF pour Carriage
+    Return Line Feed). Ce n'est pas la bonne configuration si vous souhaitez contribuer
+    à Symfony ! Conserver la configuration par défaut est le meilleur choix à faire, puisque
+    Git convertira vos sauts de ligne (Line Feed) conformément à ceux du dépôt. Si vous avez
+    déjà installé Git, vous pouvez vérifier la valeur en tapant :
+
+    .. code-block:: bash
+
+        $ git config core.autocrlf
+
+    Cela retournera soit « false », « input » ou « true », « true » et « false » étant
+    les mauvaises valeurs. Changez la en tapant :
+
+    .. code-block:: bash
+
+        $ git config --global core.autocrlf input
+
+    Remplacez --global par --local si vous ne voulez le changer que pour le dépôt actif.
+
+Récupérez le code source de Symfony
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Récupérez le code source de Symfony2 :
+
+* Créez un compte `GitHub`_ et authentifiez vous;
+
+* Faites un Fork du `dépôt Symfony2`_ (cliquez sur le bouton « Fork »);
+
+* Après que le « hardcore » est terminé, clonez votre fork
+  localement (cela créera un dossier `symfony`) :
+
+.. code-block:: bash
+
+      $ git clone git@github.com:USERNAME/symfony.git
+
+* Ajoutez le dépôt distant comme ``remote``:
+
+.. code-block:: bash
+
+      $ cd symfony
+      $ git remote add upstream git://github.com/symfony/symfony.git
+
+Vérifiez que les tests sont validés
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Maintenant que Symfony2 est installé, vérifiez que tout les tests unitaires
+passent sur votre environnement comme cela est expliqué dans le :doc:`document <tests>`
+dédié.
+
+Step 2: Travaillez sur votre patch
+----------------------------------
+
+La License
+~~~~~~~~~~
+
+Avant de commencer, vous devez savoir que tout les patchs que vous soumettrez
+devront être sous *license MIT*, à moins de le spécifier clairement dans vos
+commits.
+
+Choose the right Branch
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Before working on a patch, you must determine on which branch you need to
+work. The branch should be based on the `master` branch if you want to add a
+new feature. But if you want to fix a bug, use the oldest but still maintained
+version of Symfony where the bug happens (like `2.0`).
+
+.. note::
+
+    All bug fixes merged into maintenance branches are also merged into more
+    recent branches on a regular basis. For instance, if you submit a patch
+    for the `2.0` branch, the patch will also be applied by the core team on
+    the `master` branch.
+
+
+
+
+
+
 
 Check-Liste
 -----------
