@@ -1,5 +1,5 @@
 .. index::
-   single: Form; Type de champ personnalisé
+   single: Formulaire; Type de champ personnalisé
 
 Comment Créer un Type de Champ de Formulaire Personnalisé
 =========================================================

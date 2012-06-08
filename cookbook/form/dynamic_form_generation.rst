@@ -1,5 +1,5 @@
 .. index::
-   single: Form; Evénements
+   single: Formulaire; Evénements
 
 Comment générer dynamiquement des Formulaires en Utilisant les Evénements de Formulaire
 =======================================================================================
