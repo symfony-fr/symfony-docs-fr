@@ -10,7 +10,7 @@ Step 1: Configurer votre environnement
 Installer les logiciels
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Avant de travailler sur Symfony2, installer un environnement avec les
+Avant de travailler sur Symfony2, installez un environnement avec les
 logiciels suivants :
 
 * Git;
@@ -96,23 +96,113 @@ Avant de commencer, vous devez savoir que tout les patchs que vous soumettrez
 devront être sous *license MIT*, à moins de le spécifier clairement dans vos
 commits.
 
-Choose the right Branch
-~~~~~~~~~~~~~~~~~~~~~~~
+Choisissez la bonne branche
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before working on a patch, you must determine on which branch you need to
-work. The branch should be based on the `master` branch if you want to add a
-new feature. But if you want to fix a bug, use the oldest but still maintained
-version of Symfony where the bug happens (like `2.0`).
+Avant de travailler sur un patch, vous devez déterminer sur quelle branche vous
+devez travailler. La branche devrait être basée sur la branche `master` si vous
+souhaitez ajouter une nouvelle fonctionnalité. Mais si vous voulez corriger un bug,
+utiliser la dernière version maintenue de Symfony dans laquelle le bug apparait
+(par exemple `2.0`).
 
 .. note::
+    
+    Toute correction de bug mergée sur les branches de maintenance sera mergée
+    sur une branche plus récente de manière régulière. Par exemple, si vous
+    proposez une correction pour la branche `2.0`, elle sera également appliquée
+    sur la branche `master` par notre équipe.
 
-    All bug fixes merged into maintenance branches are also merged into more
-    recent branches on a regular basis. For instance, if you submit a patch
-    for the `2.0` branch, the patch will also be applied by the core team on
-    the `master` branch.
+Créez une nouvelle branche
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Chaque fois que vous voulez travailler sur un patch lié à un bug ou à une nouvelle
+fonctionnalité, créez une nouvelle branche :
+
+.. code-block:: bash
+
+    $ git checkout -b NOM_BRANCHE master
+
+Ou, si vous voulez proposer un correctif pour un bug de la branche 2.0, récupérez
+la branche `2.0` distante localement :
+
+.. code-block:: bash
+
+    $ git checkout -t origin/2.0
+
+Puis créez une nouvelle branche basée sur la 2.0 pour travailler sur votre correctif :
+
+.. code-block:: bash
+
+    $ git checkout -b NOM_BRANCHE 2.0
+
+.. tip::
+
+    Utilisez un nom explicite pour votre branche (`ticket_XXX` où `XXX` est le numéro
+    du ticket est une bonne convention pour les corrections de bugs).
+
+La commande Checkout ci-dessus bascule automatiquement le code vers la branche
+nouvellement créée (vérifiez la branche sur laquelle vous vous trouvez avec `git branch`).
+
+Travaillez sur votre patch
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Travaillez sur le code autant que vous le désirez et commitez aussi souvent que
+vous le voulez mais gardez bien à l'esprit de :
+
+* Respecter les :doc:`standards <standards>` (utilisez `git diff --check` pour
+  vérifier les espaces en bout de ligne, lisez aussi le conseil ci-dessous);
+
+* Ajouter des test unitaires afin de prouver que le bug est corrigé ou que la
+  nouvelle fonctionnalité est opérationnelle;
+
+* Tâcher de ne pas casser la rétrocompatibilité (si c'est le cas, essayez de
+  fournir une couche de compatibilité pour supporter l'ancienne version). Les
+  patchs non rétrocompatibles ont moins de chance d'être mergés;
+
+* Faire des commits bien (utilisez le pouvoir du `git rebase` afin d'avoir un
+  historique clair et logique);
+
+* Supprimer les commits non pertinents qui concernent les standards de code ou les
+  corrections de fautes de frappe dans votre propre code;
+
+* Ne jamais corriger les standards de code dans le code existant car cela rend la
+  revue de code plus difficile;
+
+* Ecrire des messages parlants pour chacun des commits (lisez le conseil ci-dessous).
+
+.. tip::
+
+    Vous pouvez vérifier les standards de code de votre patch grâce à
+    [script](http://cs.sensiolabs.org/get/php-cs-fixer.phar) [src](https://github.com/fabpot/PHP-CS-Fixer):
+
+    .. code-block:: bash
+
+        $ cd /path/to/symfony/src
+        $ php symfony-cs-fixer.phar fix . Symfony20Finder
+
+.. tip::
+
+   Un bon message de commit est composé d'un résumé succint (la première ligne),
+   suivi optionnellement par une ligne vide et par une description plus détaillée. 
+   Le résumé commence par le composant sur lequel vous êtes en train de
+   travailler entre crochets (``[DependencyInjection]``, ``[FrameworkBundle]``,
+   ...). Utilisez un verbe (``fixed ...``, ``added ...``, ...) pour commencer
+   votre résumé et n'ajouter pas de point à la fin.
 
 
+Prepare your Patch for Submission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+When your patch is not about a bug fix (when you add a new feature or change
+an existing one for instance), it must also include the following:
+
+* An explanation of the changes in the relevant CHANGELOG file(s);
+
+* An explanation on how to upgrade an existing application in the relevant
+  UPGRADE file(s) if the changes break backward compatibility.
+
+Step 3: Submit your Patch
+-------------------------
 
 
 
