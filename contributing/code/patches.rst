@@ -266,9 +266,10 @@ modifié dans votre message de pull request, comme ceci :
     Veuillez utiliser le tag "[WIP]" dans le titre si la soumission n'est
     pas encore prête ou si les tests ne sont pas complet ou ne passent pas encore.
 
-The pull request description must include the following check list to ensure
-that contributions may be reviewed without needless feedback loops and that
-your contributions can be included into Symfony2 as quickly as possible:
+La description de la Pull Request doit inclure la check list suivante afin de
+s'assurer que les contributions peuvent être relues et vérifiées sans échanges
+inutiles avec vous, et que vos contributions peuvent être inclues dans Symfony2
+aussi vite que possible :
 
 .. code-block:: text
 
@@ -276,12 +277,12 @@ your contributions can be included into Symfony2 as quickly as possible:
     Feature addition: [yes|no]
     Backwards compatibility break: [yes|no]
     Symfony2 tests pass: [yes|no]
-    Fixes the following tickets: [comma separated list of tickets fixed by the PR]
-    Todo: [list of todos pending]
+    Fixes the following tickets: [liste de tickets corrigés séparés par une virgule]
+    Todo: [liste de choses restantes à faire]
     License of the code: MIT
-    Documentation PR: [The reference to the documentation PR if any]
+    Documentation PR: [Référence de la documentation de la PR s'il y en a]
 
-An example submission could now look as follows:
+Un exemple de soumission pourrait ressembler à ça :
 
 .. code-block:: text
 
@@ -294,189 +295,78 @@ An example submission could now look as follows:
     License of the code: MIT
     Documentation PR: symfony/symfony-docs#123
 
-In the pull request description, give as much details as possible about your
-changes (don't hesitate to give code examples to illustrate your points). If
-your pull request is about adding a new feature or modifying an existing one,
-explain the rationale for the changes. The pull request description helps the
-code review and it serves as a reference when the code is merged (the pull
-request description and all its associated comments are part of the merge
-commit message).
+Dans la description de la Pull Request, donnez autant de détails que possible sur
+les changements (n'hésitez pas à donner des exemples de code pour illustrer vos
+propos). Si votre Pull Request concerne l'ajout ou la modification d'une
+fonctionnalité existante, expliquez les raisons de ce changement. La description
+d'une Pull Resquest est utile lors de la revue de code est fait office de référence
+lorsque le code est mergé (la description de la Pull Request et tout les commentaires
+qui y sont associés font partie du message de commit du merge).
 
-In addition to this "code" pull request, you must also send a pull request to
-the `documentation repository`_ to update the documentation when appropriate.
+En plus de cette Pull Request de « code », vous devez également envoyer une Pull Request
+au `dépôt de la documentation`_ pour mettre à jour la documentation si besoin.
 
-Rework your Patch
-~~~~~~~~~~~~~~~~~
+Retravaillez votre patch
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Based on the feedback on the pull request, you might need to rework your
-patch. Before re-submitting the patch, rebase with ``upstream/master`` or
-``upstream/2.0``, don't merge; and force the push to the origin:
+Selon les retours que vous aurez sur votre Pull Request, vous pourriez avoir
+besoin de retravailler votre patch. Avant de le re-soumettre, faites un rebase
+avec ``upstream/master`` ou ``upstream/2.0``, ne mergez pas; et forcez le push
+vers origin :
 
 .. code-block:: bash
 
     $ git rebase -f upstream/master
-    $ git push -f origin BRANCH_NAME
+    $ git push -f origin NOM_BRANCHE
 
 .. note::
 
-    when doing a ``push --force``, always specify the branch name explicitly
-    to avoid messing other branches in the repo (``--force`` tells git that
-    you really want to mess with things so do it carefully).
+    lorsque vous faites un ``push --force``, spécifiez toujours explicitement le
+    nom de la branche pour éviter de mettre la pagaille dans votre dépôt (``--force``
+    dit à git que vous voulez vraiment traiter des choses, donc faites attention).
 
-Often, moderators will ask you to "squash" your commits. This means you will
-convert many commits to one commit. To do this, use the rebase command:
+Souvent, les modérateurs vous demanderont « d'aplanir » vos commits. Cela signifie que vous
+devrez fusionner plusieurs commits en un seul. Pour faire cela, utilisez la commande rebase :
 
 .. code-block:: bash
 
     $ git rebase -i HEAD~3
-    $ git push -f origin BRANCH_NAME
+    $ git push -f origin NOM_BRANCHE
 
-The number 3 here must equal the amount of commits in your branch. After you
-type this command, an editor will popup showing a list of commits:
+Ici, le nombre 3 doit être égal au nombre de commit de votre branche. Après que
+vous avez tapé cette commande, un éditeur vous affichera une liste de commits :
 
 .. code-block:: text
 
-    pick 1a31be6 first commit
+    pick 1a31be6 premier commit
     pick 7fc64b4 second commit
-    pick 7d33018 third commit
+    pick 7d33018 troisième commit
 
-To squash all commits into the first one, remove the word "pick" before the
-second and the last commits, and replace it by the word "squash" or just "s".
-When you save, git will start rebasing, and if successful, will ask you to
-edit the commit message, which by default is a listing of the commit messages
-of all the commits. When you finish, execute the push command.
+Pour fusionner tous les commits dans le premier, supprimez le mot « pick »
+avant le second et les derniers commits, et remplacez le par le mot « squash »
+ou juste « s ». Quand vous enregistrez, fit commencera le rebase et, quand il aura
+terminé, vous demandera de modifier le message de commit qui est, par défaut, une
+liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la commande push.
 
 .. tip::
 
-    To automatically get your feature branch tested, you can add your fork to
-    `travis-ci.org`_. Just login using your github.com account and then simply
-    flip a single switch to enable automated testing. In your pull request,
-    instead of specifying "*Symfony2 tests pass: [yes|no]*", you can link to
-    the `travis-ci.org status icon`_. For more details, see the
-    `travis-ci.org Getting Started Guide`_. This could easily be done by clicking
-    on the wrench icon on the build page of Travis. First select your feature
-    branch and then copy the markdown to your PR description.
+    Pour que votre branche soit automatiquement testée, vous pouvez ajouter votre
+    fork à `travis-ci.org`_. Identifiez vous simplement en utilisant votre compte
+    github.com et appuyez le bouton pour activer les tests automatiques. Dans votre
+    Pull Request, plutôt que de spécifier « *Symfony2 tests pass: [yes|no]* », vous
+    pouvez faire un lien vers l'`icone de status travis-ci.org`_. Pour plus de détails,
+    lisez le `Guide de démarrage travis-ci.org`_. Cela peut être fait simplement en
+    cliquant sur l'icone de la page de build de Travis. Sélectionnez votre branche
+    puis copiez le contenu dans la description de la Pull Request.
+
 
 .. _ProGit:                                       http://progit.org/
 .. _GitHub:                                       https://github.com/signup/free
-.. _Symfony2 repository:                          https://github.com/symfony/symfony
+.. _dépôt Symfony2:                          https://github.com/symfony/symfony
 .. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
 .. _travis-ci.org:                                http://travis-ci.org
-.. _`travis-ci.org status icon`:                  http://about.travis-ci.org/docs/user/status-images/
-.. _`travis-ci.org Getting Started Guide`: http://about.travis-ci.org/docs/user/getting-started/
-.. _`dépôt de la documentation`https://github.com/symfony-fr/symfony-docs-fr
+.. _`icone de status travis-ci.org`:                  http://about.travis-ci.org/docs/user/status-images/
+.. _`Guide de démarrage travis-ci.org`: http://about.travis-ci.org/docs/user/getting-started/
+.. _`dépôt de la documentation`: https://github.com/symfony-fr/symfony-docs-fr
 
-
-
-
-Soumettre une requête
----------------------
-
-Avant de soumettre un correctif, mettez à jour votre branche (requis si vous 
-avez pris du temps à écrire votre correctif):
-
-.. code-block:: bash
-
-   $ git checkout master
-   $ git fetch upstream
-   $ git merge upstream/master
-   $ git checkout BRANCH_NAME
-   $ git rebase master
-
-.. tip::
-
-   Remplacer `master` par la version cible (ex. `2.0`) si vous travailler sur
-   un correctif de bug.
-
-Quand vous effectuez la commande ``rebase``, vous pouvez avoir besoin de fixer
-des conflit de fusion. La commande ``git status`` vous montrera les fichiers 
-non fusionnés *unmerged*. Résolvez tous les conflits et continuez le rebase:
-
-.. code-block:: bash
-
-    $ git add ... # Ajouter les fichiers dont le conflit est résolus
-    $ git rebase --continue
-
-Vérifiez à nouveau que tous les tests fonctionnent et envoyez (push) les
-modifications effectuées sur votre branche:
-
-.. code-block:: bash
-
-    $ git push origin BRANCH_NAME
-
-.. note::
-    
-    Ne corrigez jamais les conventions de codage dans vos pull request car cela
-    rend le travail de relecture de nos équipes plus difficile.
-
-Vous pouvez maintenant entamer une discussion à propos de votre correctif sur la 
-`liste de diffusion dédiée aux développements`_ ou effectuer une requête d'ajout
-(pull request). (sur le dépot ``symfony/symfony``). Afin de faciliter le travail
-de l'équipe centrale, incluez toujours les composants modifiés dans votre
-requête de cette manière:
-
-.. code-block:: text
-
-    [Yaml] Correction de quelque chose
-    [Form] [Validator] [FrameworkBundle] Ajout de quelque chose
-
-.. tip::
-
-    Prenez soin d'indiquer comme cible (range) ``symfony:2.0`` si vous émettez
-    un correctif de bug basé sur la branche 2.0.
-
-Si vous envoyez un mail à la mailing liste, n'oubliez pas d'indiquer l'URL de 
-référence de votre branche (ex. ``https://github.com/USERNAME/symfony.git/BRANCH_NAME``)
-ou l'URL de votre requête.
-
-En vous appuyant sur les retours de la liste de diffusion ou via les
-commentaires de votre requête, vous pourrez être amené à corriger votre patch.
-
-Avant de soumettre à nouveau celui-ci, fusionnez tout les commits non pertinents
-(voir ci-dessous) qui concernent les corrections de conventions de codage ou la
-corrections d'erreurs d'inattention dans votre code, puis faites un rebase avec
-upstream/master ou upstream/2.0, ne fusionner pas, et forcé l'envoi (push) vers 
-``origin``:
-
-.. code-block:: bash
-
-    $ git rebase -f upstream/master
-    $ git push -f origin BRANCH_NAME
-
-.. note::
-
-    quand vous effectuer un envoi avec l'option -f (ou --force), préciser
-    toujours le nom de la branche explicitement pour éviter de cibler une autre 
-    branches du dépot (--force réalise des actions sans controle, utilisez le
-    avec attention).
-
-Souvent, les modérateurs vous demanderons de "squasher" vos ``commits``. Cela
-implique en fait de convertir de nombreux commits en une seule et unique
-modification. Afin d'effectuer ceci, utiliser la commande rebase:
-
-.. code-block:: bash
-
-    $ git rebase -i HEAD~3
-    $ git push -f origin BRANCH_NAME
-
-Le nombre 3 correspond au nombre de commits effectué sur votre branche. Après 
-cette commande, un éditeur s'ouvrira vous montrant une liste de commits:
-
-.. code-block:: text
-
-    pick 1a31be6 first commit
-    pick 7fc64b4 second commit
-    pick 7d33018 third commit
-
-Pour fusionner l'ensemble des commits en un seul, supprimer le mot "pick" avant 
-le second et le dernier commit, et replacé le par le mot "squash" ou juste par
-"s". Une fois sauvegarder, git commencera le ``rebasing``, et si celui-ci est 
-réussi, vous demandera d'éditer le message de commit, qui par défaut est un 
-listing de tous les messages précédents. Une fois terminé, executer la commande
-push.
-
-Tous les correctifs intégrés à la branche 2.0 seront fusionnés dans les branches 
-de maintenance plus récentes. Par exemple, si vous soumettez une correction
-pour la branche `2.0`, celui-ci sera aussi appliqué par l'équipe centrale sur la
-branche `master`.
 
