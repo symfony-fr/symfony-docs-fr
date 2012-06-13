@@ -1,13 +1,13 @@
 .. index::
-   single: Form; Use virtual forms
+   single: Form; Utiliser des formulaires virtuels
 
-How to use the Virtual Form Field Option
-========================================
+Comment utiliser l'Option de Champ Virtuel de Formulaire
+========================================================
 
-The ``virtual`` form field option can be very useful when you have some
-duplicated fields in different entities.
+L'option de champ de formulaire ``virtual`` peut être très utile quand vous
+avez des champs dupliqués dans différentes entités.
 
-For example, imagine you have two entities, a ``Company`` and a ``Customer``::
+Par exemple, imaginez que vous ayez deux entités, une ``Company`` et une ``Customer``::
 
     // src/Acme/HelloBundle/Entity/Company.php
     namespace Acme\HelloBundle\Entity;
@@ -39,13 +39,13 @@ For example, imagine you have two entities, a ``Company`` and a ``Customer``::
         private $country;
     }
 
-Like you can see, each entity shares a few of the same fields: ``address``,
-``zipcode``, ``city``, ``country``.
+Comme vous pouvez le voir, chaque entité partage quelques champs qui sont
+identiques : ``address``, ``zipcode``, ``city``, ``country``.
 
-Now, you want to build two forms: one for a ``Company`` and the second for
-a ``Customer``.
+Maintenant, vous voulez construire deux formulaires : un pour l'entité
+``Company`` et un autre pour l'entité ``Customer``.
 
-Start by creating a very simple ``CompanyType`` and ``CustomerType``::
+Commencez par créer un ``CompanyType`` et un ``CustomerType``::
 
     // src/Acme/HelloBundle/Form/Type/CompanyType.php
     namespace Acme\HelloBundle\Form\Type;
@@ -77,8 +77,9 @@ Start by creating a very simple ``CompanyType`` and ``CustomerType``::
         }
     }
 
-Now, we have to deal with the four duplicated fields. Here is a (simple)
-location form type::
+Maintenant, nous devons gérer les quatre champs dupliqués. Vous pouvez
+voir ci-dessous un (simple) type de formulaire « location » (« lieu » en
+français)::
 
     // src/Acme/HelloBundle/Form/Type/LocationType.php
     namespace Acme\HelloBundle\Form\Type;
@@ -89,8 +90,8 @@ location form type::
         {
             $builder
                 ->add('address', 'textarea')
-                ->add('zipcode', 'text')
-                ->add('city', 'text')
+                ->add('zipcode', 'string')
+                ->add('city', 'string')
                 ->add('country', 'text')
             ;
         }
@@ -101,16 +102,18 @@ location form type::
         }
     }
 
-We don't *actually* have a location field in each of our entities, so we
-can't directly link our ``LocationType`` to our ``CompanyType`` or ``CustomerType``.
-But we absolutely want to have a dedicated form type to deal with location (remember, DRY!).
+Nous n'avons *en fait* pas de champ « location » dans chacune de nos entités, donc nous
+ne pouvons pas lier directement notre ``LocationType`` à notre ``CompanyType`` ou à notre
+``CustomerType``. Mais nous voulons absolument avoir un type dédié de formulaire pour
+gérer le lieu (rappelez-vous, DRY - Don't Repeat Yourself!).
 
-The ``virtual`` form field option is the solution.
+L'option de champ de formulaire ``virtual`` est la solution.
 
-We can set the option ``'virtual' => true`` in the ``getDefaultOptions`` method
-of ``LocationType`` and directly start using it in the two original form types.
+Nous pouvons définir l'option ``'virtual' => true`` dans la méthode
+``getDefaultOptions`` de ``LocationType`` et directement commencer à l'utiliser
+dans les deux types de formulaires initiaux.
 
-Look at the result::
+Voyez le résultat::
 
     // CompanyType
     public function buildForm(FormBuilder $builder, array $options)
@@ -126,17 +129,19 @@ Look at the result::
         $builder->add('bar', new LocationType());
     }
 
-With the virtual option set to false (default behavior), the Form Component
-expect each underlying object to have a ``foo`` (or ``bar``) property that
-is either some object or array which contains the four location fields.
-Of course, we don't have this object/array in our entities and we don't want it!
+Avec l'option « virtual » définie comme « false » (comportement par défaut),
+le composant Form s'attend à ce que chaque objet sous-jacent ait une propriété
+``foo`` (ou ``bar``) qui soit un objet ou un tableau contenant les quatre
+champs du lieu. Bien sûr, nous n'avons pas cet objet/tableau dans nos
+entités et nous ne le voulons pas.
 
-With the virtual option set to true, the Form component skips the ``foo`` (or ``bar``)
-property, and instead "gets" and "sets" the 4 location fields directly
-on the underlying object!
+Avec l'option « virtual » définie comme « true », le composant Form ne s'occupe pas
+de la propriété ``foo`` (ou ``bar``), et à la place « récupère » et « définit » (« gets »
+et « sets » en anglais) les 4 champs du lieu directement sur l'objet sous-jacent.
 
 .. note::
 
-    Instead of setting the ``virtual`` option inside ``LocationType``, you
-    can (just like with any options) also pass it in as an array option to
-    the third argument of ``$builder->add()``.
+    Au lieu de définir l'option ``virtual`` dans le type ``LocationType``,
+    vous pouvez (comme pour n'importe quelle autre option) aussi la passer
+    comme une option sous forme de tableau en tant que troisième argument de
+    ``$builder->add()``.

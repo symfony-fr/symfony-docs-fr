@@ -1,26 +1,28 @@
 .. index::
-   single: Form; Embed collection of forms
+   single: Formulaire; Intégrer une collection de formulaires
 
-How to Embed a Collection of Forms
-==================================
+Comment intégrer une Collection de Formulaires
+==============================================
 
-In this entry, you'll learn how to create a form that embeds a collection
-of many other forms. This could be useful, for example, if you had a ``Task``
-class and you wanted to edit/create/remove many ``Tag`` objects related to
-that Task, right inside the same form.
+Dans cet article, vous allez apprendre à créer un formulaire qui intègre une
+collection de plusieurs autres formulaires. Cela pourrait être utile, par
+exemple, si vous aviez une classe ``Task`` et que vous voudriez éditer/créer/supprimer
+différents objets ``Tag`` liés à cette « Task », tout cela dans le même
+formulaire.
 
 .. note::
 
-    In this entry, we'll loosely assume that you're using Doctrine as your
-    database store. But if you're not using Doctrine (e.g. Propel or just
-    a database connection), it's all very similar. There are only a few parts
-    of this tutorial that really care about "persistence".
-    
-    If you *are* using Doctrine, you'll need to add the Doctrine metadata,
-    including the ``ManyToMany`` on the Task's ``tags`` property.
+    Dans cet article, nous assumerons que vous utilisez Doctrine en tant
+    qu'outil de stockage pour votre base de données. Mais si vous n'utilisez
+    pas Doctrine (par exemple : Propel ou une simple connexion à la base
+    de données), tout reste très similaire. Il n'y a que quelques parties
+    de ce tutoriel qui s'occupent de la « persistence ».
 
-Let's start there: suppose that each ``Task`` belongs to multiple ``Tags``
-objects. Start by creating a simple ``Task`` class::
+    Si vous *utilisez* Doctrine, vous aurez besoin d'ajouter les méta-données
+    de Doctrine, incluant la ``ManyToMany`` sur la propriété ``tags`` de Task.
+
+Commençons ici : supposons que chaque ``Task`` appartienne à plusieurs objets
+``Tags``. Créons tout d'abord une simple classe ``Task``::
 
     // src/Acme/TaskBundle/Entity/Task.php
     namespace Acme\TaskBundle\Entity;
@@ -61,12 +63,12 @@ objects. Start by creating a simple ``Task`` class::
 
 .. note::
 
-    The ``ArrayCollection`` is specific to Doctrine and is basically the
-    same as using an ``array`` (but it must be an ``ArrayCollection``) if
-    you're using Doctrine.
+    ``ArrayCollection`` est spécifique à Doctrine et revient au même que
+    d'utiliser un ``array`` (mais cela doit être une ``ArrayCollection``) si vous
+    utilisez Doctrine.
 
-Now, create a ``Tag`` class. As you saw above, a ``Task`` can have many ``Tag``
-objects::
+Maintenant, créez une classe ``Tag``. Comme vous l'avez vu ci-dessus, une ``Task``
+peut avoir plusieurs objets ``Tag``::
 
     // src/Acme/TaskBundle/Entity/Tag.php
     namespace Acme\TaskBundle\Entity;
@@ -78,11 +80,12 @@ objects::
 
 .. tip::
 
-    The ``name`` property is public here, but it can just as easily be protected
-    or private (but then it would need ``getName`` and ``setName`` methods).
+    La propriété ``name`` est « public » içi, mais elle pourrait tout aussi bien
+    être « protected » ou « private » (ce qui impliquerait d'avoir des méthodes
+    ``getName`` et ``setName``).
 
-Now let's get to the forms. Create a form class so that a ``Tag`` object
-can be modified by the user::
+Venons-en maintenant aux formulaires. Créez une classe formulaire afin
+qu'un objet ``Tag`` puisse être modifié par l'utilisateur::
 
     // src/Acme/TaskBundle/Form/Type/TagType.php
     namespace Acme\TaskBundle\Form\Type;
@@ -110,12 +113,14 @@ can be modified by the user::
         }
     }
 
-With this, we have enough to render a tag form by itself. But since the end
-goal is to allow the tags of a ``Task`` to be modified right inside the task
-form itself, create a form for the ``Task`` class.
+Avec cela, nous avons tout ce qu'il faut pour afficher un formulaire pour le
+tag lui-même. Mais comme le but final étant de permettre la modification des
+tags d'une ``Task`` directement depuis le formulaire de la « task » lui-même,
+créez un formulaire pour la classe ``Task``.
 
-Notice that we embed a collection of ``TagType`` forms using the
-:doc:`collection</reference/forms/types/collection>` field type::
+Notez que nous intégrons une collection de formulaires ``TagType``
+en utilisant le type de champ
+:doc:`collection</reference/forms/types/collection>`::
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
     namespace Acme\TaskBundle\Form\Type;
@@ -145,7 +150,8 @@ Notice that we embed a collection of ``TagType`` forms using the
         }
     }
 
-In your controller, you'll now initialize a new instance of ``TaskType``::
+Dans votre contrôleur, vous allez maintenant initialiser une nouvelle instance
+de ``TaskType``::
 
     // src/Acme/TaskBundle/Controller/TaskController.php
     namespace Acme\TaskBundle\Controller;
@@ -161,24 +167,24 @@ In your controller, you'll now initialize a new instance of ``TaskType``::
         public function newAction(Request $request)
         {
             $task = new Task();
-            
-            // dummy code - this is here just so that the Task has some tags
-            // otherwise, this isn't an interesting example
+
+            // code "test" - le code ci-dessous est simplement là pour que la
+            // Task ait quelques tags, sinon, l'exemple ne serait pas intéressant
             $tag1 = new Tag();
             $tag1->name = 'tag1';
             $task->getTags()->add($tag1);
             $tag2 = new Tag();
             $tag2->name = 'tag2';
             $task->getTags()->add($tag2);
-            // end dummy code
+            // fin du code "test"
             
             $form = $this->createForm(new TaskType(), $task);
             
-            // process the form on POST
+            // analyse le formulaire quand on reçoit une requête POST
             if ('POST' === $request->getMethod()) {
                 $form->bindRequest($request);
                 if ($form->isValid()) {
-                    // maybe do some form processing, like saving the Task and Tag objects
+                    // ici vous pouvez par exemple sauvegarder la Task et ses objets Tag
                 }
             }
             
@@ -188,11 +194,12 @@ In your controller, you'll now initialize a new instance of ``TaskType``::
         }
     }
 
-The corresponding template is now able to render both the ``description``
-field for the task form as well as all the ``TagType`` forms for any tags
-that are already related to this ``Task``. In the above controller, I added
-some dummy code so that you can see this in action (since a ``Task`` has
-zero tags when first created).
+Le template correspondant est maintenant capable d'afficher le champ
+``description`` pour le formulaire de la tâche ainsi que les formulaires
+``TagType`` pour n'importes quels tags qui sont liés à cette objet ``Task``.
+Dans le contrôleur ci-dessus, j'ai ajouté du code test afin que vous puissiez
+voir cela en action (puisqu'un objet ``Task`` possède zéro tag lorsqu'il est
+créé pour la première fois).
 
 .. configuration-block::
 
@@ -202,12 +209,12 @@ zero tags when first created).
         {# ... #}
 
         <form action="..." method="POST" {{ form_enctype(form) }}>
-            {# render the task's only field: description #}
+            {# affiche l'unique champ de la tâche : description #}
             {{ form_row(form.description) }}
 
             <h3>Tags</h3>
             <ul class="tags">
-                {# iterate over each existing tag and render its only field: name #}
+                {# itère sur chaque tag existant et affiche son unique champ : name #}
                 {% for tag in form.tags %}
                     <li>{{ form_row(tag.name) }}</li>
                 {% endfor %}
@@ -235,48 +242,54 @@ zero tags when first created).
         
         <!-- ... -->
 
-When the user submits the form, the submitted data for the ``Tags`` fields
-are used to construct an ArrayCollection of ``Tag`` objects, which is then
-set on the ``tag`` field of the ``Task`` instance.
+Lorsque l'utilisateur soumet le formulaire, les données soumises pour les
+champs ``Tags`` sont utilisées pour construire une collection « ArrayCollection »
+d'objets ``Tag``, qui est ensuite affectée au champ ``tag`` de l'instance ``Task``.
 
-The ``Tags`` collection is accessible naturally via ``$task->getTags()``
-and can be persisted to the database or used however you need.
+La collection ``Tags`` est naturellement accessible via ``$task->getTags()``
+et peut être persistée dans la base de données ou utilisée de quelconque manière
+dont vous en avez besoin.
 
-So far, this works great, but this doesn't allow you to dynamically add new
-tags or delete existing tags. So, while editing existing tags will work
-great, your user can't actually add any new tags yet.
+Jusqu'ici, tout cela fonctionne bien, mais cela ne vous permet pas d'ajouter
+de nouveaux tags ou de supprimer des tags existants de manière dynamique. Donc,
+bien qu'éditer des tags existants fonctionnera parfaitement, votre utilisateur
+ne pourra pour le moment pas en ajouter de nouveaux.
 
 .. caution::
 
-    In this entry, we embed only one collection, but you are not limited
-    to this. You can also embed nested collection as many level down as you
-    like. But if you use Xdebug in your development setup, you may receive
-    a ``Maximum function nesting level of '100' reached, aborting!`` error.
-    This is due to the ``xdebug.max_nesting_level`` PHP setting, which defaults
-    to ``100``.
+    Dans cet exemple, nous intégrons une seule collection, mais vous n'êtes
+    pas limité à cela. Vous pouvez aussi intégrer des collections « imbriquées »
+    avec autant de sous-niveaux que vous souhaitez. Mais si vous utilisez Xdebug
+    dans votre environnement de développement, vous pourriez recevoir une erreur
+    telle ``Maximum function nesting level of '100' reached, aborting!``.
+    Cela est dû au paramètre PHP ``xdebug.max_nesting_level``, qui est défini
+    avec une valeur de ``100`` par défaut.
 
-    This directive limits recursion to 100 calls which may not be enough for
-    rendering the form in the template if you render the whole form at
-    once (e.g ``form_widget(form)``). To fix this you can set this directive
-    to a higher value (either via a PHP ini file or via :phpfunction:`ini_set`,
-    for example in ``app/autoload.php``) or render each form field by hand
-    using ``form_row``.
+    Cette directive limite la récursion à 100 appels, ce qui ne pourrait pas
+    être assez pour afficher le formulaire dans le template si vous rendez le
+    formulaire en entier en une seule fois (par exemple : ``form_widget(form)``).
+    Pour parer à cela, vous pouvez définir cette directive avec une valeur plus
+    haute (soit dans le fichier ini PHP ou à l'aide de :phpfunction:`ini_set`,
+    par exemple dans ``app/autoload.php``) ou bien afficher chaque champ du
+    formulaire « manuellement » en utilisant ``form_row``.
 
 .. _cookbook-form-collections-new-prototype:
 
-Allowing "new" tags with the "prototype"
------------------------------------------
+Autoriser de « nouveaux » tags avec le « prototypage »
+------------------------------------------------------
 
-Allowing the user to dynamically add new tags means that we'll need to
-use some JavaScript. Previously we added two tags to our form in the controller.
-Now we need to let the user add as many tag forms as he needs directly in the browser.
-This will be done through a bit of JavaScript.
+Autoriser l'utilisateur à ajouter de nouveaux tags signifie que nous allons
+avoir besoin d'utiliser un peu de Javascript. Plus tôt, nous avons ajouter deux
+tags à notre formulaire dans le contrôleur. Maintenant, nous devons permettre à
+l'utilisateur d'ajouter autant de tags qu'il souhaite directement depuis le navigateur.
+Cela va être effectué grâce à quelques lignes de Javascript.
 
-The first thing we need to do is to let the form collection know that it will
-receive an unknown number of tags. So far we've added two tags and the form
-type expects to receive exactly two, otherwise an error will be thrown:
-``This form should not contain extra fields``. To make this flexible, we
-add the ``allow_add`` option to our collection field::
+La première chose que nous devons faire est de laisser savoir à la collection
+du formulaire qu'elle va recevoir un nombre inconnu de tags. Jusqu'ici, nous
+avons ajouté deux tags et le formulaire s'attend à en recevoir exactement deux,
+sinon une erreur sera lancé : ``This form should not contain extra fields``.
+Pour rendre cela flexible, nous ajoutons l'option ``allow_add`` à notre champ
+collection::
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
     // ...
@@ -292,16 +305,16 @@ add the ``allow_add`` option to our collection field::
         ));
     }
 
-Note that we also added ``'by_reference' => false``. Normally, the form
-framework would modify the tags on a `Task` object *without* actually
-ever calling `setTags`. By setting :ref:`by_reference<reference-form-types-by-reference>`
-to `false`, `setTags` will be called. This will be important later as you'll
-see.
+Notez que nous avons aussi ajouté ``'by_reference' => false``. Normalement, le
+framework de formulaire modifierait les tags d'un objet `Task` *sans* ne jamais
+appeler `setTags`. En définissant :ref:`by_reference<reference-form-types-by-reference>`
+à `false`, `setTags` sera appelée. Vous comprendrez plus tard pourquoi cela est important.
 
-In addition to telling the field to accept any number of submitted objects, the
-``allow_add`` also makes a "prototype" variable available to you. This "prototype"
-is a little "template" that contains all the HTML to be able to render any
-new "tag" forms. To render it, make the following change to your template:
+En plus de dire au champ d'accepter n'importe quel nombre d'objets soumis, l'option
+``allow_add`` met une variable « prototype » à votre disposition. Ce « prototype »
+est un petit « template » qui contient tout le code HTML nécessaire pour afficher
+tout nouveau formulaire « tag ». Pour l'utiliser, faites le changement suivant
+dans votre formulaire :
 
 .. configuration-block::
 
@@ -319,109 +332,115 @@ new "tag" forms. To render it, make the following change to your template:
 
 .. note::
 
-    If you render your whole "tags" sub-form at once (e.g. ``form_row(form.tags)``),
-    then the prototype is automatically available on the outer ``div`` as
-    the ``data-prototype`` attribute, similar to what you see above.
+    Si vous affichez votre sous-formulaire « tags » en entier et en une seule fois
+    (par exemple : ``form_row(form.tags)``), alors le prototype est automatiquement
+    disponible dans le ``div`` extérieur avec l'attribut ``data-prototype``,
+    similaire à ce que vous voyez ci-dessus.
 
 .. tip::
 
-    The ``form.tags.get('prototype')`` is form element that looks and feels just
-    like the individual ``form_widget(tag)`` elements inside our ``for`` loop.
-    This means that you can call ``form_widget``, ``form_row``, or ``form_label``
-    on it. You could even choose to render only one of its fields (e.g. the
-    ``name`` field):
+    ``form.tags.get('prototype')`` est un élément de formulaire qui ressemble à
+    l'élément individuel ``form_widget(tag)`` à l'intérieur de notre boucle ``for``.
+    Cela signifie que vous pouvez appeler ``form_widget``, ``form_row``, ou
+    ``form_label`` sur ce prototype. Vous pourriez même choisir de ne rendre qu'un
+    seul de ses champs (par exemple : le champ ``name``) :
     
     .. code-block:: html+jinja
     
         {{ form_widget(form.tags.get('prototype').name) | e }}
 
-On the rendered page, the result will look something like this:
+Sur la page délivrée, le résultat ressemblera à quelque chose comme ca :
 
 .. code-block:: html
 
     <ul class="tags" data-prototype="&lt;div&gt;&lt;label class=&quot; required&quot;&gt;__name__&lt;/label&gt;&lt;div id=&quot;task_tags___name__&quot;&gt;&lt;div&gt;&lt;label for=&quot;task_tags___name___name&quot; class=&quot; required&quot;&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;task_tags___name___name&quot; name=&quot;task[tags][__name__][name]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;">
 
-The goal of this section will be to use JavaScript to read this attribute
-and dynamically add new tag forms when the user clicks a "Add a tag" link.
-To make things simple, we'll use jQuery and assume you have it included somewhere
-on your page.
+Le but de cette section sera d'utiliser JavaScript pour lire cet attribut et
+ajouter dynamiquement un nouveau tag lorsque l'utilisateur clique sur un
+lien « Ajouter un tag ». Pour garder les choses simples, nous allons utiliser
+jQuery et assumer que vous l'avez déjà inclus quelque part dans votre page.
 
-Add a ``script`` tag somewhere on your page so we can start writing some JavaScript.
+Ajoutez une balise ``script`` quelque part dans votre page afin que nous puissions
+commencer à écrire un peu de JavaScript.
 
-First, add a link to the bottom of the "tags" list via JavaScript. Second,
-bind to the "click" event of that link so we can add a new tag form (``addTagForm``
-will be show next):
+Tout d'abord, ajoutez un lien en bas de votre liste de « tags » via JavaScript.
+Ensuite, liez l'événement « click » de ce lien afin que nous puissions ajouter
+un formulaire tag (``addTagForm`` sera montré plus tard) :
 
 .. code-block:: javascript
 
-    // Get the div that holds the collection of tags
+    // Récupère le div qui contient la collection de tags
     var collectionHolder = $('ul.tags');
 
-    // setup an "add a tag" link
+    // ajoute un lien « add a tag »
     var $addTagLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
     var $newLinkLi = $('<li></li>').append($addTagLink);
 
     jQuery(document).ready(function() {
-        // add the "add a tag" anchor and li to the tags ul
+        // ajoute l'ancre « add a tag » et li à la balise ul
         collectionHolder.append($newLinkLi);
 
         $addTagLink.on('click', function(e) {
-            // prevent the link from creating a "#" on the URL
+            // empêche le lien de créer un « # » dans l'URL
             e.preventDefault();
 
-            // add a new tag form (see next code block)
+            // ajoute un nouveau formulaire tag (voir le prochain bloc de code)
             addTagForm(collectionHolder, $newLinkLi);
         });
     });
 
-The ``addTagForm`` function's job will be to use the ``data-prototype`` attribute
-to dynamically add a new form when this link is clicked. The ``data-prototype``
-HTML contains the tag ``text`` input element with a name of ``task[tags][__name__][name]``
-and id of ``task_tags___name___name``. The ``__name__`` is a little "placeholder",
-which we'll replace with a unique, incrementing number (e.g. ``task[tags][3][name]``).
+Le travail de la fonction ``addTagForm`` sera d'utiliser l'attribut ``data-prototype``
+pour dynamiquement ajouter un nouveau formulaire lorsque ce lien est cliqué. Le code
+HTML de ``data-prototype`` contient la balise ``texte`` avec un nom tel
+``task[tags][__name__][name]`` et un id tel ``task_tags___name___name``. La chaîne de
+caractères ``__name__`` est une variable de substitution (« placeholder » en anglais) que
+nous remplacerons avec un nombre unique et incrémental (par exemple : ``task[tags][3][name]``).
 
 .. versionadded:: 2.1
-    The placeholder was changed from ``$$name$$`` to ``__name__`` in Symfony 2.1
+    La variable de substitution a été changée dans Symfony 2.1. Au lieu de ``$$name$$``,
+    elle se nomme dorénavant ``__name__``.
 
-The actual code needed to make this all work can vary quite a bit, but here's
-one example:
+Le code nécessaire pour faire fonctionner tout cela peut varier, mais en voici un
+exemple :
 
 .. code-block:: javascript
 
     function addTagForm(collectionHolder, $newLinkLi) {
-        // Get the data-prototype we explained earlier
+        // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
         var prototype = collectionHolder.attr('data-prototype');
 
-        // Replace '__name__' in the prototype's HTML to
-        // instead be a number based on the current collection's length.
+        // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+        // la longueur de la collection courante
         var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
 
-        // Display the form in the page in an li, before the "Add a tag" link li
+        // Affiche le formulaire dans la page dans un li, avant le lien "Add a tag"
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
     }
 
 .. note:
 
-    It is better to separate your javascript in real JavaScript files than
-    to write it inside the HTML as we are doing here.
+    Il est préférable de séparer votre javascript dans des fichiers JavaScript
+    réels plutôt que de l'écrire directement en plein milieu de votre code HTML
+    comme nous le faisons ici.
 
-Now, each time a user clicks the ``Add a tag`` link, a new sub form will
-appear on the page. When we submit, any new tag forms will be converted into
-new ``Tag`` objects and added to the ``tags`` property of the ``Task`` object.
+Maintenant, chaque fois qu'un utilisateur clique sur le lien ``Add a tag``, un
+nouveau sous-formulaire apparaîtra sur la page. Lors de la soumission, quelconques
+formulaires de tag seront convertis en de nouveaux objets ``Tag`` et ajoutés à la
+propriété ``tags`` de l'objet ``Task``.
 
-.. sidebar:: Doctrine: Cascading Relations and saving the "Inverse" side
+.. sidebar:: Doctrine: Relations de Cascade et sauvegarde du côté « Inverse »
 
-    To get the new tags to save in Doctrine, you need to consider a couple
-    more things. First, unless you iterate over all of the new ``Tag`` objects
-    and call ``$em->persist($tag)`` on each, you'll receive an error from
-    Doctrine:
-    
+    Afin que les nouveaux tags soient sauvegardés dans Doctrine, vous devez
+    considérer certaines choses en plus. Tout d'abord, à moins que vous
+    itériez sur tous les nouveaux objets ``Tag`` et appelez ``$em->persist($tag)``
+    sur chacun d'entre eux, vous allez recevoir une erreur de la part de Doctrine :
+
         A new entity was found through the relationship 'Acme\TaskBundle\Entity\Task#tags' that was not configured to cascade persist operations for entity...
-    
-    To fix this, you may choose to "cascade" the persist operation automatically
-    from the ``Task`` object to any related tags. To do this, add the ``cascade``
-    option to your ``ManyToMany`` metadata:
+
+    Pour réparer cela, vous pourriez choisir d'effectuer automatiquement l'opération
+    de persistence en mode « cascade » de l'objet ``Task`` avec quelconques tags liés.
+    Pour faire ceci, ajoutez l'option ``cascade`` à votre méta-donnée ``ManyToMany`` :
     
     .. configuration-block::
     
@@ -442,18 +461,20 @@ new ``Tag`` objects and added to the ``tags`` property of the ``Task`` object.
                     tags:
                         targetEntity: Tag
                         cascade:      [persist]
-    
-    A second potential issue deals with the `Owning Side and Inverse Side`_
-    of Doctrine relationships. In this example, if the "owning" side of the
-    relationship is "Task", then persistence will work fine as the tags are
-    properly added to the Task. However, if the owning side is on "Tag", then
-    you'll need to do a little bit more work to ensure that the correct side
-    of the relationship is modified.
 
-    The trick is to make sure that the single "Task" is set on each "Tag".
-    One easy way to do this is to add some extra logic to ``setTags()``,
-    which is called by the form framework since :ref:`by_reference<reference-form-types-by-reference>`
-    is set to ``false``::
+    Un second problème potentiel peut toucher les relations de Doctrine
+    en ce qui concerne `Le côté Propriétaire et le côté Inverse`_. Dans
+    cet exemple, si le côté « propriétaire » dans la relation est « Task »,
+    alors la persistence va fonctionner sans problème comme les tags sont
+    ajoutés correctement à la « Task ». Cependant, si le côté « propriétaire »
+    est « Tag », alors vous aurez besoin de coder un peu plus afin de
+    vous assurer que le bon côté de la relation soit correctement modifié.
+
+    L'astuce est de s'assurer qu'une unique « Task » est définie pour chaque
+    « Tag ». Une manière facile de faire cela est d'ajouter un bout de logique
+    supplémentaire à la méthode ``setTags()``, qui est appelée par le framework
+    formulaire puisque la valeur de :ref:`by_reference<reference-form-types-by-reference>`
+    est définie comme ``false``::
     
         // src/Acme/TaskBundle/Entity/Task.php
         // ...
@@ -467,7 +488,7 @@ new ``Tag`` objects and added to the ``tags`` property of the ``Task`` object.
             $this->tags = $tags;
         }
 
-    Inside ``Tag``, just make sure you have an ``addTask`` method::
+    Dans le ``Tag``, assurez-vous simplement d'avoir une méthode ``addTask``::
 
         // src/Acme/TaskBundle/Entity/Tag.php
         // ...
@@ -478,20 +499,22 @@ new ``Tag`` objects and added to the ``tags`` property of the ``Task`` object.
                 $this->tasks->add($task);
             }
         }
-    
-    If you have a ``OneToMany`` relationship, then the workaround is similar,
-    except that you can simply call ``setTask`` from inside ``setTags``.
+
+    Si vous avez une relation ``OneToMany``, alors l'astuce reste similaire,
+    excepté que vous pouvez simplement appeler la méthode ``setTask`` depuis
+    la méthode ``setTags``.
 
 .. _cookbook-form-collections-remove:
 
-Allowing tags to be removed
-----------------------------
+Autoriser des tags à être supprimés
+-----------------------------------
 
-The next step is to allow the deletion of a particular item in the collection.
-The solution is similar to allowing tags to be added.
+La prochaine étape est d'autoriser la suppression d'un élément particulier de
+la collection. La solution est similaire à celle qui permet d'autoriser l'ajout
+de tags.
 
-Start by adding the ``allow_delete`` option in the form Type::
-    
+Commencez par ajouter l'option ``allow_delete`` dans le Type de formulaire::
+
     // src/Acme/TaskBundle/Form/Type/TaskType.php
     // ...
     
@@ -507,34 +530,36 @@ Start by adding the ``allow_delete`` option in the form Type::
         ));
     }
 
-Templates Modifications
-~~~~~~~~~~~~~~~~~~~~~~~
-    
-The ``allow_delete`` option has one consequence: if an item of a collection 
-isn't sent on submission, the related data is removed from the collection
-on the server. The solution is thus to remove the form element from the DOM.
+Modifications des Templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First, add a "delete this tag" link to each tag form:
+L'option ``allow_delete`` a une conséquence : si un élément d'une collection
+n'est pas envoyé lors de la soumission, les données liées à cet élément sont
+supprimées de la collection sur le serveur. La solution est donc de supprimer
+l'élément formulaire du DOM.
+
+Premièrement, ajoutez un lien « Supprimer ce tag » dans chaque formulaire de tag :
 
 .. code-block:: javascript
 
     jQuery(document).ready(function() {
-        // add a delete link to all of the existing tag form li elements
+        // ajoute un lien de suppression à tous les éléments li de
+        // formulaires de tag existants
         collectionHolder.find('li').each(function() {
             addTagFormDeleteLink($(this));
         });
     
-        // ... the rest of the block from above
+        // ... le reste du bloc vu plus haut
     });
     
     function addTagForm() {
         // ...
         
-        // add a delete link to the new form
+        // ajoute un lien de suppression au nouveau formulaire
         addTagFormDeleteLink($newFormLi);
     }
 
-The ``addTagFormDeleteLink`` function will look something like this:
+La fonction ``addTagFormDeleteLink`` va ressembler à quelque chose comme ça :
 
 .. code-block:: javascript
 
@@ -543,37 +568,38 @@ The ``addTagFormDeleteLink`` function will look something like this:
         $tagFormLi.append($removeFormA);
 
         $removeFormA.on('click', function(e) {
-            // prevent the link from creating a "#" on the URL
+            // empêche le lien de créer un « # » dans l'URL
             e.preventDefault();
 
-            // remove the li for the tag form
+            // supprime l'élément li pour le formulaire de tag
             $tagFormLi.remove();
         });
     }
 
-When a tag form is removed from the DOM and submitted, the removed ``Tag`` object
-will not be included in the collection passed to ``setTags``. Depending on
-your persistence layer, this may or may not be enough to actually remove
-the relationship between the removed ``Tag`` and ``Task`` object.
+Lorsqu'un formulaire de tag est supprimé du DOM et soumis, l'objet ``Tag`` supprimé
+ne sera pas inclus dans la collection passée à ``setTags``. Dépendant de votre couche
+de persistence, cela pourrait ou ne pourrait pas être suffisant pour effectivement
+supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
 
-.. sidebar:: Doctrine: Ensuring the database persistence
+.. sidebar:: Doctrine: Assurer la persistence dans la base de données
 
-    When removing objects in this way, you may need to do a little bit more
-    work to ensure that the relationship between the Task and the removed Tag
-    is properly removed.
+    Quand vous supprimez des objets de cette manière, vous pourriez avoir à
+    travailler un peu plus afin de vous assurer que la relation entre la
+    « Task » et le « Tag » supprimé soit correctement enlevée.
 
-    In Doctrine, you have two side of the relationship: the owning side and the
-    inverse side. Normally in this case you'll have a ManyToMany relation
-    and the deleted tags will disappear and persist correctly (adding new
-    tags also works effortlessly).
+    Dans Doctrine, vous avez deux « côtés » dans une relation : le côté propriétaire
+    et le côté inverse. Normalement, dans ce cas, vous aurez une relation ``ManyToMany``
+    et les tags supprimés disparaîtront et seront persistés correctement (ajouter
+    des tags fonctionne aussi sans efforts supplémentaires).
 
-    But if you have an ``OneToMany`` relation or a ``ManyToMany`` with a
-    ``mappedBy`` on the Task entity (meaning Task is the "inverse" side),
-    you'll need to do more work for the removed tags to persist correctly.
+    Mais si vous avez une relation ``OneToMany`` ou une ``ManyToMany`` avec
+    un ``mappedBy`` sur l'entité « Task » (signifiant qu'une « Task » est le
+    côté « inverse »), vous devrez effectuer plus de choses afin que les tags
+    supprimés soient persistés correctement.
 
-    In this case, you can modify the controller to remove the relationship
-    on the removed tag. This assumes that you have some ``editAction`` which
-    is handling the "update" of your Task::
+    Dans ce cas, vous pouvez modifier le contrôleur afin qu'il efface la
+    relation pour les tags supprimés. Ceci assume que vous ayez une ``editAction``
+    qui gére la « mise à jour » de votre « Task »::
 
         // src/Acme/TaskBundle/Controller/TaskController.php
         // ...
@@ -587,7 +613,8 @@ the relationship between the removed ``Tag`` and ``Task`` object.
                 throw $this->createNotFoundException('No task found for is '.$id);
             }
 
-            // Create an array of the current Tag objects in the database
+            // Crée un tableau contenant les objets Tag courants de la
+            // base de données
             foreach ($task->getTags() as $tag) $originalTags[] = $tag;
           
             $editForm = $this->createForm(new TaskType(), $task);
@@ -597,7 +624,8 @@ the relationship between the removed ``Tag`` and ``Task`` object.
 
                 if ($editForm->isValid()) {
         
-                    // filter $originalTags to contain tags no longer present
+                    // filtre $originalTags pour ne contenir que les tags
+                    // n'étant plus présents
                     foreach ($task->getTags() as $tag) {
                         foreach ($originalTags as $key => $toDel) {
                             if ($toDel->getId() === $tag->getId()) {
@@ -606,36 +634,39 @@ the relationship between the removed ``Tag`` and ``Task`` object.
                         }
                     }
 
-                    // remove the relationship between the tag and the Task
+                    // supprime la relation entre le tag et la « Task »
                     foreach ($originalTags as $tag) {
-                        // remove the Task from the Tag
+                        // supprime la « Task » du Tag
                         $tag->getTasks()->removeElement($task);
     
-                        // if it were a ManyToOne relationship, remove the relationship like this
+                        // si c'était une relation ManyToOne, vous pourriez supprimer la
+                        // relation comme ceci
                         // $tag->setTask(null);
                         
                         $em->persist($tag);
 
-                        // if you wanted to delete the Tag entirely, you can also do that
+                        // si vous souhaitiez supprimer totalement le Tag, vous pourriez
+                        // aussi faire comme cela
                         // $em->remove($tag);
                     }
 
                     $em->persist($task);
                     $em->flush();
 
-                    // redirect back to some edit page
+                    // redirige vers quelconque page d'édition
                     return $this->redirect($this->generateUrl('task_edit', array('id' => $id)));
                 }
             }
             
-            // render some form template
+            // affiche quelconque template de formulaire
         }
 
-    As you can see, adding and removing the elements correctly can be tricky.
-    Unless you have a ManyToMany relationship where Task is the "owning" side,
-    you'll need to do extra work to make sure that the relationship is properly
-    updated (whether you're adding new tags or removing existing tags) on
-    each Tag object itself.
+    Comme vous pouvez le voir, ajouter et supprimer les éléments correctement
+    peut ne pas être trivial. A moins que vous ayez une relation ``ManyToMany``
+    où « Task » est le côté « propriétaire », vous devrez ajouter du code
+    supplémentaire pour vous assurer que la relation soit correctement mise à
+    jour (que ce soit pour l'ajout de nouveaux tags ou pour la suppression de
+    tags existants) pour chacun des objets Tag.
 
 
-.. _`Owning Side and Inverse Side`: http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html
+.. _`Le côté Propriétaire et le côté Inverse`: http://docs.doctrine-project.org/en/latest/reference/unitofwork-associations.html
