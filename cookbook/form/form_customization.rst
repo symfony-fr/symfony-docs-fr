@@ -1,20 +1,21 @@
-.. index::
+﻿.. index::
    single: Form; Custom form rendering
 
-How to customize Form Rendering
-===============================
+Comment personnaliser le rendu de formulaire
+============================================
 
-Symfony gives you a wide variety of ways to customize how a form is rendered.
-In this guide, you'll learn how to customize every possible part of your
-form with as little effort as possible whether you use Twig or PHP as your
-templating engine.
+Symfony vous propose un large choix de méthodes pour personnaliser la manière
+dont un formulaire est affiché.
+Dans ce guide, vous apprendrez comment personnaliser autant que possible chaque
+partie de votre formulaire sans effort, et ceci que vous utilisiez Twig ou PHP
+comme moteur de template.
 
-Form Rendering Basics
----------------------
+Bases de l'affichage de formulaire
+----------------------------------
 
-Recall that the label, error and HTML widget of a form field can easily
-be rendered by using the ``form_row`` Twig function or the ``row`` PHP helper
-method:
+Rappelong que le libellé, les éventuelles erreurs et le widget HTML d'un champ
+de formulaire peuvent être facilement affichés en utilisant la fonction Twig
+``form_row`` ou la méthode d'aide (helper) PHP ``row`` :
 
 .. configuration-block::
 
@@ -26,7 +27,7 @@ method:
 
         <?php echo $view['form']->row($form['age']) }} ?>
 
-You can also render each of the three parts of the field individually:
+Vous pouvez également afficher chacune de ces trois parties d'une champ individuellement :
 
 .. configuration-block::
 
@@ -46,9 +47,9 @@ You can also render each of the three parts of the field individually:
             <?php echo $view['form']->widget($form['age']) }} ?>
         </div>
 
-In both cases, the form label, errors and HTML widget are rendered by using
-a set of markup that ships standard with Symfony. For example, both of the
-above templates would render:
+Dans les deux cas, le libellé du formulaire, les erreurs et le widget HTML sont
+affichés en utilisant un ensemble de balises qui sont livrés d'office avec Symfony.
+Par exemple, les deux templates ci-dessus afficheront :
 
 .. code-block:: html
 
@@ -60,8 +61,8 @@ above templates would render:
         <input type="number" id="form_age" name="form[age]" />
     </div>
 
-To quickly prototype and test a form, you can render the entire form with
-just one line:
+Pour tester rapidement un formulaire, vous pouvez afficher l'ensemble du formulaire
+en une seule ligne :
 
 .. configuration-block::
 
@@ -73,35 +74,36 @@ just one line:
 
         <?php echo $view['form']->widget($form) }} ?>
 
-The remainder of this recipe will explain how every part of the form's markup
-can be modified at several different levels. For more information about form
-rendering in general, see :ref:`form-rendering-template`.
+La suite de ce document explique comment le rendu de chaque partie du formulaire
+peut être modifié à différents niveaux. Pour plus d'informations sur l'affichage
+de formulaires en général, lisez :ref:`form-rendering-template`.
 
 .. _cookbook-form-customization-form-themes:
 
-What are Form Themes?
----------------------
+Que sont les thèmes de formulaire ?
+-----------------------------------
 
-Symfony uses form fragments - a small piece of a template that renders just
-one part of a form - to render every part of a form - - field labels, errors,
-``input`` text fields, ``select`` tags, etc
+Symfony utilise des fragments de formulaires - des parties de template qui affichent
+juste une partie du formulaire - pour afficher chaque partie du formulaire : libellés
+de champs, errors, champs ``input`` texte, balises ``select``, etc.
 
-The fragments are defined as blocks in Twig and as template files in PHP.
+Ces fragments sont définis par comme blocs dans Twig et comme fichiers de templates
+avec PHP.
 
-A *theme* is nothing more than a set of fragments that you want to use when
-rendering a form. In other words, if you want to customize one portion of
-how a form is rendered, you'll import a *theme* which contains a customization
-of the appropriate form fragments.
+Un *thème* n'est rien de plus qu'un ensemble de fragments que vous pouvez utiliser
+pour afficher un formulaire. En d'autres termes, si vous voulez personnaliser l'affichage
+d'une partie d'un formulaire, vous pouvez importer un *thème* qui contient une
+personnalisation des fragments de formulaire concernés.
 
-Symfony comes with a default theme (`form_div_layout.html.twig`_ in Twig and
-``FrameworkBundle:Form`` in PHP) that defines each and every fragment needed
-to render every part of a form.
+Symfony est fourni avec un thème par défaut (`form_div_layout.html.twig`_ pour Twig
+et ``FrameworkBundle:Form`` pour PHP) qui définit chaque fragment nécessaire à l'affichage
+des différentes parties d'un formulaire.
 
-In the next section you will learn how to customize a theme by overriding
-some or all of its fragments.
+Dans la section suivante, vous apprendre comment personnaliser un thème en surchargeant un
+ou l'ensemble de ses fragments.
 
-For example, when the widget of a ``integer`` type field is rendered, an ``input``
-``number`` field is generated
+Par exemple, lorsque le widget d'un type de champ ``integer`` est affiché, un champ
+``input`` ``number`` est généré.
 
 .. configuration-block::
 
@@ -113,23 +115,22 @@ For example, when the widget of a ``integer`` type field is rendered, an ``input
 
         <?php echo $view['form']->widget($form['age']) ?>
 
-renders:
+affiche :
 
 .. code-block:: html
 
     <input type="number" id="form_age" name="form[age]" required="required" value="33" />
 
-Internally, Symfony uses the ``integer_widget`` fragment  to render the field.
-This is because the field type is ``integer`` and you're rendering its ``widget``
-(as opposed to its ``label`` or ``errors``).
+En interne, Symfony utilise le fragment ``integer_widget`` pour afficher le champ.
+C'est parce que le type champ est ``integer`` et que vous voulez afficher son ``widget``
+(par opposition à son ``libellé`` ou ses ``erreurs``).
 
-In Twig that would default to the block ``integer_widget`` from the `form_div_layout.html.twig`_
-template.
+Par défaut, avec Twig, le bloc ``integer_widget`` du template `form_div_layout.html.twig`_ serait choisi.
 
-In PHP it would rather be the ``integer_widget.html.php`` file located in ``FrameworkBundle/Resources/views/Form``
-folder.
+En PHP, cela serait plutôt le fichier ``integer_widget.html.php`` situé dans le dossier
+``FrameworkBundle/Resources/views/Form``.
 
-The default implementation of the ``integer_widget`` fragment looks like this:
+L'implémentation par défaut du fragment ``integer_widget`` ressemble à ceci :
 
 .. configuration-block::
 
@@ -146,7 +147,7 @@ The default implementation of the ``integer_widget`` fragment looks like this:
 
         <?php echo $view['form']->renderBlock('field_widget', array('type' => isset($type) ? $type : "number")) ?>
 
-As you can see, this fragment itself renders another fragment - ``field_widget``:
+Comme vous pouvez le voir, ce fragment affiche un autre fragment (``field_widget``) :
 
 .. configuration-block::
 
@@ -167,71 +168,73 @@ As you can see, this fragment itself renders another fragment - ``field_widget``
             <?php echo $view['form']->renderBlock('attributes') ?>
         />
 
-The point is, the fragments dictate the HTML output of each part of a form. To
-customize the form output, you just need to identify and override the correct
-fragment. A set of these form fragment customizations is known as a form "theme".
-When rendering a form, you can choose which form theme(s) you want to apply.
+L'idée est qu'un fragment détermine le code HTML généré pour chaque partie du formulaire.
+Pour personnaliser l'affichage d'un formulaire, vous devez juste identifier et surcharger
+le bon fragment. Un ensemble de personnalisations de fragments d'un formulaire est appelé
+« thème » de formulaire. 
+Lorsque vous affichez un formulaire, pouvez choisir quel(s) thème(s) de formulaire appliquer.
 
-In Twig a theme is a single template file and the fragments are the blocks defined
-in this file.
+Dans Twig, un thème est un unique fichier de template et les fragments sont des blocs définis
+dans ce fichier.
 
-In PHP a theme is a folder and the the fragments are individual template files in
-this folder.
+En PHP, un thème est un répertoire et les fragments sont des fichiers de template individuels
+dans ce répertoire.
 
 .. _cookbook-form-customization-sidebar:
 
-.. sidebar:: Knowing which block to customize
+.. sidebar:: Savoir quel bloc personnaliser
 
-    In this example, the customized fragment name is ``integer_widget`` because
-    you want to override the HTML ``widget`` for all ``integer`` field types. If
-    you need to customize textarea fields, you would customize ``textarea_widget``.
-
-    As you can see, the fragment name is a combination of the field type and
-    which part of the field is being rendered (e.g. ``widget``, ``label``,
-    ``errors``, ``row``). As such, to customize how errors are rendered for
-    just input ``text`` fields, you should customize the ``text_errors`` fragment.
-
-    More commonly, however, you'll want to customize how errors are displayed
-    across *all* fields. You can do this by customizing the ``field_errors``
-    fragment. This takes advantage of field type inheritance. Specifically,
-    since the ``text`` type extends from the ``field`` type, the form component
-    will first look for the type-specific fragment (e.g. ``text_errors``) before
-    falling back to its parent fragment name if it doesn't exist (e.g. ``field_errors``).
-
-    For more information on this topic, see :ref:`form-template-blocks`.
+    Dans cet exemple, le nom du fragment personnalisé est ``integer_widget`` parce
+	que vous voulez surcharger le ``widget`` HTML pour tous les types de champ ``integer``.
+	Si vous voulez personnaliser les champs textarea, vous devrez personnaliser ``textarea_widget``.
+	
+	Comme vous le voyez, un nom de fragment est une combinaison du type de champ et de la
+	partie du formulaire qui doit être affichée (ex ``widget``, ``label``, ``errors``, ``row``).
+	En conséquence, pour personnaliser la manière dont les erreurs sont affichées pour les champs
+	input ``text`` uniquement, vous devrez personnaliser le fragment ``text_errors``.
+	
+	Pourtant, bien souvent vous voudrez personnaliser l'affichage des erreurs pour *tout*
+	les champs. Vous pouvez faire cela en personnalisant le fragment ``field_errors``.
+	Cette méthode tire avantage de l'héritage de type de champs. Plus précisément, puisque
+	le type ``text`` étend le type ``field``, le composant formulaire cherchera d'abord le
+	fragment spécifique au type (ex``text_errors``) avant de se rabattre sur nom du fragment
+	parent si le spécifique n'existe pas (ex ``field_errors``).
+	
+	Pour plus d'informations sur ce sujet, lisez :ref:`form-template-blocks`.
 
 .. _cookbook-form-theming-methods:
 
-Form Theming
-------------
-
-To see the power of form theming, suppose you want to wrap every input ``number``
-field with a ``div`` tag. The key to doing this is to customize the
-``integer_widget`` fragment.
-
-Form Theming in Twig
+Thèmes de formulaire
 --------------------
 
-When customizing the form field block in Twig, you have two options on *where*
-the customized form block can live:
+Pour apprécier la puissance des thèmes de formulaire, supposons que vous voulez
+encadrer chaque champ ``number`` par un ``div``. La clé pour faire cela est de
+personnaliser le fragment ``integer_widget``.
 
-+--------------------------------------+-----------------------------------+-------------------------------------------+
-| Method                               | Pros                              | Cons                                      |
-+======================================+===================================+===========================================+
-| Inside the same template as the form | Quick and easy                    | Can't be reused in other templates        |
-+--------------------------------------+-----------------------------------+-------------------------------------------+
-| Inside a separate template           | Can be reused by many templates   | Requires an extra template to be created  |
-+--------------------------------------+-----------------------------------+-------------------------------------------+
+Thèmes de formulaire avec Twig
+------------------------------
 
-Both methods have the same effect but are better in different situations.
+Lorsque vous personnalisez un bloc de champ de formulaire Twig, vous avez
+deux choix possibles quant à la *localisation* du bloc personnalisé :
+
++----------------------------------------+-------------------------------------------+-------------------------------------------+
+| Méthode                                | Avantages                                 | Inconvénients                             |
++========================================+===========================================+===========================================+
+| Dans le même template que le formulaire| Rapide et facile                          | Ne peut être réutilisé                    |
++----------------------------------------+-------------------------------------------+-------------------------------------------+
+| Dans un template séparé                | Peut être réutilisé par d'autres templates| Nécessite la création d'un template       |
++----------------------------------------+-------------------------------------------+-------------------------------------------+
+
+Ces deux méthodes ont les mêmes effets mais ne sont pas aussi avantageuses
+selon les situations.
 
 .. _cookbook-form-twig-theming-self:
 
-Method 1: Inside the same Template as the Form
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Méthode 1: Dans le même template que le formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The easiest way to customize the ``integer_widget`` block is to customize it
-directly in the template that's actually rendering the form.
+La manière la plus facile de personnaliser le bloc ``integer_widget``
+est de le modifier directement dans le template qui affiche le formulaire.
 
 .. code-block:: html+jinja
 
@@ -247,30 +250,32 @@ directly in the template that's actually rendering the form.
     {% endblock %}
 
     {% block content %}
-        {# render the form #}
+        {# affiche le formulaire #}
 
         {{ form_row(form.age) }}
     {% endblock %}
 
-By using the special ``{% form_theme form _self %}`` tag, Twig looks inside
-the same template for any overridden form blocks. Assuming the ``form.age``
-field is an ``integer`` type field, when its widget is rendered, the customized
-``integer_widget`` block will be used.
+En utilisant la balise spéciale ``{% form_theme form _self %}``, Twig cherchera
+tout bloc surchargé dans le même template. En supposant que le champ ``form.age``
+soit du type de champ ``integer``, lorsque le widget sera affiché, le bloc
+personnalisé ``integer_widget`` sera utilisé.
 
-The disadvantage of this method is that the customized form block can't be
-reused when rendering other forms in other templates. In other words, this method
-is most useful when making form customizations that are specific to a single
-form in your application. If you want to reuse a form customization across
-several (or all) forms in your application, read on to the next section.
+L'inconvénient de cette méthode est que les blocs de formulaire personnalisés
+ne peuvent pas être réutilisés pour afficher d'autres formulaires dans d'autres
+templates. En d'autres termes, cette méthode est spécialement utile pour faire
+des changements applicables à un formulaire spécifique de votre application. Si vous
+voulez réutiliser vos personnalisations pour certains (ou tout) autres formulaires,
+lisez la section suivante.
 
 .. _cookbook-form-twig-separate-template:
 
-Method 2: Inside a Separate Template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Méthode 2: Dans un template séparé
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also choose to put the customized ``integer_widget`` form block in a
-separate template entirely. The code and end-result are the same, but you
-can now re-use the form customization across many templates:
+Vous pouvez également choisir de mettre le bloc de formulaire personnalisé
+``integer_widget`` dans un template séparé. Le code et le résultat final
+seront les mêmes, mais vous pourrez alors réutiliser cette personnalisation
+de formulaire dans d'autres templates :
 
 .. code-block:: html+jinja
 
@@ -283,9 +288,9 @@ can now re-use the form customization across many templates:
         </div>
     {% endblock %}
 
-Now that you've created the customized form block, you need to tell Symfony
-to use it. Inside the template where you're actually rendering your form,
-tell Symfony to use the template via the ``form_theme`` tag:
+Maintenant que vous avez créé le bloc de formulaire personnalisé, vous devez
+dire à Symfony de l'utiliser. Dans le template où vous affichez votre formulaire,
+indiquez à Symfony d'utiliser votre template via la balise ``form_theme`` :
 
 .. _cookbook-form-twig-theme-import-template:
 
@@ -295,21 +300,21 @@ tell Symfony to use the template via the ``form_theme`` tag:
 
     {{ form_widget(form.age) }}
 
-When the ``form.age`` widget is rendered, Symfony will use the ``integer_widget``
-block from the new template and the ``input`` tag will be wrapped in the
-``div`` element specified in the customized block.
+Pour afficher le widget ``form.age``, Symfony utilisera le bloc de formulaire
+``integer_widget`` du nouveau template et la balise ``input`` sera encadrée par
+l'élément ``div`` comme vous l'avez spécifié dans le bloc personnalisé.
 
 .. _cookbook-form-php-theming:
 
-Form Theming in PHP
--------------------
+Thème de formulaire en PHP
+--------------------------
 
-When using PHP as a templating engine, the only method to customize a fragment
-is to create a new template file - this is similar to the second method used by
-Twig.
+Si vous utilisez PHP comme moteur de template, la seule méthode pour personnaliser
+un fragment est de créer un nouveau fichier de template, ce qui est équivalent à la
+seconde méthode utilisée par Twig.
 
-The template file must be named after the fragment. You must create a ``integer_widget.html.php``
-file in order to customize the ``integer_widget`` fragment.
+Le fichier de template doit être nommé en fonction du fragment. Vous devez créer un fichier
+``integer_widget.html.php`` pour personnaliser le fragment ``integer_widget``.
 
 .. code-block:: html+php
 
@@ -319,9 +324,9 @@ file in order to customize the ``integer_widget`` fragment.
         <?php echo $view['form']->renderBlock('field_widget', array('type' => isset($type) ? $type : "number")) ?>
     </div>
 
-Now that you've created the customized form template, you need to tell Symfony
-to use it. Inside the template where you're actually rendering your form,
-tell Symfony to use the theme via the ``setTheme`` helper method:
+Maintenant que vous avez créé le template de formulaire personnalisé, vous devez
+dire à Symfony de l'utiliser. Dans le template où vous affichez votre formulaire,
+indiquez à Symfony d'utiliser le thème via la méthode ``setTheme`` :
 
 .. _cookbook-form-php-theme-import-template:
 
@@ -331,37 +336,36 @@ tell Symfony to use the theme via the ``setTheme`` helper method:
 
     <?php $view['form']->widget($form['age']) ?>
 
-When the ``form.age`` widget is rendered, Symfony will use the customized
-``integer_widget.html.php`` template and the ``input`` tag will be wrapped in
-the ``div`` element.
+Pour afficher le widget ``form.age``, Symfony utilisera le template personnalisé
+``integer_widget.html.php`` et la balise ``input`` sera encadrée par l'élément ``div``.
 
 .. _cookbook-form-twig-import-base-blocks:
 
-Referencing Base Form Blocks (Twig specific)
---------------------------------------------
+Faire référence aux blocs par défaut d'un formulaire (spécifique à Twig)
+------------------------------------------------------------------------
 
-So far, to override a particular form block, the best method is to copy
-the default block from `form_div_layout.html.twig`_, paste it into a different template,
-and the customize it. In many cases, you can avoid doing this by referencing
-the base block when customizing it.
+Jusqu'à présent, pour surcharger un bloc de formulaire particulier, la meilleure
+méthode consistait à copier le bloc par défaut depuis `form_div_layout.html.twig`_,
+le copier dans un nouveau template, et le personnaliser. Dans la plupart des cas, vous
+pouvez éviter cela en référençant le bloc de base lorsque vous le personnalisez.
 
-This is easy to do, but varies slightly depending on if your form block customizations
-are in the same template as the form or a separate template.
+C'est facile à faire, mais cela peut varier sensiblement si vos personnalisations de bloc
+sont dans le même template que le formulaire ou pas.
 
-Referencing Blocks from inside the same Template as the Form
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Faire référence aux blocs depuis le même template que le formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Import the blocks by adding a ``use`` tag in the template where you're rendering
-the form:
+Importer les blocs en ajoutant la balise ``use`` dans le template où vous affichez
+le formulaire :
 
 .. code-block:: jinja
 
     {% use 'form_div_layout.html.twig' with integer_widget as base_integer_widget %}
 
-Now, when the blocks from `form_div_layout.html.twig`_ are imported, the
-``integer_widget`` block is called ``base_integer_widget``. This means that when
-you redefine the ``integer_widget`` block, you can reference the default markup
-via ``base_integer_widget``:
+A partir de maintenant, lorsque les blocs sont importés depuis `form_div_layout.html.twig`_ ,
+le bloc ``integer_widget`` sera renommé en ``base_integer_widget``. Cela signifie que
+lorsque vous redéfinissez le bloc ``integer_widget``, vous pouvez faire référence
+à l'implémentation par défaut via ``base_integer_widget`` :
 
 .. code-block:: html+jinja
 
@@ -371,11 +375,12 @@ via ``base_integer_widget``:
         </div>
     {% endblock %}
 
-Referencing Base Blocks from an External Template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Faire référence aux blocs~par défaut depuis un template externe
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If your form customizations live inside an external template, you can reference
-the base block by using the ``parent()`` Twig function:
+Si vos personnalisations de formulaire se trouvent dans un template
+externe, vous pouvez faire référence au bloc par défaut en utilisant
+la fonction Twig ``parent()`` :
 
 .. code-block:: html+jinja
 
@@ -391,25 +396,26 @@ the base block by using the ``parent()`` Twig function:
 
 .. note::
 
-    It is not possible to reference the base block when using PHP as the
-    templating engine. You have to manually copy the content from the base block
-    to your new template file.
+	Il n'est pas possible de faire référence au bloc par défaut si vous
+	utilisez PHP comme moteur de template. Vous devrez alors copier manuellement
+	le code du bloc par défaut dans votre nouveau fichier de template.
 
 .. _cookbook-form-global-theming:
 
-Making Application-wide Customizations
---------------------------------------
+Faire des personnalisations au niveau de l'application
+------------------------------------------------------
 
-If you'd like a certain form customization to be global to your application,
-you can accomplish this by making the form customizations in an external
-template and then importing it inside your application configuration:
+Si vous aimeriez qu'une personnalisation de formulaire soit globale à votre
+application, vous pouvez faire cela en réalisant cette personnalisation dans
+un template externe, et en l'important dans la configuration de votre
+application :
 
 Twig
 ~~~~
 
-By using the following configuration, any customized form blocks inside the
-``AcmeDemoBundle:Form:fields.html.twig`` template will be used globally when a
-form is rendered.
+En utilisant la configuration suivante, toute personnalisation de blocs de
+formulaire qui se trouve dans le template ``AcmeDemoBundle:Form:fields.html.twig``
+sera utilisée quand un formulaire sera affiché.
 
 .. configuration-block::
 
@@ -445,9 +451,9 @@ form is rendered.
             // ...
         ));
 
-By default, Twig uses a *div* layout when rendering forms. Some people, however,
-may prefer to render forms in a *table* layout. Use the ``form_table_layout.html.twig``
-resource to use such a layout:
+Par défaut, Twig utilise un layout à base de *div* pour afficher les formulaires.
+Cependant, certaines personnes préfèreront utiliser un layout à base de *tableau*.
+Utilisez la ressource ``form_table_layout.html.twig`` pour utiliser un tel layout :
 
 .. configuration-block::
 
@@ -482,22 +488,23 @@ resource to use such a layout:
             // ...
         ));
 
-If you only want to make the change in one template, add the following line to
-your template file rather than adding the template as a resource:
+Si vous ne voulez appliquer ce changement que dans un seul template, ajoutez
+la ligne suivante dans votre fichier de template plutôt que d'ajouter le template
+comme ressource :
 
 .. code-block:: html+jinja
 
 	{% form_theme form 'form_table_layout.html.twig' %}
 
-Note that the ``form`` variable in the above code is the form view variable
-that you passed to your template.
+Notez que la variable ``form`` dans le code ci-dessus est la vue du formulaire
+que vous avez passée à votre template.
 
 PHP
 ~~~
 
-By using the following configuration, any customized form fragments inside the
-``src/Acme/DemoBundle/Resources/views/Form`` folder will be used globally when a
-form is rendered.
+En utilisant la configuration suivante, tout fragment de formulaire personnalisé
+se situant dans le répertoire ``src/Acme/DemoBundle/Resources/views/Form`` sera
+utilisé lorsque le formulaire sera affiché.
 
 .. configuration-block::
 
@@ -540,9 +547,10 @@ form is rendered.
             // ...
         ));
 
-By default, the PHP engine uses a *div* layout when rendering forms. Some people,
-however, may prefer to render forms in a *table* layout. Use the ``FrameworkBundle:FormTable``
-resource to use such a layout:
+Par défaut, le moteur de template PHP utilise un layout à base de *div* pour afficher
+les formulaires. Néanmoins, certains préfèreront afficher leurs formulaires dans un layout
+à base de *tableau*. Utilisez la ressource ``FrameworkBundle:FormTable`` pour utiliser un tel
+layout :
 
 .. configuration-block::
 
@@ -581,25 +589,27 @@ resource to use such a layout:
             // ...
         ));
 
-If you only want to make the change in one template, add the following line to
-your template file rather than adding the template as a resource:
+Si vous ne voulez appliquer vos changements que dans un seul template, ajoutez
+la ligne suivante dans votre fichier de template plutôt que d'ajouter le template
+comme ressource :
 
 .. code-block:: html+php
 
 	<?php $view['form']->setTheme($form, array('FrameworkBundle:FormTable')); ?>
 
-Note that the ``$form`` variable in the above code is the form view variable
-that you passed to your template.
+Notez que la variable ``form`` dans le code ci-dessus est la vue du formulaire
+que vous avez passée à votre template.
 
-How to customize an Individual field
-------------------------------------
+Comment personnaliser un champ individuel
+-----------------------------------------
 
-So far, you've seen the different ways you can customize the widget output
-of all text field types. You can also customize individual fields. For example,
-suppose you have two ``text`` fields - ``first_name`` and ``last_name`` - but
-you only want to customize one of the fields. This can be accomplished by
-customizing a fragment whose name is a combination of the field id attribute and
-which part of the field is being customized. For example:
+Jusqu'ici, vous avez vu les différentes manières de personnaliser le widget
+généré pour tout les types de champ texte. Vous pouvez également personnaliser
+un champ individuel. Par exemple, supposond que vous avez deux champs ``texte``
+(``nom`` et ``prénom``) mais que vous voulez seulement personnaliser
+l'un de ces deux champs. Cela peut être fait en personnalisant un fragment dont le
+nom est une combinaison de l'attribut id du champ et de la partie du champ concerné
+(libellé, widget ou erreur). Par exemple :
 
 .. configuration-block::
 
@@ -617,7 +627,7 @@ which part of the field is being customized. For example:
 
     .. code-block:: html+php
 
-        <!-- Main template -->
+        <!-- Template principal -->
 
         <?php echo $view['form']->setTheme($form, array('AcmeDemoBundle:Form')); ?>
 
@@ -629,17 +639,18 @@ which part of the field is being customized. For example:
               echo $view['form']->renderBlock('field_widget') ?>
         </div>
 
-Here, the ``_product_name_widget`` fragment defines the template to use for the
-field whose *id* is ``product_name`` (and name is ``product[name]``).
+Ici, le fragment ``_product_name_widget`` définit le template à utiliser pour le widget
+du champ dont l'*id* est ``product_name`` (et dont le nom est ``product[name]``).
 
 .. tip::
 
-   The ``product`` portion of the field is the form name, which may be set
-   manually or generated automatically based on your form type name (e.g.
-   ``ProductType`` equates to ``product``). If you're not sure what your
-   form name is, just view the source of your generated form.
+   La partie ``product`` du champ est le nom du formulaire qui peut être défini
+   manuellement ou automatiquement généré en se basant sur le nom du type de
+   formulaire (par exemple ``ProductType`` donnera``product``). Si vous n'êtes
+   pas sûr du nom de votre formulaire, regardez le code source généré de votre
+   formulaire.
 
-You can also override the markup for an entire field row using the same method:
+Vous pouvez aussi surcharger le code d'un champ entier en utilisant la même méthode :
 
 .. configuration-block::
 
@@ -665,30 +676,31 @@ You can also override the markup for an entire field row using the same method:
             <?php echo $view['form']->widget($form) ?>
         </div>
 
-Other Common Customizations
----------------------------
+Autres personnalisations courantes
+----------------------------------
 
-So far, this recipe has shown you several different ways to customize a single
-piece of how a form is rendered. The key is to customize a specific fragment that
-corresponds to the portion of the form you want to control (see
-:ref:`naming form blocks<cookbook-form-customization-sidebar>`).
+Jusqu'à présent, ce document vous a expliqué différentes manières de personnaliser
+une unique partie de l'affichage d'un formulaire. L'idée est de personnaliser un fragment
+spécifique qui correspond à une partie du formulaire que vous voulez contrôler (lisez
+:ref:`nommer les blocs de formulaire<cookbook-form-customization-sidebar>`).
 
-In the next sections, you'll see how you can make several common form customizations.
-To apply these customizations, use one of the methods described in the
-:ref:`cookbook-form-theming-methods` section.
+Dans les sections suivantes, vous verrez comment effectuer plusieurs personnalisations
+de formulaires communes. Pour appliquer ces personnalisations, utilisez l'une des méthodes
+décrites dans la section :ref:`cookbook-form-theming-methods`.
 
-Customizing Error Output
-~~~~~~~~~~~~~~~~~~~~~~~~
+Personnaliser l'affichage d'erreurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
-   The form component only handles *how* the validation errors are rendered,
-   and not the actual validation error messages. The error messages themselves
-   are determined by the validation constraints you apply to your objects.
-   For more information, see the chapter on :doc:`validation</book/validation>`.
+   Le composant formulaire ne prend en charge que la *manière* dont les erreurs
+   de validation sont affichées, et non les messages d'erreurs eux-mêmes. Les
+   messages d'erreurs sont déterminés par les contraintes de validation que vous
+   appliquez à vos objets. Pour plus d'informations, lisez le chapitre sur la
+   :doc:`validation</book/validation>`.
 
-There are many different ways to customize how errors are rendered when a
-form is submitted with errors. The error messages for a field are rendered
-when you use the ``form_errors`` helper:
+Il y a plusieurs manières différentes de personnaliser l'affichage des erreurs
+lorsqu'un formulaire soumis n'est pas valide. Les messages d'erreur d'un champ
+sont affichés lorsque vous utilisez le helper ``form_errors`` :
 
 .. configuration-block::
 
@@ -700,16 +712,16 @@ when you use the ``form_errors`` helper:
 
         <?php echo $view['form']->errors($form['age']); ?>
 
-By default, the errors are rendered inside an unordered list:
+Par défaut, les erreurs sont affichées dans une liste non ordonnées :
 
 .. code-block:: html
 
     <ul>
-        <li>This field is required</li>
+        <li>Ce champ est obligatoire</li>
     </ul>
 
-To override how errors are rendered for *all* fields, simply copy, paste
-and customize the ``field_errors`` fragment.
+Pour surcharger l'affichage des erreurs pour *tout* les champs, il vous
+suffit de copier, coller et personnaliser le fragment ``field_errors``.
 
 .. configuration-block::
 
@@ -744,11 +756,12 @@ and customize the ``field_errors`` fragment.
         <?php endif ?>
 
 .. tip::
-    See :ref:`cookbook-form-theming-methods` for how to apply this customization.
+    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment appliquer ces personnalisations.
 
-You can also customize the error output for just one specific field type.
-For example, certain errors that are more global to your form (i.e. not specific
-to just one field) are rendered separately, usually at the top of your form:
+Vous pouvez aussi personnaliser l'affichage des erreurs pour un seul type
+de champ spécifique. Par exemple, certaines erreurs qui sont plus globales
+(c'est-à-dire qui ne sont pas spécifiques à un seul champ) sont affichées
+séparément, souvent en haut de votre formulaire :
 
 .. configuration-block::
 
@@ -760,19 +773,21 @@ to just one field) are rendered separately, usually at the top of your form:
 
         <?php echo $view['form']->render($form); ?>
 
-To customize *only* the markup used for these errors, follow the same directions
-as above, but now call the block ``form_errors`` (Twig) / the file ``form_errors.html.php``
-(PHP). Now, when errors for the ``form`` type are rendered, your customized
-fragment will be used instead of the default ``field_errors``.
+Pour *seulement* personnaliser le rendu de ces erreurs, suivez les mêmes directives
+que ci-dessus, sauf que vous devez maintenant appeler le bloc ``form_errors`` (Twig)
+ou le fichier ``form_errors.html.php`` (PHP). Maintenant, lorsque les erreurs du
+type ``form`` seront affichées, votre fragment personnalisé sera utilisé au lieu du
+fragment par défaut ``field_errors``.
 
-Customizing the "Form Row"
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Personnaliser le « Form Row »
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you can manage it, the easiest way to render a form field is via the
-``form_row`` function, which renders the label, errors and HTML widget of
-a field. To customize the markup used for rendering *all* form field rows,
-override the ``field_row`` fragment. For example, suppose you want to add a
-class to the ``div`` element around each row:
+Quand vous pouvez le faire, la manière la plus simple d'afficher un champ
+de formulaire est la fonction ``form_row``, qui affiche le libellé, les erreurs
+et le widget HTML d'un champ. Pour personnaliser le code généré utilisé pour afficher
+*tout* les champs de formulaire, surchargez le fragment ``field_row``. Par exemple,
+supposons que vous voulez ajouter une classe à l'élément ``div`` qui entoure chaque
+bloc :
 
 .. configuration-block::
 
@@ -797,16 +812,16 @@ class to the ``div`` element around each row:
         </div>
 
 .. tip::
-    See :ref:`cookbook-form-theming-methods` for how to apply this customization.
+    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment appliquer cette personnalisation.
 
-Adding a "Required" Asterisk to Field Labels
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter une astérisque « obligatoire » sur les libellés de champs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to denote all of your required fields with a required asterisk (``*``),
-you can do this by customizing the ``field_label`` fragment.
+Si vous voulez marquer tous les champs obligatoires par une astérisque (``*``),
+vous pouvez le faire en personnalisant le fragment ``field_label``.
 
-In Twig, if you're making the form customization inside the same template as your
-form, modify the ``use`` tag and add the following:
+Avec Twig, si vous faites cette personnalisation dans le même template que votre
+formulaire, modifiez le tag ``use`` et ajoutez ce qui suit :
 
 .. code-block:: html+jinja
 
@@ -816,12 +831,12 @@ form, modify the ``use`` tag and add the following:
         {{ block('base_field_label') }}
 
         {% if required %}
-            <span class="required" title="This field is required">*</span>
+            <span class="required" title="Ce champ est obligatoire">*</span>
         {% endif %}
     {% endblock %}
 
-In Twig, if you're making the form customization inside a separate template, use
-the following:
+Avec Twig, si vous faites les changements dans un template séparé, ajoutez
+ce qui suit :
 
 .. code-block:: html+jinja
 
@@ -831,35 +846,36 @@ the following:
         {{ parent() }}
 
         {% if required %}
-            <span class="required" title="This field is required">*</span>
+            <span class="required" title="Ce champ est obligatoire">*</span>
         {% endif %}
     {% endblock %}
 
-When using PHP as a templating engine you have to copy the content from the
-original template:
+Si vous utilisez PHP comme moteur de template, vous devrez copier le contenu
+depuis le template original :
 
 .. code-block:: html+php
 
     <!-- field_label.html.php -->
 
-    <!-- original content -->
+    <!-- contenu original -->
     <label for="<?php echo $view->escape($id) ?>" <?php foreach($attr as $k => $v) { printf('%s="%s" ', $view->escape($k), $view->escape($v)); } ?>><?php echo $view->escape($view['translator']->trans($label)) ?></label>
 
-    <!-- customization -->
+    <!-- personnalisation -->
     <?php if ($required) : ?>
-        <span class="required" title="This field is required">*</span>
+        <span class="required" title="Ce champ est obligatoire">*</span>
     <?php endif ?>
 
 .. tip::
-    See :ref:`cookbook-form-theming-methods` for how to apply this customization.
+    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment faire cette personnalisation.
 
-Adding "help" messages
-~~~~~~~~~~~~~~~~~~~~~~
+Ajouter des messages d'« aide »
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also customize your form widgets to have an optional "help" message.
+vous pouvez aussi personnaliser vos widgets de formulaire avec un message
+d'« aide » (« help ») facultatif.
 
-In Twig, If you're making the form customization inside the same template as your
-form, modify the ``use`` tag and add the following:
+Avec Twig, si vous faites les changements dans le même template que votre
+formulaire, modifiez le tag ``use`` et ajoutez ce qui suit :
 
 .. code-block:: html+jinja
 
@@ -873,8 +889,7 @@ form, modify the ``use`` tag and add the following:
         {% endif %}
     {% endblock %}
 
-In twig, If you're making the form customization inside a separate template, use
-the following:
+Avec Twig, si vous faites les changements dans un template séparé, procédez comme suit :
 
 .. code-block:: html+jinja
 
@@ -888,26 +903,27 @@ the following:
         {% endif %}
     {% endblock %}
 
-When using PHP as a templating engine you have to copy the content from the
-original template:
+Si vous utilisez PHP comme moteur de template, vous devrez copier le contenu
+depuis le template original :
 
 .. code-block:: html+php
 
     <!-- field_widget.html.php -->
 
-    <!-- Original content -->
+    <!-- Contenu original -->
     <input
         type="<?php echo isset($type) ? $view->escape($type) : "text" ?>"
         value="<?php echo $view->escape($value) ?>"
         <?php echo $view['form']->renderBlock('attributes') ?>
     />
 
-    <!-- Customization -->
+    <!-- Personnalisation -->
     <?php if (isset($help)) : ?>
         <span class="help"><?php echo $view->escape($help) ?></span>
     <?php endif ?>
 
-To render a help message below a field, pass in a ``help`` variable:
+Pour afficher un message d'aide en dessous du champ, passez le dans
+une variable ``help`` :
 
 .. configuration-block::
 
@@ -920,6 +936,6 @@ To render a help message below a field, pass in a ``help`` variable:
         <?php echo $view['form']->widget($form['title'], array('help' => 'foobar')) ?>
 
 .. tip::
-    See :ref:`cookbook-form-theming-methods` for how to apply this customization.
+    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment faire ces personnalisations.
 
 .. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
