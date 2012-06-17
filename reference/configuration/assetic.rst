@@ -12,16 +12,22 @@ Configuration complète par défaut
     .. code-block:: yaml
 
         assetic:
-            debug:                true
-            use_controller:       true
+            debug:                %kernel.debug%
+            use_controller:
+                enabled:              %kernel.debug%
+                profiler:             false
             read_from:            %kernel.root_dir%/../web
             write_to:             %assetic.read_from%
             java:                 /usr/bin/java
             node:                 /usr/bin/node
+            ruby:                 /usr/bin/ruby
             sass:                 /usr/bin/sass
+            # Une paire clé-valeur de noms d'éléments
+            variables:
+                some_name:                 []
             bundles:
 
-                # Par défaut (tous les bundles enregistrés):
+                # Par défaut (tout les bundles enregistrés):
                 - FrameworkBundle
                 - SecurityBundle
                 - TwigBundle
@@ -30,23 +36,19 @@ Configuration complète par défaut
                 - DoctrineBundle
                 - AsseticBundle
                 - ...
-
             assets:
-
-                # Prototype
-                name:
+                # Un tableau de noms de ressources (ex some_asset, some_other_asset)
+                some_asset:
                     inputs:               []
                     filters:              []
                     options:
-
-                        # Prototype
-                        name:                 []
+                        # Un tableau clé-valeur d'options et de valeurs
+                        some_option_name: []
             filters:
 
-                # Prototype
-                name:                 []
+                # Un tableau de noms de filtres (ex some_filter, some_other_filter)
+                some_filter:                 []
             twig:
                 functions:
-
-                    # Prototype
-                    name:                 []
+                    # Un tableau de noms de fonctions (ex some_function, some_other_function)
+                    some_function:                 []

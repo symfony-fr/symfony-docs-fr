@@ -1,15 +1,12 @@
-Comment Gérer les Dépendances Communes avec des Services Parents
-================================================================
+.. index::
+   single: Dependency Injection; Parent Services
 
-En ajoutant plus de fonctionnalités à votre application, vous pouvez 
-commencer à observer des classes qui partagent certaines dépendances. Par 
-exemple, vous pouvez avoir un gestionnaire de newsletter qui utilise des 
-« setters » pour injecter ses dépendances::
+Managing Common Dependencies with Parent Services
+=================================================
 
-    namespace Acme\HelloBundle\Mail;
-
-    use Acme\HelloBundle\Mailer;
-    use Acme\HelloBundle\EmailFormatter;
+As you add more functionality to your application, you may well start to have
+related classes that share some of the same dependencies. For example you
+may have a Newsletter Manager which uses setter injection to set its dependencies::
 
     class NewsletterManager
     {
@@ -28,12 +25,7 @@ exemple, vous pouvez avoir un gestionnaire de newsletter qui utilise des
         // ...
     }
 
-et de même une classe GreetingCard qui partage les mêmes dépendances::
-
-    namespace Acme\HelloBundle\Mail;
-
-    use Acme\HelloBundle\Mailer;
-    use Acme\HelloBundle\EmailFormatter;
+and also a Greeting Card class which shares the same dependencies::
 
     class GreetingCardManager
     {
@@ -52,17 +44,16 @@ et de même une classe GreetingCard qui partage les mêmes dépendances::
         // ...
     }
 
-le service config pour ces classes devrait être alors :
+The service config for these classes would look something like this:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Mail\NewsletterManager
-            greeting_card_manager.class: Acme\HelloBundle\Mail\GreetingCardManager
+            newsletter_manager.class: NewsletterManager
+            greeting_card_manager.class: GreetingCardManager
         services:
             my_mailer:
                 # ...
@@ -82,11 +73,10 @@ le service config pour ces classes devrait être alors :
 
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Mail\NewsletterManager</parameter>
-            <parameter key="greeting_card_manager.class">Acme\HelloBundle\Mail\GreetingCardManager</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="greeting_card_manager.class">GreetingCardManager</parameter>
         </parameters>
 
         <services>
@@ -116,13 +106,12 @@ le service config pour ces classes devrait être alors :
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Mail\NewsletterManager');
-        $container->setParameter('greeting_card_manager.class', 'Acme\HelloBundle\Mail\GreetingCardManager');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('greeting_card_manager.class', 'GreetingCardManager');
 
         $container->setDefinition('my_mailer', ... );
         $container->setDefinition('my_email_formatter', ... );
@@ -141,18 +130,12 @@ le service config pour ces classes devrait être alors :
             new Reference('my_email_formatter')
         ));
 
-Beaucoup de répétitions sont alors présentes tant dans les deux classes, que dans
-la configuration. Cela implique que si vous changez par exemple le ``Mailer`` de
-la classe ``EmailFormatter``, vous devez modifier la configuration en deux endroits.
-De la même façon, si vous avez besoin d'effectuer des changement sur les « setters »
-(setMailer ou setEmailFormatter), vous auriez besoin de modifier les deux classes.
-La solution classique est alors d'extraire ces méthode dans une classe parente des
-deux classes précédentes::
-
-    namespace Acme\HelloBundle\Mail;
-
-    use Acme\HelloBundle\Mailer;
-    use Acme\HelloBundle\EmailFormatter;
+There is a lot of repetition in both the classes and the configuration. This
+means that if you changed, for example, the ``Mailer`` of ``EmailFormatter``
+classes to be injected via the constructor, you would need to update the config
+in two places. Likewise if you needed to make changes to the setter methods
+you would need to do this in both classes. The typical way to deal with the
+common methods of these related classes would be to extract them to a super class::
 
     abstract class MailManager
     {
@@ -171,39 +154,34 @@ deux classes précédentes::
         // ...
     }
 
-Les classes ``NewsletterManager`` et ``GreetingCardManager`` peuvent alors étendre 
-cette classe abstraite::
-
-    namespace Acme\HelloBundle\Mail;
+The ``NewsletterManager`` and ``GreetingCardManager`` can then extend this
+super class::
 
     class NewsletterManager extends MailManager
     {
         // ...
     }
 
-et::
-
-    namespace Acme\HelloBundle\Mail;
+and::
 
     class GreetingCardManager extends MailManager
     {
         // ...
     }
 
-De façon similaire, le conteneur de service supporte aussi l'héritage de service
-au travers de clés de configuration ; ainsi vous pouvez réduire les répétitions en
-spécifiant un parent pour un service particulier.
+In a similar fashion, the Symfony2 service container also supports extending
+services in the configuration so you can also reduce the repetition by specifying
+a parent for a service.
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Mail\NewsletterManager
-            greeting_card_manager.class: Acme\HelloBundle\Mail\GreetingCardManager
-            mail_manager.class: Acme\HelloBundle\Mail\MailManager
+            newsletter_manager.class: NewsletterManager
+            greeting_card_manager.class: GreetingCardManager
+            mail_manager.class: MailManager
         services:
             my_mailer:
                 # ...
@@ -226,12 +204,11 @@ spécifiant un parent pour un service particulier.
             
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Mail\NewsletterManager</parameter>
-            <parameter key="greeting_card_manager.class">Acme\HelloBundle\Mail\GreetingCardManager</parameter>
-            <parameter key="mail_manager.class">Acme\HelloBundle\Mail\MailManager</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="greeting_card_manager.class">GreetingCardManager</parameter>
+            <parameter key="mail_manager.class">MailManager</parameter>
         </parameters>
 
         <services>
@@ -255,14 +232,13 @@ spécifiant un parent pour un service particulier.
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Mail\NewsletterManager');
-        $container->setParameter('greeting_card_manager.class', 'Acme\HelloBundle\Mail\GreetingCardManager');
-        $container->setParameter('mail_manager.class', 'Acme\HelloBundle\Mail\MailManager');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('greeting_card_manager.class', 'GreetingCardManager');
+        $container->setParameter('mail_manager.class', 'MailManager');
 
         $container->setDefinition('my_mailer', ... );
         $container->setDefinition('my_email_formatter', ... );
@@ -286,42 +262,43 @@ spécifiant un parent pour un service particulier.
             '%greeting_card_manager.class%'
         );
 
-Dans ce contexte, un service ``parent`` implique que les arguments et les méthodes appelées
-par le service parent devront être disponibles dans le service enfant. Les « setters » définis
-seront ainsi appelés au moment où le service enfant sera instancié.
+In this context, having a ``parent`` service implies that the arguments and
+method calls of the parent service should be used for the child services.
+Specifically, the setter methods defined for the parent service will be called
+when the child services are instantiated.
 
 .. note::
 
-   Si vous supprimez la clé parente de la configuration, les services seront toujours
-   instanciés et étendront toujours leur classe mère (ici ``MailManager``). La différence
-   étant que les ``appels`` aux « setters » (setMailer et setEmailFormatter) ne seront plus
-   effectués au moment de l'instanciation.
+   If you remove the ``parent`` config key, the services will still be instantiated
+   and they will still of course extend the ``MailManager`` class. The difference
+   is that omitting the ``parent`` config key will mean that the ``calls``
+   defined on the ``mail_manager`` service will not be executed when the
+   child services are instantiated.
 
-La classe parente est définie comme abstraite  afin de ne pas être instanciée directement.
-La mention abstraite dans le fichier de configuration permet de créer un service qui ne sera
-pas activé et qui sera seulement utilisé en tant que parent. En d'autre termes, il apparaît
-plus comme un prototype que comme un service à part entière.
+The parent class is abstract as it should not be directly instantiated. Setting
+it to abstract in the config file as has been done above will mean that it
+can only be used as a parent service and cannot be used directly as a service
+to inject and will be removed at compile time. In other words, it exists merely
+as a "template" that other services can use.
 
-Surcharger les dépendances parentes
------------------------------------
+Overriding Parent Dependencies
+------------------------------
 
-Vous pourriez avoir besoin de surcharger les arguments ou les méthodes 
-provenant d'un service parent et transmises à un seul service enfant.
-En ajoutant les appels de méthodes au service enfant, les dépendances 
-assignées par un parent peuvent être surchargées. Ainsi, que vous avez besoin
-de définir une dépendance différente à la classe ``NewsletterManager``,
-la configuration deviendrait :
+There may be times where you want to override what class is passed in for
+a dependency of one child service only. Fortunately, by adding the method
+call config for the child service, the dependencies set by the parent class
+will be overridden. So if you needed to pass a different dependency just
+to the ``NewsletterManager`` class, the config would look like this:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Mail\NewsletterManager
-            greeting_card_manager.class: Acme\HelloBundle\Mail\GreetingCardManager
-            mail_manager.class: Acme\HelloBundle\Mail\MailManager
+            newsletter_manager.class: NewsletterManager
+            greeting_card_manager.class: GreetingCardManager
+            mail_manager.class: MailManager
         services:
             my_mailer:
                 # ...
@@ -348,12 +325,11 @@ la configuration deviendrait :
             
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Mail\NewsletterManager</parameter>
-            <parameter key="greeting_card_manager.class">Acme\HelloBundle\Mail\GreetingCardManager</parameter>
-            <parameter key="mail_manager.class">Acme\HelloBundle\Mail\MailManager</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="greeting_card_manager.class">GreetingCardManager</parameter>
+            <parameter key="mail_manager.class">MailManager</parameter>
         </parameters>
 
         <services>
@@ -384,14 +360,13 @@ la configuration deviendrait :
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Mail\NewsletterManager');
-        $container->setParameter('greeting_card_manager.class', 'Acme\HelloBundle\Mail\GreetingCardManager');
-        $container->setParameter('mail_manager.class', 'Acme\HelloBundle\Mail\MailManager');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('greeting_card_manager.class', 'GreetingCardManager');
+        $container->setParameter('mail_manager.class', 'MailManager');
 
         $container->setDefinition('my_mailer', ... );
         $container->setDefinition('my_alternative_mailer', ... );
@@ -418,26 +393,22 @@ la configuration deviendrait :
             '%greeting_card_manager.class%'
         );
 
-La classe ``GreetingCardManager`` recevra les même arguments qu'avant, mais la classe
-``NewsletterManager`` recevra une instance de ``my_alternative_mailer`` à la place du
-service ``my_mailer``.
+The ``GreetingCardManager`` will receive the same dependencies as before,
+but the ``NewsletterManager`` will be passed the ``my_alternative_mailer``
+instead of the ``my_mailer`` service.
 
-Collections de Dépendances
---------------------------
+Collections of Dependencies
+---------------------------
 
-Surcharger les « setters », comme dans l'exemple précédent, provoque deux appels,
-l'un pour la définition parente, l'autre pour la définition de l'enfant. Dans 
-ce cas particulier cela n'aura pas d'incidence, les objets mailer étant simplement
-remplacés.
+It should be noted that the overridden setter method in the previous example
+is actually called twice - once per the parent definition and once per the
+child definition. In the previous example, that was fine, since the second
+``setMailer`` call replaces mailer object set by the first call.
 
-Dans certains cas cependant, cela peut causer un problème (utilisation de variables
-statiques, appels internes avec mutations, ajouts, enregistrement dans une collection, ...),
-comme dans la classe suivante::
-
-    namespace Acme\HelloBundle\Mail;
-
-    use Acme\HelloBundle\Mailer;
-    use Acme\HelloBundle\EmailFormatter;
+In some cases, however, this can be a problem. For example, if the overridden
+method call involves adding something to a collection, then two objects will
+be added to that collection. The following shows such a case, if the parent
+class looks like this::
 
     abstract class MailManager
     {
@@ -450,17 +421,16 @@ comme dans la classe suivante::
         // ...
     }
 
-Si vous avez une configuration telle que celle-ci:
+If you had the following config:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Mail\NewsletterManager
-            mail_manager.class: Acme\HelloBundle\Mail\MailManager
+            newsletter_manager.class: NewsletterManager
+            mail_manager.class: MailManager
         services:
             my_filter:
                 # ...
@@ -480,11 +450,10 @@ Si vous avez une configuration telle que celle-ci:
             
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Mail\NewsletterManager</parameter>
-            <parameter key="mail_manager.class">Acme\HelloBundle\Mail\MailManager</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="mail_manager.class">MailManager</parameter>
         </parameters>
 
         <services>
@@ -508,13 +477,12 @@ Si vous avez une configuration telle que celle-ci:
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Mail\NewsletterManager');
-        $container->setParameter('mail_manager.class', 'Acme\HelloBundle\Mail\MailManager');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('mail_manager.class', 'MailManager');
 
         $container->setDefinition('my_filter', ... );
         $container->setDefinition('another_filter', ... );
@@ -533,11 +501,9 @@ Si vous avez une configuration telle que celle-ci:
             new Reference('another_filter')
         ));
 
-Dans cet exemple, le ``setFilter`` provenant du service ``newsletter_manager``
-sera appelé deux fois, impliquant que la collection ``$filters`` contiendra à la
-fois les objets ``my_filter`` et ``another_filter``. Si vous voulez simplement
-ajouter des filtres à une classe, cela n'aura pas de conséquences. Si l'ordre des
-filtres et leurs existences importe, il faudra alors redéfinir le service en ajoutant
-tous les appels à effectuer et en lui enlevant dans la configuration le paramètre
-``parent``. Il peux cependant conserver l'héritage de classe simplifiant certains
-appels.
+In this example, the ``setFilter`` of the ``newsletter_manager`` service
+will be called twice, resulting in the ``$filters`` array containing both
+``my_filter`` and ``another_filter`` objects. This is great if you just want
+to add additional filters to the subclasses. If you want to replace the filters
+passed to the subclass, removing the parent setting from the config will 
+prevent the base class from calling ``setFilter``.

@@ -13,11 +13,10 @@ Configuration complète par défaut
 
         web_profiler:
             
-            # affiche les informations secondaire pour raccourcir la barre de debug
+            # DEPRECIE, n'est plus utile et peut être retiré de votre configuration sans danger.
             verbose:             true
 
             # affiche la barre de debug en bas des pages avec un sommaire des informations du profiler
             toolbar:             false
-
-            # vous donne une occasion de regarder les données avant de suivre une redirection
+            position:             bottom
             intercept_redirects: false

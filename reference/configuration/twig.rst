@@ -9,33 +9,36 @@ Configuration de référence du TwigBundle
     .. code-block:: yaml
 
         twig:
+            exception_controller:  Symfony\Bundle\TwigBundle\Controller\ExceptionController::showAction
             form:
                 resources:
 
-                    # Default:
-                    - div_layout.html.twig
+                    # Par défaut:
+                    - form_div_layout.html.twig
 
-                    # Example:
+                    # Exemple:
                     - MyBundle::form.html.twig
             globals:
 
-                # Examples:
+                # Exemples:
                 foo:                 "@bar"
                 pi:                  3.14
 
-                # Prototype
-                key:
+                # Exemples d'options, mais la manière la plus simple est celle ci-dessus
+                some_variable_name:
+                    # un id de service qui peut être la valeur
                     id:                   ~
+                    # définissez à "service" ou laissez vide
                     type:                 ~
                     value:                ~
             autoescape:           ~
-            base_template_class:  ~ # Exemple: Twig_Template
+            base_template_class:  ~ # Example: Twig_Template
             cache:                "%kernel.cache_dir%/twig"
             charset:              "%kernel.charset%"
             debug:                "%kernel.debug%"
             strict_variables:     ~
             auto_reload:          ~
-            exception_controller:  Symfony\Bundle\TwigBundle\Controller\ExceptionController::showAction
+            optimizations:        ~
 
     .. code-block:: xml
 

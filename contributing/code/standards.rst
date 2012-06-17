@@ -32,32 +32,41 @@ ci-dessous :
 
     namespace Acme;
 
-    class Foo
+    class FooBar
     {
         const SOME_CONST = 42;
 
-        private $foo;
+        private $fooBar;
 
         /**
          * @param string $dummy Some argument description
          */
         public function __construct($dummy)
         {
-            $this->foo = $this->transform($dummy);
+            $this->fooBar = $this->transform($dummy);
         }
 
         /**
          * @param string $dummy Some argument description
          * @return string|null Transformed input
          */
-        private function transform($dummy)
-        {
+        private function transformText($dummy, $options = array())
+         {
+            $mergedOptions = array_merge($options, array(
+                'some_default' => 'values',
+            ));
+
             if (true === $dummy) {
                 return;
             }
+
             if ('string' === $dummy) {
-                $dummy = substr($dummy, 0, 5);
-            }
+                if ('values' === $mergedOptions['some_default']) {
+                    $dummy = substr($dummy, 0, 5);
+                } else {
+                    $dummy = ucwords($dummy);
+                }
+            } 
 
             return $dummy;
         }
@@ -75,9 +84,6 @@ Structure
 
 * Utilisez les accolades pour indiquer les structures de contrôle quel que soit
   le nombre d'expressions qu'elles entourent.
-
-* Déclarez la visibilité de chacunes de vos classes, méthodes et propriétés
-  (l'usage de `var` est interdit);
 
 * Définissez une classe par fichier - cela ne s'applique pas à vos classes
   de helper privées qui ne sont pas appelées à être instanciée de l'extérieur.
