@@ -271,7 +271,7 @@ les annotations, si vous voulez les utiliser pour spécifier vos contraintes :
 
         <!-- app/config/config.xml -->
         <framework:config>
-            <framework:validation enable_annotations="true" />
+            <framework:validation enable-annotations="true" />
         </framework:config>
 
     .. code-block:: php

@@ -17,7 +17,7 @@ Finalement, trouvez le dépot *principal* du langage auquel vous voulez
 contribuer. Voici une liste des dépots officiel:
 
 * *Anglais*:   https://github.com/symfony/symfony-docs
-* *Français*:  https://github.com/gscorpio/symfony-docs-fr
+* *Français*:  https://github.com/symfony-fr/symfony-docs-fr
 * *Italien*:   https://github.com/garak/symfony-docs-it
 * *Japonais*:  https://github.com/symfony-japan/symfony-docs-ja
 * *Polonais*:  https://github.com/ampluso/symfony-docs-pl

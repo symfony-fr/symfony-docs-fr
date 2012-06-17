@@ -32,7 +32,8 @@ non-existant est entré::
     namespace Acme\TaskBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Acme\TaskBundle\Form\DataTransformer\IssueToNumberTransformer;
     use Doctrine\Common\Persistence\ObjectManager;
 
@@ -51,20 +52,13 @@ non-existant est entré::
             $this->om = $om;
         }
 
-        public function buildForm(FormBuilder $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $transformer = new IssueToNumberTransformer($this->om);
-            $builder->appendClientTransformer($transformer);
+            $builder->addViewTransformer($transformer);
         }
 
-        public function getDefaultOptions()
-        {
-            return array(
-                'invalid_message' => 'The selected issue does not exist',
-            );
-        }
-
-        public function getParent(array $options)
+        public function getParent()
         {
             return 'text';
         }
@@ -81,11 +75,12 @@ non-existant est entré::
     type de formulaire personnalisé en appelant ``appendClientTransformer`` sur
     n'importe quel constructeur de champ::
 
+        use Symfony\Component\Form\FormBuilderInterface;
         use Acme\TaskBundle\Form\DataTransformer\IssueToNumberTransformer;
 
         class TaskType extends AbstractType
         {
-            public function buildForm(FormBuilder $builder, array $options)
+            public function buildForm(FormBuilderInterface $builder, array $options)
             {
                 // ...
 
@@ -96,7 +91,7 @@ non-existant est entré::
                 // utilise un champ texte normal, mais transforme le texte en un objet issue
                 $builder
                     ->add('issue', 'text')
-                    ->appendClientTransformer($transformer)
+                    ->addViewTransformer($transformer)
                 ;
             }
 
@@ -204,11 +199,11 @@ comme suit::
     namespace Acme\TaskBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\Form\FormBuilderInterface;
 
     class TaskType extends AbstractType
     {
-        public function buildForm(FormBuilder $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder
                 ->add('task')

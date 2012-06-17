@@ -11,13 +11,15 @@ Configuration de référence
         monolog:
             handlers:
 
-                # Examples:
+                # Exemples:
                 syslog:
                     type:                stream
                     path:                /var/log/symfony.log
                     level:               ERROR
                     bubble:              false
                     formatter:           my_formatter
+                    processors:
+                        - some_callable
                 main:
                     type:                fingers_crossed
                     action_level:        WARNING
@@ -27,9 +29,9 @@ Configuration de référence
                     type:                service
                     id:                  my_handler
 
-                # Prototype
-                name:
-                    type:                 ~ # Required
+                # Options et valeurs par défaut pour un handler personnalisé : "my_custom_handler" 
+                my_custom_handler:
+                    type:                 ~ # Requis
                     id:                   ~
                     priority:             0
                     level:                DEBUG
@@ -39,6 +41,7 @@ Configuration de référence
                     facility:             user
                     max_files:            0
                     action_level:         WARNING
+                    activation_strategy:  ~
                     stop_buffering:       true
                     buffer_size:          0
                     handler:              ~
@@ -50,8 +53,11 @@ Configuration de référence
                     to_email:             ~
                     subject:              ~
                     email_prototype:
-                        id:     ~ # Requis (lorsque email_prototype est utilisé)
-                        method: ~
+                        id:                   ~ # Requis (quand email_prototype est utilisé)
+                        factory-method:       ~
+                    channels:
+                        type:                 ~
+                        elements:             []
                     formatter:            ~
 
     .. code-block:: xml

@@ -316,7 +316,7 @@ par l'entité, l'appel de la méthode ``$document->upload()`` devrait être
 supprimé du contrôleur::
 
     if ($form->isValid()) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
  
         $em->persist($document);
         $em->flush();

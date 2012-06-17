@@ -19,72 +19,89 @@ Chaque partie sera expliquée dans la section suivante.
 
         # app/config/security.yml
         security:
-            access_denied_url: /foo/error403
+            access_denied_url:    ~ # Exemple: /foo/error403
 
-            always_authenticate_before_granting: false
-
-            # whether or not to call eraseCredentials on the token
-            erase_credentials: true
-
-            # strategy can be: none, migrate, invalidate
-            session_fixation_strategy: migrate
-
+            # strategy peut valoir : none, migrate, invalidate
+            session_fixation_strategy:  migrate
+            hide_user_not_found:  true
+            always_authenticate_before_granting:  false
+            erase_credentials:    true
             access_decision_manager:
-                strategy: affirmative
-                allow_if_all_abstain: false
-                allow_if_equal_granted_denied: true
-
+                strategy:             affirmative
+                allow_if_all_abstain:  false
+                allow_if_equal_granted_denied:  true
             acl:
-                connection: default # n'importe quel nom configuré dans la section doctrine.dbal
-                tables:
-                    class: acl_classes
-                    entry: acl_entries
-                    object_identity: acl_object_identities
-                    object_identity_ancestors: acl_object_identity_ancestors
-                    security_identity: acl_security_identities
+
+                # n'importe quel nom configuré dans la section doctrine.dbal
+                connection:           ~
                 cache:
-                    id: service_id
-                    prefix: sf2_acl_
+                    id:                   ~
+                    prefix:               sf2_acl_
+                provider:             ~
+                tables:
+                    class:                acl_classes
+                    entry:                acl_entries
+                    object_identity:      acl_object_identities
+                    object_identity_ancestors:  acl_object_identity_ancestors
+                    security_identity:    acl_security_identities
                 voter:
-                    allow_if_object_identity_unavailable: true
+                    allow_if_object_identity_unavailable:  true
 
             encoders:
-                somename:
-                    class: Acme\DemoBundle\Entity\User
-                Acme\DemoBundle\Entity\User: sha512
-                Acme\DemoBundle\Entity\User: plaintext
-                Acme\DemoBundle\Entity\User:
-                    algorithm: sha512
-                    encode_as_base64: true
-                    iterations: 5000
-                Acme\DemoBundle\Entity\User:
-                    id: my.custom.encoder.service.id
+                # Exemples:
+                Acme\DemoBundle\Entity\User1: sha512
+                Acme\DemoBundle\Entity\User2:
+                    algorithm:           sha512
+                    encode_as_base64:    true
+                    iterations:          5000
 
-            providers:
-                memory_provider_name:
-                    memory:
-                        users:
-                            foo: { password: foo, roles: ROLE_USER }
-                            bar: { password: bar, roles: [ROLE_USER, ROLE_ADMIN] }
-                entity_provider_name:
-                    entity: { class: SecurityBundle:User, property: username }
+                # Exemple d'options/valeurs pour voir à quoi ressemble un encodeur personnalisé
+                Acme\Your\Class\Name:
+                    algorithm:            ~
+                    ignore_case:          false
+                    encode_as_base64:     true
+                    iterations:           5000
+                    id:                   ~
 
-            firewalls:
+            providers:            # Requis
+                # Exemples:
+                memory:
+                    name:                memory
+                    users:
+                        foo:
+                            password:            foo
+                            roles:               ROLE_USER
+                        bar:
+                            password:            bar
+                            roles:               [ROLE_USER, ROLE_ADMIN]
+                entity:
+                    entity:
+                        class:               SecurityBundle:User
+                        property:            username
+
+                # Exemple d'un provider personnalisé
+                some_custom_provider:
+                    id:                   ~
+                    chain:
+                        providers:            []
+
+            firewalls:            # Required
+                # Exemples:
                 somename:
                     pattern: .*
                     request_matcher: some.service.id
                     access_denied_url: /foo/error403
                     access_denied_handler: some.service.id
                     entry_point: some.service.id
-                    provider: some_provider_key_from_above
+                    provider: some_key_from_above
                     context: name
                     stateless: false
                     x509:
-                        provider: some_provider_key_from_above
+                        provider: some_key_from_above
                     http_basic:
-                        provider: some_provider_key_from_above
+                        provider: some_key_from_above
                     http_digest:
-                        provider: some_provider_key_from_above
+                        provider: some_key_from_above
                     form_login:
                         check_path: /login_check
                         login_path: /login
@@ -126,20 +143,51 @@ Chaque partie sera expliquée dans la section suivante.
                         success_handler: some.service.id
                     anonymous: ~
 
-            access_control:
-                -
-                    path: ^/foo
-                    host: mydomain.foo
-                    ip: 192.0.0.0/8
-                    roles: [ROLE_A, ROLE_B]
-                    requires_channel: https
+                # Options et valeurs par défaut pour un firewall
+                some_firewall_listener:
+                    pattern:              ~
+                    security:             true
+                    request_matcher:      ~
+                    access_denied_url:    ~
+                    access_denied_handler:  ~
+                    entry_point:          ~
+                    provider:             ~
+                    stateless:            false
+                    context:              ~
+                    logout:
+                        csrf_parameter:       _csrf_token
+                        csrf_provider:        ~
+                        intention:            logout
+                        path:                 /logout
+                        target:               /
+                        success_handler:      ~
+                        invalidate_session:   true
+                        delete_cookies:
 
+                            # Prototype
+                            name:
+                                path:                 ~
+                                domain:               ~
+                        handlers:             []
+                    anonymous:
+                        key:                  4f954a0667e01
+                    switch_user:
+                        provider:             ~
+                        parameter:            _switch_user
+                        role:                 ROLE_ALLOWED_TO_SWITCH
+
+            access_control:
+                requires_channel:     ~
+
+                # use the urldecoded format
+                path:                 ~ # Exemple: ^/path to resource/
+                host:                 ~
+                ip:                   ~
+                methods:              []
+                roles:                []
             role_hierarchy:
-                ROLE_SUPERADMIN: ROLE_ADMIN
-                ROLE_SUPERADMIN: 'ROLE_ADMIN, ROLE_USER'
-                ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_USER]
-                anything: { id: ROLE_SUPERADMIN, value: 'ROLE_USER, ROLE_ADMIN' }
-                anything: { id: ROLE_SUPERADMIN, value: [ROLE_USER, ROLE_ADMIN] }
+                ROLE_ADMIN:      [ROLE_ORGANIZER, ROLE_USER]
+                ROLE_SUPERADMIN: [ROLE_ADMIN]
 
 .. _reference-security-firewall-form-login:
 

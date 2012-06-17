@@ -2,39 +2,44 @@
    single: Validation; Custom constraints
 
 Comment créer une Contrainte de Validation Personnalisée
---------------------------------------------------------
+========================================================
 
 Vous pouvez créer une contrainte personnalisée en étendant la classe
-:class:`Symfony\\Component\\Validator\\Constraint`. Les options pour vos
-contraintes sont représentées par les propriétés publiques de la classe. Par
-exemple, la contrainte :doc:`Url</reference/constraints/Url>` inclut
-les propriétés ``message`` et ``protocols``:
+:class:`Symfony\\Component\\Validator\\Constraint`.
+A titre d'exemple, nous allons créer un simple validateur qui vérifie qu'une
+chaine de caractères ne contient que des caractères alphanumériques.
 
-.. code-block:: php
+Créer une classe de contrainte
+------------------------------
 
-    namespace Symfony\Component\Validator\Constraints;
+Tout d'abord, vous devez créer une classe de contrainte
+qui étend la classe :class:`Symfony\\Component\\Validator\\Constraint`:: 
+
+    namespace Acme\DemoBundle\Validator\Constraints;
     
     use Symfony\Component\Validator\Constraint;
 
     /**
      * @Annotation
      */
-    class Protocol extends Constraint
+    class ContainsAlphanumeric extends Constraint
     {
-        public $message = 'This value is not a valid protocol';
-        public $protocols = array('http', 'https', 'ftp', 'ftps');
+        public $message = 'La chaine "%string%" contient un caractère non autorisé : elle ne peut contenir que des lettres et des chiffres.';
     }
 
 .. note::
 
     L'annotation ``@Annotation`` est nécessaire pour cette nouvelle contrainte 
     afin de la rendre disponible via les annotations dans les autres classes.
+    Les options de votre contrainte sont représentées par des propriétés publiques
+    dans la classe de contrainte. 
+
+Créer le validateur en lui-même
+-------------------------------
 
 Comme vous pouvez le voir, une classe « contrainte » est minimale. La validation est
 réalisée par un autre validateur de contrainte. La classe de validation est définie
-par l'implémentation de la méthode ``validatedBy()``, incluant une logique prédéfinie :
-
-.. code-block:: php
+par l'implémentation de la méthode ``validatedBy()``, incluant une logique prédéfinie::
 
     // dans la classe de base Symfony\Component\Validator\Constraint
     public function validatedBy()
@@ -46,22 +51,19 @@ Si vous créez une contrainte personnalisée (ex: ``MyConstraint``), Symfony2
 recherchera automatiquement une autre classe, ``MyConstraintValidator`` lorsqu'il
 effectue la validation.
 
-La classe validatrice ne requiert qu'une méthode : ``validate``. Vous pouvez observer cela
-dans l’exemple suivant, avec la classe ``ProtocolValidator``:
+La classe validatrice ne requiert qu'une méthode : ``validate``::
 
-.. code-block:: php
-
-    namespace Symfony\Component\Validator\Constraints;
+    namespace Acme\DemoBundle\Validator\Constraints;
     
     use Symfony\Component\Validator\Constraint;
     use Symfony\Component\Validator\ConstraintValidator;
 
-    class ProtocolValidator extends ConstraintValidator
+    class ContainsAlphanumericValidator extends ConstraintValidator
     {
         public function validate($value, Constraint $constraint)
         {
-            if (!in_array($value, $constraint->protocols)){
-                $this->context->addViolation($constraint->message, array('%protocols%' => $constraint->protocols));
+            if (!preg_match('/^[a-zA-Za0-9]+$/', $value, $matches)) {
+                $this->context->addViolation($constraint->message, array('%string%' => $value));
             }
         }
     }
@@ -80,6 +82,83 @@ dans l’exemple suivant, avec la classe ``ProtocolValidator``:
     La méthode ``isValid`` est dépréciée au profit de ``validate`` dans Symfony 2.1. La
     méthode ``setMessage`` est également dépréciée, en faveur de l'appel à la méthode
     ``addViolation`` du contexte.
+
+Utiliser le nouveau validateur
+------------------------------
+
+Utiliser un validateur personnalisé est très facile, tout comme ceux fournis par Symfony2
+lui-même :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+        
+        # src/Acme/BlogBundle/Resources/config/validation.yml
+        Acme\DemoBundle\Entity\AcmeEntity:
+            properties:
+                name:
+                    - NotBlank: ~
+                    - Acme\DemoBundle\Validator\Constraints\ContainsAlphanumeric: ~
+
+    .. code-block:: php-annotations
+
+        // src/Acme/DemoBundle/Entity/AcmeEntity.php
+    
+        use Symfony\Component\Validator\Constraints as Assert;
+        use Acme\DemoBundle\Validator\Constraints as AcmeAssert;
+            
+        class AcmeEntity
+        {
+            // ...
+            
+            /**
+             * @Assert\NotBlank
+             * @AcmeAssert\ContainsAlphanumeric
+             */
+            protected $name;
+            
+            // ...
+        }
+
+    .. code-block:: xml
+        
+        <!-- src/Acme/DemoBundle/Resources/config/validation.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+            <class name="Acme\DemoBundle\Entity\AcmeEntity">
+                <property name="name">
+                    <constraint name="NotBlank" />
+                    <constraint name="Acme\DemoBundle\Validator\Constraints\ContainsAlphanumeric" />
+                </property>
+            </class>
+        </constraint-mapping>
+
+    .. code-block:: php
+        
+        // src/Acme/DemoBundle/Entity/AcmeEntity.php
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints\NotBlank;
+        use Acme\DemoBundle\Validator\Constraints\ContainsAlphanumeric;
+
+        class AcmeEntity
+        {
+            public $name;
+
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('name', new NotBlank());
+                $metadata->addPropertyConstraint('name', new ContainsAlphanumeric());
+            }
+        }
+
+Si votre contrainte contient des options, alors elles devraient être des
+propriétés publiques de la classe de contrainte personnalisée que vous avez
+créée plus tôt. Ces options peuvent être configurées comme toutes les options
+des contraintes de Symfony.
 
 Contraintes de validation avec dépendances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,12 +225,13 @@ Avec ceci, la méthode ``validate()`` du validateur prend un objet comme premier
         {
             if ($protocol->getFoo() != $protocol->getBar()) {
 
-                // associe le message d'erreur à la propriété foo
-                $this->context->addViolationAtSubPath('foo', $constraint->getMessage(), array(), null);
+                $propertyPath = $this->context->getPropertyPath() . 'foo';
+                $this->context->setPropertyPath($propertyPath);
+                $this->context->addViolation($constraint->getMessage(), array(), null);
 
                 return false;
             }
- 
+
             return true;
-        }   
+        }
     }

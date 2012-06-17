@@ -26,21 +26,21 @@ Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`
     namespace Acme\DemoBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class GenderType extends AbstractType
     {
-        public function getDefaultOptions()
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array(
+            $resolver->setDefaults(array(
                 'choices' => array(
                     'm' => 'Male',
                     'f' => 'Female',
                 )
-            );
+            ));
         }
 
-        public function getParent(array $options)
+        public function getParent()
         {
             return 'choice';
         }
@@ -163,11 +163,11 @@ tout simplement une nouvelle instance du type dans l'un de vos formulaires::
     namespace Acme\DemoBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\Form\FormBuilderInterface;
     
     class AuthorType extends AbstractType
     {
-        public function buildForm(FormBuilder $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder->add('gender_code', new GenderType(), array(
                 'empty_value' => 'Choose a gender',
@@ -248,7 +248,10 @@ qui reçoit la configuration du sexe/genre::
 
     # src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
-    // ...
+    
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+    //...
 
     class GenderType extends AbstractType
     {
@@ -259,11 +262,11 @@ qui reçoit la configuration du sexe/genre::
             $this->genderChoices = $genderChoices;
         }
     
-        public function getDefaultOptions()
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array(
-                'choices' => $this->genderChoices,
-            );
+            $resolver->setDefaults(array(
+                'data_class' => $this->genderChoices 
+            ));
         }
         
         // ...
@@ -276,11 +279,14 @@ maintenant beaucoup plus facile::
 
     // src/Acme/DemoBundle/Form/Type/AuthorType.php
     namespace Acme\DemoBundle\Form\Type;
+    
+    use Symfony\Component\Form\FormBuilderInterface;
+    
     // ...
 
     class AuthorType extends AbstractType
     {
-        public function buildForm(FormBuilder $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder->add('gender_code', 'gender', array(
                 'empty_value' => 'Choose a gender',

@@ -416,11 +416,13 @@ bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefau
 
 .. code-block:: php
 
-    public function getDefaultOptions()
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'validation_groups' => array('registration')
-        );
+        ));
     }
 
 Dans les deux cas, *uniquement* le groupe de validation ``registration``
@@ -439,11 +441,13 @@ comme un tableau callbak, ou une ``Closure`` :
 
 .. code-block:: php
 
-    public function getDefaultOptions()
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'validation_groups' => array('Acme\\AcmeBundle\\Entity\\Client', 'determineValidationGroups'),
-        );
+        ));
     }
 
 Cela appelera la méthode statique  ``determineValidationGroups()`` de la classe
@@ -453,9 +457,12 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
 
 .. code-block:: php
 
-    public function getDefaultOptions()
+    use Symfony\Component\Form\FormInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'validation_groups' => function(FormInterface $form) {
                 $data = $form->getData();
                 if (Entity\Client::TYPE_PERSON == $data->getType()) {
@@ -464,7 +471,7 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
                     return array('company');
                 }
             },
-        );
+        ));
     }
 
 .. index::
@@ -891,11 +898,13 @@ manière de créer des formulaires, mais le choix final vous revient.
     
     .. code-block:: php
 
-        public function getDefaultOptions()
+        use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array(
+            $resolver->setDefaults(array(
                 'data_class' => 'Acme\TaskBundle\Entity\Task',
-            );
+            ));
         }
 
 
@@ -910,7 +919,9 @@ manière de créer des formulaires, mais le choix final vous revient.
     ne doi pas être mappé à l'objet sous-jacent, vous devez définir l'option
     property_path setting à ``false``::
 
-        public function buildForm(FormBuilder $builder, array $options)
+        use Symfony\Component\Form\FormBuilderInterface;
+
+        public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder->add('task');
             $builder->add('dueDate', null, array('property_path' => false));
@@ -918,6 +929,10 @@ manière de créer des formulaires, mais le choix final vous revient.
 
     De plus, s'il y a des champs dans le formulaire qui ne sont pas inclus dans
     les données soumises, ces champs seront définis à ``null``.
+
+    La donnée du champ est accessible dans un contrôleur de cette manière::
+
+        $form->get('dueDate')->getData();
 
 .. index::
    pair: Formulaires; Doctrine
@@ -1030,20 +1045,21 @@ puisse être modifié par l'utilisateur :
     namespace Acme\TaskBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class CategoryType extends AbstractType
     {
-        public function buildForm(FormBuilder $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder->add('name');
         }
 
-        public function getDefaultOptions()
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array(
+            $resolver->setDefaults(array(
                 'data_class' => 'Acme\TaskBundle\Entity\Category',
-            );
+            ));
         }
 
         public function getName()
@@ -1059,7 +1075,9 @@ instance de la nouvelle classe ``CategoryType`` :
 
 .. code-block:: php
 
-    public function buildForm(FormBuilder $builder, array $options)
+    use Symfony\Component\Form\FormBuilderInterface;
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // ...
 
@@ -1395,6 +1413,12 @@ maintenant utilisés globalement pour définir le rendu de formulaire en sortie.
     personnalisations. Utilisez cette méthode pour faire des personnalisations
     de formulaire qui ne seront nécessaires que dans un unique template.
 
+    .. caution::
+
+        Cette fonctionnalité (``{% form_theme form _self %}``) ne marchera *que*
+        si votre template en étend un autre. Si ce n'est pas le cas, vous devrez
+        faire pointer ``form_theme`` vers un template séparé.
+
 PHP
 ...
 
@@ -1477,19 +1501,21 @@ Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple 
 
 .. code-block:: php
 
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
     class TaskType extends AbstractType
     {
         // ...
     
-        public function getDefaultOptions()
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array(
+            $resolver->setDefaults(array(
                 'data_class'      => 'Acme\TaskBundle\Entity\Task',
                 'csrf_protection' => true,
                 'csrf_field_name' => '_token',
                 // une clé unique pour aider à la génération du jeton secret
                 'intention'       => 'task_item',
-            );
+            ));
         }
         
         // ...
@@ -1609,6 +1635,7 @@ surchargez la méthode ``getDefaultOptions`` pour les spécifier :
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilder;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Symfony\Component\Validator\Constraints\Email;
     use Symfony\Component\Validator\Constraints\MinLength;
     use Symfony\Component\Validator\Constraints\Collection;
@@ -1617,14 +1644,16 @@ surchargez la méthode ``getDefaultOptions`` pour les spécifier :
     {
         // ...
 
-        public function getDefaultOptions()
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
             $collectionConstraint = new Collection(array(
                 'name' => new MinLength(5),
                 'email' => new Email(array('message' => 'Invalid email address')),
             ));
         
-            return array('validation_constraint' => $collectionConstraint);
+            $resolver->setDefaults(array(
+                'validation_constraint' => $collectionConstraint
+            ));
         }
     }
 
