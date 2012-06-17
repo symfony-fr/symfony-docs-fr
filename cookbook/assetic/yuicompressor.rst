@@ -27,6 +27,7 @@ les feuilles de style :
 
         # app/config/config.yml
         assetic:
+            # java: "/usr/bin/java"
             filters:
                 yui_css:
                     jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
@@ -49,6 +50,7 @@ les feuilles de style :
 
         // app/config/config.php
         $container->loadFromExtension('assetic', array(
+            // 'java' => '/usr/bin/java',
             'filters' => array(
                 'yui_css' => array(
                     'jar' => '%kernel.root_dir%/Resources/java/yuicompressor.jar',
@@ -59,6 +61,12 @@ les feuilles de style :
             ),
         ));
 
+.. note::
+    
+    Les utilisateurs de Windows ne doivent pas oublier de mettre à jour la
+    location de Java. Dans Windows8 x64 bit, il s'agit de
+    ``C:\Program Files (x86)\Java\jre6\bin\java.exe`` par défaut
+    
 Vous avez maintenant accès aux deux nouveaux filtres Assetic dans votre
 application : ``yui_css`` et ``yui_js``. Ils utiliseront YUI Compressor
 pour minifier respectivement les feuilles de style et les JavaScripts.

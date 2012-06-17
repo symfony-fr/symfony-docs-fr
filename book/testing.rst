@@ -289,7 +289,7 @@ document XML/HTML :
         $this->assertGreaterThan(0, $crawler->filter('h2.subtitle')->count());
 
         // Vérifie qu'il y a exactement 4 balises h2 sur la page
-        $this->assertCount(4, $crawler->filter('h2')->count());
+        $this->assertCount(4, $crawler->filter('h2'));
 
         // Vérifie que l'entête "Content-Type" vaut "application/json"
         $this->assertTrue($client->getResponse()->headers->contains('Content-Type', 'application/json'));

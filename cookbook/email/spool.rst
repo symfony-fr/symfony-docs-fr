@@ -69,20 +69,20 @@ envoyer les messages qui sont dans le « spool » :
 
 .. code-block:: bash
 
-    php app/console swiftmailer:spool:send
+    php app/console swiftmailer:spool:send --env=prod
 
 Cette commande possède une option pour limiter le nombre de messages
 devant être envoyés :
 
 .. code-block:: bash
 
-    php app/console swiftmailer:spool:send --message-limit=10
+    php app/console swiftmailer:spool:send --message-limit=10 --env=prod
 
 Vous pouvez aussi définir la limite de temps en secondes :
 
 .. code-block:: bash
 
-    php app/console swiftmailer:spool:send --time-limit=10
+    php app/console swiftmailer:spool:send --time-limit=10 --env=prod
 
 Bien sûr, vous ne voudrez pas exécuter ceci manuellement dans la réalité.
 A la place, la commande de la console devrait être lancée par une tâche cron

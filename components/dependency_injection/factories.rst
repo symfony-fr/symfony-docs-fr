@@ -1,19 +1,19 @@
-Comment utiliser une « Factory » (« Fabrique » en français) pour créer des Services
-===================================================================================
+.. index::
+   single: Dependency Injection; Factories
 
-Le conteneur de service de Symfony2 fournit une manière puissante de contrôler la
-création d'objets. Il vous permet en effet de spécifier des arguments à passer au
-contrôleur aussi bien que d'appeler des méthodes ou de configurer des paramètres.
-Parfois, cependant, cela ne vous fournit pas tout ce dont vous avez besoin pour
-construire vos objets. Dans une telle situation, vous pouvez alors utiliser une « factory »
-pour créer l'objet et avertir le conteneur de service afin qu'il appelle
-une méthode de la fabrique qui s'occupera de créer l'objet plutôt que de 
-l'instancier directement.
+Using a Factory to Create Services
+==================================
 
-Supposons que vous ayez une fabrique qui configure et retourne un nouvel objet 
-NewsletterManager ::
+Symfony2's Service Container provides a powerful way of controlling the 
+creation of objects, allowing you to specify arguments passed to the constructor
+as well as calling methods and setting parameters. Sometimes, however, this
+will not provide you with everything you need to construct your objects.
+For this situation, you can use a factory to create the object and tell the
+service container to call a method on the factory rather than directly instantiating
+the object.
 
-    namespace Acme\HelloBundle\Newsletter;
+Suppose you have a factory that configures and returns a new NewsletterManager
+object::
 
     class NewsletterFactory
     {
@@ -27,19 +27,18 @@ NewsletterManager ::
         }
     }
 
-Afin de créer le nouvel objet ``NewsletterManager`` et de le rendre disponible
-en tant que service, vous pouvez configurer un conteneur de service pour qu'il
-utilise la fabrique ``NewsletterFactory`` :
+To make the ``NewsletterManager`` object available as a service, you can
+configure the service container to use the ``NewsletterFactory`` factory
+class:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Newsletter\NewsletterManager
-            newsletter_factory.class: Acme\HelloBundle\Newsletter\NewsletterFactory
+            newsletter_manager.class: NewsletterManager
+            newsletter_factory.class: NewsletterFactory
         services:
             newsletter_manager:
                 class:          %newsletter_manager.class%
@@ -48,11 +47,10 @@ utilise la fabrique ``NewsletterFactory`` :
 
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Newsletter\NewsletterManager</parameter>
-            <parameter key="newsletter_factory.class">Acme\HelloBundle\Newsletter\NewsletterFactory</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="newsletter_factory.class">NewsletterFactory</parameter>
         </parameters>
 
         <services>
@@ -65,12 +63,11 @@ utilise la fabrique ``NewsletterFactory`` :
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Newsletter\NewsletterManager');
-        $container->setParameter('newsletter_factory.class', 'Acme\HelloBundle\Newsletter\NewsletterFactory');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('newsletter_factory.class', 'NewsletterFactory');
 
         $container->setDefinition('newsletter_manager', new Definition(
             '%newsletter_manager.class%'
@@ -80,19 +77,19 @@ utilise la fabrique ``NewsletterFactory`` :
             'get'
         );
 
-Quand vous précisez la classe à utiliser comme « factory » (via ``factory_class``),
-la méthode sera appelée de manière statique (ici ``get``). Si la « factory » elle-même
-doit être instanciée, elle sera elle-aussi définie comme un service :
+When you specify the class to use for the factory (via ``factory_class``)
+the method will be called statically. If the factory itself should be instantiated
+and the resulting object's method called (as in this example), configure the
+factory itself as a service:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Newsletter\NewsletterManager
-            newsletter_factory.class: Acme\HelloBundle\Newsletter\NewsletterFactory
+            newsletter_manager.class: NewsletterManager
+            newsletter_factory.class: NewsletterFactory
         services:
             newsletter_factory:
                 class:            %newsletter_factory.class%
@@ -103,11 +100,10 @@ doit être instanciée, elle sera elle-aussi définie comme un service :
 
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Newsletter\NewsletterManager</parameter>
-            <parameter key="newsletter_factory.class">Acme\HelloBundle\Newsletter\NewsletterFactory</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="newsletter_factory.class">NewsletterFactory</parameter>
         </parameters>
 
         <services>
@@ -121,12 +117,11 @@ doit être instanciée, elle sera elle-aussi définie comme un service :
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Newsletter\NewsletterManager');
-        $container->setParameter('newsletter_factory.class', 'Acme\HelloBundle\Newsletter\NewsletterFactory');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('newsletter_factory.class', 'NewsletterFactory');
 
         $container->setDefinition('newsletter_factory', new Definition(
             '%newsletter_factory.class%'
@@ -141,27 +136,24 @@ doit être instanciée, elle sera elle-aussi définie comme un service :
 
 .. note::
 
-   Le service « factory » est précisé par son identifiant et non par une référence
-   au service lui-même. Vous n'avez donc pas besoin d'utiliser la syntaxe utilisant
-   l'arobase (« @ »).
+   The factory service is specified by its id name and not a reference to 
+   the service itself. So, you do not need to use the @ syntax.
 
-Transmettre des arguments à la méthode de la « factory »
---------------------------------------------------------
+Passing Arguments to the Factory Method
+---------------------------------------
 
-Si vous avez besoin de transmettre des arguments à la méthode de la « factory »,
-vous pouvez utiliser l'option ``arguments`` à l'intérieur du conteneur de
-service. Ainsi, supposons que la méthode ``get`` de l’exemple précédent demande
-le service ``templating`` comme argument :
+If you need to pass arguments to the factory method, you can use the ``arguments``
+options inside the service container. For example, suppose the ``get`` method
+in the previous example takes the ``templating`` service as an argument:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        # src/Acme/HelloBundle/Resources/config/services.yml
         parameters:
             # ...
-            newsletter_manager.class: Acme\HelloBundle\Newsletter\NewsletterManager
-            newsletter_factory.class: Acme\HelloBundle\Newsletter\NewsletterFactory
+            newsletter_manager.class: NewsletterManager
+            newsletter_factory.class: NewsletterFactory
         services:
             newsletter_factory:
                 class:            %newsletter_factory.class%
@@ -174,11 +166,10 @@ le service ``templating`` comme argument :
 
     .. code-block:: xml
 
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
         <parameters>
             <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Newsletter\NewsletterManager</parameter>
-            <parameter key="newsletter_factory.class">Acme\HelloBundle\Newsletter\NewsletterFactory</parameter>
+            <parameter key="newsletter_manager.class">NewsletterManager</parameter>
+            <parameter key="newsletter_factory.class">NewsletterFactory</parameter>
         </parameters>
 
         <services>
@@ -194,12 +185,11 @@ le service ``templating`` comme argument :
 
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
 
         // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Newsletter\NewsletterManager');
-        $container->setParameter('newsletter_factory.class', 'Acme\HelloBundle\Newsletter\NewsletterFactory');
+        $container->setParameter('newsletter_manager.class', 'NewsletterManager');
+        $container->setParameter('newsletter_factory.class', 'NewsletterFactory');
 
         $container->setDefinition('newsletter_factory', new Definition(
             '%newsletter_factory.class%'

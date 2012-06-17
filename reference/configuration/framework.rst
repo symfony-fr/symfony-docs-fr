@@ -261,93 +261,119 @@ Toutes les Options de Configuration par Défaut
 
         framework:
 
-            # general configuration
+            # configuration générale
             charset:              ~
-            secret:               ~ # Required
+            trust_proxy_headers:  false
+            secret:               ~ # Requis
             ide:                  ~
             test:                 ~
             default_locale:       en
-            trust_proxy_headers:  false
 
-            # form configuration
+            # configuration des formulaires
             form:
                 enabled:              true
             csrf_protection:
                 enabled:              true
                 field_name:           _token
 
-            # esi configuration
+            # configuration esi 
             esi:
                 enabled:              true
 
-            # profiler configuration
+            # configuration du profileur
             profiler:
                 only_exceptions:      false
                 only_master_requests:  false
-                dsn:                  "sqlite:%kernel.cache_dir%/profiler.db"
+                dsn:                  file:%kernel.cache_dir%/profiler
                 username:
                 password:
                 lifetime:             86400
                 matcher:
                     ip:                   ~
-                    path:                 ~
+
+                    # utiliser le format urldecoded
+                    path:                 ~ # Exemple: ^/path to resource/
                     service:              ~
 
-            # router configuration
+            # configuration du routeur
             router:
                 resource:             ~ # Required
                 type:                 ~
                 http_port:            80
                 https_port:           443
 
-            # session configuration
+            # configuration de session
             session:
-                auto_start:           ~
+                auto_start:           false
                 storage_id:           session.storage.native
+                handler_id:           session.handler.native_file
                 name:                 ~
-                lifetime:             0
+                cookie_lifetime:      ~
+                cookie_path:          ~
+                cookie_domain:        ~
+                cookie_secure:        ~
+                cookie_httponly:      ~
+                gc_divisor:           ~
+                gc_probability:       ~
+                gc_maxlifetime:       ~
+                save_path:            %kernel.cache_dir%/sessions
+
+                # DEPRECIE ! utilisez : cookie_lifetime
+                lifetime:             ~
+
+                # DEPRECIE ! utilisez : cookie_path
                 path:                 ~
+
+                # DEPRECIE ! utilisez : cookie_domain
                 domain:               ~
+
+                # DEPRECIE ! utilisez : cookie_secure
                 secure:               ~
+
+                # DEPRECIE ! utilisez : cookie_httponly
                 httponly:             ~
 
-            # templating configuration
+            # Configuration du moteur du templating
             templating:
                 assets_version:       ~
-                assets_version_format:  "%%s?%%s"
+                assets_version_format:  %%s?%%s
+                hinclude_default_template:  ~
+                form:
+                    resources:
+
+                        # Par défaut:
+                        - FrameworkBundle:Form
                 assets_base_urls:
                     http:                 []
                     ssl:                  []
                 cache:                ~
-                engines:              # Required
-                form:
-                    resources:        [FrameworkBundle:Form]
+                engines:              # Requis
 
-                    # Example:
+                    # Exemple:
                     - twig
                 loaders:              []
                 packages:
 
-                    # Prototype
-                    name:
+                    # Une collection de noms de packages
+                    some_package_name:
                         version:              ~
-                        version_format:       ~
+                        version_format:       %%s?%%s
                         base_urls:
                             http:                 []
                             ssl:                  []
 
-            # translator configuration
+            # configuration du traducteur
             translator:
                 enabled:              true
                 fallback:             en
 
-            # validation configuration
+            # configuration de la validation
             validation:
                 enabled:              true
                 cache:                ~
                 enable_annotations:   false
 
-            # annotation configuration
+            # configuration des annotations
             annotations:
                 cache:                file
                 file_cache_dir:       "%kernel.cache_dir%/annotations"
