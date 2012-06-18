@@ -4,13 +4,13 @@ Utiliser des Convertisseurs de Données
 Vous allez souvent éprouver le besoin de transformer les données entrées par
 l'utilisateur dans un formulaire en quelque chose d'autre qui sera utilisé
 dans votre programme. Vous pourriez effectuer ceci manuellement dans votre
-contrôleur, mais que se passe-t-il si vous voulez utiliser ce formulaire
+contrôleur, mais que se passe-t-il si vous voulez réutiliser ce formulaire
 spécifique à différents endroits ?
 
-Disons que vous ayez une relation « one-to-one » de « Task » (« Tâche » en français) pour
+Supposons que vous ayez une relation « one-to-one » de « Task » (« Tâche » en français) pour
 « Issue » (« Problème » en français), par exemple : une tâche possède de manière
 optionnelle un problème qui lui est lié. Ajouter un élément « listbox » contenant
-tous les problèmes possibles peut éventuellement engendrer une très long liste dans
+tous les problèmes possibles peut éventuellement engendrer une très longue liste dans
 laquelle il est impossible de trouver quelque chose. Vous voudrez plutôt ajouter
 un champ texte dans lequel l'utilisateur peut simplement entrer le numéro du problème.
 Dans le contrôleur, vous pouvez convertir ce numéro de problème en une tâche, et
@@ -21,9 +21,9 @@ Cela serait mieux si ce problème était automatiquement converti en un objet «
 afin d'être utilisé dans votre action. C'est ici que les Convertisseurs de Données
 entrent en jeu.
 
-Tout d'abord, créez un type de formulaire personnalisé qui a un Convertisseur de
-Données lui étant attaché, et qui retourne le problème par numéro : le type
-« sélecteur de problème ». Eventuellement, cela sera simplement un champ texte, comme
+Tout d'abord, créez un type de formulaire personnalisé auquel est attaché un
+Convertisseur de données, et qui retourne le problème en fonctio de son numéro : le type
+« sélecteur de problème » (IssueSelector). Eventuellement, cela sera simplement un champ texte, comme
 nous configurons le parent des champs comme étant un champ texte, dans lequel vous
 pourrez entrer le numéro du problème. Le champ affichera une erreur si un numéro
 non-existant est entré::
@@ -84,7 +84,7 @@ non-existant est entré::
             {
                 // ...
 
-                // ceci assume que le gestionnaire d'entité a été passé en tant qu'option
+                // ceci suppose que le gestionnaire d'entité a été passé en tant qu'option
                 $entityManager = $options['em'];
                 $transformer = new IssueToNumberTransformer($entityManager);
 
@@ -218,8 +218,8 @@ comme suit::
         }
     }
 
-Maintenant, cela va être très facile d'utiliser ce type « sélecteur » à n'importe
-quel endroit dans votre application pour sélectionner un problème par son numéro.
+Maintenant, il sera très facile d'utiliser ce type « sélecteur » à n'importe
+quel endroit de votre application pour sélectionner un problème par son numéro.
 Aucune logique ne doit être ajoutée à votre contrôleur.
 
 Si vous voulez qu'un nouveau problème (« issue ») soit créé lorsqu'un numéro
