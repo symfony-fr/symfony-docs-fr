@@ -1,8 +1,8 @@
 .. index::
    single: Form; Utiliser des formulaires virtuels
 
-Comment utiliser l'Option de Champ Virtuel de Formulaire
-========================================================
+Comment utiliser l'Option de Champ de Formulaire ``Virtual`` 
+============================================================
 
 L'option de champ de formulaire ``virtual`` peut être très utile quand vous
 avez des champs dupliqués dans différentes entités.
@@ -108,15 +108,15 @@ français)::
         }
     }
 
-Nous n'avons *en fait* pas de champ « location » dans chacune de nos entités, donc nous
+Nous n'avons *en fait* pas de champ « location » dans nos entités, donc nous
 ne pouvons pas lier directement notre ``LocationType`` à notre ``CompanyType`` ou à notre
-``CustomerType``. Mais nous voulons absolument avoir un type dédié de formulaire pour
+``CustomerType``. Mais nous voulons absolument avoir un type de formulaire dédié pour
 gérer le lieu (rappelez-vous, DRY - Don't Repeat Yourself!).
 
 L'option de champ de formulaire ``virtual`` est la solution.
 
 Nous pouvons définir l'option ``'virtual' => true`` dans la méthode
-``getDefaultOptions`` de ``LocationType`` et directement commencer à l'utiliser
+``getDefaultOptions`` de ``LocationType`` et commencer à l'utiliser directement 
 dans les deux types de formulaires initiaux.
 
 Voyez le résultat::
@@ -135,13 +135,13 @@ Voyez le résultat::
         $builder->add('bar', new LocationType());
     }
 
-Avec l'option « virtual » définie comme « false » (comportement par défaut),
+Avec l'option « virtual » définie à « false » (comportement par défaut),
 le composant Form s'attend à ce que chaque objet sous-jacent ait une propriété
 ``foo`` (ou ``bar``) qui soit un objet ou un tableau contenant les quatre
 champs du lieu. Bien sûr, nous n'avons pas cet objet/tableau dans nos
 entités et nous ne le voulons pas.
 
-Avec l'option « virtual » définie comme « true », le composant Form ne s'occupe pas
+Avec l'option « virtual » définie à « true », le composant Form ne s'occupe pas
 de la propriété ``foo`` (ou ``bar``), et à la place « récupère » et « définit » (« gets »
 et « sets » en anglais) les 4 champs du lieu directement sur l'objet sous-jacent.
 
