@@ -1,5 +1,5 @@
-HTTP Foundation
-===============
+Fondation HTTP
+==============
 
 .. toctree::
     :maxdepth: 2
