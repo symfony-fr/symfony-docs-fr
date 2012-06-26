@@ -13,9 +13,9 @@ comme moteur de template.
 Bases de l'affichage de formulaire
 ----------------------------------
 
-Rappelong que le libellé, les éventuelles erreurs et le widget HTML d'un champ
+Rappelons que le libellé, les éventuelles erreurs et le widget HTML d'un champ
 de formulaire peuvent être facilement affichés en utilisant la fonction Twig
-``form_row`` ou la méthode d'aide (helper) PHP ``row`` :
+``form_row`` ou la méthode d'aide (« helper » en anglais) PHP ``row`` :
 
 .. configuration-block::
 
@@ -27,7 +27,8 @@ de formulaire peuvent être facilement affichés en utilisant la fonction Twig
 
         <?php echo $view['form']->row($form['age']) }} ?>
 
-Vous pouvez également afficher chacune de ces trois parties d'une champ individuellement :
+Vous pouvez également afficher chacune de ces trois parties d'un champ
+individuellement :
 
 .. configuration-block::
 
@@ -48,7 +49,7 @@ Vous pouvez également afficher chacune de ces trois parties d'une champ individ
         </div>
 
 Dans les deux cas, le libellé du formulaire, les erreurs et le widget HTML sont
-affichés en utilisant un ensemble de balises qui sont livrés d'office avec Symfony.
+affichés en utilisant un ensemble de balises livré d'office avec Symfony.
 Par exemple, les deux templates ci-dessus afficheront :
 
 .. code-block:: html
@@ -83,24 +84,25 @@ de formulaires en général, lisez :ref:`form-rendering-template`.
 Que sont les thèmes de formulaire ?
 -----------------------------------
 
-Symfony utilise des fragments de formulaires - des parties de template qui affichent
-juste une partie du formulaire - pour afficher chaque partie du formulaire : libellés
-de champs, errors, champs ``input`` texte, balises ``select``, etc.
+Symfony utilise des fragments de formulaires - des parties de template qui
+affichent juste une partie du formulaire - pour afficher chaque partie du
+formulaire : libellés de champs, erreurs, champs texte ``input``, balises
+``select``, etc.
 
 Ces fragments sont définis par comme blocs dans Twig et comme fichiers de templates
 avec PHP.
 
 Un *thème* n'est rien de plus qu'un ensemble de fragments que vous pouvez utiliser
-pour afficher un formulaire. En d'autres termes, si vous voulez personnaliser l'affichage
-d'une partie d'un formulaire, vous pouvez importer un *thème* qui contient une
-personnalisation des fragments de formulaire concernés.
+pour afficher un formulaire. En d'autres termes, si vous voulez personnaliser
+l'affichage d'une partie d'un formulaire, vous pouvez importer un *thème* qui
+contient une personnalisation des fragments de formulaire concernés.
 
 Symfony est fourni avec un thème par défaut (`form_div_layout.html.twig`_ pour Twig
-et ``FrameworkBundle:Form`` pour PHP) qui définit chaque fragment nécessaire à l'affichage
-des différentes parties d'un formulaire.
+et ``FrameworkBundle:Form`` pour PHP) qui définit chaque fragment nécessaire à
+l'affichage des différentes parties d'un formulaire.
 
-Dans la section suivante, vous apprendre comment personnaliser un thème en surchargeant un
-ou l'ensemble de ses fragments.
+Dans la section suivante, vous apprendre comment personnaliser un thème en surchargeant
+un ou l'ensemble de ses fragments.
 
 Par exemple, lorsque le widget d'un type de champ ``integer`` est affiché, un champ
 ``input`` ``number`` est généré.
@@ -122,8 +124,8 @@ affiche :
     <input type="number" id="form_age" name="form[age]" required="required" value="33" />
 
 En interne, Symfony utilise le fragment ``integer_widget`` pour afficher le champ.
-C'est parce que le type champ est ``integer`` et que vous voulez afficher son ``widget``
-(par opposition à son ``libellé`` ou ses ``erreurs``).
+C'est parce que le type de champ est ``integer`` et que vous voulez afficher son ``widget``
+(par opposition à son ``libellé`` ou à ses ``erreurs``).
 
 Par défaut, avec Twig, le bloc ``integer_widget`` du template `form_div_layout.html.twig`_ serait choisi.
 
@@ -185,29 +187,29 @@ dans ce répertoire.
 .. sidebar:: Savoir quel bloc personnaliser
 
     Dans cet exemple, le nom du fragment personnalisé est ``integer_widget`` parce
-	que vous voulez surcharger le ``widget`` HTML pour tous les types de champ ``integer``.
-	Si vous voulez personnaliser les champs textarea, vous devrez personnaliser ``textarea_widget``.
-	
-	Comme vous le voyez, un nom de fragment est une combinaison du type de champ et de la
-	partie du formulaire qui doit être affichée (ex ``widget``, ``label``, ``errors``, ``row``).
-	En conséquence, pour personnaliser la manière dont les erreurs sont affichées pour les champs
-	input ``text`` uniquement, vous devrez personnaliser le fragment ``text_errors``.
-	
-	Pourtant, bien souvent vous voudrez personnaliser l'affichage des erreurs pour *tout*
-	les champs. Vous pouvez faire cela en personnalisant le fragment ``field_errors``.
-	Cette méthode tire avantage de l'héritage de type de champs. Plus précisément, puisque
-	le type ``text`` étend le type ``field``, le composant formulaire cherchera d'abord le
-	fragment spécifique au type (ex``text_errors``) avant de se rabattre sur nom du fragment
-	parent si le spécifique n'existe pas (ex ``field_errors``).
-	
-	Pour plus d'informations sur ce sujet, lisez :ref:`form-template-blocks`.
+    que vous voulez surcharger le ``widget`` HTML pour tous les types de champ ``integer``.
+    Si vous voulez personnaliser les champs « textarea », vous devrez personnaliser ``textarea_widget``.
+
+    Comme vous le voyez, un nom de fragment est une combinaison du type de champ et de la
+    partie du formulaire qui doit être affichée (ex ``widget``, ``label``, ``errors``, ``row``).
+    En conséquence, pour personnaliser la manière dont les erreurs sont affichées pour les champs
+    input ``text`` uniquement, vous devrez personnaliser le fragment ``text_errors``.
+
+    Pourtant, bien souvent, vous voudrez personnaliser l'affichage des erreurs pour *tous*
+    les champs. Vous pouvez faire cela en personnalisant le fragment ``field_errors``.
+    Cette méthode tire avantage de l'héritage de type de champs. Plus précisément, puisque
+    le type ``text`` étend le type ``field``, le composant formulaire cherchera d'abord le
+    fragment spécifique au type (par exemple : ``text_errors``) avant de se rabattre sur le
+    nom du fragment parent si le spécifique n'existe pas (par exemple : ``field_errors``).
+
+    Pour plus d'informations sur ce sujet, lisez :ref:`form-template-blocks`.
 
 .. _cookbook-form-theming-methods:
 
 Thèmes de formulaire
 --------------------
 
-Pour apprécier la puissance des thèmes de formulaire, supposons que vous voulez
+Pour apprécier la puissance des thèmes de formulaire, supposons que vous vouliez
 encadrer chaque champ ``number`` par un ``div``. La clé pour faire cela est de
 personnaliser le fragment ``integer_widget``.
 
@@ -220,13 +222,13 @@ deux choix possibles quant à la *localisation* du bloc personnalisé :
 +----------------------------------------+-------------------------------------------+-------------------------------------------+
 | Méthode                                | Avantages                                 | Inconvénients                             |
 +========================================+===========================================+===========================================+
-| Dans le même template que le formulaire| Rapide et facile                          | Ne peut être réutilisé                    |
+| Dans le même template que le formulaire| Rapide et facile                          | Ne peut pas être réutilisé                |
 +----------------------------------------+-------------------------------------------+-------------------------------------------+
 | Dans un template séparé                | Peut être réutilisé par d'autres templates| Nécessite la création d'un template       |
 +----------------------------------------+-------------------------------------------+-------------------------------------------+
 
 Ces deux méthodes ont les mêmes effets mais ne sont pas aussi avantageuses
-selon les situations.
+l'une que l'autre suivant les situations.
 
 .. _cookbook-form-twig-theming-self:
 
@@ -264,7 +266,7 @@ L'inconvénient de cette méthode est que les blocs de formulaire personnalisés
 ne peuvent pas être réutilisés pour afficher d'autres formulaires dans d'autres
 templates. En d'autres termes, cette méthode est spécialement utile pour faire
 des changements applicables à un formulaire spécifique de votre application. Si vous
-voulez réutiliser vos personnalisations pour certains (ou tout) autres formulaires,
+voulez réutiliser vos personnalisations pour certains (ou tous les) autres formulaires,
 lisez la section suivante.
 
 .. _cookbook-form-twig-separate-template:
@@ -375,7 +377,7 @@ lorsque vous redéfinissez le bloc ``integer_widget``, vous pouvez faire référ
         </div>
     {% endblock %}
 
-Faire référence aux blocs~par défaut depuis un template externe
+Faire référence aux blocs par défaut depuis un template externe
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vos personnalisations de formulaire se trouvent dans un template
@@ -396,9 +398,9 @@ la fonction Twig ``parent()`` :
 
 .. note::
 
-	Il n'est pas possible de faire référence au bloc par défaut si vous
-	utilisez PHP comme moteur de template. Vous devrez alors copier manuellement
-	le code du bloc par défaut dans votre nouveau fichier de template.
+    Il n'est pas possible de faire référence au bloc par défaut si vous
+    utilisez PHP comme moteur de template. Vous devrez alors copier manuellement
+    le code du bloc par défaut dans votre nouveau fichier de template.
 
 .. _cookbook-form-global-theming:
 
@@ -494,7 +496,7 @@ comme ressource :
 
 .. code-block:: html+jinja
 
-	{% form_theme form 'form_table_layout.html.twig' %}
+    {% form_theme form 'form_table_layout.html.twig' %}
 
 Notez que la variable ``form`` dans le code ci-dessus est la vue du formulaire
 que vous avez passée à votre template.
@@ -595,7 +597,7 @@ comme ressource :
 
 .. code-block:: html+php
 
-	<?php $view['form']->setTheme($form, array('FrameworkBundle:FormTable')); ?>
+    <?php $view['form']->setTheme($form, array('FrameworkBundle:FormTable')); ?>
 
 Notez que la variable ``form`` dans le code ci-dessus est la vue du formulaire
 que vous avez passée à votre template.
@@ -604,11 +606,11 @@ Comment personnaliser un champ individuel
 -----------------------------------------
 
 Jusqu'ici, vous avez vu les différentes manières de personnaliser le widget
-généré pour tout les types de champ texte. Vous pouvez également personnaliser
-un champ individuel. Par exemple, supposond que vous avez deux champs ``texte``
-(``nom`` et ``prénom``) mais que vous voulez seulement personnaliser
+généré pour tous les types de champ texte. Vous pouvez également personnaliser
+un champ individuel. Par exemple, supposons que vous ayez deux champs ``texte``
+(``nom`` et ``prénom``) mais que vous vouliez seulement personnaliser
 l'un de ces deux champs. Cela peut être fait en personnalisant un fragment dont le
-nom est une combinaison de l'attribut id du champ et de la partie du champ concerné
+nom est une combinaison de l'attribut « id » du champ et de la partie du champ concerné
 (libellé, widget ou erreur). Par exemple :
 
 .. configuration-block::
@@ -646,7 +648,7 @@ du champ dont l'*id* est ``product_name`` (et dont le nom est ``product[name]``)
 
    La partie ``product`` du champ est le nom du formulaire qui peut être défini
    manuellement ou automatiquement généré en se basant sur le nom du type de
-   formulaire (par exemple ``ProductType`` donnera``product``). Si vous n'êtes
+   formulaire (par exemple : ``ProductType`` donnera ``product``). Si vous n'êtes
    pas sûr du nom de votre formulaire, regardez le code source généré de votre
    formulaire.
 
@@ -688,10 +690,11 @@ Dans les sections suivantes, vous verrez comment effectuer plusieurs personnalis
 de formulaires communes. Pour appliquer ces personnalisations, utilisez l'une des méthodes
 décrites dans la section :ref:`cookbook-form-theming-methods`.
 
-Personnaliser l'affichage d'erreurs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Personnaliser l'affichage des erreurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
+
    Le composant formulaire ne prend en charge que la *manière* dont les erreurs
    de validation sont affichées, et non les messages d'erreurs eux-mêmes. Les
    messages d'erreurs sont déterminés par les contraintes de validation que vous
@@ -700,7 +703,7 @@ Personnaliser l'affichage d'erreurs
 
 Il y a plusieurs manières différentes de personnaliser l'affichage des erreurs
 lorsqu'un formulaire soumis n'est pas valide. Les messages d'erreur d'un champ
-sont affichés lorsque vous utilisez le helper ``form_errors`` :
+sont affichés lorsque vous utilisez le « helper » ``form_errors`` :
 
 .. configuration-block::
 
@@ -712,7 +715,7 @@ sont affichés lorsque vous utilisez le helper ``form_errors`` :
 
         <?php echo $view['form']->errors($form['age']); ?>
 
-Par défaut, les erreurs sont affichées dans une liste non ordonnées :
+Par défaut, les erreurs sont affichées dans une liste non-ordonnée :
 
 .. code-block:: html
 
@@ -720,7 +723,7 @@ Par défaut, les erreurs sont affichées dans une liste non ordonnées :
         <li>Ce champ est obligatoire</li>
     </ul>
 
-Pour surcharger l'affichage des erreurs pour *tout* les champs, il vous
+Pour surcharger l'affichage des erreurs pour *tous* les champs, il vous
 suffit de copier, coller et personnaliser le fragment ``field_errors``.
 
 .. configuration-block::
@@ -756,6 +759,7 @@ suffit de copier, coller et personnaliser le fragment ``field_errors``.
         <?php endif ?>
 
 .. tip::
+
     Lisez :ref:`cookbook-form-theming-methods` pour savoir comment appliquer ces personnalisations.
 
 Vous pouvez aussi personnaliser l'affichage des erreurs pour un seul type
@@ -773,7 +777,7 @@ séparément, souvent en haut de votre formulaire :
 
         <?php echo $view['form']->render($form); ?>
 
-Pour *seulement* personnaliser le rendu de ces erreurs, suivez les mêmes directives
+Pour personnaliser *uniquement* le rendu de ces erreurs, suivez les mêmes directives
 que ci-dessus, sauf que vous devez maintenant appeler le bloc ``form_errors`` (Twig)
 ou le fichier ``form_errors.html.php`` (PHP). Maintenant, lorsque les erreurs du
 type ``form`` seront affichées, votre fragment personnalisé sera utilisé au lieu du
@@ -785,8 +789,8 @@ Personnaliser le « Form Row »
 Quand vous pouvez le faire, la manière la plus simple d'afficher un champ
 de formulaire est la fonction ``form_row``, qui affiche le libellé, les erreurs
 et le widget HTML d'un champ. Pour personnaliser le code généré utilisé pour afficher
-*tout* les champs de formulaire, surchargez le fragment ``field_row``. Par exemple,
-supposons que vous voulez ajouter une classe à l'élément ``div`` qui entoure chaque
+*tous* les champs de formulaire, surchargez le fragment ``field_row``. Par exemple,
+supposons que vous vouliez ajouter une classe à l'élément ``div`` qui entoure chaque
 bloc :
 
 .. configuration-block::
@@ -812,10 +816,11 @@ bloc :
         </div>
 
 .. tip::
+
     Lisez :ref:`cookbook-form-theming-methods` pour savoir comment appliquer cette personnalisation.
 
 Ajouter une astérisque « obligatoire » sur les libellés de champs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous voulez marquer tous les champs obligatoires par une astérisque (``*``),
 vous pouvez le faire en personnalisant le fragment ``field_label``.
@@ -866,13 +871,14 @@ depuis le template original :
     <?php endif ?>
 
 .. tip::
-    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment faire cette personnalisation.
+
+    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment appliquer cette personnalisation.
 
 Ajouter des messages d'« aide »
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-vous pouvez aussi personnaliser vos widgets de formulaire avec un message
-d'« aide » (« help ») facultatif.
+Vous pouvez aussi personnaliser vos widgets de formulaire avec un message
+d'« aide » (« help » en anglais) facultatif.
 
 Avec Twig, si vous faites les changements dans le même template que votre
 formulaire, modifiez le tag ``use`` et ajoutez ce qui suit :
@@ -936,6 +942,7 @@ une variable ``help`` :
         <?php echo $view['form']->widget($form['title'], array('help' => 'foobar')) ?>
 
 .. tip::
-    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment faire ces personnalisations.
+
+    Lisez :ref:`cookbook-form-theming-methods` pour savoir comment appliquer ces personnalisations.
 
 .. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
