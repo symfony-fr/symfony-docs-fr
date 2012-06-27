@@ -1,7 +1,7 @@
 MinLength
 =========
 
-Valide que la longueur d'une chaine de caractères est au moins supérieure à la
+Valide que la longueur d'une chaîne de caractères est au moins supérieure à la
 limite donnée.
 
 +----------------+-------------------------------------------------------------------------+
@@ -66,7 +66,7 @@ limit
 **type**: ``integer`` [:ref:`default option<validation-default-option>`]
 
 Cette option obligatoire est la valeur « minimale». La validation échouera
-si la longueur de la chaine de caractères donnée est **inférieure** à ce
+si la longueur de la chaîne de caractères donnée est **inférieure** à ce
 nombre.
 
 message
@@ -74,7 +74,7 @@ message
 
 **type**: ``string`` **default**: ``This value is too short. It should have {{ limit }} characters or more``
 
-Le message qui sera affiché si la longueur de la chaine de caractères est
+Le message qui sera affiché si la longueur de la chaîne de caractères est
 inférieure à l'option `limit`_.
 
 charset
@@ -84,7 +84,7 @@ charset
 
 
 Si l'extension PHP « mbstring » est installée, alors la fonction PHP `mb_strlen`_
-sera utilisée pour calculer la longueur de la chaine. La valeur de l'option
+sera utilisée pour calculer la longueur de la chaîne. La valeur de l'option
 ``charset`` est passée comme second argument de cette fonction.
 
 .. _`mb_strlen`: http://php.net/manual/fr/function.mb-strlen.php

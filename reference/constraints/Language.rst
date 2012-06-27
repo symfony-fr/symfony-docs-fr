@@ -49,4 +49,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid language``
 
-Le message s'affiche si la chaine de caractères n'est pas un code de langue valide.
+Le message s'affiche si la chaîne de caractères n'est pas un code de langue valide.

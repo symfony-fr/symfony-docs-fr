@@ -17,8 +17,8 @@ permet d'appliquer un ensemble de contraintes à chaque élément du tableau.
 Utilisation de base
 -------------------
 
-Supposons que vous avez un tableau de chaines de caractères, et que vous
-voulez valider chaque entrée du tableau :
+Supposons que vous ayez un tableau de chaînes de caractères, et que vous
+vouliez valider chaque entrée du tableau :
 
 .. configuration-block::
 
@@ -36,7 +36,7 @@ voulez valider chaque entrée du tableau :
 
        // src/Acme/UserBundle/Entity/User.php
        namespace Acme\UserBundle\Entity;
-       
+
        use Symfony\Component\Validator\Constraints as Assert;
 
        class User

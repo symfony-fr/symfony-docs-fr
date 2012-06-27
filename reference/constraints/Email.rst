@@ -2,7 +2,7 @@ Email
 =====
 
 Valide que la valeur est une adresse email valide. La donnée finale est convertie
-en une chaine de caractères avant d'être validée.
+en une chaîne de caractères avant d'être validée.
 
 +----------------+---------------------------------------------------------------------+
 | S'applique à   | :ref:`property or method<validation-property-target>`               |
@@ -42,7 +42,7 @@ Utilisation de base
             <class name="Acme\BlogBundle\Entity\Author">
                 <property name="email">
                     <constraint name="Email">
-                        <option name="message">The email "{{ value }}" is not a valid email.</option>
+                        <option name="message">L'email "{{ value }}" n'est pas un email valide.</option>
                         <option name="checkMX">true</option>
                     </constraint>
                 </property>
@@ -83,7 +83,7 @@ checkMX
 **type**: ``Boolean`` **default**: ``false``
 
 Si cette option est définie à true, alors la fonction PHP :phpfunction:`checkdnsrr`
-sera utilisée pour vérifier la validité du registrement MX du serveur de l'email donné.
+sera utilisée pour vérifier la validité de l'enregistrement MX du serveur de l'email donné.
 
 checkHost
 ~~~~~~~~~
@@ -94,5 +94,5 @@ checkHost
 **type**: ``Boolean`` **default**: ``false``
  
 Si cette option est définie à true, alors la fonction PHP :phpfunction:`checkdnsrr`
-sera utilisée pour vérifier la validité du registrement MX *ou* 1 *ou* AAAA du serveur
+sera utilisée pour vérifier la validité de l'enregistrement MX *ou* 1 *ou* AAAA du serveur
 de l'email donné.

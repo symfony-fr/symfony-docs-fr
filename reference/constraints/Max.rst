@@ -60,7 +60,7 @@ message
 
 **type**: ``string`` **default**: ``This value should be {{ limit }} or less``
 
-Le message qui sera affiché si la valeur est supérieur à l'option `limit`_.
+Le message qui sera affiché si la valeur est supérieure à l'option `limit`_.
 
 invalidMessage
 ~~~~~~~~~~~~~~

@@ -1,7 +1,7 @@
 NotBlank
 ========
 
-Valide qu'une valeur n'est pas vide, pas égale à une chaine de caractères vide,
+Valide qu'une valeur n'est pas vide, pas égale à une chaîne de caractères vide,
 et pas égale à ``null``. Pour forcer une valeur à ne pas être simplement égale
 à ``null``, lisez la documentation de la contrainte :doc:`/reference/constraints/NotNull`.
 

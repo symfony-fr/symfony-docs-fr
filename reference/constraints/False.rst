@@ -2,7 +2,7 @@ False
 =====
 
 Valide que la valeur est ``false``. Spécifiquement, cette contrainte vérifie que la
-valeur est exactement ``false``, exactement l'entier ``0``, ou exactement la chaine
+valeur est exactement ``false``, exactement l'entier ``0``, ou exactement la chaîne
 de caractères « ``0`` ».
 
 Vous pouvez également voir :doc:`True <True>`.
@@ -22,7 +22,7 @@ Utilisation de base
 
 La contrainte ``False`` s'applique à une propriété ou à une méthode « getter » mais
 elle est le plus souvent utilisée dans le dernier cas. Par exemple, supposons 
-que vous voulez garantir qu'une propriété ``state`` n'est *pas* dans un tableau
+que vous vouliez garantir qu'une propriété ``state`` n'est *pas* dans un tableau
 dynamique ``invalidStates``. Premièrement, vous créerez une méthode « getter »::
 
     protected $state;
@@ -77,4 +77,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be false``
 
-Ce message s'affiche si la données n'est pas à false.
+Ce message s'affiche si la donnée n'est pas à false.
