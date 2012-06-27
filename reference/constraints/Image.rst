@@ -11,36 +11,36 @@ de valider une image selon sa largeur et sa hauteur.
 Lisez la documentation de la contrainte :doc:`File</reference/constraints/File>`
 pour tout savoir sur cette contrainte.
 
-+----------------+----------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`              |
-+----------------+----------------------------------------------------------------------+
-| Options        | - `mimeTypes`_                                                       |
-|                | - `minWidth`_                                                        |
-|                | - `maxWidth`_                                                        |
-|                | - `maxHeight`_                                                       |
-|                | - `minHeight`_                                                       |
-|                | - `mimeTypesMessage`_                                                |
-|                | - `sizeNotDetectedMessage`_                                          |
-|                | - `maxWidthMessage`_                                                 |
-|                | - `minWidthMessage`_                                                 |
-|                | - `maxHeightMessage`_                                                |
-|                | - `minHeightMessage`_                                                |
-|                | - See :doc:`File</reference/constraints/File>` for inherited options |
-+----------------+----------------------------------------------------------------------+
-| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\File`            |
-+----------------+----------------------------------------------------------------------+
-| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`   |
-+----------------+----------------------------------------------------------------------+
++----------------+---------------------------------------------------------------------------+
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                   |
++----------------+---------------------------------------------------------------------------+
+| Options        | - `mimeTypes`_                                                            |
+|                | - `minWidth`_                                                             |
+|                | - `maxWidth`_                                                             |
+|                | - `maxHeight`_                                                            |
+|                | - `minHeight`_                                                            |
+|                | - `mimeTypesMessage`_                                                     |
+|                | - `sizeNotDetectedMessage`_                                               |
+|                | - `maxWidthMessage`_                                                      |
+|                | - `minWidthMessage`_                                                      |
+|                | - `maxHeightMessage`_                                                     |
+|                | - `minHeightMessage`_                                                     |
+|                | - Voir :doc:`File</reference/constraints/File>` pour les options héritées |
++----------------+---------------------------------------------------------------------------+
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\File`                 |
++----------------+---------------------------------------------------------------------------+
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\FileValidator`        |
++----------------+---------------------------------------------------------------------------+
 
 Utilisation de base
 -------------------
 
 Cette contrainte est le plus souvent utilisée sur une propriété qui sera affichée
 sous forme de champ :doc:`file</reference/forms/types/file>` dans un formulaire.
-Par exemple, supposons que vous créer un formulaire Auteur (Author) dans lequel
-vous pouvez uploader une image représentant le « portrait » (headshot en anglais)
-de l'auteur. Dans votre formulaire, la propriété ``headshot`` sera un type ``file``.
-La classe ``Author`` pourrait ressembler à ce qui suit::
+Par exemple, supposons que vous créiez un formulaire « Auteur » (« Author » en anglais)
+dans lequel vous pouvez uploader une image représentant le « portrait » (« headshot »
+en anglais) de l'auteur. Dans votre formulaire, la propriété ``headshot`` sera un type
+``file``. La classe ``Author`` pourrait ressembler à ce qui suit::
 
     // src/Acme/BlogBundle/Entity/Author.php
     namespace Acme\BlogBundle\Entity;
@@ -62,8 +62,9 @@ La classe ``Author`` pourrait ressembler à ce qui suit::
         }
     }
 
-Pour garantir que l'objet ``File`` ``headshot`` est une image valide et dont la
-taille se situe dans une certaine place, ajoutez le code suivant :
+Pour garantir que l'objet ``File`` ``headshot`` soit une image valide et dont la
+taille se conforme à certaines contraintes de hauteur et largeur, ajoutez le code
+suivant :
 
 .. configuration-block::
 
@@ -136,14 +137,14 @@ taille se situe dans une certaine place, ajoutez le code suivant :
         }
 
 La propriété ``headshot`` est maintenant validée pour garantir qu'il s'agit bien
-d'une image que sa taille respecte une certaine hauteur et une certaine largeur.
+d'une image et que sa taille respecte une certaine hauteur et une certaine largeur.
 
 Options
 -------
 
 Cette contrainte partage toutes ses options avec la contrainte :doc:`File</reference/constraints/File>`.
 Cependant, elle modifie les valeurs par défaut de deux options, et possède plusieurs
-autres options en plus.
+autres options supplémentaires.
 
 mimeTypes
 ~~~~~~~~~
@@ -196,7 +197,7 @@ sizeNotDetectedMessage
 **type**: ``string`` **default**: ``The size of the image could not be detected``
 
 Si le système n'est pas capable de déterminer la taille de l'image, cette erreur
-sera affichée. Elle n'apparaitra que si au moins une des quatres options sur les tailles
+sera affichée. Elle n'apparaîtra que si au moins une des quatres options sur les tailles
 est définie.
 
 maxWidthMessage

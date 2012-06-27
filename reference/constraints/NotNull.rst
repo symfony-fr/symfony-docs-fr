@@ -2,7 +2,7 @@ NotNull
 =======
 
 Valide qu'une valeur n'est strictement pas égale à ``null``. Pour vous assurer qu'une
-valeur ne soit simplement pas vide (pas une chaine de caractères vide), lisez la
+valeur ne soit simplement pas vide (pas une chaîne de caractères vide), lisez la
 documentation de la contrainte :doc:`/reference/constraints/NotBlank`.
 
 +----------------+-----------------------------------------------------------------------+

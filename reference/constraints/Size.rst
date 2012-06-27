@@ -1,7 +1,7 @@
 Size
 ====
 
-Valide que la longueur d'une chaine de caractères donnée, ou le nombre d'éléments
+Valide que la longueur d'une chaîne de caractères donnée, ou le nombre d'éléments
 d'une collection se situe *entre* une valeur minimum et une valeur maximum.
 
 .. versionadded:: 2.1
@@ -62,7 +62,7 @@ Pour vérifier que la longueur du champ ``firstName`` d'une classe se situe entr
         }
 
 Utilisation de base - Collections
--------------------------
+---------------------------------
 
 Pour vérifier que le champ ``emails`` contient entre 1 et 5 éléments, vous
 pouvez procéder comme suit :

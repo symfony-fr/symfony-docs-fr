@@ -5,21 +5,21 @@ UserPassword
 
    Cette contrainte n'existe que depuis la version 2.1.
 
-Cette contrainte valide qu'une valeur saisie est égale au mot de passe
-de l'utilisateur courant. C'est utile dans un formulaire où l'utilisateur
+Cette contrainte valide qu'une valeur saisie est Ã©gale au mot de passe
+de l'utilisateur courant. C'est utile dans un formulaire oÃ¹ l'utilisateur
 peut changer son mot de passe mais doit d'abord entrer son ancien mot de
-passe pour des raisons de sécurité.
+passe pour des raisons de sÃ©curitÃ©.
 
 .. note::
 
-    Elle ne devrait *pas* être utilisée dans un formulaire de connexion,
-	puisque c'est fait automatiquement par le système de sécurité.
+    Elle ne devrait *pas* Ãªtre utilisÃ©e dans un formulaire de connexion,
+    puisque cela est gÃ©rÃ© automatiquement par le systÃ¨me de sÃ©curitÃ©.
 
-Lorsqu'elle est appliquée à un tableau (ou un objet Traversable), cette contrainte
-vous permet d'appliquer une collection de contraintes à chaque élément du tableau.
+Lorsqu'elle est appliquÃ©e Ã  un tableau (ou Ã  un objet de type Traversable), cette
+contrainte vous permet d'appliquer une collection de contraintes Ã  chaque Ã©lÃ©ment du tableau.
 
 +----------------+----------------------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                                |
+| S'applique Ã    | :ref:`propriÃ©tÃ© ou mÃ©thode<validation-property-target>`                                |
 +----------------+----------------------------------------------------------------------------------------+
 | Options        | - `message`_                                                                           |
 +----------------+----------------------------------------------------------------------------------------+
@@ -31,8 +31,8 @@ vous permet d'appliquer une collection de contraintes à chaque élément du tablea
 Utilisation de base
 -------------------
 
-Supposons que vous avez une classe `PasswordChange` qui est utilisée dans un
-formulaire où l'utilisateur peut changer son mot de passe en entrant son
+Supposons que vous ayez une classe `PasswordChange` qui est utilisÃ©e dans un
+formulaire oÃ¹ l'utilisateur peut changer son mot de passe en entrant son
 ancien mot de passe et son nouveau mot de passe. Cette contrainte validera
 que l'ancien mot de passe est correct :
 
@@ -45,7 +45,7 @@ que l'ancien mot de passe est correct :
             properties:
                 oldPassword:
                     - UserPassword:
-                        message: "Votre mot de passe actuel est erroné"
+                        message: "Votre mot de passe actuel est erronÃ©"
 
     .. code-block:: php-annotations
 
@@ -58,7 +58,7 @@ que l'ancien mot de passe est correct :
        {
            /**
             * @Assert\UserPassword(
-            *     message = "Votre mot de passe actuel est erroné"
+            *     message = "Votre mot de passe actuel est erronÃ©"
             * )
             */
             protected $oldPassword;
@@ -72,5 +72,5 @@ message
 
 **type**: ``message`` **default**: ``This value should be the user current password``
 
-Le message qui sera affiché si la chaine de caractères ne correspond *pas*
+Le message qui sera affichÃ© si la chaÃ®ne de caractÃ¨res ne correspond *pas*
 au mot de passe actuel de l'utilisateur.

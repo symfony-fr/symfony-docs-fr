@@ -27,7 +27,7 @@ que chaque item d'un tableau d'items est l'un des choix valides.
 Utilisation de base
 -------------------
 
-L'idée principale de cette contrainte est que fournissez un tableau de valeurs
+L'idée principale de cette contrainte est que vous fournissez un tableau de valeurs
 valides (cela peut être fait de différentes manières) et elle valide que la
 valeur d'une propriété données est bien dans ce tableau.
 
@@ -196,7 +196,8 @@ choices
 ~~~~~~~
 
 **type**: ``array`` [:ref:`default option<validation-default-option>`]
-Cette option obligatoire (à moins que `callback`_ soit spécifiée)
+
+Cette option obligatoire (à moins que `callback`_ soit spécifié)
 représente le tableau d'options qui doit être considéré comme un
 ensemble valide. La donnée soumise sera comparée à ce tableau.
 

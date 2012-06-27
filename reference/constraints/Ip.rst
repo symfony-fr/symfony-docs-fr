@@ -84,4 +84,4 @@ message
 
 **type**: ``string`` **default**: ``This is not a valid IP address``
 
-Ce message s'affiche si la chaine de caractères n'est pas une adresse IP valide.
+Ce message s'affiche si la chaîne de caractères n'est pas une adresse IP valide.
