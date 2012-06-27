@@ -2,8 +2,8 @@ DateTime
 ========
 
 Valide que la valeur est un « datetime » valide, c'est-à-dire soit un objet
-``DateTime``, soit une chaine de caractères (ou un objet qui peut être converti
-en chaine de caractères) qui respecte un format YYYY-MM-DD HH:MM:SS valide.
+``DateTime``, soit une chaîne de caractères (ou un objet qui peut être converti
+en chaîne de caractères) qui respecte un format YYYY-MM-DD HH:MM:SS valide.
 
 +----------------+------------------------------------------------------------------------+
 | S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                |

@@ -7,15 +7,15 @@ des champs spécifiques de votre objet. Si vous utilisez la validation de formul
 cela signifie que vous pouvez faire en sorte que ces erreurs personnalisées s'affichent
 à côté d'un champ spécifique plutôt qu'en haut de votre formulaire.
 
-Cela fonctionne en spécifiant des méthodes *callback*, chacune d'elles étant appelée
-durant le processus de validation. Chacune de ces méthode peut faire toute
+Cela fonctionne en spécifiant des méthodes *callback*, chacune d'elle étant appelée
+durant le processus de validation. Chacune de ces méthodes peut faire toute
 sorte de choses, incluant la création et l'assignation d'erreurs de validation.
 
 .. note::
     
     Une méthode callback elle-même n'*échoue* pas et ne retourne aucune valeur.
-	Au lieu de cela, comme vous le verrez dans l'exemple, cette méthode a le
-	pouvoir d'ajouter directement des « violations » de validateur.
+    Au lieu de cela, comme vous le verrez dans l'exemple, cette méthode a le
+    pouvoir d'ajouter directement des « violations » de validateur.
 
 +----------------+------------------------------------------------------------------------+
 | S'applique à   | :ref:`classe<validation-class-target>`                                  |
@@ -68,7 +68,7 @@ La méthode Callback
 
 Un objet spécial ``ExecutionContext`` est passé à la méthode callback. Vous
 pouvez définir des « violations » directement sur cet objet et déterminer à
-quel champ ces erreurs seront attribuées::
+quel champ ces erreurs seront attribuées ::
 
     // ...
     use Symfony\Component\Validator\ExecutionContext;
@@ -101,11 +101,11 @@ Il s'agit d'un tableau de méthodes qui doivent être exécutées durant le
 processus de validation. Chacune de ces méthodes peut avoir l'un des formats
 suivants :
 
-1) **Nom de la méthode en chaine de caractères**
+1) **Nom de la méthode sous forme de chaîne de caractères**
 
-    Si le nom de la méthode est une simple chaine de caractères (ex ``isAuthorValid``), cette
-	méthode sera appelée sur le même objet que celui qui est en train d'être validé
-	et ``ExecutionContext`` sera le seul argument (voyez l'exemple ci-dessus).
+    Si le nom de la méthode est une simple chaîne de caractères (par exemple : ``isAuthorValid``),
+    cette méthode sera appelée sur le même objet que celui qui est en train d'être validé
+    et ``ExecutionContext`` sera le seul argument (voyez l'exemple ci-dessus).
 
 2) **Tableau statique**
 
@@ -155,9 +155,9 @@ suivants :
                 }
             }
     
-	Dans ce cas, la méthode statique ``isAuthorValid`` sera appelée sur la classe
+    Dans ce cas, la méthode statique ``isAuthorValid`` sera appelée sur la classe
     ``Acme\BlogBundle\MyStaticValidatorClass``. Deux objets sont passés en paramètre,
-    l'objet en cours de validation (ex ``Author``) et le ``ExecutionContext``::
+    l'objet en cours de validation (par exemple : ``Author``) et le ``ExecutionContext``::
 
         namespace Acme\BlogBundle;
     
@@ -173,10 +173,10 @@ suivants :
         }
 
     .. tip::
-        
-		Si vous spécifiez votre contrainte ``Callback`` via PHP, alors vous avez
-		également le choix de faire votre callback en closure PHP, ou en non statique.
-		Il n'est, en revanche, *pas* possible de spécifier un :term:`service` comme
-		contrainte. Pour valider en utilisant un service, vous devriez
+
+        Si vous spécifiez votre contrainte ``Callback`` via PHP, alors vous avez
+        également le choix de faire votre callback en closure PHP, ou en non-statique.
+        Il n'est, en revanche, *pas* possible de spécifier un :term:`service` comme
+        contrainte. Pour faire de la validation en utilisant un service, vous devriez
         :doc:`créer une contrainte de validation personnalisée</cookbook/validation/custom_constraint>`
         et ajouter cette nouvelle contrainte à votre classe.

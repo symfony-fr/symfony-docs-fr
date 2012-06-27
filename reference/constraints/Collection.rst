@@ -2,13 +2,13 @@ Collection
 ==========
 
 Cette contrainte est utilisée lorsque l'objet sous-jacent est une collection
-(c'est-à-dire un tableau ou un objet qui implémentent ``Traversable`` et ``ArrayAccess``),
+(c'est-à-dire un tableau ou un objet qui implémente ``Traversable`` et ``ArrayAccess``),
 mais vous aimeriez valider les différentes clés de cette collection de différentes
 manières. Par exemple, vous pourriez valider la clé ``email`` en utilisant la contrainte
 ``Email`` et la clé ``inventory`` avec la contrainte ``Min``.
 
 Cette contrainte permet également de s'assurer que certaines clés de la collection
-sont bien présente et que des clés supplémentaires ne le sont pas.
+sont bien présentes et que des clés supplémentaires ne le sont pas.
 
 +----------------+--------------------------------------------------------------------------+
 | S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                  |
@@ -148,7 +148,7 @@ individuels de la collection respectent leurs contraintes respectives.
 En fait, si des clés de la collection sont manquantes, ou s'il y a des clés
 non reconnues, une erreur de validation sera affichée.
 
-Si vous voulez autoriser des clés à être absentes de la collection  ou si vous
+Si vous voulez autoriser des clés à être absentes de la collection ou si vous
 voulez autoriser des clés « extra » (en plus), vous pouvez modifier respectivement
 les options `allowMissingFields`_ et `allowExtraFields`_. Dans l'exemple ci-dessus,
 l'option ``allowMissingFields`` a été définie à true, ce qui veut dire que si

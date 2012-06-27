@@ -18,10 +18,10 @@ Valide qu'une valeur correspond à une expression régulière.
 Utilisation de base
 -------------------
 
-Supposons que vous avez un champ ``description`` et que vous voulez vérifier
-qu'il commence bien par un caractère alphabnumérique. L'expression régulière
+Supposons que vous ayez un champ ``description`` et que vous vouliez vérifier
+qu'il commence bien par un caractère alphanumérique. L'expression régulière
 qui teste cela serait ``/^\w+/``, indiquant que vous cherchez au moins un ou
-plusieurs caractères alphanumériques au début de votre chaine :
+plusieurs caractères alphanumériques au début de votre chaîne :
 
 .. configuration-block::
 
@@ -49,7 +49,7 @@ plusieurs caractères alphanumériques au début de votre chaine :
         }
 
 Alternativement, vous pouvez définir l'option `match`_ à ``false`` pour
-vérifier qu'une chaine donnée ne correspond *pas*. Dans l'exemple suivant,
+vérifier qu'une chaîne donnée ne corresponde *pas*. Dans l'exemple suivant,
 vous vérifiez que le champ ``firstName`` ne contient pas de nombre et vous
 personnalisez également le message :
 
@@ -64,7 +64,7 @@ personnalisez également le message :
                     - Regex:
                         pattern: "/\d/"
                         match:   false
-                        message: Votre nom ne peux pas contenir de nombre
+                        message: Votre nom ne peut pas contenir de nombre
 
     .. code-block:: php-annotations
 
@@ -79,7 +79,7 @@ personnalisez également le message :
              * @Assert\Regex(
              *     pattern="/\d/",
              *     match=false,
-             *     message="Votre nom ne peux pas contenir de nombre"
+             *     message="Votre nom ne peut pas contenir de nombre"
              * )
              */
             protected $firstName;
@@ -93,22 +93,22 @@ pattern
 
 **type**: ``string`` [:ref:`default option<validation-default-option>`]
 
-Cette option obligatoire est le masque (pattern) de l'expression régulière
-à laquelle doit correspondre la donnée. Par défaut, le validateur échouera
-si la chaine de caractères *ne correspond pas* à cette expression régulière
-(via la fonction PHP `preg_match`_).
+Cette option obligatoire est le masque (« pattern » en anglais) de l'expression
+régulière à laquelle doit correspondre la donnée. Par défaut, le validateur
+échouera si la chaîne de caractères *ne correspond pas* à cette expression
+régulière (via la fonction PHP `preg_match`_).
 Toutefois, si l'option `match`_ est définie à false, la validation échouera
-si la chaine *correspond* à l'expression régulière.
+si la chaîne *correspond* à l'expression régulière.
 
 match
 ~~~~~
 
 **type**: ``Boolean`` default: ``true``
 
-Si cette option est à ``true`` (ou non définie), la validation passera si la chaine
+Si cette option est à ``true`` (ou non définie), la validation passera si la chaîne
 donnée correspond au `pattern`_ de l'expression régulière. Toutefois, si cette option
-est définir à ``false``, l'inverse se passera : la validation passera uniquement si
-la chaine donnée ne correspond **pas** au `pattern`_ de l'expression régulière.
+est définie à ``false``, l'inverse se passera : la validation passera uniquement si
+la chaîne donnée ne correspond **pas** au `pattern`_ de l'expression régulière.
 
 message
 ~~~~~~~

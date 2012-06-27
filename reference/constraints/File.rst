@@ -4,8 +4,8 @@ File
 Valide qu'une valeur est un « fichier » valide, qui peut être l'un des formats
 suivants :
 
-* Une chaine de caractères (ou un objet avec une méthode ``__toString()``) qui
-   représente un chemin vers un fichier existant;
+* Une chaîne de caractères (ou un objet avec une méthode ``__toString()``) qui
+  représente un chemin vers un fichier existant ;
 
 * Un objet :class:`Symfony\\Component\\HttpFoundation\\File\\File` valide
   (ce qui inclut les objets de la classe :class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`).
@@ -41,9 +41,9 @@ Utilisation de base
 
 Cette contrainte est souvent utilisée sur une propriété qui est affichée dans
 un formulaire avec le type de champ :doc:`file</reference/forms/types/file>`.
-Par exemple, supposons que vous créez un formulaire Auteur où vous pouvez
+Par exemple, supposons que vous créiez un formulaire « Auteur » où vous pouvez
 uploader une « bio » au format PDF. Dans votre formulaire, la propriété
-``bioFile`` sera un type ``file``. La classe ``Author`` ressemblerait à ceci::
+``bioFile`` sera de type ``file``. La classe ``Author`` ressemblerait à ceci::
 
     // src/Acme/BlogBundle/Entity/Author.php
     namespace Acme\BlogBundle\Entity;
@@ -171,10 +171,10 @@ mimeTypes
 
 **type**: ``array`` ou ``string``
 
-Si elle cette option est définie, le validateur vérifiera que le type MIME
-du fichier envoyé correspond au type MIME donné (s'il est défini sous forme
-de chaine de caractères) ou s'il existe dans la collection de types MIME
-donnés (s'ils sont définis comme tableau).
+Si cette option est définie, le validateur vérifiera que le type MIME
+du fichier envoyé correspond au type MIME donné (si l'option est définie sous forme
+de chaîne de caractères) ou s'il existe dans la collection de types MIME
+donnés (si l'option est définie sous forme de tableau).
 
 maxSizeMessage
 ~~~~~~~~~~~~~~
@@ -198,8 +198,8 @@ notFoundMessage
 
 Le message affiché si aucun fichier ne correspond au chemin donné. Cette
 erreur n'est possible que si la valeur sous-jacente est un chemin sous forme
-de chaine de caractères, puisque l'objet ``File`` ne pourra pas être construit à partir
-d'un chemin invalide.
+de chaîne de caractères, puisque l'objet ``File`` ne pourra pas être construit à partir
+d'un chemin non valide.
 
 notReadableMessage
 ~~~~~~~~~~~~~~~~~~
@@ -207,7 +207,7 @@ notReadableMessage
 **type**: ``string`` **default**: ``The file is not readable``
 
 Le message affiché si le fichier existe, mais que la fonction PHP ``is_readable``
-échoue à passer le chemin au fichier.
+échoue à passer le chemin du fichier.
 
 uploadIniSizeErrorMessage
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -223,7 +223,7 @@ uploadFormSizeErrorMessage
 **type**: ``string`` **default**: ``The file is too large``
 
 Le message affiché si le fichier uploadé est plus lourd que le maximum
-autorisé dans champ HTML input file.
+autorisé dans le champ HTML input file.
 
 uploadErrorMessage
 ~~~~~~~~~~~~~~~~~~

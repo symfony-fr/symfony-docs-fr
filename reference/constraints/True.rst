@@ -1,9 +1,9 @@
 True
 ====
 
-Valide qu'une valeur est ``vraie`` (true). Spécifiquement, cette contrainte
+Valide qu'une valeur est ``vraie`` (« true » en anglais). Spécifiquement, cette contrainte
 vérifie que la valeur est exactement ``true``, exactement l'entier ``1``, ou exactement
-la chaine de caractère « ``1`` ».
+la chaîne de caractère « ``1`` ».
 
 Lisez également :doc:`False <False>`.
 
@@ -20,10 +20,10 @@ Lisez également :doc:`False <False>`.
 Utilisation de base
 -------------------
 
-Cette contrainte peut être appliquée à une propriété (ex une propriété ``termsAccepted``
-d'un formulaire d'inscription) ou une méthode « getter ». Elle est plus puissante dans le
-second cas, où vous pouvez vérifier que la méthode retourne true. Par exemple, supposons
-que vous avez la méthode suivante :
+Cette contrainte peut être appliquée à une propriété (par exemple : une propriété
+``termsAccepted`` d'un formulaire d'inscription) ou une méthode « getter ». Elle est
+plus puissante dans le second cas, où vous pouvez vérifier que la méthode retourne true.
+Par exemple, supposons que vous ayez la méthode suivante :
 
 .. code-block:: php
 
@@ -50,7 +50,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
         Acme\BlogBundle\Entity\Author:
             getters:
                 tokenValid:
-                    - "True": { message: "Le token est invalide" }
+                    - "True": { message: "Le token est non valide" }
 
     .. code-block:: php-annotations
 
@@ -62,7 +62,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
             protected $token;
 
             /**
-             * @Assert\True(message = "Le token est invalide")
+             * @Assert\True(message = "Le token est non valide")
              */
             public function isTokenValid()
             {
@@ -82,7 +82,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
             <class name="Acme\BlogBundle\Entity\Author">
                 <getter property="tokenValid">
                     <constraint name="True">
-                        <option name="message">Le token est invalide</option>
+                        <option name="message">Le token est non valide</option>
                     </constraint>
                 </getter>
             </class>
@@ -101,7 +101,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addGetterConstraint('tokenValid', new True(array(
-                    'message' => 'Le token est invalide',
+                    'message' => 'Le token est non valide',
                 )));
             }
 

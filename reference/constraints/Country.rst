@@ -49,4 +49,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid country``
 
-Ce message s'affiche si la chaine de caractères n'est pas un code pays valide.
+Ce message s'affiche si la chaîne de caractères n'est pas un code pays valide.

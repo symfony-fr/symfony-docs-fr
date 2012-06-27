@@ -4,7 +4,7 @@ Locale
 Valide que la valeur est une locale valide.
 
 La « valeur » de chaque locale est soit le code *langue* ISO639-1 en deux lettres
-(ex ``fr``), soit le code langue suivi d'un underscore (``_``) puis du code *pays*
+(ex ``fr``), soit le code langue suivi d'un tiret du bas (``_``) puis du code *pays*
 ISO3166 (ex ``fr_FR`` pour Français/France).
 
 +----------------+------------------------------------------------------------------------+

@@ -2,7 +2,7 @@ Type
 ====
 
 Valide qu'une valeur est d'un type spécifique. Par exemple, si une variable doit
-être un tableau, vous pouvez utiliser cette contrainte avec l'option type défini
+être un tableau, vous pouvez utiliser cette contrainte avec l'option type définie
 comme ``array`` pour la valider.
 
 +----------------+---------------------------------------------------------------------+

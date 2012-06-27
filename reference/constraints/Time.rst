@@ -2,7 +2,7 @@ Time
 ====
 
 Valide qu'une valeur est une heure valide, c'est-à-dire soit un objet ``DateTime``,
-soit une chaine de caractères (ou un objet converti en chaine de caractères) qui 
+soit une chaîne de caractères (ou un objet converti en chaîne de caractères) qui
 respecte un format « HH:MM:SS » valide.
 
 +----------------+------------------------------------------------------------------------+
@@ -18,8 +18,8 @@ respecte un format « HH:MM:SS » valide.
 Utilisation de base
 -------------------
 
-Supposons que vous avez une classe Event, avec un champ ``startAt`` qui est
-l'heure à laquelle l'évènement commence :
+Supposons que vous ayez une classe Event, avec un champ ``startAt`` qui est
+l'heure à laquelle l'événement commence :
 
 .. configuration-block::
 

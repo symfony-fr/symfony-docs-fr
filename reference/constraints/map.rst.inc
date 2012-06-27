@@ -1,7 +1,7 @@
 Contraintes de bases
 ~~~~~~~~~~~~~~~~~~~~
 
-Utiliser les contraintes de bases afin de vérifier des données basiques à propos 
+Utilisez les contraintes de bases afin de vérifier des données basiques à propos
 de la valeur d'une propriété ou de la valeur retournée par une méthode de votre
 objet.
 
@@ -13,7 +13,7 @@ objet.
 * :doc:`False </reference/constraints/False>`
 * :doc:`Type </reference/constraints/Type>`
 
-Constraintes sur les chaines de caractères
+Constraintes sur les chaînes de caractères
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Email </reference/constraints/Email>`
