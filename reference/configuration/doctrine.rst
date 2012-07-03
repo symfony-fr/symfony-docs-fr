@@ -24,7 +24,7 @@ Configuration de Référence
                         dbname:               database
 
                     # Collection de différents noms de connexions
-                    # (ex default, conn2, etc)
+                    # (par exemple : default, conn2, etc)
                     default:
                         dbname:               ~
                         host:                 localhost
@@ -41,7 +41,7 @@ Configuration de Référence
                         # True pour une connexion persistente pour le driver ibm_db2
                         persistent:           ~
 
-                        # Le protocole à utiliser pour le driver ibm_db2 driver (par défaut : TCPIP)
+                        # Le protocole à utiliser pour le driver ibm_db2 (par défaut : TCPIP)
                         protocol:             ~
 
                         # True pour utiliser dbname comme nom de service au lieu de SID pour Oracle
@@ -62,14 +62,14 @@ Configuration de Référence
                         driver_class:         ~
                         wrapper_class:        ~
                         options:
-                            # un tableau d'options
+                            # Un tableau d'options
                             key:                  []
                         mapping_types:
-                            # un tableau de types de mapping
+                            # Un tableau de types de mapping
                             name:                 []
                         slaves:
 
-                            # une collection de noms de connexionx esclaves (ex slave1, slave2)
+                            # Une collection de noms de connexions esclaves (par exemple : slave1, slave2)
                             slave1:
                                 dbname:               ~
                                 host:                 localhost
@@ -86,7 +86,7 @@ Configuration de Référence
                                 # True pour une connexion persistente pour le driver ibm_db2
                                 persistent:           ~
 
-                                # Le protocole à utiliser pour le driver ibm_db2 driver (par défaut : TCPIP)
+                                # Le protocole à utiliser pour le driver ibm_db2 (par défaut : TCPIP)
                                 protocol:             ~
 
                                 # True pour utiliser dbname comme nom de service au lieu de SID pour Oracle
@@ -107,7 +107,7 @@ Configuration de Référence
                 proxy_dir:            %kernel.cache_dir%/doctrine/orm/Proxies
                 proxy_namespace:      Proxies
                 entity_managers:
-                    # Une collection de différents noms de gestionnaires d'entités (ex some_em, another_em)
+                    # Une collection de différents noms de gestionnaires d'entités (par exemple : some_em, another_em)
                     some_em:
                         query_cache_driver:
                             type:                 array # Requis
@@ -133,10 +133,10 @@ Configuration de Référence
                         auto_mapping:         false
                         hydrators:
 
-                            # un tableau de noms d'hydrateurs
+                            # Un tableau de noms d'hydrateurs
                             hydrator_name:                 []
                         mappings:
-                            # Un tableau de mapping, qui peuvent être un nom de bundle ou autre chose
+                            # Un tableau de mapping, qui peut être un nom de bundle ou autre chose
                             mapping_name:
                                 mapping:              true
                                 type:                 ~
@@ -145,17 +145,17 @@ Configuration de Référence
                                 prefix:               ~
                                 is_bundle:            ~
                         dql:
-                            # une collection de fonctions string
+                            # Une collection de fonctions de chaînes de caractères
                             string_functions:
                                 # exemple
                                 # test_string: Acme\HelloBundle\DQL\StringFunction
 
-                            # une collection de fonctions numériques
+                            # Une collection de fonctions numériques
                             numeric_functions:
                                 # exemple
                                 # test_numeric: Acme\HelloBundle\DQL\NumericFunction
 
-                            # une collection de fonctions datetime
+                            # Une collection de fonctions datetime
                             datetime_functions:
                                 # exemple
                                 # test_datetime: Acme\HelloBundle\DQL\DatetimeFunction
@@ -236,7 +236,7 @@ par défaut que l'ORM utilise si non définies :
         orm:
             auto_mapping: true
             # la distribution standard outrepasse ceci pour être à « true » en mode débuggage,
-            # « false » sinon
+            # à « false » sinon
             auto_generate_proxy_classes: false
             proxy_namespace: Proxies
             proxy_dir: %kernel.cache_dir%/doctrine/orm/Proxies
@@ -287,15 +287,15 @@ suivantes existent pour les correspondances d'entités :
 * ``dir`` Chemin vers les correspondances ou fichiers d'entités (dépend du
   « driver »). Si ce chemin est relatif, alors on assume qu'il est relatif
   par rapport à la racine du bundle. Si vous voulez utiliser cette option
-  pour spécifier des chemins absolus vous devriez préfixer le chemin avec
+  pour spécifier des chemins absolus, vous devriez préfixer le chemin avec
   les paramètres du « kernel » qui existent dans le DIC (par exemple :
   %kernel.root_dir%).
 
 * ``prefix`` Un préfixe commun d'espace de noms que toutes les entités de
   cette correspondance partagent. Le préfixe ne doit jamais être en
   conflit avec des préfixes d'autres correspondances d'entités définies
-  sinon certaines de vos entités ne seront pas trouvées par Doctrine. La
-  valeur par défaut de cette option est l'espace de noms du bundle + ``Entity``,
+  sinon, certaines de vos entités ne seront pas trouvées par Doctrine. La
+  valeur par défaut de cette option est l'espace de noms du bundle + ``Entity`` ;
   par exemple pour un bundle applicatif nommé ``AcmeHelloBundle``, le préfixe
   devrait être ``Acme\HelloBundle\Entity``.
 
@@ -308,7 +308,7 @@ suivantes existent pour les correspondances d'entités :
   défaut définie comme « true » si « dir » est prouvé comme existant grâce
   à une vérification via ``file_exists()`` qui retourne « false ». Cela est
   « false » si la vérification de présence retourne « true ». Dans ce cas,
-  un chemin absolu était spécifié et les fichiers de métadonnées sont très
+  un chemin absolu est spécifié et les fichiers de métadonnées sont très
   certainement dans un répertoire en dehors de celui du bundle.
 
 .. index::

@@ -27,7 +27,7 @@ Configuration complète par défaut
                 some_name:                 []
             bundles:
 
-                # Par défaut (tout les bundles enregistrés):
+                # Par défaut (tous les bundles enregistrés):
                 - FrameworkBundle
                 - SecurityBundle
                 - TwigBundle
@@ -37,7 +37,7 @@ Configuration complète par défaut
                 - AsseticBundle
                 - ...
             assets:
-                # Un tableau de noms de ressources (ex some_asset, some_other_asset)
+                # Un tableau de noms de ressources (par exemple : some_asset, some_other_asset)
                 some_asset:
                     inputs:               []
                     filters:              []
@@ -46,9 +46,9 @@ Configuration complète par défaut
                         some_option_name: []
             filters:
 
-                # Un tableau de noms de filtres (ex some_filter, some_other_filter)
+                # Un tableau de noms de filtres (par exemple : some_filter, some_other_filter)
                 some_filter:                 []
             twig:
                 functions:
-                    # Un tableau de noms de fonctions (ex some_function, some_other_function)
+                    # Un tableau de noms de fonctions (par exemple : some_function, some_other_function)
                     some_function:                 []

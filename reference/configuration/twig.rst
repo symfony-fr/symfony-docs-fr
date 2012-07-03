@@ -28,7 +28,7 @@ Configuration de référence du TwigBundle
                 some_variable_name:
                     # un id de service qui peut être la valeur
                     id:                   ~
-                    # définissez à "service" ou laissez vide
+                    # définissez à « service » ou laissez vide
                     type:                 ~
                     value:                ~
             autoescape:           ~
@@ -88,12 +88,13 @@ exception_controller
 
 **type**: ``string`` **default**: ``Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController::showAction``
 
-C'est le contrôleur qui est activé après qu'une exception est lancée dans votre
+C'est le contrôleur qui est activé après qu'une exception soit lancée dans votre
 application. Le contrôleur par défaut 
 (:class:`Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController`)
 est responsable de l'affichage de templates spécifiques en cas d'erreurs
 (voir :doc:`/cookbook/controller/error_pages`). Modifier cette option est
 assez compliqué. Si vous avez besoin de personnaliser une page d'erreur,
 vous devriez utiliser le lien ci-dessus. Si vous avez besoin d'ajouter un
-comportement sur une exception, vous devriez ajouter un écouteur sur l'évènement
-``kernel.exception`` (voir :ref:`dic-tags-kernel-event-listener`).
+comportement spécifique à une exception, vous devriez ajouter un écouteur
+sur l'évènement ``kernel.exception``
+(voir :ref:`dic-tags-kernel-event-listener`).

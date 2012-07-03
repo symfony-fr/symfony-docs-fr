@@ -44,7 +44,7 @@ Contraintes de validation de référence
    constraints/UserPassword
    constraints/Valid
    
-Le Validator est conçu pour valider les objets selon des *contraintes*.
+Le validateur est conçu pour valider les objets selon des *contraintes*.
 Dans la vie réelle, une contrainte pourrait être : « Le gâteau ne doit
 pas être brûlé ». Dans Symfony2, les contraintes sont similaires : ce sont
 des assertions qu'une condition est vérifiée.

@@ -29,7 +29,7 @@ Configuration de référence
                     type:                service
                     id:                  my_handler
 
-                # Options et valeurs par défaut pour un handler personnalisé : "my_custom_handler" 
+                # Options et valeurs par défaut pour un gestionnaire personnalisé : "my_custom_handler"
                 my_custom_handler:
                     type:                 ~ # Requis
                     id:                   ~
@@ -92,6 +92,7 @@ Configuration de référence
         </container>
 
 .. note::
+
     Lorsque le profiler est activé, un gestionnaire est ajouté pour stocker
-   les logs dans le profiler. Le profiler utilise le nom « debug » donc
-	il est réservé et ne peut pas être utilisé dans le configuration.
+    les logs dans le profiler. Le profiler utilise le nom « debug » donc
+    il est réservé et ne peut pas être utilisé dans la configuration.
