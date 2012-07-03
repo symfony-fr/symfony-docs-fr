@@ -1,14 +1,16 @@
-Symfony Documentation
-=====================
+Documentation de Symfony
+========================
 
-This documentation is rendered online at http://symfony.com/doc/current/
+Cette documentation est visible en ligne à l'adresse http://symfony.com/fr/doc/current/
 
-Contributing
-------------
+Contribuer
+----------
 
->**Note** 
->Unless you're documenting a feature that's new to Symfony 2.1, all pull
->requests must be based off of the **2.0** branch, **not** the master branch.
+>**Note**
+>A moins que vous documentiez une fonctionnalité qui est nouvelle dans
+>Symfony 2.1, toutes les « pull requests » doivent être basées sur la
+>branche **2.0**, **et non pas** sur la branche master.
 
-We love contributors! For more information on how you can contribute to the
-Symfony documentation, please read [Contributing to the Documentation](http://symfony.com/doc/current/contributing/documentation/overview.html) 
+Nous adorons les contributeurs ! Pour plus d'informations sur la manière
+dont vous pouvez contribuer à la documentation de Symfony, veuillez lire
+[Contribuer à la Documentation](http://symfony.com/fr/doc/current/contributing/documentation/overview.html)
