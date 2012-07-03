@@ -1,5 +1,5 @@
-The Symfony Standard Edition Bundles
-====================================
+Les Bundles de l'Edition Standard de Symfony
+============================================
 
 .. toctree::
     :hidden:
