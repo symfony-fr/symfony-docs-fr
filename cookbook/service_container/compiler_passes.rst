@@ -1,11 +1,12 @@
-How to work with Compiler Passes in Bundles
-===========================================
+Comment travailler avec les Passes de Compilation dans les Bundles
+==================================================================
 
-Compiler passes give you an opportunity to manipulate other service
-definitions that have been registered with the service container. You
-can read about how to create them in the components section ":doc:`/components/dependency_injection/compilation`".
-To register a compiler pass from a bundle you need to add it to the build
-method of the bundle definition class::
+Les passes de compilation vous donnent l'opportunité de manipuler d'autres
+définitions de service qui ont été définies via le conteneur de service.
+Pour savoir comment les créer, vous pouvez lire la section des composants
+« :doc:`/components/dependency_injection/compilation` ». Pour définir une
+passe de compilation depuis un bundle, vous devez l'ajouter à la méthode
+build se situant dans la classe du bundle::
 
     namespace Acme\MailerBundle;
 
@@ -24,10 +25,11 @@ method of the bundle definition class::
         }
     }
 
-One of the most common use-cases of compiler passes is to work with tagged services
-(read more about tags in the components section  ":doc:`/components/dependency_injection/tags`").
-If you are using custom tags in a bundle then by convention, tag names consist
-of the name of the bundle (lowercase, underscores as separators), followed
-by a dot, and finally the "real" name. For example, if you want to introduce
-some sort of "transport" tag in your AcmeMailerBundle, you should call it
-``acme_mailer.transport``.
+L'un des cas d'utilisation les plus fréquents des passes de compilation est lorsque
+vous travaillez avec des services taggés (apprenez-en plus à propos des tags en lisant
+la section sur les composants « :doc:`/components/dependency_injection/tags` »).
+Si vous utilisez des tags personnalisés dans un bundle, alors par convention, les noms
+de tag se constituent du nom du bundle (en minuscules, avec des tirets du bas en tant
+que séparateurs), suivi par un point, et finalement le nom « réel ». Par exemple, si
+vous voulez introduire un tag « transport » dans votre AcmeMailerBundle, vous devriez
+l'appeler ``acme_mailer.transport``.
