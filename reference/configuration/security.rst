@@ -32,7 +32,7 @@ Chaque partie sera expliquée dans la section suivante.
                 allow_if_equal_granted_denied:  true
             acl:
 
-                # n'importe quel nom configuré dans la section doctrine.dbal
+                # N'importe quel nom configuré dans la section doctrine.dbal
                 connection:           ~
                 cache:
                     id:                   ~
@@ -85,7 +85,7 @@ Chaque partie sera expliquée dans la section suivante.
                     chain:
                         providers:            []
 
-            firewalls:            # Required
+            firewalls:            # Requis
                 # Exemples:
                 somename:
                     pattern: .*
@@ -179,8 +179,8 @@ Chaque partie sera expliquée dans la section suivante.
             access_control:
                 requires_channel:     ~
 
-                # use the urldecoded format
-                path:                 ~ # Exemple: ^/path to resource/
+                # utilise le format « urldecoded »
+                path:                 ~ # Exemple: ^/chemin vers la ressource/
                 host:                 ~
                 ip:                   ~
                 methods:              []
@@ -203,42 +203,42 @@ Le formulaire d'authentification et son traitement
 
 *   ``login_path`` (type: ``string``, default: ``/login``)
     C'est l'URL vers laquelle l'utilisateur sera redirigé (à moins que ``use_forward``
-   ne soit défini à ``true``) lorsqu'il tente d'accéder à une ressource protégée
-	sans être complètement authentifié.
-	
-	Cette URL **doit** être accessible par un utilisateur normal non authentifié,
-	sinon vous pourriez créer une boucle de redirections. Pour plus de détails,
-	lisez « :ref:`Eviter les pièges classiques<book-security-common-pitfalls>` ».
+    ne soit défini à ``true``) lorsqu'il tente d'accéder à une ressource protégée
+    sans être complètement authentifié.
+
+    Cette URL **doit** être accessible par un utilisateur normal non-authentifié,
+    sinon vous pourriez créer une boucle de redirections. Pour plus de détails,
+    lisez « :ref:`Eviter les pièges classiques<book-security-common-pitfalls>` ».
 
 *   ``check_path`` (type: ``string``, default: ``/login_check``)
     C'est l'URL à laquelle votre formulaire doit être soumis. Le firewall
-	interceptera toute requête (par défaut seulement les requêtes ``POST``)
-	envoyée à cette URL et traitera les credentials soumis.
-    
-	Assurez vous que cette URL est couverte par votre firewall principal
-	(c'est-à-dire que vous ne devez pas créer de firewall séparé pour l'URL
+    interceptera toute requête (par défaut seulement les requêtes ``POST``)
+    envoyée à cette URL et traitera les droit d'accès soumis.
+
+    Assurez-vous que cette URL est couverte par votre firewall principal
+    (c'est-à-dire que vous ne devez pas créer de firewall séparé pour l'URL
     ``check_path``).
 
 *   ``use_forward`` (type: ``Boolean``, default: ``false``)
     Si vous voulez que l'utilisateur soit « forwardé » vers le formulaire
-	d'authentification au lieu d'être redirigé, définissez cette option à ``true``.
+    d'authentification au lieu d'être redirigé, définissez cette option à ``true``.
 
 *   ``username_parameter`` (type: ``string``, default: ``_username``)
-    C'est le nom de champ que vous devez donner au champ nom
-	d'utilisateur de votre formulaire de connexion. Lorsque vous soumettrez
-	le formulaire à l'URL ``check_path``, le système de sécurité cherchera
-	un paramètre POST avec ce nom.
+    C'est le nom de champ que vous devez donner au champ « nom
+    d'utilisateur » de votre formulaire de connexion. Lorsque vous soumettrez
+    le formulaire à l'URL ``check_path``, le système de sécurité cherchera
+    un paramètre POST avec ce nom.
 
 *   ``password_parameter`` (type: ``string``, default: ``_password``)
     C'est le nom de champ que vous devez donner au champ « mot de passe »
-	de votre formulaire de connexion. Lorsque vous soumettrez
-	le formulaire à l'URL ``check_path``, le système de sécurité cherchera
-	un paramètre POST avec ce nom.
+    de votre formulaire de connexion. Lorsque vous soumettrez
+    le formulaire à l'URL ``check_path``, le système de sécurité cherchera
+    un paramètre POST avec ce nom.
 
 *   ``post_only`` (type: ``Boolean``, default: ``true``)
     Par défaut, vous devez soumettre votre formulaire à l'URL ``check_path``
-	avec une requête POST. En définissant cette option à ``false``, vous
-	pouvez également envoyer une requête GET.
+    avec une requête POST. En définissant cette option à ``false``, vous
+    pouvez également envoyer une requête GET.
 
 Rediriger après authentification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
