@@ -9,7 +9,7 @@ toutes les options ne sont pas encore totalement décrites.
 
 Le ``FrameworkBundle`` contient la majeure partie de la fonctionnalité « de base »
 du framework et peut être configuré sous la clé ``framework`` dans la configuration
-de votre application. Cela inclut la définition de paramètres liée aux sessions,
+de votre application. Cela inclut la définition de paramètres liés aux sessions,
 à la traduction, aux formulaires, à la validation, au routage et plus encore.
 
 Configuration
@@ -89,7 +89,7 @@ test
 
 **type**: ``Boolean``
 
-Si ce paramètre de configuration est présent (et pas défini comme ``false``),
+Si ce paramètre de configuration est présent (et n'est pas défini comme ``false``),
 alors les services liés au test de votre application (par exemple :
 ``test.client``) sont chargés. Ce paramètre devrait être présent dans votre
 environnement ``test`` (généralement via ``app/config/config_test.yml``).
@@ -139,13 +139,14 @@ ajoutées uniquement à la collection ``http``.
 
 .. versionadded:: 2.1
 
-    Unlike most configuration blocks, successive values for ``assets_base_urls``
-    will overwrite each other instead of being merged. This behavior was chosen
-    because developers will typically define base URL's for each environment.
-    Given that most projects tend to inherit configurations
-    (e.g. ``config_test.yml`` imports ``config_dev.yml``) and/or share a common
-    base configuration (i.e. ``config.yml``), merging could yield a set of base
-    URL's for multiple environments.
+    A la différence de la plupart des blocs de configuration, des valeurs
+    successives pour ``assets_base_urls`` vont s'outrepasser entre elles au
+    lieu d'être fusionnées. Ce comportement a été choisi car les développeurs
+    vont généralement définir une URL de base pour chaque environnement.
+    Sachant que la plupart des projets ont tendance à hériter les configurations
+    (par exemple : ``config_test.yml`` importe ``config_dev.yml``) et/ou à
+    partager une configuration de base (i.e. ``config.yml``), fusionner reviendrait
+    à avoir un ensemble d'URLs de base pour de multiples environnements.
 
 .. _ref-framework-assets-version:
 
@@ -231,14 +232,14 @@ du fichier serait ``/images/logo.png?version=5``.
 
 .. tip::
 
-    Certains CDNs (« Content Delivery Network ») ne supporte pas l'invalidation
+    Certains « CDNs » (« Content Delivery Network ») ne supporte pas l'invalidation
     du cache via des chaînes de caractères de requête, alors l'injection de
     la version dans le chemin du fichier actuel est nécessaire. Heureusement,
     ``assets_version_format`` n'est pas limité à la production de chaînes de
     caractères de requête versionnées.
 
     Le pattern reçoit respectivement le chemin original du fichier et la version
-    en tant que premier et second paramètres. Comme le chemin du fichier est un
+    en tant que premier et second paramètre. Comme le chemin du fichier est un
     paramètre, nous ne pouvons pas le modifier sur place (par exemple :
     ``/images/logo-v5.png``); cependant, nous pouvons préfixer le chemin du
     fichier en utilisant un pattern comme ``version-%%2$s/%%1$s``, qui donnerait
@@ -291,7 +292,7 @@ Toutes les Options de Configuration par Défaut
                 matcher:
                     ip:                   ~
 
-                    # utiliser le format urldecoded
+                    # utilise le format urldecoded
                     path:                 ~ # Exemple: ^/path to resource/
                     service:              ~
 
@@ -302,7 +303,7 @@ Toutes les Options de Configuration par Défaut
                 http_port:            80
                 https_port:           443
 
-            # configuration de session
+            # configuration de la session
             session:
                 auto_start:           false
                 storage_id:           session.storage.native
