@@ -251,10 +251,11 @@ faites ce qui suit::
         ->orderByPrice()
         ->find();
 
-En une ligne, vous obtenez vos produits d'une manière orientée objet puissante.
+Très facilement, vous obtenez vos produits en construisant une requête de manière 
+orientée objet.
 Aucun besoin de perdre du temps à écrire du SQL ou quoi que ce soit d'autre,
 Symfony2 offre une manière de programmer totalement orientée objet et Propel
-respecte la même philosophie en fournissant une couche d'abstraction géniale.
+respecte la même philosophie en fournissant une couche d'abstraction ingénieuse.
 
 Si vous voulez réutiliser certaines requêtes, vous pouvez ajouter vos
 propres méthodes à la classe ``ProductQuery``::
@@ -317,7 +318,7 @@ Créez les classes :
 
 Assumons que vous ayez des produits dans votre base de données, vous ne souhaitez
 pas les perdre. Grâce aux migrations, Propel va être capable de mettre à jour votre
-base de données sans ne perdre aucune données.
+base de données sans perdre aucune données.
 
 .. code-block:: bash
 
@@ -369,9 +370,9 @@ de la nouvelle catégorie. Propel gère la persistance de cette relation pour vo
 Récupérer des Objets Liés
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Lorsque vous avez besoin de récupérer des objets liés, votre processus ressemble
-à la même chose que ce que vous avez fait avant. Tout d'abord, récupérez un objet
-``$product`` et ensuite accédez à sa ``Category`` liée::
+Lorsque vous avez besoin de récupérer des objets liés, votre processus ressemble 
+à la récupération d'un attribut dans l'exemple précédent. Tout d'abord, 
+récupérez un objet ``$product`` et ensuite accédez à sa ``Category`` liée::
 
     // ...
     use Acme\StoreBundle\Model\ProductQuery;
