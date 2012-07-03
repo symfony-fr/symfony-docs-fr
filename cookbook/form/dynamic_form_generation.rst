@@ -143,16 +143,16 @@ cela, le souscripteur pourrait ressembler à quelque chose comme ça::
 
     Il est très facile de mal interpréter l'objectif de la portion de code
     ``if (null === $data)`` de ce souscripteur d'événement. Afin de bien comprendre
-    son rôle, vous pourriez jeter un oeil à la `classe Formulaire`_ en portant votre
+    son rôle, vous pouvez jeter un oeil à la `classe Formulaire`_ en portant votre
     attention où la méthode setData() est appelée à la fin du constructeur, ainsi
     qu'à la méthde setData() elle-même.
 
 La ligne ``FormEvents::PRE_SET_DATA`` est convertie en la chaîne de caractères suivante :
 ``form.pre_set_data``. La `classe FormEvents`_ a un but organisationnel. C'est un endroit
-centralisé où vous pouvez trouver tous les différents événements de formulaire disponibles.
+centralisé où vous trouverez la liste des différents événements de formulaire disponibles.
 
-Bien que cet exemple aurait pu utiliser l'événement ``form.set_data`` ou même l'événement
-``form.post_set_data`` de manière aussi efficace, en utilisant ``form.pre_set_data``, nous
+Bien que cet exemple aurait pu utiliser de manière tout aussi efficace les événements ``form.set_data``
+ou ``form.post_set_data``, en utilisant ``form.pre_set_data``, nous
 garantissons que les données allant être récupérées depuis l'objet ``Event`` n'auront pas été
 modifiées par quelconques souscripteurs ou listeners (« écouteurs » en français). Cela parce
 que ``form.pre_set_data`` passe un objet `DataEvent`_ au lieu de l'objet `FilterDataEvent`_
