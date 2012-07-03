@@ -1,14 +1,14 @@
 .. index::
    single: Requirements
    
-Pré-requis au fonctionnement de Symfony2
-========================================
+Pré-requis au bon fonctionnement de Symfony2
+============================================
 
-Afin d'éxécuter Symfony2, votre système a besoin de valider une liste de pré-requis.
+Afin d'exécuter Symfony2, votre système a besoin de valider une liste de pré-requis.
 Vous pouvez facilement voir si votre système remplit tous les critères en affichant
-la page ``web/config.php`` de votre distribution Symfony. Puisque la CLI utilise
-souvent un ``php.ini`` différent, c'est une bonne idée de vérifier aussi les
-pré-requis en ligne de commande via :
+la page ``web/config.php`` de votre distribution Symfony. Puisque l'outil de ligne
+de commandes utilise souvent un ``php.ini`` différent, c'est une bonne idée de
+vérifier aussi les pré-requis en ligne de commandes via :
 
 
 .. code-block:: bash
@@ -23,7 +23,7 @@ Obligatoires
 * PHP doit être au minimum à la version PHP 5.3.3
 * JSON doit être activé
 * ctype doit être activé
-* Votre PHP.ini doit avoir le paramètre date.timezone défini.
+* Votre PHP.ini doit avoir le paramètre date.timezone défini
 
 Facultatives
 ------------
@@ -36,7 +36,7 @@ Facultatives
 * POSIX doit être activé (seulement sur \*nix)
 * Intl doit être installé avec ICU 4+
 * APC 3.0.17+ (ou un autre cache d'opcode doit être installé)
-* Configuration du PHP.ini recommendée
+* Configuration du PHP.ini recommandée
 
   * ``short_open_tag = Off``
   * ``magic_quotes_gpc = Off``
