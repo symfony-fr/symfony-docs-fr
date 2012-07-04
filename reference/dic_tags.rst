@@ -1,10 +1,10 @@
 Les Tags de l'Injection de Dépendances
 ======================================
 
-Les Tags de l'Injecteur de Dépendances sont de courtes chaines de caractères
+Les Tags de l'Injection de Dépendances sont de courtes chaînes de caractères
 qui peuvent être appliquées à un service pour le « marquer » afin qu'il soit utilisé
 d'une manière spécifique. Par exemple, si vous avez un service que vous voudriez
-enregistrer comme écouteur de l'un des évènements du noyau de Symfony, vous pouvez le
+enregistrer comme écouteur de l'un des événements du noyau de Symfony, vous pouvez le
 marquer avec le tag ``kernel.event_listener``.
 
 Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
@@ -16,17 +16,17 @@ Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
 +-----------------------------------+---------------------------------------------------------------------------+
 | `form.type`_                      | Crée un type de champ de formulaire personnalisé                          |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `form.type_extension`_            | Crée une « extension de formulaire» personnalisée                         |
+| `form.type_extension`_            | Crée une « extension de formulaire » personnalisée                        |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `form.type_guesser`_              | Ajoute votre propre logique pour la « prédiction de type de formulaire »  |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.cache_warmer`_            | Enregistre votre service pour qu'il soit appelé durant la mise en cache   |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.event_listener`_          | Ecoute différents évènements/hooks de Symfony                             |
+| `kernel.event_listener`_          | Ecoute différents événements/hooks de Symfony                             |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents évènements/hooks de Symfony    |
+| `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents événements/hooks de Symfony    |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `monolog.logger`_                 | Se connecte avec un canal de log personnalisé                             |
+| `monolog.logger`_                 | Pour écrire des logs dans un canal de log personnalisé                    |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `monolog.processor`_              | Ajoute un processeur personnalisé pour les logs                           |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -38,7 +38,7 @@ Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
 +-----------------------------------+---------------------------------------------------------------------------+
 | `security.listener.factory`_      | Nécessaire pour créer un système d'authentification personnalisé          |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personalisé                              |
+| `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                              |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `templating.helper`_              | Rend votre service accessible dans les templates PHP                      |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -54,7 +54,7 @@ Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
 data_collector
 --------------
 
-**But**: Crée une classe qui collecte des données personnalisées pour le profileur
+**But** : Crée une classe qui collecte des données personnalisées pour le profileur
 
 Pour plus de détails sur la création de vos propres collections de données, lisez
 l'article du Cookbook : :doc:`/cookbook/profiler/data_collector`.
@@ -62,7 +62,7 @@ l'article du Cookbook : :doc:`/cookbook/profiler/data_collector`.
 form.type
 ---------
 
-**But**: Crée un type de champ de formulaire personnalisé
+**But** : Crée un type de champ de formulaire personnalisé
 
 Pour plus de détails sur la création de vos propres types de formulaire, lisez
 l'article du Cookbook : :doc:`/cookbook/form/create_custom_field_type`.
@@ -70,7 +70,7 @@ l'article du Cookbook : :doc:`/cookbook/form/create_custom_field_type`.
 form.type_extension
 -------------------
 
-**But**: Crée une « extension de formulaire» personnalisée
+**But** : Crée une « extension de formulaire » personnalisée
 
 Les extensions de type de formulaire sont une manière de prendre en
 main la création des champs de formulaire. Par exemple, l'ajout du jeton
@@ -127,7 +127,7 @@ attribuez leur le tag `form.type_extension` :
 form.type_guesser
 -----------------
 
-**But**: Ajoute votre propre logique pour la « prédiction de type de formulaire »
+**But** : Ajoute votre propre logique pour la « prédiction de type de formulaire »
 
 Ce tag vous permet d'ajouter votre propre logique au processus de
 :ref:`Prédiction de formulaire<book-forms-field-guessing>`. Par défaut,
@@ -144,16 +144,17 @@ Pour voir un exemple de ce à quoi la classe ressemblerait, regardez la classe
 kernel.cache_warmer
 -------------------
 
-**Purpose**: Register your service to be called during the cache warming process
+**But** : Enregistre votre service pour qu'il soit appelé durant la mise en cache
 
-Cache warming occurs whenever you run the ``cache:warmup`` or ``cache:clear``
-task (unless you pass ``--no-warmup`` to ``cache:clear``). The purpose is
-to initialize any cache that will be needed by the application and prevent
-the first user from any significant "cache hit" where the cache is generated
-dynamically.
+La mise en cache s'effectue lorsque vous exécutez la tâche ``cache:warmup`` ou
+``cache:clear`` (à moins que vous passiez ``--no-warmup`` à ``cache:clear``). Le
+but est d'initialiser quelconque cache dont l'application aura besoin et d'éviter
+que le premier utilisateur ne subisse un ralentissement dû à la mise en cache
+lorsque ce dernier est généré dynamiquement.
 
-To register your own cache warmer, first create a service that implements
-the :class:`Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface` interface::
+Pour enregistrer votre propre système de mise en cache, créez tout d'abord un
+service qui implémente l'interface
+:class:`Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface`::
 
     // src/Acme/MainBundle/Cache/MyCustomWarmer.php
     namespace Acme\MainBundle\Cache;
@@ -164,7 +165,7 @@ the :class:`Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface` i
     {
         public function warmUp($cacheDir)
         {
-            // do some sort of operations to "warm" your cache
+            // effectuez quelques opérations afin de procéder à la mise en cache
         }
 
         public function isOptional()
@@ -173,11 +174,13 @@ the :class:`Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface` i
         }
     }
 
-The ``isOptional`` method should return true if it's possible to use the
-application without calling this cache warmer. In Symfony 2.0, optional warmers
-are always executed anyways, so this function has no real effect.
+La méthode ``isOptional`` devrait retourner « true » s'il est possible d'utiliser
+l'application sans avoir à appeler ce procédé de mise en cache. Dans Symfony 2.0,
+ces procédés de mise en cache sont toujours exécutés de toute façon, donc cette
+fonction n'a pas vraiment d'effet.
 
-To register your warmer with Symfony, give it the kernel.cache_warmer tag:
+Pour enregistrer votre procédé de mise en cache dans Symfony, donnez-lui le
+tag kernel.cache_warmer :
 
 .. configuration-block::
 
@@ -202,39 +205,41 @@ To register your warmer with Symfony, give it the kernel.cache_warmer tag:
             ->addTag('kernel.cache_warmer', array('priority' => 0))
         ;
 
-The ``priority`` value is optional, and defaults to 0. This value can be
-from -255 to 255, and the warmers will be executed in the order of their
-priority.
+La valeur ``priority`` est optionnelle, et vaut par défaut 0. Cette valeur
+peut aller de -255 à 255, et les procédés de mise en cache seront exécutés
+selon l'ordre de leur priorité.
 
 .. _dic-tags-kernel-event-listener:
 
 kernel.event_listener
 ---------------------
 
-**Purpose**: To listen to different events/hooks in Symfony
+**But** : Ecoute différents événements/hooks de Symfony
 
-This tag allows you to hook your own classes into Symfony's process at different
-points.
+Ce tag vous permet d'injecter vos propres classes dans le processus de Symfony à
+différents points.
 
-For a full example of this listener, read the :doc:`/cookbook/service_container/event_listener`
-cookbook entry.
+Pour un exemple complet de cet écouteur (« listener » en anglais), lisez l'article
+du cookbook :doc:`/cookbook/service_container/event_listener`.
 
-For another practical example of a kernel listener, see the cookbook
-article: :doc:`/cookbook/request/mime_type`.
+Pour un autre exemple pratique d'un écouteur du « kernel » (« noyau » en français),
+référez-vous à l'article du cookbook suivant : :doc:`/cookbook/request/mime_type`.
 
 .. _dic-tags-kernel-event-subscriber:
 
 kernel.event_subscriber
 -----------------------
 
-**Purpose**: To subscribe to a set of different events/hooks in Symfony
+**But** : Pour s'abonner à un ensemble de différents événements/hooks de Symfony
 
 .. versionadded:: 2.1
 
-   The ability to add kernel event subscribers is new to 2.1.
+   La possibilité d'ajouter des souscripteurs aux événements du kernel a été
+   introduite avec Symfony 2.1.
 
-To enable a custom subscriber, add it as a regular service in one of your
-configuration, and tag it with ``kernel.event_subscriber``:
+Pour activer un souscripteur personnalisé, ajoutez-le dans l'une de vos configurations
+comme vous le feriez pour un service « normal », et taggez-le avec
+``kernel.event_subscriber`` :
 
 .. configuration-block::
 
@@ -261,24 +266,25 @@ configuration, and tag it with ``kernel.event_subscriber``:
 
 .. note::
 
-    Your service must implement the :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`
-    interface.
+    Votre service doit implémenter l'interface
+    :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`.
 
 .. note::
 
-    If your service is created by a factory, you **MUST** correctly set the ``class``
-    parameter for this tag to work correctly.
+    Si votre service est créé par une « factory » (« usine » en français), vous
+    **devez** définir correctement le paramètre ``class`` afin que ce tag fonctionne
+    sans problèmes.
 
 .. _dic_tags-monolog:
 
 monolog.logger
 --------------
 
-**Purpose**: To use a custom logging channel with Monolog
+**But** : Pour écrire des logs dans un canal de log personnalisé
 
-Monolog allows you to share its handlers between several logging channels.
-The logger service uses the channel ``app`` but you can change the
-channel when injecting the logger in a service.
+Monolog vous permet de partager ses gestionnaires entre différents canaux
+de logs. Le service de log utilise le canal ``app`` mais vous pouvez
+changer ce dernier lorsque vous injectez le « logger » dans un service.
 
 .. configuration-block::
 
@@ -306,25 +312,27 @@ channel when injecting the logger in a service.
 
 .. note::
 
-    This works only when the logger service is a constructor argument,
-    not when it is injected through a setter.
+    Cela fonctionne uniquement quand le service de log est un argument du
+    constructeur, et pas lorsqu'il est injecté via un « setter ».
 
 .. _dic_tags-monolog-processor:
 
 monolog.processor
 -----------------
 
-**Purpose**: Add a custom processor for logging
+**But** : Ajoute un processeur personnalisé pour les logs
 
-Monolog allows you to add processors in the logger or in the handlers to add
-extra data in the records. A processor receives the record as an argument and
-must return it after adding some extra data in the ``extra`` attribute of
-the record.
+Monolog vous permet d'ajouter des processeurs au service de log ou aux
+gestionnaires afin d'ajouter des données supplémentaires aux enregistrements.
+Un processeur reçoit l'enregistrement en tant qu'argument et doit le retourner
+après avoir ajouté quelques données supplémentaires à l'attribut ``extra`` de
+l'enregistrement.
 
-Let's see how you can use the built-in ``IntrospectionProcessor`` to add
-the file, the line, the class and the method where the logger was triggered.
+Voyons voir comment vous pouvez utiliser le processeur intégré
+``IntrospectionProcessor`` afin d'ajouter le fichier, la ligne, la classe
+et la méthode depuis laquelle le service de log a été appelé.
 
-You can add a processor globally:
+Vous pouvez ajouter un processeur de manière globale.
 
 .. configuration-block::
 
@@ -350,11 +358,12 @@ You can add a processor globally:
 
 .. tip::
 
-    If your service is not a callable (using ``__invoke``) you can add the
-    ``method`` attribute in the tag to use a specific method.
+    Si votre service n'est pas un « callable » (appelable via ``__invoke``)
+    vous pouvez ajouter l'attribut ``method`` dans le tag afin de spécifier
+    la méthode à utiliser.
 
-You can add also a processor for a specific handler by using the ``handler``
-attribute:
+Vous pouvez aussi ajouter un processeur pour un gestionnaire spécifique en
+utilisant l'attribut ``handler`` :
 
 .. configuration-block::
 
@@ -378,9 +387,9 @@ attribute:
         $definition->addTag('monolog.processor', array('handler' => 'firephp');
         $container->register('my_service', $definition);
 
-You can also add a processor for a specific logging channel by using the ``channel``
-attribute. This will register the processor only for the ``security`` logging
-channel used in the Security component:
+De même, vous pouvez ajouter un processeur pour un canal spécifique de log en utilisant
+l'attribut ``channel``. L'exemple qui suit va enregistrer le processeur uniquement pour
+le canal de log ``security`` utilisé par le composant « Security » :
 
 .. configuration-block::
 
@@ -406,16 +415,18 @@ channel used in the Security component:
 
 .. note::
 
-    You cannot use both the ``handler`` and ``channel`` attributes for the
-    same tag as handlers are shared between all channels.
+    Vous ne pouvez pas utiliser les deux attributs ``handler`` et ``channel``
+    pour un même tag car les gestionnaires (« handlers » en anglais) sont
+    partagés entre tous les canaux.
 
 routing.loader
 --------------
 
-**Purpose**: Register a custom service that loads routes
+**But** : Enregistre un service personnalisé qui charge les routes
 
-To enable a custom routing loader, add it as a regular service in one
-of your configuration, and tag it with ``routing.loader``:
+Pour activer un chargeur de routes personnalisé, ajoutez-le dans l'une de vos
+configurations comme vous le feriez pour un service « normal », et taggez-le
+avec ``routing.loader`` :
 
 .. configuration-block::
 
@@ -443,62 +454,67 @@ of your configuration, and tag it with ``routing.loader``:
 security.listener.factory
 -------------------------
 
-**Purpose**: Necessary when creating a custom authentication system
+**But** : Nécessaire pour créer un système d'authentification personnalisé
 
-This tag is used when creating your own custom authentication system. For
-details, see :doc:`/cookbook/security/custom_authentication_provider`.
+Ce tag est utilisé lorsque vous créez votre propre système d'authentification
+personnalisé. Pour plus de détails, voyez
+:doc:`/cookbook/security/custom_authentication_provider`.
 
 security.remember_me_aware
 --------------------------
 
-**Purpose**: To allow remember me authentication
+**But** : Pour permettre l'authentification avec « se souvenir de moi »
 
-This tag is used internally to allow remember-me authentication to work. If
-you have a custom authentication method where a user can be remember-me authenticated,
-then you may need to use this tag.
+Ce tag est utilisé en interne pour permettre à la l'authentification « se souvenir
+de moi » de fonctionner. Si vous avez une méthode d'authentification personnalisée
+où un utilisateur peut être authentifié avec l'option « se souvenir de moi »,
+alors vous pourriez avoir à utiliser ce tag.
 
-If your custom authentication factory extends
+Si votre « factory » d'authentification personnalisée étend
 :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\AbstractFactory`
-and your custom authentication listener extends
+et que votre écouteur d'authentification personnalisé étend
 :class:`Symfony\\Component\\Security\\Http\\Firewall\\AbstractAuthenticationListener`,
-then your custom authentication listener will automatically have this tagged
-applied and it will function automatically.
+alors ce dernier va automatiquement se voir appliquer ce tag et il fonctionnera automatiquement.
 
 security.voter
 --------------
 
-**Purpose**: To add a custom voter to Symfony's authorization logic
+**But** : Ajoute un voteur personnalisé à la logique d'autorisation de Symfony
 
-When you call ``isGranted`` on Symfony's security context, a system of "voters"
-is used behind the scenes to determine if the user should have access. The
-``security.voter`` tag allows you to add your own custom voter to that system.
+Lorsque vous appelez ``isGranted`` dans le contexte de sécurité de Symfony, un
+système de « voteurs » est utilisé en arrière-plan pour déterminer si l'utilisateur
+devrait ou non avoir accès. Le tag ``security.voter`` vous permet d'ajouter votre
+propre voteur personnalisé à ce système.
 
-For more information, read the cookbook article: :doc:`/cookbook/security/voters`.
+Pour plus d'informations, lisez l'article du cookbook :
+:doc:`/cookbook/security/voters`.
 
 swiftmailer.plugin
 ------------------
 
-**Purpose**: Register a custom SwiftMailer Plugin
+**But** : Enregistre un plugin SwiftMailer personnalisé
 
-If you're using a custom SwiftMailer plugin (or want to create one), you can
-register it with SwiftMailer by creating a service for your plugin and tagging
-it with ``swiftmailer.plugin`` (it has no options).
+Si vous utilisez un plugin SwiftMailer personnalisé (ou souhaitez en créer un),
+vous pouvez le déclarer via SwiftMailer en créant un service pour votre plugin
+et en le « taggant » avec ``swiftmailer.plugin`` (il ne possède pas d'options).
 
-A SwiftMailer plugin must implement the ``Swift_Events_EventListener`` interface.
-For more information on plugins, see `SwiftMailer's Plugin Documentation`_.
+Un plugin SwiftMailer doit implémenter l'interface ``Swift_Events_EventListener``.
+Pour plus d'informations sur les plugins, voir la
+`Documentation du Système de Plugin de SwiftMailer`_.
 
-Several SwiftMailer plugins are core to Symfony and can be activated via
-different configuration. For details, see :doc:`/reference/configuration/swiftmailer`.
+Plusieurs plugins SwiftMailer font partie du coeur de Symfony et peuvent être activés
+grâce à différentes configurations. Pour plus de détails, voir
+:doc:`/reference/configuration/swiftmailer`.
 
 templating.helper
 -----------------
 
-**Purpose**: Make your service available in PHP templates
+**But** : Rend votre service accessible dans les templates PHP
 
-To enable a custom template helper, add it as a regular service in one
-of your configuration, tag it with ``templating.helper`` and define an
-``alias`` attribute (the helper will be accessible via this alias in the
-templates):
+Pour activer un template d'aide personnalisé, ajoutez-le dans l'une de vos
+configurations comme vous le feriez pour un service « normal », taggez-le
+avec ``templating.helper`` et définissez un attribut ``alias`` (le template
+d'aide sera ainsi accessible via cet alias dans les templates) :
 
 .. configuration-block::
 
@@ -526,12 +542,12 @@ templates):
 translation.loader
 ------------------
 
-**Purpose**: To register a custom service that loads translations
+**But** : Enregistre un service personnalisé qui charge les traductions
 
-By default, translations are loaded form the filesystem in a variety of different
-formats (YAML, XLIFF, PHP, etc). If you need to load translations from some
-other source, first create a class that implements the
-:class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface` interface::
+Par défaut, les traductions sont chargées depuis le système de fichiers dans différents
+formats (YAML, XLIFF, PHP, etc.). Si vous avez besoin de charger des traductions
+depuis une autre source, créez d'abord une classe qui implémente l'interface
+:class:`Symfony\\Component\\Translation\\Loader\\LoaderInterface`::
 
     // src/Acme/MainBundle/Translation/MyCustomLoader.php
     namespace Acme\MainBundle\Translation;
@@ -545,18 +561,19 @@ other source, first create a class that implements the
         {
             $catalogue = new MessageCatalogue($locale);
 
-            // some how load up some translations from the "resource"
-            // then set them into the catalogue
+            // chargez des traductions depuis la « ressource » d'une manière ou d'une autre
+            // puis définissez les dans le catalogue
             $catalogue->set('hello.world', 'Hello World!', $domain);
 
             return $catalogue;
         }
     }
 
-Your custom loader's ``load`` method is responsible for returning a
-:Class:`Symfony\\Component\\Translation\\MessageCatalogue`.
+Votre méthode de chargement personnalisée ``load`` est responsable de retourner
+un :Class:`Symfony\\Component\\Translation\\MessageCatalogue`.
 
-Now, register your loader as a service and tag it with ``translation.loader``:
+Maintenant, vous pouvez enregistrer votre chargeur comme un service et le
+tagger avec ``translation.loader`` :
 
 .. code-block:: yaml
 
@@ -579,30 +596,34 @@ Now, register your loader as a service and tag it with ``translation.loader``:
         ->addTag('translation.loader', array('alias' => 'bin'))
     ;
 
-The ``alias`` option is required and very important: it defines the file
-"suffix" that will be used for the resource files that use this loader. For
-example, suppose you have some custom ``bin`` format that you need to load.
-If you have a ``bin`` file that contains French translations for the ``messages``
-domain, then you might have a file ``app/Resources/translations/messages.fr.bin``.
+L'option ``alias`` est requise et très importante : elle définit le « suffixe »
+du fichier qui sera utilisé pour les fichiers de ressource qui utilisent ce
+chargeur. Par exemple, supposons que vous ayez un format personnalisé ``bin``
+que vous devez charger. Si vous avez un fichier ``bin`` qui contient des traductions
+françaises pour le domaine ``messages``, alors vous auriez un fichier tel
+``app/Resources/translations/messages.fr.bin``.
 
-When Symfony tries to load the ``bin`` file, it passes the path to your custom
-loader as the ``$resource`` argument. You can then perform any logic you need
-on that file in order to load your translations.
+Lorsque Symfony essaye de charger le fichier ``bin``, il passe le chemin de votre
+chargeur personnalisé en tant qu'argument ``$ressource``. Vous pouvez ainsi
+effectuer quelconque opération nécessaire sur ce fichier afin de pouvoir
+charger vos traductions.
 
-If you're loading translations from a database, you'll still need a resource
-file, but it might either be blank or contain a little bit of information
-about loading those resources from the database. The file is key to trigger
-the ``load`` method on your custom loader.
+Si vous chargez des traductions depuis une base de données, vous aurez toujours
+besoin d'un fichier de ressource, mais il pourrait soit être vide ou soit
+contenir quelques informations sur le chargement de ces ressources depuis la
+base de données. Le fichier est clé pour déclencher la méthode ``load`` de votre
+chargeur personnalisé.
 
 .. _reference-dic-tags-twig-extension:
 
 twig.extension
 --------------
 
-**Purpose**: To register a custom Twig Extension
+**But** : Enregistre une extension Twig personnalisée
 
-To enable a Twig extension, add it as a regular service in one of your
-configuration, and tag it with ``twig.extension``:
+Pour activer une extension Twig, ajoutez-la dans l'une de vos
+configurations comme vous le feriez pour un service « normal », et
+taggez-la avec ``twig.extension``:
 
 .. configuration-block::
 
@@ -627,15 +648,15 @@ configuration, and tag it with ``twig.extension``:
             ->addTag('twig.extension')
         ;
 
-For information on how to create the actual Twig Extension class, see
-`Twig's documentation`_ on the topic or read the cookbook article:
-:doc:`/cookbook/templating/twig_extension`
+Pour plus d'informations sur comment créer la classe d'Extension Twig,
+voyez la `documentation Twig`_ sur le sujet ou lisez l'article du cookbook :
+:doc:`/cookbook/templating/twig_extension`.
 
-Before writing your own extensions, have a look at the
-`Twig official extension repository`_ which already includes several
-useful extensions. For example ``Intl`` and its ``localizeddate`` filter
-that formats a date according to user's locale. These official Twig extensions
-also have to be added as regular services:
+Avant d'écrire vos propres extensions, jetez un oeil au
+_`dépôt officiel des extensions Twig` qui inclut déjà plusieurs extensions
+utiles. Par exemple, ``Intl`` et son filtre ``localizeddate`` qui formatte
+une date selon la locale de l'utilisateur. Ces extensions Twig officielles
+doivent aussi être ajoutées comme les autres services « normaux » :
 
 .. configuration-block::
 
@@ -663,31 +684,36 @@ also have to be added as regular services:
 validator.constraint_validator
 ------------------------------
 
-**Purpose**: Create your own custom validation constraint
+**But** : Crée votre propre contrainte de validation personnalisée
 
-This tag allows you to create and register your own custom validation constraint.
-For more information, read the cookbook article: :doc:`/cookbook/validation/custom_constraint`.
+Ce tag vous permet de créer et d'enregistrer votre propre contrainte de validation
+personnalisée. Pour plus d'informations, lisez l'article du cookbook :
+:doc:`/cookbook/validation/custom_constraint`.
 
 validator.initializer
 ---------------------
 
-**Purpose**: Register a service that initializes objects before validation
+**But** : Enregistre un service qui initialise les objets avant validation
 
-This tag provides a very uncommon piece of functionality that allows you
-to perform some sort of action on an object right before it's validated.
-For example, it's used by Doctrine to query for all of the lazily-loaded
-data on an object before it's validated. Without this, some data on a Doctrine
-entity would appear to be "missing" when validated, even though this is not
-really the case.
+Ce tag fournit un bout de fonctionnalité très peu commun qui vous permet
+d'effectuer une action sur un objet juste avant qu'il soit validé. Par exemple,
+cela est utilisé par Doctrine pour effectuer une requête de toutes les
+données « chargées de manière fainéante » (« lazy loading » en anglais)
+sur un objet avant qu'il ne soit validé. Sans cela, certaines données
+d'une entité Doctrine apparaîtraient comme « manquantes » lorsque validées,
+bien que cela ne soit pas réellement le cas.
 
-If you do need to use this tag, just make a new class that implements the
-:class:`Symfony\\Component\\Validator\\ObjectInitializerInterface` interface.
-Then, tag it with the ``validator.initializer`` tag (it has no options).
+Si vous devez utiliser ce tag, créez simplement une nouvelle classe qui
+implémente l'interface
+:class:`Symfony\\Component\\Validator\\ObjectInitializerInterface`.
+Puis, taggez-le avec ``validator.initializer`` (ce tag ne possède pas
+d'options).
 
-For an example, see the ``EntityInitializer`` class inside the Doctrine Bridge.
+Pour un exemple, jetez un oeil à la classe ``EntityInitializer`` dans le
+« Doctrine Bridge ».
 
 ..  _`documentation Twig`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
 ..  _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions
 .. _`KernelEvents`: https://github.com/symfony/symfony/blob/2.0/src/Symfony/Component/HttpKernel/KernelEvents.php
-.. _`SwiftMailer's Plugin Documentation`: http://swiftmailer.org/docs/plugins.html
+.. _`Documentation du Système de Plugin de SwiftMailer`: http://swiftmailer.org/docs/plugins.html
 
