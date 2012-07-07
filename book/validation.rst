@@ -224,7 +224,7 @@ au code suivant :
 
     public function updateAction(Request $request)
     {
-        $author = new Acme\BlogBundle\Entity\Author();
+        $author = new Author();
         $form = $this->createForm(new AuthorType(), $author);
         
         if ($request->getMethod() == 'POST') {

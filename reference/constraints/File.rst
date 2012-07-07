@@ -176,6 +176,8 @@ du fichier envoyé correspond au type MIME donné (si l'option est définie sous
 de chaîne de caractères) ou s'il existe dans la collection de types MIME
 donnés (si l'option est définie sous forme de tableau).
 
+Vous pouvez trouver une liste des types mime existant sur le `site IANA`_.
+
 maxSizeMessage
 ~~~~~~~~~~~~~~
 
@@ -233,3 +235,5 @@ uploadErrorMessage
 Le message affiché si le fichier ne peut pas être uploadé pour une raison
 quelconque, par exemple si l'upload échoue ou qu'il est impossible d'écrire
 sur le disque.
+
+.. _`site IANA`: http://www.iana.org/assignments/media-types/index.html

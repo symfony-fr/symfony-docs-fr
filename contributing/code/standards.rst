@@ -11,7 +11,7 @@ Rappelez vous que l'avantage principal d'un standard est que toutes les parties
 du code source résultant se ressemblent et semblent ainsi familières, ce n'est
 pas que telle technique soit plus lisible qu'une autre.
 
-Symfony suit les standards définis par les documents PSR-0, PSR-1 et PSR-2
+Symfony suit les standards définis par les documents `PSR-0`_, `PSR-1`_ and `PSR-2`_.
 
 Comme une image - ou un peu de code - est plus efficace que des milliers de
 mots, voici un court exemple contenant les plus courantes conventions décrites
@@ -126,3 +126,7 @@ License
 
 * Symfony est réalisé sous licence MIT, un bloc licence doit être présent
   au début de chaque fichier PHP, avant l'espace de nom.
+
+.. _`PSR-0`: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md 
+.. _`PSR-1`: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md 
+.. _`PSR-2`: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md

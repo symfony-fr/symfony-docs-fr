@@ -74,10 +74,10 @@ Il y a trois méthodes qui sont particulièrement importantes :
   ne pas définir) l'attribut ``multiple`` pour le champ ``select``. Voir
   `Créer un Template pour le Champ`_ pour plus de détails.
 
-* ``getDefaultOptions()`` - Cette méthode définit des options pour votre
+* ``setDefaultOptions()`` - Cette méthode définit des options pour votre
   formulaire qui peuvent être utilisées dans ``buildForm()`` et
   ``buildView()``. Il y a beaucoup d'options communes à tous les champs
-  (voir `FieldType`_), mais vous pouvez créer ici n'importe quelle autre dont
+  (voir `FormType`_), mais vous pouvez créer ici n'importe quelle autre dont
   vous pourriez avoir besoin.
 
 .. tip::
@@ -87,7 +87,7 @@ Il y a trois méthodes qui sont particulièrement importantes :
     ou quelque chose qui étend ``form``. Aussi, si vous avez besoin de
     modifier la « vue » (« view » en anglais) de n'importe lequel de vos
     types enfants depuis votre type parent, utilisez la méthode
-    ``buildViewBottomUp()``.
+    ``finishView()``.
 
 La méthode ``getName()`` retourne un identifiant qui devrait être unique
 dans votre application. Ce dernier est utilisé dans différents endroits,

@@ -24,6 +24,7 @@ contribuer. Voici une liste des dépots officiel:
 * *Roumain*:   https://github.com/sebio/symfony-docs-ro
 * *Russe*:     https://github.com/avalanche123/symfony-docs-ru
 * *Espagnol*:  https://github.com/gitnacho/symfony-docs-es
+* *Turc*:      https://github.com/symfony-tr/symfony-docs-tr
 
 .. note::
 

@@ -146,7 +146,7 @@ besoin que du JavaScript :
             {# ... #}
 
             {# stocke le prototype dasn l'attribut data-prototype #}
-            <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.get('prototype')) | e }}">
+            <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.vars.prototype) | e }}">
             {% for emailField in form.emails %}
                 <li>
                     {{ form_errors(emailField) }}
@@ -295,11 +295,11 @@ Le champ prototype peut être rendu via la variable ``prototype`` du champ colle
 
     .. code-block:: jinja
     
-        {{ form_row(form.emails.get('prototype')) }}
+        {{ form_row(form.emails.vars.prototype) }}
 
     .. code-block:: php
     
-        <?php echo $view['form']->row($form['emails']->get('prototype')) ?>
+        <?php echo $view['form']->row($form['emails']->getVar('prototype')) ?>
 
 Notez que tout ce dont vous avez vraiment besoin c'est le « widget », mais selon la
 manière dont vous rendez votre formulaire, utiliser le « form row » peut être plus

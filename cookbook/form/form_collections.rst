@@ -324,13 +324,13 @@ dans votre formulaire :
 
     .. code-block:: html+jinja
     
-        <ul class="tags" data-prototype="{{ form_widget(form.tags.get('prototype')) | e }}">
+        <ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype) | e }}">
             ...
         </ul>
     
     .. code-block:: html+php
     
-        <ul class="tags" data-prototype="<?php echo $view->escape($view['form']->row($form['tags']->get('prototype'))) ?>">
+        <ul class="tags" data-prototype="<?php echo $view->escape($view['form']->row($form['tags']->getVar('prototype'))) ?>">
             ...
         </ul>
 
@@ -343,7 +343,7 @@ dans votre formulaire :
 
 .. tip::
 
-    ``form.tags.get('prototype')`` est un élément de formulaire qui ressemble à
+    ``form.tags.vars.prototype`` est un élément de formulaire qui ressemble à
     l'élément individuel ``form_widget(tag)`` à l'intérieur de notre boucle ``for``.
     Cela signifie que vous pouvez appeler ``form_widget``, ``form_row``, ou
     ``form_label`` sur ce prototype. Vous pourriez même choisir de ne rendre qu'un
@@ -351,9 +351,9 @@ dans votre formulaire :
     
     .. code-block:: html+jinja
     
-        {{ form_widget(form.tags.get('prototype').name) | e }}
+        {{ form_widget(form.tags.vars.prototype.name) | e }}
 
-Sur la page délivrée, le résultat ressemblera à quelque chose comme ca :
+Sur la page affichée, le résultat ressemblera à quelque chose comme ca :
 
 .. code-block:: html
 

@@ -1,3 +1,6 @@
+.. index::
+   single: Doctrine; File uploads
+
 Comment gérer les uploads de fichier avec Doctrine
 ==================================================
 

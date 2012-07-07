@@ -1,3 +1,6 @@
+.. index::
+   single: Workflow; Git
+
 Comment créer et stocker un projet Symfony2 dans git
 ====================================================
 

@@ -225,13 +225,7 @@ Avec ceci, la méthode ``validate()`` du validateur prend un objet comme premier
         {
             if ($protocol->getFoo() != $protocol->getBar()) {
 
-                $propertyPath = $this->context->getPropertyPath() . 'foo';
-                $this->context->setPropertyPath($propertyPath);
-                $this->context->addViolation($constraint->getMessage(), array(), null);
-
-                return false;
+                $this->context->addViolationAtSubPath('foo', $constraint->message, array(), null);
             }
-
-            return true;
         }
     }

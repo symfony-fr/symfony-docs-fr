@@ -412,7 +412,7 @@ vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire
     ;
 
 Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
-bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``getDefaultOptions()`` :
+bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``setDefaultOptions()`` :
 
 .. code-block:: php
 
@@ -1627,7 +1627,7 @@ mais voici un petit exemple::
 
 Maintenant, quand vous appelez `$form->bindRequest($request)`, les contraintes configurées sont
 appliquées aux données de votre formulaire. Si vous utilisez une classe de formulaire,
-surchargez la méthode ``getDefaultOptions`` pour les spécifier :
+surchargez la méthode ``setDefaultOptions`` pour les spécifier :
 
 .. code-block:: php
 

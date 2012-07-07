@@ -1,6 +1,6 @@
 ﻿.. index::
    single: Service Container
-   single: Dependency Injection Container
+   single: Dependency Injection; Container
 
 Service Container
 =================
@@ -29,7 +29,7 @@ conteneur et pour personnaliser des objets provenant de bundles tiers. Vous alle
 le conteneur de services facilite l'écriture de code de qualité.
 
 .. index::
-   single: Service Container; Qu'est-ce qu'un service ?
+   single: Service Container; Qu'est-ce qu'un conteneur de services ?
 
 Qu'est-ce qu'un Service ?
 -------------------------
@@ -332,7 +332,7 @@ configuration de services des bundles tiers.
 
 
 .. index::
-   single: Service Container; imports
+   single: Service Container; Imports
 
 .. _service-container-imports-directive:
 
