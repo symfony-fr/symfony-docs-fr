@@ -1,3 +1,6 @@
+.. index::
+   single: Emails; Spooling
+
 Comment utiliser le « Spool » d'Email
 =====================================
 

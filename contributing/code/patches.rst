@@ -35,6 +35,13 @@ email fonctionnelle :
 
 .. tip::
 
+    Si votre IDE crée les fichiers de configuration dans le répertoire de votre
+    projet, vous pouvez utiliser le fichier global ``.gitignore`` (pour tout les
+    projets) ou le fichier ``.git/info/exclude`` (par projet) pour les ignorer.
+    Lisez la [documentation Github] (https://help.github.com/articles/ignoring-files)
+
+.. tip::
+
     Pour les utilisateurs Windows : en installant Git, l'installeur vous demandera
     quoi faire avec les fins de lignes, et vous suggérera de remplacer tout les
     saut de lignes (LF pour Line Feed) par des fins de lignes (CRLF pour Carriage

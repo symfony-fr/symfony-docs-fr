@@ -33,7 +33,7 @@ profiler est disponible (il est activé par défaut dans l'environnement de ``te
                 $this->assertLessThan(10, $profile->getCollector('db')->getQueryCount());
 
                 // Vérifier le temps utilisé par le framework
-                $this->assertLessThan(0.5, $profile->getCollector('timer')->getTime());
+                $this->assertLessThan((500, $profile->getCollector('time')->getTotalTime());
             }
         }
     }

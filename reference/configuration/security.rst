@@ -1,5 +1,5 @@
 .. index::
-   single: Security; Configuration Reference
+   single: Security; Configuration reference
 
 Configuration de référence de la Sécurité 
 =========================================

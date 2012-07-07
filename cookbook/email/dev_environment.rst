@@ -1,3 +1,6 @@
+.. index::
+   single: Emails; In development
+
 Comment travailler avec les Emails pendant le Développement
 ===========================================================
 

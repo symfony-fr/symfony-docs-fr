@@ -1,5 +1,5 @@
 .. index::
-   single: Environnements;
+   single: Environnements
 
 Comment Maîtriser et Créer de nouveaux Environnements
 =====================================================

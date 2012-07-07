@@ -1,3 +1,7 @@
+.. index::
+   single: Security; Securing any service
+   single: Security; Securing any method
+
 Comment sécuriser quelconque Service ou Méthode de votre Application
 ====================================================================
 

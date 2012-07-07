@@ -1,3 +1,6 @@
+.. index::
+   single: Logging; Emailling errors
+
 Comment configurer Monolog pour envoyer les erreurs par Email
 =============================================================
 

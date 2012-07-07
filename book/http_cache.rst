@@ -176,7 +176,10 @@ contrôleur principal pour qu'il utilise le cache kernel :
     $kernel->loadClassCache();
     // wrap the default AppKernel with the AppCache one
     $kernel = new AppCache($kernel);
-    $kernel->handle(Request::createFromGlobals())->send();
+    $request = Request::createFromGlobals();
+    $response = $kernel->handle($request);
+    $response->send();
+    $kernel->terminate($request, $response);
 
 Le cache kernel se comportera immédiatement comme un « reverse proxy » en
 mettant en cache les réponses de l'application et en les renvoyant au
@@ -334,7 +337,7 @@ diverses sur le cache.
     :ref:`http-expiration-validation`.
 
 .. index::
-   single: Cache; Cache-Control Header
+   single: Cache; Cache-Control header
    single: HTTP headers; Cache-Control
 
 L'en-tête Cache-Control
@@ -705,7 +708,7 @@ La méthode ``Response::isNotModified()`` compare l'en-tête
     qu'elle est en cache.
 
 .. index::
-   single: Cache; Conditional Get
+   single: Cache; Conditional get
    single: HTTP; 304
 
 .. _optimizing-cache-validation:

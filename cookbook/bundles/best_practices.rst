@@ -1,5 +1,5 @@
 .. index::
-   single: Bundles; Bonnes pratiques
+   single: Bundle; Bonnes pratiques
 
 Structure de Bundle et Bonnes Pratiques
 ===========================================
@@ -10,7 +10,7 @@ web. Même si les bundles sont très flexibles, vous devriez suivre quelques une
 des bonnes pratiques si vous voulez les distribuer.
 
 .. index::
-   pair: Bundles; Conventions de Nommage
+   pair: Bundles; Conventions de nommage
 
 .. _bundles-naming-conventions:
 

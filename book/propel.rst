@@ -20,8 +20,11 @@ récupérer.
 .. sidebar:: Codez en même temps que vous lisez cet exemple
 
     Si vous voulez codez en même temps que vous parcourez l'exemple de ce
-    chapitre, créez un ``AcmeStoreBundle`` via: ``php app/console generate:bundle
-    --namespace=Acme/StoreBundle``.
+    chapitre, créez un ``AcmeStoreBundle`` via : 
+
+    .. code-block:: bash
+
+        php app/console generate:bundle --namespace=Acme/StoreBundle
 
 Configurer la Base de Données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,7 +33,7 @@ Avant de pouvoir démarrer, vous allez avoir besoin de configurer les informatio
 de connexion de votre base de données. Par convention, ces informations sont
 généralement configurées dans un fichier ``app/config/parameters.yml`` :
 
-.. code-block:: yml
+.. code-block:: yaml
 
     # app/config/parameters.yml
     parameters:

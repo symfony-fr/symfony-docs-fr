@@ -1,6 +1,6 @@
 .. index::
-   single: Doctrine; Configuration de Référence de l'ORM
-   single: Configuration de Référence; ORM Doctrine
+   single: Doctrine; Configuration de référence de l'ORM
+   single: Configuration de référence; ORM Doctrine
 
 Configuration de Référence
 ==========================
@@ -106,6 +106,8 @@ Configuration de Référence
                 auto_generate_proxy_classes:  false
                 proxy_dir:            %kernel.cache_dir%/doctrine/orm/Proxies
                 proxy_namespace:      Proxies
+                # cherchez la classe "ResolveTargetEntityListener" pour avoir un mode d'emploi
+                resolve_target_entities: []
                 entity_managers:
                     # Une collection de différents noms de gestionnaires d'entités (par exemple : some_em, another_em)
                     some_em:
@@ -253,7 +255,7 @@ Drivers de Cache
 ~~~~~~~~~~~~~~~~
 
 Pour les drivers de cache, vous pouvez spécifier les valeurs « array », « apc »,
-« memcache », « xcache » ou « service ».
+« memcache », « memcached », « xcache » ou « service ».
 
 L'exemple suivant montre un aperçu global des options de configuration du cache :
 
