@@ -2,7 +2,6 @@ UserPassword
 ============
 
 .. versionadded:: 2.1
-
    Cette contrainte n'existe que depuis la version 2.1.
 
 Cette contrainte valide qu'une valeur saisie est égale au mot de passe
@@ -23,9 +22,9 @@ contrainte vous permet d'appliquer une collection de contraintes à chaque élé
 +----------------+----------------------------------------------------------------------------------------+
 | Options        | - `message`_                                                                           |
 +----------------+----------------------------------------------------------------------------------------+
-| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\UserPassword`                      |
+| Classe         | :class:`Symfony\\Bridge\\Security\\Core\\Validator\\Constraints\\UserPassword`         |
 +----------------+----------------------------------------------------------------------------------------+
-| Validateur     | :class:`Symfony\\Bundle\\SecurityBundle\\Validator\\Constraint\\UserPasswordValidator` |
+| Validateur     | :class:`Symfony\\Bridge\\Security\\Core\\Validator\\Constraint\\UserPasswordValidator` |
 +----------------+----------------------------------------------------------------------------------------+
 
 Utilisation de base

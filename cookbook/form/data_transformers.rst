@@ -1,3 +1,6 @@
+.. index::
+   single: Form; Data transformers
+
 Utiliser des Convertisseurs de Données
 ======================================
 
@@ -72,7 +75,7 @@ non-existant est entré::
 .. tip::
 
     Vous pouvez aussi utiliser les convertisseurs sans avoir à créer un nouveau
-    type de formulaire personnalisé en appelant ``appendClientTransformer`` sur
+    type de formulaire personnalisé en appelant ``addViewTransformer`` sur
     n'importe quel constructeur de champ::
 
         use Symfony\Component\Form\FormBuilderInterface;

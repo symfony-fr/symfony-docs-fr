@@ -208,7 +208,7 @@ est exécuté par le framework. L'étape suivante est de créer ce contrôleur.
 
 Le contrôleur - ``AcmeHelloBundle:Hello:index`` est le nom *logique* du contrôleur,
 et il est associé à la méthode ``indexAction`` d'une classe PHP appelée
-``Acme\HelloBundle\Controller\Hello``. Commencez par créer ce fichier dans votre
+``Acme\HelloBundle\Controller\HelloController``. Commencez par créer ce fichier dans votre
 ``AcmeHelloBundle`` :
 
 .. code-block:: php
@@ -713,6 +713,10 @@ entre tous les bundles Symfony2. Jetez un oeil au ``AcmeHelloBundle``, car il co
 certains des éléments les plus communs d'un bundle :
 
 * ``Controller/`` contient les contrôleurs du bundle (ex ``HelloController.php``);
+
+* ``DependencyInjection/``  contient certaines classes d'extension d'injection
+  de dépendances, qui peuvent importer des configurations de services, enregistrer
+  des passes de compilation ou plus encore (ce répertoire n'est pas obligatoire);
 
 * ``Resources/config/`` contient la configuration, notamment la configuration
   de routage (ex ``routing.yml``);

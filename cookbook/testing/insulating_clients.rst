@@ -1,5 +1,5 @@
 .. index::
-   single: Tests
+   single: Tests; Insulating clients
 
 Comment tester les interactions de multiples clients
 ====================================================
@@ -13,7 +13,7 @@ un « chat » par exemple), créez plusieurs clients::
     $harry->request('POST', '/say/sally/Hello');
     $sally->request('GET', '/messages');
 
-    $this->assertEquals(201, $harry->getResponse()->getStatusCode());
+    $this->assertEquals(201, $harry->getResponse()->getStatus());
     $this->assertRegExp('/Hello/', $sally->getResponse()->getContent());
 
 Cependant cela ne fonctionnera que si vous ne maintenez pas dans votre application
@@ -29,7 +29,7 @@ des états globaux. Dans ces cas vous devrez isoler les clients::
     $harry->request('POST', '/say/sally/Hello');
     $sally->request('GET', '/messages');
 
-    $this->assertEquals(201, $harry->getResponse()->getStatusCode());
+    $this->assertEquals(201, $harry->getResponse()->getStatus());
     $this->assertRegExp('/Hello/', $sally->getResponse()->getContent());
 
 Insulated clients transparently execute their requests in a dedicated and

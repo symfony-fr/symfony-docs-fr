@@ -1,6 +1,6 @@
 .. index::
    single: Configuration; Sémantique
-   single: Bundle; Configuration d'Extension
+   single: Bundle; Configuration d'extension
 
 Comment exposer une configuration sémantique pour un Bundle
 ===========================================================
@@ -99,7 +99,7 @@ La seconde méthode possède plusieurs avantages spécifiques :
 
 .. index::
    single: Bundles; Extension
-   single: Injection de Dépendances, Extension
+   single: Injection de Dépendances; Extension
 
 Créer une classe d'Extension
 ----------------------------

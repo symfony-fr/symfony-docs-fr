@@ -44,7 +44,7 @@ vous faite un ``bindRequest`` sur le formulaire::
 
 Notez que la méthode ``setAuthor`` n'est pas appelée. L'objet Author est modifié par référence.
 
-Si nous définissons ``by_reference`` à false, l'association ressemblera à ceci :
+Si nous définissons ``by_reference`` à false, l'association ressemblera à ceci::
 
     $article->setTitle('...');
     $author = $article->getAuthor();

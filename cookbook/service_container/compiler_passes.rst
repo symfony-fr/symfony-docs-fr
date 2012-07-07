@@ -1,3 +1,7 @@
+.. index::
+   single: Dependency Injection; Compiler passes
+   single: Service Container; Compiler passes
+
 Comment travailler avec les Passes de Compilation dans les Bundles
 ==================================================================
 

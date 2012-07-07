@@ -150,6 +150,10 @@ Installer les extensions Sphinx
     
     # ...
     sys.path.append(os.path.abspath('_exts'))
+
+    # ajouter PhpLexer 
+    from sphinx.highlighting import lexers 
+    from pygments.lexers.web import PhpLexer
     
     # ...
     # ajoute les extensions à la liste des extensions

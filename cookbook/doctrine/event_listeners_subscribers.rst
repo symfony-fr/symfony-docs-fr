@@ -1,3 +1,6 @@
+.. index::
+   single: Doctrine; Event listeners and subscribers
+
 .. _doctrine-event-config:
 
 Enregistrer des listeners (« écouteurs » en français) et des souscripteurs d'évènement
@@ -95,7 +98,7 @@ l'évènement est lancé::
         public function postPersist(LifecycleEventArgs $args)
         {
             $entity = $args->getEntity();
-            $entityManager = $args->getManager();
+            $entityManager = $args->getEntityManager();
             
             // peut-être vous voulez seulement agir sur une entité « Product »
             if ($entity instanceof Product) {

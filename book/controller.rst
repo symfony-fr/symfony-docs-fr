@@ -567,6 +567,15 @@ le chapitre :doc:`Templating </book/templating>`
         $templating = $this->get('templating');
         $content = $templating->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
 
+.. note::
+
+    Il est aussi possible d'afficher des templates situés dans des sous-répertoires.
+    Mais évitez tout de même de tomber dans la facilité de faire des arborescences
+    trop élaborées::
+ 
+        $templating->render('AcmeHelloBundle:Hello/Greetings:index.html.twig', array('name' => $name));
+        // index.html.twig situé dans Resources/views/Hello/Greetings est affiché.
+
 .. index::
    single: Le Contrôleur; Accéder aux services
 

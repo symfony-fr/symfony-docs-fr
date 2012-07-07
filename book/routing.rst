@@ -110,7 +110,6 @@ Ceci est le but du routeur Symfony2 : faire correspondre l'URL d'une requête
 d'astuces qui rendent même facile la création des URLs les plus complexes.
 
 .. versionadded:: 2.1
-
     Depuis Symfony 2.1, le composant de routage accepte également les
     valeurs Unicode comme: /Жени/
 
@@ -1170,11 +1169,11 @@ de la méthode ``generate()`` :
     de l'objet courant ``Request``. Celui-ci est détecté automatiquement basé
     sur les informations du serveur fournies par PHP. Lorsque vous générez
     des URLs absolues pour des scripts exécutés depuis la ligne de commande,
-    vous devrez spécifier manuellement l'host désiré sur l'objet ``Request`` :
+    vous devrez spécifier manuellement l'host désiré sur l'objet ``RequestContext`` :
     
     .. code-block:: php
     
-        $request->headers->set('HOST', 'www.example.com');
+        $router->getContext()->setHost('www.example.com');
 
 .. index::
    single: Routage; Générer des URLs depuis un template
@@ -1184,7 +1183,7 @@ Générer des URLs avec « Query Strings »
 
 La méthode ``generate`` prend un tableau de valeurs jokers pour générer l'URI.
 Mais si vous en passez d'autres, elles seront ajoutées à l'URI en tant que
-«query string» ::
+« query string » ::
 
     $router->generate('blog', array('page' => 2, 'category' => 'Symfony'));
     // /blog/2?category=Symfony

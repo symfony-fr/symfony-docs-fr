@@ -20,6 +20,7 @@ du coeur du noyau::
     namespace Acme\DemoBundle\Listener;
 
     use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+    use Symfony\Component\HttpFoundation\Response;
 
     class AcmeExceptionListener
     {
@@ -30,6 +31,7 @@ du coeur du noyau::
             $message = 'My Error says: ' . $exception->getMessage();
             
             // personnalise notre objet réponse pour afficher les détails de notre exception
+            $response = new Response();
             $response->setContent($message);
             $response->setStatusCode($exception->getStatusCode());
             

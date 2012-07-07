@@ -116,7 +116,7 @@ gérer le lieu (rappelez-vous, DRY - Don't Repeat Yourself!).
 L'option de champ de formulaire ``virtual`` est la solution.
 
 Nous pouvons définir l'option ``'virtual' => true`` dans la méthode
-``getDefaultOptions`` de ``LocationType`` et commencer à l'utiliser directement 
+``setDefaultOptions()`` de ``LocationType`` et commencer à l'utiliser directement 
 dans les deux types de formulaires initiaux.
 
 Voyez le résultat::

@@ -1,3 +1,6 @@
+.. index::
+   single: Security; "Remember me"
+
 Comment ajouter la Fonctionnalité de Login « Remember Me »
 ==========================================================
 

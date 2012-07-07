@@ -202,14 +202,15 @@ en combinant plusieurs permissions de base :
         ->add('delete')
         ->add('undelete')
     ;
-    $mask = $builder->get(); // int(15)
+    $mask = $builder->get(); // int(29)
 
 Ce masque binaire représenté par un entier peut ainsi être utilisé pour accorder
 à un utilisateur les permissions de base que vous avez ajouté ci-dessus :
 
 .. code-block:: php
 
-    $acl->insertObjectAce(new UserSecurityIdentity('johannes'), $mask);
+    $identity = new UserSecurityIdentity('johannes', 'Acme\UserBundle\Entity\User');
+    $acl->insertObjectAce($identity, $mask);
 
 L'utilisateur a désormais le droit de lire, éditer, supprimer, et annuler
 une suppression sur des objets.

@@ -1,3 +1,6 @@
+.. index:: 
+   single: Security; Customizing form login
+
 Comment personnaliser votre Formulaire de Login
 ===============================================
 

@@ -1,3 +1,6 @@
+.. index::
+   single: Dependency Injection; Scopes
+
 Comment travailler avec les champs d'applications (« scopes » en anglais)
 =========================================================================
 
