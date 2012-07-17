@@ -1,8 +1,6 @@
-
 Makefile
 make.bat
 conf.py
-
 sphinx-php/
 _build/*
 _exts/*
