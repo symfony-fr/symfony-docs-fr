@@ -1,56 +1,59 @@
 .. index::
-   single: Event Dispatcher
+   single: Répartiteur d'Evénement
 
-The Generic Event Object
-========================
+L'objet Evénement Générique
+===========================
 
 .. versionadded:: 2.1
-    The ``GenericEvent`` event class was added in Symfony 2.1
+    La classe événement ``GenericEvent`` a été ajoutée dans Symfony 2.1.
 
-The base :class:`Symfony\\Component\\EventDispatcher\\Event` class provided by the
-``Event Dispatcher`` component is deliberately sparse to allow the creation of
-API specific event objects by inheritance using OOP. This allow for elegant and
-readable code in complex applications.
+La classe de base :class:`Symfony\\Component\\EventDispatcher\\Event` fournie par
+le composant ``Event Dispatcher`` est délibérément spartiate afin de permettre
+la création d'objets événement spécifiques à une API grâce à l'héritage en utilisant
+la POO (« Programmation Orientée Objet »). Cela permet d'avoir du code élégant et
+lisible dans des applications complexes.
 
-The :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` is available
-for convenience for those who wish to use just one event object throughout their
-application. It is suitable for most purposes straight out of the box, because
-it follows the standard observer pattern where the event object
-encapsulates an event 'subject', but has the addition of optional extra
-arguments.
+La classe :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` est
+à disposition pour ceux souhaitant utiliser juste un objet événement à
+travers leur application. Elle est adaptée à la plupart des besoins
+« out of the box » car elle suit le pattern standard de l'observeur où
+l'objet événement encapsule un « sujet » événement, tout en ayant la
+possibilité d'avoir des arguments additionnels.
 
-:class:`Symfony\\Component\\EventDispatcher\\GenericEvent` has a simple API in
-addition to the base class :class:`Symfony\\Component\\EventDispatcher\\Event`
+La classe :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` possède
+une API simple en plus de la classe de base
+:class:`Symfony\\Component\\EventDispatcher\\Event` :
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::__construct`:
-  Constructor takes the event subject and any arguments;
+  Le constructeur prend le sujet de l'événement et n'importe quels arguments ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getSubject`:
-  Get the subject;
+  Récupère le sujet ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArg`:
-  Sets an argument by key;
+  Définit un argument par clé ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArgs`:
-  Sets arguments array;
+  Définit un tableau d'arguments ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArg`:
-  Gets an argument by key;
+  Récupère un argument par clé ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgs`:
-  Gets an array of argument;
+  Récupère un tableau d'arguments ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::hasArg`:
-  Returns true if the argument key exists;
+  Retourne « true » si la clé de l'argument existe.
 
-The ``GenericEvent`` also implements :phpclass:`ArrayAccess` on the event
-arguments which makes it very convenient to pass extra arguments regarding the
-event subject.
+Le ``GenericEvent`` implémente aussi :phpclass:`ArrayAccess` sur les
+arguments de l'événement qui fait que cela facilite réellement le passage
+d'arguments supplémentaires eu égard au sujet de l'événement.
 
-The following examples show use-cases to give a general idea of the flexibility.
-The examples assume event listeners have been added to the dispatcher.
+Les exemples suivants montrent des cas d'école pour vous donner une idée
+général de la flexibilité. Les exemples assument que des « listeners »
+d'événement ont été ajoutés au répartiteur.
 
-Simply passing a subject::
+Passer simplement un sujet::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -67,8 +70,8 @@ Simply passing a subject::
         }
     }
 
-Passing and processing arguments using the :phpclass:`ArrayAccess` API to access
-the event arguments::
+Passer et gérer des arguments en utilisant l'API :phpclass:`ArrayAccess` pour
+accéder aux arguments de l'événement::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -82,14 +85,14 @@ the event arguments::
         public function handler(GenericEvent $event)
         {
             if (isset($event['type']) && $event['type'] === 'foo') {
-                // ... do something
+                // ... faites quelque chose
             }
 
             $event['counter']++;
         }
     }
 
-Filtering data::
+Filtrer des données::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
