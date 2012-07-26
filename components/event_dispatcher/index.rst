@@ -1,5 +1,5 @@
-Event Dispatcher
-================
+Répartiteur d'Evénement
+=======================
 
 .. toctree::
     :maxdepth: 2

@@ -1,28 +1,31 @@
 .. index::
-   single: Event Dispatcher; Container Aware; Dependency Injection; DIC
+   single: Répartiteur d'Evénement; Connaissant le Conteneur; Injection de Dépendances; DIC
 
-The Container Aware Event Dispatcher
-====================================
+Le Répartiteur d'Evénement connaissant le Conteneur
+===================================================
 
 .. versionadded:: 2.1
-    This feature was moved into the EventDispatcher component in Symfony 2.1.
+    Cette fonctionnalité a été déplacée dans l'« EventDispatcher » dans Symfony 2.1.
 
 Introduction
 ------------
 
-The :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher` is
-a special event dispatcher implementation which is coupled to the Symfony2
-Dependency Injection Container Component (DIC). It allows DIC services to be
-specified as event listeners making the event dispatcher extremely powerful.
+La classe :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`
+est une implémentation spéciale du répartiteur d'événement qui est couplé au composant
+« Dependency Injection Container (DIC) » (« Conteneur d'Injection de Dépendances » en
+français). Il permet aux services du « DIC » d'être spécifiés en tant que « listeners »
+d'événement rendant le répartiteur d'événement extrêmement puissant.
 
-Services are lazy loaded meaning the services attached as listeners will only be
-created if an event is dispatched that requires those listeners.
+Les services sont chargés de manière fainéante (« lazy loading » en anglais), ce qui
+signifie que les services attachés en tant que « listeners » ne seront créés que si
+un événement qui est réparti nécessite ces « listeners ».
 
-Setup
------
+Installation
+------------
 
-Setup is straightforward by injecting a :class:`Symfony\\Component\\DependencyInjection\\ContainerInterface`
-into the :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`::
+L'installation est très facile et nécessite uniquement l'injection d'une interface
+:class:`Symfony\\Component\\DependencyInjection\\ContainerInterface` dans la classe
+:class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
@@ -30,40 +33,41 @@ into the :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatc
     $container = new ContainerBuilder();
     $dispatcher = new ContainerAwareEventDispatcher($container);
 
-Adding Listeners
-----------------
+Ajouter des « Listeners »
+-------------------------
 
-The *Container Aware Event Dispatcher* can either load specified services
-directly, or services that implement :class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`.
+Le *Répartiteur d'Evénement connaissant le Conteneur* peut soit directement
+charger des services spécifiques, soit des services qui implémentent
+:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`.
 
-The following examples assume the DIC has been loaded with any services that
-are mentioned.
+Les exemples suivants assument que le « DIC » a été chargé avec tous les
+services qui sont mentionnés.
 
 .. note::
 
-    Services must be marked as public in the DIC.
+    Les services doivent être marqués comme publics dans le « DIC ».
 
-Adding Services
-~~~~~~~~~~~~~~~
+Ajouter des Services
+~~~~~~~~~~~~~~~~~~~~
 
-To connect existing service definitions, use the
+Pour connecter des définitions de service existantes, utilisez la méthode
 :method:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher::addListenerService`
-method where the ``$callback`` is an array of ``array($serviceId, $methodName)``::
+où le ``$callback`` est un tableau de ``array($serviceId, $methodName)``::
 
     $dispatcher->addListenerService($eventName, array('foo', 'logListener'));
 
-Adding Subscriber Services
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter des Services Souscripteurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``EventSubscribers`` can be added using the
+Les « ``EventSubscribers`` » peuvent être ajoutés en utilisant la méthode
 :method:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher::addSubscriberService`
-method where the first argument is the service ID of the subscriber service,
-and the second argument is the the service's class name (which must implement
-:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`) as follows::
+où le premier argument est l'ID du service souscripteur, et où le second argument
+est le nom de la classe du service (qui doit implémenter
+:class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`) comme suit::
 
     $dispatcher->addSubscriberService('kernel.store_subscriber', 'StoreSubscriber');
 
-The ``EventSubscriberInterface`` will be exactly as you would expect::
+L'``EventSubscriberInterface`` va ressembler exactement à ce à quoi vous vous attendez::
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     // ...
