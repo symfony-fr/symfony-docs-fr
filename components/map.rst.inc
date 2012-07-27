@@ -1,12 +1,12 @@
-* **The Class Loader Component**
+* **Le Composant Chargeur de Classes (« Class Loader » en anglais)**
 
   * :doc:`/components/class_loader`
 
-* **The Console Component**
+* **Le Composant Console**
 
   * :doc:`/components/console`
 
-* **The CSS Selector Component**
+* **Le Composant Sélecteur CSS**
 
   * :doc:`/components/css_selector`
 
@@ -25,15 +25,15 @@
   * :doc:`/components/event_dispatcher/container_aware_dispatcher`
   * :doc:`/components/event_dispatcher/generic_event`
 
-* **The DOM Crawler Component**
+* **Le Composant « DOM Crawler »**
 
   * :doc:`/components/dom_crawler`
 
-* **The Filesystem Component**
+* **Le Composant Système de Fichiers**
 
   * :doc:`/components/filesystem`
 
-* **The Finder Component**
+* **Le Composant « Finder »**
 
   * :doc:`/components/finder`
 
@@ -44,22 +44,22 @@
   * :doc:`/components/http_foundation/session_configuration`
   * :doc:`/components/http_foundation/session_testing`
 
-* **The Locale Component**
+* **Le Composant « Locale »**
 
   * :doc:`/components/locale`
 
-* **The Process Component**
+* **Le Composant « Process »**
 
   * :doc:`/components/process`
 
-* **The Routing Component**
+* **Le Composant Routeur**
 
   * :doc:`/components/routing`
 
-* **The Templating Component**
+* **Le Composant « Templating »**
 
   * :doc:`/components/templating`
 
-* **The YAML Component**
+* **Le Composant YAML**
 
   * :doc:`/components/yaml`
