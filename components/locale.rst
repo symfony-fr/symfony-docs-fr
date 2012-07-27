@@ -1,13 +1,14 @@
 .. index::
    single: Locale
 
-The Locale Component
-====================
+Le Composant Locale
+===================
 
-    Locale component provides fallback code to handle cases when the ``intl`` extension is missing.
-    Additionally it extends the implementation of a native :phpclass:`Locale` class with several handy methods.
+    Le composant « Locale » fournit une solution de secours pour gérer les cas où l'extension ``intl`` est
+    manquante. De plus, il étend l'implémentation de la classe native :phpclass:`Locale` avec plusieurs
+    méthodes pratiques.
 
-Replacement for the following functions and classes is provided:
+Des solutions de substitution pour les fonctions et classes suivantes sont fournies :
 
 * :phpfunction:`intl_is_failure`
 * :phpfunction:`intl_get_error_code`
@@ -19,23 +20,25 @@ Replacement for the following functions and classes is provided:
 
 .. note::
 
-     Stub implementation only supports the ``en`` locale.
+    L'implémentation de Stub supporte uniquement la locale ``en``.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Locale);
-* Install it via PEAR ( `pear.symfony.com/Locale`);
-* Install it via Composer (`symfony/locale` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Locale) ;
+* Installez le via PEAR (`pear.symfony.com/Locale`) ;
+* Installez le via Composer (`symfony/locale` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-Taking advantage of the fallback code includes requiring function stubs and adding class stubs to the autoloader.
+Tirer parti de ce « code de secours » inclut le fait de requérir les bouts de fonctions et d'ajouter les
+morceaux de classes à l'« autoloader ».
 
-When using the ClassLoader component following code is sufficient to supplement missing ``intl`` extension:
+Lorsque vous utilisez le composant « ClassLoader », le code suivant est suffisant pour suppléer l'extension
+``intl`` manquante :
 
 .. code-block:: php
 
@@ -45,25 +48,25 @@ When using the ClassLoader component following code is sufficient to supplement 
         $loader->registerPrefixFallbacks(array(__DIR__.'/path/to/src/Symfony/Component/Locale/Resources/stubs'));
     }
 
-:class:`Symfony\\Component\\Locale\\Locale` class enriches native :phpclass:`Locale` class with additional features:
+La classe :class:`Symfony\\Component\\Locale\\Locale` enrichit la classe native :phpclass:`Locale` avec des
+fonctionnalités supplémentaires :
 
 .. code-block:: php
 
     use Symfony\Component\Locale\Locale;
 
-    // Get the country names for a locale or get all country codes
+    // récupère les noms de pays pour une locale ou récupère tous les codes de pays
     $countries = Locale::getDisplayCountries('pl');
     $countryCodes = Locale::getCountries();
 
-    // Get the language names for a locale or get all language codes
+    // récupère les noms de langue pour une locale ou récupère tous les codes de langue
     $languages = Locale::getDisplayLanguages('fr');
     $languageCodes = Locale::getLanguages();
 
-    // Get the locale names for a given code or get all locale codes
+    // récupère les noms de locale pour un code donné ou récupère tous les codes de locale
     $locales = Locale::getDisplayLocales('en');
     $localeCodes = Locale::getLocales();
 
-    // Get ICU versions
+    // récupère les versions ICU
     $icuVersion = Locale::getIcuVersion();
     $icuDataVersion = Locale::getIcuDataVersion();
-
