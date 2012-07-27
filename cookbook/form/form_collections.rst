@@ -1,27 +1,27 @@
 .. index::
-   single: Formulaire; Intégrer une collection de formulaires
+   single: Formulaire; Imbriquer une collection de formulaires
 
-Comment intégrer une Collection de Formulaires
-==============================================
+Comment imbriquer une Collection de Formulaires
+===============================================
 
-Dans cet article, vous allez apprendre à créer un formulaire qui intègre une
+Dans cet article, vous allez apprendre à créer un formulaire qui imbrique une
 collection de plusieurs autres formulaires. Cela pourrait être utile, par
-exemple, si vous aviez une classe ``Task`` et que vous voudriez éditer/créer/supprimer
+exemple, si vous avez une classe ``Task`` et que vous voulez éditer/créer/supprimer
 différents objets ``Tag`` liés à cette « Task », tout cela dans le même
 formulaire.
 
 .. note::
 
-    Dans cet article, nous assumerons que vous utilisez Doctrine en tant
+    Dans cet article, nous supposons que vous utilisez Doctrine en tant
     qu'outil de stockage pour votre base de données. Mais si vous n'utilisez
     pas Doctrine (par exemple : Propel ou une simple connexion à la base
-    de données), tout reste très similaire. Il n'y a que quelques parties
-    de ce tutoriel qui s'occupent de la « persistence ».
+    de données), tout reste très similaire. Seules quelques sections
+    de ce tutoriel s'occupent de la « persistence ».
 
     Si vous *utilisez* Doctrine, vous aurez besoin d'ajouter les méta-données
-    de Doctrine, incluant la ``ManyToMany`` sur la propriété ``tags`` de Task.
+    de Doctrine, incluant la relation ``ManyToMany`` sur la propriété ``tags`` de Task.
 
-Commençons ici : supposons que chaque ``Task`` appartienne à plusieurs objets
+Pour commencer, supposons que chaque ``Task`` appartienne à plusieurs objets
 ``Tags``. Créons tout d'abord une simple classe ``Task``::
 
     // src/Acme/TaskBundle/Entity/Task.php
@@ -63,9 +63,9 @@ Commençons ici : supposons que chaque ``Task`` appartienne à plusieurs objets
 
 .. note::
 
-    ``ArrayCollection`` est spécifique à Doctrine et revient au même que
-    d'utiliser un ``array`` (mais cela doit être une ``ArrayCollection``) si vous
-    utilisez Doctrine.
+    ``ArrayCollection`` est spécifique à Doctrine et revient à utiliser un
+    ``array`` (mais cela doit être une ``ArrayCollection`` si vous
+    utilisez Doctrine).
 
 Maintenant, créez une classe ``Tag``. Comme vous l'avez vu ci-dessus, une ``Task``
 peut avoir plusieurs objets ``Tag``::
@@ -80,7 +80,7 @@ peut avoir plusieurs objets ``Tag``::
 
 .. tip::
 
-    La propriété ``name`` est « public » içi, mais elle pourrait tout aussi bien
+    La propriété ``name`` est « public » ici, mais elle pourrait tout aussi bien
     être « protected » ou « private » (ce qui impliquerait d'avoir des méthodes
     ``getName`` et ``setName``).
 
@@ -115,11 +115,11 @@ qu'un objet ``Tag`` puisse être modifié par l'utilisateur::
     }
 
 Avec cela, nous avons tout ce qu'il faut pour afficher un formulaire pour le
-tag lui-même. Mais comme le but final étant de permettre la modification des
+tag lui-même. Mais comme le but final est de permettre la modification des
 tags d'une ``Task`` directement depuis le formulaire de la « task » lui-même,
 créez un formulaire pour la classe ``Task``.
 
-Notez que nous intégrons une collection de formulaires ``TagType``
+Notez que nous imbriquons une collection de formulaires ``TagType``
 en utilisant le type de champ
 :doc:`collection</reference/forms/types/collection>`::
 
@@ -170,7 +170,7 @@ de ``TaskType``::
         {
             $task = new Task();
 
-            // code "test" - le code ci-dessous est simplement là pour que la
+            // code de test - le code ci-dessous est simplement là pour que la
             // Task ait quelques tags, sinon, l'exemple ne serait pas intéressant
             $tag1 = new Tag();
             $tag1->name = 'tag1';
@@ -178,7 +178,7 @@ de ``TaskType``::
             $tag2 = new Tag();
             $tag2->name = 'tag2';
             $task->getTags()->add($tag2);
-            // fin du code "test"
+            // fin du code de test
             
             $form = $this->createForm(new TaskType(), $task);
             
@@ -198,8 +198,8 @@ de ``TaskType``::
 
 Le template correspondant est maintenant capable d'afficher le champ
 ``description`` pour le formulaire de la tâche ainsi que les formulaires
-``TagType`` pour n'importes quels tags qui sont liés à cette objet ``Task``.
-Dans le contrôleur ci-dessus, j'ai ajouté du code test afin que vous puissiez
+``TagType`` pour n'importe quels tags qui sont liés à cet objet ``Task``.
+Dans le contrôleur ci-dessus, j'ai ajouté du code de test afin que vous puissiez
 voir cela en action (puisqu'un objet ``Task`` possède zéro tag lorsqu'il est
 créé pour la première fois).
 
@@ -249,8 +249,8 @@ champs ``Tags`` sont utilisées pour construire une collection « ArrayCollectio
 d'objets ``Tag``, qui est ensuite affectée au champ ``tag`` de l'instance ``Task``.
 
 La collection ``Tags`` est naturellement accessible via ``$task->getTags()``
-et peut être persistée dans la base de données ou utilisée de quelconque manière
-dont vous en avez besoin.
+et peut être persistée dans la base de données ou utilisée de la manière que
+vous voulez.
 
 Jusqu'ici, tout cela fonctionne bien, mais cela ne vous permet pas d'ajouter
 de nouveaux tags ou de supprimer des tags existants de manière dynamique. Donc,
@@ -259,8 +259,8 @@ ne pourra pour le moment pas en ajouter de nouveaux.
 
 .. caution::
 
-    Dans cet exemple, nous intégrons une seule collection, mais vous n'êtes
-    pas limité à cela. Vous pouvez aussi intégrer des collections « imbriquées »
+    Dans cet exemple, nous n'imbriquons qu'une seule collection, mais vous n'êtes
+    pas limité à cela. Vous pouvez aussi intégrer des collections  imbriquées
     avec autant de sous-niveaux que vous souhaitez. Mais si vous utilisez Xdebug
     dans votre environnement de développement, vous pourriez recevoir une erreur
     telle ``Maximum function nesting level of '100' reached, aborting!``.
@@ -268,7 +268,7 @@ ne pourra pour le moment pas en ajouter de nouveaux.
     avec une valeur de ``100`` par défaut.
 
     Cette directive limite la récursion à 100 appels, ce qui ne pourrait pas
-    être assez pour afficher le formulaire dans le template si vous rendez le
+    être assez pour afficher le formulaire dans le template si vous affichez le
     formulaire en entier en une seule fois (par exemple : ``form_widget(form)``).
     Pour parer à cela, vous pouvez définir cette directive avec une valeur plus
     haute (soit dans le fichier ini PHP ou à l'aide de :phpfunction:`ini_set`,
@@ -281,15 +281,16 @@ Autoriser de « nouveaux » tags avec le « prototypage »
 ------------------------------------------------------
 
 Autoriser l'utilisateur à ajouter de nouveaux tags signifie que nous allons
-avoir besoin d'utiliser un peu de Javascript. Plus tôt, nous avons ajouter deux
+avoir besoin d'utiliser un peu de Javascript. Plus tôt, nous avons ajouté deux
 tags à notre formulaire dans le contrôleur. Maintenant, nous devons permettre à
 l'utilisateur d'ajouter autant de tags qu'il souhaite directement depuis le navigateur.
-Cela va être effectué grâce à quelques lignes de Javascript.
+Quelques lignes de Javascript sont nécessaires pour effectuer cela.
 
-La première chose que nous devons faire est de laisser savoir à la collection
+La première chose que nous devons faire est de spécifier à la collection
 du formulaire qu'elle va recevoir un nombre inconnu de tags. Jusqu'ici, nous
 avons ajouté deux tags et le formulaire s'attend à en recevoir exactement deux,
-sinon une erreur sera lancé : ``This form should not contain extra fields``.
+sinon une erreur sera levée : ``This form should not contain extra fields`` ce qui
+signifie que le formulaire ne peut contenir de champs supplémentaires.
 Pour rendre cela flexible, nous ajoutons l'option ``allow_add`` à notre champ
 collection::
 
@@ -310,14 +311,14 @@ collection::
     }
 
 Notez que nous avons aussi ajouté ``'by_reference' => false``. Normalement, le
-framework de formulaire modifierait les tags d'un objet `Task` *sans* ne jamais
+framework de formulaire modifierait les tags d'un objet `Task` *sans* jamais
 appeler `setTags`. En définissant :ref:`by_reference<reference-form-types-by-reference>`
 à `false`, `setTags` sera appelée. Vous comprendrez plus tard pourquoi cela est important.
 
 En plus de dire au champ d'accepter n'importe quel nombre d'objets soumis, l'option
 ``allow_add`` met une variable « prototype » à votre disposition. Ce « prototype »
 est un petit « template » qui contient tout le code HTML nécessaire pour afficher
-tout nouveau formulaire « tag ». Pour l'utiliser, faites le changement suivant
+un nouveau formulaire « tag ». Pour l'utiliser, faites le changement suivant
 dans votre formulaire :
 
 .. configuration-block::
@@ -346,30 +347,30 @@ dans votre formulaire :
     ``form.tags.vars.prototype`` est un élément de formulaire qui ressemble à
     l'élément individuel ``form_widget(tag)`` à l'intérieur de notre boucle ``for``.
     Cela signifie que vous pouvez appeler ``form_widget``, ``form_row``, ou
-    ``form_label`` sur ce prototype. Vous pourriez même choisir de ne rendre qu'un
+    ``form_label`` sur ce prototype. Vous pourriez même choisir de n'afficher qu'un
     seul de ses champs (par exemple : le champ ``name``) :
     
     .. code-block:: html+jinja
     
         {{ form_widget(form.tags.vars.prototype.name) | e }}
 
-Sur la page affichée, le résultat ressemblera à quelque chose comme ca :
+Sur la page affichée, le résultat ressemblera à quelque chose comme ceci :
 
 .. code-block:: html
 
     <ul class="tags" data-prototype="&lt;div&gt;&lt;label class=&quot; required&quot;&gt;__name__&lt;/label&gt;&lt;div id=&quot;task_tags___name__&quot;&gt;&lt;div&gt;&lt;label for=&quot;task_tags___name___name&quot; class=&quot; required&quot;&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;task_tags___name___name&quot; name=&quot;task[tags][__name__][name]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;">
 
-Le but de cette section sera d'utiliser JavaScript pour lire cet attribut et
+Le but de cette section sera d'utiliser Javascript pour lire cet attribut et
 ajouter dynamiquement un nouveau tag lorsque l'utilisateur clique sur un
 lien « Ajouter un tag ». Pour garder les choses simples, nous allons utiliser
-jQuery et assumer que vous l'avez déjà inclus quelque part dans votre page.
+jQuery et supposer que vous l'avez déjà inclus quelque part dans votre page.
 
 Ajoutez une balise ``script`` quelque part dans votre page afin que nous puissions
-commencer à écrire un peu de JavaScript.
+commencer à écrire un peu de Javascript.
 
-Tout d'abord, ajoutez un lien en bas de votre liste de « tags » via JavaScript.
+Tout d'abord, ajoutez un lien en bas de votre liste de « tags » via Javascript.
 Ensuite, liez l'événement « click » de ce lien afin que nous puissions ajouter
-un formulaire tag (``addTagForm`` sera montré plus tard) :
+un formulaire tag (``addTagForm`` sera expliqué plus tard) :
 
 .. code-block:: javascript
 
@@ -377,11 +378,11 @@ un formulaire tag (``addTagForm`` sera montré plus tard) :
     var collectionHolder = $('ul.tags');
 
     // ajoute un lien « add a tag »
-    var $addTagLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
+    var $addTagLink = $('<a href="#" class="add_tag_link">Ajouter un tag</a>');
     var $newLinkLi = $('<li></li>').append($addTagLink);
 
     jQuery(document).ready(function() {
-        // ajoute l'ancre « add a tag » et li à la balise ul
+        // ajoute l'ancre « ajouter un tag » et li à la balise ul
         collectionHolder.append($newLinkLi);
 
         $addTagLink.on('click', function(e) {
@@ -394,9 +395,9 @@ un formulaire tag (``addTagForm`` sera montré plus tard) :
     });
 
 Le travail de la fonction ``addTagForm`` sera d'utiliser l'attribut ``data-prototype``
-pour dynamiquement ajouter un nouveau formulaire lorsque ce lien est cliqué. Le code
-HTML de ``data-prototype`` contient la balise ``texte`` avec un nom tel
-``task[tags][__name__][name]`` et un id tel ``task_tags___name___name``. La chaîne de
+pour ajouter dynamiquement un nouveau formulaire lorsqu'on clique sur ce lien. Le code
+HTML de ``data-prototype`` contient la balise ``texte`` avec un nom du genre
+``task[tags][__name__][name]`` et un id du genre ``task_tags___name___name``. La chaîne de
 caractères ``__name__`` est une variable de substitution (« placeholder » en anglais) que
 nous remplacerons avec un nombre unique et incrémental (par exemple : ``task[tags][3][name]``).
 
@@ -417,33 +418,33 @@ exemple :
         // la longueur de la collection courante
         var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
 
-        // Affiche le formulaire dans la page dans un li, avant le lien "Add a tag"
+        // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un tag"
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
     }
 
 .. note:
 
-    Il est préférable de séparer votre javascript dans des fichiers JavaScript
-    réels plutôt que de l'écrire directement en plein milieu de votre code HTML
+    Il est préférable de séparer votre javascript dans des vrais fichiers Javascript
+    plutôt que de l'écrire directement en plein milieu de votre code HTML
     comme nous le faisons ici.
 
-Maintenant, chaque fois qu'un utilisateur clique sur le lien ``Add a tag``, un
-nouveau sous-formulaire apparaîtra sur la page. Lors de la soumission, quelconques
-formulaires de tag seront convertis en de nouveaux objets ``Tag`` et ajoutés à la
+Maintenant, chaque fois qu'un utilisateur cliquera sur le lien ``Ajouter un tag``, un
+nouveau sous-formulaire apparaîtra sur la page. Lors de la soumission, tout nouveau
+formulaire de tag sera converti en un nouvel objet ``Tag`` et ajouté à la
 propriété ``tags`` de l'objet ``Task``.
 
 .. sidebar:: Doctrine: Relations de Cascade et sauvegarde du côté « Inverse »
 
     Afin que les nouveaux tags soient sauvegardés dans Doctrine, vous devez
-    considérer certaines choses en plus. Tout d'abord, à moins que vous
-    itériez sur tous les nouveaux objets ``Tag`` et appelez ``$em->persist($tag)``
+    prendre en compte certains éléments. Tout d'abord, à moins que vous
+    n'itériez sur tous les nouveaux objets ``Tag`` et appelez ``$em->persist($tag)``
     sur chacun d'entre eux, vous allez recevoir une erreur de la part de Doctrine :
 
         A new entity was found through the relationship 'Acme\TaskBundle\Entity\Task#tags' that was not configured to cascade persist operations for entity...
 
     Pour réparer cela, vous pourriez choisir d'effectuer automatiquement l'opération
-    de persistence en mode « cascade » de l'objet ``Task`` avec quelconques tags liés.
+    de persistence en mode « cascade » de l'objet ``Task`` pour tout les tags liés.
     Pour faire ceci, ajoutez l'option ``cascade`` à votre méta-donnée ``ManyToMany`` :
     
     .. configuration-block::
@@ -472,7 +473,7 @@ propriété ``tags`` de l'objet ``Task``.
     alors la persistence va fonctionner sans problème comme les tags sont
     ajoutés correctement à la « Task ». Cependant, si le côté « propriétaire »
     est « Tag », alors vous aurez besoin de coder un peu plus afin de
-    vous assurer que le bon côté de la relation soit correctement modifié.
+    vous assurer que le bon côté de la relation est correctement modifié.
 
     L'astuce est de s'assurer qu'une unique « Task » est définie pour chaque
     « Tag ». Une manière facile de faire cela est d'ajouter un bout de logique
@@ -565,12 +566,12 @@ Premièrement, ajoutez un lien « Supprimer ce tag » dans chaque formulaire de 
         addTagFormDeleteLink($newFormLi);
     }
 
-La fonction ``addTagFormDeleteLink`` va ressembler à quelque chose comme ça :
+La fonction ``addTagFormDeleteLink`` va ressembler à quelque chose comme ceci :
 
 .. code-block:: javascript
 
     function addTagFormDeleteLink($tagFormLi) {
-        var $removeFormA = $('<a href="#">delete this tag</a>');
+        var $removeFormA = $('<a href="#">Supprimer ce tag</a>');
         $tagFormLi.append($removeFormA);
 
         $removeFormA.on('click', function(e) {
@@ -583,7 +584,7 @@ La fonction ``addTagFormDeleteLink`` va ressembler à quelque chose comme ça :
     }
 
 Lorsqu'un formulaire de tag est supprimé du DOM et soumis, l'objet ``Tag`` supprimé
-ne sera pas inclus dans la collection passée à ``setTags``. Dépendant de votre couche
+ne sera pas inclus dans la collection passée à ``setTags``. Selon votre couche
 de persistence, cela pourrait ou ne pourrait pas être suffisant pour effectivement
 supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
 
@@ -604,7 +605,7 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
     supprimés soient persistés correctement.
 
     Dans ce cas, vous pouvez modifier le contrôleur afin qu'il efface la
-    relation pour les tags supprimés. Ceci assume que vous ayez une ``editAction``
+    relation pour les tags supprimés. Ceci suppose que vous ayez une ``editAction``
     qui gére la « mise à jour » de votre « Task »::
 
         // src/Acme/TaskBundle/Controller/TaskController.php
@@ -616,7 +617,7 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
             $task = $em->getRepository('AcmeTaskBundle:Task')->find($id);
     
             if (!$task) {
-                throw $this->createNotFoundException('No task found for is '.$id);
+                throw $this->createNotFoundException('Aucune tâche trouvée pour cet id : '.$id);
             }
 
             // Crée un tableau contenant les objets Tag courants de la
@@ -664,11 +665,11 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
                 }
             }
             
-            // affiche quelconque template de formulaire
+            // affiche un template de formulaire quelconque
         }
 
     Comme vous pouvez le voir, ajouter et supprimer les éléments correctement
-    peut ne pas être trivial. A moins que vous ayez une relation ``ManyToMany``
+    peut ne pas être trivial. A moins que vous n'ayez une relation ``ManyToMany``
     où « Task » est le côté « propriétaire », vous devrez ajouter du code
     supplémentaire pour vous assurer que la relation soit correctement mise à
     jour (que ce soit pour l'ajout de nouveaux tags ou pour la suppression de
