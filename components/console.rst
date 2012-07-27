@@ -1,30 +1,30 @@
 .. index::
     single: Console; CLI
 
-The Console Component
-=====================
+Le Composant Console
+====================
 
-    The Console component eases the creation of beautiful and testable command
-    line interfaces.
+    Le composant Console facilite la création d'interfaces de ligne de commandes,
+    belles et testables.
 
-The Console component allows you to create command-line commands. Your console
-commands can be used for any recurring task, such as cronjobs, imports, or
-other batch jobs.
+Le composant Console vous permet de créer des commandes de ligne de commandes.
+Vos commandes de console peuvent être utilisées pour quelconque tâche récurrente,
+comme des cronjobs, des imports, ou d'autres processus à exécuter par lots.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Console);
-* Install it via PEAR ( `pear.symfony.com/Console`);
-* Install it via Composer (`symfony/console` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Console) ;
+* Installez le via PEAR (`pear.symfony.com/Console`) ;
+* Installez le via Composer (`symfony/console` dans Packagist).
 
-Creating a basic Command
-------------------------
+Créer une Commande basique
+--------------------------
 
-To make a console command to greet us from the command line, create ``GreetCommand.php``
-and add the following to it::
+Pour faire une commande de console qui nous accueille depuis la ligne de commandes, créez
+un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
 
     namespace Acme\DemoBundle\Command;
 
@@ -63,8 +63,8 @@ and add the following to it::
         }
     }
 
-You also need to create the file to run at the command line which creates
-an ``Application`` and adds commands to it::
+Vous devez aussi créer le fichier à exécuter en ligne de commandes qui crée
+une ``Application`` et lui ajoute les commandes::
 
     #!/usr/bin/env php
     # app/console
@@ -77,66 +77,69 @@ an ``Application`` and adds commands to it::
     $application->add(new GreetCommand);
     $application->run();
 
-Test the new console command by running the following
+Testez la nouvelle commande de console en exécutant ce qui suit :
 
 .. code-block:: bash
 
     app/console demo:greet Fabien
 
-This will print the following to the command line:
+Cela va afficher ce qui suit sur votre ligne de commandes :
 
 .. code-block:: text
 
     Hello Fabien
 
-You can also use the ``--yell`` option to make everything uppercase:
+Vous pouvez aussi utiliser l'option ``--yell`` pour afficher tout en majuscules :
 
 .. code-block:: bash
 
     app/console demo:greet Fabien --yell
 
-This prints::
+Cela affiche::
 
     HELLO FABIEN
 
-Coloring the Output
-~~~~~~~~~~~~~~~~~~~
+Ajouter de la couleur à l'affichage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Whenever you output text, you can surround the text with tags to color its
-output. For example::
+A chaque fois que vous affichez du texte, vous pouvez entourer le texte avec
+des balises afin d'ajouter de la couleur à l'affichage. Par exemple::
 
-    // green text
+    // texte vert
     $output->writeln('<info>foo</info>');
 
-    // yellow text
+    // texte jaune
     $output->writeln('<comment>foo</comment>');
 
-    // black text on a cyan background
+    // texte noir sur fond cyan
     $output->writeln('<question>foo</question>');
 
-    // white text on a red background
+    // texte blanc sur fond rouge
     $output->writeln('<error>foo</error>');
 
-It is possible to define your own styles using the class
+Il est possible de définir vos propres styles en utilisant la classe
 :class:`Symfony\\Component\\Console\\Formatter\\OutputFormatterStyle`::
 
     $style = new OutputFormatterStyle('red', 'yellow', array('bold', 'blink'));
     $output->getFormatter()->setStyle('fire', $style);
     $output->writeln('<fire>foo</fire>');
 
-Available foreground and background colors are: ``black``, ``red``, ``green``,
-``yellow``, ``blue``, ``magenta``, ``cyan`` and ``white``.
+Les couleurs d'écriture et de fond disponibles sont : ``black`` (« noir »), ``red``
+(« rouge »), ``green`` (« vert »), ``yellow`` (« jaune »), ``blue`` (« bleu »),
+``magenta`` (« magenta »), ``cyan`` (« cyan ») et ``white`` (« blanc »).
 
-And available options are: ``bold``, ``underscore``, ``blink``, ``reverse`` and ``conceal``.
+Et les options disponibles sont : ``bold`` (« gras »), ``underscore`` (« souligné »),
+``blink`` (« clignotant »), ``reverse`` (« inversé ») et ``conceal`` (« masqué »).
 
-Using Command Arguments
------------------------
+Utiliser des Arguments de Commande
+----------------------------------
 
-The most interesting part of the commands are the arguments and options that
-you can make available. Arguments are the strings - separated by spaces - that
-come after the command name itself. They are ordered, and can be optional
-or required. For example, add an optional ``last_name`` argument to the command
-and make the ``name`` argument required::
+La partie la plus intéressante des commandes sont les arguments et options que
+vous pouvez rendre disponibles. Les arguments sont les chaînes de caractères -
+séparées par des espaces - qui viennent après le nom de la commande lui-même.
+Ils sont ordonnés, et peuvent être optionnels ou requis. Par exemple, ajoutez
+un argument optionnel ``last_name`` à la commande et faites en sorte que l'argument
+``name`` soit requis::
 
     $this
         // ...
@@ -144,43 +147,44 @@ and make the ``name`` argument required::
         ->addArgument('last_name', InputArgument::OPTIONAL, 'Your last name?')
         // ...
 
-You now have access to a ``last_name`` argument in your command::
+Vous avez maintenant accès à l'argument ``last_name`` depuis votre commande::
 
     if ($lastName = $input->getArgument('last_name')) {
         $text .= ' '.$lastName;
     }
 
-The command can now be used in either of the following ways:
+La commande peut maintenant être utilisée de l'une des façons suivantes :
 
 .. code-block:: bash
 
     app/console demo:greet Fabien
     app/console demo:greet Fabien Potencier
 
-Using Command Options
----------------------
+Utiliser des Options de Commande
+--------------------------------
 
-Unlike arguments, options are not ordered (meaning you can specify them in any
-order) and are specified with two dashes (e.g. ``--yell`` - you can also
-declare a one-letter shortcut that you can call with a single dash like
-``-y``). Options are *always* optional, and can be setup to accept a value
-(e.g. ``dir=src``) or simply as a boolean flag without a value (e.g.
-``yell``).
+Contrairement aux arguments, les options ne sont pas ordonnées (ce qui signifie
+que vous pouvez les spécifier dans n'importe quel ordre) et sont spécifiées avec
+deux tirets (par exemple : ``--yell`` - vous pouvez aussi déclarer un raccourci
+d'une lettre que vous pouvez appeler avec un unique tiret comme ``-y``). Les
+options sont *toujours* optionnelles, et peuvent être déclarées de manière à
+accepter une valeur (par exemple : ``dir=src``) ou simplement en tant que
+drapeau booléen sans valeur (par exemple : ``yell``).
 
 .. tip::
 
-    It is also possible to make an option *optionally* accept a value (so that
-    ``--yell`` or ``yell=loud`` work). Options can also be configured to
-    accept an array of values.
+    Il est aussi possible de faire qu'une option accepte *optionnellement* une
+    valeur (qui ferait que ``--yell`` ou ``yell=loud`` fonctionnerait). Les
+    options peuvent être configurées pour accepter un tableau de valeurs.
 
-For example, add a new option to the command that can be used to specify
-how many times in a row the message should be printed::
+Par exemple, ajoutez une nouvelle option à la commande qui peut être utilisée
+pour spécifier combien de fois le message devrait être affiché::
 
     $this
         // ...
         ->addOption('iterations', null, InputOption::VALUE_REQUIRED, 'How many times should the message be printed?', 1)
 
-Next, use this in the command to print the message multiple times:
+Ensuite, utilisez cette commande pour afficher le message plusieurs fois :
 
 .. code-block:: php
 
@@ -188,8 +192,8 @@ Next, use this in the command to print the message multiple times:
         $output->writeln($text);
     }
 
-Now, when you run the task, you can optionally specify a ``--iterations``
-flag:
+Maintenant, lorsque vous exécutez la tâche, vous pouvez spécifier de manière
+optionnelle un drapeau ``--iterations`` :
 
 .. code-block:: bash
 
@@ -197,30 +201,30 @@ flag:
 
     app/console demo:greet Fabien --iterations=5
 
-The first example will only print once, since ``iterations`` is empty and
-defaults to ``1`` (the last argument of ``addOption``). The second example
-will print five times.
+Le premier exemple va afficher le résultat une seule fois, puisque ``iterations``
+est vide et que par défaut il vaut ``1`` (le dernier argument de ``addOption``).
+Le second exemple va afficher le résultat cinq fois.
 
-Recall that options don't care about their order. So, either of the following
-will work:
+Rappelez-vous bien que ces options ne tiennent pas compte de leur ordre. Donc,
+n'importe laquelle des deux commandes suivantes va fonctionner :
 
 .. code-block:: bash
 
     app/console demo:greet Fabien --iterations=5 --yell
     app/console demo:greet Fabien --yell --iterations=5
 
-There are 4 option variants you can use:
+Il y a 4 variantes d'options que vous pouvez utiliser :
 
-===========================  =====================================================================================
+===========================  =================================================================================================
 Option                       Value
-===========================  =====================================================================================
-InputOption::VALUE_IS_ARRAY  This option accepts multiple values (e.g. ``--dir=/foo --dir=/bar``)
-InputOption::VALUE_NONE      Do not accept input for this option (e.g. ``--yell``)
-InputOption::VALUE_REQUIRED  This value is required (e.g. ``--iterations=5``), the option itself is still optional
-InputOption::VALUE_OPTIONAL  This option may or may not have a value (e.g. ``yell`` or ``yell=loud``)
-===========================  =====================================================================================
+===========================  =================================================================================================
+InputOption::VALUE_IS_ARRAY  Cette option accepte de multiples valeurs (par exemple : ``--dir=/foo --dir=/bar``)
+InputOption::VALUE_NONE      N'accepte pas de valeur en entrée pour cette option (par exemple : ``--yell``)
+InputOption::VALUE_REQUIRED  Cette valeur est requise (par exemple : ``--iterations=5``), l'option elle-même reste optionnelle
+InputOption::VALUE_OPTIONAL  Cette option peut ou non avoir une valeur (par exemple : ``yell`` ou ``yell=loud``)
+===========================  =================================================================================================
 
-You can combine VALUE_IS_ARRAY with VALUE_REQUIRED or VALUE_OPTIONAL like this:
+Vous pouvez combiner VALUE_IS_ARRAY avec VALUE_REQUIRED ou VALUE_OPTIONAL de la manière suivante :
 
 .. code-block:: php
 
@@ -228,37 +232,38 @@ You can combine VALUE_IS_ARRAY with VALUE_REQUIRED or VALUE_OPTIONAL like this:
         // ...
         ->addOption('iterations', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How many times should the message be printed?', 1)
 
-Asking the User for Information
--------------------------------
+Demander de l'Information à l'Utilisateur
+-----------------------------------------
 
-When creating commands, you have the ability to collect more information
-from the user by asking him/her questions. For example, suppose you want
-to confirm an action before actually executing it. Add the following to your
-command::
+Lorsque vous créez des commandes, vous avez la possibilité de collecter plus
+d'informations de la part de l'utilisateur en lui posant des questions. Par exemple, supposons
+que vous souhaitiez confirmer une action avant de l'exécuter réellement. Ajoutez
+ce qui suit à votre commande::
 
     $dialog = $this->getHelperSet()->get('dialog');
     if (!$dialog->askConfirmation($output, '<question>Continue with this action?</question>', false)) {
         return;
     }
 
-In this case, the user will be asked "Continue with this action", and unless
-they answer with ``y``, the task will stop running. The third argument to
-``askConfirmation`` is the default value to return if the user doesn't enter
-any input.
+Dans ce cas, l'utilisateur va être interrogé par : « Continuer avec cette action » ;
+et à moins qu'il ne réponde par ``y``, la tâche va arrêter son exécution. Le
+troisième argument de ``askConfirmation`` est la valeur par défaut à retourner
+si l'utilisateur ne rentre aucune valeur.
 
-You can also ask questions with more than a simple yes/no answer. For example,
-if you needed to know the name of something, you might do the following::
+Vous pouvez aussi poser des questions nécessitant plus qu'une simple réponse telle oui/non.
+Par exemple, si vous aviez besoin de savoir le nom de quelque chose, vous pourriez
+faire la chose suivante::
 
     $dialog = $this->getHelperSet()->get('dialog');
     $name = $dialog->ask($output, 'Please enter the name of the widget', 'foo');
 
-Testing Commands
-----------------
+Tester les Commandes
+--------------------
 
-Symfony2 provides several tools to help you test your commands. The most
-useful one is the :class:`Symfony\\Component\\Console\\Tester\\CommandTester`
-class. It uses special input and output classes to ease testing without a real
-console::
+Symfony2 fournit plusieurs outils pour vous aider à tester vos commandes. La
+plus utile est la classe :class:`Symfony\\Component\\Console\\Tester\\CommandTester`.
+Elle utilise des classes « d'entrée et de sortie » spécifiques permettant de
+faciliter le « testing » sans avoir de console réelle::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
@@ -280,13 +285,12 @@ console::
         }
     }
 
-The :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
-method returns what would have been displayed during a normal call from the
-console.
+La méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
+retourne ce qui aurait été retourné durant un appel normal depuis la console.
 
-You can test sending arguments and options to the command by passing them
-as an array to the :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
-method::
+Vous pouvez tester l'envoi d'arguments et d'options à la commande en les passant
+en tant que tableau à la méthode
+:method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`::
 
     use Symfony\Component\Console\Tester\CommandTester;
     use Symfony\Component\Console\Application;
@@ -314,20 +318,21 @@ method::
 
 .. tip::
 
-    You can also test a whole console application by using
+    Vous pouvez aussi tester une application console entière en utilisant
     :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester`.
 
-Calling an existing Command
----------------------------
+Appeler une Commande existante
+------------------------------
 
-If a command depends on another one being run before it, instead of asking the
-user to remember the order of execution, you can call it directly yourself.
-This is also useful if you want to create a "meta" command that just runs a
-bunch of other commands (for instance, all commands that need to be run when
-the project's code has changed on the production servers: clearing the cache,
-generating Doctrine2 proxies, dumping Assetic assets, ...).
+Si une commande dépend d'une autre ayant été exécutée avant elle, plutôt que de
+demander à l'utilisateur de se rappeler de l'ordre d'exécution, vous pouvez
+l'appeler directement vous-même. Cela est aussi utile si vous souhaitez créer
+une commande « méta » qui exécute juste un ensemble de commandes (par exemple,
+toutes les commandes qui ont besoin d'être exécutées lorsque le code du projet
+a été modifié sur les serveurs de production : effacer le cache, générer les
+proxys Doctrine2, préparer les fichiers Assetic, ...).
 
-Calling a command from another one is straightforward::
+Appeler une commande depuis une autre est très simple::
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -345,23 +350,21 @@ Calling a command from another one is straightforward::
         // ...
     }
 
-First, you :method:`Symfony\\Component\\Console\\Application::find` the
-command you want to execute by passing the command name.
+D'abord, vous :method:`Symfony\\Component\\Console\\Application::find` (« trouvez »
+en français) la commande que vous voulez exécuter en passant le nom de cette dernière.
 
-Then, you need to create a new
-:class:`Symfony\\Component\\Console\\Input\\ArrayInput` with the arguments and
-options you want to pass to the command.
+Ensuite, vous devez créer un nouvel :class:`Symfony\\Component\\Console\\Input\\ArrayInput`
+avec les arguments et options que vous souhaitez passer à la commande.
 
-Eventually, calling the ``run()`` method actually executes the command and
-returns the returned code from the command (return value from command's
-``execute()`` method).
+Eventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
+et retourner le code retourné par le commande (retourne la valeur de la méthode
+``execute()`` de la commande).
 
 .. note::
 
-    Most of the time, calling a command from code that is not executed on the
-    command line is not a good idea for several reasons. First, the command's
-    output is optimized for the console. But more important, you can think of
-    a command as being like a controller; it should use the model to do
-    something and display feedback to the user. So, instead of calling a
-    command from the Web, refactor your code and move the logic to a new
-    class.
+    La plupart du temps, appeler une commande depuis du code qui n'est pas
+    exécuté depuis la ligne de commandes n'est pas une bonne idée pour plusieurs
+    raisons. Mais le plus important, c'est que vous compreniez qu'il faut voir une
+    commande comme un contrôleur ; il devrait utiliser le modèle pour faire quelque
+    chose et afficher le retour à l'utilisateur. Donc, plutôt que d'appeler une commande
+    depuis le Web, revoyez votre code et déplacez la logique dans une nouvelle classe.
