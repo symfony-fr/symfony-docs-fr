@@ -1,92 +1,95 @@
 .. index::
    single: CSS Selector
 
-The CssSelector Component
-=========================
+Le Composant CssSelector
+========================
 
-    The CssSelector Component converts CSS selectors to XPath expressions.
+    Le Composant CssSelector convertit des sélecteurs CSS en expressions XPath.
 
 Installation
 ------------
 
-You can install the component in several different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/CssSelector);
-* Install it via PEAR ( `pear.symfony.com/CssSelector`);
-* Install it via Composer (`symfony/css-selector` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/CssSelector) ;
+* Installez le via PEAR ( `pear.symfony.com/CssSelector`) ;
+* Installez le via Composer (`symfony/css-selector` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-Why use CSS selectors?
-~~~~~~~~~~~~~~~~~~~~~~
+Pourquoi utiliser des sélecteurs CSS ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you're parsing an HTML or an XML document, by far the most powerful
-method is XPath.
+Lorsque vous parcourez un document HTML ou XML, la méthode la plus puissante
+est de loin d'utiliser XPath.
 
-XPath expressions are incredibly flexible, so there is almost always an
-XPath expression that will find the element you need. Unfortunately, they
-can also become very complicated, and the learning curve is steep. Even common
-operations (such as finding an element with a particular class) can require
-long and unwieldy expressions.
+Les expressions XPath sont incroyablement flexibles, ce qui fait qu'il y a
+presque toujours une expression XPath qui va trouver l'élément dont vous avez
+besoin. Malheureusement, ces expressions peuvent aussi devenir très compliquées,
+et la courbe d'apprentissage est raide. Même les opérations communes (comme
+trouver un élément ayant une classe particulière) peuvent requérir des
+expressions longues et difficile à manier.
 
-Many developers -- particularly web developers -- are more comfortable
-using CSS selectors to find elements. As well as working in stylesheets,
-CSS selectors are used in Javascript with the ``querySelectorAll`` function
-and in popular Javascript libraries such as jQuery, Prototype and MooTools.
+Beaucoup de développeurs -- en particulier les développeurs web -- sont
+plus à l'aise avec l'utilisation de sélecteurs CSS pour trouver des éléments.
+En plus de fonctionner dans les feuilles de styles, les sélecteurs CSS sont
+aussi utilisés en Javascript avec la fonction ``querySelectorAll`` et dans des
+bibliothèques Javascript populaires telles jQuery, Prototype et MooTools.
 
-CSS selectors are less powerful than XPath, but far easier to write, read
-and understand. Since they are less powerful, almost all CSS selectors can
-be converted to an XPath equivalent. This XPath expression can then be used
-with other functions and classes that use XPath to find elements in a
-document.
+Les sélecteurs CSS sont moins puissants que XPath, mais sont beaucoup plus
+facile à écrire, lire et comprendre. Comme ils sont moins puissants, quasiment
+tous les sélecteurs CSS peuvent être convertis en un équivalent XPath. Cette
+expression XPath peut dès lors être utilisée avec d'autres fonctions et classes
+qui utilisent XPath pour trouver des éléments dans un document.
 
-The ``CssSelector`` component
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Le composant ``CssSelector``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The component's only goal is to convert CSS selectors to their XPath
-equivalents::
+Le seul objectif de ce composant est de convertir des sélecteurs CSS
+en leurs équivalents XPath::
 
     use Symfony\Component\CssSelector\CssSelector;
 
     print CssSelector::toXPath('div.item > h4 > a');
 
-This gives the following output:
+Cela vous affiche ce qui suit :
 
 .. code-block:: text
 
     descendant-or-self::div[contains(concat(' ',normalize-space(@class), ' '), ' item ')]/h4/a
 
-You can use this expression with, for instance, :phpclass:`DOMXPath` or
-:phpclass:`SimpleXMLElement` to find elements in a document.
+Vous pouvez utiliser cette expression avec, par exemple, :phpclass:`DOMXPath`
+ou avec :phpclass:`SimpleXMLElement` afin de trouver des éléments dans un document.
 
 .. tip::
 
-    The :method:`Crawler::filter()<Symfony\\Component\\DomCrawler\\Crawler::filter>` method
-    uses the ``CssSelector`` component to find elements based on a CSS selector
-    string. See the :doc:`/components/dom_crawler` for more details.
+    La méthode :method:`Crawler::filter()<Symfony\\Component\\DomCrawler\\Crawler::filter>`
+    utilise le composant ``CssSelector`` pour trouver des éléments en se basant sur une
+    chaîne de caractères représentant un sélecteur CSS. Voir :doc:`/components/dom_crawler`
+    pour plus de détails.
 
-Limitations of the CssSelector component
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Limitations du composant CssSelector
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Not all CSS selectors can be converted to XPath equivalents.
+Tous les sélecteurs CSS ne peuvent pas être convertis en un équivalent XPath.
 
-There are several CSS selectors that only make sense in the context of a
-web-browser.
+Il y a plusieurs sélecteurs CSS qui ne font du sens que dans le contexte
+d'un navigateur web.
 
-* link-state selectors: ``:link``, ``:visited``, ``:target``
-* selectors based on user action: ``:hover``, ``:focus``, ``:active``
-* UI-state selectors: ``:enabled``, ``:disabled``, ``:indeterminate``
-  (however, ``:checked`` and ``:unchecked`` are available)
+* sélecteurs basés sur le statut d'un lien : ``:link``, ``:visited``, ``:target``
+* sélecteurs basés sur l'action d'un utilisateur : ``:hover``, ``:focus``, ``:active``
+* sélecteurs basés sur l'état de l'« UI » : ``:enabled``, ``:disabled``, ``:indeterminate``
+  (cependant, ``:checked`` et ``:unchecked`` sont disponibles)
 
-Pseudo-elements (``:before``, ``:after``, ``:first-line``,
-``:first-letter``) are not supported because they select portions of text
-rather than elements.
+Les pseudo-éléments (``:before``, ``:after``, ``:first-line``, ``:first-letter``)
+ne sont pas supportés car ils sélectionnent des portions de texte plutôt que
+des éléments.
 
-Several pseudo-classes are not yet supported:
+Plusieurs pseudo-classes ne sont pas encore supportées :
 
 * ``:lang(language)``
 * ``root``
 * ``*:first-of-type``, ``*:last-of-type``, ``*:nth-of-type``,
-  ``*:nth-last-of-type``, ``*:only-of-type``. (These work with an element
-  name (e.g. ``li:first-of-type``) but not with ``*``.
+  ``*:nth-last-of-type``, ``*:only-of-type``. (Ceux-ci fonctionnent avec un
+  nom d'élément (par exemple : ``li:first-of-type``) mais pas avec ``*``.
