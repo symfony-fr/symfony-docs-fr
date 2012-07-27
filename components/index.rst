@@ -1,4 +1,4 @@
-The Components
+Les Composants
 ==============
 
 .. toctree::
