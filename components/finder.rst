@@ -1,26 +1,26 @@
 .. index::
    single: Finder
 
-The Finder Component
-====================
+Le Composant Finder
+===================
 
-   The Finder Component finds files and directories via an intuitive fluent
-   interface.
+    Le Composant Finder trouve des fichiers et des répertoires via une interface
+    intuitive.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Finder);
-* Install it via PEAR ( `pear.symfony.com/Finder`);
-* Install it via Composer (`symfony/finder` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Finder) ;
+* Installez le via PEAR (`pear.symfony.com/Finder`) ;
+* Installez le via Composer (`symfony/finder` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-The :class:`Symfony\\Component\\Finder\\Finder` class finds files and/or
-directories::
+La classe :class:`Symfony\\Component\\Finder\\Finder` trouve des fichiers
+et/ou des répertoires::
 
     use Symfony\Component\Finder\Finder;
 
@@ -28,56 +28,58 @@ directories::
     $finder->files()->in(__DIR__);
 
     foreach ($finder as $file) {
-        // Print the absolute path
+        // affiche le chemin absolu
         print $file->getRealpath()."\n";
-        // Print the relative path to the file, omitting the filename
+        // affiche le chemin relatif d'un fichier, sans le nom du fichier
         print $file->getRelativePath()."\n";
-        // Print the relative path to the file
+        // affiche le chemin relatif du fichier
         print $file->getRelativePathname()."\n";
     }
 
-The ``$file`` is an instance of :class:`Symfony\\Component\\Finder\\SplFileInfo`
-which extends :phpclass:`SplFileInfo` to provide methods to work with relative
-paths.
+``$file`` est une instance de :class:`Symfony\\Component\\Finder\\SplFileInfo`
+qui étend :phpclass:`SplFileInfo` afin de fournir des méthodes permettant de
+travailler avec les chemins relatifs.
 
-The above code prints the names of all the files in the current directory
-recursively. The Finder class uses a fluent interface, so all methods return
-the Finder instance.
+Le code ci-dessus affiche les noms de tous les fichiers dans le répertoire courant
+de manière récursive. La classe « Finder » utilise une interface intuitive, et de ce fait
+toutes les méthodes retournent une instance de « Finder ».
 
 .. tip::
 
-    A Finder instance is a PHP `Iterator`_. So, instead of iterating over the
-    Finder with ``foreach``, you can also convert it to an array with the
-    :phpfunction:`iterator_to_array` method, or get the number of items with
-    :phpfunction:`iterator_count`.
+    Une instance de « Finder » est un `Iterator`_ PHP. Donc, au lieu d'itérer
+    sur le « Finder » avec un ``foreach``, vous pouvez aussi le convertir en
+    un tableau avec la méthode :phpfunction:`iterator_to_array`, ou récupérer
+    le nombre d'éléments grâce à :phpfunction:`iterator_count`.
 
-Criteria
+Critères
 --------
 
-Location
-~~~~~~~~
+Le chemin
+~~~~~~~~~
 
-The location is the only mandatory criteria. It tells the finder which
-directory to use for the search::
+Le chemin (i.e. l'endroit où se trouve le fichier) est le seul critère
+obligatoire. Il informe le « finder » du répertoire à utiliser pour
+la recherche::
 
     $finder->in(__DIR__);
 
-Search in several locations by chaining calls to
+Vous pouvez effectuer une recherche dans plusieurs répertoires/chemins en
+chaînant les appels de la méthode
 :method:`Symfony\\Component\\Finder\\Finder::in`::
 
     $finder->files()->in(__DIR__)->in('/elsewhere');
 
-Exclude directories from matching with the
-:method:`Symfony\\Component\\Finder\\Finder::exclude` method::
+Vous pouvez exclure des répertoires de votre recherche grâce à la
+méthode :method:`Symfony\\Component\\Finder\\Finder::exclude`::
 
     $finder->in(__DIR__)->exclude('ruby');
 
-As the Finder uses PHP iterators, you can pass any URL with a supported
-`protocol`_::
+Comme le « Finder » utilise des itérateurs PHP, vous pouvez passer
+n'importe quelle URL ayant un `protocole`_ supporté::
 
     $finder->in('ftp://example.com/pub/');
 
-And it also works with user-defined streams::
+Et cela fonctionne aussi avec les flux définis par l'utilisateur::
 
     use Symfony\Component\Finder\Finder;
 
@@ -87,39 +89,41 @@ And it also works with user-defined streams::
     $finder = new Finder();
     $finder->name('photos*')->size('< 100K')->date('since 1 hour ago');
     foreach ($finder->in('s3://bucket-name') as $file) {
-        // do something
+        // faites quelque chose
 
         print $file->getFilename()."\n";
     }
 
 .. note::
 
-    Read the `Streams`_ documentation to learn how to create your own streams.
+    Lisez la documentation sur les `Flux`_ pour apprendre comment créer vos
+    propres flux.
 
-Files or Directories
-~~~~~~~~~~~~~~~~~~~~~
+Fichiers et Répertoires
+~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the Finder returns files and directories; but the
-:method:`Symfony\\Component\\Finder\\Finder::files` and
-:method:`Symfony\\Component\\Finder\\Finder::directories` methods control that::
+Par défaut, le « Finder » retourne des fichiers et des répertoires ; mais les
+méthodes :method:`Symfony\\Component\\Finder\\Finder::files` et
+:method:`Symfony\\Component\\Finder\\Finder::directories` contrôlent cela::
 
     $finder->files();
 
     $finder->directories();
 
-If you want to follow links, use the ``followLinks()`` method::
+Si vous souhaitez suivre des liens, utilisez la méthode ``followLinks()``::
 
     $finder->files()->followLinks();
 
-By default, the iterator ignores popular VCS files. This can be changed with
-the ``ignoreVCS()`` method::
+Par défaut, l'itérateur ignore les fichiers VCS dont le type est populaire.
+Cela peut être modifié grâce à la méthode ``ignoreVCS()``::
 
     $finder->ignoreVCS(false);
 
-Sorting
-~~~~~~~
+Triage
+~~~~~~
 
-Sort the result by name or by type (directories first, then files)::
+Triez les résultats par nom ou par type (répertoires en premier, ensuite les
+fichiers)::
 
     $finder->sortByName();
 
@@ -127,10 +131,11 @@ Sort the result by name or by type (directories first, then files)::
 
 .. note::
 
-    Notice that the ``sort*`` methods need to get all matching elements to do
-    their jobs. For large iterators, it is slow.
+    Notez que les méthodes ``sort*`` ont besoin de récupérer tous les éléments
+    correspondants à la recherche pour effectuer leur travail. Pour des
+    itérateurs de grande taille, cela est lent.
 
-You can also define your own sorting algorithm with ``sort()`` method::
+Vous pouvez aussi définir votre propre algorithme de triage via la méthode ``sort()``::
 
     $sort = function (\SplFileInfo $a, \SplFileInfo $b)
     {
@@ -139,92 +144,99 @@ You can also define your own sorting algorithm with ``sort()`` method::
 
     $finder->sort($sort);
 
-File Name
-~~~~~~~~~
+Nom de Fichier
+~~~~~~~~~~~~~~
 
-Restrict files by name with the
-:method:`Symfony\\Component\\Finder\\Finder::name` method::
+Restreignez les fichiers par leur nom grâce à la méthode
+:method:`Symfony\\Component\\Finder\\Finder::name`::
 
     $finder->files()->name('*.php');
 
-The ``name()`` method accepts globs, strings, or regexes::
+La méthode ``name()`` accepte des « globs », des chaînes de caractères,
+ou des expressions régulières::
 
     $finder->files()->name('/\.php$/');
 
-The ``notName()`` method excludes files matching a pattern::
+La méthode ``notName()`` exclut les fichiers correspondant à un pattern::
 
     $finder->files()->notName('*.rb');
 
-File Contents
-~~~~~~~~~~~~~
+Contenus de Fichier
+~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.1
-   Methods ``contains()`` and ``notContains()`` have been
-   introduced in version 2.1.
+    Les méthodes ``contains()`` et ``notContains()`` ont été introduites
+    dans la version 2.1.
 
-Restrict files by contents with the
-:method:`Symfony\\Component\\Finder\\Finder::contains` method::
+Restreignez les fichiers par leur contenu grâce à la méthode
+:method:`Symfony\\Component\\Finder\\Finder::contains`::
 
     $finder->files()->contains('lorem ipsum');
 
-The ``contains()`` method accepts strings or regexes::
+La méthode ``contains()`` accepte des chaînes de caractères ou des
+expressions régulières::
 
     $finder->files()->contains('/lorem\s+ipsum$/i');
 
-The ``notContains()`` method excludes files containing given pattern::
+La méthode ``notContains()`` exclut les fichiers correspondant à un pattern
+donné::
 
     $finder->files()->notContains('dolor sit amet');
 
-File Size
-~~~~~~~~~
+Taille de Fichier
+~~~~~~~~~~~~~~~~~
 
-Restrict files by size with the
-:method:`Symfony\\Component\\Finder\\Finder::size` method::
+Restreignez les fichiers par leur taille grâce à la méthode
+:method:`Symfony\\Component\\Finder\\Finder::size`::
 
     $finder->files()->size('< 1.5K');
 
-Restrict by a size range by chaining calls::
+Restreignez par un intervalle de taille en chaînant les appels::
 
     $finder->files()->size('>= 1K')->size('<= 2K');
 
-The comparison operator can be any of the following: ``>``, ``>=``, ``<``, ``<=``,
+L'opérateur de comparaison peut être l'un des suivants : ``>``, ``>=``, ``<``, ``<=``,
 ``==``, ``!=``.
 
 .. versionadded:: 2.1
-   The operator ``!=`` was added in version 2.1.
+    L'opérateur ``!=`` a été ajouté dans la version 2.1.
 
-The target value may use magnitudes of kilobytes (``k``, ``ki``), megabytes
-(``m``, ``mi``), or gigabytes (``g``, ``gi``). Those suffixed with an ``i`` use
-the appropriate ``2**n`` version in accordance with the `IEC standard`_.
+La valeur cible peut utiliser les unités suivantes : kilo-octets (``k``, ``ki``), mega-octets
+(``m``, ``mi``), ou giga-octets (``g``, ``gi``). Celles suffixées avec un ``i`` utilisent
+la version appropriée ``2**n`` en accord avec le `standard IEC`_.
 
-File Date
-~~~~~~~~~
+Date de Fichier
+~~~~~~~~~~~~~~~
 
-Restrict files by last modified dates with the
-:method:`Symfony\\Component\\Finder\\Finder::date` method::
+Restreignez les fichiers par leur date de dernière modification grâce à la
+méthode :method:`Symfony\\Component\\Finder\\Finder::date`::
 
     $finder->date('since yesterday');
 
-The comparison operator can be any of the following: ``>``, ``>=``, ``<``, '<=',
-'=='. You can also use ``since`` or ``after`` as an alias for ``>``, and
-``until`` or ``before`` as an alias for ``<``.
+L'opérateur de comparaison peut être l'un des suivants : ``>``, ``>=``, ``<``,
+'<=', '=='. Vous pouvez aussi utiliser ``since`` (« depuis » en français) ou
+``after`` (« après » en français) en tant qu'alias de ``>``, et ``until``
+(« jusqu'à » en français) ou ``before`` (« avant » en français) en tant qu'alias
+de ``<``.
 
-The target value can be any date supported by the `strtotime`_ function.
+La valeur cible peut être n'importe quelle date supportée par la fonction
+`strtotime`_.
 
-Directory Depth
-~~~~~~~~~~~~~~~
+Profondeur de Répertoire
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the Finder recursively traverse directories. Restrict the depth of
-traversing with :method:`Symfony\\Component\\Finder\\Finder::depth`::
+Par défaut, le « Finder » parcourt les répertoires récursivement. Restreignez
+la profondeur de navigation grâce à la méthode
+:method:`Symfony\\Component\\Finder\\Finder::depth`::
 
     $finder->depth('== 0');
     $finder->depth('< 3');
 
-Custom Filtering
-~~~~~~~~~~~~~~~~
+Filtrage Personnalisé
+~~~~~~~~~~~~~~~~~~~~~
 
-To restrict the matching file with your own strategy, use
-:method:`Symfony\\Component\\Finder\\Finder::filter`::
+Pour restreindre les fichiers correspondants à votre propre stratégie,
+utilisez la méthode :method:`Symfony\\Component\\Finder\\Finder::filter`::
 
     $filter = function (\SplFileInfo $file)
     {
@@ -235,13 +247,13 @@ To restrict the matching file with your own strategy, use
 
     $finder->files()->filter($filter);
 
-The ``filter()`` method takes a Closure as an argument. For each matching file,
-it is called with the file as a :class:`Symfony\\Component\\Finder\\SplFileInfo`
-instance. The file is excluded from the result set if the Closure returns
-``false``.
+La méthode ``filter()`` prend une Closure en argument. Pour chaque fichier qui
+correspond, cette dernière est appelée avec le fichier en tant qu'instance de
+:class:`Symfony\\Component\\Finder\\SplFileInfo`. Le fichier est exclut de
+l'ensemble des résultats si la Closure retourne ``false``.
 
 .. _strtotime:   http://www.php.net/manual/en/datetime.formats.php
 .. _Iterator:     http://www.php.net/manual/en/spl.iterators.php
-.. _protocol:     http://www.php.net/manual/en/wrappers.php
-.. _Streams:      http://www.php.net/streams
-.. _IEC standard: http://physics.nist.gov/cuu/Units/binary.html
+.. _protocole:     http://www.php.net/manual/en/wrappers.php
+.. _Flux:      http://www.php.net/streams
+.. _standard IEC: http://physics.nist.gov/cuu/Units/binary.html
