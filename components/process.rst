@@ -1,25 +1,25 @@
 .. index::
    single: Process
 
-The Process Component
-=====================
+Le Composant « Process »
+========================
 
-    The Process Component executes commands in sub-processes.
+    Le Composant « Process » exécute des commandes dans des sous-processus.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Process);
-* Install it via PEAR ( `pear.symfony.com/Process`);
-* Install it via Composer (`symfony/process` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Process) ;
+* Installez le via PEAR (`pear.symfony.com/Process`) ;
+* Installez le via Composer (`symfony/process` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-The :class:`Symfony\\Component\\Process\\Process` class allows you to execute
-a command in a sub-process::
+La classe :class:`Symfony\\Component\\Process\\Process` vous permet d'exécuter
+une commande dans un sous-processus::
 
     use Symfony\Component\Process\Process;
 
@@ -32,14 +32,14 @@ a command in a sub-process::
 
     print $process->getOutput();
 
-The :method:`Symfony\\Component\\Process\\Process::run` method takes care
-of the subtle differences between the different platforms when executing the
-command.
+La méthode :method:`Symfony\\Component\\Process\\Process::run` se charge
+des différences subtiles entre les différentes plateformes lors de
+l'exécution d'une commande.
 
-When executing a long running command (like rsync-ing files to a remote
-server), you can give feedback to the end user in real-time by passing an
-anonymous function to the
-:method:`Symfony\\Component\\Process\\Process::run` method::
+Lorsque vous exécutez une commande durant un certain temps (comme effectuer un
+rsync de fichiers vers un serveur distant), vous pouvez donner un retour
+à l'utilisateur final en temps réel en passant une fonction anonyme à la
+méthode :method:`Symfony\\Component\\Process\\Process::run`::
 
     use Symfony\Component\Process\Process;
 
@@ -52,8 +52,8 @@ anonymous function to the
         }
     });
 
-If you want to execute some PHP code in isolation, use the ``PhpProcess``
-instead::
+Si vous voulez exécuter du code PHP de manière isolée, utilisez plutôt
+le ``PhpProcess`` à la place::
 
     use Symfony\Component\Process\PhpProcess;
 
@@ -63,13 +63,13 @@ instead::
     $process->run();
 
 .. versionadded:: 2.1
-    The ``ProcessBuilder`` class has been as of 2.1.
+    La classe ``ProcessBuilder`` a été ajoutée avec la version 2.1.
 
-To make your code work better on all platforms, you might want to use the
-:class:`Symfony\\Component\\Process\\ProcessBuilder` class instead::
+Pour que votre code fonctionne mieux sur toutes les plateformes, vous
+pourriez vouloir utiliser la classe
+:class:`Symfony\\Component\\Process\\ProcessBuilder` à la place::
 
     use Symfony\Component\Process\ProcessBuilder;
 
     $builder = new ProcessBuilder(array('ls', '-lsa'));
     $builder->getProcess()->run();
-
