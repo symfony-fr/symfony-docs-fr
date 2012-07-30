@@ -1,29 +1,31 @@
 .. index::
    single: Filesystem
 
-The Filesystem Component
-========================
+Le Composant « Filesystem » (« système de fichiers » en français)
+=================================================================
 
-    The Filesystem components provides basic utilities for the filesystem.
+    Le Composant « Filesystem » fournit des utilitaires basiques pour
+    le système de fichiers.
 
 .. versionadded:: 2.1
-    The Filesystem Component is new to Symfony 2.1. Previously, the ``Filesystem``
-    class was located in the ``HttpKernel`` component.
+    Le Composant « Filesystem » est nouveau depuis Symfony 2.1. Auparavant,
+    la classe ``Filesystem`` était située dans le composant ``HttpKernel``.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Filesystem);
-* Install it via PEAR ( `pear.symfony.com/Filesystem`);
-* Install it via Composer (`symfony/filesystem` on Packagist).
+* Utilisez le dépôt officiel Git (https://github.com/symfony/Filesystem) ;
+* Installez le via PEAR (`pear.symfony.com/Filesystem`) ;
+* Installez le via Composer (`symfony/filesystem` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-The :class:`Symfony\\Component\\Filesystem\\Filesystem` class is the unique
-endpoint for filesystem operations::
+La classe :class:`Symfony\\Component\\Filesystem\\Filesystem` est l'unique
+endroit où se trouve les utilitaires pour effectuer des opérations sur le
+système de fichiers::
 
     use Symfony\Component\Filesystem\Filesystem;
     use Symfony\Component\Filesystem\Exception\IOException;
@@ -38,201 +40,205 @@ endpoint for filesystem operations::
 
 .. note::
 
-    Methods :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`,
+    Les méthodes :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::chown`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::chgrp`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::chown`,
-    :method:`Symfony\\Component\\Filesystem\\Filesystem::remove` and
-    :method:`Symfony\\Component\\Filesystem\\Filesystem::touch` can receive a
-    string, an array or any object implementing :phpclass:`Traversable` as
-    the target argument.
-
+    :method:`Symfony\\Component\\Filesystem\\Filesystem::remove` et
+    :method:`Symfony\\Component\\Filesystem\\Filesystem::touch` peuvent
+    recevoir une chaîne de caractères, un tableau ou n'importe quel objet
+    implémentant :phpclass:`Traversable` en tant qu'argument cible.
 
 Mkdir
 ~~~~~
 
-Mkdir creates directory. On posix filesystems, directories are created with a
-default mode value `0777`. You can use the second argument to set your own mode::
+« Mkdir » crée un répertoire. Sur les systèmes de fichiers posix, les répertoires
+sont créés avec une valeur de mode qui par défaut est `0777`. Vous pouvez
+utiliser le second argument pour définir votre propre mode::
 
     $fs->mkdir('/tmp/photos', 0700);
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Exists
 ~~~~~~
 
-Exists checks for the presence of all files or directories and returns false if a
-file is missing::
+« Exists » vérifie la présence de tous les fichiers ou répertoires et retourne « false »
+si un fichier est manquant::
 
-    // this directory exists, return true
+    // ce répertoire existe, retourne « true »
     $fs->exists('/tmp/photos');
 
-    // rabbit.jpg exists, bottle.png does not exists, return false
+    // rabbit.jpg existe, bottle.png n'existe pas, retourne « false »
     $fs->exists(array('rabbit.jpg', 'bottle.png'));
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Copy
 ~~~~
 
-This method is used to copy files. If the target already exists, the file is
-copied only if the source modification date is earlier than the target. This
-behavior can be overridden by the third boolean argument::
+Cette méthode est utilisée pour copier des fichiers. Si la cible existe déjà,
+le fichier est copié seulement si la date de modification de la source est
+plus récente que celle de la cible. Ce comportement peut être outrepassé par
+un troisième argument booléen::
 
-    // works only if image-ICC has been modified after image.jpg
+    // fonctionne uniquement si image-ICC a été modifié après image.jpg
     $fs->copy('image-ICC.jpg', 'image.jpg');
 
-    // image.jpg will be overridden
+    // image.jpg va être écrasé
     $fs->copy('image-ICC.jpg', 'image.jpg', true);
 
 Touch
 ~~~~~
 
-Touch sets access and modification time for a file. The current time is used by
-default. You can set your own with the second argument. The third argument is
-the access time::
+« Touch » définit la date de modification et d'accès d'un fichier. La date courante
+est utilisée par défaut. Vous pouvez définir la vôtre avec le second argument.
+Le troisième argument est la date d'accès::
 
-    // set modification time to the current timestamp
+    // définit la date de modification avec la date courante
     $fs->touch('file.txt');
-    // set modification time 10 seconds in the future
+    // définit la date de modification avec la date courante + 10 secondes
     $fs->touch('file.txt', time() + 10);
-    // set access time 10 seconds in the past
+    // définit la date d'accès avec la date courante - 10 secondes
     $fs->touch('file.txt', time(), time() - 10);
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Chown
 ~~~~~
 
-Chown is used to change the owner of a file. The third argument is a boolean
-recursive option::
+« Chown » est utilisée pour changer le propriétaire d'un fichier. Le troisième
+argument est une option récursive booléenne::
 
-    // set the owner of the lolcat video to www-data
+    // définit le propriétaire de la vidéo lolcat comme étant www-data
     $fs->chown('lolcat.mp4', 'www-data');
-    // change the owner of the video directory recursively
+    // change le propriétaire du répertoire « video » de manière récursive
     $fs->chown('/video', 'www-data', true);
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Chgrp
 ~~~~~
 
-Chgrp is used to change the group of a file. The third argument is a boolean
-recursive option::
+« Chgrp » est utilisée pour changer le groupe d'un fichier. Le troisième
+argument est une option récursive booléenne::
 
-    // set the group of the lolcat video to nginx
+    // définit le groupe de la vidéo lolcat comme étant nginx
     $fs->chgrp('lolcat.mp4', 'nginx');
-    // change the group of the video directory recursively
+    // change le groupe du répertoire « video » de manière récursive
     $fs->chgrp('/video', 'nginx', true);
 
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Chmod
 ~~~~~
 
-Chmod is used to change the mode of a file. The third argument is a boolean
-recursive option::
+« Chmod » est utilisée pour changer le mode d'un fichier. Le troisième
+argument est une option récursive booléenne::
 
-    // set the mode of the video to 0600
+    // définit le mode de la vidéo comme étant 0600
     $fs->chmod('video.ogg', 0600);
-    // change the mod of the src directory recursively
+    // change le mode du répertoire « src » de manière récursive
     $fs->chmod('src', 0700, true);
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Remove
 ~~~~~~
 
-Remove let's you remove files, symlink, directories easily::
+« Remove » vous permet de supprimer des fichiers, des liens symboliques et
+des répertoires très facilement::
 
     $fs->remove(array('symlink', '/path/to/directory', 'activity.log'));
 
 .. note::
 
-    You can pass an array or any :phpclass:`Traversable` object as the first
-    argument.
+    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    en tant que premier argument.
 
 Rename
 ~~~~~~
 
-Rename is used to rename files and directories::
+« Rename » est utilisée pour renommer des fichiers et des répertoires::
 
-    //rename a file
+    // renomme un fichier
     $fs->rename('/tmp/processed_video.ogg', '/path/to/store/video_647.ogg');
-    //rename a directory
+    // renomme un répertoire
     $fs->rename('/tmp/files', '/path/to/store/files');
 
 symlink
 ~~~~~~~
 
-Creates a symbolic link from the target to the destination. If the filesystem
-does not support symbolic links, a third boolean argument is available::
+Crée un lien symbolique depuis une cible vers la destination. Si le système de
+fichiers ne supporte pas les liens symboliques, un troisième argument booléen
+est disponible::
 
-    // create a symbolic link
+    // crée un lien symbolique
     $fs->symlink('/path/to/source', '/path/to/destination');
-    // duplicate the source directory if the filesystem does not support symbolic links
+    // duplique le répertoire source si le système de fichiers ne supporte pas les
+    // liens symboliques
     $fs->symlink('/path/to/source', '/path/to/destination', true);
 
 makePathRelative
 ~~~~~~~~~~~~~~~~
 
-Return the relative path of a directory given another one::
+Retourne le chemin relatif d'un répertoire par rapport à un autre::
 
-    // returns '../'
+    // retourne '../'
     $fs->makePathRelative('/var/lib/symfony/src/Symfony/', '/var/lib/symfony/src/Symfony/Component');
-    // returns 'videos'
+    // retourne 'videos'
     $fs->makePathRelative('/tmp', '/tmp/videos');
 
 mirror
 ~~~~~~
 
-Mirrors a directory::
+« Reflète » un répertoire::
 
     $fs->mirror('/path/to/source', '/path/to/target');
 
 isAbsolutePath
 ~~~~~~~~~~~~~~
 
-isAbsolutePath returns true if the given path is absolute, false otherwise::
+isAbsolutePath retourne « true » si le chemin donné est absolu, « false » sinon::
 
-    // return true
+    // retourne « true »
     $fs->isAbsolutePath('/tmp');
-    // return true
+    // retourne « true »
     $fs->isAbsolutePath('c:\\Windows');
-    // return false
+    // retourne « false »
     $fs->isAbsolutePath('tmp');
-    // return false
+    // retourne « false »
     $fs->isAbsolutePath('../dir');
 
-Error Handling
---------------
+Gestion des Erreurs
+-------------------
 
-Whenever something wrong happens, an exception implementing
-:class:`Symfony\\Component\\Filesystem\\Exception\\ExceptionInterface` is
-thrown.
+Chaque fois que quelque chose de faux/mal intervient, une exception implémentant
+:class:`Symfony\\Component\\Filesystem\\Exception\\ExceptionInterface` est
+lancée.
 
 .. note::
 
-    Prior to version 2.1, :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`
-    returned a boolean and did not throw exceptions. As of 2.1, a
-    :class:`Symfony\\Component\\Filesystem\\Exception\\IOException` is
-    thrown if a directory creation fails.
+    Avant la version 2.1, :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`
+    retournait un booléen et ne lançait pas d'exceptions. Depuis 2.1, une
+    :class:`Symfony\\Component\\Filesystem\\Exception\\IOException` est lancée
+    si la création d'un répertoire échoue.
