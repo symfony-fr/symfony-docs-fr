@@ -1,29 +1,30 @@
 .. index::
    single: DomCrawler
 
-The DomCrawler Component
-========================
+Le Composant DomCrawler
+=======================
 
-    The DomCrawler Component eases DOM navigation for HTML and XML documents.
+    Le Composant DomCrawler facilite la navigation DOM dans les documents HTML
+    et XML.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/DomCrawler);
-* Install it via PEAR ( `pear.symfony.com/DomCrawler`);
-* Install it via Composer (`symfony/dom-crawler` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/DomCrawler) ;
+* Installez le via PEAR (`pear.symfony.com/DomCrawler`) ;
+* Installez le via Composer (`symfony/dom-crawler` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-The :class:`Symfony\\Component\\DomCrawler\\Crawler` class provides methods
-to query and manipulate HTML and XML documents.
+La classe :class:`Symfony\\Component\\DomCrawler\\Crawler` fournit des méthodes
+pour interroger et manipuler des documents HTML et XML.
 
-An instance of the Crawler represents a set (:phpclass:`SplObjectStorage`)
-of :phpclass:`DOMElement` objects, which are basically nodes that you can
-traverse easily::
+Une instance du Crawler représente un ensemble (:phpclass:`SplObjectStorage`)
+d'objets :phpclass:`DOMElement`, qui sont finalement des noeuds au travers desquels
+vous pouvez naviguer aisément :
 
     use Symfony\Component\DomCrawler\Crawler;
 
@@ -42,103 +43,108 @@ traverse easily::
         print $domElement->nodeName;
     }
 
-Specialized :class:`Symfony\\Component\\DomCrawler\\Link` and
-:class:`Symfony\\Component\\DomCrawler\\Form` classes are useful for
-interacting with html links and forms as you traverse through the HTML tree.
+Les classes spécialisées :class:`Symfony\\Component\\DomCrawler\\Link`
+et :class:`Symfony\\Component\\DomCrawler\\Form` sont utiles pour intéragir
+avec des liens et formulaires HTML lorsque vous naviguez au travers de
+l'arbre HTML.
 
-Node Filtering
-~~~~~~~~~~~~~~
+Filtrage de Noeud
+~~~~~~~~~~~~~~~~~
 
-Using XPath expressions is really easy::
+Utiliser des expressions XPath est très facile::
 
     $crawler = $crawler->filterXPath('descendant-or-self::body/p');
 
 .. tip::
 
-    ``DOMXPath::query`` is used internally to actually perform an XPath query.
+    ``DOMXPath::query`` est utilisée en interne pour exécuter une requête XPath.
 
-Filtering is even easier if you have the ``CssSelector`` Component installed.
-This allows you to use jQuery-like selectors to traverse::
+Filtrer des noeuds est d'autant plus facile si vous avez le Composant
+``CssSelector`` installé.
+Cela vous permet d'utiliser des sélecteurs similaires à ceux de jQuery pour
+naviguer dans le DOM::
 
     $crawler = $crawler->filter('body > p');
 
-Anonymous function can be used to filter with more complex criteria::
+Une fonction anonyme peut être utilisée pour filtrer des noeuds à l'aide
+de critères plus complexes::
 
     $crawler = $crawler->filter('body > p')->reduce(function ($node, $i) {
-        // filter even nodes
+        // filtre les noeuds pairs
         return ($i % 2) == 0;
     });
 
-To remove a node the anonymous function must return false.
+Pour supprimer un noeud, la fonction anonyme doit retourner « false ».
 
 .. note::
 
-    All filter methods return a new :class:`Symfony\\Component\\DomCrawler\\Crawler`
-    instance with filtered content.
+    Toutes les méthodes de filtrage retournent une nouvelle instance de
+    :class:`Symfony\\Component\\DomCrawler\\Crawler` avec le contenu filtré.
 
-Node Traversing
-~~~~~~~~~~~~~~~
+Navigation au travers des noeuds
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Access node by its position on the list::
+Accède au noeud par sa position dans la liste::
 
     $crawler->filter('body > p')->eq(0);
 
-Get the first or last node of the current selection::
+Récupère le premier ou dernier noeud de la sélection courante::
 
     $crawler->filter('body > p')->first();
     $crawler->filter('body > p')->last();
 
-Get the nodes of the same level as the current selection::
+Récupère les noeuds du même niveau que la sélection courante::
 
     $crawler->filter('body > p')->siblings();
 
-Get the same level nodes after or before the current selection::
+Récupère les noeuds de même niveau après ou avant la sélection courante::
 
     $crawler->filter('body > p')->nextAll();
     $crawler->filter('body > p')->previousAll();
 
-Get all the child or parent nodes::
+Récupère tous les noeuds enfants ou parents::
 
     $crawler->filter('body')->children();
     $crawler->filter('body > p')->parents();
 
 .. note::
 
-    All the traversal methods return a new :class:`Symfony\\Component\\DomCrawler\\Crawler`
-    instance.
+    Toutes les méthodes de navigation retournent un nouvelle instance de
+    :class:`Symfony\\Component\\DomCrawler\\Crawler`.
 
-Accessing Node Values
-~~~~~~~~~~~~~~~~~~~~~
+Accéder aux Valeurs des Noeuds
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Access the value of the first node of the current selection::
+Accède à la valeur du premier noeud de la sélection courante::
 
     $message = $crawler->filterXPath('//body/p')->text();
 
-Access the attribute value of the first node of the current selection::
+Accède à la valeur de l'attribut du premier noeud de la sélection courante::
 
     $class = $crawler->filterXPath('//body/p')->attr('class');
 
-Extract attribute and/or node values from the list of nodes::
+Extrait les valeurs de l'attribut et/ou du noeud de la liste des noeuds::
 
     $attributes = $crawler->filterXpath('//body/p')->extract(array('_text', 'class'));
 
 .. note::
 
-    Special attribute ``_text`` represents a node value.
+    L'attribut spécial ``_text`` représente la valeur d'un noeud.
 
-Call an anonymous function on each node of the list::
+Appelez une fonction anonyme sur chaque noeud de la liste::
 
     $nodeValues = $crawler->filter('p')->each(function ($node, $i) {
         return $node->nodeValue;
     });
 
-The anonymous function receives the position and the node as arguments.
-The result is an array of values returned by the anonymous function calls.
+La fonction anonyme reçoit la position et le noeud en tant qu'arguments.
+Le résultat est un tableau de valeurs retournées par les appels de fonction
+anonyme.
 
-Adding the Content
+Ajouter du Contenu
 ~~~~~~~~~~~~~~~~~~
 
-The crawler supports multiple ways of adding the content::
+Le « crawler » supporte plusieurs façons d'ajouter du contenu::
 
     $crawler = new Crawler('<html><body /></html>');
 
@@ -151,9 +157,9 @@ The crawler supports multiple ways of adding the content::
     $crawler->add('<html><body /></html>');
     $crawler->add('<root><node /></root>');
 
-As the Crawler's implementation is based on the DOM extension, it is also able
-to interact with native :phpclass:`DOMDocument`, :phpclass:`DOMNodeList`
-and :phpclass:`DOMNode` objects:
+Comme l'implémentation du « Crawler » est basée sur l'extension DOM, elle est
+aussi capable d'intéragir avec les objets natifs :phpclass:`DOMDocument`,
+:phpclass:`DOMNodeList` et :phpclass:`DOMNode` :
 
 .. code-block:: php
 
@@ -168,84 +174,91 @@ and :phpclass:`DOMNode` objects:
     $crawler->addNode($node);
     $crawler->add($document);
 
-Form and Link support
-~~~~~~~~~~~~~~~~~~~~~
+Support des Formulaires et des Liens
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Special treatment is given to links and forms inside the DOM tree.
+Un traitement spécial est réservé pour les liens et formulaires se
+trouvant dans l'arbre DOM.
 
-Links
+Liens
 .....
 
-To find a link by name (or a clickable image by its ``alt`` attribute), use
-the ``selectLink`` method on an existing crawler. This returns a Crawler
-instance with just the selected link(s). Calling ``link()`` gives us a special
-:class:`Symfony\\Component\\DomCrawler\\Link` object::
+Pour trouver un lien par son nom (ou une image cliquable via son attribut ``alt``),
+utilisez la méthode ``selectLink`` sur un « crawler » existant. Cela retourne
+une instance de « Crawler » avec seulement le(s) lien(s) sélectionné(s).
+Appeler la méthode ``link()`` nous retourne un objet spécial
+:class:`Symfony\\Component\\DomCrawler\\Link`::
 
     $linksCrawler = $crawler->selectLink('Go elsewhere...');
     $link = $linksCrawler->link();
 
-    // or do this all at once
+    // ou faites cela en une seule fois
     $link = $crawler->selectLink('Go elsewhere...')->link();
 
-The :class:`Symfony\\Component\\DomCrawler\\Link` object has several useful
-methods to get more information about the selected link itself::
+L'objet :class:`Symfony\\Component\\DomCrawler\\Link` possède plusieurs
+méthodes utiles pour récupérer plus d'informations à propos du lien
+sélectionné lui-même::
 
-    // return the raw href value
+    // retourne la valeur de l'attribut href
     $href = $link->getRawUri();
 
-    // return the proper URI that can be used to make another request
+    // retourne l'URI qui peut être utilisée pour effectuer une autre requête
     $uri = $link->getUri();
 
-The ``getUri()`` is especially useful as it cleans the ``href`` value and
-transforms it into how it should really be processed. For example, for a
-link with ``href="#foo"``, this would return the full URI of the current
-page suffixed with ``#foo``. The return from ``getUri()`` is always a full
-URI that you can act on.
+La méthode ``getUri()`` est particulièrement utile car elle « nettoie » la
+valeur de ``href`` et la transforme en une valeur qui peut être utilisée.
+Par exemple, pour un lien tel ``href="#foo"``, cette méthode retournerait
+l'URI complète de la page courante suffixée avec ``#foo``. Le retour de la
+méthode ``getUri()`` est toujours une URI complète avec laquelle vous pouvez
+effectuer l'action de votre choix.
 
-Forms
-.....
+Formulaires
+...........
 
-Special treatment is also given to forms. A ``selectButton()`` method is
-available on the Crawler which returns another Crawler that matches a button
-(``input[type=submit]``, ``input[type=image]``, or a ``button``) with the
-given text. This method is especially useful because you can use it to return
-a :class:`Symfony\\Component\\DomCrawler\\Form` object that represents the
-form that the button lives in::
+Un traitement spécial est aussi réservé aux formulaires. Une méthode
+``selectButton()`` est disponible sur le « Crawler » qui retourne un
+autre « Crawler » qui a correspondu à un bouton (``input[type=submit]``,
+``input[type=image]``, ou un ``button``) ayant le texte donné. Cette méthode
+est très utile car vous pouvez l'utiliser pour retourner un objet
+:class:`Symfony\\Component\\DomCrawler\\Form` qui représente le formulaire
+dans lequel le bouton se trouve::
 
     $form = $crawler->selectButton('validate')->form();
 
-    // or "fill" the form fields with data
+    // ou « remplissez » les champs du formulaire avec des données
     $form = $crawler->selectButton('validate')->form(array(
         'name' => 'Ryan',
     ));
 
-The :class:`Symfony\\Component\\DomCrawler\\Form` object has lots of very
-useful methods for working with forms::
+L'objet :class:`Symfony\\Component\\DomCrawler\\Form` possède de nombreuses
+méthodes utiles pour travailler avec les formulaires::
 
     $uri = $form->getUri();
 
     $method = $form->getMethod();
 
-The :method:`Symfony\\Component\\DomCrawler\\Form::getUri` method does more
-than just return the ``action`` attribute of the form. If the form method
-is GET, then it mimics the browser's behavior and returns the ``action``
-attribute followed by a query string of all of the form's values.
+La méthode :method:`Symfony\\Component\\DomCrawler\\Form::getUri` fait plus
+que simplement retourner l'attribut ``action`` du formulaire. Si la méthode
+du formulaire est GET, alors elle simule le comportement du navigateur et
+retourne l'attribut ``action`` suivi par une chaîne de caractères représentant
+toutes les valeurs du formulaires suffixées en tant que paramètres de requête.
 
-You can virtually set and get values on the form::
+Vous pouvez virtuellement définir et récupérer des valeurs du formulaire::
 
-    // set values on the form internally
+    // définit des valeurs du formulaire
     $form->setValues(array(
         'registration[username]' => 'symfonyfan',
         'registration[terms]'    => 1,
     ));
 
-    // get back an array of values - in the "flat" array like above
+    // récupère un tableau de valeurs - tableau qui est « plat » comme ci-dessus
     $values = $form->getValues();
 
-    // returns the values like PHP would see them, where "registration" is its own array
+    // retourne les valeurs telles que PHP les verraient, où « registration » est son
+    // propre tableau
     $values = $form->getPhpValues();
 
-To work with multi-dimensional fields::
+Pour travailler avec des champs multi-dimensionnels::
 
     <form>
         <input name="multi[]" />
@@ -253,69 +266,74 @@ To work with multi-dimensional fields::
         <input name="multi[dimensional]" />
     </form>
 
-You must specify the fully qualified name of the field::
+Vous devez spécifier le nom du champ entièrement qualifié::
 
+    // Définit un seul champ
     // Set a single field
     $form->setValue('multi[0]', 'value');
 
-    // Set multiple fields at once
+    // Définit plusieurs champs en une seule fois
     $form->setValue('multi', array(
         1             => 'value',
         'dimensional' => 'an other value'
     ));
 
-This is great, but it gets better! The ``Form`` object allows you to interact
-with your form like a browser, selecting radio values, ticking checkboxes,
-and uploading files::
+Cela est super, mais le meilleur reste à venir ! L'objet ``Form`` vous permet
+d'intéragir avec votre formulaire comme un navigateur, en sélectionnant des
+valeurs de boutons radio, en cochant des cases « checkbox », et en « uploadant »
+des fichiers::
 
     $form['registration[username]']->setValue('symfonyfan');
 
-    // check or uncheck a checkbox
+    // coche ou décoche une case « checkbox »
     $form['registration[terms]']->tick();
     $form['registration[terms]']->untick();
 
-    // select an option
+    // sélectionne une option
     $form['registration[birthday][year]']->select(1984);
 
-    // select many options from a "multiple" select or checkboxes
+    // sélectionne plusieurs options d'un champ « select » multiple ou
+    // plusieurs cases « checkbox »
     $form['registration[interests]']->select(array('symfony', 'cookies'));
 
-    // even fake a file upload
+    // peut même simuler un « upload » de fichier
     $form['registration[photo]']->upload('/path/to/lucas.jpg');
 
-What's the point of doing all of this? If you're testing internally, you
-can grab the information off of your form as if it had just been submitted
-by using the PHP values::
+Quel est le but d'effectuer tout cela ? Si vous faites des tests en interne,
+vous pouvez récupérer les informations de votre formulaire comme s'il avait
+été soumis en utilisant des valeurs PHP::
 
     $values = $form->getPhpValues();
     $files = $form->getPhpFiles();
 
-If you're using an external HTTP client, you can use the form to grab all
-of the information you need to create a POST request for the form::
+Si vous utilisez un client HTTP externe, vous pouvez utiliser le formulaire
+pour récupérer toutes les informations dont vous avez besoin pour créer une
+requête POST pour le formulaire::
 
     $uri = $form->getUri();
     $method = $form->getMethod();
     $values = $form->getValues();
     $files = $form->getFiles();
 
-    // now use some HTTP client and post using this information
+    // maintenant, utilisez quelconque client HTTP et postez le formulaire
+    // en utilisant ces informations
 
-One great example of an integrated system that uses all of this is `Goutte`_.
-Goutte understands the Symfony Crawler object and can use it to submit forms
-directly::
+Un bel exemple d'un système intégré qui utilise tout cela est `Goutte`_.
+Goutte comprend l'objet « Crawler » de Symfony et peut l'utiliser pour
+soumettre des formulaires directement::
 
     use Goutte\Client;
 
-    // make a real request to an external site
+    // effectue une requête réelle vers un site externe
     $client = new Client();
     $crawler = $client->request('GET', 'https://github.com/login');
 
-    // select the form and fill in some values
+    // sélectionne le formulaire et le remplit avec quelques valeurs
     $form = $crawler->selectButton('Log in')->form();
     $form['login'] = 'symfonyfan';
     $form['password'] = 'anypass';
 
-    // submit that form
+    // soumet le formulaire
     $crawler = $client->submit($form);
 
 .. _`Goutte`: https://github.com/fabpot/goutte
