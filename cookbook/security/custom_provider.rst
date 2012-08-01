@@ -13,8 +13,8 @@ de cet utilisateur est correct ou non et génère un token de sécurité afin
 que l'utilisateur reste authentifié pendant la session courante. Symfony
 possède par défaut un fournisseur d'utilisateur « in_memory » et « entity ».
 Dans cet article, nous allons vous montrer comment vous pouvez créer votre
-propre fournisseur d'utilisateur, qui pourrait être utile si vos utilisateurs
-sont accédés via une base de données personnalisée, un fichier, ou - comme
+propre fournisseur d'utilisateur, ce qui pourrait être utile si vous accédez à
+vos utilisateurs via une base de données personnalisée, un fichier, ou - comme
 nous le montrons dans cet exemple - à travers un service web.
 
 Créer une Classe Utilisateur
@@ -22,7 +22,7 @@ Créer une Classe Utilisateur
 
 Tout d'abord, quelle que soit la source de vos données utilisateurs, vous
 allez avoir besoin de créer une classe ``User`` qui représente ces données.
-L'``User`` peut ressembler à ce que vous voulez et contenir n'importe
+Le ``User`` peut ressembler à ce que vous voulez et contenir n'importe
 quelles données. La seule condition requise est que la classe implémente
 :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`. Les
 méthodes de cette interface doivent donc être définies dans la classe
@@ -135,7 +135,7 @@ Voici un exemple de ce à quoi cela pourrait ressembler::
         {
             // effectuez un appel à votre service web ici
             // $userData = ...
-            // prétendons qu'il retourne un tableau en cas de succès, ou bien
+            // supposons qu'il retourne un tableau en cas de succès, ou bien
             // « false » s'il n'y a pas d'utilisateur
 
             if ($userData) {
@@ -209,7 +209,7 @@ service.
 
 .. note::
 
-    Assurez-vous que le fichier des services est importé. Voir
+    Assurez-vous que le fichier des services est importé. Lisez
     :ref:`service-container-imports-directive` pour plus de détails.
 
 Modifier ``security.yml``
@@ -262,7 +262,7 @@ plusieurs fois et encodé ensuite en base64.
     différente, alors vous aurez besoin de travailler un peu plus afin que
     Symfony encode correctement le mot de passe. Ceci est au-delà de la portée
     de cet article, mais devrait inclure de créer une sous-classe
-    ``MessageDigestPasswordEncoder`` ainsi que d'outrepasser la méthode
+    ``MessageDigestPasswordEncoder`` ainsi que surcharger la méthode
     ``mergePasswordAndSalt``.
 
     De surcroît, le « hash », par défaut, est encodé plusieurs fois puis
