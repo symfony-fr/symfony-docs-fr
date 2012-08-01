@@ -13,8 +13,8 @@ Imaginez que vous êtes en train de créer un système de blog dans lequel vos
 utilisateurs peuvent commenter vos posts. Maintenant, vous voulez qu'un
 utilisateur puisse éditer ses propres commentaires, mais pas ceux d'autres
 utilisateurs ; en outre, vous voulez vous-même être capable d'éditer tous
-les commentaires. Dans ce scénario, ``Comment`` serait notre objet domaine
-auquel vous souhaitez restreindre l'accès. Vous devriez considérer plusieurs
+les commentaires. Dans ce scénario, ``Comment`` (commentaire) serait notre objet domaine
+auquel vous souhaitez restreindre l'accès. Vous pouvez envisager plusieurs
 approches pour accomplir cela en utilisant Symfony2 ; les deux approches basiques
 sont (liste non-exhaustive) :
 
@@ -70,11 +70,11 @@ configurer la connexion que le système d'ACL est supposé utiliser :
     Le système ACL requiert au moins qu'une connexion DBAL Doctrine soit
     configurée. Cependant, cela ne veut pas dire que vous devez utiliser
     Doctrine pour faire correspondre vos objets domaine. Vous pouvez utiliser
-    quelconque outil de correspondance de votre choix pour vos objets, que ce
+    n'importe quel outil de correspondance de votre choix pour vos objets, que ce
     soit l'ORM Doctrine, l'ODM Mongo, Propel, ou du SQL brut, le choix reste
     le vôtre.
 
-Après que la connexion soit configurée, nous devons importer la structure de
+Après que la connexion est configurée, nous devons importer la structure de
 la base de données. Heureusement, nous avons une tâche pour cela. Exécutez
 simplement la commande suivante :
 
@@ -205,7 +205,7 @@ en combinant plusieurs permissions de base :
     $mask = $builder->get(); // int(29)
 
 Ce masque binaire représenté par un entier peut ainsi être utilisé pour accorder
-à un utilisateur les permissions de base que vous avez ajouté ci-dessus :
+à un utilisateur les permissions de base que vous avez ajoutées ci-dessus :
 
 .. code-block:: php
 
