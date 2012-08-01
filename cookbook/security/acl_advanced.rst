@@ -1,33 +1,33 @@
 .. index::
-   single: Sécurité; Concepts d'ACL avancée
+   single: Sécurité; Concepts d'ACL avancés
 
-Concepts d'ACL avancée
+Concepts d'ACL avancés
 ======================
 
 Le but de ce chapitre est de donner une vision plus profonde du système des
 ACL (« Liste de Contrôle d'Accès » en français), et aussi d'expliquer certaines
-décisions d'architecture derrière lui.
+décisions prises en ce qui concerne sa conception.
 
 Concepts d'Architecture
 -----------------------
 
 Les capacités de sécurité de l'instance objet de Symfony2 sont basées sur le
-concept d'une « Access Control List ». Chaque instance d'objet domaine a sa
-propre ACL. L'instance ACL détient une liste détaillée des « Access Control
+concept d'une « Access Control List ». Chaque **instance** d'un objet domaine a sa
+propre ACL. L'instance ACL contient une liste détaillée des « Access Control
 Entries » (ACEs ou « Entrées de Contrôle d'Accès » en français) qui sont
 utilisées pour prendre les décisions d'accès. Le système d'ACL de Symfony2 se
 concentre sur deux objectifs :
 
-- fournir un moyen de récupérer de manière efficiente un grand nombre d'ACLs/ACEs
+- fournir un moyen de récupérer de manière efficace un grand nombre d'ACLs/ACEs
   pour vos objets domaine, et de les modifier ;
 - fournir un moyen de prendre les décisions facilement quant à savoir si une
   personne est autorisée à effectuer une action sur un objet domaine ou non.
 
-Comme indiqué par le premier point, l'une des principales facultés du système
+Comme spécifié dans le premier point, l'une des principales facultés du système
 ACL de Symfony2 est de fournir une manière très performante de récupérer des
 ACLs/ACEs. Ceci est extrêmement important sachant que chaque ACL pourrait avoir
 plusieurs ACEs, et hériter d'une autre ACL à la manière d'une structure en arbre.
-Donc, nous ne nous servons pas de quelconque ORM spécifiquement, mais
+Donc, nous ne nous servons pas d'un ORM spécifique, mais
 l'implémentation par défaut intéragit avec votre connexion en utilisant directement
 le DBAL de Doctrine.
 
@@ -45,33 +45,34 @@ identité d'objet au fournisseur d'ACL pour un traitement ultérieur.
 Identités de Sécurité
 ~~~~~~~~~~~~~~~~~~~~~
 
-Ceci est analogue à l'identité d'objet, mais représente un utilisateur, ou
-un rôle dans votre application. Chaque rôle, ou utilisateur possède sa
+Ceci est similaire à l'identité d'objet, mais représente un utilisateur, ou
+un rôle dans votre application. Chaque rôle ou utilisateur possède sa
 propre identité de sécurité.
 
 Structure de Table dans la Base de Données
 ------------------------------------------
 
-L'implémentation par défaut utilise cinq tables de base de données comme
-listées ci-dessous. Les tables sont ordonnées de celle contenant le moins
-de lignes à celle en contenant le plus dans une application typique :
+L'implémentation par défaut utilise cinq tables de base de données qui sont
+listées ci-dessous. Les tables sont classées par nombre de lignes, de celle
+contenant le moins de lignes à celle en contenant le plus dans une application 
+classique :
 
 - *acl_security_identities* : Cette table enregistre toutes les identités
   de sécurité (SID) qui détiennent les ACEs. L'implémentation par défaut
-  vient avec deux identités de sécurité : ``RoleSecurityIdentity``, et
+  est fournie avec deux identités de sécurité : ``RoleSecurityIdentity``, et
   ``UserSecurityIdentity`` ;
 - *acl_classes* : Cette table fait correspondre les noms de classe avec
   un id unique qui peut être référencé depuis d'autres tables ;
 - *acl_object_identities* : Chaque ligne dans cette table représente une
   unique instance d'objet domaine ;
 - *acl_object_identity_ancestors* : Cette table nous autorise à déterminer
-  tous les ancêtres d'une ACL d'une manière très efficiente ;
+  tous les ancêtres d'une ACL de manière très efficace ;
 - *acl_entries* : Cette table contient toutes les ACEs. C'est typiquement la
   table avec le plus de lignes. Elle peut en contenir des dizaines de millions
   sans impacter de façon significative les performances.
 
 Portée des « Access Control Entries »
---------------------------------------
+-------------------------------------
 
 Les entrées de contrôle d'accès peuvent avoir différentes portées dans lesquelles
 elles s'appliquent. Dans Symfony2, nous avons principalement deux portées
@@ -83,7 +84,7 @@ différentes :
   précédent, et elle s'applique uniquement à un objet spécifique.
 
 Parfois, vous aurez besoin d'appliquer une ACE uniquement sur le champ
-spécifique d'un objet. Disons que vous vouliez que l'ID soit uniquement
+spécifique d'un objet. Supposons que vous voulez que l'ID soit uniquement
 visible par un administrateur mais pas par votre service client. Pour
 solutionner ce problème commun, nous avons ajouté deux sous-portées
 supplémentaires :
@@ -155,7 +156,7 @@ Les attributs sont utilisés par l'« AccessDecisionManager », tout comme
 les rôles sont des attributs utilisés par l'« AccessDecisionManager ».
 Souvent, ces attributs représentent en fait une aggrégation de masques
 binaires. Les masques binaires, d'un autre côté, sont utilisés par le
-système d'ACL en interne pour stocker de manière efficiente les permissions
+système d'ACL en interne pour stocker de manière efficace les permissions
 de vos utilisateurs dans la base de données, et pour effectuer des
 vérifications en utilisant des opérations sur les masques binaires extrêmement
 rapides.
@@ -173,7 +174,7 @@ Décisions de post-autorisation
 ------------------------------
 
 Les décisions de post-autorisation sont effectuées après qu'une méthode
-sécurisée ait été invoquée, et impliquent typiquement l'objet domaine qui
+sécurisée a été invoquée, et impliquent typiquement l'objet domaine qui
 est retourné par une telle méthode. Après invocations, les fournisseurs
 permettent aussi de modifier, ou de filtrer l'objet domaine avant qu'il
 ne soit retourné.
@@ -181,9 +182,9 @@ ne soit retourné.
 A cause de limitations actuelles du langage PHP, il n'y a pas de
 fonctionnalités de post-autorisation implémentées dans le composant
 coeur « Security ». Néanmoins, il y a un bundle expérimental appelé
-JMSSecurityExtraBundle_ qui ajoute ces fonctionnalités. Voyez sa
-documentation pour avoir plus d'informations quant à comment ceci
-est accompli.
+JMSSecurityExtraBundle_ qui ajoute ces fonctionnalités. Lisez sa
+documentation pour avoir plus d'informations pour comprendre comment ceci
+est réalisé.
 
 Processus pour connaître les décisions d'autorisation
 -----------------------------------------------------
