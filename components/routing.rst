@@ -2,32 +2,35 @@
    single: Routing
    single: Components; Routing
 
-The Routing Component
-=====================
+Le Composant de Routage
+=======================
 
-   The Routing Component maps an HTTP request to a set of configuration
-   variables.
+    Le Composant de Routage fait correspondre une requête HTTP à un ensemble
+    de variables de configuration.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Routing);
-* Install it via PEAR (`pear.symfony.com/Routing`);
-* Install it via Composer (`symfony/routing` on Packagist)
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Routing) ;
+* Installez le via PEAR (`pear.symfony.com/Routing`) ;
+* Installez le via Composer (`symfony/routing` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-In order to set up a basic routing system you need three parts:
+Afin d'installer un système de routage basique, vous avez besoin de trois blocs :
 
-* A :class:`Symfony\\Component\\Routing\\RouteCollection`, which contains the route definitions (instances of the class :class:`Symfony\\Component\\Routing\\Route`)
-* A :class:`Symfony\\Component\\Routing\\RequestContext`, which has information about the request
-* A :class:`Symfony\\Component\\Routing\\Matcher\\UrlMatcher`, which performs the mapping of the request to a single route
+* Une :class:`Symfony\\Component\\Routing\\RouteCollection`, qui contient les définitions des
+  routes (instances de la classe :class:`Symfony\\Component\\Routing\\Route`)
+* Une :class:`Symfony\\Component\\Routing\\RequestContext`, qui possède les informations
+  concernant la requête
+* Une classe :class:`Symfony\\Component\\Routing\\Matcher\\UrlMatcher`, qui s'occupe de la
+  correspondance entre la requête et une route unique
 
-Let's see a quick example. Notice that this assumes that you've already configured
-your autoloader to load the Routing component::
+Jetons un oeil à un exemple simple. Notez que ce dernier assume que vous ayez déjà
+configuré votre « autoloader » afin qu'il charge le composant de routage::
 
     use Symfony\Component\Routing\Matcher\UrlMatcher;
     use Symfony\Component\Routing\RequestContext;
@@ -46,51 +49,55 @@ your autoloader to load the Routing component::
 
 .. note::
 
-    Be careful when using ``$_SERVER['REQUEST_URI']``, as it may include
-    any query parameters on the URL, which will cause problems with route
-    matching. An easy way to solve this is to use the HttpFoundation component
-    as explained :ref:`below<components-routing-http-foundation>`.
+    Faites attention lorsque vous utilisez ``$_SERVER['REQUEST_URI']``, car cette
+    variable pourrait contenir quelconques paramètres de requête dans l'URL, ce
+    qui causerait des problèmes avec la correspondance de la route. Une manière
+    facile de résoudre cela est d'utiliser le composant « HttpFoundation » comme
+    expliqué :ref:`ci-dessous<components-routing-http-foundation>`.
 
-You can add as many routes as you like to a
+Vous pouvez ajouter autant de routes que vous le souhaitez dans une
 :class:`Symfony\\Component\\Routing\\RouteCollection`.
 
-The :method:`RouteCollection::add()<Symfony\\Component\\Routing\\RouteCollection::add>`
-method takes two arguments. The first is the name of the route. The second
-is a :class:`Symfony\\Component\\Routing\\Route` object, which expects a
-URL path and some array of custom variables in its constructor. This array
-of custom variables can be *anything* that's significant to your application,
-and is returned when that route is matched.
+La méthode :method:`RouteCollection::add()<Symfony\\Component\\Routing\\RouteCollection::add>`
+prend deux arguments. Le premier est le nom de la route. Le deuxième est un
+objet :class:`Symfony\\Component\\Routing\\Route`, qui s'attend à recevoir une URL et
+quelconque tableau de variables personnalisées dans son constructeur. Ce tableau
+peut être *n'importe quoi* qui fait du sens pour votre application, et est retourné
+lorsque cette route correspond à la requête.
 
-If no matching route can be found a
-:class:`Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException` will be thrown.
+Si aucune correspondance de route ne peut être trouvée, une
+:class:`Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException`
+sera lancée.
 
-In addition to your array of custom variables, a ``_route`` key is added,
-which holds the name of the matched route.
+En plus de votre tableau de variables personnalisées, une clé ``_route``
+est ajoutée, qui contient le nom de la route correspondante.
 
-Defining routes
-~~~~~~~~~~~~~~~
+Définition des routes
+~~~~~~~~~~~~~~~~~~~~~
 
-A full route definition can contain up to four parts:
+Une définition du routage complète peut contenir jusqu'à quatre parties :
 
-1. The URL pattern route. This is matched against the URL passed to the `RequestContext`,
-and can contain named wildcard placeholders (e.g. ``{placeholders}``)
-to match dynamic parts in the URL.
+1. Le pattern de l'URL de la route. Une correspondance tente d'être effectuée entre la
+route et l'URL passée au `RequestContext`, et peut contenir des valeurs de substitution
+jokers nommées (par exemple : ``{placeholders}``) afin de faire correspondre les
+parties dynamiques de l'URL.
 
-2. An array of default values. This contains an array of arbitrary values
-that will be returned when the request matches the route.
+2. Un tableau de valeurs par défaut. Ce dernier contient un tableau de
+valeurs arbitraires qui seront retournées lorsque la requête correspond à
+la route.
 
-3. An array of requirements. These define constraints for the values of the
-placeholders as regular expressions.
+3. Un tableau de conditions requises. Ce dernier définit les contraintes concernant
+le contenu des valeurs de substitution sous forme d'expressions régulières.
 
-4. An array of options. These contain internal settings for the route and
-are the least commonly needed.
+4. Un tableau d'options. Ce dernier contient des paramètres internes pour la
+route et sont généralement ceux qui sont le moins souvent nécessaire.
 
-Take the following route, which combines several of these ideas::
+Prenez la route suivante, qui combine plusieurs de ces idées::
 
    $route = new Route(
-       '/archive/{month}', // path
-       array('controller' => 'showArchive'), // default values
-       array('month' => '[0-9]{4}-[0-9]{2}'), // requirements
+       '/archive/{month}', // chemin
+       array('controller' => 'showArchive'), // valeurs par défaut
+       array('month' => '[0-9]{4}-[0-9]{2}'), // conditions requises
        array() // options
    );
 
@@ -100,38 +107,39 @@ Take the following route, which combines several of these ideas::
    // array('controller' => 'showArchive', 'month' => '2012-01', '_route' => '...')
 
    $parameters = $matcher->match('/archive/foo');
-   // throws ResourceNotFoundException
+   // lance une ResourceNotFoundException
 
-In this case, the route is matched by ``/archive/2012-01``, because the ``{month}``
-wildcard matches the regular expression wildcard given. However, ``/archive/foo``
-does *not* match, because "foo" fails the month wildcard.
+Dans ce cas, la route correspond avec l'URL ``/archive/2012-01``, car le joker
+``{month}`` correspond à l'expression régulière donnée. Cependant, ``/archive/foo``
+*ne* correspond *pas*, car « foo » n'a pas de correspondance avec le joker « {month} ».
 
-Besides the regular expression constraints there are two special requirements
-you can define:
+En plus des contraintes dictées par les expressions régulières, il y a deux
+conditions requises spécifiques que vous pouvez définir :
 
-* ``_method`` enforces a certain HTTP request method (``HEAD``, ``GET``, ``POST``, ...)
-* ``_scheme`` enforces a certain HTTP scheme (``http``, ``https``)
+* ``_method`` impose une certaine méthode HTTP pour la requête (``HEAD``, ``GET``, ``POST``, ...)
+* ``_scheme`` impose un certain schème HTTP (``http``, ``https``)
 
-For example, the following route would only accept requests to /foo with
-the POST method and a secure connection::
+Par exemple, la route suivante ne va accepter que les requêtes vers « /foo »
+avec une méthode POST et une connexion sécurisée::
 
    $route = new Route('/foo', array(), array('_method' => 'post', '_scheme' => 'https' ));
 
 .. tip::
 
-    If you want to match all urls which start with a certain path and end in an
-    arbitrary suffix you can use the following route definition::
+    Si vous voulez avoir une correspondance pour toutes les URLs qui commencent
+    par un certain chemin et qui se terminent par un suffixe déterminé, vous
+    pouvez utiliser la définition de route suivante::
 
         $route = new Route('/start/{suffix}', array('suffix' => ''), array('suffix' => '.*'));
 
+Utiliser des Préfixes
+~~~~~~~~~~~~~~~~~~~~~
 
-Using Prefixes
-~~~~~~~~~~~~~~
-
-You can add routes or other instances of
-:class:`Symfony\\Component\\Routing\\RouteCollection` to *another* collection.
-This way you can build a tree of routes. Additionally you can define a prefix,
-default requirements and default options to all routes of a subtree::
+Vous pouvez ajouter des routes ou d'autres instances de
+:class:`Symfony\\Component\\Routing\\RouteCollection` à une *autre* collection.
+De cette façon, vous pouvez construire un arbre de routes. De plus, vous pouvez
+définir un préfixe, des conditions requises par défaut ainsi que des options par
+défaut pour toutes les routes d'un sous-arbre::
 
     $rootCollection = new RouteCollection();
 
@@ -141,34 +149,35 @@ default requirements and default options to all routes of a subtree::
 
     $rootCollection->addCollection($subCollection, '/prefix', array('_scheme' => 'https'));
 
-Set the Request Parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Définir les Paramètres de Requête
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :class:`Symfony\\Component\\Routing\\RequestContext` provides information
-about the current request. You can define all parameters of an HTTP request
-with this class via its constructor::
+La classe :class:`Symfony\\Component\\Routing\\RequestContext` fournit des
+informations à propos de la requête courante. Vous pouvez définir tous les
+paramètres d'une requête HTTP avec cette classe via son constructeur::
 
     public function __construct($baseUrl = '', $method = 'GET', $host = 'localhost', $scheme = 'http', $httpPort = 80, $httpsPort = 443)
 
 .. _components-routing-http-foundation:
 
-Normally you can pass the values from the ``$_SERVER`` variable to populate the
-:class:`Symfony\\Component\\Routing\\RequestContext`. But If you use the
-:doc:`HttpFoundation</components/http_foundation/index>` component, you can use its 
-:class:`Symfony\\Component\\HttpFoundation\\Request` class to feed the 
-:class:`Symfony\\Component\\Routing\\RequestContext` in a shortcut::
+Normalement, vous pouvez passer les valeurs depuis la variable ``$_SERVER`` afin de
+fournir les données au :class:`Symfony\\Component\\Routing\\RequestContext`. Mais
+si vous utilisez le composant :doc:`HttpFoundation</components/http_foundation/index>`,
+vous pouvez vous servir de sa classe :class:`Symfony\\Component\\HttpFoundation\\Request`
+pour récupérer le :class:`Symfony\\Component\\Routing\\RequestContext` via un
+raccourci::
 
     use Symfony\Component\HttpFoundation\Request;
 
     $context = new RequestContext();
     $context->fromRequest(Request::createFromGlobals());
 
-Generate a URL
-~~~~~~~~~~~~~~
+Générer une URL
+~~~~~~~~~~~~~~~
 
-While the :class:`Symfony\\Component\\Routing\\Matcher\\UrlMatcher` tries
-to find a route that fits the given request you can also build a URL from
-a certain route::
+Alors que la classe :class:`Symfony\\Component\\Routing\\Matcher\\UrlMatcher`
+essaye de trouver une route qui corresponde à la requête donnée, vous pouvez
+aussi construire une URL depuis une certaine route::
 
     use Symfony\Component\Routing\Generator\UrlGenerator;
 
@@ -186,25 +195,28 @@ a certain route::
 
 .. note::
 
-    If you have defined the ``_scheme`` requirement, an absolute URL is generated
-    if the scheme of the current :class:`Symfony\\Component\\Routing\\RequestContext`
-    does not match the requirement.
+    Si vous avez défini la condition requise ``_scheme``, une URL absolue est
+    générée si le schème du :class:`Symfony\\Component\\Routing\\RequestContext`
+    courant ne respecte pas cette condition.
 
-Load Routes from a File
-~~~~~~~~~~~~~~~~~~~~~~~
+Charger des Routes depuis un Fichier
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You've already seen how you can easily add routes to a collection right inside
-PHP. But you can also load routes from a number of different files.
+Vous avez déjà vu comment vous pouvez ajouter facilement des routes à une
+collection directement depuis PHP. Mais vous pouvez aussi charger des routes
+depuis différents fichiers.
 
-The Routing component comes with a number of loader classes, each giving
-you the ability to load a collection of route definitions from an external
-file of some format.
-Each loader expects a :class:`Symfony\\Component\\Config\\FileLocator` instance
-as the constructor argument. You can use the :class:`Symfony\\Component\\Config\\FileLocator`
-to define an array of paths in which the loader will look for the requested files.
-If the file is found, the loader returns a :class:`Symfony\\Component\\Routing\\RouteCollection`.
+Le composant de Routage vient avec un certain nombre de classes de chargement,
+chacune vous fournissant la possibilité de charger une collection de définitions
+de route depuis un fichier externe d'un certain format.
+Chaque chargeur attend une instance de :class:`Symfony\\Component\\Config\\FileLocator` en
+tant qu'argument du constructeur. Vous pouvez utiliser le
+:class:`Symfony\\Component\\Config\\FileLocator` pour définir un tableau de chemins dans
+lequel le chargeur va chercher les fichiers requis.
+Si le fichier est trouvé, le chargeur retourne une :class:`Symfony\\Component\\Routing\\RouteCollection`.
 
-If you're using the ``YamlFileLoader``, then route definitions look like this:
+Si vous utilisez le chargeur ``YamlFileLoader``, alors les définitions de route ressemblent
+à cela :
 
 .. code-block:: yaml
 
@@ -217,25 +229,26 @@ If you're using the ``YamlFileLoader``, then route definitions look like this:
         pattern: /foo/bar
         defaults: { controller: 'MyController::foobarAction' }
 
-To load this file, you can use the following code. This assumes that your
-``routes.yml`` file is in the same directory as the below code::
+Pour charger ce fichier, vous pouvez utiliser le code suivant. Cela assume
+que votre fichier ``routes.yml`` est dans le même répertoire que le code
+ci-dessus::
 
     use Symfony\Component\Config\FileLocator;
     use Symfony\Component\Routing\Loader\YamlFileLoader;
 
-    // look inside *this* directory
+    // cherche dans *ce* répertoire
     $locator = new FileLocator(array(__DIR__));
     $loader = new YamlFileLoader($locator);
     $collection = $loader->load('routes.yml');
 
-Besides :class:`Symfony\\Component\\Routing\\Loader\\YamlFileLoader` there are two
-other loaders that work the same way:
+En plus du chargeur :class:`Symfony\\Component\\Routing\\Loader\\YamlFileLoader`, il
+y a d'autres chargeurs qui fonctionnent de la même manière :
 
 * :class:`Symfony\\Component\\Routing\\Loader\\XmlFileLoader`
 * :class:`Symfony\\Component\\Routing\\Loader\\PhpFileLoader`
 
-If you use the :class:`Symfony\\Component\\Routing\\Loader\\PhpFileLoader` you
-have to provide the name of a php file which returns a :class:`Symfony\\Component\\Routing\\RouteCollection`::
+Si vous utiliser le chargeur :class:`Symfony\\Component\\Routing\\Loader\\PhpFileLoader`,
+vous devez fournir le nom d'un fichier PHP qui retourne une :class:`Symfony\\Component\\Routing\\RouteCollection`::
 
     // RouteProvider.php
     use Symfony\Component\Routing\RouteCollection;
@@ -247,11 +260,11 @@ have to provide the name of a php file which returns a :class:`Symfony\\Componen
 
     return $collection;
 
-Routes as Closures
-..................
+Des Routes en tant que Closures
+...............................
 
-There is also the :class:`Symfony\\Component\\Routing\\Loader\\ClosureLoader`, which
-calls a closure and uses the result as a :class:`Symfony\\Component\\Routing\\RouteCollection`::
+Il y a aussi le chargeur :class:`Symfony\\Component\\Routing\\Loader\\ClosureLoader`, qui
+appelle une closure et utilise son résultat en tant que :class:`Symfony\\Component\\Routing\\RouteCollection`::
 
     use Symfony\Component\Routing\Loader\ClosureLoader;
 
@@ -262,28 +275,29 @@ calls a closure and uses the result as a :class:`Symfony\\Component\\Routing\\Ro
     $loader = new ClosureLoader();
     $collection = $loader->load($closure);
 
-Routes as Annotations
-.....................
+Des Routes en tant qu'Annotations
+.................................
 
-Last but not least there are
-:class:`Symfony\\Component\\Routing\\Loader\\AnnotationDirectoryLoader` and
-:class:`Symfony\\Component\\Routing\\Loader\\AnnotationFileLoader` to load
-route definitions from class annotations. The specific details are left
-out here.
+Enfin, il existe aussi le :class:`Symfony\\Component\\Routing\\Loader\\AnnotationDirectoryLoader`
+et le :class:`Symfony\\Component\\Routing\\Loader\\AnnotationFileLoader` qui
+permettent de charger des définitions de route depuis des annotations de classe.
+Les détails spécifiques ne sont pas expliqués ici.
 
-The all-in-one Router
+Le Routeur tout-en-un
 ~~~~~~~~~~~~~~~~~~~~~
 
-The :class:`Symfony\\Component\\Routing\\Router` class is a all-in-one package
-to quickly use the Routing component. The constructor expects a loader instance,
-a path to the main route definition and some other settings::
+La classe :class:`Symfony\\Component\\Routing\\Router` est un « package » tout-en-un
+permettant d'utiliser rapidement le composant de Routage. Le constructeur s'attend
+à recevoir une instance de chargeur, un chemin vers la définition principale des
+routes et d'autres paramètres::
 
     public function __construct(LoaderInterface $loader, $resource, array $options = array(), RequestContext $context = null, array $defaults = array());
 
-With the ``cache_dir`` option you can enable route caching (if you provide a
-path) or disable caching (if it's set to ``null``). The caching is done
-automatically in the background if you want to use it. A basic example of the
-:class:`Symfony\\Component\\Routing\\Router` class would look like::
+Avec l'option ``cache_dir``, vous pouvez activer le cache pour les routes (si
+vous fournissez un chemin) ou désactiver le cache (si le paramètre est défini comme
+``null``). Le mécanisme de cache est géré automatiquement en arrière-plan si vous
+souhaitez l'utiliser. Un exemple basique de la classe
+:class:`Symfony\\Component\\Routing\\Router` ressemblerait à cela::
 
     $locator = new FileLocator(array(__DIR__));
     $requestContext = new RequestContext($_SERVER['REQUEST_URI']);
@@ -298,14 +312,14 @@ automatically in the background if you want to use it. A basic example of the
 
 .. note::
 
-    If you use caching, the Routing component will compile new classes which
-    are saved in the ``cache_dir``. This means your script must have write
-    permissions for that location.
+    Si vous utilisez le cache, le composant de Routage va compiler de nouvelles
+    classes qui seront sauvegardées dans le ``cache_dir``. Cela signifie que votre
+    script doit avoir les permissions d'écriture nécessaires pour ce chemin.
 
 .. versionadded:: 2.1
 
-    As of Symfony 2.1, the Routing component also accepts Unicode values
-    in routes like this::
+    Depuis Symfony 2.1, le composant de Routage accepte aussi des valeurs
+    Unicode dans les routes comme par exemple::
 
         $routes->add('unicode_route', new Route('/Жени'));
 
