@@ -1,43 +1,47 @@
-Defining Relationships with Abstract Classes and Interfaces
-===========================================================
+Définir des Relations avec des Classes Abstraites et des Interfaces
+===================================================================
 
 .. versionadded: 2.1
-    The ResolveTargetEntityListener is new to Doctrine 2.2, which was first
-    packaged with Symfony 2.1.
+    Le ResolveTargetEntityListener est nouveau dans Doctrine 2.2, qui a été
+    « packagé » pour la première fois avec Symfony 2.1.
 
-One of the goals of bundles is to create discreet bundles of functionality
-that do not have many (if any) dependencies, allowing you to use that
-functionality in other applications without including unnecessary items.
+L'un des buts des bundles est de créer des ensembles distincts de fonctionnalités
+qui n'ont pas beaucoup (ou pas du tout) de dépendances, vous permettant
+d'utiliser cette fonctionnalité dans d'autres applications sans inclure
+d'éléments superflus.
 
-Doctrine 2.2 includes a new utility called the ``ResolveTargetEntityListener``,
-that functions by intercepting certain calls inside Doctrine and rewriting
-``targetEntity`` parameters in your metadata mapping at runtime. It means that
-in your bundle you are able to use an interface or abstract class in your
-mappings and expect correct mapping to a concrete entity at runtime.
+Doctrine 2.2 inclut un nouvel utilitaire appelé le ``ResolveTargetEntityListener``,
+qui fonctionne en interceptant certains appels dans Doctrine et en ré-écrivant
+des paramètres ``targetEntity`` dans vos méta-données de correspondance durant
+l'exécution. Cela signifie que depuis votre bundle, vous êtes capable d'utiliser
+une interface ou une classe abstraite dans vos correspondances et que vous pouvez
+vous attendre à une correspondance correcte avec une entité concrète au moment
+de l'exécution.
 
-This functionality allows you to define relationships between different entities
-without making them hard dependencies.
+Cette fonctionnalité vous permet de définir des relations entre différentes
+entités sans en faire des dépendances « écrites en dur ».
 
-Background
-----------
+Contexte/décor
+--------------
 
-Suppose you have an `InvoiceBundle` which provides invoicing functionality
-and a `CustomerBundle` that contains customer management tools. You want
-to keep these separated, because they can be used in other systems without
-each other, but for your application you want to use them together.
+Supposons que vous ayez un `InvoiceBundle` qui fournit une fonctionnalité de
+facturation (« invoicing » en anglais) et un `CustomerBundle` qui contient
+les outils de gestion de client. Vous souhaitez garder ces deux entités
+séparées, car elles peuvent être utilisées dans d'autres systèmes l'une
+sans l'autre ; mais pour votre application, vous voulez les utiliser ensemble.
 
-In this case, you have an ``Invoice`` entity with a relationship to a
-non-existent object, an ``InvoiceSubjectInterface``. The goal is to get
-the ``ResolveTargetEntityListener`` to replace any mention of the interface
-with a real object that implements that interface.
+Dans ce cas, vous avez une entité ``Invoice`` ayant une relation avec un
+objet qui n'existe pas, une ``InvoiceSubjectInterface``. Le but est de
+récupérer le ``ResolveTargetEntityListener`` pour remplacer toute mention de
+l'interface par un objet réel qui implémente cette interface.
 
-Set up
-------
+Mise en place
+-------------
 
-Let's use the following basic entities (which are incomplete for brevity)
-to explain how to set up and use the RTEL.
+Utilisons les entités basiques suivantes (qui sont incomplètes pour plus de
+brièveté) pour expliquer comment mettre en place et utiliser le RTEL.
 
-A Customer entity::
+Une entité « Customer »::
 
     // src/Acme/AppBundle/Entity/Customer.php
 
@@ -53,11 +57,11 @@ A Customer entity::
      */
     class Customer extends BaseCustomer implements InvoiceSubjectInterface
     {
-        // In our example, any methods defined in the InvoiceSubjectInterface
-        // are already implemented in the BaseCustomer
+        // Dans notre exemple, toutes les méthodes définies dans
+        // l'« InvoiceSubjectInterface » sont déjà implémentées dans le « BaseCustomer »
     }
 
-An Invoice entity::
+Une entité « Invoice »::
 
     // src/Acme/InvoiceBundle/Entity/Invoice.php
 
@@ -67,7 +71,7 @@ An Invoice entity::
     use Acme\InvoiceBundle\Model\InvoiceSubjectInterface;
 
     /**
-     * Represents an Invoice.
+     * Représente une « Invoice ».
      *
      * @ORM\Entity
      * @ORM\Table(name="invoice")
@@ -81,23 +85,23 @@ An Invoice entity::
         protected $subject;
     }
 
-An InvoiceSubjectInterface::
+Une « InvoiceSubjectInterface »::
 
     // src/Acme/InvoiceBundle/Model/InvoiceSubjectInterface.php
 
     namespace Acme\InvoiceBundle\Model;
 
     /**
-     * An interface that the invoice Subject object should implement.
-     * In most circumstances, only a single object should implement
-     * this interface as the ResolveTargetEntityListener can only
-     * change the target to a single object.
+     * Une interface que le sujet de la facture devrait implémenter.
+     * Dans la plupart des circonstances, il ne devrait y avoir qu'un unique objet
+     * qui implémente cette interface comme le ResolveTargetEntityListener peut
+     * changer seulement la cible d'un objet unique.
      */
     interface InvoiceSubjectInterface
     {
-        // List any additional methods that your InvoiceBundle
-        // will need to access on the subject so that you can
-        // be sure that you have access to those methods.
+        // Liste toutes les méthodes additionnelles dont votre
+        // InvoiceBundle aura besoin pour accéder au sujet afin
+        // que vous soyez sûr que vous avez accès à ces méthodes.
 
         /**
          * @return string
@@ -105,8 +109,8 @@ An InvoiceSubjectInterface::
         public function getName();
     }
 
-Next, you need to configure the listener, which tells the DoctrineBundle
-about the replacement:
+Ensuite, vous devez configurer le « listener », qui informe le DoctrineBundle
+de votre remplacement :
 
 .. configuration-block::
 
@@ -149,10 +153,11 @@ about the replacement:
             ),
         ));
 
-Final Thoughts
---------------
+Réflexions finales
+------------------
 
-With the ``ResolveTargetEntityListener``, you are able to decouple your
-bundles, keeping them usable by themselves, but still being able to
-define relationships between different objects. By using this method,
-your bundles will end up being easier to maintain independently.
+Avec le ``ResolveTargetEntityListener``, vous êtes capable de découpler
+vos bundles, en les gardant utilisables par eux-mêmes, mais en étant
+toujours capable de définir des relations entre différents objets. En
+utilisant cette méthode, vos bundles vont finir par être plus faciles
+à maintenir indépendamment.
