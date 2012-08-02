@@ -1,42 +1,46 @@
 .. index::
    single: Event Dispatcher
 
-How to setup before and after Filters
-=====================================
+Comment mettre en place des filtres avant et après un processus donné
+=====================================================================
 
-It is quite common in web application development to need some logic to be
-executed just before or just after your controller actions acting as filters 
-or hooks.
+Il est très commun dans le développement d'application web d'avoir besoin
+qu'un bout de logique soit exécuté juste avant ou juste après vos actions
+de contrôleur actant comme des filtres ou des « hooks ».
 
-In Symfony1, this was achieved with the preExecute and postExecute methods,
-most major frameworks have similar methods but there is no such thing in Symfony2.
-The good news is that there is a much better way to interfere the
-Request -> Response process using the EventDispatcher component.
+Dans Symfony1, cela était effectué avec les méthodes « preExecute » et
+« postExecute » ; la plupart des principaux « frameworks » ont des méthodes
+similaires mais il n'y a rien de semblable dans Symfony2.
+La bonne nouvelle est qu'il y a une bien meilleure manière d'interférer
+le processus Requête -> Réponse en utilisant le composant « EventDispatcher ».
 
-Token validation Example
-------------------------
+Exemple de validation de jeton
+------------------------------
 
-Imagine that you need to develop an API where some controllers are public
-but some others are restricted to one or some clients. For these private features,
-you might provide a token to your clients to identify themselves.
+Imaginez que vous deviez développer une API dans laquelle certains contrôleurs
+sont publics mais d'autres sont ont un accès restreint qui est réservé à un
+ou plusieurs clients. Pour ces fonctionnalités privées, vous pourriez
+fournir un jeton à vos clients afin de qu'ils s'identifient eux-mêmes.
 
-So, before executing your controller action, you need to check if the action
-is restricted or not. And if it is restricted, you need to validate the provided
-token.
+Donc, avant d'exécuter votre action de contrôleur, vous devez vérifier si
+l'action est restreinte ou pas. Et si elle est restreinte, vous devez valider
+le jeton fourni.
 
 .. note::
 
-    Please note that for simplicity in the recipe, tokens will be defined
-    in config and neither database setup nor authentication provider via
-    the Security component will be used.
+    Veuillez note que pour plus de simplicité, les jetons vont être
+    définis dans la configuration et aucune mise en place de base de données
+    ni de fournisseur d'authentification via le composant de Sécurité ne vont
+    être utilisés.
 
-Creating a before filter with a controller.request event
---------------------------------------------------------
+Créer un filtre interférant avant un processus avec un événement controller.request
+-----------------------------------------------------------------------------------
 
-Basic Setup
-~~~~~~~~~~~
+Mise en place basique
+~~~~~~~~~~~~~~~~~~~~~
 
-You can add basic token configuration using ``config.yml`` and the parameters key:
+Vous pouvez ajouter une configuration de token basique en utilisant le fichier
+``config.yml`` et la clé « parameters » :
 
 .. configuration-block::
 
@@ -66,36 +70,38 @@ You can add basic token configuration using ``config.yml`` and the parameters ke
             'client2' => 'pass2'
         ));
 
-Tag Controllers to be checked
------------------------------
+Les contrôleurs de Tag devant être vérifiés
+-------------------------------------------
 
-A ``kernel.controller`` listener gets notified on every request, right before
-the controller is executed. First, you need some way to identify if the controller
-that matches the request needs token validation.
+Un « listener » de ``kernel.controller`` est notifié à chaque requête, juste
+avant que le contrôleur ne soit exécuté. D'abord, vous avez besoin d'une manière
+de savoir si le contrôleur qui correspond à la requête a besoin d'une validation
+de token.
 
-A clean and easy way is to create an empty interface and make the controllers
-implement it::
+Une façon propre et facile est de créer une interface vide et de faire que les
+contrôleurs l'implémentent::
 
     namespace Acme\DemoBundle\Controller;
 
     interface TokenAuthenticatedController
     {
-        // Nothing here
+        // rien ici
     }
 
-A controller that implements this interface simply looks like this::
+Un contrôleur qui implémente cette interface ressemble simplement à cela::
 
     class FooController implements TokenAuthenticatedController
     {
-        // Your actions that need authentication
+        // vos actions qui ont besoin d'authentification
     }
 
-Creating an Event Listener
---------------------------
+Créer un « Listener » d'Evénement
+---------------------------------
 
-Next, you'll need to create an event listener, which will hold the logic
-that you want executed before your controllers. If you're not familiar with
-event listeners, you can learn more about them at :doc:`/cookbook/service_container/event_listener`::
+Ensuite, vous allez avoir besoin de créer un « listener » d'événement, qui va
+contenir la logique que vous souhaitez exécuter avant vos contrôleurs. Si
+vous n'êtes pas familier avec les « listeners » d'événement, vous pouvez
+en apprendre plus sur eux ici :doc:`/cookbook/service_container/event_listener`::
 
     namespace Acme\DemoBundle\EventListener;
 
@@ -117,8 +123,9 @@ event listeners, you can learn more about them at :doc:`/cookbook/service_contai
             $controller = $event->getController();
 
             /*
-             * $controller passed can be either a class or a Closure. This is not usual in Symfony2 but it may happen.
-             * If it is a class, it comes in array format
+             * la variable $controller passée peut être une classe ou une Closure. Ce n'est pas
+             * courant dans Symfony2 mais cela peut arriver.
+             * Si c'est une classe, elle est donnée sous forme de tableau
              */
             if (!is_array($controller)) {
                 return;
@@ -133,12 +140,13 @@ event listeners, you can learn more about them at :doc:`/cookbook/service_contai
         }
     }
 
-Registering the Listener
+Déclarer le « Listener »
 ------------------------
 
-Finally, register your listener as a service and tag it as an event listener.
-By listening on ``kernel.controller``, you're telling Symfony that you want
-your listener to be called just before any controller is executed:
+Finalement, déclarez votre « listener » comme un service et « taggez-le » en
+tant que « listener » d'événement. En écoutant le ``kernel.controller``, vous
+dites à Symfony que vous voulez que votre « listener » soit appelé juste avant
+que quelconque contrôleur soit exécuté :
 
 .. configuration-block::
 
