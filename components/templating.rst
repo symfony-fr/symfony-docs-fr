@@ -1,35 +1,35 @@
 .. index::
    single: Templating
 
-The Templating Component
-========================
+Le Composant Templating
+=======================
 
-    Templating provides all the tools needed to build any kind of template
-    system.
+    Le Composant Templating fournit tous les outils nécessaires pour construire
+    n'importe quel système de templates.
 
-    It provides an infrastructure to load template files and optionally monitor
-    them for changes. It also provides a concrete template engine implementation
-    using PHP with additional tools for escaping and separating templates into
-    blocks and layouts.
+    Il fournit une infrastructure qui charge des fichiers de template et qui,
+    optionnellement, surveille s'ils changent. Il apporte aussi une implémentation
+    concrète d'un moteur de template utilisant PHP avec des outils additionnels
+    pour séparer les templates en blocs et couches.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Templating);
-* Install it via PEAR (`pear.symfony.com/Templating`);
-* Install it via Composer (`symfony/templating` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Templating) ;
+* Installez le via PEAR (`pear.symfony.com/Templating`) ;
+* Installez le via Composer (`symfony/templating` dans Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-The :class:`Symfony\\Component\\Templating\\PhpEngine` class is the entry point
-of the component. It needs a template name parser
-(:class:`Symfony\\Component\\Templating\\TemplateNameParserInterface`) to
-convert a template name to a template reference and template loader
-(:class:`Symfony\\Component\\Templating\\Loader\\LoaderInterface`) to find the
-template associated to a reference::
+La classe :class:`Symfony\\Component\\Templating\\PhpEngine` est le point
+d'entrée du composant. Elle a besoin d'un analyseur de nom de template
+(:class:`Symfony\\Component\\Templating\\TemplateNameParserInterface`) pour
+convertir un nom de template en une référence de template et d'un chargeur
+de template (:class:`Symfony\\Component\\Templating\\Loader\\LoaderInterface`)
+pour trouver le template associé à une référence::
 
     use Symfony\Component\Templating\PhpEngine;
     use Symfony\Component\Templating\TemplateNameParser;
@@ -41,18 +41,19 @@ template associated to a reference::
 
     echo $view->render('hello.php', array('firstname' => 'Fabien'));
 
-The :method:`Symfony\\Component\\Templating\\PhpEngine::render` method executes
-the file `views/hello.php` and returns the output text.
+La méthode :method:`Symfony\\Component\\Templating\\PhpEngine::render` exécute
+le fichier `views/hello.php` et retourne le texte de sortie.
 
 .. code-block:: html+php
 
     <!-- views/hello.php -->
     Hello, <?php echo $firstname ?>!
 
-Template Inheritance with Slots
--------------------------------
+Héritage de Template avec les Slots
+-----------------------------------
 
-The template inheritance is designed to share layouts with many templates.
+L'héritage de template est structuré de manière à partager les couches avec
+de nombreux templates.
 
 .. code-block:: html+php
 
@@ -66,8 +67,8 @@ The template inheritance is designed to share layouts with many templates.
         </body>
     </html>
 
-The :method:`Symfony\\Component\\Templating\\PhpEngine::extend` method is called in the
-sub-template to set its parent template.
+La méthode :method:`Symfony\\Component\\Templating\\PhpEngine::extend` est appelée dans
+le sous-template pour définir son template parent.
 
 .. code-block:: html+php
 
@@ -83,28 +84,29 @@ sub-template to set its parent template.
         <?php echo $page->body ?>
     </p>
 
-To use template inheritance, the :class:`Symfony\\Component\\Templating\\Helper\\SlotsHelper`
-helper must be registered::
+Pour utiliser l'héritage de template, la classe
+:class:`Symfony\\Component\\Templating\\Helper\\SlotsHelper` doit être
+déclarée::
 
     use Symfony\Templating\Helper\SlotsHelper;
 
     $view->set(new SlotsHelper());
 
-    // Retrieve $page object
+    // récupère l'objet $page
 
     echo $view->render('page.php', array('page' => $page));
 
 .. note::
 
-    Multiple levels of inheritance is possible: a layout can extend an other
-    layout.
+    Avoir de multiples niveaux d'héritage est possible : une couche peut étendre
+    une autre couche.
 
-Output Escaping
----------------
+Echappement en sortie
+---------------------
 
-This documentation is still being written.
+Cette partie de la documentation est toujours en cours d'écriture.
 
-The Asset Helper
-----------------
+La classe d'Aide « Asset »
+--------------------------
 
-This documentation is still being written.
+Cette partie de la documentation est toujours en cours d'écriture.
