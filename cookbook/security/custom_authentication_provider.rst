@@ -6,9 +6,9 @@ Comment créer un Fournisseur d'Authentification Personnalisé
 
 Si vous avez lu le chapitre :doc:`/book/security`, vous comprenez la
 distinction que Symfony2 fait entre authentification et autorisation dans
-l'implémentation de la sécurité. Ce chapitre discute des classes coeurs
-impliquées dans le processus d'authentification, et de comment implémenter
-un fournisseur d'authentification personnalisé. Comme l'authentification et
+l'implémentation de la sécurité. Ce chapitre traite des classes noyaux
+impliquées dans le processus d'authentification, et de l'implémentation
+d'un fournisseur d'authentification personnalisé. Comme l'authentification et
 l'autorisation sont des concepts séparés, cette extension sera indépendante
 du « fournisseur d'utilisateur », et fonctionnera avec les fournisseurs
 d'utilisateur de votre application, qu'ils soient stockés en mémoire,
@@ -21,7 +21,7 @@ Le chapitre suivant démontre comment créer un fournisseur d'authentification
 personnalisé pour une authentification WSSE. Le protocole de sécurité
 pour WSSE fournit plusieurs avantages concernant la sécurité :
 
-1. Encryption du Nom d'utilisateur / Mot de passe
+1. Encryptage du Nom d'utilisateur / Mot de passe
 2. Sécurité contre les attaques de type « replay »
 3. Aucune configuration de serveur web requise
 
@@ -29,7 +29,7 @@ WSSE est très utile pour sécuriser des services web, qu'ils soient SOAP
 ou REST.
 
 Il existe de nombreuses et très bonnes documentations sur `WSSE`_, mais
-cet article ne va pas se concentrer sur le protocole de sécurité, mais
+cet article ne va pas se focaliser sur le protocole de sécurité, mais
 plutôt sur la manière dont un protocole personnalisé peut être ajouté
 à votre application Symfony2. La base de WSSE est qu'un en-tête de requête
 est vérifié pour y trouver des informations de connexions encryptées en
@@ -69,7 +69,7 @@ pertinentes à notre fournisseur d'authentification.
         {
             parent::__construct($roles);
 
-            // Si l'utilisateur as des rôles, on le considère comme authentifié
+            // Si l'utilisateur a des rôles, on le considère comme authentifié
             $this->setAuthenticated(count($roles) > 0);
         }
 
@@ -91,7 +91,7 @@ Le Listener
 -----------
 
 Ensuite, vous avez besoin d'un listener pour « écouter » le contexte de
-sécurité. Le listener est responsable de transmettre les requêtes au pare-feu et
+sécurité. Le listener est chargé de transmettre les requêtes au pare-feu et
 d'appeler le fournisseur d'authentification. Un listener doit être une instance
 de :class:`Symfony\\Component\\Security\\Http\\Firewall\\ListenerInterface`.
 Un listener de sécurité devrait gérer l'évènement
@@ -172,16 +172,16 @@ alors une réponse 403 est retournée.
     Une classe non utilisée ci-dessus, la classe
     :class:`Symfony\\Component\\Security\\Http\\Firewall\\AbstractAuthenticationListener`,
     est une classe de base très utile qui fournit certaines fonctionnalités communes pour
-    les extensions de sécurité. Ceci inclut maintenir le token dans la session, fournir
+    les extensions de sécurité. Ceci inclut le fait de maintenir le token dans la session, fournir
     des gestionnaires en cas de succès/échec, des URLs de formulaire de login, et plus
     encore. Comme WSSE ne requiert pas de maintenir les sessions d'authentification ou
-    les formulaires de login, cela ne sera pas utiliser dans cet exemple.
+    les formulaires de login, cela ne sera pas utilisé dans cet exemple.
 
 Le Fournisseur d'Authentification
 ---------------------------------
 
 Le fournisseur d'authentification va effectuer la vérification du
-``WsseUserToken``. C'est à dire que le fournisseur va vérifier que la valeur
+``WsseUserToken``. C'est-à-dire que le fournisseur va vérifier que la valeur
 de l'en-tête ``Created`` est valide dans les cinq minutes, que la valeur de
 l'en-tête ``Nonce`` est unique dans les cinq minutes, et que la valeur de
 l'en-tête ``PasswordDigest`` correspond au mot de passe de l'utilisateur.
@@ -250,7 +250,7 @@ l'en-tête ``PasswordDigest`` correspond au mot de passe de l'utilisateur.
 
 .. note::
 
-    La :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface`
+    La classe :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface`
     requiert une méthode ``authenticate`` sur le token de l'utilisateur ainsi
     qu'une méthode ``supports``, qui dit au gestionnaire d'authentification
     d'utiliser ou non ce fournisseur pour le token donné. Dans le cas de
@@ -328,7 +328,7 @@ requiert les méthodes suivantes :
 * la méthode ``addConfiguration``, qui est utilisée pour définir les
   options de configuration en dessous de la clé de configuration dans
   votre configuration de sécurité.
-  Comment définir les options de configuration est expliqué plus tard dans
+  Comment définir les options de configuration sera expliqué plus tard dans
   ce chapitre.
 
 .. note::
@@ -350,8 +350,8 @@ utilisée comme un pare-feu dans votre configuration de sécurité.
     conteneur d'injection de dépendances ? ». Ceci est une très bonnne
     question. La raison est que vous pouvez utiliser votre pare-feu
     plusieurs fois afin de sécuriser plusieurs parties de votre application.
-    Grâce à cela, chaque fois que votre pare-feu est utilisé, un nouveau
-    service est créé dans le conteneur d'injection de dépendances.
+    Grâce à cela, chaque fois que votre pare-feu sera utilisé, un nouveau
+    service sera créé dans le conteneur d'injection de dépendances.
     La factory est ce qui crée ces nouveaux services.
 
 Configuration
