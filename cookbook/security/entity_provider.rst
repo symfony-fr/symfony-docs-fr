@@ -15,9 +15,9 @@ serveur OAuth ou une base de données.
 Introduction
 ------------
 
-Cet article se concentre sur comment authentifier des utilisateurs à travers
+Cet article traite de l'authentification des utilisateurs à travers
 une table de base de données gérée par une classe entité Doctrine. Le contenu
-de cette entrée du cookbook est divisée en trois parties. La première partie
+de cet article du Cookbook est divisé en trois parties. La première partie
 parle de la conception d'une classe entité Doctrine ``User`` ainsi que du
 fait de la rendre utilisable par la couche de sécurité de Symfony. La deuxième
 partie décrit comment authentifier facilement un utilisateur avec l'objet Doctrine
@@ -28,7 +28,7 @@ tutoriel va démontrer comment créer un objet personnalisé
 récupérer des utilisateurs depuis la base de données sous certaines
 conditions personnalisées.
 
-Ce tutoriel assume qu'il existe un bundle ``Acme\UserBundle`` démarré et chargé
+Ce tutoriel suppose qu'il existe un bundle ``Acme\UserBundle`` démarré et chargé
 dans le kernel de l'application.
 
 Le Modèle de Données
@@ -41,7 +41,7 @@ ou non le compte de l'utilisateur est activé.
 
 Pour faire court, les méthodes « getter » et « setter » de chacun des champs
 ont été supprimées pour se concentrer sur les méthodes les plus importantes
-qui viennent de l'interface
+qui proviennent de l'interface
  :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 
 
@@ -156,7 +156,7 @@ Pour plus de détails sur chacune d'entre elles, voir
 .. versionadded:: 2.1
 
     Dans Symfony2.1, la méthode ``equals`` a été supprimée de ``UserInterface``.
-    Si vous avez besoin d'outrepasser l'implémentation par défaut de la logique
+    Si vous avez besoin de surcharger l'implémentation par défaut de la logique
     de comparaison, implémentez la nouvelle interface
     :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface` et
     implémentez la méthode ``isEqualTo``;
@@ -176,8 +176,8 @@ Pour plus de détails sur chacune d'entre elles, voir
         return $this->username === $user->getUsername();
     }
 
-Ci-dessous est un export de ma table ``User`` depuis MySQL. Pour des détails sur
-comment créer des entrées utilisateur et encoder leur mot de passe, voir le
+Voici, ci-dessous, un export de ma table ``User`` depuis MySQL. Pour plus de détails sur
+la création des entrées utilisateur et l'encodage de leur mot de passe, lisez le
 chapitre :ref:`book-security-encoding-user-password`.
 
 .. code-block:: text
@@ -194,11 +194,11 @@ chapitre :ref:`book-security-encoding-user-password`.
     4 rows in set (0.00 sec)
 
 La base de données contient désormais quatre utilisateurs avec différents
-noms d'utilisateurs, emails et statuts. La prochaine partie va se concentrer
-sur comment authentifier l'un de ces utilisateurs grâce au fournisseur
+noms d'utilisateurs, emails et statuts. La prochaine partie va traiter de
+l'authentification de l'un de ces utilisateurs grâce au fournisseur
 d'entité utilisateur Doctrine et à quelques lignes de configuration.
 
-Authentifier Quelqu'un à travers une Base de Données
+Authentifier quelqu'un à travers une base de données
 ----------------------------------------------------
 
 Authentifier un utilisateur Doctrine à travers une base de données avec la
@@ -242,9 +242,9 @@ entrées d'entité « User » de la base de données :
 
 La section ``encoders`` associe l'encodeur de mot de passe ``sha1`` à la classe
 entité. Cela signifie que Symfony va s'attendre à ce que le mot de passe stocké
-dans la base de données soit encodé à l'aide de cet algorithme. Pour des détails
-sur comment créer un nouvel objet « User » avec un mot de passe encrypté
-correctement, voyez la section :ref:`book-security-encoding-user-password` du
+dans la base de données soit encodé à l'aide de cet algorithme. Pour plus de détails
+sur la création d'un nouvel objet « User » avec un mot de passe encrypté
+correctement, lisez la section :ref:`book-security-encoding-user-password` du
 chapitre sur la sécurité.
 
 La section ``providers`` définit un fournisseur d'utilisateur ``administrators``.
@@ -323,11 +323,11 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
 
 Si nous essayons de nous authentifier avec ``maxime``, l'accès est maintenant
 interdit comme cet utilisateur n'a pas un compte activé. La prochaine section
-va se concentrer sur comment implémenter un fournisseur d'entité personnalisé
+va se concentrer sur l'implémentation d'un fournisseur d'entité personnalisé
 pour authentifier un utilisateur avec son nom d'utilisateur ou avec son adresse
 email.
 
-Authentifier Quelqu'un avec un Fournisseur d'Entité Personnalisé
+Authentifier quelqu'un avec un fournisseur d'entité personnalisé
 ----------------------------------------------------------------
 
 La prochaine étape est de permettre à un utilisateur de s'authentifier avec son
@@ -336,15 +336,15 @@ dans la base de données. Malheureusement, le fournisseur d'entité natif est
 seulement capable de gérer une propriété unique pour récupérer l'utilisateur
 depuis la base de données.
 
-Pour accomplir ceci, créez un fournisseur d'entité personnalisé qui cherche
+Pour réaliser ceci, créez un fournisseur d'entité personnalisé qui cherche
 un utilisateur dont le champ « nom d'utilisateur » *ou* « email » correspond
 au nom d'utilisateur soumis lors de la phase de connexion/login. La bonne
-nouvelle est qu'un objet dépôt Doctrine peut agir comme un fournisseur
+nouvelle est qu'un objet Repository Doctrine peut agir comme un fournisseur
 d'entité utilisateur s'il implémente
 :class:`Symfony\\Component\\Security\\Core\\User\\UserProviderInterface`.
-Cette interface vient avec trois méthodes à implémenter :
+Cette interface est fournie avec trois méthodes à implémenter :
 ``loadUserByUsername($username)``, ``refreshUser(UserInterface $user)``,
-et ``supportsClass($class)``. Pour plus de détails, voir
+et ``supportsClass($class)``. Pour plus de détails, lisez
 :class:`Symfony\\Component\\Security\\Core\\User\\UserProviderInterface`.
 
 Le code ci-dessous montre l'implémentation de
@@ -440,7 +440,7 @@ le voir dans cette section.
 
     Avec une installation typique, vous devriez toujours retourner au moins 1 rôle
     avec la méthode ``getRoles()``. Par convention, un rôle appelé ``ROLE_USER``
-    est généralement retourné. Si vous ne réussissez pas à retourner quelconque
+    est généralement retourné. Si vous ne réussissez pas à retourner un quelconque
     rôle, cela voudrait dire que votre utilisateur n'est pas authentifié du tout.
 
 Dans cet exemple, la classe entité ``AcmeUserBundle:User`` définit une relation
