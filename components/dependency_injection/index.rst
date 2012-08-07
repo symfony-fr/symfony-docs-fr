@@ -1,5 +1,5 @@
-﻿Dependency Injection
-====================
+﻿Injection de Dépendance
+=======================
 
 .. toctree::
     :maxdepth: 2
@@ -10,4 +10,3 @@
     tags
     factories
     parentservices
-
