@@ -66,5 +66,5 @@ vous servant du rôle ``IS_AUTHENTICATED_ANONYMOUSLY`` :
             ),
 
 Il est aussi possible de spécifier l'utilisation d'``HTTPS`` dans la
-configuration de routage ; voir :doc:`/cookbook/routing/scheme` pour
+configuration de routage, lisez :doc:`/cookbook/routing/scheme` pour
 plus de détails.
