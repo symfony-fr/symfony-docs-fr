@@ -1,98 +1,101 @@
 ﻿.. index::
    single: Dependency Injection; Service Definitions
 
+Travailler avec les Paramètres et Définitions du Conteneur
+==========================================================
 
-Working with Container Parameters and Definitions
-=================================================
+Récupérer et Définir les Paramètres du Conteneur
+------------------------------------------------
 
-Getting and Setting Container Parameters
-----------------------------------------
-
-Working with container parameters is straight forward using the container's
-accessor methods for parameters. You can check if a parameter has been defined
-in the container with::
+Travailler avec les paramètres du conteneur est très facile si vous utilisez
+les méthodes d'accès du conteneur pour les paramètres. Vous pouvez contrôler
+qu'un paramètre a été défini dans le conteneur avec::
 
      $container->hasParameter($name);
 
-You can retrieve parameters set in the container with::
+Vous pouvez récupérer des paramètres définis dans le conteneur avec::
 
     $container->getParameter($name);
 
-and set a parameter in the container with::
+et définir un paramètre dans le conteneur grâce à::
 
     $container->setParameter($name, $value);
 
-Getting and Setting Service Definitions
----------------------------------------
+Récupérer et Définir les Définitions de Service
+-----------------------------------------------
 
-There are also some helpful methods for
-working with the service definitions.
+Il existe aussi des méthodes utiles pour travailler avec les
+définitions de service.
 
-To find out if there is a definition for a service id:: 
+Pour savoir si il y a une définition pour un certain ID de service::
 
     $container->hasDefinition($serviceId);
 
-This is useful if you only want to do something if a particular definition exists.
+Cela est utile si vous voulez faire quelque chose uniquement si une définition
+particulière existe.
 
-You can retrieve a definition with::
+Vous pouvez récupérer une définition avec::
 
     $container->getDefinition($serviceId);
 
-or::
+ou::
 
     $container->findDefinition($serviceId);
 
-which unlike ``getDefinition()`` also resolves aliases so if the ``$serviceId``
-argument is an alias you will get the underlying definition.
+qui contrairement à ``getDefinition()`` résoud aussi les alias donc si un
+argument ``$serviceId`` est un alias, vous allez récupérer la définition
+sous-jacente.
 
-The service definitions themselves are objects so if you retrieve a definition
-with these methods and make changes to it these will be reflected in the
-container. If, however, you are creating a new definition then you can add
-it to the container using::
+Les définitions de service elles-mêmes sont des objets donc si vous récupérez
+une définition avec ces méthodes et effectuez des changements sur cette dernière,
+ils seront répercutés sur le conteneur. Cependant, si vous créez une nouvelle
+définition alors vous pouvez l'ajouter au conteneur en utilisant::
 
     $container->setDefinition($id, $definition);
 
-Working with a definition
--------------------------
+Travailler avec une définition
+------------------------------
 
-Creating a new definition
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Créer une nouvelle définition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you need to create a new definition rather than manipulate one retrieved
-from then container then the definition class is :class:`Symfony\\Component\\DependencyInjection\\Definition`.
+Si vous devez créer une nouvelle définition plutôt que d'en manipuler une
+récupérée depuis le conteneur, alors la classe de définition est
+:class:`Symfony\\Component\\DependencyInjection\\Definition`.
 
-Class
-~~~~~
+Classe
+~~~~~~
 
-First up is the class of a definition, this is the class of the object returned
-when the service is requested from the container.
+La classe de définition est la classe de l'objet retourné lorsque le
+service est demandé depuis le conteneur.
 
-To find out what class is set for a definition::
+Pour savoir quelle classe est définie pour une définition::
 
     $definition->getClass();
 
-and to set a different class::
+et pour définir une classe différente::
 
-    $definition->setClass($class); // Fully qualified class name as string
+    $definition->setClass($class); // nom de classe entièrement qualifié en tant que chaîne de caractères
 
-Constructor Arguments
-~~~~~~~~~~~~~~~~~~~~~
+Arguments du Constructeur
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To get an array of the constructor arguments for a definition you can use::
+Pour récupérer un tableau contenant les arguments du constructeur pour une
+définition, vous pouvez utiliser::
 
     $definition->getArguments();
 
-or to get a single argument by its position::
+ou pour récupérer un seul argument via sa position::
 
     $definition->getArgument($index); 
-    //e.g. $definition->getArguments(0) for the first argument
+    // par exemple : $definition->getArguments(0) pour le premier argument
 
-You can add a new argument to the end of the arguments array using::
+Vous pouvez ajouter un argument à la fin du tableau d'arguments en utilisant::
 
     $definition->addArgument($argument);
 
-The argument can be a string, an array, a service parameter by using ``%paramater_name%``
-or a service id by using ::
+L'argument peut être une chaîne de caractères, un tableau, un paramètre de service en
+utilisant ``%nom_de_paramètre%`` ou un ID de service en utilisant::
 
     use Symfony\Component\DependencyInjection\Reference;
   
@@ -100,34 +103,38 @@ or a service id by using ::
 
     $definition->addArgument(new Reference('service_id'));
 
-In a similar way you can replace an already set argument by index using::
+De façon similaire, vous pouvez remplacer un argument déjà défini via
+son index en utilisant::
 
     $definition->replaceArgument($index, $argument);
 
-You can also replace all the arguments (or set some if there are none) with
-an array of arguments::
+Vous pouvez aussi remplacer tous les arguments (ou en définir quelques-uns
+s'il n'y en a pas) par un tableau d'arguments::
 
     $definition->replaceArguments($arguments);
 
-Method Calls
-~~~~~~~~~~~~
+Appels de Méthode
+~~~~~~~~~~~~~~~~~
 
-If the service you are working with uses setter injection then you can manipulate
-any method calls in the definitions as well.
+Si le service avec lequel vous travaillez utilise l'injection par mutateur (« setter »
+en anglais), alors vous pouvez aussi manipuler quelconques appels de méthode dans
+les définitions.
 
-You can get an array of all the method calls with::
+Vous pouvez récupérer un tableau de tous les appels de méthode avec::
 
     $definition->getMethodCalls();
 
-Add a method call with::
+Ajoutez un appel de méthode avec::
 
    $definition->addMethodCall($method, $arguments);
 
-Where ``$method`` is the method name and $arguments is an array of the arguments
-to call the method with. The arguments can be strings, arrays, parameters or
-service ids as with the constructor arguments.
+Où ``$method`` est le nom de la méthode et ``$arguments`` est un tableau d'arguments
+à utiliser lors de l'appel de la méthode. Les arguments peuvent être des chaînes
+de caractères, des tableaux, des paramètres ou des IDs de service tout comme pour
+les arguments du constructeur.
 
-You can also replace any existing method calls with an array of new ones with::
+Vous pouvez aussi remplacer n'importe quel appel de méthode par un tableau
+de nouveaux appels grâce à la méthode::
 
     $definition->setMethodCalls($methodCalls);
 
