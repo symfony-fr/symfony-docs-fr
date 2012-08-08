@@ -1,15 +1,15 @@
 .. index:: 
    single: Security; Customizing form login
 
-Comment personnaliser votre Formulaire de Login
+Comment personnaliser votre formulaire de login
 ===============================================
 
 Utiliser un :ref:`formulaire de login<book-security-form-login>` est une méthode
-commune et flexible pour gérer l'authentification dans Symfony2. Quasiment chaque
+classique et flexible pour gérer l'authentification dans Symfony2. Quasiment chaque
 aspect du formulaire de login peut être personnalisé. La configuration complète
-et par défaut est montrée dans la prochaine section.
+par défaut est détaillée dans la prochaine section.
 
-Référence de Configuration du Formulaire de Login
+Référence de Configuration du formulaire de login
 -------------------------------------------------
 
 .. configuration-block::
@@ -21,7 +21,7 @@ Référence de Configuration du Formulaire de Login
             firewalls:
                 main:
                     form_login:
-                        # l'utilisateur est redirigé ici quand il/elle a besoin de se connecté
+                        # l'utilisateur est redirigé ici quand il/elle a besoin de se connecter
                         login_path:                     /login
 
                         # si défini à true, « forward » l'utilisateur vers le formulaire de
@@ -104,34 +104,34 @@ Référence de Configuration du Formulaire de Login
             ),
         ));
 
-Rediriger après un Succès
+Rediriger après un succès
 -------------------------
 
 Vous pouvez changer l'URL de redirection après que le formulaire de login
-ait été soumis avec succès via plusieurs options de configuration. Par défaut,
-le formulaire va rediriger l'utilisateur vers l'URL qu'il a demandé (i.e. l'URL
+a été soumis avec succès via plusieurs options de configuration. Par défaut,
+le formulaire va rediriger l'utilisateur vers l'URL qu'il a demandée (c-a-d l'URL
 qui a déclenchée le formulaire de login qui est montré). Par exemple, si
 l'utilisateur a demandé ``http://www.example.com/admin/post/18/edit``, alors
 après, il sera éventuellement redirigé vers ``http://www.example.com/admin/post/18/edit``
 dans le cas d'un succès de connexion. Cela est effectué en stockant l'URL
 demandée dans la session. Si aucune URL n'est présente dans la session (peut-être
 que l'utilisateur a été directement sur la page de login), alors l'utilisateur
-est redirigé vers la page par défaut, qui est ``/`` (i.e. la page d'accueil) par
+est redirigé vers la page par défaut, qui est ``/`` (c-a-d. la page d'accueil) par
 défaut. Vous pouvez changer ce comportement de différentes façons.
 
 .. note::
 
     Comme précisé, par défaut, l'utilisateur est redirigé vers la page qu'il
-    avait demandé à la base. Quelquefois, cela peut poser des problèmes, comme
+    avait demandée à la base. Quelquefois, cela peut poser des problèmes, comme
     par exemple si une requête AJAX en arrière-plan « apparaît » comme étant la
     dernière URL visitée, redirigeant l'utilisateur vers cette dernière. Pour plus
-    d'informations sur comment contrôler ce comportement, voir
+    d'informations sur comment contrôler ce comportement, lisez
     :doc:`/cookbook/security/target_path`.
 
-Changer la Page par Défaut
+Changer la page par défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tout d'abord, la page par défaut peut être définie (i.e. la page vers laquelle
+Tout d'abord, la page par défaut peut être définie (c-a-d la page vers laquelle
 l'utilisateur est redirigée si aucune page n'avait été précédemment stockée
 dans la session). Pour la définir en tant que ``/admin``, utilisez la configuration
 suivante :
@@ -174,7 +174,7 @@ suivante :
 Maintenant, quand aucune URL n'est définie dans la session, l'utilisateur
 va être envoyé vers ``/admin``.
 
-Toujours Rediriger vers la Page par Défaut
+Toujours rediriger vers la page par défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vous pouvez faire en sorte que les utilisateurs soient toujours redirigés vers la
@@ -263,10 +263,10 @@ identique. Vous pouvez effectuer cela en définissant ``use_referer`` à « true
     Depuis la version 2.1, si le référant est égal à l'option ``login_path``,
     l'utilisateur sera redirigé vers le ``default_target_path``.
 
-Contrôler l'URL de Redirection depuis le Formulaire
+Contrôler l'URL de redirection depuis le formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi outrepasser le chemin vers lequel l'utilisateur est redirigé
+Vous pouvez aussi surcharger le chemin vers lequel l'utilisateur est redirigé
 via le formulaire lui-même en incluant un champ caché avec le nom ``_target_path``.
 Par exemple, pour rediriger vers l'URL définie par une route ``account``,
 utilisez ce qui suit :
@@ -349,7 +349,7 @@ caché du formulaire en changeant l'option ``target_path_parameter``.
             ),
         ));
 
-Redirection en cas d'Echec du Login
+Redirection en cas d'échec du login
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En plus de la redirection lorsqu'un utilisateur réussit à se connecter, vous
