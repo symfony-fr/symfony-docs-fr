@@ -1,8 +1,8 @@
 .. index::
    single: Security; "Remember me"
 
-Comment ajouter la Fonctionnalité de Login « Remember Me »
-==========================================================
+Comment ajouter la fonctionnalité de login « Se souvenir de moi »
+=================================================================
 
 Une fois qu'un utilisateur est authentifié, ses informations de connexion
 sont généralement stockées dans la session. Cela signifie que lorsque la
@@ -13,7 +13,7 @@ de rester connecté plus longtemps que la durée d'une session en utilisant
 un cookie avec l'option pare-feu ``remember_me``. Le pare-feu a besoin
 d'avoir une clé secrète configurée, qui est utilisée pour encrypter le
 contenu du cookie. Il possède aussi plusieurs options avec des valeurs
-par défaut qui sont montrées ici :
+par défaut qui sont détaillées ici :
 
 .. configuration-block::
 
@@ -61,7 +61,7 @@ s'il veut utiliser la fonctionnalité « remember me » ou non, comme cela
 ne sera pas toujours approprié. La manière usuelle d'effectuer ceci est
 d'ajouter une « checkbox » au formulaire de login. En donnant le nom
 ``_remember_me`` à la « checkbox », le cookie va automatiquement être
-défini lorsque la « checkbox » est cochée et que l'utilisateur s'est
+défini lorsque la « checkbox » sera cochée et que l'utilisateur se sera
 connecté avec succès. Donc, votre formulaire de login spécifique
 pourrait au final ressembler à cela :
 
@@ -111,11 +111,11 @@ pourrait au final ressembler à cela :
 L'utilisateur va donc être connecté automatiquement lors de ses prochaines
 visites tant que le cookie restera valide.
 
-Forcer l'Utilisateur à se Ré-authentifier avant d'accéder à certaines Ressources
+Forcer l'utilisateur à se ré-authentifier avant d'accéder à certaines ressources
 --------------------------------------------------------------------------------
 
 Lorsque l'utilisateur retourne sur votre site, il ou elle est authentifié
-automatiquement basé sur les informations stockées dans le cookie
+automatiquement en se basant sur les informations stockées dans le cookie
 « remember me ». Cela permet à l'utilisateur d'accéder à des ressources protégées
 comme si l'utilisateur s'était authentifié lors de sa visite sur le site.
 
@@ -125,7 +125,7 @@ autoriser un utilisateur avec un cookie « remember me » à voir les informatio
 basiques de son compte, mais par contre vous pourriez lui imposer de se
 ré-authentifier avant de modifier cette information.
 
-Le composant de sécurité fournit une manière facile d'effectuer cela. En plus
+Le composant de sécurité fournit une manière simple de faire cela. En plus
 des rôles qui leurs sont explicitement assignés, les utilisateurs possèdent
 automatiquement l'un des rôles suivants dépendant de la manière dont ils sont
 authentifiés :
@@ -204,23 +204,23 @@ des annotations :
     vous auriez la situation suivante :
 
     * Si un utilisateur non-authentifié (ou authentifié anonymement) essaye
-      d'accéder la zone « account », il sera demandé à cet utilisateur de
+      d'accéder à la zone « account », il sera demandé à cet utilisateur de
       s'authentifier.
 
     * Une fois que l'utilisateur a entré son nom d'utilisateur et son mot de
-      passe, et en assumant que l'utilisateur recoive le rôle ``ROLE_USER``
+      passe, et en supposant que l'utilisateur recoive le rôle ``ROLE_USER``
       par votre configuration, ce dernier aura le rôle ``IS_AUTHENTICATED_FULLY``
       et sera capable d'accéder à n'importe quelle page de la section
       « account », incluant l'action ``editAction`` du contrôleur.
 
-    * Enfin, assumons que la session de l'utilisateur se termine ; quand ce dernier
+    * Enfin, supposons que la session de l'utilisateur se termine ; quand ce dernier
       retourne sur le site, il sera capable d'accéder à chaque page de la partie
-      « account » - excepté la page « edit » - sans être forcé à se
-      ré-authentifié. Cependant, quand il essaye d'accéder à l'action ``editAction``
-      du contrôleur, il sera forcer à se ré-authentifier, puisqu'il n'est pas
+      « account » - exceptée la page « edit » - sans être obligé de se
+      ré-authentifier. Cependant, quand il essaye d'accéder à l'action ``editAction``
+      du contrôleur, il sera obligé de se ré-authentifier, puisqu'il n'est pas
       (encore) totalement authentifié.
 
 Pour plus d'informations sur la sécurisation de services ou de méthodes de cette
-manière, voir :doc:`/cookbook/security/securing_services`.
+manière, lisez :doc:`/cookbook/security/securing_services`.
 
 .. _JMSSecurityExtraBundle: https://github.com/schmittjoh/JMSSecurityExtraBundle
