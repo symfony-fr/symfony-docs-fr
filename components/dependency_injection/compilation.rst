@@ -1,38 +1,42 @@
 ﻿﻿.. index::
    single: Dependency Injection; Compilation
 
-Compiling the Container
-=======================
+Compiler le Conteneur
+=====================
 
-The service container can be compiled for various reasons. These reasons
-include checking for any potential issues such as circular references and
-making the container more efficient by resolving parameters and removing 
-unused services.
+Le conteneur de service peut être compilé pour plusieurs raisons. Ces
+raisons incluent d'effectuer des vérifications de quelconques problèmes
+potentiels comme des références circulaires et de rendre le conteneur plus
+efficace en résolvant les paramètres et en supprimant les services n'étant pas
+utilisés.
 
-It is compiled by running::
+Le conteneur est compilé en exécutant::
 
     $container->compile();
 
-The compile method uses *Compiler Passes* for the compilation. The *Dependency Injection*
-component comes with several passes which are automatically registered for
-compilation. For example the :class:`Symfony\\Component\\DependencyInjection\\Compiler\\CheckDefinitionValidityPass`
-checks for various potential issues with the definitions that have been set
-in the container. After this and several other passes that check the container's
-validity, further compiler passes are used to optimize the configuration
-before it is cached. For example, private services and abstract services
-are removed, and aliases are resolved.
+La méthode « compile » utilise des *Passes de Compilation* pour la compilation. Le
+composant d'*Injection de Dépendance* vient avec plusieurs passes qui sont
+automatiquement enregistrées pour la compilation. Par exemple, la classe
+:class:`Symfony\\Component\\DependencyInjection\\Compiler\\CheckDefinitionValidityPass`
+vérifie les problèmes potentiels qu'il pourrait y avoir avec les définitions
+qui ont été déclarées dans le conteneur. Après cette passe et d'autres qui se chargent
+de vérifier la validité du conteneur, des passes de compilation supplémentaires
+sont utilisées pour optimiser la configuration avant qu'elle soit mise en cache.
+Par exemple, les services privés et les services abstraits sont supprimés, et les
+alias sont résolus.
 
-Creating a Compiler Pass
-------------------------
+Créer une Passe de Compilateur
+------------------------------
 
-You can also create and register your own compiler passes with the container.
-To create a compiler pass it needs to implements the :class:`Symfony\\Component\\DependencyInjection\\Compiler\\CompilerPassInterface`
-interface. The compiler pass gives you an opportunity to manipulate the service
-definitions that have been compiled. This can be very powerful, but is not
-something needed in everyday use.
+Vous pouvez aussi créer et enregistrer vos propres passes de compilateur dans
+le conteneur. Pour créer une passe de compilateur, vous devez implémenter
+l'interface :class:`Symfony\\Component\\DependencyInjection\\Compiler\\CompilerPassInterface`.
+La passe de compilateur vous donne l'opportunité de manipuler les définitions
+de service qui ont été compilées. Cela peut être très puissant, mais ce n'est
+pas non plus quelque chose dont vous aurez besoin tous les jours.
 
-The compiler pass must have the ``process`` method which is passed the container
-being compiled::
+La passe de compilateur doit avoir la méthode ``process`` qui est passée au
+conteneur allant être compilé::
 
     class CustomCompilerPass
     {
@@ -42,40 +46,47 @@ being compiled::
         }
     }
 
-The container's parameters and definitions can be manipulated using the
-methods described in the :doc:`/components/dependency_injection/definitions`.
-One common thing to do in a compiler pass is to search for all services that
-have a certain tag in order to process them in some way or dynamically plug
-each into some other service.
+Les paramètres et définitions du conteneur peuvent être manipulées en
+utilisant les méthodes décrites dans la documentation que vous trouvez
+ici :doc:`/components/dependency_injection/definitions`. Une chose courante
+à faire dans une passe de compilateur est de rechercher tous les services
+qui ont un certain tag afin de les traiter d'une certaine manière ou d'injecter
+chacun d'entre eux dans un autre service de façon dynamique.
 
-Registering a Compiler Pass
----------------------------
+Enregistrer une Passe de Compilateur
+------------------------------------
 
-You need to register your custom pass with the container. Its process method
-will then be called when the container is compiled::
+Vous devez enregistrer votre passe personnalisée dans votre conteneur. Sa
+méthode « process » sera alors appelée lorsque le conteneur aura été compilé::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 
     $container = new ContainerBuilder();
     $container->addCompilerPass(new CustomCompilerPass);
 
-Controlling the Pass Ordering
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contrôler l'Ordre des Passes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default compiler passes are grouped into optimization passes and removal
-passes. The optimization passes run first and include tasks such as resolving
-references within the definitions. The removal passes perform tasks such as removing
-private aliases and unused services. You can choose where in the order any custom
-passes you add are run. By default they will be run before the optimization passes.
+Les passes de compilateur par défaut sont groupées en des passes d'optimisation
+et des passes de suppression. Les passes d'optimisation sont exécutées en premier
+et incluent des tâches comme résoudre les références dans les définitions. Les
+passes de suppression exécutent des tâches telles la suppression des alias privés
+et des services inutilisés. Vous pouvez choisir dans quel ordre de passage vous
+souhaitez que vos passes personnalisées soient exécutées. Par défaut, elles vont
+être exécutées avant les passes d'optimisation.
 
-You can use the following constants as the second argument when registering
-a pass with the container to control where it goes in the order:
+Vous pouvez utiliser les constantes suivantes en tant que second argument quand
+vous enregistrez une passe dans le conteneur pour contrôler où elle sera placée
+dans l'ordre de passage :
 
 * ``PassConfig::TYPE_BEFORE_OPTIMIZATION``
 * ``PassConfig::TYPE_OPTIMIZE``
 * ``PassConfig::TYPE_BEFORE_REMOVING``
 * ``PassConfig::TYPE_REMOVE``
 * ``PassConfig::TYPE_AFTER_REMOVING``
+
+Par exemple, pour exécuter votre passe personnalisée après que les passes de suppression
+par défaut aient été exécutées, vous pouvez faire comme cela::
 
 For example, to run your custom pass after the default removal passes have been run::
 
@@ -85,43 +96,52 @@ For example, to run your custom pass after the default removal passes have been 
     $container->addCompilerPass(new CustomCompilerPass, PassConfig::TYPE_AFTER_REMOVING);
 
 
-Managing Configuration with Extensions
---------------------------------------
+Gérer la Configuration avec des Extensions
+------------------------------------------
 
-As well as loading configuration directly into the container as shown in 
-:doc:`/components/dependency_injection/introduction`, you can manage it by registering
-extensions with the container. The extensions must implement  :class:`Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface`
-and can be registered with the container with::
+Tout comme vous pouvez charger la configuration directement dans le conteneur
+comment montré dans :doc:`/components/dependency_injection/introduction`, vous
+pouvez aussi la gérer en enregistrant des extensions dans le conteneur. Les
+extensions doivent implémenter l'interface
+:class:`Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface` et
+peuvent être enregistrées dans le conteneur avec::
 
     $container->registerExtension($extension);
 
-The main work of the extension is done in the ``load`` method. In the load method 
-you can load configuration from one or more configuration files as well as
-manipulate the container definitions using the methods shown in :doc:`/components/dependency_injection/definitions`. 
+Le travail principal d'une extension se déroule dans la méthode ``load``.
+Dans cette dernière, vous pouvez charger votre configuration depuis un ou
+plusieurs fichiers de configuration ainsi que manipuler les définitions du
+conteneur en utilisant les méthodes montrées dans
+:doc:`/components/dependency_injection/definitions`.
 
-The ``load`` method is passed a fresh container to set up, which is then
-merged afterwards into the container it is registered with. This allows you
-to have several extensions managing container definitions independently.
-The extensions do not add to the containers configuration when they are added
-but are processed when the container's ``compile`` method is called.
+Un nouveau conteneur à définir est passé à la méthode ``load``, qui est
+ensuite fusionné avec le conteneur avec lequel il est enregistré. Cela
+vous permet d'avoir plusieurs extensions qui gèrent les définitions du
+conteneur indépendemment. Les extensions n'ajoutent rien à la configuration
+des conteneurs lorsqu'elles sont ajoutées mais sont traitées quand la méthode
+``compile`` du conteneur est appelée.
 
 .. note::
- 
-    If you need to manipulate the configuration loaded by an extension then
-    you cannot do it from another extension as it uses a fresh container.
-    You should instead use a compiler pass which works with the full container
-    after the extensions have been processed. 
 
-Dumping the Configuration for Performance
------------------------------------------
+    Si vous devez manipuler la configuration chargée par une extension, alors
+    vous ne pouvez pas le faire depuis une autre extension comme elle utilise
+    un nouveau conteneur. Pour cela, vous devriez plutôt utiliser une passe de
+    compilateur à la place qui fonctionne avec le conteneur complet après que
+    les extensions aient été traitées.
 
-Using configuration files to manage the service container can be much easier
-to understand than using PHP once there are a lot of services. This ease comes
-at a price though when it comes to performance as the config files need to be
-parsed and the PHP configuration built from them. The compilation process makes
-the container more efficient but it takes time to run. You can have the best of both
-worlds though by using configuration files and then dumping and caching the resulting
-configuration. The ``PhpDumper`` makes dumping the compiled container easy::
+« Dumper » la Configuration pour plus de Performance
+----------------------------------------------------
+
+Utiliser des fichiers de configuration pour gérer le conteneur de services
+peut être beaucoup plus facile à comprendre que d'utiliser PHP une fois que
+vous avez de nombreux services. Néanmoins, cette facilité a un prix quand on
+commence à parler de performance car les fichiers de configuration ont besoin
+d'être traités et ensuite, la configuration en PHP a besoin d'être assemblée
+à partir de ces derniers. Le processus de compilation rend le conteneur plus
+efficace mais il prend du temps à être exécuté. Cependant, vous pouvez avoir
+le meilleur des deux mondes en utilisant des fichiers de configuration que
+vous « dumpez » et dont vous cachez la configuration résultante.
+Le ``PhpDumper`` facilite le « dump » du conteneur compilé::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\DependencyInjection\Dumper\PhpDumper
@@ -140,9 +160,9 @@ configuration. The ``PhpDumper`` makes dumping the compiled container easy::
         file_put_contents($file, $dumper->dump());
     }
 
-``ProjectServiceContiner`` is the default name given to the dumped container
-class, you can change this though this with the ``class`` option when you dump
-it::
+``ProjectServiceContiner`` est le nom par défaut donné à la classe du conteneur
+« dumpé », mais vous pouvez changer cela avec l'option ``class`` lorsque vous
+la « dumpez »::
 
     // ...
     $file = __DIR__ .'/cache/container.php';
@@ -159,16 +179,17 @@ it::
         file_put_contents($file, $dumper->dump(array('class' => 'MyCachedContainer')));
     }
 
-You will now get the speed of the PHP configured container with the ease of using
-configuration files. In the above example you will need to delete the cached
-container file whenever you make any changes. Adding a check for a variable that
-determines if you are in debug mode allows you to keep the speed of the cached
-container in production but getting an up to date configuration whilst developing
-your application::
+Vous allez maintenant profiter de la rapidité du conteneur configuré PHP tout en
+conservant la facilité d'utilisation des fichiers de configuration. Dans l'exemple
+ci-dessus, vous devrez supprimer le fichier du conteneur caché chaque fois que vous
+effectuez des changements. Ajouter un contrôle sur une variable qui détermine si
+vous êtes en mode débuggage vous permet de conserver la vitesse du conteneur caché
+en production mais d'avoir une configuration toujours à jour lorsque vous êtes en
+train de développer votre application::
 
     // ...
 
-    // set $isDebug based on something in your project
+    // définir $isDebug basé sur une information provenant de votre projet
 
     $file = __DIR__ .'/cache/container.php';
 
