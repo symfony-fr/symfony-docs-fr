@@ -1,19 +1,20 @@
 .. index::
    single: Dependency Injection; Factories
 
-Using a Factory to Create Services
-==================================
+Utiliser une « Factory » pour Créer des Services
+================================================
 
-Symfony2's Service Container provides a powerful way of controlling the 
-creation of objects, allowing you to specify arguments passed to the constructor
-as well as calling methods and setting parameters. Sometimes, however, this
-will not provide you with everything you need to construct your objects.
-For this situation, you can use a factory to create the object and tell the
-service container to call a method on the factory rather than directly instantiating
-the object.
+Le Conteneur de Service de Symfony2 fournit une manière puissante de contrôler
+la création d'objets, vous permettant de spécifier les arguments passés
+au constructeur ainsi que d'appeler des méthodes et de définir des paramètres.
+Certaines fois, cependant, ceci ne vous fournira pas tout ce dont vous avez
+besoin pour construire vos objets. Dans cette situation, vous pouvez
+utiliser une « factory » pour créer l'objet et informer le conteneur de
+service d'appeler une méthode de la « factory » plutôt que de directement
+instancier l'objet.
 
-Suppose you have a factory that configures and returns a new NewsletterManager
-object::
+Supposez que vous ayez une « factory » qui configure et retourne un nouvel
+objet ``NewsletterManager``::
 
     class NewsletterFactory
     {
@@ -27,9 +28,9 @@ object::
         }
     }
 
-To make the ``NewsletterManager`` object available as a service, you can
-configure the service container to use the ``NewsletterFactory`` factory
-class:
+Pour rendre l'objet ``NewsletterManager`` disponible en tant que service,
+vous pouvez configurer le conteneur de service afin qu'il utilise la classe
+« factory » ``NewsletterFactory`` :
 
 .. configuration-block::
 
@@ -77,10 +78,10 @@ class:
             'get'
         );
 
-When you specify the class to use for the factory (via ``factory_class``)
-the method will be called statically. If the factory itself should be instantiated
-and the resulting object's method called (as in this example), configure the
-factory itself as a service:
+Lorsque vous spécifiez la classe à utiliser pour la « factory » (via ``factory_class``)
+la méthode sera appelée de manière statique. Si la « factory » elle-même doit
+être instanciée et la méthode de l'objet résultant appelée (comme dans cet exemple),
+configurez la « factory » elle-même comme un service :
 
 .. configuration-block::
 
@@ -136,15 +137,17 @@ factory itself as a service:
 
 .. note::
 
-   The factory service is specified by its id name and not a reference to 
-   the service itself. So, you do not need to use the @ syntax.
+    Le service « factory » est spécifié par son ID de nom et non pas par
+    une référence au service lui-même. Donc vous ne devez pas utiliser la
+    syntaxe « @ ».
 
-Passing Arguments to the Factory Method
----------------------------------------
+Passer des Arguments à la Méthode de la « Factory »
+---------------------------------------------------
 
-If you need to pass arguments to the factory method, you can use the ``arguments``
-options inside the service container. For example, suppose the ``get`` method
-in the previous example takes the ``templating`` service as an argument:
+Si vous devez passer des arguments à la méthode de la « factory », vous pouvez
+utiliser l'option ``arguments`` du conteneur de service. Par exemple, supposons
+que la méthode ``get`` de l'exemple précédent prenne le service ``templating``
+en tant qu'argument :
 
 .. configuration-block::
 
