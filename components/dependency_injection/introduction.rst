@@ -1,29 +1,30 @@
 ﻿.. index::
     single: Dependency Injection
 
-The Dependency Injection Component
-==================================
+Le Composant d'Injection de Dépendance (« Dependency Injection » en anglais)
+============================================================================
 
-    The Dependency Injection component allows you to standardize and centralize
-    the way objects are constructed in your application.
+    Le composant d'Injection de Dépendance vous permet de standardiser et de
+    centraliser la manière dont les objets sont construits dans votre application.
 
-For an introduction to Dependency Injection and service containers see
-:doc:`/book/service_container`
+Pour une introduction sur le sujet de l'Injection de Dépendance et des conteneurs
+de service, voir :doc:`/book/service_container`.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/DependencyInjection);
-* Install it via PEAR ( `pear.symfony.com/DependencyInjection`);
-* Install it via Composer (`symfony/dependency-injection` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/DependencyInjection) ;
+* Installez le via PEAR (`pear.symfony.com/DependencyInjection`) ;
+* Installez le via Composer (`symfony/dependency-injection` dans Packagist).
 
-Basic Usage
------------
+Utilisation Basique
+-------------------
 
-You might have a simple class like the following ``Mailer`` that
-you want to make available as a service:
+Vous pourriez avoir une classe toute simple telle ``Mailer``, que l'on peut
+voir ci-dessous, que vous voulez rendre disponible en tant que service :
+
 
 .. code-block:: php
 
@@ -39,7 +40,8 @@ you want to make available as a service:
         // ...
     }
 
-You can register this in the container as a service:
+Vous pouvez enregistrer cette dernière dans le conteneur en tant que
+service :
 
 .. code-block:: php
 
@@ -48,9 +50,10 @@ You can register this in the container as a service:
     $container = new ContainerBuilder();
     $container->register('mailer', 'Mailer');
 
-An improvement to the class to make it more flexible would be to allow
-the container to set the ``transport`` used. If you change the class
-so this is passed into the constructor:
+Une amélioration que l'on pourrait apporter à la classe afin de la rendre
+plus flexible serait de permettre au conteneur de définir la propriété
+``transport`` utilisée. Si vous changez la classe afin que la propriété soit
+passée au constructeur, cela nous donne :
 
 .. code-block:: php
 
@@ -66,7 +69,7 @@ so this is passed into the constructor:
         // ...
     }
 
-Then you can set the choice of transport in the container:
+Ensuite, vous pouvez définir votre choix de transport dans le conteneur :
 
 .. code-block:: php
 
@@ -76,14 +79,15 @@ Then you can set the choice of transport in the container:
     $container->register('mailer', 'Mailer')
         ->addArgument('sendmail');
 
-This class is now much more flexible as we have separated the choice of
-transport out of the implementation and into the container.
+Cette classe est maintenant beaucoup plus flexible car nous avons séparé
+le choix du transport - qui est maintenant du ressort du conteneur - de
+l'implémentation de la classe.
 
-Which mail transport you have chosen may be something other services need to
-know about. You can avoid having to change it in multiple places by making
-it a parameter in the container and then referring to this parameter for the
-``Mailer`` service's constructor argument:
-
+Le mode de transport d'email que vous avez choisi pourrait être quelque chose
+que d'autres services ont besoin de connaître. Vous pouvez éviter d'avoir à le
+changer à différents endroits en en faisant un paramètre dans le conteneur et
+en y référant par la suite lorsque vous définissez l'argument du constructeur
+du service ``Mailer`` :
 
 .. code-block:: php
 
@@ -94,9 +98,9 @@ it a parameter in the container and then referring to this parameter for the
     $container->register('mailer', 'Mailer')
         ->addArgument('%mailer.transport%');
 
-Now that the ``mailer`` service is in the container you can inject it as
-a dependency of other classes. If you have a ``NewsletterManager`` class
-like this:
+Maintenant que le service ``mailer`` est dans le conteneur, vous pouvez
+l'injecter comme une dépendance dans d'autres classes. Si vous avez une
+classe ``NewsletterManager`` comme ceci :
 
 .. code-block:: php
 
@@ -114,7 +118,8 @@ like this:
         // ...
     }
 
-Then you can register this as a service as well and pass the ``mailer`` service into it:
+Alors vous pouvez aussi l'enregistrer en tant que service et lui passer le
+service ``mailer`` :
 
 .. code-block:: php
 
@@ -130,8 +135,9 @@ Then you can register this as a service as well and pass the ``mailer`` service 
     $container->register('newsletter_manager', 'NewsletterManager')
         ->addArgument(new Reference('mailer');
 
-If the ``NewsletterManager`` did not require the ``Mailer`` and injecting
-it was only optional then you could use setter injection instead:
+Si le ``NewsletterManager`` n'avait pas requis le ``Mailer`` et que l'injection
+était optionnelle, alors vous pourriez utiliser une injection par mutateur à
+la place :
 
 .. code-block:: php
 
@@ -149,8 +155,9 @@ it was only optional then you could use setter injection instead:
         // ...
     }
 
-You can now choose not to inject a ``Mailer`` into the ``NewsletterManager``.
-If you do want to though then the container can call the setter method:
+Vous pouvez maintenant choisir de ne pas injecter un ``Mailer`` dans le
+``NewsletterManager``. Mais si vous le désirez, alors le conteneur peut
+appeler la méthode du mutateur :
 
 .. code-block:: php
 
@@ -166,8 +173,8 @@ If you do want to though then the container can call the setter method:
     $container->register('newsletter_manager', 'NewsletterManager')
         ->addMethodCall('setMailer', new Reference('mailer');
 
-You could then get your ``newsletter_manager`` service from the container
-like this:
+Vous pourriez alors récupérer votre service ``newsletter_manager`` depuis
+le conteneur comme cela :
 
 .. code-block:: php
 
@@ -180,30 +187,33 @@ like this:
 
     $newsletterManager = $container->get('newsletter_manager');
 
-Avoiding Your Code Becoming Dependent on the Container
-------------------------------------------------------
+Eviter que Votre Code Devienne Dépendant du Conteneur
+-----------------------------------------------------
 
-Whilst you can retrieve services from the container directly it is best
-to minimize this. For example, in the ``NewsletterManager`` we injected
-the ``mailer`` service in rather than asking for it from the container.
-We could have injected the container in and retrieved the ``mailer`` service
-from it but it would then be tied to this particular container making it
-difficult to reuse the class elsewhere.
+Tandis que vous pouvez récupérer directement des services depuis le conteneur,
+il est plus judicieux de minimiser cela. Par exemple, dans le ``NewsletterManager``,
+nous avons injecté le service ``mailer`` plutôt que de le demander depuis
+le conteneur. Nous pourrions avoir injecté le conteneur et ensuite
+récupéré depuis ce dernier le service ``mailer`` mais cela voudrait dire
+que ce service serait lié à ce conteneur en particulier rendant ainsi
+difficile la réutilisation de cette classe quelque part d'autre.
 
-You will need to get a service from the container at some point but this
-should be as few times as possible at the entry point to your application.
+Vous allez devoir récupérer un service depuis le conteneur à un moment ou à
+un autre mais cela devrait être limité autant que possible au point d'entrée
+de votre application.
 
-Setting Up the Container with Configuration Files
--------------------------------------------------
+Initialiser le Conteneur avec des Fichiers de Configuration
+-----------------------------------------------------------
 
-As well as setting up the services using PHP as above you can also use configuration
-files. To do this you also need to install the Config component:
+Tout comme vous avez initialisé vos services en utilisant PHP ci-dessus,
+vous pouvez aussi utiliser des fichiers de configuration. Pour
+faire cela, vous devez installer en sus le composant « Config » :
 
-* Use the official Git repository (https://github.com/symfony/Config);
-* Install it via PEAR ( `pear.symfony.com/Config`);
-* Install it via Composer (`symfony/config` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Config) ;
+* Installez le via PEAR (`pear.symfony.com/Config`) ;
+* Installez le via Composer (`symfony/config` dans Packagist).
 
-Loading an xml config file:
+Chargement d'un fichier de configuration XML :
 
 .. code-block:: php
 
@@ -215,7 +225,7 @@ Loading an xml config file:
     $loader = new XmlFileLoader($container, new FileLocator(__DIR__));
     $loader->load('services.xml');
 
-Loading a yaml config file:
+Chargement d'un fichier de configuration YAML :
 
 .. code-block:: php
 
@@ -227,7 +237,8 @@ Loading a yaml config file:
     $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
     $loader->load('services.yml');
 
-The ``newsletter_manager`` and ``mailer`` services can be set up using config files:
+Les services ``newsletter_manager`` et ``mailer`` peuvent aussi être initialisés
+en utilisant des fichiers de configuration :
 
 .. configuration-block::
 
@@ -278,4 +289,3 @@ The ``newsletter_manager`` and ``mailer`` services can be set up using config fi
 
         $container->register('newsletter_manager', 'NewsletterManager')
            ->addMethodCall('setMailer', new Reference('mailer');
-
