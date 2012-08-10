@@ -1,31 +1,86 @@
-Le Cookbook
-===========
+Documentation Symfony2
+======================
+
+Quick Tour
+----------
+
+Démarrez rapidement avec le :doc:`Quick Tour <quick_tour/index>` de Symfony 2 :
 
 .. toctree::
     :hidden:
 
-    workflow/index
-    controller/index
-    routing/index
-    assetic/index
-    doctrine/index
-    form/index
-    validation/index
-    configuration/index
-    service_container/index
-    bundles/index
-    email/index
-    testing/index
-    security/index
-    cache/index
-    templating/index
-    logging/index
-    console/index
-    debugging
-    event_dispatcher/index
-    request/index
-    profiler/index
-    web_services/index
-    symfony1
+    quick_tour/index
 
-.. include:: /cookbook/map.rst.inc
+* :doc:`quick_tour/the_big_picture` >
+* :doc:`quick_tour/the_view` >
+* :doc:`quick_tour/the_controller` >
+* :doc:`quick_tour/the_architecture`
+
+Book
+----
+
+Plongez-vous dans Symfony2 avec les guides thématiques :
+
+.. toctree::
+    :hidden:
+
+    book/index
+
+.. include:: /book/map.rst.inc
+
+Cookbook
+--------
+
+.. toctree::
+    :hidden:
+
+    cookbook/index
+
+Lisez le :doc:`Cookbook</cookbook/index>`.
+
+Composants
+----------
+
+.. toctree::
+    :hidden:
+
+    components/index
+
+Lisez la documentation sur les :doc:`Composants</components/index>`.
+
+Documents de Référence
+----------------------
+
+Trouvez rapidement des réponses à vos questions avec les documents de référence :
+
+.. toctree::
+    :hidden:
+
+    reference/index
+
+.. include:: /reference/map.rst.inc
+
+Bundles
+-------
+
+L'Edition Standard de Symfony est livrée avec quelques bundles.
+Apprenez-en plus à propos d'eux :
+
+.. toctree::
+    :hidden:
+
+    bundles/index
+
+.. include:: /bundles/map.rst.inc
+
+Contribuer
+----------
+
+Contribuer à Symfony2 :
+
+.. toctree::
+    :hidden:
+
+    contributing/index
+
+.. include:: /contributing/map.rst.inc
