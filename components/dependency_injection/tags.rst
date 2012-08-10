@@ -1,22 +1,24 @@
 ﻿.. index::
    single: Dependency Injection; Tags
 
-Working with Tagged Services
-============================
+Travailler avec des Services Taggés
+===================================
 
-Tags are a generic string (along with some options) that can be applied to
-any service. By themselves, tags don't actually alter the functionality of your
-services in any way. But if you choose to, you can ask a container builder
-for a list of all services that were tagged with some specific tag. This
-is useful in compiler passes where you can find these services and use or
-modify them in some specific way.
+Les tags sont des chaînes de caractères génériques (accompagnées de quelques
+options) qui peuvent être appliquées à n'importe quel service. Les tags en
+eux-mêmes n'altèrent en rien la fonctionnalité de vos services. Mais si vous
+le décidez, vous pouvez demander à un constructeur de conteneur de vous
+donner la liste de tous les services étant taggés avec un tag spécifique.
+Cela est utile dans les passes de compilation où vous pouvez trouver ces
+services et les utiliser ou les modifier d'une manière spécifique.
 
-For example, if you are using Swift Mailer you might imagine that you want
-to implement a "transport chain", which is a collection of classes implementing
-``\Swift_Transport``. Using the chain, you'll want Swift Mailer to try several
-ways of transporting the message until one succeeds.
+Par exemple, si vous utilisez Swift Mailer, vous pourriez imaginer que vous
+souhaitez implémenter une « chaîne de transport », qui est une collection de
+classes implémentant ``\Swift_Transport``. En utilisant la chaîne, vous allez
+vouloir que Swift Mailer essaye plusieurs manières de transporter le message
+jusqu'à ce que l'une d'entre elle fonctionne.
 
-To begin with, define the ``TransportChain`` class::
+Pour commencer, définissez la classe ``TransportChain``::
 
     class TransportChain
     {
@@ -33,7 +35,7 @@ To begin with, define the ``TransportChain`` class::
         }
     }
 
-Then, define the chain as a service:
+Puis, définissez la chaîne en tant que service :
 
 .. configuration-block::
 
@@ -64,12 +66,13 @@ Then, define the chain as a service:
 
         $container->setDefinition('acme_mailer.transport_chain', new Definition('%acme_mailer.transport_chain.class%'));
 
-Define Services with a Custom Tag
----------------------------------
+Définir des Services avec un Tag Personnalisé
+---------------------------------------------
 
-Now we want several of the ``\Swift_Transport`` classes to be instantiated
-and added to the chain automatically using the ``addTransport()`` method.
-As an example we add the following transports as services:
+Maintenant, nous voulons que plusieurs classes ``\Swift_Transport`` soient
+instanciées et ajoutées à la chaîne automatiquement en utilisant la méthode
+``addTransport()``. Comme exemple, nous allons ajouter les transports
+suivants en tant que services :
 
 .. configuration-block::
 
@@ -110,15 +113,15 @@ As an example we add the following transports as services:
         $definitionSendmail->addTag('acme_mailer.transport');
         $container->setDefinition('acme_mailer.transport.sendmail', $definitionSendmail);
 
-Notice that each was given a tag named ``acme_mailer.transport``. This is
-the custom tag that you'll use in your compiler pass. The compiler pass
-is what makes this tag "mean" something.
+Notez qu'un tag nommé ``acme_mailer.transport`` a été donné à chacun.
+C'est le tag personnalisé que vous allez utiliser dans votre passe de
+compilateur. La passe de compilateur est ce qui donne un sens à ce tag.
 
-Create a ``CompilerPass``
--------------------------
+Créer une ``CompilerPass`` (« Passe de Compilateur » en français)
+-----------------------------------------------------------------
 
-Your compiler pass can now ask the container for any services with the
-custom tag::
+Votre passe de compilateur peut maintenant interroger le conteneur pour
+n'importe quel service ayant le tag personnalisé::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -140,31 +143,31 @@ custom tag::
         }
     }
 
-The ``process()`` method checks for the existence of the ``acme_mailer.transport_chain``
-service, then looks for all services tagged ``acme_mailer.transport``. It adds
-to the definition of the ``acme_mailer.transport_chain`` service a call to
-``addTransport()`` for each "acme_mailer.transport" service it has found.
-The first argument of each of these calls will be the mailer transport service
-itself.
+La méthode ``process()`` vérifie l'existence du service ``acme_mailer.transport_chain``,
+puis recherche tous les services taggés avec ``acme_mailer.transport``. Elle ajoute
+un appel à ``addTransport()`` à la définition du service ``acme_mailer.transport_chain``
+pour chaque service ``acme_mailer.transport`` qu'elle trouve. Le premier argument
+de chacun de ces appels sera le service de transport d'email lui-même.
 
-Register the Pass with the Container
-------------------------------------
+Enregistrer la Passe dans le Conteneur
+--------------------------------------
 
-You also need to register the pass with the container, it will then be
-run when the container is compiled::
+Vous avez aussi besoin d'enregistrer la passe dans le conteneur ; elle
+sera ensuite exécutée lorsque le conteneur est compilé::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 
     $container = new ContainerBuilder();
     $container->addCompilerPass(new TransportCompilerPass);
 
-Adding additional attributes on Tags
-------------------------------------
+Ajouter des attributs additionnels aux Tags
+-------------------------------------------
 
-Sometimes you need additional information about each service that's tagged with your tag. 
-For example, you might want to add an alias to each TransportChain.
+Quelquefois, vous avez besoin d'informations additionnelles à propos de
+chaque service qui est taggé avec votre tag. Par exemple, vous pourriez
+vouloir ajouter un alias pour chaque TransportChain.
 
-To begin with, change the ``TransportChain`` class::
+Pour commencer, changez la classe ``TransportChain``::
 
     class TransportChain
     {
@@ -191,11 +194,12 @@ To begin with, change the ``TransportChain`` class::
         }
     }
 
-As you can see, when ``addTransport`` is called, it takes not only a ``Swift_Transport``
-object, but also a string alias for that transport. So, how can we allow
-each tagged transport service to also supply an alias?
+Comme vous pouvez le voir, lorsque ``addTransport`` est appelée, elle ne prend pas
+que l'objet ``Swift_Transport``, mais aussi un alias sous forme de chaîne de
+caractères pour ce transport. Donc, comment pouvons-nous autoriser chaque transport
+taggé à fournir aussi un alias ?
 
-To answer this, change the service declaration:
+Pour répondre à cette question, changez la déclaration du service comme suit :
 
 .. configuration-block::
 
@@ -212,7 +216,7 @@ To answer this, change the service declaration:
                 class: \Swift_SendmailTransport
                 tags:
                     -  { name: acme_mailer.transport, alias: bar }
-        
+
 
     .. code-block:: xml
 
@@ -224,9 +228,9 @@ To answer this, change the service declaration:
         <service id="acme_mailer.transport.sendmail" class="\Swift_SendmailTransport">
             <tag name="acme_mailer.transport" alias="bar" />
         </service>
-        
-Notice that you've added a generic ``alias`` key to the tag. To actually
-use this, update the compiler::
+
+Notez que vous avez ajouter une clé générique ``alias`` au tag. Pour
+utiliser cette dernière, mettez à jour votre compilateur::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -250,7 +254,8 @@ use this, update the compiler::
         }
     }
 
-The trickiest part is the ``$attributes`` variable. Because you can use the
-same tag many times on the same service (e.g. you could theoretically tag
-the same service 5 times with the ``acme_mailer.transport`` tag), ``$attributes``
-is an array of the tag information for each tag on that service.
+La partie importante ici est la variable ``$attributes``. Comme vous pouvez
+utiliser le même tag plusieurs fois avec le même service (par exemple : vous
+pourriez, en théorie, tagger le même service cinq fois avec le tag
+``acme_mailer.transport``), ``$attributes`` est un tableau contenant l'information
+du tag pour chaque tag de ce service.
