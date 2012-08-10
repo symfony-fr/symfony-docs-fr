@@ -1,12 +1,13 @@
 .. index::
    single: Dependency Injection; Parent Services
 
-Managing Common Dependencies with Parent Services
-=================================================
+Gérer les Dépendances Communes avec des Services Parents
+========================================================
 
-As you add more functionality to your application, you may well start to have
-related classes that share some of the same dependencies. For example you
-may have a Newsletter Manager which uses setter injection to set its dependencies::
+Au fur et à mesure que vous ajoutez de la fonctionnalité à votre application, vous
+pourriez commencer à avoir des classes liées partageant les mêmes dépendances. Par
+exemple, vous pourriez avoir un gestionnaire de lettres d'information (« Newsletter
+Manager » en anglais) qui utilise l'injection via mutateur pour définir ses dépendances::
 
     class NewsletterManager
     {
@@ -25,7 +26,8 @@ may have a Newsletter Manager which uses setter injection to set its dependencie
         // ...
     }
 
-and also a Greeting Card class which shares the same dependencies::
+et aussi une classe « Greeting Card » (« carte de voeux » en français) qui
+partage les mêmes dépendances::
 
     class GreetingCardManager
     {
@@ -44,7 +46,8 @@ and also a Greeting Card class which shares the same dependencies::
         // ...
     }
 
-The service config for these classes would look something like this:
+La configuration des services pour ces classes ressemble à quelque
+chose comme ça :
 
 .. configuration-block::
 
@@ -130,12 +133,13 @@ The service config for these classes would look something like this:
             new Reference('my_email_formatter')
         ));
 
-There is a lot of repetition in both the classes and the configuration. This
-means that if you changed, for example, the ``Mailer`` of ``EmailFormatter``
-classes to be injected via the constructor, you would need to update the config
-in two places. Likewise if you needed to make changes to the setter methods
-you would need to do this in both classes. The typical way to deal with the
-common methods of these related classes would be to extract them to a super class::
+Il y a beaucoup de répétitions dans chacune des classes et de la configuration.
+Cela signifie que si vous changiez, par exemple, le ``Mailer`` des classes de
+``EmailFormatter`` injecté via le constructeur, vous devriez mettre à jour
+la configuration à deux endroits. De même, si vous deviez effectuer des
+changements dans les méthodes de mutation, vous devriez faire cela dans les
+deux classes. La manière usuelle de gérer les méthodes communes de ces classes
+liées serait de les extraire dans une classe parente::
 
     abstract class MailManager
     {
@@ -154,24 +158,24 @@ common methods of these related classes would be to extract them to a super clas
         // ...
     }
 
-The ``NewsletterManager`` and ``GreetingCardManager`` can then extend this
-super class::
+Les classes ``NewsletterManager`` et ``GreetingCardManager`` peuvent alors
+étendre cette classe parente::
 
     class NewsletterManager extends MailManager
     {
         // ...
     }
 
-and::
+et::
 
     class GreetingCardManager extends MailManager
     {
         // ...
     }
 
-In a similar fashion, the Symfony2 service container also supports extending
-services in the configuration so you can also reduce the repetition by specifying
-a parent for a service.
+De façon similaire, le conteneur de service de Symfony2 supporte aussi
+l'extension de services via la configuration qui vous permet de réduire le
+nombre de répétitions en spécifiant un parent pour un service.
 
 .. configuration-block::
 
@@ -262,33 +266,35 @@ a parent for a service.
             '%greeting_card_manager.class%'
         );
 
-In this context, having a ``parent`` service implies that the arguments and
-method calls of the parent service should be used for the child services.
-Specifically, the setter methods defined for the parent service will be called
-when the child services are instantiated.
+Dans ce contexte, avoir un service ``parent`` implique que les arguments et
+appels de méthode du service parent devrait être utilisés pour les services
+enfants. Spécifiquement, les méthodes mutateurs définies pour le service parent
+seront appelées lorsque les services enfants seront instanciés.
 
 .. note::
 
-   If you remove the ``parent`` config key, the services will still be instantiated
-   and they will still of course extend the ``MailManager`` class. The difference
-   is that omitting the ``parent`` config key will mean that the ``calls``
-   defined on the ``mail_manager`` service will not be executed when the
-   child services are instantiated.
+    Si vous supprimez la clé de configuration ``parent``, les services seront
+    toujours instanciés et étendront toujours la classe ``MailManager``. La
+    différence est que le fait d'omettre la clé de configuration ``parent``
+    signifiera que les ``appels`` définis sur le service ``mail_manager``
+    ne seront pas exécutés quand les services enfants seront instanciés.
 
-The parent class is abstract as it should not be directly instantiated. Setting
-it to abstract in the config file as has been done above will mean that it
-can only be used as a parent service and cannot be used directly as a service
-to inject and will be removed at compile time. In other words, it exists merely
-as a "template" that other services can use.
+La classe parente est abstraite comme elle ne devrait pas être directement
+instanciée. La définir comme abstraite dans le fichier de configuration
+comme cela a été fait ci-dessus signifiera qu'elle ne peut être utilisée
+uniquement en tant que service parent et ne peut pas être utilisée directement
+en tant que service à injecter et sera supprimée au moment de la compilation.
 
-Overriding Parent Dependencies
-------------------------------
+Outrepasser des Dépendances Parentes
+------------------------------------
 
-There may be times where you want to override what class is passed in for
-a dependency of one child service only. Fortunately, by adding the method
-call config for the child service, the dependencies set by the parent class
-will be overridden. So if you needed to pass a different dependency just
-to the ``NewsletterManager`` class, the config would look like this:
+Il se peut qu'à un moment ou à un autre vous souhaitiez outrepasser quelle
+classe est passée en tant que dépendance d'un seul de vos services enfants.
+Heureusement, en ajoutant la configuration d'appel de méthode pour
+le service enfant, les dépendances définies par la classe parente seront
+outrepassées. Donc si vous aviez besoin de passer une dépendance différente
+uniquement à la classe ``NewsletterManager``, la configuration ressemblerait à
+quelque chose comme ça :
 
 .. configuration-block::
 
@@ -393,22 +399,23 @@ to the ``NewsletterManager`` class, the config would look like this:
             '%greeting_card_manager.class%'
         );
 
-The ``GreetingCardManager`` will receive the same dependencies as before,
-but the ``NewsletterManager`` will be passed the ``my_alternative_mailer``
-instead of the ``my_mailer`` service.
+La classe ``GreetingCardManager`` va recevoir les mêmes dépendances qu'avant,
+mais la classe ``NewsletterManager`` quant à elle va avoir le service
+``my_alternative_mailer` à la place du service ``my_mailer``.
 
-Collections of Dependencies
----------------------------
+Collections de Dépendances
+--------------------------
 
-It should be noted that the overridden setter method in the previous example
-is actually called twice - once per the parent definition and once per the
-child definition. In the previous example, that was fine, since the second
-``setMailer`` call replaces mailer object set by the first call.
+Veuillez noter que la méthode de mutation outrepassée dans l'exemple
+précédent est en fait appelée deux fois - une fois par la définition
+du parent et une fois par la définition de l'enfant. Dans l'exemple
+précédent, cela fonctionnait bien, puisque le second appel à ``setMailer``
+remplaçait l'objet ``mailer`` défini par le premier appel.
 
-In some cases, however, this can be a problem. For example, if the overridden
-method call involves adding something to a collection, then two objects will
-be added to that collection. The following shows such a case, if the parent
-class looks like this::
+Dans certains cas, cependant, cela peut être problématique. Par exemple,
+si l'appel de la méthode outrepassé implique l'ajout de quelque chose à une
+collection, alors deux objets seront ajoutés à cette collection. Ce qui
+suit montre un tel cas, avec une classe parente qui ressemble à ça::
 
     abstract class MailManager
     {
@@ -421,7 +428,7 @@ class looks like this::
         // ...
     }
 
-If you had the following config:
+Si vous aviez la configuration suivante :
 
 .. configuration-block::
 
@@ -501,9 +508,10 @@ If you had the following config:
             new Reference('another_filter')
         ));
 
-In this example, the ``setFilter`` of the ``newsletter_manager`` service
-will be called twice, resulting in the ``$filters`` array containing both
-``my_filter`` and ``another_filter`` objects. This is great if you just want
-to add additional filters to the subclasses. If you want to replace the filters
-passed to the subclass, removing the parent setting from the config will 
-prevent the base class from calling ``setFilter``.
+Dans cet exemple, la méthode ``setFilter`` du service ``newsletter_manager``
+sera appelée deux fois, donnant comme résultat le tableau ``$filters``
+contenant les deux objets ``my_filter`` et ``another_filter``. Cela est
+parfait si vous voulez simplement ajouter des filtres additionnels aux
+sous-classes. Si vous souhaitez remplacer les filtres passés à la sous-classe,
+supprimer le paramètre ``parent`` de la configuration va éviter que la classe
+de base appelle ``setFilter``.
