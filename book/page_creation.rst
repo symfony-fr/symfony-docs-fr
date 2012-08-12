@@ -264,7 +264,7 @@ votre application devrait vous saluer::
     de « prod » en allant à l'adresse :
 
     .. code-block:: text
-	
+
         http://localhost/app.php/hello/Ryan
  
     Si vous avez une erreur, c'est certainement parce que vous avez besoin de vider
@@ -292,7 +292,7 @@ A la place d'écrire le code HTML dans le contrôleur, retournez plutôt un temp
 .. code-block:: php	
     :linenos:
 
-	
+
     // src/Acme/HelloBundle/Controller/HelloController.php
 
     namespace Acme\HelloBundle\Controller;
@@ -390,7 +390,7 @@ signifie que le template se situe en dehors du bundle et dans le répertoire ``a
             </head>
             <body>
                 {% block body %}{% endblock %}
-		{% block javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}
             </body>
         </html>
 
@@ -407,7 +407,7 @@ signifie que le template se situe en dehors du bundle et dans le répertoire ``a
             </head>
             <body>
                 <?php $view['slots']->output('_content') ?>
-		<?php $view['slots']->output('stylesheets') ?>
+            <?php $view['slots']->output('stylesheets') ?>
             </body>
         </html>
 
@@ -454,7 +454,8 @@ Le répertoire Web
 
 Le répertoire web contient tous les fichiers publics et statiques incluant les
 images, les feuilles de style et les javascripts. 
-Il contient également le :term:`front controller` (contrôleur frontal) :
+Il contient également le « :term:`contrôleur frontal` » (« front controller » en
+anglais) :
 
 .. code-block:: php
 

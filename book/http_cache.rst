@@ -30,8 +30,8 @@ fonctionne le système de cache de Symfony2 et pourquoi nous pensons
 que c'est la meilleur approche possible.
 
 Le système de cache de Symfony2 est différent car il se base sur la
-simplicité et la puissance du cache HTTP tel qu'il est défini dans les
-:term:`spécifications HTTP`. Au lieu de réinventer la méthodologie de
+simplicité et la puissance du cache HTTP tel qu'il est défini dans la
+:term:`spécification HTTP`. Au lieu de réinventer la méthodologie de
 mise en cache, Symfony2 adopte la norme qui définit la
 communication de base sur le Web. Une fois que vous avez compris
 les fondamentaux de la validation HTTP et de l'expiration de la mise

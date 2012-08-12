@@ -25,7 +25,7 @@ Le répertoire ``web/``
 
 Le répertoire Web racine est l'endroit ou se situent tous les fichiers statiques
 et publics comme les images, les feuilles de styles et les fichiers javascript. 
-C'est aussi ici que se situeront les :term:`contrôleurs frontaux` :
+C'est aussi ici que vous trouverez chaque :term:`contrôleur frontal` :
 
 .. code-block:: php
 
@@ -109,8 +109,8 @@ serveur ou au sein même de vos projets.
 Comprendre le système de bundles
 --------------------------------
 
-Cette section présente une des plus géniales et puissantes fonctionnalités de
-Symfony2, le système de :term:`Bundles`.
+Cette section présente l'une des plus géniales et puissantes fonctionnalités de
+Symfony2, le système de :term:`Bundles<bundle>`.
 
 Un bundle est une sorte de plugin comme on peut en trouver dans d'autres logiciels. 
 Alors pourquoi l'a t-on nommé *bundle* et non pas *plugin* ? C'est parce que *tout*
