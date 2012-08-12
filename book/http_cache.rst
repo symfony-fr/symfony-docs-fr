@@ -48,17 +48,15 @@ Nous allons parcourir ce sujet en quatre étapes :
     l'application. Symfony2 possède sa propre passerelle par défaut,
     mais toute autre technologie peut être utilisée.
 
-* **Etape 2**: Les en-têtes du :ref:`cache HTTP
-    <http-cache-introduction>` sont utilisées pour communiquer avec la
-    passerelle de cache et tout autre cache entre votre application et
-    le client. Symfony2 en propose par défaut et fournit une interface puissante
-    pour intéragir avec elles.
+* **Etape 2**: Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
+    sont utilisées pour communiquer avec la passerelle de cache et tout
+    autre cache entre votre application et le client. Symfony2 en propose
+    par défaut et fournit une interface puissante pour intéragir avec elles.
 
-* **Etape 3**: :ref:`L'expiration et la validation
-    <http-expiration-validation>` sont les deux modèles utilisés pour
-    déterminer si le contenu d'un cache est *valide* (peut être
-    réutilisé à partir du cache) ou *périmé* (doit être regénéré par
-    l'application).
+* **Etape 3**: :ref:`L'expiration et la validation<http-expiration-validation>`
+    sont les deux modèles utilisés pour déterminer si le contenu d'un cache est
+    *valide* (peut être réutilisé à partir du cache) ou *périmé* (doit être
+    regénéré par l'application).
 
 * **Etape 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI)
     autorise le cache HTTP à mettre en cache des
@@ -450,14 +448,14 @@ HTTP Expiration et Validation
 
 La spécification HTTP définit deux modèles de mise en cache :
 
-* Avec le `modèle expiration`_, on spécifie simplement combien de
+* Avec le `modèle d'expiration`_, on spécifie simplement combien de
   temps une réponse doit être considérée comme « valide » en incluant un
   en-tête ``Cache-Control`` et/ou ``Expires``. Les systèmes de cache qui
   comprennent les directives n'enverront pas la même requête jusqu'à ce
   que la version en cache devienne « invalide ».
 
 * Quand une page est dynamique (c-a-d quand son contenu change
-  souvent), le `modèle validation`_ est souvent nécessaire. Avec ce
+  souvent), le `modèle de validation`_ est souvent nécessaire. Avec ce
   modèle, le système de cache stocke la réponse mais demande au
   serveur à chaque requête si la réponse est encore
   valide. L'application utilise un identifiant unique (l'en-tête ``Etag``)
@@ -761,7 +759,7 @@ Quand l'objet ``Response`` n'est pas modifié, la méthode
 ``isNotModified()`` définit automatiquement le code 304, enlève le
 contenu et les en-têtes qui ne doivent pas être présents pour un
 status ``304`` (voir la
-:methode:`Symfony\\Component\\HttpFoundation\\Response::setNotModified`).
+:method:`Symfony\\Component\\HttpFoundation\\Response::setNotModified`).
 
 .. index::
    single: Cache; Vary
@@ -1177,8 +1175,8 @@ En savoir plus grâce au Cookbook
 .. _`Cache Tutorial`: http://www.mnot.net/cache_docs/
 .. _`Varnish`: http://www.varnish-cache.org/
 .. _`Squid in reverse proxy mode`: http://wiki.squid-cache.org/SquidFaq/ReverseProxy
-.. _`expiration model`: http://tools.ietf.org/html/rfc2616#section-13.2
-.. _`validation model`: http://tools.ietf.org/html/rfc2616#section-13.3
+.. _`modèle d'expiration`: http://tools.ietf.org/html/rfc2616#section-13.2
+.. _`modèle de validation`: http://tools.ietf.org/html/rfc2616#section-13.3
 .. _`RFC 2616`: http://tools.ietf.org/html/rfc2616
 .. _`HTTP Bis`: http://tools.ietf.org/wg/httpbis/
 .. _`P4 - Conditional Requests`: http://tools.ietf.org/html/draft-ietf-httpbis-p4-conditional-12

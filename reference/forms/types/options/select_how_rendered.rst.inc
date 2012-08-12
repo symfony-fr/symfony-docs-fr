@@ -1,15 +1,15 @@
-Liste déroulante, checkboxes ou boutons radio
+Liste dÃ©roulante, checkboxes ou boutons radio
 ---------------------------------------------
 
-Ce champ peut être affichée comme un ou plusieurs différents champs HTML,
+Ce champ peut Ãªtre affichÃ©e comme un ou plusieurs diffÃ©rents champs HTML,
 selon la valeur des options ``expanded`` et ``multiple`` :
 
 +-----------------------------------------------+----------+----------+
 | Balise HTML                                   | expanded | multiple |
 +===============================================+==========+==========+
-| Liste déroulante                              | false    | false    |
+| Liste dÃ©roulante                              | false    | false    |
 +-----------------------------------------------+----------+----------+
-| Liste déroulante (avec attribut ``multiple``) | false    | true     |
+| Liste dÃ©roulante (avec attribut ``multiple``) | false    | true     |
 +-----------------------------------------------+----------+----------+
 | Boutons radio                                 | true     | false    |
 +-----------------------------------------------+----------+----------+

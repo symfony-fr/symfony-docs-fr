@@ -36,8 +36,8 @@ Voilà comment cela fonctionne :
   *répartiteur* central qu'il souhaite écouter l'événement ``kernel.response`` ;
 
 * A un certain point, le noyau Symfony2 dit à l'objet *répartiteur* de « répartir »
- (« dispatch » en anglais) l'événement ``kernel.response``, en passant avec lui un
- objet ``Event`` qui a accès à l'objet ``Response`` ;
+  (« dispatch » en anglais) l'événement ``kernel.response``, en passant avec lui un
+  objet ``Event`` qui a accès à l'objet ``Response`` ;
 
 * Le répartiteur notifie (i.e. appelle une méthode) tous les « listeners » de
   l'événement ``kernel.response``, autorisant chacun d'entre eux à effectuer
@@ -595,7 +595,7 @@ Introspection du Nom de l'Evénement
 
 Comme l'``EventDispatcher`` connaît déjà le nom de l'événement lorsqu'il le
 répartit, le nom de l'événement est aussi injecté dans les objets
- :class:`Symfony\\Component\\EventDispatcher\\Event`, le rendant disponible aux
+:class:`Symfony\\Component\\EventDispatcher\\Event`, le rendant disponible aux
 « listeners » d'événement via la méthode
 :method:`Symfony\\Component\\EventDispatcher\\Event::getName`.
 

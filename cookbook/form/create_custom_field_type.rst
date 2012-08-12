@@ -77,8 +77,8 @@ Il y a trois méthodes qui sont particulièrement importantes :
 * ``setDefaultOptions()`` - Cette méthode définit des options pour votre
   formulaire qui peuvent être utilisées dans ``buildForm()`` et
   ``buildView()``. Il y a beaucoup d'options communes à tous les champs
-  (voir `FormType`_), mais vous pouvez créer ici n'importe quelle autre dont
-  vous pourriez avoir besoin.
+  (voir :doc:`/reference/forms/types/form`), mais vous pouvez créer ici
+  n'importe quelle autre dont vous pourriez avoir besoin.
 
 .. tip::
 

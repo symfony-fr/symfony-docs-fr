@@ -669,6 +669,7 @@ comme second argument :
 Le Client peut soumettre des instances de ``Form`` :
 
 .. code-block:: php
+
     $client->submit($form);
 
 Les valeurs des champs peuvent aussi être passées en second argument de la

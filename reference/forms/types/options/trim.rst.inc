@@ -3,8 +3,8 @@ trim
 
 **type**: ``Boolean`` **default**: ``true``
 
-Si cette option est à true, les espaces d'une chaine de caractères soumise
-dans un formulaire seront supprimés grâce à la fonction ``trim()`` quand
-les données seront associées au formulaire. Cela garantie que, si une valeur
-est soumises avec des espaces en trop, ils seront supprimés avant que la donnée
-soit intégrée à l'objet sous-jacent.
+Si cette option est Ã  true, les espaces d'une chaine de caractÃ¨res soumise
+dans un formulaire seront supprimÃ©s grÃ¢ce Ã  la fonction ``trim()`` quand
+les donnÃ©es seront associÃ©es au formulaire. Cela garantie que, si une valeur
+est soumises avec des espaces en trop, ils seront supprimÃ©s avant que la donnÃ©e
+soit intÃ©grÃ©e Ã  l'objet sous-jacent.

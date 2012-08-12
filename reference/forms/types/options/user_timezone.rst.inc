@@ -1,10 +1,10 @@
 user_timezone
 ~~~~~~~~~~~~~
 
-**type**: ``string`` **default**: Fuseau horaire par défaut du système
+**type**: ``string`` **default**: Fuseau horaire par dÃ©faut du systÃ¨me
 
-Fuseau horaire qui déterminera comment la donnée doit être affichée à l'utilisateur
-(et par conséquent cela concerne aussi les données soumises par l'utilisateur).
-Il doit faire partie des `fuseaux horaires supportés par PHP`_
+Fuseau horaire qui dÃ©terminera comment la donnÃ©e doit Ãªtre affichÃ©e Ã  l'utilisateur
+(et par consÃ©quent cela concerne aussi les donnÃ©es soumises par l'utilisateur).
+Il doit faire partie des `fuseaux horaires supportÃ©s par PHP`_
 
-.. _`fuseaux horaires supportés par PHP`: http://php.net/manual/fr/timezones.php
+.. _`fuseaux horaires supportÃ©s par PHP`: http://php.net/manual/fr/timezones.php

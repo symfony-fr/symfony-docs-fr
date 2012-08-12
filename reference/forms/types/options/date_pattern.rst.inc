@@ -3,12 +3,12 @@ pattern
 
 **type**: ``string``
 
-Cette option n'est utile que si l'option `widget`_ est définie à ``choice``.
-Le masque par défaut se base sur l'option `format`_, est essaye de trouver
-les caractères ``M``, ``d``, et ``y`` du format. Si aucune occurence n'est
-trouvée, la valeur par défaut est la chaine de caractères ``{{ year }}-{{ month }}-{{ day }}``.
+Cette option n'est utile que si l'option `widget`_ est dÃ©finie avec la valeur ``choice``.
+Le masque par dÃ©faut se base sur l'option `format`_, est essaye de trouver
+les caractÃ¨res ``M``, ``d``, et ``y`` du format. Si aucune occurence n'est
+trouvÃ©e, la valeur par dÃ©faut est la chaine de caractÃ¨res ``{{ year }}-{{ month }}-{{ day }}``.
 Les identifiants de cette option sont :
 
-  * ``{{ year }}``: Remplacé par le widget ``year``
-  * ``{{ month }}``: Remplacé par le widget ``month``
-  * ``{{ day }}``: Remplacé par le widget ``day``
+  * ``{{ year }}``: RemplacÃ© par le widget ``year``
+  * ``{{ month }}``: RemplacÃ© par le widget ``month``
+  * ``{{ day }}``: RemplacÃ© par le widget ``day``

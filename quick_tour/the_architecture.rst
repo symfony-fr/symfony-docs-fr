@@ -351,7 +351,7 @@ application vous dira tout concernant les requêtes et vous aidera à résoudre
 vos soucis rapidement.
 
 Utiliser l'Interface en Ligne de Commande (CLI)
---------------------------------------
+-----------------------------------------------
 
 Chaque application est fournie avec une interface en ligne de commandes
 (``app/console``) qui vous aidera à maintenir votre application. Cette interface

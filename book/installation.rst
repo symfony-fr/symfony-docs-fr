@@ -81,7 +81,7 @@ Step 1: Téléchargez `Composer`_ (Le nouveau système de package PHP)
     curl -s http://getcomposer.org/installer | php
 
 Assurez vous d'avoir téléchargé ``composer.phar`` dans le même répertoire
-que celui où se situe le fichier ``composer.json``(par défaut à la racine
+que celui où se situe le fichier ``composer.json`` (par défaut à la racine
 de votre projet Symfony).
 
 Step 2: Install vendors

@@ -509,10 +509,10 @@ de ces méthodes en commençant - Symfony les complète pour vous avec des valeu
 par défaut.
 
 * ``registerBundles()``: renvoit un tableau de tous les bundles dont l'application
-a besoin pour fonctionner (voir le :ref:`page-creation-bundles`);
+  a besoin pour fonctionner (voir le :ref:`page-creation-bundles`) ;
 
 * ``registerContainerConfiguration()``: Charge le fichier de configuration ressources
-   principal de l'application (voir la section `Configuration de l'Application`_)
+   principal de l'application (voir la section `Configuration de l'Application`_).
 
 
 Dans le développement au quotidien, vous utiliserez principalement le répertoire
@@ -555,7 +555,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
     :doc: `Comment charger automatiquement des classes</components/class_loader>`.
 
 Le répertoire des sources (``src/``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour faire simple, le répertoire ``src/`` contient tout le code (code PHP, templates,
 fichiers de configuration, feuilles de style, etc) qui fait tourner *votre* application. 

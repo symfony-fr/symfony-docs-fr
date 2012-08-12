@@ -3,14 +3,14 @@ format
 
 **type**: ``integer`` ou ``string`` **default**: ``IntlDateFormatter::MEDIUM``
 
-Option passée à la classe ``IntlDateFormatter``, utilisée pour formatter
+Option passÃ©e Ã  la classe ``IntlDateFormatter``, utilisÃ©e pour formatter
 la saisie de l'utilisateur au bon format. C'est essentiel quand l'option
-`widget`_  est définie comme ``single_text``, et elle définira la manière
-dont l'utilisateur devra saisir ses données. 
-Par défaut, le format est déterminé selon la locale de l'utilisateur, ce qui
-signifie que le *format attendu sera différent pour différents utilisateurs*.
+`widget`_  est dÃ©finie comme ``single_text``, et elle dÃ©finira la maniÃ¨re
+dont l'utilisateur devra saisir ses donnÃ©es.
+Par dÃ©faut, le format est dÃ©terminÃ© selon la locale de l'utilisateur, ce qui
+signifie que le *format attendu sera diffÃ©rent pour diffÃ©rents utilisateurs*.
 Vous pouvez la surcharger en passant le format sous forme de chaine de
-caractères.
+caractÃ¨res.
 
 Pour plus d'informations sur les formats valides, lisez `Syntaxe des formats Date/Time`_.
 Par exemple, pour afficher un simple champ texte qui attend une saisie au format

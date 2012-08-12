@@ -2,7 +2,7 @@
    single: symfony1
 
 En quoi Symfony2 diffère de Symfony1
-==================================
+====================================
 
 Le framework Symfony2 correspond à une évolution majeure si on le compare à la
 première version du framework. Heureusement, comme il est basé sur l'architecture MVC,

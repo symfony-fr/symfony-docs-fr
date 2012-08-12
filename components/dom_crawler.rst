@@ -24,7 +24,7 @@ pour interroger et manipuler des documents HTML et XML.
 
 Une instance du Crawler représente un ensemble (:phpclass:`SplObjectStorage`)
 d'objets :phpclass:`DOMElement`, qui sont finalement des noeuds au travers desquels
-vous pouvez naviguer aisément :
+vous pouvez naviguer aisément::
 
     use Symfony\Component\DomCrawler\Crawler;
 

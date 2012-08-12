@@ -110,11 +110,11 @@ déjà le fichier d'amorçage. Pour vous en assurer, ouvrez votre contrôleur fr
 Veuillez noter qu'il y a deux inconvénients à utiliser un fichier d'amorçage :
 
 * le fichier nécessite d'être régénéré à chaque fois que les fichiers sources 
-originaux changent (à savoir quand vous mettez à jour le code source de Symfony2
-ou une librairie tierce),
+  originaux changent (à savoir quand vous mettez à jour le code source de Symfony2
+  ou une librairie tierce),
 
 * lors du débogage, vous devrez placer des points d'arrêt (breakpoints) dans ce fichier
-d'amorçage.
+  d'amorçage.
 
 Si vous utilisez l'édition Symfony2 standard, les fichiers d'amorçage sont automatiquement
 regénérés après avoir mis à jour les librairies tierces (« vendors »)
