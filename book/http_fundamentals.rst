@@ -115,7 +115,7 @@ Beaucoup d'autres en-têtes existent et peuvent être trouvées sur la page
 Wikipedia `List of HTTP header fields`_ (anglais).
 
 Etape 2: Le Serveur retourne une réponse
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une fois que le serveur a reçu la requête, il connaît exactement quelle ressource
 le client a besoin (via l'URI) et ce que le client souhaite faire avec cette

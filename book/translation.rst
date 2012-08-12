@@ -234,10 +234,9 @@ se fait comme précédemment :
 .. note::
 
     Les paramètres de substitution peuvent prendre n'importe quelle forme
-    puisque le message en entier est reconstruit en utilisant la fonction
-    PHP `strtr`_. Cependant, la notation ``%var%`` est requise
-    pour les traductions dans les templates Twig, et c'est une convention
-    générale à suivre.
+    puisque le message en entier est reconstruit en utilisant la `fonction strtr`_
+    de PHP . Cependant, la notation ``%var%`` est requise pour les traductions
+    dans les templates Twig, et c'est une convention générale à suivre.
     
 Comme nous l'avons vu, créer une traduction est un processus en deux étapes :
 
@@ -463,8 +462,8 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
 .. index::
    single: Traductions; Domaines de messages
    
-Utiliser les Domaines de Messages
----------------------------------
+Utiliser les Domaines de Message
+--------------------------------
 
 Comme nous l'avons vu, les fichiers de messages sont organisés par les différentes locales
 qu'ils traduisent. Pour plus de structure, les fichiers de messages peuvent également être organisés en
@@ -957,7 +956,7 @@ traduire dans l'option message. Par exemple, pour garantir qu'une propriété $n
 
 Créez un fichier de traduction pour le catalogue ``validators`` pour les messages
 de contraintes, typiquement dans le répertoire ``Resources/translations/`` du bundle.
-Lisez `Catalogues de Messages`_ pour en savoir plus
+Lisez `Catalogues de Message`_ pour en savoir plus
 
 .. configuration-block::
 
@@ -1008,7 +1007,7 @@ n'a plus besoin d'être un processus douloureux et se résume simplement à quel
 
 .. _`i18n`: http://fr.wikipedia.org/wiki/Internationalisation_et_localisation
 .. _`L10n`: http://fr.wikipedia.org/wiki/Localisation_(informatique)
-.. _`strtr function`: http://www.php.net/manual/fr/function.strtr.php
+.. _`fonction strtr`: http://www.php.net/manual/fr/function.strtr.php
 .. _`ISO 31-11`: http://en.wikipedia.org/wiki/ISO_31-11
 .. _`Translatable Extension`: https://github.com/l3pp4rd/DoctrineExtensions
 .. _`ISO3166 Alpha-2`: http://fr.wikipedia.org/wiki/ISO_3166-1#Table_de_codage

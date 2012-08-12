@@ -23,7 +23,7 @@ Utilisation de base
 
 Supposons que vous ayez un ``AcmeUserBundle`` avec une entité ``User`` qui
 a un champ ``email``. Vous pouvez utiliser la contrainte ``Unique`` pour garantir
-que le champ ``email``soit unique dans votre table d'utilisateurs :
+que le champ ``email`` soit unique dans votre table d'utilisateurs :
 
 .. configuration-block::
 

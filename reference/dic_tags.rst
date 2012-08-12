@@ -38,7 +38,7 @@ Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
 +-----------------------------------+---------------------------------------------------------------------------+
 | `security.listener.factory`_      | Nécessaire pour créer un système d'authentification personnalisé          |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                              |
+| `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                             |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `templating.helper`_              | Rend votre service accessible dans les templates PHP                      |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -122,8 +122,6 @@ attribuez leur le tag `form.type_extension` :
             ->addTag('form.type_extension', array('alias' => 'field'))
         ;
 
-.. _reference-dic-tags-twig-extension:
-
 form.type_guesser
 -----------------
 
@@ -139,7 +137,7 @@ l'interface :class:`Symfony\\Component\\Form\\FormTypeGuesserInterface`. Ensuite
 définition du service avec ``form.type_guesser`` (il n'y a pas d'option).
 
 Pour voir un exemple de ce à quoi la classe ressemblerait, regardez la classe
-``ValidatorTypeGuesser`` du composant ``Form`.
+``ValidatorTypeGuesser`` du composant ``Form``.
 
 kernel.cache_warmer
 -------------------
@@ -653,7 +651,7 @@ voyez la `documentation Twig`_ sur le sujet ou lisez l'article du cookbook :
 :doc:`/cookbook/templating/twig_extension`.
 
 Avant d'écrire vos propres extensions, jetez un oeil au
-_`dépôt officiel des extensions Twig` qui inclut déjà plusieurs extensions
+`dépôt officiel des extensions Twig`_ qui inclut déjà plusieurs extensions
 utiles. Par exemple, ``Intl`` et son filtre ``localizeddate`` qui formatte
 une date selon la locale de l'utilisateur. Ces extensions Twig officielles
 doivent aussi être ajoutées comme les autres services « normaux » :
@@ -712,8 +710,8 @@ d'options).
 Pour un exemple, jetez un oeil à la classe ``EntityInitializer`` dans le
 « Doctrine Bridge ».
 
-..  _`documentation Twig`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
-..  _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions
+.. _`documentation Twig`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
+.. _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions
 .. _`KernelEvents`: https://github.com/symfony/symfony/blob/2.0/src/Symfony/Component/HttpKernel/KernelEvents.php
 .. _`Documentation du Système de Plugin de SwiftMailer`: http://swiftmailer.org/docs/plugins.html
 

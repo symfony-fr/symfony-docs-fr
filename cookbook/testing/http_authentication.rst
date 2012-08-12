@@ -26,8 +26,8 @@ l'authentification HTTP. De cette manière, vous pouvez utiliser le code décrit
 ci-dessus pour vous authentifier dans les tests, mais néanmoins conserver le fait
 que vos utilisateurs doivent se connecter via l'usuel ``form_login``.
 Pour cela, dans la configuration de test vous devez inclure la clé
-``http_basic``dans votre pare-feu Symfony, à l'intérieur du conteneur traitant 
-le ``form_login`:
+``http_basic`` dans votre pare-feu Symfony, à l'intérieur du conteneur traitant
+le ``form_login`` :
 
 .. configuration-block::
 

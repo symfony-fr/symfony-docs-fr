@@ -72,7 +72,7 @@ Options du champ
 class
 ~~~~~
 
-**type**: ``string`` **obligatoire*
+**type**: ``string`` **obligatoire**
 
 La classe de votre entité (ex: ``AcmeStoreBundle:Category``). Cela peut être
 le nom complet de la classe (ex: ``Acme\StoreBundle\Entity\Category``) ou son alias

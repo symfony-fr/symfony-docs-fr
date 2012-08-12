@@ -1524,7 +1524,7 @@ Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple 
 Pour désactiver la protection CSRF, définissez l'option ``csrf_protection``
 à false. Les personnalisations peuvent aussi être effectuées globalement dans
 votre projet. Pour plus d'informations, voir la section de
-:ref:`référence de configuration de formulaire</reference-framework-form>`.
+:ref:`référence de configuration de formulaire<reference-framework-form>`.
 
 .. note::
 

@@ -18,7 +18,7 @@ sorte de choses, incluant la création et l'assignation d'erreurs de validation.
     pouvoir d'ajouter directement des « violations » de validateur.
 
 +----------------+------------------------------------------------------------------------+
-| S'applique à   | :ref:`classe<validation-class-target>`                                  |
+| S'applique à   | :ref:`classe<validation-class-target>`                                 |
 +----------------+------------------------------------------------------------------------+
 | Options        | - `methods`_                                                           |
 +----------------+------------------------------------------------------------------------+

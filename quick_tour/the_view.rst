@@ -27,7 +27,7 @@ contenu (HTML, XML, CSV, LaTeX, ...). Twig définit deux sortes de délimiteurs 
 * ``{{ ... }}``: Affiche une variable ou le résultat d'une expression.
 
 * ``{% ... %}``: Contrôle la logique du template; il est utilisé pour éxécuter des
-boucles ``for`` et des conditions ``if``, entre autres.
+  boucles ``for`` et des conditions ``if``, entre autres.
 
 Ci-dessous un template minimal qui illustre quelques bases; en utilisant deux
 variables ``page_title`` et ``navigation``, qui ont été passées au template :
@@ -268,7 +268,7 @@ de votre application n'importe où sous le répertoire racine web sans changer l
 moindre code dans vos templates.
 
 Echapper les variables
-------------------
+----------------------
 
 Twig est configuré par défaut pour échapper automatiquement le flux de sortie.
 Lisez la `documentation`_  de Twig pour en apprendre plus sur l'échappement et

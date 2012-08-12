@@ -33,7 +33,7 @@ Si votre problème ressemble finalement à un bug, signalez-le en utilisant le
 * *(optionnel)* Joingnez un :doc:`patch <patches>`.
 
 .. _documentation: http://symfony.com/doc/2.0/
-.. _liste de diffusion http://groups.google.com/group/symfony-users
+.. _liste de diffusion: http://groups.google.com/group/symfony-users
 .. _forum: http://forum.symfony-project.org/
 .. _canal IRC: irc://irc.freenode.net/symfony
 .. _tracker: https://github.com/symfony/symfony/issues

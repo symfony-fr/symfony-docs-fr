@@ -88,8 +88,6 @@ dans l'ordre de passage :
 Par exemple, pour exécuter votre passe personnalisée après que les passes de suppression
 par défaut aient été exécutées, vous pouvez faire comme cela::
 
-For example, to run your custom pass after the default removal passes have been run::
-
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 
     $container = new ContainerBuilder();

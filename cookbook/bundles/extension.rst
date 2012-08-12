@@ -500,7 +500,7 @@ est montré ici, supportant des noeuds de tableaux, des noeuds « prototypes »,
 une validation avancée, une normalisation spécifique à XML et une fusion
 avancée. La meilleure façon de voir cela en action est d'effectuer un
 « checkout » d'une des classes de Configuration coeurs, comme par exemple
-la `Configuration du FrameworkBundle `_ ou la `Configuration du TwigBundle`_.
+la `Configuration du FrameworkBundle`_ ou la `Configuration du TwigBundle`_.
 
 Dump de la Configuration par Défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

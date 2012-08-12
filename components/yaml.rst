@@ -374,7 +374,7 @@ Le fichier YAML précédent est équivalent au code PHP suivant :
 
     array('PHP', 'Perl', 'Python');
 
-Les correspondances utilisent un deux-points suivi d'un espace (``: ``) pour
+Les correspondances utilisent un deux-points suivi d'un espace pour
 marquer chaque paire clé/valeur :
 
 .. code-block:: yaml

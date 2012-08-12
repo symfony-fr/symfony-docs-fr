@@ -190,9 +190,9 @@ besoin que du JavaScript :
     Si vous rendez une collection entière en une seule fois, alors le prototype
     est automatiquement disponible dans l'attribut ``data-prototype`` de l'élément
     (ex: ``div`` ou ``table``) qui encadre votre collection. La seule différence
-	c'est que le « form row » est rendu pour vous en entier, ce qui signifie que vous
-	n'aurez pas à l'encadrer dans un conteneur quelconque comme nous l'avions fait
-	ci-dessus.
+    c'est que le « form row » est rendu pour vous en entier, ce qui signifie que vous
+    n'aurez pas à l'encadrer dans un conteneur quelconque comme nous l'avions fait
+    ci-dessus.
 
 Options du champ
 ----------------
@@ -246,10 +246,10 @@ côté client. Pour plus d'informations, voyez l'exemple ci-dessus et :ref:`cook
 
 .. caution::
     Si vous imbriquez des autres formulaires entiers pour prendre en compte une
-	relation one-to-many en base de données, vous devrez vous assurer manuellement
-	que la clé étrangère de ces nouveaux objets est correctement définie. Si vous
-	utilisez Doctrine, ce ne sera pas fait automatiquement. Voyez le lien ci-dessus
-	pour plus de détails.
+    relation one-to-many en base de données, vous devrez vous assurer manuellement
+    que la clé étrangère de ces nouveaux objets est correctement définie. Si vous
+    utilisez Doctrine, ce ne sera pas fait automatiquement. Voyez le lien ci-dessus
+    pour plus de détails.
 
 allow_delete
 ~~~~~~~~~~~~
@@ -266,13 +266,13 @@ dans le tableau final.
 Pour plus d'informations, lisez :ref:`cookbook-form-collections-remove`.
 
 .. caution::
-    
-	Soyez prudents lorsque vous utilisez cette option en imbriquant une collection
-	d'objets. Dans ce cas, si un formulaire imbriqué est supprimé, il *sera* bien
-	retiré du tableau final d'objets. Pourtant, selon la logique de votre application,
-	lorsque l'un de ces objets est supprimé, vous voudrez probablement supprimer,
-	ou au moins retirer, les clé étrangères qui lient cet objet à l'objet principal.
-	Rien de tout cela n'est fait automatiquement. Pour plus d'informations, lisez
+
+    Soyez prudents lorsque vous utilisez cette option en imbriquant une collection
+    d'objets. Dans ce cas, si un formulaire imbriqué est supprimé, il *sera* bien
+    retiré du tableau final d'objets. Pourtant, selon la logique de votre application,
+    lorsque l'un de ces objets est supprimé, vous voudrez probablement supprimer,
+    ou au moins retirer, les clé étrangères qui lient cet objet à l'objet principal.
+    Rien de tout cela n'est fait automatiquement. Pour plus d'informations, lisez
     :ref:`cookbook-form-collections-remove`.
 
 prototype
@@ -307,9 +307,9 @@ facile pour vous.
 
 .. tip::
     
-	Si vous rendez une entière collection de champs en une seule fois, alors le
-	prototype du « form row » est automatiquement disponible dans l'attribut ``data-prototype``
-	de l'élément (ex ``div`` ou ``table``) qui encadre votre collection.
+    Si vous rendez une entière collection de champs en une seule fois, alors le
+    prototype du « form row » est automatiquement disponible dans l'attribut ``data-prototype``
+    de l'élément (ex ``div`` ou ``table``) qui encadre votre collection.
 
 Pour plus de détails sur l'utilisation de cette option, lisez l'exemple ci-dessus
 ou :ref:`cookbook-form-collections-new-prototype`.

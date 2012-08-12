@@ -67,8 +67,8 @@ sont les clés pour devenir un bon développeur dans presque tous les langages.
 Définition d'un Conteneur de Services
 -------------------------------------
 
-Un :term:`Service Container` (ou *dependency injection container*) est simplement
-un objet PHP qui gère l'instanciation des services (c-a-d objets).
+Un :term:`Conteneur de services` (« service container » ou « *dependency injection container* »
+en anglais) est simplement un objet PHP qui gère l'instanciation des services (c-a-d objets).
 Par exemple, supposons que nous avons une simple classe PHP qui envoie des messages email.
 Sans un conteneur de services, nous devons manuellement créer l'objet chaque fois que
 nous en avons besoin :

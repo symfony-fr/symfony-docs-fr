@@ -42,11 +42,11 @@ exemple : un Produit récupéré depuis la base de données).
 
 Supposons maintenant que vous ne souhaitiez pas que l'utilisateur puisse
 changer la valeur de ``name`` une fois que l'objet a été créé. Pour faire
-cela, vous pouvez utiliser le :ref:`Répartiteur d'Evénements (« Event
-Dispatcher » en anglais) <book-internals-event-dispatcher>` de Symfony
-pour analyser les données de l'objet et modifier le formulaire en se basant
-sur les données de l'objet Product. Dans cet article, vous allez apprendre
-comment ajouter ce niveau de flexibilité à vos formulaires.
+cela, vous pouvez utiliser le
+:ref:`Répartiteur d'Evénements (« Event Dispatcher » en anglais) <book-internals-event-dispatcher>`
+de Symfony pour analyser les données de l'objet et modifier le formulaire
+en se basant sur les données de l'objet Product. Dans cet article, vous
+allez apprendre comment ajouter ce niveau de flexibilité à vos formulaires.
 
 .. _`cookbook-forms-event-subscriber`:
 

@@ -67,11 +67,11 @@ une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\Da
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFEVEN`` Mode pour arrondir
     au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
-	arrondi au voisin pair.
+    arrondi au voisin pair.
 
 *   ``IntegerToLocalizedStringTransformer::ROUND_HALFUP`` Mode pour arrondir
     au « voisin le plus proche ». Si les deux voisins sont équidistants, alors c'est
-	arrondi au voisin supérieur.
+    arrondi au voisin supérieur.
 
 .. include:: /reference/forms/types/options/grouping.rst.inc
 

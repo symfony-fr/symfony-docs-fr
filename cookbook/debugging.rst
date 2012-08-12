@@ -9,11 +9,11 @@ devriez utiliser l'environnement ``dev`` (correspondant au contrôleur frontal
 ``app_dev.php``). Cet environnement est optimisé pour :
 
 * Donner au développeur des informations rapides et claires si quelque chose ne
-se déroule pas comme prévu (à l'aide de la web debug toolbar, d'exceptions
-documentées et présentées clairement, du profiler, ...);
+  se déroule pas comme prévu (à l'aide de la web debug toolbar, d'exceptions
+  documentées et présentées clairement, du profiler, ...) ;
 
 * Etre aussi proche que possible à l'environnement de production afin de
-préparer le déploiement du projet.
+  préparer le déploiement du projet.
 
 .. _cookbook-debugging-disable-bootstrap:
 

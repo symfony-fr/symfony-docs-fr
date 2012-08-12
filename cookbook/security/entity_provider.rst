@@ -42,7 +42,7 @@ ou non le compte de l'utilisateur est activé.
 Pour faire court, les méthodes « getter » et « setter » de chacun des champs
 ont été supprimées pour se concentrer sur les méthodes les plus importantes
 qui proviennent de l'interface
- :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
+:class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 
 
 .. code-block:: php

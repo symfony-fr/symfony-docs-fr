@@ -215,28 +215,28 @@ de Symfony utilise le service ``validator`` en interne pour valider l'objet
 après que les valeurs ont été soumises. Les violations de contraintes sur
 l'objet sont converties en objets ``FieldError`` qui peuvent être facilement affichés
 dans votre formulaire. Le processus de soumission d'un formulaire typique ressemble
-au code suivant :
+au code suivant::
 
+    // ...
     use Acme\BlogBundle\Entity\Author;
     use Acme\BlogBundle\Form\AuthorType;
     use Symfony\Component\HttpFoundation\Request;
-    // ...
 
     public function updateAction(Request $request)
     {
         $author = new Author();
         $form = $this->createForm(new AuthorType(), $author);
-        
+
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-            
+            $form->bind($request);
+
             if ($form->isValid()) {
                 // the validation passed, do something with the $author object
-                
-                return $this->redirect($this->generateUrl('...'));
+
+                return $this->redirect($this->generateUrl(...));
             }
         }
-        
+
         return $this->render('BlogBundle:Author:form.html.twig', array(
             'form' => $form->createView(),
         ));
@@ -245,7 +245,7 @@ au code suivant :
 .. note::
 
     Cet exemple utilise une classe de formulaire ``AuthorType``, qui n'est pas montrée ici.
-	
+
 Pour plus d'informations, voir le chapitre :doc:`Forms</book/forms>`.
 
 .. index::
