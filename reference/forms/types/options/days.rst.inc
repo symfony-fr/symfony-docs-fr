@@ -1,9 +1,10 @@
 days
 ~~~~
 
-**type**: ``array`` **default**: 1 à 31
+**type**: ``array`` **default**: 1 Ã  31
 
 Liste des jours disponibles dans le type de champ ``day``. Cette option
-n'est utile que dans le cas où l'option ``widget`` est définie à ``choice``::
+n'est utile que dans le cas oÃ¹ l'option ``widget`` est dÃ©finie avec la
+valeur ``choice``::
 
     'days' => range(1,31)

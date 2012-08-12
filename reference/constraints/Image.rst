@@ -27,4 +27,4 @@ mimeTypesMessage
 **type**: ``string`` **default**: ``This file is not a valid image``
 
 
-.. _`IANA website`: http://www.iana.org/assignments/media-types/image/index.html
+.. _`site IANA`: http://www.iana.org/assignments/media-types/image/index.html

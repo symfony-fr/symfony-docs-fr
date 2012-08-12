@@ -111,5 +111,5 @@ un navigateur web.
     La couverture de code ne fonctionne que si vous avez activé XDebug et
     installé toutes les dépendances.
 
-.. _installer: http://www.phpunit.de/manual/current/fr/installation.html
+.. _`installez`: http://www.phpunit.de/manual/current/fr/installation.html
 .. _`Composer`: http://getcomposer.org/

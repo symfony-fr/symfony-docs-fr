@@ -47,7 +47,7 @@ Configurer la base de données
 
 Avant que vous ne soyez réellement prêt, vous devez configurer les paramètres
 de connexion à votre base de données. Par convention, ces paramètres sont
-habituellement placés dans le fichier ``app/config/parameters.yml`:
+habituellement placés dans le fichier ``app/config/parameters.yml`` :
 
 .. code-block:: yaml
 
@@ -298,7 +298,7 @@ la classe ``Product``. C'est une commande sure - vous pouvez la lancer
 encore et encore : elle ne génèrera que les getters et les setters qui n'existent
 pas (c.à.d qu'elle ne remplace pas les méthodes existantes)
 
-.. sidebar:: Un peu plus sur ``doctrine:generate:entities`
+.. sidebar:: Un peu plus sur ``doctrine:generate:entities``
 
     Avec la commande ``doctrine:generate:entities``, vous pouvez :
  
@@ -1302,7 +1302,7 @@ l'article du cookbook à ce sujet : :doc:`using common Doctrine extensions</cook
 .. _book-doctrine-field-types:
 
 Référence des types de champs de Doctrine
-----------------------------------------
+-----------------------------------------
 
 Doctrine contient un grand nombre de types de champs. Chacun mappe un type
 de données PHP vers un type de colonne spécifique à la base de données que 
@@ -1345,6 +1345,7 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
 .. configuration-block::
 
     .. code-block:: php-annotations
+
         /**
         * Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
         * (refletant les valeurs par défaut des options "type", "length" et *nullable);

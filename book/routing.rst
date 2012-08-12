@@ -818,9 +818,9 @@ argument à la méthode contrôleur. De plus, il y a 3 paramètres spéciaux : c
 d'eux apporte une fonctionnalité unique à votre application :
 
 * ``_controller``: Comme vous l'avez vu, ce paramètre est utilisé pour déterminer
-quel contrôleur est éxecuté lorsque l'URL est reconnue.
-* ``_format``: Utilisé pour définir le format de la requête(:ref:`en savoir plus<book-routing-format-param>`);
-* ``_locale``: Utilisé pour définir la locale de la session (:ref:`en savoir plus<book-translation-locale-url>`);
+  quel contrôleur est éxecuté lorsque l'URL est reconnue ;
+* ``_format``: Utilisé pour définir le format de la requête(:ref:`en savoir plus<book-routing-format-param>`) ;
+* ``_locale``: Utilisé pour définir la locale de la session (:ref:`en savoir plus<book-translation-locale-url>`).
 
 .. tip::
 

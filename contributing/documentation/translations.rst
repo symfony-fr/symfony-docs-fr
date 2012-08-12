@@ -37,22 +37,22 @@ Rejoindre l'équipe de traduction
 Si vous voulez aider à traduire certains documents dans votre langue ou corriger
 des erreurs, rejoinger nous; c'est une processus simple:
 
-* Présentez vous sur la liste de diffusion `Symfony docs mailing-list`_;
-* *(optionel)* Proposer les sujets sur lesquels vous pouvez travailler;
+* Présentez vous sur la liste de diffusion `Symfony docs mailing-list`_ ;
+* *(optionel)* Proposer les sujets sur lesquels vous pouvez travailler ;
 * Forker le dépot *master* de votre language (clic sur le bouton "Fork" sur la 
-page github);
-* Traduisez certains documents et envoyé les sur votre dépot;
+  page github) ;
+* Traduisez certains documents et envoyé les sur votre dépot ;
 * Effectuer une requête de mise à jour (clic sur le bouton "Pull Request" de 
-votre page sur GitHub);
+  votre page sur GitHub) ;
 * Le chef d'équipe accepte vos modifications et les fusionnent avec le dépot
-  master;
+  master ;
 * Le site de la documentation est mis à jour toutes les nuits à partir du dépot
-du chef d'équipe.
+  du chef d'équipe.
 
 .. _translations-adding-a-new-language:
 
 Ajouter une nouvelle langue
---------------------------
+---------------------------
 
 Cette section présente le guide à suivre pour commencer la traduction de la
 documentation de Symfony2 dans une nouvelle langue.
@@ -87,6 +87,6 @@ changement aux documents traduits aussitôt que possible.
 
     Les langues non maintenues sont supprimées de la liste officielle des dépôts
     car mettre à disposition une documentation obsolète comporte des risques
-	dangeureux.
+    dangeureux.
 
 .. _Symfony docs mailing-list: http://groups.google.com/group/symfony-docs

@@ -3,13 +3,13 @@ widget
 
 **type**: ``string`` **default**: ``choice``
 
-Désigne la manière sont le champ doit être affiché. Cette option accepte les
+DÃ©signe la maniÃ¨re sont le champ doit Ãªtre affichÃ©. Cette option accepte les
 cas suivants :
 
-* ``choice``: Affiche trois listes déroulantes. L'ordre des liste est défini
+* ``choice``: Affiche trois listes dÃ©roulantes. L'ordre des liste est dÃ©fini
   par l'option `pattern`_.
 
-* ``text``: Affiche trois champs textes (mois, jour, année).
+* ``text``: Affiche trois champs textes (mois, jour, annÃ©e).
 
 * ``single_text``: Affiche un unique champ texte. La saisie de l'utilisateur sera
-  validé en se basant sur l'option `format`_.
+  validÃ© en se basant sur l'option `format`_.

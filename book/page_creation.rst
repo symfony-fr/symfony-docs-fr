@@ -264,7 +264,7 @@ votre application devrait vous saluer::
     de « prod » en allant à l'adresse :
 
     .. code-block:: text
-	
+
         http://localhost/app.php/hello/Ryan
  
     Si vous avez une erreur, c'est certainement parce que vous avez besoin de vider
@@ -292,7 +292,7 @@ A la place d'écrire le code HTML dans le contrôleur, retournez plutôt un temp
 .. code-block:: php	
     :linenos:
 
-	
+
     // src/Acme/HelloBundle/Controller/HelloController.php
 
     namespace Acme\HelloBundle\Controller;
@@ -390,7 +390,7 @@ signifie que le template se situe en dehors du bundle et dans le répertoire ``a
             </head>
             <body>
                 {% block body %}{% endblock %}
-		{% block javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}
             </body>
         </html>
 
@@ -407,7 +407,7 @@ signifie que le template se situe en dehors du bundle et dans le répertoire ``a
             </head>
             <body>
                 <?php $view['slots']->output('_content') ?>
-		<?php $view['slots']->output('stylesheets') ?>
+            <?php $view['slots']->output('stylesheets') ?>
             </body>
         </html>
 
@@ -454,7 +454,8 @@ Le répertoire Web
 
 Le répertoire web contient tous les fichiers publics et statiques incluant les
 images, les feuilles de style et les javascripts. 
-Il contient également le :term:`front controller` (contrôleur frontal) :
+Il contient également le « :term:`contrôleur frontal` » (« front controller » en
+anglais) :
 
 .. code-block:: php
 
@@ -509,10 +510,10 @@ de ces méthodes en commençant - Symfony les complète pour vous avec des valeu
 par défaut.
 
 * ``registerBundles()``: renvoit un tableau de tous les bundles dont l'application
-a besoin pour fonctionner (voir le :ref:`page-creation-bundles`);
+  a besoin pour fonctionner (voir le :ref:`page-creation-bundles`) ;
 
 * ``registerContainerConfiguration()``: Charge le fichier de configuration ressources
-   principal de l'application (voir la section `Configuration de l'Application`_)
+   principal de l'application (voir la section `Configuration de l'Application`_).
 
 
 Dans le développement au quotidien, vous utiliserez principalement le répertoire
@@ -555,7 +556,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
     :doc: `Comment charger automatiquement des classes</components/class_loader>`.
 
 Le répertoire des sources (``src/``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour faire simple, le répertoire ``src/`` contient tout le code (code PHP, templates,
 fichiers de configuration, feuilles de style, etc) qui fait tourner *votre* application. 

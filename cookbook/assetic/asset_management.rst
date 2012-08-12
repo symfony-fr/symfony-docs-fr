@@ -91,11 +91,11 @@ réellement générée pourrait ressembler à ceci :
 
 .. note::
     
-	C'est un point essentiel : une fois que vous laissez Assetic gérer vos ressources,
-	les fichiers sont servis depuis différents emplacements. Cela *peut* poser des
-	problèmes avec les CSS qui utilisent des images référencées par des chemins
-	relatifs. Pourtant, ce problème peut être résolu en utilisant le filtre
-	``cssrewrite`` qui met à jour les chemins dans les fichiers CSS pour prendre
+    C'est un point essentiel : une fois que vous laissez Assetic gérer vos ressources,
+    les fichiers sont servis depuis différents emplacements. Cela *peut* poser des
+    problèmes avec les CSS qui utilisent des images référencées par des chemins
+    relatifs. Pourtant, ce problème peut être résolu en utilisant le filtre
+    ``cssrewrite`` qui met à jour les chemins dans les fichiers CSS pour prendre
     en compte leur nouvel emplacement.
 
 Combiner des ressources

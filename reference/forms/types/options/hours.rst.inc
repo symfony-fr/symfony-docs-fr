@@ -1,7 +1,7 @@
 hours
 ~~~~~
 
-**type**: ``integer`` **default**: 0 à 23
+**type**: ``integer`` **default**: 0 Ã  23
 
 Liste des heures disponibles dans le type de champ ``hours``. Cette option
-n'est utile que si l'option ``widget`` est définie à ``choice``.
+n'est utile que si l'option ``widget`` est dÃ©finie Ã  ``choice``.

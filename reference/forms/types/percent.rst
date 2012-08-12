@@ -40,17 +40,17 @@ type
 Cette option contrôle la façon dont vos données sont stockées dans l'objet. Par exemple,
 un pourcentage correspondant à « 55% », peut être stocké comme ``0,55`` ou ``55`` dans votre
 objet. Les deux « types » gèrent ces deux cas :
-    
+
 *   ``fractional``
     Si votre donnée est stockée au format décimal (ex ``0,55``), utilisez ce type.
     La donnée sera multipliée par ``100`` avant d'être affichée à l'utilisateur (ex ``55``).
     La valeur soumise sera divisée par ``100`` lors de la soumission du formulaire pour que
-	la valeur soit stockée au format décimal (``0,55``);
+    la valeur soit stockée au format décimal (``0,55``) ;
 
 *   ``integer``
     Si votre donnée est stockée comme integer (ex 55), utilisez cette
-	option. La valeur brute (``55``) est affichée à l'utilisateur et stockée dans votre objet.
-	Notez que cela ne fonctionne que pour les valeurs entières.
+    option. La valeur brute (``55``) est affichée à l'utilisateur et stockée dans votre objet.
+    Notez que cela ne fonctionne que pour les valeurs entières.
 
 precision
 ~~~~~~~~~

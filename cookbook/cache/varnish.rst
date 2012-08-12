@@ -22,7 +22,7 @@ automatiquement lorsque vous utilisez le « reverse proxy » de Symfony2, mais v
 avez besoin d'une configuration spéciale pour que cela fonctionne avec Varnish.
 Heureusement, Symfony2 repose déjà sur un autre standard écrit par Akamaï
 (`Architecture Edge`_). En conséquence, les conseils de configuration décrits dans ce
- chapitre peuvent être utiles même si vous n'utilisez pas Symfony2.
+chapitre peuvent être utiles même si vous n'utilisez pas Symfony2.
 
 .. note::
 

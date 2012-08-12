@@ -58,7 +58,7 @@ la barre latérale.
       Cela se déroule en arrière-plan et est tout à fait normal.
 
     * Dans votre contrôleur intégré, vous interrogez une nouvelle fois le service
-     `my_mailer`. Votre service ayant le champ d'application `container`, la 
+      `my_mailer`. Votre service ayant le champ d'application `container`, la
       même  instance (*MailerA*) est réutilisée. Et voilà le problème : l'instance
       *MailerA* contient toujours l'ancien objet *RequestA*, qui *ne correspond plus*
       maintenant à l'objet requête mis à jour (*RequestB* est maintenant le service

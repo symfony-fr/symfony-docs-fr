@@ -8,7 +8,7 @@ Doctrine2 est très flexible, et la communauté a déjà créé une série d'ext
 Doctrine très pratiques afin de vous aider avec les tâches usuelles liées aux
 entités.
 
-Une librairie en particulier - la librairie `DoctrineExtensionsBundle`_ - fournit
+Une librairie en particulier - la librairie `DoctrineExtensions`_ - fournit
 l'intégration de fonctionnalités pour les comportements (Behaviors) `Sluggable`_,
 `Translatable`_, `Timestampable`_, `Loggable`_, `Tree`_ et `Sortable`_
 

@@ -1,10 +1,10 @@
 label
 ~~~~~
 
-**type**: ``string`` **default**: Le libellé est « deviné » à partir du nom du champ.
+**type**: ``string`` **default**: Le libellÃ© est Ã  devinÃ© Ã  partir du nom du champ.
 
-Définit le libellé qui sera utilisé à l'affichage du champ. Le libellé peut aussi
-être directement défini dans le template :
+DÃ©finit le libellÃ© qui sera utilisÃ© Ã  l'affichage du champ. Le libellÃ© peut aussi
+Ãªtre directement dÃ©fini dans le template :
     
 .. code-block:: jinja
 

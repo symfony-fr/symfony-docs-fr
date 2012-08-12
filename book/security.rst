@@ -547,7 +547,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
 
     D'abord, assurez-vous que vous avez défini les routes ``/login`` et ``/login_check``
     correctement et qu'elles correspondent aux valeurs de configuration ``login_path`` et
-    ``check_path`. Une mauvaise configuration ici pourrait vouloir dire que vous seriez redirigé
+    ``check_path``. Une mauvaise configuration ici pourrait vouloir dire que vous seriez redirigé
     à une page 404 au lieu de la page de connexion, ou que la soumission du formulaire ne 
     fasse rien (vous ne verriez que le formulaire de connexion encore et encore).
 
@@ -1019,9 +1019,9 @@ cette interface.
 .. note::
 
     L'objet User sera sérialisé et sauvegardé dans la session lors des requêtes, il est donc
-    recommandé d'`implémenter l'interface \Serializable interface`_
-    dans votre classe User. Cela est spécialement important si votre classe ``User``a une classe
-    parente avec des propriétés privées.
+    recommandé d'`implémenter l'interface \Serializable`_ dans votre classe User. Cela est
+    spécialement important si votre classe ``User`` a une classe parente avec des propriétés
+    privées.
 
 Ensuite, il faut configurer le fournisseur d'utilisateur ``entity`` (``entity`` user provider),
 le pointer vers la classe ``User`` :
@@ -1029,6 +1029,7 @@ le pointer vers la classe ``User`` :
 .. configuration-block::
 
     .. code-block:: yaml
+
         # app/config/security.yml
         security:
             providers:
@@ -1056,7 +1057,7 @@ le pointer vers la classe ``User`` :
         ));
 
 Avec l'introduction de ce nouveau fournisseur, le système d'authentification va tenter de charger
-un objet ``User``depuis la base de données en utilisant le champ ``username``de cette classe.
+un objet ``User`` depuis la base de données en utilisant le champ ``username`` de cette classe.
 
 .. note::
     Cet exemple ne vous montre que les principes de base du fournisseur ``entity``.
@@ -1500,9 +1501,9 @@ paramètre de configuration ``logout`` :
         ));
 
 Une fois que c'est configuré au niveau de votre pare-feu, un utilisateur qui accèdera à ``/logout``
-(ou quelle que soit la configuration de ``path``que vous avez) sera déconnecté. 
+(ou quelle que soit la configuration de ``path`` que vous avez) sera déconnecté.
 L'utilisateur sera redirigé à la page d'accueil (la valeur du paramètre ``target``).
-Les 2 paramètres de configuration ``path``et ``target``ont comme valeur par défaut ce qui est 
+Les 2 paramètres de configuration ``path`` et ``target`` ont comme valeur par défaut ce qui est
 défini ici. En d'autres termes, sauf si vous voulez les changer, vous pouvez les omettre 
 complètement et ainsi réduire votre configuration :
 
@@ -1616,7 +1617,7 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
 Parfois, il peut être utile de pouvoir passer d'un utilisateur à un autre sans avoir 
 à se déconnecter et à se reconnecter (par exemple si vous êtes en train de débugguer ou de 
 comprendre un bug qu'un utilisateur obtient, mais que vous ne pouvez pas reproduire).
-Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_user``du pare-feu :
+Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_user`` du pare-feu :
 
 .. configuration-block::
 
@@ -1775,5 +1776,5 @@ Apprenez plus grâce au Cookbook
 .. _`composant de sécurité`: https://github.com/symfony/Security
 .. _`JMSSecurityExtraBundle`: https://github.com/schmittjoh/JMSSecurityExtraBundle
 .. _`FOSUserBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
-.. _`implémenter l'interface \Serializable interface`: http://php.net/manual/en/class.serializable.php
+.. _`implémenter l'interface \Serializable`: http://php.net/manual/en/class.serializable.php
 .. _`functions-online.com`: http://www.functions-online.com/sha1.html

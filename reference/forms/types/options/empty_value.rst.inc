@@ -3,26 +3,26 @@ empty_value
 
 **type**: ``string`` ou ``Boolean``
 
-Cette option détermine si une option « vide » spécial (ex : « Choisissez une option »)
-soit apparaitre en haut de la liste déroulante. Cette option ne s'applique que si les
-deux option ``expanded`` et ``multiple`` ont été définies à false.
+Cette option dÃ©termine si une option Â« vide Â» spÃ©ciale (ex : Â« Choisissez une option Â»)
+va apparaÃ®tre en haut de la liste dÃ©roulante. Cette option ne s'applique que si les
+deux option ``expanded`` et ``multiple`` ont Ã©tÃ© dÃ©finies Ã  false.
 
-* Ajoute une valeur vide avec « Choisissez une option » comme texte::
+* Ajoute une valeur vide avec Â« Choisissez une option Â» comme texte::
 
     $builder->add('states', 'choice', array(
         'empty_value' => 'Choisissez une option',
     ));
 
-* Garantie qu'aucune option « vide » n'est affichée::
+* Garantie qu'aucune option Â« vide Â» n'est affichÃ©e::
 
     $builder->add('states', 'choice', array(
         'empty_value' => false,
     ));
 
-Si vous ne définissez pas l'option ``empty_value``, alors une option vide (sans texte)
-sera automatiquement ajoutée si et seulement si l'option ``required`` est à false::
+Si vous ne dÃ©finissez pas l'option ``empty_value``, alors une option vide (sans texte)
+sera automatiquement ajoutÃ©e si et seulement si l'option ``required`` est Ã  false::
 
-    // Une option vide (sans texte) sera ajoutée
+    // Une option vide (sans texte) sera ajoutÃ©e
     $builder->add('states', 'choice', array(
         'required' => false,
     ));

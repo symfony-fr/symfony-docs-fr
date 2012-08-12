@@ -127,7 +127,7 @@ Symfony2 (remplacez *Fabien* par votre prénom) :
 
 Que se passe t-il ici ? Décortiquons cette URL :
 
-* ``app_dev.php``: C'est un :term:`contrôleur frontal<front controller>`. C'est l'unique point
+* ``app_dev.php``: C'est un :term:`contrôleur frontal<contrôleur frontal>`. C'est l'unique point
   d'entrée de votre application et cela prend en charge toutes les requêtes.
 
 * ``/demo/hello/Fabien``: C'est le *chemin virtuel* vers la ressource à laquelle
@@ -423,7 +423,7 @@ en environnement de production (``app.php``) où les performances prévalent. C'
 pourquoi vous devriez toujours utiliser l'environnement de développement pour
 développer vos applications.
 
-Différents :term:`environnements<environment>` d'une application donnée ne diffèrent
+Différents :term:`environnements<environnement>` d'une application donnée ne diffèrent
 que par leur configuration. En fait, une configuration peut hériter d'une autre :
 
 .. code-block:: yaml

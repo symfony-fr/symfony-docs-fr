@@ -3,18 +3,18 @@ empty_data
 
 **type**: ``divers`` **default**: ``array()`` si ``multiple`` ou ``expanded``, ``''`` sinon
 
-Cette option détermine quelle valeur le champ affichera si le choix ``empty_value``
-est sélectionné.
+Cette option dÃ©termine quelle valeur le champ affichera si le choix ``empty_value``
+est sÃ©lectionnÃ©.
 
-Par exemple, si vous voulez que le champ ``gender`` soit défini comme ``null`` si
-aucune valeur n'est sélectionnée, vous pouvez le faire comme ceci :
+Par exemple, si vous voulez que le champ ``gender`` soit dÃ©fini comme ``null`` si
+aucune valeur n'est sÃ©lectionnÃ©e, vous pouvez le faire comme ceci :
 
 .. code-block:: php
 
     $builder->add('gender', 'choice', array(
         'choices' => array(
             'm' => 'Masculin',
-            'f' => 'Féminin'
+            'f' => 'FÃ©minin'
         ),
         'required'    => false,
         'empty_value' => 'Choisissez votre sexe',
