@@ -4,9 +4,9 @@
 Comment mettre en place des filtres avant et après un processus donné
 =====================================================================
 
-Il est très commun dans le développement d'application web d'avoir besoin
+Il est très commun, dans le développement d'application web, d'avoir besoin
 qu'un bout de logique soit exécuté juste avant ou juste après vos actions
-de contrôleur actant comme des filtres ou des « hooks ».
+de contrôleur agissant comme des filtres ou des « hooks ».
 
 Dans Symfony1, cela était effectué avec les méthodes « preExecute » et
 « postExecute » ; la plupart des principaux « frameworks » ont des méthodes
@@ -17,10 +17,10 @@ le processus Requête -> Réponse en utilisant le composant « EventDispatcher �
 Exemple de validation de jeton
 ------------------------------
 
-Imaginez que vous deviez développer une API dans laquelle certains contrôleurs
-sont publics mais d'autres sont ont un accès restreint qui est réservé à un
+Imaginez que vous devez développer une API dans laquelle certains contrôleurs
+sont publics mais d'autres ont un accès restreint qui est réservé à un
 ou plusieurs clients. Pour ces fonctionnalités privées, vous pourriez
-fournir un jeton à vos clients afin de qu'ils s'identifient eux-mêmes.
+fournir un jeton à vos clients afin qu'ils s'identifient eux-mêmes.
 
 Donc, avant d'exécuter votre action de contrôleur, vous devez vérifier si
 l'action est restreinte ou pas. Et si elle est restreinte, vous devez valider
@@ -28,7 +28,7 @@ le jeton fourni.
 
 .. note::
 
-    Veuillez note que pour plus de simplicité, les jetons vont être
+    Veuillez noter que, pour plus de simplicité, les jetons vont être
     définis dans la configuration et aucune mise en place de base de données
     ni de fournisseur d'authentification via le composant de Sécurité ne vont
     être utilisés.
@@ -74,9 +74,8 @@ Les contrôleurs de Tag devant être vérifiés
 -------------------------------------------
 
 Un « listener » de ``kernel.controller`` est notifié à chaque requête, juste
-avant que le contrôleur ne soit exécuté. D'abord, vous avez besoin d'une manière
-de savoir si le contrôleur qui correspond à la requête a besoin d'une validation
-de token.
+avant que le contrôleur ne soit exécuté. D'abord, vous avez besoin de savoir si
+le contrôleur qui correspond à la requête a besoin d'une validation de token.
 
 Une façon propre et facile est de créer une interface vide et de faire que les
 contrôleurs l'implémentent::
@@ -146,7 +145,7 @@ Déclarer le « Listener »
 Finalement, déclarez votre « listener » comme un service et « taggez-le » en
 tant que « listener » d'événement. En écoutant le ``kernel.controller``, vous
 dites à Symfony que vous voulez que votre « listener » soit appelé juste avant
-que quelconque contrôleur soit exécuté :
+qu'un contrôleur quelconque soit exécuté :
 
 .. configuration-block::
 
