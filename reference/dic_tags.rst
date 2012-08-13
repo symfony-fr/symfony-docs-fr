@@ -145,8 +145,8 @@ kernel.cache_warmer
 **But** : Enregistre votre service pour qu'il soit appelé durant la mise en cache
 
 La mise en cache s'effectue lorsque vous exécutez la tâche ``cache:warmup`` ou
-``cache:clear`` (à moins que vous passiez ``--no-warmup`` à ``cache:clear``). Le
-but est d'initialiser quelconque cache dont l'application aura besoin et d'éviter
+``cache:clear`` (à moins que vous passiez l'option ``--no-warmup`` à ``cache:clear``). Le
+but est d'initialiser un cache quelconque dont l'application aura besoin et d'éviter
 que le premier utilisateur ne subisse un ralentissement dû à la mise en cache
 lorsque ce dernier est généré dynamiquement.
 
@@ -455,7 +455,7 @@ security.listener.factory
 **But** : Nécessaire pour créer un système d'authentification personnalisé
 
 Ce tag est utilisé lorsque vous créez votre propre système d'authentification
-personnalisé. Pour plus de détails, voyez
+personnalisé. Pour plus de détails, lisez
 :doc:`/cookbook/security/custom_authentication_provider`.
 
 security.remember_me_aware
@@ -463,7 +463,7 @@ security.remember_me_aware
 
 **But** : Pour permettre l'authentification avec « se souvenir de moi »
 
-Ce tag est utilisé en interne pour permettre à la l'authentification « se souvenir
+Ce tag est utilisé en interne pour permettre l'authentification « se souvenir
 de moi » de fonctionner. Si vous avez une méthode d'authentification personnalisée
 où un utilisateur peut être authentifié avec l'option « se souvenir de moi »,
 alors vous pourriez avoir à utiliser ce tag.
@@ -501,7 +501,7 @@ Pour plus d'informations sur les plugins, voir la
 `Documentation du Système de Plugin de SwiftMailer`_.
 
 Plusieurs plugins SwiftMailer font partie du coeur de Symfony et peuvent être activés
-grâce à différentes configurations. Pour plus de détails, voir
+grâce à différentes configurations. Pour plus de détails, lisez
 :doc:`/reference/configuration/swiftmailer`.
 
 templating.helper
@@ -567,7 +567,7 @@ depuis une autre source, créez d'abord une classe qui implémente l'interface
         }
     }
 
-Votre méthode de chargement personnalisée ``load`` est responsable de retourner
+Votre méthode de chargement personnalisée ``load`` est chargée de retourner
 un :Class:`Symfony\\Component\\Translation\\MessageCatalogue`.
 
 Maintenant, vous pouvez enregistrer votre chargeur comme un service et le
@@ -598,18 +598,18 @@ L'option ``alias`` est requise et très importante : elle définit le « suffixe
 du fichier qui sera utilisé pour les fichiers de ressource qui utilisent ce
 chargeur. Par exemple, supposons que vous ayez un format personnalisé ``bin``
 que vous devez charger. Si vous avez un fichier ``bin`` qui contient des traductions
-françaises pour le domaine ``messages``, alors vous auriez un fichier tel
+françaises pour le domaine ``messages``, alors vous auriez un fichier du type
 ``app/Resources/translations/messages.fr.bin``.
 
 Lorsque Symfony essaye de charger le fichier ``bin``, il passe le chemin de votre
 chargeur personnalisé en tant qu'argument ``$ressource``. Vous pouvez ainsi
-effectuer quelconque opération nécessaire sur ce fichier afin de pouvoir
+effectuer n'importe quelle opération nécessaire sur ce fichier afin de pouvoir
 charger vos traductions.
 
 Si vous chargez des traductions depuis une base de données, vous aurez toujours
 besoin d'un fichier de ressource, mais il pourrait soit être vide ou soit
-contenir quelques informations sur le chargement de ces ressources depuis la
-base de données. Le fichier est clé pour déclencher la méthode ``load`` de votre
+contenir des informations sur le chargement de ces ressources depuis la
+base de données. Le fichier est essentiel pour déclencher la méthode ``load`` de votre
 chargeur personnalisé.
 
 .. _reference-dic-tags-twig-extension:
@@ -647,7 +647,7 @@ taggez-la avec ``twig.extension``:
         ;
 
 Pour plus d'informations sur comment créer la classe d'Extension Twig,
-voyez la `documentation Twig`_ sur le sujet ou lisez l'article du cookbook :
+lisez la `documentation Twig`_ sur le sujet ou lisez l'article du cookbook :
 :doc:`/cookbook/templating/twig_extension`.
 
 Avant d'écrire vos propres extensions, jetez un oeil au
@@ -694,7 +694,7 @@ validator.initializer
 **But** : Enregistre un service qui initialise les objets avant validation
 
 Ce tag fournit un bout de fonctionnalité très peu commun qui vous permet
-d'effectuer une action sur un objet juste avant qu'il soit validé. Par exemple,
+d'effectuer une action sur un objet juste avant qu'il ne soit validé. Par exemple,
 cela est utilisé par Doctrine pour effectuer une requête de toutes les
 données « chargées de manière fainéante » (« lazy loading » en anglais)
 sur un objet avant qu'il ne soit validé. Sans cela, certaines données
