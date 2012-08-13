@@ -1,7 +1,7 @@
 .. index::
    single: Sécurité; Chemin Cible de Redirection
 
-Comment changer le Comportement par Défaut du Chemin Cible
+Comment changer le comportement par défaut du chemin cible
 ==========================================================
 
 Par défaut, le composant de sécurité conserve l'information de l'URI de la dernière
@@ -9,19 +9,19 @@ requête dans une variable de session nommée ``_security.target_path``. Lors
 d'une connexion réussie, l'utilisateur est redirigé vers ce chemin afin de l'aider
 à continuer sa visite en le renvoyant vers la dernière page connue qu'il a parcourue.
 
-Lors de certaines occasions, ceci est inattendu. Par exemple, quand l'URI de la
+Dans certains cas, ce n'est pas la meilleure solution. Par exemple, quand l'URI de la
 dernière requête est une méthode POST HTTP avec une route configurée pour
 accepter seulement une méthode POST, l'utilisateur est redirigé vers cette
 route et se retrouvera confronté inévitablement à une erreur 404.
 
 Pour contourner ce comportement, vous auriez simplement besoin d'étendre la
-classe ``ExceptionListener`` et d'outrepasser la méthode par défaut nommée
+classe ``ExceptionListener`` et surcharger la méthode par défaut nommée
 ``setTargetPath()``.
 
-Tout d'abord, outrepassez le paramètre ``security.exception_listener.class``
+Tout d'abord, surchargez le paramètre ``security.exception_listener.class``
 dans votre fichier de configuration. Cela peut être effectué depuis votre
 fichier de configuration principal (dans `app/config`) ou depuis un fichier
-de configuration étant importé depuis un bundle :
+de configuration importé depuis un bundle :
 
 .. configuration-block::
 
