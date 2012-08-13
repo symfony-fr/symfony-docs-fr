@@ -1,7 +1,7 @@
 .. index::
    single: Sécurité, Voteurs
 
-Comment implémenter votre propre Voteur pour ajouter des Adresses IP sur une liste noire
+Comment implémenter votre propre Voteur pour ajouter des adresses IP sur une liste noire
 ========================================================================================
 
 Le composant de sécurité de Symfony2 fournit plusieurs couches pour authentifier
@@ -34,7 +34,7 @@ qui requiert les trois méthodes suivantes :
 
 
 La méthode ``supportsAttribute()`` est utilisée pour vérifier si le voteur
-supporte l'attribut de l'utilisateur donné (i.e. un rôle, une ACL, etc.).
+supporte l'attribut de l'utilisateur donné (c-a-d un rôle, une ACL, etc.).
 
 La méthode ``supportsClass()`` est utilisée pour vérifier si le voteur
 supporte la classe du token de l'utilisateur courant.
@@ -105,7 +105,7 @@ C'est tout ! Votre voteur est terminé. La prochaine étape est d'injecter
 le voteur dans la couche de sécurité. Cela peut être effectué facilement
 à l'aide du conteneur de service.
 
-Déclarer le Voteur comme Service
+Déclarer le Voteur comme service
 --------------------------------
 
 Pour injecter le voteur dans la couche de sécurité, nous devons le déclarer
@@ -162,15 +162,15 @@ en tant que service, et le tagger comme un « security.voter » :
 
    Soyez sûr d'importer ce fichier de configuration depuis le fichier de configuration
    de votre application principale (par exemple : ``app/config/config.yml``). Pour plus
-   d'informations, voyez :ref:`service-container-imports-directive`. Pour en savoir plus
-   concernant la définition de services en général, voyez le chapitre
+   d'informations, lisez :ref:`service-container-imports-directive`. Pour en savoir plus
+   concernant la définition de services en général, lisez le chapitre
    :doc:`/book/service_container`.
 
-Changer la Stratégie de Décision d'Accès
+Changer la stratégie de décision d'accès
 ----------------------------------------
 
 Afin que votre nouveau voteur soit utilisé, nous devons changer la stratégie de
-décision d'accès par défaut, qui d'habitude autorise l'accès si *quelconque*
+décision d'accès par défaut, qui d'habitude autorise l'accès si *n'importe quel*
 voteur autorise l'accès.
 
 Dans notre cas, nous allons choisir la stratégie ``unanimous``. Contrairement
@@ -178,7 +178,7 @@ Dans notre cas, nous allons choisir la stratégie ``unanimous``. Contrairement
 seulement un voteur refuse l'accès (par exemple : le ``ClientIpVoter``), alors
 l'accès n'est pas autorisé pour l'utilisateur final.
 
-Pour faire cela, outrepassez la section par défaut ``access_decision_manager``
+Pour faire cela, surchargez la section par défaut ``access_decision_manager``
 du fichier de configuration de votre application avec le code suivant.
 
 .. configuration-block::
