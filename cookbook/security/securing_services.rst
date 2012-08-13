@@ -2,8 +2,8 @@
    single: Security; Securing any service
    single: Security; Securing any method
 
-Comment sécuriser quelconque Service ou Méthode de votre Application
-====================================================================
+Comment sécuriser n'importe quel service ou méthode de votre application
+========================================================================
 
 Dans le chapitre sur la sécurité, vous pouvez voir comment
 :ref:`sécuriser un contrôleur<book-security-securing-controller>` en
@@ -22,7 +22,7 @@ Service et en vérifiant le rôle actuel de l'utilisateur::
         // ...
     }
 
-Vous pouvez aussi sécuriser *quelconque* service d'une manière similaire en lui injectant
+Vous pouvez aussi sécuriser *n'importe quel* service d'une manière similaire en lui injectant
 le service ``security.context``. Pour une introduction générale sur l'injection
 de dépendances dans un service, voyez le chapitre :doc:`/book/service_container` du
 book. Par exemple, supposons que vous ayez une classe ``NewsletterManager`` qui envoie
@@ -47,8 +47,8 @@ la classe ressemble à ceci :
 
 Votre but est de vérifier le rôle de l'utilisateur lorsque la méthode
 ``sendNewsletter()`` est appelée. La première étape pour y parvenir est d'injecter
-le service ``security.context`` dans l'objet. Sachant que cela ne ferait pas de sens
-de *ne pas* effectuer une vérification de sécurité, nous avons ici un candidat
+le service ``security.context`` dans l'objet. Sachant qu'il serait assez risqué
+de *ne pas* effectuer de vérification de sécurité, nous avons ici un candidat
 idéal pour l'injection via le constructeur, qui garantit que l'objet du contexte
 de sécurité sera disponible dans la classe ``NewsletterManager``::
 
@@ -142,10 +142,10 @@ de sécurité lorsque la méthode ``sendNewsletter()`` est appelée::
 Si l'utilisateur actuel ne possède pas le rôle ``ROLE_NEWSLETTER_ADMIN``,
 il lui sera demandé de se connecter.
 
-Sécuriser des Méthodes en Utilisant des Annotations
+Sécuriser des méthodes en utilisant des annotations
 ---------------------------------------------------
 
-Vous pouvez aussi sécuriser des appels de méthodes dans quelconque service avec
+Vous pouvez aussi sécuriser des appels de méthodes dans n'importe quel service avec
 des annotations en utilisant le bundle optionnel `JMSSecurityExtraBundle`_. Ce
 bundle est inclus dans la Distribution Standard de Symfony2.
 
@@ -224,14 +224,14 @@ une annotation::
     avec des méthodes marquées comme « final »
 
 Le ``JMSSecurityExtraBundle`` vous permet aussi de sécuriser les paramètres et
-les valeurs retournées par les méthodes. Pour plus d'informations, voir la
+les valeurs retournées par les méthodes. Pour plus d'informations, lisez la
 documentation du `JMSSecurityExtraBundle`_.
 
 .. _securing-services-annotations-sidebar:
 
 .. sidebar:: Activer la Fonctionnalité des Annotations pour tous les Services
 
-    Quand vous sécurisez la méthode d'un service (comme montré ci-dessus), vous
+    Quand vous sécurisez la méthode d'un service (comme expliqué ci-dessus), vous
     pouvez soit tagger chaque service individuellement, ou activer la
     fonctionnalité pour *tous* les services en une seule fois. Pour ce faire,
     définissez l'option de configuration ``secure_all_services`` à « true » :
@@ -265,7 +265,7 @@ documentation du `JMSSecurityExtraBundle`_.
                 'secure_all_services' => true,
             ));
 
-    Le désavantage de cette méthode est que, si elle est activée, le chargement
+    L'inconvénient de cette méthode est que, si elle est activée, le chargement
     initial de la page pourrait être très lent selon le nombre de services que
     vous avez défini.
 
