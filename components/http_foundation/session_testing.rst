@@ -2,42 +2,44 @@
    single: HTTP
    single: HttpFoundation, Sessions
 
-Testing with Sessions
-=====================
+Tester avec les Sessions
+========================
 
-Symfony2 is designed from the ground up with code-testability in mind. In order
-to make your code which utilizes session easily testable we provide two separate
-mock storage mechanisms for both unit testing and functional testing.
+Symfony2 est architecturé depuis ses propres fondations avec l'objectif
+en tête que le code soit testable. Afin de rendre votre code utilisant les
+sessions facilement testable, nous fournissons deux mécanismes de simulation
+de stockage pour les tests unitaires et fonctionnels.
 
-Testing code using real sessions is tricky because PHP's workflow state is global
-and it is not possible to have multiple concurrent sessions in the same PHP
-process.
+Tester du code en utilisant des sessions réelles est délicat car le flux
+des états dans PHP est global et il n'est pas possible d'avoir plusieurs
+sessions concurrentes dans le même processus PHP.
 
-The mock storage engines simulate the PHP session workflow without actually
-starting one allowing you to test your code without complications. You may also
-run multiple instances in the same PHP process.
+Les moteurs de simulation de stockage simulent le flux d'une session PHP
+sans en démarrer une en fait ; ce qui vous permet de tester votre code sans
+avoir de complications. Vous pourriez aussi exécuter plusieurs instances
+dans le même processus PHP.
 
-The mock storage drivers do not read or write the system globals
-`session_id()` or `session_name()`. Methods are provided to simulate this if
-required:
+Les « drivers » de simulation de stockage ne lisent ni écrivent les variables
+globales du système `session_id()` ou `session_name()`. Des méthodes sont
+fournies pour simuler cela si nécessaire :
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::getId`: Gets the
-  session ID.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::getId`:
+  Récupère l'ID de la session.
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::setId`: Sets the
-  session ID.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::setId`:
+  Définit l'ID de la session.
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::getName`: Gets the
-  session name.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::getName`:
+  Récupère le nom de la session.
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::setName`: Sets the
-  session name.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::setName`:
+  Définit le nom de la session.
 
-Unit Testing
-------------
+Tester de manière Unitaire
+--------------------------
 
-For unit testing where it is not necessary to persist the session, you should
-simply swap out the default storage engine with
+Pour tester unitairement où il n'est pas nécessaire de persister la session,
+vous devriez simplement permuter le moteur de stockage par défaut avec
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\MockArraySessionStorage`::
 
     use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
@@ -45,15 +47,15 @@ simply swap out the default storage engine with
 
     $session = new Session(new MockArraySessionStorage());
 
-Functional Testing
-------------------
+Tester de manière Fonctionnelle
+-------------------------------
 
-For functional testing where you may need to persist session data across
-separate PHP processes, simply change the storage engine to
+Pour tester de manière fonctionnelle où vous pourriez avoir besoin de persister
+les données de session à travers des processus PHP séparés, changer simplement
+le moteur de stockage pour être
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\MockFileSessionStorage`::
 
     use Symfony\Component\HttpFoundation\Session\Session;
     use Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage;
 
     $session = new Session(new MockFileSessionStorage());
-
