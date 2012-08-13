@@ -2,7 +2,7 @@ Définir des Relations avec des Classes Abstraites et des Interfaces
 ===================================================================
 
 .. versionadded: 2.1
-    Le ResolveTargetEntityListener est nouveau dans Doctrine 2.2, qui a été
+    Le ResolveTargetEntityListener est une nouveauté de Doctrine 2.2, qui a été
     « packagé » pour la première fois avec Symfony 2.1.
 
 L'un des buts des bundles est de créer des ensembles distincts de fonctionnalités
@@ -94,7 +94,7 @@ Une « InvoiceSubjectInterface »::
     /**
      * Une interface que le sujet de la facture devrait implémenter.
      * Dans la plupart des circonstances, il ne devrait y avoir qu'un unique objet
-     * qui implémente cette interface comme le ResolveTargetEntityListener peut
+     * qui implémente cette interface puisque le ResolveTargetEntityListener peut
      * changer seulement la cible d'un objet unique.
      */
     interface InvoiceSubjectInterface
