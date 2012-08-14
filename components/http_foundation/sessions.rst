@@ -2,329 +2,348 @@
    single: HTTP
    single: HttpFoundation, Sessions
 
-Session Management
+Gestion de Session
 ==================
 
-The Symfony2 HttpFoundation Component has a very powerful and flexible session
-subsystem which is designed to provide session management through a simple
-object-oriented interface using a variety of session storage drivers.
+Le Composant HttpFoundation de Symfony2 possède un sous-système de session
+très flexible et puissant qui est implémenté de façon à fournir une gestion
+de session à travers une interface orientée-objet simple et utilisant une
+variété de « drivers » de stockage de session.
 
 .. versionadded:: 2.1
-    The :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface` interface,
-    as well as a number of other changes, are new as of Symfony 2.1.
+    L'interface :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface`,
+    de même que de nombreux autres changements, sont nouveaux depuis Symfony 2.1.
 
-Sessions are used via the simple :class:`Symfony\\Component\\HttpFoundation\\Session\\Session`
-implementation of :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface` interface.
+Les sessions sont utilisées via l'implémentation simple de
+:class:`Symfony\\Component\\HttpFoundation\\Session\\Session` de l'interface
+:class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface`.
 
-Quick example::
+Rapide exemple::
 
     use Symfony\Component\HttpFoundation\Session\Session;
 
     $session = new Session();
     $session->start();
 
-    // set and get session attributes
+    // définit et récupère des attributs de session
     $session->set('name', 'Drak');
     $session->get('name');
 
-    // set flash messages
+    // définit des messages dits « flash »
     $session->getFlashBag()->add('notice', 'Profile updated');
 
-    // retrieve messages
+    // récupère des messages
     foreach ($session->getFlashBag()->get('notice', array()) as $message) {
         echo "<div class='flash-notice'>$message</div>";
     }
 
 .. note::
 
-    Symfony sessions are designed to replace several native PHP funtions.
-    Applications should avoid using ``session_start()``, ``session_regenerate_id()``,
-    ``session_id()``, ``session_name()``, and ``session_destroy()`` and instead
-    use the APIs in the following section.
+    Les sessions de Symfony sont implémentées pour remplacer plusieurs
+    fonctions PHP natives. Les applications devraient éviter d'utiliser
+    ``session_start()``, ``session_regenerate_id()``, ``session_id()``,
+    ``session_name()``, et ``session_destroy()`` et utiliser à la place
+    les APIs de la section suivante.
 
 .. note::
 
-    While it is recommended to explicitly start a session, a sessions will actually
-    start on demand, that is, if any session request is made to read/write session
-    data.
+    Bien qu'il soit recommandé de démarrer une session explicitement, une
+    session va en fait être démarrer sur demande, ce qui veut dire, si
+    toute requête d'une session est faite pour lire/écrire des données de
+    session.
 
 .. warning::
 
-    Symfony sessions are incompatible with PHP ini directive ``session.auto_start = 1``
-    This directive should be turned off in ``php.ini``, in the webserver directives or
-    in ``.htaccess``.
+    Les sessions de Symfony sont incompatibles avec la directive PHP ini
+    ``session.auto_start = 1``. Cette directive devrait être désactivée
+    dans le fichier ``php.ini``, dans les directives du serveur web ou
+    dans un fichier ``.htaccess``.
 
-Session API
-~~~~~~~~~~~
+API de Session
+~~~~~~~~~~~~~~
 
-The :class:`Symfony\\Component\\HttpFoundation\\Session\\Session` class implements
-:class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface`.
+La classe :class:`Symfony\\Component\\HttpFoundation\\Session\\Session`
+implémente :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionInterface`.
 
-The :class:`Symfony\\Component\\HttpFoundation\\Session\\Session` has a simple API
-as follows divided into a couple of groups.
+La classe :class:`Symfony\\Component\\HttpFoundation\\Session\\Session`
+possède une API simple comme suit (divisée en différents groupes).
 
-Session workflow
+Flux de fonctionnement d'une session
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::start`:
-  Starts the session - do not use ``session_start()``.
+  Démarre la session - ne pas utiliser ``session_start()`` ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::migrate`:
-  Regenerates the session id - do not use ``session_regenerate_id()``.
-  This method can optionally change the lifetime of the new cookie that will
-  be emitted by calling this method.
+  Regénère l'ID de la session - ne pas utiliser ``session_regenerate_id()``.
+  Cette méthode peut optionnellement changer la durée de vie du nouveau
+  cookie qui va être émis lors de l'appel de cette méthode ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::invalidate`:
-  Clears the session data and regenerates the session id do not use ``session_destroy()``.
-  This is a shortcut for ``clear()`` and ``migrate()``.
+  Supprime les données de la session et regénère l'ID de la session - ne pas
+  utiliser ``session_destroy()``.
+  C'est un raccourci pour les méthodes ``clear()`` et ``migrate()`` ;
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getId`: Gets the
-  session ID. Do not use ``session_id()``.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getId`:
+  Récupère l'ID de la session - ne pas utiliser ``session_id()`` ;
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::setId`: Sets the
-  session ID. Do not use ``session_id()``.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::setId`:
+  Définit l'ID de la session - ne pas utiliser ``session_id()`` ;
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getName`: Gets the
-  session name. Do not use ``session_name()``.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getName`:
+  Récupère le nom de la session - ne pas utiliser ``session_name()`` ;
 
-* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::setName`: Sets the
-  session name. Do not use ``session_name()``.
+* :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::setName`:
+  Définit le nom de la session - ne pas utiliser ``session_name()`` ;
 
-Session attributes
+Attributs de session
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::set`:
-  Sets an attribute by key;
+  Définit un attribut par clé ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::get`:
-  Gets an attribute by key;
+  Récupère un attribut par clé ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::all`:
-  Gets all attributes as an array of key => value;
+  Récupère tous les attributs sous forme de tableau de paires clé => valeur ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::has`:
-  Returns true if the attribute exists;
+  Retourne « true » si l'attribut existe ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::keys`:
-  Returns an array of stored attribute keys;
+  Retourne un tableau contenant les clés des attributs ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::replace`:
-  Sets multiple attributes at once: takes a keyed array and sets each key => value pair.
+  Définit plusieurs attributs en une fois : prend un tableau de clés et
+  définit chaque paire de clé => valeur ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::remove`:
-  Deletes an attribute by key;
+  Supprime un attribut par clé ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::clear`:
-  Clear all attributes;
+  Supprime tous les attributs.
 
-The attributes are stored internally in an "Bag", a PHP object that acts like
-an array. A few methods exist for "Bag" management:
+Les attributs sont stockés en interne dans un « Bag » (« sac » en français),
+un objet PHP qui agit comme un tableau. Quelques méthodes existent pour
+gérer ce « Bag » :
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::registerBag`:
-  Registers a :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface`
+  Enregistre une :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface` ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getBag`:
-  Gets a :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface` by
-  bag name.
+  Récupère une :class:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface`
+  par nom de « bag » ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getFlashBag`:
-  Gets the :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`.
-  This is just a shortcut for convenience.
+  Récupère la :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`.
+  Ceci est juste un raccourci pour plus de commodité.
 
-Session meta-data
+Métadonnées de session
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getMetadataBag`:
-  Gets the :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\MetadataBag`
-  which contains information about the session.
+  Récupère le :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\MetadataBag`
+  qui contient des informations à propos de la session.
 
+Gestion de données de session
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Session Data Management
-~~~~~~~~~~~~~~~~~~~~~~~
+La gestion de session de PHP requiert l'utilisation de la variable super-globale
+``$_SESSION``, cependant, cela interfère d'une certaine manière avec la
+testabilité du code et l'encapsulation dans un paradigme POO. Pour aider
+à résoudre ce soucis, Symfony2 utilise des « bags de session » (« sacs
+de session » en français) liés à la session pour encapsuler un ensemble
+de données spécifique d'« attributs » ou de « messages flash ».
 
-PHP's session management requires the use of the ``$_SESSION`` super-global,
-however, this interferes somewhat with code testability and encapsulation in a
-OOP paradigm. To help overcome this, Symfony2 uses 'session bags' linked to the
-session to encapsulate a specific dataset of 'attributes' or 'flash messages'.
+Cette approche diminue aussi la « pollution » de l'espace de noms dans
+la variable super-globale ``$_SESSION`` car chaque sac stocke toutes ses
+données sous un espace de noms unique. Cela permet à Symfony2 de co-exister
+en toute quiétude avec d'autres applications ou bibliothèques qui pourrait
+utiliser la varible super-globale ``$_SESSION`` et toutes ses données restent
+entièrement compatible avec la gestion de session de Symfony2.
 
-This approach also mitigates namespace pollution within the ``$_SESSION``
-super-global because each bag stores all its data under a unique namespace.
-This allows Symfony2 to peacefully co-exist with other applications or libraries
-that might use the ``$_SESSION`` super-global and all data remains completely
-compatible with Symfony2's session management.
+Symfony2 fournit deux sortes de sacs de stockage, avec deux implémentations
+séparées. Tout est écrit à l'aide d'interfaces donc vous pourriez étendre
+ou créer votre propre sac si nécessaire.
 
-Symfony2 provides 2 kinds of storage bags, with two separate implementations.
-Everything is written against interfaces so you may extend or create your own
-bag types if necessary.
-
-:class:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface` has
-the following API which is intended mainly for internal purposes:
+:class:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface`
+possède l'API suivante qui est destinée principalement à des fins internes :
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface::getStorageKey`:
-  Returns the key which the bag will ultimately store its array under in ``$_SESSION``.
-  Generally this value can be left at its default and is for internal use.
+  Retourne la clé sous laquelle le sac va stocker au final son tableau
+  dans la variable super-globale ``$_SESSION`` ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface::initialize`:
-  This is called internally by Symfony2 session storage classes to link bag data
-  to the session.
+  Cette méthode est appelée en interne par les classes de stockage de session
+  de Symfony2 pour lier les données du sac à la session ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionBagInterface::getName`:
-  Returns the name of the session bag.
+  Retourne le nom du sac de session.
 
+Attributs
+~~~~~~~~~
 
-Attributes
-~~~~~~~~~~
-
-The purpose of the bags implementing the :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface`
-is to handle session attribute storage. This might include things like user ID,
-and remember me login settings or other user based state information.
+Le but des « sacs » implémentant l'interface :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface`
+est de gérer le stockage des attributs de session. Cela peut inclure des
+choses comme l'ID utilisateur, les paramètres concernant le login tel
+« Se souvenir de moi » ou d'autres informations à propos de l'état de l'utilisateur.
 
 * :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBag`
-  This is the standard default implementation.
+  Cela est l'implémentation standard par défaut ;
 
 * :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\NamespacedAttributeBag`
-  This implementation allows for attributes to be stored in a structured namespace.
+  Cette implémentation permet aux attributs d'être stockés dans un espace
+  de noms structuré.
 
-Any plain `key => value` storage system is limited in the extent to which
-complex data can be stored since each key must be unique. You can achieve
-namespacing by introducing a naming convention to the keys so different parts of
-your application could operate without clashing. For example, `module1.foo` and
-`module2.foo`. However, sometimes this is not very practical when the attributes
-data is an array, for example a set of tokens. In this case, managing the array
-becomes a burden because you have to retrieve the array then process it and
-store it again::
+Tout système de stockage `clé => valeur` est limité quant aux données complexes
+qui peuvent être stockées puisque chaque clé doit être unique. Vous pouvez
+néanmoins utiliser les espaces de noms en introduisant une convention de
+nommage pour les clés afin que les différentes parties de votre application
+puissent fonctionner sans heurt. Par exemple, `module1.foo` et `module2.foo`.
+Cependant, parfois, cela n'est pas très pratique quand les données des attributs
+sont sous la forme d'un tableau, par exemple pour un ensemble de jetons.
+Dans ce cas, gérer le tableau devient un fardeau car vous devez récupérer
+le tabeau puis le traiter et le stocker de nouveau::
 
     $tokens = array('tokens' => array('a' => 'a6c1e0b6',
                                       'b' => 'f4a7b1f3'));
 
-So any processing of this might quickly get ugly, even simply adding a token to
-the array::
+Du coup, quelconque traitement similaire à ce que vous avez ci-dessus pourrait
+vite devenir moche, même en ajoutant simplement un jeton au tableau::
 
     $tokens = $session->get('tokens');
     $tokens['c'] = $value;
     $session->set('tokens', $tokens);
 
-With structured namespacing, the the key can be translated to the array
-structure like this using a namespace character (defaults to `/`)::
+Avec un espace de noms structuré, la clé peut être traduite en une structure
+en tableau comme ceci en utilisant un caractère d'espace de noms (par défaut
+`/`)::
 
     $session->set('tokens/c', $value);
 
-This way you can easily access a key within the stored array directly and easily.
+De cette manière, vous pouvez facilement accéder à une clé du tableau stocké.
 
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface`
-has a simple API
+possède une API simple :
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::set`:
-  Sets an attribute by key;
+  Définit un attribut par clé ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::get`:
-  Gets an attribute by key;
+  Récupère un attribut par clé ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::all`:
-  Gets all attributes as an array of key => value;
+  Récupère tous les attributs en tant que tableau « clé => valeur » ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::has`:
-  Returns true if the attribute exists;
+  Retourne « true » si l'attribut existe ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::keys`:
-  Returns an array of stored attribute keys;
+  Retourne un tableau des clés d'attributs stockés ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::replace`:
-  Sets multiple attributes at once: takes a keyed array and sets each key => value pair.
+  Définit plusieurs attributs en une fois : prend un tableau de clés et
+  définit chaque paire de clé => valeur ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::remove`:
-  Deletes an attribute by key;
+  Supprime un attribut par sa clé ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::clear`:
-  Clear the bag;
+  Supprime le sac.
 
-
-Flash messages
+Messages flash
 ~~~~~~~~~~~~~~
 
-The purpose of the :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`
-is to provide a way of settings and retrieving messages on a per session basis.
-The usual workflow for flash messages would be set in an request, and displayed
-after a page redirect. For example, a user submits a form which hits an update
-controller, and after processing the controller redirects the page to either the
-updated page or an error page. Flash messages set in the previous page request
-would be displayed immediately on the subsequent page load for that session.
-This is however just one application for flash messages.
+Le but de l'interface :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`
+est de fournir une manière de définir et récupérer des messages par session.
+Le flux standard pour les messages flash serait la définition du message
+dans une requête, et l'affichage après une redirection vers une autre page.
+Par exemple, un utilisateur soumet un formulaire qui passe par un contrôleur
+de mise à jour, et ensuite, à la fin de ce contrôleur, ce dernier redirige
+la page vers celle mise à jour ou vers une page d'erreur. Le message flash
+défini dans la requête de la page précédente serait donc affiché immédiatement
+dans la page suivante de cette session. Cela n'est qu'un exemple d'utilisation
+des messages flash.
 
 * :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\AutoExpireFlashBag`
-   This implementation messages set in one page-load will
-   be available for display only on the next page load. These messages will auto
-   expire regardless of if they are retrieved or not.
+  Cette implémentation de la définition des messages flash ne sera disponible
+  que durant l'affichage de la prochaine page. Ces messages vont expirer
+  de manière automatique suivant s'ils ont été recupérés ou non ;
 
 * :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBag`
-   In this implementation, messages will remain in the session until
-   they are explicitly retrieved or cleared. This makes it possible to use ESI
-   caching.
+  Dans cette implémentation, les messages vont rester dans la session jusqu'à
+  ce qu'ils soient explicitement récupérés ou supprimés. Cela rend donc
+  possible l'utilisation du mécanisme de cache ESI.
 
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface`
-has a simple API
+possède une API simple :
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::add`:
-  Adds a flash message to the stack of specified type;
+  Ajoute un message flash à la pile du type spécifié ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::set`:
-  Sets flashes by type;  This method conveniently takes both singles messages as
-  a ``string`` or multiple messages in an ``array``.
+  Définit des flashs par type ; cette méthode prend soit un message « unique »
+  en tant que ``chaîne de caractères`` ou plusieurs messages dans un ``tableau`` ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::get`:
-  Gets flashes by type and clears those flashes from the bag;
+  Récupère les flashs par type et supprime ces derniers du sac ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::setAll`:
-  Sets all flashes, accepts a keyed array of arrays ``type => array(messages)``;
+  Définit tous les flashs ; accepte un tableau à clé de tableaux ``type => array(messages)`` ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::all`:
-  Gets all flashes (as a keyed array of arrays) and clears the flashes from the bag;
+  Récupère tous les flashs (en tant que tableau à clé de tableaux) et supprime
+  les flashs du sac ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::peek`:
-  Gets flashes by type (read only);
+  Récupère tous les flashs par type (lecture seulement) ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::peekAll`:
-  Gets all flashes (read only) as keyed array of arrays;
+  Récupère tous les flashs (lecture seulement) en tant que tableau à clé
+  de tableaux ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::has`:
-  Returns true if the type exists, false if not;
+  Retourne « true » si le type existe, « false » sinon ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::keys`:
-  Returns an array of the stored flash types;
+  Retourne un tableau des types de flash stockés ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBagInterface::clear`:
-  Clears the bag;
+  Supprime le sac.
 
-For simple applications it is usually sufficient to have one flash message per
-type, for example a confirmation notice after a form is submitted. However,
-flash messages are stored in a keyed array by flash ``$type`` which means your
-application can issue multiple messages for a given type. This allows the API
-to be used for more complex messaging in your application.
+Pour des applications simples, il est généralement suffisant d'avoir un
+message flash par type, par exemple une notification de confirmation après
+qu'un formulaire ait été soumis. Cependant, les messages flash sont stockés
+dans un tableau à clé par ``$type`` de flash qui signifie que votre application
+peut émettre plusieurs messages pour un type donné. Cela permet à l'API
+d'être utilisée pour un système de messages plus complexe dans votre application.
 
-Examples of setting multiple flashes::
+Exemples de définition de plusieurs flashs::
 
     use Symfony\Component\HttpFoundation\Session\Session;
 
     $session = new Session();
     $session->start();
 
-    // add flash messages
+    // ajoute des messages flash
     $session->getFlashBag()->add('warning', 'Your config file is writable, it should be set read-only');
     $session->getFlashBag()->add('error', 'Failed to update name');
     $session->getFlashBag()->add('error', 'Another error');
 
-Displaying the flash messages might look like this:
+Afficher les messages flash pourrait ressembler à quelque chose comme ca :
 
-Simple, display one type of message::
+Affiche simplement un type de message::
 
-    // display warnings
+    // affiche les avertissements
     foreach ($session->getFlashBag()->get('warning', array()) as $message) {
         echo "<div class='flash-warning'>$message</div>";
     }
 
-    // display errors
+    // affiche les erreurs
     foreach ($session->getFlashBag()->get('error', array()) as $message) {
         echo "<div class='flash-error'>$message</div>";
     }
 
-Compact method to process display all flashes at once::
+Méthode compacte de traitement de l'affichage de tous les flashs en une
+seule fois::
 
     foreach ($session->getFlashBag()->all() as $type => $messages) {
         foreach ($messages as $message) {
