@@ -1,7 +1,7 @@
 ﻿.. index::
    single: Dependency Injection; Service Definitions
 
-Travailler avec les Paramètres et Définitions du Conteneur
+Travailler avec les paramètres et définitions du conteneur
 ==========================================================
 
 Récupérer et Définir les Paramètres du Conteneur
@@ -21,7 +21,7 @@ et définir un paramètre dans le conteneur grâce à::
 
     $container->setParameter($name, $value);
 
-Récupérer et Définir les Définitions de Service
+Récupérer et définir les définitions de service
 -----------------------------------------------
 
 Il existe aussi des méthodes utiles pour travailler avec les
@@ -77,7 +77,7 @@ et pour définir une classe différente::
 
     $definition->setClass($class); // nom de classe entièrement qualifié en tant que chaîne de caractères
 
-Arguments du Constructeur
+Arguments du constructeur
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour récupérer un tableau contenant les arguments du constructeur pour une
@@ -113,11 +113,11 @@ s'il n'y en a pas) par un tableau d'arguments::
 
     $definition->replaceArguments($arguments);
 
-Appels de Méthode
+Appels de méthode
 ~~~~~~~~~~~~~~~~~
 
 Si le service avec lequel vous travaillez utilise l'injection par mutateur (« setter »
-en anglais), alors vous pouvez aussi manipuler quelconques appels de méthode dans
+en anglais), alors vous pouvez aussi manipuler n'importe quels appels de méthode dans
 les définitions.
 
 Vous pouvez récupérer un tableau de tous les appels de méthode avec::
