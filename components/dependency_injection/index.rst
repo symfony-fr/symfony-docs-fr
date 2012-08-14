@@ -1,4 +1,4 @@
-﻿Injection de Dépendance
+Injection de Dépendance
 =======================
 
 .. toctree::
