@@ -7,8 +7,8 @@ Le Composant d'Injection de Dépendance (« Dependency Injection » en anglais)
     Le composant d'Injection de Dépendance vous permet de standardiser et de
     centraliser la manière dont les objets sont construits dans votre application.
 
-Pour une introduction sur le sujet de l'Injection de Dépendance et des conteneurs
-de service, voir :doc:`/book/service_container`.
+Pour une introduction sur l'Injection de Dépendance et des conteneurs
+de service, lisez le chapitre :doc:`/book/service_container`.
 
 Installation
 ------------
@@ -22,7 +22,7 @@ Vous pouvez installer le composant de différentes manières :
 Utilisation Basique
 -------------------
 
-Vous pourriez avoir une classe toute simple telle ``Mailer``, que l'on peut
+Vous pourriez avoir une classe toute simple comme par exemple ``Mailer``, que l'on peut
 voir ci-dessous, que vous voulez rendre disponible en tant que service :
 
 
@@ -86,7 +86,7 @@ l'implémentation de la classe.
 Le mode de transport d'email que vous avez choisi pourrait être quelque chose
 que d'autres services ont besoin de connaître. Vous pouvez éviter d'avoir à le
 changer à différents endroits en en faisant un paramètre dans le conteneur et
-en y référant par la suite lorsque vous définissez l'argument du constructeur
+en y faisant référence par la suite lorsque vous définissez l'argument du constructeur
 du service ``Mailer`` :
 
 .. code-block:: php
@@ -135,7 +135,7 @@ service ``mailer`` :
     $container->register('newsletter_manager', 'NewsletterManager')
         ->addArgument(new Reference('mailer');
 
-Si le ``NewsletterManager`` n'avait pas requis le ``Mailer`` et que l'injection
+Si le ``NewsletterManager`` n'avait pas toujours besoin du ``Mailer`` et que l'injection
 était optionnelle, alors vous pourriez utiliser une injection par mutateur à
 la place :
 
@@ -187,7 +187,7 @@ le conteneur comme cela :
 
     $newsletterManager = $container->get('newsletter_manager');
 
-Eviter que Votre Code Devienne Dépendant du Conteneur
+Eviter que votre code devienne dépendant du Conteneur
 -----------------------------------------------------
 
 Tandis que vous pouvez récupérer directement des services depuis le conteneur,
@@ -202,7 +202,7 @@ Vous allez devoir récupérer un service depuis le conteneur à un moment ou à
 un autre mais cela devrait être limité autant que possible au point d'entrée
 de votre application.
 
-Initialiser le Conteneur avec des Fichiers de Configuration
+Initialiser le Conteneur avec des fichiers de configuration
 -----------------------------------------------------------
 
 Tout comme vous avez initialisé vos services en utilisant PHP ci-dessus,
