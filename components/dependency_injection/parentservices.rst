@@ -1,13 +1,13 @@
 .. index::
    single: Dependency Injection; Parent Services
 
-Gérer les Dépendances Communes avec des Services Parents
+Gérer les dépendances communes avec des services parents
 ========================================================
 
 Au fur et à mesure que vous ajoutez de la fonctionnalité à votre application, vous
 pourriez commencer à avoir des classes liées partageant les mêmes dépendances. Par
 exemple, vous pourriez avoir un gestionnaire de lettres d'information (« Newsletter
-Manager » en anglais) qui utilise l'injection via mutateur pour définir ses dépendances::
+Manager » en anglais) qui utilise l'injection via des mutateurs pour définir ses dépendances::
 
     class NewsletterManager
     {
@@ -133,7 +133,7 @@ chose comme ça :
             new Reference('my_email_formatter')
         ));
 
-Il y a beaucoup de répétitions dans chacune des classes et de la configuration.
+Il y a beaucoup de répétitions dans chacune des classes et dans la configuration.
 Cela signifie que si vous changiez, par exemple, le ``Mailer`` des classes de
 ``EmailFormatter`` injecté via le constructeur, vous devriez mettre à jour
 la configuration à deux endroits. De même, si vous deviez effectuer des
@@ -285,14 +285,14 @@ comme cela a été fait ci-dessus signifiera qu'elle ne peut être utilisée
 uniquement en tant que service parent et ne peut pas être utilisée directement
 en tant que service à injecter et sera supprimée au moment de la compilation.
 
-Outrepasser des Dépendances Parentes
-------------------------------------
+Surcharger des dépendances parentes
+-----------------------------------
 
-Il se peut qu'à un moment ou à un autre vous souhaitiez outrepasser quelle
+Il se peut qu'à un moment ou à un autre vous souhaitiez surcharger quelle
 classe est passée en tant que dépendance d'un seul de vos services enfants.
 Heureusement, en ajoutant la configuration d'appel de méthode pour
 le service enfant, les dépendances définies par la classe parente seront
-outrepassées. Donc si vous aviez besoin de passer une dépendance différente
+surchargées. Donc si vous aviez besoin de passer une dépendance différente
 uniquement à la classe ``NewsletterManager``, la configuration ressemblerait à
 quelque chose comme ça :
 
@@ -403,19 +403,19 @@ La classe ``GreetingCardManager`` va recevoir les mêmes dépendances qu'avant,
 mais la classe ``NewsletterManager`` quant à elle va avoir le service
 ``my_alternative_mailer` à la place du service ``my_mailer``.
 
-Collections de Dépendances
+Collections de dépendances
 --------------------------
 
-Veuillez noter que la méthode de mutation outrepassée dans l'exemple
+Veuillez noter que la méthode de mutation surchargée dans l'exemple
 précédent est en fait appelée deux fois - une fois par la définition
 du parent et une fois par la définition de l'enfant. Dans l'exemple
 précédent, cela fonctionnait bien, puisque le second appel à ``setMailer``
 remplaçait l'objet ``mailer`` défini par le premier appel.
 
 Dans certains cas, cependant, cela peut être problématique. Par exemple,
-si l'appel de la méthode outrepassé implique l'ajout de quelque chose à une
+si l'appel de la méthode surchargée implique l'ajout de quelque chose à une
 collection, alors deux objets seront ajoutés à cette collection. Ce qui
-suit montre un tel cas, avec une classe parente qui ressemble à ça::
+suit montre un tel cas, avec une classe parente qui ressemble à cela::
 
     abstract class MailManager
     {
