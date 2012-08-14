@@ -1,33 +1,35 @@
 .. index::
    single: Dependency Injection; Advanced configuration
 
-Advanced Container Configuration
-================================
+Configuration Avancée du Conteneur
+==================================
 
-Marking Services as public / private
-------------------------------------
+Marquer les Services comme public / privé
+-----------------------------------------
 
-When defining services, you'll usually want to be able to access these definitions
-within your application code. These services are called ``public``. For example,
-the ``doctrine`` service registered with the container when using the DoctrineBundle
-is a public service as you can access it via::
+Lorsque vous définissez des services, vous allez généralement vouloir avoir
+accès à ces définitions depuis le code de votre application. Ces services
+sont dits ``publics``. Par exemple, le service ``doctrine`` enregistré dans
+le conteneur lorsque vous utilisez le DoctrineBundle est un service public
+que vous pouvez accéder via::
 
    $doctrine = $container->get('doctrine');
 
-However, there are use-cases when you don't want a service to be public. This
-is common when a service is only defined because it could be used as an
-argument for another service.
+Cependant, il y a des cas où vous ne souhaitez pas qu'un service soit public.
+Cela est commun quand un service est défini seulement pour être utilisé
+comme argument d'un autre service.
 
 .. note::
 
-    If you use a private service as an argument to more than one other service,
-    this will result in two different instances being used as the instantiation
-    of the private service is done inline (e.g. ``new PrivateFooBar()``).
+    Si vous utilisez un service privé comme argument de plus d'un autre
+    service, cela résultera en deux différentes instances étant utilisées
+    puisque l'instanciation du service privé est faite durant l'exécution
+    (par exemple : ``new PrivateFooBar()``).
 
-Simply said: A service will be private when you do not want to access it
-directly from your code.
+Pour faire simple : un service est privé quand vous ne voulez pas y accéder
+directement depuis votre code.
 
-Here is an example:
+Voici un exemple :
 
 .. configuration-block::
 
@@ -48,23 +50,23 @@ Here is an example:
         $definition->setPublic(false);
         $container->setDefinition('foo', $definition);
 
-Now that the service is private, you *cannot* call::
+Maintenant que le service est privé, vous *ne pouvez pas* l'appeler::
 
     $container->get('foo');
 
-However, if a service has been marked as private, you can still alias it (see
-below) to access this service (via the alias).
+Cependant, si un service a été marqué comme privé, vous pouvez toujours
+créer un alias de ce dernier (voir ci-dessous) pour y accéder (via l'alias).
 
 .. note::
 
-   Services are by default public.
+   Les services sont par défaut publics.
 
-Aliasing
---------
+Créer un alias
+--------------
 
-You may sometimes want to use shortcuts to access some services. You can
-do so by aliasing them and, furthermore, you can even alias non-public
-services.
+Parfois, vous pourriez vouloir utiliser des raccourcis pour accéder à certains
+de vos services. Vous pouvez faire cela en créant des alias pour ces derniers ;
+de plus, vous pouvez même créer des alias pour les services non-publics.
 
 .. configuration-block::
 
@@ -89,16 +91,18 @@ services.
 
         $containerBuilder->setAlias('bar', 'foo');
 
-This means that when using the container directly, you can access the ``foo``
-service by asking for the ``bar`` service like this::
+Cela signifie que lorsque vous utilisez le conteneur directement, vous
+pouvez accéder au service ``foo`` en demandant le service ``bar`` comme
+cela::
 
-    $container->get('bar'); // Would return the foo service
+    $container->get('bar'); // Retournerait le service foo
 
-Requiring files
----------------
+Requérir des fichiers
+---------------------
 
-There might be use cases when you need to include another file just before
-the service itself gets loaded. To do so, you can use the ``file`` directive.
+Il pourrait y avoir des cas où vous aurez besoin d'inclure un autre fichier
+juste avant que le service lui-même soit chargé. Pour faire cela, vous
+pouvez utiliser la directive ``file``.
 
 .. configuration-block::
 
@@ -121,5 +125,5 @@ the service itself gets loaded. To do so, you can use the ``file`` directive.
         $definition->setFile('%kernel.root_dir%/src/path/to/file/foo.php');
         $container->setDefinition('foo', $definition);
 
-Notice that symfony will internally call the PHP function require_once
-which means that your file will be included only once per request.
+Notez que Symfony va appeler en interne la fonction PHP require_once, ce
+qui veut dire que votre fichier va être inclus seulement une fois par requête.
