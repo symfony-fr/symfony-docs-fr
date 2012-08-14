@@ -66,7 +66,7 @@ Puis, définissez la chaîne en tant que service :
 
         $container->setDefinition('acme_mailer.transport_chain', new Definition('%acme_mailer.transport_chain.class%'));
 
-Définir des Services avec un Tag Personnalisé
+Définir des services avec un tag personnalisé
 ---------------------------------------------
 
 Maintenant, nous voulons que plusieurs classes ``\Swift_Transport`` soient
@@ -113,7 +113,7 @@ suivants en tant que services :
         $definitionSendmail->addTag('acme_mailer.transport');
         $container->setDefinition('acme_mailer.transport.sendmail', $definitionSendmail);
 
-Notez qu'un tag nommé ``acme_mailer.transport`` a été donné à chacun.
+Notez qu'un tag nommé ``acme_mailer.transport`` a été attribué à chacun.
 C'est le tag personnalisé que vous allez utiliser dans votre passe de
 compilateur. La passe de compilateur est ce qui donne un sens à ce tag.
 
@@ -149,18 +149,18 @@ un appel à ``addTransport()`` à la définition du service ``acme_mailer.transp
 pour chaque service ``acme_mailer.transport`` qu'elle trouve. Le premier argument
 de chacun de ces appels sera le service de transport d'email lui-même.
 
-Enregistrer la Passe dans le Conteneur
+Enregistrer la passe dans le Conteneur
 --------------------------------------
 
 Vous avez aussi besoin d'enregistrer la passe dans le conteneur ; elle
-sera ensuite exécutée lorsque le conteneur est compilé::
+sera ensuite exécutée lorsque le conteneur sera compilé::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 
     $container = new ContainerBuilder();
     $container->addCompilerPass(new TransportCompilerPass);
 
-Ajouter des attributs additionnels aux Tags
+Ajouter des attributs additionnels aux tags
 -------------------------------------------
 
 Quelquefois, vous avez besoin d'informations additionnelles à propos de
@@ -229,7 +229,7 @@ Pour répondre à cette question, changez la déclaration du service comme suit 
             <tag name="acme_mailer.transport" alias="bar" />
         </service>
 
-Notez que vous avez ajouter une clé générique ``alias`` au tag. Pour
+Notez que vous avez ajouté une clé générique ``alias`` au tag. Pour
 utiliser cette dernière, mettez à jour votre compilateur::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -254,7 +254,7 @@ utiliser cette dernière, mettez à jour votre compilateur::
         }
     }
 
-La partie importante ici est la variable ``$attributes``. Comme vous pouvez
+Ici, la partie importante est la variable ``$attributes``. Comme vous pouvez
 utiliser le même tag plusieurs fois avec le même service (par exemple : vous
 pourriez, en théorie, tagger le même service cinq fois avec le tag
 ``acme_mailer.transport``), ``$attributes`` est un tableau contenant l'information
