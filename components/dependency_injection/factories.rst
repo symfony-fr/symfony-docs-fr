@@ -1,19 +1,19 @@
 .. index::
    single: Dependency Injection; Factories
 
-Utiliser une « Factory » pour Créer des Services
+Utiliser une « Factory » pour créer des services
 ================================================
 
 Le Conteneur de Service de Symfony2 fournit une manière puissante de contrôler
 la création d'objets, vous permettant de spécifier les arguments passés
 au constructeur ainsi que d'appeler des méthodes et de définir des paramètres.
-Certaines fois, cependant, ceci ne vous fournira pas tout ce dont vous avez
+Parfois, cependant, ceci ne vous fournira pas tout ce dont vous avez
 besoin pour construire vos objets. Dans cette situation, vous pouvez
 utiliser une « factory » pour créer l'objet et informer le conteneur de
-service d'appeler une méthode de la « factory » plutôt que de directement
-instancier l'objet.
+service d'appeler une méthode de la « factory » plutôt que d'instancier
+l'objet directement.
 
-Supposez que vous ayez une « factory » qui configure et retourne un nouvel
+Supposons que vous ayez une « factory » qui configure et retourne un nouvel
 objet ``NewsletterManager``::
 
     class NewsletterFactory
