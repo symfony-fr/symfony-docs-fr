@@ -72,7 +72,7 @@ qui implémente :class:`Symfony\\Component\\Config\\Definition\\ConfigurationInt
     }
 
 Ajouter des définitions de noeuds à l'arbre
-------------------------------------------
+-------------------------------------------
 
 Noeuds variable
 ~~~~~~~~~~~~~~~
