@@ -1,14 +1,15 @@
 .. index::
    single: Config; Loading resources
 
-Loading resources
-=================
+Chargement des ressources
+=========================
 
-Locating resources
-------------------
+Localisation des ressources
+---------------------------
 
-Loading the configuration normally starts with a search for resources – in
-most cases: files. This can be done with the :class:`Symfony\\Component\\Config\\FileLocator`::
+Le chargement de la configuration démarre normalement par une recherche
+des ressources - dans la plupart des cas : des fichiers. Cela peut être
+effectué à l'aide de la classe :class:`Symfony\\Component\\Config\\FileLocator`::
 
     use Symfony\Component\Config\FileLocator;
 
@@ -17,20 +18,21 @@ most cases: files. This can be done with the :class:`Symfony\\Component\\Config\
     $locator = new FileLocator($configDirectories);
     $yamlUserFiles = $locator->locate('users.yml', null, false);
 
-The locator receives a collection of locations where it should look for files.
-The first argument of ``locate()`` is the name of the file to look for. The
-second argument may be the current path and when supplied, the locator will
-look in this directory first. The third argument indicates whether or not the
-locator should return the first file it has found, or an array containing
-all matches.
+Le localisateur reçoit une collection de localisations où il doit rechercher
+les fichiers. Le premier argument de ``locate()`` est le nom du fichier
+à rechercher. Le second argument peut être le chemin courant, et lorsqu'il
+est fourni, le localisateur doit rechercher en premier dans ce répertoire.
+Le troisième argument indique si oui ou non le localisateur doit retourner
+le premier fichier qu'il trouve, ou bien un tableau contenant tous les
+fichiers trouvés.
 
-Resource loaders
-----------------
+Chargeurs de ressource
+----------------------
 
-For each type of resource (Yaml, XML, annotation, etc.) a loader must be defined.
-Each loader should implement :class:`Symfony\\Component\\Config\\Loader\\LoaderInterface`
-or extend the abstract :class:`Symfony\\Component\\Config\\Loader\\FileLoader`
-class, which allows for recursively importing other resources::
+Pour chaque type de ressource (Yaml, XML, annotations, etc.), un chargeur
+doit être défini. Chaque chargeur doit implémenter :class:`Symfony\\Component\\Config\\Loader\\LoaderInterface`
+ou étendre la classe abstraite :class:`Symfony\\Component\\Config\\Loader\\FileLoader`,
+qui permet d'importer d'autres ressources de manière récursive::
 
     use Symfony\Component\Config\Loader\FileLoader;
     use Symfony\Component\Yaml\Yaml;
@@ -41,9 +43,9 @@ class, which allows for recursively importing other resources::
         {
             $configValues = Yaml::parse($resource);
 
-            // ... handle the config values
+            // ... gèrer les valeurs de configuration
 
-            // maybe import some other resource:
+            // importer peut-être d'autres ressources :
 
             // $this->import('extra_users.yml');
         }
@@ -54,19 +56,21 @@ class, which allows for recursively importing other resources::
         }
     }
 
-Finding the right loader
-------------------------
+Trouver le chargeur correct
+---------------------------
 
-The :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver` receives as
-its first constructor argument a collection of loaders. When a resource (for
-instance an XML file) should be loaded, it loops through this collection
-of loaders and returns the loader which supports this particular resource type.
+La classe :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver` reçoit
+en tant que premier argument de son constructeur une collection de chargeurs.
+Quand une ressource (par exemple un fichier XML) doit être chargée, le
+« LoaderResolver » va itérer sur cette collection de chargeurs et retourner
+le chargeur qui supporte ce type de ressource en particulier.
 
-The :class:`Symfony\\Component\\Config\\Loader\\DelegatingLoader` makes use
-of the :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. When
-it is asked to load a resource, it delegates this question to the
-:class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. In case the resolver
-has found a suitable loader, this loader will be asked to load the resource::
+La classe :class:`Symfony\\Component\\Config\\Loader\\DelegatingLoader`
+utilise le :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`.
+Lorsqu'on lui demande de charger une ressource, elle délègue cette question
+au :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. Dans le
+cas où le résolveur trouve un chargeur approprié, ce dernier va être utilisé
+pour charger la ressource::
 
     use Symfony\Component\Config\Loader\LoaderResolver;
     use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -76,6 +80,6 @@ has found a suitable loader, this loader will be asked to load the resource::
 
     $delegatingLoader->load(__DIR__.'/users.yml');
     /*
-    The YamlUserLoader will be used to load this resource,
-    since it supports files with a "yml" extension
+    Le YamlUserLoader va être utilisé pour charger cette ressource puisqu'il
+    supporte les fichiers ayant une extension « yml »
     */
