@@ -1,37 +1,40 @@
 .. index::
    single: Config; Caching based on resources
 
-Caching based on resources
-==========================
+Mécanisme de cache basé sur les ressources
+==========================================
 
-When all configuration resources are loaded, you may want to process the configuration
-values and combine them all in one file. This file acts like a cache. Its
-contents don’t have to be regenerated every time the application runs – only
-when the configuration resources are modified.
+Lorsque toutes les ressources de configuration sont chargées, vous pourriez
+vouloir traiter les valeurs de configuration et les combiner toutes en
+un seul fichier. Ce fichier agit en tant que cache. Son contenu n'a pas
+besoin d'être regénéré chaque fois que l'application est exécutée - seulement
+quand les ressources de configuration sont modifiées.
 
-For example, the Symfony Routing component allows you to load all routes,
-and then dump a URL matcher or a URL generator based on these routes. In
-this case, when one of the resources is modified (and you are working in a
-development environment), the generated file should be invalidated and regenerated.
-This can be accomplished by making use of the :class:`Symfony\\Component\\Config\\ConfigCache`
-class.
+Par exemple, le composant de Routage de Symfony vous permet de charger
+toutes les routes, et d'afficher une correspondance d'URL ou une URL générée
+basé sur ces routes. Dans ce cas, lorsqu'une des ressources est modifiée
+(et que vous travaillez dans un environnement de développement), le fichier
+généré devrait être invalidé ou regénéré. Cela peut être effectué en utilisant
+la classe :class:`Symfony\\Component\\Config\\ConfigCache`.
 
-The example below shows you how to collect resources, then generate some code
-based on the resources that were loaded, and write this code to the cache. The
-cache also receives the collection of resources that were used for generating
-the code. By looking at the "last modified" timestamp of these resources,
-the cache can tell if it is still fresh or that its contents should be regenerated::
+L'exemple ci-dessous vous montre comment collecter des ressources, puis
+générer du code basé sur les ressources qui ont été chargées, et écrire
+ce code dans le cache. Le cache reçoit aussi la collection de ressources
+qui ont été utilisées pour générer le code. En regardant l'estampille de
+la date de dernière modification de ces ressources, le cache peut dire
+s'il est contient toujours la dernière version ou si son contenu devrait
+être regénéré::
 
     use Symfony\Component\Config\ConfigCache;
     use Symfony\Component\Config\Resource\FileResource;
 
     $cachePath = __DIR__.'/cache/appUserMatcher.php';
 
-    // the second argument indicates whether or not we are in debug mode
+    // le second argument indique si nous sommes en mode débuggage ou pas
     $userMatcherCache = new ConfigCache($cachePath, true);
 
     if (!$userMatcherCache->isFresh()) {
-        // fill this with an array of 'users.yml' file paths
+        // remplissez cela avec un tableau contenant les chemins des fichiers « users.yml »
         $yamlUserFiles = ...;
 
         $resources = array();
@@ -41,17 +44,18 @@ the cache can tell if it is still fresh or that its contents should be regenerat
             $resources[] = new FileResource($yamlUserFile);
         }
 
-        // the code for the UserMatcher is generated elsewhere
+        // le code pour le « UserMatcher » est généré quelque part d'autre
         $code = ...;
 
         $userMatcherCache->write($code, $resources);
     }
 
-    // you may want to require the cached code:
+    // vous pourriez vouloir requérir le code caché :
     require $cachePath;
 
-In debug mode, a ``.meta`` file will be created in the same directory as the
-cache file itself. This ``.meta`` file contains the serialized resources,
-whose timestamps are used to determine if the cache is still fresh. When not
-in debug mode, the cache is considered to be "fresh" as soon as it exists,
-and therefore no ``.meta`` file will be generated.
+En mode débuggage, un fichier ``.meta`` sera créé dans le même répertoire
+que le fichier de cache lui-même. Ce fichier ``.meta`` contient les ressources
+sérialisées, dont les estampilles sont utilisées pour déterminer si le
+cache contient toujours la dernière version. Lorsque vous n'êtes pas en
+mode débuggage, le cache est considéré comme contenant la dernière version
+dès qu'il existe, et donc, aucun fichier ``.meta`` ne sera généré.
