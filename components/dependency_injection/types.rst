@@ -1,23 +1,24 @@
 .. index::
    single: Dependency Injection; Injection types
 
-Types of Injection
-==================
+Types d'Injection
+=================
 
-Making a class's dependencies explicit and requiring that they be injected
-into it is a good way of making a class more reusable, testable and decoupled
-from others.
+Rendre les dépendances d'une classe explicites et exigeant qu'elles soient
+injectées dans cette dernière est une bonne manière de rendre une classe
+plus réutilisable, testable, et découplée des autres.
 
-There are several ways that the dependencies can be injected. Each injection
-point has advantages and disadvantages to consider, as well as different ways
-of working with them when using the service container.
+Il y a plusieurs manières d'injecter des dépendances. Chaque type d'injection
+a ses propres avantages et inconvénients à prendre en considération, ainsi
+que différentes façons de fonctionner lorsque vous les utiliser avec le
+conteneur de service.
 
-Constructor Injection
----------------------
+Injection via le Constructeur
+-----------------------------
 
-The most common way to inject dependencies is via a class's constructor.
-To do this you need to add an argument to the constructor signature to accept
-the dependency::
+La manière la plus commune d'injecter des dépendances est via le constructeur
+de la classe. Pour effectuer cela, vous avez besoin d'ajouter un argument
+à la signature du constructeur afin d'accepter la dépendance::
 
     class NewsletterManager
     {
@@ -31,8 +32,8 @@ the dependency::
         // ...
     }
 
-You can specify what service you would like to inject into this in the
-service container configuration:
+Vous pouvez spécifier quel service vous souhaiteriez injecter dans cette
+classe via la configuration du conteneur de service :
 
 .. configuration-block::
 
@@ -70,32 +71,38 @@ service container configuration:
 
 .. tip::
 
-    Type hinting the injected object means that you can be sure that a suitable
-    dependency has been injected. By type-hinting, you'll get a clear error
-    immediately if an unsuitable dependency is injected. By type hinting
-    using an interface rather than a class you can make the choice of dependency
-    more flexible. And assuming you only use methods defined in the interface,
-    you can gain that flexibility and still safely use the object.
+    Le fait de requérir un certain type d'objet injecté signifie que vous
+    pouvez être sûr qu'une dépendance appropriée a été injectée. Grâce
+    à cela, vous allez recevoir immédiatement une erreur claire si une
+    dépendance inappropriée est injectée. En forçant le type grâce à une
+    interface plutôt que via une classe, vous pouvez rendre le choix de
+    la dépendance plus flexible. Et en assumant que vous utilisez uniquement
+    des méthodes définies dans l'interface, vous pouvez tirer parti de
+    cette flexibilité tout en continuant d'utiliser l'objet de manière
+    sécuritaire.
 
-There are several advantages to using constructor injection:
+Utiliser l'injection via le constructeur propose plusieurs avantages :
 
-* If the dependency is a requirement and the class cannot work without it
-  then injecting it via the constructor ensures it is present when the class
-  is used as the class cannot be constructed without it.
+* Si la dépendance est une condition requise et que la classe ne peut pas
+  fonctionner sans elle, alors l'injecter via le constructeur assure que
+  la dépendance sera présente lorsque la classe sera utilisée comme la
+  classe ne peut pas être construite sans elle.
 
-* The constructor is only ever called once when the object is created, so you
-  can be sure that the dependency will not change during the object's lifetime.
+* Le constructeur est appelé seulement une fois lorsque l'objet est créé,
+  donc vous pouvez être sûr que la dépendance ne changera pas pendant la
+  durée de vie de l'objet.
 
-These advantages do mean that constructor injection is not suitable for working
-with optional dependencies. It is also more difficult to use in combination
-with class hierarchies: if a class uses constructor injection then extending it
-and overriding the constructor becomes problematic.
+Ces avantages signifient que l'injection via constructeur n'est pas appropriée
+pour travailler avec des dépendances optionnelles. Ce type d'injection
+est aussi plus difficile à utiliser avec les hiérarchies de classe : si
+une classe utilise l'injection via le constructeur, alors l'étendre et
+outrepasser le constructeur devient problématique.
 
-Setter Injection
-----------------
+Injection via Mutateur
+----------------------
 
-Another possible injection point into a class is by adding a setter method that
-accepts the dependency::
+Un autre type possible d'injection dans une classe se fait par l'ajout
+d'une méthode mutateur qui accepte la dépendance::
 
     class NewsletterManager
     {
@@ -145,29 +152,33 @@ accepts the dependency::
             'NewsletterManager'
         ))->addMethodCall('setMailer', array(new Reference('my_mailer')));
 
-This time the advantages are:
+Cette fois les avantages sont :
 
-* Setter injection works well with optional dependencies. If you do not need
-  the dependency, then just do not call the setter.
+* L'injection par mutateur fonctionne bien avec les dépendances optionnelles.
+  Si vous n'avez pas besoin de la dépendance, alors n'appelez pas le mutateur,
+  tout simplement ;
 
-* You can call the setter multiple times. This is particularly useful if the
-  method adds the dependency to a collection. You can then have a variable number
-  of dependencies.
+* Vous pouvez appeler le mutateur plusieurs fois. Cela est particulièrement
+  utile si la méthode ajoute la dépendance dans une collection. Vous pouvez
+  ainsi avoir un nombre variable de dépendances.
 
-The disadvantages of setter injection are:
+Les inconvénients d'une injection par mutateur sont :
 
-* The setter can be called more than just at the time of construction so
-  you cannot be sure the dependency is not replaced during the lifetime of the
-  object (except by explicitly writing the setter method to check if has already been
-  called).
+* Le mutateur peut être appelé plus de fois que juste au moment de la construction
+  donc vous ne pouvez pas être sûr que la dépendance n'est pas remplacée
+  pendant la durée de vie de l'objet (excepté si vous ajoutez une vérification
+  explicite dans la méthode mutateur qui contrôle si il n'a pas déjà été
+  appelé) ;
 
-* You cannot be sure the setter will be called and so you need to add checks
-  that any required dependencies are injected.
+* Vous ne pouvez pas être sûr que le mutateur sera appelé et vous devez
+  ajouter des contrôles qui vérifient que quelconque(s) dépendance(s) requise(s)
+  est injectée.
 
-Property Injection
-------------------
+Injection via une Propriété
+---------------------------
 
-Another possibility is just setting public fields of the class directly::
+Une autre possibilité est de simplement définir des champs publics dans
+la classe::
 
     class NewsletterManager
     {
@@ -210,17 +221,20 @@ Another possibility is just setting public fields of the class directly::
             'NewsletterManager'
         ))->setProperty('mailer', new Reference('my_mailer')));
 
+Utiliser l'injection via propriété n'apporte presque que des inconvénients,
+cette façon est similaire à l'injection par mutateur mais avec d'autres
+problèmes importants en plus :
 
-There are mainly only disadvantages to using property injection, it is similar
-to setter injection but with these additional important problems:
+* Vous ne pouvez pas du tout contrôler quand la dépendance est définie,
+  elle peut être changée à n'importe quel moment pendant la durée de vie
+  de l'objet ;
 
-* You cannot control when the dependency is set at all, it can be changed
-  at any point in the object's lifetime.
+* Vous ne pouvez pas utiliser la détection de type donc vous ne pouvez
+  pas être sûr du type de la dépendance injectée excepté si vous écrivez
+  dans le code de la classe un test qui vérifie l'objet instancié avant
+  de l'utiliser.
 
-* You cannot use type hinting so you cannot be sure what dependency is injected
-  except by writing into the class code to explicitly test the class instance
-  before using it.
-
-But, it is useful to know that this can be done with the service container,
-especially if you are working with code that is out of your control, such
-as in a third party library, which uses public properties for its dependencies.
+Mais, il est utile de savoir que ceci peut être effectué avec le conteneur
+de service, spécialement si vous travaillez avec du code qui n'est pas
+sous votre contrôle, comme avec une bibliothèque tierce, qui utilise des
+propriétés publiques pour ses dépendances.
