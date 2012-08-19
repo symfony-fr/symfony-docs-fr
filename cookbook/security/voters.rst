@@ -1,5 +1,5 @@
 .. index::
-   single: Sécurité, Voteurs
+   single: Sécurité; Voteurs
 
 Comment implémenter votre propre Voteur pour ajouter des adresses IP sur une liste noire
 ========================================================================================
@@ -64,6 +64,7 @@ ensemble d'adresses IP de la liste noire :
 
 .. code-block:: php
 
+    // src/Acme/DemoBundle/Security/Authorization/Voter/ClientIpVoter.php
     namespace Acme\DemoBundle\Security\Authorization\Voter;
 
     use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -116,7 +117,6 @@ en tant que service, et le tagger comme un « security.voter » :
     .. code-block:: yaml
 
         # src/Acme/AcmeBundle/Resources/config/services.yml
-
         services:
             security.access.blacklist_voter:
                 class:      Acme\DemoBundle\Security\Authorization\Voter\ClientIpVoter
@@ -128,7 +128,6 @@ en tant que service, et le tagger comme un « security.voter » :
     .. code-block:: xml
 
         <!-- src/Acme/AcmeBundle/Resources/config/services.xml -->
-
         <service id="security.access.blacklist_voter"
                  class="Acme\DemoBundle\Security\Authorization\Voter\ClientIpVoter" public="false">
             <argument type="service" id="service_container" strict="false" />
@@ -142,7 +141,6 @@ en tant que service, et le tagger comme un « security.voter » :
     .. code-block:: php
 
         // src/Acme/AcmeBundle/Resources/config/services.php
-
         use Symfony\Component\DependencyInjection\Definition;
         use Symfony\Component\DependencyInjection\Reference;
 

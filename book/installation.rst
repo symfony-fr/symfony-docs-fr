@@ -18,7 +18,7 @@ Télécharger une Distribution Symfony2
 
 .. tip::
     Premièrement, vérifiez que vous avez installé et configuré un serveur web
-    (comme Apache) avec PHP 5.3.3 ou supérieur. Pour plus d'informations sur les
+    (comme Apache) avec PHP 5.3.4 ou supérieur. Pour plus d'informations sur les
     prérequis Symfony2, lisez le chapitre :doc:`pré-requis</reference/requirements>`.
     Pour plus d'informations sur la manière de configurer la racine web de votre serveur,
     lisez les documentations suivantes : `Apache`_ | `Nginx`_ .
@@ -136,7 +136,7 @@ Utilisez l'URL suivante pour vérifier votre configuration :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/config.php
+    http://localhost/config.php
 
 S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
 
@@ -205,7 +205,7 @@ première « vraie » page Symfony2 :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/app_dev.php/
+    http://localhost/app_dev.php/
 
 Symfony2 devrait vous accueillir et vous féliciter pour tout le travail accompli
 jusqu'ici !

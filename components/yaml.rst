@@ -1,5 +1,6 @@
 .. index::
    single: Yaml
+   single: Components; Yaml
    
 Le Composant YAML
 =================
@@ -129,16 +130,23 @@ méthode de surcouche :method:`Symfony\\Component\\Yaml\\Yaml::parse` :
     $loader = Yaml::parse('/path/to/file.yml');
 
 La méthode statique :method:`Symfony\\Component\\Yaml\\Yaml::parse` prend une
-chaîne de caractères ou un fichier contenant du YAML. En interne, elle appelle
-la méthode :method:`Symfony\\Component\\Yaml\\Parser::parse`, mais avec quelques
-bonus additionnels :
+chaîne de caractères YAML ou un fichier contenant du YAML. En interne, elle appelle
+la méthode :method:`Symfony\\Component\\Yaml\\Parser::parse`, mais elle mets en valeur
+les erreurs si quelque chose se passe mal en ajoutant le nom du fichier au message
 
-* Elle exécute le fichier YAML comme si c'était un fichier PHP, afin que vous
-  puissiez intégrer des commandes PHP dans vos fichiers YAML ;
+Exécuter du PHP dans les fichiers YAML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Lorsqu'un fichier ne peut pas être analysé, elle ajoute automatiquement
-  le nom du fichier dans le message d'erreur, ce qui simplifie le débuggage
-  lorsque votre application charge plusieurs fichiers YAML.
+.. versionadded:: 2.1
+    La méthode ``Yaml::enablePhpParsing()`` est une nouveauté de Symfony 2.1. Avant
+    la version 2.1, le PHP était *toujours* exécuté lors d'un appel à la fonction ``parse()``.
+
+Par défaut, si vous incluez du PHP dans un fichier YAML, il ne sera pas analysé.
+Si vous voulez que le PHP soit analysé, vous devez appeler ``Yaml::enablePhpParsing()``
+avant d'analyser le fichier pour activer ce mode. Si vous ne voulez autoriser le code
+PHP que dans un seul fichier YAML, assurez vous de désactiver l'analyse du PHP après
+avoir analysé votre fichier en appelant ``Yaml::$enablePhpParsing = false;`` (``$enablePhpParsing``
+est une propriété publique).
 
 Ecrire des Fichiers YAML
 ~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,5 +1,5 @@
 .. index::
-   single: Sécurité; Fournisseur d'Authentification Personnalisé
+   single: Sécurité; Fournisseur d'authentification personnalisé
 
 Comment créer un Fournisseur d'Authentification Personnalisé
 ============================================================
@@ -144,7 +144,7 @@ un token authentifié dans le contexte de sécurité en cas de succès.
 
                         if ($returnValue instanceof TokenInterface) {
                             return $this->securityContext->setToken($returnValue);
-                        } else if ($returnValue instanceof Response) {
+                        } elseif ($returnValue instanceof Response) {
                             return $event->setResponse($returnValue);
                         }
                     } catch (AuthenticationException $e) {
@@ -213,7 +213,7 @@ l'en-tête ``PasswordDigest`` correspond au mot de passe de l'utilisateur.
         {
             $user = $this->userProvider->loadUserByUsername($token->getUsername());
 
-            if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {            
+            if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
                 $authenticatedToken = new WsseUserToken($user->getRoles());
                 $authenticatedToken->setUser($user);
 
@@ -231,7 +231,7 @@ l'en-tête ``PasswordDigest`` correspond au mot de passe de l'utilisateur.
             }
 
             // Valide que le nonce est unique dans les 5 minutes
-            if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 300 < time()) {
+            if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 300 > time()) {
                 throw new NonceExpiredException('Previously used nonce detected');
             }
             file_put_contents($this->cacheDir.'/'.$nonce, time());
@@ -308,7 +308,8 @@ classe qui implémente
         }
 
         public function addConfiguration(NodeDefinition $node)
-        {}
+        {        
+        }
     }
 
 La :class:`Symfony\\Bundle\\SecurityBundle\\DependencyInjection\\Security\\Factory\\SecurityFactoryInterface`
@@ -486,15 +487,14 @@ de définir la nouvelle option dans la méthode ``addConfiguration``.
 
     class WsseFactory implements SecurityFactoryInterface
     {
-        # ...
+        // ...
 
         public function addConfiguration(NodeDefinition $node)
         {
           $node
             ->children()
-              ->scalarNode('lifetime')->defaultValue(300)
-            ->end()
-          ;
+            ->scalarNode('lifetime')->defaultValue(300)
+            ->end();
         }
     }
 
@@ -514,10 +514,10 @@ votre fournisseur d'authentification afin qu'il l'utilise.
                 ->setDefinition($providerId,
                   new DefinitionDecorator('wsse.security.authentication.provider'))
                 ->replaceArgument(0, new Reference($userProvider))
-                ->replaceArgument(2, $config['lifetime'])
-            ;
+                ->replaceArgument(2, $config['lifetime']);
             // ...
         }
+        
         // ...
     }
 

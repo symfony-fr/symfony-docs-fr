@@ -8,8 +8,8 @@ Avant de se lancer directement dans la génération dynamique de formulaire,
 commençons par passer en revue ce à quoi ressemble une classe de formulaire
 basique::
 
-    //src/Acme/DemoBundle/Form/ProductType.php
-    namespace Acme\DemoBundle\Form;
+    // src/Acme/DemoBundle/Form/Type/ProductType.php
+    namespace Acme\DemoBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
@@ -57,10 +57,10 @@ Donc, au lieu d'ajouter directement ce widget « name » via notre classe
 formulaire ProductType, déléguons la responsabilité de créer ce champ
 particulier à un Souscripteur d'Evénement::
 
-    //src/Acme/DemoBundle/Form/ProductType.php
-    namespace Acme\DemoBundle\Form
+    // src/Acme/DemoBundle/Form/Type/ProductType.php
+    namespace Acme\DemoBundle\Form\Type;
 
-    use Symfony\Component\Form\AbstractType
+    use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Acme\DemoBundle\Form\EventListener\AddNameFieldSubscriber;
 

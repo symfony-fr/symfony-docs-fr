@@ -1,8 +1,8 @@
 .. index::
    single: Templating; Global variables
 
-Injecter des variables dans tous les modèles (i.e. Variables Globales)
-======================================================================
+Comment injecter des variables dans tous les modèles (i.e. Variables Globales)
+==============================================================================
 
 Parfois vous voulez qu'une variable soit accessible dans tous les modèles
 que vous utilisez. C'est possible à l'intérieur du fichier

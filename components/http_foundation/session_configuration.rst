@@ -39,8 +39,8 @@ Bien que les gestionnaires de sauvegarde puissent être activés en utilisant di
 ``ini_set('session.save_handler', $name);``, Symfony2 fournit un moyen pratique d'activer
 ces derniers de la même manière que pour les gestionnaires personnalisés.
 
-Symfony2 fournit des « drivers » pour le gestionnaire de sauvegarde natif suivant en
-tant qu'exemple :
+Symfony2 fournit des « drivers » pour le gestionnaire de sauvegarde natif suivant
+comme exemple :
 
   * :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\NativeFileSessionHandler`
 

@@ -33,6 +33,7 @@ est facilement compréhensible lorsqu'on les analyse un par un.
 
     .. code-block:: xml
 
+        <!-- app/config/config.xml -->
         <container xmlns="http://symfony.com/schema/dic/services"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:monolog="http://symfony.com/schema/dic/monolog"
@@ -113,6 +114,7 @@ d'être loggées sur le serveur en même temps qu'elles sont envoyées par email
 
     .. code-block:: xml
 
+         <!-- app/config/config.xml -->
         <container xmlns="http://symfony.com/schema/dic/services"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:monolog="http://symfony.com/schema/dic/monolog"

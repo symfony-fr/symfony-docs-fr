@@ -89,7 +89,7 @@ Chaque Kernel Symfony2 implémente
     function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
 
 .. index::
-   single: Composants Internes; Résolution du Contrôleur
+   single: Composants Internes; Résolution du contrôleur
 
 Les Contrôleurs
 ~~~~~~~~~~~~~~~
@@ -136,7 +136,7 @@ automatiquement les arguments de la méthode, basé sur les attributs de la Requ
         }
 
 .. index::
-  single: Composants Internes; Gestion de la Requête
+  single: Composants Internes; Gestion de la requête
 
 Gestion des Requêtes
 ~~~~~~~~~~~~~~~~~~~~
@@ -180,7 +180,7 @@ par exemple), désactivez l'évènement ``kernel.exception`` en passant ``false`
 que troisième argument de la méthode ``handle()``.
 
 .. index::
-  single: Composants Internes; Requêtes Internes
+  single: Composants Internes; Requêtes internes
 
 Requêtes Internes
 ~~~~~~~~~~~~~~~~~
@@ -375,6 +375,16 @@ créer et définir un nouvel objet ``Exception``, ou ne rien faire :
         // $exception = new \Exception('Some special exception');
         // $event->setException($exception);
     }
+
+.. note::
+
+    Comme Symfony vérifie que le code de statut de la Réponse est le plus
+    approprié selon l'exception, définir un code de statut sur la réponse
+    ne fonctionnera pas. Si vous voulez réécrire le code de statut (ce que
+    vous ne devriez pas faire sans une excellente raison), définissez l'entête
+    ``X-Status-Code``::
+
+        return new Response('Error', 404 /* ignoré */, array('X-Status-Code' => 200));
 
 .. index::
    single: Dispatcher d'Evènements

@@ -67,7 +67,7 @@ Vous pouvez ajouter une configuration de token basique en utilisant le fichier
         // app/config/config.php
         $container->setParameter('tokens', array(
             'client1' => 'pass1',
-            'client2' => 'pass2'
+            'client2' => 'pass2',
         ));
 
 Les contrôleurs de Tag devant être vérifiés
@@ -102,6 +102,7 @@ contenir la logique que vous souhaitez exécuter avant vos contrôleurs. Si
 vous n'êtes pas familier avec les « listeners » d'événement, vous pouvez
 en apprendre plus sur eux ici :doc:`/cookbook/service_container/event_listener`::
 
+    // src/Acme/DemoBundle/EventListener/BeforeListener.php
     namespace Acme\DemoBundle\EventListener;
 
     use Acme\DemoBundle\Controller\TokenAuthenticatedController;
@@ -151,7 +152,7 @@ qu'un contrôleur quelconque soit exécuté :
 
     .. code-block:: yaml
 
-        # app/config/config.yml (or inside or your services.yml)
+        # app/config/config.yml (ou dans votre services.yml)
         services:
             demo.tokens.action_listener:
               class: Acme\DemoBundle\EventListener\BeforeListener
@@ -161,6 +162,7 @@ qu'un contrôleur quelconque soit exécuté :
 
     .. code-block:: xml
 
+        <!-- app/config/config.xml (ou dans votre services.xml) -->
         <service id="demo.tokens.action_listener" class="Acme\DemoBundle\EventListener\BeforeListener">
             <argument>%tokens%</argument>
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
@@ -168,6 +170,7 @@ qu'un contrôleur quelconque soit exécuté :
 
     .. code-block:: php
 
+        // app/config/config.php (ou dans votre services.php)
         use Symfony\Component\DependencyInjection\Definition;
 
         $listener = new Definition('Acme\DemoBundle\EventListener\BeforeListener', array('%tokens%'));

@@ -89,6 +89,7 @@ Par exemple, pour exécuter votre passe personnalisée après que les passes de 
 par défaut ont été exécutées, vous pouvez faire comme cela::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
     $container = new ContainerBuilder();
     $container->addCompilerPass(new CustomCompilerPass, PassConfig::TYPE_AFTER_REMOVING);
@@ -178,12 +179,15 @@ la « dumpez »::
     }
 
 Vous allez maintenant profiter de la rapidité du conteneur PHP configuré tout en
-conservant la facilité d'utilisation des fichiers de configuration. Dans l'exemple
-ci-dessus, vous devrez supprimer le fichier du conteneur caché chaque fois que vous
-effectuez des changements. Ajouter un contrôle sur une variable qui détermine si
-vous êtes en mode débuggage vous permet de conserver la vitesse du conteneur caché
-en production mais d'avoir une configuration toujours à jour lorsque vous êtes en
-train de développer votre application::
+conservant la facilité d'utilisation des fichiers de configuration. De plus, dumper
+le conteneur de cette manière optimise encore la manière dont les services sont
+créés par le conteneur.
+
+Dans l'exemple ci-dessus, vous devrez supprimer le fichier du conteneur mis en cache
+chaque fois que vous effectuerez des changements. Ajouter un contrôle sur une variable
+qui détermine si vous êtes en mode débuggage vous permet de conserver la rapidité du conteneur
+mis en cache en production mais aussi d'avoir une configuration toujours à jour lorsque vous
+êtes en train de développer votre application::
 
     // ...
 
@@ -205,3 +209,46 @@ train de développer votre application::
         }
     }
 
+Cela pourrait être encore amélioré en recompilant seulement le conteneur en mode
+debug lorsque des changements ont été fait dans sa configuration plutôt qu'à
+chaque requête. Ceci peut être fait en cachant les fichiers utilisés pour configurer
+le conteneur de la manière décrite dans « :doc:`/components/conf/caching` » dans
+la documentation du composant Config.
+
+Vous n'avez pas besoin de vous soucier des fichiers à mettre en cache car le contructeur
+du conteneur garde une trâce de toute les ressources utilisées pour le configurer, pas
+seulement les fichiers de configuration mais également les classes d'extension et les
+passes de compilateur. Cela signifie que tout changement dans l'un de ces fichiers
+invalidera le cache et déclenchera la regénération du conteneur. Vous avez juste besoin
+de demander ces ressources au conteneur et les utiliser comme metadonnées pour le cache::
+
+    // ...
+
+    // définissez $isDebug en vous basant sur quelque chose dans votre projet
+
+    $file = __DIR__ .'/cache/container.php';
+    $containerConfigCache = new ConfigCache($file, $isDebug);
+
+    if (!$cache->isFresh()) {
+        $containerBuilder = new ContainerBuilder();
+        //--
+        $container->compile();
+
+        $dumper = new PhpDumper($containerBuilder);
+        $containerConfigCache->write(
+            $dumper->dump(array('class' => 'MyCachedContainer')),
+            $containerBuilder->getResources()
+        );
+    }
+
+    require_once $file;
+    $container = new MyCachedContainer();
+
+Maintenant, le conteneur récupéré dans le cache est utilisé indépendamment du fait
+que le mode debug est activé ou non. La différence est que le ``ConfigCache`` est
+définit comme le debug mode (la valeur du mode debug lui est passé comme second
+argument dans son constructeur). Lorsque le cache n'est pas en mode debug, le conteneur
+mis en cache sera toujours utilisé s'il existe. En mode debug, un fichier de métadonnées
+est écrit avec le timestamp de tout les fichiers de ressource. Ceci sont ensuite vérifiés
+pour voir si les fichiers ont changé, et si c'est le cas, le cache sera considéré comme
+périmé.

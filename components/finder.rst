@@ -1,5 +1,6 @@
 .. index::
    single: Finder
+   single: Components; Finder
 
 Le Composant Finder
 ===================
@@ -251,6 +252,25 @@ La méthode ``filter()`` prend une Closure en argument. Pour chaque fichier qui
 correspond, cette dernière est appelée avec le fichier en tant qu'instance de
 :class:`Symfony\\Component\\Finder\\SplFileInfo`. Le fichier est exclut de
 l'ensemble des résultats si la Closure retourne ``false``.
+
+Lire le contenu des fichiers retournés
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.1
+   La méthode ``getContents()`` a été ajoutée dans la version 2.1.
+
+Les contenus des fichiers retournés peuvent être lus avec
+:method:`Symfony\\Component\\Finder\\SplFileInfo::getContents`::
+
+    use Symfony\Component\Finder\Finder;
+
+    $finder = new Finder();
+    $finder->files()->in(__DIR__);
+
+    foreach ($finder as $file) {
+        $contents = $file->getContents();
+        ...
+    }
 
 .. _strtotime:   http://www.php.net/manual/en/datetime.formats.php
 .. _Iterator:     http://www.php.net/manual/en/spl.iterators.php

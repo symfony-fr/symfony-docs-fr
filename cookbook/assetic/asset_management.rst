@@ -326,7 +326,7 @@ la commande suivante :
 
 .. code-block:: bash
 
-    php app/console assetic:dump --env=prod --no-debug
+    $ php app/console assetic:dump --env=prod --no-debug
 
 Cela génèrera physiquement et écrira chaque fichier dont vous avez besoin
 (ex ``/js/abcd123.js``). Si vous mettez à jour vos ressources, vous aurez besoin
@@ -370,7 +370,7 @@ suivante :
 
 .. code-block:: bash
 
-    php app/console assetic:dump
+    $ php app/console assetic:dump
 
 Elle écrit physiquement tous les fichiers de ressource dont vous avez
 besoin pour l'environnement de ``dev``. Le gros inconvénient est que vous
@@ -380,7 +380,7 @@ ressources *modifiées* :
 
 .. code-block:: bash
 
-    php app/console assetic:dump --watch
+    $ php app/console assetic:dump --watch
 
 Lancer cette commande en environnement de ``dev`` peut générer un florilège
 de fichiers. Pour conserver votre projet bien organisé, il peut être intéressant

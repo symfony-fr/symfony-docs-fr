@@ -32,6 +32,12 @@ votre bundle::
 En effectuant ce simple changement, vous pouvez désormais surcharger plusieurs parties
 du ``FOSUserBundle`` en créant simplement un fichier ayant le même nom.
 
+.. note::
+
+    Malgré le nom de la méthode, il n'y a pas de relation parent/enfant entre
+    les bundles. Il s'agit juste d'une manière d'étendre et de surcharger un
+    bundle existant.
+
 Surcharger des contrôleurs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

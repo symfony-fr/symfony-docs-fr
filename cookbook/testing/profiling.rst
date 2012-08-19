@@ -25,7 +25,6 @@ profiler est disponible (il est activé par défaut dans l'environnement de ``te
             $crawler = $client->request('GET', '/hello/Fabien');
 
             // Ecrire des assertions concernant la réponse
-            // ...
 
             // Vérifier que le profiler est activé
             if ($profile = $client->getProfile()) {

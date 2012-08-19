@@ -10,17 +10,18 @@ plutôt que dans des fichiers, car l'usage des bases de données permet plus fac
 gestion de la montée en charge dans un environnement multi-serveurs.
 
 Symfony2 incorpore une solution de stockage de sessions dans la base de données appelée
-:class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\PdoSessionStorage`.
+:class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\PdoSessionHandler`.
 Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.yml``
 (ou le format de configuration de votre choix):
 
 .. versionadded:: 2.1
     Dans Symfony2.1 la classe et l'espace de noms ont évolué. Vous trouvez dorénavant
-    la classe `PdoSessionStorage` dans l'espace `Session\\Storage` :
-    ``Symfony\Component\HttpFoundation\Session\Storage\PdoSessionStorage``.
-    De même, les second et troisième arguments du constructeur ont été permutés.
-    Vous noterez ci-dessous que les arguments ``%session.storage.options%`` et ``%pdo.db_options%``
-    ont échangé leurs positions.
+    la classe de stockage de session dans l'espace de nom `Session\\Storage` :
+    ``Symfony\Component\HttpFoundation\Session\Storage``. Notez également que dans
+    Symfony 2.1, vous devrez configurer ``handler_id`` et non pas ``storage_id`` comme
+    en Symfony2.0.
+
+    Ci-dessous, vous verrez que ``%session.storage.options%`` n'est plus utilisé.
 
 .. configuration-block::
 
@@ -30,7 +31,7 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         framework:
             session:
                 # ...
-                handler_id:     session.storage.pdo
+                handler_id:     session.handler.pdo
 
         parameters:
             pdo.db_options:
@@ -47,15 +48,15 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
                     user:     myuser
                     password: mypassword
 
-            session.storage.pdo:
+            session.handler.pdo:
                 class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-                arguments: [@pdo, %pdo.db_options%, %session.storage.options%]
+                arguments: [@pdo, %pdo.db_options%]
 
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
         <framework:config>
-            <framework:session handler-id="session.storage.pdo" lifetime="3600" auto-start="true"/>
+            <framework:session handler-id="session.handler.pdo" lifetime="3600" auto-start="true"/>
         </framework:config>
 
         <parameters>
@@ -74,24 +75,23 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
                 <argument>mypassword</argument>
             </service>
 
-            <service id="session.storage.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
+            <service id="session.handler.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
                 <argument type="service" id="pdo" />
                 <argument>%pdo.db_options%</argument>
-                <argument>%session.storage.options%</argument>
             </service>
         </services>
 
     .. code-block:: php
 
-        // app/config/config.yml
+        // app/config/config.php
         use Symfony\Component\DependencyInjection\Definition;
         use Symfony\Component\DependencyInjection\Reference;
 
         $container->loadFromExtension('framework', array(
             // ...
             'session' => array(
-                // ...
-                'handler_id' => 'session.storage.pdo',
+                ...,
+                'handler_id' => 'session.handler.pdo',
             ),
         ));
 
@@ -112,9 +112,8 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         $storageDefinition = new Definition('Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler', array(
             new Reference('pdo'),
             '%pdo.db_options%',
-            '%session.storage.options%',
         ));
-        $container->setDefinition('session.storage.pdo', $storageDefinition);
+        $container->setDefinition('session.handler.pdo', $storageDefinition);
 
 * ``db_table`` : Nom de la table des sessions dans votre base de données
 * ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (de type VARCHAR(255) ou plus)

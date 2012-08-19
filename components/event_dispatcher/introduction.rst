@@ -1,5 +1,6 @@
 .. index::
-   single: Répartiteur d'Evénement
+   single: Répartiteur d'evénement
+   single: Components; EventDispatcher
 
 Le Composant Répartiteur d'Evénement
 ====================================
@@ -92,7 +93,7 @@ Voici quelques exemples de nom d'événement correct :
 * ``form.pre_set_data``
 
 .. index::
-   single: Répartiteur d'Evénement; Sous-classes Evénementss
+   single: Répartiteur d'Evénement; Sous-classes evénementss
 
 Noms d'Evénement et Objets Evénements
 .....................................
@@ -213,7 +214,7 @@ Par exemple, l'événement ``kernel.event`` passe une instance de
 .. _event_dispatcher-closures-as-listeners:
 
 .. index::
-   single: Répartiteur d'Evénement; Créer et Répartir un Evénement
+   single: Répartiteur d'Evénement; Créer et répartir un évènement
 
 Créer et Répartir un Evénement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

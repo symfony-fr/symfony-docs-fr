@@ -6,11 +6,14 @@ Type de champ Form
 
 Voir :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType`.
 
-Le type ``form`` prédéfinit un ensemble d'options :
+Le type ``form`` prédéfinit un ensemble d'options qui sont disponibles
+pour tout les champs :
 
 .. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/required.rst.inc
+
+.. include:: /reference/forms/types/options/cascade_validation.rst.inc
 
 .. include:: /reference/forms/types/options/disabled.rst.inc
 

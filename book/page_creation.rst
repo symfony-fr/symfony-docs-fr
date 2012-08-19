@@ -73,7 +73,7 @@ affichées à l'écran (choisissez les options par défaut) :
 
 .. code-block:: bash
 	
-    php app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
+    $ php app/console generate:bundle --namespace=Acme/HelloBundle --format=yml
 
 Un répertoire ``src/Acme/HelloBundle`` est créé pour le bundle. Une ligne est aussi
 automatiquement ajoutée au fichier ``app/AppKernel.php`` afin que le bundle soit
@@ -216,8 +216,6 @@ et il est associé à la méthode ``indexAction`` d'une classe PHP appelée
     // src/Acme/HelloBundle/Controller/HelloController.php
     namespace Acme\HelloBundle\Controller;
 
-    use Symfony\Component\HttpFoundation\Response;
-
     class HelloController
     {
     }
@@ -272,7 +270,7 @@ votre application devrait vous saluer::
 
     .. code-block:: bash
 
-        php app/console cache:clear --env=prod --no-debug
+        $ php app/console cache:clear --env=prod --no-debug
 
 Une troisième étape optionelle dans ce processus est de créer un template.
 
@@ -694,7 +692,7 @@ un squelette de bundle de base :
 
 .. code-block:: bash
 
-    php app/console generate:bundle --namespace=Acme/TestBundle
+    $ php app/console generate:bundle --namespace=Acme/TestBundle
 
 Le squelette du bundle contient un contrôleur de base, un template et une configuration
 de routage qui peuvent être personnalisés. Vous en apprendrez plus sur les commandes
@@ -760,7 +758,6 @@ selon le format que vous préférez :
         
         framework:
             secret:          "%secret%"
-            charset:         UTF-8
             router:          { resource: "%kernel.root_dir%/config/routing.yml" }
             #...
 
@@ -779,7 +776,7 @@ selon le format que vous préférez :
             <import resource="security.yml" />
         </imports>
         
-        <framework:config charset="UTF-8" secret="%secret%">
+        <framework:config secret="%secret%">
             <framework:router resource="%kernel.root_dir%/config/routing.xml" />
             <!-- ... -->
         </framework:config>
@@ -796,7 +793,6 @@ selon le format que vous préférez :
 
         $container->loadFromExtension('framework', array(
             'secret'          => '%secret%',
-            'charset'         => 'UTF-8',
             'router'          => array('resource' => '%kernel.root_dir%/config/routing.php'),
             // ...
         ));
@@ -1017,8 +1013,10 @@ en tête :
 * chaque fonctionnalité de Symfony2 (incluant le noyau du framework) est organisée
   dans un *bundle*, qui est un ensemble structuré de fichiers pour cette fonctionnalité;
 
-* la **configuration** de chaque bundle se trouve dans le répertoire ``app/config``
-  et peut être écrite en YAML, XML ou PHP;
+* la **configuration** de chaque bundle se trouve dans le répertoire ``Ressources/config``
+  du bundle et peut être écrite en YAML, XML ou PHP;
+
+* La **configuration globale de l'application** se trouve dans le répertoire ``app/config``
 
 * chaque **environnement** est accessible via des contrôleurs frontaux différents
   (ex ``app.php`` et ``app_dev.php``) et charge un fichier de configuration différent.
@@ -1029,7 +1027,7 @@ la flexibilité de son architecture et le pouvoir qu'il vous donne pour dévelop
 rapidement des applications.
 
 .. _`Twig`: http://twig.sensiolabs.org
-.. _`bundles tiers`: http://symfony2bundles.org/
+.. _`bundles tiers`: http://knpbundles.com
 .. _`Symfony Standard Edition`: http://symfony.com/download
 .. _`documentation Apache's DirectoryIndex`: http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 .. _`documentation Nginx HttpCoreModule`: http://wiki.nginx.org/HttpCoreModule#location

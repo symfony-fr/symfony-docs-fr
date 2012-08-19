@@ -468,7 +468,6 @@ invoque l'extension du conteneur de services à l'intérieur du ``FrameworkBundl
         # app/config/config.yml
         framework:
             secret:          xxxxxxxxxx
-            charset:         UTF-8
             form:            true
             csrf_protection: true
             router:        { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -477,7 +476,7 @@ invoque l'extension du conteneur de services à l'intérieur du ``FrameworkBundl
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <framework:config charset="UTF-8" secret="xxxxxxxxxx">
+        <framework:config secret="xxxxxxxxxx">
             <framework:form />
             <framework:csrf-protection />
             <framework:router resource="%kernel.root_dir%/config/routing.xml" />
@@ -489,7 +488,6 @@ invoque l'extension du conteneur de services à l'intérieur du ``FrameworkBundl
         // app/config/config.php
         $container->loadFromExtension('framework', array(
             'secret'          => 'xxxxxxxxxx',
-            'charset'         => 'UTF-8',
             'form'            => array(),
             'csrf-protection' => array(),
             'router'          => array('resource' => '%kernel.root_dir%/config/routing.php'),
@@ -510,7 +508,7 @@ de services du ``FrameworkBundle``. Chaque extension vous permet de facilement
 personnaliser le bundle, sans se soucier de la manière dont les services internes sont
 définis.
 
-Dans ce cas, l'extension vous permet de personnaliser la ``charset``, ``error_handler``,
+Dans ce cas, l'extension vous permet de personnaliser le ``error_handler``,
 ``csrf_protection``, ``router`` et bien plus encore. En interne,
 le ``FrameworkBundle`` utilise les options spécifiées ici pour définir et configurer
 les services qui lui sont spécifiques. Le bundle se charge de créer tous les  
@@ -888,148 +886,10 @@ du framework.
     la clé ``swiftmailer`` invoque l'extension du service de 
     ``SwiftmailerBundle``, qui déclare le service ``mailer``.
 
-.. index::
-   single: Service Container; Advanced configuration
-
-Configuration de Conteneur Avancée
-----------------------------------
-
-Comme nous l'avons vu, la définition des services à l'intérieur du conteneur est facile, en général
-impliquant une clé de configuration de ``service`` et quelques paramètres. Cependant,
-le conteneur a plusieurs autres outils disponibles qui aident à *tagger* les services
-pour des fonctionnalités spéciales, créent des services plus complexes, et effectuent des opérations
-après que le conteneur soit construit.
-
-Marquer les Services comme public / privé
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Lors de la définition des services, vous souhaitez généralement être en mesure d'accéder à ces définitions
-au sein de votre code d'application. Ces services sont appelés ``publics``. Par exemple,
-le service ``doctrine`` enregistré avec le conteneur en utilisant le DoctrineBundle
-est un service public que vous pouvez y accéder via :
-
-.. code-block:: php
-
-   $doctrine = $container->get('doctrine');
-
-Cependant, il y a des cas utiles où vous ne voulez pas qu'un service soit public. Cela
-est courant quand un service est seulement défini car il pourrait être utilisé comme un
-paramètre pour un autre service.
-
-.. note::
-
-    Si vous utilisez un service privé comme un paramètre pour plus d'un autre service,
-    cela se traduira par deux instances différentes étant utilisées puisque l'instanciation
-    du service privé se fait « inline » (par exemple ``new PrivateFooBar()``).
-
-Autrement dit : un service sera privé lorsque vous ne voulez pas y accéder
-directement à partir de votre code.
-
-Voici un exemple :
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        services:
-           foo:
-             class: Acme\HelloBundle\Foo
-             public: false
-
-    .. code-block:: xml
-
-        <service id="foo" class="Acme\HelloBundle\Foo" public="false" />
-
-    .. code-block:: php
-
-        $definition = new Definition('Acme\HelloBundle\Foo');
-        $definition->setPublic(false);
-        $container->setDefinition('foo', $definition);
-
-Maintenant que le service est privé, vous *ne pouvez pas* appeler :
-
-.. code-block:: php
-
-    $container->get('foo');
-
-Cependant, si un service a été marqué comme privé, vous pouvez toujours le mettre en alias (voir
-ci-dessous) pour accéder à ce service (via l'alias).
-
-.. note::
-
-   Les services sont publics par défaut.
-
-Aliasing
-~~~~~~~~
-
-Lors de l'utilisation des bundles de base ou tiers au sein de votre application, vous voudriez peut-être
-utiliser des raccourcis pour accéder à certains services. Vous pouvez le faire en les mettant en alias et,
-en outre, vous pouvez même mettre en alias les services non publics.
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        services:
-           foo:
-             class: Acme\HelloBundle\Foo
-           bar:
-             alias: foo
-
-    .. code-block:: xml
-
-        <service id="foo" class="Acme\HelloBundle\Foo"/>
-
-        <service id="bar" alias="foo" />
-
-    .. code-block:: php
-
-        $definition = new Definition('Acme\HelloBundle\Foo');
-        $container->setDefinition('foo', $definition);
-
-        $containerBuilder->setAlias('bar', 'foo');
-
-Cela signifie que quand vous utilisez le conteneur directement, vous pouvez accéder au 
-service  ``foo`` en demandant le service ``bar`` comme ceci :
-
-.. code-block:: php
-
-    $container->get('bar'); // Would return the foo service
-
-Fichiers Requis
-~~~~~~~~~~~~~~~
-
-Il pourrait y avoir des cas utiles où vous avez besoin d'inclure un autre fichier juste avant
-que le service proprement dit ne soit chargé. Pour ce faire, vous pouvez utiliser la directive ``file``.
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        services:
-           foo:
-             class: Acme\HelloBundle\Foo\Bar
-             file: %kernel.root_dir%/src/path/to/file/foo.php
-
-    .. code-block:: xml
-
-        <service id="foo" class="Acme\HelloBundle\Foo\Bar">
-            <file>%kernel.root_dir%/src/path/to/file/foo.php</file>
-        </service>
-
-    .. code-block:: php
-
-        $definition = new Definition('Acme\HelloBundle\Foo\Bar');
-        $definition->setFile('%kernel.root_dir%/src/path/to/file/foo.php');
-        $container->setDefinition('foo', $definition);
-
-Veuillez noter que symfony appelera en interne la fonction PHP require_once
-ce qui signifie que votre fichier ne sera inclu qu'une seule fois par requête.
-
 .. _book-service-container-tags:
 
-Tags (``tags``)
-~~~~~~~~~~~~~~~
+Tags
+----
 
 De la même manière qu'un billet de blog sur le Web pourrait être taggé avec des noms
 telles que « Symfony » ou « PHP », les services configurés dans votre conteneur peuvent également être
@@ -1089,8 +949,14 @@ des paramètres supplémentaires (au-delà du paramètre ``name``).
 Apprenez en plus
 ----------------
 
+* :doc:`/components/dependency_injection/compilation`
+* :doc:`/components/dependency_injection/definitions`
 * :doc:`/components/dependency_injection/factories`
 * :doc:`/components/dependency_injection/parentservices`
+* :doc:`/components/dependency_injection/tags`
 * :doc:`/cookbook/controller/service`
+* :doc:`/cookbook/service_container/scopes`
+* :doc:`/cookbook/service_container/compiler_passes`
+* :doc:`/components/dependency_injection/advanced`
 
 .. _`service-oriented architecture`: http://wikipedia.org/wiki/Service-oriented_architecture

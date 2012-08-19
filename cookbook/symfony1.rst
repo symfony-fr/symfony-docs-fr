@@ -135,6 +135,7 @@ standard Symfony2 comme exemple::
     class SensioFrameworkExtraBundle extends Bundle
     {
         // ...
+    }
 
 Le fichier lui même est présent dans 
 ``vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/SensioFrameworkExtraBundle.php``.
@@ -152,7 +153,7 @@ configuré Symfony pour qu'il recherche l'espace de nom ``Sensio`` dans le répe
 
     // ...
     $loader->registerNamespaces(array(
-        // ...
+        ...,
         'Sensio'           => __DIR__.'/../vendor/sensio/framework-extra-bundle',
     ));
 
@@ -260,7 +261,7 @@ Dans Symfony2, les bundles sont activés à l'intérieur du noyau applicatif::
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            // ...
+            ...,
             new Acme\DemoBundle\AcmeDemoBundle(),
         );
 

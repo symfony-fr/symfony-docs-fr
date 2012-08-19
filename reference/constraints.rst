@@ -16,7 +16,7 @@ Contraintes de validation de référence
    constraints/Email
    constraints/MinLength
    constraints/MaxLength
-   constraints/Size
+   constraints/Length
    constraints/Url
    constraints/Regex
    constraints/Ip
@@ -31,6 +31,7 @@ Contraintes de validation de référence
 
    constraints/Choice
    constraints/Collection
+   constraints/Count
    constraints/UniqueEntity
    constraints/Language
    constraints/Locale

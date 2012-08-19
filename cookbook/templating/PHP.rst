@@ -1,5 +1,5 @@
 .. index::
-   single: PHP Templates
+   single: PHP templates
 
 Comment utiliser PHP plutôt que Twig dans les templates
 =======================================================
@@ -29,9 +29,9 @@ application:
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <framework:config ... >
+        <framework:config ...>
             <!-- ... -->
-            <framework:templating ... >
+            <framework:templating ...>
                 <framework:engine id="twig" />
                 <framework:engine id="php" />
             </framework:templating>
@@ -40,7 +40,7 @@ application:
     .. code-block:: php
 
         $container->loadFromExtension('framework', array(
-            // ...
+            ...,
             'templating'      => array(
                 'engines' => array('twig', 'php'),
             ),
@@ -53,6 +53,8 @@ le nom de vos templates à la place de l'extension ``.twig``.
 Le contrôleur suivant délivre ainsi le template ``index.html.php`` ::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
+
+    // ...
 
     public function indexAction($name)
     {
@@ -197,7 +199,7 @@ La méthode ``render()`` évalue et retourne le contenu d'un autre template (c'e
 exactement la même méthode que celle utilisée dans le contrôleur).
 
 .. index::
-   single: Templating; Embedding Pages
+   single: Templating; Embedding pages
 
 Intégrer d'autre contrôleurs
 ----------------------------

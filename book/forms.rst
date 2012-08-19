@@ -231,7 +231,7 @@ fonctionnalité suivante à votre contrôleur :
             ->getForm();
 
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 // effectuez quelques actions, comme sauvegarder la tâche dans
@@ -243,14 +243,21 @@ fonctionnalité suivante à votre contrôleur :
         // ...
     }
 
+.. versionadded:: 2.1
+
+    La méthode ``bind`` a été rendue plus flexible dans SYmfony 2.1. Elle
+    accepte maintenant les données brutes du client (comme avant) ou un
+    objet Request Symfony. Elle est à privilégier par rapport à la méthode
+    ``bindRequest`` dépréciée.
+
 Maintenant, lorsque vous soumettez le formulaire, le contrôleur lie les données
 soumises avec le formulaire, qui transmet ces données en retour aux propriétés
 ``task`` et ``dueDate`` de l'objet ``$task``. Tout ceci a lieu grâce à la
-méthode ``bindRequest()``.
+méthode ``bind()``.
 
 .. note::
 
-    Aussitôt que ``bindRequest()`` est appelée, les données soumises sont
+    Aussitôt que ``bind()`` est appelée, les données soumises sont
     transférées immédiatement à l'objet sous-jacent. Ceci intervient
     indépendamment du fait que les données sous-jacentes soient valides ou non.
 
@@ -337,9 +344,7 @@ puisse pas être vide et qu'il doive être un objet \DateTime valide.
             </property>	
             <property name="dueDate">
                 <constraint name="NotBlank" />
-                <constraint name="Type">
-                    <value>\DateTime</value>
-                </constraint>
+                <constraint name="Type">\DateTime</constraint>
             </property>
         </class>
 
@@ -389,7 +394,7 @@ La validation est une fonctionnalité très puissante de Symfony2 et possède so
 :doc:`propre chapitre</book/validation>`.
 
 .. index::
-   single: Formulaires; Les Groupes de Validation
+   single: Formulaires; Les Groupes de validation
 
 .. _book-forms-validation-groups:
 
@@ -475,7 +480,7 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
     }
 
 .. index::
-   single: Formulaires; Types de Champ Intégrés
+   single: Formulaires; Types de champ intégrés
 
 .. _book-forms-type-reference:
 
@@ -624,7 +629,7 @@ passant l'option au tableau des options de champ ::
     ->add('task', null, array('max_length' => 4))
 
 .. index::
-   single: Formulaires; Rendu dans un Template
+   single: Formulaires; Rendu dans un template
 
 .. _form-rendering-template:
 
@@ -839,7 +844,6 @@ de construction du formulaire « task » :
 .. code-block:: php
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
-
     namespace Acme\TaskBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
@@ -1084,8 +1088,19 @@ instance de la nouvelle classe ``CategoryType`` :
         $builder->add('category', new CategoryType());
     }
 
-Les champs de ``CategoryType`` peuvent maintenant être rendus à côté de ceux
-de la classe ``TaskType``. Rendez les champs de ``Category`` de la même manière
+Les champs de ``CategoryType`` peuvent maintenant être affichés à côté de ceux
+de la classe ``TaskType``. Pour activer la validation sur CategoryType, ajoutez
+l'option ``cascade_validation``::
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Acme\TaskBundle\Entity\Category',
+            'cascade_validation' => true,
+        ));
+    }
+
+Affichez les champs de ``Category`` de la même manière
 que les champs de la classe ``Task`` :
 
 .. configuration-block::
@@ -1304,7 +1319,7 @@ ce dernier vous souhaitez personnaliser (par exemple : ``widget``), vous pouvez
 construire le nom du fragment qui a besoin d'être réécrit (par exemple : ``textarea_widget``).
 
 .. index::
-   single: Formulaires; Inhéritance de Fragment de Template
+   single: Formulaires; Héritage de fragment de template
 
 Héritage de Fragment de Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1331,7 +1346,7 @@ le fragment ``field_errors`` directement.
     chaque type de champ.
 
 .. index::
-   single: Formulaires; Habillage Global
+   single: Formulaires; Habillage global
 
 Habillage Global de Formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1560,7 +1575,7 @@ un tableau des données soumises. C'est en fait très facile :
             ->getForm();
         
             if ($request->getMethod() == 'POST') {
-                $form->bindRequest($request);
+                $form->bind($request);
 
                 // les données sont un tableau avec les clés "name", "email", et "message"
                 $data = $form->getData();
@@ -1625,7 +1640,7 @@ mais voici un petit exemple::
         // ...
     ;
 
-Maintenant, quand vous appelez `$form->bindRequest($request)`, les contraintes configurées sont
+Maintenant, quand vous appelez `$form->bind($request)`, les contraintes configurées sont
 appliquées aux données de votre formulaire. Si vous utilisez une classe de formulaire,
 surchargez la méthode ``setDefaultOptions`` pour les spécifier :
 

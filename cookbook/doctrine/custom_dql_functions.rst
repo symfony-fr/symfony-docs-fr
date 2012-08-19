@@ -1,8 +1,8 @@
 .. index::
    single: Doctrine; Custom DQL functions
 
-Définir des Fonctions DQL Personnalisées
-========================================
+Comment définir des fonctions DQL personnalisées
+================================================
 
 Doctrine vous permet de spécifier des fonctions DQL personnalisées. Pour plus
 d'informations à ce sujet, lisez l'article du cookbook de Doctrine
@@ -60,10 +60,10 @@ Dans Symfony, vous pouvez définir vos fonctions DQL personnalisées comme suit 
         // app/config/config.php
         $container->loadFromExtension('doctrine', array(
             'orm' => array(
-                // ...
+                ...,
                 'entity_managers' => array(
                     'default' => array(
-                        // ...
+                        ...,
                         'dql' => array(
                             'string_functions' => array(
                                 'test_string'   => 'Acme\HelloBundle\DQL\StringFunction',

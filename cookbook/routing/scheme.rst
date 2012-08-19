@@ -54,15 +54,15 @@ Pendant la génération de l'URL de ``secure``, et si le système actuel est
 HTTP, Symfony va automatiquement générer une URL absolue avec HTTPS comme
 « scheme » :
 
-.. code-block:: text
+.. code-block:: jinja
 
-    # Si le « scheme » actuel est HTTPS
+    {# Si le « scheme » actuel est HTTPS #}
     {{ path('secure') }}
-    # génère /secure
+    {# génère /secure
 
-    # Si le « scheme » actuel est HTTP
+    {# Si le « scheme » actuel est HTTP #}
     {{ path('secure') }}
-    # génère https://example.com/secure
+    {# génère https://example.com/secure #}
 
 La condition requise est aussi forcée pour les requêtes entrantes. Si vous
 essayez d'accéder au chemin ``/secure`` avec HTTP, vous serez automatiquement

@@ -1,9 +1,9 @@
 Contraintes de bases
 ~~~~~~~~~~~~~~~~~~~~
 
-Utilisez les contraintes de bases afin de vérifier des données basiques à propos
-de la valeur d'une propriété ou de la valeur retournée par une méthode de votre
-objet.
+Voici les contraintes de base : utilisez les afin de vérifier des données
+basiques à propos de la valeur d'une propriété ou de la valeur retournée
+par une méthode de votre objet.
 
 * :doc:`NotBlank </reference/constraints/NotBlank>`
 * :doc:`Blank </reference/constraints/Blank>`
@@ -19,6 +19,7 @@ Constraintes sur les chaînes de caractères
 * :doc:`Email </reference/constraints/Email>`
 * :doc:`MinLength </reference/constraints/MinLength>`
 * :doc:`MaxLength </reference/constraints/MaxLength>`
+* :doc:`Length </reference/constraints/Length>`
 * :doc:`Url </reference/constraints/Url>`
 * :doc:`Regex </reference/constraints/Regex>`
 * :doc:`Ip </reference/constraints/Ip>`
@@ -28,6 +29,7 @@ Constraintes sur les nombres
 
 * :doc:`Max </reference/constraints/Max>`
 * :doc:`Min </reference/constraints/Min>`
+* :doc:`Range </reference/constraints/Range>`
 
 Constraintes sur les dates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,6 +43,7 @@ Constraintes sur les collections
 
 * :doc:`Choice </reference/constraints/Choice>`
 * :doc:`Collection </reference/constraints/Collection>`
+* :doc:`Count </reference/constraints/Count>`
 * :doc:`UniqueEntity </reference/constraints/UniqueEntity>`
 * :doc:`Language </reference/constraints/Language>`
 * :doc:`Locale </reference/constraints/Locale>`

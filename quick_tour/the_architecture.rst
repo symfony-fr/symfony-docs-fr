@@ -178,7 +178,6 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
 	#esi:            ~
         #translator:     { fallback: %locale% }
         secret:          "%secret%"
-        charset:         UTF-8
         router:          { resource: "%kernel.root_dir%/config/routing.yml" }
         form:            true
         csrf_protection: true        
@@ -312,11 +311,11 @@ Etendre les bundles
 	
 Si vous suivez ces conventions, alors vous pouvez utiliser :doc:`l'héritage de bundle</cookbook/bundles/inheritance>`
 pour «surcharger» les fichiers, les contrôleurs et les templates. Par exemple, 
-vous pouvez créer un nouveau bundle (``AcmeNewBundle``) et spécifier que son parent
-est ``AcmeDemoBundle``. Lorsque Symfony chargera le contrôleur ``AcmeDemoBundle:Welcome:index``,
-il cherchera d'abord la classe ``WelcomeController`` dans le bundle ``AcmeNewBundle``
-puis dans le bundle ``AcmeDemoBundle``. Cela signifie qu'un bundle peut surcharger
-presque toutes les parties d'un autre bundle!
+vous pouvez créer un nouveau bundle (``AcmeNewBundle``) et spécifier qu'il surcharge
+le ``AcmeDemoBundle``. Lorsque Symfony chargera le contrôleur ``AcmeDemoBundle:Welcome:index``,
+il cherchera d'abord la classe ``WelcomeController`` dans le bundle ``AcmeNewBundle`` et,
+s'il ne la trouve pas, il la cherchera dans le bundle ``AcmeDemoBundle``. Cela signifie qu'un
+bundle peut surcharger presque toutes les parties d'un autre bundle!
 
 Vous comprenez maintenant pourquoi Symfony2 est si flexible ? Partagez vos
 Bundles entre applications, stockez-les localement ou globalement, c'est vous

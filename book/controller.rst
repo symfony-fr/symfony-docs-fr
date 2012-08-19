@@ -101,8 +101,8 @@ Les contrôleurs sont aussi appelés *actions*.
     :linenos:
 
     // src/Acme/HelloBundle/Controller/HelloController.php
-
     namespace Acme\HelloBundle\Controller;
+
     use Symfony\Component\HttpFoundation\Response;
 
     class HelloController
@@ -220,8 +220,8 @@ réfère à une méthode ``HelloController::indexAction()`` qui réside dans le 
 
     <?php
     // src/Acme/HelloBundle/Controller/HelloController.php
-
     namespace Acme\HelloBundle\Controller;
+
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
     class HelloController extends Controller
@@ -354,7 +354,7 @@ lorsque vous travaillez avec les formulaires, par exemple :
     {
         $form = $this->createForm(...);
         
-        $form->bindRequest($request);
+        $form->bind($request);
         // ...
     }
 
@@ -376,8 +376,8 @@ Ajoutez le mot-clé ``use`` au-dessus de la classe ``Controller`` et modifiez
 .. code-block:: php
 
     // src/Acme/HelloBundle/Controller/HelloController.php
-
     namespace Acme\HelloBundle\Controller;
+    
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\Response;
 
@@ -412,7 +412,7 @@ elle-même.
     </cookbook/controller/service>`.
 
 .. index::
-   single: Controller; Common Tasks
+   single: Controller; Common tasks
 
 Les Tâches Communes du Contrôleur
 ---------------------------------
@@ -679,7 +679,7 @@ Ces attributs vont rester affectés à cet utilisateur pour le restant de sa
 session.
 
 .. index::
-   single Session; Les messages Flash
+   single: Session; Les messages Flash
 
 Les Messages Flash
 ~~~~~~~~~~~~~~~~~~
@@ -698,7 +698,7 @@ Par exemple, imaginez que vous traitiez la soumission d'un formulaire :
     {
         $form = $this->createForm(...);
 
-        $form->bindRequest($this->getRequest());
+        $form->bind($this->getRequest());
         if ($form->isValid()) {
             // effectue le traitement du formulaire
 

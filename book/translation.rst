@@ -229,7 +229,7 @@ se fait comme précédemment :
     .. code-block:: yaml
 
         # messages.fr.yml
-        'Hello %name%': Hello %name%
+        'Hello %name%': Bonjour %name%
 
 .. note::
 
@@ -275,7 +275,7 @@ système de fichiers et reconnues par Symfony, grâce à certaines conventions.
 
     .. code-block:: bash
     
-        php app/console cache:clear
+        $ php app/console cache:clear
 
 .. index::
    single: Traductions; Emplacements des ressources de traduction
@@ -815,7 +815,6 @@ Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire l
             {{ '<h3>foo</h3>'|trans }}
 
 .. versionadded:: 2.1
-
      Vous pouvez maintenant définir un domaine de traduction pour un template
      Twig entier avec une seule balise :
    
@@ -962,7 +961,7 @@ Lisez `Catalogues de Message`_ pour en savoir plus
 
     .. code-block:: xml
 
-        <!-- validators.fr.xliff -->
+        <!-- validators.en.xliff -->
         <?xml version="1.0"?>
         <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
             <file source-language="en" datatype="plaintext" original="file.ext">
@@ -977,14 +976,14 @@ Lisez `Catalogues de Message`_ pour en savoir plus
 
     .. code-block:: php
 
-        // validators.fr.php
+        // validators.en.php
         return array(
             'author.name.not_blank' => 'Saisissez un nom.',
         );
 
     .. code-block:: yaml
 
-        # validators.fr.yml
+        # validators.en.yml
         author.name.not_blank: Saisissez un nom.
 
 Résumé

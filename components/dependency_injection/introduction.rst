@@ -1,5 +1,6 @@
 ﻿.. index::
     single: Dependency Injection
+    single: Components; DependencyInjection
 
 Le Composant d'Injection de Dépendance (« Dependency Injection » en anglais)
 ============================================================================
@@ -207,11 +208,7 @@ Initialiser le Conteneur avec des fichiers de configuration
 
 Tout comme vous avez initialisé vos services en utilisant PHP ci-dessus,
 vous pouvez aussi utiliser des fichiers de configuration. Pour
-faire cela, vous devez installer en sus le composant « Config » :
-
-* Utilisez le dépôt Git officiel (https://github.com/symfony/Config) ;
-* Installez le via PEAR (`pear.symfony.com/Config`) ;
-* Installez le via Composer (`symfony/config` dans Packagist).
+faire cela, vous devez installer :doc:`le composant « Config »</components/config/introduction>`.
 
 Chargement d'un fichier de configuration XML :
 
@@ -236,6 +233,12 @@ Chargement d'un fichier de configuration YAML :
     $container = new ContainerBuilder();
     $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
     $loader->load('services.yml');
+
+.. note::
+
+    Si vous voulez charger des fichiers de configuration  alors vous aurez également
+    besoin d'installer :doc:`le composant YAML</components/yaml>`.
+    
 
 Les services ``newsletter_manager`` et ``mailer`` peuvent aussi être initialisés
 en utilisant des fichiers de configuration :

@@ -14,7 +14,7 @@ Avant de travailler sur Symfony2, installez un environnement avec les
 logiciels suivants :
 
 * Git;
-* PHP version 5.3.3 ou supérieur;
+* PHP version 5.3.4 ou supérieur;
 * PHPUnit 3.6.4 ou supérieur.
 
 Configurer Git
@@ -38,7 +38,7 @@ email fonctionnelle :
     Si votre IDE crée les fichiers de configuration dans le répertoire de votre
     projet, vous pouvez utiliser le fichier global ``.gitignore`` (pour tout les
     projets) ou le fichier ``.git/info/exclude`` (par projet) pour les ignorer.
-    Lisez la [documentation Github] (https://help.github.com/articles/ignoring-files)
+    Lisez la `documentation Github`_.
 
 .. tip::
 
@@ -180,7 +180,8 @@ vous le voulez mais gardez bien à l'esprit de :
 .. tip::
 
     Vous pouvez vérifier les standards de code de votre patch grâce à
-    [script](http://cs.sensiolabs.org/get/php-cs-fixer.phar) [src](https://github.com/fabpot/PHP-CS-Fixer):
+    `script <http://cs.sensiolabs.org/get/php-cs-fixer.phar>`_
+    (`source <https://github.com/fabpot/PHP-CS-Fixer>`_):
 
     .. code-block:: bash
 
@@ -369,6 +370,7 @@ liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la comm
 
 .. _ProGit:                                       http://progit.org/
 .. _GitHub:                                       https://github.com/signup/free
+.. _`documentation _GitHub`:              https://help.github.com/articles/ignoring-files
 .. _dépôt Symfony2:                          https://github.com/symfony/symfony
 .. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
 .. _travis-ci.org:                                http://travis-ci.org

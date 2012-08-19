@@ -55,21 +55,23 @@ Malheureusement, cela a un coût, et le chargeur itère à travers tous les espa
 jusqu'à ce qu'il trouve le fichier qu'il recherchait.
 
 La solution la plus simple est de mettre en cache l'emplacement de chaque classe
-après qu'il l'ait trouvé la première fois. Symfony est fourni avec une classe chargeur
-- ``ApcUniversalClassLoader`` - qui étend ``UniversalClassLoader`` et qui sauvegarde
-l'emplacement de la classe dans APC.
+après qu'elles ont été trouvées la première fois. Symfony est fourni avec une classe
+- :class:`Symfony\\Component\\ClassLoader\\ApcClassLoader` - qui fait exactement cela.
+Pour l'utiliser, il vous suffit d'adapter votre contrôleur frontal. Si vous utilisez la
+distribution standard, le code devrait déjà être disponible dans ce fichier en commentaires::
 
-Pour utiliser cette classe de chargeur, vous n'avez qu'à adapter votre fichier 
-``autoloader.php`` de la manière suivante :
+    // app.php
+    // ...
 
-.. code-block:: php
+    $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
-    // app/autoload.php
-    require __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
+    // Use APC for autoloading to improve performance
+    // Change 'sf2' by the prefix you want in order to prevent key conflict with another application
+    /*
+    $loader = new ApcClassLoader('sf2', $loader);
+    $loader->register(true);
+    */
 
-    use Symfony\Component\ClassLoader\ApcUniversalClassLoader;
-
-    $loader = new ApcUniversalClassLoader('un préfixe de caching unique');
     // ...
 
 .. note::

@@ -403,7 +403,8 @@ et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check
 
 .. versionadded:: 2.1	
     Dans Symfony 2.1, vous *devez* avoir des routes configurées pour vos URLs ``login_path``
-    (ex ``/login``) et ``check_path`` (ex ``/login_check``).
+    (ex ``/login``), ``check_path`` (ex ``/login_check``) et ``logout``  
+    (ex ``/logout`` - voir `Se déconnecter`_).
 
 Veuillez noter que le nom de la route ``login`` n'est pas important. Ce qui importe est
 que l'URL de la route (``login``) corresponde à la valeur de ``login_path``, car c'est
@@ -1011,7 +1012,6 @@ cette interface.
 
 
 .. versionadded:: 2.1
-
    Dans Symfony 2.1, la méthode ``equals`` a été retirée de la ``UserInterface``.
    Si vous avez besoin de surcharger l'implémentation par défaut de la logique de comparaison,
    implémentez la nouvelle interface :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface`.
@@ -1522,8 +1522,13 @@ complètement et ainsi réduire votre configuration :
         'logout' => array(),
 
 Veuillez noter que vous n'aurez *pas* à implémenter un contrôleur pour l'URL ``/logout``
-car le pare-feu se charge de tout. Vous pouvez toutefois vouloir créer une route afin 
+car le pare-feu se charge de tout. Vous *devez* toutefois créer une route afin 
 de l'utiliser pour générer l'URL :
+
+.. warning::
+  
+    Depuis Symfony 2.1, vous *devez* avoir une route qui correspond à votre chemin de déconnexion.
+    Sans route, vous ne pourrez pas vous déconnecter.
 
 .. configuration-block::
 

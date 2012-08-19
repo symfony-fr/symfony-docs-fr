@@ -1,8 +1,8 @@
 .. index::
    single: Sécurité; Concepts d'ACL avancés
 
-Concepts d'ACL avancés
-======================
+Comment utiliser les concepts d'ACL avancés
+===========================================
 
 Le but de ce chapitre est de donner une vision plus profonde du système des
 ACL (« Liste de Contrôle d'Accès » en français), et aussi d'expliquer certaines

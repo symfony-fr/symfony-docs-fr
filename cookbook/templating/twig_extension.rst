@@ -26,12 +26,10 @@ une classe Extension Twig. En tant qu'exemple, nous allons créer un filtre « p
 afin de formater un nombre donné en un prix::
 
     // src/Acme/DemoBundle/Twig/AcmeExtension.php
-
     namespace Acme\DemoBundle\Twig;
 
     use Twig_Extension;
     use Twig_Filter_Method;
-    use Twig_Function_Method;
 
     class AcmeExtension extends Twig_Extension
     {
@@ -115,14 +113,14 @@ des autres :
 .. code-block:: jinja
 
     {# affiche $5,500.00 #}
-    {{ '5500' | price }}
+    {{ '5500'|price }}
     
 Passez d'autres arguments à votre filtre :
 
 .. code-block:: jinja
     
     {# affiche $5500,2516 #}
-    {{ '5500.25155' | price(4, ',', '') }}
+    {{ '5500.25155'|price(4, ',', '') }}
     
 En savoir plus
 --------------

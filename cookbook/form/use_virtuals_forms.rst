@@ -25,7 +25,7 @@ Par exemple, imaginez que vous ayez deux entités, une ``Company`` et une ``Cust
 
 .. code-block:: php
 
-    // src/Acme/HelloBundle/Entity/Company.php
+    // src/Acme/HelloBundle/Entity/Customer.php
     namespace Acme\HelloBundle\Entity;
 
     class Customer
@@ -58,8 +58,7 @@ Commencez par créer un ``CompanyType`` et un ``CustomerType``::
         {
             $builder
                 ->add('name', 'text')
-                ->add('website', 'text')
-            ;
+                ->add('website', 'text');
         }
     }
 
@@ -69,6 +68,7 @@ Commencez par créer un ``CompanyType`` et un ``CustomerType``::
     namespace Acme\HelloBundle\Form\Type;
 
     use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class CustomerType extends AbstractType
     {
@@ -76,8 +76,7 @@ Commencez par créer un ``CompanyType`` et un ``CustomerType``::
         {
             $builder
                 ->add('firstName', 'text')
-                ->add('lastName', 'text')
-            ;
+                ->add('lastName', 'text');
         }
     }
 
@@ -89,6 +88,7 @@ français)::
     namespace Acme\HelloBundle\Form\Type;
 
     use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class LocationType extends AbstractType
     {
@@ -98,8 +98,14 @@ français)::
                 ->add('address', 'textarea')
                 ->add('zipcode', 'string')
                 ->add('city', 'string')
-                ->add('country', 'text')
-            ;
+                ->add('country', 'text');
+        }
+
+        public function getDefaultOptions(array $options)
+        {
+            return array(
+                'virtual' => true,
+            );
         }
 
         public function getName()
@@ -123,8 +129,10 @@ Voyez le résultat::
 
     // CompanyType
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('foo', new LocationType());
+    {  
+        $builder->add('foo', new LocationType(), array( 
+            'data_class' => 'Acme\HelloBundle\Entity\Company'
+        ));
     }
 
 .. code-block:: php
@@ -132,7 +140,9 @@ Voyez le résultat::
     // CustomerType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('bar', new LocationType());
+        $builder->add('bar', new LocationType(), array(
+            'data_class' => 'Acme\HelloBundle\Entity\Customer'
+        ));
     }
 
 Avec l'option « virtual » définie à « false » (comportement par défaut),

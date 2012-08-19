@@ -18,7 +18,24 @@ Télécharger Symfony2
 --------------------
 
 Tout d'abord, vérifiez que vous avez installé et configuré un serveur web (comme
-Apache) avec PHP 5.3.3 ou supérieur.
+Apache) avec PHP 5.3.4 ou supérieur.
+
+.. tip::
+   
+    Si vous avez PHP 5.4, vous pouvez utiliser le serveur web intégré. Le serveur
+    intégré ne devrait être utilisé que pour le développement, mais il peut vous
+    aider à démarrer un projet plus rapidement et plus facielement.
+
+    Tapez juste cette commande dans votre répertoire Symfony pour démarrer le serveur :
+    
+    .. code-block:: bash
+
+        $ php app/console server:run localhost:8000
+
+    Alors, l'URL de votre application sera « http://localhost:8000/app_dev.php »
+
+    Si vous voulez accéder à votre application via « http://localhost/app_dev.php »,
+    vous devrez lancer la commande avec des droits d'administrateur.
 
 Vous êtes prêts ? Commencez par télécharger la « `Symfony2 Standard Edition`_ »,
 une :term:`distribution` Symfony préconfigurée pour répondre à la plupart des besoins,
@@ -83,7 +100,7 @@ votre serveur :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/config.php
+    http://localhost/config.php
 
 S'il y encore des problèmes listés, vous devez les corriger. Vous pouvez également
 modifier votre configuration en suivant les recommandations données.
@@ -92,7 +109,7 @@ pour afficher votre première « vraie » page Symfony2 :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/app_dev.php/
+    http://localhost/app_dev.php/
 
 Symfony2 devrait vous féliciter pour le travail accompli jusqu'à présent !
 
@@ -120,7 +137,7 @@ Symfony2 (remplacez *Fabien* par votre prénom) :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/app_dev.php/demo/hello/Fabien
+    http://localhost/app_dev.php/demo/hello/Fabien
 
 .. image:: /images/quick_tour/hello_fabien.png
    :align: center
@@ -389,14 +406,14 @@ l'environnement de production :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/app.php/demo/hello/Fabien
+    http://localhost/app.php/demo/hello/Fabien
 
 Et si vous utilisez Apache avec le ``mod_rewrite`` activé, vous pouvez omettre
 la partie ``app.php`` dans l'URL :
 
 .. code-block:: text
 
-    http://localhost/Symfony/web/demo/hello/Fabien
+    http://localhost/demo/hello/Fabien
 
 Enfin, sur le serveur de production, vous devriez faire pointer le répertoire 
 racine web vers le répertoire ``web/`` pour sécuriser votre installation et avoir 
