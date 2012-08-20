@@ -188,7 +188,7 @@ Supposez que vous avez créé une action ``fancy`` et que vous voulez l'inclure
 .. code-block:: jinja
 
     {# src/Acme/DemoBundle/Resources/views/Demo/index.html.twig #}
-    {% render "AcmeDemoBundle:Demo:fancy" with { 'name': name, 'color': 'green' } %}
+    {% render "AcmeDemoBundle:Demo:fancy" with {'name': name, 'color': 'green'} %}
 
 Ici, la chaîne de caractères ``AcmeDemoBundle:Demo:fancy`` fait référence à l'action
 ``fancy`` du contrôleur ``Demo``. Les arguments (``name`` et ``color``) agissent
@@ -236,6 +236,8 @@ masque (pattern) de chaque route :
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+    // ...
+
     /**
      * @Route("/hello/{name}", name="_demo_hello")
      * @Template()
@@ -248,7 +250,7 @@ masque (pattern) de chaque route :
 .. tip::
 
     La fonction ``url`` génère des URLs *absolues* : ``{{ url('_demo_hello', {
-    'name': 'Thomas' }) }}``.
+    'name': 'Thomas'}) }}``.
 
 Inclure les assets: images, javascripts, et feuilles de style
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

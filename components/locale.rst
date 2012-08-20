@@ -1,5 +1,6 @@
 .. index::
    single: Locale
+   single: Components; Locale
 
 Le Composant Locale
 ===================
@@ -37,7 +38,7 @@ Utilisation
 Tirer parti de ce « code de secours » inclut le fait de requérir les bouts de fonctions et d'ajouter les
 morceaux de classes à l'« autoloader ».
 
-Lorsque vous utilisez le composant « ClassLoader », le code suivant est suffisant pour suppléer l'extension
+Lorsque vous utilisez le composant « ClassLoader », le code suivant est suffisant pour pallier l'extension
 ``intl`` manquante :
 
 .. code-block:: php

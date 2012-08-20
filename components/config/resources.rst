@@ -56,8 +56,8 @@ qui permet d'importer d'autres ressources de manière récursive::
         }
     }
 
-Trouver le chargeur correct
----------------------------
+Trouver le bon chargeur
+-----------------------
 
 La classe :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver` reçoit
 en tant que premier argument de son constructeur une collection de chargeurs.

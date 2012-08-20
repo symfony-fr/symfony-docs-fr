@@ -184,7 +184,7 @@ de ``TaskType``::
             
             // analyse le formulaire quand on reçoit une requête POST
             if ('POST' === $request->getMethod()) {
-                $form->bindRequest($request);
+                $form->bind($request);
                 if ($form->isValid()) {
                     // ici vous pouvez par exemple sauvegarder la Task et ses objets Tag
                 }
@@ -208,6 +208,7 @@ créé pour la première fois).
     .. code-block:: html+jinja
 
         {# src/Acme/TaskBundle/Resources/views/Task/new.html.twig #}
+
         {# ... #}
 
         <form action="..." method="POST" {{ form_enctype(form) }}>
@@ -229,6 +230,7 @@ créé pour la première fois).
     .. code-block:: html+php
 
         <!-- src/Acme/TaskBundle/Resources/views/Task/new.html.php -->
+
         <!-- ... -->
 
         <form action="..." method="POST" ...>
@@ -295,6 +297,7 @@ Pour rendre cela flexible, nous ajoutons l'option ``allow_add`` à notre champ
 collection::
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
+
     // ...
     
     use Symfony\Component\Form\FormBuilderInterface;
@@ -325,7 +328,7 @@ dans votre formulaire :
 
     .. code-block:: html+jinja
     
-        <ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype) | e }}">
+        <ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype)|e }}">
             ...
         </ul>
     
@@ -352,7 +355,7 @@ dans votre formulaire :
     
     .. code-block:: html+jinja
     
-        {{ form_widget(form.tags.vars.prototype.name) | e }}
+        {{ form_widget(form.tags.vars.prototype.name)|e }}
 
 Sur la page affichée, le résultat ressemblera à quelque chose comme ceci :
 
@@ -451,6 +454,10 @@ propriété ``tags`` de l'objet ``Task``.
     
         .. code-block:: php-annotations
 
+            // src/Acme/TaskBundle/Entity/Task.php
+
+            // ...
+
             /**
              * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"})
              */
@@ -482,6 +489,7 @@ propriété ``tags`` de l'objet ``Task``.
     est définie comme ``false``::
     
         // src/Acme/TaskBundle/Entity/Task.php
+
         // ...
 
         public function setTags(ArrayCollection $tags)
@@ -496,6 +504,7 @@ propriété ``tags`` de l'objet ``Task``.
     Dans le ``Tag``, assurez-vous simplement d'avoir une méthode ``addTask``::
 
         // src/Acme/TaskBundle/Entity/Tag.php
+
         // ...
 
         public function addTask(Task $task)
@@ -521,6 +530,7 @@ de tags.
 Commencez par ajouter l'option ``allow_delete`` dans le Type de formulaire::
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
+
     // ...
     
     use Symfony\Component\Form\FormBuilderInterface;
@@ -609,6 +619,7 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
     qui gére la « mise à jour » de votre « Task »::
 
         // src/Acme/TaskBundle/Controller/TaskController.php
+        
         // ...
 
         public function editAction($id, Request $request)
@@ -620,14 +631,16 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
                 throw $this->createNotFoundException('Aucune tâche trouvée pour cet id : '.$id);
             }
 
+            $originalTags = array();
+
             // Crée un tableau contenant les objets Tag courants de la
             // base de données
             foreach ($task->getTags() as $tag) $originalTags[] = $tag;
           
             $editForm = $this->createForm(new TaskType(), $task);
 
-               if ('POST' === $request->getMethod()) {
-                $editForm->bindRequest($this->getRequest());
+            if ('POST' === $request->getMethod()) {
+                $editForm->bind($this->getRequest());
 
                 if ($editForm->isValid()) {
         

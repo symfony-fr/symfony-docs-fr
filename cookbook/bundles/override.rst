@@ -65,7 +65,6 @@ recherche. Pour le Translator, le paramètre est défini et utilisé dans le fic
     .. code-block:: php
 
         // app/config/config.php
-
         $container->setParameter('translator.class', 'Acme\HelloBundle\Translation\Translator');
 
 Deuxièmement, si la classe n'est pas spécifiée dans les paramètres, si vous voulez
@@ -73,7 +72,8 @@ vous assurer que la classe est bien toujours surchargée lorsque votre bundle es
 utilisé, ou si vous avez besoin de faire un peu plus de modifications, vous devrez
 utiliser une passe de compilation::
 
-    namespace Foo\BarBundle\DependencyInjection\Compiler;
+    // src/Acme/DemoBundle/DependencyInjection/Compiler/OverrideServiceCompilerPass.php
+    namespace Acme\DemoBundle\DependencyInjection\Compiler;
 
     use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -83,7 +83,7 @@ utiliser une passe de compilation::
         public function process(ContainerBuilder $container)
         {
             $definition = $container->getDefinition('original-service-id');
-            $definition->setClass('Foo\BarBundle\YourService');
+            $definition->setClass('Acme\DemoBundle\YourService');
         }
     }
 

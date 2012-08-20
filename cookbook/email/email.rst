@@ -16,7 +16,7 @@ qui tire partie de la puissance de la bibliothèque `Swiftmailer`_.
         public function registerBundles()
         {
             $bundles = array(
-                // ...
+                ...,
                 new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             );
 
@@ -49,8 +49,8 @@ seul paramètre obligatoire de la configuration est ``transport`` :
         <!-- app/config/config.xml -->
 
         <!--
-        xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
-        http://symfony.com/schema/dic/swiftmailer http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd
+            xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
+            http://symfony.com/schema/dic/swiftmailer http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd
         -->
 
         <swiftmailer:config

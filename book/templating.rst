@@ -118,6 +118,11 @@ balises div en alternant les classes ``odd`` et ``even`` :
 Tout au long de ce chapitre, les exemples de templates seront donnés à la fois
 avec Twig et PHP.
 
+.. tip::
+
+    Si vous choisissez de ne *pas* utiliser Twig et que vous le désactivez, vous
+    devrez implémenter votre propre gestionnaire d'exceptions via l'évènement ``kernel.exception``.
+
 .. sidebar:: Pourquoi Twig?
 
     Les templates Twig sont conçus pour être simples et ne traiteront
@@ -127,13 +132,11 @@ avec Twig et PHP.
     bénéficierez. Et bien sûr, vous serez adoré par tous les web
     designers.
 
-    Twig peut aussi faire des choses que PHP ne pourrait pas faire, comme du vrai
-    héritage de templates (Twig compile les templates en classes PHP qui héritent
-    les unes des autres), le contrôle d'espace, le bac à sable et l'inclusion de
-    fonctions et de filtres personnalisés qui n'affectent que les templates. Twig
-    contient de petites fonctionnalités qui rendent l'écriture de template plus
-    facile et plus concise. Prenez l'exemple suivant, il combine une boucle avec
-    l'instruction logique ``if`` :
+    Twig peut aussi faire des choses que PHP ne pourrait pas faire, comme le contrôle
+    d'espaces blancs, le bac à sable et l'inclusion de fonctions et de filtres personnalisés
+    qui n'affectent que les templates. Twig contient de petites fonctionnalités qui rendent
+    l'écriture de template plus facile et plus concise. Prenez l'exemple suivant, il
+    combine une boucle avec l'instruction logique ``if`` :
     
     .. code-block:: html+jinja
     
@@ -459,7 +462,7 @@ lisez la section :ref:`template-formats`.
    pour plus de détails.
 
 .. index::
-   single: Templating; Tags and Helpers
+   single: Templating; Tags and helpers
    single: Templating; Helpers
 
 Balises et Helpers
@@ -530,7 +533,7 @@ L'inclusion de ce template dans tout autre template est simple :
 
     .. code-block:: html+jinja
 
-        {# src/Acme/ArticleBundle/Resources/Article/list.html.twig #}
+        {# src/Acme/ArticleBundle/Resources/views/Article/list.html.twig #}
         {% extends 'AcmeArticleBundle::layout.html.twig' %}
 
         {% block body %}
@@ -543,7 +546,7 @@ L'inclusion de ce template dans tout autre template est simple :
 
     .. code-block:: php
 
-        <!-- src/Acme/ArticleBundle/Resources/Article/list.html.php -->
+        <!-- src/Acme/ArticleBundle/Resources/views/Article/list.html.php -->
         <?php $view->extend('AcmeArticleBundle::layout.html.php') ?>
 
         <?php $view['slots']->start('body') ?>
@@ -873,7 +876,7 @@ la documentation de l'option de configuration :ref:`ref-framework-assets-version
 .. index::
    single: Templating; Including stylesheets and Javascripts
    single: Stylesheets; Including stylesheets
-   single: Javascripts; Including Javascripts
+   single: Javascript; Including Javascripts
 
 L'inclusion de Feuilles de style et de Javascripts avec Twig
 ------------------------------------------------------------
@@ -1016,7 +1019,7 @@ Plusieurs options de configuration sont disponibles et sont détaillées dans le
    beaucoup de bundles tiers).
 
 .. index::
-    single; Template; Overriding templates
+    single: Template; Overriding templates
 
 .. _overriding-bundle-templates:
 
@@ -1055,8 +1058,14 @@ Pour surcharger le template du bundle, il suffit de copier le template
 ``app/Resources/AcmeBlogBundle`` n'existe pas, nous vous laissons le soin
 de le créer). Vous êtes maintenant à même de personnaliser le template.
 
+.. caution::
+
+    Si vous ajoutez un template à un nouvel endroit, vous *pourriez* avoir
+    besoin de vider votre cache (``php app/console cache:clear``), même
+    si vous êtes en mode debug.
+
 Cette logique s'applique aussi au template layout. Supposons maintenant que chaque
-template dans ``AcmeBloqBundle`` hérite d'un template de base appelé
+template dans ``AcmeBlogBundle`` hérite d'un template de base appelé
 ``AcmeBlogBundle::layout.html.twig``. Comme précédemment, Symfony2 regardera
 dans les deux emplacements suivants :
 
@@ -1082,7 +1091,7 @@ bon sous-répertoire de ``app/Resources``.
 .. _templating-overriding-core-templates:
 
 .. index::
-    single; Template; Overriding exception templates
+    single: Template; Overriding exception templates
 
 La Surcharge des Core Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

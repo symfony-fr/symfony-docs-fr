@@ -14,6 +14,7 @@ depuis la base de données.
 +-------------+----------------------------------------------------------------------+
 | Options     | - `class`_                                                           |
 |             | - `property`_                                                        |
+|             | - `group_by`_                                                        |
 |             | - `query_builder`_                                                   |
 |             | - `em`_                                                              |
 +-------------+----------------------------------------------------------------------+
@@ -86,6 +87,17 @@ property
 C'est la propriété qui doit être utilisée pour afficher l'entité sous forme de
 texte dans l'élément HTML. Si vous le laissez vite, l'objet entité sera converti
 en texte et devra alors implémenter la méthode ``__toString()``.
+
+group_by
+~~~~~~~~
+
+**type**: ``string``
+
+C'est un nom de propriété (ex ``author.name``) utilisé pour organiser
+les choix disponibles dans les groupes. Ce ne fonctionne que lorsque vous
+affichez une balise select, et cela se fait par l'ajout de balises optgroup
+autour des balises option. Les choix qui ne retournent aucune valeur pour ce nom
+de propriété sont affichés directement dans la balise select, sans optgroup.
 
 query_builder
 ~~~~~~~~~~~~~

@@ -1,5 +1,5 @@
 .. index::
-   single: Evénements; Créer un Listener
+   single: Evénements; Créer un listener
 
 Comment créer un « listener » (« écouteur » en français) d'evénement
 ====================================================================
@@ -56,6 +56,7 @@ service et notifier Symfony que c'est un « listener » de l'événement
 
     .. code-block:: yaml
 
+        # app/config/config.yml
         services:
             kernel.listener.your_listener_name:
                 class: Acme\DemoBundle\Listener\AcmeExceptionListener
@@ -64,16 +65,17 @@ service et notifier Symfony que c'est un « listener » de l'événement
 
     .. code-block:: xml
 
+        <!-- app/config/config.xml -->
         <service id="kernel.listener.your_listener_name" class="Acme\DemoBundle\Listener\AcmeExceptionListener">
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>
 
     .. code-block:: php
 
+        // app/config/config.php
         $container
             ->register('kernel.listener.your_listener_name', 'Acme\DemoBundle\Listener\AcmeExceptionListener')
-            ->addTag('kernel.event_listener', array('event' => 'kernel.exception', 'method' => 'onKernelException'))
-        ;
+            ->addTag('kernel.event_listener', array('event' => 'kernel.exception', 'method' => 'onKernelException'));
         
 .. note::
 
@@ -107,7 +109,7 @@ très facilement comme ceci::
                 return;
              }
  
-            // votre code
+            // ...
             }
         } 
     }

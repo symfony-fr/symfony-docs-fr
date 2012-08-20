@@ -517,12 +517,13 @@ quelque chose d'utile pour presque n'importe quelle situation, quelle que soit
 la manière dont votre projet est développé. Pour en nommer quelques unes :
 
 
-* `HttpFoundation`_ - Contient les classes ``Request`` et ``Response``, ainsi
-  que d'autres classes pour la gestion des sessions et des uploads de fichiers;
+* :doc:`HttpFoundation</components/http_foundation/introduction>` - Contient les classes
+  ``Request`` et ``Response``, ainsi que d'autres classes pour la gestion des sessions
+  et des uploads de fichiers;
 
-* `Routing`_ - Un puissant et rapide système qui vous permet de lier une
-  URI spécifique (par exemple: ``/contact``) à l'information lui permettant
-  de savoir comment gérer cette requête (par exemple: exécute la méthode
+* :doc:`Routing</components/routing>`  - Un puissant et rapide système qui vous
+  permet de lier une URI spécifique (par exemple: ``/contact``) à l'information
+  lui permettant de savoir comment gérer cette requête (par exemple: exécute la méthode
   ``contactAction()``);
 
 * `Form`_ - Un framework complet et flexible pour la création de formulaires
@@ -531,13 +532,13 @@ la manière dont votre projet est développé. Pour en nommer quelques unes :
 * `Validator`_ Un système permettant de créer des règles à propos de données
   et de valider ou non les données utilisateurs soumises suivant ces règles;
 
-* `ClassLoader`_ Une bibliothèque pour le chargement automatique («autoloading»)
-  qui permet aux classes PHP d'être utilisées sans avoir besoin d'``inclure``
-  («require») manuellement les fichiers contenant ces dernières;
+* :doc:`ClassLoader</components/class_loader>` Une bibliothèque pour le chargement
+  automatique («autoloading») qui permet aux classes PHP d'être utilisées sans avoir
+  besoin d'``inclure`` («require») manuellement les fichiers contenant ces dernières;
 
-* `Templating`_ Une boîte à outils pour délivrer des templates, gérer leur
-  inhéritance (i.e. un template est décoré par un layout) et effectuer d'autres
-  tâches communes aux templates;
+* :doc:`Templating</components/templating>` Une boîte à outils pour afficher des
+  templates, gérer leur héritage (c-a-d qu'un template est décoré par un layout)
+  et effectuer d'autres tâches communes aux templates;
 
 * `Security`_ - Une puissante bibliothèque pour gérer tous les types de
   sécurité dans une application;
@@ -580,11 +581,7 @@ Pour les utilisateurs avancés, le ciel est la seule limite.
 .. _`Liste des codes HTTP`: http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
 .. _`List of HTTP header fields`: http://en.wikipedia.org/wiki/List_of_HTTP_header_fields
 .. _`Liste de media type usuels`: http://fr.wikipedia.org/wiki/Type_MIME#Liste_de_media_type_usuels
-.. _`HttpFoundation`: https://github.com/symfony/HttpFoundation
-.. _`Routing`: https://github.com/symfony/Routing
 .. _`Form`: https://github.com/symfony/Form
 .. _`Validator`: https://github.com/symfony/Validator
-.. _`ClassLoader`: https://github.com/symfony/ClassLoader
-.. _`Templating`: https://github.com/symfony/Templating
 .. _`Security`: https://github.com/symfony/Security
 .. _`Translation`: https://github.com/symfony/Translation

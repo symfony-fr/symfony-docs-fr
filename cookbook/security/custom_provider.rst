@@ -31,7 +31,7 @@ utilisateur personnalisée : ``getRoles()``, ``getPassword()``, ``getSalt()``,
 
 Voyons cela en action::
 
-    // src/Acme/WebserviceUserBundle/Security/User.php
+    // src/Acme/WebserviceUserBundle/Security/User/WebserviceUser.php
     namespace Acme\WebserviceUserBundle\Security\User;
 
     use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,7 +69,7 @@ Voyons cela en action::
         public function getUsername()
         {
             return $this->username;
-        }   
+        }
 
         public function eraseCredentials()
         {
@@ -134,12 +134,13 @@ Voici un exemple de ce à quoi cela pourrait ressembler::
         public function loadUserByUsername($username)
         {
             // effectuez un appel à votre service web ici
-            // $userData = ...
+            $userData = ...
             // supposons qu'il retourne un tableau en cas de succès, ou bien
             // « false » s'il n'y a pas d'utilisateur
 
             if ($userData) {
-                // $password = '...';
+                $password = '...';
+                
                 // ...
 
                 return new WebserviceUser($username, $password, $salt, $roles)

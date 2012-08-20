@@ -22,6 +22,7 @@ qui représente les fonctionnalités que vous mettrez à disposition dans votre 
 Dans ce cas, le service SOAP permettra à un client d'appeler la méthode nommée ``hello``, 
 qui engendrera l'envoi d'un courriel::
 
+    // src/Acme/SoapBundle/HelloService.php
     namespace Acme\SoapBundle;
 
     class HelloService
@@ -44,7 +45,7 @@ qui engendrera l'envoi d'un courriel::
             $this->mailer->send($message);
 
 
-            return 'Bonjour, ' . $name;
+            return 'Bonjour, '.$name;
         }
     }
 
@@ -113,7 +114,7 @@ Voici un exemple qui appelle un service en utilisant le client `NuSOAP`_. Cet ex
 suppose que le ``indexAction`` présent dans le contrôleur ci-dessus est accessible via la
 route ``/soap``::
 
-    $client = new \soapclient('http://example.com/app.php/soap?wsdl', true);
+    $client = new \Soapclient('http://example.com/app.php/soap?wsdl', true);
     
     $result = $client->call('hello', array('name' => 'Scott'));
 

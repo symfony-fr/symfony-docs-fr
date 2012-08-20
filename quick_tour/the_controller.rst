@@ -20,6 +20,8 @@ ajoutez un ``_format`` avec une valeur d'attribut ``xml`` :
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+    // ...
+
     /**
      * @Route("/hello/{name}", defaults={"_format"="xml"}, name="_demo_hello")
      * @Template()
@@ -49,6 +51,8 @@ l'emplacement ``{_format}`` dans le pattern à la place :
     // src/Acme/DemoBundle/Controller/DemoController.php
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+    // ...
 
     /**
      * @Route("/hello/{name}.{_format}", defaults={"_format"="html"}, requirements={"_format"="html|xml|json"}, name="_demo_hello")
@@ -210,7 +214,7 @@ De plus, l'utilisateur ``admin`` a le rôle ``ROLE_ADMIN``, qui inclut aussi le 
     cette configuration, mais vous pouvez utiliser un algorithme en modifiant la
     section ``encoders``.
 
-Aller à l'URL ``http://localhost/Symfony/web/app_dev.php/demo/secured/hello``
+Aller à l'URL ``http://localhost/app_dev.php/demo/secured/hello``
 vous redirigera automatiquement au formulaire d'authentification car la ressource
 est protégée par un ``firewall``.
 

@@ -82,6 +82,35 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
     dans votre configuration Apache. Pour plus d'informations, consultez
     l'article :doc:`/cookbook/configuration/external_parameters`.
 
+.. sidebar:: Configurer la base de données
+
+    Une erreur que font même les développeurs les plus chevronnés est d'oublier
+    de définir un jeu de caractères (charset) et une collation par défaut sur
+    leurs bases de données. Ils se retrouvent alors avec une collation de type
+    latin qui est la valeur par défaut de la plupart des bases de données.
+    Ils pourraient tout de même penser à le faire la toute première fois, mais
+    ils oublient que tout serait à refaire après avoir lancé une commande fréquente au cours
+    du développement :
+
+    .. code-block:: bash
+
+        $ app/console doctrine:database:drop --force
+        $ app/console doctrine:database:create
+
+    Il n'y a aucune manière de configurer ces paramètres par défaut dans Doctrine,
+    puisque Doctrine essaye d'être aussi agnostic que possible en terme de configuration.
+    Un moyen de résoudre ce problème est de configurer les valeurs par défaut au niveau
+    du serveur.
+
+    Définir UTF8 par défaut pour MySQL est aussi simple que d'ajouter ces quelques lignes
+    à votre fichier de configuration (typiquement ``my.cnf``) :
+
+    .. code-block:: ini
+    
+        [mysqld]
+        collation-server = utf8_general_ci
+        character-set-server = utf8  
+
 Maintenant que Doctrine connaît vos paramètres de connexion, vous pouvez lui
 demander de créer votre base de données :
 
@@ -100,7 +129,7 @@ cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle`` 
 
 .. code-block:: php
 
-    // src/Acme/StoreBundle/Entity/Product.php    
+    // src/Acme/StoreBundle/Entity/Product.php
     namespace Acme\StoreBundle\Entity;
 
     class Product
@@ -391,7 +420,7 @@ suivante au ``DefaultController`` du bundle :
         $product->setPrice('19.99');
         $product->setDescription('Lorem ipsum dolor');
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $em->persist($product);
         $em->flush();
 
@@ -543,7 +572,7 @@ une action de mise à jour dans un contrôleur :
 
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $product = $em->getRepository('AcmeStoreBundle:Product')->find($id);
 
         if (!$product) {
@@ -614,7 +643,7 @@ Imaginons que vous souhaitez récupérer tous les produits dont le prix est sup�
 
 .. code-block:: php
 
-    $em = $this->getDoctrine()->getManager();
+    $em = $this->getDoctrine()->getEntityManager();
     $query = $em->createQuery(
         'SELECT p FROM AcmeStoreBundle:Product p WHERE p.price > :price ORDER BY p.price ASC'
     )->setParameter('price', '19.99');
@@ -644,7 +673,7 @@ la place :
     
     .. code-block:: php
 
-        $query = $em->createQuery('SELECT ....')
+        $query = $em->createQuery('SELECT ...')
             ->setMaxResults(1);
         
         try {
@@ -789,7 +818,7 @@ ordre alphabétique.
     {
         public function findAllOrderedByName()
         {
-            return $this->getManager()
+            return $this->getEntityManager()
                 ->createQuery('SELECT p FROM AcmeStoreBundle:Product p ORDER BY p.name ASC')
                 ->getResult();
         }
@@ -797,14 +826,14 @@ ordre alphabétique.
 
 .. tip::
 
-    Vous pouvez accéder au gestionnaire d'entités par ``$this->getManager()`` à
+    Vous pouvez accéder au gestionnaire d'entités par ``$this->getEntityManager()`` à
     l'intérieur du dépôt.
 
 Vous pouvez alors utiliser cette nouvelle méthode comme les méthodes par défaut du dépôt :
 
 .. code-block:: php
 
-    $em = $this->getDoctrine()->getManager();
+    $em = $this->getDoctrine()->getEntityManager();
     $products = $em->getRepository('AcmeStoreBundle:Product')
                 ->findAllOrderedByName();
 
@@ -1005,7 +1034,7 @@ Maintenant, regardons le code en action. Imaginez que vous êtes dans un contrô
             // relate this product to the category
             $product->setCategory($category);
             
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($category);
             $em->persist($product);
             $em->flush();
@@ -1133,7 +1162,7 @@ une jointure dans la requête originale. Ajouter le code suivant à la classe
     
     public function findOneByIdJoinedToCategory($id)
     {
-        $query = $this->getManager()
+        $query = $this->getEntityManager()
             ->createQuery('
                 SELECT p, c FROM AcmeStoreBundle:Product p
                 JOIN p.category c
@@ -1387,7 +1416,7 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
 
 
 .. index::
-   single: Doctrine; ORM Console Commands
+   single: Doctrine; ORM console commands
    single: CLI; Doctrine ORM
 
 Commandes en console

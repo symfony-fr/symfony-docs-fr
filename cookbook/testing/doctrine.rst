@@ -22,7 +22,6 @@ afin d'obtenir une connexion valide. Dans ce cas, votre classe doit hériter de 
 une classe qui simplifiera les processus de test::
 
     // src/Acme/StoreBundle/Tests/Entity/ProductRepositoryFunctionalTest.php
-
     namespace Acme\StoreBundle\Tests\Entity;
 
     use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

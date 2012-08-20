@@ -4,7 +4,7 @@
 Types d'Injection
 =================
 
-Rendre les dépendances d'une classe explicites et exigeant qu'elles soient
+Rendre les dépendances d'une classe explicites et exiger qu'elles soient
 injectées dans cette dernière est une bonne manière de rendre une classe
 plus réutilisable, testable, et découplée des autres.
 
@@ -71,32 +71,32 @@ classe via la configuration du conteneur de service :
 
 .. tip::
 
-    Le fait de requérir un certain type d'objet injecté signifie que vous
+    Le fait de requérir l'injection d'un certain type d'objet signifie que vous
     pouvez être sûr qu'une dépendance appropriée a été injectée. Grâce
     à cela, vous allez recevoir immédiatement une erreur claire si une
     dépendance inappropriée est injectée. En forçant le type grâce à une
     interface plutôt que via une classe, vous pouvez rendre le choix de
-    la dépendance plus flexible. Et en assumant que vous utilisez uniquement
+    la dépendance plus flexible. Et en supposant que vous utilisez uniquement
     des méthodes définies dans l'interface, vous pouvez tirer parti de
     cette flexibilité tout en continuant d'utiliser l'objet de manière
-    sécuritaire.
+    sécurisée.
 
 Utiliser l'injection via le constructeur propose plusieurs avantages :
 
 * Si la dépendance est une condition requise et que la classe ne peut pas
-  fonctionner sans elle, alors l'injecter via le constructeur assure que
-  la dépendance sera présente lorsque la classe sera utilisée comme la
-  classe ne peut pas être construite sans elle.
+  fonctionner sans elle, alors l'injecter via le constructeur permet de
+  s'assurer que la dépendance sera présente lorsque la classe sera utilisée
+  puisque la classe ne peut pas être construite sans elle.
 
 * Le constructeur est appelé seulement une fois lorsque l'objet est créé,
   donc vous pouvez être sûr que la dépendance ne changera pas pendant la
   durée de vie de l'objet.
 
-Ces avantages signifient que l'injection via constructeur n'est pas appropriée
+Ces avantages signifient que l'injection via constructeur n'est pas envisageable
 pour travailler avec des dépendances optionnelles. Ce type d'injection
 est aussi plus difficile à utiliser avec les hiérarchies de classe : si
 une classe utilise l'injection via le constructeur, alors l'étendre et
-outrepasser le constructeur devient problématique.
+surcharger le constructeur devient problématique.
 
 Injection via Mutateur
 ----------------------
@@ -164,14 +164,14 @@ Cette fois les avantages sont :
 
 Les inconvénients d'une injection par mutateur sont :
 
-* Le mutateur peut être appelé plus de fois que juste au moment de la construction
-  donc vous ne pouvez pas être sûr que la dépendance n'est pas remplacée
+* Le mutateur peut encore être appelé après la construction
+  donc vous ne pouvez pas être sûr que la dépendance n'ait pas été remplacée
   pendant la durée de vie de l'objet (excepté si vous ajoutez une vérification
-  explicite dans la méthode mutateur qui contrôle si il n'a pas déjà été
+  explicite dans la méthode mutateur qui contrôle s'il n'a pas déjà été
   appelé) ;
 
 * Vous ne pouvez pas être sûr que le mutateur sera appelé et vous devez
-  ajouter des contrôles qui vérifient que quelconque(s) dépendance(s) requise(s)
+  ajouter des contrôles qui vérifient que toute dépendance requise
   est injectée.
 
 Injection via une Propriété
@@ -221,8 +221,8 @@ la classe::
             'NewsletterManager'
         ))->setProperty('mailer', new Reference('my_mailer')));
 
-Utiliser l'injection via propriété n'apporte presque que des inconvénients,
-cette façon est similaire à l'injection par mutateur mais avec d'autres
+Utiliser l'injection via une propriété n'apporte presque que des inconvénients,
+cette méthode est similaire à l'injection par mutateur mais avec d'autres
 problèmes importants en plus :
 
 * Vous ne pouvez pas du tout contrôler quand la dépendance est définie,

@@ -1,8 +1,8 @@
 .. index::
    single: Sécurité; Access Control Lists (ACLs)
 
-Access Control Lists (ACLs) (« liste de contrôle d'accès » en français)
-=======================================================================
+Comment utiliser les Access Control Lists (ACLs) (« liste de contrôle d'accès » en français)
+============================================================================================
 
 Dans les applications complexes, vous allez souvent rencontrer le problème
 que les décisions d'accès ne peuvent pas uniquement se baser sur la personne
@@ -92,38 +92,44 @@ Créer un ACL, et ajouter un ACE
 
 .. code-block:: php
 
+    // src/Acme/DemoBundle/Controller/BlogController.php
+    namespace Acme\DemoBundle\Controller;
+
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
     use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
     use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
     use Symfony\Component\Security\Acl\Permission\MaskBuilder;
-    // ...
-    
-    // BlogController.php
-    public function addCommentAction(Post $post)
-    {
-        $comment = new Comment();
 
-        // préparation du $form, et liaison des données
+    class BlogController
+    {
         // ...
 
-        if ($form->isValid()) {
-            $entityManager = $this->get('doctrine.orm.default_entity_manager');
-            $entityManager->persist($comment);
-            $entityManager->flush();
+        public function addCommentAction(Post $post)
+        {
+            $comment = new Comment();
 
-            // crée les ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($comment);
-            $acl = $aclProvider->createAcl($objectIdentity);
+            // préparation du $form et liaison (bind) des données
 
-            // récupère l'identité de sécurité de l'utilisateur actuellement connecté
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+            if ($form->isValid()) {
+                $entityManager = $this->get('doctrine.orm.default_entity_manager');
+                $entityManager->persist($comment);
+                $entityManager->flush();
 
-            // accorde les accès propriétaires
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
+                // création de l'ACL
+                $aclProvider = $this->get('security.acl.provider');
+                $objectIdentity = ObjectIdentity::fromDomainObject($comment);
+                $acl = $aclProvider->createAcl($objectIdentity);
+
+                // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
+                $securityContext = $this->get('security.context');
+                $user = $securityContext->getToken()->getUser();
+                $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+                // donne accès au propriétaire
+                $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+                $aclProvider->updateAcl($acl);
+            }
         }
     }
 
@@ -155,19 +161,26 @@ Vérification des Accès
 
 .. code-block:: php
 
-    // BlogController.php
-    public function editCommentAction(Comment $comment)
+    // src/Acme/DemoBundle/Controller/BlogController.php
+
+    // ...
+
+    class BlogController
     {
-        $securityContext = $this->get('security.context');
-
-        // vérification pour les droits d'accès en édition
-        if (false === $securityContext->isGranted('EDIT', $comment))
-        {
-            throw new AccessDeniedException();
-        }
-
-        // récupérez l'objet « comment » actuel, et éditez-le ici
         // ...
+
+        public function editCommentAction(Comment $comment)
+        {
+            $securityContext = $this->get('security.context');
+
+            // check for edit access
+            if (false === $securityContext->isGranted('EDIT', $comment))
+            {
+                throw new AccessDeniedException();
+            }
+
+            // ... récupérez le bon objet « comment », et éditez-le ici
+        }
     }
 
 Dans cet exemple, nous vérifions que l'utilisateur possède la permission

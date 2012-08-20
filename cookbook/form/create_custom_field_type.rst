@@ -22,7 +22,7 @@ type de champ sera nommée `GenderType` et le fichier sera stocké dans le répe
 par défaut pour les champs de formulaire, c'est à dire ``<BundleName>\Form\Type``.
 Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`::
 
-    # src/Acme/DemoBundle/Form/Type/GenderType.php
+    // src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
@@ -77,7 +77,7 @@ Il y a trois méthodes qui sont particulièrement importantes :
 * ``setDefaultOptions()`` - Cette méthode définit des options pour votre
   formulaire qui peuvent être utilisées dans ``buildForm()`` et
   ``buildView()``. Il y a beaucoup d'options communes à tous les champs
-  (voir :doc:`/reference/forms/types/form`), mais vous pouvez créer ici
+  (lisez :doc:`/reference/forms/types/form`), mais vous pouvez créer ici
   n'importe quelle autre dont vous pourriez avoir besoin.
 
 .. tip::
@@ -119,21 +119,21 @@ formulaire (voir le lien ci-dessus pour plus de détails), créez un bloc
     {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
 
     {% block gender_widget %}
-    {% spaceless %}
-        {% if expanded %}
-            <ul {{ block('widget_container_attributes') }}>
-            {% for child in form %}
-                <li>
-                    {{ form_widget(child) }}
-                    {{ form_label(child) }}
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            {# laisse le widget choice afficher la balise select #}
-            {{ block('choice_widget') }}
-        {% endif %}
-    {% endspaceless %}
+        {% spaceless %}
+            {% if expanded %}
+                <ul {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    <li>
+                        {{ form_widget(child) }}
+                        {{ form_label(child) }}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                {# laisse le widget choice afficher la balise select #}
+                {{ block('choice_widget') }}
+            {% endif %}
+        {% endspaceless %}
     {% endblock %}
 
 .. note::
@@ -147,7 +147,6 @@ formulaire (voir le lien ci-dessus pour plus de détails), créez un bloc
     .. code-block:: yaml
 
         # app/config/config.yml
-
         twig:
             form:
                 resources:
@@ -246,7 +245,7 @@ cela dans un moment quand nous utiliserons le type de champ personnalisé.
 Mais tout d'abord, ajoutez une méthode ``__construct`` à ``GenderType``,
 qui reçoit la configuration du sexe/genre::
 
-    # src/Acme/DemoBundle/Form/Type/GenderType.php
+    // src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
     
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;

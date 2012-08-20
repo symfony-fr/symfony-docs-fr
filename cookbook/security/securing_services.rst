@@ -9,9 +9,9 @@ Dans le chapitre sur la sécurité, vous pouvez voir comment
 :ref:`sécuriser un contrôleur<book-security-securing-controller>` en
 récupérant le service ``security.context`` depuis le Conteneur de
 Service et en vérifiant le rôle actuel de l'utilisateur::
-
-    use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+    
     // ...
+    use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
     public function helloAction($name)
     {
@@ -32,6 +32,7 @@ la classe ressemble à ceci :
 
 .. code-block:: php
 
+    // src/Acme/HelloBundle/Newsletter/NewsletterManager.php
     namespace Acme\HelloBundle\Newsletter;
 
     class NewsletterManager
@@ -133,7 +134,7 @@ de sécurité lorsque la méthode ``sendNewsletter()`` est appelée::
                 throw new AccessDeniedException();
             }
 
-            //--
+            //...
         }
 
         // ...
@@ -209,7 +210,7 @@ une annotation::
          */
         public function sendNewsletter()
         {
-            //--
+            //...
         }
 
         // ...
@@ -261,7 +262,7 @@ documentation du `JMSSecurityExtraBundle`_.
 
             // app/config/config.php
             $container->loadFromExtension('jms_security_extra', array(
-                // ...
+                ...,
                 'secure_all_services' => true,
             ));
 

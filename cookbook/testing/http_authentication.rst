@@ -1,5 +1,5 @@
 .. index::
-   single: Tests; HTTP Authentication
+   single: Tests; HTTP authentication
 
 Comment simuler une authentification HTTP dans un Test Fonctionnel
 ==================================================================

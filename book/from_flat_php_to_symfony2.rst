@@ -274,7 +274,7 @@ article du blog en fonction d'un id passé en paramètre :
     {
         $link = open_database_connection();
 
-        $id = mysql_real_escape_string($id);
+        $id = intval($id);
         $query = 'SELECT date, title, body FROM post WHERE id = '.$id;
         $result = mysql_query($query);
         $row = mysql_fetch_assoc($result);
@@ -319,7 +319,7 @@ Malgré tout, cette page introduit des problèmes persistants qu'un framework pe
 résoudre. Par exemple, un paramètre de requête ``id`` manquant ou invalide va
 générer une erreur fatale. Il serait mieux que cela génère une erreur 404, mais
 cela ne peut pas vraiment être fait facilement. Pire, si vous oubliez d'échapper
-le paramètre  ``id`` avec la fonction ``mysql_real_escape_string()``, votre base
+le paramètre  ``id`` avec la fonction ``intval()``, votre base
 de données est sujette à des attaques d'injection SQL.
 
 Un autre problème est que chaque fichier contrôleur doit inclure le fichier 
@@ -558,8 +558,8 @@ Voici la même application, en utilisant cette fois-ci Symfony2 :
 
     <?php
     // src/Acme/BlogBundle/Controller/BlogController.php
-
     namespace Acme\BlogBundle\Controller;
+    
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
     class BlogController extends Controller

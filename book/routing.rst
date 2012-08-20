@@ -84,9 +84,9 @@ vers une classe et une méthode PHP spécifique :
 
 .. code-block:: php
 
-    // src/Acme/BlogBundle/Controller/BlogController.php
-    
+    // src/Acme/BlogBundle/Controller/BlogController.php    
     namespace Acme\BlogBundle\Controller;
+
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
     class BlogController extends Controller
@@ -858,9 +858,9 @@ Le contrôleur pourrait ressembler à quelque chose comme ça :
 
 .. code-block:: php
 
-    // src/Acme/BlogBundle/Controller/BlogController.php
-    
+    // src/Acme/BlogBundle/Controller/BlogController.php    
     namespace Acme\BlogBundle\Controller;
+    
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     
     class BlogController extends Controller
@@ -1074,7 +1074,7 @@ suivante depuis la racine de votre projet.
 
 .. code-block:: bash
 
-    php app/console router:debug
+    $ php app/console router:debug
 
 La commande va retourner une liste de *toutes* les routes configurées
 dans votre application :
@@ -1093,7 +1093,7 @@ route en incluant le nom de cette dernière après la commande :
 
 .. code-block:: bash
 
-    php app/console router:debug article_show
+    $ php app/console router:debug article_show
 
 .. index::
    single: Routage; Générer des URLs

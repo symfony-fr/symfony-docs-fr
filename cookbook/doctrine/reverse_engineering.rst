@@ -67,7 +67,7 @@ les champs des tables.
 
 .. code-block:: bash
 
-    php app/console doctrine:mapping:convert xml ./src/Acme/BlogBundle/Resources/config/doctrine/metadata/orm --from-database --force
+    $ php app/console doctrine:mapping:convert xml ./src/Acme/BlogBundle/Resources/config/doctrine/metadata/orm --from-database --force
 
 Cette outil de ligne de commande demande à Doctrine d'introspecter la base de données et de
 générer les fichiers XML de méta-données dans le dossier
@@ -105,8 +105,8 @@ sont liées en exécutant les deux commandes suivantes.
 
 .. code-block:: bash
 
-    php app/console doctrine:mapping:import AcmeBlogBundle annotation
-    php app/console doctrine:generate:entities AcmeBlogBundle
+    $ php app/console doctrine:mapping:import AcmeBlogBundle annotation
+    $ php app/console doctrine:generate:entities AcmeBlogBundle
 
 La première commande génère les classes entité avec des annotations de
 correspondance, mais vous pouvez bien sûr changer l'argument ``annotation``

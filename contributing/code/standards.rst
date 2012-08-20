@@ -43,7 +43,7 @@ ci-dessous :
          */
         public function __construct($dummy)
         {
-            $this->fooBar = $this->transform($dummy);
+            $this->fooBar = $this->transformText($dummy);
         }
 
         /**

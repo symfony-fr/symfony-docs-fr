@@ -48,7 +48,7 @@ Maintenant nous générons les règles **url_rewrite** :
     
 .. code-block:: bash
 
-    php app/console router:dump-apache -e=prod --no-debug
+    $ php app/console router:dump-apache -e=prod --no-debug
     
 Ce qui devrait afficher quelque chose du genre :
 

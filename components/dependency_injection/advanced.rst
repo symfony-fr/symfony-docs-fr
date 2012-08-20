@@ -4,25 +4,25 @@
 Configuration Avancée du Conteneur
 ==================================
 
-Marquer les Services comme public / privé
------------------------------------------
+Marquer les services comme publics / privés
+-------------------------------------------
 
 Lorsque vous définissez des services, vous allez généralement vouloir avoir
 accès à ces définitions depuis le code de votre application. Ces services
 sont dits ``publics``. Par exemple, le service ``doctrine`` enregistré dans
 le conteneur lorsque vous utilisez le DoctrineBundle est un service public
-que vous pouvez accéder via::
+auquel vous pouvez accéder via::
 
    $doctrine = $container->get('doctrine');
 
 Cependant, il y a des cas où vous ne souhaitez pas qu'un service soit public.
-Cela est commun quand un service est défini seulement pour être utilisé
+Cela arrive souvent quand un service est défini seulement pour être utilisé
 comme argument d'un autre service.
 
 .. note::
 
-    Si vous utilisez un service privé comme argument de plus d'un autre
-    service, cela résultera en deux différentes instances étant utilisées
+    Si vous utilisez un service privé comme argument de plusieurs autres
+    services, cela résultera en deux différentes instances étant utilisées
     puisque l'instanciation du service privé est faite durant l'exécution
     (par exemple : ``new PrivateFooBar()``).
 
@@ -66,7 +66,7 @@ Créer un alias
 
 Parfois, vous pourriez vouloir utiliser des raccourcis pour accéder à certains
 de vos services. Vous pouvez faire cela en créant des alias pour ces derniers ;
-de plus, vous pouvez même créer des alias pour les services non-publics.
+de plus, vous pouvez même créer des alias pour les services non publics.
 
 .. configuration-block::
 
@@ -95,7 +95,7 @@ Cela signifie que lorsque vous utilisez le conteneur directement, vous
 pouvez accéder au service ``foo`` en demandant le service ``bar`` comme
 cela::
 
-    $container->get('bar'); // Retournerait le service foo
+    $container->get('bar'); // Retourne le service foo
 
 Requérir des fichiers
 ---------------------

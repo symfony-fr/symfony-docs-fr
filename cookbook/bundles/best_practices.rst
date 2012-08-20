@@ -1,8 +1,8 @@
 .. index::
    single: Bundle; Bonnes pratiques
 
-Structure de Bundle et Bonnes Pratiques
-===========================================
+Comment utiliser les bonnes pratiques pour structurer vos Bundles
+=================================================================
 
 Un bundle est un répertoire qui a une structure bien définie et qui peut
 héberger à peu près tout : des classes aux contrôleurs en passant par les ressources
@@ -10,7 +10,7 @@ web. Même si les bundles sont très flexibles, vous devriez suivre quelques une
 des bonnes pratiques si vous voulez les distribuer.
 
 .. index::
-   pair: Bundles; Conventions de nommage
+   pair: Bundle; Conventions de nommage
 
 .. _bundles-naming-conventions:
 
@@ -280,6 +280,7 @@ configuration :
 
     .. code-block:: ini
 
+        ; app/config/config.ini
         [parameters]
         acme_hello.email.from = fabien@example.com
 

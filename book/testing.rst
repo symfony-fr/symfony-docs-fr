@@ -40,7 +40,7 @@ un oeil au fichier ``app/phpunit.xml.dist``.
     La couverture de code peut être générée avec l'option ``--coverage-html``.
 
 .. index::
-   single: Tests; Tests Unitaires
+   single: Tests; Unit tests
 
 Tests unitaires
 ---------------
@@ -112,7 +112,7 @@ Exécuter les tests pour un fichier ou répertoire donné est aussi très facile
     $ phpunit -c app src/Acme/DemoBundle/
 
 .. index::
-   single: Tests; Functional Tests
+   single: Tests; Functional tests
 
 Tests Fonctionnels
 ------------------

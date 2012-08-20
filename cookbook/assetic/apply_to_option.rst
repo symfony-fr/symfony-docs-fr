@@ -56,9 +56,7 @@ depuis vos templates :
 
     .. code-block:: html+jinja
 
-        {% javascripts '@AcmeFooBundle/Resources/public/js/example.coffee'
-            filter='coffee'
-        %}
+        {% javascripts '@AcmeFooBundle/Resources/public/js/example.coffee' filter='coffee'%}
         <script src="{{ asset_url }}" type="text/javascript"></script>
         {% endjavascripts %}
 
@@ -67,7 +65,7 @@ depuis vos templates :
         <?php foreach ($view['assetic']->javascripts(
             array('@AcmeFooBundle/Resources/public/js/example.coffee'),
             array('coffee')) as $url): ?>
-        <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
+            <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
         <?php endforeach; ?>
 
 C'est tout ce dont vous avez besoin pour compiler ce fichier CoffeeScript
@@ -96,7 +94,7 @@ fichier en sortie :
             array('@AcmeFooBundle/Resources/public/js/example.coffee',
                   '@AcmeFooBundle/Resources/public/js/another.coffee'),
             array('coffee')) as $url): ?>
-        <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
+            <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
         <?php endforeach; ?>
 
 Les deux fichiers seront maintenant délivrés comme un unique fichier compilé
@@ -179,5 +177,5 @@ passeront à travers le filtre CoffeeScript) :
                   '@AcmeFooBundle/Resources/public/js/another.coffee',
                   '@AcmeFooBundle/Resources/public/js/regular.js'),
             as $url): ?>
-        <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
+            <script src="<?php echo $view->escape($url) ?>" type="text/javascript"></script>
         <?php endforeach; ?>

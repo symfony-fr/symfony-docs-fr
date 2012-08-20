@@ -7,7 +7,7 @@ Mécanisme de cache basé sur les ressources
 Lorsque toutes les ressources de configuration sont chargées, vous pourriez
 vouloir traiter les valeurs de configuration et les combiner toutes en
 un seul fichier. Ce fichier agit en tant que cache. Son contenu n'a pas
-besoin d'être regénéré chaque fois que l'application est exécutée - seulement
+besoin d'être regénéré chaque fois que l'application est exécutée mais seulement
 quand les ressources de configuration sont modifiées.
 
 Par exemple, le composant de Routage de Symfony vous permet de charger
@@ -20,9 +20,9 @@ la classe :class:`Symfony\\Component\\Config\\ConfigCache`.
 L'exemple ci-dessous vous montre comment collecter des ressources, puis
 générer du code basé sur les ressources qui ont été chargées, et écrire
 ce code dans le cache. Le cache reçoit aussi la collection de ressources
-qui ont été utilisées pour générer le code. En regardant l'estampille de
+qui ont été utilisées pour générer le code. En regardant le timestamp de
 la date de dernière modification de ces ressources, le cache peut dire
-s'il est contient toujours la dernière version ou si son contenu devrait
+s'il contient toujours la dernière version ou si son contenu devrait
 être regénéré::
 
     use Symfony\Component\Config\ConfigCache;
@@ -50,12 +50,12 @@ s'il est contient toujours la dernière version ou si son contenu devrait
         $userMatcherCache->write($code, $resources);
     }
 
-    // vous pourriez vouloir requérir le code caché :
+    // vous pourriez vouloir inclure le code caché :
     require $cachePath;
 
 En mode débuggage, un fichier ``.meta`` sera créé dans le même répertoire
 que le fichier de cache lui-même. Ce fichier ``.meta`` contient les ressources
-sérialisées, dont les estampilles sont utilisées pour déterminer si le
+sérialisées, dont les timestamps sont utilisées pour déterminer si le
 cache contient toujours la dernière version. Lorsque vous n'êtes pas en
 mode débuggage, le cache est considéré comme contenant la dernière version
 dès qu'il existe, et donc, aucun fichier ``.meta`` ne sera généré.

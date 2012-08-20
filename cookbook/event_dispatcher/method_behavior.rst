@@ -25,8 +25,9 @@ début ou à la fin d'une méthode::
             // avoir été modifiés
             $foo = $event->getFoo();
             $bar = $event->getBar();
+            
             // l'implémentation réelle est ici
-            // $ret = ...;
+            $ret = ...;
 
             // faites quelque chose après la fin de la méthode
             $event = new FilterSendReturnValue($ret);

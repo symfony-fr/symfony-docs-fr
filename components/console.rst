@@ -1,5 +1,6 @@
 .. index::
     single: Console; CLI
+    single: Components; Console
 
 Le Composant Console
 ====================
@@ -81,7 +82,7 @@ Testez la nouvelle commande de console en exécutant ce qui suit :
 
 .. code-block:: bash
 
-    app/console demo:greet Fabien
+    $ app/console demo:greet Fabien
 
 Cela va afficher ce qui suit sur votre ligne de commandes :
 
@@ -93,7 +94,7 @@ Vous pouvez aussi utiliser l'option ``--yell`` pour afficher tout en majuscules 
 
 .. code-block:: bash
 
-    app/console demo:greet Fabien --yell
+    $ app/console demo:greet Fabien --yell
 
 Cela affiche::
 
@@ -157,8 +158,8 @@ La commande peut maintenant être utilisée de l'une des façons suivantes :
 
 .. code-block:: bash
 
-    app/console demo:greet Fabien
-    app/console demo:greet Fabien Potencier
+    $ app/console demo:greet Fabien
+    $ app/console demo:greet Fabien Potencier
 
 Utiliser des options de commande
 --------------------------------
@@ -197,9 +198,9 @@ optionnelle un drapeau ``--iterations`` :
 
 .. code-block:: bash
 
-    app/console demo:greet Fabien
+    $ app/console demo:greet Fabien
 
-    app/console demo:greet Fabien --iterations=5
+    $ app/console demo:greet Fabien --iterations=5
 
 Le premier exemple va afficher le résultat une seule fois, puisque ``iterations``
 est vide et que par défaut il vaut ``1`` (le dernier argument de ``addOption``).
@@ -210,8 +211,8 @@ n'importe laquelle des deux commandes suivantes va fonctionner :
 
 .. code-block:: bash
 
-    app/console demo:greet Fabien --iterations=5 --yell
-    app/console demo:greet Fabien --yell --iterations=5
+    $ app/console demo:greet Fabien --iterations=5 --yell
+    $ app/console demo:greet Fabien --yell --iterations=5
 
 Il y a 4 variantes d'options que vous pouvez utiliser :
 
@@ -267,6 +268,7 @@ faciliter le « testing » sans avoir de console réelle::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
+    use Acme\DemoBundle\Command\GreetCommand;
 
     class ListCommandTest extends \PHPUnit_Framework_TestCase
     {

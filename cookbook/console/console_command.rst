@@ -1,5 +1,5 @@
 .. index::
-   single: Console; Create Commands
+   single: Console; Create commands
 
 Comment créer une commande pour la Console
 ==========================================
@@ -60,7 +60,7 @@ Cette commande sera maintenant automatiquement prête à être exécutée :
 
 .. code-block:: bash
 
-    app/console demo:greet Fabien
+    $ app/console demo:greet Fabien
 
 Tester les commandes
 --------------------

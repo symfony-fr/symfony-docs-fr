@@ -56,6 +56,7 @@ Ceci vous permet de « logger » facilement les messages de plusieurs manières.
 
     .. code-block:: yaml
 
+        # app/config/config*.yml
         monolog:
             handlers:
                 syslog:
@@ -128,6 +129,7 @@ remplacer facilement. Votre outil de mise en forme doit implémenter
 
     .. code-block:: yaml
 
+        # app/config/config.yml
         services:
             my_formatter:
                 class: Monolog\Formatter\JsonFormatter
@@ -184,7 +186,7 @@ chaque requête en utilisant un processeur.
 
     namespace Acme\MyBundle;
 
-    use Symfony\Component\HttpFoundation\Session;
+    use Symfony\Component\HttpFoundation\Session\Session;
 
     class SessionRequestProcessor
     {
@@ -216,6 +218,7 @@ chaque requête en utilisant un processeur.
 
     .. code-block:: yaml
 
+        # app/config/config.yml        
         services:
             monolog.formatter.session_request:
                 class: Monolog\Formatter\LineFormatter

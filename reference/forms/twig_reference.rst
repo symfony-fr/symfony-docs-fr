@@ -20,8 +20,8 @@ de spécifier le libellé que vous voulez afficher.
     {{ form_label(form.name) }}
 
     {# Ces deux syntaxes sont équivalentes #}
-    {{ form_label(form.name, 'Votre nom', { 'attr': {'class': 'foo'} }) }}
-    {{ form_label(form.name, null, { 'label': 'Votre nom', 'attr': {'class': 'foo'} }) }}
+    {{ form_label(form.name, 'Your Name', {'label_attr': {'class': 'foo'}}) }}
+    {{ form_label(form.name, null, {'label': 'Your name', 'label_attr': {'class': 'foo'}}) }}
 
 form_errors(form.name)
 ----------------------
@@ -44,7 +44,7 @@ ou à une collection de champs, chaque item du formulaire sera affiché.
 .. code-block:: jinja
 
     {# affiche un widget, et lui affecte la classe "foo" #}
-    {{ form_widget(form.name, { 'attr': {'class': 'foo'} }) }}
+    {{ form_widget(form.name, {'attr': {'class': 'foo'}}) }}
 
 Le deuxième argument de ``form_widget`` est un tableau de variables. La variable
 la plus commune est ``attr``, qui est un tableau d'attibuts HTML à appliquer au widget.
@@ -59,7 +59,7 @@ et du widget.
 .. code-block:: jinja
 
     {# affiche un bloc de champ, mais affiche « foo » comme libellé #}
-    {{ form_row(form.name, { 'label': 'foo' }) }}
+    {{ form_row(form.name, {'label': 'foo'}) }}
 
 Le deuxième argument de ``form_row`` est un tableau de variables. Les templates fournis dans
 Symfony ne permettent que de surcharger le libellé, comme vous le voyez dans l'exemple ci-dessus.
