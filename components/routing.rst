@@ -29,7 +29,7 @@ Afin d'installer un système de routage basique, vous avez besoin de trois blocs
 * Une classe :class:`Symfony\\Component\\Routing\\Matcher\\UrlMatcher`, qui s'occupe de la
   correspondance entre la requête et une route unique
 
-Jetons un oeil à un exemple simple. Notez que ce dernier assume que vous ayez déjà
+Jetons un oeil à un exemple simple. Notez que ce dernier suppose que vous ayez déjà
 configuré votre « autoloader » afin qu'il charge le composant de routage::
 
     use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -61,8 +61,8 @@ Vous pouvez ajouter autant de routes que vous le souhaitez dans une
 La méthode :method:`RouteCollection::add()<Symfony\\Component\\Routing\\RouteCollection::add>`
 prend deux arguments. Le premier est le nom de la route. Le deuxième est un
 objet :class:`Symfony\\Component\\Routing\\Route`, qui s'attend à recevoir une URL et
-quelconque tableau de variables personnalisées dans son constructeur. Ce tableau
-peut être *n'importe quoi* qui fait du sens pour votre application, et est retourné
+tout tableau de variables personnalisées dans son constructeur. Ce tableau
+peut être *n'importe quoi* qui ait du sens pour votre application, et est retourné
 lorsque cette route correspond à la requête.
 
 Si aucune correspondance de route ne peut être trouvée, une
@@ -70,7 +70,7 @@ Si aucune correspondance de route ne peut être trouvée, une
 sera lancée.
 
 En plus de votre tableau de variables personnalisées, une clé ``_route``
-est ajoutée, qui contient le nom de la route correspondante.
+qui contient le nom de la route correspondante est ajoutée
 
 Définition des routes
 ~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +90,7 @@ la route.
 le contenu des valeurs de substitution sous forme d'expressions régulières.
 
 4. Un tableau d'options. Ce dernier contient des paramètres internes pour la
-route et sont généralement ceux qui sont le moins souvent nécessaire.
+route et sont généralement ceux qui sont le moins souvent nécessaires.
 
 Prenez la route suivante, qui combine plusieurs de ces idées::
 
@@ -132,7 +132,7 @@ avec une méthode POST et une connexion sécurisée::
 
         $route = new Route('/start/{suffix}', array('suffix' => ''), array('suffix' => '.*'));
 
-Utiliser des Préfixes
+Utiliser des préfixes
 ~~~~~~~~~~~~~~~~~~~~~
 
 Vous pouvez ajouter des routes ou d'autres instances de
@@ -149,7 +149,7 @@ défaut pour toutes les routes d'un sous-arbre::
 
     $rootCollection->addCollection($subCollection, '/prefix', array('_scheme' => 'https'));
 
-Définir les Paramètres de Requête
+Définir les paramètres de requête
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La classe :class:`Symfony\\Component\\Routing\\RequestContext` fournit des
@@ -199,14 +199,14 @@ aussi construire une URL depuis une certaine route::
     générée si le schème du :class:`Symfony\\Component\\Routing\\RequestContext`
     courant ne respecte pas cette condition.
 
-Charger des Routes depuis un Fichier
+Charger des routes depuis un fichier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vous avez déjà vu comment vous pouvez ajouter facilement des routes à une
 collection directement depuis PHP. Mais vous pouvez aussi charger des routes
 depuis différents fichiers.
 
-Le composant de Routage vient avec un certain nombre de classes de chargement,
+Le composant de Routage est fourni avec un certain nombre de classes de chargement,
 chacune vous fournissant la possibilité de charger une collection de définitions
 de route depuis un fichier externe d'un certain format.
 Chaque chargeur attend une instance de :class:`Symfony\\Component\\Config\\FileLocator` en
@@ -229,7 +229,7 @@ Si vous utilisez le chargeur ``YamlFileLoader``, alors les définitions de route
         pattern: /foo/bar
         defaults: { controller: 'MyController::foobarAction' }
 
-Pour charger ce fichier, vous pouvez utiliser le code suivant. Cela assume
+Pour charger ce fichier, vous pouvez utiliser le code suivant. Cela suppose
 que votre fichier ``routes.yml`` est dans le même répertoire que le code
 ci-dessus::
 
@@ -247,7 +247,7 @@ y a d'autres chargeurs qui fonctionnent de la même manière :
 * :class:`Symfony\\Component\\Routing\\Loader\\XmlFileLoader`
 * :class:`Symfony\\Component\\Routing\\Loader\\PhpFileLoader`
 
-Si vous utiliser le chargeur :class:`Symfony\\Component\\Routing\\Loader\\PhpFileLoader`,
+Si vous utilisez le chargeur :class:`Symfony\\Component\\Routing\\Loader\\PhpFileLoader`,
 vous devez fournir le nom d'un fichier PHP qui retourne une :class:`Symfony\\Component\\Routing\\RouteCollection`::
 
     // RouteProvider.php
@@ -260,7 +260,7 @@ vous devez fournir le nom d'un fichier PHP qui retourne une :class:`Symfony\\Com
 
     return $collection;
 
-Des Routes en tant que Closures
+Des routes en tant que closures
 ...............................
 
 Il y a aussi le chargeur :class:`Symfony\\Component\\Routing\\Loader\\ClosureLoader`, qui
@@ -275,7 +275,7 @@ appelle une closure et utilise son résultat en tant que :class:`Symfony\\Compon
     $loader = new ClosureLoader();
     $collection = $loader->load($closure);
 
-Des Routes en tant qu'Annotations
+Des Routes en tant qu'annotations
 .................................
 
 Enfin, il existe aussi le :class:`Symfony\\Component\\Routing\\Loader\\AnnotationDirectoryLoader`
