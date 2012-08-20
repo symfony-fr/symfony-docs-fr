@@ -1,5 +1,5 @@
 .. index::
-   single: Profiling; Collecteur de Données
+   single: Profiling; Collecteur de données
 
 Comment créer un Collecteur de Données personnalisé
 ===================================================

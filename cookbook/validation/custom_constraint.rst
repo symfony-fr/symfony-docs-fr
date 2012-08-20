@@ -15,6 +15,7 @@ Créer une classe de contrainte
 Tout d'abord, vous devez créer une classe de contrainte
 qui étend la classe :class:`Symfony\\Component\\Validator\\Constraint`:: 
 
+    // src/Acme/DemoBundle/Validator/constraints/ContainsAlphanumeric.php
     namespace Acme\DemoBundle\Validator\Constraints;
     
     use Symfony\Component\Validator\Constraint;
@@ -53,6 +54,7 @@ effectue la validation.
 
 La classe validatrice ne requiert qu'une méthode : ``validate``::
 
+    // src/Acme/DemoBundle/Validator/Constraints/ContainsAlphanumericValidator.php
     namespace Acme\DemoBundle\Validator\Constraints;
     
     use Symfony\Component\Validator\Constraint;
@@ -77,8 +79,7 @@ La classe validatrice ne requiert qu'une méthode : ``validate``::
     violation de contrainte n'est ajoutée au contexte. Le premier paramètre de l'appel
     à ``addViolation`` est le message d'erreur utilisé pour la violation.
 
-.. versionadded:: 2.1
- 
+.. versionadded:: 2.1 
     La méthode ``isValid`` est dépréciée au profit de ``validate`` dans Symfony 2.1. La
     méthode ``setMessage`` est également dépréciée, en faveur de l'appel à la méthode
     ``addViolation`` du contexte.
@@ -102,8 +103,8 @@ lui-même :
 
     .. code-block:: php-annotations
 
-        // src/Acme/DemoBundle/Entity/AcmeEntity.php
-    
+        // src/Acme/DemoBundle/Entity/AcmeEntity.php    
+
         use Symfony\Component\Validator\Constraints as Assert;
         use Acme\DemoBundle\Validator\Constraints as AcmeAssert;
             
@@ -188,8 +189,7 @@ Ce service doit inclure le tag ``validator.constraint_validator`` et un attribut
 
         $container
             ->register('validator.unique.your_validator_name', 'Fully\Qualified\Validator\Class\Name')
-            ->addTag('validator.constraint_validator', array('alias' => 'alias_name'))
-        ;
+            ->addTag('validator.constraint_validator', array('alias' => 'alias_name'));
 
 Votre classe ``contrainte`` devrait maintenant utiliser cet alias afin de référencer
 le validateur approprié::
@@ -229,3 +229,32 @@ Avec ceci, la méthode ``validate()`` du validateur prend un objet comme premier
             }
         }
     }
+
+Notez bien qu'une contrainte de validation de classe est appliquée à la classe elle-même,
+et pas à la propriété :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # src/Acme/BlogBundle/Resources/config/validation.yml
+        Acme\DemoBundle\Entity\AcmeEntity:
+            constraints:
+                - ContainsAlphanumeric
+
+    .. code-block:: php-annotations
+
+        /**
+         * @AcmeAssert\ContainsAlphanumeric
+         */
+        class AcmeEntity
+        {
+            // ...
+        }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\DemoBundle\Entity\AcmeEntity">
+            <constraint name="ContainsAlphanumeric" />
+        </class>

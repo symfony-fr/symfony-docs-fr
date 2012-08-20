@@ -10,7 +10,7 @@ Introduction
 
 Le Composant Config fournit plusieurs classes pour vous aider à trouver,
 charger, combiner, préremplir et valider des valeurs de configuration de
-n'importe quel type, quel que soit leur source (Yaml, XML, fichiers INI,
+n'importe quel type, quelle que soit leur source (Yaml, XML, fichiers INI,
 ou par exemple une base de données).
 
 Installation

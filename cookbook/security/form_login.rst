@@ -165,7 +165,7 @@ suivante :
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'main' => array('form_login' => array(
-                    // ...
+                    ...,
                     'default_target_path' => '/admin',
                 )),
             ),
@@ -210,7 +210,7 @@ l'option ``always_use_default_target_path`` à « true » :
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'main' => array('form_login' => array(
-                    // ...
+                    ...,
                     'always_use_default_target_path' => true,
                 )),
             ),
@@ -253,7 +253,7 @@ identique. Vous pouvez effectuer cela en définissant ``use_referer`` à « true
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'main' => array('form_login' => array(
-                    // ...
+                    ...,
                     'use_referer' => true,
                 )),
             ),
@@ -294,7 +294,7 @@ utilisez ce qui suit :
 
     .. code-block:: html+php
 
-        <?php // src/Acme/SecurityBundle/Resources/views/Security/login.html.php ?>
+        <!-- src/Acme/SecurityBundle/Resources/views/Security/login.html.php -->
         <?php if ($error): ?>
             <div><?php echo $error->getMessage() ?></div>
         <?php endif; ?>
@@ -388,7 +388,7 @@ différente en utilisant la configuration suivante :
         $container->loadFromExtension('security', array(
             'firewalls' => array(
                 'main' => array('form_login' => array(
-                    // ...
+                    ...,
                     'failure_path' => login_failure,
                 )),
             ),

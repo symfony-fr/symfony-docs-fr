@@ -13,7 +13,7 @@ les valeurs et leur structure peuvent être validées en utilisant la partie
 valeurs de configuration possèdent une certaine hiérarchie. Aussi, les
 valeurs devraient être d'un certain type, restreintes en nombre ou faire
 partie d'un ensemble de valeurs donné. Par exemple, la configuration suivante
-(en Yaml) montre une hiérarchie claire et quelques règles de validation
+(en YAML) montre une hiérarchie claire et quelques règles de validation
 qui devraient lui être appliquées (par exemple : « la valeur de ``auto_connect``
 doit être une valeur booléenne ») :
 
@@ -35,11 +35,11 @@ doit être une valeur booléenne ») :
             password: pass
 
 Lorsque vous chargez plusieurs fichiers de configuration, il devrait être
-possible de fusionner et d'outrepasser quelques valeurs. D'autres valeurs
+possible de fusionner et de surcharger quelques valeurs. D'autres valeurs
 ne devraient pas être fusionnées et rester comme elles étaient lorsque
 vous les avez rencontrées pour la première fois. Aussi, certaines clés
 sont seulement disponibles quand une autre clé possède une valeur spécifique
-(dans l'exemple de configuration ci-dessus : la clé ``memory`` fait du
+(dans l'exemple de configuration ci-dessus : la clé ``memory`` n'a de
 sens que si le ``driver`` est ``sqlite``).
 
 Définir une hiérarchie des valeurs de configuration en utilisant le « TreeBuilder »
@@ -218,12 +218,12 @@ fournies. Pour les tableaux :
 
 ``performNoDeepMerging()``
     Lorsque la valeur est aussi définie dans un second tableau de configuration,
-    n'essaye pas de fusionner un tableau, mais l'outrepasse entièrement
+    n'essaye pas de fusionner un tableau, mais le surcharge entièrement
 
 Pour tous les noeuds :
 
 ``cannotBeOverwritten()``
-    Ne laisse pas les autres tableaux de configuration outrepasser une
+    Ne laisse pas les autres tableaux de configuration surcharger une
     valeur existante pour ce noeud
 
 Règles de validation
@@ -250,7 +250,7 @@ de noeud, comme::
         ->end()
     ;
 
-Une règle de validation a toujours une parti « if ». Vous pouvez spécifier
+Une règle de validation a toujours une partie « if ». Vous pouvez spécifier
 cette partie grâce aux manières suivantes :
 
 - ``ifTrue()``
@@ -278,7 +278,7 @@ Traiter les valeurs de configuration
 La classe :class:`Symfony\\Component\\Config\\Definition\\Processor` utilise
 l'arbre comme s'il était construit en utilisant le :class:`Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder`
 pour traiter plusieurs tableaux de valeurs de configuration qui devraient
-être fusionnés. Si quelconque valeur n'est pas du type attendu, est obligatoire
+être fusionnés. Si une valeur quelconque n'est pas du type attendu, est obligatoire
 et pas encore définie, ou n'a pas pu être validée d'une façon ou d'une
 autre, une exception sera lancée. Sinon, le résultat est un tableau contenant
 les valeurs de configuration::

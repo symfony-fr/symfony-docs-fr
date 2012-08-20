@@ -8,7 +8,7 @@ Le Composant « Filesystem » (« système de fichiers » en français)
     le système de fichiers.
 
 .. versionadded:: 2.1
-    Le Composant « Filesystem » est nouveau depuis Symfony 2.1. Auparavant,
+    Le Composant « Filesystem » fait son apparition dans Symfony 2.1. Auparavant,
     la classe ``Filesystem`` était située dans le composant ``HttpKernel``.
 
 Installation
@@ -77,7 +77,7 @@ si un fichier est manquant::
 
 .. note::
 
-    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    Vous pouvez passer un tableau ou n'importe quel objet :phpclass:`Traversable`
     en tant que premier argument.
 
 Copy
@@ -85,7 +85,7 @@ Copy
 
 Cette méthode est utilisée pour copier des fichiers. Si la cible existe déjà,
 le fichier est copié seulement si la date de modification de la source est
-plus récente que celle de la cible. Ce comportement peut être outrepassé par
+plus récente que celle de la cible. Ce comportement peut être surchargé par
 un troisième argument booléen::
 
     // fonctionne uniquement si image-ICC a été modifié après image.jpg
@@ -110,7 +110,7 @@ Le troisième argument est la date d'accès::
 
 .. note::
 
-    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    Vous pouvez passer un tableau ou n'importe quel objet :phpclass:`Traversable`
     en tant que premier argument.
 
 Chown
@@ -126,7 +126,7 @@ argument est une option récursive booléenne::
 
 .. note::
 
-    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    Vous pouvez passer un tableau ou n'importe quel objet :phpclass:`Traversable`
     en tant que premier argument.
 
 Chgrp
@@ -143,7 +143,7 @@ argument est une option récursive booléenne::
 
 .. note::
 
-    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    Vous pouvez passer un tableau ou n'importe quel objet :phpclass:`Traversable`
     en tant que premier argument.
 
 Chmod
@@ -159,7 +159,7 @@ argument est une option récursive booléenne::
 
 .. note::
 
-    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    Vous pouvez passer un tableau ou n'importe quel objet :phpclass:`Traversable`
     en tant que premier argument.
 
 Remove
@@ -172,7 +172,7 @@ des répertoires très facilement::
 
 .. note::
 
-    Vous pouvez passer un tableau ou quelconque objet :phpclass:`Traversable`
+    Vous pouvez passer un tableau ou n'importe quel objet :phpclass:`Traversable`
     en tant que premier argument.
 
 Rename
@@ -229,7 +229,7 @@ isAbsolutePath retourne « true » si le chemin donné est absolu, « false » s
     // retourne « false »
     $fs->isAbsolutePath('../dir');
 
-Gestion des Erreurs
+Gestion des erreurs
 -------------------
 
 Chaque fois que quelque chose de faux/mal intervient, une exception implémentant
@@ -239,6 +239,6 @@ lancée.
 .. note::
 
     Avant la version 2.1, :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`
-    retournait un booléen et ne lançait pas d'exceptions. Depuis 2.1, une
+    retournait un booléen et ne lançait pas d'exception. Depuis la version 2.1, une
     :class:`Symfony\\Component\\Filesystem\\Exception\\IOException` est lancée
     si la création d'un répertoire échoue.

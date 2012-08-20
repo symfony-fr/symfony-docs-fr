@@ -19,7 +19,7 @@ de formulaire peuvent être facilement affichés en utilisant la fonction Twig
 
 .. configuration-block::
 
-    .. code-block:: jinja
+    .. code-block:: html+jinja
 
         {{ form_row(form.age) }}
 
@@ -138,6 +138,7 @@ L'implémentation par défaut du fragment ``integer_widget`` ressemble à ceci :
 
     .. code-block:: jinja
 
+        {# integer_widget.html.twig #}
         {% block integer_widget %}
             {% set type = type|default('number') %}
             {{ block('field_widget') }}
@@ -146,7 +147,6 @@ L'implémentation par défaut du fragment ``integer_widget`` ressemble à ceci :
     .. code-block:: html+php
 
         <!-- integer_widget.html.php -->
-
         <?php echo $view['form']->renderBlock('field_widget', array('type' => isset($type) ? $type : "number")) ?>
 
 Comme vous pouvez le voir, ce fragment affiche un autre fragment (``field_widget``) :
@@ -155,6 +155,7 @@ Comme vous pouvez le voir, ce fragment affiche un autre fragment (``field_widget
 
     .. code-block:: html+jinja
 
+        {# FrameworkBundle/Resources/views/Form/field_widget.html.twig #}
         {% block field_widget %}
             {% set type = type|default('text') %}
             <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" />
@@ -163,7 +164,6 @@ Comme vous pouvez le voir, ce fragment affiche un autre fragment (``field_widget
     .. code-block:: html+php
 
         <!-- FrameworkBundle/Resources/views/Form/field_widget.html.php -->
-
         <input
             type="<?php echo isset($type) ? $view->escape($type) : "text" ?>"
             value="<?php echo $view->escape($value) ?>"
@@ -282,7 +282,6 @@ de formulaire dans d'autres templates :
 .. code-block:: html+jinja
 
     {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
-
     {% block integer_widget %}
         <div class="integer_widget">
             {% set type = type|default('number') %}
@@ -321,7 +320,6 @@ Le fichier de template doit être nommé en fonction du fragment. Vous devez cr�
 .. code-block:: html+php
 
     <!-- src/Acme/DemoBundle/Resources/views/Form/integer_widget.html.php -->
-
     <div class="integer_widget">
         <?php echo $view['form']->renderBlock('field_widget', array('type' => isset($type) ? $type : "number")) ?>
     </div>
@@ -387,7 +385,6 @@ la fonction Twig ``parent()`` :
 .. code-block:: html+jinja
 
     {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
-
     {% extends 'form_div_layout.html.twig' %}
 
     {% block integer_widget %}
@@ -462,7 +459,6 @@ Utilisez la ressource ``form_table_layout.html.twig`` pour utiliser un tel layou
     .. code-block:: yaml
 
         # app/config/config.yml
-
         twig:
             form:
                 resources: ['form_table_layout.html.twig']
@@ -471,7 +467,6 @@ Utilisez la ressource ``form_table_layout.html.twig`` pour utiliser un tel layou
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-
         <twig:config ...>
                 <twig:form>
                     <resource>form_table_layout.html.twig</resource>
@@ -482,12 +477,11 @@ Utilisez la ressource ``form_table_layout.html.twig`` pour utiliser un tel layou
     .. code-block:: php
 
         // app/config/config.php
-
         $container->loadFromExtension('twig', array(
             'form' => array('resources' => array(
                 'form_table_layout.html.twig',
-             ))
-            // ...
+             )),
+             ...,
         ));
 
 Si vous ne voulez appliquer ce changement que dans un seul template, ajoutez
@@ -513,7 +507,6 @@ utilisé lorsque le formulaire sera affiché.
     .. code-block:: yaml
 
         # app/config/config.yml
-
         framework:
             templating:
                 form:
@@ -525,7 +518,6 @@ utilisé lorsque le formulaire sera affiché.
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-
         <framework:config ...>
             <framework:templating>
                 <framework:form>
@@ -539,14 +531,13 @@ utilisé lorsque le formulaire sera affiché.
     .. code-block:: php
 
         // app/config/config.php
-
         // PHP
         $container->loadFromExtension('framework', array(
             'templating' => array('form' =>
                 array('resources' => array(
                     'AcmeDemoBundle:Form',
-             )))
-            // ...
+             ))),
+             ...,
         ));
 
 Par défaut, le moteur de template PHP utilise un layout à base de *div* pour afficher
@@ -559,7 +550,6 @@ layout :
     .. code-block:: yaml
 
         # app/config/config.yml
-
         framework:
             templating:
                 form:
@@ -569,7 +559,6 @@ layout :
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-
         <framework:config ...>
             <framework:templating>
                 <framework:form>
@@ -582,13 +571,12 @@ layout :
     .. code-block:: php
 
         // app/config/config.php
-
         $container->loadFromExtension('framework', array(
             'templating' => array('form' =>
                 array('resources' => array(
                     'FrameworkBundle:FormTable',
-             )))
-            // ...
+             ))),
+             ...,
         ));
 
 Si vous ne voulez appliquer vos changements que dans un seul template, ajoutez
@@ -658,6 +646,7 @@ Vous pouvez aussi surcharger le code d'un champ entier en utilisant la même mé
 
     .. code-block:: html+jinja
 
+        {# _product_name_row.html.twig #}
         {% form_theme form _self %}
 
         {% block _product_name_row %}
@@ -730,16 +719,17 @@ suffit de copier, coller et personnaliser le fragment ``field_errors``.
 
     .. code-block:: html+jinja
 
+        {# fields_errors.html.twig #}
         {% block field_errors %}
-        {% spaceless %}
-            {% if errors|length > 0 %}
-            <ul class="error_list">
-                {% for error in errors %}
-                    <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        {% endspaceless %}
+            {% spaceless %}
+                {% if errors|length > 0 %}
+                <ul class="error_list">
+                    {% for error in errors %}
+                        <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endspaceless %}
         {% endblock field_errors %}
 
     .. code-block:: html+php
@@ -797,6 +787,7 @@ bloc :
 
     .. code-block:: html+jinja
 
+        {# field_row.html.twig #}
         {% block field_row %}
             <div class="form_row">
                 {{ form_label(form) }}
@@ -808,7 +799,6 @@ bloc :
     .. code-block:: html+php
 
         <!-- field_row.html.php -->
-
         <div class="form_row">
             <?php echo $view['form']->label($form) ?>
             <?php echo $view['form']->errors($form) ?>
@@ -935,7 +925,7 @@ une variable ``help`` :
 
     .. code-block:: jinja
 
-        {{ form_widget(form.title, { 'help': 'foobar' }) }}
+        {{ form_widget(form.title, {'help': 'foobar'}) }}
 
     .. code-block:: php
 

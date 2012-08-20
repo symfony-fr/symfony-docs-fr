@@ -1,5 +1,6 @@
 .. index::
    single: Process
+   single: Components; Process
 
 Le Composant « Process »
 ========================

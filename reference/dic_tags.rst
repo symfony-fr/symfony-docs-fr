@@ -93,7 +93,7 @@ directement::
     class MyFormTypeExtension extends AbstractTypeExtension
     {
         // ... écrivez toute méthode que vous voulez surcharger
-        // comme buildForm(), buildView(), buildViewBottomUp(), getDefaultOptions() ou getAllowedOptionValues()
+        // comme buildForm(), buildView(), finishView(), setDefaultOptions()
     }
 
 Pour que Symfony connaisse l'existence de vos extension de formulaire et sache comment les utiliser,
@@ -223,6 +223,88 @@ du cookbook :doc:`/cookbook/service_container/event_listener`.
 Pour un autre exemple pratique d'un écouteur du « kernel » (« noyau » en français),
 référez-vous à l'article du cookbook suivant : :doc:`/cookbook/request/mime_type`.
 
+Ecouteurs d'évènements du noyau de référence
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lorsque vous ajoutez vos propres écouteurs, cela peut être utile de connaitre
+les autres écouteurs du noyau de Symfony et leurs priorités.
+
+.. note::
+
+    Tout les écouteurs listés ici peuvent ne pas écouter selon votre environnement,
+    votre configuration et vos bundles. De plus, les bundles tiers fournissent des
+    écouteurs supplémentaires qui ne sont pas listés ici.
+
+kernel.request
+..............
+
++-------------------------------------------------------------------------------------------+-----------+
+| Nom de classe de l'écouteur                                                               | Priorité  |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener`                  | 1024      |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\TestSessionListener`             | 192       |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\SessionListener`                 | 128       |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\RouterListener`                    | 32        |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener`                    | 16        |
++-------------------------------------------------------------------------------------------+-----------+
+| :class:`Symfony\\Component\\Security\\Http\\Firewall`                                     | 8         |
++-------------------------------------------------------------------------------------------+-----------+
+
+kernel.controller
+.................
+
++-------------------------------------------------------------------------------------------+----------+
+| Nom de classe de l'écouteur                                                               | Priorité |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Bundle\\FrameworkBundle\\DataCollector\\RequestDataCollector`            | 0        |
++-------------------------------------------------------------------------------------------+----------+
+
+kernel.response
+...............
+
++-------------------------------------------------------------------------------------------+----------+
+| Nom de classe de l'écouteur                                                               | Priorité |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\EsiListener`                       | 0        |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener`                  | 0        |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Bundle\\SecurityBundle\\EventListener\\ResponseListener`                 | 0        |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener`                  | -100     |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Bundle\\FrameworkBundle\\EventListener\\TestSessionListener`             | -128     |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener`       | -128     |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener`          | -1024    |
++-------------------------------------------------------------------------------------------+----------+
+
+kernel.exception
+................
+
++-------------------------------------------------------------------------------------------+----------+
+| Nom de classe de l'écouteur                                                               | Priorité |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener`                  | 0        |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener`                 | -128     |
++-------------------------------------------------------------------------------------------+----------+
+
+kernel.terminate
+................
+
++-------------------------------------------------------------------------------------------+----------+
+| Nom de classe de l'écouteur                                                               | Priorité |
++-------------------------------------------------------------------------------------------+----------+
+| :class:`Symfony\\Bundle\\SwiftmailerBundle\\EventListener\\EmailSenderListener`           | 0        |
++-------------------------------------------------------------------------------------------+----------+
+
+
 .. _dic-tags-kernel-event-subscriber:
 
 kernel.event_subscriber
@@ -231,7 +313,6 @@ kernel.event_subscriber
 **But** : Pour s'abonner à un ensemble de différents événements/hooks de Symfony
 
 .. versionadded:: 2.1
-
    La possibilité d'ajouter des souscripteurs aux événements du kernel a été
    introduite avec Symfony 2.1.
 

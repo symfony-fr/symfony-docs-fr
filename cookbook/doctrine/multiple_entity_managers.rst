@@ -46,7 +46,16 @@ alors que le gestionnaire d'entités ``customer`` gère les entités du bundle
 
 Lorsque vous travaillez avec plusieurs gestionnaires d'entités, vous devriez
 être explicite quant au gestionnaire d'entités que vous voulez. Si vous
-*omettez* le nom du gestionnaire d'entité quand vous le demandez, le
+*omettez* le nom du gestionnaire d'entité quand vous mettez à jour votre schema,
+le gestionnaire par défaut (c-a-d ``default``) est utilisé::
+
+    # Utilise le gestionnaire « default »
+    php app/console doctrine:schema:update --force
+
+    # tilise le gestionnaire « customer »
+    php app/console doctrine:schema:update --force --em=customer
+
+Si vous *omettez* le nom du gestionnaire d'entité quand vous le demandez, le
 gestionnaire d'entités par défaut (c'est-à-dire ``default``) est retourné::
 
     class UserController extends Controller
@@ -65,3 +74,26 @@ Vous pouvez maintenant utiliser Doctrine comme vous le faisiez avant - en
 utilisant le gestionnaire d'entités ``default`` pour persister et aller chercher
 les entités qu'il gère et le gestionnaire d'entités ``customer`` pour persister
 et aller chercher ses entités.
+
+La même chose s'applique aux appels de repository::
+
+    class UserController extends Controller
+    {
+        public function indexAction()
+        {
+            // Retourne un repository géré par le gestionnaire « default »
+            $products = $this->get('doctrine')
+                             ->getRepository('AcmeStoreBundle:Product')
+                             ->findAll();
+
+            // MAnière explicite de traiter avec le gestionnaire « default »
+            $products = $this->get('doctrine')
+                             ->getRepository('AcmeStoreBundle:Product', 'default')
+                             ->findAll();
+
+            // Retourne un repository géré par le gestionnaire « customer »
+            $customers = $this->get('doctrine')
+                              ->getRepository('AcmeCustomerBundle:Customer', 'customer')
+                              ->findAll();
+        }
+    }

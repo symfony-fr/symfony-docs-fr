@@ -98,7 +98,7 @@ La seconde méthode possède plusieurs avantages spécifiques :
     une rétro-compatibilité sera maintenue.
 
 .. index::
-   single: Bundles; Extension
+   single: Bundle; Extension
    single: Injection de Dépendances; Extension
 
 Créer une classe d'Extension
@@ -113,6 +113,8 @@ Par exemple, la classe d'Extension de ``AcmeHelloBundle`` serait nommée
 ``AcmeHelloExtension``::
 
     // Acme/HelloBundle/DependencyInjection/AcmeHelloExtension.php
+    namespace Acme\HelloBundle\DependencyInjection;
+
     use Symfony\Component\HttpKernel\DependencyInjection\Extension;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -168,8 +170,8 @@ de noms :
             xsi:schemaLocation="http://www.example.com/symfony/schema/ http://www.example.com/symfony/schema/hello-1.0.xsd">
 
            <acme_hello:config />
-           ...
-
+           
+           <!-- ... -->
         </container>
 
     .. code-block:: php
@@ -470,9 +472,8 @@ et construire un arbre qui définit votre configuration dans cette classe::
 
             $rootNode
                 ->children()
-                    ->scalarNode('my_type')->defaultValue('bar')->end()
-                ->end()
-            ;
+                ->scalarNode('my_type')->defaultValue('bar')->end()
+                ->end();
 
             return $treeBuilder;
         }
@@ -519,7 +520,7 @@ la méthode ``Extension::getConfiguration()``. Cette dernière devant
 retourner une instance de votre ``Configuration``.
 
 Des commentaires et exemples peuvent être ajoutés à vos noeuds de configuration
-en utilisant les méthodes ``->setInfo()`` et ``->setExample()``::
+en utilisant les méthodes ``->info()`` et ``->example()``::
 
     // src/Acme/HelloBundle/DependencyExtension/Configuration.php
     namespace Acme\HelloBundle\DependencyInjection;
@@ -538,8 +539,8 @@ en utilisant les méthodes ``->setInfo()`` et ``->setExample()``::
                 ->children()
                     ->scalarNode('my_type')
                         ->defaultValue('bar')
-                        ->setInfo('ce que my_type configure')
-                        ->setExample('exemple de paramètre')
+                        ->info('ce que my_type configure')
+                        ->example('exemple de paramètre')
                     ->end()
                 ->end()
             ;
@@ -570,6 +571,7 @@ automatiquement par Symfony2. Sinon, réécrivez la méthode
 :method:`Symfony\\Component\\HttpKernel\\Bundle\\Bundle::build` de Bundle
 dans votre bundle::
 
+    // ...
     use Acme\HelloBundle\DependencyInjection\UnconventionalExtensionClass;
 
     class AcmeHelloBundle extends Bundle

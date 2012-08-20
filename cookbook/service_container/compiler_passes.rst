@@ -12,6 +12,7 @@ Pour savoir comment les créer, vous pouvez lire la section des composants
 passe de compilation depuis un bundle, vous devez l'ajouter à la méthode
 build se situant dans la classe du bundle::
 
+    // src/Acme/MailerBundle/AcmeMailerBundle.php
     namespace Acme\MailerBundle;
 
     use Symfony\Component\HttpKernel\Bundle\Bundle;

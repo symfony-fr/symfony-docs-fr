@@ -18,7 +18,7 @@ pouvez définir la méthode magique ``__call()`` dans la classe que vous voulez
         {
             // crée un évènement nommé 'foo.method_is_not_found'
             $event = new HandleUndefinedMethodEvent($this, $method, $arguments);
-            $this->dispatcher->dispatch($this, 'foo.method_is_not_found', $event);
+            $this->dispatcher->dispatch('foo.method_is_not_found', $event);
 
             // aucun listener n'a été capable d'analyser l'évènement ? La méthode
             // n'existe pas
@@ -127,4 +127,4 @@ déclarant une instance de ``Bar`` avec l'évènement ``foo.method_is_not_found`
 .. code-block:: php
 
     $bar = new Bar();
-    $dispatcher->addListener('foo.method_is_not_found', $bar);
+    $dispatcher->addListener('foo.method_is_not_found', array($bar, 'onFooMethodIsNotFound'));

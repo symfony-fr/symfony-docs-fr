@@ -42,6 +42,7 @@
   * :doc:`/cookbook/doctrine/multiple_entity_managers`
   * :doc:`/cookbook/doctrine/custom_dql_functions`
   * :doc:`/cookbook/doctrine/resolve_target_entity`
+  * :doc:`/cookbook/doctrine/registration_form`
 
 * :doc:`/cookbook/email/index`
 
@@ -86,6 +87,8 @@
 
   * :doc:`/cookbook/routing/scheme`
   * :doc:`/cookbook/routing/slash_in_parameter`
+  * :doc:`/cookbook/routing/redirect_in_config`
+  * :doc:`/cookbook/routing/method_parameters`
 
 * **symfony1**
 
@@ -123,6 +126,10 @@
   * :doc:`/cookbook/testing/insulating_clients`
   * :doc:`/cookbook/testing/profiling`
   * :doc:`/cookbook/testing/doctrine`
+
+* :doc:`/cookbook/validation/index`
+
+  * :doc:`/cookbook/validation/custom_constraint`
 
 * :doc:`/cookbook/web_services/index`
 

@@ -1,6 +1,6 @@
 .. index::
-   single: Sécurité; Fournisseur d'Utilisateur
-   single: Sécurité; Fournisseur d'Entité
+   single: Sécurité; Fournisseur d'utilisateur
+   single: Sécurité; Fournisseur d'entité
 
 Comment charger les utilisateurs depuis la base de données (le fournisseur d'Entité)
 ====================================================================================
@@ -48,7 +48,6 @@ qui proviennent de l'interface
 .. code-block:: php
 
     // src/Acme/UserBundle/Entity/User.php
-
     namespace Acme\UserBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
@@ -154,7 +153,6 @@ Pour plus de détails sur chacune d'entre elles, voir
 :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 
 .. versionadded:: 2.1
-
     Dans Symfony2.1, la méthode ``equals`` a été supprimée de ``UserInterface``.
     Si vous avez besoin de surcharger l'implémentation par défaut de la logique
     de comparaison, implémentez la nouvelle interface
@@ -164,7 +162,6 @@ Pour plus de détails sur chacune d'entre elles, voir
 .. code-block:: php
 
     // src/Acme/UserBundle/Entity/User.php
-
     namespace Acme\UserBundle\Entity;
 
     use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -216,7 +213,6 @@ entrées d'entité « User » de la base de données :
     .. code-block:: yaml
 
         # app/config/security.yml
-
         security:
             encoders:
                 Acme\UserBundle\Entity\User:
@@ -290,16 +286,16 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
 .. code-block:: php
 
     // src/Acme/UserBundle/Entity/User.php
-
     namespace Acme\Bundle\UserBundle\Entity;
 
     // ...
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-    // ...
+    
     class User implements AdvancedUserInterface
     {
         // ...
+
         public function isAccountNonExpired()
         {
             return true;
@@ -352,7 +348,6 @@ Le code ci-dessous montre l'implémentation de
 la classe ``UserRepository``::
 
     // src/Acme/UserBundle/Entity/UserRepository.php
-
     namespace Acme\UserBundle\Entity;
 
     use Symfony\Component\Security\Core\User\UserInterface;
@@ -371,8 +366,7 @@ la classe ``UserRepository``::
                 ->where('u.username = :username OR u.email = :email')
                 ->setParameter('username', $username)
                 ->setParameter('email', $username)
-                ->getQuery()
-            ;
+                ->getQuery();
 
             try {
                 // La méthode Query::getSingleResult() lance une exception
@@ -450,12 +444,12 @@ utilisateurs. Comme un groupe est aussi un rôle, la méthode précédente ``get
 retourne maintenant la liste des groupes reliés::
 
     // src/Acme/UserBundle/Entity/User.php
-
     namespace Acme\Bundle\UserBundle\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
 
     // ...
+
     class User implements AdvancedUserInterface
     {
         /**
@@ -484,6 +478,7 @@ La chose la plus importante à noter est que la classe entité ``AcmeUserBundle:
 implémente l'interface :class:`Symfony\\Component\\Security\\Core\\Role\\RoleInterface`
 qui la force à avoir une méthode ``getRole()``::
 
+    // src/Acme/Bundle/UserBundle/Entity/Group.php
     namespace Acme\Bundle\UserBundle\Entity;
 
     use Symfony\Component\Security\Core\Role\RoleInterface;
@@ -541,7 +536,6 @@ la méthode ``UserRepository::loadUserByUsername()``. Cela va récupérer l'util
 ainsi que ses rôles/groupes associés avec une requête unique::
 
     // src/Acme/UserBundle/Entity/UserRepository.php
-
     namespace Acme\Bundle\UserBundle\Entity;
 
     // ...
@@ -557,8 +551,7 @@ ainsi que ses rôles/groupes associés avec une requête unique::
                 ->where('u.username = :username OR u.email = :email')
                 ->setParameter('username', $username)
                 ->setParameter('email', $username)
-                ->getQuery()
-            ;
+                ->getQuery();
 
             // ...
         }

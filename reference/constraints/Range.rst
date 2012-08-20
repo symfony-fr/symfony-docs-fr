@@ -52,7 +52,7 @@ vous pouvez procéder comme suit :
              *      min = "120",
              *      max = "180",
              *      minMessage = "Vous devez faire au moins 120cm pour entrer",
-             *      maxMessage="Vous ne devez pas dépasser 180cm"
+             *      maxMessage = "Vous ne devez pas dépasser 180cm"
              * )
              */
              protected $height;

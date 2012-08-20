@@ -109,8 +109,7 @@ contrôleur, cela ressemblerait à quelque chose comme ça::
         $form = $this->createFormBuilder($document)
             ->add('name')
             ->add('file')
-            ->getForm()
-        ;
+            ->getForm();
 
         // ...
     }
@@ -157,14 +156,14 @@ Le contrôleur suivant vous montre comment gérer le processus en entier::
         ;
 
         if ($this->getRequest()->getMethod() === 'POST') {
-            $form->bindRequest($this->getRequest());
+            $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
                 $em->persist($document);
                 $em->flush();
 
-                $this->redirect($this->generateUrl('...'));
+                $this->redirect($this->generateUrl(...));
             }
         }
 
@@ -204,7 +203,7 @@ de fichier::
         $em->persist($document);
         $em->flush();
 
-        $this->redirect('...');
+        $this->redirect(...);
     }
 
 La méthode ``upload()`` va tirer parti de l'objet :class:`Symfony\\Component\\HttpFoundation\\File\\UploadedFile`,
@@ -324,7 +323,7 @@ supprimé du contrôleur::
         $em->persist($document);
         $em->flush();
  
-        $this->redirect('...');
+        $this->redirect(...);
     }
 
 .. note::

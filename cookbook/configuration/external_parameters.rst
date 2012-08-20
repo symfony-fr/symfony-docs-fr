@@ -1,5 +1,5 @@
 .. index::
-   single: Environments; External Parameters
+   single: Environments; External parameters
 
 Comment configurer les paramètres externes dans le conteneur de services
 ========================================================================
@@ -48,8 +48,8 @@ par la configuration ``VirtualHost`` suivante:
 
     .. code-block:: bash
 
-        export SYMFONY__DATABASE__USER=user
-        export SYMFONY__DATABASE__PASSWORD=secret
+        $ export SYMFONY__DATABASE__USER=user
+        $ export SYMFONY__DATABASE__PASSWORD=secret
 
 Maintenant que les variables d'environnement ont été déclarées, elles seront présentes
 dans la variable globale ``$_SERVER`` de PHP. Symfony va donc automatiquement recopier
@@ -104,8 +104,7 @@ et de préciser le type ``constant``.
         <?xml version="1.0" encoding="UTF-8"?>
 
         <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        >
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
             <parameters>
                 <parameter key="global.constant.value" type="constant">GLOBAL_CONSTANT</parameter>
@@ -120,7 +119,7 @@ et de préciser le type ``constant``.
 
     .. code-block:: yaml
 
-        // app/config/config.yml
+        # app/config/config.yml
         imports:
             - { resource: parameters.xml }
 

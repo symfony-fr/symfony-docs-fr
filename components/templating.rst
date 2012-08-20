@@ -1,5 +1,6 @@
 .. index::
    single: Templating
+   single: Components; Templating
 
 Le Composant Templating
 =======================
@@ -49,7 +50,7 @@ le fichier `views/hello.php` et retourne le texte de sortie.
     <!-- views/hello.php -->
     Hello, <?php echo $firstname ?>!
 
-Héritage de Template avec les Slots
+Héritage de template avec les slots
 -----------------------------------
 
 L'héritage de template est structuré de manière à partager les couches avec

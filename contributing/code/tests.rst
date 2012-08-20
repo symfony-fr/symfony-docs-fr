@@ -90,6 +90,15 @@ résultats des tests.
 
 .. tip::
 
+    Si vous ne voulez tester qu'un seul composant, tapez son chemin après la commande
+    `phpunit`, par exemple :
+
+    .. code-block:: bash
+
+        $ phpunit src/Symfony/Component/Finder/
+
+.. tip::
+
     Lancez la suite de tests avant d'appliquer vos modifications afin de
     vérifier qu'ils fonctionnent sur votre configuration.
 

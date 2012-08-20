@@ -15,10 +15,10 @@ de votre application. Cela inclut la définition de paramètres liés aux sessio
 Configuration
 -------------
 
-* `charset`_
 * `secret`_
 * `ide`_
 * `test`_
+* `trust_proxy_headers`_
 * `form`_
     * enabled
 * `csrf_protection`_
@@ -30,14 +30,6 @@ Configuration
     * `assets_base_urls`_
     * `assets_version`_
     * `assets_version_format`_
-
-charset
-~~~~~~~
-
-**type**: ``string`` **par défaut**: ``UTF-8``
-
-Le jeu de caractères étant utilisé au travers du framework. Ce dernier devient le
-paramètre du conteneur de service nommé ``kernel.charset``.
 
 secret
 ~~~~~~
@@ -95,6 +87,17 @@ alors les services liés au test de votre application (par exemple :
 environnement ``test`` (généralement via ``app/config/config_test.yml``).
 Pour plus d'informations, voir :doc:`/book/testing`.
 
+trust_proxy_headers
+~~~~~~~~~~~~~~~~~~~
+
+**type**: ``Boolean``
+
+Configure si les entêtes HTTP (comme ``HTTP_X_FORWARDED_FOR``, ``X_FORWARDED_PROTO``, et
+``X_FORWARDED_HOST``) sont conformes pour une connexion SSL. Par défaut, elle est définie
+à ``false`` et seules les connexions SSL_HTTPS sont considérées comme sécurisées.
+
+Vous devriez activer cette configuration si votre application est derrière un reverse proxy.
+
 .. _reference-framework-form:
 
 form
@@ -138,7 +141,6 @@ ajoutée aux deux collections. Les URLs commençant par ``http://`` seront
 ajoutées uniquement à la collection ``http``.
 
 .. versionadded:: 2.1
-
     A la différence de la plupart des blocs de configuration, des valeurs
     successives pour ``assets_base_urls`` vont s'outrepasser entre elles au
     lieu d'être fusionnées. Ce comportement a été choisi car les développeurs
@@ -263,7 +265,6 @@ Toutes les Options de Configuration par Défaut
         framework:
 
             # configuration générale
-            charset:              ~
             trust_proxy_headers:  false
             secret:               ~ # Requis
             ide:                  ~
@@ -302,6 +303,8 @@ Toutes les Options de Configuration par Défaut
                 type:                 ~
                 http_port:            80
                 https_port:           443
+                # si false, une URL vierge sera générée si une route a un paramètre obligatoire manquant
+                strict_requirements:  %kernel.debug%
 
             # configuration de la session
             session:

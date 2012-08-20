@@ -128,6 +128,7 @@ conteneur en tant que service et charger les dépendances provenant d'un champ
 d'application restreint à chaque appel, afin d'être certain d'obtenir les instances
 mises à jour::
 
+    // src/Acme/HelloBundle/Mail/Mailer.php
     namespace Acme\HelloBundle\Mail;
 
     use Symfony\Component\DependencyInjection\ContainerInterface;

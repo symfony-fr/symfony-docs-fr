@@ -24,7 +24,7 @@ récupérer.
 
     .. code-block:: bash
 
-        php app/console generate:bundle --namespace=Acme/StoreBundle
+        $ php app/console generate:bundle --namespace=Acme/StoreBundle
 
 Configurer la Base de Données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,13 +64,13 @@ pour vous :
 
 .. code-block:: bash
 
-    php app/console propel:database:create
+    $ php app/console propel:database:create
 
 .. note::
 
     Dans cet exemple, vous avez une connexion configurée, nommée ``default``.
     Si vous voulez configurer plus d'une connexion, lisez la partie sur la
-    configuration <working-with-symfony2.html#project_configuration>`_.
+    configuration <Travailler avec Symfony2 - Configuration>`_.
 
 Créer une Classe Modèle
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,7 +108,7 @@ dernier en exécutant :
 
 .. code-block:: bash
 
-    php app/console propel:model:build
+    $ php app/console propel:model:build
 
 Cela va générer chaque classe modèle afin que vous puissiez développer
 rapidement votre application dans le répertoire ``Model/`` de votre
@@ -125,9 +125,8 @@ Propel peut automatiquement créer toutes les tables de base de données nécess
 
 .. code-block:: bash
 
-    php app/console propel:sql:build
-
-    php app/console propel:sql:insert --force
+    $ php app/console propel:sql:build
+    $ php app/console propel:sql:insert --force
 
 Votre base de données possède désormais une table ``product`` entièrement
 fonctionnelle avec des colonnes qui correspondent au schéma que vous avez
@@ -317,7 +316,7 @@ Créez les classes :
 
 .. code-block:: bash
 
-    php app/console propel:model:build
+    $ php app/console propel:model:build
 
 Assumons que vous ayez des produits dans votre base de données, vous ne souhaitez
 pas les perdre. Grâce aux migrations, Propel va être capable de mettre à jour votre
@@ -325,9 +324,8 @@ base de données sans perdre aucune données.
 
 .. code-block:: bash
 
-    php app/console propel:migration:generate-diff
-
-    php app/console propel:migration:migrate
+    $ php app/console propel:migration:generate-diff
+    $ php app/console propel:migration:migrate
 
 Votre base de données a été mise à jour, vous pouvez continuer à écrire
 votre application.
@@ -448,6 +446,7 @@ Commandes
 Vous devriez lire la section dédiée aux `commandes Propel dans Symfony2`_.
 
 .. _`Travailler Avec Symfony2`: http://www.propelorm.org/cookbook/symfony2/working-with-symfony2.html#installation
+.. _`Travailler avec Symfony2 - Configuration`: http://www.propelorm.org/cookbook/symfony2/working-with-symfony2.html#configuration
 .. _`Relations`: http://www.propelorm.org/documentation/04-relationships.html
 .. _`Section de Référence des Comportements`: http://www.propelorm.org/documentation/#behaviors_reference
-.. _`commandes Propel dans Symfony2`: http://www.propelorm.org/cookbook/symfony2/working-with-symfony2#commands
+.. _`commandes Propel dans Symfony2`: http://www.propelorm.org/cookbook/symfony2/working-with-symfony2#the_commands

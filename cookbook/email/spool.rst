@@ -34,8 +34,8 @@ Afin d'utiliser le « spool », utilisez la configuration suivante :
         <!-- app/config/config.xml -->
 
         <!--
-        xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
-        http://symfony.com/schema/dic/swiftmailer http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd
+            xmlns:swiftmailer="http://symfony.com/schema/dic/swiftmailer"
+            http://symfony.com/schema/dic/swiftmailer http://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd
         -->
 
         <swiftmailer:config>
@@ -48,7 +48,7 @@ Afin d'utiliser le « spool », utilisez la configuration suivante :
 
         // app/config/config.php
         $container->loadFromExtension('swiftmailer', array(
-             // ...
+            ...,
             'spool' => array(
                 'type' => 'file',
                 'path' => '/path/to/spool',
@@ -72,20 +72,20 @@ envoyer les messages qui sont dans le « spool » :
 
 .. code-block:: bash
 
-    php app/console swiftmailer:spool:send --env=prod
+    $ php app/console swiftmailer:spool:send --env=prod
 
 Cette commande possède une option pour limiter le nombre de messages
 devant être envoyés :
 
 .. code-block:: bash
 
-    php app/console swiftmailer:spool:send --message-limit=10 --env=prod
+    $ php app/console swiftmailer:spool:send --message-limit=10 --env=prod
 
 Vous pouvez aussi définir la limite de temps en secondes :
 
 .. code-block:: bash
 
-    php app/console swiftmailer:spool:send --time-limit=10 --env=prod
+    $ php app/console swiftmailer:spool:send --time-limit=10 --env=prod
 
 Bien sûr, vous ne voudrez pas exécuter ceci manuellement dans la réalité.
 A la place, la commande de la console devrait être lancée par une tâche cron

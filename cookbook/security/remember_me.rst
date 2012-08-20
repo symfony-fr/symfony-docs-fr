@@ -89,7 +89,7 @@ pourrait au final ressembler à cela :
 
     .. code-block:: html+php
 
-        <?php // src/Acme/SecurityBundle/Resources/views/Security/login.html.php ?>
+         <!-- src/Acme/SecurityBundle/Resources/views/Security/login.html.php -->
         <?php if ($error): ?>
             <div><?php echo $error->getMessage() ?></div>
         <?php endif; ?>
@@ -165,9 +165,9 @@ Dans l'exemple suivant, l'action est autorisée seulement si l'utilisateur
 possède le rôle ``IS_AUTHENTICATED_FULLY``.
 
 .. code-block:: php
-
-    use Symfony\Component\Security\Core\Exception\AccessDeniedException
+    
     // ...
+    use Symfony\Component\Security\Core\Exception\AccessDeniedException
 
     public function editAction()
     {

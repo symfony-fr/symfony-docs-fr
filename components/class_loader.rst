@@ -1,5 +1,6 @@
 .. index::
    pair: Autoloader; Configuration
+   single: Components; ClassLoader
 
 Le Composant ClassLoader
 ========================

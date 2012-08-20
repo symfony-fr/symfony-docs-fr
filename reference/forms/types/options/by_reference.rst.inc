@@ -20,7 +20,7 @@ Pour mieux comprendre, jetez un oeil à cet exemple simple::
         )
 
 Si ``by_reference`` est à true, voici ce qui se passe dans l'envers du décor lorsque
-vous faite un ``bindRequest`` sur le formulaire::
+vous faites un ``bind`` sur le formulaire::
 
     $article->setTitle('...');
     $article->getAuthor()->setName('...');

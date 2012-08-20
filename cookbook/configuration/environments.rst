@@ -37,6 +37,7 @@ Cela fonctionne grâce à un simple standard utilisé par défaut dans la classe
 .. code-block:: php
 
     // app/AppKernel.php
+
     // ...
     
     class AppKernel extends Kernel
@@ -65,7 +66,6 @@ et vous verrez facilement comment ceci est accompli :
 
         imports:
             - { resource: config.yml }
-
         # ...
 
     .. code-block:: xml
@@ -73,13 +73,11 @@ et vous verrez facilement comment ceci est accompli :
         <imports>
             <import resource="config.xml" />
         </imports>
-
         <!-- ... -->
 
     .. code-block:: php
 
         $loader->import('config.php');
-
         // ...
 
 Pour partager une configuration commune, chaque fichier de configuration d'un
@@ -111,8 +109,7 @@ le fichier de configuration ``dev`` :
 
         <webprofiler:config
             toolbar="true"
-            # ...
-        />
+            .../>
 
     .. code-block:: php
 
@@ -121,7 +118,7 @@ le fichier de configuration ``dev`` :
 
         $container->loadFromExtension('web_profiler', array(
             'toolbar' => true,
-            // ..
+            ...,
         ));
 
 .. index::
@@ -215,9 +212,9 @@ et en changeant la chaîne de caractères de l'environnement.
             $container->loadFromExtension('doctrine', array(
                 'dbal' => array(
                     'logging'  => '%kernel.debug%',
-                    // ...
+                    ...,
                 ),
-                // ...
+                ...,
             ));
 
 .. index::
@@ -245,7 +242,6 @@ par exemple, ``benchmark``. Commencez par créer un nouveau fichier de configura
     .. code-block:: yaml
 
         # app/config/config_benchmark.yml
-
         imports:
             - { resource: config_prod.yml }
 
@@ -255,7 +251,6 @@ par exemple, ``benchmark``. Commencez par créer un nouveau fichier de configura
     .. code-block:: xml
 
         <!-- app/config/config_benchmark.xml -->
-
         <imports>
             <import resource="config_prod.xml" />
         </imports>
@@ -266,8 +261,7 @@ par exemple, ``benchmark``. Commencez par créer un nouveau fichier de configura
 
     .. code-block:: php
 
-        // app/config/config_benchmark.php
-        
+        // app/config/config_benchmark.php        
         $loader->import('config_prod.php')
 
         $container->loadFromExtension('framework', array(

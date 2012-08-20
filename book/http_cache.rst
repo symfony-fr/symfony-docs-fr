@@ -73,7 +73,7 @@ ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 
 .. index::
    single: Cache; Proxy
-   single: Cache; Reverse Proxy
+   single: Cache; Reverse proxy
    single: Cache; Gateway
 
 .. _gateway-caches:
@@ -143,7 +143,7 @@ des deux premiers types de cache. Ces systèmes ne sont pas sous votre contrôle
 mais suivent les directives du cache HTTP définies dans les réponses.
 
 .. index::
-   single: Cache; Symfony2 Reverse Proxy
+   single: Cache; Symfony2 reverse proxy
 
 .. _`symfony-gateway-cache`:
 
@@ -487,7 +487,7 @@ la réponse valide.
     l'apparence du document - son contenu est beaucoup plus beau que son aspect.
 
 .. index::
-   single: Cache; HTTP Expiration
+   single: Cache; HTTP expiration
 
 Expiration
 ~~~~~~~~~~
