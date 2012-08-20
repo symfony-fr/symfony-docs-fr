@@ -113,7 +113,7 @@ Récupère tous les noeuds enfants ou parents::
     Toutes les méthodes de navigation retournent un nouvelle instance de
     :class:`Symfony\\Component\\DomCrawler\\Crawler`.
 
-Accéder aux Valeurs des Noeuds
+Accéder aux valeurs des noeuds
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Accède à la valeur du premier noeud de la sélection courante::
@@ -142,7 +142,7 @@ La fonction anonyme reçoit la position et le noeud en tant qu'arguments.
 Le résultat est un tableau de valeurs retournées par les appels de fonction
 anonyme.
 
-Ajouter du Contenu
+Ajouter du contenu
 ~~~~~~~~~~~~~~~~~~
 
 Le « crawler » supporte plusieurs façons d'ajouter du contenu::
@@ -279,7 +279,7 @@ Vous devez spécifier le nom du champ entièrement qualifié::
         'dimensional' => 'an other value'
     ));
 
-Cela est super, mais le meilleur reste à venir ! L'objet ``Form`` vous permet
+C'est super, mais le meilleur reste à venir ! L'objet ``Form`` vous permet
 d'intéragir avec votre formulaire comme un navigateur, en sélectionnant des
 valeurs de boutons radio, en cochant des cases « checkbox », et en « uploadant »
 des fichiers::
@@ -316,7 +316,7 @@ requête POST pour le formulaire::
     $values = $form->getValues();
     $files = $form->getFiles();
 
-    // maintenant, utilisez quelconque client HTTP et postez le formulaire
+    // maintenant, utilisez n'importe quel client HTTP et postez le formulaire
     // en utilisant ces informations
 
 Un bel exemple d'un système intégré qui utilise tout cela est `Goutte`_.
