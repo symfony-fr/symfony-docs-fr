@@ -41,11 +41,11 @@ L'un des buts de Symfony YAML est de trouver le bon équilibre entre vitesse et
 fonctionnalités. Il supporte juste les fonctionnalités nécessaires à la gestion
 des fichiers de configuration.
 
-Un Analyseur Réel
+Un analyseur réel
 ~~~~~~~~~~~~~~~~~
 
-Il arbore un analyseur réel et est capable de « parser » un sous-ensemble important
-de la spécification YAML, pour tous vos besoins de configuration. Cela signifie
+Il arbore un analyseur réel et est capable d'analyser (« parser ») un sous-ensemble
+important de la spécification YAML, pour tous vos besoins de configuration. Cela signifie
 aussi que l'analyseur est particulièrement robuste, facile à comprendre, et
 suffisament simple à étendre.
 
@@ -78,7 +78,7 @@ vous répétez pas en référençant les bouts de configuration communs.
 Utiliser le Composant YAML de Symfony2
 --------------------------------------
 
-Le Composant YAML de Symfony2 est très simple et consiste de deux classes
+Le Composant YAML de Symfony2 est très simple et consiste en deux classes
 principales : l'une analyse les chaînes de caractères YAML
 (:class:`Symfony\\Component\\Yaml\\Parser`), et l'autre affiche une chaîne de
 caractères YAML à partir d'un tableau PHP (:class:`Symfony\\Component\\Yaml\\Dumper`).
@@ -86,7 +86,7 @@ caractères YAML à partir d'un tableau PHP (:class:`Symfony\\Component\\Yaml\\D
 Au-dessus de ces deux classes, la classe :class:`Symfony\\Component\\Yaml\\Yaml`
 agit comme une fine couche supplémentaire qui simplifie les usages communs.
 
-Lire des Fichiers YAML
+Lire des fichiers YAML
 ~~~~~~~~~~~~~~~~~~~~~~
 
 La méthode :method:`Symfony\\Component\\Yaml\\Parser::parse` analyse une
@@ -117,7 +117,7 @@ apparue :
 
 .. tip::
 
-    Comme l'analyseur est « ré-utilisable », vous pouvez utiliser le même
+    Comme l'analyseur est « réutilisable », vous pouvez utiliser le même
     objet analyseur pour charger différentes chaînes de caractères YAML.
 
 Lorsque vous chargez un fichier YAML, il est parfois mieux d'utiliser la
@@ -131,7 +131,7 @@ méthode de surcouche :method:`Symfony\\Component\\Yaml\\Yaml::parse` :
 
 La méthode statique :method:`Symfony\\Component\\Yaml\\Yaml::parse` prend une
 chaîne de caractères YAML ou un fichier contenant du YAML. En interne, elle appelle
-la méthode :method:`Symfony\\Component\\Yaml\\Parser::parse`, mais elle mets en valeur
+la méthode :method:`Symfony\\Component\\Yaml\\Parser::parse`, mais elle met en valeur
 les erreurs si quelque chose se passe mal en ajoutant le nom du fichier au message
 
 Exécuter du PHP dans les fichiers YAML
@@ -148,7 +148,7 @@ PHP que dans un seul fichier YAML, assurez vous de désactiver l'analyse du PHP 
 avoir analysé votre fichier en appelant ``Yaml::$enablePhpParsing = false;`` (``$enablePhpParsing``
 est une propriété publique).
 
-Ecrire des Fichiers YAML
+Ecrire des fichiers YAML
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 La méthode :method:`Symfony\\Component\\Yaml\\Dumper::dump` affiche n'importe
@@ -170,7 +170,7 @@ quel tableau PHP en sa représentation YAML :
 
     Bien sûr, le « dumper » YAML de Symfony2 n'est pas capable d'afficher
     des ressources. Aussi, même si le « dumper » est capable d'afficher des
-    objets PHP, cela est considéré comme une fonctionnalité non-supportée.
+    objets PHP, cela est considéré comme une fonctionnalité non supportée.
 
 Si une erreur intervient durant l'affichage, l'analyseur lance une exception
 :class:`Symfony\\Component\\Yaml\\Exception\\DumpException`.
