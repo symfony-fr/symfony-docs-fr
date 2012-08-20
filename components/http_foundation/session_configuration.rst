@@ -2,7 +2,7 @@
    single: HTTP
    single: HttpFoundation, Sessions
 
-Configurer les Sessions et les Gestionnaires de Sauvegarde
+Configurer les Sessions et les gestionnaires de sauvegarde
 ==========================================================
 
 Cette section explique comment configurer la gestion des sessions et comment
@@ -22,7 +22,7 @@ expirées : `gc` est appelée de manière aléatoire selon la documentation de P
 si elle est appelée, elle est invoquée après l'opération `open`). Vous pouvez en
 lire plus à propos de ce sujet : `php.net/session.customhandler`_.
 
-Gestionnaires de Sauvegarde PHP natifs
+Gestionnaires de sauvegarde PHP natifs
 --------------------------------------
 
 Les gestionnaires dits « natifs » sont des gestionnaires de sauvegarde qui sont
@@ -55,7 +55,7 @@ Exemple d'utilisation::
 
 .. note::
 
-    Excepté le gestionnaire des ``fichiers`` (« files » en anglais) qui est intégré dans PHP
+    Excepté le gestionnaire des ``fichiers`` qui est intégré dans PHP
     et toujours à disposition, la disponibilité des autres gestionnaires dépend du fait que
     ces extensions PHP soient activées ou non lors de l'exécution.
 
@@ -66,7 +66,7 @@ Exemple d'utilisation::
     de sauvegarde personnalisés peuvent fournir plus de liberté et de flexibilité. Symfony2 fournit
     plusieurs implémentations que vous pourriez personnaliser plus tard si nécessaire.
 
-Gestionnaires de Sauvegarde Personnalisés
+Gestionnaires de sauvegarde personnalisés
 -----------------------------------------
 
 Les gestionnaires personnalisés sont ceux qui remplacent complètement les gestionnaires de
@@ -91,7 +91,7 @@ Exemple d'utilisation::
     $session = new Session($storage);
 
 
-Configurer les Sessions PHP
+Configurer les sessions PHP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le classe :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage`
@@ -103,9 +103,9 @@ de la clé) en tant qu'un tableau clés-valeurs à l'argument ``$options`` du co
 Ou définissez-les via la méthode
 :method:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage::setOptions`.
 
-Pour des raisons de clarté, certaines options clés sont expliquées dans cette documentation.
+Pour des raisons de clarté, certaines options clé sont expliquées dans cette documentation.
 
-Durée de vie du Cookie de Session
+Durée de vie du cookie de session
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour des raisons de sécurité, il est généralement recommandé que les jetons de sécurité soient
@@ -120,7 +120,7 @@ rare de définir des cookies pour une année ou plus dépendant de l'application
 
 Comme les cookies de session sont juste des jetons côté client, ils sont moins
 importants pour le contrôle des détails de vos paramètres de sécurité qui peuvent
-en fin de compte être contrôlés de manière sécuritaire seulement côté serveur.
+en fin de compte être contrôlés de manière sécurisée seulement côté serveur.
 
 .. note::
 
@@ -130,14 +130,14 @@ en fin de compte être contrôlés de manière sécuritaire seulement côté ser
     à ``time()``+``cookie_lifetime`` où la date « time » est prise depuis le
     serveur.
 
-Configurer le Ramasse-Miettes (« Garbage Collector » en anglais)
+Configurer le ramasse-miettes (« Garbage Collector » en anglais)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Lorsqu'une session débute, PHP va appeler le gestionnaire ``gc`` de manière
 aléatoire selon la probabilité définie par ``session.gc_probability`` /
 ``session.gc_divisor``. Par exemple, si ces dernières étaient définies
 respectivement avec ``5 / 100``, cela signifierait une probabilité de 5%.
-De même, ``3 / 4`` signifierait 3 chances sur 4 d'être appelé, i.e. 75%.
+De même, ``3 / 4`` signifierait 3 chances sur 4 d'être appelé, c-a-d 75%.
 
 Si le gestionnaire de ramasse-miettes est invoqué, PHP va passer la valeur stockée
 dans la directive PHP ini ``session.gc_maxlifetime`. La signification dans ce
@@ -176,21 +176,21 @@ configuration PHP de ``session.cookie_lifetime`` à la date courante du serveur.
     Une durée de vie de cookie égale à ``0`` signifie que le cookie expire
     lorsque le navigateur est fermé.
 
-Durée d'Inactivité de la Session/Maintenir Actif
+Durée d'inactivité de la session/maintenir actif
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Il existe souvent des circonstances durant lesquelles vous souhaitez protéger
 ou minimiser l'utilisation d'une session quand un utilisateur étant connecté
 s'éloigne de son terminal en détruisant sa session après une certaine période
-d'inactivité. Par exemple, cela est commun pour les applications bancaires
-de déconnecter (« log out » en anglais) l'utilisateur après 5 ou 10 minutes
-d'inactivité. Définir la durée de vie du cookie n'est pas approprié ici
-car cela peut être manipulé par le client, donc nous devons rendre effectif
-l'expiration du côté du serveur. La manière la plus facile est d'implémenter
-ce mécanisme via le ramasse-miettes qui s'exécute assez fréquemment. Le
-cookie ``lifetime`` serait défini avec une valeur relativement grande,
-et la propriété ``maxlifetime`` du ramasse-miettes serait définie afin
-de détruire les sessions au bout de quelconque période d'inactivité souhaitée.
+d'inactivité. Par exemple, cela est classique pour les applications bancaires
+de déconnecter l'utilisateur après 5 ou 10 minutes d'inactivité. Définir la
+durée de vie du cookie n'est pas approprié ici car il peut être manipulé par
+le client, donc nous devons rendre effectif l'expiration du côté du serveur.
+La manière la plus facile est d'implémenter ce mécanisme via le ramasse-miettes
+qui s'exécute assez fréquemment. Le cookie ``lifetime`` serait défini avec une
+valeur relativement grande, et la propriété ``maxlifetime`` du ramasse-miettes
+serait définie afin de détruire les sessions au bout de n'importe quelle période
+d'inactivité souhaitée.
 
 L'autre option est de vérifier spécifiquement si une session a expiré après
 qu'elle ait été démarrée. La session peut être détruite comme nous le souhaitons.
