@@ -66,7 +66,7 @@ ou avec :phpclass:`SimpleXMLElement` afin de trouver des éléments dans un docu
 
     La méthode :method:`Crawler::filter()<Symfony\\Component\\DomCrawler\\Crawler::filter>`
     utilise le composant ``CssSelector`` pour trouver des éléments en se basant sur une
-    chaîne de caractères représentant un sélecteur CSS. Voir :doc:`/components/dom_crawler`
+    chaîne de caractères représentant un sélecteur CSS. Lisez :doc:`/components/dom_crawler`
     pour plus de détails.
 
 Limitations du composant CssSelector
@@ -74,7 +74,7 @@ Limitations du composant CssSelector
 
 Tous les sélecteurs CSS ne peuvent pas être convertis en un équivalent XPath.
 
-Il y a plusieurs sélecteurs CSS qui ne font du sens que dans le contexte
+Il y a plusieurs sélecteurs CSS qui n'ont de sens que dans le contexte
 d'un navigateur web.
 
 * sélecteurs basés sur le statut d'un lien : ``:link``, ``:visited``, ``:target``
