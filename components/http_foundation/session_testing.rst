@@ -2,11 +2,11 @@
    single: HTTP
    single: HttpFoundation, Sessions
 
-Tester avec les Sessions
+Tester avec les sessions
 ========================
 
-Symfony2 est architecturé depuis ses propres fondations avec l'objectif
-en tête que le code soit testable. Afin de rendre votre code utilisant les
+Symfony2 est conçu depuis ses propres fondations avec l'objectif
+principal que le code soit testable. Afin de rendre votre code utilisant les
 sessions facilement testable, nous fournissons deux mécanismes de simulation
 de stockage pour les tests unitaires et fonctionnels.
 
@@ -35,7 +35,7 @@ fournies pour simuler cela si nécessaire :
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\SessionStorageInterface::setName`:
   Définit le nom de la session.
 
-Tester de manière Unitaire
+Tester de manière unitaire
 --------------------------
 
 Pour tester unitairement où il n'est pas nécessaire de persister la session,
@@ -47,12 +47,12 @@ vous devriez simplement permuter le moteur de stockage par défaut avec
 
     $session = new Session(new MockArraySessionStorage());
 
-Tester de manière Fonctionnelle
+Tester de manière fonctionnelle
 -------------------------------
 
 Pour tester de manière fonctionnelle où vous pourriez avoir besoin de persister
 les données de session à travers des processus PHP séparés, changer simplement
-le moteur de stockage pour être
+le moteur de stockage pour qu'il soit
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\MockFileSessionStorage`::
 
     use Symfony\Component\HttpFoundation\Session\Session;
