@@ -14,7 +14,7 @@ la POO (« Programmation Orientée Objet »). Cela permet d'avoir du code élég
 lisible dans des applications complexes.
 
 La classe :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` est
-à disposition pour ceux souhaitant utiliser juste un objet événement à
+à disposition pour ceux qui souhaitent juste utiliser un objet événement à
 travers leur application. Elle est adaptée à la plupart des besoins
 « out of the box » car elle suit le pattern standard de l'observeur où
 l'objet événement encapsule un « sujet » événement, tout en ayant la
@@ -50,7 +50,7 @@ arguments de l'événement qui fait que cela facilite réellement le passage
 d'arguments supplémentaires eu égard au sujet de l'événement.
 
 Les exemples suivants montrent des cas d'école pour vous donner une idée
-général de la flexibilité. Les exemples assument que des « listeners »
+générale de la flexibilité. Les exemples supposent que des « listeners »
 d'événement ont été ajoutés au répartiteur.
 
 Passer simplement un sujet::

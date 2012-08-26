@@ -58,7 +58,7 @@ Critères
 Le chemin
 ~~~~~~~~~
 
-Le chemin (i.e. l'endroit où se trouve le fichier) est le seul critère
+Le chemin (c-a-d l'endroit où se trouve le fichier) est le seul critère
 obligatoire. Il informe le « finder » du répertoire à utiliser pour
 la recherche::
 
@@ -100,7 +100,7 @@ Et cela fonctionne aussi avec les flux définis par l'utilisateur::
     Lisez la documentation sur les `Flux`_ pour apprendre comment créer vos
     propres flux.
 
-Fichiers et Répertoires
+Fichiers et répertoires
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Par défaut, le « Finder » retourne des fichiers et des répertoires ; mais les
@@ -162,7 +162,7 @@ La méthode ``notName()`` exclut les fichiers correspondant à un pattern::
 
     $finder->files()->notName('*.rb');
 
-Contenus de Fichier
+Contenus de fichier
 ~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.1
@@ -206,7 +206,7 @@ La valeur cible peut utiliser les unités suivantes : kilo-octets (``k``, ``ki``
 (``m``, ``mi``), ou giga-octets (``g``, ``gi``). Celles suffixées avec un ``i`` utilisent
 la version appropriée ``2**n`` en accord avec le `standard IEC`_.
 
-Date de Fichier
+Date de fichier
 ~~~~~~~~~~~~~~~
 
 Restreignez les fichiers par leur date de dernière modification grâce à la
@@ -223,7 +223,7 @@ de ``<``.
 La valeur cible peut être n'importe quelle date supportée par la fonction
 `strtotime`_.
 
-Profondeur de Répertoire
+Profondeur de répertoire
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Par défaut, le « Finder » parcourt les répertoires récursivement. Restreignez
@@ -233,7 +233,7 @@ la profondeur de navigation grâce à la méthode
     $finder->depth('== 0');
     $finder->depth('< 3');
 
-Filtrage Personnalisé
+Filtrage personnalisé
 ~~~~~~~~~~~~~~~~~~~~~
 
 Pour restreindre les fichiers correspondants à votre propre stratégie,
@@ -250,7 +250,7 @@ utilisez la méthode :method:`Symfony\\Component\\Finder\\Finder::filter`::
 
 La méthode ``filter()`` prend une Closure en argument. Pour chaque fichier qui
 correspond, cette dernière est appelée avec le fichier en tant qu'instance de
-:class:`Symfony\\Component\\Finder\\SplFileInfo`. Le fichier est exclut de
+:class:`Symfony\\Component\\Finder\\SplFileInfo`. Le fichier est exclu de
 l'ensemble des résultats si la Closure retourne ``false``.
 
 Lire le contenu des fichiers retournés
