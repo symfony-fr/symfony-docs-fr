@@ -1,24 +1,23 @@
-Générer une nouvelle entité Doctrine
+GÃ©nÃ©rer une nouvelle entitÃ© Doctrine
 ====================================
 
 Utilisation
 -----------
 
-La commande ``generate:doctrine:entity`` génère une nouvelle entité Doctrine
-incluant la définition du mapping ainsi que les propriété, getters et setters
-de la classe.
+La commande ``generate:doctrine:entity`` gÃ©nÃ¨re une nouvelle entitÃ© Doctrine
+incluant la dÃ©finition du Â« mapping Â» ainsi que des propriÃ©tÃ©s, accesseurs et
+mutateurs de la classe.
 
-Par défaut, la commande est exécutée en mode interactif et vous pose des questions
-pour définir le nom de l'entité, son emplacement, son format de configuration et sa
-structure par défaut :
+Par dÃ©faut, la commande est exÃ©cutÃ©e en mode interactif et vous pose des questions
+pour dÃ©finir le nom de l'entitÃ©, son emplacement, son format de configuration et sa
+structure par dÃ©faut :
 
 .. code-block:: bash
 
     php app/console generate:doctrine:entity
 
-	
-Pour désactiver le mode interactif, utilisez l'option `--no-interaction` mais il
-vous faudra alors penser à passer toutes les options obligatoires :
+Pour dÃ©sactiver le mode interactif, utilisez l'option `--no-interaction` mais il
+vous faudra alors penser Ã  passer toutes les options obligatoires :
 
 .. code-block:: bash
 
@@ -27,32 +26,32 @@ vous faudra alors penser à passer toutes les options obligatoires :
 Options disponibles
 -----------------
 
-* ``--entity``: Le nom de l'entité donné en notation raccourcie, contenant le nom
-  du bundle dans lequel l'entité est localisée, ainsi que le nom de l'entité.
+* ``--entity``: Le nom de l'entitÃ© donnÃ© en notation raccourcie, contenant le nom
+  du bundle dans lequel l'entitÃ© est localisÃ©e, ainsi que le nom de l'entitÃ©.
   Par exemple, ``AcmeBlogBundle:Post`` :
 
     .. code-block:: bash
 
         php app/console generate:doctrine:entity --entity=AcmeBlogBundle:Post
 
-* ``--fields``: La liste des champs à générer dans la classe entité :
+* ``--fields``: La liste des champs Ã  gÃ©nÃ©rer dans la classe entitÃ© :
 
     .. code-block:: bash
 
         php app/console generate:doctrine:entity --fields="title:string(100) body:text"
 
 * ``--format``: (**annotation**) [valeurs: yml, xml, php ou annotation]
-  Détermine le format à utiliser pour les fichiers de configuration généré
-  comme le routage. Par défaut, la commande utilise le format ``annotation``.
+  DÃ©termine le format Ã  utiliser pour les fichiers de configuration gÃ©nÃ©rÃ©s
+  comme le routage. Par dÃ©faut, la commande utilise le format ``annotation``.
   Choisir le format ``annotation`` implique que le ``SensioFrameworkExtraBundle``
-  soit déjà installé :
+  soit dÃ©jÃ  installÃ© :
 
     .. code-block:: bash
 
         php app/console generate:doctrine:entity --format=annotation
 
-* ``--with-repository``: Cette option indique de créer ou non la classe
-  Doctrine `EntityRepository` associée :
+* ``--with-repository``: Cette option indique de crÃ©er ou non la classe
+  Doctrine `EntityRepository` associÃ©e :
 
     .. code-block:: bash
 
