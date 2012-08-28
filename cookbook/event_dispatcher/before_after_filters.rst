@@ -33,7 +33,7 @@ le jeton fourni.
     ni de fournisseur d'authentification via le composant de Sécurité ne vont
     être utilisés.
 
-Créer un filtre interférant avant un processus avec un événement controller.request
+Créer un filtre interférant avant un processus avec un évènement controller.request
 -----------------------------------------------------------------------------------
 
 Mise en place basique
@@ -94,12 +94,12 @@ Un contrôleur qui implémente cette interface ressemble simplement à cela::
         // vos actions qui ont besoin d'authentification
     }
 
-Créer un « Listener » d'Evénement
+Créer un « Listener » d'Évènement
 ---------------------------------
 
-Ensuite, vous allez avoir besoin de créer un « listener » d'événement, qui va
+Ensuite, vous allez avoir besoin de créer un « listener » d'évènement, qui va
 contenir la logique que vous souhaitez exécuter avant vos contrôleurs. Si
-vous n'êtes pas familier avec les « listeners » d'événement, vous pouvez
+vous n'êtes pas familier avec les « listeners » d'évènement, vous pouvez
 en apprendre plus sur eux ici :doc:`/cookbook/service_container/event_listener`::
 
     // src/Acme/DemoBundle/EventListener/BeforeListener.php
@@ -144,7 +144,7 @@ Déclarer le « Listener »
 ------------------------
 
 Finalement, déclarez votre « listener » comme un service et « taggez-le » en
-tant que « listener » d'événement. En écoutant le ``kernel.controller``, vous
+tant que « listener » d'évènement. En écoutant le ``kernel.controller``, vous
 dites à Symfony que vous voulez que votre « listener » soit appelé juste avant
 qu'un contrôleur quelconque soit exécuté :
 

@@ -43,7 +43,7 @@ Glossaire
         Un *Service* est un terme générique pour tout objet PHP qui éxécute une tâche
         spécifique. Un service est souvent utilisé « globalement », comme un objet
         de connexion à une base de données ou un objet qui envoie des emails. Dans
-        Symfony2, un service est souvent configuré et recupéré par le conteneur de
+        Symfony2, un service est souvent configuré et récupéré par le conteneur de
         services. Une application qui a de nombreux services découplés suit une
         `architecture orientée services`_.
 
@@ -65,7 +65,7 @@ Glossaire
         l'article `Wikipedia sur HTTP`_ ou la `HTTP 1.1 RFC`_.
 
    Environnement
-        Un environnement est une chaine de caractères (ex ``prod`` ou ``dev``) qui
+        Un environnement est une chaîne de caractères (ex ``prod`` ou ``dev``) qui
         correspond à un ensemble de configurations spécifiques. La même application peut
         être éxécutée sur la même machine avec une configuration différente en l'éxécutant
         dans différents environnements. C'est très utile puisque cela permet à une

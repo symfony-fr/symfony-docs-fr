@@ -39,7 +39,7 @@ la barre latérale.
 
     Imaginez que vous ayez configuré un service `my_mailer`, sans configurer de
     champs d'application pour ce service ; par défaut il sera réglé sur `container`.
-    Ainsi chaque fois que vous appelerez le conteneur du service `my_mailer`, vous
+    Ainsi chaque fois que vous appellerez le conteneur du service `my_mailer`, vous
     recevrez le même objet. Ce qui est habituel dans l'utilisation d'un service.
     
     Imaginez cependant que vous ayez besoin du service `request` dans votre service

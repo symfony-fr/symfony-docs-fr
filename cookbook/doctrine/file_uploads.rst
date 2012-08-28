@@ -257,7 +257,7 @@ le cycle de vie de l'entité via un callback::
     {
     }
 
-Ensuite, réfactorez la classe ``Document`` pour tirer parti de ces callbacks::
+Ensuite, réfactorisez la classe ``Document`` pour tirer parti de ces callbacks::
 
     use Symfony\Component\HttpFoundation\File\UploadedFile;
 

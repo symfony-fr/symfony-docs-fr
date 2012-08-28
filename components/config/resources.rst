@@ -43,7 +43,7 @@ qui permet d'importer d'autres ressources de manière récursive::
         {
             $configValues = Yaml::parse($resource);
 
-            // ... gèrer les valeurs de configuration
+            // ... gérer les valeurs de configuration
 
             // importer peut-être d'autres ressources :
 

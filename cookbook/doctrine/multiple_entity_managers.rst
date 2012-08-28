@@ -52,7 +52,7 @@ le gestionnaire par défaut (c-a-d ``default``) est utilisé::
     # Utilise le gestionnaire « default »
     php app/console doctrine:schema:update --force
 
-    # tilise le gestionnaire « customer »
+    # Utilise le gestionnaire « customer »
     php app/console doctrine:schema:update --force --em=customer
 
 Si vous *omettez* le nom du gestionnaire d'entité quand vous le demandez, le
@@ -86,7 +86,7 @@ La même chose s'applique aux appels de repository::
                              ->getRepository('AcmeStoreBundle:Product')
                              ->findAll();
 
-            // MAnière explicite de traiter avec le gestionnaire « default »
+            // Manière explicite de traiter avec le gestionnaire « default »
             $products = $this->get('doctrine')
                              ->getRepository('AcmeStoreBundle:Product', 'default')
                              ->findAll();

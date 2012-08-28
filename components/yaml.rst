@@ -47,7 +47,7 @@ Un analyseur réel
 Il arbore un analyseur réel et est capable d'analyser (« parser ») un sous-ensemble
 important de la spécification YAML, pour tous vos besoins de configuration. Cela signifie
 aussi que l'analyseur est particulièrement robuste, facile à comprendre, et
-suffisament simple à étendre.
+suffisamment simple à étendre.
 
 Des messages d'erreur clairs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,7 +148,7 @@ PHP que dans un seul fichier YAML, assurez vous de désactiver l'analyse du PHP 
 avoir analysé votre fichier en appelant ``Yaml::$enablePhpParsing = false;`` (``$enablePhpParsing``
 est une propriété publique).
 
-Ecrire des fichiers YAML
+Écrire des fichiers YAML
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 La méthode :method:`Symfony\\Component\\Yaml\\Dumper::dump` affiche n'importe
@@ -275,9 +275,9 @@ ou se termine avec un ou plusieurs espaces significatifs.
     caractères.
 
 Lorsqu'une chaîne de caractères contient un retour à la ligne, vous pouvez
-utiliser le style litéral, indiqué par un séparateur vertical (``|``), pour
+utiliser le style littéral, indiqué par un séparateur vertical (``|``), pour
 indiquer que la chaîne de caractères va s'étendre sur plusieurs lignes. Avec
-le style de citation litéral, les nouvelles lignes sont préservées :
+le style de citation littéral, les nouvelles lignes sont préservées :
 
 .. code-block:: yaml
 

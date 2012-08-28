@@ -9,8 +9,8 @@ contrôleurs CRUD basés sur un schéma Doctrine 2.
 Installation
 ------------
 
-`Téléchargez`_ le bundle et placez-le sous l'espace de nom ``Sensio\\Bundle\\``.
-Ensuite, comme pour tout autre bundle, incluez-le dans votre classe Kernel::
+`Téléchargez`_ le bundle et placez le sous l'espace de nom ``Sensio\\Bundle\\``.
+Ensuite, comme pour tout autre bundle, incluez dans votre classe Kernel::
 
     public function registerBundles()
     {

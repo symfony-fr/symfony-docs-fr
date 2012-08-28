@@ -7,7 +7,7 @@ Comment utiliser Assetic pour gérer vos ressources
 Assetic associe deux concepts majeurs : les ressources et les filtres. Les ressources
 sont des fichiers comme les feuilles de style, les JavaScript et les images. Les
 filtres peuvent être appliqués à ces fichiers avant qu'ils soient servis au
-navigateur. Cela permet de gérer séparemment les fichiers ressources qui sont stockés
+navigateur. Cela permet de gérer séparément les fichiers ressources qui sont stockés
 par l'application des fichiers qui sont réellement présentés à l'utilisateur.
 
 Sans Assetic, vous servez directement les fichiers qui sont stockés dans votre
@@ -172,7 +172,7 @@ Une fois qu'elles sont gérées par Assetic, vous pouvez appliquer des filtres
 à vos ressources avant qu'elles soient servies. Cela inclut les filtres qui
 compressent vos ressources pour réduire la taille des fichiers (pour de
 meilleures performances). D'autres filtres peuvent compiler des fichiers
-CoffeeScript en JavaScript ou couvertir vos fichiers SASS en CSS.
+CoffeeScript en JavaScript ou convertir vos fichiers SASS en CSS.
 En fait, Assetic possède une longue liste de filtres.
 
 Plusieurs de ces filtres ne font pas le travail directement, mais utilisent

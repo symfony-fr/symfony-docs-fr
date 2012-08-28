@@ -18,7 +18,7 @@ récent :
     $ pear channel-discover pear.symfony-project.com
     $ pear install phpunit/PHPUnit
 
-Dépendences (facultatif)
+Dépendances (facultatif)
 ------------------------
 
 Pour lancer la suite de tests complète, incluant les tests dépendants de
@@ -35,7 +35,7 @@ La suite de tests a besoin des bibliothèques tierces suivantes :
 
 Pour les installer, utilisez `Composer`_:
 
-Etape 1: Récupérer `Composer`_
+Étape 1: Récupérer `Composer`_
 
 .. code-block:: bash
 
@@ -44,7 +44,7 @@ Etape 1: Récupérer `Composer`_
 Assurez vous de télécharger ``composer.phar`` dans le même répertoire que
 celui où est situé le fichier ``composer.json``.
 
-Etape 2: Installer les vendors
+Étape 2: Installer les vendors
 
 .. code-block:: bash
 

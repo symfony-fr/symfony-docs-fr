@@ -8,10 +8,10 @@ Un champ pour saisir un temps.
 
 Ce champ peut être affiché comme champ texte, une série de champs texte (ex heures, minutes,
 secondes) ou une série de listes déroulantes. La donnée finale peut être stockée comme un objet
-``DateTime``, une chaine de caractères, un timestamp ou un tableau.
+``DateTime``, une chaîne de caractères, un timestamp ou un tableau.
 
 +----------------------+-----------------------------------------------------------------------------+
-| Type de donnée       | Peut être un objet``DateTime``, une chaine de caractère, un timestamp,      |
+| Type de donnée       | Peut être un objet``DateTime``, une chaîne de caractère, un timestamp,      |
 |                      | ou un tableau (voir l'option ``input`` )                                    |
 +----------------------+-----------------------------------------------------------------------------+
 | Rendu comme          | peut être différentes balises (voir plus bas)                               |

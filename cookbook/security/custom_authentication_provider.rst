@@ -348,7 +348,7 @@ utilisée comme un pare-feu dans votre configuration de sécurité.
 
     Vous vous demandez peut-être « pourquoi avons-nous besoin d'une classe
     factory spéciale pour ajouter des listeners et fournisseurs à un
-    conteneur d'injection de dépendances ? ». Ceci est une très bonnne
+    conteneur d'injection de dépendances ? ». Ceci est une très bonne
     question. La raison est que vous pouvez utiliser votre pare-feu
     plusieurs fois afin de sécuriser plusieurs parties de votre application.
     Grâce à cela, chaque fois que votre pare-feu sera utilisé, un nouveau
