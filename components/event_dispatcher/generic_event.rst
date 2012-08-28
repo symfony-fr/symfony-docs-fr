@@ -1,23 +1,23 @@
 .. index::
-   single: Répartiteur d'Evénement
+   single: Répartiteur d'Évènement
 
-L'objet Evénement Générique
+L'objet Évènement Générique
 ===========================
 
 .. versionadded:: 2.1
-    La classe événement ``GenericEvent`` a été ajoutée dans Symfony 2.1.
+    La classe évènement ``GenericEvent`` a été ajoutée dans Symfony 2.1.
 
 La classe de base :class:`Symfony\\Component\\EventDispatcher\\Event` fournie par
 le composant ``Event Dispatcher`` est délibérément spartiate afin de permettre
-la création d'objets événement spécifiques à une API grâce à l'héritage en utilisant
+la création d'objets évènement spécifiques à une API grâce à l'héritage en utilisant
 la POO (« Programmation Orientée Objet »). Cela permet d'avoir du code élégant et
 lisible dans des applications complexes.
 
 La classe :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` est
-à disposition pour ceux qui souhaitent juste utiliser un objet événement à
+à disposition pour ceux qui souhaitent juste utiliser un objet évènement à
 travers leur application. Elle est adaptée à la plupart des besoins
 « out of the box » car elle suit le pattern standard de l'observeur où
-l'objet événement encapsule un « sujet » événement, tout en ayant la
+l'objet évènement encapsule un « sujet » évènement, tout en ayant la
 possibilité d'avoir des arguments additionnels.
 
 La classe :class:`Symfony\\Component\\EventDispatcher\\GenericEvent` possède
@@ -25,7 +25,7 @@ une API simple en plus de la classe de base
 :class:`Symfony\\Component\\EventDispatcher\\Event` :
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::__construct`:
-  Le constructeur prend le sujet de l'événement et n'importe quels arguments ;
+  Le constructeur prend le sujet de l'évènement et n'importe quels arguments ;
 
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getSubject`:
   Récupère le sujet ;
@@ -46,12 +46,12 @@ une API simple en plus de la classe de base
   Retourne « true » si la clé de l'argument existe.
 
 Le ``GenericEvent`` implémente aussi :phpclass:`ArrayAccess` sur les
-arguments de l'événement qui fait que cela facilite réellement le passage
-d'arguments supplémentaires eu égard au sujet de l'événement.
+arguments de l'évènement qui fait que cela facilite réellement le passage
+d'arguments supplémentaires eu égard au sujet de l'évènement.
 
 Les exemples suivants montrent des cas d'école pour vous donner une idée
 générale de la flexibilité. Les exemples supposent que des « listeners »
-d'événement ont été ajoutés au répartiteur.
+d'évènement ont été ajoutés au répartiteur.
 
 Passer simplement un sujet::
 
@@ -71,7 +71,7 @@ Passer simplement un sujet::
     }
 
 Passer et gérer des arguments en utilisant l'API :phpclass:`ArrayAccess` pour
-accéder aux arguments de l'événement::
+accéder aux arguments de l'évènement::
 
     use Symfony\Component\EventDispatcher\GenericEvent;
 
