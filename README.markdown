@@ -1,7 +1,7 @@
 Documentation de Symfony
 ========================
 
-Cette documentation est visible en ligne à l'adresse http://symfony.com/fr/doc/current/
+Cette documentation est visible en ligne à l'adresse http://symfony.com/fr/doc/master/book/index.html
 
 Contribuer
 ----------
