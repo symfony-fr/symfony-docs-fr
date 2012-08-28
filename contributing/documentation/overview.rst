@@ -18,7 +18,7 @@ La documentation Symfony2 est hébergé sur GitHub:
 
     https://github.com/symfony/symfony-docs
 
-Si vous voulez soumetter un correctif, `forker`_ le dépot offciel sur GitHub et
+Si vous voulez soumetter un correctif, `forker`_ le dépôt offciel sur GitHub et
 cloner votre dépot:
 
 .. code-block:: bash
