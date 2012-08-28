@@ -11,7 +11,7 @@ Il peut être rendu comme un input text ou des balises select. Le format de la d
 réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau.
 
 +----------------------+-----------------------------------------------------------------------------+
-| Type de données      | peut être ``DateTime``, une chaine de caractères, un timestamp,             |
+| Type de données      | peut être ``DateTime``, une chaîne de caractères, un timestamp,             |
 |                      | ou un tableau (voir l'option ``input``)                                     |
 +----------------------+-----------------------------------------------------------------------------+
 | Rendu comme          | simple champ texte ou trois champs select                                   |

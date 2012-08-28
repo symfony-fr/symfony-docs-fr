@@ -24,7 +24,7 @@ Apache) avec PHP 5.3.4 ou supérieur.
    
     Si vous avez PHP 5.4, vous pouvez utiliser le serveur web intégré. Le serveur
     intégré ne devrait être utilisé que pour le développement, mais il peut vous
-    aider à démarrer un projet plus rapidement et plus facielement.
+    aider à démarrer un projet plus rapidement et plus facilement.
 
     Tapez juste cette commande dans votre répertoire Symfony pour démarrer le serveur :
     
@@ -266,13 +266,13 @@ pouvez modifier facilement l'objet Response avant de l'envoyer au navigateur :
 
 Peu importe la méthode employée, le but final de votre contrôleur est toujours de
 rendre un objet ``Response`` qui sera retourné à l'utilisateur. Cet objet ``Response``
-peut être populé par du code HTML, représenter une redirection client ou encore
+peut être peuplé par du code HTML, représenter une redirection client ou encore
 retourner le contenu d'une image JPG avec l'entête ``Content-Type`` spécifié
 comme ``image/jpg``.
 
 .. tip::
 
-    Etendre la classe ``Controller`` est facultatif. En fait, un contrôleur peut
+    Étendre la classe ``Controller`` est facultatif. En fait, un contrôleur peut
     être une simple fonction PHP ou même une closure.
     Le chapitre «:doc:`The Controller</book/controller>`» vous dira tout ce que
     vous voudrez savoir sur les contrôleurs.
@@ -320,7 +320,7 @@ routes sont définies par des annotations des méthodes action :
     }
 
 L'annotation ``@Route()`` définit une nouvelle route avec le masque ``/hello/{name}``
-qui, lorsqu'elle sera reconnue, exécutera la méthode ``helloAction``. Une chaine
+qui, lorsqu'elle sera reconnue, exécutera la méthode ``helloAction``. Une chaîne
 de caractères entre accolades comme ``{name}`` est une variable réservée. Comme
 vous pouvez le voir, sa valeur peut être récupérée par l'argument ``$name`` de
 la méthode.
@@ -370,7 +370,7 @@ chapitre introduira le fonctionnement des templates dans Symfony2.
 Bundles
 ~~~~~~~
 
-Vous vous êtes surement demandé pourquoi le mot :term:`bundle` est utilisé dans
+Vous vous êtes sûrement demandé pourquoi le mot :term:`bundle` est utilisé dans
 la plupart des noms que nous avons vus précédemment. Tout le code que vous écrivez
 dans votre application est organisé en bundles. En jargon Symfony2, un bundle est
 un ensemble structuré de fichiers (PHP, feuilles de styles, javascript, images, ...)
@@ -460,7 +460,7 @@ la web debug toolbar.
 Le mot de la fin
 ----------------
 
-Félicitations ! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
+Félicitations ! Vous avez eu un avant gout du code Symfony2. Ce n'était pas si
 terrible, n'est-ce pas ? Il y a encore beaucoup à explorer et vous devriez déjà
 comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement. 
 Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 

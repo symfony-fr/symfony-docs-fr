@@ -135,7 +135,7 @@ et insérer des nouveaux champs HTML dans votre formulaire.
 Si vous utilisez jQuery, un exemple simple pourrait ressembler à ceci. Si vous rendez
 votre collection de champs en une seule fois (ex: ``form_row(form.emails)``), alors
 les choses sont encore plus simples puisque l'attribut ``data-prototype`` est automatiquement
-rendu pour vous (avec une legère différence - voir la note ci-dessous) et vous n'avez
+rendu pour vous (avec une légère différence - voir la note ci-dessous) et vous n'avez
 besoin que du JavaScript :
 
 .. configuration-block::
@@ -145,7 +145,7 @@ besoin que du JavaScript :
         <form action="..." method="POST" {{ form_enctype(form) }}>
             {# ... #}
 
-            {# stocke le prototype dasn l'attribut data-prototype #}
+            {# stocke le prototype dans l'attribut data-prototype #}
             <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.vars.prototype) | e }}">
             {% for emailField in form.emails %}
                 <li>
@@ -260,7 +260,7 @@ Si cette option est définie à ``true``, alors si un item existant ne se retrou
 pas dans les données soumises, il sera supprimé du tableau d'items final. Cela signifie
 que vous pouvez implémenter un bouton « Supprimer » en JavaScript qui supprimera
 simplement un élément formulaire du DOM. Quand l'utilisateur soumettra le formulaire,
-l'absence de cet élément des données soumises entrainera la suppression de l'item
+l'absence de cet élément des données soumises entraînera la suppression de l'item
 dans le tableau final.
 
 Pour plus d'informations, lisez :ref:`cookbook-form-collections-remove`.
@@ -283,7 +283,7 @@ prototype
 Cette option est utile lorsqu'elle est associée à l'option `allow_add`_. Si elle
 est à ``true`` (et que `allow_add`_ est aussi à ``true``), un attribut spécial « prototype »
 sera disponible pour que vous puissiez rendre un exemple de « template » à votre page
-afin de spécifier ce à quoi le nouvel élement doit ressembler. L'attribut ``name``
+afin de spécifier ce à quoi le nouvel élément doit ressembler. L'attribut ``name``
 donné à cet élément est ``__name__``. Cela vous permet d'ajouter un bouton « Ajouter un
 élément » en JavaScript qui parcourt le prototype, remplace ``__name__`` par un
 nom unique ou un numéro, et le rend à votre formulaire. Lors de la soumission, il sera

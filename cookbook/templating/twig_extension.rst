@@ -23,7 +23,7 @@ Créer la Classe Extension
 
 Pour avoir votre fonctionnalité personnalisée, vous devez créer en premier lieu
 une classe Extension Twig. En tant qu'exemple, nous allons créer un filtre « prix »
-afin de formater un nombre donné en un prix::
+afin de formatter un nombre donné en un prix::
 
     // src/Acme/DemoBundle/Twig/AcmeExtension.php
     namespace Acme\DemoBundle\Twig;

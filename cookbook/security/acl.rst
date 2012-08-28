@@ -134,7 +134,7 @@ Créer un ACL, et ajouter un ACE
     }
 
 Il y a plusieurs décisions d'implémentation importantes dans ce petit bout de
-code. Pour le moment, je veux mettre en évidence seulement deux d'entres elles :
+code. Pour le moment, je veux mettre en évidence seulement deux d'entre elles :
 
 Tout d'abord, vous avez peut-être remarqué que ``->createAcl()`` n'accepte
 pas d'objets de domaine directement, mais uniquement des implémentations de

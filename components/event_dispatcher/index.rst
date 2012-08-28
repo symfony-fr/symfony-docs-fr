@@ -1,4 +1,4 @@
-Répartiteur d'Evénement
+Répartiteur d'Évènement
 =======================
 
 .. toctree::

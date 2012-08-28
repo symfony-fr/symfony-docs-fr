@@ -35,18 +35,18 @@ Rejoindre l'équipe de traduction
 --------------------------------
 
 Si vous voulez aider à traduire certains documents dans votre langue ou corriger
-des erreurs, rejoinger nous; c'est une processus simple:
+des erreurs, rejoigner-nous; c'est une processus simple:
 
 * Présentez vous sur la liste de diffusion `Symfony docs mailing-list`_ ;
-* *(optionel)* Proposer les sujets sur lesquels vous pouvez travailler ;
-* Forker le dépot *master* de votre language (clic sur le bouton "Fork" sur la 
+* *(optionnel)* Proposer les sujets sur lesquels vous pouvez travailler ;
+* Forker le dépôt *master* de votre language (clic sur le bouton "Fork" sur la
   page github) ;
-* Traduisez certains documents et envoyé les sur votre dépot ;
+* Traduisez certains documents et envoyé les sur votre dépôt ;
 * Effectuer une requête de mise à jour (clic sur le bouton "Pull Request" de 
   votre page sur GitHub) ;
-* Le chef d'équipe accepte vos modifications et les fusionnent avec le dépot
+* Le chef d'équipe accepte vos modifications et les fusionnent avec le dépôt
   master ;
-* Le site de la documentation est mis à jour toutes les nuits à partir du dépot
+* Le site de la documentation est mis à jour toutes les nuits à partir du dépôt
   du chef d'équipe.
 
 .. _translations-adding-a-new-language:
@@ -62,17 +62,17 @@ sur la liste de diffusion `Symfony docs mailing-list`_ et essayez de trouver des
 gens motivés pour vous aider.
 
 Quand l'équipe est prête nommé un chef d'équipe, ; il aura la responsabilité du
-dépot principal (*master*).
+dépôt principal (*master*).
 
-Créer le dépot et copier les documents en anglais.
+Créer le dépôt et copier les documents en anglais.
 
 L'équipe peut maintenant commencer son travail de traduction.
 
-Quand l'équipe est certaine que le dépot est stable et à jour (tout est traduit,
+Quand l'équipe est certaine que le dépôt est stable et à jour (tout est traduit,
 ou les documents non traduits ont été supprimés des sommaires (toctree -- 
 correspondants aux fichiers dénommés ``index.rst`` et ``map.rst.inc``), le chef
-d'équipe peut demander que le dépot soit ajouté à la liste officielle des 
-dépot *master* en envoyant un courriel à Fabien (fabien at symfony.com).
+d'équipe peut demander que le dépôt soit ajouté à la liste officielle des
+dépôt *master* en envoyant un courriel à Fabien (fabien at symfony.com).
 
 Maintenance
 -----------
@@ -87,6 +87,6 @@ changement aux documents traduits aussitôt que possible.
 
     Les langues non maintenues sont supprimées de la liste officielle des dépôts
     car mettre à disposition une documentation obsolète comporte des risques
-    dangeureux.
+    dangereux.
 
 .. _Symfony docs mailing-list: http://groups.google.com/group/symfony-docs

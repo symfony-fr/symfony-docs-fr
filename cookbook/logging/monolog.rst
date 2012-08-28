@@ -105,7 +105,7 @@ appelés dans l'ordre où ils sont définis.
 
 .. tip::
 
-    Le gestionnaire nommé « file » ne va pas être inclu dans la pile elle-même
+    Le gestionnaire nommé « file » ne va pas être inclus dans la pile elle-même
     car il est utilisé comme un gestionnaire « imbriqué » du gestionnaire
     ``fingers_crossed``.
 

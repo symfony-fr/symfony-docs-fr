@@ -184,7 +184,7 @@ la configuration donnée (une instance de ``ParamConverter``).
 L'instance de ``ParamConverter`` possède trois informations pour l'annotation:
 
 * ``name``: Le nom de l'attribut;
-* ``class``: Le nom de la classe de l'attribut (toute chaine de caractère qui représente
+* ``class``: Le nom de la classe de l'attribut (toute chaîne de caractère qui représente
   un nom de classe);
 * ``options``: Un tableau d'options
 

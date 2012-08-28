@@ -140,7 +140,7 @@ standard Symfony2 comme exemple::
 Le fichier lui même est présent dans 
 ``vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/SensioFrameworkExtraBundle.php``.
 Comme vous pouvez le voir, l'emplacement de ce fichier suit l'espace de nom de
-la classe. Plus précisemment, l'espace de nom ``Sensio\Bundle\FrameworkExtraBundle``,
+la classe. Plus précisément, l'espace de nom ``Sensio\Bundle\FrameworkExtraBundle``,
 correspond au répertoire où le fichier doit être trouvé
 (``vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/``).
 Cela s'explique par le fait que dans le fichier ``app/autoload.php``, vous avec
@@ -161,12 +161,12 @@ Si ce fichier ne se trouve *pas* à cette position exacte, vous recevrez une
 erreur ``Class "Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle"
 does not exist.``. Dans Symfony2, une erreur "class does not exist" implique que
 l'espace de nom de la classe incriminée et son emplacement physique ne
-correpondent pas. Plus simplement, Symfony2 recherche cette classe dans à un
+correspondent pas. Plus simplement, Symfony2 recherche cette classe dans à un
 emplacement précis, mais cet emplacement n'existe pas (ou contient une classe
 différente). Pour qu'une classe soit chargée automatiquement, vous **n'avez
 jamais besoin de nettoyer le cache** dans Symfony2.
 
-Comme mentionné précédemment, pour que le chaargement automatique fontionne, il
+Comme mentionné précédemment, pour que le chargement automatique fontionne, il
 a besoin de savoir que l'espace de nom ``Sensio`` se trouve dans le dossier
 ``vendor/bundles`` et que, par exemple, l'espace de nom ``Doctrine`` se trouve
 dans le dossier ``vendor/doctrine/orm/lib/``. Cette association est entièrement

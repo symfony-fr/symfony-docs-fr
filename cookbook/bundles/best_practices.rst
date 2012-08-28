@@ -126,7 +126,7 @@ Les classes et fichiers suivants ont des emplacements spécifiques :
 +-------------------------------------+-----------------------------+
 | Extensions du Conteneur de Services | ``DependencyInjection/``    |
 +-------------------------------------+-----------------------------+
-| Listeners d'Evènements              | ``EventListener/``          |
+| Listeners d'Évènements              | ``EventListener/``          |
 +-------------------------------------+-----------------------------+
 | Configuration                       | ``Resources/config/``       |
 +-------------------------------------+-----------------------------+

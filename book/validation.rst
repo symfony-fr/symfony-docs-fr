@@ -784,7 +784,7 @@ Valider des valeurs et des tableaux
 
 Jusqu'ici, vous avez vu comment valider des objets entiers. Mais souvent,
 vous voudrez juste valider une simple valeur, comme par exemple vérifier qu'une
-chaine de caractères est une adresse email valide. C'est en fait très facile à
+chaîne de caractères est une adresse email valide. C'est en fait très facile à
 faire. Dans un contrôleur, ça ressemble à ceci::
 
     // Ajouter ceci en haut de votre classe

@@ -22,9 +22,9 @@ surtout comment les réutiliser.
 Templates
 ---------
 
-Un template est un simple fichier texte qui peut génerer n'importe quel format
+Un template est un simple fichier texte qui peut générer n'importe quel format
 basé sur du texte (HTML, XML, CSV, LaTeX ...). Le type de template le plus connu
-est le template *PHP* - un fichier texte interpreté par PHP qui contient du texte
+est le template *PHP* - un fichier texte interprété par PHP qui contient du texte
 et du code PHP::
 
     <!DOCTYPE html>
@@ -180,7 +180,7 @@ L'héritage de template et layouts
 Bien souvent, les templates d'un projet partagent des éléments communs, comme les
 entêtes, pieds de page et menus latéraux. Dans Symfony2, nous abordons ce problème
 différemment : un template peut être décoré par un autre. Cela fonctionne exactement
-comme les classes PHP : l'héritage de template vous permet de batir un template
+comme les classes PHP : l'héritage de template vous permet de bâtir un template
 « layout » de base qui contient tous les éléments communs de votre site et de définir
 des **blocs** (comprenez « classe PHP avec des méthodes de base »). Un template
 enfant peut étendre le template layout et surcharger n'importe lequel de ses blocs
@@ -289,7 +289,7 @@ Un template enfant peut ressembler à cela :
 
 .. note::
 
-   Le template parent est identifié grâce à une chaine de caractères
+   Le template parent est identifié grâce à une chaîne de caractères
    particulière (``::base.html.twig``) qui indique que ce template se trouve
    dans le dossier ``app/Resources/views`` du projet. Cette convention de
    nommage est complètement expliquée dans :ref:`template-naming-locations`.
@@ -388,12 +388,12 @@ différents :
   templates dans leur dossier ``Resources/views`` (et sous dossiers). La
   plupart des templates résident au sein d'un bundle.
 
-Symfony2 utilise une chaine de caractères au format
+Symfony2 utilise une chaîne de caractères au format
 **bundle**:**controller**:**template** pour les templates. Cela permet plusieurs
 types de templates, chacun se situant à un endroit spécifique :
 
 * ``AcmeBlogBundle:Blog:index.html.twig``: Cette syntaxe est utilisée pour
-  spécifier un template pour une page donnée. Les trois parties de la chaine de
+  spécifier un template pour une page donnée. Les trois parties de la chaîne de
   caractères, séparées par deux-points (``:``), signifie ceci :
 
     * ``AcmeBlogBundle``: (*bundle*) le template se trouve dans le 
@@ -414,21 +414,21 @@ types de templates, chacun se situant à un endroit spécifique :
   trouve à ``Resources/views/layout.html.twig`` dans ``AcmeBlogBundle``.
 
 * ``::base.html.twig``: Cette syntaxe fait référence à un template de base d'une
-  application ou layout. Remarquez que la chaine de caractères commence par deux
+  application ou layout. Remarquez que la chaîne de caractères commence par deux
   deux-points (``::``), ce qui signifie que les deux parties *bundle* et
   *controller* sont absentes. Ce qui signifie que le template ne se trouve dans
   aucun bundle, mais directement dans le répertoire racine
   ``app/Resources/views/``.
 
 Dans la section :ref:`overriding-bundle-templates`, vous verrez comment les
-templates intéragissent avec ``AcmeBlogBundle``. Par exemple, il est possible de
+templates interagissent avec ``AcmeBlogBundle``. Par exemple, il est possible de
 surcharger un template en plaçant un template du même nom dans le répertoire
 ``app/Resources/AcmeBlogBundle/views/``. Cela offre la possibilité de surcharger
 les templates fournis par n'importe quel vendor bundle.
 
 .. tip::
 
-    La syntaxe de nommage des templates doit vous paraitre familière -
+    La syntaxe de nommage des templates doit vous paraître familière -
     c'est la même convention de nommage qui est utilisée pour faire référence à
     :ref:`controller-string-syntax`.
 
@@ -502,7 +502,7 @@ Quand vous avez besoin de réutiliser une grand partie d'un code PHP,
 typiquement vous déplacez le code dans une nouvelle classe PHP ou dans
 une fonction. La même chose s'applique aussi aux templates. En
 déplaçant le code réutilisé dans son propre template, il peut être
-inclu par tous les autres templates. D'abord, créez le template que
+inclus par tous les autres templates. D'abord, créez le template que
 vous souhaiterez réutiliser.
 
 .. configuration-block::
@@ -630,7 +630,7 @@ Le template ``recentList`` est simplement le suivant :
     faire correctement.
 
 Pour inclure le contrôleur, vous avez besoin de faire référence à ce dernier en
-utilisant la chaine de caractères standard pour les contrôleurs
+utilisant la chaîne de caractères standard pour les contrôleurs
 (c-a-d **bundle**:**controller**:**action**) :
 
 .. configuration-block::
@@ -668,7 +668,7 @@ Contenu asynchrone avec hinclude.js
 Les contrôleurs peuvent être imbriqués de façon asynchrone avec la librairie
 javascript hinclude.js_.
 Comme le contenu imbriqué vient d'une autre page (un d'un autre contrôleur),
-Syfmony2 utiliser le helper standard ``render`` pour configurer les tags ``hinclude``:
+Symfony2 utiliser le helper standard ``render`` pour configurer les tags ``hinclude``:
  
 .. configuration-block::
 
@@ -868,7 +868,7 @@ par exemple). La fonction ``asset`` fait attention à cela en déterminant comme
 votre application est utilisée et en générant les chemins corrects.
 
 De plus, si vous utilisez la fonction ``asset``, Symfony peut automatiquement ajouter
-une chaine de caractères afin de garantir que la ressource statique mise à jour ne
+une chaîne de caractères afin de garantir que la ressource statique mise à jour ne
 sera pas mise en cache lors de son déploiement. Par exemple, ``/images/logo.png`` 
 pourrait ressembler à ``/images/logo.png?v2``. Pour plus d'informations, lisez
 la documentation de l'option de configuration :ref:`ref-framework-assets-version`.
@@ -896,8 +896,8 @@ conservant les avantages du mécanisme d'héritage de templates de Symfony.
 
 
 Commencons par ajouter deux blocs à notre template de base qui incluront deux
-fichiers : l'un s'appelle ``stylesheet`` et est inclu dans la balise ``head``, et
-l'autre s'appelle ``javascript`` et est inclu juste avant que la base ``body`` ne se
+fichiers : l'un s'appelle ``stylesheet`` et est inclus dans la balise ``head``, et
+l'autre s'appelle ``javascript`` et est inclus juste avant que la base ``body`` ne se
 referme. Ces blocs contiendront toutes les feuilles de style et tous les
 fichiers javascript dont vous aurez besoin pour votre site :
 
@@ -1028,7 +1028,7 @@ La Surcharge de templates de Bundle
 
 La communauté Symfony2 est fière de créer et de maintenir des bundles de haute
 qualité (voir `KnpBundles.com`_) concernant un grand nombre de fonctionnalités.
-Une fois que vous utilisez un tel bundle, vous aimeriez surement surcharger et
+Une fois que vous utilisez un tel bundle, vous aimeriez sûrement surcharger et
 personnaliser un ou plusieurs de ses templates.
 
 Supposons que vous utilisiez un imaginaire ``AcmeBlogBundle`` open-source dans
@@ -1164,7 +1164,7 @@ vendor. De ce fait, le layout d'un bundle peut facilement être surchargé pour
 .. index::
    single: Templating; Output escaping
 
-L'Echappement
+L'Échappement
 -------------
 
 Lors de la génération HTML d'un template, il y a toujours un risque qu'une
@@ -1236,7 +1236,7 @@ L'échappement en PHP
 ~~~~~~~~~~~~~~~~~~~~
 
 L'échappement n'est pas automatique lorsque vous utilisez des templates PHP. Ce
-qui signife que, à moins que vous ne choisissiez explicitement d'échapper une
+qui signifie que, à moins que vous ne choisissiez explicitement d'échapper une
 variable, vous n'êtes pas protégé. Pour utiliser l'échappement, utilisez la
 méthode spéciale ``escape()`` de view : :
 
@@ -1247,7 +1247,7 @@ méthode spéciale ``escape()`` de view : :
 Par défaut, la méthode ``escape()`` suppose que la variable est rendue dans un
 contexte HTML (et donc que la variable est échappée pour être sans danger pour
 l'HTML). Le second argument vous permet de changer de contexte. Par exemple,
-pour afficher quelque chose dans une chaine de caractères JavaScript, utilisez le
+pour afficher quelque chose dans une chaîne de caractères JavaScript, utilisez le
 context ``js`` :
 
 .. code-block:: js
@@ -1320,7 +1320,7 @@ Le moteur de template dans Symfony est un outil puissant qui peut être utilisé
 chaque fois que vous avez besoin de générer du contenu de répresentation en
 HTML, XML ou tout autre format. Et bien que les templates soient un moyen commun
 de générer du contenu dans un contrôleur, leur utilisation n'est pas
-systèmatique. L'objet ``Response`` retourné par un contrôleur peut être créé
+systématique. L'objet ``Response`` retourné par un contrôleur peut être créé
 avec ou sans utilisation de template::
 
     // création d'un objet Response qui contient le rendu d'un template
@@ -1329,7 +1329,7 @@ avec ou sans utilisation de template::
     // création d'un objet Response qui contient un texte simple
     $response = new Response('response content');
 
-Le moteur de templates de Symfony est très flexible et deux outils de restition
+Le moteur de templates de Symfony est très flexible et deux outils de restitution
 sont disponibles par défaut : les traditionnels templates *PHP* et les élégants
 et puissants templates *Twig*. Ils supportent tout les deux une hiérarchie des
 template et sont fournis avec un ensemble riche de fonctions capables de

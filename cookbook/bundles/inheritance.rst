@@ -107,7 +107,7 @@ et pour les autres ressources.
    un ensemble de « groupements » (un pour chaque domaine). Symfony charge
    les fichiers de traduction des bundles en premier (dans l'ordre dans
    lequel les bundles sont initialisés) et ensuite ceux de votre répertoire
-   ``app/Resources``. Si la même traduction est spéficiée dans deux ressources,
+   ``app/Resources``. Si la même traduction est spécifiée dans deux ressources,
    c'est la traduction venant de la ressource chargée en dernier qui gagnera.
 
 .. _`FOSUserBundle`: https://github.com/friendsofsymfony/fosuserbundle

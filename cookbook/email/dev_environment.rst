@@ -5,7 +5,7 @@ Comment travailler avec les Emails pendant le Développement
 ===========================================================
 
 Lorsque vous développez une application qui envoie des emails, vous
-voudrez souvent que cette dernière n'en envoie pas au destinaire
+voudrez souvent que cette dernière n'en envoie pas au destinataire
 spécifié pendant le développement. Si vous utilisez le ``SwiftmailerBundle``
 avec Symfony2, vous pouvez facilement réaliser cela à travers les paramètres
 de configuration sans avoir à faire de quelconques changements dans votre code.

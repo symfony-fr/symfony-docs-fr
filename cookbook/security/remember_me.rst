@@ -132,7 +132,7 @@ authentifiés :
 
 * ``IS_AUTHENTICATED_ANONYMOUSLY`` - automatiquement assigné à un utilisateur
   qui se trouve dans une zone protégée du site par un pare-feu mais qui ne s'est
-  pas connecté/loggué. Cela est possible uniquement si l'accès anonyme a été
+  pas connecté/logué. Cela est possible uniquement si l'accès anonyme a été
   autorisé.
 
 * ``IS_AUTHENTICATED_REMEMBERED`` - automatiquement assigné à un utilisateur
@@ -208,7 +208,7 @@ des annotations :
       s'authentifier.
 
     * Une fois que l'utilisateur a entré son nom d'utilisateur et son mot de
-      passe, et en supposant que l'utilisateur recoive le rôle ``ROLE_USER``
+      passe, et en supposant que l'utilisateur reçoive le rôle ``ROLE_USER``
       par votre configuration, ce dernier aura le rôle ``IS_AUTHENTICATED_FULLY``
       et sera capable d'accéder à n'importe quelle page de la section
       « account », incluant l'action ``editAction`` du contrôleur.

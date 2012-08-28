@@ -33,7 +33,7 @@ default_protocol
 **type**: ``string`` **default**: ``http``
 
 Si une valeur soumise ne commence pas un protocole (ex ``http://``,
-``ftp://``, etc), ce protocole sera ajouté au début de la chaine de caractères
+``ftp://``, etc), ce protocole sera ajouté au début de la chaîne de caractères
 lorsque les données seront associées au formulaire.
 
 Options héritées

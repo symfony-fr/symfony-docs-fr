@@ -278,7 +278,7 @@ Dans cet exemple, la ressource peut être mise en cache pour une journée. Mais 
 pouvez également utiliser la validation plutôt que l'expiration ou une combinaison
 des deux si cela correspond mieux à vos besoins.
 
-La mise en cache des ressources est gérée par le reverse proxy inclu dans Symfony2.
+La mise en cache des ressources est gérée par le reverse proxy inclus dans Symfony2.
 Mais, puisque la mise en cache est gérée par des entêtes HTTP classiques, vous
 pouvez remplacer le reverse proxy Symfony par Varnish ou Squid et l'adapter
 facilement à votre application.
