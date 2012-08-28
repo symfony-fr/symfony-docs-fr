@@ -152,7 +152,7 @@ Si vous voulez autoriser des clés à être absentes de la collection ou si vous
 voulez autoriser des clés « extra » (en plus), vous pouvez modifier respectivement
 les options `allowMissingFields`_ et `allowExtraFields`_. Dans l'exemple ci-dessus,
 l'option ``allowMissingFields`` a été définie à true, ce qui veut dire que si
-l'un des élements ``personal_email`` ou ``short_bio`` était manquant dans la
+l'un des éléments ``personal_email`` ou ``short_bio`` était manquant dans la
 propriété ``$personalData``, aucune erreur de validation ne se serait produite.
 
 Options

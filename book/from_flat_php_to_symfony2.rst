@@ -420,7 +420,7 @@ de Symfony2 qui prend en charge et achemine les requêtes.
 
 Jusqu'ici, l'application est passée d'un seul fichier PHP à une organisation qui
 permet la réutilisation du code. Vous devriez être plus heureux, mais loin d'être
-satisfait. Par exemple, le système de routing est inconstant, et ne reconnaitrait
+satisfait. Par exemple, le système de routing est inconstant, et ne reconnaîtrait
 pas que la page de liste d'articles (``/index.php``) devrait aussi être accessible
 via ``/`` (si Apache rewrite est activé). Aussi, au lieu de développer une
 application de blog, beaucoup de temps a été consacré à l'« architecture » du code
@@ -581,7 +581,7 @@ Voici la même application, en utilisant cette fois-ci Symfony2 :
                 ->find($id);
             
             if (!$post) {
-                // genère une page 404
+                // génère une page 404
                 throw $this->createNotFoundException();
             }
 

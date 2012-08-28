@@ -109,7 +109,7 @@ Choisissez la bonne branche
 Avant de travailler sur un patch, vous devez déterminer sur quelle branche vous
 devez travailler. La branche devrait être basée sur la branche `master` si vous
 souhaitez ajouter une nouvelle fonctionnalité. Mais si vous voulez corriger un bug,
-utiliser la dernière version maintenue de Symfony dans laquelle le bug apparait
+utiliser la dernière version maintenue de Symfony dans laquelle le bug apparaît
 (par exemple `2.0`).
 
 .. note::
@@ -175,7 +175,7 @@ vous le voulez mais gardez bien à l'esprit de :
 * Ne jamais corriger les standards de code dans le code existant car cela rend la
   revue de code plus difficile;
 
-* Ecrire des messages parlants pour chacun des commits (lisez le conseil ci-dessous).
+* Écrire des messages parlants pour chacun des commits (lisez le conseil ci-dessous).
 
 .. tip::
 
@@ -190,7 +190,7 @@ vous le voulez mais gardez bien à l'esprit de :
 
 .. tip::
 
-   Un bon message de commit est composé d'un résumé succint (la première ligne),
+   Un bon message de commit est composé d'un résumé succinct (la première ligne),
    suivi optionnellement par une ligne vide et par une description plus détaillée. 
    Le résumé commence par le composant sur lequel vous êtes en train de
    travailler entre crochets (``[DependencyInjection]``, ``[FrameworkBundle]``,
@@ -307,7 +307,7 @@ Dans la description de la Pull Request, donnez autant de détails que possible s
 les changements (n'hésitez pas à donner des exemples de code pour illustrer vos
 propos). Si votre Pull Request concerne l'ajout ou la modification d'une
 fonctionnalité existante, expliquez les raisons de ce changement. La description
-d'une Pull Resquest est utile lors de la revue de code est fait office de référence
+d'une Pull Request est utile lors de la revue de code est fait office de référence
 lorsque le code est mergé (la description de la Pull Request et tout les commentaires
 qui y sont associés font partie du message de commit du merge).
 
@@ -362,7 +362,7 @@ liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la comm
     fork à `travis-ci.org`_. Identifiez vous simplement en utilisant votre compte
     github.com et appuyez le bouton pour activer les tests automatiques. Dans votre
     Pull Request, plutôt que de spécifier « *Symfony2 tests pass: [yes|no]* », vous
-    pouvez faire un lien vers l'`icone de status travis-ci.org`_. Pour plus de détails,
+    pouvez faire un lien vers l'`icône de status travis-ci.org`_. Pour plus de détails,
     lisez le `Guide de démarrage travis-ci.org`_. Cela peut être fait simplement en
     cliquant sur l'icone de la page de build de Travis. Sélectionnez votre branche
     puis copiez le contenu dans la description de la Pull Request.

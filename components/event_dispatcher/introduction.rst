@@ -1,5 +1,5 @@
 .. index::
-   single: Répartiteur d'evènement
+   single: Répartiteur d'évènement
    single: Components; EventDispatcher
 
 Le Composant répartiteur d'évènement
@@ -22,7 +22,7 @@ interférer avec d'autres plugins. Ceci n'est pas un problème facile à
 résoudre avec de l'héritage simple, et l'héritage multiple (s'il était
 possible avec PHP) possède ses propres inconvénients.
 
-Le composant Répartiteur d'Evènement de Symfony2 implémente le pattern
+Le composant Répartiteur d'Évènement de Symfony2 implémente le pattern
 `Observer`_ d'une manière simple et efficace pour rendre toutes ces
 choses possibles et pour réaliser des projets vraiment extensibles.
 
@@ -59,7 +59,7 @@ Vous pouvez installer le composant de différentes manières :
 Utilisation
 -----------
 
-Evènements
+Évènements
 ~~~~~~~~~~
 
 Lorsqu'un évènement est réparti, il est identifié par un nom unique (par
@@ -70,7 +70,7 @@ tard, l'objet ``Event`` lui-même contient souvent des données à propos de
 l'évènement qui est réparti.
 
 .. index::
-   pair: Répartiteur d'Evènement; Conventions de nommage
+   pair: Répartiteur d'Évènement; Conventions de nommage
 
 Conventions de Nommage
 ......................
@@ -93,7 +93,7 @@ Voici quelques exemples de nom d'évènement correct :
 * ``form.pre_set_data``
 
 .. index::
-   single: Répartiteur d'Evènement; Sous-classes évènements
+   single: Répartiteur d'Évènement; Sous-classes évènements
 
 Noms d'évènement et objets évènements
 .....................................
@@ -130,7 +130,7 @@ notifie tous les « listeners » qui se sont enregistrés auprès de cet évène
     $dispatcher = new EventDispatcher();
 
 .. index::
-   single: Répartiteur d'Evènements; Listeners
+   single: Répartiteur d'Évènement; Listeners
 
 Connecter des Listeners
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,7 +214,7 @@ Par exemple, l'évènement ``kernel.event`` passe une instance de
 .. _event_dispatcher-closures-as-listeners:
 
 .. index::
-   single: Répartiteur d'Evènement; Créer et répartir un évènement
+   single: Répartiteur d'Évènement; Créer et répartir un évènement
 
 Créer et répartir un évènement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,7 +327,7 @@ l'objet ``Order`` via la méthode ``getOrder``::
     }
 
 .. index::
-   single: Répartiteur d'Evènement; Souscripteurs d'Evènement
+   single: Répartiteur d'Évènement; Souscripteurs d'Evènement
 
 Utiliser les souscripteurs d'évènement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -406,7 +406,7 @@ dans le souscripteur et montre aussi comment passer la priorité de chaque
 méthode du « listener ».
 
 .. index::
-   single: Répartiteur d'Evènement; Arrêter le déroulement d'Evènements
+   single: Répartiteur d'Évènement; Arrêter le déroulement d'Évènements
 
 .. _event_dispatcher-event-propagation:
 
@@ -442,18 +442,18 @@ qui retourne une valeur booléenne::
     }
 
 .. index::
-   single: Répartiteur d'Evènement; Evènements et « listeners » connaissant le Répartiteur d'Evènement
+   single: Répartiteur d'Évènement; Évènements et « listeners » connaissant le Répartiteur d'Évènement
 
 .. _event_dispatcher-dispatcher-aware-events:
 
-Evènements et « Listeners » connaissant le répartiteur d'évènements
+Évènements et « Listeners » connaissant le répartiteur d'évènements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.1
     L'objet ``Event`` contient une référence au répartiteur l'ayant invoqué depuis
     Symfony 2.1.
 
-Le ``Répartiteur d'Evènement`` injecte toujours une référence de lui-même dans
+Le ``Répartiteur d'Évènement`` injecte toujours une référence de lui-même dans
 l'objet « évènement » passé. Cela signifie que tous les « listeners » ont un
 accès direct à l'objet ``EventDispatcher`` qui a notifié le « listener » via
 la méthode de l'objet ``Event`` passé
@@ -541,7 +541,7 @@ une injection via « setter » peut être la manière de faire, et plus particul
 lorsqu'il s'agit de dépendances optionnelles.
 
 .. index::
-   single: Répartiteur d'Evènement; Raccourcis du Répartiteur
+   single: Répartiteur d'Évènement; Raccourcis du Répartiteur
 
 .. _event_dispatcher-shortcuts:
 

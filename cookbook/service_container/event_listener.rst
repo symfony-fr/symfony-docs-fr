@@ -1,19 +1,19 @@
 .. index::
-   single: Evénements; Créer un listener
+   single: Évènements; Créer un listener
 
-Comment créer un « listener » (« écouteur » en français) d'evénement
+Comment créer un « listener » (« écouteur » en français) d'évènement
 ====================================================================
 
-Symfony possède divers événements et « hooks » qui peuvent être utilisés
+Symfony possède divers évènements et « hooks » qui peuvent être utilisés
 pour déclencher un comportement personnalisé dans votre application. Ces
-événements sont lancés par le composant HttpKernel et peuvent être consultés
+évènements sont lancés par le composant HttpKernel et peuvent être consultés
 dans la classe :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
-Afin de personnaliser un événement avec votre propre logique, vous devez créer
-un service qui va agir en tant que « listener » d'événement pour cet événement.
+Afin de personnaliser un évènement avec votre propre logique, vous devez créer
+un service qui va agir en tant que « listener » d'évènement pour cet évènement.
 Dans cet article, nous allons créer un service qui agit en tant que « Listener »
 d'Exception, nous permettant de modifier comment les exceptions sont affichées par
-notre application. L'événement ``KernelEvents::EXCEPTION`` est l'un des événements
+notre application. L'évènement ``KernelEvents::EXCEPTION`` est l'un des évènements
 du coeur du noyau::
 
     // src/Acme/DemoBundle/Listener/AcmeExceptionListener.php
@@ -26,7 +26,7 @@ du coeur du noyau::
     {
         public function onKernelException(GetResponseForExceptionEvent $event)
         {
-            // nous récupérons l'objet exception depuis l'événement reçu
+            // nous récupérons l'objet exception depuis l'évènement reçu
             $exception = $event->getException();
             $message = 'My Error says: ' . $exception->getMessage();
             
@@ -35,21 +35,21 @@ du coeur du noyau::
             $response->setContent($message);
             $response->setStatusCode($exception->getStatusCode());
             
-            // envoie notre objet réponse modifié à l'événement
+            // envoie notre objet réponse modifié à l'évènement
             $event->setResponse($response);
         }
     }
 
 .. tip::
 
-    Chaque événement reçoit un objet de type ``$event`` légèrement différent.
-    Pour l'événement ``kernel.exception``, c'est
+    Chaque évènement reçoit un objet de type ``$event`` légèrement différent.
+    Pour l'évènement ``kernel.exception``, c'est
     :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`.
-    Pour voir quel est le type d'objet que chaque « listener » d'événement reçoit,
+    Pour voir quel est le type d'objet que chaque « listener » d'évènement reçoit,
     voyez :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
 Maintenant que la classe est créée, nous devons juste la définir en tant que
-service et notifier Symfony que c'est un « listener » de l'événement
+service et notifier Symfony que c'est un « listener » de l'évènement
 ``kernel.exception`` en utilisant un « tag » spécifique :
 
 .. configuration-block::
@@ -86,7 +86,7 @@ service et notifier Symfony que c'est un « listener » de l'événement
     autre.
 
 
-Evènement de requête, vérification des types
+Évènement de requête, vérification des types
 --------------------------------------------
 
 Une même page peut faire plusieurs requêtes (une requête principale et plusieurs

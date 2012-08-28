@@ -83,7 +83,7 @@ Configuration de Référence
                                 # Le socket Unix à utiliser avec MySQL
                                 unix_socket:          ~
 
-                                # True pour une connexion persistente pour le driver ibm_db2
+                                # True pour une connexion persistante pour le driver ibm_db2
                                 persistent:           ~
 
                                 # Le protocole à utiliser pour le driver ibm_db2 (par défaut : TCPIP)

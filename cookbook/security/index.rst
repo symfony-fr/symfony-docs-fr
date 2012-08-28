@@ -1,4 +1,4 @@
-Securité
+Sécurité
 ========
 
 .. toctree::

@@ -208,7 +208,7 @@ Le formulaire d'authentification et son traitement
 
     Cette URL **doit** être accessible par un utilisateur normal non-authentifié,
     sinon vous pourriez créer une boucle de redirections. Pour plus de détails,
-    lisez « :ref:`Eviter les pièges classiques<book-security-common-pitfalls>` ».
+    lisez « :ref:`Éviter les pièges classiques<book-security-common-pitfalls>` ».
 
 *   ``check_path`` (type: ``string``, default: ``/login_check``)
     C'est l'URL à laquelle votre formulaire doit être soumis. Le firewall

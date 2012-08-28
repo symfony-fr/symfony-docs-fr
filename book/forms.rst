@@ -4,7 +4,7 @@
 Formulaires
 ===========
 
-Intéragir avec les formulaires HTML est l'une des plus communes - et stimulantes -
+Interagir avec les formulaires HTML est l'une des plus communes - et stimulantes -
 tâches pour un développeur web. Symfony2 intègre un composant « Form » qui rend
 la chose facile. Dans ce chapitre, vous allez construire un formulaire complexe
 depuis la base, tout en apprenant au fur et à mesure les caractéristiques les
@@ -245,7 +245,7 @@ fonctionnalité suivante à votre contrôleur :
 
 .. versionadded:: 2.1
 
-    La méthode ``bind`` a été rendue plus flexible dans SYmfony 2.1. Elle
+    La méthode ``bind`` a été rendue plus flexible dans Symfony 2.1. Elle
     accepte maintenant les données brutes du client (comme avant) ou un
     objet Request Symfony. Elle est à privilégier par rapport à la méthode
     ``bindRequest`` dépréciée.
@@ -455,7 +455,7 @@ comme un tableau callbak, ou une ``Closure`` :
         ));
     }
 
-Cela appelera la méthode statique  ``determineValidationGroups()`` de la classe
+Cela appellera la méthode statique  ``determineValidationGroups()`` de la classe
 ``Client`` après que le formulaire soit associé, mais avant que la validation soit faite.
 L'objet Form est passé comme argument à cette méthode (regardez l'exemple suivant).
 Vous pouvez aussi définir une logique entière en utilisant une Closure :

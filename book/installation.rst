@@ -38,7 +38,7 @@ distribution Symfony2. Vous devrez alors faire deux choix :
 
 * Téléchargez la distribution avec ou sans vendors. Si vous avez installé `Git`_
   sur votre ordinateur, vous devriez télécharger Symfony2 « sans vendors ». Cela
-  vous donnera plus de flexibilité quand vous incluerez des librairies tierces.
+  vous donnera plus de flexibilité quand vous inclurez des librairies tierces.
 
 Téléchargez l'une des archives quelque part dans le dossier racine de votre serveur
 web et extrayez là. Depuis une interface de commande UNIX, cela peut être fait

@@ -48,7 +48,7 @@ Tests unitaires
 Un test unitaire teste habituellement une classe PHP spécifique. Si vous voulez tester
 le comportement général de votre application, lisez la sections sur les `Tests Fonctionnels`_.
 
-Ecrire des tests unitaires avec Symfony2 n'est pas différent d'écrire des tests
+Écrire des tests unitaires avec Symfony2 n'est pas différent d'écrire des tests
 unitaires standards PHPUnit. Supposez, par exemple, que vous avez un classe
 *incroyablement* simple appelée ``Calculator`` dans le répertoire ``Utility/`` de
 votre bundle :
@@ -66,7 +66,7 @@ votre bundle :
         }
     }
 
-Poour tester cela, créez le fichier ``CalculatorTest`` dans le dossier ``Tests/Utility``
+Pour tester cela, créez le fichier ``CalculatorTest`` dans le dossier ``Tests/Utility``
 de votre:
 
 .. code-block:: php
@@ -533,7 +533,7 @@ Beaucoup d'autres méthodes sont également disponibles :
 +------------------------+----------------------------------------------------+
 | ``last()``             | Dernier noeud                                      |
 +------------------------+----------------------------------------------------+
-| ``siblings()``         | Eléments de même niveau (siblings)                 |
+| ``siblings()``         | Éléments de même niveau (siblings)                 |
 +------------------------+----------------------------------------------------+
 | ``nextAll()``          | Tous les siblings suivants                         |
 +------------------------+----------------------------------------------------+

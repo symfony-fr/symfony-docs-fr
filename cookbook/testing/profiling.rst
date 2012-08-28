@@ -61,5 +61,5 @@ dans les messages d'erreurs::
 
 .. tip::
 
-    L'API intégrée vous permet de connaitre les méthodes et les interfaces disponibles :
+    L'API intégrée vous permet de connaître les méthodes et les interfaces disponibles :
     :doc:`data collectors</cookbook/profiler/data_collector>`.
