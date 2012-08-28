@@ -460,7 +460,7 @@ la web debug toolbar.
 Le mot de la fin
 ----------------
 
-Félicitations ! Vous avez eu un avant gôut du code Symfony2. Ce n'était pas si
+Félicitations ! Vous avez eu un avant goût du code Symfony2. Ce n'était pas si
 terrible, n'est-ce pas ? Il y a encore beaucoup à explorer et vous devriez déjà
 comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement. 
 Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 
