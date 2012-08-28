@@ -4,7 +4,7 @@ Générer un contrôleur CRUD basé sur une entité Doctrine
 Utilisation
 -----------
 
-la commande ``generate:doctrine:crud`` génère un contrôleur basique pour une
+La commande ``generate:doctrine:crud`` génère un contrôleur basique pour une
 entité donnée, localisé dans un bundle donné. Ce contrôleur vous permet
 d'effectuer les cinq opérations de base sur un modèle.
 
@@ -55,7 +55,7 @@ Options disponibles
         php app/console generate:doctrine:crud --with-write
 
 * ``--format``: (**annotation**) [valeurs: yml, xml, php ou annotation]
-  Détermine le format à utiliser pour les fichiers de configuration généré
+  Détermine le format à utiliser pour les fichiers de configuration générés
   comme le routage. Par défaut, la commande utilise le format ``annotation``.
   Choisir le format ``annotation`` implique que le ``SensioFrameworkExtraBundle``
   soit déjà installé :

@@ -4,8 +4,8 @@ Générer une nouvelle classe de type de formulaire basée sur une entité Doctr
 Utilisation
 -----------
 
-la commande ``generate:doctrine:form`` génère une classe de type de formulaire
-basique en utilisant les métadonnées de mapping d'une classe entité donnée :
+La commande ``generate:doctrine:form`` génère une classe de type de formulaire
+basique en utilisant les métadonnées de « mapping » d'une classe entité donnée :
 
 .. code-block:: bash
 

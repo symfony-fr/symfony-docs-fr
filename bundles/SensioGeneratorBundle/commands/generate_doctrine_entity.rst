@@ -5,8 +5,8 @@ Utilisation
 -----------
 
 La commande ``generate:doctrine:entity`` génère une nouvelle entité Doctrine
-incluant la définition du mapping ainsi que les propriété, getters et setters
-de la classe.
+incluant la définition du « mapping » ainsi que des propriétés, accesseurs et
+mutateurs de la classe.
 
 Par défaut, la commande est exécutée en mode interactif et vous pose des questions
 pour définir le nom de l'entité, son emplacement, son format de configuration et sa
@@ -16,7 +16,6 @@ structure par défaut :
 
     php app/console generate:doctrine:entity
 
-	
 Pour désactiver le mode interactif, utilisez l'option `--no-interaction` mais il
 vous faudra alors penser à passer toutes les options obligatoires :
 
@@ -42,7 +41,7 @@ Options disponibles
         php app/console generate:doctrine:entity --fields="title:string(100) body:text"
 
 * ``--format``: (**annotation**) [valeurs: yml, xml, php ou annotation]
-  Détermine le format à utiliser pour les fichiers de configuration généré
+  Détermine le format à utiliser pour les fichiers de configuration générés
   comme le routage. Par défaut, la commande utilise le format ``annotation``.
   Choisir le format ``annotation`` implique que le ``SensioFrameworkExtraBundle``
   soit déjà installé :
