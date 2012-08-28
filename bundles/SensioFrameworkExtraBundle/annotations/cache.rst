@@ -4,7 +4,7 @@
 Utilisation
 -----------
 
-L'annotation ``@Cache`` facile la définition du cache HTTP::
+L'annotation ``@Cache`` facilite la définition du cache HTTP::
 
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
@@ -44,8 +44,8 @@ la dernière surcharge la première::
 Attributs
 ---------
 
-Voici une liste des attributs valides, ainsi que les entêtes
-HTTP correspondants :
+Voici une liste des attributs valides, ainsi que les en-têtes
+HTTP correspondantes :
 
 ============================== ================
 Annotation                     Méthode Response
