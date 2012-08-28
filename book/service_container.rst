@@ -219,7 +219,7 @@ simple. Les paramètres rendent les définitions de services plus organisées et
         ));
 
 Le résultat final est exactement le même que précédemment - la différence est seulement dans
-* comment * nous avons défini le service. En entourant les chaînes ``my_mailer.class`` et
+*comment* nous avons défini le service. En entourant les chaînes ``my_mailer.class`` et
 ``my_mailer.transport`` par le signe pourcent (``%``), le conteneur sait qu'il 
 faut chercher des paramètres avec ces noms. Quand le conteneur est construit, il
 cherche la valeur de chaque paramètre et l'utilise dans la définition du service.
