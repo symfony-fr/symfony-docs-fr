@@ -53,7 +53,7 @@ La configuration par défaut est la suivante :
 
     .. code-block:: php
 
-        // carica il profilatore
+        // charge le profileur
         $container->loadFromExtension('sensio_framework_extra', array(
             'router'  => array('annotations' => true),
             'request' => array('converters' => true),
@@ -73,9 +73,9 @@ les routes jusqu'à la configuration de mise en cache.
 Même si les annotations ne sont pas une fonctionnalité native de PHP, elles ont tout
 de même certains avantages sur les autres options de configuration de Symfony2 :
 
-* Le code et la configuration sont au même endroit (la classe contrôleur);
-* Simple à apprendre et à utiliser;
-* Facile à écrire;
+* Le code et la configuration sont au même endroit (la classe contrôleur) ;
+* Simple à apprendre et à utiliser ;
+* Facile à écrire ;
 * Réduit la taille du contrôleur (puisque son seul rôle est de récupérer les données
   du Modèle).
 
