@@ -1,29 +1,29 @@
-Générer un contrôleur CRUD basé sur une entité Doctrine
+GÃ©nÃ©rer un contrÃ´leur CRUD basÃ© sur une entitÃ© Doctrine
 =======================================================
 
 Utilisation
 -----------
 
-la commande ``generate:doctrine:crud`` génère un contrôleur basique pour une
-entité donnée, localisé dans un bundle donné. Ce contrôleur vous permet
-d'effectuer les cinq opérations de base sur un modèle.
+la commande ``generate:doctrine:crud`` gÃ©nÃ¨re un contrÃ´leur basique pour une
+entitÃ© donnÃ©e, localisÃ© dans un bundle donnÃ©. Ce contrÃ´leur vous permet
+d'effectuer les cinq opÃ©rations de base sur un modÃ¨le.
 
 * Afficher les enregistrements,
-* Afficher un seul enregistrement en se basant sur sa clé primaire,
-* Créer un nouvel enregistrement,
+* Afficher un seul enregistrement en se basant sur sa clÃ© primaire,
+* CrÃ©er un nouvel enregistrement,
 * Modifier un enregistrement existant,
 * Supprimer un enregistrement existant.
 
-Par défaut, la commande est exécutée en mode interactif et vous pose des questions
-pour définir le nom de l'entité, le préfixe de la route et s'il faut ou non générer
+Par dÃ©faut, la commande est exÃ©cutÃ©e en mode interactif et vous pose des questions
+pour dÃ©finir le nom de l'entitÃ©, le prÃ©fixe de la route et s'il faut ou non gÃ©nÃ©rer
 les actions :
 
 .. code-block:: bash
 
     php app/console generate:doctrine:crud
 
-Pour désactiver le mode interactif, utilisez l'option `--no-interaction` mais il
-vous faudra alors penser à passer toutes les options obligatoires :
+Pour dÃ©sactiver le mode interactif, utilisez l'option `--no-interaction` mais il
+vous faudra alors penser Ã  passer toutes les options obligatoires :
 
 .. code-block:: bash
 
@@ -32,22 +32,22 @@ vous faudra alors penser à passer toutes les options obligatoires :
 Options disponibles
 -------------------
 
-* ``--entity``: Le nom de l'entité donné en notation raccourcie, contenant le nom
-  du bundle dans lequel l'entité est localisée, ainsi que le nom de l'entité.
+* ``--entity``: Le nom de l'entitÃ© donnÃ© en notation raccourcie, contenant le nom
+  du bundle dans lequel l'entitÃ© est localisÃ©e, ainsi que le nom de l'entitÃ©.
   Par exemple, ``AcmeBlogBundle:Post`` :
 
     .. code-block:: bash
 
         php app/console generate:doctrine:crud --entity=AcmeBlogBundle:Post
 
-* ``--route-prefix``: Le préfixe à utiliser pour chaque route associée à une
+* ``--route-prefix``: Le prÃ©fixe Ã  utiliser pour chaque route associÃ©e Ã  une
   action :
 
     .. code-block:: bash
 
         php app/console generate:doctrine:crud --route-prefix=acme_post
 
-* ``--with-write``: (**no**) [valeurs: yes|no] Spécifie s'il faut générer ou non
+* ``--with-write``: (**no**) [valeurs: yes|no] SpÃ©cifie s'il faut gÃ©nÃ©rer ou non
    les actions `new`, `create`, `edit`, `update` et `delete` :
 
     .. code-block:: bash
@@ -55,10 +55,10 @@ Options disponibles
         php app/console generate:doctrine:crud --with-write
 
 * ``--format``: (**annotation**) [valeurs: yml, xml, php ou annotation]
-  Détermine le format à utiliser pour les fichiers de configuration généré
-  comme le routage. Par défaut, la commande utilise le format ``annotation``.
+  DÃ©termine le format Ã  utiliser pour les fichiers de configuration gÃ©nÃ©rÃ©
+  comme le routage. Par dÃ©faut, la commande utilise le format ``annotation``.
   Choisir le format ``annotation`` implique que le ``SensioFrameworkExtraBundle``
-  soit déjà installé :
+  soit dÃ©jÃ  installÃ© :
 
     .. code-block:: bash
 

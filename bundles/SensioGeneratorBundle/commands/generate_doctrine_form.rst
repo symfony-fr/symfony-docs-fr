@@ -1,11 +1,11 @@
-Générer une nouvelle classe de type de formulaire basée sur une entité Doctrine
+GÃ©nÃ©rer une nouvelle classe de type de formulaire basÃ©e sur une entitÃ© Doctrine
 ===============================================================================
 
 Utilisation
 -----------
 
-la commande ``generate:doctrine:form`` génère une classe de type de formulaire
-basique en utilisant les métadonnées de mapping d'une classe entité donnée :
+la commande ``generate:doctrine:form`` gÃ©nÃ¨re une classe de type de formulaire
+basique en utilisant les mÃ©tadonnÃ©es de mapping d'une classe entitÃ© donnÃ©e :
 
 .. code-block:: bash
 
@@ -14,8 +14,8 @@ basique en utilisant les métadonnées de mapping d'une classe entité donnée :
 Arguments obligatoires
 ----------------------
 
-* ``entity``: Le nom de l'entité donné en notation raccourcie, contenant le nom
-  du bundle dans lequel l'entité est localisée, ainsi que le nom de l'entité.
+* ``entity``: Le nom de l'entitÃ© donnÃ© en notation raccourcie, contenant le nom
+  du bundle dans lequel l'entitÃ© est localisÃ©e, ainsi que le nom de l'entitÃ©.
   Par exemple, ``AcmeBlogBundle:Post`` :
 
     .. code-block:: bash
