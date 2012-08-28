@@ -1,4 +1,4 @@
-﻿.. index::
+.. index::
    single: Service Container
    single: Dependency Injection; Container
 
