@@ -22,13 +22,13 @@ qu'ils puissent être injectés comme arguments de méthodes de contrôleur::
 Plusieurs choses se passent dans l'envers du décor :
 
 * Le convertisseur esssaie de récupérer un objet ``SensioBlogBundle:Post`` depuis les
-  attributs de la requête (les attributs de la requête proviennent des jokers (placeholders)
-  de la route, ici ``id``);
+  attributs de la requête (les attributs de la requête proviennent des paramètres
+  de substitution de la route, ici ``id``) ;
 
-* Si aucun objet ``Post`` n'est trouvé, une réponse ``404`` est générée;
+* Si aucun objet ``Post`` n'est trouvé, une réponse ``404`` est générée ;
 
 * Si un objet ``Post`` est trouvé, un nouvel attribut ``post`` de requête est défini
-  (accessible via ``$request->attributes->get('post')``);
+  (accessible via ``$request->attributes->get('post')``) ;
 
 * Comme pour tout autre attribut de requête, il est injecté dans le contrôleur lorsqu'il
   est présent dans la signature de la méthode.
@@ -53,18 +53,18 @@ Convertisseur Doctrine
 Nom du convertisseur : ``doctrine.orm``
 
 Le convertisseur Doctrine tente de convertir des attributs de requête en entités
-Doctrine récupérées de la base de données. Deux approches sont possibles::
+Doctrine récupérées depuis la base de données. Deux approches sont possibles::
 
-- Récupérer l'objet par sa clé primaire
-- Récupérer l'objet par un ou plusieurs champs qui contient une valeur unique en
+- Récupérer l'objet par sa clé primaire ;
+- Récupérer l'objet par un ou plusieurs champ(s) qui contien(nen)t une valeur unique en
   base de données.
 
 L'algorithme suivant détermine quelle opération sera exécutée.
 
 - Si un paramètre ``{id}`` est présent dans la route, retrouve l'objet par sa clé
-  primaire
+  primaire ;
 - Si une option ``'id'`` est configurée et correspond aux paramètres de la route, l'objet
-  est récupéré par sa clé primaire.
+  est récupéré par sa clé primaire ;
 - Si les règles précédentes ne s'appliquent pas, essaye de trouver une entité en faisant
   correspondre les paramètres de la route aux champs. Vous pouvez contrôler ce processus
   en configurant des paramètres ``exclude`` ou un attribut pour le nom de champ ``mapping``.
@@ -83,7 +83,7 @@ peut être configuré avec l'option ``entity_manager``::
     {
     }
 
-Si le joker (placeholder) n'a pas le même nom que la clé primaire, passez
+Si le paramètre de substitution n'a pas le même nom que la clé primaire, passez
 l'option ``id``::
 
     /**
@@ -105,7 +105,7 @@ Cela vous permet également d'avoir plusieurs convertisseurs pour une action::
     }
 
 Dans l'exemple ci-dessus, le paramètre ``post`` est géré automatiquement, mais le
-paramètre ``comment`` est configuré avec l'annotation car ils ne peuvent pas tout
+paramètre ``comment`` est configuré avec l'annotation car ils ne peuvent pas tous
 les deux suivre la convention par défaut.
 
 Si vous voulez faire correspondre une entité en utilisant plusieurs champs,
@@ -147,7 +147,7 @@ une instance de DateTime::
     {
     }
 
-Par défaut, tout format de date qui peut être parsé par le constructeur de
+Par défaut, tout format de date qui peut être analysé par le constructeur de
 ``DateTime`` est accepté. Vous pouvez cependant être plus restrictif en passant
 le format en option::
 
@@ -181,12 +181,12 @@ Tout les convertisseurs doivent implémenter
 La méthode ``supports()`` doit retourner ``true`` quand elle est capable de convertir
 la configuration donnée (une instance de ``ParamConverter``).
 
-L'instance de ``ParamConverter`` possède trois informations pour l'annotation:
+L'instance de ``ParamConverter`` possède trois informations pour l'annotation :
 
-* ``name``: Le nom de l'attribut;
-* ``class``: Le nom de la classe de l'attribut (toute chaine de caractère qui représente
-  un nom de classe);
-* ``options``: Un tableau d'options
+* ``name``: Le nom de l'attribut ;
+* ``class``: Le nom de la classe de l'attribut (toute chaîne de caractères qui représente
+  un nom de classe) ;
+* ``options``: Un tableau d'options.
 
 La méthode ``apply()`` est appelée chaque fois que la configuration est supportée.
 Basée sur les attributs de la requête, elle définit un attribut nommé
@@ -210,4 +210,4 @@ vous devez définir `priority="false"` dans votre définition de tag.
 .. tip::
 
     Utilisez la classe ``DoctrineParamConverter`` comme modèle pour vos propres
-    convertisseurs
+    convertisseurs.
