@@ -44,7 +44,7 @@ Exemple d'utilisation
 Lors de la soumission réussie d'un formulaire, la valeur saisie dans les deux
 champs « password » devient la donnée de la clé ``password``. En d'autres termes,
 même si deux champs sont soumis en réalité, la donnée finale du formulaire est juste
-la valeur unique dont vous avez besoin (généralement une chaine de caractères).
+la valeur unique dont vous avez besoin (généralement une chaîne de caractères).
 
 L'option la plus importante est ``type``, qui peut être n'importe quel type de champ
 et qui détermine le réel type des deux champs sous-jacents. L'option ``options`` est passée

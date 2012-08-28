@@ -159,7 +159,7 @@ Le ``PhpDumper`` facilite le « dump » du conteneur compilé::
         file_put_contents($file, $dumper->dump());
     }
 
-``ProjectServiceContiner`` est le nom par défaut donné à la classe du conteneur
+``ProjectServiceContainer`` est le nom par défaut donné à la classe du conteneur
 « dumpé », mais vous pouvez changer cela avec l'option ``class`` lorsque vous
 la « dumpez »::
 

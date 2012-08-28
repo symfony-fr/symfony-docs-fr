@@ -4,7 +4,7 @@ Les Tags de l'Injection de Dépendances
 Les Tags de l'Injection de Dépendances sont de courtes chaînes de caractères
 qui peuvent être appliquées à un service pour le « marquer » afin qu'il soit utilisé
 d'une manière spécifique. Par exemple, si vous avez un service que vous voudriez
-enregistrer comme écouteur de l'un des événements du noyau de Symfony, vous pouvez le
+enregistrer comme écouteur de l'un des évènements du noyau de Symfony, vous pouvez le
 marquer avec le tag ``kernel.event_listener``.
 
 Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
@@ -22,9 +22,9 @@ Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
 +-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.cache_warmer`_            | Enregistre votre service pour qu'il soit appelé durant la mise en cache   |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.event_listener`_          | Ecoute différents événements/hooks de Symfony                             |
+| `kernel.event_listener`_          | Écoute différents évènements/hooks de Symfony                             |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents événements/hooks de Symfony    |
+| `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents évènements/hooks de Symfony    |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `monolog.logger`_                 | Pour écrire des logs dans un canal de log personnalisé                    |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -212,7 +212,7 @@ selon l'ordre de leur priorité.
 kernel.event_listener
 ---------------------
 
-**But** : Ecoute différents événements/hooks de Symfony
+**But** : Écoute différents évènements/hooks de Symfony
 
 Ce tag vous permet d'injecter vos propres classes dans le processus de Symfony à
 différents points.
@@ -223,10 +223,10 @@ du cookbook :doc:`/cookbook/service_container/event_listener`.
 Pour un autre exemple pratique d'un écouteur du « kernel » (« noyau » en français),
 référez-vous à l'article du cookbook suivant : :doc:`/cookbook/request/mime_type`.
 
-Ecouteurs d'évènements du noyau de référence
+Écouteurs d'évènements du noyau de référence
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Lorsque vous ajoutez vos propres écouteurs, cela peut être utile de connaitre
+Lorsque vous ajoutez vos propres écouteurs, cela peut être utile de connaître
 les autres écouteurs du noyau de Symfony et leurs priorités.
 
 .. note::
@@ -310,10 +310,10 @@ kernel.terminate
 kernel.event_subscriber
 -----------------------
 
-**But** : Pour s'abonner à un ensemble de différents événements/hooks de Symfony
+**But** : Pour s'abonner à un ensemble de différents évènements/hooks de Symfony
 
 .. versionadded:: 2.1
-   La possibilité d'ajouter des souscripteurs aux événements du kernel a été
+   La possibilité d'ajouter des souscripteurs aux évènements du kernel a été
    introduite avec Symfony 2.1.
 
 Pour activer un souscripteur personnalisé, ajoutez-le dans l'une de vos configurations

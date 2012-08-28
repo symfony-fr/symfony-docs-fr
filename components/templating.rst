@@ -102,7 +102,7 @@ déclarée::
     Avoir de multiples niveaux d'héritage est possible : une couche peut étendre
     une autre couche.
 
-Echappement en sortie
+Échappement en sortie
 ---------------------
 
 Cette partie de la documentation est toujours en cours d'écriture.

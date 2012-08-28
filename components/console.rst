@@ -358,7 +358,7 @@ en français) la commande que vous voulez exécuter en passant le nom de cette d
 Ensuite, vous devez créer un nouvel :class:`Symfony\\Component\\Console\\Input\\ArrayInput`
 avec les arguments et options que vous souhaitez passer à la commande.
 
-Eventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
+Éventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
 et retourner le code retourné par le commande (retourne la valeur de la méthode
 ``execute()`` de la commande).
 

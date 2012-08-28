@@ -47,7 +47,7 @@ ou à une collection de champs, chaque item du formulaire sera affiché.
     {{ form_widget(form.name, {'attr': {'class': 'foo'}}) }}
 
 Le deuxième argument de ``form_widget`` est un tableau de variables. La variable
-la plus commune est ``attr``, qui est un tableau d'attibuts HTML à appliquer au widget.
+la plus commune est ``attr``, qui est un tableau d'attributs HTML à appliquer au widget.
 Dans certains cas, des types ont aussi des options liées au template. C'est au cas par cas.
 
 form_row(form.name, variables)

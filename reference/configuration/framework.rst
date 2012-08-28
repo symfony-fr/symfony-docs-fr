@@ -322,19 +322,19 @@ Toutes les Options de Configuration par Défaut
                 gc_maxlifetime:       ~
                 save_path:            %kernel.cache_dir%/sessions
 
-                # DEPRECIE ! utilisez : cookie_lifetime
+                # DÉPRÉCIÉ ! utilisez : cookie_lifetime
                 lifetime:             ~
 
-                # DEPRECIE ! utilisez : cookie_path
+                # DÉPRÉCIÉ ! utilisez : cookie_path
                 path:                 ~
 
-                # DEPRECIE ! utilisez : cookie_domain
+                # DÉPRÉCIÉ ! utilisez : cookie_domain
                 domain:               ~
 
-                # DEPRECIE ! utilisez : cookie_secure
+                # DÉPRÉCIÉ ! utilisez : cookie_secure
                 secure:               ~
 
-                # DEPRECIE ! utilisez : cookie_httponly
+                # DÉPRÉCIÉ ! utilisez : cookie_httponly
                 httponly:             ~
 
             # Configuration du moteur du templating

@@ -82,7 +82,7 @@ sont simples : « to » (« à » en français), « from » (« de » en frança
 sujet.
 
 Vous pouvez combiner ces gestionnaires avec d'autres afin que les erreurs continuent
-d'être loggées sur le serveur en même temps qu'elles sont envoyées par email :
+d'être loguées sur le serveur en même temps qu'elles sont envoyées par email :
 
 .. configuration-block::
 

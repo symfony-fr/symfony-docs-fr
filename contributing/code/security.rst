@@ -13,7 +13,7 @@ solution en suivant ces étapes :
 
 1. Envoi d'un accusé de réception au rapporteur;
 2. Travail sur un correctif;
-3. Ecriture d'un message décrivant la vulnérabilité, les utilisations possibles,
+3. Écriture d'un message décrivant la vulnérabilité, les utilisations possibles,
    et des moyens mis à disposition pour y pallier;
 4. Application du correctif sur toutes les versions maintenues de Symfony;
 5. Publication du message sur le blog officiel de Symfony.

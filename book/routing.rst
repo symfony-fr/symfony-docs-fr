@@ -249,7 +249,7 @@ ensuite exécutée. Ce processus sera expliqué rapidement dans la section
 Routage avec les Paramètres de substitution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Evidemment, le système de routage supporte des routes beaucoup plus
+Évidemment, le système de routage supporte des routes beaucoup plus
 intéressantes. De nombreuses routes vont contenir un ou plusieurs
 paramètres de substitution nommés « joker » :
 
@@ -1138,7 +1138,7 @@ depuis les templates.
 
 .. tip::
 
-    Si le front de votre application utilise des requêtes AJAX, vous voudrez surement
+    Si le front de votre application utilise des requêtes AJAX, vous voudrez sûrement
     être capable de générer des URLs en javascript en vous basant sur votre configuration.
     En utilisant le `FOSJsRoutingBundle`_, vous pourrez faire cela :
 

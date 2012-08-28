@@ -400,7 +400,7 @@ elle-même.
 
 .. tip::
 
-    Etendre la classe de base est *optionnel* dans Symfony; elle contient
+    Étendre la classe de base est *optionnel* dans Symfony; elle contient
     des raccourcis utiles mais rien d'obligatoire. Vous pouvez aussi étendre
     ``Symfony\Component\DependencyInjection\ContainerAware``. L'objet conteneur
     de service (« service container ») sera ainsi accessible à travers la
@@ -633,7 +633,7 @@ comme ça :
 La méthode ``createNotFoundException()`` crée un objet spécial ``NotFoundHttpException``,
 qui finalement déclenche une réponse HTTP 404 dans Symfony.
 
-Evidemment, vous êtes libre de lancer une quelconque classe ``Exception`` dans votre
+Évidemment, vous êtes libre de lancer une quelconque classe ``Exception`` dans votre
 contrôleur - Symfony2 retournera automatiquement un code de réponse HTTP 500.
 
 .. code-block:: php
@@ -797,7 +797,7 @@ Le mot de la fin
 Chaque fois que vous créez une page, vous allez au final avoir besoin
 d'écrire du code qui contient la logique de cette page. Dans Symfony, ceci
 est appelé un contrôleur, et c'est une fonction PHP qui peut faire tout ce
-qu'il faut pour retourner l'objet final ``Response`` qui sera delivré à
+qu'il faut pour retourner l'objet final ``Response`` qui sera délivré à
 l'utilisateur.
 
 Pour vous simplifier la vie, vous pouvez choisir d'étendre une classe ``Controller``

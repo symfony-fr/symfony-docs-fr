@@ -13,7 +13,7 @@ Configuration complète par défaut
 
         web_profiler:
             
-            # DEPRECIE, n'est plus utile et peut être retiré de votre configuration sans danger
+            # DÉPRÉCIÉ, n'est plus utile et peut être retiré de votre configuration sans danger
             verbose:             true
 
             # affiche la barre de débuggage en bas des pages avec un résumé des informations du profiler

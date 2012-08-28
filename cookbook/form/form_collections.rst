@@ -372,7 +372,7 @@ Ajoutez une balise ``script`` quelque part dans votre page afin que nous puissio
 commencer à écrire un peu de Javascript.
 
 Tout d'abord, ajoutez un lien en bas de votre liste de « tags » via Javascript.
-Ensuite, liez l'événement « click » de ce lien afin que nous puissions ajouter
+Ensuite, liez l'évènement « click » de ce lien afin que nous puissions ajouter
 un formulaire tag (``addTagForm`` sera expliqué plus tard) :
 
 .. code-block:: javascript

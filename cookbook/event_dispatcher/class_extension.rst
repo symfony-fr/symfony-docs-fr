@@ -1,5 +1,5 @@
 .. index::
-   single: Dispatcher d'Evènements
+   single: Dispatcher d'Évènements
 
 Comment étendre une Classe sans utiliser l'Héritage
 ===================================================

@@ -7,7 +7,7 @@ Comment créer une Contrainte de Validation Personnalisée
 Vous pouvez créer une contrainte personnalisée en étendant la classe
 :class:`Symfony\\Component\\Validator\\Constraint`.
 A titre d'exemple, nous allons créer un simple validateur qui vérifie qu'une
-chaine de caractères ne contient que des caractères alphanumériques.
+chaîne de caractères ne contient que des caractères alphanumériques.
 
 Créer une classe de contrainte
 ------------------------------
@@ -25,7 +25,7 @@ qui étend la classe :class:`Symfony\\Component\\Validator\\Constraint`::
      */
     class ContainsAlphanumeric extends Constraint
     {
-        public $message = 'La chaine "%string%" contient un caractère non autorisé : elle ne peut contenir que des lettres et des chiffres.';
+        public $message = 'La chaîne "%string%" contient un caractère non autorisé : elle ne peut contenir que des lettres et des chiffres.';
     }
 
 .. note::
