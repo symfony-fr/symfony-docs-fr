@@ -47,7 +47,7 @@ est ce que verra l'utilisateur dans le formulaire (ex: ``Masculin``).
     ));
 
 En définissant l'option ``multiple`` à true, vous pouvez autoriser l'utilisateur à 
-choisir plusieurs valeurs. Le widget sera rendu comme une balide``select`` multiple, ou
+choisir plusieurs valeurs. Le widget sera rendu comme une balise ``select`` multiple, ou
 comme une série de checkboxes en fonction de l'option ``expanded`` :
 
 .. code-block:: php

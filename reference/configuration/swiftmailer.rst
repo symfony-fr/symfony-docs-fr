@@ -157,12 +157,12 @@ delivery_address
 **type**: ``string``
 
 Si défini, tous les emails seront envoyés à cette adresse à la place d'être
-envoyés à leurs destinaires définis. Cela est souvent pratique lorsque vous
+envoyés à leurs destinataires définis. Cela est souvent pratique lorsque vous
 développez. Par exemple, en définissant cela dans le fichier ``config_dev.yml``,
 vous pouvez garantir que tous les emails envoyés pendant la phase de
 développement seront envoyés vers un compte unique.
 
-Ceci utilise le ``Swift_Plugins_RedirectingPlugin``. Les destinaires d'origine
+Ceci utilise le ``Swift_Plugins_RedirectingPlugin``. Les destinataires d'origine
 sont disponibles dans les en-têtes ``X-Swift-To``, ``X-Swift-Cc`` et ``X-Swift-Bcc``.
 
 disable_delivery
