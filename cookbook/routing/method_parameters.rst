@@ -89,8 +89,8 @@ navigateurs ne supportent pas l'envoi de requêtes PUT et DELETE.
 Heureusement, Symfony2 vous fournit de manière simple de contourner cette
 limitation. En incluant le paramètre ``_method`` dans la chaîne de caractères
 de la requête, ou dans les paramètres d'une requête HTTP, Symfony l'utilisera
-comme méthode pour toruver une route correspondante. Cela peut être fait très
-faciclement dans les formulaires grâce à un champ caché. Supposons que vous
+comme méthode pour trouver une route correspondante. Cela peut être fait très
+facilement dans les formulaires grâce à un champ caché. Supposons que vous
 ayez un formulaire pour éditer un billet de blog :
 
 .. code-block:: html+jinja

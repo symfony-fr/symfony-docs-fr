@@ -12,7 +12,7 @@ devriez utiliser l'environnement ``dev`` (correspondant au contrôleur frontal
   se déroule pas comme prévu (à l'aide de la web debug toolbar, d'exceptions
   documentées et présentées clairement, du profiler, ...) ;
 
-* Etre aussi proche que possible à l'environnement de production afin de
+* Être aussi proche que possible à l'environnement de production afin de
   préparer le déploiement du projet.
 
 .. _cookbook-debugging-disable-bootstrap:

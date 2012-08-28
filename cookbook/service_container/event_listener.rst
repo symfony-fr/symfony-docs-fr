@@ -1,5 +1,5 @@
 .. index::
-   single: Evénements; Créer un listener
+   single: Évènements; Créer un listener
 
 Comment créer un « listener » (« écouteur » en français) d'evénement
 ====================================================================
@@ -10,7 +10,7 @@ pour déclencher un comportement personnalisé dans votre application. Ces
 dans la classe :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
 Afin de personnaliser un événement avec votre propre logique, vous devez créer
-un service qui va agir en tant que « listener » d'événement pour cet événement.
+un service qui va agir en tant que « listener » d'évènement pour cet événement.
 Dans cet article, nous allons créer un service qui agit en tant que « Listener »
 d'Exception, nous permettant de modifier comment les exceptions sont affichées par
 notre application. L'événement ``KernelEvents::EXCEPTION`` est l'un des événements
@@ -26,7 +26,7 @@ du coeur du noyau::
     {
         public function onKernelException(GetResponseForExceptionEvent $event)
         {
-            // nous récupérons l'objet exception depuis l'événement reçu
+            // nous récupérons l'objet exception depuis l'évènement reçu
             $exception = $event->getException();
             $message = 'My Error says: ' . $exception->getMessage();
             
@@ -49,7 +49,7 @@ du coeur du noyau::
     voyez :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
 Maintenant que la classe est créée, nous devons juste la définir en tant que
-service et notifier Symfony que c'est un « listener » de l'événement
+service et notifier Symfony que c'est un « listener » de l'évènement
 ``kernel.exception`` en utilisant un « tag » spécifique :
 
 .. configuration-block::
@@ -86,7 +86,7 @@ service et notifier Symfony que c'est un « listener » de l'événement
     autre.
 
 
-Evènement de requête, vérification des types
+Évènement de requête, vérification des types
 --------------------------------------------
 
 Une même page peut faire plusieurs requêtes (une requête principale et plusieurs

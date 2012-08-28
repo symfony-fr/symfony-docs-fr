@@ -1,5 +1,5 @@
 .. index::
-   single: Formulaire; Evénements
+   single: Formulaire; Évènements
 
 Comment générer dynamiquement des Formulaires en Utilisant les Evénements de Formulaire
 =======================================================================================
@@ -43,19 +43,19 @@ exemple : un Produit récupéré depuis la base de données).
 Supposons maintenant que vous ne souhaitiez pas que l'utilisateur puisse
 changer la valeur de ``name`` une fois que l'objet a été créé. Pour faire
 cela, vous pouvez utiliser le
-:ref:`Répartiteur d'Evénements (« Event Dispatcher » en anglais) <book-internals-event-dispatcher>`
+:ref:`Répartiteur d'Évènements (« Event Dispatcher » en anglais) <book-internals-event-dispatcher>`
 de Symfony pour analyser les données de l'objet et modifier le formulaire
 en se basant sur les données de l'objet Product. Dans cet article, vous
 allez apprendre comment ajouter ce niveau de flexibilité à vos formulaires.
 
 .. _`cookbook-forms-event-subscriber`:
 
-Ajouter Un Souscripteur d'Evénement à une Classe Formulaire
+Ajouter Un Souscripteur d'Évènement à une Classe Formulaire
 -----------------------------------------------------------
 
 Donc, au lieu d'ajouter directement ce widget « name » via notre classe
 formulaire ProductType, déléguons la responsabilité de créer ce champ
-particulier à un Souscripteur d'Evénement::
+particulier à un Souscripteur d'Évènement::
 
     // src/Acme/DemoBundle/Form/Type/ProductType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -79,14 +79,14 @@ particulier à un Souscripteur d'Evénement::
         }
     }
 
-Le souscripteur d'événement obtient l'objet FormFactory via son constructeur
+Le souscripteur d'évènement obtient l'objet FormFactory via son constructeur
 afin que notre nouveau souscripteur soit capable de créer le widget du
-formulaire une fois qu'il est notifié de l'événement durant la création du
+formulaire une fois qu'il est notifié de l'évènement durant la création du
 formulaire.
 
 .. _`cookbook-forms-inside-subscriber-class`:
 
-A l'intérieur de la Classe du Souscripteur d'Evénement
+A l'intérieur de la Classe du Souscripteur d'Évènement
 ------------------------------------------------------
 
 Le but est de créer un champ « name » *uniquement* si l'objet Product sous-jacent
@@ -113,7 +113,7 @@ cela, le souscripteur pourrait ressembler à quelque chose comme ça::
         public static function getSubscribedEvents()
         {
 
-            // Informe le répartiteur que nous voulons écouter l'événement
+            // Informe le répartiteur que nous voulons écouter l'évènement
             // form.pre_set_data et que la méthode preSetData devrait être appelée
             return array(FormEvents::PRE_SET_DATA => 'preSetData');
         }
@@ -142,10 +142,10 @@ cela, le souscripteur pourrait ressembler à quelque chose comme ça::
 .. caution::
 
     Il est très facile de mal interpréter l'objectif de la portion de code
-    ``if (null === $data)`` de ce souscripteur d'événement. Afin de bien comprendre
+    ``if (null === $data)`` de ce souscripteur d'évènement. Afin de bien comprendre
     son rôle, vous pouvez jeter un oeil à la `classe Formulaire`_ en portant votre
     attention où la méthode setData() est appelée à la fin du constructeur, ainsi
-    qu'à la méthde setData() elle-même.
+    qu'à la méthode setData() elle-même.
 
 La ligne ``FormEvents::PRE_SET_DATA`` est convertie en la chaîne de caractères suivante :
 ``form.pre_set_data``. La `classe FormEvents`_ a un but organisationnel. C'est un endroit
@@ -156,7 +156,7 @@ ou ``form.post_set_data``, en utilisant ``form.pre_set_data``, nous
 garantissons que les données allant être récupérées depuis l'objet ``Event`` n'auront pas été
 modifiées par quelconques souscripteurs ou listeners (« écouteurs » en français). Cela parce
 que ``form.pre_set_data`` passe un objet `DataEvent`_ au lieu de l'objet `FilterDataEvent`_
-passé par l'événement ``form.set_data``. `DataEvent`_, contrairement à son enfant
+passé par l'évènement ``form.set_data``. `DataEvent`_, contrairement à son enfant
 `FilterDataEvent`_, ne possède pas de méthode setData().
 
 .. note::

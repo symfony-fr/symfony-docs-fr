@@ -45,7 +45,7 @@ votre dépôt local git :
    paramètres spécifiques à la machine comme les mots de passe de base de données
    ne soient pas committés. En créant le fichier ``parameters.yml.dist``, les
    nouveaux développeurs peuvent rapidement cloner le projet, copier ce fichier
-   vers ``parameters.yml``, l'adapter, et commencer à developper.
+   vers ``parameters.yml``, l'adapter, et commencer à développer.
 
 5. Initialisez votre dépôt git :
 
@@ -92,7 +92,7 @@ développer, en committant les nouveaux changements dans votre dépôt git.
 
         $ php bin/vendors lock
 
-    pmuis vous pouvez supprimer les répertoires d'historique git avec la commande
+    puis vous pouvez supprimer les répertoires d'historique git avec la commande
     suivante :
 
     .. code-block:: bash
@@ -129,7 +129,7 @@ Au lieu d'utiliser le système ``deps`` et ``bin/vendors`` pour gérer les
 bibliothèques vendor, vous pourriez choisir à la place le système natif
 `git submodules`_. Il n'y a rien d'incorrect dans cette approche, bien que le
 système ``deps`` soit la manière officielle de résoudre ce problème et qu'il peut
-être parfois difficle de travailler avec les git submodules.
+être parfois difficile de travailler avec les git submodules.
 
 Stocker votre projet sur un serveur distant
 -------------------------------------------

@@ -108,7 +108,7 @@ Si vous choisissez d'exposer une configuration sémantique pour votre bundle,
 vous aurez d'abord besoin de créer une nouvelle classe « Extension », qui va
 gérer le processus. Cette classe devrait se trouver dans le répertoire
 ``DependencyInjection`` de votre bundle et son nom devrait être construit en
-remplacant le suffixe ``Bundle`` du nom de la classe du Bundle par ``Extension``.
+remplaçant le suffixe ``Bundle`` du nom de la classe du Bundle par ``Extension``.
 Par exemple, la classe d'Extension de ``AcmeHelloBundle`` serait nommée
 ``AcmeHelloExtension``::
 
@@ -281,7 +281,7 @@ vous pourriez simplement les fusionner manuellement::
 
 .. caution::
 
-    Assurez-vous que la techique de fusion ci-dessus ait sens pour votre
+    Assurez-vous que la technique de fusion ci-dessus ait sens pour votre
     bundle. Ceci est juste un exemple et vous devriez être attentif à ne pas
     l'utiliser aveuglément.
 

@@ -4,7 +4,7 @@
 Comment surcharger n'importe quelle partie d'un bundle
 ======================================================
 
-Ce document est une référence succinte sur comment surcharger différentes
+Ce document est une référence succincte sur comment surcharger différentes
 partie d'un bundle tiers.
 
 Templates

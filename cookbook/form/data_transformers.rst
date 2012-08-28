@@ -163,7 +163,7 @@ de champ ``invalid_message``.
     appliqué au champ::
 
         // C'EST INCORRECT, LE CONVERTISSEUR SERA APPLIQUE A TOUT LE FORMULAIRE
-        // regardez l'exemple ci-dessus pour connaitre la bonne syntaxe
+        // regardez l'exemple ci-dessus pour connaître la bonne syntaxe
         $builder->add('issue', 'text')
             ->addModelTransformer($transformer);
 

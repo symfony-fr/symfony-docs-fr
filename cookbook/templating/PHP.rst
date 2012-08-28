@@ -101,7 +101,7 @@ Maintenant, regardons d'un peu plus près le fichier ``layout.html.php`` :
 
 Le décorateur ou layout est lui-même décoré par un autre (``::base.html.php``).
 Symfony2 supporte en effet de multiples niveaux de décoration : un décorateur
-peut lui-même être décoré par un autre, et celà indéfinimment. Quand la partie
+peut lui-même être décoré par un autre, et celà indéfiniment. Quand la partie
 bundle du nom du template est vide, les vues sont recherchées dans le dossier
 ``app/Resources/views/``. Ce dossier contient donc les vues globales utilisées
 dans tout le projet.
