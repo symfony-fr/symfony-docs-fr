@@ -40,7 +40,7 @@ Symfony2.
 
 Nous allons parcourir ce sujet en quatre étapes :
 
-* **Etape 1**: Une :ref:`passerelle de cache <gateway-caches>`, ou
+* **Étape 1**: Une :ref:`passerelle de cache <gateway-caches>`, ou
     reverse proxy, est une couche indépendante qui se trouve devant
     votre application. Le passerelle met en cache les réponses telles
     qu'elles sont retournées par l'application et répond aux requêtes
@@ -48,17 +48,17 @@ Nous allons parcourir ce sujet en quatre étapes :
     l'application. Symfony2 possède sa propre passerelle par défaut,
     mais toute autre technologie peut être utilisée.
 
-* **Etape 2**: Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
+* **Étape 2**: Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
     sont utilisées pour communiquer avec la passerelle de cache et tout
     autre cache entre votre application et le client. Symfony2 en propose
     par défaut et fournit une interface puissante pour intéragir avec elles.
 
-* **Etape 3**: :ref:`L'expiration et la validation<http-expiration-validation>`
+* **Étape 3**: :ref:`L'expiration et la validation<http-expiration-validation>`
     sont les deux modèles utilisés pour déterminer si le contenu d'un cache est
     *valide* (peut être réutilisé à partir du cache) ou *périmé* (doit être
     regénéré par l'application).
 
-* **Etape 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI)
+* **Étape 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI)
     autorise le cache HTTP à mettre en cache des
     fragments de pages (voir des fragments imbriqués) de façon
     indépendante. Avec l'ESI, vous pouvez même mettre en cache une
@@ -68,7 +68,7 @@ Nous allons parcourir ce sujet en quatre étapes :
 La mise en cache via HTTP n'est pas réservée à Symfony, beaucoup
 d'articles existent à ce sujet. Si vous n'êtes pas familier avec la
 mise cache HTTP, nous vous recommandons *chaudement* l'article de
-Ryan Tomayko `Things Caches Do`_. Une autre ressource appronfondie sur
+Ryan Tomayko `Things Caches Do`_. Une autre ressource approfondie sur
 ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 
 .. index::
@@ -81,14 +81,14 @@ ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 La mise en cache avec la Passerelle de Cache
 --------------------------------------------
 
-Lors d'une mise en cache via HTTP, le *cache* est complétement séparé
+Lors d'une mise en cache via HTTP, le *cache* est complètement séparé
 de votre application. Il est placé entre votre application et le client
 effectuant des requêtes.
 
 Le travail du cache est d'accepter les requêtes du client et de les
 transmettre à votre application. Le cache recevra aussi en retour des
 réponses de votre application et les enverra au client. Le cache est au milieu
-(« middle-man ») dans ce jeu de commmunication requête-réponse
+(« middle-man ») dans ce jeu de communication requête-réponse
 entre le client et votre application.
 
 Lors d'une communication, le cache stockera toutes les réponses qu'ils
@@ -151,7 +151,7 @@ Symfony2 Reverse Proxy
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Symfony2 contient un reverse proxy (aussi appelé passerelle de cache)
-écrit en PHP. Son activation entrainera la mise en cache immédiate des
+écrit en PHP. Son activation entraînera la mise en cache immédiate des
 réponses stockables de l'application. L'installer est aussi simple que ça. Chaque
 nouvelle application Symfony2 contient un noyau pré-configuré
 (AppCache) qui encapsule le noyau par défault (AppKernel). Le cache kernel (cache
@@ -248,7 +248,7 @@ Voici une liste des principales options :
 * ``allow_revalidate`` : Définit si le client peut forcer une
   revalidation du cache en incluant une directive de ``Cache-Control``
   « max-age=0 » dans la requête. Définissez la à ``true`` pour la conformité
-  avec la RFC 2616 (par defaut : ``false``);
+  avec la RFC 2616 (par défaut : ``false``);
 
 * ``stale_while_revalidate`` : Spécifie le nombre de secondes par
   défaut (la granularité est la seconde parce que le TTL de la réponse
@@ -331,7 +331,7 @@ diverses sur le cache.
 
 .. note::
 
-    Tous ces en-têtes seront complétement détaillés dans la section
+    Tous ces en-têtes seront complètement détaillés dans la section
     :ref:`http-expiration-validation`.
 
 .. index::
@@ -636,7 +636,7 @@ md5 du contenu :
     }
 
 La méthode ``Response::isNotModified()`` compare le ``ETag`` envoyé avec la
-requête avec celui défini dans l'objet ``Reponse``. S'ils sont
+requête avec celui défini dans l'objet ``Response``. S'ils sont
 identiques, la méthode renvoie automatiquement le code 304 en ``Response``.
 
 Cet algorithme est assez simple et très générique, mais il est
@@ -958,7 +958,7 @@ indépendamment du reste de la page.
         return $response;
     }
 
-Dans cet exemple, la page a une espèrance de vie de 10 minutes en
+Dans cet exemple, la page a une espérance de vie de 10 minutes en
 cache. Dans un deuxième temps, incluons l'élément relatif à
 l'actualité dans un template via une action embarquée. Ceci sera
 réalisé grâce au « helper » ``render`` (voir la documentation sur
@@ -993,7 +993,7 @@ est défini à ``true``, *et* si Symfony2 détecte qu'il y a un dialogue avec
 une passerelle de cache qui supporte ESI, l'application génère le
 marqueur. Mais s'il n'y a pas de passerelle ou si elle ne supporte pas le
 ESI, Symfony2 fusionnera simplement les contenus comme si standalone
-était déini à ``false``.
+était défini à ``false``.
 
 .. note::
 
@@ -1061,7 +1061,7 @@ correctement, il faut définir une route ``_internal`` :
     Puisque la route permet à toutes les actions d'être appelées
     depuis une URL, il est possible de les protéger avec le pare-feu de
     Symfony2 (en autorisant l'accès uniquement aux adresses IP de vos
-    serveurs proxy). Lisez le paragraphe :ref:`Securiser par IP<book-security-securing-ip>` 
+    serveurs proxy). Lisez le paragraphe :ref:`Sécuriser par IP<book-security-securing-ip>`
     du :doc:`chapitre Sécurité </book/security>` pour plus d'informations sur
     comment faire cela.
 

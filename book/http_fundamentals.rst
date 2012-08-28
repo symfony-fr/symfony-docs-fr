@@ -48,7 +48,7 @@ Avec Symfony2, vous allez apprendre comment le maîtriser.
 .. index::
    single: HTTP; Paradigme requête-réponse
 
-Etape 1: Le Client envoie une Requête
+Étape 1: Le Client envoie une Requête
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Chaque conversation sur le web débute avec une *requête*. La requête est
@@ -114,7 +114,7 @@ l'application que le client utilise pour effectuer la requête (``User-Agent``).
 Beaucoup d'autres en-têtes existent et peuvent être trouvées sur la page
 Wikipedia `List of HTTP header fields`_ (anglais).
 
-Etape 2: Le Serveur retourne une réponse
+Étape 2: Le Serveur retourne une réponse
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une fois que le serveur a reçu la requête, il connaît exactement quelle ressource
@@ -191,7 +191,7 @@ Symfony est conçu pour correspondre à cette réalité.
 Requêtes et réponses en PHP
 ---------------------------
 
-Alors comment intéragissez-vous avec la «requête» et créez-vous la «réponse»
+Alors comment interagissez-vous avec la «requête» et créez-vous la «réponse»
 quand vous utilisez PHP ? En réalité, PHP vous abstrait une partie du processus
 global :
 
@@ -355,7 +355,7 @@ des URLs (que se passait-il si vous souhaitiez changer ``blog.php`` en
 ``news.php`` sans que tous vos liens existants ne cessent de fonctionner ?)
 et le fait que chaque fichier *doive* manuellement inclure tout un ensemble
 de fichiers coeurs pour que la sécurité, les connexions à la base de données
-et le «look» du site puissent rester consistents.
+et le «look» du site puissent rester consistants.
 
 Une bien meilleure solution est d'utiliser un simple fichier PHP appelé
 :term:`contrôleur frontal`: qui s'occupe de chaque requête arrivant dans
@@ -485,7 +485,7 @@ Dans cet exemple très simple, le contrôleur crée simplement un objet ``Respon
 apprendre comment un contrôleur peut fournir des templates, permettant à votre code de
 «présentation» (i.e. quoi que ce soit qui délivre du HTML) de se trouver dans un fichier de template
 séparé. Cela libère le contrôleur et lui permet de s'occuper seulement des choses complexes :
-intéragir avec la base de données, gérer les données soumises, ou envoyer des emails.
+interagir avec la base de données, gérer les données soumises, ou envoyer des emails.
 
 Symfony2: Construisez votre application, pas vos outils.
 --------------------------------------------------------
@@ -564,7 +564,7 @@ est une bibliothèque PHP qui accomplit deux tâches distinctes :
    pièces ensembles.
 
 Le but du framework est d'intégrer beaucoup d'outils indépendants afin de
-fournir une expérience consistente au développeur. Même le framework lui-même
+fournir une expérience consistante au développeur. Même le framework lui-même
 est un bundle Symfony2 (i.e. un plugin) qui peut être configuré ou remplacé
 entièrement.
 

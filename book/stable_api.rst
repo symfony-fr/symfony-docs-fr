@@ -9,7 +9,7 @@ de Symfony2 (composants et bundles "du coeur") qui partagent les propriétés su
 
 * le namespace et le nom de la classe ne changera pas,
 * le nom de la méthode ne changera pas,
-* la signatude de la méthode (arguments et valeur de retour) ne changera pas,
+* la signature de la méthode (arguments et valeur de retour) ne changera pas,
 * l'objectif de la méthode ne changera pas
 
 L'implémentation elle-même peut changer. La seule raison valable d'un changement 

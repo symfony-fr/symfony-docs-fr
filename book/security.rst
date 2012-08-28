@@ -259,12 +259,12 @@ Utilisation d'un formulaire de connexion traditionnel
 
 .. tip::
 
-    Dans cette secion, vous apprendre comment créer un formulaire de connexion basique
+    Dans cette section, vous apprendre comment créer un formulaire de connexion basique
     qui continue d'utilisez les utilisateurs codés en dur que vous avez défini dans le
     fichier ``security.yml``.
 
     Pour charger les utilisateurs de la base de données, lisez :doc:`/cookbook/security/entity_provider`.
-    En lisant cet article et cette secion, vous pouvez créer un système de connexion
+    En lisant cet article et cette section, vous pouvez créer un système de connexion
     complet qui charge les utilisateurs dans la base de données.
 
 Pour l'instant, vous avez vu comment protéger votre application derrière un pare-feu et
@@ -492,7 +492,7 @@ Il ne nous reste qu'à créer le template correspondant :
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="_password" />
             <!--
-                Si vous voulez controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+                Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
                 (plus de détails ci-dessous)
                 <input type="hidden" name="_target_path" value="/account" />
             -->
@@ -556,7 +556,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
 
     Aussi, assurez-vous que la page de connexion ne requiert *pas* un rôle particulier afin 
     d'être affichée. Par exemple, la configuration suivante - qui nécessite le rôle
-    ``ROLE_ADMIN`` pour toutes les URLs (inluant l'URL ``/login``), va provoquer une boucle de
+    ``ROLE_ADMIN`` pour toutes les URLs (incluant l'URL ``/login``), va provoquer une boucle de
     redirection :
     
     .. configuration-block::
@@ -723,7 +723,7 @@ régulière.
 
     En préfixant votre chemin par ``^``, vous vous assurez que seules les URLs *commençant* par le masque
     correspondent. Par exemple, un chemin spécifiant simplement ``/admin`` (sans 
-    le ``^``) reconnaitra une url du type ``/admin/foo`` mais aussi  ``/foo/admin``.
+    le ``^``) reconnaîtra une url du type ``/admin/foo`` mais aussi  ``/foo/admin``.
 
 Pour chaque requête entrante, Symfony essaie de trouver une règle d'accès de contrôle
 (la première gagne). Si l'utilisateur n'est pas encore authentifié, le processus 
