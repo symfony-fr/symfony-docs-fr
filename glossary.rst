@@ -65,7 +65,7 @@ Glossaire
         l'article `Wikipedia sur HTTP`_ ou la `HTTP 1.1 RFC`_.
 
    Environnement
-        Un environnement est une chaine de caractères (ex ``prod`` ou ``dev``) qui
+        Un environnement est une chaîne de caractères (ex ``prod`` ou ``dev``) qui
         correspond à un ensemble de configurations spécifiques. La même application peut
         être éxécutée sur la même machine avec une configuration différente en l'éxécutant
         dans différents environnements. C'est très utile puisque cela permet à une

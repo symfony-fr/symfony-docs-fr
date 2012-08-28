@@ -220,7 +220,7 @@ le numéro du problème, en un format *modèle*, l'objet Issue, et inversement).
 
 La différence entre les convertisseurs est subtile et vous devriez toujours
 penser à ce que la donnée « normalisée » d'un champ devrait être. Par exemple,
-la donnée « normalisée » d'un champ ``texte`` est une chaine de caractères, mais
+la donnée « normalisée » d'un champ ``texte`` est une chaîne de caractères, mais
 c'est un objet ``DateTime`` pour un champ ``date``.
 
 Utiliser les convertisseurs dans un type de champ personnalisé

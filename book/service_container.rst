@@ -227,7 +227,7 @@ cherche la valeur de chaque paramètre et l'utilise dans la définition du servi
 .. note::
 
     Le signe pourcent au sein d'un paramètre ou d'un argument, et qui fait partie
-    de la chaine de caractères, doit être échappé par un autre signe pourcent :
+    de la chaîne de caractères, doit être échappé par un autre signe pourcent :
 
     .. code-block:: xml
 
@@ -253,7 +253,7 @@ cependant, vous pouvez ne pas avoir besoin de la flexibilité des paramètres.
 Tableaux de paramètres
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Les paramètres ne sont pas obligatoirement des chaines de caractères, ils peuvent aussi
+Les paramètres ne sont pas obligatoirement des chaînes de caractères, ils peuvent aussi
 être des tableaux. Pour le format XML, vous devez utiliser l'attribut type="collection"
 pour tous les paramètres qui sont des tableaux.
 

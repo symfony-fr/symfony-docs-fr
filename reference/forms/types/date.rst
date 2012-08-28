@@ -8,14 +8,14 @@ Un champ qui permet à l'utilisateur de modifier une date via différents élém
 HTML.
 
 Les données utilisées par ce type de champ peuvent être un objet ``DateTime``,
-une chaine de caractères, un timestamp ou un tableau. Tant que l'option `input`_
+une chaîne de caractères, un timestamp ou un tableau. Tant que l'option `input`_
 est correctement définie, le champ s'occupera de tous les détails.
 
 Le champ peut être rendu comme un simple champ texte, trois champs texte (mois,
 jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 
 +----------------------+-----------------------------------------------------------------------------+
-| Type de données      | peut être ``DateTime``, une chaine de caractères, un timestamp, ou un       |
+| Type de données      | peut être ``DateTime``, une chaîne de caractères, un timestamp, ou un       |
 |                      | tableau (voir l'option ``input``)                                           |
 +----------------------+-----------------------------------------------------------------------------+
 | Rendu comme          | champ texte unique, trois champs textes, ou trois listes déroulantes        |
@@ -92,7 +92,7 @@ utilisée pour définir un choix « vide » en haut de chaque liste déroulante:
         'empty_value' => '',
     ));
 
-Sinon, vous pouvez aussi spécifier une chaine de caractères qui sera affichée pour
+Sinon, vous pouvez aussi spécifier une chaîne de caractères qui sera affichée pour
 la valeur « vide»::
 
     $builder->add('dueDate', 'date', array(

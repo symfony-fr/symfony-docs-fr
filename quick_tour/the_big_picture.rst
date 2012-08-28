@@ -320,7 +320,7 @@ routes sont définies par des annotations des méthodes action :
     }
 
 L'annotation ``@Route()`` définit une nouvelle route avec le masque ``/hello/{name}``
-qui, lorsqu'elle sera reconnue, exécutera la méthode ``helloAction``. Une chaine
+qui, lorsqu'elle sera reconnue, exécutera la méthode ``helloAction``. Une chaîne
 de caractères entre accolades comme ``{name}`` est une variable réservée. Comme
 vous pouvez le voir, sa valeur peut être récupérée par l'argument ``$name`` de
 la méthode.

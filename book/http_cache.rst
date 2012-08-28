@@ -186,7 +186,7 @@ client.
 .. tip::
 
     Le cache kernel a une méthode spéciale ``getLog()`` qui retourne
-    une chaine de caractères décrivant ce qui se passe dans la couche
+    une chaîne de caractères décrivant ce qui se passe dans la couche
     du cache. Dans l'environnement de développement, il est possible
     de l'utiliser pour du débogage ou afin de valider votre stratégie
     de mise en cache : ::

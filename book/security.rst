@@ -1179,7 +1179,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
         ));
 
 Dans cet exemple, nous utilisons L'algorithme plus puissant ``sha512``. Aussi, comme nous 
-avons uniquement spécifié l'algorithme (``sha512``) sous forme de chaine de caractères, 
+avons uniquement spécifié l'algorithme (``sha512``) sous forme de chaîne de caractères,
 le système va par défaut hacher votre mot de passe 5000 fois de suite et ensuite l'encoder
 en base64. En d'autres termes, le mot de passe a été très fortement obscurci pour ne pas
 qu'il puisse être décodé (c'est-à-dire que vous ne pouvez pas retrouver le mot
@@ -1405,7 +1405,7 @@ La notion de « rôle » est au centre du processus d'autorisation. Chaque utili
 assigner un groupe de rôles et chaque ressource nécessite un ou plusieurs rôles.
 Si un utilisateur a les rôles requis, l'accès est accordé. Sinon, l'accès est refusé.
 
-Les rôles sont assez simples, et sont en fait des chaines de caractères que vous créez 
+Les rôles sont assez simples, et sont en fait des chaînes de caractères que vous créez
 et utilisez au besoin (même si les rôles sont des objets en interne). Par exemple,
 si vous désirez limiter l'accès à la section d'administration du blog de votre site web,
 vous pouvez protéger cette section en utilisant un rôle ``ROLE_BLOG_ADMIN``.
@@ -1657,7 +1657,7 @@ Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_
             ),
         ));
 
-Pour changer d'utilisateur, il suffit d'ajouter à la chaine de requête le paramètre 
+Pour changer d'utilisateur, il suffit d'ajouter à la chaîne de requête le paramètre
 ``_switch_user`` et le nom d'utilisateur comme valeur à l'URL en cours :
 
     http://example.com/somewhere?_switch_user=thomas

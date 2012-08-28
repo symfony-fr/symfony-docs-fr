@@ -289,7 +289,7 @@ Un template enfant peut ressembler à cela :
 
 .. note::
 
-   Le template parent est identifié grâce à une chaine de caractères
+   Le template parent est identifié grâce à une chaîne de caractères
    particulière (``::base.html.twig``) qui indique que ce template se trouve
    dans le dossier ``app/Resources/views`` du projet. Cette convention de
    nommage est complètement expliquée dans :ref:`template-naming-locations`.
@@ -388,12 +388,12 @@ différents :
   templates dans leur dossier ``Resources/views`` (et sous dossiers). La
   plupart des templates résident au sein d'un bundle.
 
-Symfony2 utilise une chaine de caractères au format
+Symfony2 utilise une chaîne de caractères au format
 **bundle**:**controller**:**template** pour les templates. Cela permet plusieurs
 types de templates, chacun se situant à un endroit spécifique :
 
 * ``AcmeBlogBundle:Blog:index.html.twig``: Cette syntaxe est utilisée pour
-  spécifier un template pour une page donnée. Les trois parties de la chaine de
+  spécifier un template pour une page donnée. Les trois parties de la chaîne de
   caractères, séparées par deux-points (``:``), signifie ceci :
 
     * ``AcmeBlogBundle``: (*bundle*) le template se trouve dans le 
@@ -414,7 +414,7 @@ types de templates, chacun se situant à un endroit spécifique :
   trouve à ``Resources/views/layout.html.twig`` dans ``AcmeBlogBundle``.
 
 * ``::base.html.twig``: Cette syntaxe fait référence à un template de base d'une
-  application ou layout. Remarquez que la chaine de caractères commence par deux
+  application ou layout. Remarquez que la chaîne de caractères commence par deux
   deux-points (``::``), ce qui signifie que les deux parties *bundle* et
   *controller* sont absentes. Ce qui signifie que le template ne se trouve dans
   aucun bundle, mais directement dans le répertoire racine
@@ -630,7 +630,7 @@ Le template ``recentList`` est simplement le suivant :
     faire correctement.
 
 Pour inclure le contrôleur, vous avez besoin de faire référence à ce dernier en
-utilisant la chaine de caractères standard pour les contrôleurs
+utilisant la chaîne de caractères standard pour les contrôleurs
 (c-a-d **bundle**:**controller**:**action**) :
 
 .. configuration-block::
@@ -868,7 +868,7 @@ par exemple). La fonction ``asset`` fait attention à cela en déterminant comme
 votre application est utilisée et en générant les chemins corrects.
 
 De plus, si vous utilisez la fonction ``asset``, Symfony peut automatiquement ajouter
-une chaine de caractères afin de garantir que la ressource statique mise à jour ne
+une chaîne de caractères afin de garantir que la ressource statique mise à jour ne
 sera pas mise en cache lors de son déploiement. Par exemple, ``/images/logo.png`` 
 pourrait ressembler à ``/images/logo.png?v2``. Pour plus d'informations, lisez
 la documentation de l'option de configuration :ref:`ref-framework-assets-version`.
@@ -1247,7 +1247,7 @@ méthode spéciale ``escape()`` de view : :
 Par défaut, la méthode ``escape()`` suppose que la variable est rendue dans un
 contexte HTML (et donc que la variable est échappée pour être sans danger pour
 l'HTML). Le second argument vous permet de changer de contexte. Par exemple,
-pour afficher quelque chose dans une chaine de caractères JavaScript, utilisez le
+pour afficher quelque chose dans une chaîne de caractères JavaScript, utilisez le
 context ``js`` :
 
 .. code-block:: js
