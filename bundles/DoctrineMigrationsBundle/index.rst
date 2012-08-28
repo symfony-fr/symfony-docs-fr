@@ -8,7 +8,7 @@ versions de votre schéma de base de données de manière simple, sécurisée et
 .. tip::
 
     Vous pouvez en lire plus sur les migrations de base de données Doctrine sur
-	la `documentation`_ du projet.
+    la `documentation`_ du projet.
 
 Installation
 ------------
@@ -17,7 +17,7 @@ Les migrations Doctrine pour Symfony sont maintenues dans le `DoctrineMigrations
 Le bundle utilise la librairie externe `Doctrine Database Migrations`_.
 
 Suivez ces étapes pour installer le bundle et la librairie dans l'Edition
-Standard Symfony. Ajoutez le code suivante à votre fichier ``composer.json`` :
+Standard de Symfony. Ajoutez le code suivant à votre fichier ``composer.json`` :
 
 .. code-block:: json
 
@@ -27,7 +27,7 @@ Standard Symfony. Ajoutez le code suivante à votre fichier ``composer.json`` :
         }
     }
 
-Mettez à jour vos librairies vendor :
+Mettez à jour vos librairies « vendor » :
 
 .. code-block:: bash
 
@@ -39,9 +39,9 @@ Si tout s'est bien passé, le ``DoctrineMigrationsBundle`` peut maintenant
 .. note::
 
     ``DoctrineMigrationsBundle`` installe la librairie `Doctrine Database Migrations`_.
-	La librairie peut être trouvée dans le répertoire ``vendor/doctrine/migrations``.
+    La librairie peut être trouvée dans le répertoire ``vendor/doctrine/migrations``.
 
-Enfin, assurez vous d'avoir activé le bundle dans le fichier ``AppKernel.php`` en
+Enfin, assurez-vous d'avoir activé le bundle dans le fichier ``AppKernel.php`` en
 ajoutant le code suivant :
 
 .. code-block:: php
@@ -58,20 +58,20 @@ ajoutant le code suivant :
 Utilisation
 -----------
 
-Toutes les fonctionnalités liées aux migrations sont contenues dans
-quelques commandes :
+Toutes les fonctionnalités liées aux migrations sont contenues dans quelques
+commandes :
 
 .. code-block:: bash
 
     doctrine:migrations
-      :diff     Génère une migration en comparant votre base actuelle et vos informations de mapping.
-      :execute  Exécute une seule migration de version manuelle (vers une version supérieure ou inférieure).
+      :diff     Génère une migration en comparant votre base actuelle et vos informations de « mapping ».
+      :execute  Exécute une seule migration manuelle de version (vers une version supérieure ou inférieure).
       :generate Génère une classe de migration vide.
       :migrate  Exécute une migration jusqu'à la version spécifiée, ou jusqu'à la dernière version.
-      :status   Affiche le status d'un ensemble de migrations.
+      :status   Affiche le statut d'un ensemble de migrations.
       :version  Ajoute ou supprime manuellement des versions du tableau de versions.
 
-Commencez par récupérer le status des migrations de votre application en exécutant
+Commencez par récupérer le statut des migrations de votre application en exécutant
 la commande ``status`` :
 
 .. code-block:: bash
@@ -98,10 +98,10 @@ peut générer des migrations automatiquement à votre place.
 .. code-block:: bash
 
     php app/console doctrine:migrations:generate
-    Génère une nouvelle classe de migration à "/path/to/project/app/DoctrineMigrations/Version20100621140655.php"
+    Nouvelle classe de migration générée dans "/path/to/project/app/DoctrineMigrations/Version20100621140655.php"
 
-Jetez un oeil à la classe de migration nouvellement créée et vous verrez
-quelque chose qui ressemble à ceci::
+Jetez un oeil à la classe de migration nouvellement créée et vous verrez quelque
+chose qui ressemble à ceci::
 
     namespace Application\Migrations;
 
@@ -153,20 +153,20 @@ et migrez ensuite lorsque vous serez prêt :
     php app/console doctrine:migrations:migrate
 
 Pour plus d'informations sur comment écrire les migrations elles-mêmes
-(c-a-d comment remplir les méthodes ``up()`` et ``down()``), lisez la
+(c'est à dire comment remplir les méthodes ``up()`` et ``down()``), lisez la
 `documentation`_ officielle sur les Migrations Doctrine.
 
 Exécuter les migrations pendant le déploiement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Bien sûr, le but final des migrations est d'être capable de les utiliser
-pour mettre à jour de façon fiable la structure votre base de données lorsque
+afin de mettre à jour de façon fiable la structure de votre base de données lorsque
 vous déployez votre application. En exécutant les migrations localement (ou
 sur un serveur de test), vous pouvez vous assurer qu'elles fonctionnent comme
 vous le voulez.
 
 Lorsque vous déployez enfin votre application, vous devez juste vous rappeler
-l'exécuter la commande ``doctrine:migrations:migrate``. En interne, Doctrine
+d'exécuter la commande ``doctrine:migrations:migrate``. En interne, Doctrine
 crée une table ``migration_versions`` dans votre base de données et surveille
 quelles migrations ont été exécutées. En conséquence, peu importe combien de
 migrations vous avez créé et exécuté localement, lorsque vous exécutez la commande
@@ -182,11 +182,12 @@ Générer les migrations automatiquement
 
 En réalité, vous devrez rarement avoir besoin d'écrire les migrations manuellement,
 puisque la librairie peut générer les classes de migration automatiquement en
-comparant vos informations de mapping Doctrine (c-a-d ce à quoi votre base de données
-*devrait* ressembler) avec la structure de votre base de données actuelle.
+comparant vos informations de « mapping » Doctrine (c'est à dire ce à quoi votre
+base de données *devrait* ressembler) avec la structure de votre base de données
+actuelle.
 
 Par exemple, supposons que vous créiez une nouvelle entité ``User`` et que vous
-ajoutiez les informations de mapping pour l'ORM Doctrine :
+ajoutiez les informations de « mapping » pour l'ORM Doctrine :
 
 .. configuration-block::
 
@@ -269,12 +270,12 @@ base de données :
     php app/console doctrine:migrations:migrate
 
 La morale de l'histoire est la suivante : après chaque changement que vous
-faites dans votre mapping Doctrine, exécutez la commande ``doctrine:migrations:diff``
+faites dans votre « mapping » Doctrine, exécutez la commande ``doctrine:migrations:diff``
 pour générer automatiquement vos classes de migration.
 
-Si vous faites cela dès le début de votre projet (c-a-d dès que les premières
+Si vous faites cela dès le début de votre projet (c'est à dire dès que les premières
 tables ont été chargées via une classe de migration), vous serez toujours capable
-de créer une base de données fraiche et d'exécuter les migrations dans l'ordre
+de créer une base de données fraîche et d'exécuter les migrations dans l'ordre
 afin d'avoir votre schéma de base de données complètement à jour. En fait, c'est
 une manière de travailler simple et fiable pour votre projet.
 
