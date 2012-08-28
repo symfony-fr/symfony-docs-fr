@@ -1,7 +1,7 @@
 .. index::
    single: Formulaire; Évènements
 
-Comment générer dynamiquement des Formulaires en Utilisant les Evénements de Formulaire
+Comment générer dynamiquement des Formulaires en Utilisant les Évènements de Formulaire
 =======================================================================================
 
 Avant de se lancer directement dans la génération dynamique de formulaire,
@@ -149,9 +149,9 @@ cela, le souscripteur pourrait ressembler à quelque chose comme ça::
 
 La ligne ``FormEvents::PRE_SET_DATA`` est convertie en la chaîne de caractères suivante :
 ``form.pre_set_data``. La `classe FormEvents`_ a un but organisationnel. C'est un endroit
-centralisé où vous trouverez la liste des différents événements de formulaire disponibles.
+centralisé où vous trouverez la liste des différents évènements de formulaire disponibles.
 
-Bien que cet exemple aurait pu utiliser de manière tout aussi efficace les événements ``form.set_data``
+Bien que cet exemple aurait pu utiliser de manière tout aussi efficace les évènements ``form.set_data``
 ou ``form.post_set_data``, en utilisant ``form.pre_set_data``, nous
 garantissons que les données allant être récupérées depuis l'objet ``Event`` n'auront pas été
 modifiées par quelconques souscripteurs ou listeners (« écouteurs » en français). Cela parce
@@ -161,7 +161,7 @@ passé par l'évènement ``form.set_data``. `DataEvent`_, contrairement à son e
 
 .. note::
 
-    Vous pouvez voir la liste complète des événements de formulaire via la
+    Vous pouvez voir la liste complète des évènements de formulaire via la
     `classe FormEvents`_, que vous trouverez dans le bundle formulaire.
 
 .. _`DataEvent`: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Event/DataEvent.php
