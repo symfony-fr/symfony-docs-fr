@@ -35,7 +35,7 @@ Rejoindre l'équipe de traduction
 --------------------------------
 
 Si vous voulez aider à traduire certains documents dans votre langue ou corriger
-des erreurs, rejoinger nous; c'est une processus simple:
+des erreurs, rejoignez-nous; c'est une processus simple:
 
 * Présentez vous sur la liste de diffusion `Symfony docs mailing-list`_ ;
 * *(optionel)* Proposer les sujets sur lesquels vous pouvez travailler ;
