@@ -43,7 +43,7 @@ Glossaire
         Un *Service* est un terme générique pour tout objet PHP qui éxécute une tâche
         spécifique. Un service est souvent utilisé « globalement », comme un objet
         de connexion à une base de données ou un objet qui envoie des emails. Dans
-        Symfony2, un service est souvent configuré et recupéré par le conteneur de
+        Symfony2, un service est souvent configuré et récupéré par le conteneur de
         services. Une application qui a de nombreux services découplés suit une
         `architecture orientée services`_.
 

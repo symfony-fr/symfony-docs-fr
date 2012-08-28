@@ -274,7 +274,7 @@ pour générer automatiquement vos classes de migration.
 
 Si vous faites cela dès le début de votre projet (c-a-d dès que les premières
 tables ont été chargées via une classe de migration), vous serez toujours capable
-de créer une base de données fraiche et d'exécuter les migrations dans l'ordre
+de créer une base de données fraîche et d'exécuter les migrations dans l'ordre
 afin d'avoir votre schéma de base de données complètement à jour. En fait, c'est
 une manière de travailler simple et fiable pour votre projet.
 
