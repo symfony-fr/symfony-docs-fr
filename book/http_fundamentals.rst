@@ -428,7 +428,7 @@ Symfony suit un schema simple et identique pour toutes les requêtes:
 Chaque «page» de votre site est définie dans un fichier de configuration du
 routing qui relie différentes URLs à différentes fonctions PHP. Le travail de
 chaque fonction PHP, appelée :term:`contrôleur`, est de créer puis retourner 
-un objet ``Response``, construit à partir des informations de la requète, à l'aide 
+un objet ``Response``, construit à partir des informations de la requête, à l'aide 
 des outils mis à disposition par le framework. En d'autres termes, le contrôleur 
 est le lieu où *votre* code va : c'est là que vous interprétez la requête et 
 que vous créez une réponse.
