@@ -15,7 +15,7 @@ existante ou en lisant `les bases de reStructuredText`_ sur le site de
 Sphinx.
 
 Si vous êtes familier avec Markdown, soyez attentif à certains concepts
-qui semblent très similaires mais sont diffèrents :
+qui semblent très similaires mais sont différents :
 
 * Les listes commencent au début de la ligne (aucune indentation n'est permise);
 
@@ -139,7 +139,7 @@ Afin de tester une documentation avant de la proposer :
 Installer les extensions Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Télécharger l'extension depuis le dépot `source`_
+* Télécharger l'extension depuis le dépôt `source`_
 
 * Copiez le répertoire ``sensio`` vers le dossier ``_exts`` dans le répertoire
   racine (où se trouve ``conf.py``)

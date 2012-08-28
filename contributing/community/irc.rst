@@ -25,7 +25,7 @@ Ces réunions sont conduites chaque jeudi à 17:00 CET (+01:00) sur le channel
 
 Les `logs`_  IRC sont ensuite publiés sur le wiki, en incluant un court résumé
 pour chacun des sujets abordés. Des tickets sont créés pour chacune des tâches
-ou chacun des problèmes identifiés pednant la réunion et sont référencés dans le
+ou chacun des problèmes identifiés pendant la réunion et sont référencés dans le
 résumé.
 
 Quelques lignes directrices et informations concernant la participation :

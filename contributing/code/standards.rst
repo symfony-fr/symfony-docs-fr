@@ -100,7 +100,7 @@ Conventions de nommage
 * Utilisez le camelCase, pas de underscore, pour les variables,
   les noms de méthodes et de fonctions, et les arguments;
 
-* Utilsez les underscores pour les options, les noms des paramètres;
+* Utilisez les underscores pour les options, les noms des paramètres;
 
 * Utilisez les espaces de nom pour toutes vos classes;
 
