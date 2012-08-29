@@ -362,7 +362,7 @@ liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la comm
     fork à `travis-ci.org`_. Identifiez vous simplement en utilisant votre compte
     github.com et appuyez le bouton pour activer les tests automatiques. Dans votre
     Pull Request, plutôt que de spécifier « *Symfony2 tests pass: [yes|no]* », vous
-    pouvez faire un lien vers l'`icône de status travis-ci.org`_. Pour plus de détails,
+    pouvez faire un lien vers l'`icône de statut travis-ci.org`_. Pour plus de détails,
     lisez le `Guide de démarrage travis-ci.org`_. Cela peut être fait simplement en
     cliquant sur l'icone de la page de build de Travis. Sélectionnez votre branche
     puis copiez le contenu dans la description de la Pull Request.
@@ -374,7 +374,7 @@ liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la comm
 .. _dépôt Symfony2:                          https://github.com/symfony/symfony
 .. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
 .. _travis-ci.org:                                http://travis-ci.org
-.. _`icone de status travis-ci.org`:                  http://about.travis-ci.org/docs/user/status-images/
+.. _`icône de statut travis-ci.org`:                  http://about.travis-ci.org/docs/user/status-images/
 .. _`Guide de démarrage travis-ci.org`: http://about.travis-ci.org/docs/user/getting-started/
 .. _`dépôt de la documentation`: https://github.com/symfony-fr/symfony-docs-fr
 
