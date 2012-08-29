@@ -24,7 +24,7 @@ vous faudra alors penser à passer toutes les options obligatoires :
     php app/console generate:doctrine:entity --non-interaction --entity=AcmeBlogBundle:Post --fields="title:string(100) body:text" --format=xml
 
 Options disponibles
------------------
+-------------------
 
 * ``--entity``: Le nom de l'entité donné en notation raccourcie, contenant le nom
   du bundle dans lequel l'entité est localisée, ainsi que le nom de l'entité.
