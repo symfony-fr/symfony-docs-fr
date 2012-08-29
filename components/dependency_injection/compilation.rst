@@ -212,7 +212,7 @@ mis en cache en production mais aussi d'avoir une configuration toujours à jour
 Cela pourrait être encore amélioré en recompilant seulement le conteneur en mode
 debug lorsque des changements ont été fait dans sa configuration plutôt qu'à
 chaque requête. Ceci peut être fait en cachant les fichiers utilisés pour configurer
-le conteneur de la manière décrite dans « :doc:`/components/conf/caching` » dans
+le conteneur de la manière décrite dans « :doc:`/components/config/caching` » dans
 la documentation du composant Config.
 
 Vous n'avez pas besoin de vous soucier des fichiers à mettre en cache car le contructeur
