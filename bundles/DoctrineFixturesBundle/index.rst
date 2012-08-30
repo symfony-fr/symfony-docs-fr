@@ -4,17 +4,17 @@ DoctrineFixturesBundle
 Les fixtures sont utilisées pour charger un ensemble de données dans une base
 de données. Ces données peuvent être utilisées pour les tests ou peuvent être
 les données initiales nécessaires au bon fonctionnement de l'application.
-Symfony2 n'a pas été conçu pour gérer les fixtures, mais Doctrine2 possède une
-librairie qui peut vous aider à écrire des fictures pour l':doc:`ORM</book/doctrine>`
+Symfony2 n'a pas été conçue pour gérer les fixtures, mais Doctrine2 possède une
+bibliothèque qui peut vous aider à écrire des fixtures pour l':doc:`ORM</book/doctrine>`
 ou l':doc:`ODM</bundles/DoctrineMongoDBBundle/index>` Doctrine.
 
 Installation et configuration
 -----------------------------
 
 Les fixtures Doctrine pour Symfony sont maintenues dans le `DoctrineFixturesBundle`_.
-Le bundle utilise la librairie externe `Doctrine Data Fixtures`_.
+Le bundle utilise la bibliothèque externe `Doctrine Data Fixtures`_.
 
-Suivez ces étapes pour installer le bundle et la librairie dans l'Édition
+Suivez ces étapes pour installer le bundle et la bibliothèque dans l'Édition
 Standard de Symfony. Ajoutez le code suivant à votre fichier ``composer.json`` :
 
 .. code-block:: json
@@ -25,7 +25,7 @@ Standard de Symfony. Ajoutez le code suivant à votre fichier ``composer.json`` 
         }
     }
 
-Mettez à jour les librairies vendor :
+Mettez à jour les bibliothèques vendor :
 
 .. code-block:: bash
 
@@ -36,8 +36,8 @@ Si tout s'est bien passé, le ``DoctrineFixturesBundle`` peut maintenant
 
 .. note::
 
-    ``DoctrineFixturesBundle`` installe la librairie `Doctrine Data Fixtures`_.
-	La librairie peut être trouvée dans le répertoire ``vendor/doctrine/data-fixtures``.
+    ``DoctrineFixturesBundle`` installe la bibliothèque `Doctrine Data Fixtures`_.
+    La bibliothèque peut être trouvée dans le répertoire ``vendor/doctrine/data-fixtures``.
 
 Finalement, enregistrez le bundle ``DoctrineFixturesBundle`` dans le fichier ``app/AppKernel.php``.
 
@@ -62,13 +62,13 @@ créer des objets et les persister en base de données. Comme toutes les classes
 dans Symfony2, les fixtures doivent se trouver dans l'un des bundles de votre
 application.
 
-Pour un bundle qui se situe dans ``src/Acme/HelloBundle``, les classes fixture
+Pour un bundle qui se situe dans ``src/Acme/HelloBundle``, les classes de fixtures
 devraient se trouver dans les répertoires ``src/Acme/HelloBundle/DataFixtures/ORM``
 ou ``src/Acme/HelloBundle/DataFixtures/MongoDB`` respectivement pour l'ORM et l'ODM.
-Ce tutoriel suppose que vous utilisez l'ORM, mais les fixtures peuvent être ajoutées
-tout aussi facilement si vous utilisez l'ODM.
+Ce tutoriel suppose que vous utilisez un ORM, mais les fixtures peuvent être ajoutées
+tout aussi facilement si vous utilisez un ODM.
 
-Imaginez que vous havez une classe ``User``, et que vous aimeriez charger
+Imaginez que vous ayez une classe ``User``, et que vous aimeriez charger
 une entrée ``User`` :
 
 .. code-block:: php
@@ -114,23 +114,23 @@ la ligne de commande en utilisant la commande ``doctrine:fixtures:load`` :
 
     php app/console doctrine:fixtures:load
 
-Si vous utilisez l'ODM, utilisez plutôt la commande ``doctrine:mongodb:fixtures:load`` :
+Si vous utilisez un ODM, utilisez plutôt la commande ``doctrine:mongodb:fixtures:load`` :
 
 .. code-block:: bash
 
     php app/console doctrine:mongodb:fixtures:load
 
 La tâche regardera dans le répertoire ``DataFixtures/ORM`` (ou ``DataFixtures/MongoDB``
-pour l'ODM) de chaque bundle et exécuter chaque classe qui implémente la
+pour l'ODM) de chaque bundle et exécutera chaque classe qui implémente la
 ``FixtureInterface``.
 
 Les deux commandes sont fournies avec quelques options :
 
 * ``--fixtures=/path/to/fixture`` - Utilisez cette option pour spécifier manuellement
-  le répertoire où les fixtures doivent être chargées;
+  le répertoire où les fixtures doivent être chargées ;
 
-* ``--append`` - Utilisez ce flag pour ajouter les données au lieu de supprimer les
-  données avant de les charger (les supprimer en premier est le comportement par défaut);
+* ``--append`` - Utilisez ce « drapeau » pour ajouter les données au lieu de supprimer les
+  données avant de les charger (les supprimer en premier est le comportement par défaut) ;
 
 * ``--em=manager_name`` - Spécifie manuellement le gestionnaire d'entité à utiliser pour
   charger les données.
@@ -150,13 +150,13 @@ Partager des objets entre les fixtures
 --------------------------------------
 
 Écrire une fixture basique est très simple. Mais que se passerait-il si vous
-avez plusieurs classes de fixtures et que vous voulez être capable de faire
-référence à des données chargées dans d'autres classes de fixture ?
-Par exemple, comment feriez vous si vous chargez un objet ``User`` dans une fixture,
-et qu'ensuite vous voulez y faire référence dans une fixture différente pour assigner
-l'utilisateur à un groupe particulier?
+aviez plusieurs classes de fixtures et que vous voudriez être capable de faire
+référence à des données chargées dans d'autres classes de fixtures ?
+Par exemple, comment feriez vous si vous chargiez un objet ``User`` dans une fixture,
+et qu'ensuite vous vouliez y faire référence dans une fixture différente pour assigner
+l'utilisateur à un groupe particulier ?
 
-La librairie de fixtures Doctrine gère cela très facilement en vous permettant
+La bibliothèque de fixtures Doctrine gère cela très facilement en vous permettant
 de spécifier l'ordre dans lequel les fixtures sont chargées.
 
 .. code-block:: php
@@ -191,14 +191,14 @@ de spécifier l'ordre dans lequel les fixtures sont chargées.
          */
         public function getOrder()
         {
-            return 1; // l'ordre dans lequel les fichiers sont chargées
+            return 1; // l'ordre dans lequel les fichiers sont chargés
         }
     }
 
-La classe de fixture implémente maintenant l'interface ``OrderedFixtureInterface``,
+La classe de fixtures implémente maintenant l'interface ``OrderedFixtureInterface``,
 qui spécifie à Doctrine que vous voulez choisir l'ordre de vos fixtures. Créez
-une autre classe de fixture et faites la charter après ``LoadUserData`` en
-retournant un ordre 2 :
+une autre classe de fixture et faites chargez-la après ``LoadUserData`` en
+retournant un ordre ayant pour valeur « 2 » :
 
 .. code-block:: php
 
@@ -232,7 +232,7 @@ retournant un ordre 2 :
          */
         public function getOrder()
         {
-            return 2; // l'ordre dans lequel les fichiers sont chargées
+            return 2; // l'ordre dans lequel les fichiers sont chargés
         }
     }
 
@@ -283,9 +283,9 @@ retournées par ``getOrder()``. Tout objet qui est défini avec la méthode
 fixtures qui ont un ordre plus grand.
 
 Les fixtures vous permettent de créer tout type de données dont vous avez
-besoin via l'interface PHP normale pour créer et persister des objets. En
+besoin via l'interface PHP usuelle pour créer et persister des objets. En
 contrôlant l'ordre des fixtures et la définition des références, presque
-tout peut être géré par les fixtures.
+tout peut être géré via les fixtures.
 
 Utiliser le Conteneur dans les fixtures
 ---------------------------------------
@@ -356,9 +356,9 @@ classe (comme expliqué ci-dessus), vous pouvez y accéder via la méthode ``loa
 
 .. note::
 
-	Si vous êtes trop fénéant pour implémenter la méthode obligatoire
-	:method:`Symfony\\Component\\DependencyInjection\\ContainerInterface::setContainer`, vous pouvez
-	étendre votre classe avec :class:`Symfony\\Component\\DependencyInjection\\ContainerAware`.
+    Si vous êtes trop fénéant pour implémenter la méthode obligatoire
+    :method:`Symfony\\Component\\DependencyInjection\\ContainerInterface::setContainer`, vous pouvez
+    faire en sorte que votre classe étende :class:`Symfony\\Component\\DependencyInjection\\ContainerAware`.
 
 .. _DoctrineFixturesBundle: https://github.com/doctrine/DoctrineFixturesBundle
 .. _`Doctrine Data Fixtures`: https://github.com/doctrine/data-fixtures
