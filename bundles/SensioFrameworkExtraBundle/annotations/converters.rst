@@ -53,7 +53,7 @@ Convertisseur Doctrine
 Nom du convertisseur : ``doctrine.orm``
 
 Le convertisseur Doctrine tente de convertir des attributs de requête en entités
-Doctrine récupérées depuis la base de données. Deux approches sont possibles::
+Doctrine récupérées depuis la base de données. Deux approches sont possibles :
 
 - Récupérer l'objet par sa clé primaire ;
 - Récupérer l'objet par un ou plusieurs champ(s) qui contien(nen)t une valeur unique en
