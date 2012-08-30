@@ -591,7 +591,7 @@ Mettre à jour l'objet ne nécessite que trois étapes :
 2. Modifier l'objet;
 3. Apeller la méthode ``flush()`` du gestionnaire d'entités
 
-Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Rappeler
+Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Souvenez-vous que
 cette méthode dit simplement à Doctrine de gérer, ou « regarder » l'objet ``$product``.
 Dans ce cas, comme vous avez récupéré l'objet ``$product`` depuis Doctrine,
 il est déjà surveillé.
