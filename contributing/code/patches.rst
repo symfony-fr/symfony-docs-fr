@@ -370,7 +370,7 @@ liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la comm
 
 .. _ProGit:                                       http://progit.org/
 .. _GitHub:                                       https://github.com/signup/free
-.. _`documentation _GitHub`:              https://help.github.com/articles/ignoring-files
+.. _`documentation Github`:              https://help.github.com/articles/ignoring-files
 .. _dépôt Symfony2:                          https://github.com/symfony/symfony
 .. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
 .. _travis-ci.org:                                http://travis-ci.org
