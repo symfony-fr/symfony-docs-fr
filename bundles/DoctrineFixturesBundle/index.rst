@@ -356,7 +356,7 @@ classe (comme expliqué ci-dessus), vous pouvez y accéder via la méthode ``loa
 
 .. note::
 
-    Si vous êtes trop fénéant pour implémenter la méthode obligatoire
+    Si vous êtes trop fainéant pour implémenter la méthode obligatoire
     :method:`Symfony\\Component\\DependencyInjection\\ContainerInterface::setContainer`, vous pouvez
     faire en sorte que votre classe étende :class:`Symfony\\Component\\DependencyInjection\\ContainerAware`.
 
