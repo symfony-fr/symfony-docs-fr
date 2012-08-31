@@ -145,10 +145,10 @@ cette classe dans le répertoire ``Document`` de votre bundle ``AcmeStoreBundle`
         protected $price;
     }
 
-Cette classe - souvent appelée un « document », ce qui veut dire *une classe basique
+Cette classe, souvent appelée un « document », ce qui veut dire *une classe basique
 qui contient des données* - est simple et remplit les besoins métiers des produits
-dans votre application. Cette classe ne peut pas encore être persistée dans MongoD
- - c'est juste une simple classe PHP.	
+dans votre application. Cette classe ne peut pas encore être persistée dans
+MongoDB, c'est juste une simple classe PHP.	
 
 Ajouter des informations de mapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -451,7 +451,40 @@ que vous voulez supprimer le document de MongoDB. La véritable suppression,
 cependant, n'est réellement executée que lorsque la méthode ``flush()``
 est appelée.
 
+Requêter des objets
+-------------------
 
+Comme vous l'avez vu plus haut, la classe de dépôt préconstruite vous permet
+de faire des requêtes pour récupérer un ou plusieurs objets en vous basant
+sur un certain nombre de différents paramètres. Lorsque c'est suffisant, c'est
+la manière la plus simple de retrouver des documents. Bien sûr, vous pouvez
+aussi créer des requêtes plus complexes.
+
+Utiliser le constructeur de requêtes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+L'ODM Doctrine est fourni avec un objet « Constructeur » de requête, qui vous
+permet de construire une requête qui retournera exactement les documents que vous
+voulez. Si vous utilisez un IDE, vous pourrez aussi tirer profit de l'autocomplétion
+lorsque vous taperez les noms de méthode. Dans un contrôleur::
+
+    $products = $this->get('doctrine_mongodb')
+        ->getManager()
+        ->createQueryBuilder('AcmeStoreBundle:Product')
+        ->field('name')->equals('foo')
+        ->limit(10)
+        ->sort('price', 'ASC')
+        ->getQuery()
+        ->execute()
+
+Dans ce cas, la requête retourne 10 produits dont le nom est « foo » et qui sont
+triés par ordre de prix du plus petit au plus grand.
+
+L'objet ``QueryBuilder`` contient toutes les méthodes nécessaires pour construire
+votre requête. Pour plus d'informations sur le constructeur de requêtes de Doctrine,
+consultez la documentation de Doctrine : `Query Builder`_. Pour obtenir une liste des
+conditions que vous pouvez placer dans une requête, lisez la documentation spécifique
+`Opérateurs Conditionnels`_.
 
 Apprenez en plus avec le Cookbook
 ---------------------------------
@@ -465,5 +498,5 @@ Apprenez en plus avec le Cookbook
 .. _`MongoDB type`: http://us.php.net/manual/en/mongo.types.php
 .. _`Mapping Types Documentation`: http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/reference/basic-mapping.html#doctrine-mapping-types
 .. _`Query Builder`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/query-builder-api.html
-.. _`Conditional Operators`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/query-builder-api.html#conditional-operators
+.. _`Opérateurs Conditionnels`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/query-builder-api.html#conditional-operators
 .. _`Event Documentation`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/events.html
