@@ -31,8 +31,8 @@ facile à configurer et à utiliser.
 Installation
 ------------
 
-To use the MongoDB ODM, you'll need two libraries provided by Doctrine and
-one bundle that integrates them into Symfony.
+Pour utiliser l'ODM MongoDB, vous avez besoin de deux bibliothèques fournies
+par Doctrine et un bundle qui les intègre dans Symfony.
 
 Installer le bundle avec Composer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -537,7 +537,6 @@ Pour ce faire, ajouter le nom de la classe dépôt à vos définitions de mappin
 
         </doctrine-mong-mapping>
 
-Doctrine can generate the repository class for you by running :
 Doctrine peut générer la classe de dépôt pour vous en exécutant la commande :
 
 .. code-block:: bash
@@ -772,8 +771,6 @@ Et même si Doctrine tourne autour d'un simple concept, il est incroyablement
 puissant, vous permettant de créer des requêtes complexes et de vous abonner
 à des évènements qui vous permettent d'effectuer différentes actions au
 cours du cycle de vie de vos objets.
-=======
->>>>>>> upstream/master
 
 Apprenez en plus avec le Cookbook
 ---------------------------------
