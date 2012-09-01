@@ -180,7 +180,7 @@ Contrôle d'accès (autorisation)
 
 Par contre, si un utilisateur demande ``/admin/foo``, le système se comporte différemment.
 C'est à cause de la section de la configuration ``access_control`` qui stipule que toute 
-requête correspondant au masque d'expression régulière ``^/admin`` (c'est à dire ``/admin``
+requête correspondant au masque d'expression régulière ``^/admin`` (c'est-à-dire ``/admin``
 ou tout ce qui correspond à ``/admin/*``) requiert le rôle ``ROLE_ADMIN``. Les rôles sont à
 la base de la plupart des mécanismes d'autorisation : un utilisateur peut accéder à 
 ``/admin/foo`` seulement s'il possède le role ``ROLE_ADMIN``.
