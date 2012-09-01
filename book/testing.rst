@@ -1,8 +1,8 @@
 .. index::
    single: Tests
 
-Testing
-=======
+Les Tests
+=========
 
 A chaque fois que vous écrivez une nouvelle ligne de code, vous ajoutez aussi
 potentiellement de nouveaux bugs. Pour créer de meilleurs applications et plus
