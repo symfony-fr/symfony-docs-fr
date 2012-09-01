@@ -19,7 +19,7 @@ Définir le Type de Champ
 Afin de créer le type de champ personnalisé, nous devons créer tout d'abord la
 classe représentant le champ. Dans notre situation, la classe s'occupant du
 type de champ sera nommée `GenderType` et le fichier sera stocké dans le répertoire
-par défaut pour les champs de formulaire, c'est à dire ``<BundleName>\Form\Type``.
+par défaut pour les champs de formulaire, c'est-à-dire ``<BundleName>\Form\Type``.
 Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`::
 
     // src/Acme/DemoBundle/Form/Type/GenderType.php

@@ -7,9 +7,9 @@
    config
    form
 
-L'ODM (Object Document Mapper) `MongoDB`_  ressemble beaucoup à l'ORM Doctrine2
+L'ODM (« Object Document Mapper ») `MongoDB`_  ressemble beaucoup à l'ORM Doctrine2
 dans sa philosophie et son fonctionnement. En d'autres termes, comme l':doc:`ORM Doctrine2</book/doctrine>`,
-avec l'ODM Doctrine, vous traiter des objets PHP qui sont ensuite persistés de
+avec l'ODM Doctrine, vous traitez des objets PHP qui sont ensuite persistés de
 façon transparente dans et depuis MongoDB.
 
 .. tip::
@@ -24,9 +24,9 @@ facile à configurer et à utiliser.
 
     Ce chapitre ressemble beaucoup au :doc:`chapitre sur l'ORM Doctrine2</book/doctrine>`,
     qui traite de la manière dont l'ORM Doctrine peut être utilisé pour persister
-    les données dans une base de données relationnel (ex MySQL). C'est en ce sens,
-    si vous persistez dans une base de données relationnelle via l'ORM ou dans
-    MongoDB via l'ODM, que les philosophies sont proches.
+    les données dans une base de données relationnel (par exemple : MySQL). C'est
+    en ce sens, si vous persistez dans une base de données relationnelle via l'ORM
+    ou dans MongoDB via l'ODM, que les philosophies sont proches.
 
 Installation
 ------------

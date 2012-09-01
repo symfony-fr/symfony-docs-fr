@@ -4,14 +4,14 @@
 Certains formulaires ont des champs en plus, dont les valeurs n'ont
 pas besoin d'être stockées en base de données. Par exemple, vous pourriez
 vouloir créer un formulaire de création de compte avec des champs en plus
-(comme par exemple une checkbox « Accepter les conditions ») et imbriquer
+(comme par exemple une case à cocher « Accepter les conditions ») et imbriquer
 le formulaire qui contient les informations relatives au compte. Nous
 utiliserons MongoDB pour stocker les données.
 
 Un modèle simple : User
 -----------------------
 
-Dans ce tutoriel, nous commençons avec le modèle pour un document ``User``::
+Dans ce tutoriel, nous commençons avec le modèle d'un document ``User``::
 
     // src/Acme/AccountBundle/Document/User.php
     namespace Acme\AccountBundle\Document;
@@ -64,7 +64,7 @@ Dans ce tutoriel, nous commençons avec le modèle pour un document ``User``::
             return $this->password;
         }
 
-        // stupid simple encryption (please don't copy it!)
+        // cryptage simpliste uniquement pour l'exemple (ne pas copier SVP !)
         public function setPassword($password)
         {
             $this->password = sha1($password);
@@ -79,8 +79,8 @@ validation au début de la classe.
 .. note::
 
     Si vous voulez intégrer cet utilisateur dans le système de sécurité, vous
-    devez implémenter la :ref:`UserInterface<book-security-user-entity>` du
-    composant Security.
+    devez implémenter l'interface :ref:`UserInterface<book-security-user-entity>`
+    du composant « Security ».
 
 Créer un formulaire pour le modèle
 ----------------------------------
@@ -117,9 +117,9 @@ Ensuite, créez le formulaire pour le modèle ``User``::
         }
     }
 
-Nous n'avons ajouté que deux champs : ``email`` et ``plainPassword`` (dupliqué pour confirmer
-le mot de passe saisi). L'option ``data_class`` spécifie au formulaire le nom de
-la classe associée (c-a-d votre document ``User``).
+Nous n'avons ajouté que deux champs : ``email`` et ``plainPassword`` (dupliqué
+pour confirmer le mot de passe saisi). L'option ``data_class`` spécifie au formulaire
+le nom de la classe associée (c'est-à-dire votre document ``User``).
 
 .. tip::
 
@@ -130,14 +130,14 @@ Imbriquer le formulaire User dans le formulaire de création de compte
 
 Le formulaire que vous utiliserez pour la page de création de compte n'est
 pas le même que le formulaire qui est utilisé pour modifier simplement l'objet
-``User`` (c-a-d ``UserType``). Le formulaire de création de compte contiendra
+``User`` (c'est-à-dire ``UserType``). Le formulaire de création de compte contiendra
 quelques champs supplémentaires, comme « Accepter les conditions », dont la valeur
 ne sera pas stockée en base de données.
 
 En d'autres termes, créez un second formulaire pour la création de compte, qui
 imbrique le formulaire ``User`` et ajoute les champs supplémentaires dont vous
-avez besoin. Commencez par créer une simple classe qui représente la « création de compte »
-(« registration » en anglais)::
+avez besoin. Commencez par créer une classe simple qui représente la « création
+de compte » (« registration » en anglais)::
 
     // src/Acme/AccountBundle/Form/Model/Registration.php
     namespace Acme\AccountBundle\Form\Model;
@@ -206,13 +206,13 @@ Ensuite, créez le formulaire pour ce modèle ``Registration``::
 Vous n'avez pas besoin d'utiliser de méthode spéciale pour imbriquer le
 formulaire ``UserType``. Un formulaire est aussi un champ, donc vous pouvez
 l'ajouter comme n'importe quel champ, avec l'objectif que la propriété
-``Registration.user`` contienne une instance de la classe ``UserType``.	
+``Registration.user`` contienne une instance de la classe ``UserType``.
 
 Gérer la soumission du formulaire
 ---------------------------------
 
 Ensuite, vous aurez besoin d'un contrôleur pour prendre en charge le formulaire.
-Commencez par créer un simple contrôleur pour afficher le formulaire de création
+Commencez par créer un contrôleur simple pour afficher le formulaire de création
 de compte::
 
     // src/Acme/AccountBundle/Controller/AccountController.php
@@ -247,7 +247,7 @@ et son template :
     </form>
 
 Enfin, créez le contrôleur qui prendra en charge la soumission du formulaire. Il
-se chargera de la validation, et enregistrera les données dans MongoDB::	
+se chargera de la validation, et enregistrera les données dans MongoDB::
 
     public function createAction()
     {
@@ -269,5 +269,5 @@ se chargera de la validation, et enregistrera les données dans MongoDB::
         return $this->render('AcmeAccountBundle:Account:register.html.twig', array('form' => $form->createView()));
     }
 
-C'est tout ! Maintenant, votre formulaire valide et vous permet d'enregistrer
+C'est tout ! Maintenant, votre formulaire vous permet de valider et d'enregistrer
 un objet ``User`` dans MongoDB.
