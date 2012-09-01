@@ -23,7 +23,7 @@ Environnements Différents, Fichiers de Configuration Différents
 Une application Symfony2 typique démarre avec trois environnements : ``dev``,
 ``prod``, et ``test``. Comme nous l'avons vu, chaque « environnement » représente
 simplement une façon d'exécuter la même base de code avec des configurations
-différentes. Ainsi, cela ne devrait pas être une suprise pour vous que chaque
+différentes. Ainsi, cela ne devrait pas être une surprise pour vous que chaque
 environnement charge son propre fichier de configuration. Si vous utilisez
 le format de configuration YAML, les fichiers suivants sont utilisés :
 
@@ -333,7 +333,7 @@ Par défaut, ces fichiers cachés sont largement stockés dans le répertoire
 Quelquefois, lorsque vous débuggez, il pourrait être utile d'inspecter un
 fichier caché pour comprendre comment quelque chose fonctionne. Quand vous
 faites ça, rappelez-vous de regarder dans le répertoire de l'environnement
-que vous êtez en train d'utiliser (la plupart du temps ``dev`` lorsque vous
+que vous êtes en train d'utiliser (la plupart du temps ``dev`` lorsque vous
 développez et débuggez). Bien que celui-ci puisse varier, le répertoire
 ``app/cache/dev`` inclut ce qui suit :
 

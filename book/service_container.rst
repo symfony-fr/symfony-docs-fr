@@ -219,7 +219,7 @@ simple. Les paramètres rendent les définitions de services plus organisées et
         ));
 
 Le résultat final est exactement le même que précédemment - la différence est seulement dans
-* comment * nous avons défini le service. En entourant les chaînes ``my_mailer.class`` et
+*comment* nous avons défini le service. En entourant les chaînes ``my_mailer.class`` et
 ``my_mailer.transport`` par le signe pourcent (``%``), le conteneur sait qu'il 
 faut chercher des paramètres avec ces noms. Quand le conteneur est construit, il
 cherche la valeur de chaque paramètre et l'utilise dans la définition du service.
@@ -227,7 +227,7 @@ cherche la valeur de chaque paramètre et l'utilise dans la définition du servi
 .. note::
 
     Le signe pourcent au sein d'un paramètre ou d'un argument, et qui fait partie
-    de la chaine de caractères, doit être échappé par un autre signe pourcent :
+    de la chaîne de caractères, doit être échappé par un autre signe pourcent :
 
     .. code-block:: xml
 
@@ -253,7 +253,7 @@ cependant, vous pouvez ne pas avoir besoin de la flexibilité des paramètres.
 Tableaux de paramètres
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Les paramètres ne sont pas obligatoirement des chaines de caractères, ils peuvent aussi
+Les paramètres ne sont pas obligatoirement des chaînes de caractères, ils peuvent aussi
 être des tableaux. Pour le format XML, vous devez utiliser l'attribut type="collection"
 pour tous les paramètres qui sont des tableaux.
 
@@ -390,7 +390,7 @@ ou ``Resources/config`` n'existent pas, créez-les.
         ));
 
 La définition elle-même n'a pas changé, seulement son emplacement. Bien sûr, le conteneur
-de service ne connait pas le nouveau fichier de ressources. Heureusement, nous pouvons
+de service ne connaît pas le nouveau fichier de ressources. Heureusement, nous pouvons
 facilement importer le fichier de ressources en utilisant la clé ``imports`` dans 
 la configuration de l'application.
 
@@ -523,7 +523,7 @@ disponibles pour les bundles du noyau peuvent être trouvées à :doc:`Reference
 
 .. note::
 
-   Nativement, le conteneur de services reconnait seulement les
+   Nativement, le conteneur de services reconnaît seulement les
    directives ``parameters``, ``services``, et ``imports``. Toutes les autres directives
    sont gérées par une extension du conteneur de service.
 
@@ -783,7 +783,7 @@ elle existe et ne rien faire si ce n'est pas le cas :
             array(new Reference('my_mailer', ContainerInterface::IGNORE_ON_INVALID_REFERENCE))
         ));
 
-En YAML, la syntaxe spéciale ``@?`` indique au conteneur de service que la dependance
+En YAML, la syntaxe spéciale ``@?`` indique au conteneur de service que la dépendance
 est optionnelle. Bien sûr, le ``NewsletterManager`` doit être aussi écrit pour 
 permettre une dépendance optionnelle :
 
@@ -797,7 +797,7 @@ permettre une dépendance optionnelle :
 Services de Bundle Tiers et Noyau de Symfony
 --------------------------------------------
 
-Etant donné que Symfony2 et tous les bundles tiers configurent et récupèrent leurs services
+Étant donné que Symfony2 et tous les bundles tiers configurent et récupèrent leurs services
 via le conteneur, vous pouvez facilement y accéder, ou même les utiliser dans vos propres
 services. Pour garder les choses simples, par défaut Symfony2 n'exige pas que
 les contrôleurs soient définis comme des services. Par ailleurs Symfony2 injecte l'ensemble du

@@ -19,7 +19,7 @@ Utilisation de base
 -------------------
 
 Supposons que vous ayez une classe Event, avec un champ ``startAt`` qui est
-l'heure à laquelle l'événement commence :
+l'heure à laquelle l'évènement commence :
 
 .. configuration-block::
 

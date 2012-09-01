@@ -85,4 +85,3 @@ sont automatiquement passés au template si la méthode retourne ``null`` et que
     public function showAction(Post $post)
     {
     }
-

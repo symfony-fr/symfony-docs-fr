@@ -22,7 +22,7 @@ d'entre elles est construite par dessus celles qui la précèdent.
 .. tip::
 
     L'autoloading (« chargement automatique ») n'est pas géré par le
-    framework directement ; ceci est effectué indépendemment à l'aide de
+    framework directement ; ceci est effectué indépendamment à l'aide de
     la classe :class:`Symfony\\Component\\ClassLoader\\UniversalClassLoader`
     et du fichier ``src/autoload.php``. Lisez le :doc:`chapitre dédié
     </components/class_loader>` pour plus d'informations.
@@ -197,9 +197,9 @@ en conséquence (le traitement doit seulement intervenir sur la requête
 « master »).
 
 .. index::
-   pair: Kernel; Evènement
+   pair: Kernel; Évènement
 
-Les Evènements
+Les Évènements
 ~~~~~~~~~~~~~~
 
 Chaque évènement capturé par le Kernel est une sous-classe de
@@ -229,18 +229,18 @@ requêtes « master », ajoutez le code suivant au début de votre méthode list
 
 .. tip::
 
-    Si vous n'êtes pas encore familier avec le « Dispatcher d'Evènements » de
+    Si vous n'êtes pas encore familier avec le « Dispatcher d'Évènements » de
     Symfony2, lisez d'abord la section  :doc:`Documentation du composant Event Dispatcher</components/event_dispatcher/introduction>`.
 
 .. index::
-   single: Evènement; kernel.request
+   single: Évènement; kernel.request
 
 .. _kernel-core-request:
 
-L'Evènement ``kernel.request``
+L'Évènement ``kernel.request``
 ..............................
 
-*La Classe Evènement* : :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`
+*La Classe Évènement* : :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent`
 
 Le but de cet évènement est soit de retourner un objet ``Response`` immédiatement, soit
 de définir des variables afin qu'un Contrôleur puisse être appelé après l'évènement.
@@ -255,12 +255,12 @@ la ``Requête`` et déterminer le nom du Contrôleur (stocké dans l'attribut de
 ``Requête`` ``_controller``).
 
 .. index::
-   single: Evènement; kernel.controller
+   single: Évènement; kernel.controller
 
 L'évènement ``kernel.controller``
 .................................
 
-*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`
+*La Classe Évènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`
 
 Cet évènement n'est pas utilisé par le ``FrameworkBundle``, mais peut être un point
 d'entrée utilisé pour modifier le contrôleur qui devrait être exécuté :
@@ -279,12 +279,12 @@ d'entrée utilisé pour modifier le contrôleur qui devrait être exécuté :
     }
 
 .. index::
-   single: Evènement; kernel.view
+   single: Évènement; kernel.view
 
 L'évènement ``kernel.view``
 ...........................
 
-*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForControllerResultEvent`
+*La Classe Évènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForControllerResultEvent`
 
 Cet évènement n'est pas utilisé par le ``FrameworkBundle``, mais il peut être utilisé
 pour implémenter un sous-système de vues. Cet évènement est appelé *seulement* si le
@@ -307,12 +307,12 @@ La valeur retournée par le Contrôleur est accessible via la méthode ``getCont
     }
 
 .. index::
-   single: Evènement; kernel.response
+   single: Évènement; kernel.response
 
 L'évènement ``kernel.response``
 ...............................
 
-*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`
+*La Classe Évènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterResponseEvent`
 
 L'objectif de cet évènement est de permettre à d'autres systèmes de modifier ou
 de remplacer l'objet ``Response`` après sa création :
@@ -341,14 +341,14 @@ Le ``FrameworkBundle`` enregistre plusieurs listeners :
   pour trouver des balises ESI.
 
 .. index::
-   single: Evènement; kernel.exception
+   single: Évènement; kernel.exception
 
 .. _kernel-kernel.exception:
 
 L'évènement ``kernel.exception``
 ................................
 
-*La Classe Evènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`
+*La Classe Évènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\GetResponseForExceptionEvent`
 
 Le ``FrameworkBundle`` enregistre un
 :class:`Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener` qui
@@ -387,9 +387,9 @@ créer et définir un nouvel objet ``Exception``, ou ne rien faire :
         return new Response('Error', 404 /* ignoré */, array('X-Status-Code' => 200));
 
 .. index::
-   single: Dispatcher d'Evènements
+   single: Dispatcher d'Évènements
 
-Le Dispatcher d'Evènements
+Le Dispatcher d'Évènements
 --------------------------
 
 Le dispatcher d'évènements est un composant autonome qui est responsable

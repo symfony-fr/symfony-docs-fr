@@ -18,7 +18,7 @@ La documentation Symfony2 est hébergé sur GitHub:
 
     https://github.com/symfony/symfony-docs
 
-Si vous voulez soumetter un correctif, `forker`_ le dépot offciel sur GitHub et
+Si vous voulez soumettre un correctif, `forker`_ le dépôt officiel sur GitHub et
 cloner votre dépot:
 
 .. code-block:: bash
@@ -41,8 +41,8 @@ Ensuite, créez une branche dédiée pour vos changement:
     $ git checkout -b improving_foo_and_bar
 
 Vous pouvez maintenant appliquer vos changements directement à cette branche et 
-les transmettre (commit). Ensuite, envoyer cette branche à *votre* dépot et
-inititier une requête (pull request). Celle-ci devra être entre votre branche
+les transmettre (commit). Ensuite, envoyer cette branche à *votre* dépôt et
+initier une requête (pull request). Celle-ci devra être entre votre branche
 ``improving_foo_and_bar`` et la branche symfony-docs ``master``.
 
 .. image:: /images/docs-pull-request.png
@@ -92,7 +92,7 @@ de code qui semblent familiers, vous devriez suivre ces règles :
   fichier qui contient le code. Placez une ligne vite après ce commentaire, à moins que la prochaine ligne
   ne soit également un commentaire;
 * Vous devriez mettre un ``$`` devant chaque ligne de commande;
-* Nous préfèrerons le raccourci ``::`` à ``.. code-block:: php`` pour commencer un block de PHP.
+* Nous préférerons le raccourci ``::`` à ``.. code-block:: php`` pour commencer un block de PHP.
 
 Un exemple::
 
@@ -134,11 +134,11 @@ La contribution la plus facile que vous pouvez effectuer est de signaler une
 erreur: une typo, une grammaire imparfaite, un example de code erroné, une 
 explication manquante...
 
-Etapes:
+Étapes:
 
 * Soumettez un bogue dans le gestionnaire de bogues;
 
-* *(optionel)* Proposer un correctif.
+* *(optionnel)* Proposer un correctif.
 
 Traductions
 -----------

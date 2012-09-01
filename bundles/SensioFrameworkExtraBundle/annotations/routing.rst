@@ -29,7 +29,7 @@ C'est équivalent à la configuration YAML suivante :
         defaults: { _controller: SensioBlogBundle:Post:index }
 
 Comme tout schéma de route, vous pouvez définir des valeurs par défaut, des valeurs
-obligatoires et des jokers (« placeholder » en anglais)::
+obligatoires et des valeurs de substitution (« placeholder » en anglais)::
 
     /**
      * @Route("/{id}", requirements={"id" = "\d+"}, defaults={"foo" = "bar"})
@@ -73,7 +73,7 @@ Vous pouvez également importer tout un répertoire :
         resource: "@SensioBlogBundle/Controller"
         type:     annotation
 
-Comme pour les autres ressources, vous pouvez « monter » les routes sous un préfixe :
+Comme pour les autres ressources, vous pouvez préfixer les routes :
 
 .. code-block:: yaml
 

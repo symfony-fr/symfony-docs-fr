@@ -32,7 +32,7 @@ La page « Hello Symfony ! »
 ---------------------------
 
 Commençons avec une application traditionnelle « Hello World ! ». Quand nous
-aurons terminé, l'utilisateur sera capable de reçevoir un message de 
+aurons terminé, l'utilisateur sera capable de recevoir un message de
 salutation personnalisé (ex « Hello Symfony ») en se rendant à l'URL suivante :
 
 .. code-block:: text
@@ -61,7 +61,7 @@ Avant de commencer : Créez un Bundle
 
 Avant de commencer, vous devez créer un *bundle*. Dans Symfony2, un :term:`bundle`
 est comme un plugin, excepté le fait que tout le code de votre application
-siègera dans un bundle.
+siégera dans un bundle.
 
 Un bundle n'est rien d'autre qu'un répertoire qui contient tout ce qui est relatif
 à une fonctionnalité spécifique, ce qui inclut les classes PHP, la configuration
@@ -272,7 +272,7 @@ votre application devrait vous saluer::
 
         $ php app/console cache:clear --env=prod --no-debug
 
-Une troisième étape optionelle dans ce processus est de créer un template.
+Une troisième étape optionnelle dans ce processus est de créer un template.
 
 .. note::
 
@@ -280,7 +280,7 @@ Une troisième étape optionelle dans ce processus est de créer un template.
    de la création de pages. Pour plus d'informations lisez le chapitre
    :doc:`Chapitre Contrôleurs </book/controller>`.
 
-Etape 3 facultative : Créez le Template
+Étape 3 facultative : Créez le Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les templates vous permettent de déplacer toute la présentation (ex: code HTML)
@@ -330,12 +330,12 @@ voire les deux.
 Le contrôleur rend le template ``AcmeHelloBundle:Hello:index.html.twig``,
 qui suit la convention de nommage :
 
-    **NomBundle**:**NomControleur**:**NomTemplate**
+    **NomBundle**:**NomContrôleur**:**NomTemplate**
 
 C'est le nom *logique* du template, qui est associé à une location physique selon
 la convention suivante.
-	
-    **/chemin/vers/NomBundle**/Resources/views/**NomControleur**/**NomTemplate**
+
+    **/chemin/vers/NomBundle**/Resources/views/**NomContrôleur**/**NomTemplate**
 
 Dans ce cas, ``AcmeHelloBundle`` est le nom de bundle, ``Hello`` est le
 nom du contrôleur et enfin ``index.html.twig`` est le template :
@@ -370,7 +370,7 @@ Analysons maintenant le template Twig ligne par ligne :
   le bloc ``body``.
 
 Le nom de fichier du template parent, ``::base.html.twig``, est dispensé des portions
-**NomBundle** et **NomControleur** (remarquez les deux points (``::``) au début). Ceci
+**NomBundle** et **NomContrôleur** (remarquez les deux points (``::``) au début). Ceci
 signifie que le template se situe en dehors du bundle et dans le répertoire ``app``.
 
 .. configuration-block::
@@ -527,7 +527,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
 .. sidebar:: Autoloading
 
     Lorsque Symfony se charge, un fichier spécial - ``app/autoload.php`` - est
-    inclu. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
+    inclus. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
     tous vos fichiers depuis le répertoire ``src/`` et toutes les librairies tierces
     depuis le repertoire ``vendor/``.
 
@@ -549,7 +549,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
             src/Acme/HelloBundle/Controller/HelloController.php
 
     Typiquement, le seul moment où vous devrez vous soucier du fichier ``app/autoload.php``	
-    est quand vous incluerez des librairies tierces dans le repertoire ``vendor/``.
+    est quand vous inclurez des librairies tierces dans le repertoire ``vendor/``.
     Pour plus d'informations sur le chargement automatique, voir 
     :doc: `Comment charger automatiquement des classes</components/class_loader>`.
 
@@ -634,7 +634,7 @@ La Symfony Standard Edition est fournie avec une tâche qui crée un bundle
 totalement fonctionnel pour vous. Bien sûr, vous pouvez tout aussi facilement créer un
 bundle à la main.
 
-Pour vous montrer à quel point le système de bundle est simple, créeons un nouveau
+Pour vous montrer à quel point le système de bundle est simple, créons un nouveau
 bundle appelé ``AcmeTestBundle`` et activons le.
 
 .. tip::
@@ -707,7 +707,7 @@ Structure des répertoires des bundles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La structure des répertoire d'un bundle est simple et flexible. Par défaut le système
-de bundle suit un ensemblde de conventions qui aident à garder le code homogène
+de bundle suit un ensemble de conventions qui aident à garder le code homogène
 entre tous les bundles Symfony2. Jetez un oeil au ``AcmeHelloBundle``, car il contient
 certains des éléments les plus communs d'un bundle :
 
@@ -940,7 +940,7 @@ que vous avez choisi :
 
 Vous savez déjà que l'extension ``.yml`` peut être changée en ``.xml`` ou
 ``.php`` si vous préférez utiliser le format XML ou PHP pour écrire votre configuration.
-Notez également que chaque environnement charge sa propre configuration. Considerez
+Notez également que chaque environnement charge sa propre configuration. Considérez
 le fichier de configuration pour l'environnement de ``dev``.
 
 .. configuration-block::
@@ -1022,7 +1022,7 @@ en tête :
   (ex ``app.php`` et ``app_dev.php``) et charge un fichier de configuration différent.
 
 A partir de maintenant, chaque chapitre vous introduira de plus en plus d'outils
-puissants et de concepts avancés. Plus vous connaitrez Symfony2, plus vous apprécierez
+puissants et de concepts avancés. Plus vous connaîtrez Symfony2, plus vous apprécierez
 la flexibilité de son architecture et le pouvoir qu'il vous donne pour développer
 rapidement des applications.
 

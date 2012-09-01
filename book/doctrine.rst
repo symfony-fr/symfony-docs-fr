@@ -17,7 +17,7 @@ avec une base de données.
     Doctrine est totalement découplé de Symfony et son utilisation est optionelle.
     Ce chapitre est entièrement consacré à l'ORM Doctrine, dont l'objectif est de
     mapper vos objets avec une base de donnée relationnelle (comme *MySQL*, *PostGesSQL*
-    ou *Microsoft SQL*). Si vous préferez utiliser des requêtes SQL brutes, 
+    ou *Microsoft SQL*). Si vous préférez utiliser des requêtes SQL brutes,
     c'est facile, et expliqué dans l'article « :doc:`/cookbook/doctrine/dbal` » du cookbook
 
     Vous pouvez aussi persister vos données à l'aide de `MongoDB`_ en utilisant la
@@ -62,7 +62,7 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
 .. note::
 
     Définir la configuration dans ``parameters.yml`` est juste une convention.
-    Les paramètres definis dans ce fichiers sont référencés dans le fichier de
+    Les paramètres définis dans ce fichiers sont référencés dans le fichier de
     configuration principal au moment de configurer Doctrine :
     
     .. code-block:: yaml
@@ -141,7 +141,7 @@ cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle`` 
         protected $description;
     }
 
-Cette classe - souvent apellée une « entité », ce qui veut dire *une classe basique
+Cette classe - souvent appelée une « entité », ce qui veut dire *une classe basique
 qui contient des données* - est simple et remplit les besoins métiers des produits
 dans votre application. Cette classe ne peut pas encore être persistée dans une
 base de données - c'est juste une simple classe PHP.
@@ -164,7 +164,7 @@ Ajouter des informations de mapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Doctrine vous permet de travailler avec des bases de données d'une manière beaucoup
-plus intéréssante que de récupérer des lignes basées sur les colonnes de vos tables
+plus intéressante que de récupérer des lignes basées sur les colonnes de vos tables
 dans des tableaux. A la place, Doctrine vous permet de persister des *objets* entiers
 dans votre base de données et récupérer ces objets depuis votre base de données. Ce système
 fonctionne en associant vos classes PHP avec des tables de votre base,
@@ -264,7 +264,7 @@ dans la classe ``Product`` avec les annotations :
 
 .. tip::
 
-    Le nom de la table est optionel et si il est omis il sera détérminé automatiquement
+    Le nom de la table est optionnel et si il est omis il sera déterminé automatiquement
     en se basant sur le nom de la classe de l'entité.
 
 
@@ -371,7 +371,7 @@ Vous avez maintenant une classe ``Product`` utilisable avec des informations de
 mapping permettant à Doctrine de savoir exactement comment le faire persister. Bien sûr,
 vous n'avez toujours pas la table ``product`` correspondante dans votre base de données.
 Heureusement, Doctrine peut créer automatiquement toute les tables de la base de données
-nécéssaires aux entités connues dans votre application. Pour ce faire, lancez :
+nécessaires aux entités connues dans votre application. Pour ce faire, lancez :
 
 .. code-block:: bash
 
@@ -384,8 +384,8 @@ nécéssaires aux entités connues dans votre application. Pour ce faire, lancez
     entités) à ce à quoi elle ressemble *vraiment*, et génère le code SQL nécéssaire
     pour *mettre à jour* la base de données vers ce qu'elle doit être. En d'autre termes,
     si vous ajoutez une nouvelle propriété avec des métadonnées mappées sur 
-    ``Product`` et relancez cette tâche, elle vous génerera une requête « alter table »
-    nécéssaire pour ajouter cette nouvelle colonne à la table ``products`` existante.
+    ``Product`` et relancez cette tâche, elle vous génèrera une requête « alter table »
+    nécessaire pour ajouter cette nouvelle colonne à la table ``products`` existante.
 
     Une façon encore meilleure de profiter de cette fonctionnalité est d'utiliser
     les :doc:`migrations</bundles/DoctrineMigrationsBundle/index>`, qui vous permettent de
@@ -591,7 +591,7 @@ Mettre à jour l'objet ne nécessite que trois étapes :
 2. Modifier l'objet;
 3. Apeller la méthode ``flush()`` du gestionnaire d'entités
 
-Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Rappeler
+Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Souvenez-vous que
 cette méthode dit simplement à Doctrine de gérer, ou « regarder » l'objet ``$product``.
 Dans ce cas, comme vous avez récupéré l'objet ``$product`` depuis Doctrine,
 il est déjà surveillé.
@@ -617,7 +617,7 @@ est appelée.
 Requêter des objets
 -------------------
 
-Vous avez déja vu comment les objets dépôts vous permettaient de lancer des
+Vous avez déjà vu comment les objets dépôts vous permettaient de lancer des
 requêtes basiques sans aucun travail :
 
 .. code-block:: php
@@ -963,7 +963,7 @@ il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
                         name: category_id
                         referencedColumnName: id
 
-Finallement, maintenant que vous avez ajouté une nouvelle propriété aux classes
+Finalement, maintenant que vous avez ajouté une nouvelle propriété aux classes
 ``Category`` et ``Product``, dites à Doctrine de regénérer les getters et setters
 manquants pour vous :
 
@@ -1047,7 +1047,7 @@ Maintenant, regardons le code en action. Imaginez que vous êtes dans un contrô
 
 Maintenant, une simple ligne est ajoutée aux tables ``category`` et ``product``.
 La colonne ``product.category_id`` du nouveau produit est définie comme
-la valeur de l'``id`` de la nouvelle catégorie. Doctrine gèrera la persistence 
+la valeur de l'``id`` de la nouvelle catégorie. Doctrine gérera la persistence
 de cette relation pour vous.
 
 Récupérer des objets associés
@@ -1218,14 +1218,14 @@ Callbacks et cycle de vie
 -------------------------
 
 Parfois, vous voudrez effectuer des actions juste avant ou après qu'une entité 
-ait été inserée, mise à jour ou supprimée. Ces actions sont connues sous le nom
+ait été insérée, mise à jour ou supprimée. Ces actions sont connues sous le nom
 de callbacks du « cycle de vie » (lifecycle), car il s'agit de callbacks (méthodes)
 qui peuvent être appelées à divers moment du cycle de vie de votre entité (par exemple lorsque
-l'entité est inserée, mise à jour, supprimée, etc.).
+l'entité est insérée, mise à jour, supprimée, etc.).
 
 Si vous utilisez des annotations pour vos métadonnées, commencez par activer
 les callbacks du cycle de vie. Si vous utilisez YAML ou XML pour votre mapping,
-ce n'est pas nécéssaire :
+ce n'est pas nécessaire :
 
 .. code-block:: php-annotations
 
@@ -1239,7 +1239,7 @@ ce n'est pas nécéssaire :
     }
 
 Désormais, vous pouvez dire à Doctrine d'éxecutez une méthode à n'importe
-quel événement du cycle de vie. Par exemple, supposons que vous souhaitez
+quel évènement du cycle de vie. Par exemple, supposons que vous souhaitez
 définir une date ``created`` à la date courante, uniquement lorsque l'entité
 est persistée (c.à.d insérée) :
 
@@ -1287,7 +1287,7 @@ Maintenant, juste avant que l'entité soit initialement persistée, Doctrine
 appelera automatiquement la méthode et le champ ``created`` sera défini
 à la date courante.
 
-Vous pouvez procéder ainsi pour n'importe quel autre événement du cycle de
+Vous pouvez procéder ainsi pour n'importe quel autre évènement du cycle de
 vie, ce qui inclut :
 
 * ``preRemove``
@@ -1299,11 +1299,11 @@ vie, ce qui inclut :
 * ``postLoad``
 * ``loadClassMetadata``
 
-Pour plus d'informations sur la signification de ces événements du cycle de vie
-et sur leurs callbacks en général, réferrez vous à la documentation de 
+Pour plus d'informations sur la signification de ces évènements du cycle de vie
+et sur leurs callbacks en général, référez vous à la documentation de
 Doctrine: `Lifecycle Events documentation`_.
 
-.. sidebar:: Callbacks du cycle de vie et traitants d'événements
+.. sidebar:: Callbacks du cycle de vie et traitants d'évènements
 
     Notez que la méthode ``setCreatedValue()`` ne prend pas d'argument.
     C'est toujours le cas des callbacks du cycle de vie, et c'est intentionnel :
@@ -1313,7 +1313,7 @@ Doctrine: `Lifecycle Events documentation`_.
 
     Si vous souhaitez faire des montages plus lourds - comme une identification ou
     envoyer un mail - vous devez écrire une classe externe et l'enregistrer
-    pour écouter ou s'abonner aux évenements, puis lui donner les accès
+    pour écouter ou s'abonner aux évènements, puis lui donner les accès
     à toutes les ressources dont vous aurez besoin. Pour plus d'informations,
     voir :doc:`/cookbook/doctrine/event_listeners_subscribers`.
 
@@ -1377,7 +1377,7 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
 
         /**
         * Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
-        * (refletant les valeurs par défaut des options "type", "length" et *nullable);
+        * (reflétant les valeurs par défaut des options "type", "length" et *nullable);
         * 
         * @ORM\Column()
         */
@@ -1395,7 +1395,7 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
  
         fields:
             # Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
-            # (refletant les valeurs par défaut des options "type", "length" et *nullable);
+            # (reflétant les valeurs par défaut des options "type", "length" et *nullable);
             # l'attribut type est nécessaire dans une configuration en yaml
             name:
                 type: string
@@ -1455,7 +1455,7 @@ Quelques commandes notables ou intéréssantes incluent :
   Pour plus d'informations, voir :doc:`/cookbook/doctrine/reverse_engineering`.
 
 * ``doctrine:mapping:info`` - vous donne toutes les entités dont Doctrine a
-  connaisance et s'il existe des erreurs basiques dans leur mapping.
+  connaissance et s'il existe des erreurs basiques dans leur mapping.
 
 * ``doctrine:query:dql`` et ``doctrine:query:sql`` - vous permet d'effectuer
   des commandes DQL ou SQL directement en ligne de commande.
@@ -1478,7 +1478,7 @@ la base de données.
 
 Et même si Doctrine tourne autour d'un simple concept, il est incroyablement
 puissant, vous permettant de créer des requêtes complexes et de vous abonner
-à des événements qui vous permettent d'effectuer différentes actions au
+à des évènements qui vous permettent d'effectuer différentes actions au
 cours du cycle de vie de vos objets.
 
 Pour plus d'informations sur Doctrine, lisez la section *Doctrine* du 

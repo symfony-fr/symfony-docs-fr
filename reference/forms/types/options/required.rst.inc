@@ -3,12 +3,11 @@ required
 
 **type**: ``Boolean`` **default**: ``true``
 
-Si cette option est à true, un `attribut HTML5 « required »`_ sera affiché.
-La balise ``label`` correspondante s'affichera également avec une classe ``required``.
+En passant cette option à true, un `attribut HTML5 required`_ sera ajouté à l'élément.
+L'élément ``label`` correspondant aura quant à lui la classe ``required``.
 
-C'est une fonctionnalité indépendante de la validation et qui
-This is superficial and independent from validation. At best, if you let Symfony
-guess your field type, then the value of this option will be guessed from
-your validation information.
+Il s'agit seulement de l'affichage : ce n'est pas lié à la validation. Le mieux est de
+laisser Symfony deviner votre type de champ et définir la valeur de cette option en
+fonction de la validation.
 
-.. _`attribut HTML5 « required »`: http://diveintohtml5.info/forms.html
+.. _`attribut HTML5 required`: http://diveintohtml5.info/forms.html

@@ -451,7 +451,7 @@ sera utilisée quand un formulaire sera affiché.
         ));
 
 Par défaut, Twig utilise un layout à base de *div* pour afficher les formulaires.
-Cependant, certaines personnes préfèreront utiliser un layout à base de *tableau*.
+Cependant, certaines personnes préféreront utiliser un layout à base de *tableau*.
 Utilisez la ressource ``form_table_layout.html.twig`` pour utiliser un tel layout :
 
 .. configuration-block::
@@ -541,7 +541,7 @@ utilisé lorsque le formulaire sera affiché.
         ));
 
 Par défaut, le moteur de template PHP utilise un layout à base de *div* pour afficher
-les formulaires. Néanmoins, certains préfèreront afficher leurs formulaires dans un layout
+les formulaires. Néanmoins, certains préféreront afficher leurs formulaires dans un layout
 à base de *tableau*. Utilisez la ressource ``FrameworkBundle:FormTable`` pour utiliser un tel
 layout :
 

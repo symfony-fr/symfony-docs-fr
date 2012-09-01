@@ -78,7 +78,7 @@ validation au début de la classe.
 
 .. note::
 
-	Si vous voulez intégrer cet utilisateur dans le système de sécurité, vous
+    Si vous voulez intégrer cet utilisateur dans le système de sécurité, vous
     devez implémenter la :ref:`UserInterface<book-security-user-entity>` du
     composant Security.
 

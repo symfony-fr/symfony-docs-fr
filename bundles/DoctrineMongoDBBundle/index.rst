@@ -148,7 +148,7 @@ cette classe dans le répertoire ``Document`` de votre bundle ``AcmeStoreBundle`
 Cette classe, souvent appelée un « document », ce qui veut dire *une classe basique
 qui contient des données* - est simple et remplit les besoins métiers des produits
 dans votre application. Cette classe ne peut pas encore être persistée dans
-MongoDB, c'est juste une simple classe PHP. 
+MongoDB, c'est juste une simple classe PHP.	
 
 Ajouter des informations de mapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -772,6 +772,8 @@ Et même si Doctrine tourne autour d'un simple concept, il est incroyablement
 puissant, vous permettant de créer des requêtes complexes et de vous abonner
 à des évènements qui vous permettent d'effectuer différentes actions au
 cours du cycle de vie de vos objets.
+=======
+>>>>>>> upstream/master
 
 Apprenez en plus avec le Cookbook
 ---------------------------------

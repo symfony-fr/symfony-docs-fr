@@ -48,7 +48,7 @@ Rapide exemple::
 .. note::
 
     Bien qu'il soit recommandé de démarrer une session explicitement, une
-    session va en fait être démarrer sur demande, ce qui veut dire, si
+    session va en fait être démarrée sur demande, ce qui veut dire, si
     toute requête d'une session est faite pour lire/écrire des données de
     session.
 
@@ -158,7 +158,7 @@ la variable super-globale ``$_SESSION`` car chaque sac stocke toutes ses
 données sous un espace de noms unique. Cela permet à Symfony2 de co-exister
 en toute quiétude avec d'autres applications ou bibliothèques qui pourrait
 utiliser la varible super-globale ``$_SESSION`` et toutes ses données restent
-entièrement compatible avec la gestion de session de Symfony2.
+entièrement compatibles avec la gestion de session de Symfony2.
 
 Symfony2 fournit deux sortes de sacs de stockage, avec deux implémentations
 séparées. Tout est écrit à l'aide d'interfaces donc vous pourriez étendre
@@ -181,7 +181,8 @@ possède l'API suivante qui est destinée principalement à des fins internes :
 Attributs
 ~~~~~~~~~
 
-Le but des « sacs » implémentant l'interface :class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface`
+Le but des « sacs » implémentant l'interface
+:class:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface`
 est de gérer le stockage des attributs de session. Cela peut inclure des
 choses comme l'ID utilisateur, les paramètres concernant le login tel
 « Se souvenir de moi » ou d'autres informations à propos de l'état de l'utilisateur.
@@ -197,16 +198,16 @@ Tout système de stockage `clé => valeur` est limité quant aux données comple
 qui peuvent être stockées puisque chaque clé doit être unique. Vous pouvez
 néanmoins utiliser les espaces de noms en introduisant une convention de
 nommage pour les clés afin que les différentes parties de votre application
-puissent fonctionner sans heurt. Par exemple, `module1.foo` et `module2.foo`.
+puissent fonctionner sans soucis. Par exemple, `module1.foo` et `module2.foo`.
 Cependant, parfois, cela n'est pas très pratique quand les données des attributs
 sont sous la forme d'un tableau, par exemple pour un ensemble de jetons.
 Dans ce cas, gérer le tableau devient un fardeau car vous devez récupérer
-le tabeau puis le traiter et le stocker de nouveau::
+le tableau puis le traiter et le stocker de nouveau::
 
     $tokens = array('tokens' => array('a' => 'a6c1e0b6',
                                       'b' => 'f4a7b1f3'));
 
-Du coup, quelconque traitement similaire à ce que vous avez ci-dessus pourrait
+Du coup, n'importe quel traitement similaire à ce que vous avez ci-dessus pourrait
 vite devenir moche, même en ajoutant simplement un jeton au tableau::
 
     $tokens = $session->get('tokens');
@@ -237,7 +238,7 @@ possède une API simple :
   Retourne « true » si l'attribut existe ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::keys`:
-  Retourne un tableau des clés d'attributs stockés ;
+  Retourne un tableau des clés d'attributs stockées ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBagInterface::replace`:
   Définit plusieurs attributs en une fois : prend un tableau de clés et

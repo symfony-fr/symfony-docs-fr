@@ -123,7 +123,7 @@ de sous-ensembles de bibliothèques pour les grands projets::
 Dans cet exemple, si vous essayez d'utiliser une classe de l'espace de noms
 ``Doctrine\Common`` ou de l'un de ses enfants, l'« autoloader » va d'abord rechercher
 la classe dans le répertoire ``doctrine-common``, et il va ensuite rechercher dans
-le répertoire ``Doctrine`` (le dernier configuré) s'il ne l'a trouve pas, avant
+le répertoire ``Doctrine`` (le dernier configuré) s'il ne la trouve pas, avant
 d'abandonner. L'ordre des enregistrements est significatif dans ce cas.
 
 .. _standards: http://symfony.com/PSR0

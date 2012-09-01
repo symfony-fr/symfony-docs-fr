@@ -5,11 +5,11 @@
 Le Composant Console
 ====================
 
-    Le composant Console facilite la création d'interfaces de ligne de commandes,
+    Le composant Console facilite la création d'interfaces en ligne de commandes,
     belles et testables.
 
 Le composant Console vous permet de créer des commandes de ligne de commandes.
-Vos commandes de console peuvent être utilisées pour quelconque tâche récurrente,
+Vos commandes de console peuvent être utilisées pour n'importe quelle tâche récurrente,
 comme des cronjobs, des imports, ou d'autres processus à exécuter par lots.
 
 Installation
@@ -132,15 +132,15 @@ Les couleurs d'écriture et de fond disponibles sont : ``black`` (« noir »), `
 Et les options disponibles sont : ``bold`` (« gras »), ``underscore`` (« souligné »),
 ``blink`` (« clignotant »), ``reverse`` (« inversé ») et ``conceal`` (« masqué »).
 
-Utiliser des Arguments de Commande
+Utiliser des arguments de commande
 ----------------------------------
 
 La partie la plus intéressante des commandes sont les arguments et options que
 vous pouvez rendre disponibles. Les arguments sont les chaînes de caractères -
 séparées par des espaces - qui viennent après le nom de la commande lui-même.
-Ils sont ordonnés, et peuvent être optionnels ou requis. Par exemple, ajoutez
+Ils sont ordonnés, et peuvent être optionnels ou obligatoires. Par exemple, ajoutez
 un argument optionnel ``last_name`` à la commande et faites en sorte que l'argument
-``name`` soit requis::
+``name`` soit obligatoire::
 
     $this
         // ...
@@ -161,7 +161,7 @@ La commande peut maintenant être utilisée de l'une des façons suivantes :
     $ app/console demo:greet Fabien
     $ app/console demo:greet Fabien Potencier
 
-Utiliser des Options de Commande
+Utiliser des options de commande
 --------------------------------
 
 Contrairement aux arguments, les options ne sont pas ordonnées (ce qui signifie
@@ -233,7 +233,7 @@ Vous pouvez combiner VALUE_IS_ARRAY avec VALUE_REQUIRED ou VALUE_OPTIONAL de la 
         // ...
         ->addOption('iterations', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How many times should the message be printed?', 1)
 
-Demander de l'Information à l'Utilisateur
+Demander de l'information à l'utilisateur
 -----------------------------------------
 
 Lorsque vous créez des commandes, vous avez la possibilité de collecter plus
@@ -258,7 +258,7 @@ faire la chose suivante::
     $dialog = $this->getHelperSet()->get('dialog');
     $name = $dialog->ask($output, 'Please enter the name of the widget', 'foo');
 
-Tester les Commandes
+Tester les commandes
 --------------------
 
 Symfony2 fournit plusieurs outils pour vous aider à tester vos commandes. La
@@ -323,7 +323,7 @@ en tant que tableau à la méthode
     Vous pouvez aussi tester une application console entière en utilisant
     :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester`.
 
-Appeler une Commande existante
+Appeler une commande existante
 ------------------------------
 
 Si une commande dépend d'une autre ayant été exécutée avant elle, plutôt que de
@@ -358,7 +358,7 @@ en français) la commande que vous voulez exécuter en passant le nom de cette d
 Ensuite, vous devez créer un nouvel :class:`Symfony\\Component\\Console\\Input\\ArrayInput`
 avec les arguments et options que vous souhaitez passer à la commande.
 
-Eventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
+Éventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
 et retourner le code retourné par le commande (retourne la valeur de la méthode
 ``execute()`` de la commande).
 

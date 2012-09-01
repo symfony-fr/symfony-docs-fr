@@ -24,7 +24,7 @@ par le kernel de Symfony. L'évènement ``kernel.request`` est dispatché très 
 le processus de gestion de la requête de Symfony et vous permet de modifier
 l'objet requête.
 
-Créez la classe suivante, en remplacant le chemin par un chemin vers un bundle de
+Créez la classe suivante, en remplaçant le chemin par un chemin vers un bundle de
 votre projet::
 
     // src/Acme/DemoBundle/RequestListener.php

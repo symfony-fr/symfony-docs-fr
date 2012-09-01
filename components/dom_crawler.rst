@@ -45,7 +45,7 @@ vous pouvez naviguer aisément::
     }
 
 Les classes spécialisées :class:`Symfony\\Component\\DomCrawler\\Link`
-et :class:`Symfony\\Component\\DomCrawler\\Form` sont utiles pour intéragir
+et :class:`Symfony\\Component\\DomCrawler\\Form` sont utiles pour interagir
 avec des liens et formulaires HTML lorsque vous naviguez au travers de
 l'arbre HTML.
 

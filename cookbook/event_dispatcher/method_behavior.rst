@@ -1,5 +1,5 @@
 .. index::
-   single: Dispatcher d'Evènements
+   single: Dispatcher d'Évènements
 
 Comment personnaliser le Comportement d'une Méthode sans utiliser l'Héritage
 ============================================================================

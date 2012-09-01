@@ -267,7 +267,7 @@ principale (i.e. ``config.yml``) puis la modifier pour ajouter des outils de deb
     assetic:
         use_controller: true
 
-Etendre un bundle
+Étendre un bundle
 ~~~~~~~~~~~~~~~~~
 
 En plus d'être une façon sympathique d'organiser et de configurer votre code,
@@ -275,7 +275,7 @@ les bundles peuvent étendre d'autres bundles. L'héritage entre bundle vous per
 de surcharger n'importe quel bundle pour personnaliser ses contrôleurs, ses templates,
 ou n'importe lequel de ses fichiers.
 C'est ici que les noms logiques (ex ``@AcmeDemoBundle/Controller/SecuredController.php``)
-se revèlent pratiques : ils font abstraction de l'endroit où est stockée la ressource.
+se révèlent pratiques : ils font abstraction de l'endroit où est stockée la ressource.
 
 Noms logiques de fichiers	
 .........................
@@ -285,7 +285,7 @@ notation :
 ``@NOM_DU_BUNDLE/path/to/file``; Symfony2 remplacera ``@NOM_DU_BUNDLE`` par le chemin
 du bundle. A titre d'exemple, le chemin logique
 ``@AcmeDemoBundle/Controller/DemoController.php`` sera transformé en
-``src/Acme/DemoBundle/Controller/DemoController.php``, car Symfony connait la
+``src/Acme/DemoBundle/Controller/DemoController.php``, car Symfony connaît la
 la location du bundle ``AcmeDemoBundle``.
 	
 Noms logiques de contrôleurs	
@@ -306,9 +306,9 @@ pas besoin d'être stockés sur le système de fichiers. Vous pouvez par exemple
 stocker dans une base de données.
 
 
-Etendre les bundles
+Étendre les bundles
 ...................
-	
+
 Si vous suivez ces conventions, alors vous pouvez utiliser :doc:`l'héritage de bundle</cookbook/bundles/inheritance>`
 pour «surcharger» les fichiers, les contrôleurs et les templates. Par exemple, 
 vous pouvez créer un nouveau bundle (``AcmeNewBundle``) et spécifier qu'il surcharge

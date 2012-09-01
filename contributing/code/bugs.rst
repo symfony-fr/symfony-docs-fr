@@ -30,7 +30,7 @@ Si votre problème ressemble finalement à un bug, signalez-le en utilisant le
 * Donnez autant de détails que possible sur votre environnement (OS, version PHP,
   version Symfony, extensions actives, ...);
 
-* *(optionnel)* Joingnez un :doc:`patch <patches>`.
+* *(optionnel)* Joignez un :doc:`patch <patches>`.
 
 .. _documentation: http://symfony.com/doc/2.0/
 .. _liste de diffusion: http://groups.google.com/group/symfony-users

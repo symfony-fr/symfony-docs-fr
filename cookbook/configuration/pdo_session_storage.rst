@@ -5,7 +5,7 @@ Comment stocker les sessions dans la base de données grâce à PdoSessionStorag
 ==============================================================================
 
 Par défaut, Symfony2 stocke les sessions dans des fichiers. La plupart des sites
-de moyenne et grande envegure vont cependant vouloir stocker les sessions dans la base de données
+de moyenne et grande envergure vont cependant vouloir stocker les sessions dans la base de données
 plutôt que dans des fichiers, car l'usage des bases de données permet plus facilement la
 gestion de la montée en charge dans un environnement multi-serveurs.
 
