@@ -153,7 +153,7 @@ et migrez ensuite lorsque vous serez prêt :
     php app/console doctrine:migrations:migrate
 
 Pour plus d'informations sur comment écrire les migrations elles-mêmes
-(c'est à dire comment remplir les méthodes ``up()`` et ``down()``), lisez la
+(c'est-à-dire comment remplir les méthodes ``up()`` et ``down()``), lisez la
 `documentation`_ officielle sur les Migrations Doctrine.
 
 Exécuter les migrations pendant le déploiement
@@ -182,7 +182,7 @@ Générer les migrations automatiquement
 
 En réalité, vous devrez rarement avoir besoin d'écrire les migrations manuellement,
 puisque la librairie peut générer les classes de migration automatiquement en
-comparant vos informations de « mapping » Doctrine (c'est à dire ce à quoi votre
+comparant vos informations de « mapping » Doctrine (c'est-à-dire ce à quoi votre
 base de données *devrait* ressembler) avec la structure de votre base de données
 actuelle.
 
@@ -273,7 +273,7 @@ La morale de l'histoire est la suivante : après chaque changement que vous
 faites dans votre « mapping » Doctrine, exécutez la commande ``doctrine:migrations:diff``
 pour générer automatiquement vos classes de migration.
 
-Si vous faites cela dès le début de votre projet (c'est à dire dès que les premières
+Si vous faites cela dès le début de votre projet (c'est-à-dire dès que les premières
 tables ont été chargées via une classe de migration), vous serez toujours capable
 de créer une base de données fraîche et d'exécuter les migrations dans l'ordre
 afin d'avoir votre schéma de base de données complètement à jour. En fait, c'est
