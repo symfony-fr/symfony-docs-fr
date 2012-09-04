@@ -1,5 +1,5 @@
 .. index::
-   single: Répartiteur d'évènement
+   single: Event Dispatcher
    single: Components; EventDispatcher
 
 Le Composant répartiteur d'évènement
@@ -70,7 +70,7 @@ tard, l'objet ``Event`` lui-même contient souvent des données à propos de
 l'évènement qui est réparti.
 
 .. index::
-   pair: Répartiteur d'Évènement; Conventions de nommage
+   pair: Event Dispatcher; Naming conventions
 
 Conventions de Nommage
 ......................
@@ -93,7 +93,7 @@ Voici quelques exemples de nom d'évènement correct :
 * ``form.pre_set_data``
 
 .. index::
-   single: Répartiteur d'Évènement; Sous-classes évènements
+   single: Event Dispatcher; Event subclasses
 
 Noms d'évènement et objets évènements
 .....................................
@@ -130,7 +130,7 @@ notifie tous les « listeners » qui se sont enregistrés auprès de cet évène
     $dispatcher = new EventDispatcher();
 
 .. index::
-   single: Répartiteur d'Évènement; Listeners
+   single: Event Dispatcher; Listeners
 
 Connecter des Listeners
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,7 +214,7 @@ Par exemple, l'évènement ``kernel.event`` passe une instance de
 .. _event_dispatcher-closures-as-listeners:
 
 .. index::
-   single: Répartiteur d'Évènement; Créer et répartir un évènement
+   single: Event Dispatcher; Creating and dispatching an event
 
 Créer et répartir un évènement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,7 +327,7 @@ l'objet ``Order`` via la méthode ``getOrder``::
     }
 
 .. index::
-   single: Répartiteur d'Évènement; Souscripteurs d'Evènement
+   single: Event Dispatcher; Event subscribers
 
 Utiliser les souscripteurs d'évènement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -406,7 +406,7 @@ dans le souscripteur et montre aussi comment passer la priorité de chaque
 méthode du « listener ».
 
 .. index::
-   single: Répartiteur d'Évènement; Arrêter le déroulement d'Évènements
+   single: Event Dispatcher; Stopping event flow
 
 .. _event_dispatcher-event-propagation:
 
@@ -442,7 +442,7 @@ qui retourne une valeur booléenne::
     }
 
 .. index::
-   single: Répartiteur d'Évènement; Évènements et « listeners » connaissant le Répartiteur d'Évènement
+   single: Event Dispatcher; Event Dispatcher aware events and listeners
 
 .. _event_dispatcher-dispatcher-aware-events:
 
@@ -541,7 +541,7 @@ une injection via « setter » peut être la manière de faire, et plus particul
 lorsqu'il s'agit de dépendances optionnelles.
 
 .. index::
-   single: Répartiteur d'Évènement; Raccourcis du Répartiteur
+   single: Event Dispatcher; Dispatcher shortcuts
 
 .. _event_dispatcher-shortcuts:
 
