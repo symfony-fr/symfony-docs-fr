@@ -24,7 +24,7 @@ facile à configurer et à utiliser.
 
     Ce chapitre ressemble beaucoup au :doc:`chapitre sur l'ORM Doctrine2</book/doctrine>`,
     qui traite de la manière dont l'ORM Doctrine peut être utilisé pour persister
-    les données dans une base de données relationnel (par exemple : MySQL). C'est
+    les données dans une base de données relationnelle (par exemple : MySQL). C'est
     en ce sens, si vous persistez dans une base de données relationnelle via l'ORM
     ou dans MongoDB via l'ODM, que les philosophies sont proches.
 
@@ -32,12 +32,12 @@ Installation
 ------------
 
 Pour utiliser l'ODM MongoDB, vous avez besoin de deux bibliothèques fournies
-par Doctrine et un bundle qui les intègre dans Symfony.
+par Doctrine et d'un bundle qui les intègre dans Symfony.
 
 Installer le bundle avec Composer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Pour installer DoctrineMongoDBBundle avec Composer ajoutez juste le code
+Pour installer DoctrineMongoDBBundle avec Composer, ajoutez simplement le code
 suivant à votre fichier `composer.json`::
 
     {
@@ -55,13 +55,13 @@ Ensuite, vous pouvez installer les nouvelles dépendances en exécutant la comma
 
     php composer.phar update
 
-Maintenant, Composer téléchargera automatiquement tout les fichiers requis, et les
+Maintenant, Composer téléchargera automatiquement tous les fichiers requis, et les
 installera pour vous.
 
 Activer les annotations et le bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensuite, activez la librairie des annotations en ajoutant le code suivant au chargeur
+Ensuite, activez la bibliothèque des annotations en ajoutant le code suivant au chargeur
 automatique (ci-dessous la ligne ``AnnotationRegistry::registerFile`` existante)::
 
     // app/autoload.php
@@ -70,7 +70,7 @@ automatique (ci-dessous la ligne ``AnnotationRegistry::registerFile`` existante)
     );
 
 Tout ce qu'il reste à faire est de mettre à jour votre fichier ``AppKernel.php``,
-et enregistrer le nouveau bundle::
+et d'enregistrer le nouveau bundle::
 
     // app/AppKernel.php
     public function registerBundles()
@@ -111,11 +111,11 @@ qui activera l'ODM MongoDB dans votre application :
     Bien sûr, vous aurez également besoin de vous assurer que le serveur MongoDB
     est démarré. Pour plus de détails, lisez le guide MongoDB `Quick Start`_.
 
-Un simple exemple : un produit
+Un exemple simple : un produit
 ------------------------------
 
 La manière la plus facile de comprendre l'ODM Doctrine MongoDB est de le voir
-en action. Dans cette section, vous allez suivre les étapes obligatoire pour
+en action. Dans cette section, vous allez suivre les étapes obligatoires pour
 commencer à persister des documents depuis et dans MongoDB.
 
 .. sidebar:: Coder les exemples en même temps
@@ -148,13 +148,13 @@ cette classe dans le répertoire ``Document`` de votre bundle ``AcmeStoreBundle`
 Cette classe, souvent appelée un « document », ce qui veut dire *une classe basique
 qui contient des données* - est simple et remplit les besoins métiers des produits
 dans votre application. Cette classe ne peut pas encore être persistée dans
-MongoDB, c'est juste une simple classe PHP.	
+MongoDB, c'est juste une simple classe PHP.
 
-Ajouter des informations de mapping
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter des informations de « mapping »
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Doctrine vous permet de travailler avec MongoDB d'une manière beaucoup
-plus intéressante que simplement extraire les données comme vous le feriez
+plus intéressante que de simplement extraire les données comme vous le feriez
 pour un tableau. Au lieu de ça, Doctrine vous permet de persister des *objets*
 entiers dans MongoDB et d'extraire des objets entiers depuis MongoDB. Cela
 fonctionne en associant une classe PHP et ses propriétés aux entrées d'une
@@ -162,7 +162,7 @@ collection MongoDB.
 
 Pour que Doctrine soit capable de faire cela, vous avez juste besoin de
 créer des « métadonnées », ou une configuration qui indique exactement à
-Doctrine comme la classe ``Product`` et ses propriétés devraient être
+Doctrine comment la classe ``Product`` et ses propriétés devraient être
 *associées* à MongoDB. Ces métadonnées peuvent être spécifiées dans différents
 formats incluant YAML, XML ou directement dans la classe ``Product`` via les
 annotations :
@@ -225,51 +225,51 @@ annotations :
         </doctrine-mongo-mapping>
 
 Doctrine vous permet de choisir parmi une très grande variété de types de champs
-chacun avec ses propres options. Pour obtenir des informations sur les types de champs
+ayant chacun ses propres options. Pour obtenir des informations sur les types de champs
 disponibles, reportez vous à la section :ref:`cookbook-mongodb-field-types`.
 
 
 .. seealso::
 
-    Vous pouvez aussi regarder la documentation sur les`Bases du Mapping`_ de Doctrine pour
-    avoir tout les détails à propos des informations de mapping. Si vous utilisez 
+    Vous pouvez aussi regarder la documentation sur les `Bases du Mapping`_ de Doctrine pour
+    avoir tous les détails à propos des informations de « mapping ». Si vous utilisez
     les annotations, vous devrez préfixer toutes les annotations avec ``MongoDB\`` 
     (ex: ``MongoDB\String``), ce qui n'est pas montré dans la documentation de
-    Doctrine. Vous devez aussi inclure le morceau de code :
+    Doctrine. Vous devrez aussi inclure le morceau de code :
     ``use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;``, qui *importe*
     le préfixe ``MongoDB`` pour les annotations.
 
-Générer les getters et setters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Générer les accesseurs et mutateurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Même si Doctrine sait maintenant comment persister un objet ``Product`` dans
 MongoDB, la classe elle-même n'est pas encore très utile. Comme ``Product``
-est juste une simple classe PHP, vous devez créer des getters et des setters
-(ex: ``getName()``, ``setName()``) pour pouvoir accéder à ces propriétés (car elles
-sont ``protected``). Heureusement, Doctrine peut faire ça pour vous en exécutant
-la commande :
+est juste une simple classe PHP, vous devez créer des accesseurs et des mutateurs
+(par exemple : ``getName()``, ``setName()``) pour pouvoir accéder à ces propriétés
+(car elles sont ``protected``). Heureusement, Doctrine peut faire ça pour vous
+en exécutant la commande :
 
 .. code-block:: bash
 
     php app/console doctrine:mongodb:generate:documents AcmeStoreBundle
 
-Cette commande s'assure que tous les getters et les setters sont générés pour
-la classe ``Product``. C'est une commande sure - vous pouvez l'exécuter
-encore et encore : elle ne génèrera que les getters et les setters qui n'existent
-pas (c-à-d qu'elle ne remplace pas les méthodes existantes)
+Cette commande s'assure que tous les accesseurs et mutateurs sont générés pour
+la classe ``Product``. C'est une commande sûre ; vous pouvez l'exécuter
+encore et encore : elle ne génèrera que les accesseurs et mutateurs qui n'existent
+pas (c-à-d qu'elle ne remplace pas les méthodes existantes).
 
 .. note::
 
     Doctrine se moque que vos propriétés soient ``protected`` ou ``private``, ou
-    même que vous ayez un getter ou un setter pour une propriété.
-    Les getters et setters sont générés ici seulement parce que vous en aurez besoin
+    même que vous ayez un accesseur ou un mutateur pour une propriété.
+    Les accesseurs et mutateurs sont générés ici seulement parce que vous en aurez besoin
     pour intéragir avec vos objets PHP.
 
 Persister des objets dans MongoDB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant que vous avez un document ``Product`` mappé avec les méthodes getters et
-setters, vous êtes prêt à persister des données dans MongoDB. Dans un
+Maintenant que vous avez un document ``Product`` correspondant aux méthodes accesseurs et
+mutateurs, vous êtes prêt à persister des données dans MongoDB. Dans un
 contrôleur, c'est très facile. Ajoutez la méthode suivante au ``DefaultController``
 du bundle :
 
@@ -302,14 +302,14 @@ du bundle :
 Décortiquons cet exemple :
 
 * **lignes 8 à 10** Dans cette section, vous instanciez et travaillez avec l'objet
-  ``product`` comme n'importe quel autre objet PHP normal;
+  ``product`` comme n'importe quel autre objet PHP normal ;
 
 * **ligne 12** Cette ligne récupère un objet *gestionnaire de document* (document manager)
   de Doctrine, qui est chargé de gérer le processus de persistence et de récupération
-  des objets vers et depuis MongoDB;
+  des objets vers et depuis MongoDB ;
 
 * **ligne 13** La méthode ``persist()`` dit à Doctrine de « gérer » l'objet ``product``.
-  Cela ne requiert pas vraiment qu'une requête soit faite à MongoDB (du moins pas encore).
+  Cela ne requiert pas vraiment qu'une requête soit faite à MongoDB (du moins pas encore) ;
 
 * **ligne 14** Quand la méthode ``flush()`` est appelée, Doctrine regarde dans tous 
   les objets qu'il gère pour savoir s'ils ont besoin d'être persistés dans MongoDB.
@@ -324,7 +324,7 @@ Décortiquons cet exemple :
     global et éxecute la ou les requêtes les plus efficaces possibles.
 
 Pour la création et la suppression d'objet, le fonctionnement est toujours le même. 
-Dans la prochaine section, vous découvrirez que Doctrine est assez rusée pour
+Dans la prochaine section, vous découvrirez que Doctrine est assez rusé pour
 mettre à jour les entrées si elles existent déjà dans MongoDB.
 
 .. tip::
@@ -337,8 +337,8 @@ mettre à jour les entrées si elles existent déjà dans MongoDB.
 Récupérer des objets de MongoDB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Récupérer un objet dans MongoDB est encore plus facile. Par exemple,
-supposons que vous avez configuré une route pour afficher un ``Product`` spécifique
+Récupérer un objet depuis MongoDB est encore plus facile. Par exemple,
+supposons que vous ayez configuré une route pour afficher un ``Product`` spécifique
 en se basant sur la valeur de son ``id``::
 
     public function showAction($id)
@@ -354,11 +354,11 @@ en se basant sur la valeur de son ``id``::
         // faire quelque chose comme envoyer l'objet $product à un template
     }
 
-Lorsque vous requêtez pour un type particulier d'objet, vous utiliserez toujours
-ce qui est connu sous le nom de « dépôt » (ou « repository »). Dites-vous qu'un
-dépôt est une classe PHP dont le seul travail est de vous aider à récupérer 
-des entités d'une certaine classe. Vous pouvez accéder au dépôt d'une classe
-d'entités avec::
+Lorsque vous effectuez une requête pour un type particulier d'objet, vous utiliserez
+toujours ce qui est connu sous le nom de « dépôt » (ou « repository » en anglais).
+Dites-vous qu'un dépôt est une classe PHP dont le seul travail est de vous aider
+à récupérer des entités d'une certaine classe. Vous pouvez accéder au dépôt d'une
+classe d'entités grâce à::
 
     $repository = $this->get('doctrine_mongodb')
         ->getManager()
@@ -368,8 +368,8 @@ d'entités avec::
 
     La chaîne ``AcmeStoreBundle:Product`` est un raccourci que vous pouvez utiliser
     n'importe où dans Doctrine au lieu du nom complet de la classe du document
-    (c.à.d ``Acme\StoreBundle\Entity\Product``). Tant que vos documents sont disponibles
-    sous l'espace de nom ``Entity`` de votre bundle, cela fonctionnera.
+    (c-à-d ``Acme\StoreBundle\Entity\Product``). Tant que vos documents sont disponibles
+    sous l'espace de noms ``Entity`` de votre bundle, cela fonctionnera.
 
 Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte
 de méthodes utiles::
@@ -377,11 +377,11 @@ de méthodes utiles::
     // requête par clé primaire (souvent « id »)
     $product = $repository->find($id);
 
-    /// Noms de méthodes dynamique en se basant sur un nom de colonne
+    /// noms de méthodes dynamiques en se basant sur un nom de colonne
     $product = $repository->findOneById($id);
     $product = $repository->findOneByName('foo');
 
-    // trouver *tout* les produits
+    // trouver *tous* les produits
     $products = $repository->findAll();
 
     // trouver un groupe de produits en se basant sur une valeur de colonne
@@ -398,17 +398,17 @@ récupérer facilement des objets en se basant sur des conditions multiples::
     // requête pour un produit identifié par son nom et son prix
     $product = $repository->findOneBy(array('name' => 'foo', 'price' => 19.99));
 
-    // requête pour tout les produits identifiés par leur nom, triés par prix
+    // requête pour tous les produits identifiés par leur nom, triés par prix
     $product = $repository->findBy(
         array('name' => 'foo'),
         array('price', 'ASC')
     );
 
-Mettre un objet à jour
+Mettre à jour un objet
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Une fois que vous avez récupéré un objet depuis Doctrine, le mettre à jour est
-facile. Supposons que vous avez une route qui associe l'id d'un produit à
+facile. Supposons que vous ayez une route qui associe l'id d'un produit à
 une action de mise à jour dans un contrôleur::
 
     public function updateAction($id)
@@ -428,14 +428,14 @@ une action de mise à jour dans un contrôleur::
 
 Mettre à jour l'objet ne nécessite que trois étapes :
 
-1. Récupérer l'objet depuis Doctrine;
-2. Modifier l'objet;
-3. Apeller la méthode ``flush()`` du gestionnaire de document
+1. Récupérer l'objet depuis Doctrine ;
+2. Modifier l'objet ;
+3. Apeller la méthode ``flush()`` du gestionnaire de document.
 
 Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Souvenez-vous que
 cette méthode dit simplement à Doctrine de gérer, ou « regarder » l'objet ``$product``.
 Dans ce cas, comme vous avez récupéré l'objet ``$product`` depuis Doctrine,
-il est déjà surveillé.
+il est déjà « surveillé ».
 
 Supprimer un objet
 ~~~~~~~~~~~~~~~~~~
@@ -448,7 +448,7 @@ Supprimer un objet est très similaire, mais requiert un appel à la méthode
 
 Comme vous vous en doutez, la méthode ``remove()`` signale à Doctrine
 que vous voulez supprimer le document de MongoDB. La véritable suppression,
-cependant, n'est réellement executée que lorsque la méthode ``flush()``
+cependant, n'est réellement exécutée que lorsque la méthode ``flush()``
 est appelée.
 
 Requêter des objets
@@ -465,8 +465,9 @@ Utiliser le constructeur de requêtes
 
 L'ODM Doctrine est fourni avec un objet « Constructeur » de requête, qui vous
 permet de construire une requête qui retournera exactement les documents que vous
-voulez. Si vous utilisez un IDE, vous pourrez aussi tirer profit de l'autocomplétion
-lorsque vous taperez les noms de méthode. Dans un contrôleur::
+voulez. Si vous utilisez un environnement de développement, vous pourrez aussi
+tirer profit de l'autocomplétion lorsque vous taperez les noms de méthode. Dans
+un contrôleur::
 
     $products = $this->get('doctrine_mongodb')
         ->getManager()
@@ -477,7 +478,7 @@ lorsque vous taperez les noms de méthode. Dans un contrôleur::
         ->getQuery()
         ->execute()
 
-Dans ce cas, la requête retourne 10 produits dont le nom est « foo » et qui sont
+Dans ce cas, la requête retourne dix produits dont le nom est « foo » et qui sont
 triés par ordre de prix du plus petit au plus grand.
 
 L'objet ``QueryBuilder`` contient toutes les méthodes nécessaires pour construire
@@ -489,13 +490,13 @@ conditions que vous pouvez placer dans une requête, lisez la documentation spé
 Classes de dépôt personnalisées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dans la sections précédente, vous avez commencé à construire et utiliser des
+Dans la section précédente, vous avez commencé à construire et à utiliser des
 requêtes plus complexes à l'intérieur de vos contrôleurs. Dans le but d'isoler,
 de tester et de réutiliser ces requêtes, il est conseillé de créer des dépôts
 personnalisés pour vos documents et d'y ajouter les méthodes contenant vos
 requêtes.
 
-Pour ce faire, ajouter le nom de la classe dépôt à vos définitions de mapping.
+Pour ce faire, ajoutez le nom de la classe dépôt à vos définitions de « mapping ».
 
 .. configuration-block::
 
@@ -543,7 +544,7 @@ Doctrine peut générer la classe de dépôt pour vous en exécutant la commande
 
     php app/console doctrine:mongodb:generate:repositories AcmeStoreBundle
 
-Ensuite, ajoutez une méthode - ``findAllOrderedByName()`` - à la classe de dépôt
+Ensuite, ajoutez une méthode ``findAllOrderedByName()`` à la classe de dépôt
 fraîchement générée. Cette méthode requêtera tout les documents ``Product``, en les
 classant par ordre alphabétique.
 
@@ -595,9 +596,9 @@ l'article du cookbook à ce sujet : :doc:`Utiliser les extensions Doctrine</cook
 Référence des types de champs de Doctrine
 -----------------------------------------
 
-Doctrine contient un grand nombre de types de champs. Chacun mappe un type
-de données PHP vers un `type MongoDB`_ spécifique. Voici *quelques uns* des
-types qui sont supportés par Doctrine :
+Doctrine contient un grand nombre de types de champs. Chacun fait correspondre
+un type de données PHP à un `type MongoDB`_ spécifique. Voici *quelques uns*
+des types qui sont supportés par Doctrine :
 
 * ``string``
 * ``int``
@@ -613,12 +614,12 @@ Pour plus d'informations, lisez la documentation Doctrine `Types de mapping Doct
    single: Doctrine; ODM Console Commands
    single: CLI; Doctrine ODM
 
-Commandes en console
+Commandes de console
 --------------------
 
-L'intégration de l'ODM Doctrine2 offre plusieurs commandes en console
-sous l'espace de nom ``doctrine:mongodb``. Pour voir la liste de ces commandes,
-vous pouvez lancer la console sans aucun argument :
+L'intégration de l'ODM Doctrine2 offre plusieurs commandes de console sous l'espace
+de noms ``doctrine:mongodb``. Pour voir la liste de ces commandes, vous pouvez
+lancer la console sans aucun argument :
 
 .. code-block:: bash
 
@@ -636,8 +637,8 @@ sur la commande ``doctrine:mongodb:query``, lancez :
 
 .. note::
 
-   Pour pouvoir charger des données de test (fixtures) dans MongoDB, vous devrez 
-   installer le bundle ``DoctrineFixtureBundle``. Pour apprendre comment
+   Pour pouvoir charger des données de test (« fixtures ») dans MongoDB, vous devrez
+   installer le bundle ``DoctrineFixturesBundle``. Pour apprendre comment
    le faire, lisez la documentation : ":doc:`/bundles/DoctrineFixturesBundle/index`"
 
 .. index::
@@ -647,8 +648,8 @@ sur la commande ``doctrine:mongodb:query``, lancez :
 Configuration
 -------------
 
-Pour obtenir des informations détailles sur les options de configuration disponibles
-lorsque vous l'utilisez l'ODM Doctrine, lisez la section
+Pour obtenir des informations détaillées sur les options de configuration disponibles
+lorsque vous utilisez l'ODM Doctrine, lisez la section
 :doc:`MongoDB Reference</bundles/DoctrineMongoDBBundle/config>`.
 
 Enregistrer des abonnements et des écouteurs d'évènements
@@ -666,9 +667,9 @@ plus d'informations, lisez la `Documentation sur les évènements`_ de Doctrine.
 
 .. note::
 
-    Chaque connexion dans Doctrine possède son propre gestionnaire d'évènement,
-    qui est partagé entre tout les gestionnaires de document rattachés à cette
-    connexion. Les écouteurs et les abonnements peuvent être enregistrés avec tout
+    Chaque connexion dans Doctrine possède son propre gestionnaire d'évènements,
+    qui est partagé entre tous les gestionnaires de document rattachés à cette
+    connexion. Les écouteurs et les abonnements peuvent être enregistrés avec tous
     les gestionnaires d'évènements ou seulement un (en utilisant le nom de la
     connexion).
 
@@ -685,14 +686,15 @@ spécifique.
 
     L'attribut ``priority``, dont la valeur par défaut est ``0`` s'il est absent,
     peut être utilisé pour contrôler l'ordre dans lequel les écouteurs sont enregistrés.
-    Tout comme dans le :ref:`répartiteur d'évènement<event_dispatcher>` de Symfony2,
+    Tout comme dans le :ref:`répartiteur d'évènements<event_dispatcher>` de Symfony2,
     un grand nombre signifie que l'écouteur sera exécuté en premier et les écouteurs
     avec la même priorité seront exécutés dans l'ordre où ils ont été enregistrés
-    par le gestionnaire d'évènement.
+    par le gestionnaire d'évènements.
 
     Enfin, l'attribut ``lazy``, dont la valeur par défaut est ``false`` s'il est
-    absent, peut être utilisé pour demander que l'écouteur soit chargé de manière
-    « fainéante » par le gestionnaire d'évènement lorsque l'évènement est réparti.
+    absent, peut être utilisé pour demander à ce que l'écouteur soit chargé de
+    manière « fainéante » par le gestionnaire d'évènements lorsque l'évènement est
+    réparti.
 
     .. configuration-block::
 
@@ -724,12 +726,12 @@ spécifique.
 *   **Abonnement à un évènement**: Utilisez le tag ``doctrine_mongodb.odm.event_subscriber``
     pour enregistrer un abonnement. Les abonnements sont chargés d'implémenter
     ``Doctrine\Common\EventSubscriber`` et une méthode pour retourner les évènements
-    qu'il surveille. Pour cette raison, ce tag n'a pas d'attribut ``event``, pourtant
+    qu'il surveille. Pour cette raison, ce tag n'a pas d'attribut ``event``, pourtant,
     les attributs ``connection``, ``priority`` et ``lazy`` sont disponibles.
 
 .. note::
 
-    Contrairement aux écouteurs d'évènement Symfony2, le gestionnaire d'évènement
+    Contrairement aux écouteurs d'évènement Symfony2, le gestionnaire d'évènements
     Doctrine s'attend à ce que chaque écouteur et chaque abonnement ait un nom de
     méthode correspondant à/aux évènement(s) observé(s). Pour cette raison, les tags
     mentionnés ci-dessus n'ont pas d'attribut ``method``.
@@ -738,7 +740,7 @@ Intégration du SecurityBundle
 -----------------------------
 
 Un fournisseur d'utilisateur est disponible pour vos projets MongoDB. Il fonctionne
-exactement pareil que le fournisseur d'`entité` décrit dans :doc:`le Cookbook</cookbook/security/entity_provider>`.
+exactement de la même façon que le fournisseur d'`entité` décrit dans :doc:`le Cookbook</cookbook/security/entity_provider>`.
 
 .. configuration-block::
 
@@ -764,7 +766,7 @@ Résumé
 Avec Doctrine, vous pouvez tout d'abord vous focaliser sur vos objets et sur 
 leur utilité dans votre application, puis vous occuper de leur persistence dans
 MongoDB ensuite. Vous pouvez faire cela car Doctrine vous permet d'utiliser n'importe
-quel objet PHP pour stocker vos données et se fie aux métadonnées de mapping
+quel objet PHP pour stocker vos données et se fie aux métadonnées de « mapping »
 pour faire correspondre les données d'un objet à une collection de MongoDB.
 
 Et même si Doctrine tourne autour d'un simple concept, il est incroyablement
@@ -772,7 +774,7 @@ puissant, vous permettant de créer des requêtes complexes et de vous abonner
 à des évènements qui vous permettent d'effectuer différentes actions au
 cours du cycle de vie de vos objets.
 
-Apprenez en plus avec le Cookbook
+Apprenez en plus grâce au Cookbook
 ---------------------------------
 
 * :doc:`/bundles/DoctrineMongoDBBundle/form`
