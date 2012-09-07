@@ -12,7 +12,7 @@ Dans Symfony1, cela était effectué avec les méthodes « preExecute » et
 « postExecute » ; la plupart des principaux « frameworks » ont des méthodes
 similaires mais il n'y a rien de semblable dans Symfony2.
 La bonne nouvelle est qu'il y a une bien meilleure manière d'interférer
-le processus Requête -> Réponse en utilisant le composant « EventDispatcher ».
+le processus Requête -> Réponse en utilisant le :doc:`composant EventDispatcher</components/event_dispatcher/introduction>`.
 
 Exemple de validation de jeton
 ------------------------------
@@ -23,14 +23,14 @@ ou plusieurs clients. Pour ces fonctionnalités privées, vous pourriez
 fournir un jeton à vos clients afin qu'ils s'identifient eux-mêmes.
 
 Donc, avant d'exécuter votre action de contrôleur, vous devez vérifier si
-l'action est restreinte ou pas. Et si elle est restreinte, vous devez valider
+l'action est restreinte ou pas. Si elle est restreinte, vous devez valider
 le jeton fourni.
 
 .. note::
 
-    Veuillez noter que, pour plus de simplicité, les jetons vont être
-    définis dans la configuration et aucune mise en place de base de données
-    ni de fournisseur d'authentification via le composant de Sécurité ne vont
+    Veuillez noter que, pour garder cet article suffisament simple, les jetons
+    vont être définis dans la configuration et aucune mise en place de base de
+    données ni de fournisseur d'authentification via le composant de Sécurité ne vont
     être utilisés.
 
 Créer un filtre interférant avant un processus avec un évènement controller.request
@@ -113,7 +113,7 @@ en apprendre plus sur eux ici :doc:`/cookbook/service_container/event_listener`:
     {
         private $tokens;
 
-        public function __contruct($tokens)
+        public function __construct($tokens)
         {
             $this->tokens = $tokens;
         }
@@ -131,7 +131,7 @@ en apprendre plus sur eux ici :doc:`/cookbook/service_container/event_listener`:
                 return;
             }
 
-            if($controller[0] instanceof TokenAuthenticatedController) {
+            if ($controller[0] instanceof TokenAuthenticatedController) {
                 $token = $event->getRequest()->get('token');
                 if (!in_array($token, $this->tokens)) {
                     throw new AccessDeniedHttpException('This action needs a valid token!');
@@ -155,9 +155,9 @@ qu'un contrôleur quelconque soit exécuté :
         # app/config/config.yml (ou dans votre services.yml)
         services:
             demo.tokens.action_listener:
-              class: Acme\DemoBundle\EventListener\BeforeListener
-              arguments: [ %tokens% ]
-              tags:
+                class: Acme\DemoBundle\EventListener\BeforeListener
+                arguments: [ %tokens% ]
+                tags:
                     - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
     .. code-block:: xml

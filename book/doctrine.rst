@@ -51,13 +51,13 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
 
 .. code-block:: yaml
 
-    #app/config/parameters.yml
-    [parameters]
-        database_driver   = pdo_mysql
-        database_host     = localhost
-        database_name     = test_project
-        database_user     = root
-        database_password = password
+    # app/config/parameters.yml
+    parameters:
+        database_driver:    pdo_mysql
+        database_host:      localhost
+        database_name:      test_project
+        database_user:      root
+        database_password:  password
 
 .. note::
 

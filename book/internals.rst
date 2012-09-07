@@ -526,7 +526,6 @@ Voici par exemple la configuration pour l'environnement de développement :
         web_profiler:
             toolbar: true
             intercept_redirects: true
-            verbose: true
 
     .. code-block:: xml
 
@@ -566,11 +565,6 @@ l'application.
 Quand l'option ``intercept-redirects`` est définie à ``true``, le web
 profiler intercepte les redirections et vous donne l'opportunité d'inspecter
 les données collectées avant de suivre la redirection.
-
-Quand l'option ``verbose`` est définie à ``true``, la Barre d'Outils de
-Débuggage Web affiche beaucoup d'informations. Définir ``verbose`` à ``false``
-cache quelques informations secondaires afin de rendre la barre d'outils plus
-petite.
 
 Si vous activez le profiler web, vous avez aussi besoin de monter les routes
 du profiler :

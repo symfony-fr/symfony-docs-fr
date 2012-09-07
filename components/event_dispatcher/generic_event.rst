@@ -30,19 +30,19 @@ une API simple en plus de la classe de base
 * :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getSubject`:
   Récupère le sujet ;
 
-* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArg`:
+* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArgument`:
   Définit un argument par clé ;
 
-* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArgs`:
+* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::setArguments`:
   Définit un tableau d'arguments ;
 
-* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArg`:
+* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgument`:
   Récupère un argument par clé ;
 
-* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgs`:
+* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArguments`:
   Récupère un tableau d'arguments ;
 
-* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::hasArg`:
+* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::hasArgument`:
   Retourne « true » si la clé de l'argument existe.
 
 Le ``GenericEvent`` implémente aussi :phpclass:`ArrayAccess` sur les
