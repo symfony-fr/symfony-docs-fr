@@ -77,9 +77,8 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
 	
     .. code-block:: bash
 	
-        curl -s http://getcomposer.org/installer | php
-
-      php composer.phar install
+        $ curl -s http://getcomposer.org/installer | php
+      	$ php composer.phar install
 
     Si vous n'avez pas installé ``curl``, vous pouvez juste télécharger le fichier ``installer``
     manuellement à cette adresse http://getcomposer.org/installer. Placez ce fichier dans votre
@@ -87,8 +86,8 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
 
     .. code-block:: bash
  
-    php installer
-    php composer.phar install
+    	$ php installer
+    	$ php composer.phar install
 
 Vérifier la Configuration
 -------------------------
