@@ -97,7 +97,7 @@ supplémentaires :
 Décisions de pré-autorisation
 -----------------------------
 
-Pour les décisions de pré-autorisation, que ce soit des décisions avant
+Pour les décisions de pré-autorisation, que ce soit des décisions prises avant
 quelconque méthode ou bien une action sécurisée qui est invoquée, nous
 reposons sur le service éprouvé « AccessDecisionManager » qui est aussi
 utilisé pour connaître les décisions d'autorisation basées sur des rôles.
@@ -153,10 +153,9 @@ Attributs de Permission vs. Masques Binaires de Permission
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les attributs sont utilisés par l'« AccessDecisionManager », tout comme
-les rôles sont des attributs utilisés par l'« AccessDecisionManager ».
-Souvent, ces attributs représentent en fait une aggrégation de masques
-binaires. Les masques binaires, d'un autre côté, sont utilisés par le
-système d'ACL en interne pour stocker de manière efficace les permissions
+les rôles. Souvent, ces attributs représentent en fait une agrégation de masques
+binaires. D'un autre côté, les masques binaires sous forme d'entier sont utilisés
+par le système d'ACL en interne pour stocker de manière efficace les permissions
 de vos utilisateurs dans la base de données, et pour effectuer des
 vérifications en utilisant des opérations sur les masques binaires extrêmement
 rapides.

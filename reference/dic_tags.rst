@@ -7,7 +7,13 @@ d'une manière spécifique. Par exemple, si vous avez un service que vous voudri
 enregistrer comme écouteur de l'un des évènements du noyau de Symfony, vous pouvez le
 marquer avec le tag ``kernel.event_listener``.
 
-Voici des informations sur l'ensemble des tags disponibles dans Symfony2 :
+Vous pouvez en apprendre un peu plus sur les « tags » en lisant la section ":ref:`book-service-container-tags`"
+du chapitre sur le Conteneur de Service.
+
+Ci-dessous, vous avez des informations sur l'ensemble des tags disponibles dans Symfony2.
+Il pourrait aussi y avoir des « tags » dans d'autres bundles que vous utilisez
+et qui ne sont pas listés ici. Par exemple, le bundle AsseticBundle possède plusieurs
+« tags » qui ne sont pas listés ici.
 
 +-----------------------------------+---------------------------------------------------------------------------+
 | Nom du tag                        | Utilisation                                                               |

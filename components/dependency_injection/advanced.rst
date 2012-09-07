@@ -21,10 +21,10 @@ comme argument d'un autre service.
 
 .. note::
 
-    Si vous utilisez un service privé comme argument de plusieurs autres
-    services, cela résultera en deux différentes instances étant utilisées
-    puisque l'instanciation du service privé est faite durant l'exécution
-    (par exemple : ``new PrivateFooBar()``).
+    Si vous utilisez un service privé comme argument d'un seul autre service,
+    cela résultera en une instanciation « instantanée » (par exemple :
+    ``new PrivateFooBar()``) à l'intérieur de cet autre service, le rendant publiquement
+    indisponible à l'exécution.
 
 Pour faire simple : un service est privé quand vous ne voulez pas y accéder
 directement depuis votre code.

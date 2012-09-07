@@ -229,10 +229,10 @@ de demander ces ressources au conteneur et les utiliser comme metadonnées pour 
     $file = __DIR__ .'/cache/container.php';
     $containerConfigCache = new ConfigCache($file, $isDebug);
 
-    if (!$cache->isFresh()) {
+    if (!$containerConfigCache->isFresh()) {
         $containerBuilder = new ContainerBuilder();
         //--
-        $container->compile();
+        $containerBuilder->compile();
 
         $dumper = new PhpDumper($containerBuilder);
         $containerConfigCache->write(

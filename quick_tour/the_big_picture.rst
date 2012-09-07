@@ -20,24 +20,7 @@ Télécharger Symfony2
 Tout d'abord, vérifiez que vous avez installé et configuré un serveur web (comme
 Apache) avec PHP 5.3.4 ou supérieur.
 
-.. tip::
-   
-    Si vous avez PHP 5.4, vous pouvez utiliser le serveur web intégré. Le serveur
-    intégré ne devrait être utilisé que pour le développement, mais il peut vous
-    aider à démarrer un projet plus rapidement et plus facilement.
-
-    Tapez juste cette commande dans votre répertoire Symfony pour démarrer le serveur :
-    
-    .. code-block:: bash
-
-        $ php app/console server:run localhost:8000
-
-    Alors, l'URL de votre application sera « http://localhost:8000/app_dev.php »
-
-    Si vous voulez accéder à votre application via « http://localhost/app_dev.php »,
-    vous devrez lancer la commande avec des droits d'administrateur.
-
-Vous êtes prêts ? Commencez par télécharger la « `Symfony2 Standard Edition`_ »,
+Vous êtes prêt ? Commencez par télécharger l' « `Édition Standard de Symfony2`_ »,
 une :term:`distribution` Symfony préconfigurée pour répondre à la plupart des besoins,
 et qui contient également du code expliquant comment fonctionne Symfony2
 (téléchargez l'archive avec les *vendors* pour gagner encore plus de temps).
@@ -53,7 +36,7 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
                 cache/
                 config/
                 logs/
-	        Ressources/
+                Resources/
             bin/
             src/
                 Acme/
@@ -72,23 +55,32 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
 
 .. note::
 
-    Si vous avez téléchargé la Standard Edition *sans vendors*, lancez simplement
-    la commande suivante pour télécharger toutes les librairies nécessaires :
-	
-    .. code-block:: bash
-	
-        curl -s http://getcomposer.org/installer | php
-
-      php composer.phar install
-
-    Si vous n'avez pas installé ``curl``, vous pouvez juste télécharger le fichier ``installer``
-    manuellement à cette adresse http://getcomposer.org/installer. Placez ce fichier dans votre
-    projet puis lancez les commandes :
+    Si vous êtes familier avec Composer, vous pouvez exécuter la commande suivante
+    plutôt que de télécharger l'archive :
 
     .. code-block:: bash
- 
-    php installer
-    php composer.phar install
+
+        $ composer.phar create-project symfony/framework-standard-edition path/to/install
+
+        # supprime l'historique de Git
+        $ rm -rf .git
+
+.. tip::
+
+    Si vous avez PHP 5.4, vous pouvez utiliser le serveur web intégré :
+
+    .. code-block:: bash
+
+        # vérifie votre configuration PHP pour la ligne de commandes (« CLI » en anglais)
+        $ php ./app/check.php
+
+        # démarre le serveur web intégré
+        $ php ./app/console server:run
+
+    Alors, l'URL de votre application sera « http://localhost:8000/app_dev.php ».
+
+    Le serveur intégré devrait être utilisé uniquement en phase de développement,
+    mais il peut vous aider à démarrer votre projet rapidement et facilement.
 
 Vérifier la Configuration
 -------------------------
@@ -101,6 +93,18 @@ votre serveur :
 .. code-block:: text
 
     http://localhost/config.php
+
+.. note::
+
+    Toutes les URLs d'exemple assument que vous ayez téléchargé et désarchivé
+    Symfony directement à la racine web de votre serveur web. Si vous avez suivi
+    les instructions ci-dessus et désarchivé le répertoire `Symfony` dans votre
+    racine web, alors ajoutez `/Symfony/web` après `localhost` pour toutes les
+    URLs que vous voyez :
+
+    .. code-block:: text
+
+        http://localhost/Symfony/web/config.php
 
 S'il y encore des problèmes listés, vous devez les corriger. Vous pouvez également
 modifier votre configuration en suivant les recommandations données.
@@ -184,7 +188,7 @@ comprendrez exactement ce que cela signifie vraiment.
 
 .. tip::
     
-    La Symfony2 Standard Edition utilise le format `YAML`_ pour ses fichiers de
+    L'Édition Standard de Symfony2 utilise le format `YAML`_ pour ses fichiers de
     configuration, mais Symfony2 supporte également nativement le XML, le PHP,
     et les annotations. Les différents formats sont compatibles et peuvent être
     utilisés de façon interchangeable dans une application. Enfin, les performances
@@ -389,7 +393,7 @@ plus près le bas de n'importe quelle page affichée par Symfony2; vous devriez 
 une petite barre avec le logo Symfony2. On l'appelle la «Web Debug Toolbar» et
 c'est le meilleur ami du développeur.
 
-.. image:: /images/quick_tour/web_debug_toolbar.png	
+.. image:: /images/quick_tour/web_debug_toolbar.png
    :align: center
 
 Mais ce que vous voyez au premier abord est seulement la partie émergée de l'iceberg.
@@ -466,7 +470,7 @@ comprendre comment Symfony2 aide à mieux implémenter des sites web rapidement.
 Si vous avez envie d'en apprendre plus sur Symfony2, plongez dans la section 
 suivante : «:doc:`La vue<the_view>`».
 
-.. _Symfony2 Standard Edition:      http://symfony.com/download
+.. _Édition Standard de Symfony2:   http://symfony.com/download
 .. _Symfony en 5 minutes:           http://symfony.com/symfony-in-five-minutes
 .. _YAML:                           http://www.yaml.org/
 .. _les annotations dans les contrôleurs:     http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html#annotations-for-controllers

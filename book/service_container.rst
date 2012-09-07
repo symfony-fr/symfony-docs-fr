@@ -931,20 +931,8 @@ Ce qui suit est une liste de tags disponibles avec les bundles noyau de Symfony2
 Chacun d'eux a un effet différent sur votre service et de nombreuses tags nécessitent
 des paramètres supplémentaires (au-delà du paramètre ``name``).
 
-* assetic.filter
-* assetic.templating.php
-* data_collector
-* form.field_factory.guesser
-* kernel.cache_warmer
-* kernel.event_listener
-* monolog.logger
-* routing.loader
-* security.listener.factory
-* security.voter
-* templating.helper
-* twig.extension
-* translation.loader
-* validator.constraint_validator
+Pour une liste de tous les tags disponibles dans le coeur du Framework Symfony,
+consultez :doc:`/reference/dic_tags`.
 
 Apprenez en plus
 ----------------

@@ -264,7 +264,7 @@ qui reçoit la configuration du sexe/genre::
         public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
             $resolver->setDefaults(array(
-                'data_class' => $this->genderChoices 
+                'choices' => $this->genderChoices,
             ));
         }
         
