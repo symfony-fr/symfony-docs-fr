@@ -673,7 +673,7 @@ facilement depuis n'importe quel contrôleur :
     $foo = $session->get('foo');
 
     // utilise une valeur par défaut si la clé n'existe pas
-    $filters = $session->set('filters', array());
+    $filters = $session->get('filters', array());
 
 Ces attributs vont rester affectés à cet utilisateur pour le restant de sa
 session.

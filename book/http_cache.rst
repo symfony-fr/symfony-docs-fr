@@ -630,6 +630,7 @@ md5 du contenu :
     {
         $response = $this->render('MyBundle:Main:index.html.twig');
         $response->setETag(md5($response->getContent()));
+        $response->setPublic(); // permet de s'assurer que la réponse est publique, et qu'elle peut donc être cachée
         $response->isNotModified($this->getRequest());
 
         return $response;
@@ -687,7 +688,14 @@ nécessitant de calculer le rendu de la ressource comme valeur de l'en-tête
         $date = $authorDate > $articleDate ? $authorDate : $articleDate;
 
         $response->setLastModified($date);
-        $response->isNotModified($this->getRequest());
+        // Définit la réponse comme publique. Sinon elle sera privée par défaut.
+        $response->setPublic();
+
+        if ($response->isNotModified($this->getRequest())) {
+            return $response;
+        }
+
+        // ajoutez du code ici pour remplir la réponse avec le contenu complet
 
         return $response;
     }
@@ -724,29 +732,32 @@ exactement ça en exposant un modèle simple et efficace :
 
     public function showAction($articleSlug)
     {
-	// Obtenir le minimum d'informations pour calculer 
-	// l'ETag ou la dernière valeur modifiée (Last-Modified value)
-	// (basé sur lobjet Request, les données sont recueillies
-	// d'une base de données ou d'un couple clé-valeur 
-	// par exemple)
+        // Obtenir le minimum d'informations pour calculer
+        // l'ETag ou la dernière valeur modifiée (Last-Modified value)
+        // (basé sur lobjet Request, les données sont recueillies
+        // d'une base de données ou d'un couple clé-valeur
+        // par exemple)
         $article = // ...
 
-	// Créer un objet Response avec un en-tête ETag 
-	// et/ou un en-tête Last-Modified
+        // Créer un objet Response avec un en-tête ETag
+        // et/ou un en-tête Last-Modified
         $response = new Response();
         $response->setETag($article->computeETag());
         $response->setLastModified($article->getPublishedAt());
 
-	// Vérifier que l'objet Response n'est pas modifié 
-	// pour un objet Request donné
+        // Définit la réponse comme publique. Sinon elle sera privée par défaut.
+        $response->setPublic();
+
+        // Vérifier que l'objet Response n'est pas modifié
+        // pour un objet Request donné
         if ($response->isNotModified($this->getRequest())) {
-	    // Retourner immédiatement un objet 304 Response
+            // Retourner immédiatement un objet 304 Response
             return $response;
         } else {
-	    // faire plus de travail ici - comme récupérer plus de données
+            // faire plus de travail ici - comme récupérer plus de données
             $comments = // ...
             
-	    // ou formatter un template avec la $response déjà existante
+            // ou formatter un template avec la $response déjà existante
             return $this->render(
                 'MyBundle:MyController:article.html.twig',
                 array('article' => $article, 'comments' => $comments),
@@ -953,6 +964,7 @@ indépendamment du reste de la page.
     public function indexAction()
     {
         $response = $this->render('MyBundle:MyController:index.html.twig');
+        // définit l'âge maximal partagé - cela marque aussi la réponse comme étant publique
         $response->setSharedMaxAge(600);
 
         return $response;

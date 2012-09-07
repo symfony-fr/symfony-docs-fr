@@ -83,6 +83,17 @@ Vous pouvez spécifier la configuration de différentes façons :
         type:     exclusive # Inclus tous, excepté ceux listés ci-dessous
         elements: [ foo, bar ]
 
+Créer votre propre Canal
+------------------------
+
+Vous pouvez remplacer les logs du canal de monolog par un service à la fois.
+Cela s'effectue en ajoutant un tag ``monolog.logger`` à votre service et en spécifiant
+dans quel canal le service devrait loguer. En faisant cela, le « logger » qui
+est injecté dans ce service est préconfiguré pour utiliser le canal que vous
+avez spécifié.
+
+Pour plus d'informations - incluant un exemple complet - lisez « :ref:`dic_tags-monolog` »
+dans la section « Tags d'Injection de Dépendance » du document de référence.
 
 En savoir plus grâce au Cookbook
 --------------------------------

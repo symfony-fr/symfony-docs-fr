@@ -152,13 +152,16 @@ la prochaine requête :
 .. code-block:: php
 
     // stocke un message pour la prochaine requête (dans un contrôleur)
-    $session->setFlash('notice', 'Congratulations, your action succeeded!');
+    $session->getFlashBag()->set('notice', 'Congratulations, your action succeeded!');
 
     // affiche le message lors de la requêtes suivante (dans un template)
-    {{ app.session.flash('notice') }}
+    {{ app.session.flashBag.get('notice') }}
 
 C'est utile quand vous avez besoin d'afficher un message de succès avant de
 rediriger l'utilisateur vers une autre page (qui affichera alors le message).
+Veuillez notez que lorsque vous utilisez « has() » ou « get() » à la place
+de « flash », le message flash ne sera pas effacé et restera donc disponible
+durant les prochaines requêtes.
 
 Sécuriser les ressources
 ------------------------

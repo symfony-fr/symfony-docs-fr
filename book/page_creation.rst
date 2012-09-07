@@ -110,7 +110,7 @@ ajouté une entrée lorsque vous avez généré le ``AcmeHelloBundle`` :
     .. code-block:: yaml
 
         # app/config/routing.yml
-         AcmeHelloBundle:
+         acme_hello:
              resource: "@AcmeHelloBundle/Resources/config/routing.yml"
              prefix:   /
 
