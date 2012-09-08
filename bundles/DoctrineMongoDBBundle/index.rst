@@ -775,7 +775,7 @@ puissant, vous permettant de créer des requêtes complexes et de vous abonner
 cours du cycle de vie de vos objets.
 
 Apprenez en plus grâce au Cookbook
----------------------------------
+----------------------------------
 
 * :doc:`/bundles/DoctrineMongoDBBundle/form`
 
