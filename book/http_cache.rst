@@ -42,7 +42,7 @@ Nous allons parcourir ce sujet en quatre étapes :
 
 * **Étape 1**: Une :ref:`passerelle de cache <gateway-caches>`, ou
     reverse proxy, est une couche indépendante qui se trouve devant
-    votre application. Le passerelle met en cache les réponses telles
+    votre application. La passerelle met en cache les réponses telles
     qu'elles sont retournées par l'application et répond aux requêtes
     dont les réponses sont en cache avant qu'elles n'atteignent
     l'application. Symfony2 possède sa propre passerelle par défaut,
