@@ -104,7 +104,7 @@ En plus des paramètres venant des routes, le contrôleur peut également accéd
 
 .. code-block:: php
 
-    $request = $this->$this->getRequest();
+    $request = $this->getRequest();
 
     $request->isXmlHttpRequest(); // is it an Ajax request?
 
@@ -135,7 +135,7 @@ dans un contrôleur :
 
 .. code-block:: php
 
-    $session = $this->$this->getRequest()->getSession();
+    $session = $this->getRequest()->getSession();
 
     // stocke un attribut pour une future requête
     $session->set('foo', 'bar');
