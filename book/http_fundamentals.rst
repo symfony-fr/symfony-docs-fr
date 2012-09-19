@@ -202,7 +202,7 @@ global :
     $foo = $_GET['foo'];
 
     header('Content-type: text/html');
-    echo 'L'URI demandée est: '.$uri;
+    echo 'L\'URI demandée est: '.$uri;
     echo 'La valeur du paramètre "foo" est: '.$foo;
 
 Aussi étrange que cela puisse paraître, cette petite application utilise les
