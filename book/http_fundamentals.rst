@@ -275,7 +275,7 @@ est connecté via une connexion sécurisée (i.e. ``https``).
 
     Comme vu ci-dessus, les variables ``$_GET`` et ``$_POST`` sont accessibles
     respectivement via les propriétés publiques ``query`` et ``request``. Chacun
-    de ces objets et un objet :class:`Symfony\\Component\\HttpFoundation\\ParameterBag`
+    de ces objets est un objet :class:`Symfony\\Component\\HttpFoundation\\ParameterBag`
     qui a des méthodes comme :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::get`,
     :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::has`,
     :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::all` et bien d'autres.
