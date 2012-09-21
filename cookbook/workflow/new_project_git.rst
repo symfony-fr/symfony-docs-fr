@@ -44,7 +44,7 @@ votre dépôt local git :
     Vous pouvez aussi avoir un fichier .gitignore qui peut être utilisé
     sur tout votre système, dans ce cas, vous pourrez trouver plus d'informations
     ici : `Github .gitignore`_.
-    De cette manière, vous pouvez exclure les fichiers/dossiers souvent utilisé par
+    De cette manière, vous pouvez exclure les fichiers/dossiers souvent utilisés par
     votre IDE pour l'ensemble de vos projets.
 
 4. Copiez ``app/config/parameters.yml`` vers ``app/config/parameters.yml.dist``.
@@ -95,7 +95,7 @@ apprendre plus sur comment configurer et développer votre application en intern
 Vendors et Submodules
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Au lieu d'utiliser le le fichier ``composer.json`` pour gérer les
+Au lieu d'utiliser le fichier ``composer.json`` pour gérer les
 bibliothèques vendor, vous pourriez choisir à la place le système natif
 `git submodules`_. Il n'y a rien d'incorrect dans cette approche, bien que le
 système ``composer.json`` soit la manière officielle de résoudre ce problème et qu'il peut
