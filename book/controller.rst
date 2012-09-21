@@ -638,7 +638,7 @@ contrôleur - Symfony2 retournera automatiquement un code de réponse HTTP 500.
 
 .. code-block:: php
 
-    throw new \Exception('Quelque chose s'est mal passé!');
+    throw new \Exception('Quelque chose s\'est mal passé!');
 
 Dans chaque cas, une page d'erreur avec style est retournée à l'utilisateur final et une
 page d'erreur complète avec des infos de debugging est retournée au développeur
