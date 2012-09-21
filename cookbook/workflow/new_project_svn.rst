@@ -58,7 +58,7 @@ configuration basique de Subversion :
    qu'il est hébergé sur `Google code`_ et nommé ``myproject`` :
 
   .. code-block:: bash
-    
+
         $ svn checkout http://myproject.googlecode.com/svn/trunk myproject
 
 4. Copiez les fichiers du projet Symfony2 dans le dossier subversion :
@@ -102,18 +102,13 @@ configuration basique de Subversion :
    nouveaux développeurs peuvent rapidement cloner le projet, copier ce fichier
    vers ``parameters.yml``, l'adapter, et commencer à développer.
 
-8. Finalement, téléchargez toutes les bibliothèques tierces :
-
-  .. code-block:: bash
-    
-        $ php bin/vendors install
+8. Finalement, téléchargez toutes les bibliothèques tierces en exécutant
+   composer. Pour plus de détails, consultez la page :ref:`installation-updating-vendors`
 
 .. tip::
 
-    `git`_ doit être installé pour pouvoir exécuter la commande ``bin/vendors`` ;
-    c'est le protocole utilisé pour aller récupérer les bibliothèques vendor.
-    Cela signifie seulement que ``git`` est utilisé comme outil pour aider au
-    téléchargement des bibliothèques dans le répertoire ``vendor/``.
+    Si vous utilisez des versions « dev », alors git peut être utilisé pour installer
+    ces bibliothèques puisqu'il n'y a pas d'archive disponible à télécharger.
 
 A ce point, vous avez un projet Symfony2 entièrement fonctionnel stocké dans votre
 dépôt Subversion. Le développement peut démarrer avec des commits dans ce dernier.
