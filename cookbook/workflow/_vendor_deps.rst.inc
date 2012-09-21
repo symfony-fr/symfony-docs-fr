@@ -11,7 +11,7 @@ version désirée.
 
 Par défaut, ces bibliothèques sont téléchargées en exécutant ``php composer.phar install``.
 Le fichier binaire ``composer.phar`` est une bibliothèque appellé
-`Composer`_ et vous pouvez en savoir plus sur son installation dans le chapitre
+`Composer`_. Vous pouvez en savoir plus sur son installation dans le chapitre
 :ref:`Installation<installation-updating-vendors>`.
 
 Le fichier ``composer.phar`` utilise un fichier ``composer.json`` situé à la racine
