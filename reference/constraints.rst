@@ -40,8 +40,6 @@ Contraintes de validation de référence
    constraints/File
    constraints/Image
 
-   constraints/Luhn
-
    constraints/Callback
    constraints/All
    constraints/UserPassword

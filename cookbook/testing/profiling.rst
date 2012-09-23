@@ -14,18 +14,14 @@ Le Profiler de Symfony2 :ref:`Profiler <internals-profiler>` collecte de nombreu
 informations à chaque requête. Utilisez celle-ci pour vérifier le nombre d'appels
 à la base de données, le temps passé dans l'exécution du framework, ...
 
-Avant de pouvoir écrire des assertions, vous devez activer le profiler et vous assurez
-qu'il est disponible (il est activé par défaut dans l'environnement de ``test`` )::
+Avant de pouvoir écrire des assertions, vous devez toujours vous assurez que le profiler
+est disponible (il est activé par défaut dans l'environnement de ``test`` )::
 
     class HelloControllerTest extends WebTestCase
     {
         public function testIndex()
         {
             $client = static::createClient();
-
-            // Active le profiler pour la prochaine requête
-            // (cela ne fait rien si le profiler n'est pas disponible)
-            $client->enableProfiler();
             
             $crawler = $client->request('GET', '/hello/Fabien');
 
