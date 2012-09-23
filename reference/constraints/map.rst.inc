@@ -55,11 +55,6 @@ Constraintes sur les fichiers
 * :doc:`File </reference/constraints/File>`
 * :doc:`Image </reference/constraints/Image>`
 
-Constraintes sur la finance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :doc:`Luhn </reference/constraints/Luhn>`
-
 Autres Constraintes
 ~~~~~~~~~~~~~~~~~~~
 
