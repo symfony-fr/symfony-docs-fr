@@ -433,11 +433,11 @@ Maintenant, tout « listener » de ``store.order`` qui n'a pas encore
 été appelé *ne* sera *pas* appelé.
 
 Il est possible de détecter si un évènement a été stoppé en utilisant la méthode
-:method:`Symfony\\Component\\EventDispatcher\\Event::isStoppedPropagation`
+:method:`Symfony\\Component\\EventDispatcher\\Event::isPropagationStopped`
 qui retourne une valeur booléenne::
 
     $dispatcher->dispatch('foo.event', $event);
-    if ($event->isStoppedPropagation()) {
+    if ($event->isPropagationStopped()) {
         // ...
     }
 
@@ -568,7 +568,7 @@ De plus, l'« EventDisptacher » retourne toujours tout évènement qui a
 créé en interne pas le répartiteur. Cela permet d'utiliser des raccourcis
 sympas::
 
-    if (!$dispatcher->dispatch('foo.event')->isStoppedPropagation()) {
+    if (!$dispatcher->dispatch('foo.event')->isPropagationStopped()) {
         // ...
     }
 

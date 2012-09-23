@@ -1,4 +1,4 @@
-﻿﻿.. index::
+﻿.. index::
    single: Dependency Injection; Compilation
 
 Compiler le Conteneur
@@ -24,6 +24,230 @@ de vérifier la validité du conteneur, des passes de compilation supplémentair
 sont utilisées pour optimiser la configuration avant qu'elle soit mise en cache.
 Par exemple, les services privés et les services abstraits sont supprimés, et les
 alias sont résolus.
+
+Gérer la configuration avec les extensions
+------------------------------------------
+
+Tout comme le chargement de la configuration directement dans le conteneur
+qui est expliqué dans :doc:`/components/dependency_injection/introduction`,
+vous pouvez gérer le chargement de la configuration en enregistrant des extensions
+dans le conteneur. La première étape dans le processus de compilation est de
+charger la configuration depuis n'importe quelle classe d'extension enregistrée
+dans le conteneur. Contrairement au chargement direct, les extensions ne sont
+traitées que lorsque le conteneur est compilé. Si votre application est modulaire,
+alors les extensions permettent à chaque module d'enregistrer et de gérer leur
+propre configuration de service.
+
+Les extensions doivent implémenter :class:`Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface`
+et peuvent être enregistrées dans le conteneur avec::
+
+    $container->registerExtension($extension);
+
+Le principal travail de l'extension est accompli dans la méthode ``load``.
+Dans la méthode de chargement, vous pouvez charger la configuration depuis un
+ou plusieurs fichiers de configuration tout comme vous pouvez manipuler les définitions
+du conteneur en utilisant les méthodes montrées dans doc:`/components/dependency_injection/definitions`.
+
+La méthode ``load`` recoit en paramètre un conteneur neuf à configurer, qui
+est ensuite fusionné dans le conteneur dans lequel il est enregistré. Cela
+vous permet d'avoir plusieurs extensions qui gèrent les définitions de conteneur
+indépendament. Les extensions ne s'ajoutent pas à la configuration des conteneurs
+au moment de l'ajout, mais sont traitées lorsque la méthode ``compile`` du conteneur
+est appelée.
+
+Une extension très simple peut charger des fichiers de configuration dans le conteneur::
+
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+    use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+    use Symfony\Component\Config\FileLocator;
+
+    class AcmeDemoExtension implements ExtensionInterface
+    {
+        public function load(array $configs, ContainerBuilder $container)
+        {
+            $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+            $loader->load('services.xml');
+        }
+
+        // ...
+    }
+
+Cela n'apporte pas grand chose comparé au fait de charger le fichier directement
+dans le conteneur global qui est construit. Cela permet juste aux fichiers d'être
+séparés entre les modules/bundles. Être en mesure de travailler sur la configuration
+d'un module à partir de fichiers de configuration en dehors du module/bundle est
+nécessaire pour faire une application complexe et configurable. Cela peut être
+fait en spécifiant les parties des fichiers de configuration qui sont chargés
+directement dans le conteneur comme appartement à une extension particulière.
+Ces parties de la configuration ne seront pas prises en charge directement par
+le conteneur mais par l'Extension concernée.
+
+L'Extension doit définir une méthode ``getAlias`` pour implémenter l'interface::
+
+    // ...
+
+    class AcmeDemoExtension implements ExtensionInterface
+    {
+        // ...
+
+        public function getAlias()
+        {
+            return 'acme_demo';
+        }
+    }
+
+Pour les fichiers de configuration YAML, spécifier l'alias de l'Extension
+comme une clé signifiera que les valeurs seront passées à la méthode ``load``
+de l'Extension :
+
+.. code-block:: yaml
+
+    # ...
+    acme_demo:
+        foo: fooValue
+        bar: barValue
+
+Si ce fichier est chargé dans la configuration, alors ses valeurs ne sont
+traitées que lorsque le conteneur sera compilé et les Extensions chargées::
+
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\Config\FileLocator;
+    use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+
+    $container = new ContainerBuilder();
+    $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
+    $loader->load('config.yml');
+
+    $container->registerExtension(new AcmeDemoExtension);
+    // ...
+    $container->compile();
+
+Les vameurs de ces parties de fichiers de configuration sont passées dans le
+premier argument de la méthode ``load`` de l'extension::
+
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $foo = $configs[0]['foo']; //fooValue
+        $bar = $configs[0]['bar']; //barValue
+    }
+
+L'argument ``$configs`` est un tableau qui contient chaque fichier de configuration
+qui est chargé dans le conteneur. Nous avons chargé qu'un seul fichier dans
+l'exemple ci-dessus mais il s'agit tout de même d'un tableau. Le tableau ressemble
+à ceci::
+
+    array(
+        array(
+            'foo' => 'fooValue',
+            'bar' => 'barValue',
+        )
+    )
+
+Alors que vous pouvez gérer manuellement la fusion des différents fichiers, il
+est cependant préférable d'utiliser :doc:`the Config Component</components/config/introduction>`
+pour fusionner et valider les valeurs de la configuration. Au cours du processus,
+vous pouvez accéder aux valeurs de configuration de cette manière::
+
+    use Symfony\Component\Config\Definition\Processor;
+    // ...
+
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $config = $processor->processConfiguration($configuration, $configs);
+
+        $foo = $config['foo']; //fooValue
+        $bar = $config['bar']; //barValue
+
+        // ...
+    }
+
+Il existe deux autres méthodes que vous devez implémenter. L'une pour
+retourner l'espace de nom XML afin que les parties concernées d'un fichier
+de configuration XML soient passées à l'extension. L'autre pour spécifier
+la base du chemin vers les fichiers XSD pour valider la configuration XML::
+
+    public function getXsdValidationBasePath()
+    {
+        return __DIR__.'/../Resources/config/';
+    }
+
+    public function getNamespace()
+    {
+        return 'http://www.example.com/symfony/schema/';
+    }
+
+.. note::
+
+    La validation XSD est facultative. Retourner ``false`` depuis la méthode
+    ``getXsdValidationBasePath`` la désactivera.
+
+La version XML de la configuration ressemblerait maintenant à ceci :
+
+.. code-block:: xml
+
+    <?xml version="1.0" ?>
+    <container xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:acme_demo="http://www.example.com/symfony/schema/"
+        xsi:schemaLocation="http://www.example.com/symfony/schema/ http://www.example.com/symfony/schema/hello-1.0.xsd">
+
+        <acme_demo:config>
+            <acme_demo:foo>fooValue</acme_hello:foo>
+            <acme_demo:bar>barValue</acme_demo:bar>
+        </acme_demo:config>
+
+    </container>
+
+.. note::
+    
+    Dans le framework full stack Symfony2, il existe une classe Extension de base
+    qui implémente ces méthodes ainsi que des raccourcis de méthodes pour traiter
+    la configuration. Lisez :doc:`/cookbook/bundles/extension` pour plus de détails.
+
+La valeur de configuration traitée peut maintenant être ajoutée aux paramètres du
+conteneur comme si elle était listée dans la section ``parameters`` du fichier de
+configuration, mais avec l'avantage supplémentaire de partager plusieurs fichiers
+ainsi que la validation de la configuration::
+
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $config = $processor->processConfiguration($configuration, $configs);
+
+        $container->setParameter('acme_demo.FOO', $config['foo'])
+
+        // ...
+    }
+
+Des prérequis de configuration plus complexes peuvent être pris en charge
+dans les classes Extension. Par exemple, vous pouvez choisir de charger un
+fichier de configuration de service principal, mais aussi d'en charger un
+secondaire seulement si un paramètre spécifique est défini::
+
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $configuration = new Configuration();
+        $processor = new Processor();
+        $config = $processor->processConfiguration($configuration, $configs);
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
+
+        if ($config['advanced']) {
+            $loader->load('advanced.xml');
+        }
+    }
+
+.. note::
+
+    Si vous devez manipuler la configuration chargée par une extension, alors
+    vous ne pouvez pas le faire depuis une autre extension qui utilise un conteneur
+    neuf. Vous devez plutôt utiliser une passe de compilateur qui fonctionne avec
+    l'ensemble du conteneur après que les extensions ont été traitées.
 
 Créer une Passe de Compilateur
 ------------------------------
@@ -63,6 +287,12 @@ méthode « process » sera alors appelée lorsque le conteneur aura été compi
 
     $container = new ContainerBuilder();
     $container->addCompilerPass(new CustomCompilerPass);
+
+.. note::
+
+    Les passes de compilateur sont enregistrées différemment si vous
+    utilisez le framework full stack. Lisez :doc:`cookbook/service_container/compiler_passes`
+    pour plus de détails.
 
 Contrôler l'Ordre des Passes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -191,7 +421,8 @@ mis en cache en production mais aussi d'avoir une configuration toujours à jour
 
     // ...
 
-    // définir $isDebug en se basant sur une information provenant de votre projet
+    // basé sur une information provenant de votre projet
+    $isDebug = ...;
 
     $file = __DIR__ .'/cache/container.php';
 
@@ -203,7 +434,7 @@ mis en cache en production mais aussi d'avoir une configuration toujours à jour
         //--
         $container->compile();
 
-        if(!$isDebug) 
+        if (!$isDebug){
             $dumper = new PhpDumper($container);
             file_put_contents($file, $dumper->dump(array('class' => 'MyCachedContainer')));
         }
@@ -224,7 +455,8 @@ de demander ces ressources au conteneur et les utiliser comme metadonnées pour 
 
     // ...
 
-    // définissez $isDebug en vous basant sur quelque chose dans votre projet
+    // basé sur quelque chose dans votre projet
+    $isDebug = ...;
 
     $file = __DIR__ .'/cache/container.php';
     $containerConfigCache = new ConfigCache($file, $isDebug);
@@ -252,3 +484,8 @@ mis en cache sera toujours utilisé s'il existe. En mode debug, un fichier de m�
 est écrit avec le timestamp de tout les fichiers de ressource. Ceci sont ensuite vérifiés
 pour voir si les fichiers ont changé, et si c'est le cas, le cache sera considéré comme
 périmé.
+
+.. note::
+
+    Dans le framework full stack, le compilateur et le cache du conteneur s'en
+    occupent pour vous.

@@ -499,7 +499,9 @@ et fusionner tous les tableaux de configuration ensemble.
 La classe de ``Configuration`` peut être bien plus compliquée que ce qui
 est montré ici, supportant des noeuds de tableaux, des noeuds « prototypes »,
 une validation avancée, une normalisation spécifique à XML et une fusion
-avancée. La meilleure façon de voir cela en action est d'effectuer un
+avancée. Vous pouvez en lire plus à ce propos dans
+:doc:`the Config Component documentation</components/config/definition>`.
+Vous pouvez également voir cela en action en effectuant un
 « checkout » d'une des classes de Configuration coeurs, comme par exemple
 la `Configuration du FrameworkBundle`_ ou la `Configuration du TwigBundle`_.
 

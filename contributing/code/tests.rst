@@ -12,11 +12,9 @@ Afin de lancer la suite de tests Symfony2, `installez`_ PHPUnit 3.6.4 ou plus
 récent :
 
 .. code-block:: bash
-
-    $ pear channel-discover pear.phpunit.de
-    $ pear channel-discover components.ez.no
-    $ pear channel-discover pear.symfony-project.com
-    $ pear install phpunit/PHPUnit
+    
+    $ pear config-set auto_discover 1
+    $ pear install pear.phpunit.de/PHPUnit
 
 Dépendances (facultatif)
 ------------------------
