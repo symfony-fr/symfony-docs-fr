@@ -28,7 +28,7 @@ votre dépôt local git :
    Renommez-le en ce que vous voulez.
 
 3. Créez un nouveau fichier nommé ``.gitignore`` à la racine de votre nouveau
-   projet (par exemple : à côté du fichier ``deps``) et coller ce qui suit dedans.
+   projet (par exemple : à côté du fichier ``composer.json``) et coller ce qui suit dedans.
    Les fichiers correspondants à ces patterns seront ignorés par git :
 
    .. code-block:: text
@@ -39,6 +39,13 @@ votre dépôt local git :
         /app/logs/*
         /vendor/  
         /app/config/parameters.yml
+
+.. tip::
+    Vous pouvez aussi avoir un fichier .gitignore qui peut être utilisé
+    sur tout votre système, dans ce cas, vous pourrez trouver plus d'informations
+    ici : `Github .gitignore`_.
+    De cette manière, vous pouvez exclure les fichiers/dossiers souvent utilisés par
+    votre IDE pour l'ensemble de vos projets.
 
 4. Copiez ``app/config/parameters.yml`` vers ``app/config/parameters.yml.dist``.
    Le fichier ``parameters.yml`` est ignoré par git (voir ci-dessus) afin que les
@@ -65,49 +72,12 @@ votre dépôt local git :
 
         $ git commit -m "Initial commit"
 
-8. Finalement, téléchargez toutes les bibliothèques tierces :
-
-   .. code-block:: bash
-
-        $ php bin/vendors install
+8. Finalement, téléchargez toutes les bibliothèques tierces en exécutant
+   composer. Pour plus de détails, consultez la page :ref:`installation-updating-vendors`
 
 A ce point, vous disposez d'un projet Symfony2 totalement fonctionnel qui est
 correctement committé sous git. Vous pouvez immédiatement commencer à
 développer, en committant les nouveaux changements dans votre dépôt git.
-
-.. tip::
-
-    Après exécution de la commande :
-
-    .. code-block:: bash
-
-        $ php bin/vendors install
-
-    votre projet va contenir l'historique git complet de tous les bundles
-    et de toutes les bibliothèques définies dans le fichier ``deps``. Cela
-    peut aller jusqu'à 100 Mo ! Vous pouvez sauvegarder la version actuelle
-    de chaque dépendance avec la commande :
-
-    .. code-block:: bash
-
-        $ php bin/vendors lock
-
-    puis vous pouvez supprimer les répertoires d'historique git avec la commande
-    suivante :
-
-    .. code-block:: bash
-
-        $ find vendor -name .git -type d | xargs rm -rf
-
-    La commande supprime tous les répertoires ``.git`` contenus dans le
-    dossier ``vendor``.
-
-    Si vous voulez mettre à jour les bundles définis dans le fichier ``deps``
-    après cela, vous allez devoir les réinstaller :
-
-    .. code-block:: bash
-
-        $ php bin/vendors install --reinstall
 
 Vous pouvez continuer en lisant le chapitre :doc:`/book/page_creation` pour en
 apprendre plus sur comment configurer et développer votre application en interne.
@@ -125,10 +95,10 @@ apprendre plus sur comment configurer et développer votre application en intern
 Vendors et Submodules
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Au lieu d'utiliser le système ``deps`` et ``bin/vendors`` pour gérer les
+Au lieu d'utiliser le fichier ``composer.json`` pour gérer les
 bibliothèques vendor, vous pourriez choisir à la place le système natif
 `git submodules`_. Il n'y a rien d'incorrect dans cette approche, bien que le
-système ``deps`` soit la manière officielle de résoudre ce problème et qu'il peut
+système ``composer.json`` soit la manière officielle de résoudre ce problème et qu'il peut
 être parfois difficile de travailler avec les git submodules.
 
 Stocker votre projet sur un serveur distant
@@ -154,3 +124,4 @@ qui aide à gérer ceci est `Gitolite`_.
 .. _`GitHub`: https://github.com/
 .. _`dépôt barebones`: http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository
 .. _`Gitolite`: https://github.com/sitaramc/gitolite
+.. _`Github .gitignore`: http://help.github.com/ignore-files/
