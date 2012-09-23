@@ -19,6 +19,7 @@
 * :doc:`/cookbook/configuration/index`
 
   * :doc:`/cookbook/configuration/environments`
+  * :doc:`/cookbook/configuration/override_dir_structure`
   * :doc:`/cookbook/configuration/external_parameters`
   * :doc:`/cookbook/configuration/pdo_session_storage`
   * :doc:`/cookbook/configuration/apache_router`
@@ -26,6 +27,7 @@
 * **Console Commands**
 
   * :doc:`/cookbook/console/console_command`
+  * :doc:`/cookbook/console/usage`
 
 * :doc:`/cookbook/controller/index`
 

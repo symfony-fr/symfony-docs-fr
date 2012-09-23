@@ -1259,6 +1259,84 @@ context ``js`` :
 
 .. _template-formats:
 
+Debugguer
+---------
+
+.. versionadded:: 2.0.9
+    Cette fonctionnalité est disponible depuis Twig ``1.5.x``, qui a été fourni pour
+    la première fois avec Symfony 2.0.9.
+
+Lorsque vous utilisez PHP, vous pouvez utiliser ``var_dump()`` si vous avez
+besoin de trouver rapidement la valeur d'une variable. C'est utile, par exemple,
+dans un contrôleur. La même chose peut être faite lorsque vous utilisez Twig en
+utilisant l'extension de debug. Elle a besoin d'être activée dans la configuration :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/config.yml
+        services:
+            acme_hello.twig.extension.debug:
+                class:        Twig_Extension_Debug
+                tags:
+                     - { name: 'twig.extension' }
+
+    .. code-block:: xml
+
+        <!-- app/config/config.xml -->
+        <services>
+            <service id="acme_hello.twig.extension.debug" class="Twig_Extension_Debug">
+                <tag name="twig.extension" />
+            </service>
+        </services>
+
+    .. code-block:: php
+
+        // app/config/config.php
+        use Symfony\Component\DependencyInjection\Definition;
+
+        $definition = new Definition('Twig_Extension_Debug');
+        $definition->addTag('twig.extension');
+        $container->setDefinition('acme_hello.twig.extension.debug', $definition);
+
+Les paramètres de template peuvent être affichés en utilisant la fonction ``dump`` :
+
+.. code-block:: html+jinja
+
+    {# src/Acme/ArticleBundle/Resources/views/Article/recentList.html.twig #}
+    {{ dump(articles) }}
+
+    {% for article in articles %}
+        <a href="/article/{{ article.slug }}">
+            {{ article.title }}
+        </a>
+    {% endfor %}
+
+Les variables ne seront affichées que si l'option ``debug`` de Twig (dans ``config.yml``)
+est à ``true``. Cela signifie que par défaut, les variables seront affichées en environnement
+de ``dev`` mais pas en environnement de ``prod``.
+
+Vérification de la syntaxe
+--------------------------
+
+.. versionadded:: 2.1
+    La commande ``twig:lint`` a été ajoutée dans Symfony 2.1
+
+Vous pouvez vérifier les éventuelles erreurs de syntaxe dans les templates
+Twig en utilisant la commande ``twig:lint`` :
+
+.. code-block:: bash
+
+    # Vous pouvez vérifier par nom de fichier :
+    $ php app/console twig:lint src/Acme/ArticleBundle/Resources/views/Article/recentList.html.twig
+
+    # ou par répertoire :
+    $ php app/console twig:lint src/Acme/ArticleBundle/Resources/views
+
+    # ou en utilisant le nom du bundle :
+    $ php app/console twig:lint @AcmeArticleBundle
+
 Les Formats de Template
 -----------------------
 

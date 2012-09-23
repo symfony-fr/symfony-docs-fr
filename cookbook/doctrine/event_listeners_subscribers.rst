@@ -2,9 +2,8 @@
    single: Doctrine; Event listeners and subscribers
 
 .. _doctrine-event-config:
-
-Enregistrer des listeners (« écouteurs » en français) et des souscripteurs d'évènement
-======================================================================================
+Comment enregistrer des listeners (« écouteurs » en français) et des souscripteurs d'évènement
+==============================================================================================
 
 Doctrine est fourni avec un riche système d'évènement qui lance des évènements à
 chaque fois - ou presque - que quelque chose se passe dans le système. Pour vous,

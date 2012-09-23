@@ -434,17 +434,17 @@ suivante au ``DefaultController`` du bundle :
 
 Décortiquons cet exemple :
 
-* **lignes 8 à 11** Dans cette section, vous instanciez et travaillez avec l'objet
+* **lignes 9 à 12** Dans cette section, vous instanciez et travaillez avec l'objet
   ``product`` comme n'importe quel autre objet PHP normal;
 
-* **ligne 13** Cette ligne récupère un objet *gestionnaire d'entités* (entity manager)
+* **ligne 14** Cette ligne récupère un objet *gestionnaire d'entités* (entity manager)
   de Doctrine, qui est responsable de la gestion du processus de persistence et de récupération
   des objets vers et depuis la base de données;
 
-* **ligne 14** La méthode ``persist()`` dit à Doctrine de « gérer » l'objet ``product``.
+* **ligne 15** La méthode ``persist()`` dit à Doctrine de « gérer » l'objet ``product``.
   Cela ne crée pas vraiment de requête dans la base de données (du moins pas encore).
 
-* **ligne 15** Quand la méthode ``flush()`` est appelée, Doctrine regarde dans tous 
+* **ligne 16** Quand la méthode ``flush()`` est appelée, Doctrine regarde dans tous 
   les objets qu'il gère pour savoir si ils ont besoin d'être persistés dans la base
   de données. Dans cet exemple, l'objet ``$product`` n'a pas encore été persisté,
   le gestionnaire d'entités éxecute donc une requête ``INSERT`` et une ligne est créée dans

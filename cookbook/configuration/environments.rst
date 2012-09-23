@@ -350,6 +350,11 @@ développez et débuggez). Bien que celui-ci puisse varier, le répertoire
 
 * ``twig/`` - ce répertoire contient tous les templates Twig cachés.
 
+.. note::
+ 
+    Vous pouvez facilement changer l'emplacement du répertoire et son nom. Pour
+    plus d'informations, lisez l'article :doc:`/cookbook/configuration/override_dir_structure`.
+
 Aller plus loin
 ---------------
 

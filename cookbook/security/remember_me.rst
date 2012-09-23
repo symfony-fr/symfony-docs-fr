@@ -24,7 +24,7 @@ par défaut qui sont détaillées ici :
             main:
                 remember_me:
                     key:      "%secret%"
-                    lifetime: 3600
+                    lifetime: 31536000 # 365 jours en secondes
                     path:     /
                     domain:   ~ # Prend la valeur par défaut du domaine courant depuis $_SERVER
 
@@ -35,7 +35,7 @@ par défaut qui sont détaillées ici :
             <firewall>
                 <remember-me
                     key      = "%secret%"
-                    lifetime = "3600"
+                    lifetime = "31536000" <!-- 365 jours en secondes -->
                     path     = "/"
                     domain   = "" <!-- Prend la valeur par défaut du domaine courant depuis $_SERVER -->
                 />
@@ -49,7 +49,7 @@ par défaut qui sont détaillées ici :
             'firewalls' => array(
                 'main' => array('remember_me' => array(
                     'key'                     => '%secret%',
-                    'lifetime'                => 3600,
+                    'lifetime'                => 31536000, // 365 jours en secondes
                     'path'                    => '/',
                     'domain'                  => '', // Prend la valeur par défaut du domaine courant depuis $_SERVER
                 )),

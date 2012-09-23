@@ -150,7 +150,7 @@ qui aide à gérer ceci est `Gitolite`_.
 .. _`git`: http://git-scm.com/
 .. _`Symfony2 Standard Edition`: http://symfony.com/download
 .. _`Readme de la Standard Edition`: https://github.com/symfony/symfony-standard/blob/master/README.md
-.. _`git submodules`: http://book.git-scm.com/5_submodules.html
+.. _`git submodules`: http://git-scm.com/book/en/Git-Tools-Submodules
 .. _`GitHub`: https://github.com/
-.. _`dépôt barebones`: http://progit.org/book/ch4-4.html
+.. _`dépôt barebones`: http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository
 .. _`Gitolite`: https://github.com/sitaramc/gitolite

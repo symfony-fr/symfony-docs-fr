@@ -1,4 +1,4 @@
-* **Le Composant Chargeur de Classes (« Class Loader » en anglais)**
+* **Class Loader**
 
   * :doc:`/components/class_loader`
 
@@ -9,11 +9,12 @@
   * :doc:`/components/config/caching`
   * :doc:`/components/config/definition`
 
-* **Le Composant Console**
+* :doc:`/components/console/index`
 
-  * :doc:`/components/console`
+  * :doc:`/components/console/introduction`
+  * :doc:`/components/console/usage`
 
-* **Le Composant Sélecteur CSS**
+* **CSS Selector**
 
   * :doc:`/components/css_selector`
 
@@ -28,21 +29,21 @@
   * :doc:`/components/dependency_injection/parentservices`
   * :doc:`/components/dependency_injection/advanced`
 
+* **DOM Crawler**
+
+* :doc:`/components/dom_crawler`
+
 * :doc:`/components/event_dispatcher/index`
 
   * :doc:`/components/event_dispatcher/introduction`
   * :doc:`/components/event_dispatcher/container_aware_dispatcher`
   * :doc:`/components/event_dispatcher/generic_event`
 
-* **Le Composant « DOM Crawler »**
-
-  * :doc:`/components/dom_crawler`
-
-* **Le Composant Système de Fichiers**
+* **Filesystem**
 
   * :doc:`/components/filesystem`
-
-* **Le Composant « Finder »**
+  
+* **Finder**
 
   * :doc:`/components/finder`
 
@@ -53,22 +54,26 @@
   * :doc:`/components/http_foundation/session_configuration`
   * :doc:`/components/http_foundation/session_testing`
 
-* **Le Composant « Locale »**
+* **Locale**
 
   * :doc:`/components/locale`
 
-* **Le Composant « Process »**
+* **Process**
 
   * :doc:`/components/process`
 
-* **Le Composant Routeur**
+* **Routing**
 
   * :doc:`/components/routing`
 
-* **Le Composant « Templating »**
+* **Serializer**
+
+  * :doc:`/components/serializer`
+
+* **Templating**
 
   * :doc:`/components/templating`
 
-* **Le Composant YAML**
+* **YAML**
 
   * :doc:`/components/yaml`
