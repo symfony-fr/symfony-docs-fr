@@ -17,15 +17,15 @@ passe pour des raisons de sécurité.
 Lorsqu'elle est appliquée à un tableau (ou à un objet de type Traversable), cette
 contrainte vous permet d'appliquer une collection de contraintes à chaque élément du tableau.
 
-+----------------+----------------------------------------------------------------------------------------+
-| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                                |
-+----------------+----------------------------------------------------------------------------------------+
-| Options        | - `message`_                                                                           |
-+----------------+----------------------------------------------------------------------------------------+
-| Classe         | :class:`Symfony\\Bridge\\Security\\Core\\Validator\\Constraints\\UserPassword`         |
-+----------------+----------------------------------------------------------------------------------------+
-| Validateur     | :class:`Symfony\\Bridge\\Security\\Core\\Validator\\Constraint\\UserPasswordValidator` |
-+----------------+----------------------------------------------------------------------------------------+
++----------------+-------------------------------------------------------------------------------------------+
+| S'applique à   | :ref:`propriété ou méthode<validation-property-target>`                                   |
++----------------+-------------------------------------------------------------------------------------------+
+| Options        | - `message`_                                                                              |
++----------------+-------------------------------------------------------------------------------------------+
+| Classe         | :class:`Symfony\\Component\\Security\\Core\\Validator\\Constraint\\UserPassword`          |
++----------------+-------------------------------------------------------------------------------------------+
+| Validateur     | :class:`Symfony\\Component\\Security\\Core\\Validator\\Constraint\\UserPasswordValidator` |
++----------------+-------------------------------------------------------------------------------------------+
 
 Utilisation de base
 -------------------
@@ -43,7 +43,7 @@ que l'ancien mot de passe est correct :
         Acme\UserBundle\Form\Model\ChangePassword:
             properties:
                 oldPassword:
-                    - UserPassword:
+                    - Symfony\Component\Security\Core\Validator\Constraint\UserPassword:
                         message: "Votre mot de passe actuel est erroné"
 
     .. code-block:: php-annotations
@@ -51,12 +51,12 @@ que l'ancien mot de passe est correct :
        // src/Acme/UserBundle/Form/Model/ChangePassword.php
        namespace Acme\UserBundle\Form\Model;
        
-       use Symfony\Component\Validator\Constraints as Assert;
+       use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
        class ChangePassword
        {
            /**
-            * @Assert\UserPassword(
+            * @SecurityAssert\UserPassword(
             *     message = "Votre mot de passe actuel est erroné"
             * )
             */

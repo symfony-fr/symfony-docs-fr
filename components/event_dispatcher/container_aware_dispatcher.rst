@@ -1,5 +1,5 @@
 .. index::
-   single: Event Dispatcher; Container Aware; Dependency Injection; DIC
+   single: Event Dispatcher; Service container aware
 
 Le Répartiteur d'évènement du Container Aware
 =============================================
@@ -11,9 +11,9 @@ Introduction
 ------------
 
 La classe :class:`Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher`
-est une implémentation spéciale du répartiteur d'évènement qui est couplé au composant
-« Dependency Injection Container (DIC) » (« Conteneur d'Injection de Dépendances » en
-français). Il permet aux services du « DIC » d'être spécifiés en tant que « listeners »
+est une implémentation spéciale du répartiteur d'évènement qui est couplé au conteneur
+de services qui fait partie du :doc:`composant d'Injection de Dépendance</components/dependency_injection/introduction>`.
+Il permet aux services d'être spécifiés en tant que « listeners »
 d'évènement rendant le répartiteur d'évènement extrêmement puissant.
 
 Les services sont chargés de manière fainéante (« lazy loading » en anglais), ce qui
@@ -40,12 +40,12 @@ Le *Répartiteur d'Évènement du Container Aware* peut soit directement
 charger des services spécifiques, soit des services qui implémentent
 :class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`.
 
-Les exemples suivants supposent que le « DIC » a été chargé avec tous les
-services qui sont mentionnés.
+Les exemples suivants supposent que le conteneur de services a été chargé
+avec tous les services qui sont mentionnés.
 
 .. note::
 
-    Les services doivent être marqués comme publics dans le « DIC ».
+    Les services doivent être marqués comme publics dans le conteneur.
 
 Ajouter des services
 ~~~~~~~~~~~~~~~~~~~~

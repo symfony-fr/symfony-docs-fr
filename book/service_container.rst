@@ -934,6 +934,30 @@ des paramètres supplémentaires (au-delà du paramètre ``name``).
 Pour une liste de tous les tags disponibles dans le coeur du Framework Symfony,
 consultez :doc:`/reference/dic_tags`.
 
+Débugger les services
+---------------------
+
+Vous pouvez voir quels services sont enregistrés dans le conteneur grâce à la console.
+Pour afficher tout les services et les classes de chacun d'entre eux, exécutez :
+
+.. code-block:: bash
+
+    $ php app/console container:debug
+
+Par défaut, seuls les services publics sont affichés, mais vous pouvez également
+voir les services privés :
+
+.. code-block:: bash
+
+    $ php app/console container:debug --show-private
+
+Vous pouvez obtenir des informations détaillées sur un service particulier en
+spécifiant son identifiant :
+
+.. code-block:: bash
+
+    $ php app/console container:debug my_mailer
+
 Apprenez en plus
 ----------------
 

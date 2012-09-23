@@ -57,7 +57,12 @@ la Distribution Standard :
 
 .. code-block:: bash
 
-    php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony
+    php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony 2.1.x-dev
+
+.. tip::
+
+    Pour une version exacte, remplacez `2.1.x-dev` par la dernière version de
+    Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
 
 Cette commande peut prendre plusieurs minutes pour s'exécuter car « Composer »
 télécharge la Distribution Standard ainsi que toutes les bibliothèques « vendor »
@@ -107,6 +112,11 @@ avec l'une des commandes suivantes (remplacez ``###`` par le nom du fichier) :
 
 Si vous avez téléchargé la distribution sans les « vendors », vous devez lire
 la section suivante.
+
+.. note::
+
+    Vous pouvez facilement surcharger la structure de répertoires par défaut. Lisez
+    :doc:`/cookbook/configuration/override_dir_structure` pour plus d'informations
 
 .. _installation-updating-vendors:
 
@@ -269,7 +279,7 @@ Commencer à développer
 
 Maintenant que vous avez une application Symfony2 fonctionnelle, vous pouvez
 commencer à développer ! Votre distribution devrait contenir un exemple de code.
-Vérifiez le fichier ``README.rst`` inclu avec la distribution (ouvrez le en tant
+Vérifiez le fichier ``README.md`` inclu avec la distribution (ouvrez le en tant
 que fichier texte) pour savoir quel exemple de code est inclu avec votre distribution
 et savoir comment le supprimer par la suite.
 
@@ -315,3 +325,4 @@ pour récupérer toutes les librairies nécessaires.
 .. _`Composer`: http://getcomposer.org/
 .. _`Apache`: http://httpd.apache.org/docs/current/mod/core.html#documentroot
 .. _`Nginx`: http://wiki.nginx.org/Symfony
+.. _`Installation de Symfony`:    http://symfony.com/download
