@@ -60,10 +60,13 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
 
     .. code-block:: bash
 
-        $ composer.phar create-project symfony/framework-standard-edition path/to/install
+        $ composer.phar create-project symfony/framework-standard-edition path/to/install 2.1.x-dev
 
         # supprime l'historique de Git
         $ rm -rf .git
+
+    Pour une version exacte, remplacez `2.1.x-dev` par la dernière version de
+    Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
 
 .. tip::
 
@@ -475,3 +478,4 @@ suivante : «:doc:`La vue<the_view>`».
 .. _YAML:                           http://www.yaml.org/
 .. _les annotations dans les contrôleurs:     http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html#annotations-for-controllers
 .. _Twig:                           http://twig.sensiolabs.org/
+.. _`Installation de Symfony`:    http://symfony.com/download

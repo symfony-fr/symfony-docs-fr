@@ -462,15 +462,21 @@ application, utilisez la commande ``container:debug``.
 Accéder aux données du profileur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Pour chaque requête, le profileur Symfony collecte et stocke plein d'informations
-sur la gestion interne des requêtes. Par exemple, le profileur peut être utilisé
-pour vérifier qu'une page donnée ne dépasse pas un certain nombre de requêtes en
-base de données lors de son chargement.
+Pour chaque requête, vous pouvez activer le profileur Symfony afin de
+collecter et stocker diverses informations sur la gestion interne des requêtes.
+Par exemple, le profileur peut être utilisé pour vérifier qu'une page donnée ne
+dépasse pas un certain nombre de requêtes en base de données lors de son chargement.
 
 Pour obtenir le profileur de la dernière requête, utilisez le code suivant:
 
 .. code-block:: php
 
+    // active le profileur pour la requête suivante
+    $client->enableProfiler();
+ 
+    $crawler = $client->request('GET', '/profiler');
+  
+    // récupère le profil
     $profile = $client->getProfile();
 
 Pour des détails spécifique sur l'utilisation du profileur au sein d'un test,

@@ -40,6 +40,8 @@ s'il contient toujours la dernière version ou si son contenu devrait
         $resources = array();
 
         foreach ($yamlUserFiles as $yamlUserFile) {
+            // Lisez l'article précédent « Chargement des ressources »
+            // pour voir d'où provient $delegatingLoader
             $delegatingLoader->load($yamlUserFile);
             $resources[] = new FileResource($yamlUserFile);
         }

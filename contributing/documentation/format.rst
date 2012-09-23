@@ -122,6 +122,52 @@ La liste des formats supportés :
 | php-annotations       | Annotations |
 +-----------------------+-------------+
 
+Ajouter des liens
+~~~~~~~~~~~~~~~~~
+
+POur ajouter des liens à d'autres pages dans les documents, utilisez la
+syntaxe suivante :
+
+.. code-block:: rst
+
+    :doc:`/path/to/page`
+
+En utilisant le chemin et le nom du fichier de la page sans l'extension,
+par exemple :
+
+.. code-block:: rst
+
+    :doc:`/book/controller`
+
+    :doc:`/components/event_dispatcher/introduction`
+
+    :doc:`/cookbook/configuration/environments`
+
+Le texte du lien sera le titre principal du document vers lequel pointe le
+lien. Vous pouvez aussi spécifier un autre texte pour le lien :
+
+.. code-block:: rst
+
+    :doc:`Spooling Email</cookbook/email/spool>`
+
+Vous pouvez aussi ajouter des liens vers la documentation de l'API :
+
+.. code-block:: rst
+
+    :class:`Symfony\\Component\\Routing\\Matcher\\ApacheUrlMatcher`
+
+    :method:`Symfony\\Component\\HttpKernel\\Bundle\\Bundle::build`
+
+et vers la documentation de PHP :
+
+.. code-block:: rst
+
+    :phpclass:`SimpleXMLElement`
+
+    :phpmethod:`DateTime::createFromFormat`
+
+    :phpfunction:`iterator_to_array`
+
 Tester une Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

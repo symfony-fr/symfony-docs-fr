@@ -109,7 +109,6 @@ un token authentifié dans le contexte de sécurité en cas de succès.
     use Symfony\Component\Security\Core\Exception\AuthenticationException;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-    use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
     use Acme\DemoBundle\Security\Authentication\Token\WsseUserToken;
 
     class WsseListener implements ListenerInterface
@@ -127,35 +126,35 @@ un token authentifié dans le contexte de sécurité en cas de succès.
         {
             $request = $event->getRequest();
 
-            if ($request->headers->has('x-wsse')) {
-
-                $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
-
-                if (preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)) {
-                    $token = new WsseUserToken();
-                    $token->setUser($matches[1]);
-
-                    $token->digest   = $matches[2];
-                    $token->nonce    = $matches[3];
-                    $token->created  = $matches[4];
-
-                    try {
-                        $returnValue = $this->authenticationManager->authenticate($token);
-
-                        if ($returnValue instanceof TokenInterface) {
-                            return $this->securityContext->setToken($returnValue);
-                        } elseif ($returnValue instanceof Response) {
-                            return $event->setResponse($returnValue);
-                        }
-                    } catch (AuthenticationException $e) {
-                        // vous pourriez logger quelque chose ici
-                    }
-                }
+            $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
+            if (!$request->headers->has('x-wsse') || 1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)) {
+                return;
             }
 
-            $response = new Response();
-            $response->setStatusCode(403);
-            $event->setResponse($response);
+            $token = new WsseUserToken();
+            $token->setUser($matches[1]);
+
+            $token->digest   = $matches[2];
+            $token->nonce    = $matches[3];
+            $token->created  = $matches[4];
+
+            try {
+                $authToken = $this->authenticationManager->authenticate($token);
+
+                $this->securityContext->setToken($authToken);
+            } catch (AuthenticationException $failed) {
+                // ... you might log something here
+
+                // To deny the authentication clear the token. This will redirect to the login page.
+                // $this->securityContext->setToken(null);
+                // return;
+
+                // Deny authentication with a '403 Forbidden' HTTP response
+                $response = new Response();
+                $response->setStatusCode(403);
+                $event->setResponse($response);
+
+            }
         }
     }
 

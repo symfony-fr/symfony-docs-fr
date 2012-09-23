@@ -315,10 +315,3 @@ souhaitez l'utiliser. Un exemple basique de la classe
     Si vous utilisez le cache, le composant de Routage va compiler de nouvelles
     classes qui seront sauvegardées dans le ``cache_dir``. Cela signifie que votre
     script doit avoir les permissions d'écriture nécessaires pour ce chemin.
-
-.. versionadded:: 2.1
-    Depuis Symfony 2.1, le composant de Routage accepte aussi des valeurs
-    Unicode dans les routes comme par exemple::
-
-        $routes->add('unicode_route', new Route('/Жени'));
-
