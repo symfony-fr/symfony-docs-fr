@@ -152,10 +152,12 @@ la prochaine requête :
 .. code-block:: php
 
     // stocke un message pour la prochaine requête (dans un contrôleur)
-    $session->getFlashBag()->set('notice', 'Congratulations, your action succeeded!');
+    $session->getFlashBag()->add('notice', 'Congratulations, your action succeeded!');
 
-    // affiche le message lors de la requêtes suivante (dans un template)
-    {{ app.session.flashBag.get('notice') }}
+    // affiche tout les messages lors de la requêtes suivante (dans un template)
+    {% for flashMessage in app.session.flashbag.get('notice') %}   
+        <div>{{ flashMessage }}</div>  
+    {% endfor %}
 
 C'est utile quand vous avez besoin d'afficher un message de succès avant de
 rediriger l'utilisateur vers une autre page (qui affichera alors le message).

@@ -79,9 +79,8 @@ Flux de fonctionnement d'une session
   cookie qui va être émis lors de l'appel de cette méthode ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::invalidate`:
-  Supprime les données de la session et regénère l'ID de la session - ne pas
+  Supprime toutes les données de la session et regénère l'ID de la session - ne pas
   utiliser ``session_destroy()``.
-  C'est un raccourci pour les méthodes ``clear()`` et ``migrate()`` ;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getId`:
   Récupère l'ID de la session - ne pas utiliser ``session_id()`` ;

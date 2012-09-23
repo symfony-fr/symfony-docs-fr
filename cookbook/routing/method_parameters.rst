@@ -1,8 +1,8 @@
 .. index::
    single: Routing; _method
 
-Utilise des méthodes HTTP autres que GET et POST dans les routes
-================================================================
+Comment utiliser des méthodes HTTP autres que GET et POST dans les routes
+=========================================================================
 
 La méthode HTTP d'une requête est l'un des prérequis qui peuvent être
 vérifiés pour valider si une route correspond ou pas. Cela est abordé dans le

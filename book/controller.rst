@@ -124,7 +124,7 @@ Les contrôleurs sont aussi appelés *actions*.
 
 Ce contrôleur est relativement simple, mais parcourons-le tout de même :
 
-* *ligne 3*: Symfony2 tire avantage de la fonctionnalité des espaces de noms
+* *ligne 4*: Symfony2 tire avantage de la fonctionnalité des espaces de noms
   (« namespaces ») de PHP 5.3 afin de donner un espace de noms à la classe entière
   du contrôleur. Le mot-clé ``use`` importe la classe ``Response``, que notre
   contrôleur doit retourner.

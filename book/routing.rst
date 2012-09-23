@@ -109,10 +109,6 @@ Ceci est le but du routeur Symfony2 : faire correspondre l'URL d'une requête
 à un contrôleur. Tout au long du chemin, vous allez apprendre toutes sortes
 d'astuces qui rendent même facile la création des URLs les plus complexes.
 
-.. versionadded:: 2.1
-    Depuis Symfony 2.1, le composant de routage accepte également les
-    valeurs Unicode comme: /Жени/
-
 .. index::
    single: Routage; Sous le capot
 
@@ -1094,6 +1090,17 @@ route en incluant le nom de cette dernière après la commande :
 .. code-block:: bash
 
     $ php app/console router:debug article_show
+
+.. versionadded:: 2.1
+    La commande ``router:match`` a été ajoutée dans Symfony 2.1
+
+Vous pouvez vérifier quelle route, s'il y en a, correspond à un chemin
+avec la commande ``router:match`` :
+
+.. code-block:: bash
+
+    $ php app/console router:match /articles/en/2012/article.rss
+    Route "article_show" matches
 
 .. index::
    single: Routage; Générer des URLs

@@ -237,6 +237,7 @@ nombre de répétitions en spécifiant un parent pour un service.
     .. code-block:: php
 
         use Symfony\Component\DependencyInjection\Definition;
+        use Symfony\Component\DependencyInjection\DefinitionDecorator;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
@@ -284,6 +285,12 @@ instanciée. La définir comme abstraite dans le fichier de configuration
 comme cela a été fait ci-dessus signifiera qu'elle ne peut être utilisée
 uniquement en tant que service parent et ne peut pas être utilisée directement
 en tant que service à injecter et sera supprimée au moment de la compilation.
+
+.. note::
+  
+   Pour que les dépendances parents puissent être résolues, le ``ContainerBuilder``
+   doit d'abord être compilé. Lisez :doc:`/components/dependency_injection/compilation` 
+   pour plus de détails.
 
 Surcharger des dépendances parentes
 -----------------------------------
@@ -367,6 +374,7 @@ quelque chose comme ça :
     .. code-block:: php
 
         use Symfony\Component\DependencyInjection\Definition;
+        use Symfony\Component\DependencyInjection\DefinitionDecorator;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
@@ -485,6 +493,7 @@ Si vous aviez la configuration suivante :
     .. code-block:: php
 
         use Symfony\Component\DependencyInjection\Definition;
+        use Symfony\Component\DependencyInjection\DefinitionDecorator;
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
