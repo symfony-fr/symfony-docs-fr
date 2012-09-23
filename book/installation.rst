@@ -57,11 +57,11 @@ la Distribution Standard :
 
 .. code-block:: bash
 
-    php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony 2.1.x-dev
+    php composer.phar create-project symfony/framework-standard-edition /path/to/webroot/Symfony dev-master
 
 .. tip::
 
-    Pour une version exacte, remplacez `2.1.x-dev` par la dernière version de
+    Pour une version exacte, remplacez `dev-master` par la dernière version de
     Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
 
 Cette commande peut prendre plusieurs minutes pour s'exécuter car « Composer »

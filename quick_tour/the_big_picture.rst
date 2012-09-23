@@ -60,12 +60,12 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
 
     .. code-block:: bash
 
-        $ composer.phar create-project symfony/framework-standard-edition path/to/install 2.1.x-dev
+        $ composer.phar create-project symfony/framework-standard-edition path/to/install dev-master
 
         # supprime l'historique de Git
         $ rm -rf .git
 
-    Pour une version exacte, remplacez `2.1.x-dev` par la dernière version de
+    Pour une version exacte, remplacez `dev-master` par la dernière version de
     Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
 
 .. tip::
