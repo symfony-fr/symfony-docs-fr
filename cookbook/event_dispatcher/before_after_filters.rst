@@ -85,6 +85,7 @@ que les contrôleurs l'implémentent::
     }
 
 Un contrôleur qui implémente cette interface ressemble simplement à cela::
+
     namespace Acme\DemoBundle\Controller;
 
     use Acme\DemoBundle\Controller\TokenAuthenticatedController;
