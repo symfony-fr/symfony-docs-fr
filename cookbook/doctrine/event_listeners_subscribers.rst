@@ -2,6 +2,7 @@
    single: Doctrine; Event listeners and subscribers
 
 .. _doctrine-event-config:
+
 Comment enregistrer des listeners (« écouteurs » en français) et des souscripteurs d'évènement
 ==============================================================================================
 
