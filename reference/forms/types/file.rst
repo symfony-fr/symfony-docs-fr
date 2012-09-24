@@ -14,7 +14,7 @@ Le type ``file`` représente un input File dans votre formulaire.
 |             | - `read_only`_                                                      |
 |             | - `error_bubbling`_                                                 |
 +-------------+---------------------------------------------------------------------+
-| Type parent | :doc:`form</reference/forms/types/form>`                           |
+| Type parent | :doc:`form</reference/forms/types/form>`                            |
 +-------------+---------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FileType`  |
 +-------------+---------------------------------------------------------------------+
