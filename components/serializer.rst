@@ -2,41 +2,41 @@
    single: Serializer 
    single: Components; Serializer
 
-The Serializer Component
-========================
+Le Composant Serializer
+=======================
 
-   The Serializer Component is meant to be used to turn objects into a
-   specific format (XML, JSON, Yaml, ...) and the other way around.
+   Le composant Serializer est destiné à être utilisé pour transformer
+   des objets en un format spécifique (XML, JSON, Yaml, ...) et inversement.
 
-In order to do so, the Serializer Component follows the following
-simple schema.
+Pour faire cela, le composant Serializer suit le schéma simple suivant.
 
 .. image:: /images/components/serializer/serializer_workflow.png
 
-As you can see in the picture above, an array is used as a man in
-the middle. This way, Encoders will only deal with turning specific
-**formats** into **arrays** and vice versa. The same way, Normalizers 
-will deal with turning specific **objects** into **arrays** and vice versa.
+Comme vous pouvez le voir sur l'image ci-dessus, un tableau est utilisé
+comme intermédiaire. De cette manière, les encodeurs (Encoder) ne se chargeront
+que de transformer des **formats** spécifiques en **tableaux** et vice versa.
+De la même manière, les normaliseurs (Normalizer) ne transformeront que
+des **objets** en **tableaux** et vice versa.
 
-Serialization is a complicated topic, and while this component may not work
-in all cases, it can be a useful tool while developing tools to serialize
-and deserialize your objects.
+La sérialisation est un sujet complexe, et même si ce composant ne fonctionne
+pas pour tout les cas de figure, il peut être un outil très utile pour sérialiser
+ou désérialiser vos objets.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de différentes manières :
 
-* Use the official Git repository (https://github.com/symfony/Serializer);
-* Install it via PEAR ( `pear.symfony.com/Serializer`);
-* Install it via Composer (`symfony/serializer` on Packagist).
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Serializer);
+* Installez le via PEAR ( `pear.symfony.com/Serializer`);
+* Installez le via Composer (`symfony/serializer` on Packagist).
 
-Usage
------
+Utilisation
+-----------
 
-Using the Serializer component is really simple. We just need to set up
-the :class:`Symfony\\Component\\Serializer\\Serializer` specifying
-which Encoders and Normalizer are going to be available::
+Utiliser le composant Serializer est très simple. Nous avons juste besoin
+de définir la classe :class:`Symfony\\Component\\Serializer\\Serializer`
+pour spécifier quels encodeurs et quels normaliseurs seront disponibles::
 
     use Symfony\Component\Serializer\Serializer;
     use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -48,11 +48,11 @@ which Encoders and Normalizer are going to be available::
 
     $serializer = new Serializer($normalizers, $encoders);
 
-Serializing an object
-~~~~~~~~~~~~~~~~~~~~~
+Sérialiser un objet
+~~~~~~~~~~~~~~~~~~~
 
-For the sake of this example, let's assume the following class already
-exists in our project::
+Pour les besoins de cet exemple, supposons que la classe suivante
+existe déjà dans notre projet::
 
     namespace Acme;
 
@@ -84,8 +84,8 @@ exists in our project::
         }
     }
 
-Now, if we want to serialize this object into JSON, we only need to
-use the Serializer service created before::
+Maintenant, si vous voulons sérialiser un objet en JSON, nous
+devonts juste utiliser le service Serializer précédemment créé::
 
     $person = new Acme\Person();
     $person->setName('foo');
@@ -93,15 +93,15 @@ use the Serializer service created before::
 
     $serializer->serialize($person, 'json'); // Output: {"name":"foo","age":99}
 
-The first parameter of the :method:`Symfony\\Component\\Serializer\\Serializer::serialize`
-is the object to be serialized and the second is used to choose the proper encoder,
-in this case :class:`Symfony\\Component\\Serializer\\Encoder\\JsonEncoder`.
+Le premier paramètre de la méthode :method:`Symfony\\Component\\Serializer\\Serializer::serialize`
+est l'objet à sérialiser et le second est utilisé pour choisir l'encodeur, dans notre cas
+:class:`Symfony\\Component\\Serializer\\Encoder\\JsonEncoder`.
 
-Deserializing an Object
-~~~~~~~~~~~~~~~~~~~~~~~
+Désérialiser un objet
+~~~~~~~~~~~~~~~~~~~~~
 
-Let's see now how to do the exactly the opposite. This time, the information
-of the `People` class would be encoded in XML format::
+Voyons maintenant comment faire l'opération inverse. Cette fois, l'information
+de la classe `People` est encodée en format XML::
 
     $data = <<<EOF
     <person>
@@ -112,20 +112,21 @@ of the `People` class would be encoded in XML format::
 
     $person = $serializer->deserialize($data,'Acme\Person','xml');
 
-In this case, :method:`Symfony\\Component\\Serializer\\Serializer::deserialize`
-needs three parameters:
+Dans ce cas, la méthode :method:`Symfony\\Component\\Serializer\\Serializer::deserialize`
+nécessite trois paramètres :
 
-1. The information to be decoded
-2. The name of the class this information will be decoded to
-3. The encoder used to convert that information into an array
+1. L'information à décoder
+2. Le nom de la classe dans laquelle sera décodée l'information
+3. L'encodeur utilisé pour convertir l'information en tableau
 
 JMSSerializationBundle
 ----------------------
 
-A popular third-party bundle, `JMSSerializationBundle`_ exists and extends
-(and sometimes replaces) the serialization functionality. This includes the
-ability to configure how your objects should be serialize/deserialized via
-annotations (as well as YML, XML and PHP), integration with the Doctrine ORM,
-and handling of other complex cases (e.g. circular references).
+Il existe un bundle tierce populaire, `JMSSerializationBundle`_, qui étend
+(et parfois remplace) la fonctionnalité de sérialisation. Cela inclut la
+capacité de configurer la manière dont vos objets doivent être sérialisée et
+désérialisés via des annotations (ou YML, XML et PHP), l'intégration avec
+l'ORM Doctrine, et la prise en charge de cas de figure plus complexes (par
+exemple les références circulaires).
 
 .. _`JMSSerializationBundle`: https://github.com/schmittjoh/JMSSerializerBundle
