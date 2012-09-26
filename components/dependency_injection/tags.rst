@@ -163,7 +163,7 @@ sera ensuite exécutée lorsque le conteneur sera compilé::
 .. note::
 
     Les passes de compilateur sont enregistrées différemment si vous
-    utilisez le framework full stack. Lisez :doc:`cookbook/service_container/compiler_passes`
+    utilisez le framework full stack. Lisez :doc:`/cookbook/service_container/compiler_passes`
     pour plus de détails.
 
 Ajouter des attributs additionnels aux tags
