@@ -686,7 +686,7 @@ spécifique.
 
     L'attribut ``priority``, dont la valeur par défaut est ``0`` s'il est absent,
     peut être utilisé pour contrôler l'ordre dans lequel les écouteurs sont enregistrés.
-    Tout comme dans le :ref:`répartiteur d'évènements<event_dispatcher>` de Symfony2,
+    Tout comme dans le :doc:`répartiteur d'évènements</components/event_dispatcher/introduction>` de Symfony2,
     un grand nombre signifie que l'écouteur sera exécuté en premier et les écouteurs
     avec la même priorité seront exécutés dans l'ordre où ils ont été enregistrés
     par le gestionnaire d'évènements.
