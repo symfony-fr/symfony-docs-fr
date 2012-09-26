@@ -291,7 +291,7 @@ méthode « process » sera alors appelée lorsque le conteneur aura été compi
 .. note::
 
     Les passes de compilateur sont enregistrées différemment si vous
-    utilisez le framework full stack. Lisez :doc:`cookbook/service_container/compiler_passes`
+    utilisez le framework full stack. Lisez :doc:`/cookbook/service_container/compiler_passes`
     pour plus de détails.
 
 Contrôler l'Ordre des Passes
