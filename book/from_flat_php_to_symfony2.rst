@@ -75,7 +75,7 @@ impossible à maintenir. Il y a plusieurs problèmes qui doivent être résolus:
 .. note::
     Un autre problème non mentionné ici est le fait que la base de données est 
     liée à MySQL. Même si le sujet n'est pas couvert ici, Symfony intègre `Doctrine`_,
-    une librairie dédiée à l'abstraction des base de données 
+    une bibliothèque dédiée à l'abstraction des base de données
     et au mapping objet-relationnel.
     
 Retroussons-nous les manches et résolvons ces problèmes ainsi que d'autres.
@@ -372,7 +372,7 @@ fonction de l'URI demandée:
     <?php
     // index.php
 
-    // charge et initialise les librairies globales
+    // charge et initialise les bibliothèques globales
     require_once 'model.php';
     require_once 'controllers.php';
 
@@ -405,7 +405,7 @@ sont maintenant des fonctions PHP et ont été placés dans le fichier ``control
     }
 
 En tant que contrôleur frontal, ``index.php`` assume un nouveau rôle, celui
-d'inclure les librairies principales et de router l'application pour que l'un des
+d'inclure les bibliothèques principales et de router l'application pour que l'un des
 deux contrôleurs (les fonctions ``list_action()`` et ``show_action()``) soit appelé.
 En réalité, le contrôleur frontal commence à ressembler et à agir comme le mécanisme
 de Symfony2 qui prend en charge et achemine les requêtes.
