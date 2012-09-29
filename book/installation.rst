@@ -24,7 +24,7 @@ Télécharger une Distribution Symfony2
     lisez les documentations suivantes : `Apache`_ | `Nginx`_ .
 
 Les « distributions » Symfony2 sont des applications entièrement fonctionnelles
-qui incluent les librairies du coeur de Symfony2, une sélection de bundles utiles,
+qui incluent les bibliothèques du coeur de Symfony2, une sélection de bundles utiles,
 une arborescence pratique et une configuration par défaut. Quand vous téléchargez
 une distribution Symfony2, vous téléchargez un squelette d'application qui peut
 être immédiatement utilisé pour commencer à développer votre application.
@@ -188,7 +188,7 @@ Symfony elle-même - dans le répertoire ``vendor/``.
 Configuration et installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant, toutes les librairies tierces nécessaires sont dans le répertoire
+Maintenant, toutes les bibliothèques tierces nécessaires sont dans le répertoire
 ``vendor/``. Vous avez également une application par défaut installée dans le
 répertoire ``app/`` et un exemple de code dans le répertoire ``src/``.
 
@@ -315,7 +315,7 @@ cela se fait en créant le fichier ``.gitignore`` et en y ajoutant la ligne suiv
 Maintenant, le répertoire vendor ne sera pas commité sur votre système de gestion
 de code. C'est plutôt bien (en fait c'est génial !) car lorsque quelqu'un clone ou
 récupère le projet, il lui suffit de lancer la commande ``php bin/vendors install``
-pour récupérer toutes les librairies nécessaires.
+pour récupérer toutes les bibliothèques nécessaires.
 
 .. _`activer le support ACL`: https://help.ubuntu.com/community/FilePermissionsACLs
 .. _`http://symfony.com/download`: http://symfony.com/download

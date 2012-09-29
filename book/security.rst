@@ -22,7 +22,7 @@ Comme la meilleure façon d'apprendre est par l'exemple, alors plongeons dans le
 
 .. note::
 
-    Le `composant de sécurité` de Symfony est disponible en tant que librairie indépendante, 
+    Le `composant de sécurité` de Symfony est disponible en tant que bibliothèque indépendante,
     et peut être utilisé pour tout projet PHP.
 
 Exemple simple: l'authentification HTTP 
