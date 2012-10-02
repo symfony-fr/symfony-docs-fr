@@ -14,9 +14,9 @@ Installation
 ------------
 
 Les migrations Doctrine pour Symfony sont maintenues dans le `DoctrineMigrationsBundle`_.
-Le bundle utilise la librairie externe `Doctrine Database Migrations`_.
+Le bundle utilise la bibliothèque externe `Doctrine Database Migrations`_.
 
-Suivez ces étapes pour installer le bundle et la librairie dans l'Edition
+Suivez ces étapes pour installer le bundle et la bibliothèque dans l'Edition
 Standard de Symfony. Ajoutez le code suivant à votre fichier ``composer.json`` :
 
 .. code-block:: json
@@ -27,7 +27,7 @@ Standard de Symfony. Ajoutez le code suivant à votre fichier ``composer.json`` 
         }
     }
 
-Mettez à jour vos librairies « vendor » :
+Mettez à jour vos bibliothèques « vendor » :
 
 .. code-block:: bash
 
@@ -38,8 +38,8 @@ Si tout s'est bien passé, le ``DoctrineMigrationsBundle`` peut maintenant
 
 .. note::
 
-    ``DoctrineMigrationsBundle`` installe la librairie `Doctrine Database Migrations`_.
-    La librairie peut être trouvée dans le répertoire ``vendor/doctrine/migrations``.
+    ``DoctrineMigrationsBundle`` installe la bibliothèque `Doctrine Database Migrations`_.
+    La bibliothèque peut être trouvée dans le répertoire ``vendor/doctrine/migrations``.
 
 Enfin, assurez-vous d'avoir activé le bundle dans le fichier ``AppKernel.php`` en
 ajoutant le code suivant :
@@ -181,7 +181,7 @@ Générer les migrations automatiquement
 --------------------------------------
 
 En réalité, vous devrez rarement avoir besoin d'écrire les migrations manuellement,
-puisque la librairie peut générer les classes de migration automatiquement en
+puisque la bibliothèque peut générer les classes de migration automatiquement en
 comparant vos informations de « mapping » Doctrine (c'est-à-dire ce à quoi votre
 base de données *devrait* ressembler) avec la structure de votre base de données
 actuelle.
