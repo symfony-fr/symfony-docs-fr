@@ -113,13 +113,13 @@ Veuillez noter qu'il y a deux inconvénients à utiliser un fichier d'amorçage 
 
 * le fichier nécessite d'être régénéré à chaque fois que les fichiers sources 
   originaux changent (à savoir quand vous mettez à jour le code source de Symfony2
-  ou une librairie tierce),
+  ou une bibliothèque tierce),
 
 * lors du débogage, vous devrez placer des points d'arrêt (breakpoints) dans ce fichier
   d'amorçage.
 
 Si vous utilisez l'édition Symfony2 standard, les fichiers d'amorçage sont automatiquement
-regénérés après avoir mis à jour les librairies tierces (« vendors »)
+regénérés après avoir mis à jour les bibliothèques tierces (« vendors »)
 grâce à la commande ``php bin/vendors install``.
 
 Fichiers d'amorçage et caches de byte code

@@ -665,7 +665,7 @@ Contenu asynchrone avec hinclude.js
 .. versionadded:: 2.1 
     hinclude.js support was added in Symfony 2.1
 
-Les contrôleurs peuvent être imbriqués de façon asynchrone avec la librairie
+Les contrôleurs peuvent être imbriqués de façon asynchrone avec la bibliothèque
 javascript hinclude.js_.
 Comme le contenu imbriqué vient d'une autre page (un d'un autre contrôleur),
 Symfony2 utiliser le helper standard ``render`` pour configurer les tags ``hinclude``:

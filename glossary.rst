@@ -13,7 +13,7 @@ Glossaire
 
    Projet
         Un *Projet* est un répertoire composé d'une Application, un ensemble de
-        bundles, des librairies tierces, un chargeur automatique (autoloader), et
+        bundles, des bibliothèques tierces, un chargeur automatique (autoloader), et
         des contrôleurs frontaux.
 
    Application
@@ -73,12 +73,12 @@ Glossaire
         un environnement de ``prod`` qui est optimisé pour de meilleures performances.
 
    Vendor
-        Un *vendor* est un fournisseur de librairies PHP et de bundles, incluant
+        Un *vendor* est un fournisseur de bibliothèques PHP et de bundles, incluant
         Symfony2 lui-même. Malgré la connotation commercial du terme, les vendors
         de Symfony sont souvent (et même très souvent) des logiciels libres. Toute
-        librairie que vous ajoutez dans votre projet Symfony2 devrait se trouver
+        bibliothèque que vous ajoutez dans votre projet Symfony2 devrait se trouver
         dans le répertoire ``vendor``. Lisez
-        :ref:`L'Architecture: Utilisation de librairies externes <using-vendors>`.
+        :ref:`L'Architecture: Utilisation de bibliothèques externes <using-vendors>`.
 
    Acme
         *Acme* est un exemple d'entreprise utilisé dans Symofny pour les exemples et
@@ -99,7 +99,7 @@ Glossaire
 
    Kernel
         Le *Kernel* (noyau) est le coeur de Symfony2. L'objet Kernel prend en charge
-        les requêtes HTTP en utilisant tous les bundles et librairies qui sont enregistrés.
+        les requêtes HTTP en utilisant tous les bundles et bibliothèques qui sont enregistrés.
         Lisez :ref:`L'Architecture : Le répertoire Application<the-app-dir>` et le chapitre
         :doc:`/book/internals`.
 
