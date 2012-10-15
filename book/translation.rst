@@ -497,8 +497,10 @@ via l'objet ``request`` :
 
 .. code-block:: php
 
-    // access the request object in a standard controller
+    // Accéder à l'objet Request dans un contrôleur standard
     $request = $this->getRequest();
+
+    $locale = $request->getLocale();
 
     $request->setLocale('en_US');
 
