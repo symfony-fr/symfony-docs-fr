@@ -324,7 +324,7 @@ qui décidez.
 .. _using-vendors:
 
 Utilisation de bibliothèques externes (Vendors)
---------------------------------------------
+-----------------------------------------------
 
 Il y a de fortes probabilités que votre application dépende de bibliothèques tierces.
 Celles-ci doivent être stockées dans le répertoire ``vendor/``. Ce
