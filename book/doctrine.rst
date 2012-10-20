@@ -69,11 +69,11 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
     
         doctrine:
             dbal:
-                driver:   %database_driver%
-                host:     %database_host%
-                dbname:   %database_name%
-                user:     %database_user%
-                password: %database_password%
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
     
     En gardant ces paramètres de connexion dans un fichier séparé, vous pouvez
     facilement garder différentes versions de ce fichier sur chaque serveur.
@@ -81,6 +81,13 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
     quelle information sensible) en dehors de votre projet, comme par exemple
     dans votre configuration Apache. Pour plus d'informations, consultez
     l'article :doc:`/cookbook/configuration/external_parameters`.
+
+Maintenant que Doctrine connaît vos paramètres de connexion, vous pouvez lui
+demander de créer votre base de données :
+
+.. code-block:: bash
+
+    php app/console doctrine:database:create
 
 .. sidebar:: Configurer la base de données
 
@@ -110,13 +117,6 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
         [mysqld]
         collation-server = utf8_general_ci
         character-set-server = utf8  
-
-Maintenant que Doctrine connaît vos paramètres de connexion, vous pouvez lui
-demander de créer votre base de données :
-
-.. code-block:: bash
-
-    php app/console doctrine:database:create
 
 Créer une classe entité
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -769,7 +769,7 @@ Pour ce faire, ajouter le nom de la classe dépôt à vos informations de mappin
         use Doctrine\ORM\Mapping as ORM;
 
         /**
-         * @ORM\Entity(repositoryClass="Acme\StoreBundle\Repository\ProductRepository")
+         * @ORM\Entity(repositoryClass="Acme\StoreBundle\Entity\ProductRepository")
          */
         class Product
         {
@@ -781,7 +781,7 @@ Pour ce faire, ajouter le nom de la classe dépôt à vos informations de mappin
         # src/Acme/StoreBundle/Resources/config/doctrine/Product.orm.yml
         Acme\StoreBundle\Entity\Product:
             type: entity
-            repositoryClass: Acme\StoreBundle\Repository\ProductRepository
+            repositoryClass: Acme\StoreBundle\Entity\ProductRepository
             # ...
 
     .. code-block:: xml
@@ -791,7 +791,7 @@ Pour ce faire, ajouter le nom de la classe dépôt à vos informations de mappin
         <doctrine-mapping>
 
             <entity name="Acme\StoreBundle\Entity\Product"
-                    repository-class="Acme\StoreBundle\Repository\ProductRepository">
+                    repository-class="Acme\StoreBundle\Entity\ProductRepository">
                     <!-- ... -->
             </entity>
         </doctrine-mapping>
@@ -809,8 +809,8 @@ ordre alphabétique.
 
 .. code-block:: php
 
-    // src/Acme/StoreBundle/Repository/ProductRepository.php
-    namespace Acme\StoreBundle\Repository;
+    // src/Acme/StoreBundle/Entity/ProductRepository.php
+    namespace Acme\StoreBundle\Entity;
 
     use Doctrine\ORM\EntityRepository;
 
@@ -1158,7 +1158,7 @@ une jointure dans la requête originale. Ajouter le code suivant à la classe
 
 .. code-block:: php
 
-    // src/Acme/StoreBundle/Repository/ProductRepository.php
+    // src/Acme/StoreBundle/Entity/ProductRepository.php
     
     public function findOneByIdJoinedToCategory($id)
     {
