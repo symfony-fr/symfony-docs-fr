@@ -15,7 +15,7 @@ le nom d'utilisateur et le mot de passe comme variable serveurs à la méthode
 
 Vous pouvez aussi les outrepasser directement dans l'objet requête::
 
-    $client->request('DELETE', '/post/12', array(), array(
+    $client->request('DELETE', '/post/12', array(), array(), array(
         'PHP_AUTH_USER' => 'username',
         'PHP_AUTH_PW'   => 'pa$$word',
     ));
