@@ -27,7 +27,7 @@ plus avoir à rappeler l'application pour les requêtes suivantes. Bien
 sûr, ce n'est pas toujours possible pour les sites web fortement
 dynamiques. A travers ce chapitre, nous allons décrire comment
 fonctionne le système de cache de Symfony2 et pourquoi nous pensons
-que c'est la meilleur approche possible.
+que c'est la meilleure approche possible.
 
 Le système de cache de Symfony2 est différent car il se base sur la
 simplicité et la puissance du cache HTTP tel qu'il est défini dans la
