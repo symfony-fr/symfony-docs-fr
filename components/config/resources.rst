@@ -52,7 +52,10 @@ qui permet d'importer d'autres ressources de manière récursive::
 
         public function supports($resource, $type = null)
         {
-            return is_string($resource) && 'yml' === pathinfo($resource, PATHINFO_EXTENSION);
+            return is_string($resource) && 'yml' === pathinfo(
+                $resource,
+                PATHINFO_EXTENSION
+            );
         }
     }
 

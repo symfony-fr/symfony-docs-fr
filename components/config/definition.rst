@@ -98,6 +98,20 @@ comme le noeud booléen ``auto_connect`` et le noeud scalaire ``default_connecti
 En général : après avoir défini un noeud, un appel à la méthode ``end()``
 vous fait remonter d'un niveau dans la hiérarchie.
 
+Types de noeud
+~~~~~~~~~~~~~~
+
+Il est possible de valider le type d'une valeur fournie en utilisant la
+définition de noeud appropriée. Les types de noeud disponibles sont :
+  
+* scalar
+* boolean
+* array
+* variable (pas de validation)
+  
+et sont créés avec ``node($name, $type)`` ou leurs méthodes raccourcies associées
+``xxxxNode($name)``.
+
 Noeuds tableau
 ~~~~~~~~~~~~~~
 
@@ -220,11 +234,173 @@ fournies. Pour les tableaux :
     Lorsque la valeur est aussi définie dans un second tableau de configuration,
     n'essaye pas de fusionner un tableau, mais le surcharge entièrement
 
-Pour tous les noeuds :
+Pour tout les noeuds :
 
 ``cannotBeOverwritten()``
     Ne laisse pas les autres tableaux de configuration surcharger une
     valeur existante pour ce noeud
+
+Ajouter des sections
+--------------------
+
+Si vous devez valider une configuration complexe, alors l'arbre peut devenir
+très long et vous voudrez surement le découper en plusieurs sections. Vous
+pouvez faire cela en définissant une section dans un noeud séparé et en ajoutant
+ce noeud à l'arbre principal avec ``append()``::
+
+    public function getConfigTreeBuilder()
+    {
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root('database');
+
+        $rootNode
+            ->arrayNode('connection')
+                ->children()
+                    ->scalarNode('driver')
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                    ->end()
+                    ->scalarNode('host')
+                        ->defaultValue('localhost')
+                    ->end()
+                    ->scalarNode('username')->end()
+                    ->scalarNode('password')->end()
+                    ->booleanNode('memory')
+                        ->defaultFalse()
+                    ->end()
+                ->end()
+                ->append($this->addParametersNode())
+            ->end()
+        ;
+
+        return $treeBuilder;
+    }
+
+    public function addParametersNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('parameters');
+
+        $node
+            ->isRequired()
+            ->requiresAtLeastOneElement()
+            ->useAttributeAsKey('name')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('name')->isRequired()->end()
+                    ->scalarNode('value')->isRequired()->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+C'est aussi très utile pour vous aider à ne pas vous répeter si vous avez
+des sections de configuration qui sont identiques en plusieurs endroits.
+
+Normalisation
+-------------
+
+Lorsque les fichiers de configuration sont traités, ils sont d'abord normalisés.
+Ensuite, ils sont mergés puis l'arbre est utilisé pour valider le tableau qui a été
+généré. La normalisation consiste à supprimer certaines des différences issues des différents
+formats de configuration, principalement des différences entre Yaml et XML.
+
+Typiquement, le séparateur de clés utilisé en Yaml est ``_`` et ``-`` en XML.
+Par exemple, ``auto_connect`` en Yaml deviendrait ``auto-connect`` en XML. La
+normalisation les transforme tout les deux en ``auto_connect``.
+
+Une autre différence en Yaml et Xml est la manière dont les tableaux de valeurs
+sont représentés. En Yaml, cela ressemble à :
+
+.. code-block:: yaml
+
+    twig:
+        extensions: ['twig.extension.foo', 'twig.extension.bar']
+
+et en XML à :
+
+.. code-block:: xml
+
+    <twig:config>
+        <twig:extension>twig.extension.foo</twig:extension>
+        <twig:extension>twig.extension.bar</twig:extension>
+    </twig:config>
+
+Cette différence peut être supprimée à la normalisation en pluralisant
+la clé utilisée en XML. Vous pouvez indiquer que vous voulez qu'une clé soit
+pluralisée de cette manière avec ``fixXmlConfig()``::
+
+    $rootNode
+        ->fixXmlConfig('extension')
+        ->children()
+            ->arrayNode('extensions')
+                ->prototype('scalar')->end()
+            ->end()
+        ->end()
+    ;
+
+S'il s'agit d'un pluriel irrégulier, vous pouvez le spécifier comme second
+argument::
+
+    $rootNode
+        ->fixXmlConfig('child', 'children')
+        ->children()
+            ->arrayNode('children')
+        ->end()
+    ;
+
+En parallèle, ``fixXmlConfig`` garantit que chaque élément xml sera toujours
+intégré dans un tableau. Vous pouvez avoir :
+
+.. code-block:: xml
+
+    <connection>default</connection>
+    <connection>extra</connection>
+
+et parfois seulement :
+
+.. code-block:: xml
+
+    <connection>default</connection>
+
+Par défaut, ``connection`` sera un tableau dans le premier cas et une chaine
+de caractères dans le second cas, ce qui rendrait la validation difficile.
+Vous pouvez vous assurer qu'il s'agisse toujours d'un tableau avec ``fixXmlConfig``.
+
+Si nécessaire, vous pouvez contrôler encore plus le processus de normalisation. Par
+exemple, vous pouvez autoriser qu'une chaine de caractères soit définie et utilisée
+comme clé particulière, ou que plusieurs clés soit définies explicitement. Pour cela,
+si tout est facultatif dans votre config sauf l'id:
+
+.. code-block:: yaml
+
+    connection:
+        name: my_mysql_connection
+        host: localhost
+        driver: mysql
+        username: user
+        password: pass
+
+vous pouvez agalement autoriser ce qui suit :
+
+.. code-block:: yaml
+
+    connection: my_mysql_connection
+
+en changeant la valeur d'une chaine de caractère en tableau associatif avec
+``name`` comme clé::
+    $rootNode
+        ->arrayNode('connection')
+           ->beforeNormalization()
+               ->ifString()
+               ->then(function($v) { return array('name'=> $v); })
+           ->end()
+           ->scalarValue('name')->isRequired()
+           // ...
+        ->end()
+    ;    
 
 Règles de validation
 --------------------
@@ -294,4 +470,7 @@ les valeurs de configuration::
 
     $processor = new Processor();
     $configuration = new DatabaseConfiguration;
-    $processedConfiguration = $processor->processConfiguration($configuration, $configs);
+    $processedConfiguration = $processor->processConfiguration(
+        $configuration,
+        $configs)
+    ;
