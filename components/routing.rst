@@ -37,8 +37,9 @@ configuré votre « autoloader » afin qu'il charge le composant de routage::
     use Symfony\Component\Routing\RouteCollection;
     use Symfony\Component\Routing\Route;
 
+    $route = new Route('/foo', array('controller' => 'MyController'))
     $routes = new RouteCollection();
-    $routes->add('route_name', new Route('/foo', array('controller' => 'MyController')));
+    $routes->add('route_name', $route);
 
     $context = new RequestContext($_SERVER['REQUEST_URI']);
 
@@ -104,7 +105,11 @@ Prenez la route suivante, qui combine plusieurs de ces idées::
    // ...
 
    $parameters = $matcher->match('/archive/2012-01');
-   // array('controller' => 'showArchive', 'month' => '2012-01', '_route' => '...')
+   // array( 
+   //     'controller' => 'showArchive',
+   //     'month' => '2012-01',
+   //     '_route' => ...
+   //  )
 
    $parameters = $matcher->match('/archive/foo');
    // lance une ResourceNotFoundException
@@ -121,8 +126,12 @@ conditions requises spécifiques que vous pouvez définir :
 
 Par exemple, la route suivante ne va accepter que les requêtes vers « /foo »
 avec une méthode POST et une connexion sécurisée::
-
-   $route = new Route('/foo', array(), array('_method' => 'post', '_scheme' => 'https' ));
+    
+   $route = new Route(
+       '/foo',
+       array(),
+       array('_method' => 'post', '_scheme' => 'https' )
+   );
 
 .. tip::
 
@@ -130,7 +139,11 @@ avec une méthode POST et une connexion sécurisée::
     par un certain chemin et qui se terminent par un suffixe déterminé, vous
     pouvez utiliser la définition de route suivante::
 
-        $route = new Route('/start/{suffix}', array('suffix' => ''), array('suffix' => '.*'));
+        $route = new Route(  
+            '/start/{suffix}',
+            array('suffix' => ''),
+            array('suffix' => '.*')
+        );
 
 Utiliser des préfixes
 ~~~~~~~~~~~~~~~~~~~~~
@@ -147,7 +160,11 @@ défaut pour toutes les routes d'un sous-arbre::
     $subCollection->add( /*...*/ );
     $subCollection->add( /*...*/ );
 
-    $rootCollection->addCollection($subCollection, '/prefix', array('_scheme' => 'https'));
+    $rootCollection->addCollection( 
+        $subCollection,
+        '/prefix',
+        array('_scheme' => 'https')
+    );
 
 Définir les paramètres de requête
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,7 +173,14 @@ La classe :class:`Symfony\\Component\\Routing\\RequestContext` fournit des
 informations à propos de la requête courante. Vous pouvez définir tous les
 paramètres d'une requête HTTP avec cette classe via son constructeur::
 
-    public function __construct($baseUrl = '', $method = 'GET', $host = 'localhost', $scheme = 'http', $httpPort = 80, $httpsPort = 443)
+    public function __construct(
+        $baseUrl = '',
+        $method = 'GET',
+        $host = 'localhost',
+        $scheme = 'http',
+        $httpPort = 80,
+        $httpsPort = 443
+    )
 
 .. _components-routing-http-foundation:
 
@@ -255,7 +279,10 @@ vous devez fournir le nom d'un fichier PHP qui retourne une :class:`Symfony\\Com
     use Symfony\Component\Routing\Route;
 
     $collection = new RouteCollection();
-    $collection->add('route_name', new Route('/foo', array('controller' => 'ExampleController')));
+    $collection->add(   
+        'route_name',
+        new Route('/foo', array('controller' => 'ExampleController'))
+    );
     // ...
 
     return $collection;
@@ -291,7 +318,13 @@ permettant d'utiliser rapidement le composant de Routage. Le constructeur s'atte
 à recevoir une instance de chargeur, un chemin vers la définition principale des
 routes et d'autres paramètres::
 
-    public function __construct(LoaderInterface $loader, $resource, array $options = array(), RequestContext $context = null, array $defaults = array());
+    public function __construct( 
+        LoaderInterface $loader,
+        $resource,
+        array $options = array(),
+        RequestContext $context = null,
+        array $defaults = array()
+    );
 
 Avec l'option ``cache_dir``, vous pouvez activer le cache pour les routes (si
 vous fournissez un chemin) ou désactiver le cache (si le paramètre est défini comme

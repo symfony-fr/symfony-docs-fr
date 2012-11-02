@@ -69,9 +69,9 @@ Puis, définissez la chaîne en tant que service :
 Définir des services avec un tag personnalisé
 ---------------------------------------------
 
-Maintenant, nous voulons que plusieurs classes ``\Swift_Transport`` soient
+Maintenant, vous voulez peut être que plusieurs classes ``\Swift_Transport`` soient
 instanciées et ajoutées à la chaîne automatiquement en utilisant la méthode
-``addTransport()``. Comme exemple, nous allons ajouter les transports
+``addTransport()``. Par exemple, vous pouvez ajouter les transports
 suivants en tant que services :
 
 .. configuration-block::
@@ -131,14 +131,22 @@ n'importe quel service ayant le tag personnalisé::
     {
         public function process(ContainerBuilder $container)
         {
-            if (false === $container->hasDefinition('acme_mailer.transport_chain')) {
+            if (!$container->hasDefinition('acme_mailer.transport_chain')) {
                 return;
             }
 
-            $definition = $container->getDefinition('acme_mailer.transport_chain');
+            $definition = $container->getDefinition(
+                'acme_mailer.transport_chain'
+            );
 
-            foreach ($container->findTaggedServiceIds('acme_mailer.transport') as $id => $attributes) {
-                $definition->addMethodCall('addTransport', array(new Reference($id)));
+            $taggedServices = $container->findTaggedServiceIds(
+                'acme_mailer.transport' 
+            ); 
+            foreach ($taggedServices as $id => $attributes) {
+                $definition->addMethodCall(
+                    'addTransport',
+                    array(new Reference($id))
+                );
             }
         }
     }
@@ -202,7 +210,7 @@ Pour commencer, changez la classe ``TransportChain``::
 
 Comme vous pouvez le voir, lorsque ``addTransport`` est appelée, elle ne prend pas
 que l'objet ``Swift_Transport``, mais aussi un alias sous forme de chaîne de
-caractères pour ce transport. Donc, comment pouvons-nous autoriser chaque transport
+caractères pour ce transport. Donc, comment pouvez-vous autoriser chaque transport
 taggé à fournir aussi un alias ?
 
 Pour répondre à cette question, changez la déclaration du service comme suit :
@@ -246,15 +254,23 @@ utiliser cette dernière, mettez à jour votre compilateur::
     {
         public function process(ContainerBuilder $container)
         {
-            if (false === $container->hasDefinition('acme_mailer.transport_chain')) {
+            if (!$container->hasDefinition('acme_mailer.transport_chain')) {
                 return;
             }
 
-            $definition = $container->getDefinition('acme_mailer.transport_chain');
+            $definition = $container->getDefinition(
+                'acme_mailer.transport_chain'
+            );
 
-            foreach ($container->findTaggedServiceIds('acme_mailer.transport') as $id => $tagAttributes) {
+            $taggedServices = $container->findTaggedServiceIds(
+                'acme_mailer.transport'
+            );
+            foreach ($taggedServices as $id => $tagAttributes) {
                 foreach ($tagAttributes as $attributes) {
-                    $definition->addMethodCall('addTransport', array(new Reference($id), $attributes["alias"]));
+                    $definition->addMethodCall(
+                        'addTransport',
+                        array(new Reference($id), $attributes["alias"])
+                    );
                 }
             }
         }
