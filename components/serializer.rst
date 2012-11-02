@@ -34,7 +34,7 @@ Vous pouvez installer le composant de différentes manières :
 Utilisation
 -----------
 
-Utiliser le composant Serializer est très simple. Nous avons juste besoin
+Utiliser le composant Serializer est très simple. Vous avez juste besoin
 de définir la classe :class:`Symfony\\Component\\Serializer\\Serializer`
 pour spécifier quels encodeurs et quels normaliseurs seront disponibles::
 
@@ -84,8 +84,8 @@ existe déjà dans notre projet::
         }
     }
 
-Maintenant, si vous voulons sérialiser un objet en JSON, nous
-devonts juste utiliser le service Serializer précédemment créé::
+Maintenant, si vous voulez sérialiser un objet en JSON, vous devez juste
+utiliser le service Serializer précédemment créé::
 
     $person = new Acme\Person();
     $person->setName('foo');

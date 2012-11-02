@@ -30,7 +30,7 @@ s'il contient toujours la dernière version ou si son contenu devrait
 
     $cachePath = __DIR__.'/cache/appUserMatcher.php';
 
-    // le second argument indique si nous sommes en mode débuggage ou pas
+    // le second argument indique si vous voulez utiliser le mode debug ou non
     $userMatcherCache = new ConfigCache($cachePath, true);
 
     if (!$userMatcherCache->isFresh()) {

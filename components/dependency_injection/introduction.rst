@@ -80,7 +80,7 @@ Ensuite, vous pouvez définir votre choix de transport dans le conteneur :
     $container->register('mailer', 'Mailer')
         ->addArgument('sendmail');
 
-Cette classe est maintenant beaucoup plus flexible car nous avons séparé
+Cette classe est maintenant beaucoup plus flexible car vous avez séparé
 le choix du transport - qui est maintenant du ressort du conteneur - de
 l'implémentation de la classe.
 
@@ -193,8 +193,8 @@ Eviter que votre code devienne dépendant du Conteneur
 
 Tandis que vous pouvez récupérer directement des services depuis le conteneur,
 il est plus judicieux de minimiser cela. Par exemple, dans le ``NewsletterManager``,
-nous avons injecté le service ``mailer`` plutôt que de le demander depuis
-le conteneur. Nous pourrions avoir injecté le conteneur et ensuite
+vous avez injecté le service ``mailer`` plutôt que de le demander depuis
+le conteneur. Vous pourriez avoir injecté le conteneur et ensuite
 récupéré depuis ce dernier le service ``mailer`` mais cela voudrait dire
 que ce service serait lié à ce conteneur en particulier rendant ainsi
 difficile la réutilisation de cette classe quelque part d'autre.

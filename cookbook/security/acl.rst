@@ -67,20 +67,22 @@ configurer la connexion que le système d'ACL est supposé utiliser :
 
 .. note::
 
-    Le système ACL requiert au moins qu'une connexion DBAL Doctrine soit
+    Le système ACL requiert qu'une connexion DBAL Doctrine (utilisable par défaut)
+    ou qu'une connexion ODM Doctrine (utilisable avec `MongoDBAclBundle 
+    <https://github.com/iampersistent/MongoDBAclBundle>`_) soit
     configurée. Cependant, cela ne veut pas dire que vous devez utiliser
-    Doctrine pour faire correspondre vos objets domaine. Vous pouvez utiliser
-    n'importe quel outil de correspondance de votre choix pour vos objets, que ce
-    soit l'ORM Doctrine, l'ODM Mongo, Propel, ou du SQL brut, le choix reste
-    le vôtre.
+    l'ORM ou l'ODM Doctrine pour faire correspondre vos objets domaine. Vous
+    pouvez utiliser n'importe quel outil de correspondance de votre choix pour
+    vos objets, que ce soit l'ORM Doctrine, l'ODM Mongo, Propel, ou du SQL brut,
+    le choix reste le vôtre.
 
 Après que la connexion est configurée, nous devons importer la structure de
 la base de données. Heureusement, nous avons une tâche pour cela. Exécutez
 simplement la commande suivante :
 
-.. code-block:: text
+.. code-block:: bash
 
-    php app/console init:acl
+    $ php app/console init:acl
 
 Démarrage
 ---------
@@ -227,3 +229,5 @@ Ce masque binaire représenté par un entier peut ainsi être utilisé pour acco
 
 L'utilisateur a désormais le droit de lire, éditer, supprimer, et annuler
 une suppression sur des objets.
+
+.. _`MongoDBAclBundle`: https://github.com/IamPersistent/MongoDBAclBundle
