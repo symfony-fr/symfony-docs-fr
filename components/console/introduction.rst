@@ -42,8 +42,17 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
             $this
                 ->setName('demo:greet')
                 ->setDescription('Greet someone')
-                ->addArgument('name', InputArgument::OPTIONAL, 'Who do you want to greet?')
-                ->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters')
+                ->addArgument(
+                    'name',
+                    InputArgument::OPTIONAL,
+                    'Who do you want to greet?'
+                )
+                ->addOption(
+                   'yell',
+                   null,
+                   InputOption::VALUE_NONE,
+                   'If set, the task will yell in uppercase letters'
+                )
             ;
         }
 
@@ -144,8 +153,16 @@ un argument optionnel ``last_name`` à la commande et faites en sorte que l'argu
 
     $this
         // ...
-        ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?')
-        ->addArgument('last_name', InputArgument::OPTIONAL, 'Your last name?')
+        ->addArgument(
+            'name',
+            InputArgument::REQUIRED,
+            'Who do you want to greet?'
+        )
+        ->addArgument(
+            'last_name',
+            InputArgument::OPTIONAL,
+            'Your last name?'
+        );
         // ...
 
 Vous avez maintenant accès à l'argument ``last_name`` depuis votre commande::
@@ -212,7 +229,13 @@ pour spécifier combien de fois le message devrait être affiché::
 
     $this
         // ...
-        ->addOption('iterations', null, InputOption::VALUE_REQUIRED, 'How many times should the message be printed?', 1)
+        ->addOption(
+            'iterations',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'How many times should the message be printed?',
+            1
+        );
 
 Ensuite, utilisez cette commande pour afficher le message plusieurs fois :
 
@@ -260,7 +283,13 @@ Vous pouvez combiner VALUE_IS_ARRAY avec VALUE_REQUIRED ou VALUE_OPTIONAL de la 
 
     $this
         // ...
-        ->addOption('iterations', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How many times should the message be printed?', 1)
+        ->addOption(
+            'iterations',
+            null,
+            InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+            'How many times should the message be printed?',
+            1
+        );
 
 Demander de l'information à l'utilisateur
 -----------------------------------------
@@ -271,7 +300,11 @@ que vous souhaitiez confirmer une action avant de l'exécuter réellement. Ajout
 ce qui suit à votre commande::
 
     $dialog = $this->getHelperSet()->get('dialog');
-    if (!$dialog->askConfirmation($output, '<question>Continue with this action?</question>', false)) {
+    if (!$dialog->askConfirmation(
+        $output,
+        '<question>Continue with this action?</question>',
+        false 
+    )) {
         return;
     }
 
@@ -285,7 +318,11 @@ Par exemple, si vous aviez besoin de savoir le nom de quelque chose, vous pourri
 faire la chose suivante::
 
     $dialog = $this->getHelperSet()->get('dialog');
-    $name = $dialog->ask($output, 'Please enter the name of the widget', 'foo');
+    $name = $dialog->ask(
+        $output,
+        'Please enter the name of the widget',
+        'foo'  
+    );
 
 Tester les commandes
 --------------------
@@ -321,7 +358,7 @@ retourne ce qui aurait été retourné durant un appel normal depuis la console.
 
 Vous pouvez tester l'envoi d'arguments et d'options à la commande en les passant
 en tant que tableau à la méthode
-:method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`::
+:method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`::
 
     use Symfony\Component\Console\Tester\CommandTester;
     use Symfony\Component\Console\Application;

@@ -82,6 +82,13 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
     dans votre configuration Apache. Pour plus d'informations, consultez
     l'article :doc:`/cookbook/configuration/external_parameters`.
 
+Maintenant que Doctrine connaît vos paramètres de connexion, vous pouvez lui
+demander de créer votre base de données :
+
+.. code-block:: bash
+
+    php app/console doctrine:database:create
+
 .. sidebar:: Configurer la base de données
 
     Une erreur que font même les développeurs les plus chevronnés est d'oublier
@@ -94,8 +101,8 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
 
     .. code-block:: bash
 
-        $ app/console doctrine:database:drop --force
-        $ app/console doctrine:database:create
+        $ php app/console doctrine:database:drop --force
+        $ php app/console doctrine:database:create
 
     Il n'y a aucune manière de configurer ces paramètres par défaut dans Doctrine,
     puisque Doctrine essaye d'être aussi agnostic que possible en terme de configuration.
@@ -110,13 +117,6 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
         [mysqld]
         collation-server = utf8_general_ci
         character-set-server = utf8  
-
-Maintenant que Doctrine connaît vos paramètres de connexion, vous pouvez lui
-demander de créer votre base de données :
-
-.. code-block:: bash
-
-    php app/console doctrine:database:create
 
 Créer une classe entité
 ~~~~~~~~~~~~~~~~~~~~~~~

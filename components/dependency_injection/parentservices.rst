@@ -249,7 +249,7 @@ nombre de répétitions en spécifiant un parent pour un service.
         $container->setDefinition('my_email_formatter', ... );
         $container->setDefinition('mail_manager', new Definition(
             '%mail_manager.class%'
-        ))->SetAbstract(
+        ))->setAbstract(
             true
         )->addMethodCall('setMailer', array(
             new Reference('my_mailer')
@@ -387,7 +387,7 @@ quelque chose comme ça :
         $container->setDefinition('my_email_formatter', ... );
         $container->setDefinition('mail_manager', new Definition(
             '%mail_manager.class%'
-        ))->SetAbstract(
+        ))->setAbstract(
             true
         )->addMethodCall('setMailer', array(
             new Reference('my_mailer')
@@ -504,7 +504,7 @@ Si vous aviez la configuration suivante :
         $container->setDefinition('another_filter', ... );
         $container->setDefinition('mail_manager', new Definition(
             '%mail_manager.class%'
-        ))->SetAbstract(
+        ))->setAbstract(
             true
         )->addMethodCall('setFilter', array(
             new Reference('my_filter')
