@@ -154,6 +154,8 @@ Vous pouvez aussi ajouter des liens vers la documentation de l'API :
 
 .. code-block:: rst
 
+    :namespace:`Symfony\\Component\\BrowserKit`
+
     :class:`Symfony\\Component\\Routing\\Matcher\\ApacheUrlMatcher`
 
     :method:`Symfony\\Component\\HttpKernel\\Bundle\\Bundle::build`

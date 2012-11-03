@@ -1257,8 +1257,9 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
                 chain_provider:
                     providers: [in_memory, user_db]
                 in_memory:
-                    users:
-                        foo: { password: test }
+                    memory:
+                        users:
+                            foo: { password: test }
                 user_db:
                     entity: { class: Acme\UserBundle\Entity\User, property: username }
 
@@ -1271,7 +1272,9 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
                 <provider>user_db</provider>
             </provider>
             <provider name="in_memory">
-                <user name="foo" password="test" />
+                <memory>
+                    <user name="foo" password="test" />
+                </memory>
             </provider>
             <provider name="user_db">
                 <entity class="Acme\UserBundle\Entity\User" property="username" />
@@ -1287,9 +1290,10 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
                     'providers' => array('in_memory', 'user_db'),
                 ),
                 'in_memory' => array(
-                    'users' => array(
-                        'foo' => array('password' => 'test'),
-                    ),
+                    'memory' => array(
+                       'users' => array(
+                           'foo' => array('password' => 'test'),
+                       ),
                 ),
                 'user_db' => array(
                     'entity' => array('class' => 'Acme\UserBundle\Entity\User', 'property' => 'username'),

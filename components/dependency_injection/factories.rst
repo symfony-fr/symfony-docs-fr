@@ -42,8 +42,8 @@ vous pouvez configurer le conteneur de service afin qu'il utilise la classe
             newsletter_factory.class: NewsletterFactory
         services:
             newsletter_manager:
-                class:          %newsletter_manager.class%
-                factory_class:  %newsletter_factory.class%
+                class:          "%newsletter_manager.class%"
+                factory_class:  "%newsletter_factory.class%"
                 factory_method: get 
 
     .. code-block:: xml
@@ -93,9 +93,9 @@ configurez la « factory » elle-même comme un service :
             newsletter_factory.class: NewsletterFactory
         services:
             newsletter_factory:
-                class:            %newsletter_factory.class%
+                class:            "%newsletter_factory.class%"
             newsletter_manager:
-                class:            %newsletter_manager.class%
+                class:            "%newsletter_manager.class%"
                 factory_service:  newsletter_factory
                 factory_method:   get 
 
@@ -159,9 +159,9 @@ en tant qu'argument :
             newsletter_factory.class: NewsletterFactory
         services:
             newsletter_factory:
-                class:            %newsletter_factory.class%
+                class:            "%newsletter_factory.class%"
             newsletter_manager:
-                class:            %newsletter_manager.class%
+                class:            "%newsletter_manager.class%"
                 factory_service:  newsletter_factory
                 factory_method:   get
                 arguments:

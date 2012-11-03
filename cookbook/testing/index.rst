@@ -8,3 +8,4 @@ Tests
     insulating_clients
     profiling
     doctrine
+    bootstrap

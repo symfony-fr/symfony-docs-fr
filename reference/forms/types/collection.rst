@@ -19,6 +19,7 @@ est très utile lorsque vous créerez des formulaires avec des relations one-to-
 |             | - `allow_add`_                                                              |
 |             | - `allow_delete`_                                                           |
 |             | - `prototype`_                                                              |
+|             | - `prototype_name`_                                                         |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `label`_                                                                  |
 | héritées    | - `error_bubbling`_                                                         |
@@ -313,6 +314,19 @@ facile pour vous.
 
 Pour plus de détails sur l'utilisation de cette option, lisez l'exemple ci-dessus
 ou :ref:`cookbook-form-collections-new-prototype`.
+
+prototype_name 
+~~~~~~~~~~~~~~
+
+.. versionadded:: 2.1
+   
+    L'option ``prototype_name`` est un ajout de Symfony 2.1
+    
+**type**: ``String`` **default**: ``__name__``
+
+Si vous avez plusieurs collections dans votre formulaire, ou pire encore,
+des collections imbriquées, vous voudrez peut être changer le joker (placeholder)
+pour que les jokers sous-jacents ne soient pas remplacés par la même valeur.
 
 Options héritées
 ----------------

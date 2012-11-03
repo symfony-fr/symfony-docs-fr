@@ -12,3 +12,4 @@
     factories
     parentservices
     advanced
+    workflow
