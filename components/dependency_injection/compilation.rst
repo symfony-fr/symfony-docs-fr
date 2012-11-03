@@ -25,6 +25,8 @@ sont utilisées pour optimiser la configuration avant qu'elle soit mise en cache
 Par exemple, les services privés et les services abstraits sont supprimés, et les
 alias sont résolus.
 
+.. _components-dependency-injection-extension:
+
 Gérer la configuration avec les extensions
 ------------------------------------------
 
@@ -240,7 +242,8 @@ secondaire seulement si un paramètre spécifique est défini::
         $loader = new XmlFileLoader( 
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
-        );        
+        );  
+
         $loader->load('services.xml');
 
         if ($config['advanced']) {
@@ -254,6 +257,8 @@ secondaire seulement si un paramètre spécifique est défini::
     vous ne pouvez pas le faire depuis une autre extension qui utilise un conteneur
     neuf. Vous devez plutôt utiliser une passe de compilateur qui fonctionne avec
     l'ensemble du conteneur après que les extensions ont été traitées.
+
+.. _components-dependency-injection-compiler-passes:
 
 Créer une Passe de Compilateur
 ------------------------------
@@ -365,6 +370,8 @@ des conteneurs lorsqu'elles sont ajoutées mais sont traitées quand la méthode
     un nouveau conteneur. Pour cela, vous devriez plutôt utiliser une passe de
     compilateur à la place qui fonctionne avec le conteneur complet après que
     les extensions ont été traitées.
+
+.. _components-dependency-injection-dumping:
 
 « Dumper » la Configuration pour plus de Performance
 ----------------------------------------------------

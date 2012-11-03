@@ -155,7 +155,7 @@ Le contrôleur suivant vous montre comment gérer le processus en entier::
             ->getForm()
         ;
 
-        if ($this->getRequest()->getMethod() === 'POST') {
+        if ($this->getRequest()->isMethod('POST')) {
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();

@@ -37,7 +37,7 @@ une valeur :
     # app/config/config.yml
     twig:
         globals:
-            ga_tracking: %ga_tracking%
+            ga_tracking: "%ga_tracking%"
 
 La même variable est disponible exactement comme précédemment.
 

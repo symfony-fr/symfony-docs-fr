@@ -154,12 +154,12 @@ votre template est dans un ``AcmeDebugBundle`` :
             data_collector.your_collector_name:
                 class: Acme\DebugBundle\Collector\Class\Name
                 tags:
-                    - { name: data_collector, template: "AcmeDebug:Collector:templatename", id: "your_collector_name" }
+                    - { name: data_collector, template: "AcmeDebugBundle:Collector:templatename", id: "your_collector_name" }
 
     .. code-block:: xml
 
         <service id="data_collector.your_collector_name" class="Acme\DebugBundle\Collector\Class\Name">
-            <tag name="data_collector" template="AcmeDebug:Collector:templatename" id="your_collector_name" />
+            <tag name="data_collector" template="AcmeDebugBundle:Collector:templatename" id="your_collector_name" />
         </service>
 
     .. code-block:: php

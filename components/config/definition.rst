@@ -107,6 +107,7 @@ définition de noeud appropriée. Les types de noeud disponibles sont :
 * scalar
 * boolean
 * array
+* enum (new in 2.1)
 * variable (pas de validation)
   
 et sont créés avec ``node($name, $type)`` ou leurs méthodes raccourcies associées

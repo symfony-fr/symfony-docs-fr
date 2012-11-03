@@ -40,11 +40,13 @@ dans le champ Choice::
 
     $builder->add('users', 'entity', array(
         'class' => 'AcmeHelloBundle:User',
+        'property' => 'username',
     ));
 
 Dans ce cas, tout les objets ``User`` seront chargés depuis la base de données et seront
 affichés soit comme une balise ``select``, soit un ensemble de boutons radio ou de checkboxes
-(cela dépendra des valeurs des options ``multiple`` et ``expanded``).
+(cela dépendra des valeurs des options ``multiple`` et ``expanded``). Si l'objet entité ne
+possède pas de méthode ``__toString()``, alors l'option ``property`` est nécessaire. 
 
 Utiliser une requête personnalisée pour les entités
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -203,6 +203,8 @@ Vous allez devoir récupérer un service depuis le conteneur à un moment ou à
 un autre mais cela devrait être limité autant que possible au point d'entrée
 de votre application.
 
+.. _components-dependency-injection-loading-config:
+
 Initialiser le Conteneur avec des fichiers de configuration
 -----------------------------------------------------------
 

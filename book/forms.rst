@@ -230,7 +230,7 @@ fonctionnalité suivante à votre contrôleur :
             ->add('dueDate', 'date')
             ->getForm();
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->isMethod('POST')) {
             $form->bind($request);
 
             if ($form->isValid()) {
@@ -471,7 +471,7 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
             'validation_groups' => function(FormInterface $form) {
                 $data = $form->getData();
                 if (Entity\Client::TYPE_PERSON == $data->getType()) {
-                    return array('person')
+                    return array('person');
                 } else {
                     return array('company');
                 }
@@ -1185,7 +1185,7 @@ balise :
 
         {# src/Acme/TaskBundle/Resources/views/Form/fields.html.twig #}
 
-        {% block field_row %}
+        {% block form_row %}
         {% spaceless %}
             <div class="form_row">
                 {{ form_label(form) }}
@@ -1193,11 +1193,11 @@ balise :
                 {{ form_widget(form) }}
             </div>
         {% endspaceless %}
-        {% endblock field_row %}
+        {% endblock form_row %}
 
     .. code-block:: html+php
 
-        <!-- src/Acme/TaskBundle/Resources/views/Form/field_row.html.php -->
+        <!-- src/Acme/TaskBundle/Resources/views/Form/form_row.html.php -->
 
         <div class="form_row">
             <?php echo $view['form']->label($form, $label) ?>
@@ -1205,9 +1205,9 @@ balise :
             <?php echo $view['form']->widget($form, $parameters) ?>
         </div>
 
-Le fragment de formulaire ``field_row`` est utilisé pour rendre la plupart
+Le fragment de formulaire ``form_row`` est utilisé pour rendre la plupart
 des champs via la fonction ``form_row``. Pour dire au composant formulaire
-d'utiliser votre nouveau fragment ``field_row`` defini ci-dessus, ajoutez
+d'utiliser votre nouveau fragment ``form_row`` defini ci-dessus, ajoutez
 ce qui suit en haut du template qui rend le formulaire :
 
 .. configuration-block:: php
@@ -1235,8 +1235,8 @@ ce qui suit en haut du template qui rend le formulaire :
 La balise ``form_theme`` (dans Twig) « importe » les fragments définis dans le
 template donné et les utilise lorsqu'il rend le formulaire. En d'autres termes,
 quand la fonction ``form_row`` est appelée plus tard dans ce template, elle va
-utiliser le bloc ``field_row`` de votre thème personnalisé (à la place du bloc
-par défaut ``field_row`` qui est délivré avec Symfony).
+utiliser le bloc ``form_row`` de votre thème personnalisé (à la place du bloc
+par défaut ``form_row`` qui est délivré avec Symfony).
 
 Votre thème personnalisé n'a pas besoin de surcharger tous les blocks. Lorsqu'il
 affiche un block qui n'est pas surchargé par votre thème personnalisé, le moteur de
@@ -1288,10 +1288,10 @@ sont situés dans le répertoire `Resources/views/Form` du bundle du framework
 Chaque nom de fragment suit le même pattern de base et est divisé en deux parties,
 séparées par un unique underscore (``_``). Quelques exemples sont :
 
-* ``field_row`` - utilisé par ``form_row`` pour rendre la plupart des champs ;
+* ``form_row`` - utilisé par ``form_row`` pour rendre la plupart des champs ;
 * ``textarea_widget`` - utilisé par ``form_widget`` pour rendre un champ de
   type ``textarea`` ;
-* ``field_errors`` - utilisé par ``form_errors`` pour rendre les erreurs d'un champ.
+* ``form_errors`` - utilisé par ``form_errors`` pour rendre les erreurs d'un champ.
 
 Chaque fragment suit le même pattern de base : ``type_part``. La partie ``type``
 correspond au *type* du champ qui doit être rendu (par exemple : ``textarea``,
@@ -1300,13 +1300,13 @@ va être rendu (par exemple : ``label``, ``widget``, ``errors``, etc). Par défa
 il y a 4 *parts* possibles d'un formulaire qui peuvent être rendues :
 
 +-------------+-----------------------------------+------------------------------------------------------------+
-| ``label``   | (par exemple : ``field_label``)   | rend le label du champ                                     |
+| ``label``   | (par exemple : ``form_label``)   | rend le label du champ                                      |
 +-------------+-----------------------------------+------------------------------------------------------------+
-| ``widget``  | (par exemple : ``field_widget``)  | rend la représentation HTML du champ                       |
+| ``widget``  | (par exemple : ``form_widget``)  | rend la représentation HTML du champ                        |
 +-------------+-----------------------------------+------------------------------------------------------------+
-| ``errors``  | (par exemple : ``field_errors``)  | rend les erreurs du champ                                  |
+| ``errors``  | (par exemple : ``form_errors``)  | rend les erreurs du champ                                   |
 +-------------+-----------------------------------+------------------------------------------------------------+
-| ``row``     | (par exemple : ``field_row``)     | rend la ligne entière du champ (label, widget, et erreurs) |
+| ``row``     | (par exemple : ``form_row``)     | rend la ligne entière du champ (label, widget, et erreurs)  |
 +-------------+-----------------------------------+------------------------------------------------------------+
 
 .. note::
@@ -1328,16 +1328,16 @@ Dans certains cas, le fragment que vous voulez personnaliser sera absent.
 Par exemple, il n'y a pas de fragment ``textarea_errors`` dans les thèmes
 fournis par défaut par Symfony.
 
-La réponse est : via le fragment ``field_errors``. Quand Symfony rend les erreurs
+La réponse est : via le fragment ``form_errors``. Quand Symfony rend les erreurs
 d'un champ de type textarea, il recherche en premier un fragment ``textarea_errors``
-avant de se replier sur le fragment de secours ``field_errors``. Chaque type de
+avant de se replier sur le fragment de secours ``form_errors``. Chaque type de
 champ a un type *parent* (le type parent de ``textarea`` est ``field``), et
 Symfony l'utilise si le fragment de base n'existe pas.
 
 Donc, afin de réécrire les erreurs pour les champs ``textarea`` *seulement*, copiez
-le fragment ``field_errors``, renommez-le en ``textarea_errors`` et personnalisez-le.
+le fragment ``form_errors``, renommez-le en ``textarea_errors`` et personnalisez-le.
 Pour réécrire le rendu d'erreur par défaut pour *tous* les champs, copiez et personnalisez
-le fragment ``field_errors`` directement.
+le fragment ``form_errors`` directement.
 
 .. tip::
 
@@ -1413,9 +1413,9 @@ maintenant utilisés globalement pour définir le rendu de formulaire en sortie.
         {% form_theme form _self %}
 
         {# effectue la personnalisation du fragment de formulaire #}
-        {% block field_row %}
+        {% block form_row %}
             {# personnalisez le rendu en sortie de la ligne du champ #}
-        {% endblock field_row %}
+        {% endblock form_row %}
 
         {% block content %}
             {# ... #}
@@ -1574,7 +1574,7 @@ un tableau des données soumises. C'est en fait très facile :
             ->add('message', 'textarea')
             ->getForm();
         
-            if ($request->getMethod() == 'POST') {
+            if ($request->isMethod('POST')) {
                 $form->bind($request);
 
                 // les données sont un tableau avec les clés "name", "email", et "message"
@@ -1711,6 +1711,6 @@ En savoir plus grâce au Cookbook
 .. _`Composant Formulaire Symfony2`: https://github.com/symfony/Form
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php
 .. _`Twig Bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Twig
-.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
+.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/2.1/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
 .. _`Cross-site request forgery`: http://en.wikipedia.org/wiki/Cross-site_request_forgery
 .. _`voir sur GitHub`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form

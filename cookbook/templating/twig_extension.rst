@@ -28,15 +28,12 @@ afin de formatter un nombre donné en un prix::
     // src/Acme/DemoBundle/Twig/AcmeExtension.php
     namespace Acme\DemoBundle\Twig;
 
-    use Twig_Extension;
-    use Twig_Filter_Method;
-
-    class AcmeExtension extends Twig_Extension
+    class AcmeExtension extends \Twig_Extension
     {
         public function getFilters()
         {
             return array(
-                'price' => new Twig_Filter_Method($this, 'priceFilter'),
+                'price' => new \Twig_Filter_Method($this, 'priceFilter'),
             );
         }
         

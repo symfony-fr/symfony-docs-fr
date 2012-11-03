@@ -81,7 +81,7 @@ Puis, dans votre configuration de service, vous pouvez injecter le service :
 
         services:
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 arguments: [@security.context]
 
     .. code-block:: xml
