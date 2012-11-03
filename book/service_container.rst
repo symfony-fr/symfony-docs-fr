@@ -188,7 +188,7 @@ simple. Les paramètres rendent les définitions de services plus organisées et
 
         services:
             my_mailer:
-                class:        %my_mailer.class%
+                class:        "%my_mailer.class%"
                 arguments:    [%my_mailer.transport%]
 
     .. code-block:: xml
@@ -359,7 +359,7 @@ ou ``Resources/config`` n'existent pas, créez-les.
 
         services:
             my_mailer:
-                class:        %my_mailer.class%
+                class:        "%my_mailer.class%"
                 arguments:    [%my_mailer.transport%]
 
     .. code-block:: xml
@@ -597,7 +597,7 @@ le conteneur de services nous donne une option beaucoup plus attrayante :
             my_mailer:
                 # ...
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 arguments: [@my_mailer]
 
     .. code-block:: xml
@@ -686,7 +686,7 @@ L'injection de la dépendance par la méthode setter a juste besoin d'un changem
             my_mailer:
                 # ...
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 calls:
                     - [ setMailer, [ @my_mailer ] ]
 
@@ -751,7 +751,7 @@ elle existe et ne rien faire si ce n'est pas le cas :
 
         services:
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 arguments: [@?my_mailer]
 
     .. code-block:: xml
@@ -854,7 +854,7 @@ Configurer le conteneur de services est facile :
 
         services:
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 arguments: [@mailer, @templating]
 
     .. code-block:: xml

@@ -104,7 +104,7 @@ Configuration de Référence
             orm:
                 default_entity_manager:  ~
                 auto_generate_proxy_classes:  false
-                proxy_dir:            %kernel.cache_dir%/doctrine/orm/Proxies
+                proxy_dir:            "%kernel.cache_dir%/doctrine/orm/Proxies"
                 proxy_namespace:      Proxies
                 # cherchez la classe "ResolveTargetEntityListener" pour avoir un mode d'emploi
                 resolve_target_entities: []
@@ -348,12 +348,12 @@ de configuration possibles :
                 driver_class:         MyNamespace\MyDriverImpl
                 options:
                     foo: bar
-                path:                 %kernel.data_dir%/data.sqlite
+                path:                 "%kernel.data_dir%/data.sqlite"
                 memory:               true
                 unix_socket:          /tmp/mysql.sock
                 wrapper_class:        MyDoctrineDbalConnectionWrapper
                 charset:              UTF8
-                logging:              %kernel.debug%
+                logging:              "%kernel.debug%""
                 platform_service:     MyOwnDatabasePlatformService
                 mapping_types:
                     enum: string

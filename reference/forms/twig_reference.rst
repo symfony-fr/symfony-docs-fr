@@ -23,6 +23,8 @@ de spécifier le libellé que vous voulez afficher.
     {{ form_label(form.name, 'Your Name', {'label_attr': {'class': 'foo'}}) }}
     {{ form_label(form.name, null, {'label': 'Your name', 'label_attr': {'class': 'foo'}}) }}
 
+Lisez ":ref:`twig-reference-form-variables`" pour en savoir plus sur l'argument ``variables``.
+
 form_errors(form.name)
 ----------------------
 
@@ -49,6 +51,10 @@ ou à une collection de champs, chaque item du formulaire sera affiché.
 Le deuxième argument de ``form_widget`` est un tableau de variables. La variable
 la plus commune est ``attr``, qui est un tableau d'attributs HTML à appliquer au widget.
 Dans certains cas, des types ont aussi des options liées au template. C'est au cas par cas.
+Les ``attributes`` ne s'appliquent pas récursivement aux champs enfants si vous affichez
+plusieurs champs en même temps (ex ``form_widget(form)``).
+
+Lisez ":ref:`twig-reference-form-variables`" pour en savoir plus sur l'argument ``variables``.
 
 form_row(form.name, variables)
 ------------------------------
@@ -63,6 +69,8 @@ et du widget.
 
 Le deuxième argument de ``form_row`` est un tableau de variables. Les templates fournis dans
 Symfony ne permettent que de surcharger le libellé, comme vous le voyez dans l'exemple ci-dessus.
+
+Lisez ":ref:`twig-reference-form-variables`" pour en savoir plus sur l'argument ``variables``.
 
 form_rest(form, variables)
 --------------------------
@@ -86,3 +94,75 @@ pratique de toujours l'ajouter dans votre balise form :
 .. code-block:: html+jinja
 
     <form action="{{ path('form_submit') }}" method="post" {{ form_enctype(form) }}>
+
+.. _`twig-reference-form-variables`:
+
+Un peu plus sur les « Variables » de formulaire
+-----------------------------------------------
+
+Dans presque toutes les fonctions Twig ci-dessus, le dernier argument est
+un tableau de « variables » qui sont utilisées lors de l'affichage de la partie
+de formulaire. Par exemple, le code suivant affichera le « widget » d'une champ, et
+modifiera ses attributs pour inclure une classe spéciale :
+
+.. code-block:: jinja
+
+    {# affiche un widget, mais y ajoute une classe "foo" #}
+    {{ form_widget(form.name, { 'attr': {'class': 'foo'} }) }}
+
+Le but de ces variables, ce qu'elles font et d'où elles viennent, n'est
+peut être pas clair au premier abord, mais elles sont incroyablement puissantes.
+Peu importe où vous affichez une partie de formulaire, le block qui l'affiche
+utilise un certain nombre de variables. Par défaut, ces blocks se situent dans
+`form_div_layout.html.twig`_.
+
+Jetez un oeil à ``form_label`` à titre d'exemple :
+
+.. code-block:: jinja
+
+    {% block form_label %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    {% endblock form_label %}
+
+Ce block se sert de plusieurs variables : ``compound``, ``label_attr``, ``required``,
+``label``, ``name`` et ``translation_domain``. Ces variables sont rendues disponibles
+par le système d'affichage de formulaires. Mais plus important encore, ce sont les
+variables que vous pouvez surcharger en appelant ``form_label`` (car dans cet exemple,
+nous affichons le label).
+
+Les variables exactes à surcharger dépendent de la partie du formulaire que vous
+affichez (ex label ou widget) et quel champ vous affiches (ex un widget ``choice``
+a une option ``expanded`` en plus). Si vous êtes capable de vous plonger dans le
+fichier `form_div_layout.html.twig`_, vous saurez toujours quelles options sont
+disponibles.
+
+.. tip::
+
+    Sous le capot, ces variables sont rendues disponibles par l'objet ``FormView``
+    de votre formulaire lorsque le composant Formulaire appelle ``buildView`` et
+    ``buildViewBottomUp`` sur chaque « noeud » de l'arbre formulaire. Pour voir
+    quelles variables « vue » possède un champ en particulier, trouvez le code
+    source du champ de formulaire (et ses parents) et regardez ces deux fonctions.
+
+.. note::
+
+    Si vous affichez un formulaire entier en une seule fois (ou un formulaire
+    imbriqué), l'argument ``variables``ne s'appliquera qu'au formulaire lui-même
+    et pas à ses enfants. En d'autres termes, le code suivant ne passera **pas**
+    l'attribut classe « foo » à tout les enfants du champ de formulaire :
+
+    .. code-block:: jinja
+
+        {# ne marche **pas**, les variables ne sont pas récursives #}
+        {{ form_widget(form, { 'attr': {'class': 'foo'} }) }}
+
+.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/2.1/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig

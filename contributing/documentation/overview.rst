@@ -89,8 +89,8 @@ de code qui semblent familiers, vous devriez suivre ces règles :
   Si on cache plusieurs lignes : la description peut être placée après les ``...``
   Si on ne cache qu'une partie de la ligne : la description peut être placée avant la ligne;
 * Si c'est utile, un ``bloc de code`` devrait commencer par un commentaire indiquant le nom du
-  fichier qui contient le code. Placez une ligne vite après ce commentaire, à moins que la prochaine ligne
-  ne soit également un commentaire;
+  fichier qui contient le code. Ne mettez pas ligne vite après ce commentaire, à moins que
+  la prochaine ligne ne soit également un commentaire;
 * Vous devriez mettre un ``$`` devant chaque ligne de commande;
 * Nous préférerons le raccourci ``::`` à ``.. code-block:: php`` pour commencer un block de PHP.
 

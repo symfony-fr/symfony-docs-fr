@@ -9,4 +9,5 @@ Formulaire
     dynamic_form_generation
     form_collections
     create_custom_field_type
+    create_form_type_extension
     use_virtuals_forms

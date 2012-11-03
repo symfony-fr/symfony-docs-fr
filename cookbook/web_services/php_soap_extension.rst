@@ -22,8 +22,8 @@ qui représente les fonctionnalités que vous mettrez à disposition dans votre 
 Dans ce cas, le service SOAP permettra à un client d'appeler la méthode nommée ``hello``, 
 qui engendrera l'envoi d'un courriel::
 
-    // src/Acme/SoapBundle/HelloService.php
-    namespace Acme\SoapBundle;
+    // src/Acme/SoapBundle/Services/HelloService.php
+    namespace Acme\SoapBundle\Services;
 
     class HelloService
     {
@@ -61,14 +61,14 @@ Symfony et lui permettre de construire l'objet ``HelloService`` adéquat :
         # app/config/config.yml    
         services:
             hello_service:
-                class: Acme\DemoBundle\Services\HelloService
+                class: Acme\SoapBundle\Services\HelloService
                 arguments: [@mailer]
 
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
         <services>
-         <service id="hello_service" class="Acme\DemoBundle\Services\HelloService">
+         <service id="hello_service" class="Acme\SoapBundle\Services\HelloService">
           <argument type="service" id="mailer"/>
          </service>
         </services>
