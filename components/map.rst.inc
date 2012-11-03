@@ -13,6 +13,7 @@
 
   * :doc:`/components/console/introduction`
   * :doc:`/components/console/usage`
+  * :doc:`/components/console/single_command_tool`  
 
 * **CSS Selector**
 
@@ -28,6 +29,7 @@
   * :doc:`/components/dependency_injection/factories`
   * :doc:`/components/dependency_injection/parentservices`
   * :doc:`/components/dependency_injection/advanced`
+  * :doc:`/components/dependency_injection/workflow`
 
 * **DOM Crawler**
 

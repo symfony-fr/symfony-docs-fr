@@ -182,7 +182,7 @@ suivants :
   lancée depuis une application ;
 * Les tests fonctionnels devraient être utilisés uniquement pour tester la
   sortie de la réponse et quelques informations de profilage si vous en avez ;
-* La couverture du code devrait couvrir au moins 95% de tout votre code.
+* Les tests devraient couvrir au moins 95% de tout votre code.
 
 .. note::
 

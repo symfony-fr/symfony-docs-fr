@@ -17,5 +17,6 @@
 
 * **Communauté**
 
+  * :doc:`Processus de sortie de versions </contributing/community/releases>`
   * :doc:`Réunions IRC </contributing/community/irc>`
   * :doc:`Autres ressources </contributing/community/other>`

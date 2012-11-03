@@ -111,7 +111,7 @@ pouvez utiliser la directive ``file``.
         services:
            foo:
              class: Example\Foo\Bar
-             file: %kernel.root_dir%/src/path/to/file/foo.php
+             file: "%kernel.root_dir%/src/path/to/file/foo.php"
 
     .. code-block:: xml
 

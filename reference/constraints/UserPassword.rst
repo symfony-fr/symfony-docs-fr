@@ -51,7 +51,7 @@ que l'ancien mot de passe est correct :
        // src/Acme/UserBundle/Form/Model/ChangePassword.php
        namespace Acme\UserBundle\Form\Model;
        
-       use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+       use Symfony\Component\Security\Core\Validator\Constraint as SecurityAssert;
 
        class ChangePassword
        {

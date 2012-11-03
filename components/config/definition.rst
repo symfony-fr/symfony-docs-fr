@@ -107,6 +107,7 @@ définition de noeud appropriée. Les types de noeud disponibles sont :
 * scalar
 * boolean
 * array
+* enum (new in 2.1)
 * variable (pas de validation)
   
 et sont créés avec ``node($name, $type)`` ou leurs méthodes raccourcies associées
@@ -223,6 +224,35 @@ certaine valeur :
             ->end()
         ->end()
     ;
+
+Sections facultatives
+---------------------
+
+.. versionadded:: 2.1
+    Les méthodes ``canBeEnabled`` et ``canBeDisabled`` sont une nouveauté de Symfony 2.2
+
+Si vous avez des sections entières qui sont facultatives et qui peuvent être activées ou
+désactivées, vous pouvez profiter des avantages des méthodes raccourci
+:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeEnabled` et
+:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeDisabled`::
+
+    $arrayNode
+        ->canBeEnabled()
+    ;
+
+    // est équivalent à
+
+    $arrayNode
+        ->treatFalseLike(array('enabled' => false))
+        ->treatTrueLike(array('enabled' => true))
+        ->treatNullLike(array('enabled' => true))
+        ->children()
+            ->booleanNode('enabled')
+                ->defaultFalse()
+    ;
+
+La méthode ``canBeDisabled`` est quasiment identique à ceci près que la section sera
+activée par défaut.
 
 Options de fusion
 -----------------
