@@ -8,7 +8,7 @@ Doctrine2 est très flexible, et la communauté a déjà créé une série d'ext
 Doctrine très pratiques afin de vous aider avec les tâches usuelles liées aux
 entités.
 
-Une librairie en particulier - la librairie `DoctrineExtensions`_ - fournit
+Une bibliothèque en particulier - la bibliothèque `DoctrineExtensions`_ - fournit
 l'intégration de fonctionnalités pour les comportements (Behaviors) `Sluggable`_,
 `Translatable`_, `Timestampable`_, `Loggable`_, `Tree`_ et `Sortable`_
 
@@ -18,7 +18,7 @@ Toutefois, pour installer/activer chaque extension, vous devez enregistrer
 et activer un :doc:`Ecouteur d'évènement (Event Listener)</cookbook/doctrine/event_listeners_subscribers>`.
 Pour faire cela, vous avez deux possibilités :
 
-#. Utiliser le bundle `StofDoctrineExtensionsBundle`_, qui intègre la librairie ci-dessus.
+#. Utiliser le bundle `StofDoctrineExtensionsBundle`_, qui intègre la bibliothèque ci-dessus.
 
 #. Implémenter ces services directement en suivant la documentation pour l'intégration dans
    Symfony2 : `Installer les extensions Gedmo Doctrine2 dans Symfony2`_

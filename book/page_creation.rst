@@ -443,7 +443,7 @@ a par défaut la même structure de répertoires basique et recommandée :
 
 * ``src/``: Tout le code PHP du projet est stocké ici;
 
-* ``vendor/``: Par convention, toutes les librairies tierces (additionnelles) sont placées ici;
+* ``vendor/``: Par convention, toutes les bibliothèques tierces (additionnelles) sont placées ici;
 
 * ``web/``: Le répertoire racine web qui contient tous les fichiers publiquement accessibles;
 
@@ -528,7 +528,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
 
     Lorsque Symfony se charge, un fichier spécial - ``app/autoload.php`` - est
     inclus. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
-    tous vos fichiers depuis le répertoire ``src/`` et toutes les librairies tierces
+    tous vos fichiers depuis le répertoire ``src/`` et toutes les bibliothèques tierces
     depuis le repertoire ``vendor/``.
 
     Grace à l'autoloader, vous n'avez jamais à vous soucier d'utiliser les instructions
@@ -549,7 +549,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
             src/Acme/HelloBundle/Controller/HelloController.php
 
     Typiquement, le seul moment où vous devrez vous soucier du fichier ``app/autoload.php``	
-    est quand vous inclurez des librairies tierces dans le repertoire ``vendor/``.
+    est quand vous inclurez des bibliothèques tierces dans le repertoire ``vendor/``.
     Pour plus d'informations sur le chargement automatique, voir 
     :doc: `Comment charger automatiquement des classes</components/class_loader>`.
 
@@ -1007,8 +1007,8 @@ en tête :
 
 * chaque projet contient juste quelques répertoires principaux : ``web/`` (ressources
   web et contrôleurs frontaux), ``app/`` (configuration), ``src/`` (vos bundles),
-  et ``vendor/`` (librairies tierces) (il y a aussi un répertoire ``bin/`` qui est utilisé
-  pour la mise à jour des librairies vendors);
+  et ``vendor/`` (bibliothèques tierces) (il y a aussi un répertoire ``bin/`` qui est utilisé
+  pour la mise à jour des bibliothèques vendors);
 
 * chaque fonctionnalité de Symfony2 (incluant le noyau du framework) est organisée
   dans un *bundle*, qui est un ensemble structuré de fichiers pour cette fonctionnalité;

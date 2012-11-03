@@ -34,6 +34,7 @@ Vous pouvez installer le composant de différentes manières :
 Utilisation
 -----------
 
+
 Utiliser le composant Serializer est très simple. Vous avez juste besoin
 de définir la classe :class:`Symfony\\Component\\Serializer\\Serializer`
 pour spécifier quels encodeurs et quels normaliseurs seront disponibles::

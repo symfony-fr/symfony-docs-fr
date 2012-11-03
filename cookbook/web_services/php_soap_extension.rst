@@ -7,7 +7,7 @@ Comment créer des web services SOAP à l'intérieur d'un contrôleur Symfony2
 Configurer un contrôleur afin qu'il agisse comme un serveur est réalisé simplement
 avec quelques outils. Vous devez, bien sûr, avoir installé l'extension `PHP SOAP`_.
 Comme l'extension PHP SOAP ne peut actuellement pas générer un WSDL, vous devez soit
-en créer un, soit utiliser un générateur provenant d'une librairie tierce.
+en créer un, soit utiliser un générateur provenant d'une bibliothèque tierce.
 
 .. note::
 

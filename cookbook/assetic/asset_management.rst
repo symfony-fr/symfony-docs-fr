@@ -176,9 +176,9 @@ CoffeeScript en JavaScript ou convertir vos fichiers SASS en CSS.
 En fait, Assetic possède une longue liste de filtres.
 
 Plusieurs de ces filtres ne font pas le travail directement, mais utilisent
-des librairies tierces pour faire le gros du travail. Cela signifie que vous
-devrez souvent installer une librairie tierce pour utiliser un filtre. Le grand
-avantage d'utiliser Assetic pour faire appel à ces librairies (plutôt que de les
+des bibliothèques tierces pour faire le gros du travail. Cela signifie que vous
+devrez souvent installer une bibliothèque tierce pour utiliser un filtre. Le grand
+avantage d'utiliser Assetic pour faire appel à ces bibliothèques (plutôt que de les
 utiliser directement) est qu'au lieu de les exécuter à la main après avoir modifié
 les fichiers, Assetic prendra tout en charge pour vous, et supprimera définitivement
 cette étape du processus de développement et de déploiement.

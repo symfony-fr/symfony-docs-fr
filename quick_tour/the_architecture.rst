@@ -17,7 +17,7 @@ recommandée d'une application Symfony2 :
 
 * ``app/``:    La configuration de l'application,
 * ``src/``:    Le code PHP du projet,
-* ``vendor/``: Les librairies tierces,
+* ``vendor/``: Les bibliothèques tierces,
 * ``web/``:    Le répertoire Web racine.
 
 Le répertoire ``web/``
@@ -323,13 +323,13 @@ qui décidez.
 
 .. _using-vendors:
 
-Utilisation de librairies externes (Vendors)
---------------------------------------------
+Utilisation de bibliothèques externes (Vendors)
+-----------------------------------------------
 
-Il y a de fortes probabilités que votre application dépende de librairies tierces.
+Il y a de fortes probabilités que votre application dépende de bibliothèques tierces.
 Celles-ci doivent être stockées dans le répertoire ``vendor/``. Ce
-répertoire contient déjà les librairies de Symfony2, la librairie SwiftMailer,
-l'ORM Doctrine, le système de template Twig et d'autres librairies et bundles.
+répertoire contient déjà les bibliothèques de Symfony2, la bibliothèque SwiftMailer,
+l'ORM Doctrine, le système de template Twig et d'autres bibliothèques et bundles.
 
 Comprendre le Cache et les Logs
 -------------------------------
