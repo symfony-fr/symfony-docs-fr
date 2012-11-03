@@ -168,7 +168,7 @@ La configuration du service pour cette classe :
             my_mailer.class: Acme\HelloBundle\Mail\Mailer
         services:
             my_mailer:
-                class:     %my_mailer.class%
+                class:     "%my_mailer.class%"
                 arguments:
                     - "@service_container"
                 # scope: container can be omitted as it is the default

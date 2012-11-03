@@ -47,3 +47,20 @@ source d'inspiration quant à comment effectuer de nombreuses tâches usuelles.
     utilisé dans beaucoup de projets différents. Donc, même si vous ne
     spécifiez pas vos contrôleurs en tant que services, vous allez probablement
     voir ceci effectué dans quelques bundles Symfony2 open-source.
+
+Utiliser les annotations de routage
+-----------------------------------
+
+Lorsque vous utilisez les annotations pour définir le routage dans un contrôleur
+défini comme service, vous devrez votre service comme suit::
+    /**
+     * @Route("/blog", service="my_bundle.annot_controller")
+     * @Cache(expires="tomorrow")
+     */
+    class AnnotController extends Controller
+    {
+    }
+
+Dans cet exemple, ``my_bundle.annot_controller`` devrait l'id de l'instance
+du ``AnnotController`` définie dans le conteneur de services. Cette partie
+est documentée dans le chapitre :doc:`/bundles/SensioFrameworkExtraBundle/annotations/routing`.

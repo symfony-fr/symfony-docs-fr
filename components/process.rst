@@ -28,7 +28,7 @@ une commande dans un sous-processus::
     $process->setTimeout(3600);
     $process->run();
     if (!$process->isSuccessful()) {
-        throw new RuntimeException($process->getErrorOutput());
+        throw new \RuntimeException($process->getErrorOutput());
     }
 
     print $process->getOutput();

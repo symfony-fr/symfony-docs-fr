@@ -133,15 +133,16 @@ avec Twig et PHP.
     designers.
 
     Twig peut aussi faire des choses que PHP ne pourrait pas faire, comme le contrôle
-    d'espaces blancs, le bac à sable et l'inclusion de fonctions et de filtres personnalisés
-    qui n'affectent que les templates. Twig contient de petites fonctionnalités qui rendent
+    d'espaces blancs, le bac à sable, l'échappement de caractères automatique et
+    contecxtuel et l'inclusion de fonctions et de filtres personnalisés qui n'affectent
+    que les templates. Twig contient de petites fonctionnalités qui rendent
     l'écriture de template plus facile et plus concise. Prenez l'exemple suivant, il
     combine une boucle avec l'instruction logique ``if`` :
     
     .. code-block:: html+jinja
     
         <ul>
-            {% for user in users %}
+            {% for user in users if user.active %}
                 <li>{{ user.username }}</li>
             {% else %}
                 <li>Aucun utilisateur trouvé.</li>

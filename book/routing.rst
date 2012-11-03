@@ -1,5 +1,5 @@
 .. index::
-   single: Routage
+   single: Routing
 
 Routage
 =======
@@ -25,7 +25,7 @@ chapitre, vous serez capable de :
 * Débugger vos routes
 
 .. index::
-   single: Routage; Les bases
+   single: Routing; Basics
 
 Le routage en Action
 --------------------
@@ -110,7 +110,7 @@ Ceci est le but du routeur Symfony2 : faire correspondre l'URL d'une requête
 d'astuces qui rendent même facile la création des URLs les plus complexes.
 
 .. index::
-   single: Routage; Sous le capot
+   single: Routing; Under the hood
 
 Routage: Sous le Capot
 ----------------------
@@ -149,7 +149,7 @@ ressemble à ça :
    spécifique à exécuter.
 
 .. index::
-   single: Routage; Créer des routes
+   single: Routing; Creating routes
 
 Créer des Routes
 ----------------
@@ -188,9 +188,10 @@ configuration de l'application :
 .. tip::
 
     Bien que toutes les routes soient chargées depuis un fichier unique, c'est
-    une pratique courante d'inclure des ressources de routage additionnelles
-    directement depuis ce dernier. Référez-vous à la section
-    :ref:`routing-include-external-resources` pour plus d'informations.
+    une pratique courante d'inclure des ressources de routage additionnelles.
+    Pour faire cela, il vous suffit de spécifier quels fichiers externes doivent
+    être inclus dans le fichier de configuration de routage principal.Référez-vous
+    à la section :ref:`routing-include-external-resources` pour plus d'informations.
 
 Configuration Basique des Routes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -240,7 +241,7 @@ ensuite exécutée. Ce processus sera expliqué rapidement dans la section
 :ref:`controller-string-syntax`.
 
 .. index::
-   single: Routage; Paramètres de substitution
+   single: Routing; Placeholders
 
 Routage avec les Paramètres de substitution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -438,7 +439,7 @@ la valeur ``2``. Parfait.
 +---------+------------+
 
 .. index::
-   single: Routage; Conditions Requises
+   single: Routing; Requirements
 
 Ajouter des Conditions Requises
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -641,7 +642,7 @@ l'expression régulière ``(en|fr)``.
 +-----+-------------------------------------+
 
 .. index::
-   single: Routage; Conditions requises pour la méthode
+   single: Routing; Method requirement
 
 Ajouter des Conditions Requises pour la Méthode HTTP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -724,8 +725,8 @@ qu'expression régulière. Pour faire correspondre les requêtes à la méthode
 ``GET`` *ou* à ``POST``, vous pouvez utiliser ``GET|POST``.
 
 .. index::
-   single: Routage; Exemple avancé
-   single: Routage; Le paramètre _format
+   single: Routing; Advanced example
+   single: Routing; _format parameter
 
 .. _advanced-routing-example:
 
@@ -824,8 +825,8 @@ d'eux apporte une fonctionnalité unique à votre application :
     également stockée en session pour que les futures requêtes la conservent.
 
 .. index::
-   single: Routage; Les contrôleurs
-   single: Contrôleur; Format de nommage des chaînes de caractères
+   single: Routing; Controllers
+   single: Controller; String naming format
 
 .. _controller-string-syntax:
 
@@ -923,7 +924,7 @@ discussion plus détaillée sur le sujet, lisez :ref:`route-parameters-controlle
     définie comme étant le nom de la route qui a correspondu.
 
 .. index::
-   single: Routage; Importer des ressources de routage
+   single: Routing; Importing routing resources
 
 .. _routing-include-external-resources:
 
@@ -1056,8 +1057,14 @@ final ``/admin/hello/{name}`` à la place de simplement ``/hello/{name}`` :
 La chaîne de caractères ``/admin`` sera maintenant ajoutée devant le pattern
 de chaque route chargée depuis la nouvelle ressource de routage.
 
+.. tip::
+
+    Vous pouvez également définir les routes en utilisant les annotations.
+    Lisez la:doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/routing>`
+    pour savoir comment faire.
+    
 .. index::
-   single: Routage; Debugging
+   single: Routing; Debugging
 
 Visualiser et Debugger les Routes
 ---------------------------------
@@ -1103,7 +1110,7 @@ avec la commande ``router:match`` :
     Route "article_show" matches
 
 .. index::
-   single: Routage; Générer des URLs
+   single: Routing; Generating URLs
 
 Générer des URLs
 ----------------
@@ -1156,7 +1163,7 @@ depuis les templates.
     Pour plus d'informations, lisez la documentation du bundle.
 
 .. index::
-   single: Routage; URLs Absolues
+   single: Routing; Absolute URLs
 
 Générer des URLs Absolues
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1183,7 +1190,7 @@ de la méthode ``generate()`` :
         $router->getContext()->setHost('www.example.com');
 
 .. index::
-   single: Routage; Générer des URLs depuis un template
+   single: Routing; Generating URLs in a template
 
 Générer des URLs avec « Query Strings »
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

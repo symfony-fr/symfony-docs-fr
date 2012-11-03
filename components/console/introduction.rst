@@ -42,8 +42,17 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
             $this
                 ->setName('demo:greet')
                 ->setDescription('Greet someone')
-                ->addArgument('name', InputArgument::OPTIONAL, 'Who do you want to greet?')
-                ->addOption('yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters')
+                ->addArgument(
+                    'name',
+                    InputArgument::OPTIONAL,
+                    'Who do you want to greet?'
+                )
+                ->addOption(
+                   'yell',
+                   null,
+                   InputOption::VALUE_NONE,
+                   'If set, the task will yell in uppercase letters'
+                )
             ;
         }
 
@@ -144,8 +153,16 @@ un argument optionnel ``last_name`` à la commande et faites en sorte que l'argu
 
     $this
         // ...
-        ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?')
-        ->addArgument('last_name', InputArgument::OPTIONAL, 'Your last name?')
+        ->addArgument(
+            'name',
+            InputArgument::REQUIRED,
+            'Who do you want to greet?'
+        )
+        ->addArgument(
+            'last_name',
+            InputArgument::OPTIONAL,
+            'Your last name?'
+        );
         // ...
 
 Vous avez maintenant accès à l'argument ``last_name`` depuis votre commande::
@@ -212,7 +229,13 @@ pour spécifier combien de fois le message devrait être affiché::
 
     $this
         // ...
-        ->addOption('iterations', null, InputOption::VALUE_REQUIRED, 'How many times should the message be printed?', 1)
+        ->addOption(
+            'iterations',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'How many times should the message be printed?',
+            1
+        );
 
 Ensuite, utilisez cette commande pour afficher le message plusieurs fois :
 
@@ -260,7 +283,13 @@ Vous pouvez combiner VALUE_IS_ARRAY avec VALUE_REQUIRED ou VALUE_OPTIONAL de la 
 
     $this
         // ...
-        ->addOption('iterations', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How many times should the message be printed?', 1)
+        ->addOption(
+            'iterations',
+            null,
+            InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+            'How many times should the message be printed?',
+            1
+        );
 
 Demander de l'information à l'utilisateur
 -----------------------------------------
@@ -271,7 +300,11 @@ que vous souhaitiez confirmer une action avant de l'exécuter réellement. Ajout
 ce qui suit à votre commande::
 
     $dialog = $this->getHelperSet()->get('dialog');
-    if (!$dialog->askConfirmation($output, '<question>Continue with this action?</question>', false)) {
+    if (!$dialog->askConfirmation(
+        $output,
+        '<question>Continue with this action?</question>',
+        false 
+    )) {
         return;
     }
 
@@ -285,7 +318,84 @@ Par exemple, si vous aviez besoin de savoir le nom de quelque chose, vous pourri
 faire la chose suivante::
 
     $dialog = $this->getHelperSet()->get('dialog');
-    $name = $dialog->ask($output, 'Please enter the name of the widget', 'foo');
+    $name = $dialog->ask(
+        $output,
+        'Please enter the name of the widget',
+        'foo'  
+    );
+
+Afficher une barre de progression
+---------------------------------
+
+.. versionadded:: 2.2
+    Le helper ``progress`` a été ajouté dans Symfony 2.2.
+
+Lorsque vous éxécutez des longues commandes, il peut être utile d'afficher
+une barre de progression qui se met à jour lorsque votre commande s'éxécute :
+
+.. image:: /images/components/console/progress.png
+
+Pour afficher les détails de la progression, utilisez le
+:class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`, passez lui un nombre
+total d'unités, et incrémentez la progression lorsque votre commande s'éxécute::
+
+    $progress = $app->getHelperSet()->get('progress');
+
+    $progress->start($output, 50);
+    $i = 0;
+    while ($i++ < 50) {
+        // fait quelque chose
+
+        // avance la progression d'1 unité
+        $progress->advance();
+    } 
+
+    $progress->finish();
+
+L'apparence de la progression peut également être personnalisé, avec certains
+niveaux de verbosité. Chacun de ces niveaux affiche différents items possibles,
+comme un pourcentage de complétion, une barre de progression ou une information
+du type actuel/total (ex 10/50)::
+
+    $progress->setFormat(ProgressHelper::FORMAT_QUIET);
+    $progress->setFormat(ProgressHelper::FORMAT_NORMAL);
+    $progress->setFormat(ProgressHelper::FORMAT_VERBOSE);
+    $progress->setFormat(ProgressHelper::FORMAT_QUIET_NOMAX);
+    // la valeur par défaut
+    $progress->setFormat(ProgressHelper::FORMAT_NORMAL_NOMAX);
+    $progress->setFormat(ProgressHelper::FORMAT_VERBOSE_NOMAX);
+
+Vous pouvez également contrôler différents caractères et la largeur
+utilisée pour la barre de progression::
+
+    // la partie finie de la barre
+    $progress->setBarCharacter('<comment>=</comment>');
+    // la partie infinie de la barre
+    $progress->setEmptyBarCharacter(' ');
+    $progress->setProgressChar('|');
+    $progress->setBarWidth(50);
+
+Pour voir les autres options disponibles, jetez un oeil à l'API
+de :class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`.
+
+.. caution::
+
+    Pour des raisons de performance, attention de ne pas définir un pas
+    trop important. Par exemple, si vous itérez sur un nombre important
+    d'items, choisissez un nombre raisonable qui se met à jour sur plusieurs
+    itérations::
+    
+        $progress->start($output, 500);
+        $i = 0;
+        while ($i++ < 50000) {
+            // ... fait quelque chose
+
+            // avance toutes les 100 itérations
+            if ($i % 100 == 0) {
+                $progress->advance();
+            }
+        }
+
 
 Tester les commandes
 --------------------
@@ -316,7 +426,7 @@ faciliter le « testing » sans avoir de console réelle::
         }
     }
 
-La méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
+La méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`
 retourne ce qui aurait été retourné durant un appel normal depuis la console.
 
 Vous pouvez tester l'envoi d'arguments et d'options à la commande en les passant
