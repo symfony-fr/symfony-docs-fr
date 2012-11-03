@@ -25,6 +25,8 @@ sont utilisées pour optimiser la configuration avant qu'elle soit mise en cache
 Par exemple, les services privés et les services abstraits sont supprimés, et les
 alias sont résolus.
 
+.. _components-dependency-injection-extension:
+
 Gérer la configuration avec les extensions
 ------------------------------------------
 
@@ -66,7 +68,10 @@ Une extension très simple peut charger des fichiers de configuration dans le co
     {
         public function load(array $configs, ContainerBuilder $container)
         {
-            $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+            $loader = new XmlFileLoader(
+                $container,
+                new FileLocator(__DIR__.'/../Resources/config')
+            );            
             $loader->load('services.xml');
         }
 
@@ -234,7 +239,11 @@ secondaire seulement si un paramètre spécifique est défini::
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader( 
+            $container,
+            new FileLocator(__DIR__.'/../Resources/config')
+        ); 
+
         $loader->load('services.xml');
 
         if ($config['advanced']) {
@@ -248,6 +257,8 @@ secondaire seulement si un paramètre spécifique est défini::
     vous ne pouvez pas le faire depuis une autre extension qui utilise un conteneur
     neuf. Vous devez plutôt utiliser une passe de compilateur qui fonctionne avec
     l'ensemble du conteneur après que les extensions ont été traitées.
+
+.. _components-dependency-injection-compiler-passes:
 
 Créer une Passe de Compilateur
 ------------------------------
@@ -322,8 +333,10 @@ par défaut ont été exécutées, vous pouvez faire comme cela::
     use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
     $container = new ContainerBuilder();
-    $container->addCompilerPass(new CustomCompilerPass, PassConfig::TYPE_AFTER_REMOVING);
-
+    $container->addCompilerPass(
+        new CustomCompilerPass,
+        PassConfig::TYPE_AFTER_REMOVING
+    );
 
 Gérer la Configuration avec des Extensions
 ------------------------------------------
@@ -357,6 +370,8 @@ des conteneurs lorsqu'elles sont ajoutées mais sont traitées quand la méthode
     un nouveau conteneur. Pour cela, vous devriez plutôt utiliser une passe de
     compilateur à la place qui fonctionne avec le conteneur complet après que
     les extensions ont été traitées.
+
+.. _components-dependency-injection-dumping:
 
 « Dumper » la Configuration pour plus de Performance
 ----------------------------------------------------
@@ -405,7 +420,10 @@ la « dumpez »::
         $container->compile();
 
         $dumper = new PhpDumper($container);
-        file_put_contents($file, $dumper->dump(array('class' => 'MyCachedContainer')));
+        file_put_contents(
+            $file,  
+            $dumper->dump(array('class' => 'MyCachedContainer'))
+        );  
     }
 
 Vous allez maintenant profiter de la rapidité du conteneur PHP configuré tout en
@@ -436,7 +454,10 @@ mis en cache en production mais aussi d'avoir une configuration toujours à jour
 
         if (!$isDebug){
             $dumper = new PhpDumper($container);
-            file_put_contents($file, $dumper->dump(array('class' => 'MyCachedContainer')));
+            file_put_contents(
+                $file,
+                $dumper->dump(array('class' => 'MyCachedContainer'))
+            );
         }
     }
 

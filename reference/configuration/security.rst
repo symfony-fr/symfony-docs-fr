@@ -55,6 +55,14 @@ Chaque partie sera expliquée dans la section suivante.
                     encode_as_base64:    true
                     iterations:          5000
 
+                # encodeur PBKDF2
+                # lisez la note en fin d'article sur la sécurité et les performances
+                Acme\Your\Class\Name:
+                    algorithm:            pbkdf2
+                    hash_algorithm:       sha512
+                    encode_as_base64:     true
+                    iterations:           1000
+
                 # Exemple d'options/valeurs pour voir à quoi ressemble un encodeur personnalisé
                 Acme\Your\Class\Name:
                     algorithm:            ~
@@ -189,6 +197,9 @@ Chaque partie sera expliquée dans la section suivante.
                 ROLE_ADMIN:      [ROLE_ORGANIZER, ROLE_USER]
                 ROLE_SUPERADMIN: [ROLE_ADMIN]
 
+.. caution::
+    
+
 .. _reference-security-firewall-form-login:
 
 Configuration du formulaire de login
@@ -247,3 +258,17 @@ Rediriger après authentification
 * ``default_target_path`` (type: ``string``, default: ``/``)
 * ``target_path_parameter`` (type: ``string``, default: ``_target_path``)
 * ``use_referer`` (type: ``Boolean``, default: ``false``)
+
+Utiliser l'encodeur PBKDF2 : performance et sécurité
+----------------------------------------------------
+
+L'encodeur `PBKDF2`_ fournit un haut niveau de sécurité cryptographique,
+et est recommandé par le National Institute of Standards and Technology (NIST).
+
+Mais attention, utiliser PBKDF2 (avec un grand nombre d'itérations) ralentit
+le processus. PBHDF2 devrait être utilisé avec prudence.
+
+Une bonne configuration est constituée d'environ 1000 itération et utilise
+sha512 comme algorithme de hashage.
+
+.. _`PBKDF2`: http://en.wikipedia.org/wiki/PBKDF2

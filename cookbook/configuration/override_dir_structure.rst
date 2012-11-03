@@ -47,7 +47,7 @@ Vous pouvez surcharger le répertoire de cache en surchargeant la méthode
 notre cas, nous avons changé l'emplacement du répertoire cache pour qu'il
 devienne ``app/{environment}/cache``.
 
-.. warning::
+.. caution::
 
     Vous devriez avoir un répertoire ``cache`` différent pour chaque environnement,
     sinon certains effets de bord pourraient survenir. Chaque environnement génère
@@ -109,7 +109,7 @@ le déplacez, vous aurez besoin de modifier les chemins dans ces fichiers::
         # ...
         assetic:
             # ...
-            read_from: %kernel.root_dir%/../../public_html
+            read_from: "%kernel.root_dir%/../../public_html"
 
     Maintenant, vous devez juste exporter vos ressources pour que votre application puisse
     fonctionner :

@@ -99,6 +99,14 @@ Le fichier de méta-données ``BlogPost.dcm.xml`` généré ressemble à ce qui 
       </entity>
     </doctrine-mapping>
 
+.. note::
+
+    Si vous avez des relations ``oneToMany`` entre vos entités,
+    vous devrez éditer les fichiers ``xml`` ou ``yml`` générés pour
+    ajouter une section sur les entités spécifiques afin de définir
+    les attributs ``inversedBy`` et ``mappedBy`` de la relation
+    ``oneToMany``.
+
 Une fois que les fichiers de méta-données sont générés, vous pouvez demander
 à Doctrine d'importer le schéma et de construire les classes entité qui lui
 sont liées en exécutant les deux commandes suivantes.

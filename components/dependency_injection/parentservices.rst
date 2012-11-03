@@ -63,13 +63,13 @@ chose comme ça :
             my_email_formatter:
                 # ...
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 calls:
                     - [ setMailer, [ @my_mailer ] ]
                     - [ setEmailFormatter, [ @my_email_formatter] ]
 
             greeting_card_manager:
-                class:     %greeting_card_manager.class%
+                class:     "%greeting_card_manager.class%"
                 calls:
                     - [ setMailer, [ @my_mailer ] ]
                     - [ setEmailFormatter, [ @my_email_formatter] ]
@@ -192,18 +192,18 @@ nombre de répétitions en spécifiant un parent pour un service.
             my_email_formatter:
                 # ...
             mail_manager:
-                class:     %mail_manager.class%
+                class:     "%mail_manager.class%"
                 abstract:  true
                 calls:
                     - [ setMailer, [ @my_mailer ] ]
                     - [ setEmailFormatter, [ @my_email_formatter] ]
             
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 parent: mail_manager
             
             greeting_card_manager:
-                class:     %greeting_card_manager.class%
+                class:     "%greeting_card_manager.class%"
                 parent: mail_manager
             
     .. code-block:: xml
@@ -249,7 +249,7 @@ nombre de répétitions en spécifiant un parent pour un service.
         $container->setDefinition('my_email_formatter', ... );
         $container->setDefinition('mail_manager', new Definition(
             '%mail_manager.class%'
-        ))->SetAbstract(
+        ))->setAbstract(
             true
         )->addMethodCall('setMailer', array(
             new Reference('my_mailer')
@@ -320,20 +320,20 @@ quelque chose comme ça :
             my_email_formatter:
                 # ...
             mail_manager:
-                class:     %mail_manager.class%
+                class:     "%mail_manager.class%"
                 abstract:  true
                 calls:
                     - [ setMailer, [ @my_mailer ] ]
                     - [ setEmailFormatter, [ @my_email_formatter] ]
             
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 parent: mail_manager
                 calls:
                     - [ setMailer, [ @my_alternative_mailer ] ]
             
             greeting_card_manager:
-                class:     %greeting_card_manager.class%
+                class:     "%greeting_card_manager.class%"
                 parent: mail_manager
             
     .. code-block:: xml
@@ -387,7 +387,7 @@ quelque chose comme ça :
         $container->setDefinition('my_email_formatter', ... );
         $container->setDefinition('mail_manager', new Definition(
             '%mail_manager.class%'
-        ))->SetAbstract(
+        ))->setAbstract(
             true
         )->addMethodCall('setMailer', array(
             new Reference('my_mailer')
@@ -452,13 +452,13 @@ Si vous aviez la configuration suivante :
             another_filter:
                 # ...
             mail_manager:
-                class:     %mail_manager.class%
+                class:     "%mail_manager.class%"
                 abstract:  true
                 calls:
                     - [ setFilter, [ @my_filter ] ]
                     
             newsletter_manager:
-                class:     %newsletter_manager.class%
+                class:     "%newsletter_manager.class%"
                 parent: mail_manager
                 calls:
                     - [ setFilter, [ @another_filter ] ]
@@ -504,7 +504,7 @@ Si vous aviez la configuration suivante :
         $container->setDefinition('another_filter', ... );
         $container->setDefinition('mail_manager', new Definition(
             '%mail_manager.class%'
-        ))->SetAbstract(
+        ))->setAbstract(
             true
         )->addMethodCall('setFilter', array(
             new Reference('my_filter')

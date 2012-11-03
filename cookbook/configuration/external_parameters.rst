@@ -66,8 +66,8 @@ Vous pourrez ainsi faire référence à ces paramètres si nécessaire.
             dbal:
                 driver    pdo_mysql
                 dbname:   symfony2_project
-                user:     %database.user%
-                password: %database.password%
+                user:     "%database.user%"
+                password: "%database.password%"
 
     .. code-block:: xml
 

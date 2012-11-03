@@ -1185,6 +1185,9 @@ en base64. En d'autres termes, le mot de passe a été très fortement obscurci 
 qu'il puisse être décodé (c'est-à-dire que vous ne pouvez pas retrouver le mot
 de passe depuis le mot de passe haché).
 
+.. versionadded:: 2.2
+    Depuis Symfony 2.2 vous pouvez également utiliser l'encodeur de mot de passe PBKDF2.
+
 Si vous avez une sorte de formulaire d'enregistrement pour les utilisateurs, vous devez pouvoir
 générer un mot de passe haché pour pouvoir le sauvegarder. Peu importe l'algorithme que vous 
 avez configuré pour votre objet User, le mot de passe haché peut toujours être déterminé de
@@ -1257,8 +1260,9 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
                 chain_provider:
                     providers: [in_memory, user_db]
                 in_memory:
-                    users:
-                        foo: { password: test }
+                    memory:
+                        users:
+                            foo: { password: test }
                 user_db:
                     entity: { class: Acme\UserBundle\Entity\User, property: username }
 
@@ -1271,7 +1275,9 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
                 <provider>user_db</provider>
             </provider>
             <provider name="in_memory">
-                <user name="foo" password="test" />
+                <memory>
+                    <user name="foo" password="test" />
+                </memory>
             </provider>
             <provider name="user_db">
                 <entity class="Acme\UserBundle\Entity\User" property="username" />
@@ -1287,9 +1293,10 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
                     'providers' => array('in_memory', 'user_db'),
                 ),
                 'in_memory' => array(
-                    'users' => array(
-                        'foo' => array('password' => 'test'),
-                    ),
+                    'memory' => array(
+                       'users' => array(
+                           'foo' => array('password' => 'test'),
+                       ),
                 ),
                 'user_db' => array(
                     'entity' => array('class' => 'Acme\UserBundle\Entity\User', 'property' => 'username'),

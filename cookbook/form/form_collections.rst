@@ -183,7 +183,7 @@ de ``TaskType``::
             $form = $this->createForm(new TaskType(), $task);
             
             // analyse le formulaire quand on reçoit une requête POST
-            if ('POST' === $request->getMethod()) {
+            if ($request->isMethod('POST')) {
                 $form->bind($request);
                 if ($form->isValid()) {
                     // ici vous pouvez par exemple sauvegarder la Task et ses objets Tag
@@ -639,7 +639,7 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
           
             $editForm = $this->createForm(new TaskType(), $task);
 
-            if ('POST' === $request->getMethod()) {
+            if ($request->isMethod('POST')) {
                 $editForm->bind($this->getRequest());
 
                 if ($editForm->isValid()) {
