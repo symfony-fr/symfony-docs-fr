@@ -180,12 +180,6 @@ et ses propriétés doivent être mappées avec la base de données. Ces métado
 peuvent être spécifiées dans de nombreux formats incluant le YAML, XML ou directement
 dans la classe ``Product`` avec les annotations :
 
-.. note::
-
-    Un bundle ne peut accepter qu'un format de définition des métadonnées. Par 
-    exemple, il n'est pas possible de mélanger des définitions au format YAML
-    avec des entités annotées dans les classes PHP.
-
 .. configuration-block::
 
     .. code-block:: php-annotations
@@ -262,6 +256,12 @@ dans la classe ``Product`` avec les annotations :
             </entity>
         </doctrine-mapping>
 
+.. note::
+
+    Un bundle ne peut accepter qu'un format de définition des métadonnées. Par 
+    exemple, il n'est pas possible de mélanger des définitions au format YAML
+    avec des entités annotées dans les classes PHP.
+
 .. tip::
 
     Le nom de la table est optionnel et si il est omis il sera déterminé automatiquement
@@ -307,6 +307,7 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
          * @IgnoreAnnotation("fn")
          */
         class Product
+        // ...
 
 Générer les getters et setters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -331,10 +332,10 @@ pas (c.à.d qu'elle ne remplace pas les méthodes existantes)
 
     Avec la commande ``doctrine:generate:entities``, vous pouvez :
  
-        * générer les getters et setters,
+        * générer les getters et setters;
 
         * générer les classes repository configurées avec les annotations
-            ``@ORM\Entity(repositoryClass="...")``,
+            ``@ORM\Entity(repositoryClass="...")``;
  
         * générer les constructeurs appropriés pour les relations 1:n et n:m.
 
@@ -435,11 +436,11 @@ suivante au ``DefaultController`` du bundle :
 Décortiquons cet exemple :
 
 * **lignes 9 à 12** Dans cette section, vous instanciez et travaillez avec l'objet
-  ``product`` comme n'importe quel autre objet PHP normal;
+  ``product`` comme n'importe quel autre objet PHP normal.
 
 * **ligne 14** Cette ligne récupère un objet *gestionnaire d'entités* (entity manager)
   de Doctrine, qui est responsable de la gestion du processus de persistence et de récupération
-  des objets vers et depuis la base de données;
+  des objets vers et depuis la base de données.
 
 * **ligne 15** La méthode ``persist()`` dit à Doctrine de « gérer » l'objet ``product``.
   Cela ne crée pas vraiment de requête dans la base de données (du moins pas encore).
@@ -448,7 +449,7 @@ Décortiquons cet exemple :
   les objets qu'il gère pour savoir si ils ont besoin d'être persistés dans la base
   de données. Dans cet exemple, l'objet ``$product`` n'a pas encore été persisté,
   le gestionnaire d'entités éxecute donc une requête ``INSERT`` et une ligne est créée dans
-  la table ``product``
+  la table ``product``.
 
 .. note::
 
@@ -587,9 +588,9 @@ une action de mise à jour dans un contrôleur :
 
 Mettre à jour l'objet ne nécessite que trois étapes :
 
-1. Récupérer l'objet depuis Doctrine;
-2. Modifier l'objet;
-3. Apeller la méthode ``flush()`` du gestionnaire d'entités
+#. Récupérer l'objet depuis Doctrine;
+#. Modifier l'objet;
+#. Apeller la méthode ``flush()`` du gestionnaire d'entités
 
 Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Souvenez-vous que
 cette méthode dit simplement à Doctrine de gérer, ou « regarder » l'objet ``$product``.

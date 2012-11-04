@@ -410,9 +410,7 @@ Veuillez noter que le nom de la route ``login`` n'est pas important. Ce qui impo
 que l'URL de la route (``login``) corresponde à la valeur de ``login_path``, car c'est
 là que le système de sécurité va rediriger les utilisateurs qui doivent se connecter.
 
-Ensuite, créez un contrôleur qui va afficher le formulaire de connexion :
-
-.. code-block:: php
+Ensuite, créez un contrôleur qui va afficher le formulaire de connexion::
 
     // src/Acme/SecurityBundle/Controller/SecurityController.php;
     namespace Acme\SecurityBundle\Controller;
@@ -814,9 +812,7 @@ Sécuriser un contrôleur
 
 Protéger votre application en utilisant des masques d'URL est facile, mais pourrait ne pas offrir
 une granularité suffisante dans certains cas. Si nécessaire, vous pouvez facilement forcer
-l'autorisation dans un contrôleur :
-
-.. code-block:: php
+l'autorisation dans un contrôleur::
 
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
     // ...
@@ -831,9 +827,7 @@ l'autorisation dans un contrôleur :
 .. _book-security-securing-controller-annotations:
 
 Vous pouvez aussi choisir d'installer et d'utiliser le Bundle ``JMSSecurityExtraBundle``,
-qui peut sécuriser un contrôleur en utilisant les annotations :
-
-.. code-block:: php
+qui peut sécuriser un contrôleur en utilisant les annotations::
 
     use JMS\SecurityExtraBundle\Annotation\Secure;
     /**
@@ -883,8 +877,8 @@ Les utilisateurs
 ----------------
 
 Dans les sections précédentes, vous avez appris comment vous pouvez protéger différentes 
-ressources en exigeant un ensemble de rôles pour une ressource. Dans cette section, nous allons
-explorer l'autre aspect de l'autorisation : les utilisateurs.
+ressources en exigeant un ensemble de rôles pour une ressource. Cette section aborde
+l'autre aspect de l'autorisation : les utilisateurs.
 
 D'où viennent les utilisateurs (*Fournisseurs d'utilisateurs*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -978,7 +972,7 @@ Charger les utilisateurs de la base de données
 Si vous voulez charger vos utilisateurs depuis l'ORM Doctrine, vous pouvez facilement le faire
 en créant une classe ``User``et en configurant le fournisseur d'entités (``entity`` provider).
 
-.. tip:
+.. tip::
 
     Un bundle de très grande qualité est disponible, qui permet de sauvegarder vos utilisateurs
     depuis l'ORM ou l'ODM de Doctrine. Apprenez-en plus sur le `FOSUserBundle`_
@@ -1203,9 +1197,7 @@ Récupérer l'objet User
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Après l'authentification, l'objet ``User`` correspondant à l'utilisateur courant peut être
-récupéré via le service ``security.context``. Depuis un controleur, cela ressemble à ça :
-
-.. code-block:: php
+récupéré via le service ``security.context``. Depuis un controleur, cela ressemble à ça::
 
     public function indexAction()
     {
@@ -1237,6 +1229,10 @@ la méthode :method:`GlobalVariables::getUser()<Symfony\\Bundle\\FrameworkBundle
     .. code-block:: html+jinja
 	
         <p>Username: {{ app.user.username }}</p>
+
+    .. code-block:: html+php
+  
+        <p>Username: <?php echo $app->getUser()->getUsername() ?></p>
 
 Utiliser plusieurs fournisseurs d'utilisateurs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1664,9 +1660,13 @@ Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_
 Pour changer d'utilisateur, il suffit d'ajouter à la chaîne de requête le paramètre
 ``_switch_user`` et le nom d'utilisateur comme valeur à l'URL en cours :
 
+.. code-block:: text
+
     http://example.com/somewhere?_switch_user=thomas
 
 Pour revenir à l'utilisateur initial, utilisez le nom d'utilisateur spécial ``_exit``:
+
+.. code-block:: text
 
     http://example.com/somewhere?_switch_user=_exit
 

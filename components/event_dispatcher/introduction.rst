@@ -53,8 +53,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/EventDispatcher);
-* Installez le via PEAR (`pear.symfony.com/EventDispatcher`);
-* Installez le via Composer (`symfony/event-dispatcher` sur Packagist).
+* Installez le via Composer (``symfony/event-dispatcher`` sur `Packagist`_).
 
 Utilisation
 -----------
@@ -614,7 +613,8 @@ d'exécution du « listener »::
         }
     }
 
-.. _Observer: http://en.wikipedia.org/wiki/Observer_pattern
+.. _Observer: http://fr.wikipedia.org/wiki/Observateur_(patron_de_conception)
 .. _`composant HttpKernel de Symfony2`: https://github.com/symfony/HttpKernel
-.. _Closures: http://php.net/manual/en/functions.anonymous.php
-.. _callable PHP: http://www.php.net/manual/en/language.pseudo-types.php#language.types.callback
+.. _Closures: http://www.php.net/manual/fr/functions.anonymous.php
+.. _callable PHP: http://www.php.net/manual/fr/language.pseudo-types.php#language.types.callback
+.. _Packagist: https://packagist.org/packages/symfony/event-dispatcher

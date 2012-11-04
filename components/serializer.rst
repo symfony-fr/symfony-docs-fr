@@ -28,8 +28,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Serializer);
-* Installez le via PEAR ( `pear.symfony.com/Serializer`);
-* Installez le via Composer (`symfony/serializer` on Packagist).
+* Installez le via Composer (``symfony/serializer`` on `Packagist`_).
 
 Utilisation
 -----------
@@ -130,3 +129,4 @@ l'ORM Doctrine, et la prise en charge de cas de figure plus complexes (par
 exemple les références circulaires).
 
 .. _`JMSSerializationBundle`: https://github.com/schmittjoh/JMSSerializerBundle
+.. _Packagist: https://packagist.org/packages/symfony/serializer

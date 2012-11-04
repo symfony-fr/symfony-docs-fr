@@ -29,8 +29,7 @@ Installation
 Vous pouvez installer le composant de plusieurs manières :
 
 * Utilisez le dépôt officiel Git (https://github.com/symfony/ClassLoader) ;
-* Installez le via PEAR (`pear.symfony.com/ClassLoader`);
-* Installez le via Composer (`symfony/class-loader` dans Packagist).
+* Installez le via Composer (``symfony/class-loader`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -128,3 +127,4 @@ d'abandonner. L'ordre des enregistrements est significatif dans ce cas.
 
 .. _standards: http://symfony.com/PSR0
 .. _PEAR:      http://pear.php.net/manual/en/standards.php
+.. _Packagist: https://packagist.org/packages/symfony/class-loader

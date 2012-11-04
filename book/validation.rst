@@ -14,7 +14,7 @@ transparente. Ce composant est basé sur la `spécification JSR303`_.
 Quoi ? Une spécification Java en PHP? Vous avez bien entendu, mais ce n'est pas
 aussi terrible que ça en a l'air. Regardons comment elle peut être utilisée en PHP.
 
-.. index:
+.. index::
    single: Validation; Les bases
 
 Les Bases de la Validation

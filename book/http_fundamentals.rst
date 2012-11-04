@@ -193,11 +193,8 @@ Requêtes et réponses en PHP
 
 Alors comment interagissez-vous avec la «requête» et créez-vous la «réponse»
 quand vous utilisez PHP ? En réalité, PHP vous abstrait une partie du processus
-global :
+global::
 
-.. code-block:: php
-
-    <?php
     $uri = $_SERVER['REQUEST_URI'];
     $foo = $_GET['foo'];
 
@@ -389,9 +386,7 @@ Rester Organisé
 Mais à l'intérieur de votre contrôleur frontal, comment savez-vous quelle page devrait
 être rendue et comment pouvez-vous délivrer chacune d'elles de façon «saine» ? D'une manière
 ou d'une autre, vous allez devoir inspecter l'URI entrante et exécuter les différentes
-parties de votre code dépendant de cette valeur. Cela peut rapidement devenir moche :
-
-.. code-block:: php
+parties de votre code dépendant de cette valeur. Cela peut rapidement devenir moche::
 
     // index.php
 
@@ -452,11 +447,33 @@ que vous vouliez ajouter une page ``/contact`` à votre application Symfony.
 Premièrement, commencez par ajouter une entrée pour ``/contact`` dans votre
 fichier de configuration du routing :
 
-.. code-block:: yaml
+.. configuration-block::
+ 
+    .. code-block:: yaml
 
-    contact:
-        pattern:  /contact
-        defaults: { _controller: AcmeDemoBundle:Main:contact }
+        # app/config/routing.yml
+        contact: 
+            pattern:  /contact
+            defaults: { _controller: AcmeDemoBundle:Main:contact }
+
+    .. code-block:: xml
+
+        <route id="contact" pattern="/contact">
+            <default key="_controller">AcmeBlogBundle:Main:contact</default>
+        </route>
+
+    .. code-block:: php
+ 
+        // app/config/routing.php
+        use Symfony\Component\Routing\RouteCollection;
+        use Symfony\Component\Routing\Route;
+  
+        $collection = new RouteCollection();
+        $collection->add('contact', new Route('/contact', array(
+            '_controller' => 'AcmeBlogBundle:Main:contact',
+        )));
+ 
+        return $collection;
 
 .. note::
 
@@ -468,10 +485,9 @@ Lorsque quelqu'un visite la page ``/contact``, il y a correspondance avec cette 
 et le contrôleur spécifié est exécuté. Comme vous l'apprendrez dans le
 :doc:`chapitre sur le routage</book/routing>`, la chaîne de caractères ``AcmeDemoBundle:Main:contact``
 est une syntaxe raccourcie qui pointe vers une méthode PHP spécifique ``contactAction`` dans la
-classe appelée ``MainController``:
+classe appelée ``MainController``::
 
-.. code-block:: php
-
+    // src/Acme/DemoBundle/Controller/MainController.php
     class MainController
     {
         public function contactAction()
@@ -480,7 +496,8 @@ classe appelée ``MainController``:
         }
     }
 
-Dans cet exemple très simple, le contrôleur crée simplement un objet ``Response`` contenant l'HTML
+Dans cet exemple très simple, le contrôleur crée simplement un objet
+:class:`Symfony\\Component\\HttpFoundation\\Response` contenant l'HTML
 "<h1>Contact us!</h1>". Dans le :doc:`chapitre du contrôleur</book/controller>`, vous allez
 apprendre comment un contrôleur peut fournir des templates, permettant à votre code de
 «présentation» (i.e. quoi que ce soit qui délivre du HTML) de se trouver dans un fichier de template
@@ -558,7 +575,7 @@ Donc finalement, *qu'est-ce* que le *Framework* Symfony2 ? Le *Framework Symfony
 est une bibliothèque PHP qui accomplit deux tâches distinctes :
 
 #. Fournir une sélection de composants (i.e. les Composants Symfony2) et
-   des bibliothèques tiers (e.g. ``Swiftmailer`` pour envoyer des emails);
+   des bibliothèques tiers (e.g. `Swiftmailer`_ pour envoyer des emails);
 
 #. Fournir une configuration et une bibliothèque «colle» qui lie toutes ces
    pièces ensembles.
@@ -585,3 +602,4 @@ Pour les utilisateurs avancés, le ciel est la seule limite.
 .. _`Validator`: https://github.com/symfony/Validator
 .. _`Security`: https://github.com/symfony/Security
 .. _`Translation`: https://github.com/symfony/Translation
+.. _`Swiftmailer`: http://swiftmailer.org/

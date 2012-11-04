@@ -22,8 +22,7 @@ Installation
 Vous pouvez installer le composant de différentes façon :
 
 * En utilisant le dépôt officiel Git (https://github.com/symfony/HttpFoundation) ;
-* En l'installant à l'aide de PEAR ( `pear.symfony.com/HttpFoundation`) ;
-* En l'installant à l'aide de Composer (`symfony/http-foundation` sur Packagist).
+* En l'installant à l'aide de Composer (``symfony/http-foundation`` sur `Packagist`_).
 
 Requête
 -------
@@ -350,3 +349,5 @@ Session
 
 TBD -- Cette partie n'est actuellement pas écrite et sera certainement retravaillée
 dans Symfony en version 2.1.
+
+.. _Packagist: https://packagist.org/packages/symfony/http-foundation
