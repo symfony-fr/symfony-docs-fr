@@ -53,6 +53,7 @@ Utiliser les annotations de routage
 
 Lorsque vous utilisez les annotations pour définir le routage dans un contrôleur
 défini comme service, vous devrez votre service comme suit::
+
     /**
      * @Route("/blog", service="my_bundle.annot_controller")
      * @Cache(expires="tomorrow")

@@ -14,8 +14,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/DomCrawler) ;
-* Installez le via PEAR (`pear.symfony.com/DomCrawler`) ;
-* Installez le via Composer (`symfony/dom-crawler` dans Packagist).
+* Installez le via Composer (``symfony/dom-crawler`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -200,18 +199,18 @@ L'objet :class:`Symfony\\Component\\DomCrawler\\Link` possède plusieurs
 méthodes utiles pour récupérer plus d'informations à propos du lien
 sélectionné lui-même::
 
-    // retourne la valeur de l'attribut href
-    $href = $link->getRawUri();
 
     // retourne l'URI qui peut être utilisée pour effectuer une autre requête
     $uri = $link->getUri();
 
-La méthode ``getUri()`` est particulièrement utile car elle « nettoie » la
-valeur de ``href`` et la transforme en une valeur qui peut être utilisée.
-Par exemple, pour un lien tel ``href="#foo"``, cette méthode retournerait
-l'URI complète de la page courante suffixée avec ``#foo``. Le retour de la
-méthode ``getUri()`` est toujours une URI complète avec laquelle vous pouvez
-effectuer l'action de votre choix.
+.. note::
+  
+    La méthode ``getUri()`` est particulièrement utile car elle « nettoie » la
+    valeur de ``href`` et la transforme en une valeur qui peut être utilisée.
+    Par exemple, pour un lien tel ``href="#foo"``, cette méthode retournerait
+    l'URI complète de la page courante suffixée avec ``#foo``. Le retour de la
+    méthode ``getUri()`` est toujours une URI complète avec laquelle vous pouvez
+    effectuer l'action de votre choix.
 
 Formulaires
 ...........
@@ -337,4 +336,5 @@ soumettre des formulaires directement::
     // soumet le formulaire
     $crawler = $client->submit($form);
 
-.. _`Goutte`: https://github.com/fabpot/goutte
+.. _`Goutte`:  https://github.com/fabpot/goutte
+.. _Packagist: https://packagist.org/packages/symfony/dom-crawler

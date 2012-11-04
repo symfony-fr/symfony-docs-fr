@@ -28,8 +28,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Yaml) ;
-* Installez le via PEAR (`pear.symfony.com/Yaml`) ;
-* Installez le via Composer (`symfony/yaml` dans Packagist).
+* Installez le via Composer (``symfony/yaml`` dans `Packagist`_).
 
 Pourquoi ?
 ----------
@@ -501,3 +500,4 @@ symbole dièse (``#``) :
     dans une collection.
 
 .. _YAML: http://yaml.org/
+.. _Packagist: https://packagist.org/packages/symfony/yaml

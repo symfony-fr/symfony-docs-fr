@@ -125,7 +125,7 @@ En savoir plus
 Pour étudier le sujet des Extensions Twig plus en détail, veuillez jeter un coup d'oeil à
 la `documentation des extensions Twig`_.
 
-.. _`dépôt officiel des extensions Twig`: http://github.com/fabpot/Twig-extensions
+.. _`dépôt officiel des extensions Twig`: https://github.com/fabpot/Twig-extensions
 .. _`documentation des extensions Twig`: http://twig.sensiolabs.org/doc/advanced.html#creating-an-extension
 .. _`variables globales`: http://twig.sensiolabs.org/doc/advanced.html#id1
 .. _`fonctions`: http://twig.sensiolabs.org/doc/advanced.html#id2

@@ -158,4 +158,4 @@ n'est pas actif.
     :ref:`cookbook-assetic-apply-to`.
 
 .. _`YUI Compressor`: http://developer.yahoo.com/yui/compressor/
-.. _`Téléchargez le JAR`: http://yuilibrary.com/downloads/#yuicompressor
+.. _`Téléchargez le JAR`: http://yuilibrary.com/projects/yuicompressor/

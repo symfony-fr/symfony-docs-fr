@@ -151,7 +151,7 @@ d'un dépôt central pour fonctionner. Vous avez donc plusieurs solutions :
 .. _`Symfony2 Standard Edition`: http://symfony.com/download
 .. _`Readme de la Standard Edition`: https://github.com/symfony/symfony-standard/blob/master/README.md
 .. _`Contrôle de version avec Subversion`: http://svnbook.red-bean.com/
-.. _`GitHub`: http://github.com/
+.. _`GitHub`: https://github.com/
 .. _`Google code`: http://code.google.com/hosting/
 .. _`SourceForge`: http://sourceforge.net/
 .. _`Gna`: http://gna.org/

@@ -5,7 +5,7 @@
 Comment définir des Relations avec des Classes Abstraites et des Interfaces
 ===========================================================================
 
-.. versionadded: 2.1
+.. versionadded:: 2.1
     Le ResolveTargetEntityListener est une nouveauté de Doctrine 2.2, qui a été
     « packagé » pour la première fois avec Symfony 2.1.
 

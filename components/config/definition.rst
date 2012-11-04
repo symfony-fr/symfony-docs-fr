@@ -108,10 +108,40 @@ définition de noeud appropriée. Les types de noeud disponibles sont :
 * boolean
 * array
 * enum (new in 2.1)
+* integer (new in 2.2)
+* float (new in 2.2)
 * variable (pas de validation)
   
 et sont créés avec ``node($name, $type)`` ou leurs méthodes raccourcies associées
 ``xxxxNode($name)``.
+
+Contraintes de noeud numérique
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   
+.. versionadded:: 2.2
+  
+    Les noeuds numériques (float et integer) ont été ajoutés dans la version 2.2
+
+Les noeuds numériques (float et integer) fournissent deux contraintes supplémentaires
+:method:`Symfony\\Component\\Config\\Definition\\Builder::min` et
+:method:`Symfony\\Component\\Config\\Definition\\Builder::max` qui vous permettent de
+valider leur valeur :
+ 
+.. code-block:: php
+
+    $rootNode 
+        ->children()
+            ->integerNode('positive_value')
+                ->min(0) 
+            ->end()
+            ->floatNode('big_value')
+                ->max(5E45) 
+            ->end()
+            ->integerNode('value_inside_a_range')
+                ->min(-50)->max(50)
+            ->end()
+        ->end()
+    ;
 
 Noeuds tableau
 ~~~~~~~~~~~~~~

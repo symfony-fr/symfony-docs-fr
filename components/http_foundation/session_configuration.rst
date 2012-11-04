@@ -79,6 +79,7 @@ peuvent vous servir d'exemples si vous souhaitez écrire le(s) vôtre(s).
   * :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\PdoSessionHandler`
   * :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\MemcacheSessionHandler`
   * :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\MemcachedSessionHandler`
+  * :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\MongoDbSessionHandler`
   * :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\NullSessionHandler`
 
 Exemple d'utilisation::
@@ -140,7 +141,7 @@ respectivement avec ``5 / 100``, cela signifierait une probabilité de 5%.
 De même, ``3 / 4`` signifierait 3 chances sur 4 d'être appelé, c-a-d 75%.
 
 Si le gestionnaire de ramasse-miettes est invoqué, PHP va passer la valeur stockée
-dans la directive PHP ini ``session.gc_maxlifetime`. La signification dans ce
+dans la directive PHP ini ``session.gc_maxlifetime``. La signification dans ce
 contexte est que n'importe quelle session stockée qui a été sauvegardée il y a
 plus longtemps que ``maxlifetime`` devrait être supprimée. Cela permet d'expirer
 des enregistrements selon leur temps d'inactivité.

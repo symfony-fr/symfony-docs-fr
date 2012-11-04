@@ -9,7 +9,7 @@ un champ qui a une valeur booléenne : si la checkbox est cochée, le champ sera
 défini à true. Si la checkbox n'est pas cochée, le champ sera défini à false.
 
 +-------------+------------------------------------------------------------------------+
-| Rendu comme | Champ ``input`` ``text``                                               |
+| Rendu comme | Champ ``input`` ``checkbox``                                           |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `value`_                                                             |
 +-------------+------------------------------------------------------------------------+

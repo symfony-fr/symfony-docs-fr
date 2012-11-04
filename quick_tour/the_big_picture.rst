@@ -120,7 +120,7 @@ pour afficher votre première « vraie » page Symfony2 :
 
 Symfony2 devrait vous féliciter pour le travail accompli jusqu'à présent !
 
-.. image:: /images/quick_tour/welcome.jpg
+.. image:: /images/quick_tour/welcome.png
    :align: center
 
 Comprendre les fondamentaux
@@ -405,6 +405,11 @@ utile : le profiler.
 
 .. image:: /images/quick_tour/profiler.png
    :align: center
+
+.. note::
+
+    Vous pouvez avoir plus d'informations rapidement en survolant les items
+    de la Web Debug Toolbar.
 
 Bien évidemment, vous ne voudrez pas voir ces outils lorsque vous déploierez votre
 application sur le serveur de production. C'est pourquoi vous trouverez un autre
