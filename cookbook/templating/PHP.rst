@@ -61,6 +61,21 @@ Le contrôleur suivant délivre ainsi le template ``index.html.php`` ::
         return $this->render('AcmeHelloBundle:Hello:index.html.php', array('name' => $name));
     }
 
+Ou vous pouvez utiliser le raccourci :doc:`/bundles/SensioFrameworkExtraBundle/annotations/view`
+pour afficher le template par défaut ``AcmeHelloBundle:Hello:index.html.php``::
+
+    // src/Acme/HelloBundle/Controller/HelloController.php
+
+    // ...
+
+    /**
+     * @Template(engine="php")
+     */
+    public function indexAction($name)
+    {
+        return array('name' => $name);
+    }
+    
 .. index::
   single: Templating; Layout
   single: Layout

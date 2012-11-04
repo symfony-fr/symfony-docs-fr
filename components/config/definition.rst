@@ -392,6 +392,7 @@ vous pouvez agalement autoriser ce qui suit :
 
 en changeant la valeur d'une chaine de caractère en tableau associatif avec
 ``name`` comme clé::
+
     $rootNode
         ->arrayNode('connection')
            ->beforeNormalization()

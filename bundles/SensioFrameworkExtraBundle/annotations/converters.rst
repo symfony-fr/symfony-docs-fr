@@ -143,7 +143,7 @@ une instance de DateTime::
     /**
      * @Route("/blog/archive/{start}/{end}")
      */
-    public function archiveAction(DateTime $start, DateTime $end)
+    public function archiveAction(\DateTime $start, DateTime $end)
     {
     }
 
@@ -156,7 +156,7 @@ le format en option::
      * @ParamConverter("start", options={"format": "Y-m-d"})
      * @ParamConverter("end", options={"format": "Y-m-d"})
      */
-    public function archiveAction(DateTime $start, DateTime $end)
+    public function archiveAction(\DateTime $start, DateTime $end)
     {
     }
 

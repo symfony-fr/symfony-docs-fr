@@ -36,6 +36,7 @@ dans la base de données. Écrire en pur PHP est « rapide et sale » :
     $result = mysql_query('SELECT id, title FROM post', $link);
     ?>
 
+    <!DOCTYPE html>
     <html>
         <head>
             <title>List of Posts</title>
@@ -111,6 +112,7 @@ qui est essentiellement un fichier HTML qui utilise une syntaxe PHP de template 
 
 .. code-block:: html+php
 
+    <!DOCTYPE html>
     <html>
         <head>
             <title>List of Posts</title>
@@ -220,6 +222,7 @@ Corrigez cela en créant un nouveau fichier ``layout.php`` :
 .. code-block:: html+php
 
     <!-- templates/layout.php -->
+    <!DOCTYPE html>
     <html>
         <head>
             <title><?php echo $title ?></title>
@@ -378,9 +381,9 @@ fonction de l'URI demandée:
 
     // route la requête en interne
     $uri = $_SERVER['REQUEST_URI'];
-    if ($uri == '/index.php') {
+    if ('/index.php' == $uri) {
         list_action();
-    } elseif ($uri == '/index.php/show' && isset($_GET['id'])) {
+    } elseif ('/index.php/show' == $uri && isset($_GET['id'])) {
         show_action($_GET['id']);
     } else {
         header('Status: 404 Not Found');
@@ -481,9 +484,9 @@ blog :
     $request = Request::createFromGlobals();
 
     $uri = $request->getPathInfo();
-    if ($uri == '/') {
+    if ('/' == $uri) {
         $response = list_action();
-    } elseif ($uri == '/show' && $request->query->has('id')) {
+    } elseif ('/show' == $uri && $request->query->has('id')) {
         $response = show_action($request->query->get('id'));
     } else {
         $html = '<html><body><h1>Page Not Found</h1></body></html>';
@@ -546,17 +549,14 @@ L'application exemple en Symfony2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le blog a beaucoup évolué, mais il contient beaucoup de code pour une si simple application.
-Durant cette évolution, nous avons inventé un mécanisme simple de routage et une méthode utilisant
+Durant cette évolution, vous avez créé un mécanisme simple de routage et une méthode utilisant
 ``ob_start()`` et ``ob_get_clean()`` pour faire le rendu de templates.
 Si, pour une raison, vous deviez continuer à construire ce « framework », vous pourriez utiliser
 les composants indépendants `Routing`_ et `Templating`_, qui apportent une solution à ces problèmes.
 
 Au lieu de résoudre à nouveau ces problèmes, vous pouvez laisser Symfony2 s'en occuper pour vous.
-Voici la même application, en utilisant cette fois-ci Symfony2 :
+Voici la même application, en utilisant cette fois-ci Symfony2::
 
-.. code-block:: html+php
-
-    <?php
     // src/Acme/BlogBundle/Controller/BlogController.php
     namespace Acme\BlogBundle\Controller;
     
@@ -617,6 +617,7 @@ Le layout est à peu près identique :
 .. code-block:: html+php
 
     <!-- app/Resources/views/layout.html.php -->
+    <!DOCTYPE html>
     <html>
         <head>
             <title><?php echo $view['slots']->output('title', 'Default title') ?></title>
@@ -628,7 +629,7 @@ Le layout est à peu près identique :
 
 .. note::
 
-    Nous vous laissons faire le template de détail d'article comme exercice, cela devrait être
+    Le template d'affichage d'un article est laissé comme exercice, cela devrait être
     assez simple en se basant sur le template de liste.
 
 Lorsque le moteur de Symfony2 (appelé ``Kernel``) démarre, il a besoin d'une table
@@ -649,11 +650,8 @@ Une table de routage fournit cette information dans un format lisible :
 Maintenant que Symfony2 prend en charge toutes les taches banales, le contrôleur frontal
 est extrêmement simple. Et comme il fait si peu de chose, vous n'aurez jamais à le modifier
 une fois que vous l'aurez créé (et si vous utilisez une distribution de Symfony2, vous n'aurez
-même pas à le créer) :
+même pas à le créer)::
 
-.. code-block:: html+php
-
-    <?php
     // web/app.php
     require_once __DIR__.'/../app/bootstrap.php';
     require_once __DIR__.'/../app/AppKernel.php';
@@ -737,7 +735,7 @@ Le template du layout associé ``layout.html.twig`` est encore plus simple à é
 .. code-block:: html+jinja
 
     {# app/Resources/views/layout.html.twig #}
-
+    <!DOCTYPE html>
     <html>
         <head>
             <title>{% block title %}Default title{% endblock %}</title>
@@ -763,5 +761,5 @@ Apprenez en lisant le Cookbook
 .. _`Templating`: https://github.com/symfony/Templating
 .. _`KnpBundles.com`: http://knpbundles.com/
 .. _`Twig`: http://twig.sensiolabs.org
-.. _`Varnish`: http://www.varnish-cache.org
+.. _`Varnish`: https://www.varnish-cache.org
 .. _`PHPUnit`: http://www.phpunit.de

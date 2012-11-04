@@ -78,7 +78,7 @@ route qui fasse correspondre une URL à ce dernier (#2).
 .. note::
 
     Bien que nommé de la même manière, un « contrôleur frontal » est différent
-    des « contrôleurs » dont nous allons parler dans ce chapitre. Un contrôleur
+    des « contrôleurs » abordés dans ce chapitre. Un contrôleur
     frontal est un petit fichier PHP qui se situe dans votre répertoire web et
     à travers lequel toutes les requêtes sont dirigées. Une application typique
     va avoir un contrôleur frontal de production (par exemple: ``app.php``) et
@@ -214,11 +214,8 @@ Les paramètres de la route en tant qu'arguments du contrôleur
 Vous savez déjà que le paramètre ``_controller`` ``AcmeHelloBundle:Hello:index``
 réfère à une méthode ``HelloController::indexAction()`` qui réside dans le bundle
 ``AcmeHelloBundle``. Mais ce qui est plus intéressant sont les arguments qui sont passés
-à cette méthode :
+à cette méthode::
 
-.. code-block:: php
-
-    <?php
     // src/Acme/HelloBundle/Controller/HelloController.php
     namespace Acme\HelloBundle\Controller;
 
@@ -371,9 +368,7 @@ dont elle pourrait avoir besoin. En étendant cette classe ``Controller``, vous
 pouvez tirer parti de plusieurs méthodes d'aide (« helper »).
 
 Ajoutez le mot-clé ``use`` au-dessus de la classe ``Controller`` et modifiez
-``HelloController`` pour qu'il l'étende :
-
-.. code-block:: php
+``HelloController`` pour qu'il l'étende::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
     namespace Acme\HelloBundle\Controller;
@@ -402,14 +397,13 @@ elle-même.
 
     Étendre la classe de base est *optionnel* dans Symfony; elle contient
     des raccourcis utiles mais rien d'obligatoire. Vous pouvez aussi étendre
-    ``Symfony\Component\DependencyInjection\ContainerAware``. L'objet conteneur
-    de service (« service container ») sera ainsi accessible à travers la
-    propriété ``container``.
+    :class:`Symfony\\Component\\DependencyInjection\\ContainerAware`. L'objet
+    conteneur de service (« service container ») sera ainsi accessible à travers
+    la propriété ``container``.
 
 .. note::
 
-    Vous pouvez aussi définir vos :doc:`Contrôleurs en tant que Services
-    </cookbook/controller/service>`.
+    Vous pouvez aussi définir vos :doc:`Contrôleurs en tant que Services</cookbook/controller/service>`.
 
 .. index::
    single: Controller; Common tasks
@@ -456,9 +450,7 @@ Afin d'exécuter une redirection 301 (permanente), modifiez le second argument :
 
     La méthode ``redirect()`` est simplement un raccourci qui crée un objet
     ``Response`` spécialisé dans la redirection d'utilisateur. Cela revient
-    à faire :
-
-    .. code-block:: php
+    à faire::
 
         use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -729,7 +721,7 @@ pour délivrer le message ``notice`` :
 
     .. code-block:: php
     
-        <?php foreach ($view['session']->getFlashBag()->get('notice') as $message): ?>
+        <?php foreach ($view['session']->getFlash('notice') as $message): ?>
             <div class="flash-notice">
                 <?php echo "<div class='flash-error'>$message</div>" ?>
             </div>

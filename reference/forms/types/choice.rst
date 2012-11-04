@@ -20,6 +20,7 @@ Pour utiliser ce champ, vous devez spécifier *soit* l'option ``choice_list``, *
 |             | - `preferred_choices`_                                                      |
 |             | - `empty_value`_                                                            |
 |             | - `empty_data`_                                                             |
+|             | - `by_reference`_                                                           |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `required`_                                                               |
 | héritées    | - `label`_                                                                  |
@@ -105,6 +106,8 @@ Pour des cas plus avancés, une classe personnalisée qui implémente l'interfac
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
 .. include:: /reference/forms/types/options/empty_data.rst.inc
+
+.. include:: /reference/forms/types/options/by_reference.rst.inc
 
 Options héritées
 ----------------

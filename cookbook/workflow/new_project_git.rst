@@ -124,4 +124,4 @@ qui aide à gérer ceci est `Gitolite`_.
 .. _`GitHub`: https://github.com/
 .. _`dépôt barebones`: http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository
 .. _`Gitolite`: https://github.com/sitaramc/gitolite
-.. _`Github .gitignore`: http://help.github.com/ignore-files/
+.. _`Github .gitignore`: https://help.github.com/articles/ignoring-files

@@ -130,5 +130,5 @@ documentation.
     * :doc:`dev_environment`
     * :doc:`spool`
 
-.. _`Swiftmailer`: http://www.swiftmailer.org/
+.. _`Swiftmailer`: http://swiftmailer.org/
 .. _`Création de Messages`: http://swiftmailer.org/docs/messages.html

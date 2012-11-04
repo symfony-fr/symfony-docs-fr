@@ -14,8 +14,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Finder) ;
-* Installez le via PEAR (`pear.symfony.com/Finder`) ;
-* Installez le via Composer (`symfony/finder` dans Packagist).
+* Installez le via Composer (``symfony/finder`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -272,8 +271,9 @@ Les contenus des fichiers retournés peuvent être lus avec
         ...
     }
 
-.. _strtotime:   http://www.php.net/manual/en/datetime.formats.php
-.. _Iterator:     http://www.php.net/manual/en/spl.iterators.php
-.. _protocole:     http://www.php.net/manual/en/wrappers.php
+.. _strtotime:   http://www.php.net/manual/fr/datetime.formats.php
+.. _Iterator:     http://www.php.net/manual/fr/spl.iterators.php
+.. _protocole:     http://www.php.net/manual/fr/wrappers.php
 .. _Flux:      http://www.php.net/streams
 .. _standard IEC: http://physics.nist.gov/cuu/Units/binary.html
+.. _Packagist:    https://packagist.org/packages/symfony/finder

@@ -18,8 +18,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Console) ;
-* Installez le via PEAR (`pear.symfony.com/Console`) ;
-* Installez le via Composer (`symfony/console` dans Packagist).
+* Installez le via Composer (``symfony/console`` dans `Packagist`_).
 
 Créer une Commande basique
 --------------------------
@@ -436,3 +435,11 @@ et retourner le code retourné par le commande (retourne la valeur de la méthod
     commande comme un contrôleur ; il devrait utiliser le modèle pour faire quelque
     chose et afficher le retour à l'utilisateur. Donc, plutôt que d'appeler une commande
     depuis le Web, revoyez votre code et déplacez la logique dans une nouvelle classe.
+
+En savoir plus !
+----------------
+
+* :doc:`/components/console/usage` 
+* :doc:`/components/console/single_command_tool`
+
+.. _Packagist: https://packagist.org/packages/symfony/console

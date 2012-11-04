@@ -29,8 +29,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Locale) ;
-* Installez le via PEAR (`pear.symfony.com/Locale`) ;
-* Installez le via Composer (`symfony/locale` dans Packagist).
+* Installez le via Composer (``symfony/locale`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -71,3 +70,5 @@ fonctionnalités supplémentaires :
     // récupère les versions ICU
     $icuVersion = Locale::getIcuVersion();
     $icuDataVersion = Locale::getIcuDataVersion();
+
+.. _Packagist: https://packagist.org/packages/symfony/locale

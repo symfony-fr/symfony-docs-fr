@@ -114,7 +114,7 @@ ce qui ressemblera à quelque chose comme ceci (ça dépendra du nom de votre fo
 
 .. code-block:: html
 
-    <input type="email" id="form_emails_1" name="form[emails][0]" value="foo@foo.com" />
+    <input type="email" id="form_emails_0" name="form[emails][0]" value="foo@foo.com" />
     <input type="email" id="form_emails_1" name="form[emails][1]" value="bar@bar.com" />
 
 Pour autoriser votre utilisateur à ajouter un autre email, définissez juste `allow_add`_
