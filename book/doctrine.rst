@@ -22,7 +22,7 @@ avec une base de données.
 
     Vous pouvez aussi persister vos données à l'aide de `MongoDB`_ en utilisant la
     bibliothèque ODM de Doctrine. Pour plus d'informations, lisez l'article 
-    « :doc:`/bundles/DoctrineMongoDBBundle/index`" du cookbook
+    « :doc:`/bundles/DoctrineMongoDBBundle/index` » du cookbook
 
 Un simple exemple : un produit
 ------------------------------
