@@ -197,9 +197,6 @@ Chaque partie sera expliquée dans la section suivante.
                 ROLE_ADMIN:      [ROLE_ORGANIZER, ROLE_USER]
                 ROLE_SUPERADMIN: [ROLE_ADMIN]
 
-.. caution::
-    
-
 .. _reference-security-firewall-form-login:
 
 Configuration du formulaire de login
