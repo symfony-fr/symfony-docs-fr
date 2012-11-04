@@ -566,7 +566,7 @@ passée au template ``list.html.twig`` en utilisant la commande ``with``.
 .. tip::
 
     La syntaxe ``{'article': article}`` est la syntaxe standard de Twig pour les
-    tables de hachage (hash maps) (c-a-d un tableau clé-valeurs). Si nous souhaitons
+    tables de hachage (hash maps) (c-a-d un tableau clé-valeurs). Si vous souhaitez
     passer plusieurs elements, cela ressemblera à ceci : ``{'foo': foo, 'bar': bar}``.
 
 .. index::
@@ -625,10 +625,9 @@ Le template ``recentList`` est simplement le suivant :
 
 .. note::
 
-    Remarquons que nous avons triché et que nous avons codé en dur les URLs des
-    articles dans cet exemple (``/article/*slug*`` par exemple). Ce n'est pas
-    une bonne pratique. Dans la section suivante, vous apprendrez comment le
-    faire correctement.
+    Notez que dans l'exemple de cet article, les URLs sont codées en dur
+    (``/article/*slug*`` par exemple). Ce n'est pas une bonne pratique. Dans
+    la section suivante, vous apprendrez comment le faire correctement.
 
 Pour inclure le contrôleur, vous avez besoin de faire référence à ce dernier en
 utilisant la chaîne de caractères standard pour les contrôleurs
@@ -1112,7 +1111,7 @@ Trois niveaux d'héritages
 
 Une façon commune d'utiliser l'héritage est d'utiliser l'approche à trois
 niveaux. Cette méthode fonctionne parfaitement avec trois différents types
-de templates que nous détaillons :
+de templates détaillés :
 
 * Créez un fichier ``app/Resources/views/base.html.twig`` qui contient le
   principal layout pour votre application (comme dans l'exemple précédent). En

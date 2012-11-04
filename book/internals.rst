@@ -141,34 +141,35 @@ automatiquement les arguments de la méthode, basé sur les attributs de la Requ
 Gestion des Requêtes
 ~~~~~~~~~~~~~~~~~~~~
 
-La méthode ``handle()`` prend une ``Requête`` et retourne *toujours* une ``Réponse``.
+La méthode :method:`Symfony\\Component\\HttpKernel\\HttpKernel::handle`
+prend une ``Requête`` et retourne *toujours* une ``Réponse``.
 Pour convertir la ``Requête``, ``handle()`` repose sur le « Resolver » et sur une
 chaîne ordonnée de notifications d'évènements (voir la prochaine section pour plus
 d'informations à propos de chaque évènement) :
 
-1. Avant de faire quoi que ce soit d'autre, l'évènement ``kernel.request`` est
+#. Avant de faire quoi que ce soit d'autre, l'évènement ``kernel.request`` est
    notifié -- si l'un des listeners (« écouteurs » en français) retourne une
    ``Réponse``, il saute directement à l'étape 8 ;
 
-2. Le « Resolver » est appelé pour déterminer le Contrôleur à exécuter ;
+#. Le « Resolver » est appelé pour déterminer le Contrôleur à exécuter ;
 
-3. Les listeners de l'évènement ``kernel.controller`` peuvent maintenant
+#. Les listeners de l'évènement ``kernel.controller`` peuvent maintenant
    manipuler le « callable » Contrôleur de la manière dont ils souhaitent
    (le changer, créer un « wrapper » au-dessus de lui, ...) ;
 
-4. Le Kernel vérifie que le Contrôleur est un « callable » PHP valide ;
+#. Le Kernel vérifie que le Contrôleur est un « callable » PHP valide ;
 
-5. Le « Resolver » est appelé pour déterminer les arguments à passer au Contrôleur ;
+#. Le « Resolver » est appelé pour déterminer les arguments à passer au Contrôleur ;
 
-6. Le Kernel appelle le Contrôleur ;
+#. Le Kernel appelle le Contrôleur ;
 
-7. Si le Contrôleur ne retourne pas une ``Réponse``, les listeners de l'évènement
+#. Si le Contrôleur ne retourne pas une ``Réponse``, les listeners de l'évènement
    ``kernel.view`` peuvent convertir la valeur retournée par le Contrôleur en une ``Réponse`` ;
 
-8. Les listeners de l'évènement ``kernel.response`` peuvent manipuler la ``Réponse``
+#. Les listeners de l'évènement ``kernel.response`` peuvent manipuler la ``Réponse``
    (contenu et en-têtes) ;
 
-9. La Réponse est retournée.
+#. La Réponse est retournée.
 
 Si une Exception est capturée pendant le traitement de la Requête, l'évènement
 ``kernel.exception`` est notifié et les listeners ont alors une chance de
@@ -206,12 +207,14 @@ Chaque évènement capturé par le Kernel est une sous-classe de
 :class:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent`. Cela signifie que
 chaque évènement a accès aux mêmes informations de base :
 
-* ``getRequestType()`` - retourne le *type* de la requête
-  (``HttpKernelInterface::MASTER_REQUEST`` ou ``HttpKernelInterface::SUB_REQUEST``) ;
+* :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getRequestType``
+  - retourne le *type* de la requête (``HttpKernelInterface::MASTER_REQUEST`` ou ``HttpKernelInterface::SUB_REQUEST``) ;
 
-* ``getKernel()`` - retourne le Kernel gérant la requête ;
+* :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getKernel`
+  - retourne le Kernel gérant la requête ;
 
-* ``getRequest()`` - retourne la ``Requête`` courante qui est en train d'être gérée.
+* :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getRequest`
+  - retourne la ``Requête`` courante qui est en train d'être gérée.
 
 ``getRequestType()``
 ....................
@@ -263,9 +266,7 @@ L'évènement ``kernel.controller``
 *La Classe Évènement*: :class:`Symfony\\Component\\HttpKernel\\Event\\FilterControllerEvent`
 
 Cet évènement n'est pas utilisé par le ``FrameworkBundle``, mais peut être un point
-d'entrée utilisé pour modifier le contrôleur qui devrait être exécuté :
-
-.. code-block:: php
+d'entrée utilisé pour modifier le contrôleur qui devrait être exécuté::
 
     use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -482,7 +483,8 @@ lui associe aussi un jeton ; ce jeton est disponible dans l'en-tête HTTP
     ou lorsque vous voulez récupérer le jeton pour une requête Ajax, utilisez un
     outil comme Firebug pour obtenir la valeur de l'en-tête HTTP ``X-Debug-Token``.
 
-Utilisez la méthode ``find()`` pour accéder aux jetons basés sur quelques critères :
+Utilisez la méthode :method:`Symfony\\Component\\HttpKernel\\Profiler\\Profiler::find`
+pour accéder aux jetons basés sur quelques critères :
 
     // récupère les 10 derniers jetons
     $tokens = $container->get('profiler')->find('', '', 10);
@@ -494,8 +496,9 @@ Utilisez la méthode ``find()`` pour accéder aux jetons basés sur quelques cri
     $tokens = $container->get('profiler')->find('127.0.0.1', '', 10);
 
 Si vous souhaitez manipuler les données de profiling sur une machine différente
-que celle où les informations ont été générées, utilisez les méthodes ``export()``
-et ``import()`` ::
+que celle où les informations ont été générées, utilisez les méthodes
+:method:`Symfony\\Component\\HttpKernel\\Profiler\\Profiler::export` et
+:method:`Symfony\\Component\\HttpKernel\\Profiler\\Profiler::import`::
 
     // sur la machine de production
     $profile = $container->get('profiler')->loadProfile($token);

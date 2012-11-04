@@ -73,6 +73,17 @@ Apprenez-en plus à propos d'eux :
 
 .. include:: /bundles/map.rst.inc
 
+CMF
+---
+
+Le Syfmony CMFProject facililite l'ajout de fonctionnalités liées aux CMS dans
+les applications construites avec le framework PHP Symfony2.
+
+.. toctree::
+    :hidden:
+
+    cmf/index
+
 Contribuer
 ----------
 

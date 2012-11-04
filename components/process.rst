@@ -13,8 +13,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Process) ;
-* Installez le via PEAR (`pear.symfony.com/Process`) ;
-* Installez le via Composer (`symfony/process` dans Packagist).
+* Installez le via Composer (``symfony/process`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -36,6 +35,16 @@ une commande dans un sous-processus::
 La méthode :method:`Symfony\\Component\\Process\\Process::run` se charge
 des différences subtiles entre les différentes plateformes lors de
 l'exécution d'une commande.
+
+.. versionadded:: 2.2
+    Les méthodes ``getIncrementalOutput()`` et ``getIncrementalErrorOutput()``
+    ont été ajoutées dans Symfony 2.2.
+
+La méthode ``getOutput()`` retourne toujours l'ensemble du contenu de la
+sortie standard de la console et la méthode ``getErrorOutput()`` le contenu
+de l'erreur. Alternativement, les méthodes ``getIncrementalOutput()`` et
+``getIncrementalErrorOutput()`` retournent les nouvelles sorties depuis le
+dernier appel.
 
 Lorsque vous exécutez une commande durant un certain temps (comme effectuer un
 rsync de fichiers vers un serveur distant), vous pouvez donner un retour
@@ -60,7 +69,8 @@ le ``PhpProcess`` à la place::
 
     $process = new PhpProcess(<<<EOF
         <?php echo 'Hello World'; ?>
-    EOF);
+    EOF
+    );
     $process->run();
 
 .. versionadded:: 2.1
@@ -74,3 +84,5 @@ pourriez vouloir utiliser la classe
 
     $builder = new ProcessBuilder(array('ls', '-lsa'));
     $builder->getProcess()->run();
+
+.. _Packagist: https://packagist.org/packages/symfony/process

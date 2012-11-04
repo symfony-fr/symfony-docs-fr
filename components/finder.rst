@@ -14,8 +14,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Finder) ;
-* Installez le via PEAR (`pear.symfony.com/Finder`) ;
-* Installez le via Composer (`symfony/finder` dans Packagist).
+* Installez le via Composer (``symfony/finder`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -184,6 +183,39 @@ donné::
 
     $finder->files()->notContains('dolor sit amet');
 
+Path
+~~~~
+
+.. versionadded:: 2.2
+   Les méthodes ``path()`` et ``notPath()`` ont été ajoutées dans la version 2.2.
+
+Vous pouvez restreindre les fichiers et les répertoire en fonction
+de leur chemin avec la méthode :method:`Symfony\\Component\\Finder\\Finder::path`::
+
+    $finder->path('some/special/dir');
+
+Le slash (c-a-d ``/``) devrait être utilisé comme séparateur de dossiers sur
+toutes les plateformes.
+
+La méthode `path()`` accepte une chaine de caractères ou une expression
+régulière::
+
+    $finder->path('foo/bar');
+    $finder->path('/^foo\/bar/');
+
+En interne, les chaines de caractères sont converties en expressions régulières
+en échappant les slashes et en ajoutant des délimiteurs :
+
+.. code-block:: text
+
+    dirname    ===>    /dirname/
+    a/b/c      ===>    /a\/b\/c/
+
+La méthode :method:`Symfony\\Component\\Finder\\Finder::notPath` exclut des fichiers
+en fonction de leur chemin::
+
+    $finder->notPath('other/dir');
+
 Taille de Fichier
 ~~~~~~~~~~~~~~~~~
 
@@ -272,8 +304,9 @@ Les contenus des fichiers retournés peuvent être lus avec
         ...
     }
 
-.. _strtotime:   http://www.php.net/manual/en/datetime.formats.php
-.. _Iterator:     http://www.php.net/manual/en/spl.iterators.php
-.. _protocole:     http://www.php.net/manual/en/wrappers.php
+.. _strtotime:   http://www.php.net/manual/fr/datetime.formats.php
+.. _Iterator:     http://www.php.net/manual/fr/spl.iterators.php
+.. _protocole:     http://www.php.net/manual/fr/wrappers.php
 .. _Flux:      http://www.php.net/streams
 .. _standard IEC: http://physics.nist.gov/cuu/Units/binary.html
+.. _Packagist:    https://packagist.org/packages/symfony/finder

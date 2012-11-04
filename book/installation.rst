@@ -249,9 +249,7 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
     en écriture au groupe ou aux autres (cela dépend si l'utilisateur serveur web
     et l'utilisateur de ligne de commande sont dans le même groupe ou non). Pour
     faire ceci, ajoutez la ligne suivante au début des fichiers ``app/console``,
-    ``web/app.php`` et ``web/app_dev.php`` :
-
-    .. code-block:: php
+    ``web/app.php`` et ``web/app_dev.php``::
 
         umask(0002); // Définit une permission 0775
 

@@ -114,7 +114,7 @@ ce qui ressemblera à quelque chose comme ceci (ça dépendra du nom de votre fo
 
 .. code-block:: html
 
-    <input type="email" id="form_emails_1" name="form[emails][0]" value="foo@foo.com" />
+    <input type="email" id="form_emails_0" name="form[emails][0]" value="foo@foo.com" />
     <input type="email" id="form_emails_1" name="form[emails][1]" value="bar@bar.com" />
 
 Pour autoriser votre utilisateur à ajouter un autre email, définissez juste `allow_add`_
@@ -317,7 +317,11 @@ ou :ref:`cookbook-form-collections-new-prototype`.
 
 prototype_name 
 ~~~~~~~~~~~~~~
-  
+
+.. versionadded:: 2.1
+   
+    L'option ``prototype_name`` est un ajout de Symfony 2.1
+
 **type**: ``String`` **default**: ``__name__``
 
 Si vous avez plusieurs collections dans votre formulaire, ou pire encore,
