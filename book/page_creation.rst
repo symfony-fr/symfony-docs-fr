@@ -310,7 +310,9 @@ A la place d'écrire le code HTML dans le contrôleur, retournez plutôt un temp
 
 .. note::
 
-   Afin d'utiliser la méthode ``render()``, votre contrôleur doit étendre la classe
+   Afin d'utiliser la méthode
+   :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller::render`,
+   votre contrôleur doit étendre la classe
    `Symfony\Bundle\FrameworkBundle\Controller\Controller`` (API 
    docs: :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`), qui
    ajoute des raccourcis pour des tâches fréquemment utilisées dans les contrôleurs.
@@ -405,7 +407,7 @@ signifie que le template se situe en dehors du bundle et dans le répertoire ``a
             </head>
             <body>
                 <?php $view['slots']->output('_content') ?>
-            <?php $view['slots']->output('stylesheets') ?>
+                <?php $view['slots']->output('javascripts') ?>
             </body>
         </html>
 
@@ -493,7 +495,7 @@ classe Kernel, ``AppKernel``, pour initialiser l'application (bootstrap).
 
 Les contrôleurs frontaux sont essentiels pour traiter chaque requête. 
 Cependant, vous aurez rarement besoin de les modifier ou même d'y penser. 
-Nous en reparlerons dans la section `Environnements`_ .
+Ils seront abordés dans la section `Environnements`_ .
 
 Le répertoire de l'application (``app``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -901,7 +903,7 @@ besoin de nettoyer ces fichiers cachés afin de permettre leur regénération :
 
 .. code-block:: bash
 
-    php app/console cache:clear --env=prod --no-debug
+    $ php app/console cache:clear --env=prod --no-debug
 
 .. note::
 

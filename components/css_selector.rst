@@ -13,8 +13,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/CssSelector) ;
-* Installez le via PEAR ( `pear.symfony.com/CssSelector`) ;
-* Installez le via Composer (`symfony/css-selector` dans Packagist).
+* Installez le via Composer (``symfony/css-selector`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -94,3 +93,5 @@ Plusieurs pseudo-classes ne sont pas encore supportées :
 * ``*:first-of-type``, ``*:last-of-type``, ``*:nth-of-type``,
   ``*:nth-last-of-type``, ``*:only-of-type``. (Ceux-ci fonctionnent avec un
   nom d'élément (par exemple : ``li:first-of-type``) mais pas avec ``*``.
+
+.. _Packagist: https://packagist.org/packages/symfony/css-selector

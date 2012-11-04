@@ -42,10 +42,14 @@ suivant à votre fichier `composer.json`::
 
     {
         "require": {
-            "doctrine/mongodb-odm-bundle": "v3.0.0-BETA1"
+            "doctrine/mongodb-odm-bundle": "3.0.*"
         },
         "minimum-stability": "dev"
     }
+
+L'instruction ``minimum-stability`` est nécessaire tant qu'une version non-beta du bundle
+n'est pas disponible. Selon les besoins de votre projet, d'autres valeurs que ``dev``
+peuvent etre utilisée. Elle sont expliquées dans la `documentation de Composer`_ .
 
 Ensuite, vous pouvez installer les nouvelles dépendances en exécutant la commande
 ``update`` de Composer depuis le répertoire dans lequel est situé le fichier
@@ -62,12 +66,11 @@ Activer les annotations et le bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ensuite, activez la bibliothèque des annotations en ajoutant le code suivant au chargeur
-automatique (ci-dessous la ligne ``AnnotationRegistry::registerFile`` existante)::
+automatique (ci-dessous la ligne ``AnnotationRegistry::registerLoader`` existante)::
 
     // app/autoload.php
-    AnnotationRegistry::registerFile(
-        __DIR__.'/../vendor/doctrine/mongodb-odm/lib/Doctrine/ODM/MongoDB/Mapping/Annotations/DoctrineAnnotations.php'
-    );
+    use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
+    AnnotationDriver::registerAnnotationClasses();
 
 Tout ce qu'il reste à faire est de mettre à jour votre fichier ``AppKernel.php``,
 et d'enregistrer le nouveau bundle::
@@ -99,8 +102,7 @@ qui activera l'ODM MongoDB dans votre application :
         connections:
             default:
                 server: mongodb://localhost:27017
-                options:
-                    connect: true
+                options: {}
         default_database: test_database
         document_managers:
             default:
@@ -780,7 +782,8 @@ Apprenez en plus grâce au Cookbook
 * :doc:`/bundles/DoctrineMongoDBBundle/form`
 
 .. _`MongoDB`:          http://www.mongodb.org/
-.. _`documentation`:    http://www.doctrine-project.org/docs/mongodb_odm/1.0/en
+.. _`documentation`:    http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/
+.. _`documentation de Composer`: http://getcomposer.org/doc/04-schema.md#minimum-stability
 .. _`Quick Start`:      http://www.mongodb.org/display/DOCS/Quickstart
 .. _`Bases du Mapping`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/basic-mapping.html
 .. _`type MongoDB`: http://us.php.net/manual/en/mongo.types.php

@@ -19,8 +19,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Config) ;
-* Installez le via PEAR (`pear.symfony.com/Config`) ;
-* Installez le via Composer (`symfony/config` dans Packagist).
+* Installez le via Composer (``symfony/config`` dans `Packagist`_).
 
 Sections
 --------
@@ -28,3 +27,5 @@ Sections
 * :doc:`/components/config/resources`
 * :doc:`/components/config/caching`
 * :doc:`/components/config/definition`
+
+.. _Packagist: https://packagist.org/packages/symfony/config

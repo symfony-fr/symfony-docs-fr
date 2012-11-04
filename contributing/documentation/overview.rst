@@ -145,7 +145,7 @@ Traductions
 
 Lisez la documentation dédiée :doc:`traductions <translations>`.
 
-.. _`forker`: http://help.github.com/fork-a-repo/
-.. _`pull requests`: http://help.github.com/pull-requests/
+.. _`forker`: https://help.github.com/articles/fork-a-repo
+.. _`pull requests`: https://help.github.com/articles/using-pull-requests
 .. _`Erreurs de génération de la documentation`: http://symfony.com/doc/build_errors
 .. _`Standards de code Twig`: http://twig.sensiolabs.org/doc/coding_standards.html

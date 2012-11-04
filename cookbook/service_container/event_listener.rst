@@ -21,6 +21,7 @@ du coeur du noyau::
 
     use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
     use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
     class AcmeExceptionListener
     {
@@ -28,12 +29,20 @@ du coeur du noyau::
         {
             // nous récupérons l'objet exception depuis l'évènement reçu
             $exception = $event->getException();
-            $message = 'My Error says: ' . $exception->getMessage();
+            $message = 'My Error says: ' . $exception->getMessage() . ' with code: ' . $exception->getCode();
             
             // personnalise notre objet réponse pour afficher les détails de notre exception
             $response = new Response();
             $response->setContent($message);
-            $response->setStatusCode($exception->getStatusCode());
+ 
+            // HttpExceptionInterface est un type d'exception spécial qui
+            // contient le code statut et les détails de l'entête
+            if ($exception instanceof HttpExceptionInterface) {
+                $response->setStatusCode($exception->getStatusCode());
+                $response->headers->replace($exception->getHeaders());
+            } else {
+                $response->setStatusCode(500);
+            }
             
             // envoie notre objet réponse modifié à l'évènement
             $event->setResponse($response);

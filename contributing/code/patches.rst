@@ -368,12 +368,12 @@ liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la comm
     puis copiez le contenu dans la description de la Pull Request.
 
 
-.. _ProGit:                                       http://progit.org/
+.. _ProGit:                                       http://git-scm.com/book
 .. _GitHub:                                       https://github.com/signup/free
 .. _`documentation Github`:              https://help.github.com/articles/ignoring-files
 .. _dépôt Symfony2:                          https://github.com/symfony/symfony
 .. _liste de diffusion dédiée aux développements: http://groups.google.com/group/symfony-devs
-.. _travis-ci.org:                                http://travis-ci.org
+.. _travis-ci.org:                                https://travis-ci.org/
 .. _`icône de statut travis-ci.org`:                  http://about.travis-ci.org/docs/user/status-images/
 .. _`Guide de démarrage travis-ci.org`: http://about.travis-ci.org/docs/user/getting-started/
 .. _`dépôt de la documentation`: https://github.com/symfony-fr/symfony-docs-fr

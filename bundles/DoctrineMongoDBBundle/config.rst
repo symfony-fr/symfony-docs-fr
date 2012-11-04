@@ -11,8 +11,7 @@ Exemple de configuration
         connections:
             default:
                 server: mongodb://localhost:27017
-                options:
-                    connect: true
+                options: {}
         default_database: hello_%kernel.environment%
         document_managers:
             default:
@@ -34,8 +33,7 @@ comme ceci :
             connections:
                 default:
                     server: mongodb://localhost:27017
-                    options:
-                        connect: true
+                    options: {}
             document_managers:
                 default:
                     mappings:
@@ -69,7 +67,6 @@ comme ceci :
                 </doctrine_mongodb:document-manager>
                 <doctrine_mongodb:connection id="default" server="mongodb://localhost:27017">
                     <doctrine_mongodb:options>
-                        <doctrine_mongodb:connect>true</doctrine_mongodb:connect>
                     </doctrine_mongodb:options>
                 </doctrine_mongodb:connection>
             </doctrine_mongodb:config>
@@ -162,12 +159,8 @@ vous pouvez utiliser la syntaxe suivante :
             connections:
                 conn1:
                     server: mongodb://localhost:27017
-                    options:
-                        connect: true
                 conn2:
                     server: mongodb://localhost:27017
-                    options:
-                        connect: true
             document_managers:
                 dm1:
                     connection: conn1
@@ -197,12 +190,10 @@ vous pouvez utiliser la syntaxe suivante :
                     auto-generate-proxy-classes="true">
                 <doctrine_mongodb:connection id="conn1" server="mongodb://localhost:27017">
                     <doctrine_mongodb:options>
-                        <doctrine_mongodb:connect>true</doctrine_mongodb:connect>
                     </doctrine_mongodb:options>
                 </doctrine_mongodb:connection>
                 <doctrine_mongodb:connection id="conn2" server="mongodb://localhost:27017">
                     <doctrine_mongodb:options>
-                        <doctrine_mongodb:connect>true</doctrine_mongodb:connect>
                     </doctrine_mongodb:options>
                 </doctrine_mongodb:connection>
                 <doctrine_mongodb:document-manager id="dm1" metadata-cache-driver="xcache" connection="conn1">

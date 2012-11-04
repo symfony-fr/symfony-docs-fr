@@ -19,8 +19,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Templating) ;
-* Installez le via PEAR (`pear.symfony.com/Templating`) ;
-* Installez le via Composer (`symfony/templating` dans Packagist).
+* Installez le via Composer (``symfony/templating`` dans `Packagist`_).
 
 Utilisation
 -----------
@@ -89,7 +88,7 @@ Pour utiliser l'héritage de template, la classe
 :class:`Symfony\\Component\\Templating\\Helper\\SlotsHelper` doit être
 déclarée::
 
-    use Symfony\Templating\Helper\SlotsHelper;
+    use Symfony\Component\Templating\Helper\SlotsHelper;
 
     $view->set(new SlotsHelper());
 
@@ -111,3 +110,5 @@ La classe d'Aide « Asset »
 --------------------------
 
 Cette partie de la documentation est toujours en cours d'écriture.
+
+.. _Packagist: https://packagist.org/packages/symfony/templating

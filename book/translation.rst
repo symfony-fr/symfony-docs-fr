@@ -23,22 +23,22 @@ une fonction capable de traduire le texte (ou « message ») dans la langue de l
     Le terme *locale* désigne en gros la langue et le pays de l'utilisateur. Cela
     peut être n'importe quelle chaîne de caractères que votre application va utiliser
     pour gérer les traductions et autres différences de format (par ex. format de monnaie).
-    Nous recommandons le code *langue* `ISO639-1`_, un « underscore » (``_``), et ensuite le code
-    *pays* `ISO3166 Alpha-2`_ (par ex. ``fr_FR`` pour Français/France).
+    Le code *langue* `ISO639-1`_, un « underscore » (``_``), et ensuite le code
+    *pays* `ISO3166 Alpha-2`_ (par ex. ``fr_FR`` pour Français/France) est recommandé.
 
-Dans ce chapitre, nous allons apprendre comment préparer une application à gérer de multiples
+Dans ce chapitre, vous apprendrez comment préparer une application à gérer de multiples
 locales et ensuite comment créer des traductions pour plusieurs locales. Dans l'ensemble,
 le processus a plusieurs étapes communes :
     
-1. Activer et configurer le composant ``Translation`` de Symfony ;
+#. Activer et configurer le composant ``Translation`` de Symfony ;
 
-2. Faire abstraction des chaînes de caractères (i.e. « messages ») en les encadrant
+#. Faire abstraction des chaînes de caractères (i.e. « messages ») en les encadrant
    avec des appels au ``Translator`` ;
 
-3. Créer des ressources de traduction pour chaque locale supportée qui traduit
+#. Créer des ressources de traduction pour chaque locale supportée qui traduit
    chaque message dans l'application ;
 
-4. Déterminer, définir et gérer la locale de l'utilisateur dans la requête, et
+#. Déterminer, définir et gérer la locale de l'utilisateur dans la requête, et
    optionnellement dans la session.
 
 
@@ -97,7 +97,7 @@ La traduction du texte est faite à travers le service ``translator``
 (:class:`Symfony\\Component\\Translation\\Translator`). Pour traduire un bloc 
 de texte (appelé un *message*), utilisez la méthode
 :method:`Symfony\\Component\\Translation\\Translator::trans`. Supposons,
-par exemple, que nous traduisons un simple message dans un contrôleur :
+par exemple, que vous traduisez un simple message dans un contrôleur :
 
 .. code-block:: php
 
@@ -110,7 +110,7 @@ par exemple, que nous traduisons un simple message dans un contrôleur :
 
 Quand ce code est exécuté, Symfony2 va essayer de traduire le message
 « Symfony2 is great » en se basant sur la ``locale`` de l'utilisateur. Pour que
-cela marche, nous devons dire à Symfony2 comment traduire le message via une
+cela marche, vous devez dire à Symfony2 comment traduire le message via une
 « ressource de traduction », qui est une collection de traductions de messages
 pour une locale donnée. Ce « dictionnaire » de traduction peut être créé en
 plusieurs formats différents, XLIFF étant le format recommandé :
@@ -186,7 +186,7 @@ Parfois, un message contenant une variable a besoin d'être traduit :
 Cependant, créer une traduction pour cette chaîne de caractères est impossible étant
 donné que le traducteur va essayer de trouver le message exact, incluant les portions
 de la variable (par ex. « Hello Ryan » ou « Hello Fabien »). Au lieu d'écrire une traduction
-pour toutes les itérations possibles de la variable ``$name``, nous pouvons remplacer la
+pour toutes les itérations possibles de la variable ``$name``, vous pouvez remplacer la
 variable avec un paramètre de substitution (« placeholder ») :
 
 .. code-block:: php
@@ -238,12 +238,12 @@ se fait comme précédemment :
     de PHP . Cependant, la notation ``%var%`` est requise pour les traductions
     dans les templates Twig, et c'est une convention générale à suivre.
     
-Comme nous l'avons vu, créer une traduction est un processus en deux étapes :
+Comme vous l'avez vu, créer une traduction est un processus en deux étapes :
 
-1. Faire abstraction du message qui a besoin d'être traduit en le passant à travers 
+#. Faire abstraction du message qui a besoin d'être traduit en le passant à travers 
    le ``Translator``.
 
-2. Créer une traduction pour le message dans chaque locale que vous avez choisi de 
+#. Créer une traduction pour le message dans chaque locale que vous avez choisi de 
    supporter.
 
 La deuxième étape est faite en créant des catalogues de messages qui définissent les traductions
@@ -398,7 +398,7 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
     locale par défaut (i.e. pour traduire ``symfony2.great`` en ``Symfony2 is great``).
     
     La deuxième méthode est très pratique car la clé du message n'aura pas besoin d'être modifiée
-    dans chaque fichier de traduction si nous décidons que le message devrait en fait
+    dans chaque fichier de traduction si vous décidez que le message devrait en fait
     être « Symfony2 is really great » dans la locale par défaut.
     
     Le choix de la méthode à utiliser dépend entièrement de vous, mais le format « mot-clé »
@@ -465,7 +465,7 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
 Utiliser les Domaines de Message
 --------------------------------
 
-Comme nous l'avons vu, les fichiers de messages sont organisés par les différentes locales
+Comme vous l'avez vu, les fichiers de messages sont organisés par les différentes locales
 qu'ils traduisent. Pour plus de structure, les fichiers de messages peuvent également être organisés en
 « domaines ». Lors de la création des fichiers de messages, le domaine est la première
 partie du nom du fichier. Le domaine par défaut est ``messages``. Par exemple, supposons que,
@@ -684,7 +684,7 @@ utilisée pour déterminer quelle forme de pluriel utiliser. Les tags peuvent ê
 chaîne descriptive qui se termine par un deux-points (``:``). Les tags n'ont pas besoin d'être les
 mêmes dans le message original que dans la traduction.
 
-.. tip:
+.. tip::
 
     Comme les tags sont optionnels, le traducteur ne les utilise pas (il va seulement
     obtenir une chaîne de caractères en fonction de sa position dans la chaîne).

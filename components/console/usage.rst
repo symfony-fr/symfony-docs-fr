@@ -1,8 +1,8 @@
 .. index::
     single: Console; Usage
 
-Utilistion de la console
-========================
+Utiliser les commandes de console, les raccourcis et les commandes préconstruites
+=================================================================================
 
 En plus des options que vous spécifiez dans vos commandes, il existe des
 options ainsi que que des commandes préconstruites pour le composant Console.
