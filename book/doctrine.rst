@@ -1448,7 +1448,12 @@ Quelques commandes notables ou intéréssantes incluent :
   
   .. code-block:: bash
   
-    php app/console doctrine:ensure-production-settings --env=prod
+    php app/console doctrine:ensure-production-settings --no-debug --env=prod
+
+  .. caution::
+
+    N'oubliez pas d'ajouter ``--no-debug``, car le marqueur de débugage est 
+    toujours activé, même si l'environement est ``prod``.
 
 * ``doctrine:mapping:import`` - permet à Doctrine d'introspecter une
   base de données existante pour créer les informations de mapping.
