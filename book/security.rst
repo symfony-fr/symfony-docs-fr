@@ -410,9 +410,7 @@ Veuillez noter que le nom de la route ``login`` n'est pas important. Ce qui impo
 que l'URL de la route (``login``) corresponde à la valeur de ``login_path``, car c'est
 là que le système de sécurité va rediriger les utilisateurs qui doivent se connecter.
 
-Ensuite, créez un contrôleur qui va afficher le formulaire de connexion :
-
-.. code-block:: php
+Ensuite, créez un contrôleur qui va afficher le formulaire de connexion::
 
     // src/Acme/SecurityBundle/Controller/SecurityController.php;
     namespace Acme\SecurityBundle\Controller;
@@ -814,9 +812,7 @@ Sécuriser un contrôleur
 
 Protéger votre application en utilisant des masques d'URL est facile, mais pourrait ne pas offrir
 une granularité suffisante dans certains cas. Si nécessaire, vous pouvez facilement forcer
-l'autorisation dans un contrôleur :
-
-.. code-block:: php
+l'autorisation dans un contrôleur::
 
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
     // ...
@@ -831,9 +827,7 @@ l'autorisation dans un contrôleur :
 .. _book-security-securing-controller-annotations:
 
 Vous pouvez aussi choisir d'installer et d'utiliser le Bundle ``JMSSecurityExtraBundle``,
-qui peut sécuriser un contrôleur en utilisant les annotations :
-
-.. code-block:: php
+qui peut sécuriser un contrôleur en utilisant les annotations::
 
     use JMS\SecurityExtraBundle\Annotation\Secure;
     /**
@@ -883,8 +877,8 @@ Les utilisateurs
 ----------------
 
 Dans les sections précédentes, vous avez appris comment vous pouvez protéger différentes 
-ressources en exigeant un ensemble de rôles pour une ressource. Dans cette section, nous allons
-explorer l'autre aspect de l'autorisation : les utilisateurs.
+ressources en exigeant un ensemble de rôles pour une ressource. Cette section aborde
+l'autre aspect de l'autorisation : les utilisateurs.
 
 D'où viennent les utilisateurs (*Fournisseurs d'utilisateurs*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -978,7 +972,7 @@ Charger les utilisateurs de la base de données
 Si vous voulez charger vos utilisateurs depuis l'ORM Doctrine, vous pouvez facilement le faire
 en créant une classe ``User``et en configurant le fournisseur d'entités (``entity`` provider).
 
-.. tip:
+.. tip::
 
     Un bundle de très grande qualité est disponible, qui permet de sauvegarder vos utilisateurs
     depuis l'ORM ou l'ODM de Doctrine. Apprenez-en plus sur le `FOSUserBundle`_
@@ -1206,9 +1200,7 @@ Récupérer l'objet User
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Après l'authentification, l'objet ``User`` correspondant à l'utilisateur courant peut être
-récupéré via le service ``security.context``. Depuis un controleur, cela ressemble à ça :
-
-.. code-block:: php
+récupéré via le service ``security.context``. Depuis un controleur, cela ressemble à ça::
 
     public function indexAction()
     {
@@ -1240,6 +1232,10 @@ la méthode :method:`GlobalVariables::getUser()<Symfony\\Bundle\\FrameworkBundle
     .. code-block:: html+jinja
 	
         <p>Username: {{ app.user.username }}</p>
+
+    .. code-block:: html+php
+
+        <p>Username: <?php echo $app->getUser()->getUsername() ?></p>    
 
 Utiliser plusieurs fournisseurs d'utilisateurs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1667,9 +1663,13 @@ Cela peut être facilement réalisé en activant l'auditeur (listener) ``switch_
 Pour changer d'utilisateur, il suffit d'ajouter à la chaîne de requête le paramètre
 ``_switch_user`` et le nom d'utilisateur comme valeur à l'URL en cours :
 
+.. code-block:: text
+
     http://example.com/somewhere?_switch_user=thomas
 
 Pour revenir à l'utilisateur initial, utilisez le nom d'utilisateur spécial ``_exit``:
+
+.. code-block:: text
 
     http://example.com/somewhere?_switch_user=_exit
 
@@ -1756,6 +1756,63 @@ ne sera jamais créé par Symfony2 :
     Si vous utilisez un formulaire de connexion, Symfony2 va créer un cookie même si vous avez configuré
     ``stateless`` à ``true``.
 
+Utilitaires
+-----------
+
+.. versionadded:: 2.2
+    Les classes ``StringUtils`` et ```SecureRandom`` ont été ajoutées dans Symfony 2.2
+
+Le composant de Sécurité Symfony est fourni avec un ensemble d'utilitaires pratiques
+liés à la sécurité. Ces utilitaires sont utilisés par Symfony, mais vous devriez
+aussi les utiliser pour résoudre les problèmes qu'ils traitent.
+
+Comparer des chaines de caractères
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Le temps pris pour comparer deux chaines de caractères dépend de leurs différences.
+Cela peut être utilisé par un attaquant lorsque les deux chaines représentent un
+mot de passe par exemple; cela s'appelle une `attaque temporelle`_.
+
+En interne, pour comparer deux mots de passe, Symfony utilise un algorithme
+en temps constant; vous pouvez utiliser la même stratégie dans votre propre
+code grâce à la classe :class:`Symfony\\Component\\Security\\Core\\Util\\StringUtils`::
+
+    use Symfony\Component\Security\Core\Util\StringUtils;
+
+    // est-ce password1 est égal à password2 ?
+    $bool = StringUtils::equals($password1, $password2);
+
+Générer un nombre aléatoire sécurisé
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Chaque fois que vous avez besoin de générer un nombre aléatoire sécurisé,
+nous vous incitons fortement à utiliser la classe 
+:class:`Symfony\\Component\\Security\\Core\\Util\\SecureRandom`::
+
+    use Symfony\Component\Security\Core\Util\SecureRandom;
+
+    $generator = new SecureRandom();
+    $random = $generator->nextBytes(10);
+
+La méthode
+:method:`Symfony\\Component\\Security\\Core\\Util\\SecureRandom::nextBytes`
+retourne une chaine de caractères numérique d'une longueur égale au nombre passé
+en argument (10 dans l'exemple ci-dessus).
+
+La classe SecureRandom est plus efficace lorsque OpenSSL est installé mais
+s'il n'est pas disponible, elle se rabat sur un algorithme interne qui a besoin
+d'un fichier pour l'alimenter. Contentez vous de passer le nom du fichier en
+argument pour l'activer::
+
+    $generator = new SecureRandom('/some/path/to/store/the/seed.txt');
+    $random = $generator->nextBytes(10);
+
+.. note::
+
+    Vous pouvez aussi accéder à une instance aléatoire sécurisée directement
+    depuis le conteneur d'injection de dépendance de Symfony. Son nom est
+    ``security.secure_random``.
+
 Derniers mots
 -------------
 
@@ -1790,3 +1847,4 @@ Apprenez plus grâce au Cookbook
 .. _`FOSUserBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
 .. _`implémenter l'interface \Serializable`: http://php.net/manual/en/class.serializable.php
 .. _`functions-online.com`: http://www.functions-online.com/sha1.html
+.. _`attaque temporelle`: http://fr.wikipedia.org/wiki/Attaque_temporelle

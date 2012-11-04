@@ -97,6 +97,7 @@
   * :doc:`/cookbook/routing/slash_in_parameter`
   * :doc:`/cookbook/routing/redirect_in_config`
   * :doc:`/cookbook/routing/method_parameters`
+  * :doc:`/cookbook/routing/service_container_parameters`
 
 * **symfony1**
 
@@ -148,3 +149,5 @@
 
   * :doc:`/cookbook/workflow/new_project_git`
   * :doc:`/cookbook/workflow/new_project_svn`
+
+* :doc:`/cookbook/deployment-tools`

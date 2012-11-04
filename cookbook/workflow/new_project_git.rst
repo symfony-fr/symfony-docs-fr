@@ -40,6 +40,13 @@ votre dépôt local git :
         /vendor/  
         /app/config/parameters.yml
 
+.. tip::
+    Vous pouvez aussi avoir un fichier .gitignore qui peut être utilisé
+    sur tout votre système, dans ce cas, vous pourrez trouver plus d'informations
+    ici : `Github .gitignore`_.
+    De cette manière, vous pouvez exclure les fichiers/dossiers souvent utilisés par
+    votre IDE pour l'ensemble de vos projets.
+
 4. Copiez ``app/config/parameters.yml`` vers ``app/config/parameters.yml.dist``.
    Le fichier ``parameters.yml`` est ignoré par git (voir ci-dessus) afin que les
    paramètres spécifiques à la machine comme les mots de passe de base de données
@@ -154,3 +161,4 @@ qui aide à gérer ceci est `Gitolite`_.
 .. _`GitHub`: https://github.com/
 .. _`dépôt barebones`: http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository
 .. _`Gitolite`: https://github.com/sitaramc/gitolite
+.. _`Github .gitignore`: https://help.github.com/articles/ignoring-files

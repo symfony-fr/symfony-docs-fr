@@ -68,8 +68,7 @@ configurer la connexion que le système d'ACL est supposé utiliser :
 .. note::
 
     Le système ACL requiert qu'une connexion DBAL Doctrine (utilisable par défaut)
-    ou qu'une connexion ODM Doctrine (utilisable avec `MongoDBAclBundle 
-    <https://github.com/iampersistent/MongoDBAclBundle>`_) soit
+    ou qu'une connexion ODM Doctrine (utilisable avec `MongoDBAclBundle`_) soit
     configurée. Cependant, cela ne veut pas dire que vous devez utiliser
     l'ORM ou l'ODM Doctrine pour faire correspondre vos objets domaine. Vous
     pouvez utiliser n'importe quel outil de correspondance de votre choix pour

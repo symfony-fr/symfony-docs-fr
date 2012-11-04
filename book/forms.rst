@@ -27,9 +27,7 @@ de choses à faire ») simple qui doit afficher des « tâches ». Parce que vos
 utilisateurs devront éditer et créer des tâches, vous allez avoir besoin de
 construire des formulaires. Mais avant de commencer, concentrez-vous
 d'abord sur la classe générique ``Task`` qui représente et stocke les données
-pour une tâche :
-
-.. code-block:: php
+pour une tâche::
 
     // src/Acme/TaskBundle/Entity/Task.php
     namespace Acme\TaskBundle\Entity;
@@ -839,9 +837,7 @@ Comme vous l'avez vu, un formulaire peut être créé et utilisé directement da
 un contrôleur. Cependant, une meilleure pratique est de construire le formulaire
 dans une classe PHP séparée et autonome, qui peut ainsi être réutilisée n'importe
 où dans votre application. Créez une nouvelle classe qui va héberger la logique
-de construction du formulaire « task » :
-
-.. code-block:: php
+de construction du formulaire « task »::
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
     namespace Acme\TaskBundle\Form\Type;
@@ -866,9 +862,7 @@ de construction du formulaire « task » :
 Cette nouvelle classe contient toutes les directives nécessaires à la création
 du formulaire « task » (notez que la méthode ``getName()`` doit retourner un
 identifiant unique pour ce « type » de formulaire). Il peut être utilisé pour
-construire rapidement un objet formulaire dans le contrôleur :
-
-.. code-block:: php
+construire rapidement un objet formulaire dans le contrôleur::
 
     // src/Acme/TaskBundle/Controller/DefaultController.php
 
@@ -921,14 +915,14 @@ manière de créer des formulaires, mais le choix final vous revient.
     Dans le cas où vous avez besoin de champs supplémentaires dans le formulaire
     (par exemple une checkbox « Acceptez vous les conditions d'utilisation ») qui
     ne doi pas être mappé à l'objet sous-jacent, vous devez définir l'option
-    property_path setting à ``false``::
+    ``mapped`` setting à ``false``::
 
         use Symfony\Component\Form\FormBuilderInterface;
 
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder->add('task');
-            $builder->add('dueDate', null, array('property_path' => false));
+            $builder->add('dueDate', null, array('mapped' => false));
         }
 
     De plus, s'il y a des champs dans le formulaire qui ne sont pas inclus dans
@@ -1090,12 +1084,12 @@ instance de la nouvelle classe ``CategoryType`` :
 
 Les champs de ``CategoryType`` peuvent maintenant être affichés à côté de ceux
 de la classe ``TaskType``. Pour activer la validation sur CategoryType, ajoutez
-l'option ``cascade_validation``::
+l'option ``cascade_validation`` à ``TaskType``::
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Acme\TaskBundle\Entity\Category',
+            'data_class' => 'Acme\TaskBundle\Entity\Task',
             'cascade_validation' => true,
         ));
     }
@@ -1210,7 +1204,7 @@ des champs via la fonction ``form_row``. Pour dire au composant formulaire
 d'utiliser votre nouveau fragment ``form_row`` defini ci-dessus, ajoutez
 ce qui suit en haut du template qui rend le formulaire :
 
-.. configuration-block:: php
+.. configuration-block::
 
     .. code-block:: html+jinja
 
@@ -1546,7 +1540,7 @@ votre projet. Pour plus d'informations, voir la section de
     L'option ``intention`` est optionnelle mais améliore grandement la sécurité
     du jeton généré en le rendant différent pour chaque formulaire.
 
-.. index:
+.. index::
    single: Forms; With no class
 
 Utiliser un formulaire sans classe
@@ -1588,10 +1582,10 @@ Par défaut, en fait, un formulaire part du principe que vous voulez travailler 
 un tableau de données plutôt qu'avec un objet.Il y a exactement deux façons de changer
 ce comportement et d'associer le formulaire avec un objet à la place:
 
-1. Passez un objet lors de la création du formulaire (comme premier argument de ``createFormBuilder``
+#. Passez un objet lors de la création du formulaire (comme premier argument de ``createFormBuilder``
    ou deuxième argument de ``createForm``);
 
-2. Définissez l'option ``data_class`` de votre formulaire.
+#. Définissez l'option ``data_class`` de votre formulaire.
 
 Si vous ne faites *pas* l'un ou l'autre, alors le formulaire retournera les données
 dans un tableau. Dans cet exemple, puisque ``$defaultData`` n'est pas un objet (et
@@ -1601,9 +1595,7 @@ finalement un tableau.
 .. tip::
 
     Vous pouvez également accéder directement aux valeurs POST (dans ce cas "name")
-    par le biais de l'objet Request, comme ceci :
-
-    .. code-block:: php
+    par le biais de l'objet Request, comme ceci::
 
         $this->get('request')->request->get('name');
 
@@ -1635,7 +1627,7 @@ mais voici un petit exemple::
 
     // créez un formulaire, sans valeurs par défaut, et passez les contraintes
     $form = $this->createFormBuilder(null, array(
-        'validation_constraint' => $collectionConstraint,
+        'constraints' => $collectionConstraint,
     ))->add('email', 'email')
         // ...
     ;
@@ -1667,7 +1659,7 @@ surchargez la méthode ``setDefaultOptions`` pour les spécifier :
             ));
         
             $resolver->setDefaults(array(
-                'validation_constraint' => $collectionConstraint
+                'constraints' => $collectionConstraint
             ));
         }
     }

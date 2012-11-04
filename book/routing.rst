@@ -80,9 +80,7 @@ Le paramètre ``_controller`` est une clé spéciale qui dit à Symfony quel
 contrôleur doit être exécuté lorsqu'une URL correspond à cette route.
 La chaîne de caractères ``_controller`` est appelée le
 :ref:`nom logique<controller-string-syntax>`. Il suit un pattern qui pointe
-vers une classe et une méthode PHP spécifique :
-
-.. code-block:: php
+vers une classe et une méthode PHP spécifique::
 
     // src/Acme/BlogBundle/Controller/BlogController.php    
     namespace Acme\BlogBundle\Controller;
@@ -851,9 +849,7 @@ Par exemple, la valeur ``AcmeBlogBundle:Blog:show`` pour le paramètre
 | AcmeBlogBundle | BlogController       | showAction        |
 +----------------+----------------------+-------------------+
 
-Le contrôleur pourrait ressembler à quelque chose comme ça :
-
-.. code-block:: php
+Le contrôleur pourrait ressembler à quelque chose comme ça::
 
     // src/Acme/BlogBundle/Controller/BlogController.php    
     namespace Acme\BlogBundle\Controller;
@@ -889,9 +885,7 @@ Les Paramètres de la Route et les Arguments du Contrôleur
 
 Les paramètres de la route (par exemple : ``{slug}``) sont spécialement
 importants parce que chacun d'entre eux est mis à disposition en tant
-qu'argument de la méthode contrôleur :
-
-.. code-block:: php
+qu'argument de la méthode contrôleur::
 
     public function showAction($slug)
     {
@@ -1120,9 +1114,7 @@ réalité, le routage est un système bi-directionnel : faire correspondre une
 URL à un contrôleur+paramètres et une route+paramètres à une URL. Les méthodes
 :method:`Symfony\\Component\\Routing\\Router::match` et
 :method:`Symfony\\Component\\Routing\\Router::generate` forment ce système
-bi-directionnel. Prenez l'exemple de la route ``blog_show`` vue plus haut :
-
-.. code-block:: php
+bi-directionnel. Prenez l'exemple de la route ``blog_show`` vue plus haut::
 
     $params = $router->match('/blog/my-blog-post');
     // array('slug' => 'my-blog-post', '_controller' => 'AcmeBlogBundle:Blog:show')
@@ -1133,9 +1125,7 @@ bi-directionnel. Prenez l'exemple de la route ``blog_show`` vue plus haut :
 Pour générer une URL, vous avez besoin de spécifier le nom de la route (par
 exemple : ``blog_show``) ainsi que quelconque joker (par exemple :
 ``slug = my-blog-post``) utilisé dans le pattern de cette route. Avec cette
-information, n'importe quelle URL peut être générée facilement :
-
-.. code-block:: php
+information, n'importe quelle URL peut être générée facilement::
 
     class MainController extends Controller
     {
@@ -1170,9 +1160,7 @@ Générer des URLs Absolues
 
 Par défaut, le routeur va générer des URLs relatives (par exemple : ``/blog``).
 Pour générer une URL absolue, passez simplement ``true`` comme troisième argument
-de la méthode ``generate()`` :
-
-.. code-block:: php
+de la méthode ``generate()``::
 
     $router->generate('blog_show', array('slug' => 'my-blog-post'), true);
     // http://www.example.com/blog/my-blog-post
@@ -1183,10 +1171,8 @@ de la méthode ``generate()`` :
     de l'objet courant ``Request``. Celui-ci est détecté automatiquement basé
     sur les informations du serveur fournies par PHP. Lorsque vous générez
     des URLs absolues pour des scripts exécutés depuis la ligne de commande,
-    vous devrez spécifier manuellement l'host désiré sur l'objet ``RequestContext`` :
-    
-    .. code-block:: php
-    
+    vous devrez spécifier manuellement l'host désiré sur l'objet ``RequestContext``::
+        
         $router->getContext()->setHost('www.example.com');
 
 .. index::

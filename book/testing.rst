@@ -635,7 +635,7 @@ Comme pour les liens, vous sélectionnez les formulaires à l'aide de la méthod
 
 .. note::
 
-    Notez que nous sélectionnons les boutons de formulaire et non pas les formulaires
+    Notez que vous sélectionnez les boutons de formulaire et non pas les formulaires
     eux-mêmes car un formulaire peut contenir plusieurs boutons; si vous utilisez l'API
     de traversement, gardez en mémoire que vous devez chercher un bouton.
 

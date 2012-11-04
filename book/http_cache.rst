@@ -40,30 +40,30 @@ Symfony2.
 
 Nous allons parcourir ce sujet en quatre étapes :
 
-* **Étape 1**: Une :ref:`passerelle de cache <gateway-caches>`, ou
-    reverse proxy, est une couche indépendante qui se trouve devant
-    votre application. La passerelle met en cache les réponses telles
-    qu'elles sont retournées par l'application et répond aux requêtes
-    dont les réponses sont en cache avant qu'elles n'atteignent
-    l'application. Symfony2 possède sa propre passerelle par défaut,
-    mais toute autre technologie peut être utilisée.
+#. Une :ref:`passerelle de cache <gateway-caches>`, ou
+   reverse proxy, est une couche indépendante qui se trouve devant
+   votre application. La passerelle met en cache les réponses telles
+   qu'elles sont retournées par l'application et répond aux requêtes
+   dont les réponses sont en cache avant qu'elles n'atteignent
+   l'application. Symfony2 possède sa propre passerelle par défaut,
+   mais toute autre technologie peut être utilisée.
 
-* **Étape 2**: Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
-    sont utilisées pour communiquer avec la passerelle de cache et tout
-    autre cache entre votre application et le client. Symfony2 en propose
-    par défaut et fournit une interface puissante pour intéragir avec elles.
+#. Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
+   sont utilisées pour communiquer avec la passerelle de cache et tout
+   autre cache entre votre application et le client. Symfony2 en propose
+   par défaut et fournit une interface puissante pour intéragir avec elles.
 
-* **Étape 3**: :ref:`L'expiration et la validation<http-expiration-validation>`
-    sont les deux modèles utilisés pour déterminer si le contenu d'un cache est
-    *valide* (peut être réutilisé à partir du cache) ou *périmé* (doit être
-    regénéré par l'application).
+#. :ref:`L'expiration et la validation<http-expiration-validation>`
+   sont les deux modèles utilisés pour déterminer si le contenu d'un cache est
+   *valide* (peut être réutilisé à partir du cache) ou *périmé* (doit être
+   regénéré par l'application).
 
-* **Étape 4**: :ref:`Edge Side Includes <edge-side-includes>` (ESI)
-    autorise le cache HTTP à mettre en cache des
-    fragments de pages (voir des fragments imbriqués) de façon
-    indépendante. Avec l'ESI, vous pouvez même mettre en cache une
-    page entière pendant 60 minutes, mais un bloc imbriqué dans cette
-    page uniquement 5 minutes.
+#. :ref:`Edge Side Includes <edge-side-includes>` (ESI)
+   autorise le cache HTTP à mettre en cache des
+   fragments de pages (voir des fragments imbriqués) de façon
+   indépendante. Avec l'ESI, vous pouvez même mettre en cache une
+   page entière pendant 60 minutes, mais un bloc imbriqué dans cette
+   page uniquement 5 minutes.
 
 La mise en cache via HTTP n'est pas réservée à Symfony, beaucoup
 d'articles existent à ce sujet. Si vous n'êtes pas familier avec la
@@ -195,9 +195,8 @@ client.
 
 L'objet ``AppCache`` a une configuration par défaut mais
 peut être reconfiguré finement grâce à une série d'options que vous
-pouvez paramètrer en surchargeant la méthode ``getOptions()`` :
-
-.. code-block:: php
+pouvez paramètrer en surchargeant la méthode 
+:method:`Symfony\\Bundle\\FrameworkBundle\\HttpCache\\HttpCache::getOptions`::
 
     // app/AppCache.php
 
@@ -350,9 +349,7 @@ réponse. Chaque information est séparée par une virgule :
      Cache-Control: max-age=3600, must-revalidate
 
 Symfony fournit une abstraction du ``Cache-Control`` pour faciliter sa
-gestion :
-
-.. code-block:: php
+gestion::
 
     $response = new Response();
 
@@ -522,7 +519,7 @@ de l'objet ``Response``. Elle prend un objet ``DateTime`` en argument :
 
 L'en-tête HTTP résultante sera :
 
-.. code-block:: php
+.. code-block:: text
 
     Expires: Thu, 01 Mar 2011 16:00:00 GMT
 
@@ -563,7 +560,9 @@ par les systèmes de cache partagés :
     // Idem mais uniquement pour les caches partagés
     $response->setSharedMaxAge(600);
 
-L'en-tête ``Cache-Control`` devrait être (il peut y avoir d'autres directives) : ::
+L'en-tête ``Cache-Control`` devrait être (il peut y avoir d'autres directives) :
+
+.. code-block:: text
 
     Cache-Control: max-age=600, s-maxage=600
 
@@ -636,9 +635,11 @@ md5 du contenu :
         return $response;
     }
 
-La méthode ``Response::isNotModified()`` compare le ``ETag`` envoyé avec la
-requête avec celui défini dans l'objet ``Response``. S'ils sont
-identiques, la méthode renvoie automatiquement le code 304 en ``Response``.
+La méthode :method:`Symfony\\Component\\HttpFoundation\\Response::isNotModified`
+method:`Symfony\\Component\\HttpFoundation\\Response::isNotModified`
+compare le ``ETag`` envoyé avec la requête avec celui défini dans l'objet ``Response``.
+S'ils sont identiques, la méthode renvoie automatiquement le code 304 en
+``Response``.
 
 Cet algorithme est assez simple et très générique, mais il est
 nécessaire de créer entièrement l'objet ``Response`` avant de pouvoir
@@ -700,8 +701,8 @@ nécessitant de calculer le rendu de la ressource comme valeur de l'en-tête
         return $response;
     }
 
-La méthode ``Response::isNotModified()`` compare l'en-tête
-``If-Modified-Since`` envoyé par la requête avec l'en-tête
+La méthode :method:`Symfony\\Component\\HttpFoundation\\Response::isNotModified`
+compare l'en-tête ``If-Modified-Since`` envoyé par la requête avec l'en-tête
 ``Last-Modified`` défini pour la réponse. S'ils sont équivalents, l'objet
 ``Response`` contiendra le code 304.
 
@@ -801,6 +802,8 @@ liste des différents en-têtes séparés par des virgules dont les
 valeurs définissent une représentation différente de la même
 ressource.
 
+.. code-block:: text
+
     Vary: Accept-Encoding, User-Agent
 
 .. tip::
@@ -852,7 +855,8 @@ la gestion du cache. Voici les plus utiles :
     $response->setNotModified();
 
 La plupart des en-têtes en relation avec la gestion du cache peuvent
-être définis avec la seule méthode ``setCache()`` :
+être définis avec la seule méthode
+:method:`Symfony\\Component\\HttpFoundation\\Response::setCache`::
 
 .. code-block:: php
 
@@ -893,14 +897,15 @@ c'est le seul qui est utile en dehors du contexte Akamaï :
 
 .. code-block:: html
 
+    <!DOCTYPE html>
     <html>
         <body>
-            Some content
+            <!-- ... some content -->
 
             <!-- Embed the content of another page here -->
             <esi:include src="http://..." />
 
-            More content
+            <!-- ... some content -->
         </body>
     </html>
 
@@ -1185,7 +1190,7 @@ En savoir plus grâce au Cookbook
 
 .. _`Things Caches Do`: http://tomayko.com/writings/things-caches-do
 .. _`Cache Tutorial`: http://www.mnot.net/cache_docs/
-.. _`Varnish`: http://www.varnish-cache.org/
+.. _`Varnish`: https://www.varnish-cache.org/
 .. _`Squid in reverse proxy mode`: http://wiki.squid-cache.org/SquidFaq/ReverseProxy
 .. _`modèle d'expiration`: http://tools.ietf.org/html/rfc2616#section-13.2
 .. _`modèle de validation`: http://tools.ietf.org/html/rfc2616#section-13.3
