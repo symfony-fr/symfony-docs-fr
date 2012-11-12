@@ -858,8 +858,6 @@ La plupart des en-têtes en relation avec la gestion du cache peuvent
 être définis avec la seule méthode
 :method:`Symfony\\Component\\HttpFoundation\\Response::setCache`::
 
-.. code-block:: php
-
     // Définir la configuration du cache avec un seul appel
     $response->setCache(array(
         'etag'          => $etag,
