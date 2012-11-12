@@ -55,7 +55,7 @@ Configuration au niveau du bundle avec les Extensions
 Par convention, chaque bundle contient une classe Extension qui se situe
 dans le répertoire ``DependencyInjection`` du bundle. Elles sont enregistrées
 avec le ``ContainerBuilder`` lorsque le noyau est initialisé. Lorsque le 
-``ContainerBuilder`` est :doc:`compilé</components/dependency-injection/compilation>`,
+``ContainerBuilder`` est :doc:`compilé</components/dependency_injection/compilation>`,
 la configuration de l'application qui correspond à l'extension du bundle est passée
 à l'Extension qui charge également ses propres fichiers de configuration, généralement
 depuis le répertoire ``Resources/config`` du bundle. La configuration niveau application
