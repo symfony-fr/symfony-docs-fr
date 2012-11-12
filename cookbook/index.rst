@@ -27,6 +27,6 @@ Le Cookbook
     profiler/index
     web_services/index
     symfony1
-    deployment-tools
+    deployment_tools
 
 .. include:: /cookbook/map.rst.inc
