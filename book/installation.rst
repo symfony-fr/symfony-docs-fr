@@ -270,7 +270,7 @@ première « vraie » page Symfony2 :
 Symfony2 devrait vous accueillir et vous féliciter pour tout le travail accompli
 jusqu'ici !
 
-.. image:: /images/quick_tour/welcome.jpg
+.. image:: /images/quick_tour/welcome.png
 
 Commencer à développer
 ----------------------
