@@ -101,7 +101,7 @@ Symfony est fourni avec un thème par défaut (`form_div_layout.html.twig`_ pour
 et ``FrameworkBundle:Form`` pour PHP) qui définit chaque fragment nécessaire à
 l'affichage des différentes parties d'un formulaire.
 
-Dans la section suivante, vous apprendre comment personnaliser un thème en surchargeant
+Dans la section suivante, vous apprendrez comment personnaliser un thème en surchargeant
 un ou l'ensemble de ses fragments.
 
 Par exemple, lorsque le widget d'un type de champ ``integer`` est affiché, un champ
