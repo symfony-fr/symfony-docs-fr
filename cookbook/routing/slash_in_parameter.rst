@@ -1,8 +1,8 @@
 .. index::
-   single: Routage; Autoriser un / dans un paramètre route
+   single: Routage; Autoriser un / dans un paramètre de route
 
-Comment autoriser un caractère « / » dans un paramètre route
-============================================================
+Comment autoriser un caractère « / » dans un paramètre de route
+===============================================================
 
 Quelquefois, vous avez besoin de composer des URLs avec des paramètres qui
 peuvent contenir un slash ``/``. Par exemple, prenez la route classique
