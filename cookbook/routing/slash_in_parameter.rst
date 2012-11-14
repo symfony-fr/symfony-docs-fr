@@ -4,8 +4,8 @@
 Comment autoriser un caractère « / » dans un paramètre de route
 ===============================================================
 
-Quelquefois, vous avez besoin de composer des URLs avec des paramètres qui
-peuvent contenir un slash ``/``. Par exemple, prenez la route classique
+Parfois, on a besoin de construire des URLs avec des paramètres qui
+peuvent contenir un slash ``/``. Prenons par exemple la route classique
 ``/hello/{name}``. Par défaut, ``/hello/Fabien`` va correspondre à cette
 route mais pas ``/hello/Fabien/Kris``. Cela est dû au fait que Symfony
 utilise ce caractère comme séparateur entre les parties de la route.
@@ -19,7 +19,7 @@ Configurer la Route
 
 Par défaut, les composants de routage de Symfony requièrent que les paramètres
 correspondent au pattern de regex suivant : ``[^/]+``. Cela veut dire que tous
-les caractères sont autorisés excepté ``/``.
+les caractères sont autorisés sauf ``/``.
 
 Vous devez explicitement autoriser le caractère ``/`` à faire partie de votre
 paramètre en spécifiant un pattern de regex plus permissif.
