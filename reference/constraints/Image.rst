@@ -92,7 +92,7 @@ ses dimensions soient comprises dans un certain intervalle, ajoutez ce qui suit 
              *     minWidth = 200,
              *     maxWidth = 400,
              *     minHeight = 200,
-             *     maxHeight = 400,
+             *     maxHeight = 400
              * )
              */
             protected $headshot;
