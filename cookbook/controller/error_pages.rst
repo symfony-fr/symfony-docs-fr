@@ -31,7 +31,7 @@ dépendant du niveau de contrôle que vous souhaitez :
     :ref:`kernel-kernel.exception`.
 
 Tous les templates d'erreur se trouvent dans le ``TwigBundle``. Pour surcharger
-ces templates, nous utilisons simplement la méthode standard qui permet
+ces templates, utilisez simplement la méthode standard qui permet
 de surcharger un template qui se trouve dans un bundle. Pour plus d'informations,
 voir :ref:`overriding-bundle-templates`.
 
