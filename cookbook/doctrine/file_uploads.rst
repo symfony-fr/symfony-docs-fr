@@ -216,7 +216,7 @@ qui correspond à ce qui est retourné après qu'un champ ``file`` ait été sou
             return;
         }
 
-        // nous utilisons le nom de fichier original ici mais
+        // utilisez le nom de fichier original ici mais
         // vous devriez « l'assainir » pour au moins éviter
         // quelconques problèmes de sécurité
         

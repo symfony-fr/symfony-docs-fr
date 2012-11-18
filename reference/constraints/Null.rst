@@ -31,7 +31,7 @@ soit exactement égale à ``null``, ajoutez le code suivant :
         Acme\BlogBundle\Entity\Author:
             properties:
                 firstName:
-                    - Null: ~
+                    - 'Null': ~
 
     .. code-block:: php-annotations
 

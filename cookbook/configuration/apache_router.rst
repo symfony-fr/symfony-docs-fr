@@ -12,7 +12,7 @@ d'utiliser Symfony2 pour le faire.
 Changer les paramètres de la configuration du routeur
 -----------------------------------------------------
 
-Pour dumper les routes Apache, nous devons d'abord modifier les paramètres
+Pour dumper les routes Apache, vous devez d'abord modifier les paramètres
 de configuration pour dire à Symfony2 d'utiliser le ``ApacheUrlMatcher`` plutôt
 que celui par défaut :
 
@@ -44,7 +44,7 @@ Pour tester que cela fonctionne, créons une route très basique pour le bundle 
         defaults: { _controller: AcmeDemoBundle:Demo:hello }
             
     
-Maintenant nous générons les règles **url_rewrite** :
+Maintenant générez les règles **url_rewrite** :
     
 .. code-block:: bash
 
@@ -63,7 +63,7 @@ Ce qui devrait afficher quelque chose du genre :
     RewriteRule .* app.php [QSA,L,E=_ROUTING__route:hello,E=_ROUTING_name:%1,E=_ROUTING__controller:AcmeDemoBundle\:Demo\:hello]
 
 Vous pouvez maintenant réécrire le `web/.htaccess` pour utiliser les nouvelles règles.
-Avec notre exemple, cela ressemblerait à ceci :
+Avec cet exemple, cela ressemblerait à ceci :
 
 .. code-block:: apache
 
