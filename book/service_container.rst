@@ -166,8 +166,9 @@ beaucoup de services. Les services qui ne sont jamais utilisés ne sont jamais c
 
 Comme bonus supplémentaire, le service ``Mailer`` est seulement créé une fois et la même
 instance est retournée chaque fois que vous demandez le service. Ceci est presque toujours
-le comportement dont vous aurez besoin (c'est plus souple et plus puissant), mais nous allons apprendre
-plus tard, comment vous pouvez configurer un service qui a de multiples instances.
+le comportement dont vous aurez besoin (c'est plus souple et plus puissant), mais vous
+apprendrez comment configurer un service qui a de multiples instances dans l'article du
+Cookbook « :doc:`/cookbook/service_container/scopes` ».
 	
 .. _book-service-container-parameters:
 
