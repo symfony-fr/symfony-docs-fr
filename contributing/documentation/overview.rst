@@ -18,16 +18,21 @@ La documentation Symfony2 est hébergé sur GitHub:
 
     https://github.com/symfony/symfony-docs
 
-Si vous voulez soumettre un correctif, `forker`_ le dépôt officiel sur GitHub et
-cloner votre dépot:
+Si vous voulez soumettre un correctif, `forkez`_ le dépôt officiel sur GitHub et
+clonez votre dépot:
 
 .. code-block:: bash
 
     $ git clone git://github.com/YOURUSERNAME/symfony-docs.git
 
+Selon les sources du framework, le dépôt de la documentation est séparé en trois
+branches : ``2.0`` pour la dernière version de Symfony 2.0.x, ``2.1`` pour la
+dernière version de SYmfony 2.1.x et ``master`` qui est la branche de développement
+des versions à venir.
+
 A moins que vous ne documentiez une fonctionnalité nouvelle, vos changements
-doivent être basé sur la branche 2.0 plutôt que sur la branche master. Pour
-effectuer ceci ``checkouter`` la branche 2.0:
+doivent toujours être basé sur la branche 2.0 plutôt que sur la branche master.
+Pour effectuer ceci faites un ``checkout`` la branche 2.0 :
 
 .. code-block:: bash
 
@@ -48,11 +53,16 @@ initier une requête (pull request). Celle-ci devra être entre votre branche
 .. image:: /images/docs-pull-request.png
    :align: center
 
-Si vous avez basé vos changement sur la branche 2.0 vous devez suivre le lien
- de commit et changer la branche de base vers @2.0 :
+Si vous avez basé vos changement sur la branche 2.0 vous devez changer la branche
+de base pour qu'elle soit 2.0 sur la page de prévisualisation :
 
 .. image:: /images/docs-pull-request-change-base.png
    :align: center
+
+.. note::
+  
+  Tout les changements faits sur la branche 2.0 seront mergés chaque semaine dans la
+  branche 2.1 qui sera ensuite mergée sur la branche master pour la prochaine version.
 
 GitHub traite en détail les requêtes de mise à jour ou `pull requests`_ .
 
@@ -145,7 +155,7 @@ Traductions
 
 Lisez la documentation dédiée :doc:`traductions <translations>`.
 
-.. _`forker`: https://help.github.com/articles/fork-a-repo
+.. _`forkez`: https://help.github.com/articles/fork-a-repo
 .. _`pull requests`: https://help.github.com/articles/using-pull-requests
 .. _`Erreurs de génération de la documentation`: http://symfony.com/doc/build_errors
 .. _`Standards de code Twig`: http://twig.sensiolabs.org/doc/coding_standards.html
