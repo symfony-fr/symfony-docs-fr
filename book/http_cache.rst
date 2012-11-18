@@ -25,9 +25,9 @@ Le moyen le plus efficace d'améliorer les performances d'une
 application est de mettre en cache l'intégralité d'une réponse pour ne
 plus avoir à rappeler l'application pour les requêtes suivantes. Bien
 sûr, ce n'est pas toujours possible pour les sites web fortement
-dynamiques. A travers ce chapitre, nous allons décrire comment
-fonctionne le système de cache de Symfony2 et pourquoi nous pensons
-que c'est la meilleure approche possible.
+dynamiques. A travers ce chapitre, vous verrez comment
+fonctionne le système de cache de Symfony2 et en quoi c'est la meilleure
+approche possible.
 
 Le système de cache de Symfony2 est différent car il se base sur la
 simplicité et la puissance du cache HTTP tel qu'il est défini dans la
@@ -67,8 +67,8 @@ Nous allons parcourir ce sujet en quatre étapes :
 
 La mise en cache via HTTP n'est pas réservée à Symfony, beaucoup
 d'articles existent à ce sujet. Si vous n'êtes pas familier avec la
-mise cache HTTP, nous vous recommandons *chaudement* l'article de
-Ryan Tomayko `Things Caches Do`_. Une autre ressource approfondie sur
+mise cache HTTP, lire l'article de Ryan Tomayko `Things Caches Do`_
+est *très* recommandé. Une autre ressource approfondie sur
 ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
 
 .. index::
@@ -133,10 +133,10 @@ interprétées par trois différents types de cache :
 
 .. note::
 
-    La notion de cache privé par rapport au cache partagé sera
-    expliquée plus en détails lorsque nous verrons les contenus liés à
-    exactement un utilisateur (les informations sur un compte
-    utilisateur par exemple).
+    La notion de cache *privé* par rapport au cache *partagé* sera
+    expliquée plus en détails lorsque la mise en cache de les contenus liés
+    à exactement un utilisateur (les informations sur un compte
+    utilisateur par exemple) sera abordée.
 
 Toutes les réponses de l'application iront communément dans un ou deux
 des deux premiers types de cache. Ces systèmes ne sont pas sous votre contrôle 
@@ -646,7 +646,7 @@ calculer l'en-tête ETag, ce qui n'est pas optimal. En d'autre termes,
 cette approche économise la bande passante mais pas l'utilisation du
 CPU.
 
-Dans la section :ref:`optimizing-cache-validation`, nous verrons
+Dans la section :ref:`optimizing-cache-validation`, vous verrez
 comment le modèle de validation peut être utilisé plus intelligemment
 pour déterminer la validité d'un cache sans faire autant de travail.
 
