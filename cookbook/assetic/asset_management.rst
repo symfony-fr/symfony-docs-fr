@@ -185,7 +185,7 @@ cette étape du processus de développement et de déploiement.
 
 Pour utiliser un filtre, vous aurez d'abord besoin de le spécifier dans la
 configuration d'Assetic. Ajouter un filtre dans la configuration ne signifie
-pas qu'il est utilisé, mais juste qu'il est prêt à l'être (nous allons l'utiliser
+pas qu'il est utilisé, mais juste qu'il est prêt à l'être (vous allez l'utiliser
 ci-dessous).
 
 Par exemple, pour utiliser le JavaScript YUI Compressor, la configuration

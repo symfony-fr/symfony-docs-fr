@@ -2,59 +2,69 @@ Participer à la Documentation
 =============================
 
 La documentation est aussi importante que le code. Elle suit exactement les 
-mêmes principes:
+mêmes principes :
 DRY, testée, facile à maintenir, extensible, optimisée, et factorisée dans un
 soucis de concision.
 
 Contribuer
 ----------
 
-Avant de contribuer, vous devez devenir familier avec le language utilisé
-:doc:`markup rest<format>` dans la documentation.
+Avant de contribuer, vous devez maîtriser le language :doc:`markup rest<format>`
+utilisé dans la documentation.
 
-La documentation Symfony2 est hébergé sur GitHub:
+La documentation Symfony2 est hébergée sur GitHub:
 
 .. code-block:: text
 
     https://github.com/symfony/symfony-docs
 
-Si vous voulez soumettre un correctif, `forker`_ le dépôt officiel sur GitHub et
-cloner votre dépot:
+Si vous voulez soumettre un correctif, `forkez`_ le dépôt officiel sur GitHub et
+clonez votre dépot :
 
 .. code-block:: bash
 
     $ git clone git://github.com/YOURUSERNAME/symfony-docs.git
 
+Selon les sources du framework, le dépôt de la documentation est séparé en trois
+branches : ``2.0`` pour la dernière version de Symfony 2.0.x, ``2.1`` pour la
+dernière version de SYmfony 2.1.x et ``master`` qui est la branche de développement
+des versions à venir.
+
 A moins que vous ne documentiez une fonctionnalité nouvelle, vos changements
-doivent être basé sur la branche 2.0 plutôt que sur la branche master. Pour
-effectuer ceci ``checkouter`` la branche 2.0:
+doivent toujours être basés sur la branche 2.0 plutôt que sur la branche master.
+Pour effectuer ceci faites un ``checkout`` la branche 2.0 :
 
 .. code-block:: bash
 
     $ git checkout 2.0
 
 
-Ensuite, créez une branche dédiée pour vos changement:
+Ensuite, créez une branche dédiée pour vos changements :
 
 .. code-block:: bash
 
     $ git checkout -b improving_foo_and_bar
 
 Vous pouvez maintenant appliquer vos changements directement à cette branche et 
-les transmettre (commit). Ensuite, envoyer cette branche à *votre* dépôt et
-initier une requête (pull request). Celle-ci devra être entre votre branche
+les commiter. Ensuite, envoyez cette branche à *votre* dépôt et
+initiez une requête (pull request). Celle-ci devra être entre votre branche
 ``improving_foo_and_bar`` et la branche symfony-docs ``master``.
 
 .. image:: /images/docs-pull-request.png
    :align: center
 
-Si vous avez basé vos changement sur la branche 2.0 vous devez suivre le lien
- de commit et changer la branche de base vers @2.0 :
+Si vous avez basé vos changement sur la branche 2.0 vous devez changer la branche
+de base pour qu'elle soit 2.0 sur la page de prévisualisation :
 
 .. image:: /images/docs-pull-request-change-base.png
    :align: center
 
-GitHub traite en détail les requêtes de mise à jour ou `pull requests`_ .
+.. note::
+  
+  Tout les changements faits sur la branche 2.0 seront mergés chaque semaine dans la
+  branche 2.1 qui sera ensuite mergée sur la branche master pour la prochaine version.
+
+GitHub explique en détail les requêtes de mise à jour ou `pull requests`_ .
 
 .. note::
 
@@ -62,12 +72,12 @@ GitHub traite en détail les requêtes de mise à jour ou `pull requests`_ .
     Attribution-Share Alike 3.0 Unported :doc:`Licence <license>`.
 
 .. tip::
-		
-		Vos changements apparaissent sur le site symfony.com moins de 15 minutes
-		après que l'équipe de documentation a mergé votre pull request. Vous pouvez
-		vérifier si vos changements ont introduit des erreurs de syntaxe en allant
-		sur la page `Erreurs de génération de la documentation`_ (elle est mise à
-		jour chaque nuit à 3h du matin quand le serveur génère la documentation).
+
+    Soyez patient, vos changement peuvent mettre de 15 minutes à plusieurs jours
+    après que l'équipe de documentation a mergé votre pull request avant d'être visibles
+    sur le site symfony.com. Vous pouvez vérifier si vos changements ont introduit des
+    erreurs de syntaxe en allant sur la page `Erreurs de génération de la documentation`_
+    (elle est mise à jour chaque nuit à 3h du matin quand le serveur génère la documentation).
 
 Standards
 ---------
@@ -89,7 +99,7 @@ de code qui semblent familiers, vous devriez suivre ces règles :
   Si on cache plusieurs lignes : la description peut être placée après les ``...``
   Si on ne cache qu'une partie de la ligne : la description peut être placée avant la ligne;
 * Si c'est utile, un ``bloc de code`` devrait commencer par un commentaire indiquant le nom du
-  fichier qui contient le code. Ne mettez pas ligne vite après ce commentaire, à moins que
+  fichier qui contient le code. Ne mettez pas de ligne vide après ce commentaire, à moins que
   la prochaine ligne ne soit également un commentaire;
 * Vous devriez mettre un ``$`` devant chaque ligne de commande;
 * Nous préférerons le raccourci ``::`` à ``.. code-block:: php`` pour commencer un block de PHP.
@@ -131,21 +141,21 @@ Signaler une erreur
 -------------------
 
 La contribution la plus facile que vous pouvez effectuer est de signaler une 
-erreur: une typo, une grammaire imparfaite, un example de code erroné, une 
-explication manquante...
+erreur : une faute de frappe, une grammaire imparfaite, un exemple de code erroné, une 
+explication manquante ...
 
 Étapes:
 
 * Soumettez un bogue dans le gestionnaire de bogues;
 
-* *(optionnel)* Proposer un correctif.
+* *(optionnel)* Proposez un correctif.
 
 Traductions
 -----------
 
 Lisez la documentation dédiée :doc:`traductions <translations>`.
 
-.. _`forker`: https://help.github.com/articles/fork-a-repo
+.. _`forkez`: https://help.github.com/articles/fork-a-repo
 .. _`pull requests`: https://help.github.com/articles/using-pull-requests
 .. _`Erreurs de génération de la documentation`: http://symfony.com/doc/build_errors
 .. _`Standards de code Twig`: http://twig.sensiolabs.org/doc/coding_standards.html
