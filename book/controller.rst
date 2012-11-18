@@ -550,6 +550,12 @@ Le moteur de rendu (« templating engine ») de Symfony est expliqué plus en d�
 le chapitre :doc:`Templating </book/templating>`
 
 .. tip::
+   
+    Vous pouvez même éviter d'appeler la méthode ``render`` en utilisant l'annotation
+    ``@Template``. Lisez la documentation du :doc:`FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/view>`
+    pour plus de détails.
+
+.. tip::
 
     La méthode ``renderView`` est un raccourci de l'utilisation directe du
     service ``templating``. Ce dernier peut aussi être utilisé directement :
