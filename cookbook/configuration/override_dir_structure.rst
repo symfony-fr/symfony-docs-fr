@@ -44,7 +44,7 @@ Vous pouvez surcharger le répertoire de cache en surchargeant la méthode
 
 ``$this->rootDir`` est le chemin absolu vers le répertoire ``app`` et
 ``$this->environment`` est l'environnement actuel (c-a-d ``dev``). Dans
-notre cas, nous avons changé l'emplacement du répertoire cache pour qu'il
+ce cas, vous avez changé l'emplacement du répertoire cache pour qu'il
 devienne ``app/{environment}/cache``.
 
 .. caution::
@@ -74,7 +74,7 @@ méthode ``getLogDir``::
         }
     }
 
-Ici, nous avons changé l'emplacement du répertoire pour ``app/{environment}/logs``.
+Ici, vous avez changé l'emplacement du répertoire pour ``app/{environment}/logs``.
 
 Surcharger le répertoire ``web``
 --------------------------------

@@ -396,6 +396,39 @@ de :class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`.
         }
 
 
+Poser des questions et valider la réponse
+-----------------------------------------
+
+Vous pouvez facilement poser une question et valider une réponse grâce
+aux méthodes préconstruites::
+
+    $dialog = $this->getHelperSet()->get('dialog');
+
+    $validator = function ($value) {
+        if ('' === trim($value)) {
+            throw new \Exception('The value can not be empty');
+        }
+
+        return $value;
+    }
+
+    $password = $dialog->askAndValidate(
+        $output,
+        'Veuillez entrer le nom du widget',
+        $validator,
+        20,
+        'foo'
+    );
+
+Le callback de validation peut être n'importe quelle fonction PHP appelable. Le
+quatrième argument de la méthode :method:`Symfony\\Component\\Console\\Helper::askAndValidate`
+est le nombre maximum d'essais, définissez le à ``false`` pour
+un nombre illimité d'essais. Le cinquième argument est la valeur par défaut.
+
+Le callback doit lancer une exception si la valeur n'est pas acceptable. Veuillez
+noter que le callback **doit** retourner une valeur. La valeur peut être modifiée
+par le callback (elle sera retournée modifiée par le helper).
+
 Tester les commandes
 --------------------
 

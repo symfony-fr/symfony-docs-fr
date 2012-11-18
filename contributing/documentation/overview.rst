@@ -72,12 +72,12 @@ GitHub explique en détail les requêtes de mise à jour ou `pull requests`_ .
     Attribution-Share Alike 3.0 Unported :doc:`Licence <license>`.
 
 .. tip::
-		
-		Vos changements apparaissent sur le site symfony.com moins de 15 minutes
-		après que l'équipe de documentation a mergé votre pull request. Vous pouvez
-		vérifier si vos changements ont introduit des erreurs de syntaxe en allant
-		sur la page `Erreurs de génération de la documentation`_ (elle est mise à
-		jour chaque nuit à 3h du matin quand le serveur génère la documentation).
+
+    Soyez patient, vos changement peuvent mettre de 15 minutes à plusieurs jours
+    après que l'équipe de documentation a mergé votre pull request avant d'être visibles
+    sur le site symfony.com. Vous pouvez vérifier si vos changements ont introduit des
+    erreurs de syntaxe en allant sur la page `Erreurs de génération de la documentation`_
+    (elle est mise à jour chaque nuit à 3h du matin quand le serveur génère la documentation).
 
 Standards
 ---------

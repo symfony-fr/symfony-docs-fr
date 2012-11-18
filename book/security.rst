@@ -1843,7 +1843,7 @@ Apprenez plus grâce au Cookbook
 * :doc:`/cookbook/security/remember_me`
 
 .. _`composant de sécurité`: https://github.com/symfony/Security
-.. _`JMSSecurityExtraBundle`: https://github.com/schmittjoh/JMSSecurityExtraBundle
+.. _`JMSSecurityExtraBundle`: http://jmsyst.com/bundles/JMSSecurityExtraBundle/1.2
 .. _`FOSUserBundle`: https://github.com/FriendsOfSymfony/FOSUserBundle
 .. _`implémenter l'interface \Serializable`: http://php.net/manual/en/class.serializable.php
 .. _`functions-online.com`: http://www.functions-online.com/sha1.html

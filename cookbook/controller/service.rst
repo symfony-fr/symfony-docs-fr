@@ -11,8 +11,8 @@ ceci fonctionne très bien, les contrôleurs peuvent aussi être définis
 en tant que services.
 
 Pour faire référence à un contrôleur qui est défini en tant que service, utilisez
-la notation avec deux-points (:). Par exemple, supposons que nous ayons
-défini un service nommé ``my_controller`` et que nous voulions transmettre
+la notation avec deux-points (:). Par exemple, supposons que vous ayez
+défini un service nommé ``my_controller`` et que vous voulez le transmettre
 à une méthode appelée ``indexAction()`` à l'intérieur du service::
 
     $this->forward('my_controller:indexAction', array('foo' => $bar));
