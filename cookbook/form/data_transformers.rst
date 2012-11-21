@@ -187,7 +187,7 @@ vous traitez avec la donnée « modèle ».
 
 2) **Données normalisée** - C'est la version normalisée de votre donnée, et c'est
 bien souvent la même que votre donnée « modèle » (mais pas dans notre exemple).
-Elle n'est en général par utilisée directement.
+Elle n'est en général pas utilisée directement.
 
 3) **Donnée vue** - C'est le format qui est utilisé pour remplir les champs eux-mêmes.
 C'est aussi le format dans lequel l'utilisateur soumettra ses données. Quand vous appelez
