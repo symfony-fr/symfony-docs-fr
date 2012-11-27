@@ -127,7 +127,7 @@ login/mot de passe) :
     La distribution Symfony Standard place la configuration de la sécurité dans un fichier 
     séparé (``app/config/security.yml``). Si vous ne voulez pas utiliser un fichier séparé,
     vous pouvez mettre la configuration directement dans le fichier principal de configuration
-    (``app/config/security.yml``).
+    (``app/config/config.yml``).
 
 Le résultat final de cette configuration est un système de sécurité entièrement fonctionnel, 
 que l'on peut décrire de la manière suivante :
@@ -214,7 +214,7 @@ que l'accès lui est refusé.
     Quand Symfony refuse à l'utilisateur l'accès, l'utilisateur voit une page d'erreur
     et recevra un code d'erreur HTTP 403 (``Forbidden``). Vous pouvez personnaliser 
     la page d'erreur pour refus d'accès en suivant les instructions se trouvant dans la page 
-    du cookbook `Pages d'erreurs<cookbook-error-pages-by-status-code>` pour personnaliser
+    du cookbook `Pages d'erreurs</cookbook/controller/error_pages>` pour personnaliser
     la page d'erreur 403.
 
 Enfin, si l'utilisateur ``admin`` demande ``/admin/foo``, un processus similaire se déroule,
@@ -349,7 +349,7 @@ D'abord, activez le formulaire de connexion (« form login ») de votre pare-feu
             'form_login' => array(),
 
 Maintenant, quand le système de sécurité initie le processus d'authentification,
-il va rediriger l'utilisateur au formulaire de connexion (``/login`` by default).
+il va rediriger l'utilisateur au formulaire de connexion (``/login`` par défaut).
 L'implémentation de ce formulaire de connexion est de toute évidence votre responsabilité.
 Tout d'abord, créez 2 routes : une qui affiche le formulaire de connexion (ici, ``/login``) 
 et une qui va prendre en charge la soumission du formulaire (ici, ``/login_check``) :
