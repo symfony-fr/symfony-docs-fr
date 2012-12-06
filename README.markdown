@@ -15,3 +15,9 @@ Contribuer
 Nous adorons les contributeurs ! Pour plus d'informations sur la manière
 dont vous pouvez contribuer à la documentation de Symfony, veuillez lire
 [Contribuer à la Documentation](http://symfony.com/fr/doc/current/contributing/documentation/overview.html)
+
+Contribuer à la traduction française
+------------------------------------
+Ce qui précède concerne le dépôt de la documentation anglaise, et non pas ce
+dépôt. Si vous trouvez une erreur de traduction, vous êtes priés de faire une
+pull request basée sur la branche 2.1
