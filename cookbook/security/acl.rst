@@ -18,7 +18,7 @@ auquel vous souhaitez restreindre l'accès. Vous pouvez envisager plusieurs
 approches pour accomplir cela en utilisant Symfony2 ; les deux approches basiques
 sont (liste non-exhaustive) :
 
-- *Forcer la sécurité dans vos méthodes business* : cela signifie garder une
+- *Forcer la sécurité dans vos méthodes métier* : cela signifie garder une
   référence dans chaque ``Comment`` de tous les utilisateurs qui ont accès, et
   alors de comparer ces utilisateurs avec le ``Token`` fourni.
 - *Forcer la sécurité avec des rôles* : avec cette approche, vous ajouteriez
@@ -26,7 +26,7 @@ sont (liste non-exhaustive) :
   ``ROLE_COMMENT_2``, etc.
 
 Les deux approches sont parfaitement valides. Cependant, elles associent votre
-logique d'autorisation à votre code business, ce qui rend le tout moins
+logique d'autorisation à votre code métier, ce qui rend le tout moins
 réutilisable ailleurs, et qui augmente aussi la difficulté d'effectuer des tests
 unitaires. En outre, vous pourriez rencontrer des problèmes de performance
 si beaucoup d'utilisateurs accédaient à un même et unique objet domaine.
@@ -70,12 +70,12 @@ configurer la connexion que le système d'ACL est supposé utiliser :
     Le système ACL requiert qu'une connexion DBAL Doctrine (utilisable par défaut)
     ou qu'une connexion ODM Doctrine (utilisable avec `MongoDBAclBundle`_) soit
     configurée. Cependant, cela ne veut pas dire que vous devez utiliser
-    l'ORM ou l'ODM Doctrine pour faire correspondre vos objets domaine. Vous
-    pouvez utiliser n'importe quel outil de correspondance de votre choix pour
+    l'ORM ou l'ODM Doctrine pour faire correspondre vos objets. Vous
+    pouvez utiliser l'outil de correspondance de votre choix pour
     vos objets, que ce soit l'ORM Doctrine, l'ODM Mongo, Propel, ou du SQL brut,
     le choix reste le vôtre.
 
-Après que la connexion est configurée, nous devons importer la structure de
+Une fois la connexion configurée, nous devons importer la structure de
 la base de données. Heureusement, nous avons une tâche pour cela. Exécutez
 simplement la commande suivante :
 
