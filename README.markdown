@@ -19,5 +19,5 @@ dont vous pouvez contribuer à la documentation de Symfony, veuillez lire
 Contribuer à la traduction française
 ------------------------------------
 Ce qui précède concerne le dépôt de la documentation anglaise, et non pas ce
-dépôt. Si vous trouvez une erreur de traduction, vous êtes priés de faire une
-pull request basée sur la branche 2.1
+dépôt. Si vous trouvez une erreur de traduction, vous êtes prié de faire une
+Pull Request sur la branche 2.1 et non pas sur la master.
