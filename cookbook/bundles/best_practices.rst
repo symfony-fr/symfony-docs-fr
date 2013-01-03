@@ -110,10 +110,10 @@ classes et fichiers les plus utilisés (2 niveaux au maximum). Plus de niveaux
 peuvent être définis pour les fichiers non-stratégiques et moins utilisés.
 
 Le répertoire du bundle est en lecture seule. Si vous avez besoin d'écrire des
-fichiers temporaires, stockez-les dans le dossier ``cache/` ou ``log/`` de
+fichiers temporaires, stockez-les dans le dossier ``cache/`` ou ``log/`` de
 l'application hébergeant votre bundle. Des outils peuvent générer des fichiers
 dans la structure du répertoire du bundle, mais uniquement si les fichiers
-générés vont faire partie du répertoire.
+générés vont faire partie du dépôt.
 
 Les classes et fichiers suivants ont des emplacements spécifiques :
 
