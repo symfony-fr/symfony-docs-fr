@@ -29,7 +29,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Locale) ;
-* Installez le via Composer (``symfony/locale`` dans `Packagist`_).
+* Installez le via Composer (``symfony/locale`` sur `Packagist`_).
 
 Utilisation
 -----------
