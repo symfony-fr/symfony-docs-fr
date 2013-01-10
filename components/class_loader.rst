@@ -29,7 +29,7 @@ Installation
 Vous pouvez installer le composant de plusieurs manières :
 
 * Utilisez le dépôt officiel Git (https://github.com/symfony/ClassLoader) ;
-* Installez le via Composer (``symfony/class-loader`` dans `Packagist`_).
+* Installez le via Composer (``symfony/class-loader`` sur `Packagist`_).
 
 Utilisation
 -----------

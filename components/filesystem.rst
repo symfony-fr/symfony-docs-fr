@@ -17,7 +17,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt officiel Git (https://github.com/symfony/Filesystem) ;
-* Installez le via Composer (`symfony/filesystem` dans Packagist).
+* Installez le via Composer (`symfony/filesystem` sur Packagist).
 
 Utilisation
 -----------

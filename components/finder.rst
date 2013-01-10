@@ -14,7 +14,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Finder) ;
-* Installez le via Composer (``symfony/finder`` dans `Packagist`_).
+* Installez le via Composer (``symfony/finder`` sur `Packagist`_).
 
 Utilisation
 -----------
