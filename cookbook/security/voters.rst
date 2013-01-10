@@ -49,17 +49,17 @@ doit retourner l'une des valeurs suivantes :
 * ``VoterInterface::ACCESS_DENIED``: L'utilisateur n'est pas autorisé à accéder à
   l'application
 
-Dans cet exemple, nous allons vérifier si l'adresse IP de l'utilisateur correspond
-à l'une des adresses de la liste noire. Si c'est le cas, nous retournerons
-``VoterInterface::ACCESS_DENIED``, sinon nous retournerons
+Dans cet exemple, vous allez vérifier si l'adresse IP de l'utilisateur correspond
+à l'une des adresses de la liste noire. Si c'est le cas, vous retournerez
+``VoterInterface::ACCESS_DENIED``, sinon vous retournerez
 ``VoterInterface::ACCESS_ABSTAIN`` comme le but de ce voteur est uniquement de
 refuser l'accès, et non pas de l'autoriser.
 
 Créer un Voteur personnalisé
 ----------------------------
 
-Pour ajouter un utilisateur sur la liste noire en se basant sur son IP, nous
-pouvons utiliser le service ``request`` et comparer l'adresse IP avec un
+Pour ajouter un utilisateur sur la liste noire en se basant sur son IP, vous
+pouvez utiliser le service ``request`` et comparer l'adresse IP avec un
 ensemble d'adresses IP de la liste noire :
 
 .. code-block:: php
@@ -81,13 +81,13 @@ ensemble d'adresses IP de la liste noire :
 
         public function supportsAttribute($attribute)
         {
-            // nous n'allons pas vérifier l'attribut de l'utilisateur, alors nous retournons true
+            // vous n'allez pas vérifier l'attribut de l'utilisateur, alors vous retournez true
             return true;
         }
 
         public function supportsClass($class)
         {
-            // notre voteur supporte tous les types de classes de token, donc nous retournons true
+            // votre voteur supporte tous les types de classes de token, donc vous retournez true
             return true;
         }
 
@@ -109,7 +109,7 @@ le voteur dans la couche de sécurité. Cela peut être effectué facilement
 Déclarer le Voteur comme service
 --------------------------------
 
-Pour injecter le voteur dans la couche de sécurité, nous devons le déclarer
+Pour injecter le voteur dans la couche de sécurité, vous devez le déclarer
 en tant que service, et le tagger comme un « security.voter » :
 
 .. configuration-block::
@@ -167,11 +167,11 @@ en tant que service, et le tagger comme un « security.voter » :
 Changer la stratégie de décision d'accès
 ----------------------------------------
 
-Afin que votre nouveau voteur soit utilisé, nous devons changer la stratégie de
+Afin que votre nouveau voteur soit utilisé, vous devez changer la stratégie de
 décision d'accès par défaut, qui d'habitude autorise l'accès si *n'importe quel*
 voteur autorise l'accès.
 
-Dans notre cas, nous allons choisir la stratégie ``unanimous``. Contrairement
+Dans ce cas, vous allez choisir la stratégie ``unanimous``. Contrairement
 à la stratégie par défaut ``affirmative``, avec la stratégie ``unanimous``, si
 seulement un voteur refuse l'accès (par exemple : le ``ClientIpVoter``), alors
 l'accès n'est pas autorisé pour l'utilisateur final.

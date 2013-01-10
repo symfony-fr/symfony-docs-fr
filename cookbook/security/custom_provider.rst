@@ -12,7 +12,7 @@ pour un nom d'utilisateur donné. Symfony vérifie alors si le mot de passe
 de cet utilisateur est correct ou non et génère un token de sécurité afin
 que l'utilisateur reste authentifié pendant la session courante. Symfony
 possède par défaut un fournisseur d'utilisateur « in_memory » et « entity ».
-Dans cet article, nous allons vous montrer comment vous pouvez créer votre
+Dans cet article, vous verrez comment vous pouvez créer votre
 propre fournisseur d'utilisateur, ce qui pourrait être utile si vous accédez à
 vos utilisateurs via une base de données personnalisée, un fichier, ou - comme
 nous le montrons dans cet exemple - à travers un service web.
@@ -107,7 +107,7 @@ Pour plus de détails sur chacune de ces méthodes, voir l'interface
 Créer un Fournisseur d'Utilisateur
 ----------------------------------
 
-Maintenant que vous avez une classe ``User``, nous allons créer un fournisseur
+Maintenant que vous avez une classe ``User``, vous allez créer un fournisseur
 d'utilisateur qui va récupérer les informations utilisateur depuis un service
 web, et nous allons aussi créer un objet ``WebserviceUser`` et le remplir avec
 des données.
@@ -167,7 +167,7 @@ Voici un exemple de ce à quoi cela pourrait ressembler::
 Créer un Service pour le Fournisseur d'Utilisateur
 --------------------------------------------------
 
-Maintenant, nous allons rendre le fournisseur d'utilisateur disponible en tant que
+Maintenant, vous allez rendre le fournisseur d'utilisateur disponible en tant que
 service.
 
 .. configuration-block::

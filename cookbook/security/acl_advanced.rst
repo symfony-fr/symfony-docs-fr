@@ -27,9 +27,8 @@ Comme spécifié dans le premier point, l'une des principales facultés du syst�
 ACL de Symfony2 est de fournir une manière très performante de récupérer des
 ACLs/ACEs. Ceci est extrêmement important sachant que chaque ACL pourrait avoir
 plusieurs ACEs, et hériter d'une autre ACL à la manière d'une structure en arbre.
-Donc, nous ne nous servons pas d'un ORM spécifique, mais
-l'implémentation par défaut intéragit avec votre connexion en utilisant directement
-le DBAL de Doctrine.
+Donc, nous ne nous servons pas d'un ORM spécifique, mais l'implémentation par
+défaut intéragit avec votre connexion en utilisant directement le DBAL de Doctrine.
 
 Identités d'Objet
 ~~~~~~~~~~~~~~~~~
@@ -75,19 +74,19 @@ Portée des « Access Control Entries »
 -------------------------------------
 
 Les entrées de contrôle d'accès peuvent avoir différentes portées dans lesquelles
-elles s'appliquent. Dans Symfony2, nous avons principalement deux portées
+elles s'appliquent. Dans Symfony2, il existe principalement deux portées
 différentes :
 
 - Portée de la Classe : Ces entrées s'appliquent à tous les objets ayant la
   même classe.
-- Portée de l'Objet : Ceci est la portée que nous avons utilisé dans le chapitre
+- Portée de l'Objet : Ceci est la portée utilisée dans le chapitre
   précédent, et elle s'applique uniquement à un objet spécifique.
 
 Parfois, vous aurez besoin d'appliquer une ACE uniquement sur le champ
 spécifique d'un objet. Supposons que vous voulez que l'ID soit uniquement
 visible par un administrateur mais pas par votre service client. Pour
-solutionner ce problème commun, nous avons ajouté deux sous-portées
-supplémentaires :
+solutionner ce problème commun, deux sous-portées supplémentaires ont
+été ajoutées :
 
 - Portée d'un Champ de Classe : Ces entrées s'appliquent à tous les objets
   ayant la même classe, mais uniquement à un champ spécifique de ces objets.
@@ -166,8 +165,8 @@ Extensibilité
 La table de permissions ci-dessus n'est en rien statique, et pourrait
 théoriquement être complètement remplacée. Cependant, elle devrait couvrir
 la plupart des problèmes que vous pourriez rencontrer, et pour des raisons
-d'intéropérabilité avec d'autres bundles, nous vous encourageons à garder
-la signification que nous avons envisagé pour ces permissions.
+d'intéropérabilité avec d'autres bundles, vous êtes encouragé à conserver
+les significations initialement prévues pour ces permissions.
 
 Décisions de post-autorisation
 ------------------------------
