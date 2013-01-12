@@ -13,7 +13,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Process) ;
-* Installez le via Composer (``symfony/process`` dans `Packagist`_).
+* Installez le via Composer (``symfony/process`` sur `Packagist`_).
 
 Utilisation
 -----------

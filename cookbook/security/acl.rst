@@ -13,7 +13,7 @@ Imaginez que vous êtes en train de créer un système de blog dans lequel vos
 utilisateurs peuvent commenter vos posts. Maintenant, vous voulez qu'un
 utilisateur puisse éditer ses propres commentaires, mais pas ceux d'autres
 utilisateurs ; en outre, vous voulez vous-même être capable d'éditer tous
-les commentaires. Dans ce scénario, ``Comment`` (commentaire) serait notre objet domaine
+les commentaires. Dans ce scénario, ``Comment`` (commentaire) serait l'objet
 auquel vous souhaitez restreindre l'accès. Vous pouvez envisager plusieurs
 approches pour accomplir cela en utilisant Symfony2 ; les deux approches basiques
 sont (liste non-exhaustive) :
@@ -31,14 +31,14 @@ réutilisable ailleurs, et qui augmente aussi la difficulté d'effectuer des tes
 unitaires. En outre, vous pourriez rencontrer des problèmes de performance
 si beaucoup d'utilisateurs accédaient à un même et unique objet domaine.
 
-Heureusement, il y a une meilleure façon de faire, dont nous allons parler
+Heureusement, il y a une meilleure façon de faire, que vous allez découvrir
 maintenant.
 
 Initialisation (« Bootstrapping » en anglais)
 ---------------------------------------------
 
-Maintenant, avant que nous puissions finalement passer à l'action, nous avons
-besoin d'effectuer certaines initialisations. Premièrement, nous devons
+Maintenant, avant que vous puissiez finalement passer à l'action, vous avez
+besoin d'effectuer certaines initialisations. Premièrement, vous devez
 configurer la connexion que le système d'ACL est supposé utiliser :
 
 .. configuration-block::
@@ -75,8 +75,8 @@ configurer la connexion que le système d'ACL est supposé utiliser :
     vos objets, que ce soit l'ORM Doctrine, l'ODM Mongo, Propel, ou du SQL brut,
     le choix reste le vôtre.
 
-Une fois la connexion configurée, nous devons importer la structure de
-la base de données. Heureusement, nous avons une tâche pour cela. Exécutez
+Une fois la connexion configurée, vous devez importer la structure de
+la base de données. Heureusement, il existe une tâche pour cela. Exécutez
 simplement la commande suivante :
 
 .. code-block:: bash
@@ -86,7 +86,7 @@ simplement la commande suivante :
 Démarrage
 ---------
 
-Revenons à notre petit exemple depuis le début et implémentons ses ACLs.
+Revenez à notre petit exemple du début et implémentez ses ACLs.
 
 Créer un ACL, et ajouter un ACE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -144,13 +144,13 @@ permet de travailler avec les ACLs même si vous n'avez pas d'instance d'objet
 domaine sous la main. Cela va être extrêmement utile si vous voulez vérifier
 les permissions pour un grand nombre d'objets sans avoir à les désérialiser.
 
-L'autre partie intéressante est l'appel à ``->insertObjectAce()``. Dans notre
-exemple, nous accordons à l'utilisateur qui est connecté un accès propriétaire
+L'autre partie intéressante est l'appel à ``->insertObjectAce()``. Dans
+l'exemple, vous accordez à l'utilisateur connecté un accès propriétaire
 au Comment. Le ``MaskBuilder::MASK_OWNER`` est un masque binaire prédéfini ;
 ne vous inquiétez pas, le constructeur de masque va abstraire la plupart des
-détails techniques, mais en utilisant cette technique nous pouvons stocker
-beaucoup de différentes permissions dans une même ligne de base de données ;
-ce qui nous offre un boost considérable au niveau performance.
+détails techniques, mais en utilisant cette technique vous pouvez stocker
+plein de  permissions différentesdans une même ligne de base de données ;
+ce qui vous offre un avanatage considérable au niveau performance.
 
 .. tip::
 
@@ -184,7 +184,7 @@ Vérification des Accès
         }
     }
 
-Dans cet exemple, nous vérifions que l'utilisateur possède la permission
+Dans cet exemple, vous vérifiez que l'utilisateur possède la permission
 ``EDIT``. En interne, Symfony2 fait correspondre la permission avec
 plusieurs masques binaires, et vérifie si l'utilisateur possède l'un
 d'entre eux.
@@ -198,10 +198,10 @@ d'entre eux.
 Permissions Cumulées
 --------------------
 
-Dans notre premier exemple ci-dessus, nous avons accordé uniquement la
+Dans le premier exemple ci-dessus, vous avez accordé uniquement la
 permission basique ``OWNER`` à l'utilisateur. Bien que cela permette aussi
 à l'utilisateur d'effectuer n'importe quelle opération telle que la lecture,
-l'édition, etc. sur l'objet domaine, il y a des cas où nous voulons accorder
+l'édition, etc. sur l'objet domaine, il y a des cas où vous voudrez accorder
 ces permissions explicitement.
 
 Le ``MaskBuilder`` peut être utilisé pour créer des masques binaires facilement

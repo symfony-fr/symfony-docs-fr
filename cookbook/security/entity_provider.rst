@@ -254,7 +254,7 @@ la validité du mot de passe.
 
 Ce code et cette configuration fonctionnent mais ce n'est pas suffisant pour
 sécuriser l'application pour des utilisateurs **activés**. En effet, maintenant,
-nous pouvons toujours nous authentifier avec ``maxime``. La section suivante
+vous pouvez toujours vous authentifier avec ``maxime``. La section suivante
 explique comment interdire l'accès aux utilisateurs non-activés.
 
 Interdire les Utilisateurs non-activés
@@ -317,8 +317,8 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
         }
     }
 
-Si nous essayons de nous authentifier avec ``maxime``, l'accès est maintenant
-interdit comme cet utilisateur n'a pas un compte activé. La prochaine section
+Si vous essayez de vous authentifier avec ``maxime``, l'accès est maintenant
+interdit puisque cet utilisateur n'a pas un compte activé. La prochaine section
 va se concentrer sur l'implémentation d'un fournisseur d'entité personnalisé
 pour authentifier un utilisateur avec son nom d'utilisateur ou avec son adresse
 email.
@@ -398,7 +398,7 @@ la classe ``UserRepository``::
 Pour finir l'implémentation, la configuration de la couche de sécurité doit
 être modifiée pour dire à Symfony d'utiliser le nouveau fournisseur d'entité
 personnalisé à la place du fournisseur d'entité Doctrine générique. Ceci est
-trivial à réaliser en supprimant le champ ``property`` dans la section
+facile à réaliser en supprimant le champ ``property`` dans la section
 ``security.providers.administrators.entity`` du fichier ``security.yml``.
 
 .. configuration-block::
@@ -427,7 +427,7 @@ utilisateur est « chargé », sa méthode ``getRoles()`` retourne le tableau co
 ses rôles de sécurité qui doivent lui être assignés. Vous pouvez charger ces
 données depuis n'importe où - une liste codée en dur et utilisée pour tous les
 utilisateurs (par exemple : ``array('ROLE_USER')``), un tableau Doctrine en tant
-que propriété nommée ``roles``, ou via une relation Doctrine, comme nous allons
+que propriété nommée ``roles``, ou via une relation Doctrine, comme vous allez
 le voir dans cette section.
 
 .. caution::

@@ -18,7 +18,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Console) ;
-* Installez le via Composer (``symfony/console`` dans `Packagist`_).
+* Installez le via Composer (``symfony/console`` sur `Packagist`_).
 
 Créer une Commande basique
 --------------------------
