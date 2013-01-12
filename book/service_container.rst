@@ -12,7 +12,7 @@ votre inventaire de produits, ou tout autre objet qui traite des données via un
 tierce. Le fait est qu'une application moderne fait beaucoup de choses et est organisée
 entre de nombreux objets qui gèrent chaque tâche.
 
-Ce chapitre parle d'un objet spécial PHP dans Symfony2 qui vous aide
+Ce chapitre traite d'un objet spécial PHP dans Symfony2 qui vous aide
 à instancier, organiser et récupérer les nombreux objets de votre application.
 Cet objet, appelé un conteneur de services, vous permettra de standardiser et
 centraliser la façon dont les objets sont construits dans votre application. Le conteneur
@@ -329,10 +329,9 @@ Le conteneur de services est construit en utilisant une ressource de configurati
 flexibilité absolue sur les services dans votre application.
 
 La configuration des services externes peut être importée de deux manières différentes.
-Tout d'abord, la méthode que vous utiliserez le plus souvent dans votre application :
-la directive ``imports``. Dans la section suivante, nous allons introduire la
-deuxième méthode, qui est la méthode flexible et préférée pour l'importation de 
-configuration de services des bundles tiers.
+La première, et la plus commune, consiste à utiliser la directive ``imports``. Plus tard,
+vous apprendrez la seconde méthode qui est la méthode flexible et préférée pour
+l'importation de configuration de services des bundles tiers.
 
 
 .. index::

@@ -17,8 +17,7 @@ manière légèrement différente. Vous apprécierez ces différences mineures c
 elles permettent des comportements stables, sans surprises, testables et une
 séparation claire des logiques utilisées au sein de vos applications Symfony2.
 
-Ainsi, asseyez vous et relaxez vous afin que nous puissions vous transporter du « passé »
-au « présent ».
+Ainsi, asseyez vous et relaxez vous pendant votre voyage du « passé » au « présent ».
 
 Arborescence des répertoires
 ----------------------------
