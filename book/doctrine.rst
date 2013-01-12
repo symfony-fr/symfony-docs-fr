@@ -494,6 +494,12 @@ en se basant sur la valeur de son ``id`` :
         // faire quelque chose comme envoyer l'objet $product à un template
     }
 
+.. tip::
+  
+    Vous pouvez réaliser la même chose depuis une action de contrôleur sans écrire
+    de code en utilisant ``@ParamConverter``. Pour plus de détails, lisez la
+    :doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/converters>`.
+
 Lorsque vous requêtez pour un type particulier d'objet, vous utiliserez toujours
 ce qui est connu sous le nom de « dépôt » (ou « repository »). Dites vous qu'un
 dépôt est une classe PHP dont le seul travail est de vous aider à récupérer 
