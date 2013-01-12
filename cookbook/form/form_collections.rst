@@ -114,12 +114,12 @@ qu'un objet ``Tag`` puisse être modifié par l'utilisateur::
         }
     }
 
-Avec cela, nous avons tout ce qu'il faut pour afficher un formulaire pour le
+Avec cela, vous avez tout ce qu'il faut pour afficher un formulaire pour le
 tag lui-même. Mais comme le but final est de permettre la modification des
 tags d'une ``Task`` directement depuis le formulaire de la « task » lui-même,
 créez un formulaire pour la classe ``Task``.
 
-Notez que nous imbriquons une collection de formulaires ``TagType``
+Notez que vous imbriquez une collection de formulaires ``TagType``
 en utilisant le type de champ
 :doc:`collection</reference/forms/types/collection>`::
 
@@ -261,7 +261,7 @@ ne pourra pour le moment pas en ajouter de nouveaux.
 
 .. caution::
 
-    Dans cet exemple, nous n'imbriquons qu'une seule collection, mais vous n'êtes
+    Dans cet exemple, vous n'imbriquez qu'une seule collection, mais vous n'êtes
     pas limité à cela. Vous pouvez aussi intégrer des collections  imbriquées
     avec autant de sous-niveaux que vous souhaitez. Mais si vous utilisez Xdebug
     dans votre environnement de développement, vous pourriez recevoir une erreur
@@ -282,18 +282,18 @@ ne pourra pour le moment pas en ajouter de nouveaux.
 Autoriser de « nouveaux » tags avec le « prototypage »
 ------------------------------------------------------
 
-Autoriser l'utilisateur à ajouter de nouveaux tags signifie que nous allons
-avoir besoin d'utiliser un peu de Javascript. Plus tôt, nous avons ajouté deux
-tags à notre formulaire dans le contrôleur. Maintenant, nous devons permettre à
+Autoriser l'utilisateur à ajouter de nouveaux tags signifie que vous allez
+avoir besoin d'utiliser un peu de Javascript. Plus tôt, vous avez ajouté deux
+tags à votre formulaire dans le contrôleur. Maintenant, vous devez permettre à
 l'utilisateur d'ajouter autant de tags qu'il souhaite directement depuis le navigateur.
 Quelques lignes de Javascript sont nécessaires pour effectuer cela.
 
-La première chose que nous devons faire est de spécifier à la collection
-du formulaire qu'elle va recevoir un nombre inconnu de tags. Jusqu'ici, nous
-avons ajouté deux tags et le formulaire s'attend à en recevoir exactement deux,
+La première chose que vous devez faire est de spécifier à la collection
+du formulaire qu'elle va recevoir un nombre inconnu de tags. Jusqu'ici, vous
+avez ajouté deux tags et le formulaire s'attend à en recevoir exactement deux,
 sinon une erreur sera levée : ``This form should not contain extra fields`` ce qui
 signifie que le formulaire ne peut contenir de champs supplémentaires.
-Pour rendre cela flexible, nous ajoutons l'option ``allow_add`` à notre champ
+Pour rendre cela flexible, vous ajoutez l'option ``allow_add`` à votre champ
 collection::
 
     // src/Acme/TaskBundle/Form/Type/TaskType.php
@@ -313,7 +313,7 @@ collection::
         ));
     }
 
-Notez que nous avons aussi ajouté ``'by_reference' => false``. Normalement, le
+Notez que ``'by_reference' => false`` a également été ajouté. Normalement, le
 framework de formulaire modifierait les tags d'un objet `Task` *sans* jamais
 appeler `setTags`. En définissant :ref:`by_reference<reference-form-types-by-reference>`
 à `false`, `setTags` sera appelée. Vous comprendrez plus tard pourquoi cela est important.
@@ -348,7 +348,7 @@ dans votre formulaire :
 .. tip::
 
     ``form.tags.vars.prototype`` est un élément de formulaire qui ressemble à
-    l'élément individuel ``form_widget(tag)`` à l'intérieur de notre boucle ``for``.
+    l'élément individuel ``form_widget(tag)`` à l'intérieur de votre boucle ``for``.
     Cela signifie que vous pouvez appeler ``form_widget``, ``form_row``, ou
     ``form_label`` sur ce prototype. Vous pourriez même choisir de n'afficher qu'un
     seul de ses champs (par exemple : le champ ``name``) :
@@ -365,14 +365,14 @@ Sur la page affichée, le résultat ressemblera à quelque chose comme ceci :
 
 Le but de cette section sera d'utiliser Javascript pour lire cet attribut et
 ajouter dynamiquement un nouveau tag lorsque l'utilisateur clique sur un
-lien « Ajouter un tag ». Pour garder les choses simples, nous allons utiliser
-jQuery et supposer que vous l'avez déjà inclus quelque part dans votre page.
+lien « Ajouter un tag ». Pour garder les choses simples, cet exemple utilise
+jQuery et suppose que vous l'avez déjà inclus quelque part dans votre page.
 
-Ajoutez une balise ``script`` quelque part dans votre page afin que nous puissions
+Ajoutez une balise ``script`` quelque part dans votre page afin que vous puissiez
 commencer à écrire un peu de Javascript.
 
 Tout d'abord, ajoutez un lien en bas de votre liste de « tags » via Javascript.
-Ensuite, liez l'évènement « click » de ce lien afin que nous puissions ajouter
+Ensuite, liez l'évènement « click » de ce lien afin que vous puissiez ajouter
 un formulaire tag (``addTagForm`` sera expliqué plus tard) :
 
 .. code-block:: javascript
@@ -402,7 +402,7 @@ pour ajouter dynamiquement un nouveau formulaire lorsqu'on clique sur ce lien. L
 HTML de ``data-prototype`` contient la balise ``texte`` avec un nom du genre
 ``task[tags][__name__][name]`` et un id du genre ``task_tags___name___name``. La chaîne de
 caractères ``__name__`` est une variable de substitution (« placeholder » en anglais) que
-nous remplacerons avec un nombre unique et incrémental (par exemple : ``task[tags][3][name]``).
+vous remplacerez avec un nombre unique et incrémental (par exemple : ``task[tags][3][name]``).
 
 .. versionadded:: 2.1
     La variable de substitution a été changée dans Symfony 2.1. Au lieu de ``$$name$$``,
@@ -430,7 +430,7 @@ exemple :
 
     Il est préférable de séparer votre javascript dans des vrais fichiers Javascript
     plutôt que de l'écrire directement en plein milieu de votre code HTML
-    comme nous le faisons ici.
+    comme c'est fait ici.
 
 Maintenant, chaque fois qu'un utilisateur cliquera sur le lien ``Ajouter un tag``, un
 nouveau sous-formulaire apparaîtra sur la page. Lors de la soumission, tout nouveau

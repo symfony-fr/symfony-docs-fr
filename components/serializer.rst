@@ -28,7 +28,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Serializer);
-* Installez le via Composer (``symfony/serializer`` on `Packagist`_).
+* Installez le via Composer (``symfony/serializer`` sur `Packagist`_).
 
 Utilisation
 -----------

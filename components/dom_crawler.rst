@@ -14,7 +14,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/DomCrawler) ;
-* Installez le via Composer (``symfony/dom-crawler`` dans `Packagist`_).
+* Installez le via Composer (``symfony/dom-crawler`` sur `Packagist`_).
 
 Utilisation
 -----------

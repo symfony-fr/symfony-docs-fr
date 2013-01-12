@@ -48,9 +48,9 @@ Le rôle du token dans le contexte de sécurité de Symfony2 est important.
 Un token représente les données d'authentification de l'utilisateur
 présentes dans la requête. Une fois qu'une requête est authentifiée, le
 token conserve les données de l'utilisateur, et délivre ces données au
-travers du contexte de sécurité. Premièrement, nous allons créer notre
-classe token. Cela va permettre de passer toutes les informations
-pertinentes à notre fournisseur d'authentification.
+travers du contexte de sécurité. Premièrement, vous allez créer votre
+classe token. Cela permettra de passer toutes les informations
+pertinentes à votre fournisseur d'authentification.
 
 .. code-block:: php
 
@@ -345,9 +345,9 @@ utilisée comme un pare-feu dans votre configuration de sécurité.
 
 .. note::
 
-    Vous vous demandez peut-être « pourquoi avons-nous besoin d'une classe
+    Vous vous demandez peut-être « pourquoi ai-je besoin d'une classe
     factory spéciale pour ajouter des listeners et fournisseurs à un
-    conteneur d'injection de dépendances ? ». Ceci est une très bonne
+    conteneur d'injection de dépendances ? ». C'est une très bonne
     question. La raison est que vous pouvez utiliser votre pare-feu
     plusieurs fois afin de sécuriser plusieurs parties de votre application.
     Grâce à cela, chaque fois que votre pare-feu sera utilisé, un nouveau
