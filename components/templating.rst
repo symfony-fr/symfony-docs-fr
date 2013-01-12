@@ -19,7 +19,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Templating) ;
-* Installez le via Composer (``symfony/templating`` dans `Packagist`_).
+* Installez le via Composer (``symfony/templating`` sur `Packagist`_).
 
 Utilisation
 -----------

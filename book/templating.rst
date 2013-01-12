@@ -16,6 +16,10 @@ remplir le corps d'emails et bien d'autres. Vous apprendrez des
 raccourcis, des méthodes ingénieuses pour étendre les templates et
 surtout comment les réutiliser.
 
+.. note::
+    L'affichage des templates est abordé dans la page
+    :ref:`contrôleir <controller-rendering-templates>` du Book.
+
 .. index::
    single: Templating; What is a template?
 

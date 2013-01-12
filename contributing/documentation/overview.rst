@@ -25,7 +25,7 @@ clonez votre dépot :
 
     $ git clone git://github.com/YOURUSERNAME/symfony-docs.git
 
-Selon les sources du framework, le dépôt de la documentation est séparé en trois
+Conformément au code source de Symfony, le dépôt de la documentation est séparé en trois
 branches : ``2.0`` pour la dernière version de Symfony 2.0.x, ``2.1`` pour la
 dernière version de SYmfony 2.1.x et ``master`` qui est la branche de développement
 des versions à venir.
@@ -73,7 +73,7 @@ GitHub explique en détail les requêtes de mise à jour ou `pull requests`_ .
 
 .. tip::
 
-    Soyez patient, vos changement peuvent mettre de 15 minutes à plusieurs jours
+    Soyez patient, vos changements peuvent mettre de 15 minutes à plusieurs jours
     après que l'équipe de documentation a mergé votre pull request avant d'être visibles
     sur le site symfony.com. Vous pouvez vérifier si vos changements ont introduit des
     erreurs de syntaxe en allant sur la page `Erreurs de génération de la documentation`_

@@ -17,7 +17,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/DependencyInjection) ;
-* Installez le via Composer (``symfony/dependency-injection`` dans `Packagist`_).
+* Installez le via Composer (``symfony/dependency-injection`` sur `Packagist`_).
 
 Utilisation Basique
 -------------------

@@ -5,19 +5,19 @@ Comment Créer un Type de Champ de Formulaire Personnalisé
 =========================================================
 
 Symfony est livré avec un ensemble de types de champ essentiels disponible
-pour construire des formulaires. Cependant, il y a des situations où nous
-voulons créer un type de champ de formulaire personnalisé pour un besoin
-spécifique. Cet article assume que nous avons besoin d'une définition de
-champ qui s'occupe du sexe/genre d'une personne, basé sur le champ existant
-« choice ». Cette section explique comment le champ est défini, comment nous
-pouvons personnaliser son affichage et, finalement, comment nous pouvons le
-déclarer afin de pouvoir l'utiliser dans notre application.
+pour construire des formulaires. Cependant, il y a des situations où vous
+voudrez créer un type de champ de formulaire personnalisé pour un besoin
+spécifique. Cet article part du principe que vous avez besoin d'une définition de
+champ qui s'occupe du sexe/genre d'une personne, basée sur le champ existant
+« choice ». Cette section explique comment le champ est défini, comment vous
+pouvez personnaliser son affichage et, finalement, comment vous pouvez le
+déclarer afin de pouvoir l'utiliser dans votre application.
 
 Définir le Type de Champ
 ------------------------
 
-Afin de créer le type de champ personnalisé, nous devons créer tout d'abord la
-classe représentant le champ. Dans notre situation, la classe s'occupant du
+Afin de créer le type de champ personnalisé, vous devez créer tout d'abord la
+classe représentant le champ. Dans cette situation, la classe s'occupant du
 type de champ sera nommée `GenderType` et le fichier sera stocké dans le répertoire
 par défaut pour les champs de formulaire, c'est-à-dire ``<BundleName>\Form\Type``.
 Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`::
@@ -56,9 +56,9 @@ Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`
     L'endroit où est stocké ce fichier n'est pas important - le répertoire
     ``Form\Type`` est seulement une convention.
 
-Ici, la valeur retournée par la fonction ``getParent`` indique que nous
-étendons le type de champ ``choice``. Cela signifie que, par défaut, nous
-héritons de toute la logique et du rendu de l'affichage de ce type de champ.
+Ici, la valeur retournée par la fonction ``getParent`` indique que vous
+étendez le type de champ ``choice``. Cela signifie que, par défaut, vous
+héritez de toute la logique et du rendu de l'affichage de ce type de champ.
 Pour avoir un aperçu de cette logique, jetez un oeil à la classe `ChoiceType`_.
 Il y a trois méthodes qui sont particulièrement importantes :
 
@@ -94,7 +94,7 @@ dans votre application. Ce dernier est utilisé dans différents endroits,
 comme par exemple lorsque vous personnalisez la manière dont votre formulaire
 sera rendu.
 
-Le but de votre champ était d'étendre le type « choice » afin d'activer
+Le but de ce champ était d'étendre le type « choice » afin d'activer
 la sélection du sexe/genre. Cela est accompli en définissant ``choices``
 par une liste de genres possibles.
 
@@ -105,14 +105,14 @@ Chaque type de champ est rendu par un fragment de template, qui est déterminé
 en partie par la valeur retournée par votre méthode ``getName()``. Pour plus
 d'informations, voir :ref:`cookbook-form-customization-form-themes`.
 
-Dans ce cas, comme notre champ parent est ``choice``, nous n'avons pas
-*besoin* de faire quoi que ce soit car notre type de champ personnalisé
-sera automatiquement rendu comme un type ``choice``. Mais pour le bien
-fondé de cet exemple, supposons que quand notre champ est « étendu » (i.e.
-boutons radio ou checkbox, à la place d'un champ « select »), nous souhaitons
+Dans ce cas, comme le champ parent est ``choice``, vous n'avez pas
+*besoin* de faire quoi que ce soit car le type de champ personnalisé
+sera automatiquement affiché comme un type ``choice``. Mais pour le bien
+fondé de cet exemple, supposons que quand votre champ est « étendu » (i.e.
+boutons radio ou checkbox, à la place d'un champ « select »), vous souhaitez
 toujours l'afficher dans un élément ``ul``. Dans le template de votre thème de
 formulaire (voir le lien ci-dessus pour plus de détails), créez un bloc
-``gender_widget`` pour gérer ceci :
+``gender_widget`` pour le gérer :
 
 .. code-block:: html+jinja
 
@@ -182,11 +182,11 @@ comment des types de champ plus complexes peuvent résoudre ce problème.
 Créer votre Type de Champ en tant que Service
 ---------------------------------------------
 
-Jusqu'ici, cet article a assumé que vous aviez un type de champ personnalisé
+Jusqu'ici, cet article a supposé que vous aviez un type de champ personnalisé
 très simple. Mais si vous avez besoin d'accéder à la configuration, à une
-connexion à la base de données, ou quelconque autre service, alors vous
+connexion à la base de données, ou n'importe quel autre service, alors vous
 allez vouloir déclarer votre type personnalisé en tant que service. Par
-exemple, supposons que nous stockions les paramètres du sexe/genre dans une
+exemple, supposons que vous stockiez les paramètres du sexe/genre dans une
 configuration :
 
 .. configuration-block::
@@ -209,9 +209,9 @@ configuration :
             </parameter>
         </parameters>
 
-Pour utiliser ce paramètre, nous allons définir notre type de champ personnalisé
+Pour utiliser ce paramètre, définissez votre type de champ personnalisé
 en tant que service, en injectant la valeur du paramètre ``genders`` en tant que
-premier argument de la fonction ``__construct`` (devant être créée) :
+premier argument de la fonction ``__construct`` (qui doit être créée) :
 
 .. configuration-block::
 
@@ -239,9 +239,9 @@ premier argument de la fonction ``__construct`` (devant être créée) :
     Assurez-vous que le fichier des services est importé. Voir
     :ref:`service-container-imports-directive` pour plus de détails.
 
-Soyez sûr que l'attribut ``alias`` du tag corresponde à la valeur retournée
-par la méthode ``getName`` définie plus tôt. Nous allons voir l'importance de
-cela dans un moment quand nous utiliserons le type de champ personnalisé.
+Assurez vous que l'attribut ``alias`` du tag corresponde à la valeur retournée
+par la méthode ``getName`` définie plus tôt. Vous allez voir l'importance de
+cela dans un moment quand vous utiliserez le type de champ personnalisé.
 Mais tout d'abord, ajoutez une méthode ``__construct`` à ``GenderType``,
 qui reçoit la configuration du sexe/genre::
 
@@ -272,7 +272,7 @@ qui reçoit la configuration du sexe/genre::
     }
 
 Super ! Le ``GenderType`` est maintenant « rempli » par les paramètres de
-la configuration et déclaré en tant que service. Et parce que nous avons
+la configuration et déclaré en tant que service. De plus, parce que vous avez
 utilisé l'alias ``form.type`` dans sa configuration, utiliser le champ est
 maintenant beaucoup plus facile::
 
@@ -293,8 +293,9 @@ maintenant beaucoup plus facile::
         }
     }
 
-Notez qu'à la place d'instancier une nouvelle instance, nous pouvons simplement
-y référer grâce à l'alias utilisé dans la configuration de notre service, ``gender``.
+Notez qu'à la place d'instancier une nouvelle instance, vous pouvez simplement
+y faire référence grâce à l'alias utilisé dans la configuration de votre
+service, ``gender``.
 Amusez-vous !
 
 .. _`ChoiceType`: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Extension/Core/Type/ChoiceType.php

@@ -87,8 +87,8 @@ utiliser une passe de compilation::
         }
     }
 
-Dans cet exemple, vous retrouvez la définition du service original, et nous changeons
-son nom de classe en notre propre nom de classe.
+Dans cet exemple, vous retrouvez la définition du service original, et vous changez
+son nom de classe en votre propre nom de classe.
 
 Lisez :doc:`/cookbook/service_container/compiler_passes` pour savoir comment utiliser
 les passes de compilation. Si vous voulez faire plus que simplement surcharger la classe,

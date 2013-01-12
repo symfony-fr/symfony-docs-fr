@@ -80,7 +80,7 @@ Commencez par créer un ``CompanyType`` et un ``CustomerType``::
         }
     }
 
-Maintenant, nous devons gérer les quatre champs dupliqués. Vous pouvez
+Maintenant, les quatre champs dupliqués doivent être gérés. Vous pouvez
 voir ci-dessous un (simple) type de formulaire « location » (« lieu » en
 français)::
 
@@ -114,14 +114,14 @@ français)::
         }
     }
 
-Nous n'avons *en fait* pas de champ « location » dans nos entités, donc nous
-ne pouvons pas lier directement notre ``LocationType`` à notre ``CompanyType`` ou à notre
-``CustomerType``. Mais nous voulons absolument avoir un type de formulaire dédié pour
+Vous n'avez *en fait* pas de champ « location » dans vos entités, donc vous
+ne pouvez pas lier directement votre ``LocationType`` à votre ``CompanyType`` ou à votre
+``CustomerType``. Mais vous voulez absolument avoir un type de formulaire dédié pour
 gérer le lieu (rappelez-vous, DRY - Don't Repeat Yourself!).
 
 L'option de champ de formulaire ``virtual`` est la solution.
 
-Nous pouvons définir l'option ``'virtual' => true`` dans la méthode
+Vous pouvez définir l'option ``'virtual' => true`` dans la méthode
 ``setDefaultOptions()`` de ``LocationType`` et commencer à l'utiliser directement 
 dans les deux types de formulaires initiaux.
 
@@ -148,8 +148,8 @@ Voyez le résultat::
 Avec l'option « virtual » définie à « false » (comportement par défaut),
 le composant Form s'attend à ce que chaque objet sous-jacent ait une propriété
 ``foo`` (ou ``bar``) qui soit un objet ou un tableau contenant les quatre
-champs du lieu. Bien sûr, nous n'avons pas cet objet/tableau dans nos
-entités et nous ne le voulons pas.
+champs du lieu. Bien sûr, vous n'avez pas cet objet/tableau dans vos
+entités et vous ne le voulez pas.
 
 Avec l'option « virtual » définie à « true », le composant Form ne s'occupe pas
 de la propriété ``foo`` (ou ``bar``), et à la place « récupère » et « définit » (« gets »
