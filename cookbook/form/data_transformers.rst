@@ -126,7 +126,7 @@ l'ajouter à votre champ Issue dans un formulaire.
                 $entityManager = $options['em'];
                 $transformer = new IssueToNumberTransformer($entityManager);
 
-                // ajoute un champ texte normal, mais y ajoute aussi notre convertisseur
+                // ajoute un champ texte normal, mais y ajoute aussi votre convertisseur
                 $builder->add(
                     $builder->create('issue', 'text')
                         ->addModelTransformer($transformer)
@@ -186,7 +186,7 @@ Dans tout formulaire, les trois types de données sont :
 vous traitez avec la donnée « modèle ».
 
 2) **Données normalisée** - C'est la version normalisée de votre donnée, et c'est
-bien souvent la même que votre donnée « modèle » (mais pas dans notre exemple).
+bien souvent la même que votre donnée « modèle » (mais pas dans cet exemple).
 Elle n'est en général pas utilisée directement.
 
 3) **Donnée vue** - C'est le format qui est utilisé pour remplir les champs eux-mêmes.
@@ -209,11 +209,11 @@ Le convertisseur que vous utiliserez dépendra de votre situation.
 
 Pour utiliser le convertisseur vue, appelez ``addViewTransformer``.
 
-Alors pourquoi avons nous utilisé le convertisseur modèle ?
------------------------------------------------------------
+Alors pourquoi utiliser le convertisseur modèle ?
+-------------------------------------------------
 
-Dans notre exemple, le champ est un champ ``texte``, et nous voulons
-toujours qu'un champ texte soit un format simple, scalaire dans l'un des
+Dans cet exemple, le champ est un champ ``texte``, et un champ texte
+devrait toujours être dans un format simple, scalaire dans l'un des
 formats « normalisé » ou « vue ». Pour cette raison, le convertisseur le plus
 approprié était le convertisseur « modèle » (qui convertit un format *normalisé*,
 le numéro du problème, en un format *modèle*, l'objet Issue, et inversement).

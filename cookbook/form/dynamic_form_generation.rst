@@ -34,7 +34,7 @@ basique::
     probablement besoin de lire d'abord :doc:`le chapitre sur les
     Formulaires </book/forms>` avant d'aller plus loin.
 
-Assumons un instant que ce formulaire utilise une classe imaginaire
+Supposons un instant que ce formulaire utilise une classe imaginaire
 « Product » qui possède uniquement deux propriétés (« name » et « price »).
 Le formulaire généré à partir de cette classe sera identique que ce soit
 pour la création d'un Produit ou pour l'édition d'un Produit existant (par
@@ -53,7 +53,7 @@ allez apprendre comment ajouter ce niveau de flexibilité à vos formulaires.
 Ajouter Un Souscripteur d'Évènement à une Classe Formulaire
 -----------------------------------------------------------
 
-Donc, au lieu d'ajouter directement ce widget « name » via notre classe
+Donc, au lieu d'ajouter directement ce widget « name » via votre classe
 formulaire ProductType, déléguons la responsabilité de créer ce champ
 particulier à un Souscripteur d'Évènement::
 
@@ -80,7 +80,7 @@ particulier à un Souscripteur d'Évènement::
     }
 
 Le souscripteur d'évènement obtient l'objet FormFactory via son constructeur
-afin que notre nouveau souscripteur soit capable de créer le widget du
+afin que votre nouveau souscripteur soit capable de créer le widget du
 formulaire une fois qu'il est notifié de l'évènement durant la création du
 formulaire.
 
@@ -113,18 +113,18 @@ cela, le souscripteur pourrait ressembler à quelque chose comme ça::
         public static function getSubscribedEvents()
         {
 
-            // Informe le répartiteur que nous voulons écouter l'évènement
+            // Informe le répartiteur que vous voulez écouter l'évènement
             // form.pre_set_data et que la méthode preSetData devrait être appelée
             return array(FormEvents::PRE_SET_DATA => 'preSetData');
         }
 
-        public function preSetData(DataEvent $event)
+        public function preSetData(FormEvent $event)
         {
             $data = $event->getData();
             $form = $event->getForm();
 
             // Durant la création du formulaire, setData() est appelée avec null
-            // en argument par le constructeur de FormBuilder. Nous sommes concerné
+            // en argument par le constructeur de FormBuilder. Vous êtes concerné
             // uniquement lorsque setData est appelée et contient un objet Entity
             // (soit nouveau, soit récupéré avec Doctrine). Ce « if » nous permet
             // de passer outre ce cas là (i.e. condition null).
@@ -152,8 +152,8 @@ La ligne ``FormEvents::PRE_SET_DATA`` est convertie en la chaîne de caractères
 centralisé où vous trouverez la liste des différents évènements de formulaire disponibles.
 
 Bien que cet exemple aurait pu utiliser de manière tout aussi efficace les évènements ``form.set_data``
-ou ``form.post_set_data``, en utilisant ``form.pre_set_data``, nous
-garantissons que les données allant être récupérées depuis l'objet ``Event`` n'auront pas été
+ou ``form.post_set_data``, en utilisant ``form.pre_set_data``, vous
+garantissez que les données allant être récupérées depuis l'objet ``Event`` n'auront pas été
 modifiées par quelconques souscripteurs ou listeners (« écouteurs » en français). Cela parce
 que ``form.pre_set_data`` passe un objet `DataEvent`_ au lieu de l'objet `FilterDataEvent`_
 passé par l'évènement ``form.set_data``. `DataEvent`_, contrairement à son enfant
