@@ -323,6 +323,7 @@ faire la chose suivante::
         'foo'  
     );
 
+
 Afficher une barre de progression
 ---------------------------------
 
