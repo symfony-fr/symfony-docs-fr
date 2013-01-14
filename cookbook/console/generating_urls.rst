@@ -30,9 +30,12 @@ Configurer le contexte de manière globale
 
 Pour configurer le contexte de la requête, qui utilisé par le générateur d'URL, vous
 devrez définir les paramètres qu'il utilise comme valeurs par défaut pour changer
-l'hôte par défaut (localhost) et le schéma (http). Notez que cela n'impacte pas les
-URLs générées via les requêtes web normales, puisqu'elles surchargeront les valeurs
-par défaut.
+l'hôte par défaut (localhost) et le schéma (http).A partir de symfony 2.2, vous pouvez 
+également configurer le chemin de base si Symfony n'est pas en cours d'exécution
+dans le répertoire racine.
+
+Notez que cela n'impacte pas les URLs générées via les requêtes web normales, 
+puisqu'elles surchargeront les valeurs par défaut.
 
 .. configuration-block::
 
@@ -42,6 +45,7 @@ par défaut.
         parameters:
             router.request_context.host: example.org
             router.request_context.scheme: https
+            router.request_context.base_url: my/path
 
     .. code-block:: xml
 
@@ -54,6 +58,7 @@ par défaut.
             <parameters>
                 <parameter key="router.request_context.host">example.org</parameter>
                 <parameter key="router.request_context.scheme">https</parameter>
+                <parameter key="router.request_context.base_url">my/path</parameter>
             </parameters>
         </container>
 
@@ -62,6 +67,7 @@ par défaut.
         // app/config/config_test.php
         $container->setParameter('router.request_context.host', 'example.org');
         $container->setParameter('router.request_context.scheme', 'https');
+        $container->setParameter('router.request_context.base_url', 'my/path');
 
 Configurer le contexte dans la commande
 ---------------------------------------
@@ -79,6 +85,7 @@ récupérer le service Contexte de la requête et surcharger sa configuration::
             $context = $this->getContainer()->get('router')->getContext();
             $context->setHost('example.com');
             $context->setScheme('https');
+            $context->setBaseUrl('my/path');
 
             // ... votre code ici
         }
