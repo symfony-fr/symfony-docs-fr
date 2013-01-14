@@ -20,6 +20,14 @@ de l'application, ou dans la commande
 Configurer le contexte de manière globale
 -----------------------------------------
 
+.. versionadded: 2.1
+
+    Les paramètres host et scheme sont disponibles depuis Symfony 2.1
+
+.. versionadded: 2.2
+
+    Le paramètre base_url est disponible depuis Symfony 2.2
+
 Pour configurer le contexte de la requête, qui utilisé par le générateur d'URL, vous
 devrez définir les paramètres qu'il utilise comme valeurs par défaut pour changer
 l'hôte par défaut (localhost) et le schéma (http). Notez que cela n'impacte pas les

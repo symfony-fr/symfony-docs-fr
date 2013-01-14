@@ -75,7 +75,7 @@ qui contient le nom de la route correspondante est ajoutée
 Définition des routes
 ~~~~~~~~~~~~~~~~~~~~~
 
-Une définition du routage complète peut contenir jusqu'à quatre parties :
+Une définition du routage complète peut contenir jusqu'à cinq parties :
 
 1. Le pattern de l'URL de la route. Une correspondance tente d'être effectuée entre la
 route et l'URL passée au `RequestContext`, et peut contenir des valeurs de substitution
@@ -92,13 +92,23 @@ le contenu des valeurs de substitution sous forme d'expressions régulières.
 4. Un tableau d'options. Ce dernier contient des paramètres internes pour la
 route et sont généralement ceux qui sont le moins souvent nécessaires.
 
+5. Un pattern de nom d'hôte. La correspondance est faite avec le nom d'hôte
+passé au `RequestContext`, et peut contenir des valeurs de substitution jokers
+nommées (par exemple : ``{placeholders}``) pour effectuer une correspondance
+dynamique dans le nom d'hôte.
+
+.. versionadded:: 2.2
+
+    Le support de la correspondance avec le « Hostname » a été ajouté dans Symfony 2.2
+
 Prenez la route suivante, qui combine plusieurs de ces idées::
 
    $route = new Route(
        '/archive/{month}', // chemin
        array('controller' => 'showArchive'), // valeurs par défaut
-       array('month' => '[0-9]{4}-[0-9]{2}'), // conditions requises
-       array() // options
+       array('month' => '[0-9]{4}-[0-9]{2}', 'subdomain' => 'www|m'), // conditions requises
+       array(), // options
+       '{subdomain}.example.com' // nom d'hôte
    );
 
    // ...
@@ -107,6 +117,7 @@ Prenez la route suivante, qui combine plusieurs de ces idées::
    // array( 
    //     'controller' => 'showArchive',
    //     'month' => '2012-01',
+   //     'subdomain' => 'www',
    //     '_route' => ...
    //  )
 
@@ -150,8 +161,8 @@ Utiliser des préfixes
 Vous pouvez ajouter des routes ou d'autres instances de
 :class:`Symfony\\Component\\Routing\\RouteCollection` à une *autre* collection.
 De cette façon, vous pouvez construire un arbre de routes. De plus, vous pouvez
-définir un préfixe, des conditions requises par défaut ainsi que des options par
-défaut pour toutes les routes d'un sous-arbre::
+définir un préfixe, des conditions requises par défaut, des options par
+défaut et un pattern de nom d'hôte pour toutes les routes d'un sous-arbre::
 
     $rootCollection = new RouteCollection();
 
@@ -161,8 +172,11 @@ défaut pour toutes les routes d'un sous-arbre::
 
     $rootCollection->addCollection( 
         $subCollection,
-        '/prefix',
-        array('_scheme' => 'https')
+        '/prefix', // prefix
+        array('_scheme' => 'https'), // valeur par défaut
+        array(), // conditions requises
+        array(), // options
+        'admin.example.com', // nom d'hôte
     );
 
 Définir les paramètres de requête
