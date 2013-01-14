@@ -108,6 +108,8 @@ Cela affiche::
 
     HELLO FABIEN
 
+.. _components-console-coloring:
+
 Ajouter de la couleur à l'affichage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
