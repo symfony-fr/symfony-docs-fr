@@ -722,6 +722,127 @@ Comme les autres, la condition requise ``_method`` est analysée en tant
 qu'expression régulière. Pour faire correspondre les requêtes à la méthode
 ``GET`` *ou* à ``POST``, vous pouvez utiliser ``GET|POST``.
 
+Ajouter un Pattern « Hostname » (« nom d'hôte » en français)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.2
+
+    Le support de la correspondance avec le « Hostname » a été ajouté dans Symfony 2.2
+
+Vous pouvez aussi faire la correspondance avec le *hostname* (« nom d'hôte » en français) HTTP de la requête entrante :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        mobile_homepage:
+            pattern:  /
+            hostname_pattern: m.example.com
+            defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
+
+        homepage:
+            pattern:  /
+            defaults: { _controller: AcmeDemoBundle:Main:homepage }
+
+    .. code-block:: xml
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <route id="mobile_homepage" pattern="/" hostname-pattern="m.example.com">
+                <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
+            </route>
+
+            <route id="homepage" pattern="/">
+                <default key="_controller">AcmeDemoBundle:Main:homepage</default>
+            </route>
+        </routes>
+
+    .. code-block:: php
+
+        use Symfony\Component\Routing\RouteCollection;
+        use Symfony\Component\Routing\Route;
+
+        $collection = new RouteCollection();
+        $collection->add('mobile_homepage', new Route('/', array(
+            '_controller' => 'AcmeDemoBundle:Main:mobileHomepage',
+        ), array(), array(), 'm.example.com'));
+
+        $collection->add('homepage', new Route('/', array(
+            '_controller' => 'AcmeDemoBundle:Main:homepage',
+        )));
+
+        return $collection;
+
+Les deux routes correspondent au même pattern ``/``, cependant la première
+va correspondre uniquement si le nom d'hôte est ``m.example.com``.
+
+Valeurs de substitution et Conditions Requises pour les Patterns Hostname (« nom d'hôte » en français)
+------------------------------------------------------------------------------------------------------
+
+Des valeurs de substitution peuvent être utilisées dans les patterns de noms d'hôte
+ainsi que dans les patterns, et les conditions requises s'appliquent aussi à
+elles.
+
+Dans l'exemple suivant, nous évitons de coder en dur (« hardcoding » en anglais)
+le nom de domaine en utilisant une valeur de substitution et une condition requise.
+``%domain%`` dans les conditions requises est remplacé par la valeur du paramètre
+``domain`` venant du conteneur d'injection de dépendances.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        mobile_homepage:
+            pattern:  /
+            hostname_pattern: m.{domain}
+            defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
+            requirements:
+                domain: %domain%
+
+        homepage:
+            pattern:  /
+            defaults: { _controller: AcmeDemoBundle:Main:homepage }
+
+    .. code-block:: xml
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <route id="mobile_homepage" pattern="/" hostname-pattern="m.example.com">
+                <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
+                <requirement key="domain">%domain%</requirement>
+            </route>
+
+            <route id="homepage" pattern="/">
+                <default key="_controller">AcmeDemoBundle:Main:homepage</default>
+            </route>
+        </routes>
+
+    .. code-block:: php
+
+        use Symfony\Component\Routing\RouteCollection;
+        use Symfony\Component\Routing\Route;
+
+        $collection = new RouteCollection();
+        $collection->add('mobile_homepage', new Route('/', array(
+            '_controller' => 'AcmeDemoBundle:Main:mobileHomepage',
+        ), array(
+            'domain' => '%domain%',
+        ), array(), 'm.{domain}'));
+
+        $collection->add('homepage', new Route('/', array(
+            '_controller' => 'AcmeDemoBundle:Main:homepage',
+        )));
+
+        return $collection;
+
 .. index::
    single: Routing; Advanced example
    single: Routing; _format parameter
@@ -1050,6 +1171,49 @@ final ``/admin/hello/{name}`` à la place de simplement ``/hello/{name}`` :
 
 La chaîne de caractères ``/admin`` sera maintenant ajoutée devant le pattern
 de chaque route chargée depuis la nouvelle ressource de routage.
+
+Ajouter un Pattern Hostname (« nom d'hôte » en français) aux Routes Importées
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.2
+
+    Le support de la correspondance avec le « Hostname » a été ajouté dans Symfony 2.2
+
+Vous pouvez définir un pattern de nom d'hôte pour les routes importées :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/routing.yml
+        acme_hello:
+            resource: "@AcmeHelloBundle/Resources/config/routing.yml"
+            hostname_pattern: "hello.example.com"
+
+    .. code-block:: xml
+
+        <!-- app/config/routing.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <import resource="@AcmeHelloBundle/Resources/config/routing.xml" hostname-pattern="hello.example.com" />
+        </routes>
+
+    .. code-block:: php
+
+        // app/config/routing.php
+        use Symfony\Component\Routing\RouteCollection;
+
+        $collection = new RouteCollection();
+        $collection->addCollection($loader->import("@AcmeHelloBundle/Resources/config/routing.php"), '', array(), array(), array(), 'hello.example.com');
+
+        return $collection;
+
+Le pattern de nom d'hôte ``hello.example.com`` sera défini pour chaque route
+chargée depuis la nouvelle ressource de routage.
 
 .. tip::
 
