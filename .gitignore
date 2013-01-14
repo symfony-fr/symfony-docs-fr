@@ -4,3 +4,6 @@ conf.py
 sphinx-php/
 _build/*
 _exts/*
+/nbproject/private/
+/nbproject/
+/.gitignore
