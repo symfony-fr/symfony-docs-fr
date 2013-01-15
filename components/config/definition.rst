@@ -1,4 +1,4 @@
-.. index::
+﻿.. index::
    single: Config; Define and process configuration values
 
 Définir et traiter les valeurs de configuration
@@ -108,10 +108,40 @@ définition de noeud appropriée. Les types de noeud disponibles sont :
 * boolean
 * array
 * enum (new in 2.1)
+* integer (new in 2.2)
+* float (new in 2.2)
 * variable (pas de validation)
   
 et sont créés avec ``node($name, $type)`` ou leurs méthodes raccourcies associées
 ``xxxxNode($name)``.
+
+Contraintes de noeud numérique
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   
+.. versionadded:: 2.2
+  
+    Les noeuds numériques (float et integer) ont été ajoutés dans la version 2.2
+
+Les noeuds numériques (float et integer) fournissent deux contraintes supplémentaires
+:method:`Symfony\\Component\\Config\\Definition\\Builder::min` et
+:method:`Symfony\\Component\\Config\\Definition\\Builder::max` qui vous permettent de
+valider leur valeur :
+ 
+.. code-block:: php
+
+    $rootNode 
+        ->children()
+            ->integerNode('positive_value')
+                ->min(0) 
+            ->end()
+            ->floatNode('big_value')
+                ->max(5E45) 
+            ->end()
+            ->integerNode('value_inside_a_range')
+                ->min(-50)->max(50)
+            ->end()
+        ->end()
+    ;
 
 Noeuds tableau
 ~~~~~~~~~~~~~~
@@ -225,6 +255,35 @@ certaine valeur :
         ->end()
     ;
 
+Sections facultatives
+---------------------
+
+.. versionadded:: 2.1
+    Les méthodes ``canBeEnabled`` et ``canBeDisabled`` sont une nouveauté de Symfony 2.2
+
+Si vous avez des sections entières qui sont facultatives et qui peuvent être activées ou
+désactivées, vous pouvez profiter des avantages des méthodes raccourci
+:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeEnabled` et
+:method:`Symfony\\Component\\Config\\Definition\\Builder\\ArrayNodeDefinition::canBeDisabled`::
+
+    $arrayNode
+        ->canBeEnabled()
+    ;
+
+    // est équivalent à
+
+    $arrayNode
+        ->treatFalseLike(array('enabled' => false))
+        ->treatTrueLike(array('enabled' => true))
+        ->treatNullLike(array('enabled' => true))
+        ->children()
+            ->booleanNode('enabled')
+                ->defaultFalse()
+    ;
+
+La méthode ``canBeDisabled`` est quasiment identique à ceci près que la section sera
+activée par défaut.
+
 Options de fusion
 -----------------
 
@@ -235,7 +294,7 @@ fournies. Pour les tableaux :
     Lorsque la valeur est aussi définie dans un second tableau de configuration,
     n'essaye pas de fusionner un tableau, mais le surcharge entièrement
 
-Pour tous les noeuds :
+Pour tout les noeuds :
 
 ``cannotBeOverwritten()``
     Ne laisse pas les autres tableaux de configuration surcharger une
@@ -392,14 +451,13 @@ vous pouvez agalement autoriser ce qui suit :
 
 en changeant la valeur d'une chaine de caractère en tableau associatif avec
 ``name`` comme clé::
-
     $rootNode
         ->arrayNode('connection')
            ->beforeNormalization()
                ->ifString()
                ->then(function($v) { return array('name'=> $v); })
            ->end()
-           ->scalarValue('name')->isRequired()
+           ->scalarNode('name')->isRequired()
            // ...
         ->end()
     ;    
