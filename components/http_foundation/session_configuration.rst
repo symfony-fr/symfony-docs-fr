@@ -218,7 +218,7 @@ Ces métadonnées peuvent être utilisées pour rendre explicitement une session
 expirée lors d'un accès au site, par exemple::
 
     $session->start();
-    if (time() - $session->getMetadataBag()->getLastUpdate() > $maxIdleTime) {
+    if (time() - $session->getMetadataBag()->getLastUsed() > $maxIdleTime) {
         $session->invalidate();
         throw new SessionExpired(); // rediriger vers la page d'expiration de session
     }

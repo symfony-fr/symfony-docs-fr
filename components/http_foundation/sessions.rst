@@ -139,7 +139,7 @@ gérer ce « Bag » :
 Métadonnées de session
 
 * :method:`Symfony\\Component\\HttpFoundation\\Session\\Session::getMetadataBag`:
-  Récupère le :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\MetadataBag`
+  Récupère le :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\MetadataBag`
   qui contient des informations à propos de la session.
 
 Gestion de données de session
