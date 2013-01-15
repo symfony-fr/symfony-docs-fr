@@ -1,4 +1,4 @@
-.. index::
+﻿.. index::
    single: Config; Define and process configuration values
 
 Définir et traiter les valeurs de configuration
@@ -457,7 +457,7 @@ en changeant la valeur d'une chaine de caractère en tableau associatif avec
                ->ifString()
                ->then(function($v) { return array('name'=> $v); })
            ->end()
-           ->scalarValue('name')->isRequired()
+           ->scalarNode('name')->isRequired()
            // ...
         ->end()
     ;    
