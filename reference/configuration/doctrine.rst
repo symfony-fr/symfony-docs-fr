@@ -1,4 +1,4 @@
-.. index::
+﻿.. index::
    single: Doctrine; Configuration de référence de l'ORM
    single: Configuration de référence; ORM Doctrine
 
@@ -322,16 +322,12 @@ suivantes existent pour les correspondances d'entités :
 Configuration du DBAL Doctrine
 ------------------------------
 
-.. note::
+Le DoctrineBundle supporte tous les paramètres que les drivers Doctrine
+acceptent par défaut, convertis en XML ou YML selon les standards de
+nommage que Symfony force à utiliser. Voir la `Documentation DBAL`_ de
+Doctrine pour plus d'informations.
 
-    Le DoctrineBundle supporte tous les paramètres que les drivers Doctrine
-    acceptent par défaut, convertis en XML ou YML selon les standards de
-    nommage que Symfony force à utiliser. Voir la `Documentation DBAL`_ de
-    Doctrine pour plus d'informations.
-
-A côté des options de Doctrine par défaut, il y en a quelques unes liées à
-Symfony que vous pouvez configurer. Le bloc suivant montre toutes les clés
-de configuration possibles :
+Vous trouverez ci-dessous toutes les possiblés pour les clés:
 
 .. configuration-block::
 
@@ -345,20 +341,25 @@ de configuration possibles :
                 user:                 user
                 password:             secret
                 driver:               pdo_mysql
+		# Les options DBAL de la classe driver
                 driver_class:         MyNamespace\MyDriverImpl
+		# Les options DBAL de la classe driver ci-dessus
                 options:
                     foo: bar
                 path:                 "%kernel.data_dir%/data.sqlite"
                 memory:               true
                 unix_socket:          /tmp/mysql.sock
+		# Les options DBAL de la classe wrapper
                 wrapper_class:        MyDoctrineDbalConnectionWrapper
                 charset:              UTF8
-                logging:              "%kernel.debug%""
+                logging:              "%kernel.debug%"
                 platform_service:     MyOwnDatabasePlatformService
                 mapping_types:
                     enum: string
                 types:
                     custom: Acme\HelloBundle\MyCustomType
+		# l'option DBAL keepSlave
+ 		keep_slave:           false
 
     .. code-block:: xml
 
@@ -415,4 +416,4 @@ qui est la première définie ou celle configurée via le paramètre ``default_c
 Chaque connexion est aussi accessible via le service ``doctrine.dbal.[name]_connection``
 où ``[name]`` est le nom de la connexion.
 
-.. _Documentation DBAL: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
+.. _Documentation DBAL: _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
