@@ -324,10 +324,10 @@ Configuration du DBAL Doctrine
 
 Le DoctrineBundle supporte tous les paramètres que les drivers Doctrine
 acceptent par défaut, convertis en XML ou YML selon les standards de
-nommage que Symfony force à utiliser. Voir la `Documentation DBAL`_ de
+nommage que Symfony force à utiliser. Voir la `documentation DBAL`_ de
 Doctrine pour plus d'informations.
 
-Vous trouverez ci-dessous toutes les possiblés pour les clés:
+Vous trouverez ci-dessous toutes les possibilités pour les clés:
 
 .. configuration-block::
 
@@ -341,15 +341,15 @@ Vous trouverez ci-dessous toutes les possiblés pour les clés:
                 user:                 user
                 password:             secret
                 driver:               pdo_mysql
-		# Les options DBAL de la classe driver
+		        # l'option driverClass de DBAL
                 driver_class:         MyNamespace\MyDriverImpl
-		# Les options DBAL de la classe driver ci-dessus
+		        # l'option driverOptions de DBAL
                 options:
                     foo: bar
                 path:                 "%kernel.data_dir%/data.sqlite"
                 memory:               true
                 unix_socket:          /tmp/mysql.sock
-		# Les options DBAL de la classe wrapper
+		        # l'option wrapperClass de DBAL
                 wrapper_class:        MyDoctrineDbalConnectionWrapper
                 charset:              UTF8
                 logging:              "%kernel.debug%"
@@ -358,8 +358,8 @@ Vous trouverez ci-dessous toutes les possiblés pour les clés:
                     enum: string
                 types:
                     custom: Acme\HelloBundle\MyCustomType
-		# l'option DBAL keepSlave
- 		keep_slave:           false
+		        # l'option keepSlave de DBAL
+ 		        keep_slave:           false
 
     .. code-block:: xml
 
@@ -416,4 +416,4 @@ qui est la première définie ou celle configurée via le paramètre ``default_c
 Chaque connexion est aussi accessible via le service ``doctrine.dbal.[name]_connection``
 où ``[name]`` est le nom de la connexion.
 
-.. _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
+.. _documentation DBAL: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html

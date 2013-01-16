@@ -1,52 +1,55 @@
 .. index::
    single: Form; Form type extension
 
-How to Create a Form Type Extension
-===================================
+Comment créer une extension de type de formulaire
+=================================================
 
-:doc:`Custom form field types<create_custom_field_type>` are great when
-you need field types with a specific purpose, such as a gender selector,
-or a VAT number input.
+Les :doc:`types de formulaire personnalisés<create_custom_field_type>` sont
+supers si vous avez besoin de types de champ qui font quelque chose de
+spécifique, comme un sélecteur de civilité, ou un champ pour saisir la TVA.
 
-But sometimes, you don't really need to add new field types - you want
-to add features on top of existing types. This is where form type
-extensions come in.
+Mais parfois, vous n'avez pas vraiment besoin d'ajouter de nouveaux types
+de champ, vous voulez en fait ajouter de nouvelles fonctionnalités sur des
+types existant. C'est ici que les extensions de type entrent en jeu.
 
-Form type extensions have 2 main use-cases:
+Les extensions de type de formulaire ont deux utilisations principales :
 
-#. You want to add a **generic feature to several types** (such as
-   adding a "help" text to every field type);
-#. You want to add a **specific feature to a single type** (such
-   as adding a "download" feature to the "file" field type).
+#. Vous voulez ajouter une **fonctionnalité générique sur plusieurs types**
+   (comme ajouter un texte d'« aide » sur tout les types de champ);
+#. Vous voulez ajouter une **fonctionnalité spécifique sur un type** (comme
+   ajouter une fonctionnalité « téléchargement » sur un type de champ « file »). 
 
-In both those cases, it might be possible to achieve your goal with custom
-form rendering, or custom form field types. But using form type extensions
-can be cleaner (by limiting the amount of business logic in templates)
-and more flexible (you can add several type extensions to a single form
-type).
+Dans ces deux cas, vous pourrez atteindre votre objectif en personnalisant
+l'affichage du formulaire, ou en personnalisant les types de champ. Mais
+utiliser les extensions de type de formulaire peut être plus propre (en limitant
+la part de logique métier dans les templates) et plus flexible (vous pouvez
+ajouter plusieurs extensions de type à un seul type de formulaire)/
 
-Form type extensions can achieve most of what custom field types can do,
-but instead of being field types of their own, **they plug into existing types**.
+Les extensions de type de formulaire peuvent accomplir bien plus que ce que
+peuvent faire des types de champ personnalisés, mais au lieu d'être eux-mêmes
+des types de champ, ils se **branchent sur des types existants**.
 
-Imagine that you manage a ``Media`` entity, and that each media is associated
-to a file. Your ``Media`` form uses a file type, but when editing the entity,
-you would like to see its image automatically rendered next to the file
-input.
+Imaginez que vous devez gérer une entité ``Media``, et que chaque média est
+associé à un fichier. Votre formulaire ``Media`` utilise un type file, mais
+lorsque vous éditez l'entité, vous voulez avoir un aperçu automatique de l'image
+affiché à côté du champ.
 
-You could of course do this by customizing how this field is rendered in a
-template. But field type extensions allow you to do this in a nice DRY fashion.
+Vous pourriez bien évidemment faire cela en personnalisation la manière dont est
+affiché le champ dans le template, mais les extensions de type de champ vous
+permettent de le faire sans répéter le code.
 
-Defining the Form Type Extension
---------------------------------
+Définir l'extension de type de formulaire
+-----------------------------------------
 
-Your first task will be to create the form type extension class. Let's
-call it ``ImageTypeExtension``. By standard, form extensions usually live
-in the ``Form\Extension`` directory of one of your bundles.
+Votre première tâche est de créer la classe d'extension de type de formulaire.
+Appelons-la ``ImageTypeExtension``. Par convention, les extensions de formulaire
+se trouvent habituellement dans le répertoire ``Form\Extension`` de l'un de
+vos bundles.
 
-When creating a form type extension, you can either implement the
-:class:`Symfony\\Component\\Form\\FormTypeExtensionInterface` interface
-or extend the :class:`Symfony\\Component\\Form\\AbstractTypeExtension`
-class. In most cases, it's easier to extend the abstract class::
+Lorsque vous créez une extension de type de formulaire, vous pouvez soit
+implémenter l'interface :class:`Symfony\\Component\\Form\\FormTypeExtensionInterface`,
+soit étendre la classe :class:`Symfony\\Component\\Form\\AbstractTypeExtension`.
+Dans la plupart des cas, il est plus simple d'étendre la classe abstraite::
 
     // src/Acme/DemoBundle/Form/Extension/ImageTypeExtension.php
     namespace Acme\DemoBundle\Form\Extension;
@@ -56,9 +59,9 @@ class. In most cases, it's easier to extend the abstract class::
     class ImageTypeExtension extends AbstractTypeExtension
     {
         /**
-         * Returns the name of the type being extended.
+         * Retourne le nom du type de champ qui est étendu
          *
-         * @return string The name of the type being extended
+         * @return string Le nom du type qui est étendu
          */
         public function getExtendedType()
         {
@@ -66,18 +69,18 @@ class. In most cases, it's easier to extend the abstract class::
         }
     }
 
-The only method you **must** implement is the ``getExtendedType`` function.
-It is used to indicate the name of the form type that will be extended
-by your extension.
+La seule méthode que vous **devez** implémenter est la fonction ``getExtendedType``.
+Elle est utilisée pour spécifier le nom du type de formulaire qui est étendu
+par votre extension.
 
 .. tip::
 
-    The value you return in the ``getExtendedType`` method corresponds
-    to the value returned by the ``getName`` method in the form type class
-    you wish to extend.
+    La valeur que vous retournez dans la méthode ``getExtendedType`` correspond
+    à la valeur retournée par la méthode ``getName`` de la classe de type de
+    formulaire que vous désirez étendre.
 
-In addition to the ``getExtendedType`` function, you will probably want
-to override one of the following methods:
+En plus de la fonction ``getExtendedType``, vous allez probablement vouloir
+surcharger l'une des méthodes suivantes :
 
 * ``buildForm()``
 
@@ -87,16 +90,17 @@ to override one of the following methods:
 
 * ``finishView()``
 
-For more information on what those methods do, you can refer to the
-:doc:`Creating Custom Field Types</cookbook/form/create_custom_field_type>`
-cookbook article.
+Pour plus d'informations sur ce que ces méthodes font, vous pouvez lire
+l'article du Cookbook
+:doc:`Créer des types de champ personnalisés</cookbook/form/create_custom_field_type>`.
 
-Registering your Form Type Extension as a Service
---------------------------------------------------
 
-The next step is to make Symfony aware of your extension. All you
-need to do is to declare it as a service by using the ``form.type_extension``
-tag:
+Enregistrer vos extensions de type de formulaire comme service
+--------------------------------------------------------------
+
+La prochaine étape est d'indiquer à Symfony que vous avez créé une extension.
+Tout ce que vous devez faire pour cela est de la déclarer comme service en
+utilisant le tag ``form.type_extension`` :
 
 .. configuration-block::
 
@@ -120,20 +124,19 @@ tag:
             ->register('acme_demo_bundle.image_type_extension', 'Acme\DemoBundle\Form\Type\ImageTypeExtension')
             ->addTag('form.type_extension', array('alias' => 'file'));
 
-The ``alias`` key of the tag is the type of field that this extension should
-be applied to. In your case, as you want to extend the ``file`` field type,
-you will use ``file`` as an alias.
+La clé ``alias`` du tag est le type de champ sur lequel appliquer votre extension.
+Dans cet exemple, comme vous voulez étendre le type de champ ``file``, vous utilisez
+``file`` comme alias.
 
-Adding the extension Business Logic
------------------------------------
+Ajouter la logique métier à l'extension
+---------------------------------------
 
-The goal of your extension is to display nice images next to file inputs
-(when the underlying model contains images). For that purpose, let's assume
-that you use an approach similar to the one described in
-:doc:`How to handle File Uploads with Doctrine</cookbook/doctrine/file_uploads>`:
-you have a Media model with a file property (corresponding to the file field
-in the form) and a path property (corresponding to the image path in the
-database)::
+Le but de votre extension est d'afficher de jolies images à côté des champs
+d'upload de fichier (quand le modèle associé contient des images). Pour atteindre
+cet objectif, supposons que vous utilisez une approche similaire à celle décrite
+dans :doc:`Comment gérer l'upload de fichiers avec Doctrine</cookbook/doctrine/file_uploads>`:
+vous avez un modèle Média avec une propriété ``file`` (qui correspond au champ file)
+et une propriété ``path`` (qui correspond au chemin de l'image dans la base de données)::
 
     // src/Acme/DemoBundle/Entity/Media.php
     namespace Acme\DemoBundle\Entity;
@@ -145,7 +148,7 @@ database)::
         // ...
 
         /**
-         * @var string The path - typically stored in the database
+         * @var string Le chemin stocké en base de données
          */
         private $path;
 
@@ -158,29 +161,28 @@ database)::
         // ...
 
         /**
-         * Get the image url
+         * Retourne l'url de l'image
          *
          * @return null|string
          */
         public function getWebPath()
         {
-            // ... $webPath being the full image url, to be used in templates
+            // ... $webPath est l'url complète de l'image, qui est utilisée dans le template
 
             return $webPath;
         }
 
-Your form type extension class will need to do two things in order to extend
-the ``file`` form type:
+Votre classe d'extension de type de formulaire devra faire deux choses pour
+étendre le type de formulaire ``file`` :
 
-#. Override the ``setDefaultOptions`` method in order to add an image_path
-   option;
-#. Override the ``buildForm`` and ``buildView`` methods in order to pass the image
-   url to the view.
+#. Surcharger la méthode ``setDefaultOptions`` pour ajouter une option image_path;
+#. Surcharger les méthodes ``buildForm`` et ``buildView`` pour passer l'url de l'image
+   à la vue.
 
-The logic is the following: when adding a form field of type ``file``,
-you will be able to specify a new option: ``image_path``. This option will
-tell the file field how to get the actual image url in order to display
-it in the view::
+La logique est la suivante : lorsque vous ajoutez un champ de formulaire du
+type ``file``, vous pourrez alors spécifier une nouvelle option : ``image_path``.
+Cette option indiquera au champ de fichier comment récupérer l'url de l'image
+actuelle pour l'afficher dans la vue::
 
     // src/Acme/DemoBundle/Form/Extension/ImageTypeExtension.php
     namespace Acme\DemoBundle\Form\Extension;
@@ -195,9 +197,9 @@ it in the view::
     class ImageTypeExtension extends AbstractTypeExtension
     {
         /**
-         * Returns the name of the type being extended.
+         * Retourne le nom du type de champ qui est étendu
          *
-         * @return string The name of the type being extended
+         * @return string Le nom du type étendu
          */
         public function getExtendedType()
         {
@@ -205,7 +207,7 @@ it in the view::
         }
 
         /**
-         * Add the image_path option
+         * Ajoute l'option image_path
          *
          * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
          */
@@ -215,36 +217,37 @@ it in the view::
         }
 
         /**
-         * Pass the image url to the view
+         * Passe l'url de l'image à la vue
          *
          * @param \Symfony\Component\Form\FormView $view
          * @param \Symfony\Component\Form\FormInterface $form
          * @param array $options
          */
-        public function buildView(FormView $view, FormInterface $form)
+        public function buildView(FormView $view, FormInterface $form, array $options)
         {
             if (array_key_exists('image_path', $options)) {
                 $parentData = $form->getParent()->getData();
 
                 $propertyPath = new PropertyPath($options['image_path']);
                 $imageUrl = $propertyPath->getValue($parentData);
-                // set an "image_url" variable that will be available when rendering this field
+                // définit une variable "image_url" qui sera disponible à l'affichage du champ
                 $view->set('image_url', $imageUrl);
             }
         }
 
     }
 
-Override the File Widget Template Fragment
-------------------------------------------
+Surcharger le fragment de template du widget File
+-------------------------------------------------
 
-Each field type is rendered by a template fragment. Those template fragments
-can be overridden in order to customize form rendering. For more information,
-you can refer to the :ref:`cookbook-form-customization-form-themes` article.
+Chaque type de champ est affiché grâce à un fragment de template. Ces fragments
+de templates peuvent être surchargés pour personnaliser l'affichage du formulaire.
+Pour plus d'informations, vous pouvez consulter l'article
+:ref:`cookbook-form-customization-form-themes`.
 
-In your extension class, you have added a new variable (``image_url``), but
-you still need to take advantage of this new variable in your templates.
-Specifically, you need to override the ``file_widget`` block:
+Dans votre classe d'extension, vous avez ajouté une nouvelle variable (``image_url``),
+mais vous n'avez pas encore tiré profit de cette nouvelle variable dans vos templates.
+Spécifiquement, vous devez surcharger le bloc ``file_widget`` pour le faire :
 
 .. configuration-block::
 
@@ -274,17 +277,17 @@ Specifically, you need to override the ``file_widget`` block:
 
 .. note::
 
-    You will need to change your config file or explicitly specify how
-    you want your form to be themed in order for Symfony to use your overridden
-    block. See :ref:`cookbook-form-customization-form-themes` for more
-    information.
+    Vous devrez changer votre fichier de configuration ou spécifier
+    explicitement que votre formulaire utilise un thème pour que Symfony
+    utilise le bloc que vous avez surchargé. Pour plus d'informations, lisez
+    :ref:`cookbook-form-customization-form-themes`.
 
-Using the Form Type Extension
-------------------------------
+Utiliser l'extension de type de formulaire
+------------------------------------------
 
-From now on, when adding a field of type ``file`` in your form, you can
-specify an ``image_path`` option that will be used to display an image
-next to the file field. For example::
+A partir de maintenant, lorsque vous ajouterez un champ de type ``file`` 
+dans un formulaire, vous pourrez spécifier l'option ``image_path`` qui sera
+utilisée pour afficher une image à côté du champ. Par exemple::
 
     // src/Acme/DemoBundle/Form/Type/MediaType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -307,5 +310,5 @@ next to the file field. For example::
         }
     }
 
-When displaying the form, if the underlying model has already been associated
-with an image, you will see it displayed next to the file input.
+Lorsque vous afficherez le formulaire, si le modèle sous-jacent a déjà été associé
+à une image, vous la verrez affichée à côté du champ d'upload.
