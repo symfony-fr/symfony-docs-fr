@@ -219,6 +219,7 @@ it in the view::
          *
          * @param \Symfony\Component\Form\FormView $view
          * @param \Symfony\Component\Form\FormInterface $form
+         * @param array $options
          */
         public function buildView(FormView $view, FormInterface $form)
         {
