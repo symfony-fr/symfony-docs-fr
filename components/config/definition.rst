@@ -399,7 +399,7 @@ en changeant la valeur d'une chaine de caractère en tableau associatif avec
                ->ifString()
                ->then(function($v) { return array('name'=> $v); })
            ->end()
-           ->scalarValue('name')->isRequired()
+           ->scalarNode('name')->isRequired()
            // ...
         ->end()
     ;    
