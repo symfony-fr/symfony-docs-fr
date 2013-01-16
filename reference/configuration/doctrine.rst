@@ -416,4 +416,4 @@ qui est la première définie ou celle configurée via le paramètre ``default_c
 Chaque connexion est aussi accessible via le service ``doctrine.dbal.[name]_connection``
 où ``[name]`` est le nom de la connexion.
 
-.. _Documentation DBAL: _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
+.. _DBAL documentation: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
