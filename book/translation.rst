@@ -4,10 +4,10 @@
 Traductions
 ===========
 
-Le terme « internationalisation » (souvent abrégé `i18n`_)désigne le processus d'abstraction des textes
-et autres spécificités locales en dehors de votre application qui sont ensuite placés
-dans un fichier où ils peuvent être traduits et convertis en se basant sur la locale de
-l'utilisateur (i.e. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
+Le terme « internationalisation » (souvent abréger `i18n`_)désigne le processus d'abstraction des textes
+et autres spécificités locales en dehors de votre application qui est ensuite placé
+dans un fichier où ils peuvent être traduits et converti en se basant sur la locale de
+l'utilisateur (c.-à-d. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
 une fonction capable de traduire le texte (ou « message ») dans la langue de l'utilisateur :
 
 .. code-block:: php
@@ -32,7 +32,7 @@ le processus a plusieurs étapes communes :
     
 #. Activer et configurer le composant ``Translation`` de Symfony ;
 
-#. Faire abstraction des chaînes de caractères (i.e. « messages ») en les encadrant
+#. Faire abstraction des chaînes de caractères (c.-à-d. « messages ») en les encadrant
    avec des appels au ``Translator`` ;
 
 #. Créer des ressources de traduction pour chaque locale supportée qui traduit
@@ -283,7 +283,7 @@ système de fichiers et reconnues par Symfony, grâce à certaines conventions.
 Emplacements des Traductions et Conventions de Nommage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Symfony2 cherche les fichiers de messages (c-a-d les traductions) aux endroits suivants :
+Symfony2 cherche les fichiers de messages (c.-à-d. les traductions) aux endroits suivants :
 
 * Le répertoire ``<répertoire racine du noyau>/Resources/translations``;
 
@@ -291,7 +291,7 @@ Symfony2 cherche les fichiers de messages (c-a-d les traductions) aux endroits s
 
 * Le répertoire ``Resources/translations/`` du bundle.
 
-Les répertoire sont listés par ordre de priorité. Cela signifie que vous pouvez
+Les répertoires sont listés par ordre de priorité. Cela signifie que vous pouvez
 surcharger les messages de traduction d'un bundle dans l'un des deux premiers répertoires.
 
 Le système de surcharge se base sur les clés : seules les clés surchargées ont
@@ -333,7 +333,7 @@ Créer les Traductions
 ~~~~~~~~~~~~~~~~~~~~~
 
 Le fait de créer des fichiers de traduction est une partie importante de la 
-« localisation » (souvent abrégée `L10n`_). Les fichiers de traduction consistent
+« localisation » (souvent abréger `L10n`_). Les fichiers de traduction consistent
 en une série de paires id-traduction pour un domaine et une locale donnés.
 La source est l'identifiant de la traduction individuelle, et peut
 être le message dans la locale principale (par exemple « Symfony is great ») de votre application
@@ -397,7 +397,7 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
     toutes les traductions. Dans ce cas, les traductions doivent (aussi) être faites pour la
     locale par défaut (i.e. pour traduire ``symfony2.great`` en ``Symfony2 is great``).
     
-    La deuxième méthode est très pratique car la clé du message n'aura pas besoin d'être modifiée
+    La deuxième méthode est très pratique, car la clé du message n'aura pas besoin d'être modifiée
     dans chaque fichier de traduction si vous décidez que le message devrait en fait
     être « Symfony2 is really great » dans la locale par défaut.
     
@@ -469,7 +469,7 @@ Comme vous l'avez vu, les fichiers de messages sont organisés par les différen
 qu'ils traduisent. Pour plus de structure, les fichiers de messages peuvent également être organisés en
 « domaines ». Lors de la création des fichiers de messages, le domaine est la première
 partie du nom du fichier. Le domaine par défaut est ``messages``. Par exemple, supposons que,
-par soucis d'organisation, les traductions ont été divisées en trois domaines différents : ``messages``,
+par souci d'organisation, les traductions ont été divisées en trois domaines différents : ``messages``,
 ``admin`` et ``navigation``. La traduction française aurait les fichiers de message suivants :
 
 * ``messages.fr.xliff``
@@ -550,7 +550,7 @@ de l'utilisateur en définissant le paramètre ``default_locale`` du framework :
         ));
 
 .. versionadded:: 2.1
-     Le paramètre ``default_locale`` était à la base défini dans la clé session,
+     Le paramètre ``default_locale`` était à la base définie dans la clé session,
      cependant cela a changé dans la version 2.1. C'est parce que la locale est
      maintenant définie dans la requête et non plus dans la session
 
@@ -565,7 +565,7 @@ en se basant sur la locale de l'utilisateur. Par exemple, ``http://www.example.c
 pourrait afficher le contenu en anglais pour un utilisateur, et en français pour un autre
 utilisateur. Malheureusement, cela viole une règle fondamentale du Web qui dit qu'une URL
 particulière retourne la même ressource indépendamment de l'utilisateur. Pour enfoncer encore
-plus le clou, quel version du contenu serait indexée par les moteurs de recherche ?
+plus le clou, quelle version du contenu serait indexée par les moteurs de recherche ?
 
 Une meilleure politique est d'inclure la locale dans l'URL. Ceci est entièrement pris
 en charge par le système de routage en utilisant le paramètre spécial ``_locale`` :
@@ -617,7 +617,7 @@ pointant vers d'autres pages traduites de votre application.
 Pluralisation
 -------------
 
-La pluralisation des messages est un sujet difficile car les règles peuvent être assez complexes. 
+La pluralisation des messages est un sujet difficile, car les règles peuvent être assez complexes. 
 Par exemple, voici la représentation mathématique des règles de la pluralisation russe :
 
 .. code-block:: text
@@ -671,7 +671,7 @@ Chaque locale a son propre ensemble de règles, certaines ayant jusqu'à six dif
 formes plurielles avec des règles complexes pour déterminer quel nombre correspond à quelle forme du pluriel.
 Les règles sont assez simples pour l'anglais et le français, mais pour le russe, vous auriez
 voulu un indice pour savoir quelle règle correspond à quelle chaîne de caractères. Pour aider les traducteurs,
-vous pouvez éventuellement « tagger » chaque chaîne :
+vous pouvez éventuellement « taguer » chaque chaîne :
 
 .. code-block:: text
 
@@ -693,7 +693,7 @@ Intervalle Explicite de Pluralisation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La meilleure façon de pluraliser un message est de laisser Symfony2 utiliser sa logique interne
-pour choisir quelle chaîne utiliser en se basant sur un nombre donné. Parfois, vous aurez besoin de plus
+pour choisir quelle chaîne utilisée en se basant sur un nombre donné. Parfois, vous aurez besoin de plus
 de contrôle ou vous voudrez une traduction différente pour des cas spécifiques (pour ``0``, ou
 lorsque le nombre est négatif, par exemple). Pour de tels cas, vous pouvez utiliser des
 intervalles mathématiques explicites :
@@ -732,8 +732,8 @@ Ou des nombres entre deux autres nombres :
     [1, +Inf[
     ]-1,2[
 
-Le délimiteur gauche peut être ``[`` (inclusif) ou ``]`` (exclusif). Le delimiteur droit
-peut être ``[`` (exclusif) ou ``]`` (inclusif). En sus des nombres, vous pouvez utiliser
+Le délimiteur gauche peut-être ``[`` (inclusif) ou ``]`` (exclusif). Le délimiteur droit
+peut-être ``[`` (exclusif) ou ``]`` (inclusif). En sus des nombres, vous pouvez utiliser
 ``-Inf`` and ``+Inf`` pour l'infini.
 
 .. index::

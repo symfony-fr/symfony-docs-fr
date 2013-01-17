@@ -15,7 +15,7 @@ Créer des pages avec Symfony2 se fait en simplement deux étapes :
   requête HTTP et la transformera en un objet ``Response`` Symfony2 qui sera
   retourné à l'utilisateur.
 
-Cette approche très simple est excellente car elle correspond à la façon dont 
+Cette approche très simple est excellente, car elle correspond à la façon dont 
 fonctionne le Web. Chaque interaction sur le Web est initiée par une requête
 HTTP. Le but de votre application est simplement d'interpréter cette requête 
 et de lui retourner une Response HTTP appropriée.
@@ -23,7 +23,7 @@ et de lui retourner une Response HTTP appropriée.
 Symfony2 suit cette philosophie et vous fournit des outils et conventions pour
 garder votre application organisée tout en pouvant devenir plus complexe et fréquentée.
 
-Cela vous parait suffisamment simple ? Alors allons-y !
+Cela vous parait suffisamment simple ? Alors, allons-y !
 
 .. index::
    single: Page creation; Example
@@ -143,7 +143,7 @@ Ce code est très basique : il dit à Symfony de charger la configuration de rou
 depuis le fichier ``Resources/config/routing.yml`` qui se trouve dans le ``AcmeHelloBundle``.
 Cela signifie que vous pouvez placer votre configuration de routage directement
 dans le fichier ``app/config/routing.yml`` ou organiser vos routes dans votre
-applications et les importer depuis ce fichier.
+application et les importer depuis ce fichier.
 
 Maintenant que le fichier ``routing.yml`` du bundle est importé, ajoutez la nouvelle
 route qui définit l'URL de la page que vous êtes sur le point de créer :
@@ -325,7 +325,7 @@ d'un template rendu. Comme tout autre contrôleur, vous retournerez cet objet
 
 Notez qu'il y a deux différents exemples afin de rendre un template.
 Par défaut, Symfony2 supporte deux langages différents de templates :
-les templates classiques PHP et les simples mais puissants templates ``Twig``.
+les templates classiques PHP et les simples, mais puissants templates ``Twig``.
 Ne paniquez pas, vous êtes libres de choisir celui que vous désirez
 voire les deux.
 
@@ -418,7 +418,7 @@ un bloc ``title``, que vous pouvez choisir de définir dans le template
 enfant, il aura pour valeur par défaut ``Welcome!``.
 
 Les templates sont une façon puissante de rendre et d'organiser le contenu de 
-votre page. Les templates peuvent tout rendre, des layouts HTML au codes CSS,
+votre page. Les templates peuvent tout rendre, des layouts HTML au code CSS,
 ou n'importe quoi d'autre que le contrôleur peut avoir besoin de retourner à l'utilisateur.
 
 Dans le cycle de vie d'une requête, le template est un outil facultatif. Souvenez
@@ -509,7 +509,7 @@ a besoin de savoir à propos de votre application. Vous n'avez pas à vous souci
 de ces méthodes en commençant - Symfony les complète pour vous avec des valeurs
 par défaut.
 
-* ``registerBundles()``: renvoit un tableau de tous les bundles dont l'application
+* ``registerBundles()``: renvoie un tableau de tous les bundles dont l'application
   a besoin pour fonctionner (voir le :ref:`page-creation-bundles`) ;
 
 * ``registerContainerConfiguration()``: Charge le fichier de configuration ressources
@@ -531,7 +531,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
     Lorsque Symfony se charge, un fichier spécial - ``app/autoload.php`` - est
     inclus. Ce fichier s'occupe de configurer l'autoloader qui chargera automatiquement
     tous vos fichiers depuis le répertoire ``src/`` et toutes les bibliothèques tierces
-    depuis le repertoire ``vendor/``.
+    depuis le répertoire ``vendor/``.
 
     Grace à l'autoloader, vous n'avez jamais à vous soucier d'utiliser les instructions
     ``include`` ou ``require``. Symfony2 se base sur l'espace de nom (namespace) d'une
@@ -574,7 +574,7 @@ Un bundle est similaire aux plugins que l'on peut trouver dans d'autres logiciel
 mais en mieux. La différence clé est que *tout* est un bundle dans Symfony2, ce qui
 inclut le coeur du framework et le code de votre application.
 Les bundles sont aux premières loges dans Symfony2. Ils vous offrent la flexibilité
-d'utiliser des fonctionnalités pré-construites packagées dans des `bundles tiers`_
+d'utiliser des fonctionnalités préconstruites packagées dans des `bundles tiers`_
 ou de distribuer vos propres bundles. Cela rend facile de sélectionner quelles
 fonctionnalités activer dans votre application et de les optimiser comme vous voulez.
 
@@ -622,7 +622,7 @@ de la classe ``AppKernel`` :
         return $bundles;
     }
 
-Avec la méthode ``registerBundles()``, vous avez le contrôle totale des bundles
+Avec la méthode ``registerBundles()``, vous avez le contrôle total des bundles
 qui sont utilisés dans votre application (incluant les bundles du coeur de Symfony).
 
 .. tip::
@@ -637,7 +637,7 @@ totalement fonctionnel pour vous. Bien sûr, vous pouvez tout aussi facilement c
 bundle à la main.
 
 Pour vous montrer à quel point le système de bundle est simple, créons un nouveau
-bundle appelé ``AcmeTestBundle`` et activons le.
+bundle appelé ``AcmeTestBundle`` et activons-le.
 
 .. tip::
 
@@ -669,7 +669,7 @@ Cette classe vide est la seule pièce dont vous avez besoin afin de créer un no
 bundle. Bien que souvent vide, cette classe est très puissante et peut être utilisée
 pour personnaliser le comportement du bundle.
 
-Maintenant que vous avez créé le bundle, activez le via la classe ``AppKernel`` :
+Maintenant que vous avez créé le bundle, activez-le via la classe ``AppKernel`` :
 
 .. code-block:: php
 
@@ -702,13 +702,13 @@ Symfony2 plus tard.
 
 .. tip::
    Peu importe que vous créiez un bundle ou que vous utilisiez un bundle tiers, 
-   assurez vous toujours qu'il soit activé dans ``registerBundles()``. Si vous 
+   assurez-vous toujours qu'il soit activé dans ``registerBundles()``. Si vous 
    utilisez la commande ``generate:bundle``, c'est fait automatiquement pour vous.
 
 Structure des répertoires des bundles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La structure des répertoire d'un bundle est simple et flexible. Par défaut le système
+La structure des répertoires d'un bundle est simple et flexible. Par défaut le système
 de bundle suit un ensemble de conventions qui aident à garder le code homogène
 entre tous les bundles Symfony2. Jetez un oeil au ``AcmeHelloBundle``, car il contient
 certains des éléments les plus communs d'un bundle :
@@ -736,7 +736,7 @@ Il contient seulement les fichiers dont vous avez besoin et rien d'autre.
 
 En parcourant le Book, vous apprendrez comment persister des objets en base de données,
 créer et valider des formulaires, créer des traductions pour votre application,
-écrire des tests et bien plus encore. Chacun de ces aspect a sa propre place et
+écrire des tests et bien plus encore. Chacun de ces aspects a sa propre place et
 son propre rôle au sein d'un bundle.
 
 Configuration de l'Application
@@ -814,7 +814,7 @@ selon le format que vous préférez :
 Chaque entrée de niveau zéro comme ``framework`` ou ``twig`` définit la configuration
 d'un bundle particulier. Par exemple, la clé ``framework`` définit la configuration
 du bundle du noyau de Symfony ``FrameworkBundle`` et inclut la configuration pour le
-routage, les templates et d'autre fonctionnalités du noyau.
+routage, les templates et d'autres fonctionnalités du noyau.
 
 Pour le moment, ne vous inquiétez pas des options de configuration spécifiques à
 chaque section. Le fichier de configuration a des valeurs par défaut optimisées.
@@ -831,7 +831,7 @@ en apprendrez plus sur les options de configuration spécifiques à chaque fonct
 
     * *XML*: Plus puissant que YAML parfois et support de l'autocomplétion sur les IDE;
 
-    * *PHP*: Très puissant mais moins lisible que les formats de configuration standards.
+    * *PHP*: Très puissant, mais moins lisible que les formats de configuration standards.
 
 
 Dump de configuration par défaut
@@ -857,7 +857,7 @@ L'alias de l'extension (clé de configuration) peut aussi être utilisé :
 
 .. note::
 
-    Lisez l'article du Cookbook : :doc:`Comment exposer un configuration sémantique
+    Lisez l'article du Cookbook : :doc:`Comment exposer une configuration sémantique
     pour un Bundle </cookbook/bundles/extension>` pour avoir des informations sur
     l'ajout de configuration dans votre bundle.
 
@@ -876,11 +876,11 @@ enregistrera les erreurs et les warnings dans les logs, tandis que l'environneme
 de ``prod`` enregistrera seulement les erreurs. Certains fichiers sont reconstruits
 à chaque requête en environnement de ``dev`` (pour rendre le développement plus pratique),
 mais sont mis en cache en environnement de ``prod``. Tous les environnements peuvent
-tourner ensembles sur la même machine et éxécutent la même application.
+tourner ensemble sur la même machine et exécutent la même application.
 
 Un projet Symfony2 commence en général avec 3 environnements (``dev``, ``test``
 et ``prod``), la création d'un nouvel environnement étant très facile. Vous pouvez
-voir l'application sous différents environnement en changeant simplement le contrôleur
+voir l'application sous différents environnements en changeant simplement le contrôleur
 frontal dans votre navigateur. Pour voir l'application en environnement de ``dev``, 
 accédez à l'application via le contrôleur frontal de développement :
 
@@ -899,7 +899,7 @@ de production, appelez le contrôleur frontal de ``prod`` :
 Puisque l'environnement de ``prod`` est optimisé pour la vitesse; la configuration,
 les routes et les templates Twig sont compilés en classes PHP et cachés.
 Quand vous voudrez voir des changements en environnement de ``prod``, vous aurez
-besoin de nettoyer ces fichiers cachés afin de permettre leur regénération :
+besoin de nettoyer ces fichiers cachés afin de permettre leur régénération :
 
 .. code-block:: bash
 
