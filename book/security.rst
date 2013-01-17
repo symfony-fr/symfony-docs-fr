@@ -227,7 +227,7 @@ requête s'exécuter :
 Les étapes exécutées lorsqu'un utilisateur demande une ressource protégée sont simples, mais 
 extrêmement flexibles. Comme vous le verrez plus tard, l'authentification peut être prise 
 en charge de multiples façons, incluant les formulaires de connexion, les certificats X.509,
-ou les authentifications via Twitter. Quel que soit la méthode d'authentification, les 
+ou les authentifications via Twitter. Quelle que soit la méthode d'authentification, les 
 étapes sont toujours les mêmes :
 
 #. Un utilisateur accède à une ressource protégée;
@@ -260,7 +260,7 @@ Utilisation d'un formulaire de connexion traditionnel
 .. tip::
 
     Dans cette section, vous apprendre comment créer un formulaire de connexion basique
-    qui continue d'utilisez les utilisateurs codés en dur que vous avez défini dans le
+    qui continue d'utiliser les utilisateurs codés en dur que vous avez défini dans le
     fichier ``security.yml``.
 
     Pour charger les utilisateurs de la base de données, lisez :doc:`/cookbook/security/entity_provider`.
@@ -524,7 +524,7 @@ Récapitulons tout le processus :
    créés dans cet exemple.
 #. L'utilisateur soumet le formulaire de connexion à ``/login_check``;
 #. Le système de sécurité intercepte la requête, vérifie les informations d'identification 
-   soumis par l'utilisateur, authentifie l'utilisateur si elles sont correctes et renvoie 
+   soumises par l'utilisateur, authentifie l'utilisateur si elles sont correctes et renvoie 
    l'utilisateur au formulaire de connexion si elles ne le sont pas.
 
 Par défaut, si les informations d'identification sont correctes, l'utilisateur va être redirigé
@@ -683,7 +683,7 @@ La façon la plus simple pour sécuriser une partie de votre application est de 
 d'URL au complet. Vous avez déjà vu dans le premier exemple de ce chapitre, où tout ce qui
 correspondait à l'expression régulière ``^/admin`` nécessite le role ``ROLE_ADMIN``.
 
-Vous pouvez définir autant de masque d'URL que vous voulez - chacune étant une expression 
+Vous pouvez définir autant de masques d'URL que vous voulez - chacune étant une expression 
 régulière.
 
 .. configuration-block::
@@ -1072,7 +1072,7 @@ la base de données). Il est clair que dans une vraie application, vous allez vo
 les mots de passe de vos utilisateurs pour des raisons de sécurité. Ceci est facile à
 accomplir en mappant votre classe User avec un des nombreux « encodeurs » intégrés.
 
-Par exemple, pour rendre indéchiffrable les mots de passe de vos utilisateurs
+Par exemple, pour rendre indéchiffrables les mots de passe de vos utilisateurs
 en utilisant ``sha1``, suivez les instructions suivantes :
 
 .. configuration-block::
@@ -1172,7 +1172,7 @@ Par exemple, supposez que votre objet User est un ``Acme\UserBundle\Entity\User`
             ),
         ));
 
-Dans cet exemple, nous utilisons L'algorithme plus puissant ``sha512``. Aussi, comme nous 
+Dans cet exemple, nous utilisons l'algorithme plus puissant ``sha512``. Aussi, comme nous 
 avons uniquement spécifié l'algorithme (``sha512``) sous forme de chaîne de caractères,
 le système va par défaut hacher votre mot de passe 5000 fois de suite et ensuite l'encoder
 en base64. En d'autres termes, le mot de passe a été très fortement obscurci pour ne pas
@@ -1594,7 +1594,7 @@ la fonction helper intégrée :
 
     Si vous utilisez cette fonction et que vous ne vous trouvez pas à une URL pour laquelle
     un pare-feu est actif, une exception sera lancée. Encore une fois, c'est toujours une
-    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (que montré dans ce chapitre).
+    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (que montrer dans ce chapitre).
 
 Contrôle d'accès dans les Contrôleurs
 -------------------------------------
@@ -1716,11 +1716,11 @@ Authentification sans état
 
 Par défaut, Symfony2 s'appuie sur cookie (la Session) pour garder 
 le contexte de sécurité d'un utilisateur.
-Mais si vous utilisez des certificats ou l'authentification HTTP par exemple, la persistence
-n'est pas nécessaire car l'identité est disponible à chaque requête. Dans ce cas, et si vous
-n'avez pas besoin de sauvegarder quelque chose entre les requêtes, vous pouvez activer
-l'authentification sans état (stateless authentication), ce qui veut dire qu'aucun cookie
-ne sera jamais créé par Symfony2 :
+Mais si vous utilisez des certificats ou l'authentification HTTP par exemple, la persistance
+n'est pas nécessaire, car l'identité est disponible à chaque requête. Dans ce cas, et si
+vous n'avez pas besoin de sauvegarder quelque chose entre les requêtes, vous pouvez activer
+l'authentification sans état (stateless authentication), ce qui ne veut pas dire qu'aucun
+cookie ne sera jamais créé par Symfony2 :
 
 .. configuration-block::
 
@@ -1799,9 +1799,9 @@ La méthode
 retourne une chaine de caractères numérique d'une longueur égale au nombre passé
 en argument (10 dans l'exemple ci-dessus).
 
-La classe SecureRandom est plus efficace lorsque OpenSSL est installé mais
+La classe SecureRandom est plus efficace lorsque OpenSSL est installé, mais
 s'il n'est pas disponible, elle se rabat sur un algorithme interne qui a besoin
-d'un fichier pour l'alimenter. Contentez vous de passer le nom du fichier en
+d'un fichier pour l'alimenter. Contentez-vous de passer le nom du fichier en
 argument pour l'activer::
 
     $generator = new SecureRandom('/some/path/to/store/the/seed.txt');
@@ -1838,7 +1838,7 @@ Apprenez plus grâce au Cookbook
 -------------------------------
 
 * :doc:`Forcer HTTP/HTTPS </cookbook/security/force_https>`
-* :doc:`Blacklister des utilisateurs par adresse IP address grâce à un électeur personnalisé </cookbook/security/voters>`
+* :doc:`Blacklister des utilisateurs par adresse IP grâce à un électeur personnalisé </cookbook/security/voters>`
 * :doc:`Liste d'accès de contrôle (ACLs) </cookbook/security/acl>`
 * :doc:`/cookbook/security/remember_me`
 

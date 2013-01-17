@@ -396,7 +396,7 @@ elle-même.
 .. tip::
 
     Étendre la classe de base est *optionnel* dans Symfony; elle contient
-    des raccourcis utiles mais rien d'obligatoire. Vous pouvez aussi étendre
+    des raccourcis utiles, mais rien d'obligatoire. Vous pouvez aussi étendre
     :class:`Symfony\\Component\\DependencyInjection\\ContainerAware`. L'objet
     conteneur de service (« service container ») sera ainsi accessible à travers
     la propriété ``container``.
@@ -411,10 +411,10 @@ elle-même.
 Les Tâches Communes du Contrôleur
 ---------------------------------
 
-Bien qu'un contrôleur puisse effectuer quoi que soit virtuellement, la plupart
-d'entre eux va accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
-telles rediriger, forwarder, rendre des templates et accéder aux services,
-sont très faciles à gérer dans Symfony2.
+Bien qu'un contrôleur peut effectuer quoique soit virtuellement, la plupart
+d'entre eux vont accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
+telles redirigées, forwarder, rendre des templates et accéder aux services
+sont très facile à gérer dans Symfony2.
 
 .. index::
    single: Le Contrôleur; Rediriger
@@ -546,7 +546,7 @@ qui retourne un objet ``Response`` contenant le contenu du template :
 Dans les deux cas, le template ``Resources/views/Hello/index.html.twig`` dans
 ``AcmeHelloBundle`` sera délivré.
 
-Le moteur de rendu (« templating engine ») de Symfony est expliqué plus en détails dans
+Le moteur de rendu (« templating engine ») de Symfony est expliqué plus en détail dans
 le chapitre :doc:`Templating </book/templating>`
 
 .. tip::
@@ -657,7 +657,7 @@ utilisant un navigateur, un bot, ou un service web) entre les requêtes. Par
 défaut, Symfony2 stocke les attributs dans un cookie en utilisant les sessions
 natives de PHP.
 
-Stocker et récupérer des informations depuis la session peut être effectué
+Stocker et récupérer des informations depuis la session peut être effectuée
 facilement depuis n'importe quel contrôleur :
 
 .. code-block:: php
@@ -799,7 +799,7 @@ qu'il faut pour retourner l'objet final ``Response`` qui sera délivré à
 l'utilisateur.
 
 Pour vous simplifier la vie, vous pouvez choisir d'étendre une classe ``Controller``
-de base, qui contient des méthodes raccourcis pour de nombreuses tâches
+de base, qui contient des méthodes raccourcies pour de nombreuses tâches
 communes d'un contrôleur. Par exemple, sachant que vous ne voulez pas mettre
 de code HTML dans votre contrôleur, vous pouvez utiliser la méthode ``render()``
 pour délivrer et retourner le contenu d'un template.

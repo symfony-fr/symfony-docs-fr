@@ -6,9 +6,9 @@ Propel et les bases de données
 
 Regardons la vérité en face, l'une des tâches les plus communes et difficiles
 pour quelconque application implique de devoir persister et lire de l'information
-dans et depuis une base de données. Symfony2 ne vient pas avec un ORM intégré mais
+dans et depuis une base de données. Symfony2 ne vient pas avec un ORM intégré, mais
 l'intégration de Propel reste néanmoins aisée. Pour commencer, lisez
-`Travailler Avec Symfony2`_.
+`Travailler avec Symfony2`_.
 
 Un Exemple Simple : Un Produit
 ------------------------------
@@ -244,7 +244,7 @@ basiques que des requêtes complexes, et cela sans aucun effort de votre part::
         ->filterByName('Foo')
         ->findOne();
 
-Imaginez que vous souhaitiez effectuer une requête sur des produits coûtant plus
+Imaginez que vous souhaitiez effectuer une requête sur des produits coûtants plus
 de 19.99, ordonnés du moins cher au plus cher. Depuis l'un de vos contrôleurs,
 faites ce qui suit::
 
@@ -320,7 +320,7 @@ Créez les classes :
 
 Assumons que vous ayez des produits dans votre base de données, vous ne souhaitez
 pas les perdre. Grâce aux migrations, Propel va être capable de mettre à jour votre
-base de données sans perdre aucune données.
+base de données sans perdre aucune donnée.
 
 .. code-block:: bash
 

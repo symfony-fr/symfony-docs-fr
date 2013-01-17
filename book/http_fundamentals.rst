@@ -19,7 +19,7 @@ nouvelles bibliothèques PHP, internes ou indépendantes de Symfony2. Alors,
 soyez prêt !
 
 Fidèle à la philosophie de Symfony2, ce chapitre débute par une explication du
-concept fondamental du développement web : HTTP. Quelles que soient vos
+concept fondamental du développement web : HTTP. Quels que soient vos
 connaissances ou votre langage de programmation préféré, ce chapitre **doit
 être lu** par tout un chacun.
 
@@ -56,7 +56,7 @@ un message textuel créé par un client (par exemple: un navigateur, une
 application iPhone, etc...) dans un format spécial connu sous le nom d'HTTP.
 Le client envoie cette requête à un serveur, et puis attend la réponse.
 
-Jetez un oeil à la première partie de l'intéraction (la requête) entre un
+Jetez un oeil à la première partie de l'interaction (la requête) entre un
 navigateur et le serveur web xkcd:
 
 .. image:: /images/http-xkcd-request.png
@@ -126,7 +126,7 @@ la réponse du serveur web xkcd :
 .. image:: /images/http-xkcd.png
    :align: center
 
-Traduit en HTTP, la réponse envoyée au navigateur va ressembler à quelque chose
+Traduis-en HTTP, la réponse envoyée au navigateur va ressembler à quelque chose
 comme ça :
 
 .. code-block:: text
@@ -152,13 +152,13 @@ la page Wikipedia `Liste des codes HTTP`_ .
 
 Comme la requête, une réponse HTTP contient de l'information additionnelle
 appelée en-têtes HTTP. Par exemple, une importante en-tête de réponse HTTP
-est le ``Content-Type``. Le corps d'une même ressource peut être retournée
+est le ``Content-Type``. Le corps d'une même ressource peut être retourné
 dans de multiples formats incluant HTML, XML ou JSON et l'en-tête ``Content-Type``
 utilise les Internet Media Types comme ``text/html`` pour dire au client quel format
-doit être retourné. Une liste des media types les plus commun peut êter trouvée sur
+doit être retourné. Une liste des media types les plus communs peut être trouvée sur
 la page Wikipedia `Liste de media type usuels`_.
 
-De nombreuses autres en-têtes existent, dont quelques unes sont très puissantes.
+De nombreuses autres en-têtes existent, dont quelques-unes sont très puissantes.
 Par exemple, certaines en-têtes peuvent être utilisées pour créer un puissant
 système de cache.
 
@@ -226,7 +226,7 @@ Requêtes et Réponses dans Symfony
 ---------------------------------
 
 Symfony fournit une alternative à l'approche basique de PHP via deux classes
-qui vous permettent d'intéragir avec la requête et la réponse HTTP de manière
+qui vous permettent d'interagir avec la requête et la réponse HTTP de manière
 plus facile. La classe :class:`Symfony\\Component\\HttpFoundation\\Request`
 est une simple représentation orientée objet du message de la requête HTTP.
 Avec elle, vous avez toute l'information de la requête à votre portée :
@@ -409,7 +409,7 @@ Le Déroulement d'une Application Symfony
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quand vous laissez Symfony gérer chaque requête, la vie est beaucoup plus facile.
-Symfony suit un schema simple et identique pour toutes les requêtes:
+Symfony suit un schéma simple et identique pour toutes les requêtes:
 
 .. _request-flow-figure:
 
@@ -434,7 +434,7 @@ C'est si facile ! Revoyons cela :
 
 * Le système de routing détermine quelle fonction PHP doit être exécutée
   basé sur les informations provenant de la requête et la configuration de
-  routage que vous avez créée;
+  routage que vous avez créé;
 
 * La fonction PHP correcte est exécutée, là où votre code crée et retourne
   l'objet ``Response`` approprié.
@@ -531,7 +531,7 @@ Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plu
 de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
 projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
 quelque chose d'utile pour presque n'importe quelle situation, quelle que soit
-la manière dont votre projet est développé. Pour en nommer quelques unes :
+la manière dont votre projet est développé. Pour en nommer quelques-unes :
 
 
 * :doc:`HttpFoundation</components/http_foundation/introduction>` - Contient les classes
@@ -554,7 +554,7 @@ la manière dont votre projet est développé. Pour en nommer quelques unes :
   besoin d'``inclure`` («require») manuellement les fichiers contenant ces dernières;
 
 * :doc:`Templating</components/templating>` Une boîte à outils pour afficher des
-  templates, gérer leur héritage (c-a-d qu'un template est décoré par un layout)
+  templates, gérer leur héritage (c.-à-d. qu'un template est décoré par un layout)
   et effectuer d'autres tâches communes aux templates;
 
 * `Security`_ - Une puissante bibliothèque pour gérer tous les types de
@@ -578,7 +578,7 @@ est une bibliothèque PHP qui accomplit deux tâches distinctes :
    des bibliothèques tiers (e.g. `Swiftmailer`_ pour envoyer des emails);
 
 #. Fournir une configuration et une bibliothèque «colle» qui lie toutes ces
-   pièces ensembles.
+   pièces ensemble.
 
 Le but du framework est d'intégrer beaucoup d'outils indépendants afin de
 fournir une expérience consistante au développeur. Même le framework lui-même

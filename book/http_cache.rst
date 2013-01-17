@@ -29,7 +29,7 @@ dynamiques. A travers ce chapitre, vous verrez comment
 fonctionne le système de cache de Symfony2 et en quoi c'est la meilleure
 approche possible.
 
-Le système de cache de Symfony2 est différent car il se base sur la
+Le système de cache de Symfony2 est différent, car il se base sur la
 simplicité et la puissance du cache HTTP tel qu'il est défini dans la
 :term:`spécification HTTP`. Au lieu de réinventer la méthodologie de
 mise en cache, Symfony2 adopte la norme qui définit la
@@ -51,12 +51,12 @@ Nous allons parcourir ce sujet en quatre étapes :
 #. Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
    sont utilisées pour communiquer avec la passerelle de cache et tout
    autre cache entre votre application et le client. Symfony2 en propose
-   par défaut et fournit une interface puissante pour intéragir avec elles.
+   par défaut et fournit une interface puissante pour interagir avec elles.
 
 #. :ref:`L'expiration et la validation<http-expiration-validation>`
    sont les deux modèles utilisés pour déterminer si le contenu d'un cache est
    *valide* (peut être réutilisé à partir du cache) ou *périmé* (doit être
-   regénéré par l'application).
+   régénéré par l'application).
 
 #. :ref:`Edge Side Includes <edge-side-includes>` (ESI)
    autorise le cache HTTP à mettre en cache des
@@ -92,7 +92,7 @@ réponses de votre application et les enverra au client. Le cache est au milieu
 entre le client et votre application.
 
 Lors d'une communication, le cache stockera toutes les réponses qu'ils
-estimes « stockable » (voir :ref:`http-cache-introduction`). Si la même
+estiment « stockables » (voir :ref:`http-cache-introduction`). Si la même
 ressource est demandée, le cache renvoie le contenu mis en cache au
 client, en ignorant entièrement l'application.
 
@@ -108,7 +108,7 @@ Les types de caches
 
 Mais une passerelle de cache ne possède pas qu'un seul type de
 cache. Les en-têtes de cache HTTP envoyées par votre application sont
-interprétées par trois différents types de cache :
+interprétés par trois différents types de cache :
 
 * *Le cache du navigateur* : tous les navigateurs ont leur propre
   cache qui est utile quand un utilisateur demande la page précédente
@@ -119,10 +119,10 @@ interprétées par trois différents types de cache :
 * *Le « cache proxy »* : un proxy est un cache *partagé* car plusieurs
   applications peuvent se placer derrière un seul proxy. Il est
   habituellement installé par les entreprises pour diminuer le temps
-  de réponse des sites et la consommation des ressources réseaux.
+  de réponse des sites et la consommation des ressources réseau.
 
 * *Passerelle de cache* : comme un proxy, ce système de cache est
-  également partagé mais du côté du serveur. Installé par des
+  également partagé, mais du côté du serveur. Installé par des
   administrateurs réseau, il permet aux sites d'être plus extensibles,
   sûrs et performants.
 
@@ -134,7 +134,7 @@ interprétées par trois différents types de cache :
 .. note::
 
     La notion de cache *privé* par rapport au cache *partagé* sera
-    expliquée plus en détails lorsque la mise en cache de les contenus liés
+    expliquée plus en détail lorsque la mise en cache des contenus liés
     à exactement un utilisateur (les informations sur un compte
     utilisateur par exemple) sera abordée.
 
@@ -154,7 +154,7 @@ Symfony2 contient un reverse proxy (aussi appelé passerelle de cache)
 écrit en PHP. Son activation entraînera la mise en cache immédiate des
 réponses stockables de l'application. L'installer est aussi simple que ça. Chaque
 nouvelle application Symfony2 contient un noyau pré-configuré
-(AppCache) qui encapsule le noyau par défault (AppKernel). Le cache kernel (cache
+(AppCache) qui encapsule le noyau par défaut (AppKernel). Le cache kernel (cache
 du noyau) *est* le reverse proxy.
 
 Pour activer le mécanisme de cache, il faut modifier le code du
@@ -195,7 +195,7 @@ client.
 
 L'objet ``AppCache`` a une configuration par défaut mais
 peut être reconfiguré finement grâce à une série d'options que vous
-pouvez paramètrer en surchargeant la méthode 
+pouvez paramétrer en surchargeant la méthode 
 :method:`Symfony\\Bundle\\FrameworkBundle\\HttpCache\\HttpCache::getOptions`::
 
     // app/AppCache.php
@@ -226,7 +226,7 @@ pouvez paramètrer en surchargeant la méthode
 
 Voici une liste des principales options :
 
-* ``default_ttl`` : Le nombre de seconde pendant lesquelles une entrée du
+* ``default_ttl`` : Le nombre de secondes pendant lesquelles une entrée du
   cache devrait être considérée comme « valide » quand il n'y a pas
   d'information explicite fournie dans une réponse. Une valeur
   explicite pour les en-têtes ``Cache-Control`` ou ``Expires``
@@ -241,12 +241,12 @@ Voici une liste des principales options :
 
 * ``allow_reload`` : Définit si le client peut forcer ou non un
   rechargement du cache en incluant une directive du ``Cache-Control``
-  « no-cache » dans la requête. Définissez la à ``true`` pour la conformité
+  « no-cache » dans la requête. Définissez-la à ``true`` pour la conformité
   avec la RFC 2616 (par défaut : ``false``);
 
 * ``allow_revalidate`` : Définit si le client peut forcer une
   revalidation du cache en incluant une directive de ``Cache-Control``
-  « max-age=0 » dans la requête. Définissez la à ``true`` pour la conformité
+  « max-age=0 » dans la requête. Définissez-la à ``true`` pour la conformité
   avec la RFC 2616 (par défaut : ``false``);
 
 * ``stale_while_revalidate`` : Spécifie le nombre de secondes par
@@ -257,7 +257,7 @@ Voici une liste des principales options :
   l'extension HTTP ``stale-while-revalidate`` du ``Cache-Control``
   (cf. RFC 5861);
 
-* ``stale_if_error`` : Spécifie le nombre de seconde par défaut (la
+* ``stale_if_error`` : Spécifie le nombre de secondes par défaut (la
   granularité est la seconde) pendant lesquelles le cache peut
   renvoyer une réponse « périmée » quand une erreur est rencontrée (par
   défaut : ``60``). Ce paramètre est surchargé par l'extension HTTP
@@ -301,15 +301,15 @@ cache) et « misses » (page ou réponse non présente en cache).
 Introduction à la mise en cache avec HTTP
 -----------------------------------------
 
-Pour tirer partie des couches de gestion du cache, l'application doit
+Pour tirer parti des couches de gestion du cache, l'application doit
 être capable de communiquer quelles réponses peuvent être mises en
-cache et les règles qui décident quand et comment le cache devient
+cache et les règles, qui décident quand et comment le cache devient
 obsolète. Cela se fait en définissant des en-têtes de gestion de cache
 HTTP dans la réponse.
 
 .. tip::
 
-    Il faut garder à l'esprit que « HTTP » n'est rien d'autre que le
+    Il faut ne garder à l'esprit que « HTTP » n'est rien d'autre que le
     langage (un simple langage texte) que les clients web (les
     navigateurs par exemple) et les serveurs utilisent pour
     communiquer entre eux. Parler de mise en cache HTTP revient à
@@ -398,7 +398,7 @@ Méthodes sures
 La mise en cache HTTP ne fonctionne qu'avec les méthodes « sures »
 (telles que GET et HEAD). « Être sûr » signifie que l'état de
 l'application n'est jamais modifié par le serveur au moment de servir
-la requête (il est bien-sûr possible de loguer des informations,
+la requête (il est bien sûr possible de loguer des informations,
 mettre en cache des données, etc.). Cela a deux conséquences :
 
 * L'état de l'application ne devrait *jamais* être modifié en répondant
@@ -451,7 +451,7 @@ La spécification HTTP définit deux modèles de mise en cache :
   comprennent les directives n'enverront pas la même requête jusqu'à ce
   que la version en cache devienne « invalide ».
 
-* Quand une page est dynamique (c-a-d quand son contenu change
+* Quand une page est dynamique (c.-à-d. quand son contenu change
   souvent), le `modèle de validation`_ est souvent nécessaire. Avec ce
   modèle, le système de cache stocke la réponse mais demande au
   serveur à chaque requête si la réponse est encore
@@ -472,7 +472,7 @@ la réponse valide.
     peut être difficile à lire.
 
     Il existe actuellement une tentative (`HTTP Bis`_) de réécriture
-    de la RFC 2616.  Elle ne décrit pas une nouvelle version du HTTP
+    du RFC 2616.  Elle ne décrit pas une nouvelle version du HTTP
     mais clarifie plutôt la spécification originale du HTTP. Elle est
     découpée en sept parties ; tout ce qui concerne la gestion du
     cache se retrouve dans deux chapitres dédiés (`P4 - Conditional
@@ -735,7 +735,7 @@ exactement ça en exposant un modèle simple et efficace :
     {
         // Obtenir le minimum d'informations pour calculer
         // l'ETag ou la dernière valeur modifiée (Last-Modified value)
-        // (basé sur lobjet Request, les données sont recueillies
+        // (basé sur l'objet Request, les données sont recueillies
         // d'une base de données ou d'un couple clé-valeur
         // par exemple)
         $article = // ...
@@ -915,14 +915,14 @@ c'est le seul qui est utile en dehors du contexte Akamaï :
 
 Quand une requête est envoyée, la passerelle de cache appelle la page
 entière depuis son espace de stockage ou depuis le « backend » de
-l'application. Si la réponse contient un ou plusieurs marqueur ESI,
+l'application. Si la réponse contient un ou plusieurs marqueurs ESI,
 ils sont gérés de la même manière. En d'autres termes, la passerelle de cache récupère
 les fragments de page de son cache, ou demande à l'application de les recalculer.
 Quand tous les marqueurs ont été calculés, la passerelle les « fusionne » avec la
 page principale et envoie le contenu final vers le client.
 
 Le processus est géré de manière transparente au niveau de la
-passerelle de cache (c-a-d à l'extérieur de l'application). Comme vous
+passerelle de cache (c.-à-d. à l'extérieur de l'application). Comme vous
 pouvez le voir, si vous décidez de prendre l'avantage des marqueurs
 ESI, Symfony2 réalise le procédé pour les inclure presque sans effort.
 
@@ -995,8 +995,8 @@ configurer le marqueur ESI :
 
 Définir ``standalone`` à ``true`` permet à Symfony2 de savoir que
 l'action doit être renvoyée en tant que marqueur ESI. Vous devez vous
-demandez pourquoi vous devriez préférer utiliser un « helper » au lieu
-d'écrire simplement le marquer ESI vous-même. C'est parce que
+demander pourquoi vous devriez préférer utiliser un « helper » au lieu
+d'écrire simplement le marqueur ESI vous-même. C'est parce que
 l'utilisation d'un helper permettra à l'application de fonctionner
 même s'il n'y a pas de passerelle de cache installée. Voyons cela plus
 en détail.
@@ -1013,7 +1013,7 @@ ESI, Symfony2 fusionnera simplement les contenus comme si standalone
 .. note::
 
     Symfony2 détecte si la passerelle gère les marqueurs ESI grâce à
-    une autre spécification de Akamaï qui est dores et déjà supporté
+    une autre spécification de Akamaï qui est d'ores et déjà supporté
     par le reverse proxy de Symfony2.
 
 L'action embarquée peut maintenant spécifier ces propres règles de
@@ -1032,9 +1032,9 @@ Avec ESI, la page complète sera valide pendant 600 secondes, mais le
 composant de gestion des actualités ne le sera que pendant 60
 secondes.
 
-Un pré-requis à l'utilisation de ESI est que les actions embarquées
+Un prérequis à l'utilisation de ESI est que les actions embarquées
 soient accessibles via une URL pour que la passerelle de cache puisse
-les recharger indépendamment du reste de la page. Bien-sûr, une action
+les recharger indépendamment du reste de la page. Bien sûr, une action
 ne peut pas être appelée à moins qu'il y ait une route qui pointe vers
 elle. Symfony2 le prend en charge via une route et un contrôleur
 génériques. Pour que l'inclusion du marqueur ESI fonctionne
@@ -1081,7 +1081,7 @@ correctement, il faut définir une route ``_internal`` :
     comment faire cela.
 
 Un des grands avantages de cette stratégie de cache est qu'il est
-possible d'avoir une application aussi dynamique que souhaitée et
+possible d'avoir une application aussi dynamique que souhaité et
 tout en faisant appel à cette application le moins possible.
 
 .. note::
@@ -1101,7 +1101,7 @@ Le helper ``render`` supporte deux autres méthodes utiles :
 
 * ``ignore_errors``: s'il est défini à ``true``, un attribut ``onerror`` sera ajouté à
   l'ESI avec une valeur ``continue`` indiquant que, en cas d'échec, la
-  passerelle de cache enlèvera la marqueur ESI sans erreur ou warning.
+  passerelle de cache enlèvera le marqueur ESI sans erreur ou warning.
 
 .. index::
     single: Cache; Invalidation
@@ -1130,7 +1130,7 @@ définie trop loin dans le futur.
 
     Puisque l'invalidation est un sujet spécifique à chaque type de reverse proxy,
     si vous ne vous occupez pas de l'invalidation, vous pouvez passer d'un reverse
-    proxy à l'autre sans changer quoique ce soit au code de votre application.
+    proxy à l'autre sans changer quoi que ce soit au code de votre application.
 
 En fait, tous les « reverse proxies » fournissent un moyen de purger les
 données du cache mais il faut l'éviter autant que possible. Le moyen

@@ -19,7 +19,7 @@ Télécharger une Distribution Symfony2
 .. tip::
     Premièrement, vérifiez que vous avez installé et configuré un serveur web
     (comme Apache) avec PHP 5.3.4 ou supérieur. Pour plus d'informations sur les
-    prérequis Symfony2, lisez le chapitre :doc:`pré-requis</reference/requirements>`.
+    prérequis Symfony2, lisez le chapitre :doc:`prérequis</reference/requirements>`.
     Pour plus d'informations sur la manière de configurer la racine web de votre serveur,
     lisez les documentations suivantes : `Apache`_ | `Nginx`_ .
 
@@ -64,7 +64,7 @@ la Distribution Standard :
     Pour une version exacte, remplacez `dev-master` par la dernière version de
     Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
 
-Cette commande peut prendre plusieurs minutes pour s'exécuter car « Composer »
+Cette commande peut prendre plusieurs minutes pour s'exécuter, car « Composer »
 télécharge la Distribution Standard ainsi que toutes les bibliothèques « vendor »
 dont elle a besoin. Lorsque la commande a terminé son exécution, vous devriez
 avoir un répertoire qui ressemble à quelque chose comme ça :
@@ -193,14 +193,14 @@ Maintenant, toutes les bibliothèques tierces nécessaires sont dans le réperto
 répertoire ``app/`` et un exemple de code dans le répertoire ``src/``.
 
 Symfony2 est livré avec un testeur de configuration de votre serveur afin de
-vérifier que votre serveur web et PHP sont bien configurés pour utiliser Symfony.
+vérifier que votre serveur web et PHP sont bien configuré pour utiliser Symfony.
 Utilisez l'URL suivante pour vérifier votre configuration :
 
 .. code-block:: text
 
     http://localhost/config.php
 
-S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
+S'il y a des problèmes, corrigez-les maintenant avant de poursuivre.
 
 .. sidebar:: Définir les permissions
 
@@ -237,10 +237,10 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
         sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
         sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs
 
-    Notez que tout les serveurs web n'utilisent pas l'utilisateur ``www-data``. Vous devez
+    Notez que tous les serveurs web n'utilisent pas l'utilisateur ``www-data``. Vous devez
     vérifier quel utilisateur votre serveur web utilise et le remplacer dans la commande
     ci-dessus si besoin. Cela peut être fait en vérifiant la liste des processus pour voir
-    quel utilisateur éxécute votre serveur web.
+    quel utilisateur exécute votre serveur web.
 
     **3. Sans utiliser l'ACL**
 
@@ -257,7 +257,7 @@ S'il y a des problèmes, corrigez les maintenant avant de poursuivre.
 
         umask(0000); // Définit une permission 0777
 
-    Notez que utiliser l'ALC est recommandé si vous y avez accès sur votre serveur
+    Notez qu'utiliser l'ALC est recommandé si vous y avez accès sur votre serveur
     car changer le umask n'est pas sûr.
 
 Lorsque tout est bon, cliquez sur « Go to the Welcome page » pour afficher votre
@@ -277,8 +277,8 @@ Commencer à développer
 
 Maintenant que vous avez une application Symfony2 fonctionnelle, vous pouvez
 commencer à développer ! Votre distribution devrait contenir un exemple de code.
-Vérifiez le fichier ``README.md`` inclu avec la distribution (ouvrez le en tant
-que fichier texte) pour savoir quel exemple de code est inclu avec votre distribution
+Vérifiez le fichier ``README.md`` inclus avec la distribution (ouvrez-le en tant
+que fichier texte) pour savoir quel exemple de code est inclus avec votre distribution
 et savoir comment le supprimer par la suite.
 
 Si vous découvrez Symfony, jetez un oeil au chapitre « :doc:`page_creation` », où
@@ -286,7 +286,7 @@ vous apprendrez comment créer des pages, changer la configuration  et faire tou
 ce que vous aurez besoin de faire dans votre nouvelle application.
 
 Assurez-vous aussi de consulter le :doc:`Cookbook</cookbook/index>`, qui contient
-une grande variété d'articles expliquant comment solutionner des problèmes spécifiques
+une grande variété d'articles expliquant comment solutionné des problèmes spécifiques
 avec Symfony.
 
 Utiliser un Gestionnaire de Versions
@@ -296,7 +296,7 @@ Si vous utilisez un système de contrôle de version comme ``Git`` ou ``Subversi
 vous pouvez le configurer et commencer à commiter votre projet normalement. La
 Symfony Standard edition *est* le point de départ de votre nouveau projet.
 
-Pour des instructions spécifiques sur la meilleur façon de gérer votre projet avec git, 
+Pour des instructions spécifiques sur la meilleure façon de gérer votre projet avec git, 
 lisez le chapitre :doc:`/cookbook/workflow/new_project_git`.
 
 Ignorer le répertoire ``vendor/`` 

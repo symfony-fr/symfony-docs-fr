@@ -99,7 +99,7 @@ Pour l'instant, tout ceci peut être effectué depuis un contrôleur :
     {
         public function newAction(Request $request)
         {
-            // crée une tâche et lui donne quelques données par défaut pour cet exemple
+            // crée une tâche et lui ajouter quelques données par défaut pour cet exemple
             $task = new Task();
             $task->setTask('Write a blog post');
             $task->setDueDate(new \DateTime('tomorrow'));
@@ -195,7 +195,7 @@ un formulaire HTML.
 
 .. tip::
 
-   Le système de formulaire est assez intelligent pour accéder la valeur de la
+   Le système de formulaire est assez intelligent pour accéder à la valeur de la
    propriété protégée ``task`` via les méthodes ``getTask()`` et ``setTask()``
    de la classe ``Task``. A moins qu'une propriété soit publique, elle *doit*
    avoir une méthode « getter » et une « setter » afin que le composant formulaire
@@ -298,7 +298,7 @@ appliqué les données. Appeler ``$form->isValid()`` est un raccourci qui demand
 La validation est effectuée en ajoutant un ensemble de règles (appelées contraintes)
 à une classe. Pour voir cela en action, ajoutez des contraintes de validation
 afin que le champ ``task`` ne puisse pas être vide et que le champ ``dueDate`` ne
-puisse pas être vide et qu'il doive être un objet \DateTime valide.
+puisse pas être vide et qu'il doit être un objet \DateTime valide.
 
 .. configuration-block::
 
@@ -440,7 +440,7 @@ Groupes basés sur les données soumises
 
 Si vous avez besoin de plus de logique pour déterminer les groupes de validation
 (c'est-à-dire basés sur les données), vous pouvez définir l'option ``validation_groups``
-comme un tableau callbak, ou une ``Closure`` :
+comme un tableau callback, ou une ``Closure`` :
 
 .. code-block:: php
 
@@ -634,7 +634,7 @@ passant l'option au tableau des options de champ ::
 Rendre un Formulaire dans un Template
 -------------------------------------
 
-Jusqu'içi, vous avez vu comment un formulaire entier peut être rendu avec
+Jusqu'ici, vous avez vu comment un formulaire entier peut être rendu avec
 seulement une ligne de code. Bien sûr, vous aurez probablement besoin de
 bien plus de flexibilité :
 
@@ -914,7 +914,7 @@ manière de créer des formulaires, mais le choix final vous revient.
   
     Dans le cas où vous avez besoin de champs supplémentaires dans le formulaire
     (par exemple une checkbox « Acceptez vous les conditions d'utilisation ») qui
-    ne doi pas être mappé à l'objet sous-jacent, vous devez définir l'option
+    ne doit pas être mappé à l'objet sous-jacent, vous devez définir l'option
     ``mapped`` setting à ``false``::
 
         use Symfony\Component\Form\FormBuilderInterface;
@@ -943,7 +943,7 @@ Le but d'un formulaire est de traduire les données d'un objet (par exemple :
 soumises par l'utilisateur à l'objet original. En tant que tel, le sujet de la
 persistance de l'objet ``Task`` dans la base de données n'a rien à voir avec
 le sujet des formulaires. Mais, si vous avez configuré la classe ``Task`` de
-telle sorte qu'elle soit persistée via Doctrine (c-a-d qye vous avez ajouté des
+telle sorte qu'elle soit persistée via Doctrine (c-a-d que vous avez ajouté des
 :ref:`métadonnées de correspondance<book-doctrine-adding-mapping>` pour cela),
 alors sa persistance peut être effectuée après la soumission d'un formulaire
 lorsque ce dernier est valide :
@@ -1579,7 +1579,7 @@ un tableau des données soumises. C'est en fait très facile :
     }
 
 Par défaut, en fait, un formulaire part du principe que vous voulez travailler avec
-un tableau de données plutôt qu'avec un objet.Il y a exactement deux façons de changer
+un tableau de données plutôt qu'avec un objet. Il y a exactement deux façons de changer
 ce comportement et d'associer le formulaire avec un objet à la place:
 
 #. Passez un objet lors de la création du formulaire (comme premier argument de ``createFormBuilder``
