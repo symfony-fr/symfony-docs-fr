@@ -16,7 +16,7 @@ avec une base de données.
 
     Doctrine est totalement découplé de Symfony et son utilisation est optionelle.
     Ce chapitre est entièrement consacré à l'ORM Doctrine, dont l'objectif est de
-    mapper vos objets avec une base de donnée relationnelle (comme *MySQL*, *PostGesSQL*
+    mapper vos objets avec une base de donnée relationnelle (comme *MySQL*, *PostGresSQL*
     ou *Microsoft SQL*). Si vous préférez utiliser des requêtes SQL brutes,
     c'est facile, et expliqué dans l'article « :doc:`/cookbook/doctrine/dbal` » du cookbook
 
