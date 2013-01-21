@@ -65,7 +65,7 @@ est particulièrement pratique pour les mots de passe::
     $dialog = $this->getHelperSet()->get('dialog');
     $password = $dialog->askHiddenResponse(
         $output,
-        'What is the database password ?',
+        'Quel le mot de passe de la base de données ?',
         false
     );
 
@@ -77,8 +77,8 @@ est particulièrement pratique pour les mots de passe::
     à moins que vous n'ayez passé ``false`` comme troisième argument, comme dans
     l'exemple ci-dessus. Dans ce cas, une RuntimeException sera levée.
 
-Valider la réponse
-------------------
+Poser une question et valider la réponse
+----------------------------------------
 
 Vous pouvez même valider la réponse. Par exemple, dans le dernier exemple, vous
 avez demandé le nom d'un bundle. En suivant les conventions de nommage de Symfony2,
@@ -125,7 +125,7 @@ Cacher la réponse de l'utilisateur
 .. versionadded:: 2.2
     La méthode ``askHiddenResponseAndValidate`` a été ajoutée dans Symfony 2.2.
    
-Vous pouvez demander et valider une réponse cachée::
+Vous pouvez poser une question et valider une réponse cachée::
 
     $dialog = $this->getHelperSet()->get('dialog');
 
@@ -144,4 +144,4 @@ Vous pouvez demander et valider une réponse cachée::
     );
 
 Si vous voulez permettre qu'une réponse soit visible si elle ne peut pas être
-cachée pour une raison quelconque, passez true comme cinquième argument..
+cachée pour une raison quelconque, passez true comme cinquième argument.

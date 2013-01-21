@@ -220,6 +220,40 @@ La méthode
 :method:`Symfony\\Component\\HttpFoundation\\Request::hasPreviousSession`
 vous informe sur l'existence d'une session démarrée dans une requête antérieure.
 
+Accèder aux données Headers `Accept-*`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Vous pouvez facilement accéder aux données des Headers ``Accept-*``
+en utilisant les méthodes suivantes:
+
+* :method:`Symfony\\Component\\HttpFoundation\\Request::getAcceptableContentTypes`:
+  renvoie la liste des types de contenu acceptés par ordre décroissant de qualité;
+
+* :method:`Symfony\\Component\\HttpFoundation\\Request::getLanguages`:
+  renvoie la liste des langues acceptées par ordre décroissant de qualité;
+
+* :method:`Symfony\\Component\\HttpFoundation\\Request::getCharsets`:
+  renvoie la liste des langues acceptées par ordre décroissant de qualité;
+
+.. versionadded:: 2.2
+	La classe :class:`Symfony\\Component\\HttpFoundation\\AcceptHeader` est nouvelle en Symfony 2.2.
+  
+Si vous avez besoin d'avoir un accès complet aux données parsées de ``Accept``, ``Accept-Language``,
+``Accept-Charset`` or ``Accept-Encoding``, vous pouvez utilisé
+:class:`Symfony\\Component\\HttpFoundation\\AcceptHeader` utility class::
+
+	use Symfony\Component\HttpFoundation\AcceptHeader;
+
+    $accept = AcceptHeader::fromString($request->headers->get('Accept'));
+    if ($accept->has('text/html') {
+        $item = $accept->get('html');
+        $charset = $item->getAttribute('charset', 'utf-8');
+        $quality = $item->getQuality();
+    }
+
+    // Les éléments accepts sont triés par ordre décroissant de qualité
+    $accepts = AcceptHeader::fromString($request->headers->get('Accept'))->all();
+
 Accéder à d'autres données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
