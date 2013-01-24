@@ -220,6 +220,21 @@ La méthode
 :method:`Symfony\\Component\\HttpFoundation\\Request::hasPreviousSession`
 vous informe sur l'existence d'une session démarrée dans une requête antérieure.
 
+Acccéder aux données `Accept-*` des Headers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Vous pouvez facilement accéder aux données basiques extraites des 
+headers ``Accept-*`` en utilisant les méthodes suivantes :
+
+* :method:`Symfony\\Component\\HttpFoundation\\Request::getAcceptableContentTypes`:
+  retourne la liste des types de contenu acceptés classés par ordre décroissant de qualité;
+
+* :method:`Symfony\\Component\\HttpFoundation\\Request::getLanguages`:
+  retourne la liste des langues acceptées par ordre décroissant de qualité;
+
+* :method:`Symfony\\Component\\HttpFoundation\\Request::getCharsets`:
+  retourne la liste des langues acceptées par ordre décroissant de qualité;
+
 Accéder à d'autres données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

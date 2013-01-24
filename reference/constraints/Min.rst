@@ -1,6 +1,11 @@
 Min
 ===
 
+.. caution::
+	La contrainte Min est dépréciée depuis la version 2.1 et sera supprimée
+	dans Symfony 2.3. Utilisez :doc:`/reference/constraints/Range` avec 
+	l'option ``min``.
+
 Valide qu'un nombre donné est *supérieur* à un nombre minimum.
 
 +----------------+--------------------------------------------------------------------+

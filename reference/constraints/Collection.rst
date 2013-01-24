@@ -5,7 +5,7 @@ Cette contrainte est utilisée lorsque l'objet sous-jacent est une collection
 (c'est-à-dire un tableau ou un objet qui implémente ``Traversable`` et ``ArrayAccess``),
 mais vous aimeriez valider les différentes clés de cette collection de différentes
 manières. Par exemple, vous pourriez valider la clé ``email`` en utilisant la contrainte
-``Email`` et la clé ``inventory`` avec la contrainte ``Min``.
+``Email`` et la clé ``inventory`` avec la contrainte ``Range``.
 
 Cette contrainte permet également de s'assurer que certaines clés de la collection
 sont bien présentes et que des clés supplémentaires ne le sont pas.
@@ -60,8 +60,8 @@ et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci 
                         personal_email: Email
                         short_bio:
                             - NotBlank
-                            - MaxLength:
-                                limit:   100
+                            - Length:
+                                max:   100
                                 message: Votre bio est trop longue!
                     allowMissingFields: true
 
@@ -78,8 +78,8 @@ et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci 
              *         "personal_email" = @Assert\Email,
              *         "short_bio" = {
              *             @Assert\NotBlank(),
-             *             @Assert\MaxLength(
-             *                 limit = 100,
+             *             @Assert\Length(
+             *                 max = 100,
              *                 message = "Votre bio est trop longue!"
              *             )
              *         }
@@ -105,8 +105,8 @@ et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci 
                         </value>
                         <value key="short_bio">
                             <constraint name="NotBlank" />
-                            <constraint name="MaxLength">
-                                <option name="limit">100</option>
+                            <constraint name="Length">
+                                <option name="max">100</option>
                                 <option name="message">Votre bio est trop longue!</option>
                             </constraint>
                         </value>
@@ -122,7 +122,7 @@ et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci 
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\Collection;
         use Symfony\Component\Validator\Constraints\Email;
-        use Symfony\Component\Validator\Constraints\MaxLength;
+        use Symfony\Component\Validator\Constraints\Length;
 
         class Author
         {
@@ -133,7 +133,9 @@ et d'une longueur de moins de 100 caractères, vous pouvez procéder comme ceci 
                 $metadata->addPropertyConstraint('profileData', new Collection(array(
                     'fields' => array(
                         'personal_email' => new Email(),
-                        'lastName' => array(new NotBlank(), new MaxLength(100)),
+                        'lastName' => array(
+							new NotBlank(), 
+							new Length(array("max" => 100)),
                     ),
                     'allowMissingFields' => true,
                 )));
