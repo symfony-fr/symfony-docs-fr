@@ -192,7 +192,7 @@ lui passe l'objet ``Event`` en tant qu'argument unique::
         }
     }
 
-Dans beaucoup de cas, une sous-classe spéciale d'``Event` qui est spécifique
+Dans beaucoup de cas, une sous-classe spéciale d'``Event`` qui est spécifique
 à l'évènement donné est passée au « listener ». Cela permet au « listener »
 d'accéder à des informations spéciales concernant l'évènement. Jetez un oeil
 à la documentation ou à l'implémentation de chaque évènement pour déterminer
