@@ -19,11 +19,11 @@ nouvelles bibliothèques PHP, internes ou indépendantes de Symfony2. Alors,
 soyez prêt !
 
 Fidèle à la philosophie de Symfony2, ce chapitre débute par une explication du
-concept fondamental du développement web : HTTP. Quelles que soient vos
+concept fondamental du développement web : HTTP. Quels que soient vos
 connaissances ou votre langage de programmation préféré, ce chapitre **doit
 être lu** par tout un chacun.
 
-HTTP est Simple
+HTTP est simple
 ---------------
 
 HTTP (HyperText Transfer Protocol pour les geeks) est un langage texte qui
@@ -56,7 +56,7 @@ un message textuel créé par un client (par exemple: un navigateur, une
 application iPhone, etc...) dans un format spécial connu sous le nom d'HTTP.
 Le client envoie cette requête à un serveur, et puis attend la réponse.
 
-Jetez un oeil à la première partie de l'intéraction (la requête) entre un
+Jetez un oeil à la première partie de l'interaction (la requête) entre un
 navigateur et le serveur web xkcd:
 
 .. image:: /images/http-xkcd-request.png
@@ -155,10 +155,10 @@ appelée en-têtes HTTP. Par exemple, une importante en-tête de réponse HTTP
 est le ``Content-Type``. Le corps d'une même ressource peut être retournée
 dans de multiples formats incluant HTML, XML ou JSON et l'en-tête ``Content-Type``
 utilise les Internet Media Types comme ``text/html`` pour dire au client quel format
-doit être retourné. Une liste des media types les plus commun peut êter trouvée sur
+doit être retourné. Une liste des médias types les plus commun peut être trouvée sur
 la page Wikipedia `Liste de media type usuels`_.
 
-De nombreuses autres en-têtes existent, dont quelques unes sont très puissantes.
+De nombreuses autres en-têtes existent, dont quelques-unes sont très puissantes.
 Par exemple, certaines en-têtes peuvent être utilisées pour créer un puissant
 système de cache.
 
@@ -226,7 +226,7 @@ Requêtes et Réponses dans Symfony
 ---------------------------------
 
 Symfony fournit une alternative à l'approche basique de PHP via deux classes
-qui vous permettent d'intéragir avec la requête et la réponse HTTP de manière
+qui vous permettent d'interagir avec la requête et la réponse HTTP de manière
 plus facile. La classe :class:`Symfony\\Component\\HttpFoundation\\Request`
 est une simple représentation orientée objet du message de la requête HTTP.
 Avec elle, vous avez toute l'information de la requête à votre portée :
@@ -409,7 +409,7 @@ Le Déroulement d'une Application Symfony
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quand vous laissez Symfony gérer chaque requête, la vie est beaucoup plus facile.
-Symfony suit un schema simple et identique pour toutes les requêtes:
+Symfony suit un schéma simple et identique pour toutes les requêtes:
 
 .. _request-flow-figure:
 
@@ -434,7 +434,7 @@ C'est si facile ! Revoyons cela :
 
 * Le système de routing détermine quelle fonction PHP doit être exécutée
   basé sur les informations provenant de la requête et la configuration de
-  routage que vous avez créée;
+  routage que vous avez créé;
 
 * La fonction PHP correcte est exécutée, là où votre code crée et retourne
   l'objet ``Response`` approprié.
@@ -531,7 +531,7 @@ Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plu
 de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
 projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
 quelque chose d'utile pour presque n'importe quelle situation, quelle que soit
-la manière dont votre projet est développé. Pour en nommer quelques unes :
+la manière dont votre projet est développé. Pour en nommer quelques-unes :
 
 
 * :doc:`HttpFoundation</components/http_foundation/introduction>` - Contient les classes
@@ -578,7 +578,7 @@ est une bibliothèque PHP qui accomplit deux tâches distinctes :
    des bibliothèques tiers (e.g. `Swiftmailer`_ pour envoyer des emails);
 
 #. Fournir une configuration et une bibliothèque «colle» qui lie toutes ces
-   pièces ensembles.
+   pièces ensemble.
 
 Le but du framework est d'intégrer beaucoup d'outils indépendants afin de
 fournir une expérience consistante au développeur. Même le framework lui-même
