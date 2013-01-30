@@ -10,7 +10,7 @@ autour de Symfony2, ce chapitre est pour vous. Au lieu de vous *dire* que
 Symfony2 vous permet de développer plus rapidement de meilleures applications qu'en
 PHP pur, vous allez le voir de vos propres yeux.
 
-Dans ce chapitre, vous aller écrire une application simple en PHP, puis refactoriser
+Dans ce chapitre, vous allez écrire une application simple en PHP, puis refactoriser
 le code afin d'en améliorer l'organisation. Vous voyagerez dans le temps, en comprenant
 les décisions qui ont fait évoluer le développement web au cours de ces dernières années.
 
@@ -61,7 +61,7 @@ dans la base de données. Écrire en pur PHP est « rapide et sale » :
 C'est rapide à écrire, rapide à exécuter et, comme votre application évoluera, 
 impossible à maintenir. Il y a plusieurs problèmes qui doivent être résolus:
 
-* **aucune gestion d'erreur** : Que se passe t-il si la connexion à la base de 
+* **aucune gestion d'erreur** : Que se passe-t-il si la connexion à la base de 
   données échoue?
 
 * **mauvaise organisation** : si votre application évolue, ce fichier deviendra de 
@@ -186,7 +186,7 @@ dans un nouveau fichier appelé ``model.php`` :
 
 .. tip::
 
-   Le nom du fichier ``model.php`` est utilisé car la logique et l'accès aux données
+   Le nom du fichier ``model.php`` est utilisé, car la logique et l'accès aux données
    de l'application sont traditionnellement connus sous le nom de couche « modèle ».
    Dans une application bien structurée, la majorité du code représentant la logique
    métier devrait résider dans le modèle (plutôt que dans le contrôleur). Et
@@ -317,7 +317,7 @@ d'afficher un article du blog :
 
     <?php include 'layout.php' ?>
 
-Créez cette nouvelle page est vraiment facile et aucun code n'est dupliqué.
+Créer cette nouvelle page est vraiment facile et aucun code n'est dupliqué.
 Malgré tout, cette page introduit des problèmes persistants qu'un framework peut
 résoudre. Par exemple, un paramètre de requête ``id`` manquant ou invalide va
 générer une erreur fatale. Il serait mieux que cela génère une erreur 404, mais
@@ -327,7 +327,7 @@ de données est sujette à des attaques d'injection SQL.
 
 Un autre problème est que chaque fichier contrôleur doit inclure le fichier 
 ``model.php``. Que se passerait-il si chaque contrôleur devait soudainement
-inclure un fichier additionnel ou effectuer une quelconque tache globale (comme
+inclure un fichier additionnel ou effectuer une quelconque tâche globale (comme
 renforcer la sécurité)? Dans l'état actuel, tout nouveau code devra être ajouté
 à chaque fichier contrôleur. Si vous oubliez de modifier un fichier, il serait
 bon que ce ne soit pas relié à la sécurité...
@@ -342,16 +342,16 @@ frontal, les URIs de l'application changent un peu, mais elles sont plus flexibl
 .. code-block:: text
 
     Sans contrôleur frontal
-    /index.php          => page de liste des articles (éxécution de index.php)
-    /show.php           => page de détail d'un article (éxécution de show.php)
+    /index.php          => page de liste des articles (exécution de index.php)
+    /show.php           => page de détail d'un article (exécution de show.php)
 
     avec index.php comme contrôleur frontal
-    /index.php          => page de liste des articles (éxécution de index.php)
-    /index.php/show     => page de détail d'un article (éxécution de index.php)
+    /index.php          => page de liste des articles (exécution de index.php)
+    /index.php/show     => page de détail d'un article (exécution de index.php)
 
 .. tip::
 	La portion ``index.php`` de l'URI peut être enlevée en utilisant les règles
-	de réécritures d'URI d'Apache (ou équivalent). Dans ce cas, l'URI de la
+	de réécriture d'URI d'Apache (ou équivalent). Dans ce cas, l'URI de la
         page de détail d'un article serait simplement ``/show``.
 
 En utilisant un contrôleur frontal, un seul fichier PHP (``index.php`` dans notre cas)
@@ -441,8 +441,8 @@ automatique (« autoloader ») fourni par Symfony2. Un chargeur automatique est 
 outil qui permet d'utiliser des classes PHP sans avoir à explicitement inclure
 le fichier contenant la classe.
 
-Tout d'abord, `téléchargez Symfony2`_ et placez le dans un répertoire ``vendor/symfony/symfony``.
-Puis créer un fichier ``app/bootstrap.php``. Utilisez le pour ``inclure`` (``require``) 
+Tout d'abord, `téléchargez Symfony2`_ et placez-le dans un répertoire ``vendor/symfony/symfony``.
+Puis créer un fichier ``app/bootstrap.php``. Utilisez-le pour ``inclure`` (``require``) 
 les 2 fichiers de l'application et pour configurer le chargeur automatique :
 
 .. code-block:: html+php
@@ -464,7 +464,7 @@ Cela indique au chargeur automatique où se trouvent les classes ``Symfony``. Gr
 à cela, vous pouvez maintenant utiliser les classes Symfony sans avoir à utiliser
 l'instruction de langage ``require`` sur les fichiers qui les définissent.
 
-Le philosophie de base de Symfony est que la principale activité d'une application
+La philosophie de base de Symfony est que la principale activité d'une application
 est d'interpréter chaque requête et de retourner une réponse. Pour cela, Symfony2
 fournit les classes :class:`Symfony\\Component\\HttpFoundation\\Request` et
 :class:`Symfony\\Component\\HttpFoundation\\Response`. Ces classes sont des
@@ -678,23 +678,23 @@ voyons en quoi la migration du blog depuis une version PHP en une version Symfon
 la vie :
 
 * Votre application est constituée de **code clair et bien organisé** (même si Symfony ne vous force
-  pas à le faire). Cela encourage la **ré-utilisabilité** et permet aux nouveaux programmeurs d'être 
+  pas à le faire). Cela encourage la **réutilisabilité** et permet aux nouveaux programmeurs d'être 
   productifs sur un projet plus rapidement.
 
 * 100% du code que vous écrivez est pour *votre* application. Vous **n'avez pas à développer
-  ou à maintenir des outils de bas niveaux** tel que :ref:`le chargeur automatique<autoloading-introduction-sidebar>`,
+  ou à maintenir des outils de bas niveau** tel que :ref:`le chargeur automatique<autoloading-introduction-sidebar>`,
   :doc:`le routage</book/routing>`, ou  :doc:`les contrôleurs</book/controller>`.
 
 * Symfony2 vous donne **accès à des outils open source** comme Doctrine et le composants 
   de templates, de sécurité, de formulaires, de validation et de traduction 
-  (pour n'en nommer que quelques uns).
+  (pour n'en nommer que quelques-uns).
 
 * L'application profite maintenant d'**URLs complètement flexibles**, grâce au 
   composant de routage (``Routing``)
 
-* L'architecture centrée autour du protocole HTTP vous donne accès à des outils puissants tel que
+* L'architecture centrée autour du protocole HTTP vous donne accès à des outils puissants tels que
   le **cache HTTP** effectué par le **cache HTTP interne de Symfony2** ou par d'autres outils 
-  plus puissants tel que `Varnish`_. Ce point est couvert dans un chapitre consacré au
+  plus puissants tels que `Varnish`_. Ce point est couvert dans un chapitre consacré au
   :doc:`cache</book/http_cache>`.
 
 Et peut-être le point le plus important, en utilisant Symfony, vous avez maintenant accès 
@@ -706,7 +706,7 @@ De meilleurs templates
 ----------------------
 
 Si vous choisissez de l'utiliser, Symfony2 vient de facto avec un moteur de template appelé
-`Twig`_ qui rend les templates plus rapides à écrire et plus facile à lire.
+`Twig`_ qui rend les templates plus rapides à écrire et plus faciles à lire.
 Cela veut dire que l'application exemple pourrait contenir moins de code ! Prenez par exemple,
 le template de liste d'articles écrit avec Twig :
 

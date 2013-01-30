@@ -17,7 +17,7 @@ Vue Globale
 -----------
 
 Le code de Symfony2 se compose de plusieurs couches indépendantes. Chacune
-d'entre elles est construite par dessus celles qui la précèdent.
+d'entre elles est construite par-dessus celles qui la précèdent.
 
 .. tip::
 
@@ -174,7 +174,7 @@ d'informations à propos de chaque évènement) :
 Si une Exception est capturée pendant le traitement de la Requête, l'évènement
 ``kernel.exception`` est notifié et les listeners ont alors une chance de
 convertir l'Exception en une Réponse. Si cela fonctionne, l'évènement
-``kernel.response`` sera notifié ; si non, l'Exception sera re-jetée.
+``kernel.response`` sera notifié ; sinon, l'Exception sera rejetée.
 
 Si vous ne voulez pas que les Exceptions soient capturées (pour des requêtes imbriquées
 par exemple), désactivez l'évènement ``kernel.exception`` en passant ``false`` en tant
@@ -186,7 +186,7 @@ que troisième argument de la méthode ``handle()``.
 Requêtes Internes
 ~~~~~~~~~~~~~~~~~
 
-A tout moment durant la gestion de la requête (la « master »), une sous-requête
+A tout moment, durant la gestion de la requête (la « master »), une sous-requête
 peut être gérée. Vous pouvez passer le type de requête à la méthode ``handle()``
 (son second argument) :
 
@@ -395,7 +395,7 @@ Le Dispatcher d'Évènements
 
 Le dispatcher d'évènements est un composant autonome qui est responsable
 d'une bonne partie de la logique sous-jacente et du flux d'une requête Symfony.
-Pour plus d'informations, lisez la :doc:`documentation du composant Event Dispatcher</components/event_dispatcher/introduction>`.
+Pour plus d'informations, lisez-la :doc:`documentation du composant Event Dispatcher</components/event_dispatcher/introduction>`.
 
 .. index::
    single: Profiler
@@ -409,10 +409,10 @@ Lorsqu'il est activé, le profiler de Symfony2 collecte des informations
 utiles concernant chaque requête envoyée à votre application et les stocke
 pour une analyse future. Utilisez le profiler dans l'environnement de
 développement afin de vous aider à débugger votre code et à améliorer
-les performances de votre application; utilisez le dans l'environnement
+les performances de votre application; utilisez-le dans l'environnement
 de production pour explorer des problèmes après coup.
 
-Vous avez rarement besoin d'intéragir avec le profiler directement puisque
+Vous avez rarement besoin d'interagir avec le profiler directement puisque
 Symfony2 vous fournit des outils de visualisation tels la Barre d'Outils de
 Débuggage Web (« Web Debug Toolbar ») et le Profiler Web (« Web Profiler »).
 Si vous utilisez l'Edition Standard de Symfony2, le profiler, la barre d'outils
@@ -479,7 +479,7 @@ lui associe aussi un jeton ; ce jeton est disponible dans l'en-tête HTTP
 
 .. tip::
 
-    Lorsque le profiler est activé mais sans la barre d'outils de débuggage web,
+    Lorsque le profiler est activé, mais sans la barre d'outils de débuggage web,
     ou lorsque vous voulez récupérer le jeton pour une requête Ajax, utilisez un
     outil comme Firebug pour obtenir la valeur de l'en-tête HTTP ``X-Debug-Token``.
 
