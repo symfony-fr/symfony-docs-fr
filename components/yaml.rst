@@ -126,7 +126,7 @@ méthode de surcouche :method:`Symfony\\Component\\Yaml\\Yaml::parse` :
 
     use Symfony\Component\Yaml\Yaml;
 
-    $loader = Yaml::parse('/path/to/file.yml');
+    $yaml = Yaml::parse('/path/to/file.yml');
 
 La méthode statique :method:`Symfony\\Component\\Yaml\\Yaml::parse` prend une
 chaîne de caractères YAML ou un fichier contenant du YAML. En interne, elle appelle
