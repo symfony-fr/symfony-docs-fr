@@ -1,6 +1,11 @@
 Max
 ===
+-- caution::
 
+	La contrainte Max est dépréciée depuis la version 2.1 et sera supprimé dans Symfony 2.3.
+	Utilisez :doc:`/reference/constraints/Range` avec l'option ``max`` à la place.
+	
+	
 Valide qu'un nombre donné est *inférieur* à un nombre maximum.
 
 +----------------+--------------------------------------------------------------------+

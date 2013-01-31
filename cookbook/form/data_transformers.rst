@@ -136,15 +136,15 @@ l'ajouter à votre champ Issue dans un formulaire.
 	    public function setDefaultOptions(OptionsResolverInterface $resolver)
             {
                 $resolver->setDefaults(array(
-                    'data_class' => 'Acme\TaskBundle\Entity\Task'
+                    'data_class' => 'Acme\TaskBundle\Entity\Task',
                 ));
 
                 $resolver->setRequired(array(
-                    'em'
+                    'em',
                 ));
 
                 $resolver->setAllowedTypes(array(
-                    'em' => 'Doctrine\Common\Persistence\ObjectManager'
+                    'em' => 'Doctrine\Common\Persistence\ObjectManager',
                 ));
 
                 // ...

@@ -30,7 +30,8 @@ vouliez valider chaque entrée du tableau :
                 favoriteColors:
                     - All:
                         - NotBlank:  ~
-                        - MinLength: 5
+                        - Length: 
+							min: 5
 
     .. code-block:: php-annotations
 
@@ -44,7 +45,7 @@ vouliez valider chaque entrée du tableau :
            /**
             * @Assert\All({
             *     @Assert\NotBlank
-            *     @Assert\MinLength(5),
+            *     @Assert\Length(min = "5"),
             * })
             */
             protected $favoriteColors = array();

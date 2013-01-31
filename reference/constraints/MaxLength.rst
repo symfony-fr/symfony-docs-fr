@@ -1,6 +1,11 @@
 MaxLength
 =========
 
+-- caution::
+
+	La contrainte MaxLength est dépréciée depuis la version 2.1 et sera supprimé dans Symfony 2.3.
+	Utilisez :doc:`/reference/constraints/Length` avec l'option ``max`` à la place.
+
 Valide que la longueur d'une chaîne de caractères est inférieure à la limite donnée.
 
 +----------------+-------------------------------------------------------------------------+
