@@ -600,7 +600,7 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ :
 .. tip::
     Lorsque ces options sont définies, le champ sera rendu avec des attributs HTML
     spécifiques qui permettent la validation du champ côté client. Cependant, cela
-    ne génère pas l'équivalent côté serveur (ex ``Assert\MaxLength``). Et puisque
+    ne génère pas l'équivalent côté serveur (ex ``Assert\Length``). Et puisque
     vous aurez besoin d'ajouter la validation côté serveur manuellement, ces options
     peuvent être déduites de cette information.
 
@@ -611,8 +611,9 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ :
   correspondre à vos règles de validation.
 
 * ``max_length`` : Si le champ est de type texte, alors l'option ``max_length``
-  peut être devinée grâce aux contraintes de validation (si ``MaxLength`` ou ``Max``
-  est utilisée) ou grâce aux métadonnées de Doctrine (via la longueur du champ).
+  peut être devinée grâce aux contraintes de validation (si ``Length`` 
+  ou ``Range`` sont utilisées) ou grâce aux métadonnées 
+  de Doctrine (via la longueur du champ).
 
 
 .. note::
@@ -1617,11 +1618,11 @@ mais voici un petit exemple::
 
     // importez les namespaces en haut de votre classe
     use Symfony\Component\Validator\Constraints\Email;
-    use Symfony\Component\Validator\Constraints\MinLength;
+    use Symfony\Component\Validator\Constraints\Length;
     use Symfony\Component\Validator\Constraints\Collection;
 
     $collectionConstraint = new Collection(array(
-        'name' => new MinLength(5),
+        'name' => new Length(array("min" => 5)),
         'email' => new Email(array('message' => 'Invalid email address')),
     ));
 

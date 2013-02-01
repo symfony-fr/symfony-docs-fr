@@ -325,6 +325,76 @@ faire la chose suivante::
         'foo'  
     );
 
+.. versionadded:: 2.2
+    La méthode ``askHiddenResponse`` a été ajouté à Symfony 2.2.
+
+Vous pouvez également poser une question et cacher la réponse. Ceci
+est particulièrement pratique pour les mots de passe::
+   
+    $dialog = $this->getHelperSet()->get('dialog');
+    $password = $dialog->askHiddenResponse(
+        $output,
+        'Quel le mot de passe de la base de données ?',
+        false
+    );
+
+.. caution::
+
+    Lorsque vous demandez une réponse cachée, Symfony utilisera soit un binaire,
+    soit il changera le mode stty, soit il utilisera autre chose pour cacher la
+    réponse. Si aucun n'est disponible, il se rabattra sur une question classique
+    à moins que vous n'ayez passé ``false`` comme troisième argument, comme dans
+    l'exemple ci-dessus. Dans ce cas, une RuntimeException sera levée.
+
+Poser une question et valider la réponse
+----------------------------------------
+
+Vous pouvez facilement poser des questions et valider les réponses avec 
+les méthodes intégrées::
+
+    $dialog = $this->getHelperSet()->get('dialog');
+
+    $validator = function ($value) {
+        if (trim($value) == '') {
+            throw new \Exception('La valeur ne peut être vide');
+        }
+    }
+
+    $password = $dialog->askAndValidate(
+        $output,
+        'Entrez le nom du widget, SVP',
+        $validator,
+        20,
+        'foo'
+    );
+
+Le callback de validation peut être n'importe quelle fonction callable PHP, le quatrième argument est
+le nombre maximal de tentatives, si il est mis à ``FALSE``, ce sera un nombre illimité de tentatives. le
+cinquième argument est la valeur par défaut.
+
+.. versionadded:: 2.2
+    La méthode ``askHiddenResponseAndValidate`` a été ajoutée dans Symfony 2.2.
+
+Vous pouvez poser une question et valider une réponse cachée::
+
+    $dialog = $this->getHelperSet()->get('dialog');
+
+    $validator = function ($value) {
+        if (trim($value) == '') {
+            throw new \Exception('Le mot de passe ne peut pas être vide');
+        }
+    };
+
+    $password = $dialog->askHiddenResponseAndValidate(
+        $output,
+        'Veuillez entrer le nom du widget',
+        $validator,
+        20,
+        false
+    );
+
+Si vous voulez permettre qu'une réponse soit visible si elle ne peut pas être
+cachée pour une raison quelconque, passez true comme cinquième argument.
 
 Afficher une barre de progression
 ---------------------------------
