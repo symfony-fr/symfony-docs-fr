@@ -53,29 +53,6 @@ La question « Veuillez entrer le nom du bundle » sera posée à l'utilisateur.
 pourra taper un nom qui sera retourné à la méthode ``ask``. S'il n'entre aucun nom,
 la valeur par défaut (``AcmeDemoBundle`` dans ce cas) sera retournée.
 
-Cacher la réponse de l'utilisateur
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 2.2
-    La méthode ``askHiddenResponse`` a été ajoutée dans Symfony 2.2.
- 
-Vous pouvez également poser une question et cacher la réponse. Ceci
-est particulièrement pratique pour les mots de passe::
-   
-    $dialog = $this->getHelperSet()->get('dialog');
-    $password = $dialog->askHiddenResponse(
-        $output,
-        'What is the database password ?',
-        false
-    );
-
-.. caution::
-   
-    Lorsque vous demandez une réponse cachée, Symfony utilisera soit un binaire,
-    soit il changera le mode stty, soit il utilisera autre chose pour cacher la
-    réponse. Si aucun n'est disponible, il se rabattra sur une question classique
-    à moins que vous n'ayez passé ``false`` comme troisième argument, comme dans
-    l'exemple ci-dessus. Dans ce cas, une RuntimeException sera levée.
 
 Valider la réponse
 ------------------
@@ -118,30 +95,3 @@ Vous pouvez définir le nombre maximum de demandes dans l'argument ``$attempts``
 Si vous atteignez ce nombre, la valeur par défaut donnée en dernier argument sera
 choisie. Utiliser ``false`` revient à définir un nombre d'essais illimité. La
 demande sera faite à l'utilisateur jusqu'à ce qu'il propose une réponse valide.
-
-Cacher la réponse de l'utilisateur
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 2.2
-    La méthode ``askHiddenResponseAndValidate`` a été ajoutée dans Symfony 2.2.
-   
-Vous pouvez demander et valider une réponse cachée::
-
-    $dialog = $this->getHelperSet()->get('dialog');
-
-    $validator = function ($value) {
-        if (trim($value) == '') {
-            throw new \Exception('Le mot de passe ne peut pas être vide');
-        }
-    };
-
-    $password = $dialog->askHiddenResponseAndValidate(
-        $output,
-        'Veuillez entrer le nom du widget',
-        $validator,
-        20,
-        false
-    );
-
-Si vous voulez permettre qu'une réponse soit visible si elle ne peut pas être
-cachée pour une raison quelconque, passez true comme cinquième argument..
