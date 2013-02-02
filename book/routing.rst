@@ -934,7 +934,7 @@ argument à la méthode contrôleur. De plus, il y a 3 paramètres spéciaux : c
 d'eux apporte une fonctionnalité unique à votre application :
 
 * ``_controller``: Comme vous l'avez vu, ce paramètre est utilisé pour déterminer
-  quel contrôleur est éxecuté lorsque l'URL est reconnue ;
+  quel contrôleur est exécuté lorsque l'URL est reconnue ;
 * ``_format``: Utilisé pour définir le format de la requête(:ref:`en savoir plus<book-routing-format-param>`) ;
 * ``_locale``: Utilisé pour définir la locale de la session (:ref:`en savoir plus<book-translation-locale-url>`).
 
@@ -1274,7 +1274,7 @@ Générer des URLs
 ----------------
 
 Le système de routage devrait aussi être utilisé pour générer des URLs. En
-réalité, le routage est un système bi-directionnel : faire correspondre une
+réalité, le routage est un système bidirectionnel : faire correspondre une
 URL à un contrôleur+paramètres et une route+paramètres à une URL. Les méthodes
 :method:`Symfony\\Component\\Routing\\Router::match` et
 :method:`Symfony\\Component\\Routing\\Router::generate` forment ce système
@@ -1396,7 +1396,7 @@ Le routage est un système permettant de faire correspondre l'URL des requêtes
 entrantes à une fonction contrôleur qui devrait être appelée pour traiter la
 requête. Cela vous permet d'une part de spécifier de belles URLs et d'autre part
 de conserver la fonctionnalité de votre application découplée de ces URLs. Le
-routage est un mécanisme bi-directionnel, ce qui signifie qu'il doit aussi
+routage est un mécanisme bidirectionnel, ce qui signifie qu'il doit aussi
 être utilisé pour générer des URLs.
 
 En savoir plus grâce au Cookbook
