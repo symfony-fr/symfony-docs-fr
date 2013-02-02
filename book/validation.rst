@@ -835,7 +835,7 @@ Le mot de la fin
 ----------------
 
 Le ``validator`` de Symfony2 est un outil puissant qui peut être un atout pour
-garantir que les données de n'importe quel objet est « valide ». La puissance
+garantir que les données de n'importe quel objet sont « valides ». La puissance
 de la validation réside dans les « contraintes », qui sont des règles que vous
 pouvez appliquer aux propriétés ou aux méthodes getter de votre objet. Et tandis
 que vous utiliserez plus communément le système de validation indirectement
