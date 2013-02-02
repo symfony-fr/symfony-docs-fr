@@ -5,7 +5,7 @@ Créer et utiliser les templates
 ===============================
 
 Comme vous le savez, le :doc:`contrôleur </book/controller>` est
-responsable de la gestion de toute les requêtes d'une application
+responsable de la gestion de toutes les requêtes d'une application
 Symfony2. En réalité, le contrôleur délègue le plus gros du travail à
 d'autres classes afin que le code puisse être testé et
 réutilisé. Quand un contrôleur a besoin de générer du HTML, CSS ou
@@ -104,7 +104,7 @@ par défaut. Vous pouvez même `ajouter vos propres extensions`_ à Twig si beso
 .. tip::
 
     Créer une nouvelle extension Twig est aussi simple que de créer un nouveau
-    service et de le tagger avec ``twig.extension`` :ref:`tag<reference-dic-tags-twig-extension>`.
+    service et de le taguer avec ``twig.extension`` :ref:`tag<reference-dic-tags-twig-extension>`.
 
 Comme vous le verrez tout au long de la documentation, Twig supporte aussi les
 fonctions, et de nouvelles fonctions peuvent être ajoutées. Par exemple, la fonction
@@ -138,7 +138,7 @@ avec Twig et PHP.
 
     Twig peut aussi faire des choses que PHP ne pourrait pas faire, comme le contrôle
     d'espaces blancs, le bac à sable, l'échappement de caractères automatique et
-    contecxtuel et l'inclusion de fonctions et de filtres personnalisés qui n'affectent
+    contextuel et l'inclusion de fonctions et de filtres personnalisés qui n'affectent
     que les templates. Twig contient de petites fonctionnalités qui rendent
     l'écriture de template plus facile et plus concise. Prenez l'exemple suivant, il
     combine une boucle avec l'instruction logique ``if`` :
@@ -160,7 +160,7 @@ Twig et la mise en cache
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Twig est rapide. Chaque template Twig est compilé en une classe PHP natif qui est
-rendue à l'éxécution. Les classes compilées sont stockées dans le répertoire
+rendue à l'exécution. Les classes compilées sont stockées dans le répertoire
 ``app/cache/{environment}/twig`` (où ``{environment}`` est l'environnement, par
 exemple ``dev`` ou ``prod``) et elles peuvent être utiles dans certains cas pour
 débugguer. Lisez le chapitre :ref:`environments-summary` pour plus d'informations
@@ -174,7 +174,7 @@ soucier de vider le cache.
 
 Lorsque le mode ``debug`` est désactivé (par exemple en environnement de ``prod``),
 en revanche, vous devrez vider le répertoire de cache Twig afin que le template soit
-regénéré. Souvenez vous bien de cela lorsque vous déploirez votre application.
+régénéré. Souvenez-vous bien de cela lorsque vous déploirez votre application.
 
 .. index::
    single: Templating; Inheritance
@@ -333,7 +333,7 @@ sortie peut ressembler à ceci :
     </html>
 
 Remarquons que comme le template enfant n'a pas défini le bloc ``sidebar``, la
-valeur du template parent est utilisé à la place. Le contenu d'une balise 
+valeur du template parent est utilisée à la place. Le contenu d'une balise 
 ``{% block %}`` d'un template parent est toujours utilisé par défaut.
 
 Vous pouvez utiliser autant de niveaux d'héritage que vous souhaitez. Dans la
@@ -355,7 +355,7 @@ astuces à l'esprit :
 
 * Si vous vous retrouvez à dupliquer du contenu dans plusieurs templates, cela
   veut probablement dire que vous devriez déplacer ce contenu dans un 
-  ``{% block  %}`` d'un template parent. Dans certain cas, la meilleur solution 
+  ``{% block  %}`` d'un template parent. Dans certain cas, la meilleure solution 
   peut être de déplacer le contenu dans un nouveau template et de l'``include`` 
   (voir :ref:`including-templates`).
 
@@ -399,7 +399,7 @@ types de templates, chacun se situant à un endroit spécifique :
 
 * ``AcmeBlogBundle:Blog:index.html.twig``: Cette syntaxe est utilisée pour
   spécifier un template pour une page donnée. Les trois parties de la chaîne de
-  caractères, séparées par deux-points (``:``), signifie ceci :
+  caractères, séparées par deux-points (``:``), signifient ceci :
 
     * ``AcmeBlogBundle``: (*bundle*) le template se trouve dans le 
       ``AcmeBlogBundle`` (``src/Acme/BlogBundle`` par exemple);
@@ -486,7 +486,7 @@ système de templates fournit un système de *helper* extensible. Ce système fo
 propriétés utiles dans le contexte des templates.
 
 Nous avons déjà vu quelques balises Twig (``{% block %}`` & ``{% extends %}``)
-ainsi qu'un exemple de helper PHP (``$view['slots']``). Apprenons en un peu
+ainsi qu'un exemple de helper PHP (``$view['slots']``). Apprenons-en un peu
 plus.
 
 .. index::
@@ -503,7 +503,7 @@ articles », le code du template affichant un article peut être utilisé sur la
 page détaillant l'article, sur une page affichant les articles les plus
 populaires, ou dans une liste des derniers articles.
 
-Quand vous avez besoin de réutiliser une grand partie d'un code PHP,
+Quand vous avez besoin de réutiliser une grande partie d'un code PHP,
 typiquement vous déplacez le code dans une nouvelle classe PHP ou dans
 une fonction. La même chose s'applique aussi aux templates. En
 déplaçant le code réutilisé dans son propre template, il peut être
@@ -585,7 +585,7 @@ Dans certains cas, vous aurez besoin d'inclure plus qu'un simple
 template. Supposons que vous avez un menu latéral dans votre layout qui contient
 les trois articles les plus récents. La récupération des trois articles les plus
 récents peut nécessiter l'inclusion d'une requête vers une base de données et de
-réaliser d'autres oprérations logiques qui ne peuvent pas être effectuées dans
+réaliser d'autres opérations logiques qui ne peuvent pas être effectuées dans
 un template.
 
 La solution consiste simplement à imbriquer les résultats d'un contrôleur dans un
@@ -686,7 +686,7 @@ Symfony2 utiliser le helper standard ``render`` pour configurer les tags ``hincl
 
 .. note::
 
-   hinclude.js_ doit être inclu dans votre page pour fonctionner.
+   hinclude.js_ doit être inclus dans votre page pour fonctionner.
 
 Le contenu par défaut (pendant le chargement ou si javascript n'est pas activé) peut
 être défini de manière globale dans la configuration de votre application :
@@ -797,7 +797,7 @@ routes plus compliquées :
 
         return $collection;
 
-Dans ce cas, vous devrez spécifiez le nom de route (``article_show``) et une 
+Dans ce cas, vous devrez spécifier le nom de route (``article_show``) et une 
 valeur pour le paramètre ``{slug}``. En utilisant cette route, revoyons le
 template ``recentList`` de la section précédente, et
 faisons les liens vers les articles correctement :
@@ -893,13 +893,13 @@ conservant les avantages du mécanisme d'héritage de templates de Symfony.
 
     Cette section vous apprendra la philosophie qui existe derrière l'inclusion
     de feuilles de style et de fichiers Javascript dans Symfony. Symfony contient
-    aussi une autre bibliothèque, appelée Assetic, qui suit la même philosophie
+    aussi une autre bibliothèque, appelée Assetic, qui suit la même philosophie,
     mais vous permet de faire des choses plus intéressantes avec ces
     fichiers. Pour plus d'informations sur le sujet voir
     :doc:`/cookbook/assetic/asset_management`.
 
 
-Commencons par ajouter deux blocs à notre template de base qui incluront deux
+Commençons par ajouter deux blocs à notre template de base qui incluront deux
 fichiers : l'un s'appelle ``stylesheet`` et est inclus dans la balise ``head``, et
 l'autre s'appelle ``javascript`` et est inclus juste avant que la base ``body`` ne se
 referme. Ces blocs contiendront toutes les feuilles de style et tous les
@@ -1035,7 +1035,7 @@ qualité (voir `KnpBundles.com`_) concernant un grand nombre de fonctionnalités
 Une fois que vous utilisez un tel bundle, vous aimeriez sûrement surcharger et
 personnaliser un ou plusieurs de ses templates.
 
-Supposons que vous utilisiez un imaginaire ``AcmeBlogBundle`` open-source dans
+Supposons que vous utilisiez un imaginaire ``AcmeBlogBundle`` open source dans
 votre projet (dans le répertoire ``src/Acme/blogBundle`` par exemple). Même si vous
 êtes très content de ce bundle, vous voudriez probablement surcharger la page « liste » du
 blog pour la personnaliser et l'adapter spécialement à votre application. En
@@ -1100,7 +1100,7 @@ bon sous-répertoire de ``app/Resources``.
 La Surcharge des Core Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Puisque le framework Symfony2 lui même est juste un bundle, les templates du noyau
+Puisque le framework Symfony2 lui-même est juste un bundle, les templates du noyau
 peuvent être surchargés de la même façon. Par exemple, le bundle noyau
 ``TwigBundle`` contient un certain nombre de templates relatifs aux
 « exceptions » et aux « erreurs » qui peuvent être surchargés en copiant chacun d'eux
@@ -1228,12 +1228,12 @@ suppose que le contenu est bien échappé pour un affichage HTML.
 Dans certains cas, vous aurez besoin de désactiver l'échappement de la sortie
 lors du rendu d'une variable qui est sure et qui contient des décorations qui ne
 doivent pas être échappées. Supposons que des utilisateurs administrateurs sont
-capable décrire des articles qui contiennent du code HTML. Par défaut, Twig
+capables décrire des articles qui contiennent du code HTML. Par défaut, Twig
 échappera le corps de l'article. Pour le rendre normalement, il suffit
 d'ajouter le filtre ``raw`` : ``{{ article.body | raw }}``.
 
 Vous pouvez aussi désactiver l'échappement au sein d'un ``{% block %}`` ou pour
-un template entier, Pour plus d'informations, voir `Output Escaping`_ dans la
+un template entier. Pour plus d'informations, voir `Output Escaping`_ dans la
 documentation de Twig.
 
 L'échappement en PHP
@@ -1399,7 +1399,7 @@ Réflexions Finales
 ------------------
 
 Le moteur de template dans Symfony est un outil puissant qui peut être utilisé
-chaque fois que vous avez besoin de générer du contenu de répresentation en
+chaque fois que vous avez besoin de générer du contenu de représentation en
 HTML, XML ou tout autre format. Et bien que les templates soient un moyen commun
 de générer du contenu dans un contrôleur, leur utilisation n'est pas
 systématique. L'objet ``Response`` retourné par un contrôleur peut être créé
@@ -1413,7 +1413,7 @@ avec ou sans utilisation de template::
 
 Le moteur de templates de Symfony est très flexible et deux outils de restitution
 sont disponibles par défaut : les traditionnels templates *PHP* et les élégants
-et puissants templates *Twig*. Ils supportent tout les deux une hiérarchie des
+et puissants templates *Twig*. Ils supportent tous les deux une hiérarchie des
 template et sont fournis avec un ensemble riche de fonctions capables de
 réaliser la plupart des tâches.
 

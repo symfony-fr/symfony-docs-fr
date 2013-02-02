@@ -153,9 +153,9 @@ Si vous insérez une valeur dans la propriété ``name``, le message de succès 
         service ``validator`` ou besoin de vous inquiéter concernant l'affichage des erreurs.
         La plupart du temps, vous allez utiliser la validation indirectement lors
         de la soumission des données du formulaire. Pour plus d'informations,
-        consultez le :ref:`book-validation-forms`.
+        consultez-le :ref:`book-validation-forms`.
     
-Vous pouvez aussi passer une collection d'erreur à un template.
+Vous pouvez aussi passer une collection d'erreurs à un template.
 
 .. code-block:: php
 
@@ -256,7 +256,7 @@ Pour plus d'informations, voir le chapitre :doc:`Forms</book/forms>`.
 Configuration
 -------------
 
-Le validateur Symfony2 est activée par défaut, mais vous devez activer explicitement
+Le validateur Symfony2 est activé par défaut, mais vous devez activer explicitement
 les annotations, si vous voulez les utiliser pour spécifier vos contraintes :
 
 .. configuration-block::
@@ -835,7 +835,7 @@ Le mot de la fin
 ----------------
 
 Le ``validator`` de Symfony2 est un outil puissant qui peut être un atout pour
-garantir que les données de n'importe quel objet est « valide ». La puissance
+garantir que les données de n'importe quel objet sont « valides ». La puissance
 de la validation réside dans les « contraintes », qui sont des règles que vous
 pouvez appliquer aux propriétés ou aux méthodes getter de votre objet. Et tandis
 que vous utiliserez plus communément le système de validation indirectement
