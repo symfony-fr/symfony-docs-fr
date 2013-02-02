@@ -381,7 +381,7 @@ fonction de l'URI demandée:
 
     // route la requête en interne
     $uri = $_SERVER['REQUEST_URI'];
-    if ('/index.php' == ) {
+    if ('/index.php' == $uri) {
         list_action();
     } elseif ('/index.php/show' == $uri && isset($_GET['id'])) {
         show_action($_GET['id']);
