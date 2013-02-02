@@ -19,7 +19,7 @@ plus importantes de la bibliothèque des formulaires.
 .. index::
    single: Formulaires; Créer un formulaire simple
 
-Créer un Formulaire Simple
+Créer un formulaire simple
 --------------------------
 
 Supposez que vous construisiez une application « todo list » (en français : « liste
@@ -120,10 +120,10 @@ Pour l'instant, tout ceci peut être effectué depuis un contrôleur :
    Cet exemple vous montre comment construire votre formulaire directement
    depuis le contrôleur. Plus tard, dans la section
    « :ref:`book-form-creating-form-classes` », vous apprendrez à construire
-   votre formulaire dans une classe autonome, ce qui est recommandé car comme
+   votre formulaire dans une classe autonome, ce qui est recommandé, car comme
    cela, vos formulaires deviennent réutilisables.
 
-Créer un formulaire requiert relativement peu de code car les objets formulaires
+Créer un formulaire requiert relativement peu de code, car les objets formulaires
 de Symfony2 sont construits avec un « constructeur de formulaire » (« form builder »).
 Le principe du constructeur de formulaire est de vous permettre d'écrire des
 « conteneurs » de formulaire simples, et de le laisser prendre en charge toute
@@ -135,7 +135,7 @@ classe ``Task``. Vous avez aussi assigné à chaque champ un « type » (par exe
 ``text``, ``date``), qui, entre autres, détermine quelle(s) balise(s) HTML
 est rendue pour ce champ.
 
-Symfony2 est livré avec beaucoup de types pré-définis qui seront présentés
+Symfony2 est livré avec beaucoup de types prédéfinis qui seront présentés
 rapidement plus tard (voir :ref:`book-forms-type-reference`).
 
 .. index::
@@ -181,16 +181,16 @@ un ensemble de fonctions d'aide (helpers) pour les formulaires :
     été créé plus tôt.
 
 C'est tout ! En affichant ``form_widget(form)``, chaque champ du formulaire
-est rendu, avec un label et un message d'erreur (si erreur il y a). Aussi
+est affiché, avec un label et un message d'erreur (si erreur il y a). Aussi
 facile que cela soit, ce n'est pas (encore) très flexible. Habituellement,
 vous voudrez rendre chaque champ du formulaire individuellement afin de
 pouvoir contrôler ce à quoi le formulaire ressemble. Vous apprendrez comment
 faire cela dans la section «:ref:`form-rendering-template`».
 
-Avant de continuer, notez comment le champ ``task`` rendu possède la
+Avant de continuer, notez comment le champ ``task`` affiché possède la
 valeur de la propriété ``task`` de l'objet ``$task`` (c-a-d « Write a blog
 post »). C'est le premier travail d'un formulaire : de prendre les données
-d'un objet et de les traduire dans un format adapté pour être rendues dans
+d'un objet et de les traduire dans un format adapté pour être affiché dans
 un formulaire HTML.
 
 .. tip::
@@ -198,7 +198,7 @@ un formulaire HTML.
    Le système de formulaire est assez intelligent pour accéder la valeur de la
    propriété protégée ``task`` via les méthodes ``getTask()`` et ``setTask()``
    de la classe ``Task``. A moins qu'une propriété soit publique, elle *doit*
-   avoir une méthode « getter » et une « setter » afin que le composant formulaire
+   avoir une méthode « getter » et un « setter » afin que le composant formulaire
    puisse récupérer et assigner des données à cette propriété. Pour une propriété
    booléenne, vous pouvez utiliser une méthode « isser » (par exemple :
    ``isPublished()``) à la place d'un getter (par exemple : ``getPublished()``).
@@ -266,7 +266,7 @@ et a trois scénarios possibles :
    de la requête est ``GET`` et le formulaire est simplement créé et rendu ;
 
 #. Lorsque l'utilisateur soumet le formulaire (la méthode est ``POST``)
-   avec des données non-valides (la validation est expliquée dans la prochaine
+   avec des données non valides (la validation est expliquée dans la prochaine
    section), le formulaire est lié puis rendu, affichant cette fois toutes les
    erreurs de validation ;
 
@@ -279,16 +279,16 @@ et a trois scénarios possibles :
 .. note::
 
    Rediriger un utilisateur après une soumission de formulaire réussie empêche
-   l'utilisateur de pouvoir rafraichir la page et de re-soumettre les données.
+   l'utilisateur de pouvoir rafraichir la page et de resoumettre les données.
 
 .. index::
    single: Formulaires; Validation
 
-Validation de Formulaire
+Validation de formulaire
 ------------------------
 
 Dans la section précédente, vous avez appris comment un formulaire peut être
-soumis avec des données valides ou non-valides. Dans Symfony2, la validation
+soumis avec des données valides ou non valides. Dans Symfony2, la validation
 est appliquée à l'objet sous-jacent (par exemple : ``Task``). En d'autres termes,
 la question n'est pas de savoir si le « formulaire » est valide, mais plutôt de
 savoir si l'objet ``$task`` est valide ou non après que le formulaire lui ait
@@ -366,7 +366,7 @@ puisse pas être vide et qu'il doive être un objet \DateTime valide.
             }
         }
 
-C'est tout ! Si vous re-soumettez le formulaire avec des données non-valides,
+C'est tout ! Si vous resoumettez le formulaire avec des données non valides,
 vous allez voir les erreurs correspondantes affichées avec le formulaire.
 
 .. _book-forms-html5-validation-disable:
@@ -482,7 +482,7 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
 
 .. _book-forms-type-reference:
 
-Types de Champ Intégrés
+Types de champ intégrés
 -----------------------
 
 Symfony vient par défaut avec un grand nombre de types de champ qui couvre
@@ -582,15 +582,15 @@ un peu plus haut), ces options sont appliquées au champ prédit.
 .. caution::
 
     Si votre formulaire utilise un groupe de validation spéficique, le
-    prédicteur de type de champ continuera toujours à considérer *toutes*
+    prédicateur de type de champ continuera toujours à considérer *toutes*
     les contraintes de validation lorsqu'il essaie de deviner ces derniers
-    (incluant les contraintes qui ne font pas partie du ou des groupe(s)
+    (incluant les contraintes qui ne font pas partie du ou des groupes
     étant utilisés).
 
 .. index::
    single: Formulaires; Prédiction de type de champ
 
-Prédiction des Options de Type de Champ
+Prédiction des options de type de champ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En plus de pouvoir prédire le « type » d'un champ, Symfony peut aussi essayer
@@ -715,7 +715,7 @@ le rendu de ``form_row`` peut être personnalisé à différents niveaux.
 Rendre chaque Champ à la Main
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La fonction d'aide ``form_row`` est géniale car, grâce à elle, vous pouvez
+La fonction d'aide ``form_row`` est géniale, car, grâce à elle, vous pouvez
 rendre très rapidement chaque champ de votre formulaire (et les balises
 utilisées pour ce champ peuvent être personnalisées aussi). Mais comme la
 vie n'est pas toujours simple, vous pouvez aussi rendre chaque champ
@@ -760,7 +760,7 @@ que lorsque vous avez utilisé la fonction d'aide ``form_row`` :
 
         <?php echo $view['form']->rest($form) ?>
 
-Si le label auto-généré pour un champ n'est pas tout à fait correct, vous
+Si le label autogénéré pour un champ n'est pas tout à fait correct, vous
 pouvez le spécifier explicitement :
 
 .. configuration-block::
@@ -773,11 +773,11 @@ pouvez le spécifier explicitement :
 
         <?php echo $view['form']->label($form['task'], 'Task Description') ?>
 
-Quelques types de champ ont des options de rendu supplémentaires
+Quelques types de champ ont des options d'affichage supplémentaires
 qui peuvent être passées au widget. Ces options sont documentées avec chaque
 type, mais une qui est commune est l'option ``attr``, qui vous permet de modifier
 les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
-``task_field`` au champ texte rendu :
+``task_field`` au champ texte affiché :
 
 .. configuration-block::
 
@@ -914,8 +914,8 @@ manière de créer des formulaires, mais le choix final vous revient.
     la levée d'une exception.
   
     Dans le cas où vous avez besoin de champs supplémentaires dans le formulaire
-    (par exemple une checkbox « Acceptez vous les conditions d'utilisation ») qui
-    ne doi pas être mappé à l'objet sous-jacent, vous devez définir l'option
+    (par exemple une checkbox « Acceptez-vous les conditions d'utilisation ») qui
+    ne doit pas être mappé à l'objet sous-jacent, vous devez définir l'option
     ``mapped`` setting à ``false``::
 
         use Symfony\Component\Form\FormBuilderInterface;
@@ -985,7 +985,7 @@ pourrait contenir des données appartenant à un objet ``User`` ainsi qu'à
 plusieurs objets ``Address``. Heureusement, gérer cela est facile et naturel
 avec le composant formulaire.
 
-Imbriquer un Objet Unique
+Imbriquer un objet unique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposez que chaque ``Task`` appartienne à un simple objet ``Category``.
@@ -1135,7 +1135,7 @@ que vous souhaitez.
 Imbriquer une Collection de Formulaires
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi imbriquer une collection de formulaire dans un formulaire
+Vous pouvez aussi imbriquer une collection de formulaires dans un formulaire
 (imaginez un formulaire ``Catégorie`` avec plusieurs sous-formulaires ``Produit``).
 Cela peut être accompli en utilisant le type de champ ``collection``.
 
@@ -1202,7 +1202,7 @@ balise :
 
 Le fragment de formulaire ``form_row`` est utilisé pour rendre la plupart
 des champs via la fonction ``form_row``. Pour dire au composant formulaire
-d'utiliser votre nouveau fragment ``form_row`` defini ci-dessus, ajoutez
+d'utiliser votre nouveau fragment ``form_row`` défini ci-dessus, ajoutez
 ce qui suit en haut du template qui rend le formulaire :
 
 .. configuration-block::
@@ -1233,8 +1233,8 @@ quand la fonction ``form_row`` est appelée plus tard dans ce template, elle va
 utiliser le bloc ``form_row`` de votre thème personnalisé (à la place du bloc
 par défaut ``form_row`` qui est délivré avec Symfony).
 
-Votre thème personnalisé n'a pas besoin de surcharger tous les blocks. Lorsqu'il
-affiche un block qui n'est pas surchargé par votre thème personnalisé, le moteur de
+Votre thème personnalisé n'a pas besoin de surcharger tous les blocs. Lorsqu'il
+affiche un bloc qui n'est pas surchargé par votre thème personnalisé, le moteur de
 thème se rabattra sur le thème global (défini au niveau du bundle).
 
 Si plusieurs thèmes personnalisés sont fournis, ils seront pris selon l'ordre
@@ -1267,7 +1267,7 @@ Pour plus de précisions, lisez :doc:`/cookbook/form/form_customization`.
 Nommage de Fragment de Formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dans Symfony, chaque partie d'un formulaire qui est rendue - éléments de formulaire
+Dans Symfony, chaque partie d'un formulaire qui est rendu - éléments de formulaire
 HTML, erreurs, labels, etc - est définie dans un thème de base, qui est une
 collection de blocs dans Twig et une collection de fichiers de template dans PHP.
 
@@ -1343,7 +1343,7 @@ le fragment ``form_errors`` directement.
 .. index::
    single: Formulaires; Habillage global
 
-Habillage Global de Formulaire
+Habillage global de Formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans l'exemple ci-dessus, vous avez utilisé la fonction d'aide ``form_theme``
@@ -1498,14 +1498,14 @@ CSRF sans n'avoir rien à faire. En fait, chaque formulaire dans ce chapitre
 a profité de la protection CSRF !
 
 La protection CSRF fonctionne en ajoutant un champ caché dans votre formulaire -
-appelé ``_token`` par défaut - qui contient une valeur que seul vous et votre
+appelé ``_token`` par défaut - qui contient une valeur que seuls vous et votre
 utilisateur connaissez. Cela garantit que l'utilisateur - et non pas une autre
 entité - soumet les informations données. Symfony valide automatiquement la
 présence et l'exactitude de ce jeton.
 
 Le champ ``_token`` est un champ caché et sera rendu automatiquement si vous
 incluez la fonction ``form_rest()`` dans votre template, qui garantit que
-tous les champs non-rendus sont délivrés en sortie.
+tous les champs non rendus sont délivrés en sortie.
 
 Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple :
 
@@ -1538,7 +1538,7 @@ votre projet. Pour plus d'informations, voir la section de
 
 .. note::
 
-    L'option ``intention`` est optionnelle mais améliore grandement la sécurité
+    L'option ``intention`` est optionnelle, mais améliore grandement la sécurité
     du jeton généré en le rendant différent pour chaque formulaire.
 
 .. index::
@@ -1548,7 +1548,7 @@ Utiliser un formulaire sans classe
 ----------------------------------
 
 Dans la plupart des cas, un formulaire est associé à un objet, et les champs du 
-formulaire affichent et stockent leur données dans les propriétés d'un objet. C'est
+formulaire affichent et stockent leurs données dans les propriétés d'un objet. C'est
 exactement ce que vous avez vu jusqu'ici dans ce chapitre avec la classe `Task`.
 
 Mais parfois, vous voudrez juste utiliser un formulaire sans une classe, et obtenir
@@ -1668,7 +1668,7 @@ surchargez la méthode ``setDefaultOptions`` pour les spécifier :
 Maintenant, vous avez la flexibilité de créer des formulaires - avec validation -
 qui retourne un tableau de données plutôt qu'un objet. Dans la plupart des cas, il
 est préférable - et certainement plus robuste - d'associer le formulaire à un objet.
-Mais pour les formulaires simple, cette approche est suffisante. 
+Mais pour les formulaires simples, cette approche est suffisante. 
 
 Réflexions finales
 ------------------
@@ -1679,10 +1679,10 @@ construisez des formulaires, gardez à l'esprit que le but premier d'un
 formulaire est de transcrire les données d'un objet (``Task``) en un formulaire
 HTML afin que l'utilisateur puisse modifier ces données. Le second objectif d'un
 formulaire est de prendre les données soumises par l'utilisateur et de les
-ré-appliquer à l'objet.
+réappliquer à l'objet.
 
 Il y a beaucoup plus à apprendre à propos de la puissance du monde des
-formulaires, comme par exemple comment gérer les :doc:`uploads de fichier
+formulaires, par exemple comment gérer les :doc:`uploads de fichier
 avec Doctrine</cookbook/doctrine/file_uploads>` ou comment créer un
 formulaire où un nombre dynamique de sous-formulaires peut être ajouté
 (par exemple : une liste de choses à faire où vous pouvez continuer d'ajouter

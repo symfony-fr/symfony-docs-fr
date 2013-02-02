@@ -159,7 +159,7 @@ de raccourci ``get()`` :
 
 Lorsque vous demandez le service ``my_mailer``  du conteneur, le conteneur
 construit l'objet et le retourne. Ceci est un autre avantage majeur 
-d'utiliser le conteneur de services. A savoir, un service est *jamais* construit avant
+d'utiliser le conteneur de services. A savoir, un service n'est *jamais* construit avant
 qu'il ne soit nécessaire. Si vous définissez un service et ne l'utilisez jamais sur une demande, le service
 n'est jamais créé. Cela permet d'économiser la mémoire et d'augmenter la vitesse de votre application.
 Cela signifie aussi qu'il y a très peu ou pas d'impact de performance en définissant 
@@ -222,15 +222,15 @@ simple. Les paramètres rendent les définitions de services plus organisées et
 
 Le résultat final est exactement le même que précédemment - la différence est seulement dans
 la *manière* dont vous avez défini le service. En entourant les chaînes
-``my_mailer.class`` et ``my_mailer.transport`` par le signe pourcent (``%``), le
+``my_mailer.class`` et ``my_mailer.transport`` par le signe pour cent (``%``), le
 conteneur sait qu'il faut chercher des paramètres avec ces noms. Quand le conteneur est
 construit, il cherche la valeur de chaque paramètre et l'utilise dans la définition du
 service.
 
 .. note::
 
-    Le signe pourcent au sein d'un paramètre ou d'un argument, et qui fait partie
-    de la chaîne de caractères, doit être échappé par un autre signe pourcent :
+    Le signe pour cent au sein d'un paramètre ou d'un argument, et qui fait partie
+    de la chaîne de caractères, doit être échappé par un autre signe pour cent :
 
     .. code-block:: xml
 
@@ -437,7 +437,7 @@ Importer la Configuration via les Extensions de Conteneur
 Quand vous développerez avec Symfony2, vous utiliserez le plus souvent la directive ``imports``
 pour importer la configuration du conteneur des bundles que vous avez créé spécifiquement
 pour votre application. Les configurations des conteneurs des bundles tiers, y compris
-les services du noyau de Symfony2, sont habituellement chargés en utilisant une autre méthode qui est plus
+les services du noyau de Symfony2, sont habituellement chargées en utilisant une autre méthode qui est plus
 souple et facile à configurer dans votre application.
 
 Voici comment cela fonctionne. En interne, chaque bundle définit ses services 
@@ -508,7 +508,7 @@ dessus.
 
 Bien sûr, vous pouvez faire beaucoup plus que simplement « activer » l'extension du conteneur 
 de services du ``FrameworkBundle``. Chaque extension vous permet de facilement
-personnaliser le bundle, sans se soucier de la manière dont les services internes sont
+personnaliser le bundle, sans vous soucier de la manière dont les services internes sont
 définis.
 
 Dans ce cas, l'extension vous permet de personnaliser le ``error_handler``,
@@ -894,9 +894,9 @@ du framework.
 Tags
 ----
 
-De la même manière qu'un billet de blog sur le Web pourrait être taggé avec des noms
+De la même manière qu'un billet de blog sur le Web pourrait être tagué avec des noms
 telles que « Symfony » ou « PHP », les services configurés dans votre conteneur peuvent également être
-taggés. Dans le conteneur de services, un tag laisse supposer que le service est censé
+tagués. Dans le conteneur de services, un tag laisse supposer que le service est censé
 être utilisé dans un but précis. Prenons l'exemple suivant :
 
 .. configuration-block::
@@ -931,7 +931,7 @@ Les tags, alors, sont un moyen de dire aux bundles de Symfony2 ou tiers que
 votre service doit être enregistré ou utilisé d'une manière spéciale par le bundle.
 
 Ce qui suit est une liste de tags disponibles avec les bundles noyau de Symfony2.
-Chacun d'eux a un effet différent sur votre service et de nombreuses tags nécessitent
+Chacun d'eux a un effet différent sur votre service et de nombreux tags nécessitent
 des paramètres supplémentaires (au-delà du paramètre ``name``).
 
 Pour une liste de tous les tags disponibles dans le coeur du Framework Symfony,
@@ -941,7 +941,7 @@ Débugger les services
 ---------------------
 
 Vous pouvez voir quels services sont enregistrés dans le conteneur grâce à la console.
-Pour afficher tout les services et les classes de chacun d'entre eux, exécutez :
+Pour afficher tous les services et les classes de chacun d'entre eux, exécutez :
 
 .. code-block:: bash
 

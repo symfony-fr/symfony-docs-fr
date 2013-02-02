@@ -260,7 +260,7 @@ Utilisation d'un formulaire de connexion traditionnel
 .. tip::
 
     Dans cette section, vous apprendre comment créer un formulaire de connexion basique
-    qui continue d'utilisez les utilisateurs codés en dur que vous avez défini dans le
+    qui continue d'utiliser les utilisateurs codés en dur que vous avez défini dans le
     fichier ``security.yml``.
 
     Pour charger les utilisateurs de la base de données, lisez :doc:`/cookbook/security/entity_provider`.
@@ -468,7 +468,7 @@ Il ne nous reste qu'à créer le template correspondant :
             <input type="password" id="password" name="_password" />
             
             {#
-                Si vous voulez controler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+                Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
                 (plus de détails ci-dessous)
                 <input type="hidden" name="_target_path" value="/account" />
             #}
@@ -524,7 +524,7 @@ Récapitulons tout le processus :
    créés dans cet exemple.
 #. L'utilisateur soumet le formulaire de connexion à ``/login_check``;
 #. Le système de sécurité intercepte la requête, vérifie les informations d'identification 
-   soumis par l'utilisateur, authentifie l'utilisateur si elles sont correctes et renvoie 
+   soumises par l'utilisateur, authentifie l'utilisateur si elles sont correctes et renvoie 
    l'utilisateur au formulaire de connexion si elles ne le sont pas.
 
 Par défaut, si les informations d'identification sont correctes, l'utilisateur va être redirigé
@@ -1072,7 +1072,7 @@ la base de données). Il est clair que dans une vraie application, vous allez vo
 les mots de passe de vos utilisateurs pour des raisons de sécurité. Ceci est facile à
 accomplir en mappant votre classe User avec un des nombreux « encodeurs » intégrés.
 
-Par exemple, pour rendre indéchiffrable les mots de passe de vos utilisateurs
+Par exemple, pour rendre indéchiffrables les mots de passe de vos utilisateurs
 en utilisant ``sha1``, suivez les instructions suivantes :
 
 .. configuration-block::
@@ -1200,7 +1200,7 @@ Récupérer l'objet User
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Après l'authentification, l'objet ``User`` correspondant à l'utilisateur courant peut être
-récupéré via le service ``security.context``. Depuis un controleur, cela ressemble à ça::
+récupéré via le service ``security.context``. Depuis un contrôleur, cela ressemble à ça::
 
     public function indexAction()
     {
@@ -1594,7 +1594,7 @@ la fonction helper intégrée :
 
     Si vous utilisez cette fonction et que vous ne vous trouvez pas à une URL pour laquelle
     un pare-feu est actif, une exception sera lancée. Encore une fois, c'est toujours une
-    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (que montré dans ce chapitre).
+    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (comme c'e'st montré dans ce chapitre).
 
 Contrôle d'accès dans les Contrôleurs
 -------------------------------------
@@ -1716,8 +1716,8 @@ Authentification sans état
 
 Par défaut, Symfony2 s'appuie sur cookie (la Session) pour garder 
 le contexte de sécurité d'un utilisateur.
-Mais si vous utilisez des certificats ou l'authentification HTTP par exemple, la persistence
-n'est pas nécessaire car l'identité est disponible à chaque requête. Dans ce cas, et si vous
+Mais si vous utilisez des certificats ou l'authentification HTTP par exemple, la persistance
+n'est pas nécessaire, car l'identité est disponible à chaque requête. Dans ce cas, et si vous
 n'avez pas besoin de sauvegarder quelque chose entre les requêtes, vous pouvez activer
 l'authentification sans état (stateless authentication), ce qui veut dire qu'aucun cookie
 ne sera jamais créé par Symfony2 :
@@ -1799,9 +1799,9 @@ La méthode
 retourne une chaine de caractères numérique d'une longueur égale au nombre passé
 en argument (10 dans l'exemple ci-dessus).
 
-La classe SecureRandom est plus efficace lorsque OpenSSL est installé mais
+La classe SecureRandom est plus efficace lorsque OpenSSL est installé, mais
 s'il n'est pas disponible, elle se rabat sur un algorithme interne qui a besoin
-d'un fichier pour l'alimenter. Contentez vous de passer le nom du fichier en
+d'un fichier pour l'alimenter. Contentez-vous de passer le nom du fichier en
 argument pour l'activer::
 
     $generator = new SecureRandom('/some/path/to/store/the/seed.txt');

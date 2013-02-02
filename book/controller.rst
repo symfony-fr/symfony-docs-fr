@@ -213,7 +213,7 @@ Les paramètres de la route en tant qu'arguments du contrôleur
 
 Vous savez déjà que le paramètre ``_controller`` ``AcmeHelloBundle:Hello:index``
 réfère à une méthode ``HelloController::indexAction()`` qui réside dans le bundle
-``AcmeHelloBundle``. Mais ce qui est plus intéressant sont les arguments qui sont passés
+``AcmeHelloBundle``. Mais ce qui est plus intéressant est les arguments qui sont passés
 à cette méthode::
 
     // src/Acme/HelloBundle/Controller/HelloController.php
@@ -413,7 +413,7 @@ Les Tâches Communes du Contrôleur
 
 Bien qu'un contrôleur puisse effectuer quoi que soit virtuellement, la plupart
 d'entre eux va accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
-telles rediriger, forwarder, rendre des templates et accéder aux services,
+comme rediriger, forwarder, afficher des templates et accéder aux services
 sont très faciles à gérer dans Symfony2.
 
 .. index::
@@ -546,7 +546,7 @@ qui retourne un objet ``Response`` contenant le contenu du template :
 Dans les deux cas, le template ``Resources/views/Hello/index.html.twig`` dans
 ``AcmeHelloBundle`` sera délivré.
 
-Le moteur de rendu (« templating engine ») de Symfony est expliqué plus en détails dans
+Le moteur de rendu (« templating engine ») de Symfony est expliqué plus en détail dans
 le chapitre :doc:`Templating </book/templating>`
 
 .. tip::
@@ -799,7 +799,7 @@ qu'il faut pour retourner l'objet final ``Response`` qui sera délivré à
 l'utilisateur.
 
 Pour vous simplifier la vie, vous pouvez choisir d'étendre une classe ``Controller``
-de base, qui contient des méthodes raccourcis pour de nombreuses tâches
+de base, qui contient des méthodes raccourcies pour de nombreuses tâches
 communes d'un contrôleur. Par exemple, sachant que vous ne voulez pas mettre
 de code HTML dans votre contrôleur, vous pouvez utiliser la méthode ``render()``
 pour délivrer et retourner le contenu d'un template.
