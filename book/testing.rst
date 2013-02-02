@@ -569,7 +569,7 @@ affiner votre sélection de noeuds en enchainant les appels de méthodes :
 
 .. tip::
 
-    Utilisez la fonction ``count()`` pour avoir le nombre de noeuds contenu dans
+    Utilisez la fonction ``count()`` pour avoir le nombre de noeuds contenus dans
     le Crawler :
     ``count($crawler)``
 

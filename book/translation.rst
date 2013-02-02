@@ -5,7 +5,7 @@ Traductions
 ===========
 
 Le terme « internationalisation » (souvent abrégé `i18n`_) désigne le processus d'abstraction des textes
-et autres spécificités locales en dehors de votre application qui est ensuite placé
+et autres spécificités locales en dehors de votre application qui sont ensuite placés
 dans un fichier où ils peuvent être traduits et convertis en se basant sur la locale de
 l'utilisateur (i.e. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
 une fonction capable de traduire le texte (ou « message ») dans la langue de l'utilisateur :
