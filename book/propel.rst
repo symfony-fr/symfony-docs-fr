@@ -437,7 +437,7 @@ Comportements
 -------------
 
 Tous les comportements fournis par Propel fonctionnent avec Symfony2. Pour avoir
-plus d'informations sures comment utiliser les comportements Propel, jetez un oeil
+plus d'informations sur la manière d'utiliser les comportements Propel, jetez un oeil
 à la `Section de Référence des Comportements`_.
 
 Commandes
