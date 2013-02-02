@@ -436,6 +436,12 @@ la valeur ``2``. Parfait.
 | /blog/2 | {page} = 2 |
 +---------+------------+
 
+.. tip::
+
+    Les routes avec des paramètres optionnels à la fin ne correspondront pas à la requête
+    demandée s'il y a un slash à la fin (ex ``/blog/`` ne correspondra pas, ``/blog`` correspondra).
+
+
 .. index::
    single: Routing; Requirements
 
