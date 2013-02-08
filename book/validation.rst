@@ -153,9 +153,9 @@ Si vous insérez une valeur dans la propriété ``name``, le message de succès 
         service ``validator`` ou besoin de vous inquiéter concernant l'affichage des erreurs.
         La plupart du temps, vous allez utiliser la validation indirectement lors
         de la soumission des données du formulaire. Pour plus d'informations,
-        consultez le :ref:`book-validation-forms`.
+        consultez-le :ref:`book-validation-forms`.
     
-Vous pouvez aussi passer une collection d'erreur à un template.
+Vous pouvez aussi passer une collection d'erreurs à un template.
 
 .. code-block:: php
 
@@ -256,7 +256,7 @@ Pour plus d'informations, voir le chapitre :doc:`Forms</book/forms>`.
 Configuration
 -------------
 
-Le validateur Symfony2 est activée par défaut, mais vous devez activer explicitement
+Le validateur Symfony2 est activé par défaut, mais vous devez activer explicitement
 les annotations, si vous voulez les utiliser pour spécifier vos contraintes :
 
 .. configuration-block::
@@ -502,7 +502,8 @@ pour avoir au moins 3 caractères.
             properties:
                 firstName:
                     - NotBlank: ~
-                    - MinLength: 3
+                    - MinLength:
+						min: 3
 
     .. code-block:: php-annotations
 
@@ -513,7 +514,7 @@ pour avoir au moins 3 caractères.
         {
             /**
              * @Assert\NotBlank()
-             * @Assert\MinLength(3)
+             * @Assert\Length(min = "3")
              */
             private $firstName;
         }
@@ -525,7 +526,9 @@ pour avoir au moins 3 caractères.
         <class name="Acme\BlogBundle\Entity\Author">
             <property name="firstName">
                 <constraint name="NotBlank" />
-                <constraint name="MinLength">3</constraint>
+                <constraint name="Length">
+					<option name="min">3</option>
+				</constraint>
             </property>
         </class>
 
@@ -534,7 +537,7 @@ pour avoir au moins 3 caractères.
         // src/Acme/BlogBundle/Entity/Author.php
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\NotBlank;
-        use Symfony\Component\Validator\Constraints\MinLength;
+        use Symfony\Component\Validator\Constraints\Length;
 
         class Author
         {
@@ -543,7 +546,9 @@ pour avoir au moins 3 caractères.
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('firstName', new NotBlank());
-                $metadata->addPropertyConstraint('firstName', new MinLength(3));
+                $metadata->addPropertyConstraint(
+					'firstName', 
+					new Length(array("min" => 3)));
             }
         }
 
@@ -668,9 +673,10 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tar
                     - Email: { groups: [registration] }
                 password:
                     - NotBlank: { groups: [registration] }
-                    - MinLength: { limit: 7, groups: [registration] }
+                    - Length: { min: 7, groups: [registration] }
                 city:
-                    - MinLength: 2
+                    - Length:
+						min: 2
 
     .. code-block:: php-annotations
 
@@ -689,12 +695,12 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tar
 
             /**
             * @Assert\NotBlank(groups={"registration"})
-            * @Assert\MinLength(limit=7, groups={"registration"})
+            * @Assert\Length(min=7, groups={"registration"})
             */
             private $password;
 
             /**
-            * @Assert\MinLength(2)
+            * @Assert\Length(min = "2")
             */
             private $city;
         }
@@ -716,15 +722,17 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tar
                         <value>registration</value>
                     </option>
                 </constraint>
-                <constraint name="MinLength">
-                    <option name="limit">7</option>
+                <constraint name="Length">
+                    <option name="min">7</option>
                     <option name="groups">
                         <value>registration</value>
                     </option>
                 </constraint>
             </property>
             <property name="city">
-                <constraint name="MinLength">7</constraint>
+                <constraint name="Length">
+                    <option name="min">7</option>
+                </constraint>
             </property>
         </class>
 
@@ -736,7 +744,7 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tar
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\Email;
         use Symfony\Component\Validator\Constraints\NotBlank;
-        use Symfony\Component\Validator\Constraints\MinLength;
+        use Symfony\Component\Validator\Constraints\Length;
 
         class User
         {
@@ -749,12 +757,14 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tar
                 $metadata->addPropertyConstraint('password', new NotBlank(array(
                     'groups' => array('registration')
                 )));
-                $metadata->addPropertyConstraint('password', new MinLength(array(
-                    'limit'  => 7,
+                $metadata->addPropertyConstraint('password', new Length(array(
+                    'min'  => 7,
                     'groups' => array('registration')
                 )));
 
-                $metadata->addPropertyConstraint('city', new MinLength(3));
+                $metadata->addPropertyConstraint(
+				'city', 
+				Length(array("min" => 3)));
             }
         }
 
@@ -825,7 +835,7 @@ Le mot de la fin
 ----------------
 
 Le ``validator`` de Symfony2 est un outil puissant qui peut être un atout pour
-garantir que les données de n'importe quel objet est « valide ». La puissance
+garantir que les données de n'importe quel objet sont « valides ». La puissance
 de la validation réside dans les « contraintes », qui sont des règles que vous
 pouvez appliquer aux propriétés ou aux méthodes getter de votre objet. Et tandis
 que vous utiliserez plus communément le système de validation indirectement

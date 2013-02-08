@@ -6,7 +6,7 @@ Propel et les bases de données
 
 Regardons la vérité en face, l'une des tâches les plus communes et difficiles
 pour quelconque application implique de devoir persister et lire de l'information
-dans et depuis une base de données. Symfony2 ne vient pas avec un ORM intégré mais
+dans et depuis une base de données. Symfony2 ne vient pas avec un ORM intégré, mais
 l'intégration de Propel reste néanmoins aisée. Pour commencer, lisez
 `Travailler Avec Symfony2`_.
 
@@ -320,7 +320,7 @@ Créez les classes :
 
 Assumons que vous ayez des produits dans votre base de données, vous ne souhaitez
 pas les perdre. Grâce aux migrations, Propel va être capable de mettre à jour votre
-base de données sans perdre aucune données.
+base de données sans perdre aucune donnée.
 
 .. code-block:: bash
 
@@ -437,7 +437,7 @@ Comportements
 -------------
 
 Tous les comportements fournis par Propel fonctionnent avec Symfony2. Pour avoir
-plus d'informations sur comment utiliser les comportements Propel, jetez un oeil
+plus d'informations sur la manière d'utiliser les comportements Propel, jetez un oeil
 à la `Section de Référence des Comportements`_.
 
 Commandes

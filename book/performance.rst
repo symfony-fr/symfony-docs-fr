@@ -32,7 +32,7 @@ Le cache de byte code surveille normalement tout changement de code source.
 Cela permet de recompiler automatiquement le byte code en cas de changement
 d'un fichier source. C'est très pratique, mais cela a évidemment un coût.
 
-Pour cette raison, certains cache de byte code offrent l'option de désactiver
+Pour cette raison, certains caches de byte code offrent l'option de désactiver
 la vérification, ce sera donc à l'administrateur système de vider le cache 
 à chaque changement de fichier. Sinon, les mises à jour ne seront pas visibles.
 
@@ -119,7 +119,7 @@ Veuillez noter qu'il y a deux inconvénients à utiliser un fichier d'amorçage 
   d'amorçage.
 
 Si vous utilisez l'édition Symfony2 standard, les fichiers d'amorçage sont automatiquement
-regénérés après avoir mis à jour les bibliothèques tierces (« vendors »)
+régénérés après avoir mis à jour les bibliothèques tierces (« vendors »)
 grâce à la commande ``php bin/vendors install``.
 
 Fichiers d'amorçage et caches de byte code

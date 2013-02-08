@@ -14,9 +14,9 @@ avec une base de données.
 
 .. note::
 
-    Doctrine est totalement découplé de Symfony et son utilisation est optionelle.
+    Doctrine est totalement découplé de Symfony et son utilisation est optionnelle.
     Ce chapitre est entièrement consacré à l'ORM Doctrine, dont l'objectif est de
-    mapper vos objets avec une base de donnée relationnelle (comme *MySQL*, *PostGresSQL*
+    mapper vos objets avec une base de données relationnelle (comme *MySQL*, *PostGresSQL*
     ou *Microsoft SQL*). Si vous préférez utiliser des requêtes SQL brutes,
     c'est facile, et expliqué dans l'article « :doc:`/cookbook/doctrine/dbal` » du cookbook
 
@@ -62,7 +62,7 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
 .. note::
 
     Définir la configuration dans ``parameters.yml`` est juste une convention.
-    Les paramètres définis dans ce fichiers sont référencés dans le fichier de
+    Les paramètres définis dans ce fichier sont référencés dans le fichier de
     configuration principal au moment de configurer Doctrine :
     
     .. code-block:: yaml
@@ -78,7 +78,7 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
     En gardant ces paramètres de connexion dans un fichier séparé, vous pouvez
     facilement garder différentes versions de ce fichier sur chaque serveur.
     Vous pouvez aussi stocker la configuration de la base de données (ou n'importe
-    quelle information sensible) en dehors de votre projet, comme par exemple
+    quelle information sensible) en dehors de votre projet, par exemple
     dans votre configuration Apache. Pour plus d'informations, consultez
     l'article :doc:`/cookbook/configuration/external_parameters`.
 
@@ -105,7 +105,7 @@ demander de créer votre base de données :
         $ php app/console doctrine:database:create
 
     Il n'y a aucune manière de configurer ces paramètres par défaut dans Doctrine,
-    puisque Doctrine essaye d'être aussi agnostic que possible en terme de configuration.
+    puisque Doctrine essaye d'être aussi agnostique que possible en terme de configuration.
     Un moyen de résoudre ce problème est de configurer les valeurs par défaut au niveau
     du serveur.
 
@@ -347,10 +347,10 @@ pas (c.à.d qu'elle ne remplace pas les méthodes existantes)
     Notez bien que vous n'avez pas *besoin* d'utiliser cette commande. Doctrine
     ne repose pas sur la génération de code. Comme les classes PHP classiques,
     vous devez juste vous assurer que vos propriétés protected/private ont bien
-    leur méthodes getter et setter associées.
-    Comme c'est une tâche récurrente à faire avec Doctrine, cette commande a été crée
+    leurs méthodes getter et setter associées.
+    Comme c'est une tâche récurrente à faire avec Doctrine, cette commande a été créée
 
-Vous pouvez également générer toutes les entitées connues (c.à.d toute classe PHP
+Vous pouvez également générer toutes les entités connues (c.à.d toute classe PHP
 qui contient des informations de mapping Doctrine) d'un bundle ou d'un namespace :
 
 .. code-block:: bash
@@ -363,7 +363,7 @@ qui contient des informations de mapping Doctrine) d'un bundle ou d'un namespace
     Doctrine se moque que vos propriétés soient ``protected`` ou ``private``, ou
     même que vous ayez un getter ou un setter pour une propriété.
     Les getters et setters sont générés ici seulement parce que vous en aurez besoin
-    pour intéragir avec vos objets PHP.
+    pour interagir avec vos objets PHP.
 
 Créer les Tables et le Schema
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -371,7 +371,7 @@ Créer les Tables et le Schema
 Vous avez maintenant une classe ``Product`` utilisable avec des informations de
 mapping permettant à Doctrine de savoir exactement comment le faire persister. Bien sûr,
 vous n'avez toujours pas la table ``product`` correspondante dans votre base de données.
-Heureusement, Doctrine peut créer automatiquement toute les tables de la base de données
+Heureusement, Doctrine peut créer automatiquement toutes les tables de la base de données
 nécessaires aux entités connues dans votre application. Pour ce faire, lancez :
 
 .. code-block:: bash
@@ -383,7 +383,7 @@ nécessaires aux entités connues dans votre application. Pour ce faire, lancez 
     En fait, cette commande est incroyablement puissante. Elle compare ce à quoi
     votre base de données *devrait* ressembler (en se basant sur le mapping de vos 
     entités) à ce à quoi elle ressemble *vraiment*, et génère le code SQL nécéssaire
-    pour *mettre à jour* la base de données vers ce qu'elle doit être. En d'autre termes,
+    pour *mettre à jour* la base de données vers ce qu'elle doit être. En d'autres termes,
     si vous ajoutez une nouvelle propriété avec des métadonnées mappées sur 
     ``Product`` et relancez cette tâche, elle vous génèrera une requête « alter table »
     nécessaire pour ajouter cette nouvelle colonne à la table ``products`` existante.
@@ -439,7 +439,7 @@ Décortiquons cet exemple :
   ``product`` comme n'importe quel autre objet PHP normal.
 
 * **ligne 14** Cette ligne récupère un objet *gestionnaire d'entités* (entity manager)
-  de Doctrine, qui est responsable de la gestion du processus de persistence et de récupération
+  de Doctrine, qui est responsable de la gestion du processus de persistance et de récupération
   des objets vers et depuis la base de données.
 
 * **ligne 15** La méthode ``persist()`` dit à Doctrine de « gérer » l'objet ``product``.
@@ -448,14 +448,14 @@ Décortiquons cet exemple :
 * **ligne 16** Quand la méthode ``flush()`` est appelée, Doctrine regarde dans tous 
   les objets qu'il gère pour savoir si ils ont besoin d'être persistés dans la base
   de données. Dans cet exemple, l'objet ``$product`` n'a pas encore été persisté,
-  le gestionnaire d'entités éxecute donc une requête ``INSERT`` et une ligne est créée dans
+  le gestionnaire d'entités exécute donc une requête ``INSERT`` et une ligne est créée dans
   la table ``product``.
 
 .. note::
 
   En fait, comme Doctrine a connaissance de toutes vos entités gérées, lorsque
   vous appelez la méthode ``flush()``, il calcule un ensemble de changements
-  global et éxecute la ou les requêtes les plus efficaces possibles. Par exemple,
+  global et exécute la ou les requêtes les plus efficaces possible. Par exemple,
   si vous persistez un total de 100 objets ``Product`` et que vous appelez ensuite
   la méthode ``flush()``, Doctrine créera une *unique* requête préparée et la
   réutilisera pour chaque insertion. Ce concept est nommé *Unité de travail*, et
@@ -501,7 +501,7 @@ en se basant sur la valeur de son ``id`` :
     :doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/converters>`.
 
 Lorsque vous requêtez pour un type particulier d'objet, vous utiliserez toujours
-ce qui est connu sous le nom de « dépôt » (ou « repository »). Dites vous qu'un
+ce qui est connu sous le nom de « dépôt » (ou « repository »). Dites-vous qu'un
 dépôt est une classe PHP dont le seul travail est de vous aider à récupérer 
 des entités d'une certaine classe. Vous pouvez accéder au dépôt d'une classe
 d'entités avec :
@@ -525,11 +525,11 @@ Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte
     // requête par clé primaire (souvent "id")
     $product = $repository->find($id);
 
-    // Noms de méthodes dynamique en se basant sur un nom de colonne
+    // Noms de méthodes dynamiques en se basant sur un nom de colonne
     $product = $repository->findOneById($id);
     $product = $repository->findOneByName('foo');
 
-    // trouver *tout* les produits
+    // trouver *tous* les produits
     $products = $repository->findAll();
 
     // trouver un groupe de produits en se basant sur une valeur de colonne
@@ -541,7 +541,7 @@ Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte
     dans la section :ref:`book-doctrine-queries`.
 
 Vous pouvez aussi profiter des méthodes utiles ``findBy`` et ``findOneBy`` pour
-récupérer facilement des objets en se basant sur des conditions multiples :
+récupérer facilement des objets en vous basant sur des conditions multiples :
 
 .. code-block:: php
 
@@ -616,7 +616,7 @@ Supprimer un objet est très similaire, mais requiert un appel à la méthode
 
 Comme vous vous en doutez, la méthode ``remove()`` signale à Doctrine
 que vous voulez supprimer l'entité de la base de données. La vraie requête
-``DELETE``, cependant, n'est réellement executée que lorsque la méthode ``flush()``
+``DELETE``, cependant, n'est réellement exécutée que lorsque la méthode ``flush()``
 est appelée.
 
 .. _`book-doctrine-queries`:
@@ -675,7 +675,7 @@ la place :
     La méthode ``getSingleResult()`` lève une exception ``Doctrine\ORM\NoResultException``
     si aucun résultat n'est retourné et une exception ``Doctrine\ORM\NonUniqueResultException``
     si *plus* d'un résultat est retourné. Si vous utilisez cette méthode, vous voudrez
-    sans doute l'entourer d'un block try-catch pour vous assurer que seul un résultat
+    sans doute l'entourer d'un bloc try/catch pour vous assurer que seul un résultat
     est retourné (si vous requêtez quelque chose qui pourrait retourner plus d'un résultat) :
     
     .. code-block:: php
@@ -692,7 +692,7 @@ la place :
 
 La syntaxe du DQL est incroyablement puissante, vous permettant d'effectuer simplement
 des jointures entre vos entités (le sujet des :ref:`relations<book-doctrine-relations>` sera
-abordé plus tard), regrouper, etc. Pour plus d'informations, reportez vous à la documentation
+abordé plus tard), regrouper, etc. Pour plus d'informations, reportez-vous à la documentation
 officielle de Doctrine : `Doctrine Query Language`.
 
 .. sidebar:: Définir des paramètres
@@ -915,11 +915,11 @@ Tout d'abord, comme un objet ``Category`` sera relié à plusieurs objets
 ces objets ``Product``.
 Encore une fois, nous ne faisons pas cela parce que Doctrine en a besoin,
 mais plutôt parce qu'il est cohérent dans l'application que chaque ``Category``
-contiennent un tableau d'objets ``Product``.
+contienne un tableau d'objets ``Product``.
 
 .. note::
 
-    Le code de la méthode ``__construct()`` est important car Doctrine requiert
+    Le code de la méthode ``__construct()`` est important, car Doctrine requiert
     que la propriété ``$products`` soit un objet de type ``ArrayCollection``.
     Cet objet ressemble et se comporte *exactement* comme un tableau, mais
     avec quelque flexibilités supplémentaires. Si ça vous dérange, ne vous
@@ -930,7 +930,7 @@ contiennent un tableau d'objets ``Product``.
 .. tip::
 
     La valeur targetEntity utilisée plus haut peut faire référence à n'importe
-    quelle entitée avec un espace de nom valide, et pas seulement les entitées
+    quelle entité avec un espace de nom valide, et pas seulement les entités
     définies dans la même classe. Pour lier une entitée définie dans une autre
     classe ou un autre bundle, entrez l'espace de nom complet dans targetEntity.
 
@@ -971,7 +971,7 @@ il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
                         referencedColumnName: id
 
 Finalement, maintenant que vous avez ajouté une nouvelle propriété aux classes
-``Category`` et ``Product``, dites à Doctrine de regénérer les getters et setters
+``Category`` et ``Product``, dites à Doctrine de régénérer les getters et setters
 manquants pour vous :
 
 .. code-block:: bash
@@ -981,15 +981,15 @@ manquants pour vous :
 Ignorez les métadonnées de Doctrine pour un moment. Vous avez maintenant deux
 classes - ``Category`` et ``Product`` avec une relation naturelle one-to-many.
 La classe ``Category`` peut contenir un tableau de ``Product`` et l'objet ``Product``
-peut contenir un objet ``Category``. En d'autre termes, vous avez construit vos 
+peut contenir un objet ``Category``. En d'autres termes, vous avez construit vos 
 classes de manière à ce qu'elles aient un sens pour répondre à vos besoins. Le fait
 que les données aient besoin d'être persistées dans une base de données est
 toujours secondaire.
 
-Maintenant, regardez les métadonnées au dessus de la propriété ``$category``
+Maintenant, regardez les métadonnées au-dessus de la propriété ``$category``
 dans la classe ``Product``. Les informations ici disent à Doctrine que la classe
 associée est ``Category`` et qu'il devrait stocker l'``id`` de la catégorie
-dans un champ ``category_id`` présent dans la table ``product``. En d'autre
+dans un champ ``category_id`` présent dans la table ``product``. En d'autres
 termes, l'objet ``Category`` associé sera stocké dans la propriété ``$category``,
 mais dans les coulisses, Doctrine persistera la relation en stockant la valeur
 de l'id de la catégorie dans la colonne ``category_id`` de la table ``product``.
@@ -1001,7 +1001,7 @@ Les métadonnées de la propriété ``$products`` de l'objet ``Category``
 sont moins importantes, et disent simplement à Doctrine de regarder la propriété
 ``Product.category`` pour comprendre comment l'association est mappée.
 
-Avant que vous ne continuiez, assurez vous que Doctrine ajoute la nouvelle
+Avant que vous ne continuiez, assurez-vous que Doctrine ajoute la nouvelle
 table ``category``, et la colonne ``product.category_id``, ainsi que la
 nouvelle clé étrangère :
 
@@ -1112,7 +1112,7 @@ objet ``Category``, et Doctrine effectue alors une seconde requête pour récup�
 les objets ``Product`` associés, mais uniquement une fois que/si vous les demandez
 (c.à.d si vous appelez ``->getProducts()``).
 La variable ``$products`` est un tableau de tous les objets ``Product`` associés
-à l'objet ``Category`` donnés via leur valeurs ``category_id``.
+à l'objet ``Category`` donnés via leurs valeurs ``category_id``.
 
 .. sidebar:: Associations et classes mandataires
 
@@ -1227,7 +1227,7 @@ Callbacks et cycle de vie
 Parfois, vous voudrez effectuer des actions juste avant ou après qu'une entité 
 ait été insérée, mise à jour ou supprimée. Ces actions sont connues sous le nom
 de callbacks du « cycle de vie » (lifecycle), car il s'agit de callbacks (méthodes)
-qui peuvent être appelées à divers moment du cycle de vie de votre entité (par exemple lorsque
+qui peuvent être appelés à divers moments du cycle de vie de votre entité (par exemple lorsque
 l'entité est insérée, mise à jour, supprimée, etc.).
 
 Si vous utilisez des annotations pour vos métadonnées, commencez par activer
@@ -1245,7 +1245,7 @@ ce n'est pas nécessaire :
         // ...
     }
 
-Désormais, vous pouvez dire à Doctrine d'éxecutez une méthode à n'importe
+Désormais, vous pouvez dire à Doctrine d'éxecuter une méthode à n'importe
 quel évènement du cycle de vie. Par exemple, supposons que vous souhaitez
 définir une date ``created`` à la date courante, uniquement lorsque l'entité
 est persistée (c.à.d insérée) :
@@ -1307,14 +1307,14 @@ vie, ce qui inclut :
 * ``loadClassMetadata``
 
 Pour plus d'informations sur la signification de ces évènements du cycle de vie
-et sur leurs callbacks en général, référez vous à la documentation de
+et sur leurs callbacks en général, référez-vous à la documentation de
 Doctrine: `Lifecycle Events documentation`_.
 
 .. sidebar:: Callbacks du cycle de vie et traitants d'évènements
 
     Notez que la méthode ``setCreatedValue()`` ne prend pas d'argument.
     C'est toujours le cas des callbacks du cycle de vie, et c'est intentionnel :
-    ces callbacks doivent être de simple méthodes et contiennent des
+    ces callbacks doivent être de simples méthodes et contiennent des
     transformations de données internes à l'entité (ex: définir un champ
     créé ou mis à jour, générer une valeur de slug...).
 
@@ -1366,8 +1366,8 @@ vous utilisez. Les types suivants sont supportés par Doctrine :
 * **Autre types**
 
   * ``boolean``
-  * ``object`` (serialisé et stocké dans un champ ``CLOB``)
-  * ``array`` (serialisé et stocké dans un champ ``CLOB``)
+  * ``object`` (sérialisé et stocké dans un champ ``CLOB``)
+  * ``array`` (sérialisé et stocké dans un champ ``CLOB``)
 
 Pour plus d'informations, lisez la documentation Doctrine `Types de mapping Doctrine`_.
 
@@ -1447,11 +1447,11 @@ sur la commande ``doctrine:database:create``, lancez :
 
     php app/console help doctrine:database:create
 
-Quelques commandes notables ou intéréssantes incluent :
+Quelques commandes notables ou intéressantes incluent :
 
 * ``doctrine:ensure-production-settings`` - teste si l'environnement actuel
   est efficacement configuré pour la production. Cela devrait toujours être
-  lancé dans un environement `prod` :
+  lancé dans un environnement `prod` :
   
   .. code-block:: bash
   
@@ -1477,7 +1477,7 @@ Résumé
 ------
 
 Avec Doctrine, vous pouvez tout d'abord vous focaliser sur vos objets et sur 
-leur utilité dans votre application, puis vous occuper de leur persistence
+leur utilité dans votre application, puis vous occuper de leur persistance
 ensuite. Vous pouvez faire cela car Doctrine vous permet d'utiliser n'importe
 quel objet PHP pour stocker vos données et se fie aux métadonnées de mapping
 pour faire correspondre les données d'un objet à une table particulière de
@@ -1490,7 +1490,7 @@ cours du cycle de vie de vos objets.
 
 Pour plus d'informations sur Doctrine, lisez la section *Doctrine* du 
 Cookbook: :doc:`cookbook</cookbook/index>`, qui inclut les articles 
-suivant :
+suivants :
 
 * :doc:`/bundles/DoctrineFixturesBundle/index`
 * :doc:`/cookbook/doctrine/common_extensions`

@@ -5,7 +5,7 @@ Les Tests
 =========
 
 A chaque fois que vous écrivez une nouvelle ligne de code, vous ajoutez aussi
-potentiellement de nouveaux bugs. Pour créer de meilleurs applications et plus
+potentiellement de nouveaux bugs. Pour créer de meilleures applications et plus
 fiables, vous devriez tester votre code avec des tests fonctionnels et des tests
 unitaires.
 
@@ -46,7 +46,7 @@ Tests unitaires
 ---------------
 
 Un test unitaire teste habituellement une classe PHP spécifique. Si vous voulez tester
-le comportement général de votre application, lisez la sections sur les `Tests Fonctionnels`_.
+le comportement général de votre application, lisez la section sur les `Tests Fonctionnels`_.
 
 Écrire des tests unitaires avec Symfony2 n'est pas différent d'écrire des tests
 unitaires standards PHPUnit. Supposez, par exemple, que vous avez un classe
@@ -126,7 +126,7 @@ spécifique :
 * Tester la réponse;
 * Cliquer sur un lien ou soumettre un formulaire;
 * Tester la réponse;
-* Recommencer ainsi de suite.
+* Recommencer, ainsi de suite.
 
 Votre premier test fonctionnel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,7 +206,7 @@ cliquer dessus. Par exemple, le code suivant trouve tous les liens avec le text
     $crawler = $client->click($link);
 
 Soumettre un formulaire est très similaire : sélectionnez un bouton de ce dernier,
-ré-écrivez quelques unes de ses valeurs si besoin est puis soumettez-le :
+réécrivez quelques-unes de ses valeurs si besoin est puis soumettez-le :
 
 .. code-block:: php
 
@@ -338,7 +338,7 @@ peuvent ainsi être utilisés pour cliquer sur des liens et soumettre des formul
 
 Les méthodes ``click()`` et ``submit()`` retournent toutes deux un objet
 ``Crawler``. Ces méthodes sont le meilleur moyen de naviguer dans une
-application car elles s'occupent de beaucoup de choses pour vous, comme détecter
+application, car elles s'occupent de beaucoup de choses pour vous, comme détecter
 la méthode HTTP à partir d'un formulaire et vous fournir une bonne API pour uploader
 des fichiers.
 
@@ -553,7 +553,7 @@ Beaucoup d'autres méthodes sont également disponibles :
 +------------------------+----------------------------------------------------+
 
 Puisque chacune de ses méthodes retourne une instance de ``Crawler``, vous pouvez
-affiner votre sélection de noeud en enchainant les appels de méthodes :
+affiner votre sélection de noeuds en enchainant les appels de méthodes :
 
 .. code-block:: php
 
@@ -569,7 +569,7 @@ affiner votre sélection de noeud en enchainant les appels de méthodes :
 
 .. tip::
 
-    Utilisez la fonction ``count()`` pour avoir le nombre de noeud contenus dans
+    Utilisez la fonction ``count()`` pour avoir le nombre de noeuds contenus dans
     le Crawler :
     ``count($crawler)``
 
@@ -614,7 +614,7 @@ de filtre, cela retourne un autre objet ``Crawler``.
 
 Une fois que vous avez sélectionné un lien, vous avez accès à l'objet spécial ``Link``,
 qui possède des méthodes utiles et spécifiques aux liens (comme ``getMethod()``
-et ``getUri()``).Pour cliquer sur un lien, utiliser la méthode ``click()`` du Client
+et ``getUri()``).Pour cliquer sur un lien, utilisez la méthode ``click()`` du Client
 et passez la à un objet ``Link`` :
 
 .. code-block:: php
@@ -636,7 +636,7 @@ Comme pour les liens, vous sélectionnez les formulaires à l'aide de la méthod
 .. note::
 
     Notez que vous sélectionnez les boutons de formulaire et non pas les formulaires
-    eux-mêmes car un formulaire peut contenir plusieurs boutons; si vous utilisez l'API
+    eux-mêmes, car un formulaire peut contenir plusieurs boutons; si vous utilisez l'API
     de traversement, gardez en mémoire que vous devez chercher un bouton.
 
 La méthode ``selectButton()`` peut sélectionner des balises ``button`` et des
@@ -656,7 +656,7 @@ pour obtenir une instance de ``Form`` pour le formulaire contenant le noeud du b
     $form = $buttonCrawlerNode->form();
 
 Quand vous appelez la méthode ``form()``, vous pouvez aussi passer un tableau de
-valeurs de champs qui ré-écrit les valeurs par défaut :
+valeurs de champs qui réécrit les valeurs par défaut :
 
 .. code-block:: php
 
@@ -773,7 +773,7 @@ mode debug par défaut (``true``) en les passant en tant qu'option à la méthod
         'debug'       => false,
     ));
 
-Si votre application se comporte selon certaines en-têtes HTTP, passez les en
+Si votre application se comporte selon certaines en-têtes HTTP, passez-les en
 tant que second argument de ``createClient()`` :
 
 .. code-block:: php
@@ -783,7 +783,7 @@ tant que second argument de ``createClient()`` :
         'HTTP_USER_AGENT' => 'MySuperBrowser/1.0',
     ));
 
-Vous pouvez aussi ré-écrire les en-têtes HTTP par requête (i.e. et non pas pour
+Vous pouvez aussi réécrire les en-têtes HTTP par requête (i.e. et non pas pour
 toutes les requêtes) :
 
 .. code-block:: php

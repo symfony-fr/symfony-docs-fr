@@ -4,7 +4,7 @@
 Traductions
 ===========
 
-Le terme « internationalisation » (souvent abrégé `i18n`_)désigne le processus d'abstraction des textes
+Le terme « internationalisation » (souvent abrégé `i18n`_) désigne le processus d'abstraction des textes
 et autres spécificités locales en dehors de votre application qui sont ensuite placés
 dans un fichier où ils peuvent être traduits et convertis en se basant sur la locale de
 l'utilisateur (i.e. la langue et le pays). Pour du texte, cela signifie l'encadrer avec
@@ -291,7 +291,7 @@ Symfony2 cherche les fichiers de messages (c-a-d les traductions) aux endroits s
 
 * Le répertoire ``Resources/translations/`` du bundle.
 
-Les répertoire sont listés par ordre de priorité. Cela signifie que vous pouvez
+Les répertoires sont listés par ordre de priorité. Cela signifie que vous pouvez
 surcharger les messages de traduction d'un bundle dans l'un des deux premiers répertoires.
 
 Le système de surcharge se base sur les clés : seules les clés surchargées ont
@@ -397,7 +397,7 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
     toutes les traductions. Dans ce cas, les traductions doivent (aussi) être faites pour la
     locale par défaut (i.e. pour traduire ``symfony2.great`` en ``Symfony2 is great``).
     
-    La deuxième méthode est très pratique car la clé du message n'aura pas besoin d'être modifiée
+    La deuxième méthode est très pratique, car la clé du message n'aura pas besoin d'être modifiée
     dans chaque fichier de traduction si vous décidez que le message devrait en fait
     être « Symfony2 is really great » dans la locale par défaut.
     
@@ -469,7 +469,7 @@ Comme vous l'avez vu, les fichiers de messages sont organisés par les différen
 qu'ils traduisent. Pour plus de structure, les fichiers de messages peuvent également être organisés en
 « domaines ». Lors de la création des fichiers de messages, le domaine est la première
 partie du nom du fichier. Le domaine par défaut est ``messages``. Par exemple, supposons que,
-par soucis d'organisation, les traductions ont été divisées en trois domaines différents : ``messages``,
+par souci d'organisation, les traductions ont été divisées en trois domaines différents : ``messages``,
 ``admin`` et ``navigation``. La traduction française aurait les fichiers de message suivants :
 
 * ``messages.fr.xliff``
@@ -565,7 +565,7 @@ en se basant sur la locale de l'utilisateur. Par exemple, ``http://www.example.c
 pourrait afficher le contenu en anglais pour un utilisateur, et en français pour un autre
 utilisateur. Malheureusement, cela viole une règle fondamentale du Web qui dit qu'une URL
 particulière retourne la même ressource indépendamment de l'utilisateur. Pour enfoncer encore
-plus le clou, quel version du contenu serait indexée par les moteurs de recherche ?
+plus le clou, quelle version du contenu serait indexée par les moteurs de recherche ?
 
 Une meilleure politique est d'inclure la locale dans l'URL. Ceci est entièrement pris
 en charge par le système de routage en utilisant le paramètre spécial ``_locale`` :
@@ -617,7 +617,7 @@ pointant vers d'autres pages traduites de votre application.
 Pluralisation
 -------------
 
-La pluralisation des messages est un sujet difficile car les règles peuvent être assez complexes. 
+La pluralisation des messages est un sujet difficile, car les règles peuvent être assez complexes. 
 Par exemple, voici la représentation mathématique des règles de la pluralisation russe :
 
 .. code-block:: text
@@ -671,7 +671,7 @@ Chaque locale a son propre ensemble de règles, certaines ayant jusqu'à six dif
 formes plurielles avec des règles complexes pour déterminer quel nombre correspond à quelle forme du pluriel.
 Les règles sont assez simples pour l'anglais et le français, mais pour le russe, vous auriez
 voulu un indice pour savoir quelle règle correspond à quelle chaîne de caractères. Pour aider les traducteurs,
-vous pouvez éventuellement « tagger » chaque chaîne :
+vous pouvez éventuellement « taguer » chaque chaîne :
 
 .. code-block:: text
 
@@ -732,8 +732,8 @@ Ou des nombres entre deux autres nombres :
     [1, +Inf[
     ]-1,2[
 
-Le délimiteur gauche peut être ``[`` (inclusif) ou ``]`` (exclusif). Le delimiteur droit
-peut être ``[`` (exclusif) ou ``]`` (inclusif). En sus des nombres, vous pouvez utiliser
+Le délimiteur gauche peut-être ``[`` (inclusif) ou ``]`` (exclusif). Le delimiteur droit
+peut-être ``[`` (exclusif) ou ``]`` (inclusif). En sus des nombres, vous pouvez utiliser
 ``-Inf`` and ``+Inf`` pour l'infini.
 
 .. index::
