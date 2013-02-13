@@ -231,7 +231,7 @@ actuelle pour l'afficher dans la vue::
                 $propertyPath = new PropertyPath($options['image_path']);
                 $imageUrl = $propertyPath->getValue($parentData);
                 // définit une variable "image_url" qui sera disponible à l'affichage du champ
-                $view->vars['image_url'] = $image_url; 
+                $view->set('image_url', $imageUrl);
             }
         }
 
