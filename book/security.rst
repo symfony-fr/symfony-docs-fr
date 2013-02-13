@@ -4,7 +4,7 @@
 La sécurité
 ===========
 
-La sécurité est un processus comprenant 2 étapes, dont le but est de prévenir un utilisateur 
+La sécurité est un processus comprenant 2 étapes, dont le but est d'empêcher un utilisateur 
 d'accéder à une ressource à laquelle il n'a pas accès.
 
 Dans la première étape du processus, le système de sécurité identifie l'utilisateur en lui 
@@ -159,7 +159,7 @@ afin d'entamer le processus d'authentification.
 Un pare-feu est activé lorsque l'URL d'une requête correspond à un ``masque`` 
 d'expression régulière contenu dans la configuration du pare-feu. Dans cet exemple,
 le ``masque`` (``^/``) va correspondre à *toutes* les requêtes entrantes. Le fait que 
-le pare-feu soit activé ne veut *pas* dire que la boite d'authentification HTTP contenant
+le pare-feu soit activé *ne* veut *pas* dire que la boite d'authentification HTTP contenant
 les champs « nom d'utilisateur » et « mot de passe » sera affichée pour chaque requête. 
 Par exemple, tout utilisateur peut accéder ``/foo``  sans qu'on lui demande de s'authentifier.
 
@@ -205,14 +205,14 @@ L'utilisateur a maintenant la possibilité de soumettre ses informations d'ident
 .. image:: /images/book/security_ryan_no_role_admin_access.png
    :align: center
 
-Dans cet exemple, l'utilisateur ``ryan``s'authentifie avec succès auprès du pare-feu.
+Dans cet exemple, l'utilisateur ``ryan`` s'authentifie avec succès auprès du pare-feu.
 Mais comme ``ryan`` n'a pas le rôle ``ROLE_ADMIN``, il se verra refuser l'accès à
-``/admin/foo``. Enfin, cela veut dire que l'utilisateur verra un message indiquant
+``/admin/foo``. Cela veut dire que l'utilisateur verra un message indiquant
 que l'accès lui est refusé.
 
 .. tip::
-    Quand Symfony refuse à l'utilisateur l'accès, l'utilisateur voit une page d'erreur
-    et recevra un code d'erreur HTTP 403 (``Forbidden``). Vous pouvez personnaliser 
+    Quand Symfony refuse l'accès à  l'utilisateur, l'utilisateur voit une page d'erreur
+    et reçoit un code d'erreur HTTP 403 (``Forbidden``). Vous pouvez personnaliser 
     la page d'erreur pour refus d'accès en suivant les instructions se trouvant dans la page 
     du cookbook `Pages d'erreurs<cookbook-error-pages-by-status-code>` pour personnaliser
     la page d'erreur 403.
@@ -259,13 +259,13 @@ Utilisation d'un formulaire de connexion traditionnel
 
 .. tip::
 
-    Dans cette section, vous apprendre comment créer un formulaire de connexion basique
-    qui continue d'utilisez les utilisateurs codés en dur que vous avez défini dans le
+    Dans cette section, vous allez apprendre comment créer un formulaire de connexion basique
+    qui continue d'utiliser les utilisateurs codés en dur que vous avez défini dans le
     fichier ``security.yml``.
 
     Pour charger les utilisateurs de la base de données, lisez :doc:`/cookbook/security/entity_provider`.
     En lisant cet article et cette section, vous pouvez créer un système de connexion
-    complet qui charge les utilisateurs dans la base de données.
+    complet qui utilise les utilisateurs de la base de données.
 
 Pour l'instant, vous avez vu comment protéger votre application derrière un pare-feu et
 ensuite comment protéger l'accès à certaines zones en utilisant les rôles. En utilisant 
@@ -552,7 +552,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
 
     **2. Assurez-vous que la page de connexion n'est pas sécurisée**
 
-    Aussi, assurez-vous que la page de connexion ne requiert *pas* un rôle particulier afin 
+    Ensuite, assurez-vous que la page de connexion *ne* requiert *pas* un rôle particulier afin 
     d'être affichée. Par exemple, la configuration suivante - qui nécessite le rôle
     ``ROLE_ADMIN`` pour toutes les URLs (incluant l'URL ``/login``), va provoquer une boucle de
     redirection :
@@ -679,9 +679,10 @@ peuvent être créés et assignés aux utilisateurs.
 Sécurisation d'URLs spécifiques
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La façon la plus simple pour sécuriser une partie de votre application est de sécuriser un masque
-d'URL au complet. Vous avez déjà vu dans le premier exemple de ce chapitre, où tout ce qui
-correspondait à l'expression régulière ``^/admin`` nécessite le role ``ROLE_ADMIN``.
+La façon la plus simple pour sécuriser une partie de votre application est de sécuriser un
+ensemble complet d'URL à l'aide d'un masque. Vous avez déjà vu dans le premier exemple de
+ce chapitre, où tout ce qui correspondait à l'expression régulière ``^/admin`` nécessite
+le role ``ROLE_ADMIN``.
 
 Vous pouvez définir autant de masque d'URL que vous voulez - chacune étant une expression 
 régulière.
@@ -726,7 +727,7 @@ régulière.
 Pour chaque requête entrante, Symfony essaie de trouver une règle d'accès de contrôle
 (la première gagne). Si l'utilisateur n'est pas encore authentifié, le processus 
 d'authentification est initié (c'est-à-dire que l'utilisateur a une chance de se connecter). 
-Mais si l'utilisateur *est* authentifié, mais qu'il ne possède pas le rôle nécessaire, 
+Mais si l'utilisateur est *déjà* authentifié, mais qu'il ne possède pas le rôle nécessaire, 
 une exception :class:`Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException`
 est lancée, qui peut être attrapée et convertie en une belle page d'erreur « accès refusé » 
 présentée à l'utilisateur. Voir :doc:`/cookbook/controller/error_pages` pour plus d'informations.
