@@ -915,7 +915,7 @@ manière de créer des formulaires, mais le choix final vous revient.
   
     Dans le cas où vous avez besoin de champs supplémentaires dans le formulaire
     (par exemple une checkbox « Acceptez vous les conditions d'utilisation ») qui
-    ne doi pas être mappé à l'objet sous-jacent, vous devez définir l'option
+    ne doit pas être mappé à l'objet sous-jacent, vous devez définir l'option
     ``mapped`` setting à ``false``::
 
         use Symfony\Component\Form\FormBuilderInterface;
