@@ -58,7 +58,7 @@ La façon la plus simple de rendre ces champs est de tout faire en un coup :
 
     .. code-block:: php
     
-        <?php echo $view['form']->row($form['emails]) ?>
+        <?php echo $view['form']->row($form['emails']) ?>
 
 Une méthode plus flexible pourrait ressembler à ceci :
 
