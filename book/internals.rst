@@ -4,9 +4,9 @@
 Composants Internes
 ===================
 
-Il paraît que vous voulez comprendre comment Symfony2 fonctionne et comment
-l'étendre. Cela me rend très heureux ! Cette section est une explication en
-profondeur des composants internes de Symfony2.
+Visiblement vous voulez comprendre comment Symfony2 fonctionne et comment
+l'étendre. Cela me rend très heureux ! Cette section explique en
+profondeur les composants internes de Symfony2.
 
 .. note::
 
@@ -119,12 +119,12 @@ caractères « classe::méthode », comme ``Bundle\BlogBundle\PostController:ind
 
 La méthode
 :method:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface::getArguments`
-retourne un tableau d'arguments à passer au Contrôleur. L'implémentation par défaut résoud
-automatiquement les arguments de la méthode, basé sur les attributs de la Requête.
+retourne un tableau d'arguments à passer au Contrôleur. L'implémentation par défaut résout
+automatiquement les arguments de la méthode, basée sur les attributs de la Requête.
 
 .. sidebar:: Faire correspondre les arguments de la méthode du Contrôleur aux attributs de la Requête
 
-    Pour chaque argument d'une méthode, Symfony2 essaye d'obtenir la valeur d'un attribut
+    Pour chaque argument d'une méthode, Symfony2 essaie d'obtenir la valeur d'un attribut
     d'une Requête avec le même nom. S'il n'est pas défini, la valeur par défaut de l'argument
     est utilisée si elle est définie ::
 
