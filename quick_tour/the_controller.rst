@@ -81,10 +81,9 @@ Si vous voulez rediriger un utilisateur vers une autre page, utilisez la méthod
 
     return $this->redirect($this->generateUrl('_demo_hello', array('name' => 'Lucas')));
 
-La méthode ``generateUrl()`` est la même que la méthode ``path()`` que nous
-avions utilisée dans les templates. Elle prend le nom de la route et un tableau
-de paramètres comme arguments et retourne la jolie adresse qui
-convient.
+La méthode ``generateUrl()`` est la même que la méthode ``path()`` utilisée dans
+les templates. Elle prend le nom de la route et un tableau de paramètres comme 
+arguments et retourne la jolie adresse qui convient.
 
 Vous pouvez facilement renvoyer une action vers une autre avec la méthode
 ``forward()``. En interne, Symfony crée une « sous-requête », et retourne l'objet

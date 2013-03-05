@@ -81,13 +81,13 @@ ensemble d'adresses IP de la liste noire :
 
         public function supportsAttribute($attribute)
         {
-            // nous n'allons pas vérifier l'attribut de l'utilisateur, alors nous retournons true
+            // vous n'allez pas vérifier l'attribut de l'utilisateur, alors retournez true
             return true;
         }
 
         public function supportsClass($class)
         {
-            // notre voteur supporte tous les types de classes de token, donc nous retournons true
+            // votre voteur supporte tous les types de classes de token, donc retournez true
             return true;
         }
 
@@ -171,10 +171,10 @@ Afin que votre nouveau voteur soit utilisé, vous devez changer la stratégie de
 décision d'accès par défaut, qui d'habitude autorise l'accès si *n'importe quel*
 voteur autorise l'accès.
 
-Dans ce cas, vous allez choisir la stratégie ``unanimous``. Contrairement
-à la stratégie par défaut ``affirmative``, avec la stratégie ``unanimous``, si
-seulement un voteur refuse l'accès (par exemple : le ``ClientIpVoter``), alors
-l'accès n'est pas autorisé pour l'utilisateur final.
+Dans ce cas, choississez la stratégie ``unanimous``. Contrairement à la stratégie
+par défaut ``affirmative``, avec la stratégie ``unanimous``, si seulement un 
+voteur refuse l'accès (par exemple : le ``ClientIpVoter``), alors l'accès 
+n'est pas autorisé pour l'utilisateur final.
 
 Pour faire cela, surchargez la section par défaut ``access_decision_manager``
 du fichier de configuration de votre application avec le code suivant.

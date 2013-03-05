@@ -86,7 +86,7 @@ simplement la commande suivante :
 Démarrage
 ---------
 
-Revenez à notre petit exemple du début et implémentez ses ACLs.
+Revenez à ce petit exemple du début et implémentez ses ACLs.
 
 Créer un ACL, et ajouter un ACE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

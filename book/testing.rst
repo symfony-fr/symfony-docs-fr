@@ -260,7 +260,8 @@ document XML/HTML :
 
     Le tableau ``server`` contient les valeurs brutes que vous trouveriez normalement
     dans la variable superglobale `$_SERVER`_. Par exemple, pour définir les entêtes
-    HTTP `Content-Type` et `Referer`, vous procéderiez comme suit :
+    HTTP `Content-Type` et `Referer`, vous procéderiez comme suit (pensez au préfixe 
+	`HTTP_` pour les entêtes non standard) :
 
     .. code-block:: php
 
@@ -272,6 +273,7 @@ document XML/HTML :
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_REFERER' => '/foo/bar',
+				'HTTP_X-Requested-With' => 'XMLHttpRequest',
             )
         );
 
