@@ -17,7 +17,7 @@ Découvrir Twig
 
 .. tip::
 
-    Si vous voulez maîtriser Twig, nous vous recommandons fortement de lire sa
+    Si vous voulez maîtriser Twig, il vous est fortement recommandé de lire sa
     `documentation`_ officielle. Cette section est juste un rapide aperçu des
     concepts de base.
 
@@ -101,8 +101,8 @@ Templates de décoration
 -----------------------
 
 Bien souvent, les templates d'un projet partagent des éléments communs, comme les
-célèbres entête et pied de page. Dans Symfony2, nous abordons ce problème
-différemment : un template peut être décoré par un autre. Cela fonctionne exactement
+célèbres entête et pied de page. Dans Symfony2, le problème est abordé différemment : 
+un template peut être décoré par un autre. Cela fonctionne exactement
 comme les classes PHP : l'héritage de template vous permet de bâtir un template
 « layout » de base qui contient tous les éléments communs de votre site et de définir
 des « blocks » que les templates enfants pourront surcharger.

@@ -4,8 +4,8 @@
 Doctrine et les bases de données
 ================================
 
-Voyons les choses en face, les tâches les plus complexes pour n'importe quelle 
-application impliquent de lire et de faire persister des informations dans une base 
+L'une des tâches les plus courantes et difficiles pour toute application
+implique de lire et de faire persister des informations dans une base 
 de données. Heureusement, Symfony intègre `Doctrine`_, une bibliothèque dont
 le seul but est de vous fournir des outils puissants afin de vous rendre
 la tâche facile. Dans ce chapitre, vous apprendrez les bases de la philosophie
@@ -1018,7 +1018,7 @@ nouvelle clé étrangère :
 Sauver les entités associées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant, regardons le code en action. Imaginez que vous êtes dans un contrôleur :
+Maintenant, pour voir le code en action, imaginez que vous êtes dans un contrôleur :
 
 .. code-block:: php
 

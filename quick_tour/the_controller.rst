@@ -81,8 +81,8 @@ Si vous voulez rediriger un utilisateur vers une autre page, utilisez la méthod
 
     return $this->redirect($this->generateUrl('_demo_hello', array('name' => 'Lucas')));
 
-La méthode ``generateUrl()`` est la même que la méthode ``path()`` que nous
-avions utilisée dans les templates. Elle prend le nom de la route et un tableau
+La méthode ``generateUrl()`` est la même que la méthode ``path()`` que vous
+avez utilisée dans les templates. Elle prend le nom de la route et un tableau
 de paramètres comme arguments et retourne la jolie adresse qui
 convient.
 

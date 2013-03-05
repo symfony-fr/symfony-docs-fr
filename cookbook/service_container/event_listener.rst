@@ -11,8 +11,8 @@ dans la classe :class:`Symfony\\Component\\HttpKernel\\KernelEvents`.
 
 Afin de personnaliser un évènement avec votre propre logique, vous devez créer
 un service qui va agir en tant que « listener » d'évènement pour cet évènement.
-Dans cet article, nous allons créer un service qui agit en tant que « Listener »
-d'Exception, nous permettant de modifier comment les exceptions sont affichées par
+Dans cet article, vous allez créer un service qui agit en tant que « Listener »
+d'Exception, vous permettant de modifier comment les exceptions sont affichées par
 notre application. L'évènement ``KernelEvents::EXCEPTION`` est l'un des évènements
 du coeur du noyau::
 
