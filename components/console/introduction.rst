@@ -23,7 +23,7 @@ Vous pouvez installer le composant de différentes manières :
 Créer une Commande basique
 --------------------------
 
-Pour faire une commande de console qui nous accueille depuis la ligne de commandes, créez
+Pour faire une commande de console qui vous accueille depuis la ligne de commandes, créez
 un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
 
     namespace Acme\DemoBundle\Command;

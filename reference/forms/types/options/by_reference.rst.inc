@@ -8,7 +8,7 @@ Dans la plupart des cas, si vous avez un champ ``name``, alors vous vous attende
 certains cas, ``setName`` ne doit *pas* être appelé. Définir ``by_reference`` vous
 assure que le setter est appelé dans tous les cas.
 
-Pour mieux comprendre, jetez un oeil à cet exemple simple::
+Pour aller plus loin, voici un exemple simple::
 
     $builder = $this->createFormBuilder($article);
     $builder
@@ -28,7 +28,7 @@ vous faites un ``bind`` sur le formulaire::
 
 Notez que la méthode ``setAuthor`` n'est pas appelée. L'objet Author est modifié par référence.
 
-Si nous définissons ``by_reference`` à false, l'association ressemblera à ceci::
+Si vous définissez ``by_reference`` à false, l'association ressemblera à ceci::
 
     $article->setTitle('...');
     $author = $article->getAuthor();

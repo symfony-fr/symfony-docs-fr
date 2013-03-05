@@ -345,7 +345,7 @@ utilisée comme un pare-feu dans votre configuration de sécurité.
 
 .. note::
 
-    Vous vous demandez peut-être « pourquoi ai-je besoin d'une classe
+    Vous vous demandez peut-être « pourquoi avez vous besoin d'une classe
     factory spéciale pour ajouter des listeners et fournisseurs à un
     conteneur d'injection de dépendances ? ». C'est une très bonne
     question. La raison est que vous pouvez utiliser votre pare-feu

@@ -122,7 +122,7 @@ Les contrôleurs sont aussi appelés *actions*.
     la classe contrôleur va héberger plusieurs contrôleurs/actions (par exemple :
     ``updateAction``, ``deleteAction``, etc).
 
-Ce contrôleur est relativement simple, mais parcourons-le tout de même :
+Ce contrôleur est relativement simple :
 
 * *ligne 4*: Symfony2 tire avantage de la fonctionnalité des espaces de noms
   (« namespaces ») de PHP 5.3 afin de donner un espace de noms à la classe entière

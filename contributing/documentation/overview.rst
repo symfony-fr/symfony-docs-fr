@@ -89,20 +89,20 @@ de code qui semblent familiers, vous devriez suivre ces règles :
   ainsi que les `Standards de code Twig`_;
 * Chaque ligne devrait se terminer après le premier mot qui dépasse le 72ème caractère
   (ainsi, la plupart des lignes font environ 72 à 78 caractères);
-* Lorsqu'on n'affiche pas une ou plusieurs lignes de code, on place ``...`` en commentaire à
-  l'endroit ou les lignes sont censées se trouver. Ces commentaires sont : ``// ...`` (php),
-  ``# ...`` (yaml/bash), ``{# ... #}`` (twig), ``<!-- ... -->`` (xml/html), ``; ...`` (ini),
-  ``...`` (text);
-* Lorsqu'on cache une partie d'une ligne, par exemple une variable, on place ``...`` (sans commentaire)
-  à l'endroit ou elle est censée être;
+* Lorsque vous n'affichez pas une ou plusieurs lignes de code, vous placez ``...`` en 
+  commentaire à l'endroit ou les lignes sont censées se trouver. Ces commentaires sont : 
+  ``// ...`` (php), ``# ...`` (yaml/bash), ``{# ... #}`` (twig), 
+  ``<!-- ... -->`` (xml/html), ``; ...`` (ini), ``...`` (text);
+* Lorsque vous cachez une partie d'une ligne, par exemple une variable, placez ``...`` 
+ (sans commentaire) à l'endroit ou elle est censée être;
 * Description du code caché : (facultatif)
-  Si on cache plusieurs lignes : la description peut être placée après les ``...``
-  Si on ne cache qu'une partie de la ligne : la description peut être placée avant la ligne;
+  Si vous cachez plusieurs lignes : la description peut être placée après les ``...``
+  Si vous ne cachez qu'une partie de la ligne : la description peut être placée avant la ligne;
 * Si c'est utile, un ``bloc de code`` devrait commencer par un commentaire indiquant le nom du
   fichier qui contient le code. Ne mettez pas de ligne vide après ce commentaire, à moins que
   la prochaine ligne ne soit également un commentaire;
 * Vous devriez mettre un ``$`` devant chaque ligne de commande;
-* Nous préférerons le raccourci ``::`` à ``.. code-block:: php`` pour commencer un block de PHP.
+* Le raccourci ``::`` est préféré à ``.. code-block:: php`` pour commencer un block de PHP.
 
 Un exemple::
 
