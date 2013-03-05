@@ -126,7 +126,7 @@ cela, le souscripteur pourrait ressembler à quelque chose comme ça::
             // Durant la création du formulaire, setData() est appelée avec null
             // en argument par le constructeur de FormBuilder. Vous êtes concerné
             // uniquement lorsque setData est appelée et contient un objet Entity
-            // (soit nouveau, soit récupéré avec Doctrine). Ce « if » nous permet
+            // (soit nouveau, soit récupéré avec Doctrine). Ce « if » vous permet
             // de passer outre ce cas là (i.e. condition null).
             if (null === $data) {
                 return;

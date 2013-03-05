@@ -53,11 +53,11 @@ La façon la plus simple de rendre ces champs est de tout faire en un coup :
 .. configuration-block::
 
     .. code-block:: jinja
-    
+
         {{ form_row(form.emails) }}
 
     .. code-block:: php
-    
+
         <?php echo $view['form']->row($form['emails']) ?>
 
 Une méthode plus flexible pourrait ressembler à ceci :
@@ -65,7 +65,7 @@ Une méthode plus flexible pourrait ressembler à ceci :
 .. configuration-block::
 
     .. code-block:: html+jinja
-    
+
         {{ form_label(form.emails) }}
         {{ form_errors(form.emails) }}
 
@@ -82,7 +82,7 @@ Une méthode plus flexible pourrait ressembler à ceci :
 
         <?php echo $view['form']->label($form['emails']) ?>
         <?php echo $view['form']->errors($form['emails']) ?>
-        
+
         <ul>
         {% for emailField in form.emails %}
         <?php foreach ($form['emails'] as $emailField): ?>
@@ -142,7 +142,7 @@ besoin que du JavaScript :
 .. configuration-block::
 
     .. code-block:: html+jinja
-    
+
         <form action="..." method="POST" {{ form_enctype(form) }}>
             {# ... #}
 
@@ -155,9 +155,9 @@ besoin que du JavaScript :
                 </li>
             {% endfor %}
             </ul>
-        
+
             <a href="#" id="add-another-email">Add another email</a>
-        
+
             {# ... #}
         </form>
 
@@ -192,7 +192,7 @@ besoin que du JavaScript :
     est automatiquement disponible dans l'attribut ``data-prototype`` de l'élément
     (ex: ``div`` ou ``table``) qui encadre votre collection. La seule différence
     c'est que le « form row » est rendu pour vous en entier, ce qui signifie que vous
-    n'aurez pas à l'encadrer dans un conteneur quelconque comme nous l'avions fait
+    n'aurez pas à l'encadrer dans un conteneur quelconque comme vous l'aviez fait
     ci-dessus.
 
 Options du champ
@@ -295,11 +295,11 @@ Le champ prototype peut être rendu via la variable ``prototype`` du champ colle
 .. configuration-block::
 
     .. code-block:: jinja
-    
+
         {{ form_row(form.emails.vars.prototype) }}
 
     .. code-block:: php
-    
+
         <?php echo $view['form']->row($form['emails']->getVar('prototype')) ?>
 
 Notez que tout ce dont vous avez vraiment besoin c'est le « widget », mais selon la

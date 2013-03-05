@@ -27,8 +27,8 @@ Comme spécifié dans le premier point, l'une des principales facultés du syst�
 ACL de Symfony2 est de fournir une manière très performante de récupérer des
 ACLs/ACEs. Ceci est extrêmement important sachant que chaque ACL pourrait avoir
 plusieurs ACEs, et hériter d'une autre ACL à la manière d'une structure en arbre.
-Donc, nous ne nous servons pas d'un ORM spécifique, mais l'implémentation par
-défaut intéragit avec votre connexion en utilisant directement le DBAL de Doctrine.
+Par conséquent, aucun ORM est utilisé mais l'implémentation par défaut intéragit
+avec votre connexion en utilisant directement le DBAL de Doctrine.
 
 Identités d'Objet
 ~~~~~~~~~~~~~~~~~
@@ -97,9 +97,9 @@ Décisions de pré-autorisation
 -----------------------------
 
 Pour les décisions de pré-autorisation, que ce soit des décisions prises avant
-quelconque méthode ou bien une action sécurisée qui est invoquée, nous
-reposons sur le service éprouvé « AccessDecisionManager » qui est aussi
-utilisé pour connaître les décisions d'autorisation basées sur des rôles.
+quelconque méthode ou bien une action sécurisée qui est invoquée, le service 
+éprouvé « AccessDecisionManager » est utilisé. l'« AccessDecisionManager » 
+est aussi utilisé pour connaître les décisions d'autorisation basées sur des rôles.
 Comme les rôles, le système d'ACL ajoute plusieurs nouveaux attributs qui
 pourraient être utilisés pour vérifier différentes permissions.
 

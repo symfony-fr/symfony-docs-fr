@@ -378,11 +378,11 @@ Bundles
 ~~~~~~~
 
 Vous vous êtes sûrement demandé pourquoi le mot :term:`bundle` est utilisé dans
-la plupart des noms que nous avons vus précédemment. Tout le code que vous écrivez
+la plupart des noms que vous avez vus précédemment. Tout le code que vous écrivez
 dans votre application est organisé en bundles. En jargon Symfony2, un bundle est
 un ensemble structuré de fichiers (PHP, feuilles de styles, javascript, images, ...)
 qui implémentent une fonctionnalité unique (un blog, un forum, ...) et qui peut être
-facilement partagé avec d'autres développeurs. Jusqu'à maintenant, nous avons
+facilement partagé avec d'autres développeurs. Jusqu'à maintenant, vous avez
 manipulé un seul bundle, ``AcmeDemoBundle``. Vous en saurez plus sur les bundles
 dans le dernier chapitre de ce tutoriel.
 
