@@ -30,7 +30,7 @@ email fonctionnelle :
 
 .. tip::
 
-    Si vous découvrez Git, vous êtes vivement recommandés de lire l'excellent livre
+    Si vous découvrez Git, il vous est vivement recommandés de lire l'excellent livre
     gratuit `ProGit`_.
 
 .. tip::
