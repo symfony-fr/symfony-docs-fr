@@ -192,7 +192,7 @@ besoin que du JavaScript :
     est automatiquement disponible dans l'attribut ``data-prototype`` de l'élément
     (ex: ``div`` ou ``table``) qui encadre votre collection. La seule différence
     c'est que le « form row » est rendu pour vous en entier, ce qui signifie que vous
-    n'aurez pas à l'encadrer dans un conteneur quelconque comme  cela a été fait
+    n'aurez pas à l'encadrer dans un conteneur quelconque comme cela a été fait
     ci-dessus.
 
 Options du champ
