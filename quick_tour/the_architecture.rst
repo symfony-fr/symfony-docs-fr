@@ -156,7 +156,7 @@ qui contient une unique classe ``Bundle`` qui le décrit :
         return $bundles;
     }
 
-En plus du bundle ``AcmeDemoBundle`` qui a été déjà mentionné, notez que le
+En plus du bundle ``AcmeDemoBundle`` qui a déjà été mentionné, notez que le
 noyau active aussi d'autres bundles comme les bundles ``FrameworkBundle``,
 ``DoctrineBundle``, ``SwiftmailerBundle`` et ``AsseticBundle``. Ils sont tous
 intégrés au framework.
