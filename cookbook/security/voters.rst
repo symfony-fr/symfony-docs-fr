@@ -171,7 +171,7 @@ Afin que votre nouveau voteur soit utilisé, vous devez changer la stratégie de
 décision d'accès par défaut, qui d'habitude autorise l'accès si *n'importe quel*
 voteur autorise l'accès.
 
-Dans ce cas, choississez la stratégie ``unanimous``. Contrairement à la stratégie
+Dans ce cas, choisissez la stratégie ``unanimous``. Contrairement à la stratégie
 par défaut ``affirmative``, avec la stratégie ``unanimous``, si seulement un 
 voteur refuse l'accès (par exemple : le ``ClientIpVoter``), alors l'accès 
 n'est pas autorisé pour l'utilisateur final.
