@@ -67,7 +67,7 @@ la Distribution Standard :
 .. tip::
 
 	Pour télécharger les « vendor » plus rapidement et sans les répertoires non 
-	nécessaires(e.g. "Tests"), ajoutez l'option "--prefer-dist" à la fin de toute 
+	indispensables (par exemple : "Tests"), ajoutez l'option "--prefer-dist" à la fin de toute 
 	commande « Composer ».
 	
 Cette commande peut prendre plusieurs minutes pour s'exécuter, car « Composer »
