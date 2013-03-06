@@ -856,7 +856,7 @@ manuellement la locale à utiliser pour la traduction :
         'Symfony2 is great',
         array(),
         'messages',
-        'fr_FR',
+        'fr_FR'
     );
 
     $this->get('translator')->transChoice(
@@ -864,7 +864,7 @@ manuellement la locale à utiliser pour la traduction :
         10,
         array('%count%' => 10),
         'messages',
-        'fr_FR',
+        'fr_FR'
     );
 
 Traduire le Contenu d'une Base de Données

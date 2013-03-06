@@ -205,7 +205,7 @@ stockée dans le fichier ``app/config/security.yml``.
 
 Vous trouverez ci-dessous un exemple de configuration où l'utilisateur
 va entrer son nom d'utilisateur et son  mot de passe via une authentification
-basique HTTP. Cette information sera alors comparée et vérifiée avec nos
+basique HTTP. Cette information sera alors comparée et vérifiée avec vos
 entrées d'entité « User » de la base de données :
 
 .. configuration-block::
@@ -286,7 +286,7 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
 .. code-block:: php
 
     // src/Acme/UserBundle/Entity/User.php
-    namespace Acme\Bundle\UserBundle\Entity;
+   namespace Acme\UserBundle\Entity;
 
     // ...
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -444,7 +444,7 @@ utilisateurs. Comme un groupe est aussi un rôle, la méthode précédente ``get
 retourne maintenant la liste des groupes reliés::
 
     // src/Acme/UserBundle/Entity/User.php
-    namespace Acme\Bundle\UserBundle\Entity;
+   namespace Acme\UserBundle\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
 
@@ -479,7 +479,7 @@ implémente l'interface :class:`Symfony\\Component\\Security\\Core\\Role\\RoleIn
 qui la force à avoir une méthode ``getRole()``::
 
     // src/Acme/Bundle/UserBundle/Entity/Group.php
-    namespace Acme\Bundle\UserBundle\Entity;
+   namespace Acme\UserBundle\Entity;
 
     use Symfony\Component\Security\Core\Role\RoleInterface;
     use Doctrine\Common\Collections\ArrayCollection;
@@ -536,7 +536,7 @@ la méthode ``UserRepository::loadUserByUsername()``. Cela va récupérer l'util
 ainsi que ses rôles/groupes associés avec une requête unique::
 
     // src/Acme/UserBundle/Entity/UserRepository.php
-    namespace Acme\Bundle\UserBundle\Entity;
+   namespace Acme\UserBundle\Entity;
 
     // ...
 

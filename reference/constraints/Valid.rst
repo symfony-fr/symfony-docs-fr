@@ -16,7 +16,7 @@ un objet et les sous-objets qui lui sont associés.
 Utilisation de base
 -------------------
 
-Dans l'exemple suivant, nous créons deux classes ``Author`` et ``Address``
+Dans l'exemple suivant, vous créez deux classes ``Author`` et ``Address``
 qui ont toutes les deux des contraintes sur leurs propriétés. De plus, 
 l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$address``.
 
@@ -121,7 +121,7 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
              * @Assert\NotBlank
              */
             protected $lastName;
-            
+
             protected $address;
         }
 
@@ -131,13 +131,13 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\NotBlank;
         use Symfony\Component\Validator\Constraints\Length;
-        
+
         class Address
         {
             protected $street;
 
             protected $zipCode;
-            
+
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('street', new NotBlank());
@@ -152,15 +152,15 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\NotBlank;
         use Symfony\Component\Validator\Constraints\Length;
-        
+
         class Author
         {
             protected $firstName;
 
             protected $lastName;
-            
+
             protected $address;
-            
+
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('firstName', new NotBlank());
@@ -214,11 +214,11 @@ incorrecte. Pour éviter ceci, ajouter la contrainte ``Valid`` à la propriété
         // src/Acme/HelloBundle/Author.php
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\Valid;
-        
+
         class Author
         {
             protected $address;
-            
+
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('address', new Valid());

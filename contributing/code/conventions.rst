@@ -32,8 +32,8 @@ la relation décrite est la relation principale:
 * un ``CookieJar`` possède de nombreux objets ``Cookie``;
 
 * un service ``Container`` a de nombreux services et de nombreux paramètres
-  (comme le service est sa relation principale, nous utilisons cette convention
-  de nommage pour cette relation);
+  (comme le service est sa relation principale, la convention de nommage est
+  utilisée pour cette relation);
 
 * une ``commande`` de Console a de nombreux arguments et de nombreuses options. Il
   n'existe pas de relation principale, la convention de nommage ne s'applique donc

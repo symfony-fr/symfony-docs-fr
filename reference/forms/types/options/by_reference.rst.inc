@@ -8,7 +8,7 @@ Dans la plupart des cas, si vous avez un champ ``name``, alors vous vous attende
 certains cas, ``setName`` ne doit *pas* être appelé. Définir ``by_reference`` vous
 assure que le setter est appelé dans tous les cas.
 
-Pour mieux comprendre, jetez un oeil à cet exemple simple::
+Pour aller plus loin, voici un exemple simple::
 
     $builder = $this->createFormBuilder($article);
     $builder

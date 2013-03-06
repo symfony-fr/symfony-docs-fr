@@ -186,7 +186,7 @@ Liens
 Pour trouver un lien par son nom (ou une image cliquable via son attribut ``alt``),
 utilisez la méthode ``selectLink`` sur un « crawler » existant. Cela retourne
 une instance de « Crawler » avec seulement le(s) lien(s) sélectionné(s).
-Appeler la méthode ``link()`` nous retourne un objet spécial
+Appeler la méthode ``link()`` vous retourne un objet spécial
 :class:`Symfony\\Component\\DomCrawler\\Link`::
 
     $linksCrawler = $crawler->selectLink('Go elsewhere...');
