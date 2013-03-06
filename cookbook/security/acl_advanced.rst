@@ -27,7 +27,7 @@ Comme spécifié dans le premier point, l'une des principales facultés du syst�
 ACL de Symfony2 est de fournir une manière très performante de récupérer des
 ACLs/ACEs. Ceci est extrêmement important sachant que chaque ACL pourrait avoir
 plusieurs ACEs, et hériter d'une autre ACL à la manière d'une structure en arbre.
-Par conséquent, aucun ORM est utilisé mais l'implémentation par défaut intéragit
+Par conséquent, aucun ORM n'est utilisé mais l'implémentation par défaut intéragit
 avec votre connexion en utilisant directement le DBAL de Doctrine.
 
 Identités d'Objet
