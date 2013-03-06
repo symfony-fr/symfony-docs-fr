@@ -90,11 +90,11 @@ de code qui semblent familiers, vous devriez suivre ces règles :
 * Chaque ligne devrait se terminer après le premier mot qui dépasse le 72ème caractère
   (ainsi, la plupart des lignes font environ 72 à 78 caractères);
 * Lorsque vous n'affichez pas une ou plusieurs lignes de code,placez ``...`` en commentaire à
-  l'endroit ou les lignes sont censées se trouver. Ces commentaires sont : ``// ...`` (php),
+  l'endroit où les lignes sont censées se trouver. Ces commentaires sont : ``// ...`` (php),
   ``# ...`` (yaml/bash), ``{# ... #}`` (twig), ``<!-- ... -->`` (xml/html), ``; ...`` (ini),
   ``...`` (text);
 * Lorsque vous cachez une partie d'une ligne, par exemple une variable, placez ``...`` (sans commentaire)
-  à l'endroit ou elle est censée être;
+  à l'endroit où elle est censée être;
 * Description du code caché : (facultatif)
   Si vous cachez plusieurs lignes : la description peut être placée après les ``...``
   Si vous ne cachez qu'une partie de la ligne : la description peut être placée avant la ligne;
