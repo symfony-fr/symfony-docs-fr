@@ -243,7 +243,7 @@ du fichier serait ``/images/logo.png?version=5``.
     Le pattern reçoit respectivement le chemin original du fichier et la version
     en tant que premier et second paramètre. Comme le chemin du fichier est un
     paramètre, vous ne pouvez pas le modifier sur place (par exemple :
-    ``/images/logo-v5.png``); cependant, vous pouvez préfixer le chemin du
+    ``/images/logo-v5.png``) ; cependant, vous pouvez préfixer le chemin du
     fichier en utilisant un pattern comme ``version-%%2$s/%%1$s``, qui donnerait
     un chemin tel ``version-5/images/logo.png``.
 
