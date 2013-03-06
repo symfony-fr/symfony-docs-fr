@@ -298,7 +298,7 @@ Le mot de la fin
 ----------------
 
 C'est tout ce qu'il y a à faire et je ne suis même pas sûr que vous ayez passé
-les 10 minutes que l'on s'était allouées. Vous avez été brièvement présenté aux 
+les 10 minutes que l'on s'était allouées. Vous avez été brièvement introduit aux 
 Bundles dans la première partie et toutes les caractéristiques que vous avez 
 apprises jusqu'à maintenant font partie du «core framework Bundle».
 Mais grâce aux Bundles, tout peut être étendu ou remplacé dans Symfony2.
