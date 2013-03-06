@@ -98,7 +98,7 @@ Décisions de pré-autorisation
 
 Pour les décisions de pré-autorisation, que ce soit des décisions prises avant
 quelconque méthode ou bien une action sécurisée qui est invoquée, le service 
-éprouvé « AccessDecisionManager » est utilisé. l'« AccessDecisionManager » 
+éprouvé « AccessDecisionManager » est utilisé. L'« AccessDecisionManager » 
 est aussi utilisé pour connaître les décisions d'autorisation basées sur des rôles.
 Comme les rôles, le système d'ACL ajoute plusieurs nouveaux attributs qui
 pourraient être utilisés pour vérifier différentes permissions.
