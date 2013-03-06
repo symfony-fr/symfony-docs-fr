@@ -186,7 +186,7 @@ qu'un contrôleur quelconque soit exécuté :
 Avec cette configuration, votre méthode ``onKernelController`` de ``TokenListener``
 sera exécutée à chaque requête. Si le contrôleur qui doit être exécuté implémente
 ``TokenAuthenticatedController``, l'authentification par jeton est appliquée. Cela
-vous permet d'avoir le filtre « avant » que vous vouliez sur tout les contrôleurs.
+vous permet d'avoir le filtre « avant » que vous vouliez sur tous les contrôleurs.
 
 Créer un filtre après un évènement ``kernel.response``
 ------------------------------------------------------
