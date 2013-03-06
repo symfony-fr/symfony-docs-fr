@@ -15,7 +15,7 @@ Pour que les commandes soient automatiquement disponibles dans Symfony2, créez
 un répertoire ``Command`` dans votre bundle et créez un fichier php se terminant
 par ``Command.php`` pour chaque commande que vous voulez créer. Par exemple, si
 vous voulez étendre le bundle ``AcmeDemoBundle`` (disponible dans la Standard
-Edition de Symfony2) pour nous saluer en ligne de commande, créez le fichier
+Edition de Symfony2) pour vous saluer en ligne de commande, créez le fichier
 ``GreetCommand.php`` et insérez y le contenu suivant::
 
     // src/Acme/DemoBundle/Command/GreetCommand.php

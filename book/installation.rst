@@ -63,7 +63,13 @@ la Distribution Standard :
 
     Pour une version exacte, remplacez `dev-master` par la dernière version de
     Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
+	
+.. tip::
 
+	Pour télécharger les « vendor » plus rapidement et sans les répertoires non 
+	nécessaires(e.g. "Tests"), ajoutez l'option "--prefer-dist" à la fin de toute 
+	commande « Composer ».
+	
 Cette commande peut prendre plusieurs minutes pour s'exécuter, car « Composer »
 télécharge la Distribution Standard ainsi que toutes les bibliothèques « vendor »
 dont elle a besoin. Lorsque la commande a terminé son exécution, vous devriez

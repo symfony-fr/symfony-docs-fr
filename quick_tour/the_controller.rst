@@ -1,7 +1,7 @@
 Le Contrôleur
 =============
 
-Toujours avec nous après ces deux premières parties ? Vous êtes déjà un
+Toujours ici après ces deux premières parties ? Vous êtes déjà un
 inconditionnel de Symfony2 ! Sans plus tarder, nous allons voir ce que les
 contrôleurs peuvent faire pour vous.
 
@@ -81,10 +81,9 @@ Si vous voulez rediriger un utilisateur vers une autre page, utilisez la méthod
 
     return $this->redirect($this->generateUrl('_demo_hello', array('name' => 'Lucas')));
 
-La méthode ``generateUrl()`` est la même que la méthode ``path()`` que nous
-avions utilisée dans les templates. Elle prend le nom de la route et un tableau
-de paramètres comme arguments et retourne la jolie adresse qui
-convient.
+La méthode ``generateUrl()`` est la même que la méthode ``path()`` utilisée dans
+les templates. Elle prend le nom de la route et un tableau de paramètres comme 
+arguments et retourne la jolie adresse qui convient.
 
 Vous pouvez facilement renvoyer une action vers une autre avec la méthode
 ``forward()``. En interne, Symfony crée une « sous-requête », et retourne l'objet
@@ -297,9 +296,9 @@ facilement à votre application.
 Le mot de la fin
 ----------------
 
-C'est tout ce qu'il y a à faire et je ne suis même pas sûr que nous avons passé
-les 10 minutes que l'on s'était allouées. Nous avons brièvement présenté les 
-Bundles dans la première partie et toutes les caractéristiques que nous avons 
+C'est tout ce qu'il y a à faire et je ne suis même pas sûr que vous ayez passé
+les 10 minutes que l'on s'était allouées. Vous avez été brièvement présentés aux 
+Bundles dans la première partie et toutes les caractéristiques que vous avez 
 apprises jusqu'à maintenant font partie du «core framework Bundle».
 Mais grâce aux Bundles, tout peut être étendu ou remplacé dans Symfony2.
 C'est le thème de la :doc:`prochaine partie de ce tutoriel<the_architecture>`.

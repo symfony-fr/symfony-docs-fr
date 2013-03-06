@@ -15,7 +15,7 @@ possède par défaut un fournisseur d'utilisateur « in_memory » et « entity �
 Dans cet article, vous verrez comment vous pouvez créer votre
 propre fournisseur d'utilisateur, ce qui pourrait être utile si vous accédez à
 vos utilisateurs via une base de données personnalisée, un fichier, ou - comme
-nous le montrons dans cet exemple - à travers un service web.
+le montre cet exemple - à travers un service web.
 
 Créer une Classe Utilisateur
 ----------------------------
@@ -177,29 +177,29 @@ service.
         # src/Acme/WebserviceUserBundle/Resources/config/services.yml
         parameters:
             webservice_user_provider.class: Acme\WebserviceUserBundle\Security\User\WebserviceUserProvider
-            
+
         services:
             webservice_user_provider:
                 class: "%webservice_user_provider.class%"
-    
+
     .. code-block:: xml
 
         <!-- src/Acme/WebserviceUserBundle/Resources/config/services.xml -->
         <parameters>
             <parameter key="webservice_user_provider.class">Acme\WebserviceUserBundle\Security\User\WebserviceUserProvider</parameter>
         </parameters>
- 
+
         <services>
             <service id="webservice_user_provider" class="%webservice_user_provider.class%"></service>
         </services>
-        
+
     .. code-block:: php
-    
+
         // src/Acme/WebserviceUserBundle/Resources/config/services.php
         use Symfony\Component\DependencyInjection\Definition;
-        
+
         $container->setParameter('webservice_user_provider.class', 'Acme\WebserviceUserBundle\Security\User\WebserviceUserProvider');
-        
+
         $container->setDefinition('webservice_user_provider', new Definition('%webservice_user_provider.class%');
 
 .. tip::
@@ -272,7 +272,7 @@ plusieurs fois et encodé ensuite en base64.
     fichier ``security.yml`` :
 
     .. code-block:: yaml
-    
+
         security:
             encoders:
                 Acme\WebserviceUserBundle\Security\User\WebserviceUser:

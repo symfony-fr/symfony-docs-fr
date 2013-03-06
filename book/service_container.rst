@@ -81,7 +81,7 @@ vous en avez besoin :
     $mailer = new Mailer('sendmail');
     $mailer->send('ryan@foobar.net', ... );
 
-Ceci est assez facile. La classe imaginaire ``Mailer`` nous permet de configurer
+Ceci est assez facile. La classe imaginaire ``Mailer`` vous permet de configurer
 la méthode utilisée pour envoyer les messages par e-mail (par exemple ``sendmail``, ``smtp``, etc)
 Mais que faire si vous voulez utiliser le service mailer ailleurs ? Vous ne 
 voulez certainement pas répéter la configuration du mailer *chaque* fois que vous devez utiliser
@@ -585,7 +585,7 @@ Cette approche est pas mal, mais si nous décidons plus tard que la classe ``New
 a besoin d'un deuxième ou troisième paramètre de constructeur ? Que se passe-t-il si nous décidons de
 refactoriser notre code et de renommer la classe ? Dans les deux cas, vous auriez besoin de trouver tous les
 endroits où le ``NewsletterManager`` a été instancié et de le modifier. Bien sûr,
-le conteneur de services nous donne une option beaucoup plus attrayante :
+le conteneur de services vous donne une option beaucoup plus attrayante :
 
 .. configuration-block::
 
