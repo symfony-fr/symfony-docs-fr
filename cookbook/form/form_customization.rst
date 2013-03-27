@@ -851,7 +851,7 @@ ce qui suit :
 
     {% extends 'form_div_layout.html.twig' %}
 
-    {% block fform_label %}
+    {% block form_label %}
         {{ parent() }}
 
         {% if required %}
