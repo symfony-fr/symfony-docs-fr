@@ -358,6 +358,19 @@ lorsque vous travaillez avec les formulaires, par exemple :
 .. index::
    single: Le Contrôleur; La classe contrôleur de base
 
+Creating Static Pages
+---------------------
+
+Il est possible de créer une page web statique sans créer de contrôleur. En
+créant simplement une route, indiquez le ``FrameworkBundle:Template:template``
+comme contrôleur et le chemin logique vers votre template Twig.
+
+.. versionadded:: 2.2
+    La possibilité de cacher les templates rendus via
+    ``FrameworkBundle:Template:template`` est nouveau en Symfony 2.2.
+
+Use it ! See :doc:`cookbook/templating/render_without_controller`.
+
 La Classe Contrôleur de Base
 ----------------------------
 
