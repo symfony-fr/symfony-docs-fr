@@ -133,5 +133,5 @@ d'amorçage.
 
 .. _`caches de byte code`: http://en.wikipedia.org/wiki/List_of_PHP_accelerators
 .. _`APC`: http://php.net/manual/en/book.apc.php
-.. _`autoloader.php`: https://github.com/symfony/symfony-standard/blob/2.0/app/autoload.php
+.. _`autoloader.php`: https://github.com/symfony/symfony-standard/blob/2.2/app/autoload.php
 .. _`fichier d'amorçage`: https://github.com/sensio/SensioDistributionBundle/blob/master/Composer/ScriptHandler.php
