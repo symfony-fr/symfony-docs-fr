@@ -11,10 +11,10 @@ Rappelez vous que l'avantage principal d'un standard est que toutes les parties
 du code source résultant se ressemblent et semblent ainsi familières, ce n'est
 pas que telle technique soit plus lisible qu'une autre.
 
-Symfony suit les standards définis par les documents `PSR-0`_, `PSR-1`_ and `PSR-2`_.
+Symfony suit les standards définis par les documents `PSR-0`_, `PSR-1`_ et `PSR-2`_.
 
-Comme une image - ou un peu de code - est plus efficace que des milliers de
-mots, voici un court exemple contenant les plus courantes conventions décrites
+Comme une image - ou un peu de code - est plus efficace qu'un long discours,
+voici un court exemple contenant les conventions les plus courantes décrites
 ci-dessous :
 
 .. code-block:: php
@@ -121,7 +121,7 @@ Documentation
 
 * Les annotations `@package` et `@subpackage` ne sont pas utilisées.
 
-License
+Licence
 -------
 
 * Symfony est réalisé sous licence MIT, un bloc licence doit être présent
