@@ -358,11 +358,12 @@ lorsque vous travaillez avec les formulaires, par exemple :
 .. index::
    single: Le Contrôleur; La classe contrôleur de base
 
-Creating Static Pages
----------------------
+Créer une page statique
+-----------------------
 
 .. versionadded:: 2.2
-La possibilité de cacher les templates rendus via
+
+    La possibilité de cacher les templates rendus via
     ``FrameworkBundle:Template:template`` est nouveau en Symfony 2.2.
 
 Il est possible de créer une page web statique sans créer de contrôleur. En
@@ -370,7 +371,7 @@ créant simplement une route, indiquez le ``FrameworkBundle:Template:template``
 comme contrôleur et le chemin logique vers votre template Twig.
 
 N'hésitez pas à l'utiliser ! Rendez-vous sur la page de cookbook :
-:doc:`cookbook/templating/render_without_controller`.
+:doc:`/cookbook/templating/render_without_controller`.
 
 La Classe Contrôleur de Base
 ----------------------------
