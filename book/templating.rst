@@ -645,7 +645,7 @@ utilisant la chaîne de caractères standard pour les contrôleurs
         ...
 
         <div id="sidebar">
-            {% render "AcmeArticleBundle:Article:recentArticles" with {'max': 3} %}
+            {{ render(controller('AcmeArticleBundle:Article:recentArticles', { 'max': 3 })) }}
         </div>
 
     .. code-block:: php
