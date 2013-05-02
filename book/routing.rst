@@ -1059,7 +1059,7 @@ de chaque route chargée depuis la nouvelle ressource de routage.
 .. tip::
 
     Vous pouvez également définir les routes en utilisant les annotations.
-    Lisez la:doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/routing>`
+    Lisez la :doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/routing>`
     pour savoir comment faire.
 
 .. index::
