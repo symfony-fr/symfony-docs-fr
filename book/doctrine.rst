@@ -3,11 +3,12 @@
 
 Doctrine et les bases de données
 ================================
+
 L'une des tâches les plus courantes et difficiles pour toute application
-implique de lire et de faire persister des informations dans une base 
+consiste à lire et à persister des informations dans une base 
 de données. Heureusement, Symfony intègre `Doctrine`_, une bibliothèque dont
-le seul but est de vous fournir des outils puissants afin de vous rendre
-la tâche facile. Dans ce chapitre, vous apprendrez les bases de la philosophie
+le seul but est de vous fournir des outils puissants afin de vous faciliter
+la tâche. Dans ce chapitre, vous apprendrez les bases de la philosophie
 de Doctrine et verrez à quel point il peut être facile de travailler
 avec une base de données.
 
@@ -20,16 +21,14 @@ avec une base de données.
     c'est facile, et expliqué dans l'article « :doc:`/cookbook/doctrine/dbal` » du cookbook
 
     Vous pouvez aussi persister vos données à l'aide de `MongoDB`_ en utilisant la
-    bibliothèque ODM de Doctrine. Pour plus d'informations, lisez l'article 
-    « :doc:`/bundles/DoctrineMongoDBBundle/index` » du cookbook
+    bibliothèque ODM de Doctrine. Pour plus d'informations, lisez la documentation 
+    « :doc:`/bundles/DoctrineMongoDBBundle/index` ».
 
 Un simple exemple : un produit
 ------------------------------
 
 La manière la plus facile de comprendre comment Doctrine fonctionne est de le voir
-en action.
-
-Dans cette section, vous allez configurer votre base de données, créer un objet
+en action. Dans cette section, vous allez configurer votre base de données, créer un objet
 ``Product``, le faire persister dans la base de données et le récupérer.
 
 .. sidebar:: Coder les exemples en même temps
@@ -38,8 +37,8 @@ Dans cette section, vous allez configurer votre base de données, créer un obje
     ``AcmeStoreBundle`` à l'aide de la commande :
     
     .. code-block:: bash
-    
-        php app/console generate:bundle --namespace=Acme/StoreBundle
+
+        $ php app/console generate:bundle --namespace=Acme/StoreBundle
 
 Configurer la base de données
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,24 +57,55 @@ habituellement placés dans le fichier ``app/config/parameters.yml`` :
         database_user:      root
         database_password:  password
 
+    # ...
+
 .. note::
 
     Définir la configuration dans ``parameters.yml`` est juste une convention.
     Les paramètres définis dans ce fichier sont référencés dans le fichier de
     configuration principal au moment de configurer Doctrine :
     
-    .. code-block:: yaml
+    .. configuration-block::
+
+        .. code-block:: yaml
+
+            # app/config/config.yml
+            doctrine:
+                dbal:
+                    driver:   "%database_driver%"
+                    host:     "%database_host%"
+                    dbname:   "%database_name%"
+                    user:     "%database_user%"
+                    password: "%database_password%"
+
+        .. code-block:: xml
+
+            <!-- app/config/config.xml -->
+            <doctrine:config>
+                <doctrine:dbal
+                    driver="%database_driver%"
+                    host="%database_host%"
+                    dbname="%database_name%"
+                    user="%database_user%"
+                    password="%database_password%"
+                >
+            </doctrine:config>
+
+        .. code-block:: php
+        
+            // app/config/config.php
+            $configuration->loadFromExtension('doctrine', array(
+                'dbal' => array(
+                    'driver'   => '%database_driver%',
+                    'host'     => '%database_host%',
+                    'dbname'   => '%database_name%',
+                    'user'     => '%database_user%',
+                    'password' => '%database_password%',
+                ),
+            ));
     
-        doctrine:
-            dbal:
-                driver:   "%database_driver%"
-                host:     "%database_host%"
-                dbname:   "%database_name%"
-                user:     "%database_user%"
-                password: "%database_password%"
-    
-    En gardant ces paramètres de connexion dans un fichier séparé, vous pouvez
-    facilement garder différentes versions de ce fichier sur chaque serveur.
+    En stockant ces paramètres de connexion dans un fichier séparé, vous pouvez
+    facilement garder une version différente de ce fichier sur chaque serveur.
     Vous pouvez aussi stocker la configuration de la base de données (ou n'importe
     quelle information sensible) en dehors de votre projet, par exemple
     dans votre configuration Apache. Pour plus d'informations, consultez
@@ -86,17 +116,16 @@ demander de créer votre base de données :
 
 .. code-block:: bash
 
-    php app/console doctrine:database:create
+    $ php app/console doctrine:database:create
 
-.. sidebar:: Configurer la base de données
+.. sidebar:: Configurer la base de données en UTF8
 
     Une erreur que font même les développeurs les plus chevronnés est d'oublier
     de définir un jeu de caractères (charset) et une collation par défaut sur
     leurs bases de données. Ils se retrouvent alors avec une collation de type
     latin qui est la valeur par défaut de la plupart des bases de données.
-    Ils pourraient tout de même penser à le faire la toute première fois, mais
-    ils oublient que tout serait à refaire après avoir lancé une commande fréquente au cours
-    du développement :
+    Même s'ils pourraient penser à le faire la toute première fois, ils oublient
+    que tout serait à refaire après avoir lancé des commandes telles que :
 
     .. code-block:: bash
 
@@ -112,21 +141,56 @@ demander de créer votre base de données :
     à votre fichier de configuration (typiquement ``my.cnf``) :
 
     .. code-block:: ini
-    
+
         [mysqld]
         collation-server = utf8_general_ci
-        character-set-server = utf8  
+        character-set-server = utf8
+
+.. note::
+
+    Si vous voulez utiliser SQLite comme base de données, vous devrez définir le chemin
+    du fichier qui stockera votre base de données :
+
+    .. configuration-block::
+
+        .. code-block:: yaml
+
+            # app/config/config.yml
+            doctrine:
+                dbal:
+                    driver: pdo_sqlite
+                    path: "%kernel.root_dir%/sqlite.db"
+                    charset: UTF8
+
+        .. code-block:: xml
+
+            <!-- app/config/config.xml -->
+            <doctrine:config
+                driver="pdo_sqlite"
+                path="%kernel.root_dir%/sqlite.db"
+                charset="UTF-8"
+            >
+                <!-- ... -->
+            </doctrine:config>
+
+        .. code-block:: php
+
+            // app/config/config.php
+            $container->loadFromExtension('doctrine', array(
+                'dbal' => array(
+                    'driver'  => 'pdo_sqlite',
+                    'path'    => '%kernel.root_dir%/sqlite.db',
+                    'charset' => 'UTF-8',
+                ),
+            ));
 
 Créer une classe entité
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposons que vous créiez une application affichant des produits.
-
 Sans même pensez à Doctrine ou à votre base de données, vous savez déjà que
 vous aurez besoin d'un objet ``Product`` représentant ces derniers. Créez
-cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle`` :
-
-.. code-block:: php
+cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle``::
 
     // src/Acme/StoreBundle/Entity/Product.php
     namespace Acme\StoreBundle\Entity;
@@ -149,10 +213,10 @@ base de données - c'est juste une simple classe PHP.
 
     Une fois que vous connaissez les concepts derrière Doctrine, vous pouvez l'utiliser
     pour créer ces classes entité pour vous :
-    
+
     .. code-block:: bash
-    
-        php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Product" --fields="name:string(255) price:float description:text"
+
+        $ php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Product" --fields="name:string(255) price:float description:text"
 
 .. index::
     single: Doctrine; Adding mapping metadata
@@ -163,8 +227,8 @@ Ajouter des informations de mapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Doctrine vous permet de travailler avec des bases de données d'une manière beaucoup
-plus intéressante que de récupérer des lignes basées sur les colonnes de vos tables
-dans des tableaux. A la place, Doctrine vous permet de persister des *objets* entiers
+plus intéressante que de transformer des lignes en tableaux en vous basant sur des colonnes.
+Au lieu de ça, Doctrine vous permet de persister des *objets* entiers
 dans votre base de données et récupérer ces objets depuis votre base de données. Ce système
 fonctionne en associant vos classes PHP avec des tables de votre base,
 et les propriétés de ces classes PHP avec des colonnes de la table, c'est ce que l'on
@@ -263,7 +327,7 @@ dans la classe ``Product`` avec les annotations :
 
 .. tip::
 
-    Le nom de la table est optionnel et si il est omis il sera déterminé automatiquement
+    Le nom de la table est optionnel et, s'il est omis, sera déterminé automatiquement
     en se basant sur le nom de la classe de l'entité.
 
 
@@ -273,7 +337,7 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
 
 .. seealso::
 
-    Vous pouvez aussi regarder la documentation sur les`Bases du Mapping`_ de Doctrine pour
+    Vous pouvez aussi regarder la documentation sur les `Bases du Mapping`_ de Doctrine pour
     avoir tout les détails à propos des informations de mapping. Si vous utilisez 
     les annotations, vous devrez préfixer toutes les annotations avec ``ORM\`` 
     (ex: ``ORM\Column(..)``), ce qui n'est pas montré dans la documentation de
@@ -285,7 +349,7 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
 
     Faites bien attention que vos noms de classe et de propriétés ne soient pas
     mappés avec des mots-clés SQL (comme ``group`` ou ``user``). Par exemple, si
-    le nom de la classe de votre entité est ``Group``, alors, par défaut, le nom
+    le nom de la classe de votre entité est ``Group`` alors, par défaut, le nom
     de la table correspondante sera ``group``, ce qui causera des problèmes SQL
     avec certains moteurs. Lisez la documentation sur les `Mots-clé SQL réservés`_ de
     Doctrine pour savoir comment échapper ces noms. Alternativement, si vous êtes libre
@@ -319,7 +383,7 @@ sont ``protected``). Heureusement, Doctrine peut faire ça pour vous en lançant
 
 .. code-block:: bash
 
-    php app/console doctrine:generate:entities Acme/StoreBundle/Entity/Product
+    $ php app/console doctrine:generate:entities Acme/StoreBundle/Entity/Product
 
 
 Cette commande s'assure que tous les getters et les setters sont générés pour
