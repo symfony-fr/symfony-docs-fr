@@ -501,8 +501,8 @@ Symfony2 va toujours passer la valeur correcte à chaque variable.
 
     Comme d'autres méthodes de base de ``Controller``, la méthode ``forward``
     est juste un raccourci vers une fonctionnalité coeur de Symfony2. Un
-    forward peut être exécuté directement via le service ``http_kernel``.
-    Un forward retourne un objet ``Response`` :
+    forward peut être exécuté directement via le service ``http_kernel`` et
+    retourne un objet ``Response`` :
     
     .. code-block:: php
 
@@ -513,33 +513,37 @@ Symfony2 va toujours passer la valeur correcte à chaque variable.
         ));
 
 .. index::
-   single: Le Contrôleur; Rendre des templates
+   single: Controller; Rendering templates
 
 .. _controller-rendering-templates:
 
-Rendre des Templates
-~~~~~~~~~~~~~~~~~~~~
+Afficher des Templates
+~~~~~~~~~~~~~~~~~~~~~~
 
-Bien que n'étant pas une condition requise, la plupart des contrôleurs vont finalement
-délivrer un template qui est responsable de la génération du HTML (ou d'un autre format)
-pour le contrôleur. La méthode ``renderView()`` rend un template et retourne son contenu.
-Le contenu du template peut être utilisé pour créer un objet ``Response`` :
+Bien que ce n'est pas obligatoire, la plupart des contrôleurs va finalement
+retourner un template qui sera chargé de générer du HTML (ou un autre format)
+pour le contrôleur. La méthode ``renderView()`` retourne un template et affiche son contenu.
+Le contenu du template peut être utilisé pour créer un objet ``Response``::
 
-.. code-block:: php
+    use Symfony\Component\HttpFoundation\Response;
 
-    $content = $this->renderView('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
+    $content = $this->renderView(
+        'AcmeHelloBundle:Hello:index.html.twig',
+        array('name' => $name)
+    );
 
     return new Response($content);
 
-Ceci peut même être effectué en une seule étape à l'aide de la méthode ``render()``,
-qui retourne un objet ``Response`` contenant le contenu du template :
+Cela peut même être effectué en une seule étape à l'aide de la méthode ``render()``,
+qui retourne un objet ``Response`` contenant le contenu du template::
 
-.. code-block:: php
-
-    return $this->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
+    return $this->render(
+        'AcmeHelloBundle:Hello:index.html.twig',
+        array('name' => $name)
+    );
 
 Dans les deux cas, le template ``Resources/views/Hello/index.html.twig`` dans
-``AcmeHelloBundle`` sera délivré.
+``AcmeHelloBundle`` sera affiché.
 
 Le moteur de rendu (« templating engine ») de Symfony est expliqué plus en détail dans
 le chapitre :doc:`Templating </book/templating>`
@@ -552,34 +556,36 @@ le chapitre :doc:`Templating </book/templating>`
 
 .. tip::
 
-    La méthode ``renderView`` est un raccourci de l'utilisation directe du
-    service ``templating``. Ce dernier peut aussi être utilisé directement :
-    
-    .. code-block:: php
+    La méthode ``renderView`` est un raccourci vers l'utilisation directe du
+    service ``templating``. Ce dernier peut aussi être utilisé directement::
 
         $templating = $this->get('templating');
-        $content = $templating->render('AcmeHelloBundle:Hello:index.html.twig', array('name' => $name));
+        $content = $templating->render(
+            'AcmeHelloBundle:Hello:index.html.twig',
+            array('name' => $name)
+        );
 
 .. note::
 
     Il est aussi possible d'afficher des templates situés dans des sous-répertoires.
     Mais évitez tout de même de tomber dans la facilité de faire des arborescences
     trop élaborées::
- 
-        $templating->render('AcmeHelloBundle:Hello/Greetings:index.html.twig', array('name' => $name));
-        // index.html.twig situé dans Resources/views/Hello/Greetings est affiché.
+
+        $templating->render(
+            'AcmeHelloBundle:Hello/Greetings:index.html.twig',
+            array('name' => $name)
+        );
+        // Affiche index.html.twig situé dans Resources/views/Hello/Greetings.
 
 .. index::
-   single: Le Contrôleur; Accéder aux services
+   single: Controller; Accessing services
 
 Accéder à d'autres Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quand vous étendez la classe contrôleur de base, vous pouvez utiliser n'importe
 quel service Symfony2 via la méthode ``get()``. Voici plusieurs services communs
-dont vous pourriez avoir besoin :
-
-.. code-block:: php
+dont vous pourriez avoir besoin::
 
     $request = $this->getRequest();
 
@@ -595,13 +601,13 @@ commande de la console ``container:debug`` :
 
 .. code-block:: bash
 
-    php app/console container:debug
+    $ php app/console container:debug
 
 Pour plus d'informations, voir le chapitre :doc:`/book/service_container`.
 
 .. index::
-   single: Le Contrôleur; Gérer les erreurs
-   single: Le Contrôleur; Les pages 404
+   single: Controller; Managing errors
+   single: Controller; 404 pages
 
 Gérer les Erreurs et les Pages 404
 ----------------------------------
@@ -609,13 +615,12 @@ Gérer les Erreurs et les Pages 404
 Quand « quelque chose » n'est pas trouvé, vous devriez vous servir correctement
 du protocole HTTP et retourner une réponse 404. Pour ce faire, vous allez lancer
 un type spécial d'exception. Si vous étendez la classe contrôleur de base, faites
-comme ça :
-
-.. code-block:: php
+comme ç::
 
     public function indexAction()
     {
-        $product = // récupérer l'objet depuis la base de données
+        // récupérer l'objet depuis la base de données
+        $product = ...;
         if (!$product) {
             throw $this->createNotFoundException('Le produit n\'existe pas');
         }
@@ -626,12 +631,12 @@ comme ça :
 La méthode ``createNotFoundException()`` crée un objet spécial ``NotFoundHttpException``,
 qui finalement déclenche une réponse HTTP 404 dans Symfony.
 
-Évidemment, vous êtes libre de lancer une quelconque classe ``Exception`` dans votre
+Évidemment, vous êtes libre de lever n'importe quelle ``Exception`` dans votre
 contrôleur - Symfony2 retournera automatiquement un code de réponse HTTP 500.
 
 .. code-block:: php
 
-    throw new \Exception('Quelque chose s'est mal passé!');
+    throw new \Exception('Quelque chose a mal tourné!');
 
 Dans chaque cas, une page d'erreur avec style est retournée à l'utilisateur final et une
 page d'erreur complète avec des infos de debugging est retournée au développeur
@@ -640,7 +645,7 @@ page d'erreur complète avec des infos de debugging est retournée au développe
 « :doc:`/cookbook/controller/error_pages` ».
 
 .. index::
-   single: Le Contrôleur; La session
+   single: Controller; The session
    single: Session
 
 Gérer la Session
@@ -653,9 +658,7 @@ défaut, Symfony2 stocke les attributs dans un cookie en utilisant les sessions
 natives de PHP.
 
 Stocker et récupérer des informations depuis la session peut être effectué
-facilement depuis n'importe quel contrôleur :
-
-.. code-block:: php
+facilement depuis n'importe quel contrôleur::
 
     $session = $this->getRequest()->getSession();
 
@@ -668,11 +671,12 @@ facilement depuis n'importe quel contrôleur :
     // utilise une valeur par défaut si la clé n'existe pas
     $filters = $session->get('filters', array());
 
-Ces attributs vont rester affectés à cet utilisateur pour le restant de sa
+
+Ces attributs vont rester affectés à cet utilisateur pour le restant de son temps
 session.
 
 .. index::
-   single: Session; Les messages Flash
+   single: Session; Flash messages
 
 Les Messages Flash
 ~~~~~~~~~~~~~~~~~~
@@ -683,15 +687,14 @@ du traitement d'un formulaire : vous souhaitez rediriger l'utilisateur et affich
 message spécial lors de la *prochaine* requête. Ces types de message sont appelés
 messages « flash ».
 
-Par exemple, imaginez que vous traitiez la soumission d'un formulaire :
-
-.. code-block:: php
+Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
 
     public function updateAction()
     {
         $form = $this->createForm(...);
 
-        $form->bind($this->getRequest());
+        $form->handleRequest($this->getRequest());
+
         if ($form->isValid()) {
             // effectue le traitement du formulaire
 
@@ -703,12 +706,13 @@ Par exemple, imaginez que vous traitiez la soumission d'un formulaire :
         return $this->render(...);
     }
 
+
 Après avoir traité la requête, le contrôleur définit un message flash ``notice``
-et puis redirige l'utilisateur. Le nom (``notice``) n'est pas significatif - c'est
+et puis redirige l'utilisateur. Le nom (``notice``) n'est pas très important - c'est
 juste ce que vous utilisez pour identifier le type du message.
 
-Dans le template de la prochaine action, le code suivant pourrait être utilisé
-pour délivrer le message ``notice`` :
+Dans le template de la prochaine action, le code suivant pourra être utilisé
+pour afficher le message ``notice`` :
 
 .. configuration-block::
 
@@ -720,9 +724,9 @@ pour délivrer le message ``notice`` :
             </div>
         {% endfor %}
 
-    .. code-block:: php
-    
-        <?php foreach ($view['session']->getFlash('notice') as $message): ?>
+    .. code-block:: html+php
+
+        <?php foreach ($view['session']->getFlashBag()->get('notice') as $message): ?>
             <div class="flash-notice">
                 <?php echo "<div class='flash-error'>$message</div>" ?>
             </div>
@@ -730,46 +734,54 @@ pour délivrer le message ``notice`` :
 
 De par leur conception, les messages flash sont faits pour durer pendant exactement une
 requête (ils « disparaissent en un éclair/flash »). Ils sont conçus pour être utilisés
-au travers des redirections exactement comme vous l'avez fait dans cet exemple.
+avec les redirections exactement comme vous l'avez fait dans cet exemple.
 
 .. index::
-   single: Le Contrôleur; L'objet response
+   single: Controller; Response object
 
 L'Objet Response
 ----------------
 
 La seule condition requise d'un contrôleur est de retourner un objet ``Response``.
 La classe :class:`Symfony\\Component\\HttpFoundation\\Response` est une abstraction
-PHP autour de la réponse HTTP - le message texte rempli avec des en-têtes HTTP et
-du contenu qui est envoyé au client :
+PHP autour de la réponse HTTP - le message texte est complété avec des en-têtes HTTP et
+du contenu qui est envoyé au client::
 
-.. code-block:: php
+    use Symfony\Component\HttpFoundation\Response;
 
     // crée une simple Réponse avec un code de statut 200 (celui par défaut)
     $response = new Response('Hello '.$name, 200);
-    
+
     // crée une réponse JSON avec un code de statut 200
     $response = new Response(json_encode(array('name' => $name)));
     $response->headers->set('Content-Type', 'application/json');
 
 .. tip::
 
-    La propriété ``headers`` (en-têtes en français) est un objet
+    La propriété ``headers`` est un objet
     :class:`Symfony\\Component\\HttpFoundation\\HeaderBag` avec plusieurs
     méthodes utiles pour lire et transformer les en-têtes de la ``Response``.
     Les noms des en-têtes sont normalisés et ainsi, utiliser ``Content-Type``
     est équivalent à ``content-type`` ou même ``content_type``.
 
+.. tip::
+
+    Il existe des classes spéciales pour construire des réponses plus facilement :
+
+    - Pour du  JSON, :class:`Symfony\\Component\\HttpFoundation\\JsonResponse`.
+      Lisez :ref:`component-http-foundation-json-response`.
+    - Pour des fichiers, :class:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse`.
+      Lisez :ref:`component-http-foundation-serving-files`.
+
 .. index::
-   single: Le Contrôleur; L'objet request
+   single: Controller; Request object
+
 
 L'Objet Request
 ---------------
 
-En sus des valeurs de substitution du routage, le contrôleur a aussi accès à
-l'objet ``Request`` quand il étend la classe ``Controller`` de base :
-
-.. code-block:: php
+En plus des paramètres de routes, le contrôleur a aussi accès à
+l'objet ``Request`` quand il étend la classe ``Controller`` de base::
 
     $request = $this->getRequest();
 
@@ -777,9 +789,10 @@ l'objet ``Request`` quand il étend la classe ``Controller`` de base :
 
     $request->getPreferredLanguage(array('en', 'fr'));
 
-    $request->query->get('page'); // prend un paramètre $_GET
+    $request->query->get('page'); // retourne un paramètre $_GET
 
-    $request->request->get('page'); // prend un paramètre $_POST
+    $request->request->get('page'); // retourne un paramètre $_POST
+
 
 Comme l'objet ``Response``, les en-têtes de la requête sont stockées dans un
 objet ``HeaderBag`` et sont facilement accessibles.
