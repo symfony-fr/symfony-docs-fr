@@ -375,11 +375,12 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
 Générer les getters et setters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Même si Doctrine sait maintenant comment persister un objet ``Product`` vers la
+Même si Doctrine sait maintenant comment persister un objet ``Product`` dans la
 base de données, la classe elle-même n'est pas encore très utile. Comme ``Product``
 est juste une simple classe PHP, vous devez créer des getters et des setters
 (ex: ``getName()``, ``setName()``) pour pouvoir accéder à ces propriétés (car elles
-sont ``protected``). Heureusement, Doctrine peut faire ça pour vous en lançant :
+sont ``protected``). Heureusement, Doctrine peut faire ça pour vous en lançant la
+commande :
 
 .. code-block:: bash
 
@@ -389,7 +390,13 @@ sont ``protected``). Heureusement, Doctrine peut faire ça pour vous en lançant
 Cette commande s'assure que tous les getters et les setters sont générés pour
 la classe ``Product``. C'est une commande sure - vous pouvez la lancer
 encore et encore : elle ne génèrera que les getters et les setters qui n'existent
-pas (c.à.d qu'elle ne remplace pas les méthodes existantes)
+pas (c-à-d qu'elle ne remplace pas les méthodes existantes)
+
+.. caution::
+
+    Gardez en tête que le générateur d'entités de Doctrine ne produit que de simples
+    getters/setters. Vous devrez vérifier les entités générées et ajuster la logique
+    des getters/setters selon vos propres besoins.
 
 .. sidebar:: Un peu plus sur ``doctrine:generate:entities``
 
@@ -405,21 +412,22 @@ pas (c.à.d qu'elle ne remplace pas les méthodes existantes)
     La commande ``doctrine:generate:entities`` fait une sauvegarde de ``Product.php``
     appelée ``Product.php~``. Dans certains cas, la présence de ce fichier peut
     créer l'erreur « Cannot redeclare class ». Vous pouvez supprimer ce fichier en
-    toute sécurité
+    toute sécurité. Vous pouvez aussi utiliser l'option "--no-backup" pour éviter de
+    générer ces fichiers de sauvegarde.
 
     Notez bien que vous n'avez pas *besoin* d'utiliser cette commande. Doctrine
-    ne repose pas sur la génération de code. Comme les classes PHP classiques,
+    ne se base pas sur la génération de code. Comme les classes PHP classiques,
     vous devez juste vous assurer que vos propriétés protected/private ont bien
     leurs méthodes getter et setter associées.
-    Comme c'est une tâche récurrente à faire avec Doctrine, cette commande a été créée
+    Comme c'est une tâche récurrente à faire avec Doctrine, cette commande a été créée.
 
-Vous pouvez également générer toutes les entités connues (c.à.d toute classe PHP
+Vous pouvez également générer toutes les entités connues (c-à-d toute classe PHP
 qui contient des informations de mapping Doctrine) d'un bundle ou d'un namespace :
 
 .. code-block:: bash
-	
-    php app/console doctrine:generate:entities AcmeStoreBundle
-    php app/console doctrine:generate:entities Acme
+
+    $ php app/console doctrine:generate:entities AcmeStoreBundle
+    $ php app/console doctrine:generate:entities Acme
 
 .. note::
 
@@ -435,11 +443,11 @@ Vous avez maintenant une classe ``Product`` utilisable avec des informations de
 mapping permettant à Doctrine de savoir exactement comment le faire persister. Bien sûr,
 vous n'avez toujours pas la table ``product`` correspondante dans votre base de données.
 Heureusement, Doctrine peut créer automatiquement toutes les tables de la base de données
-nécessaires aux entités connues dans votre application. Pour ce faire, lancez :
+nécessaires aux entités connues dans votre application. Pour ce faire, exécutez la commande :
 
 .. code-block:: bash
 
-    php app/console doctrine:schema:update --force
+    $ php app/console doctrine:schema:update --force
 
 .. tip::
 
@@ -473,10 +481,11 @@ suivante au ``DefaultController`` du bundle :
     :linenos:
 
     // src/Acme/StoreBundle/Controller/DefaultController.php
+
+    // ...
     use Acme\StoreBundle\Entity\Product;
     use Symfony\Component\HttpFoundation\Response;
-    // ...
-    
+
     public function createAction()
     {
         $product = new Product();
@@ -484,11 +493,11 @@ suivante au ``DefaultController`` du bundle :
         $product->setPrice('19.99');
         $product->setDescription('Lorem ipsum dolor');
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($product);
         $em->flush();
 
-        return new Response('Produit créé avec id '.$product->getId());
+        return new Response('Id du produit créé : '.$product->getId());
     }
 
 .. note::
@@ -525,7 +534,7 @@ Décortiquons cet exemple :
   est utilisé pour sa rapidité et son efficacité.
 
 Pour la création et la suppression d'objet, le fonctionnement est le même. 
-Dans la prochaine section, vous découvrirez que Doctrine est assez rusée pour
+Dans la prochaine section, vous découvrirez que Doctrine est assez rusé pour
 générer une requête ``UPDATE`` si l'enregistrement est déjà présent dans la base
 de données.
 
@@ -533,57 +542,53 @@ de données.
 
     Doctrine fournit une bibliothèque qui vous permet de charger de manière 
     automatisée des données de test dans votre projet (des « fixtures »).
-    Pour plus d'informations, voir :doc:`/bundles/DoctrineFixturesBundle/index`.
+    Pour plus d'informations, lisez :doc:`/bundles/DoctrineFixturesBundle/index`.
 
-Récupérer des objets de la base de données
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Récupérer des objets dans la base de données
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Récupérer un objet depuis la base de données est encore plus facile. Par exemple,
 supposons que vous avez configuré une route pour afficher un ``Product`` spécifique
-en se basant sur la valeur de son ``id`` :
-
-.. code-block:: php
+en se basant sur la valeur de son ``id``::
 
     public function showAction($id)
     {
         $product = $this->getDoctrine()
             ->getRepository('AcmeStoreBundle:Product')
             ->find($id);
-        
+
         if (!$product) {
-            throw $this->createNotFoundException('Produit non trouvé avec id '.$id);
+            throw $this->createNotFoundException(
+                'Aucun produit trouvé pour cet id : '.$id
+            );
         }
 
-        // faire quelque chose comme envoyer l'objet $product à un template
+        // ... faire quelque chose comme envoyer l'objet $product à un template
     }
 
 .. tip::
   
-    Vous pouvez réaliser la même chose depuis une action de contrôleur sans écrire
-    de code en utilisant ``@ParamConverter``. Pour plus de détails, lisez la
+    Vous pouvez réaliser la même chose sans écrire de code en utilisant le raccourci
+    ``@ParamConverter``. Pour plus de détails, lisez la
     :doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/converters>`.
 
 Lorsque vous requêtez pour un type particulier d'objet, vous utiliserez toujours
 ce qui est connu sous le nom de « dépôt » (ou « repository »). Dites-vous qu'un
 dépôt est une classe PHP dont le seul travail est de vous aider à récupérer 
 des entités d'une certaine classe. Vous pouvez accéder au dépôt d'une classe
-d'entités avec :
-
-.. code-block:: php
+d'entités avec::
 
     $repository = $this->getDoctrine()
-        ->getRepository('AcmeStoreBundle:Product');
+        ->getRepository('AcmeStoreBundle:Product');;
 
 .. note::
 
     La chaîne ``AcmeStoreBundle:Product`` est un raccourci que vous pouvez utiliser
     n'importe ou dans Doctrine au lieu du nom complet de la classe de l'entité
     (c.à.d ``Acme\StoreBundle\Entity\Product``). Tant que vos entités sont disponibles
-    sous l'espace de nom ``Entity`` de votre bundle, cela marchera.
+    sous l'espace de nom ``Entity`` de votre bundle, cela fonctionnera.
 
-Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte de méthodes utiles :
-
-.. code-block:: php
+Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte de méthodes utiles::
 
     // requête par clé primaire (souvent "id")
     $product = $repository->find($id);
@@ -604,22 +609,20 @@ Une fois que vous disposez de votre dépôt, vous pouvez accéder à toute sorte
     dans la section :ref:`book-doctrine-queries`.
 
 Vous pouvez aussi profiter des méthodes utiles ``findBy`` et ``findOneBy`` pour
-récupérer facilement des objets en vous basant sur des conditions multiples :
+récupérer facilement des objets en vous basant sur des conditions multiples::
 
-.. code-block:: php
-
-    // query for one product matching be name and price
+    // requête un seul produit correspondant à un nom et un prix
     $product = $repository->findOneBy(array('name' => 'foo', 'price' => 19.99));
 
-    // query for all products matching the name, ordered by price
-    $product = $repository->findBy(
+    // requête tout les produits correspondant à un nom, classés par prix
+    $products = $repository->findBy(
         array('name' => 'foo'),
         array('price' => 'ASC')
     );
 
 .. tip::
 
-    Lorsque vous effectuez le rendu d'une page, vous pouvez voir combien de
+    Lorsque vous affichez une page, vous pouvez voir combien de
     requêtes sont faites dans le coin en bas à droite de votre barre d'outils
     de débuggage.
 
@@ -636,20 +639,20 @@ Mettre un objet à jour
 
 Une fois que vous avez récupéré un objet depuis Doctrine, le mettre à jour est
 facile. Supposons que vous avez une route qui mappe l'id d'un produit vers
-une action de mise à jour dans un contrôleur :
-
-.. code-block:: php
+une action de mise à jour dans un contrôleur::
 
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('AcmeStoreBundle:Product')->find($id);
 
         if (!$product) {
-            throw $this->createNotFoundException('No product found for id '.$id);
+            throw $this->createNotFoundException(
+                'Aucun produit trouvé pour cet id : '.$id
+            );
         }
 
-        $product->setName('New product name!');
+        $product->setName('Nom du nouveau produit!');
         $em->flush();
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -661,7 +664,7 @@ Mettre à jour l'objet ne nécessite que trois étapes :
 #. Modifier l'objet;
 #. Apeller la méthode ``flush()`` du gestionnaire d'entités
 
-Notez qu'apeller ``$em->persist($product)`` n'est pas nécessaire. Souvenez-vous que
+Notez qu'appeler ``$em->persist($product)`` n'est pas nécessaire. Souvenez-vous que
 cette méthode dit simplement à Doctrine de gérer, ou « regarder » l'objet ``$product``.
 Dans ce cas, comme vous avez récupéré l'objet ``$product`` depuis Doctrine,
 il est déjà surveillé.
@@ -687,13 +690,11 @@ est appelée.
 Requêter des objets
 -------------------
 
-Vous avez déjà vu comment les objets dépôts vous permettaient de lancer des
-requêtes basiques sans aucun travail :
-
-.. code-block:: php
+Vous avez déjà vu comment les objets dépôts vous permettaient d'exécuter des
+requêtes basiques sans aucun travail::
 
     $repository->find($id);
-    
+
     $repository->findOneByName('Foo');
 
 Bien sûr, Doctrine vous permet également d'écrire des requêtes plus complexes
@@ -720,16 +721,14 @@ Imaginons que vous souhaitez récupérer tous les produits dont le prix est sup�
     
     $products = $query->getResult();
 
-Si vous êtes à l'aise avec SQL, DQL devrait vous sembler très naturel. La plus grosse
+Si vous êtes à l'aise avec SQL, DQL ne devrait pas vous poser de problème. La plus grosse
 différence est que vous devez penser en terme d'« objets » au lieu de lignes dans une
 base de données. Pour cette raison, vous effectuez une sélection *depuis* ``AcmeStoreBundle:Product``
 et lui donnez ``p`` pour alias.
 
 La méthode ``getResult()`` retourne un tableau de résultats. Si vous ne souhaitez
 obtenir qu'un seul objet, vous pouvez utiliser la méthode ``getSingleResult()`` à
-la place :
-
-.. code-block:: php
+la place::
 
     $product = $query->getSingleResult();
 
@@ -737,15 +736,13 @@ la place :
 
     La méthode ``getSingleResult()`` lève une exception ``Doctrine\ORM\NoResultException``
     si aucun résultat n'est retourné et une exception ``Doctrine\ORM\NonUniqueResultException``
-    si *plus* d'un résultat est retourné. Si vous utilisez cette méthode, vous voudrez
+    si *plus* d'un résultat est retourné. Si vous utilisez cette méthode, vous devrez
     sans doute l'entourer d'un bloc try/catch pour vous assurer que seul un résultat
-    est retourné (si vous requêtez quelque chose qui pourrait retourner plus d'un résultat) :
-    
-    .. code-block:: php
+    est retourné (si vous requêtez quelque chose qui pourrait retourner plus d'un résultat)::
 
         $query = $em->createQuery('SELECT ...')
             ->setMaxResults(1);
-        
+
         try {
             $product = $query->getSingleResult();
         } catch (\Doctrine\Orm\NoResultException $e) {
@@ -756,7 +753,7 @@ la place :
 La syntaxe du DQL est incroyablement puissante, vous permettant d'effectuer simplement
 des jointures entre vos entités (le sujet des :ref:`relations<book-doctrine-relations>` sera
 abordé plus tard), regrouper, etc. Pour plus d'informations, reportez-vous à la documentation
-officielle de Doctrine : `Doctrine Query Language`.
+officielle de Doctrine : `Doctrine Query Language`_.
 
 .. sidebar:: Définir des paramètres
 
@@ -769,9 +766,7 @@ officielle de Doctrine : `Doctrine Query Language`.
         ... WHERE p.price > :price ...
 
     Vous pouvez alors définir la valeur de l'emplacement ``price`` en appelant la méthode
-    ``setParameter()`` :
-
-    .. code-block:: php
+    ``setParameter()``::
 
         ->setParameter('price', '19.99')
 
@@ -779,9 +774,7 @@ officielle de Doctrine : `Doctrine Query Language`.
     constituant la requête permet de se prémunir des attaques de type injections de SQL
     et devrait *toujours* être fait. Si vous utilisez plusieurs paramètres, vous
     pouvez alors définir leurs valeurs d'un seul coup en utilisant la méthode 
-    ``setParameters()`` :
-
-    .. code-block:: php
+    ``setParameters()``::
 
         ->setParameters(array(
             'price' => '19.99',
@@ -795,9 +788,7 @@ Au lieu d'écrire des requêtes directement, vous pouvez alternativement utilise
 le ``QueryBuilder`` (constructeur de requêtes) de Doctrine pour faire le même
 travail en utilisant une jolie interface orientée-objet.
 Si vous utilisez un IDE, vous pourrez aussi profiter de l'auto-complétion
-en tapant le nom des méthodes. De l'intérieur d'un contrôleur :
-
-.. code-block:: php
+en tapant le nom des méthodes. De l'intérieur d'un contrôleur::
 
     $repository = $this->getDoctrine()
         ->getRepository('AcmeStoreBundle:Product');
@@ -807,7 +798,7 @@ en tapant le nom des méthodes. De l'intérieur d'un contrôleur :
         ->setParameter('price', '19.99')
         ->orderBy('p.price', 'ASC')
         ->getQuery();
-    
+
     $products = $query->getResult();
 
 L'objet ``QueryBuilder`` contient toutes les méthodes nécessaires pour construire
@@ -857,6 +848,7 @@ Pour ce faire, ajouter le nom de la classe dépôt à vos informations de mappin
     .. code-block:: xml
 
         <!-- src/Acme/StoreBundle/Resources/config/doctrine/Product.orm.xml -->
+
         <!-- ... -->
         <doctrine-mapping>
 
@@ -867,13 +859,13 @@ Pour ce faire, ajouter le nom de la classe dépôt à vos informations de mappin
         </doctrine-mapping>
 
 Doctrine peut générer la classe de dépôt pour vous en lançant la même commande
-que celle utilisée précédemment pour générer les getters et setters. 
+que celle utilisée précédemment pour générer les getters et setters :
 
 .. code-block:: bash
 
-    php app/console doctrine:generate:entities Acme
+    $ php app/console doctrine:generate:entities Acme
 
-Ensuite, ajoutez une méthode - ``findAllOrderedByName()`` - à la classe fraîchement
+Ensuite, ajoutez une méthode ``findAllOrderedByName()`` à la classe fraîchement
 générée. Cette méthode requêtera les entités ``Product``, en les classant par
 ordre alphabétique.
 
@@ -899,11 +891,9 @@ ordre alphabétique.
     Vous pouvez accéder au gestionnaire d'entités par ``$this->getEntityManager()`` à
     l'intérieur du dépôt.
 
-Vous pouvez alors utiliser cette nouvelle méthode comme les méthodes par défaut du dépôt :
+Vous pouvez alors utiliser cette nouvelle méthode comme les méthodes par défaut du dépôt::
 
-.. code-block:: php
-
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $products = $em->getRepository('AcmeStoreBundle:Product')
                 ->findAllOrderedByName();
 
@@ -925,7 +915,7 @@ classe, vous pouvez le laisser générer la classe pour vous.
 
 .. code-block:: bash
 
-    php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Category" --fields="name:string(255)"
+    $ php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Category" --fields="name:string(255)"
 
 Cette commande génère l'entité ``Category`` pour vous, avec un champ ``id``,
 un champ ``name`` et les méthodes getter et setter associées.
@@ -939,13 +929,13 @@ propriété ``products`` dans la classe ``Category`` :
 .. configuration-block::
 
     .. code-block:: php-annotations
-	
-        // src/Acme/StoreBundle/Entity/Category.php
-        // ...
 
+        // src/Acme/StoreBundle/Entity/Category.php
+
+        // ...
         use Doctrine\Common\Collections\ArrayCollection;
 
-	class Category
+        class Category
         {
             // ...
 
@@ -972,9 +962,27 @@ propriété ``products`` dans la classe ``Category`` :
                     mappedBy: category
             # n'oubliez pas d'initialiser la collection dans la méthode __construct() de l'entité
 
+    .. code-block:: xml
+
+        <!-- src/Acme/StoreBundle/Resources/config/doctrine/Category.orm.xml -->
+        <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+            <entity name="Acme\StoreBundle\Entity\Category">
+                <!-- ... -->
+                <one-to-many field="products"
+                    target-entity="product"
+                    mapped-by="category"
+                />
+
+                <!-- n'oubliez pas d'initialiser la collection dans la méthode __construct() de l'entité -->
+            </entity>
+        </doctrine-mapping>
 
 Tout d'abord, comme un objet ``Category`` sera relié à plusieurs objets
-``Product``, une propriété tableau ``products`` est ajoutée pour stocker
+``Product``, une propriété ``products`` (un tableau) est ajoutée pour stocker
 ces objets ``Product``.
 Encore une fois, nous ne faisons pas cela parce que Doctrine en a besoin,
 mais plutôt parce qu'il est cohérent dans l'application que chaque ``Category``
@@ -1000,14 +1008,13 @@ contienne un tableau d'objets ``Product``.
 Ensuite, comme chaque classe ``Product`` est reliée exactement à un objet ``Category``,
 il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
 
-
 .. configuration-block::
 
     .. code-block:: php-annotations
 
         // src/Acme/StoreBundle/Entity/Product.php
-         // ...
 
+        // ...
         class Product
         {
             // ...
@@ -1032,6 +1039,28 @@ il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
                     joinColumn:
                         name: category_id
                         referencedColumnName: id
+
+    .. code-block:: xml
+
+        <!-- src/Acme/StoreBundle/Resources/config/doctrine/Product.orm.xml -->
+        <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+            <entity name="Acme\StoreBundle\Entity\Product">
+                <!-- ... -->
+                <many-to-one field="category"
+                    target-entity="products"
+                    join-column="category"
+                >
+                    <join-column
+                        name="category_id"
+                        referenced-column-name="id"
+                    />
+                </many-to-one>
+            </entity>
+        </doctrine-mapping>
 
 Finalement, maintenant que vous avez ajouté une nouvelle propriété aux classes
 ``Category`` et ``Product``, dites à Doctrine de régénérer les getters et setters
