@@ -718,19 +718,23 @@ pour afficher le message ``notice`` :
 
     .. code-block:: html+jinja
 
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
+        {% if app.session.started %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-notice">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
     .. code-block:: html+php
 
-        <?php foreach ($view['session']->getFlashBag()->get('notice') as $message): ?>
-            <div class="flash-notice">
-                <?php echo "<div class='flash-error'>$message</div>" ?>
-            </div>
-        <?php endforeach; ?>
+        <?php if ($view['session']->isStarted()): ?>
+            <?php foreach ($view['session']->getFlashBag()->get('notice') as $message): ?>
+                <div class="flash-notice">
+                    <?php echo "<div class='flash-error'>$message</div>" ?>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
 De par leur conception, les messages flash sont faits pour durer pendant exactement une
 requête (ils « disparaissent en un éclair/flash »). Ils sont conçus pour être utilisés
