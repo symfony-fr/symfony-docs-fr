@@ -100,9 +100,9 @@ l'évènement est lancé::
             $entity = $args->getEntity();
             $entityManager = $args->getEntityManager();
             
-            // peut-être vous voulez seulement agir sur une entité « Product »
+            // peut-être voulez-vous seulement agir sur une entité « Product »
             if ($entity instanceof Product) {
-                // fait quelque chose avec le « Product »
+                // faites quelque chose avec l'entité « Product »
             }
         }
     }
@@ -112,9 +112,9 @@ qui vous donne accès à l'objet entité de l'évènement ainsi qu'au gestionnai
 d'entités lui-même.
 
 Une chose importante à noter est qu'un listener va écouter *toutes* les entités
-de votre application. Donc, si vous n'êtes intéressé que de gérer uniquement un type
+de votre application. Donc, si vous ne voulez gérer qu'un type
 spécifique d'entité (par exemple : une entité ``Product`` mais pas une entité
-``BlogPost``), vous devriez vérifier le nom de la classe de votre entité dans
+``BlogPost``), vous devez vérifier le nom de la classe de votre entité dans
 votre méthode (comme montré ci-dessus).
 
 .. _`Le système d'évènements`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html
