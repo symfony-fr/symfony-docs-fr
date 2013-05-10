@@ -579,7 +579,7 @@ des entités d'une certaine classe. Vous pouvez accéder au dépôt d'une classe
 d'entités avec::
 
     $repository = $this->getDoctrine()
-        ->getRepository('AcmeStoreBundle:Product');;
+        ->getRepository('AcmeStoreBundle:Product');
 
 .. note::
 
