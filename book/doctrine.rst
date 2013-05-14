@@ -1068,29 +1068,29 @@ manquants pour vous :
 
 .. code-block:: bash
 
-    php app/console doctrine:generate:entities Acme
+    $ php app/console doctrine:generate:entities Acme
 
-Ignorez les métadonnées de Doctrine pour un moment. Vous avez maintenant deux
-classes - ``Category`` et ``Product`` avec une relation naturelle one-to-many.
+Laissez de côté les métadonnées de Doctrine pour un moment. Vous avez maintenant deux
+classes : ``Category`` et ``Product`` avec une relation naturelle one-to-many.
 La classe ``Category`` peut contenir un tableau de ``Product`` et l'objet ``Product``
 peut contenir un objet ``Category``. En d'autres termes, vous avez construit vos 
 classes de manière à ce qu'elles aient un sens pour répondre à vos besoins. Le fait
 que les données aient besoin d'être persistées dans une base de données est
 toujours secondaire.
 
-Maintenant, regardez les métadonnées au-dessus de la propriété ``$category``
-dans la classe ``Product``. Les informations ici disent à Doctrine que la classe
-associée est ``Category`` et qu'il devrait stocker l'``id`` de la catégorie
+Maintenant, regardez les métadonnées situées au-dessus de la propriété ``$category``
+dans la classe ``Product``. Ces informations indiquent à Doctrine que la classe
+associée est ``Category`` et que Doctrine devrait stocker l'``id`` de la catégorie
 dans un champ ``category_id`` présent dans la table ``product``. En d'autres
 termes, l'objet ``Category`` associé sera stocké dans la propriété ``$category``,
-mais dans les coulisses, Doctrine persistera la relation en stockant la valeur
+mais, de façon transparente, Doctrine persistera la relation en stockant la valeur
 de l'id de la catégorie dans la colonne ``category_id`` de la table ``product``.
 
 .. image:: /images/book/doctrine_image_2.png
    :align: center
 
 Les métadonnées de la propriété ``$products`` de l'objet ``Category``
-sont moins importantes, et disent simplement à Doctrine de regarder la propriété
+sont moins importantes, et indiquent simplement à Doctrine de regarder la propriété
 ``Product.category`` pour comprendre comment l'association est mappée.
 
 Avant que vous ne continuiez, assurez-vous que Doctrine ajoute la nouvelle
@@ -1099,12 +1099,12 @@ nouvelle clé étrangère :
 
 .. code-block:: bash
 
-    php app/console doctrine:schema:update --force
+    $ php app/console doctrine:schema:update --force
 
 .. note::
 
-    Cette tâche ne devrait être réalisée en pratique que lors du développement.
-    Pour une façon plus robuste de mettre à jour systématiquement les bases de
+    Cette commande ne devrait être exécutée que lors du développement.
+    Pour une façon plus robuste de mettre à jour les bases de
     données de production, lisez l'article suivant: :doc:`Doctrine migrations</bundles/DoctrineFixturesBundle/index>`.
 
 Sauver les entités associées
@@ -1115,10 +1115,10 @@ Maintenant, pour voir le code en action, imaginez que vous êtes dans un contrô
 .. code-block:: php
 
     // ...
+
     use Acme\StoreBundle\Entity\Category;
     use Acme\StoreBundle\Entity\Product;
     use Symfony\Component\HttpFoundation\Response;
-    // ...
 
     class DefaultController extends Controller
     {
@@ -1126,27 +1126,27 @@ Maintenant, pour voir le code en action, imaginez que vous êtes dans un contrô
         {
             $category = new Category();
             $category->setName('Main Products');
-            
+
             $product = new Product();
             $product->setName('Foo');
             $product->setPrice(19.99);
-            // relate this product to the category
+            // lie ce produit à une catégorie
             $product->setCategory($category);
-            
-            $em = $this->getDoctrine()->getEntityManager();
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->persist($product);
             $em->flush();
-            
+
             return new Response(
-                'Created product id: '.$product->getId().' and category id: '.$category->getId()
+                'Id du produit créé : '.$product->getId().' et id de la catégorie : '.$category->getId()
             );
         }
     }
 
 Maintenant, une simple ligne est ajoutée aux tables ``category`` et ``product``.
 La colonne ``product.category_id`` du nouveau produit est définie comme
-la valeur de l'``id`` de la nouvelle catégorie. Doctrine gérera la persistence
+la valeur de l'``id`` de la nouvelle catégorie. Doctrine gère la persistence
 de cette relation pour vous.
 
 Récupérer des objets associés
@@ -1154,9 +1154,7 @@ Récupérer des objets associés
 
 Lorsque vous récupérez des objets associés, le processus que vous employez
 ressemble exactement à celui employé auparavant. Tout d'abord, récupérez
-un objet ``$product`` et accéder alors à sa ``Category`` associée :
-
-.. code-block:: php
+un objet ``$product`` pour accéder à sa ``Category`` associée::
 
     public function showAction($id)
     {
@@ -1165,28 +1163,26 @@ un objet ``$product`` et accéder alors à sa ``Category`` associée :
             ->find($id);
 
         $categoryName = $product->getCategory()->getName();
-        
+
         // ...
     }
 
 Dans cet exemple, vous requêtez tout d'abord un objet ``Product`` en vous basant
-sur l'``id`` du produit. Cela produit une requête *uniquement* pour les
+sur l'``id`` du produit. Cela genère une requête *uniquement* pour les
 données du produit et hydrate l'objet ``$product`` avec ces données. Plus tard,
 lorsque vous appelez ``$product->getCategory()->getName()``, Doctrine effectue
-une seconde requête silencieusement pour trouver la ``Category`` qui est associé
+une seconde requête de façon transparente pour trouver la ``Category`` qui est associé
 à ce ``Product``. Il prépare l'objet ``$category`` et vous le renvoie.
 
 .. image:: /images/book/doctrine_image_3.png
    :align: center
 
-Ce qui est important est le fait que vous ayez un accès facile à la catégorie
+Le plus important est que vous accédiez à la catégorie
 associée au produit, mais que les données de cette catégorie ne sont réellement
 récupérées que lorsque vous demandez la catégorie (on parle alors de chargement
 fainéant ou « lazy loading »).
 
-Vous pouvez aussi faire cette requête dans l'autre sens :
-
-.. code-block:: php
+Vous pouvez aussi faire cette requête dans l'autre sens::
 
     public function showProductAction($id)
     {
@@ -1195,14 +1191,14 @@ Vous pouvez aussi faire cette requête dans l'autre sens :
             ->find($id);
 
         $products = $category->getProducts();
-    
+
         // ...
     }
 
 Dans ce cas, la même chose se produit : vous requêtez tout d'abord un simple
 objet ``Category``, et Doctrine effectue alors une seconde requête pour récupérer
 les objets ``Product`` associés, mais uniquement une fois que/si vous les demandez
-(c.à.d si vous appelez ``->getProducts()``).
+(c-à-d si vous appelez ``->getProducts()``).
 La variable ``$products`` est un tableau de tous les objets ``Product`` associés
 à l'objet ``Category`` donnés via leurs valeurs ``category_id``.
 
@@ -1210,9 +1206,7 @@ La variable ``$products`` est un tableau de tous les objets ``Product`` associé
 
     Ce mécanisme de « chargement fainéant » est possible car, quand c'est nécessaire,
     Doctrine retourne un objet « mandataire » (proxy) au lieu des vrais objets.
-    Regardez de plus près l'exemple ci-dessus :
-
-    .. code-block:: php
+    Regardez de plus près l'exemple ci-dessous::
 
         $product = $this->getDoctrine()
             ->getRepository('AcmeStoreBundle:Product')
@@ -1253,12 +1247,9 @@ original (par exemple, une ``Category``), et une pour le(s) objet(s) associé(s)
 Bien sûr, si vous savez dès le début que vous aurez besoin d'accéder aux deux
 objets, vous pouvez éviter de produire une deuxième requête en ajoutant
 une jointure dans la requête originale. Ajouter le code suivant à la classe
-``ProductRepository`` :
-
-.. code-block:: php
+``ProductRepository``::
 
     // src/Acme/StoreBundle/Entity/ProductRepository.php
-    
     public function findOneByIdJoinedToCategory($id)
     {
         $query = $this->getEntityManager()
@@ -1267,7 +1258,7 @@ une jointure dans la requête originale. Ajouter le code suivant à la classe
                 JOIN p.category c
                 WHERE p.id = :id'
             )->setParameter('id', $id);
-        
+
         try {
             return $query->getSingleResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
@@ -1276,9 +1267,7 @@ une jointure dans la requête originale. Ajouter le code suivant à la classe
     }
 
 Maintenant, vous pouvez utiliser cette méthode dans votre contrôleur pour
-requêter un objet ``Product`` et sa ``Category`` associée avec une seule requête :
-
-.. code-block:: php
+requêter un objet ``Product`` et sa ``Category`` associée avec une seule requête::
 
     public function showAction($id)
     {
@@ -1287,9 +1276,9 @@ requêter un objet ``Product`` et sa ``Category`` associée avec une seule requ�
             ->findOneByIdJoinedToCategory($id);
 
         $category = $product->getCategory();
-    
+
         // ...
-    }    
+    }
 
 Plus d'informations sur les associations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1309,9 +1298,10 @@ consultez la documentation de Doctrine: `Association Mapping Documentation`_.
 Configuration
 -------------
 
-Doctrine est hautement configurable, même si vous n'aurez sans doute jamais besoin
+Doctrine est entièrement configurable, même si vous n'aurez sans doute jamais besoin
 de vous embêter avec la plupart de ses options. Pour obtenir des informations
-sur la configuration de Doctrine, rendez-vous dans la section : :doc:`reference manual</reference/configuration/doctrine>`.
+sur la configuration de Doctrine, rendez-vous dans la section correspondante du
+:doc:`manuel de référence</reference/configuration/doctrine>`.
 
 Callbacks et cycle de vie
 -------------------------
@@ -1340,14 +1330,14 @@ ce n'est pas nécessaire :
 Désormais, vous pouvez dire à Doctrine d'éxecuter une méthode à n'importe
 quel évènement du cycle de vie. Par exemple, supposons que vous souhaitez
 définir une date ``created`` à la date courante, uniquement lorsque l'entité
-est persistée (c.à.d insérée) :
+est persistée pour la première fois (c-à-d insérée) :
 
 .. configuration-block::
 
     .. code-block:: php-annotations
 
         /**
-         * @ORM\prePersist
+         * @ORM\PrePersist
          */
         public function setCreatedValue()
         {
@@ -1361,11 +1351,12 @@ est persistée (c.à.d insérée) :
             type: entity
             # ...
             lifecycleCallbacks:
-                prePersist: [ setCreatedValue ]
+                prePersist: [setCreatedValue]
 
     .. code-block:: xml
 
         <!-- src/Acme/StoreBundle/Resources/config/doctrine/Product.orm.xml -->
+
         <!-- ... -->
         <doctrine-mapping>
 
@@ -1402,7 +1393,7 @@ Pour plus d'informations sur la signification de ces évènements du cycle de vi
 et sur leurs callbacks en général, référez-vous à la documentation de
 Doctrine: `Lifecycle Events documentation`_.
 
-.. sidebar:: Callbacks du cycle de vie et traitants d'évènements
+.. sidebar:: Callbacks du cycle de vie et écouteurs d'évènements
 
     Notez que la méthode ``setCreatedValue()`` ne prend pas d'argument.
     C'est toujours le cas des callbacks du cycle de vie, et c'est intentionnel :
@@ -1414,18 +1405,18 @@ Doctrine: `Lifecycle Events documentation`_.
     envoyer un mail - vous devez écrire une classe externe et l'enregistrer
     pour écouter ou s'abonner aux évènements, puis lui donner les accès
     à toutes les ressources dont vous aurez besoin. Pour plus d'informations,
-    voir :doc:`/cookbook/doctrine/event_listeners_subscribers`.
+    lisez :doc:`/cookbook/doctrine/event_listeners_subscribers`.
 
 Les extensions de Doctrine: Timestampable, Sluggable, etc.
 ----------------------------------------------------------
 
 Doctrine est très flexible, et il existe un certain nombre d'extensions tierces
 qui permettent de faciliter les tâches courantes sur vos entités.
-Elles incluent diverses choses comme *Sluggable*, *Timestampable*, *Loggable*,
+Elles incluent diverses outils comme *Sluggable*, *Timestampable*, *Loggable*,
 *Translatable*, et *Tree*.
 
 Pour plus d'informations sur comment trouver et utiliser ces extensions, regardez
-l'article du cookbook à ce sujet : :doc:`using common Doctrine extensions</cookbook/doctrine/common_extensions>`.
+l'article du cookbook relatif à l':doc:`utilisation des extensions Doctrine</cookbook/doctrine/common_extensions>`.
 
 .. _book-doctrine-field-types:
 
@@ -1475,19 +1466,19 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
     .. code-block:: php-annotations
 
         /**
-        * Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
-        * (reflétant les valeurs par défaut des options "type", "length" et *nullable);
-        * 
-        * @ORM\Column()
-        */
+         * Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
+         * (reflétant les valeurs par défaut des options "type", "length" et *nullable);
+         *
+         * @ORM\Column()
+         */
         protected $name;
 
         /**
-        * Une chaîne de longueur 150 qui sera persistée vers une colonne "email_address"
-        * et a un index unique.
-        *
-        * @ORM\Column(name="email_address", unique="true", length=150)
-        */
+         * Une chaîne de longueur 150 qui sera persistée vers une colonne "email_address"
+         * et a un index unique.
+         *
+         * @ORM\Column(name="email_address", unique=true, length=150)
+         */
         protected $email;
 
     .. code-block:: yaml
@@ -1507,11 +1498,25 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
                 length: 150
                 unique: true
 
+    .. code-block:: xml
+
+        <!--
+            Une chaîne de caractères de longueur 255 qui ne peut pas être nulle
+            (reflétant les valeurs par défaut des options "type", "length" et *nullable);
+            l'attribut type est nécessaire dans une configuration en xml
+        -->
+        <field name="name" type="string" />
+        <field name="email"
+            type="string"
+            column="email_address"
+            length="150"
+            unique="true"
+        />
 
 .. note::
 
     Il existe d'autre options qui ne sont pas listées ici. Pour plus de détails,
-    voir `Property Mapping documentation`_.
+    lisez `Property Mapping documentation`_.
 
 
 .. index::
@@ -1521,33 +1526,33 @@ disponibles incluent ``type`` (valant ``string`` par défaut), ``name``,
 Commandes en console
 --------------------
 
-L'intégration de l'ORM Doctrine2 offre plusieurs commandes en console
+L'intégration de l'ORM Doctrine2 offre plusieurs commandes de console
 sous l'espace de nom ``doctrine``. Pour voir la liste de ces commandes,
-vous pouvez lancer la console sans aucun argument :
+vous pouvez exécutez la console sans aucun argument :
 
 .. code-block:: bash
 
-    php app/console
+    $ php app/console
 
 Une liste des commandes disponibles s'affichera, la plupart d'entre elles
 commencent par le préfixe ``doctrine:``. Vous pouvez obtenir plus d'informations
 sur n'importe laquelle de ces commandes (ou n'importe quelle commande Symfony)
 en lançant la commande ``help``. Par exemple, pour obtenir des informations
-sur la commande ``doctrine:database:create``, lancez :
+sur la commande ``doctrine:database:create``, exécutez :
 
 .. code-block:: bash
 
-    php app/console help doctrine:database:create
+    $ php app/console help doctrine:database:create
 
-Quelques commandes notables ou intéressantes incluent :
+Voici une liste non exhaustive de commandes intéressantes :
 
 * ``doctrine:ensure-production-settings`` - teste si l'environnement actuel
-  est efficacement configuré pour la production. Cela devrait toujours être
-  lancé dans un environnement `prod` :
-  
+  est configuré de manière optimale pour la production. Elle devrait toujours être
+  exécutée dans un environnement `prod` :
+
   .. code-block:: bash
-  
-    php app/console doctrine:ensure-production-settings --env=prod
+
+      $ php app/console doctrine:ensure-production-settings --env=prod
 
 * ``doctrine:mapping:import`` - permet à Doctrine d'introspecter une
   base de données existante pour créer les informations de mapping.
@@ -1564,6 +1569,16 @@ Quelques commandes notables ou intéressantes incluent :
     Pour pouvoir charger des données d'installation (fixtures), vous devrez 
     installer le bundle ``DoctrineFixtureBundle``. Pour apprendre comment
     le faire, lisez le chapitre du Cookbook : ":doc:`/bundles/DoctrineFixturesBundle/index`"
+
+.. tip::
+
+    Cette page montre comment Doctrine fonctionne au sein d'un contrôleur.
+    Mais vous voulez peut être travailler avec Doctrine ailleurs dans votre
+    application. La méthode :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller::getDoctrine`
+    de la classe Controller retourne le service ``doctrine``. Vous pouvez
+    travailler avec de la même manière, en l'injectant dans vos propres services.
+    Lisez :doc:`/book/service_container` pour savoir comment créer vos propres
+    services.
 
 Résumé
 ------
