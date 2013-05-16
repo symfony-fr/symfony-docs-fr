@@ -127,7 +127,7 @@ login/mot de passe) :
     La distribution Symfony Standard place la configuration de la sécurité dans un fichier 
     séparé (``app/config/security.yml``). Si vous ne voulez pas utiliser un fichier séparé,
     vous pouvez mettre la configuration directement dans le fichier principal de configuration
-    (``app/config/security.yml``).
+    (``app/config/config.yml``).
 
 Le résultat final de cette configuration est un système de sécurité entièrement fonctionnel, 
 que l'on peut décrire de la manière suivante :
