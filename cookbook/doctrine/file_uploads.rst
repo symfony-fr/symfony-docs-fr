@@ -407,7 +407,6 @@ légèrement différente car vous devez sauvegarder l'extension dans la proprié
                 unlink($this->filenameForRemove);
             }
         }
-        }
 
         public function getAbsolutePath()
         {
