@@ -1,14 +1,14 @@
 .. index::
-   single: Formulaires
+   single: Forms
 
 Formulaires
 ===========
 
-Interagir avec les formulaires HTML est l'une des plus communes - et stimulantes -
-tâches pour un développeur web. Symfony2 intègre un composant « Form » qui rend
-la chose facile. Dans ce chapitre, vous allez construire un formulaire complexe
-depuis la base, tout en apprenant au fur et à mesure les caractéristiques les
-plus importantes de la bibliothèque des formulaires.
+Intéragir avec les formulaires HTML est l'une des tâches les plus habituelles
+- et stimulantes - pour un développeur web. Symfony2 intègre un composant « Form »
+qui rend cette intéraction très facile. Dans ce chapitre, vous allez construire un
+formulaire complexe depuis la base, tout en apprenant au fur et à mesure les
+caractéristiques les plus importantes de la bibliothèque des formulaires.
 
 .. note::
 
@@ -17,7 +17,7 @@ plus importantes de la bibliothèque des formulaires.
    `Composant Formulaire Symfony2`_ sur Github.
 
 .. index::
-   single: Formulaires; Créer un formulaire simple
+   single: Forms; Create a simple form
 
 Créer un formulaire simple
 --------------------------
@@ -61,14 +61,14 @@ pour une tâche::
 
    Si vous codez en même temps que vous lisez cet exemple, créez en premier
    le bundle ``AcmeTaskBundle`` en exécutant la commande suivante (et en
-   acceptant toutes les options par défaut) :
+   acceptant toutes les options par défaut):
 
    .. code-block:: bash
 
-        php app/console generate:bundle --namespace=Acme/TaskBundle
+        $ php app/console generate:bundle --namespace=Acme/TaskBundle
 
 Cette classe est un « bon vieil objet PHP » parce que, jusqu'ici, elle n'a rien
-à voir avec Symfony ou quelconque autre bibliothèque. C'est tout simplement
+à voir avec Symfony ou un quelconque autre bibliothèque. C'est tout simplement
 un objet PHP normal qui répond directement à un besoin dans *votre*
 application (c-a-d le besoin de représenter une tâche dans votre application).
 Bien sûr, à la fin de ce chapitre, vous serez capable de soumettre des données
@@ -76,17 +76,15 @@ Bien sûr, à la fin de ce chapitre, vous serez capable de soumettre des donnée
 et de les persister dans la base de données.
 
 .. index::
-   single: Formulaires; Créer un formulaire dans un contrôleur
+   single: Forms; Create a form in a controller
 
 Construire le Formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Maintenant que vous avez créé une classe ``Task``, la prochaine étape est
-de créer et de retourner le formulaire HTML. Dans Symfony2, cela se fait
-en construisant un objet formulaire qui est ensuite rendu dans un template.
-Pour l'instant, tout ceci peut être effectué depuis un contrôleur :
-
-.. code-block:: php
+de créer et d'afficher le formulaire HTML. Dans Symfony2, cela se fait
+en construisant un objet formulaire qui est ensuite affiché dans un template.
+Pour l'instant, tout ceci peut être effectué dans un contrôleur::
 
     // src/Acme/TaskBundle/Controller/DefaultController.php
     namespace Acme\TaskBundle\Controller;
@@ -107,6 +105,7 @@ Pour l'instant, tout ceci peut être effectué depuis un contrôleur :
             $form = $this->createFormBuilder($task)
                 ->add('task', 'text')
                 ->add('dueDate', 'date')
+                ->add('save', 'submit')
                 ->getForm();
 
             return $this->render('AcmeTaskBundle:Default:new.html.twig', array(
@@ -120,31 +119,36 @@ Pour l'instant, tout ceci peut être effectué depuis un contrôleur :
    Cet exemple vous montre comment construire votre formulaire directement
    depuis le contrôleur. Plus tard, dans la section
    « :ref:`book-form-creating-form-classes` », vous apprendrez à construire
-   votre formulaire dans une classe autonome, ce qui est recommandé, car comme
-   cela, vos formulaires deviennent réutilisables.
+   votre formulaire dans une classe autonome, ce qui est recommandé, car vos formulaires
+   deviendront ainsi réutilisables.
 
-Créer un formulaire requiert relativement peu de code, car les objets formulaires
+Créer un formulaire nécessite relativement peu de code, car les objets formulaires
 de Symfony2 sont construits avec un « constructeur de formulaire » (« form builder »).
 Le principe du constructeur de formulaire est de vous permettre d'écrire des
-« conteneurs » de formulaire simples, et de le laisser prendre en charge toute
+« conteneurs » de formulaire simples, et de le laisser prendre en charge
 la plus grosse partie du travail qu'est la construction du formulaire.
 
 Dans cet exemple, vous avez ajouté deux champs à votre formulaire - ``task`` et
 ``dueDate`` - correspondants aux propriétés ``task`` et ``dueDate`` de votre
 classe ``Task``. Vous avez aussi assigné à chaque champ un « type » (par exemple :
 ``text``, ``date``), qui, entre autres, détermine quelle(s) balise(s) HTML
-est rendue pour ce champ.
+est affichée pour ce champ. Enfin, vous avez ajouté un bouton « submit » pour
+envoyer le formulaire sur le serveur.
 
-Symfony2 est livré avec beaucoup de types prédéfinis qui seront présentés
+.. versionadded:: 2.3
+    Le support des boutons « submit » est une nouveauté de Symfony 2.3. Avant cela,
+    vous deviez ajouter vous même les boutons au formulaire HTML.
+
+Symfony2 est livré avec de nombreux types prédéfinis qui seront présentés
 rapidement plus tard (voir :ref:`book-forms-type-reference`).
 
 .. index::
-  single: Formulaires; Rendu de template basique
+  single: Forms; Basic template rendering
 
-Rendu du Formulaire
-~~~~~~~~~~~~~~~~~~~
+Affichage du Formulaire
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant que le formulaire a été créé, la prochaine étape est de le rendre.
+Maintenant que le formulaire a été créé, la prochaine étape est de l'afficher.
 Ceci est fait en passant un objet spécial « vue de formulaire » à votre template
 (notez le ``$form->createView()`` dans le contrôleur ci-dessus) et en utilisant
 un ensemble de fonctions d'aide (helpers) pour les formulaires :
@@ -155,35 +159,28 @@ un ensemble de fonctions d'aide (helpers) pour les formulaires :
 
         {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
 
-        <form action="{{ path('task_new') }}" method="post" {{ form_enctype(form) }}>
-            {{ form_widget(form) }}
-
-            <input type="submit" />
-        </form>
+        {{ form(form) }}
 
     .. code-block:: html+php
 
         <!-- src/Acme/TaskBundle/Resources/views/Default/new.html.php -->
 
-        <form action="<?php echo $view['router']->generate('task_new') ?>" method="post" <?php echo $view['form']->enctype($form) ?> >
-            <?php echo $view['form']->widget($form) ?>
-
-            <input type="submit" />
-        </form>
+        <?php echo $view['form']->form($form) ?>
 
 .. image:: /images/book/form-simple.png
     :align: center
 
 .. note::
 
-    Cet exemple assume que vous avez créé une route nommée ``task_new``
-    qui pointe sur le contrôleur ``AcmeTaskBundle:Default:new`` qui a
-    été créé plus tôt.
+    Cet exemple suppose que vous soumettez le formulaire grâce à une requête
+    « POST », et à la même URL que celle qui l'a affiché. Vous apprendrez plus
+    tard comment changer la méthode de la requête et l'URL cible du formulaire.
 
-C'est tout ! En affichant ``form_widget(form)``, chaque champ du formulaire
-est affiché, avec un label et un message d'erreur (si erreur il y a). Aussi
+C'est tout ! En affichant ``form(form)``, chaque champ du formulaire
+est affiché, avec un label et un message d'erreur (si erreur il y a). La fonction
+``form`` affiche tout dans une balise HTML ``form``. Aussi
 facile que cela soit, ce n'est pas (encore) très flexible. Habituellement,
-vous voudrez rendre chaque champ du formulaire individuellement afin de
+vous voudrez afficher chaque champ du formulaire individuellement afin de
 pouvoir contrôler ce à quoi le formulaire ressemble. Vous apprendrez comment
 faire cela dans la section «:ref:`form-rendering-template`».
 
@@ -200,11 +197,14 @@ un formulaire HTML.
    de la classe ``Task``. A moins qu'une propriété soit publique, elle *doit*
    avoir une méthode « getter » et un « setter » afin que le composant formulaire
    puisse récupérer et assigner des données à cette propriété. Pour une propriété
-   booléenne, vous pouvez utiliser une méthode « isser » (par exemple :
-   ``isPublished()``) à la place d'un getter (par exemple : ``getPublished()``).
+   booléenne, vous pouvez utiliser une méthode « isser » ou « hasser » (par exemple :
+   ``isPublished()`` ou ``hasReminder()`) à la place d'un getter
+   (par exemple : ``getPublished()`` ou ``getReminder()``).
 
 .. index::
-  single: Formulaires; Gérer la soumission des formulaires
+  single: Forms; Handling form submissions
+
+.. _book-form-handling-form-submissions:
 
 Gérer la Soumission des Formulaires
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -212,69 +212,70 @@ Gérer la Soumission des Formulaires
 Le second travail d'un formulaire est de transmettre les données soumises par
 l'utilisateur aux propriétés d'un objet. Pour réaliser cela, les données
 soumises par l'utilisateur doivent être liées au formulaire. Ajoutez la
-fonctionnalité suivante à votre contrôleur :
-
-.. code-block:: php
+fonctionnalité suivante à votre contrôleur::
 
     // ...
+    use Symfony\Component\HttpFoundation\Request;
 
     public function newAction(Request $request)
     {
-        // initialisez simplement un objet $task (supprimez les données fictives)
+        // just setup a fresh $task object (remove the dummy data)
         $task = new Task();
 
         $form = $this->createFormBuilder($task)
             ->add('task', 'text')
             ->add('dueDate', 'date')
+            ->add('save', 'submit')
             ->getForm();
 
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                // effectuez quelques actions, comme sauvegarder la tâche dans
-                // la base de données
-                return $this->redirect($this->generateUrl('task_success'));
-            }
+        if ($form->isValid()) {
+            // fait quelque chose comme sauvegarder la tâche dans la bdd
+
+            return $this->redirect($this->generateUrl('task_success'));
         }
 
         // ...
     }
 
-.. versionadded:: 2.1
-
-    La méthode ``bind`` a été rendue plus flexible dans Symfony 2.1. Elle
-    accepte maintenant les données brutes du client (comme avant) ou un
-    objet Request Symfony. Elle est à privilégier par rapport à la méthode
-    ``bindRequest`` dépréciée.
-
-Maintenant, lorsque vous soumettez le formulaire, le contrôleur lie les données
-soumises avec le formulaire, qui transmet ces données en retour aux propriétés
-``task`` et ``dueDate`` de l'objet ``$task``. Tout ceci a lieu grâce à la
-méthode ``bind()``.
-
-.. note::
-
-    Aussitôt que ``bind()`` est appelée, les données soumises sont
-    transférées immédiatement à l'objet sous-jacent. Ceci intervient
-    indépendamment du fait que les données sous-jacentes soient valides ou non.
+.. versionadded:: 2.3
+    La méthode :method:`Symfony\Component\Form\FormInterface::handleRequest` a été
+    ajoutée dans Symfony 2.3. Avant cela, la ``$request`` était passée à la méthode
+    ``submit``, une stratégie qui est dépréciée et qui sera supprimée dans Symfony 3.0.
+    Pour plus de détails sur cette méthode, lisez :ref:`cookbook-form-submit-request`.
 
 Ce contrôleur suit un pattern commun dans la manière de gérer les formulaires,
 et a trois scénarios possibles :
 
-#. Lors du chargement initial de la page dans votre navigateur, la méthode
-   de la requête est ``GET`` et le formulaire est simplement créé et rendu ;
+#. Lors du chargement initial de la page dans votre navigateur, le formulaire
+   est simplement créé et affiché. :method:`Symfony\Component\Form\FormInterface::handleRequest`
+   détermine que le formulaire n'a pas été soumis et ne fait rien.
+   :method:`Symfony\Component\Form\FormInterface::isValid` retourne ``false`` si le
+   formulaire n'a pas été soumis ;
 
-#. Lorsque l'utilisateur soumet le formulaire (la méthode est ``POST``)
-   avec des données non valides (la validation est expliquée dans la prochaine
-   section), le formulaire est lié puis rendu, affichant cette fois toutes les
-   erreurs de validation ;
+#. Lorsque l'utilisateur soumet le formulaire, :method:`Symfony\Component\Form\FormInterface::handleRequest`
+   s'en rend compte et écrit immédiatement les données soumises dans les
+   propriétés ``task`` et ``dueDate`` de l'objet ``$task``. Ensuite, cet objet
+   est validé. S'il est invalide (la validation est abordée dans la section
+   suivante), :method:`Symfony\Component\Form\FormInterface::isValid` retourne
+   encore ``false`` et le formulaire est réaffiché avec toutes ses erreurs de
+   validation ;
 
-#. Lorsque l'utilisateur soumet le formulaire avec des données valides, ce
-   dernier est lié et vous avez l'opportunité d'effectuer quelques actions
-   en utilisant l'objet ``$task`` (par exemple : le persister dans la base
-   de données) avant de rediriger l'utilisateur vers une autre page (par
-   exemple : une page « merci » ou de « succès »).
+   .. note::
+
+       Vous pouvez utiliser la méthode :method:`Symfony\Component\Form\FormInterface::isSubmitted`
+       pour vérifier si un formulaire a été soumis ou non, indépendemment du fait
+       que les données soumises soient valides ou non.
+
+#. Lorsque l'utilisateur soumet le formulaire avec des données valides, les
+   données soumises sont toujours écrites dans l'objet, mais cette fois,
+   :method:`Symfony\Component\Form\FormInterface::isValid` retourne ``true``.
+   Vous avez alors la possibilité d'effectuer certaines actions qui utilisent
+   l'objet ``$task` (comme le persister en base de données) avant de rediriger
+   l'utilisateur vers une autre page (par exemple une page « merci » ou 
+   « ça a marché ! »).
+
 
 .. note::
 
@@ -282,7 +283,44 @@ et a trois scénarios possibles :
    l'utilisateur de pouvoir rafraichir la page et de resoumettre les données.
 
 .. index::
-   single: Formulaires; Validation
+   single: Forms; Multiple Submit Buttons
+
+.. _book-form-submitting-multiple-buttons:
+
+Submitting Forms with Multiple Buttons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.3
+    Le support des boutons dans les formulaires est une nouveauté de Symfony 2.3.
+
+Lorsque votre formulaire contient plus d'un bouton submit, vous devrez vérifier
+quel bouton a été utilisé pour adapter les actions à effectuer dans votre
+contrôleur. Ajoutons un second bouton avec l'intitulé « Enregistrer et nouveau »
+(save and add) à notre formulaire::
+
+    $form = $this->createFormBuilder($task)
+        ->add('task', 'text')
+        ->add('dueDate', 'date')
+        ->add('save', 'submit')
+        ->add('saveAndAdd', 'submit')
+        ->getForm();
+
+Dans votre contrôleur, utilisez la méthode
+:method:`Symfony\\Component\\Form\\ClickableInterface::isClicked` du bouton pour
+vérifier si un clic sur le bouton « Enregistrer et nouveau » a été fait::
+
+    if ($form->isValid()) {
+        // fait quelque chose comme sauvegarder la tâche dans la bdd
+
+        $nextAction = $form->get('saveAndAdd')->isClicked()
+            ? 'task_new'
+            : 'task_success';
+
+        return $this->redirect($this->generateUrl($nextAction));
+    }
+
+.. index::
+   single: Forms; Validation
 
 Validation de formulaire
 ------------------------
