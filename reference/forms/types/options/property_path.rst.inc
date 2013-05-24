@@ -11,4 +11,6 @@ Si vous voulez surcharger la propriété qu'un champ lit ou remplit, vous pouvez
 définir l'option ``property_path``. Sa valeur par défaut est le nom du champ.
 
 Si vous souhaitez que le champ ne soit pas pris en compte lorsque l'objet est lu
-ou rempli, vous pouvez définir l'option ``property_path`` à ``false``
+ou rempli, vous pouvez définir l'option ``property_path`` à ``false``, mais utiliser
+cette propiété dans ce cas est déprécié, vous devez effectuer cette action
+de la façon suivante :

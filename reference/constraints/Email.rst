@@ -28,8 +28,26 @@ Utilisation de base
             properties:
                 email:
                     - Email:
-                        message: "{{ value }}" n'est pas un email valide.
+                        message: '{{ value }}' n'est pas un email valide.
                         checkMX: true
+
+    .. code-block:: php-annotations
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            /**
+             * @Assert\Email(
+             *     message = "'{{ value }}' n'est pas un email valide.",
+             *     checkMX = true
+             * )
+             */
+             protected $email;
+        }
 
     .. code-block:: xml
 
@@ -42,29 +60,30 @@ Utilisation de base
             <class name="Acme\BlogBundle\Entity\Author">
                 <property name="email">
                     <constraint name="Email">
-                        <option name="message">L'email "{{ value }}" n'est pas un email valide.</option>
+                        <option name="message">'{{ value }}' n'est pas un email valide.</option>
                         <option name="checkMX">true</option>
                     </constraint>
                 </property>
             </class>
         </constraint-mapping>
 
-    .. code-block:: php-annotations
+    .. code-block:: php
 
         // src/Acme/BlogBundle/Entity/Author.php
         namespace Acme\BlogBundle\Entity;
-        
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
         {
-            /** 
-             * @Assert\Email(
-             *     message = "'{{ value }}' n'est pas un email valide.",
-             *     checkMX = true
-             * )
-             */
-             protected $email;
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('email', new Assert\Email(array(
+                    'message' => ''{{ value }}' n'est pas un email valide.',
+                    'checkMX' => true,
+                )));
+            }
         }
 
 Options
@@ -87,9 +106,6 @@ sera utilisée pour vérifier la validité de l'enregistrement MX du serveur de 
 
 checkHost
 ~~~~~~~~~
-
-.. versionadded:: 2.1
-    L'option ``checkHost`` est une nouveauté de Symfony 2.1
 
 **type**: ``Boolean`` **default**: ``false``
  

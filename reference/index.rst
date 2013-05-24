@@ -12,9 +12,12 @@ Documents de Référence
     configuration/twig
     configuration/monolog
     configuration/web_profiler
+    configuration/kernel
 
     forms/types
     forms/twig_reference
+
+    twig_reference
 
     constraints
     dic_tags

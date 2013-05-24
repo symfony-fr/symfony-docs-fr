@@ -12,3 +12,5 @@ sera stockée dans l'objet sous-jacent. Les valeurs valides sont :
 * ``timestamp`` (ex ``1307232000``)
 
 La valeur qui provient du formulaire sera également normalisée dans ce format.
+
+.. include:: /reference/forms/types/options/_date_limitation.rst.inc

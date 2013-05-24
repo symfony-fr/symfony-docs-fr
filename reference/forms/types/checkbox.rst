@@ -5,8 +5,8 @@ Type de champ Checkbox
 ======================
 
 Crée un unique champ de type input checkbox. Cela devrait toujours ête utilisé pour
-un champ qui a une valeur booléenne : si la checkbox est cochée, le champ sera
-défini à true. Si la checkbox n'est pas cochée, le champ sera défini à false.
+un champ qui a une valeur booléenne : si la case est cochée, le champ sera
+défini à true. Si la case n'est pas cochée, le champ sera défini à false.
 
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | Champ ``input`` ``checkbox``                                           |
@@ -16,7 +16,9 @@ défini à true. Si la checkbox n'est pas cochée, le champ sera défini à fals
 | Options     | - `required`_                                                          |
 | héritées    | - `label`_                                                             |
 |             | - `read_only`_                                                         |
+|             | - `disabled`_                                                          |
 |             | - `error_bubbling`_                                                    |
+|             | - `mapped`_                                                            |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`field</reference/forms/types/field>`                             |
 +-------------+------------------------------------------------------------------------+
@@ -47,7 +49,7 @@ pas la valeur qui est définie sur votre objet.
 Options héritées
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -55,4 +57,8 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc

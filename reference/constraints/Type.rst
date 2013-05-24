@@ -33,19 +33,50 @@ Utilisation de base
 
     .. code-block:: php-annotations
 
-       // src/Acme/BlogBundle/Entity/Author.php
-       namespace Acme\BlogBundle\Entity;
-       
-       use Symfony\Component\Validator\Constraints as Assert;
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
 
-       class Author
-       {
-           /**
-            * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide.")
-            */
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            /**
+             * @Assert\Type(type="integer", message="La valeur {{ value }} n'est pas un type {{ type }} valide.")
+             */
             protected $age;
-       }
+        }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <property name="age">
+                <constraint name="Type">
+                    <option name="type">integer</option>
+                    <option name="message">La valeur {{ value }} n'est pas un type {{ type }} valide.</option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+        
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('age', new Assert\Type(array(
+                    'type'    => 'integer',
+                    'message' => 'La valeur {{ value }} n'est pas un type {{ type }} valide.',
+                )));
+            }
+        }
+        
 Options
 -------
 

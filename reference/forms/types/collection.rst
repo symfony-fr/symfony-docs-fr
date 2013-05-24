@@ -24,11 +24,20 @@ est très utile lorsque vous créerez des formulaires avec des relations one-to-
 | Options     | - `label`_                                                                  |
 | héritées    | - `error_bubbling`_                                                         |
 |             | - `by_reference`_                                                           |
+|             | - `empty_data`_                                                             |
+|             | - `mapped`_                                                                 |
 +-------------+-----------------------------------------------------------------------------+
 | Type Parent | :doc:`form</reference/forms/types/form>`                                    |
 +-------------+-----------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType`    |
 +-------------+-----------------------------------------------------------------------------+
+
+.. note::
+
+    Si vous utilisez une collection d'entités Doctrine, Il faut porter une attention
+    particulière aux options  `allow_add`_, `allow_delete`_ et `by_reference`_.
+    Dans vous pouvez voir un exemple complet dans le cookbook.
+    :doc:`/cookbook/form/form_collections`.
 
 Utilisation basique
 -------------------
@@ -318,10 +327,6 @@ ou :ref:`cookbook-form-collections-new-prototype`.
 prototype_name 
 ~~~~~~~~~~~~~~
 
-.. versionadded:: 2.1
-   
-    L'option ``prototype_name`` est un ajout de Symfony 2.1
-
 **type**: ``String`` **default**: ``__name__``
 
 Si vous avez plusieurs collections dans votre formulaire, ou pire encore,
@@ -347,3 +352,6 @@ error_bubbling
 .. _reference-form-types-by-reference:
 
 .. include:: /reference/forms/types/options/by_reference.rst.inc
+
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
