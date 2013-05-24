@@ -326,10 +326,10 @@ Validation de formulaire
 ------------------------
 
 Dans la section précédente, vous avez appris comment un formulaire peut être
-soumis avec des données valides ou non valides. Dans Symfony2, la validation
+soumis avec des données valides ou non. Dans Symfony2, la validation
 est appliquée à l'objet sous-jacent (par exemple : ``Task``). En d'autres termes,
 la question n'est pas de savoir si le « formulaire » est valide, mais plutôt de
-savoir si l'objet ``$task`` est valide ou non après que le formulaire lui ait
+savoir si l'objet ``$task`` est valide ou non après que le formulaire lui a
 appliqué les données. Appeler ``$form->isValid()`` est un raccourci qui demande
 à l'objet ``$task`` si oui ou non il possède des données valides.
 
@@ -370,14 +370,13 @@ puisse pas être vide et qu'il doive être un objet \DateTime valide.
             protected $dueDate;
         }
 
-
     .. code-block:: xml
-	
+
         <!-- Acme/TaskBundle/Resources/config/validation.xml -->
-        <class name="Acme\TaskBundle\Entity\Task">	
-            <property name="task">	
-                <constraint name="NotBlank" />	
-            </property>	
+        <class name="Acme\TaskBundle\Entity\Task">
+            <property name="task">
+                <constraint name="NotBlank" />
+            </property>
             <property name="dueDate">
                 <constraint name="NotBlank" />
                 <constraint name="Type">\DateTime</constraint>
@@ -404,17 +403,17 @@ puisse pas être vide et qu'il doive être un objet \DateTime valide.
             }
         }
 
-C'est tout ! Si vous resoumettez le formulaire avec des données non valides,
+C'est tout ! Si vous soumettez le formulaire à nouveau avec des données non valides,
 vous allez voir les erreurs correspondantes affichées avec le formulaire.
 
 .. _book-forms-html5-validation-disable:
 
 .. sidebar:: Validation HTML5
 
-   Grâce à HTML5, beaucoup de navigateurs peuvent nativement forcer certaines
+   Grâce à HTML5, de nombreux navigateurs peuvent nativement forcer certaines
    contraintes de validation côté client. La validation la plus commune est
-   activée en rendant un attribut ``required`` sur les champs qui sont requis.
-   Pour les navigateurs qui supportent HTML5, cela résultera en l'affichage
+   activée en affichant un attribut ``required`` sur les champs qui sont requis.
+   Pour les navigateurs qui supportent HTML5, cela entrainera l'affichage
    d'un message natif du navigateur si l'utilisateur essaye de soumettre le
    formulaire avec ce champ vide.
 
@@ -430,7 +429,7 @@ La validation est une fonctionnalité très puissante de Symfony2 et possède so
 :doc:`propre chapitre</book/validation>`.
 
 .. index::
-   single: Formulaires; Les Groupes de validation
+   single: Forms; Validation groups
 
 .. _book-forms-validation-groups:
 
@@ -443,44 +442,68 @@ Les Groupes de Validation
     alors vous pouvez sauter cette section.
 
 Si votre objet profite des avantages des :ref:`groupes de validation <book-validation-validation-groups>`,
-vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire doit utiliser :
-
-.. code-block:: php
+vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire doit utiliser::
 
     $form = $this->createFormBuilder($users, array(
         'validation_groups' => array('registration'),
-    ))->add(...)
-    ;
+    ))->add(...);
 
 Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
-bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``setDefaultOptions()`` :
-
-.. code-block:: php
+bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``setDefaultOptions()``::
 
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('registration')
+            'validation_groups' => array('registration'),
         ));
     }
 
-Dans les deux cas, *uniquement* le groupe de validation ``registration``
+Dans les deux cas, le groupe de validation ``registration`` *uniquement*
 sera utilisé pour valider l'objet sous-jacent.
+
+.. index::
+   single: Forms; Disabling validation
+
+Désactiver la validation
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.3
+    La possibilité de définir ``validation_groups`` à false a été ajoutée dans Symfony 2.3,
+    bien que la définir comme un tableau vide revient au même dans les versions
+    précédentes.
+
+Parfois, il peut être utilise de supprimer complètement la validation d'un formulaire.
+Pour cela, vous pouvez éviter l'appel à la méthode :method:`Symfony\\Component\\Form\\FormInterface::isValid`
+dans votre contrôleur. Si cela n'est pas possible, vous pouvez également définir
+l'option ``validation_groups`` à ``false`` ou en tant que tableau vide::
+
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'validation_groups' => false,
+        ));
+    }
+
+Notez que lorsque vous faites ceci, le formulaire exécutera toujours
+des vérifications de bases, comme par exemple véirifier si un fichier est
+trop gros pour être uploadé, ou si des champs qui n'existent pas sont soumis.
+Si vous voulez supprimer complètement la validation, supprimez l'appel à la
+méthode :method:`Symfony\\Component\\Form\\FormInterface::isValid` dans votre
+contrôleur.
+
+.. index::
+   single: Forms; Validation groups based on submitted data
 
 Groupes basés sur les données soumises
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. versionadded:: 2.1
-   La possibilité de spécifier un callback ou une Closure dans ``validation_groups``
-   date de la version 2.1
-
 Si vous avez besoin de plus de logique pour déterminer les groupes de validation
-(c'est-à-dire basés sur les données), vous pouvez définir l'option ``validation_groups``
-comme un tableau callbak, ou une ``Closure`` :
-
-.. code-block:: php
+(c'est-à-dire en vous basant sur les données), vous pouvez définir l'option ``validation_groups``
+comme un tableau callback::
 
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -492,11 +515,9 @@ comme un tableau callbak, ou une ``Closure`` :
     }
 
 Cela appellera la méthode statique  ``determineValidationGroups()`` de la classe
-``Client`` après que le formulaire soit associé, mais avant que la validation soit faite.
+``Client`` après que le formulaire est soumis, mais avant que la validation ne soit faite.
 L'objet Form est passé comme argument à cette méthode (regardez l'exemple suivant).
-Vous pouvez aussi définir une logique entière en utilisant une Closure :
-
-.. code-block:: php
+Vous pouvez aussi définir une logique entière en utilisant une Closure::
 
     use Symfony\Component\Form\FormInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -516,14 +537,55 @@ Vous pouvez aussi définir une logique entière en utilisant une Closure :
     }
 
 .. index::
-   single: Formulaires; Types de champ intégrés
+   single: Forms; Validation groups based on clicked button
+
+Groupes basés sur les clics de boutons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.3
+    Le support des boutons dans les formulaires est une nouveauté de Symfony 2.3.
+
+Lorsque votre formulaire contient plusieurs boutons submit, vous pouvez changer
+de groupe de validation selon le bouton qui a été utilisé pour soumettre le formulaire.
+Par exemple, considérez un formulaire d'assistance qui vous permet d'aller à une
+étape suivante, ou de revenir à une étape précédente. Supposez égalemen que lorsque
+vous retournez à l'étape précédente, les données du formulaires doivent être
+enregistrées mais pas validées.
+
+Premièrement, vous avez besoin d'ajouter les deux boutons au formulaire::
+
+    $form = $this->createFormBuilder($task)
+        // ...
+        ->add('nextStep', 'submit')
+        ->add('previousStep', 'submit')
+        ->getForm();
+
+Ensuite, configurez le bouton qui renvoit à l'étape précédente pour qu'il
+exécute des groupes de validation spécifiques. Dans cet exemple, vous voulez
+qu'il supprime la validation, donc vous devez définir ses options ``validation_groups``
+à false::
+
+    $form = $this->createFormBuilder($task)
+        // ...
+        ->add('previousStep', 'submit', array(
+            'validation_groups' => false,
+        ))
+        ->getForm();
+
+Maintenant, le formulaire ne vérifiera pas les contraintes de validation. Mais
+il effectuera toujours des vérifications d'intégrités de base, comme vérifier
+si un fichier est trop gros pour être uploadé ou si vous tentez de soumettre
+un texte dans un champ censé contenir un nombre
+
+.. index::
+   single: Forms; Built-in field types
 
 .. _book-forms-type-reference:
 
 Types de champ intégrés
 -----------------------
 
-Symfony vient par défaut avec un grand nombre de types de champ qui couvre
+Symfony est fourni par défaut avec un grand nombre de types de champ qui couvrent
 la plupart des champs de formulaire existants et des types de données que vous
 pourrez rencontrer :
 
@@ -533,30 +595,30 @@ Vous pouvez aussi créer vos propres types de champ personnalisés. Ce sujet
 est couvert par l'article du cookbook « :doc:`/cookbook/form/create_custom_field_type` ».
 
 .. index::
-   single: Formulaires; Options des types de champ
+   single: Forms; Field type options
 
 Options des types de champ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Chaque type de champ possède un nombre d'options qui peuvent être utilisées
-pour le configurer. Par exemple, le champ ``dueDate`` est rendu par défaut
+pour le configurer. Par exemple, le champ ``dueDate`` est affiché par défaut
 comme 3 champs select. Cependant, le :doc:`champ date</reference/forms/types/date>`
-peut être configuré pour être rendu en tant qu'un unique champ texte (où
-l'utilisateur entrerait la date « manuellement » comme une chaîne de caractères) ::
+peut être configuré pour être affiché en tant qu'un unique champ texte (où
+l'utilisateur doit entrer la date « manuellement » comme une chaîne de caractères)::
 
     ->add('dueDate', 'date', array('widget' => 'single_text'))
 
 .. image:: /images/book/form-simple2.png
     :align: center
 
-Chaque type de champ a un nombre d'options différentes qui peuvent lui être
-passées. Beaucoup d'entre elles sont spécifiques à chacun et vous pouvez trouver
+Chaque type de champ a un certain nombre d'options différentes qui peuvent lui être
+passées. Beaucoup d'entre elles sont spécifiques à chacun d'entres-eux et vous pouvez trouver
 ces détails dans la documentation de chaque type.
 
 .. sidebar:: L'option ``required``
 
     La plus commune des options est l'option ``required``, qui peut être appliquée à
-    tous les champs. Par défaut, cette dernière est définie comme ``true``,
+    tous les champs. Par défaut, cette dernière est définie à ``true``,
     signifiant que les navigateurs supportant HTML5 vont appliquer la validation
     côté client si le champ est laissé vide. Si vous ne souhaitez pas ce
     comportement, vous pouvez soit définir l'option ``required`` de vos champs
@@ -586,7 +648,7 @@ ces détails dans la documentation de chaque type.
     le formulaire, voir ci-dessous.
 
 .. index::
-   single: Formulaires; Prédiction de type de champ
+   single: Forms; Field type guessing
 
 .. _book-forms-field-guessing:
 
@@ -597,10 +659,8 @@ Maintenant que vous avez ajouté les métadonnées de validation à la classe
 ``Task``, Symfony en sait déjà un peu plus à propos de vos champs. Si vous
 l'autorisez, Symfony peut « prédire » le type de vos champs et les mettre
 en place pour vous. Dans cet exemple, Symfony peut deviner depuis les règles
-de validation que le champ ``task`` est un champ ``texte`` normal et que
-``dueDate`` est un champ ``date`` :
-
-.. code-block:: php
+de validation que le champ ``task`` est un champ ``texte`` classique et que
+``dueDate`` est un champ ``date``::
 
     public function newAction()
     {
@@ -615,25 +675,24 @@ de validation que le champ ``task`` est un champ ``texte`` normal et que
 La « prédiction » est activée lorsque vous omettez le second argument de
 la méthode ``add()`` (ou si vous lui passez ``null``). Si vous passez un
 tableau d'options en tant que troisième argument (comme pour ``dueDate``
-un peu plus haut), ces options sont appliquées au champ prédit.
+ci-dessus), ces options sont appliquées au champ prédit.
 
 .. caution::
 
     Si votre formulaire utilise un groupe de validation spéficique, le
     prédicateur de type de champ continuera toujours à considérer *toutes*
-    les contraintes de validation lorsqu'il essaie de deviner ces derniers
-    (incluant les contraintes qui ne font pas partie du ou des groupes
-    étant utilisés).
+    les contraintes de validation lorsqu'il essaie de deviner les types
+    de champ (incluant les contraintes qui ne font pas partie du ou des groupes
+    qui sont utilisés).
 
 .. index::
-   single: Formulaires; Prédiction de type de champ
+   single: Forms; Field type guessing
 
 Prédiction des options de type de champ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En plus de pouvoir prédire le « type » d'un champ, Symfony peut aussi essayer
-de deviner les valeurs correctes d'un certain nombre d'options de champ :
-
+de deviner les valeurs correctes d'un certain nombre d'options de champ.
 
 .. tip::
     Lorsque ces options sont définies, le champ sera rendu avec des attributs HTML
