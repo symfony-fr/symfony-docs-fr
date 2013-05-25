@@ -163,8 +163,8 @@ l'un des éléments ``personal_email`` ou ``short_bio`` était manquant dans la
 propriété ``$personalData``, aucune erreur de validation ne se serait produite.
 
 .. versionadded:: 2.3
-The ``Required`` and ``Optional`` constraints were moved to the namespace
-    ``Symfony\Component\Validator\Constraints\`` in Symfony 2.3.
+Les contraintes ``Required`` et ``Optional`` ont été déplacées dans le namespace
+    ``Symfony\Component\Validator\Constraints\`` depuis Symfony 2.3.
 
 Champs requi ou optionnel
 ~~~~~~~~~~~~~~~~~~~~~~~~~

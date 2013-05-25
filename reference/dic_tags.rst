@@ -17,25 +17,25 @@ et qui ne sont pas listés ici.
 +-----------------------------------+---------------------------------------------------------------------------+
 | Nom du tag                        | Utilisation                                                               |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.asset`_                  | Register an asset to the current asset manager                            |
+| `assetic.asset`_                  | Enregistre une ressource au manager de ressources courant                 |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.factory_worker`_         | Add a factory worker                                                      |
+| `assetic.factory_worker`_         | Ajoute un ``factory worker``                                              |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.filter`_                 | Register a filter                                                         |
+| `assetic.filter`_                 | Enregistre un filtre                                                      |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.formula_loader`_         | Add a formula loader to the current asset manager                         |
+| `assetic.formula_loader`_         | Ajoute un chargeur au manager de ressources courant                       |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.formula_resource`_       | Adds a resource to the current asset manager                              |
+| `assetic.formula_resource`_       | Ajoute une ressource au manager de ressources courant                     |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.templating.php`_         | Remove this service if php templating is disabled                         |
+| `assetic.templating.php`_         | Supprime le service si le moteur de rendu php est désactivé               |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.templating.twig`_        | Remove this service if twig templating is disabled                        |
+| `assetic.templating.twig`_        | Supprime le service si le moteur de rendu Twig est désactivé              |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `data_collector`_                 | Crée une classe qui collecte des données personnalisées pour le profileur |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `doctrine.event_listener`_        | Add a Doctrine event listener                                             |
+| `doctrine.event_listener`_        | Ajoute un écouteur d'événements Doctrine                                  |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `doctrine.event_subscriber`_      | Add a Doctrine event subscriber                                           |
+| `doctrine.event_subscriber`_      | Ajoute un souscripteur d'événements Doctrine                              |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `form.type`_                      | Crée un type de champ de formulaire personnalisé                          |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -43,7 +43,8 @@ et qui ne sont pas listés ici.
 +-----------------------------------+---------------------------------------------------------------------------+
 | `form.type_guesser`_              | Ajoute votre propre logique pour la « prédiction de type de formulaire »  |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.cache_clearer`_           | Register your service to be called during the cache clearing process      |
+| `kernel.cache_clearer`_           | Enregistre votre service pour qu'il soit appelé durant la suppression     |
+|                                   | du cache                                                                  |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.cache_warmer`_            | Enregistre votre service pour qu'il soit appelé durant la mise en cache   |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -51,7 +52,7 @@ et qui ne sont pas listés ici.
 +-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents évènements/hooks de Symfony    |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.fragment_renderer`_       | Add new HTTP content rendering strategies                                 |
+| `kernel.fragment_renderer`_       | Ajoute de nouvelles stratégies de rendu de contenu HTTP                   |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `monolog.logger`_                 | Pour écrire des logs dans un canal de log personnalisé                    |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -63,9 +64,9 @@ et qui ne sont pas listés ici.
 +-----------------------------------+---------------------------------------------------------------------------+
 | `security.remember_me_aware`_     | Pour permettre l'authentification avec « se souvenir de moi »             |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `serializer.encoder`_             | Register a new encoder in the ``serializer`` service                      |
+| `serializer.encoder`_             | Enregistre un nouvel encodeur dans le service ``serializer``              |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `serializer.normalizer`_          | Register a new normalizer in the ``serializer`` service                   |
+| `serializer.normalizer`_          | Enregistre un nouvel normalisateur dans le service ``serializer``         |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                             |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -75,7 +76,7 @@ et qui ne sont pas listés ici.
 +-----------------------------------+---------------------------------------------------------------------------+
 | `twig.extension`_                 | Enregistre une extension Twig personnalisée                               |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `twig.loader`_                    | Register a custom service that loads Twig templates                       |
+| `twig.loader`_                    | Enregistre un service personnalisé pour charger les modèles Twig          |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `validator.constraint_validator`_ | Crée votre propre contrainte de validation personnalisée                  |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -85,18 +86,18 @@ et qui ne sont pas listés ici.
 assetic.asset
 -------------
 
-**Purpose**: Register an asset with the current asset manager
+**But**: Enregistre une ressource au manager de ressources courant
 
 assetic.factory_worker
 ----------------------
 
-**Purpose**: Add a factory worker
+**But**: Ajoute un ``factory worker``
 
-A Factory worker is a class implementing ``Assetic\Factory\Worker\WorkerInterface``.
-Its ``process($asset)`` method is called for each asset after asset creation.
-You can modify an asset or even return a new one.
+Un ``Factory worker`` est une classe qui implémente ``Assetic\Factory\Worker\WorkerInterface``.
+Sa méthode ``process($asset)`` est appelée après chaque création de ressource.
+Vous pouvez modifié une ressource ou en retourner une nouvelle.
 
-In order to add a new worker, first create a class::
+Pour commencer à ajouter un nouveau ``worker``, il faut créer une classe::
 
     use Assetic\Asset\AssetInterface;
     use Assetic\Factory\Worker\WorkerInterface;
@@ -105,12 +106,12 @@ In order to add a new worker, first create a class::
     {
         public function process(AssetInterface $asset)
         {
-            // ... change $asset or return a new one
+            // ... Changer $asset ou retourner une nouvelle
         }
 
     }
 
-And then add register it as a tagged service:
+Puis enregistrer le avec le tag de service:
 
 .. configuration-block::
 
@@ -138,12 +139,12 @@ And then add register it as a tagged service:
 assetic.filter
 --------------
 
-**Purpose**: Register a filter
+**But**: Enregistrer un filtre
 
-AsseticBundle uses this tag to register common filters. You can also use
-this tag to register your own filters.
+AsseticBundle utilise ce tag pour enregistrer ces propres filtres. Vous pouvez
+donc utiliser aussi ce tag pour enregistrer vos propres filtres
 
-First, you need to create a filter::
+En premier, vous devez créer un filtre::
 
     use Assetic\Asset\AssetInterface;
     use Assetic\Filter\FilterInterface;
@@ -161,7 +162,7 @@ First, you need to create a filter::
         }
     }
 
-Second, define a service:
+En deuxième, définissez le service:
 
 .. configuration-block::
 
@@ -186,7 +187,7 @@ Second, define a service:
             ->addTag('assetic.filter', array('alias' => 'my_filter'))
         ;
 
-Finally, apply the filter:
+En dernier, appliquez le filtre:
 
 .. code-block:: jinja
 
@@ -197,28 +198,29 @@ Finally, apply the filter:
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-You can also apply your filter via the ``assetic.filters.my_filter.apply_to``
-config option as it's described here: :doc:`/cookbook/assetic/apply_to_option`.
-In order to do that, you must define your filter service in a separate xml
-config file and point to this file's via the ``assetic.filters.my_filter.resource``
-configuration key.
+Vous pouvez aussi appliquer un filtre à travers les options de configuration de
+``assetic.filters.my_filter.apply_to`` décrites ici :doc:`/cookbook/assetic/apply_to_option`.
+Dans l'ordre pour faire ceci, vous devez définir votre service de filtre dans un fichier de
+configuration xml séparé puis pointer ce fichier via la clé de configuration
+``assetic.filters.my_filter.resource``
 
 assetic.formula_loader
 ----------------------
 
-**Purpose**: Add a formula loader to the current asset manager
+**But**: Ajoute un chargeur au manager de ressources courant
 
-A Formula loader is a class implementing
-``Assetic\\Factory\Loader\\FormulaLoaderInterface`` interface. This class
-is responsible for loading assets from a particular kind of resources (for
-instance, twig template). Assetic ships loaders for php and twig templates.
+Un chargeur est une classe qui implémente l'interface
+``Assetic\\Factory\Loader\\FormulaLoaderInterface``. Cette classe est
+responsable du chargement des ressources pour un type de particulier de
+ressources (pour exemple, un modèle Twig).
+Chargeurs ``Assetic ships``pour php et les modèles Twig.
 
-An ``alias`` attribute defines the name of the loader.
+Un attribut ``alias`` défini le nom du chargeur.
 
 assetic.formula_resource
 ------------------------
 
-**Purpose**: Adds a resource to the current asset manager
+**But**: Ajoute une ressource au manager de ressources courant
 
 A resource is something formulae can be loaded from. For instance, twig
 templates are resources.
@@ -226,18 +228,18 @@ templates are resources.
 assetic.templating.php
 ----------------------
 
-**Purpose**: Remove this service if php templating is disabled
+**But**: Supprime le service si le moteur de rendu php est désactivé
 
-The tagged service will be removed from the container if the
-``framework.templating.engines`` config section does not contain php.
+Le service taggé sera supprimé du conteneur si la section de configuration
+``framework.templating.engines`` ne contient pas php.
 
 assetic.templating.twig
 -----------------------
 
-**Purpose**: Remove this service if twig templating is disabled
+**But**: Supprime le service si le moteur de rendu Twig est désactivé
 
-The tagged service will be removed from the container if
-``framework.templating.engines`` config section does not contain twig.
+Le service taggé sera supprimé du conteneur si la section de configuration
+``framework.templating.engines`` ne contient pas Twig.
 
 data_collector
 --------------
@@ -250,17 +252,19 @@ l'article du Cookbook : :doc:`/cookbook/profiler/data_collector`.
 doctrine.event_listener
 --------------
 
-**Purpose**: Add a Doctrine event listener
+**But**: Ajoute un écouteur d'événements Doctrine
 
-For details on creating Doctrine event listeners, read the cookbook article:
+Pour plus de détails sur la création de vos propres écouteurs d'événements Doctrine,
+lisez l'article du Cookbook:
 :doc:`/cookbook/doctrine/event_listeners_subscribers`.
 
 doctrine.event_subscriber
 --------------
 
-**Purpose**: Add a Doctrine event subscriber
+**But**: Ajoute un souscripteur d'événements Doctrine
 
-For details on creating Doctrine event subscribers, read the cookbook article:
+Pour plus de détails sur la création de vos propres enregistreurs d' événements Doctrine,
+lisez l'article du Cookbook:
 :doc:`/cookbook/doctrine/event_listeners_subscribers`.
 
 .. _dic-tags-form-type:
@@ -352,14 +356,14 @@ Pour voir un exemple de ce à quoi la classe ressemblerait, regardez la classe
 kernel.cache_clearer
 --------------------
 
-**Purpose**: Register your service to be called during the cache clearing process
+**But**: Enregistre votre service pour qu'il soit appelé durant la suppression du cache
 
-Cache clearing occurs whenever you call ``cache:clear`` command. If your
-bundle caches files, you should add custom cache clearer for clearing those
-files during the cache clearing process.
+La suppression cache s'effectue lorsque vous exécutez la commande ``cache:clear``.
+Si voter bundle mets en cache des fichiers, vous devez ajouter un nettoyeur de cache
+personnalisé pour supprimer vos fichiers durant le processus de nettoyage.
 
-In order to register your custom cache clearer, first you must create a
-service class::
+Pour enregistrer votre propre système de mise en cache, créez tout d'abord un
+service::
 
     // src/Acme/MainBundle/Cache/MyClearer.php
     namespace Acme\MainBundle\Cache;
@@ -370,12 +374,12 @@ service class::
     {
         public function clear($cacheDir)
         {
-            // clear your cache
+            // Nettoyer votre cache
         }
 
     }
 
-Then register this class and tag it with ``kernel.cache:clearer``:
+Puis enregistre la classe avec le tag ``kernel.cache:clearer``:
 
 .. configuration-block::
 
@@ -614,7 +618,7 @@ comme vous le feriez pour un service « normal », et taggez-le avec
 kernel.fragment_renderer
 ------------------------
 
-**Purpose**: Add a new HTTP content rendering strategy.
+**But**: Add a new HTTP content rendering strategy.
 
 To add a new rendering strategy - in addition to the core strategies like
 ``EsiFragmentRenderer`` - create a class that implements
@@ -831,24 +835,24 @@ Pour plus d'informations, lisez l'article du cookbook :
 serializer.encoder
 ------------------
 
-**Purpose**: Register a new encoder in the ``serializer`` service
+**But**: Enregistre un nouvel encodeur dans le service ``serializer``
 
-The class that's tagged should implement the :class:`Symfony\\Component\\Serializer\\Encoder\\EncoderInterface`
-and :class:`Symfony\\Component\\Serializer\\Encoder\\DecoderInterface`.
+La classe taggé doit implémenter :class:`Symfony\\Component\\Serializer\\Encoder\\EncoderInterface`
+et :class:`Symfony\\Component\\Serializer\\Encoder\\DecoderInterface`.
 
-For more details, see :doc:`/cookbook/serializer`.
+Pour plus de détails, lisez :doc:`/cookbook/serializer`.
 
 .. _reference-dic-tags-serializer-normalizer:
 
 serializer.normalizer
 ---------------------
 
-**Purpose**: Register a new normalizer in the Serializer service
+**But**: Enregistre un nouvel normalisateur dans le service ``serializer``
 
-The class that's tagged should implement the :class:`Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface`
-and :class:`Symfony\\Component\\Serializer\\Normalizer\\DenormalizerInterface`.
+La classe taggé doit implémenter :class:`Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface`
+et :class:`Symfony\\Component\\Serializer\\Normalizer\\DenormalizerInterface`.
 
-For more details, see :doc:`/cookbook/serializer`.
+Pour plus de détails, lisez :doc:`/cookbook/serializer`.
 
 swiftmailer.plugin
 ------------------
@@ -1047,12 +1051,12 @@ doivent aussi être ajoutées comme les autres services « normaux » :
 twig.loader
 -----------
 
-**Purpose**: Register a custom service that loads Twig templates
+**But**: Enregistre un service personnalisé pour charger les modèles Twig
 
-By default, Symfony uses only one `Twig Loader`_ -
-:class:`Symfony\\Bundle\\TwigBundle\\Loader\\FilesystemLoader`. If you need
-to load Twig templates from another resource, you can create a service for
-the new loader and tag it with ``twig.loader``:
+Par défaut, Symfony utilise seulement `Twig Loader`_ -
+:class:`Symfony\\Bundle\\TwigBundle\\Loader\\FilesystemLoader`. Si vous avez
+besoin de charger les modèles Twig par une autre ressource, vous pouvez créer un
+service pour le nouveau chargeur avec le tag ``twig.loader``:
 
 .. configuration-block::
 

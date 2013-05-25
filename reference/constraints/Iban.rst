@@ -4,11 +4,6 @@ Iban
 .. versionadded:: 2.3
     C'est une nouvelle contrainte depuis la version 2.3.
 
-This constraint is used to ensure that a bank account number has the proper format of
-an `International Bank Account Number (IBAN)`_. IBAN is an internationally agreed means
-of identifying bank accounts across national borders with a reduced risk of propagating
-transcription errors.
-
 Cette contrainte est utilisée pour s'assurer qu'un numéro de compte bancaire a le bon format
 de numéro `International Bank Account Number (IBAN)`_. IBAN est un moyen convenu au niveau international
 d'identifier les comptes bancaires à travers les frontières nationales avec un risque réduit de propager
