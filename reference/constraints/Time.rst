@@ -46,6 +46,30 @@ l'heure à laquelle l'évènement commence :
              protected $startsAt;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/EventBundle/Resources/config/validation.xml -->
+        <class name="Acme\EventBundle\Entity\Event">
+            <property name="startsAt">
+                <constraint name="Time" />
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/EventBundle/Entity/Event.php
+        namespace Acme\EventBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Event
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('startsAt', new Assert\Time());
+            }
+        }
 Options
 -------
 

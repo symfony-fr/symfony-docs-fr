@@ -3,8 +3,6 @@ Range
 
 Valide qu'un nombre donné se situe *entre* un nombre minimum et un nombre maximum.
 
-.. versionadded:: 2.1
-    La contrainte Range a été ajoutée dans Symfony 2.1.
 
 +----------------+---------------------------------------------------------------------+
 | S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
@@ -43,14 +41,16 @@ vous pouvez procéder comme suit :
     .. code-block:: php-annotations
 
         // src/Acme/EventBundle/Entity/Participant.php
+        namespace Acme\EventBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Participant
         {
             /**
              * @Assert\Range(
-             *      min = "120",
-             *      max = "180",
+             *      min = 120,
+             *      max = 180,
              *      minMessage = "Vous devez faire au moins 120cm pour entrer",
              *      maxMessage = "Vous ne devez pas dépasser 180cm"
              * )
@@ -58,6 +58,40 @@ vous pouvez procéder comme suit :
              protected $height;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/EventBundle/Resources/config/validation.xml -->
+        <class name="Acme\EventBundle\Entity\Participant">
+            <property name="height">
+                <constraint name="Range">
+                    <option name="min">120</option>
+                    <option name="max">180</option>
+                    <option name="minMessage">Vous devez faire au moins 120cm pour entrer</option>
+                    <option name="maxMessage">Vous ne devez pas dépasser 180cm</option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/EventBundle/Entity/Participant.php
+        namespace Acme\EventBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Participant
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('height', new Assert\Range(array(
+                    'min'        => 120,
+                    'max'        => 180,
+                    'minMessage' => 'Vous devez faire au moins 120cm pour entrer',
+                    'maxMessage' => 'Vous ne devez pas dépasser 180cm',
+                )));
+            }
+        }
 Options
 -------
 

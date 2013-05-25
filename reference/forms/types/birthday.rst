@@ -26,11 +26,14 @@ contient par défaut les 120 années précédant l'année courante.
 |                      | - `months`_                                                                                                            |
 |                      | - `days`_                                                                                                              |
 |                      | - `format`_                                                                                                            |
-|                      | - `pattern`_                                                                                                           |
 |                      | - `data_timezone`_                                                                                                     |
 |                      | - `user_timezone`_                                                                                                     |
 |                      | - `invalid_message`_                                                                                                   |
 |                      | - `invalid_message_parameters`_                                                                                        |
+|                      | - `read_only`_                                                                                                         |
+|                      | - `disabled`_                                                                                                          |
+|                      | - `mapped`_                                                                                                            |
+|                      | - `inherit_data`_                                                                                                      |
 +----------------------+------------------------------------------------------------------------------------------------------------------------+
 | Type parent          | :doc:`date</reference/forms/types/date>`                                                                               |
 +----------------------+------------------------------------------------------------------------------------------------------------------------+
@@ -52,9 +55,8 @@ Options héritées
 ----------------
 
 Ces options héritent du type :doc:`date</reference/forms/types/date>` :
-
 .. include:: /reference/forms/types/options/date_widget.rst.inc
-    
+
 .. include:: /reference/forms/types/options/date_input.rst.inc
 
 .. include:: /reference/forms/types/options/months.rst.inc
@@ -62,15 +64,22 @@ Ces options héritent du type :doc:`date</reference/forms/types/date>` :
 .. include:: /reference/forms/types/options/days.rst.inc
 
 .. include:: /reference/forms/types/options/date_format.rst.inc
-    
-.. include:: /reference/forms/types/options/date_pattern.rst.inc
 
 .. include:: /reference/forms/types/options/data_timezone.rst.inc
 
 .. include:: /reference/forms/types/options/user_timezone.rst.inc
 
-Ces options héritent du type :doc:`date</reference/forms/types/field>` :
+Ces options héritent du type :doc:`date</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/read_only.rst.inc
+
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/inherit_data.rst.inc
+

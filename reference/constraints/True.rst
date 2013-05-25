@@ -50,11 +50,13 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
         Acme\BlogBundle\Entity\Author:
             getters:
                 tokenValid:
-                    - "True": { message: "Le token est non valide" }
+                    - "True": { message: "Le token est non valide." }
 
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
@@ -62,7 +64,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
             protected $token;
 
             /**
-             * @Assert\True(message = "Le token est non valide")
+             * @Assert\True(message = "The token is invalid")
              */
             public function isTokenValid()
             {
@@ -72,25 +74,20 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
 
     .. code-block:: xml
 
-        <?xml version="1.0" encoding="UTF-8" ?>
         <!-- src/Acme/Blogbundle/Resources/config/validation.xml -->
-
-        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
-
-            <class name="Acme\BlogBundle\Entity\Author">
-                <getter property="tokenValid">
-                    <constraint name="True">
-                        <option name="message">Le token est non valide</option>
-                    </constraint>
-                </getter>
-            </class>
-        </constraint-mapping>
+        <class name="Acme\BlogBundle\Entity\Author">
+            <getter property="tokenValid">
+                <constraint name="True">
+                    <option name="message">Le token est non valide.</option>
+                </constraint>
+            </getter>
+        </class>
 
     .. code-block:: php
 
         // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints\True;
         
@@ -101,7 +98,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addGetterConstraint('tokenValid', new True(array(
-                    'message' => 'Le token est non valide',
+                    'message' => 'Le token est non valide.',
                 )));
             }
 
@@ -110,7 +107,7 @@ Vous pouvez appliquer la contrainte ``True`` à cette méthode.
                 return $this->token == $this->generateToken();
             }
         }
-
+        
 Si la méthode ``isTokenValid()`` retourne false, la validation échouera.
 
 Options

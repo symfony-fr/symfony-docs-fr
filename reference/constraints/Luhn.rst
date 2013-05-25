@@ -1,6 +1,9 @@
 Luhn
 ====
 
+.. versionadded:: 2.2
+    La validation Luhn validation est nouvelle depuis Symfony 2.2.
+
 Cette contrainte est utilisée poue vous assurer qu'un numéro de carte de crédit
 vérifie l'`algorithme Luhn`_. Elle est utile pour la première étape de la validation
 d'une carte de crédit : avant de communiquer avec la plateforme de paiement.
@@ -46,6 +49,8 @@ d'un objet qui contient un numéro de carte de crédit.
     .. code-block:: php-annotations
 
         // src/Acme/SubscriptionBundle/Entity/Transaction.php
+        namespace Acme\SubscriptionBundle\Entity\Transaction;
+        
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Transaction
@@ -59,8 +64,10 @@ d'un objet qui contient un numéro de carte de crédit.
     .. code-block:: php
 
         // src/Acme/SubscriptionBundle/Entity/Transaction.php
+        namespace Acme\SubscriptionBundle\Entity\Transaction;
+        
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\Luhn;
+        use Symfony\Component\Validator\Constraints as Assert;
 
         class Transaction
         {
@@ -68,7 +75,7 @@ d'un objet qui contient un numéro de carte de crédit.
 
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addPropertyConstraint('luhn', new Luhn(array(
+                $metadata->addPropertyConstraint('cardNumber', new Assert\Luhn(array(
                     'message' => 'Veuillez vérifier votre numéro de carte de crédit',
                 )));
             }
@@ -85,4 +92,4 @@ message
 Le message par défaut qui est affiché si la valeur ne vérifie pas la
 validation Luhn.
 
-.. _`algorithme Luhn`: http://en.wikipedia.org/wiki/Luhn_algorithm
+.. _`algorithme Luhn`: http://fr.wikipedia.org/wiki/Formule_de_Luhn

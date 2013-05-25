@@ -19,13 +19,16 @@ Pour utiliser ce champ, vous devez spécifier *soit* l'option ``choice_list``, *
 |             | - `expanded`_                                                               |
 |             | - `preferred_choices`_                                                      |
 |             | - `empty_value`_                                                            |
-|             | - `empty_data`_                                                             |
-|             | - `by_reference`_                                                           |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `required`_                                                               |
 | héritées    | - `label`_                                                                  |
 |             | - `read_only`_                                                              |
+|             | - `disabled`_                                                               |
 |             | - `error_bubbling`_                                                         |
+|             | - `mapped`_                                                                 |
+|             | - `inherit_data`_                                                           |
+|             | - `by_reference`_                                                           |
+|             | - `empty_data`_                                                             |
 +-------------+-----------------------------------------------------------------------------+
 | Type parent | :doc:`form</reference/forms/types/form>` (si étendu), ``field`` sinon       |
 +-------------+-----------------------------------------------------------------------------+
@@ -105,10 +108,6 @@ Pour des cas plus avancés, une classe personnalisée qui implémente l'interfac
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-.. include:: /reference/forms/types/options/empty_data.rst.inc
-
-.. include:: /reference/forms/types/options/by_reference.rst.inc
-
 Options héritées
 ----------------
 
@@ -120,4 +119,14 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/inherit_data.rst.inc
+
+.. include:: /reference/forms/types/options/by_reference.rst.inc
+
+.. include:: /reference/forms/types/options/empty_data.rst.inc

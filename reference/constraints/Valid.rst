@@ -22,7 +22,9 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
 
 .. code-block:: php
 
-    // src/Acme/HelloBundle/Address.php
+    // src/Acme/HelloBundle/Entity/Address.php
+    namespace Amce\HelloBundle\Entity;
+
     class Address
     {
         protected $street;
@@ -31,7 +33,9 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
 
 .. code-block:: php
 
-    // src/Acme/HelloBundle/Author.php
+    // src/Acme/HelloBundle/Entity/Author.php
+    namespace Amce\HelloBundle\Entity;
+
     class Author
     {
         protected $firstName;
@@ -44,54 +48,29 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
     .. code-block:: yaml
 
         # src/Acme/HelloBundle/Resources/config/validation.yml
-        Acme\HelloBundle\Address:
+        Acme\HelloBundle\Entity\Address:
             properties:
                 street:
                     - NotBlank: ~
                 zipCode:
                     - NotBlank: ~
                     - Length:
-						max: 5
+                        max: 5
 
-        Acme\HelloBundle\Author:
+        Acme\HelloBundle\Entity\Author:
             properties:
                 firstName:
                     - NotBlank: ~
-                    - Length: 
-						min: 4
+                    - Length:
+                        min: 4
                 lastName:
                     - NotBlank: ~
 
-    .. code-block:: xml
-
-        <!-- src/Acme/HelloBundle/Resources/config/validation.xml -->
-        <class name="Acme\HelloBundle\Address">
-            <property name="street">
-                <constraint name="NotBlank" />
-            </property>
-            <property name="zipCode">
-                <constraint name="NotBlank" />
-                <constraint name="Length">
-					<option name="max">5</option>
-				</constraint>
-            </property>
-        </class>
-
-        <class name="Acme\HelloBundle\Author">
-            <property name="firstName">
-                <constraint name="NotBlank" />
-                <constraint name="Length">
-					<option name="min">4</option>
-				</constraint>
-            </property>
-            <property name="lastName">
-                <constraint name="NotBlank" />
-            </property>
-        </class>
-
     .. code-block:: php-annotations
 
-        // src/Acme/HelloBundle/Address.php
+        // src/Acme/HelloBundle/Entity/Address.php
+        namespace Acme\HelloBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Address
@@ -108,12 +87,14 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
             protected $zipCode;
         }
 
-        // src/Acme/HelloBundle/Author.php
+        // src/Acme/HelloBundle/Entity/Author.php
+        namespace Acme\HelloBundle\Entity;
+
         class Author
         {
             /**
              * @Assert\NotBlank
-             * @Assert\Length( min = "4")
+             * @Assert\Length(min = "4")
              */
             protected $firstName;
 
@@ -125,47 +106,73 @@ l'objet ``Author`` stocke une instance d'``Address`` dans sa propriété ``$addr
             protected $address;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/HelloBundle/Resources/config/validation.xml -->
+        <class name="Acme\HelloBundle\Entity\Address">
+            <property name="street">
+                <constraint name="NotBlank" />
+            </property>
+            <property name="zipCode">
+                <constraint name="NotBlank" />
+                <constraint name="Length">
+                    <option name="max">5</option>
+                </constraint>
+            </property>
+        </class>
+
+        <class name="Acme\HelloBundle\Entity\Author">
+            <property name="firstName">
+                <constraint name="NotBlank" />
+                <constraint name="Length">
+                    <option name="min">4</option>
+                </constraint>
+            </property>
+            <property name="lastName">
+                <constraint name="NotBlank" />
+            </property>
+        </class>
+
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Address.php
+        // src/Acme/HelloBundle/Entity/Address.php
+        namespace Acme\HelloBundle\Entity;
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\NotBlank;
-        use Symfony\Component\Validator\Constraints\Length;
+        use Symfony\Component\Validator\Constraints as Assert;
 
         class Address
         {
             protected $street;
-
             protected $zipCode;
 
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addPropertyConstraint('street', new NotBlank());
-                $metadata->addPropertyConstraint('zipCode', new NotBlank());
+                $metadata->addPropertyConstraint('street', new Assert\NotBlank());
+                $metadata->addPropertyConstraint('zipCode', new Assert\NotBlank());
                 $metadata->addPropertyConstraint(
-				'zipCode', 
-				new Length(array("max" => 5)));
+                    'zipCode',
+                    new Assert\Length(array("max" => 5)));
             }
         }
 
-        // src/Acme/HelloBundle/Author.php
+        // src/Acme/HelloBundle/Entity/Author.php
+        namespace Acme\HelloBundle\Entity;
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\NotBlank;
-        use Symfony\Component\Validator\Constraints\Length;
+        use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
         {
             protected $firstName;
-
             protected $lastName;
-
             protected $address;
 
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addPropertyConstraint('firstName', new NotBlank());
-                $metadata->addPropertyConstraint('firstName', new Length(array("min" => 4)));
-                $metadata->addPropertyConstraint('lastName', new NotBlank());
+                $metadata->addPropertyConstraint('firstName', new Assert\NotBlank());
+                $metadata->addPropertyConstraint('firstName', new Assert\Length(array("min" => 4)));
+                $metadata->addPropertyConstraint('lastName', new Assert\NotBlank());
             }
         }
 
@@ -183,43 +190,45 @@ incorrecte. Pour éviter ceci, ajouter la contrainte ``Valid`` à la propriété
                 address:
                     - Valid: ~
 
-    .. code-block:: xml
-
-        <!-- src/Acme/HelloBundle/Resources/config/validation.xml -->
-        <class name="Acme\HelloBundle\Author">
-            <property name="address">
-                <constraint name="Valid" />
-            </property>
-        </class>
-
     .. code-block:: php-annotations
 
-        // src/Acme/HelloBundle/Author.php
+        // src/Acme/HelloBundle/Entity/Author.php
+        namespace Acme\HelloBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
         {
-            /* ... */
-
             /**
              * @Assert\Valid
              */
             protected $address;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/HelloBundle/Resources/config/validation.xml -->
+        <class name="Acme\HelloBundle\Entity\Author">
+            <property name="address">
+                <constraint name="Valid" />
+            </property>
+        </class>
+
     .. code-block:: php
 
-        // src/Acme/HelloBundle/Author.php
+        // src/Acme/HelloBundle/Entity/Author.php
+        namespace Acme\HelloBundle\Entity;
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\Valid;
-        
+        use Symfony\Component\Validator\Constraints as Assert;
+
         class Author
         {
             protected $address;
 
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addPropertyConstraint('address', new Valid());
+                $metadata->addPropertyConstraint('address', new Assert\Valid());
             }
         }
 

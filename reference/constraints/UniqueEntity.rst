@@ -1,8 +1,8 @@
 UniqueEntity
 ============
 
-Valide qu'un champ particulier (ou plusieurs champs) d'une entité Doctrine sont
-uniques.
+Valide qu'un champ particulier (ou plusieurs champs) d'une entité Doctrine est (sont)
+unique.
 Cela est souvent utilisé, par exemple, pour éviter qu'un nouvel utilisateur ne
 s'enregistre avec une adresse email qui existe déjà dans le système.
 
@@ -22,18 +22,30 @@ Utilisation de base
 -------------------
 
 Supposons que vous ayez un ``AcmeUserBundle`` avec une entité ``User`` qui
-a un champ ``email``. Vous pouvez utiliser la contrainte ``Unique`` pour garantir
+a un champ ``email``. Vous pouvez utiliser la contrainte ``UniqueEntity`` pour garantir
 que le champ ``email`` soit unique dans votre table d'utilisateurs :
 
 .. configuration-block::
 
+    .. code-block:: yaml
+
+        # src/Acme/UserBundle/Resources/config/validation.yml
+        Acme\UserBundle\Entity\Author:
+            constraints:
+                - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+            properties:
+                email:
+                    - Email: ~
+
     .. code-block:: php-annotations
 
         // Acme/UserBundle/Entity/User.php
+        namespace Acme\UserBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
         use Doctrine\ORM\Mapping as ORM;
 
-        // N'OUBLIEZ pas d'inclure ce use !
+        //Ne pas oubliter ce ``use`` !
         use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
         /**
@@ -49,31 +61,45 @@ que le champ ``email`` soit unique dans votre table d'utilisateurs :
              * @Assert\Email()
              */
             protected $email;
-            
+
             // ...
         }
-
-    .. code-block:: yaml
-
-        # src/Acme/UserBundle/Resources/config/validation.yml
-        Acme\UserBundle\Entity\Author:
-            constraints:
-                - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
-            properties:
-                email:
-                    - Email: ~
 
     .. code-block:: xml
 
         <class name="Acme\UserBundle\Entity\Author">
             <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
                 <option name="fields">email</option>
-                <option name="message">Cet email existe déjà.</option>
+                <option name="message">Cette adresse email existe déja.</option>
             </constraint>
-             <property name="email">
+            <property name="email">
                 <constraint name="Email" />
             </property>
         </class>
+
+    .. code-block:: php
+
+
+        // Acme/UserBundle/Entity/User.php
+        namespace Acme\UserBundle\Entity;
+
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        // DON'T forget this use statement!!!
+        use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addConstraint(new UniqueEntity(array(
+                    'fields'  => 'email',
+                    'message' => 'Cette adresse email existe déja.',
+                )));
+
+                $metadata->addPropertyConstraint(new Assert\Email());
+            }
+        }
 
 Options
 -------
