@@ -222,8 +222,8 @@ assetic.formula_resource
 
 **But**: Ajoute une ressource au manager de ressources courant
 
-A resource is something formulae can be loaded from. For instance, twig
-templates are resources.
+Une ressource est quelque chose qui peut être chargé. Par exemple, les templates
+Twig sont des ressources.
 
 assetic.templating.php
 ----------------------
