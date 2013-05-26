@@ -12,13 +12,30 @@ du chapitre sur le Conteneur de Service.
 
 Ci-dessous, vous avez des informations sur l'ensemble des tags disponibles dans Symfony2.
 Il pourrait aussi y avoir des « tags » dans d'autres bundles que vous utilisez
-et qui ne sont pas listés ici. Par exemple, le bundle AsseticBundle possède plusieurs
-« tags » qui ne sont pas listés ici.
+et qui ne sont pas listés ici.
 
 +-----------------------------------+---------------------------------------------------------------------------+
 | Nom du tag                        | Utilisation                                                               |
 +-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.asset`_                  | Enregistre une ressource au manager de ressources courant                 |
++-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.factory_worker`_         | Ajoute un ``factory worker``                                              |
++-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.filter`_                 | Enregistre un filtre                                                      |
++-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.formula_loader`_         | Ajoute un chargeur au manager de ressources courant                       |
++-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.formula_resource`_       | Ajoute une ressource au manager de ressources courant                     |
++-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.templating.php`_         | Supprime le service si le moteur de rendu php est désactivé               |
++-----------------------------------+---------------------------------------------------------------------------+
+| `assetic.templating.twig`_        | Supprime le service si le moteur de rendu Twig est désactivé              |
++-----------------------------------+---------------------------------------------------------------------------+
 | `data_collector`_                 | Crée une classe qui collecte des données personnalisées pour le profileur |
++-----------------------------------+---------------------------------------------------------------------------+
+| `doctrine.event_listener`_        | Ajoute un écouteur d'événements Doctrine                                  |
++-----------------------------------+---------------------------------------------------------------------------+
+| `doctrine.event_subscriber`_      | Ajoute un souscripteur d'événements Doctrine                              |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `form.type`_                      | Crée un type de champ de formulaire personnalisé                          |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -26,11 +43,16 @@ et qui ne sont pas listés ici. Par exemple, le bundle AsseticBundle possède pl
 +-----------------------------------+---------------------------------------------------------------------------+
 | `form.type_guesser`_              | Ajoute votre propre logique pour la « prédiction de type de formulaire »  |
 +-----------------------------------+---------------------------------------------------------------------------+
+| `kernel.cache_clearer`_           | Enregistre votre service pour qu'il soit appelé durant la suppression     |
+|                                   | du cache                                                                  |
++-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.cache_warmer`_            | Enregistre votre service pour qu'il soit appelé durant la mise en cache   |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.event_listener`_          | Écoute différents évènements/hooks de Symfony                             |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents évènements/hooks de Symfony    |
++-----------------------------------+---------------------------------------------------------------------------+
+| `kernel.fragment_renderer`_       | Ajoute de nouvelles stratégies de rendu de contenu HTTP                   |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `monolog.logger`_                 | Pour écrire des logs dans un canal de log personnalisé                    |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -42,7 +64,9 @@ et qui ne sont pas listés ici. Par exemple, le bundle AsseticBundle possède pl
 +-----------------------------------+---------------------------------------------------------------------------+
 | `security.remember_me_aware`_     | Pour permettre l'authentification avec « se souvenir de moi »             |
 +-----------------------------------+---------------------------------------------------------------------------+
-| `security.listener.factory`_      | Nécessaire pour créer un système d'authentification personnalisé          |
+| `serializer.encoder`_             | Enregistre un nouvel encodeur dans le service ``serializer``              |
++-----------------------------------+---------------------------------------------------------------------------+
+| `serializer.normalizer`_          | Enregistre un nouvel normalisateur dans le service ``serializer``         |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                             |
 +-----------------------------------+---------------------------------------------------------------------------+
@@ -52,10 +76,170 @@ et qui ne sont pas listés ici. Par exemple, le bundle AsseticBundle possède pl
 +-----------------------------------+---------------------------------------------------------------------------+
 | `twig.extension`_                 | Enregistre une extension Twig personnalisée                               |
 +-----------------------------------+---------------------------------------------------------------------------+
+| `twig.loader`_                    | Enregistre un service personnalisé pour charger les modèles Twig          |
++-----------------------------------+---------------------------------------------------------------------------+
 | `validator.constraint_validator`_ | Crée votre propre contrainte de validation personnalisée                  |
 +-----------------------------------+---------------------------------------------------------------------------+
 | `validator.initializer`_          | Enregistre un service qui initialise les objets avant validation          |
 +-----------------------------------+---------------------------------------------------------------------------+
+
+assetic.asset
+-------------
+
+**But**: Enregistre une ressource au manager de ressources courant
+
+assetic.factory_worker
+----------------------
+
+**But**: Ajoute un ``factory worker``
+
+Un ``Factory worker`` est une classe qui implémente ``Assetic\Factory\Worker\WorkerInterface``.
+Sa méthode ``process($asset)`` est appelée après chaque création de ressource.
+Vous pouvez modifié une ressource ou en retourner une nouvelle.
+
+Pour commencer à ajouter un nouveau ``worker``, il faut créer une classe::
+
+    use Assetic\Asset\AssetInterface;
+    use Assetic\Factory\Worker\WorkerInterface;
+
+    class MyWorker implements WorkerInterface
+    {
+        public function process(AssetInterface $asset)
+        {
+            // ... Changer $asset ou retourner une nouvelle
+        }
+
+    }
+
+Puis enregistrer le avec le tag de service:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            acme.my_worker:
+                class: MyWorker
+                tags:
+                    - { name: assetic.factory_worker }
+
+    .. code-block:: xml
+
+        <service id="acme.my_worker" class="MyWorker>
+            <tag name="assetic.factory_worker" />
+        </service>
+
+    .. code-block:: php
+
+        $container
+            ->register('acme.my_worker', 'MyWorker')
+            ->addTag('assetic.factory_worker')
+        ;
+
+assetic.filter
+--------------
+
+**But**: Enregistrer un filtre
+
+AsseticBundle utilise ce tag pour enregistrer ces propres filtres. Vous pouvez
+donc utiliser aussi ce tag pour enregistrer vos propres filtres
+
+En premier, vous devez créer un filtre::
+
+    use Assetic\Asset\AssetInterface;
+    use Assetic\Filter\FilterInterface;
+
+    class MyFilter implements FilterInterface
+    {
+        public function filterLoad(AssetInterface $asset)
+        {
+            $asset->setContent('alert("yo");' . $asset->getContent());
+        }
+
+        public function filterDump(AssetInterface $asset)
+        {
+            // ...
+        }
+    }
+
+En deuxième, définissez le service:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            acme.my_filter:
+                class: MyFilter
+                tags:
+                    - { name: assetic.filter, alias: my_filter }
+
+    .. code-block:: xml
+
+        <service id="acme.my_filter" class="MyFilter">
+            <tag name="assetic.filter" alias="my_filter" />
+        </service>
+
+    .. code-block:: php
+
+        $container
+            ->register('acme.my_filter', 'MyFilter')
+            ->addTag('assetic.filter', array('alias' => 'my_filter'))
+        ;
+
+En dernier, appliquez le filtre:
+
+.. code-block:: jinja
+
+    {% javascripts
+        '@AcmeBaseBundle/Resources/public/js/global.js'
+        filter='my_filter'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+Vous pouvez aussi appliquer un filtre à travers les options de configuration de
+``assetic.filters.my_filter.apply_to`` décrites ici :doc:`/cookbook/assetic/apply_to_option`.
+Dans l'ordre pour faire ceci, vous devez définir votre service de filtre dans un fichier de
+configuration xml séparé puis pointer ce fichier via la clé de configuration
+``assetic.filters.my_filter.resource``
+
+assetic.formula_loader
+----------------------
+
+**But**: Ajoute un chargeur au manager de ressources courant
+
+Un chargeur est une classe qui implémente l'interface
+``Assetic\\Factory\Loader\\FormulaLoaderInterface``. Cette classe est
+responsable du chargement des ressources pour un type de particulier de
+ressources (pour exemple, un modèle Twig).
+Chargeurs ``Assetic ships``pour php et les modèles Twig.
+
+Un attribut ``alias`` défini le nom du chargeur.
+
+assetic.formula_resource
+------------------------
+
+**But**: Ajoute une ressource au manager de ressources courant
+
+A resource is something formulae can be loaded from. For instance, twig
+templates are resources.
+
+assetic.templating.php
+----------------------
+
+**But**: Supprime le service si le moteur de rendu php est désactivé
+
+Le service taggé sera supprimé du conteneur si la section de configuration
+``framework.templating.engines`` ne contient pas php.
+
+assetic.templating.twig
+-----------------------
+
+**But**: Supprime le service si le moteur de rendu Twig est désactivé
+
+Le service taggé sera supprimé du conteneur si la section de configuration
+``framework.templating.engines`` ne contient pas Twig.
 
 data_collector
 --------------
@@ -64,6 +248,26 @@ data_collector
 
 Pour plus de détails sur la création de vos propres collections de données, lisez
 l'article du Cookbook : :doc:`/cookbook/profiler/data_collector`.
+
+doctrine.event_listener
+--------------
+
+**But**: Ajoute un écouteur d'événements Doctrine
+
+Pour plus de détails sur la création de vos propres écouteurs d'événements Doctrine,
+lisez l'article du Cookbook:
+:doc:`/cookbook/doctrine/event_listeners_subscribers`.
+
+doctrine.event_subscriber
+--------------
+
+**But**: Ajoute un souscripteur d'événements Doctrine
+
+Pour plus de détails sur la création de vos propres enregistreurs d' événements Doctrine,
+lisez l'article du Cookbook:
+:doc:`/cookbook/doctrine/event_listeners_subscribers`.
+
+.. _dic-tags-form-type:
 
 form.type
 ---------
@@ -92,14 +296,14 @@ Pour plus de simplicité, vous étendrez le plus souvent la classe
 directement::
 
     // src/Acme/MainBundle/Form/Type/MyFormTypeExtension.php
-    namespace Acme\MainBundle\Form\Type\MyFormTypeExtension;
+    namespace Acme\MainBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractTypeExtension;
 
     class MyFormTypeExtension extends AbstractTypeExtension
     {
-        // ... écrivez toute méthode que vous voulez surcharger
-        // comme buildForm(), buildView(), finishView(), setDefaultOptions()
+        // ... fill in whatever methods you want to override
+        // like buildForm(), buildView(), finishView(), setDefaultOptions()
     }
 
 Pour que Symfony connaisse l'existence de vos extension de formulaire et sache comment les utiliser,
@@ -124,9 +328,13 @@ attribuez leur le tag `form.type_extension` :
     .. code-block:: php
 
         $container
-            ->register('main.form.type.my_form_type_extension', 'Acme\MainBundle\Form\Type\MyFormTypeExtension') 
+            ->register('main.form.type.my_form_type_extension', 'Acme\MainBundle\Form\Type\MyFormTypeExtension')
             ->addTag('form.type_extension', array('alias' => 'field'))
         ;
+
+The ``alias`` key of the tag is the type of field that this extension should
+be applied to. For example, to apply the extension to any form/field, use the
+"form" value.
 
 form.type_guesser
 -----------------
@@ -144,6 +352,57 @@ définition du service avec ``form.type_guesser`` (il n'y a pas d'option).
 
 Pour voir un exemple de ce à quoi la classe ressemblerait, regardez la classe
 ``ValidatorTypeGuesser`` du composant ``Form``.
+
+kernel.cache_clearer
+--------------------
+
+**But**: Enregistre votre service pour qu'il soit appelé durant la suppression du cache
+
+La suppression cache s'effectue lorsque vous exécutez la commande ``cache:clear``.
+Si voter bundle mets en cache des fichiers, vous devez ajouter un nettoyeur de cache
+personnalisé pour supprimer vos fichiers durant le processus de nettoyage.
+
+Pour enregistrer votre propre système de mise en cache, créez tout d'abord un
+service::
+
+    // src/Acme/MainBundle/Cache/MyClearer.php
+    namespace Acme\MainBundle\Cache;
+
+    use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
+
+    class MyClearer implements CacheClearerInterface
+    {
+        public function clear($cacheDir)
+        {
+            // Nettoyer votre cache
+        }
+
+    }
+
+Puis enregistre la classe avec le tag ``kernel.cache:clearer``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            my_cache_clearer:
+                class: Acme\MainBundle\Cache\MyClearer
+                tags:
+                    - { name: kernel.cache_clearer }
+
+    .. code-block:: xml
+
+        <service id="my_cache_clearer" class="Acme\MainBundle\Cache\MyClearer">
+            <tag name="kernel.cache_clearer" />
+        </service>
+
+    .. code-block:: php
+
+        $container
+            ->register('my_cache_clearer', 'Acme\MainBundle\Cache\MyClearer')
+            ->addTag('kernel.cache_clearer')
+        ;
 
 kernel.cache_warmer
 -------------------
@@ -169,7 +428,7 @@ service qui implémente l'interface
     {
         public function warmUp($cacheDir)
         {
-            // effectuez quelques opérations afin de procéder à la mise en cache
+            // do some sort of operations to "warm" your cache
         }
 
         public function isOptional()
@@ -318,10 +577,6 @@ kernel.event_subscriber
 
 **But** : Pour s'abonner à un ensemble de différents évènements/hooks de Symfony
 
-.. versionadded:: 2.1
-   La possibilité d'ajouter des souscripteurs aux évènements du kernel a été
-   introduite avec Symfony 2.1.
-
 Pour activer un souscripteur personnalisé, ajoutez-le dans l'une de vos configurations
 comme vous le feriez pour un service « normal », et taggez-le avec
 ``kernel.event_subscriber`` :
@@ -360,6 +615,16 @@ comme vous le feriez pour un service « normal », et taggez-le avec
     **devez** définir correctement le paramètre ``class`` afin que ce tag fonctionne
     sans problèmes.
 
+kernel.fragment_renderer
+------------------------
+
+**But**: Add a new HTTP content rendering strategy.
+
+To add a new rendering strategy - in addition to the core strategies like
+``EsiFragmentRenderer`` - create a class that implements
+:class:`Symfony\\Component\\HttpKernel\\Fragment\\FragmentRendererInterface`,
+register it as a service, then tag it with ``kernel.fragment_renderer``.
+
 .. _dic_tags-monolog:
 
 monolog.logger
@@ -378,7 +643,7 @@ changer ce dernier lorsque vous injectez le « logger » dans un service.
         services:
             my_service:
                 class: Fully\Qualified\Loader\Class\Name
-                arguments: [@logger]
+                arguments: ["@logger"]
                 tags:
                     - { name: monolog.logger, channel: acme }
 
@@ -393,7 +658,7 @@ changer ce dernier lorsque vous injectez le « logger » dans un service.
 
         $definition = new Definition('Fully\Qualified\Loader\Class\Name', array(new Reference('logger'));
         $definition->addTag('monolog.logger', array('channel' => 'acme'));
-        $container->register('my_service', $definition);;
+        $container->register('my_service', $definition);
 
 .. note::
 
@@ -536,15 +801,6 @@ avec ``routing.loader`` :
             ->addTag('routing.loader')
         ;
 
-security.listener.factory
--------------------------
-
-**But** : Nécessaire pour créer un système d'authentification personnalisé
-
-Ce tag est utilisé lorsque vous créez votre propre système d'authentification
-personnalisé. Pour plus de détails, lisez
-:doc:`/cookbook/security/custom_authentication_provider`.
-
 security.remember_me_aware
 --------------------------
 
@@ -573,6 +829,30 @@ propre voteur personnalisé à ce système.
 
 Pour plus d'informations, lisez l'article du cookbook :
 :doc:`/cookbook/security/voters`.
+
+.. _reference-dic-tags-serializer-encoder:
+
+serializer.encoder
+------------------
+
+**But**: Enregistre un nouvel encodeur dans le service ``serializer``
+
+La classe taggé doit implémenter :class:`Symfony\\Component\\Serializer\\Encoder\\EncoderInterface`
+et :class:`Symfony\\Component\\Serializer\\Encoder\\DecoderInterface`.
+
+Pour plus de détails, lisez :doc:`/cookbook/serializer`.
+
+.. _reference-dic-tags-serializer-normalizer:
+
+serializer.normalizer
+---------------------
+
+**But**: Enregistre un nouvel normalisateur dans le service ``serializer``
+
+La classe taggé doit implémenter :class:`Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface`
+et :class:`Symfony\\Component\\Serializer\\Normalizer\\DenormalizerInterface`.
+
+Pour plus de détails, lisez :doc:`/cookbook/serializer`.
 
 swiftmailer.plugin
 ------------------
@@ -637,7 +917,7 @@ depuis une autre source, créez d'abord une classe qui implémente l'interface
     // src/Acme/MainBundle/Translation/MyCustomLoader.php
     namespace Acme\MainBundle\Translation;
 
-    use Symfony\Component\Translation\Loader\LoaderInterface
+    use Symfony\Component\Translation\Loader\LoaderInterface;
     use Symfony\Component\Translation\MessageCatalogue;
 
     class MyCustomLoader implements LoaderInterface
@@ -646,8 +926,8 @@ depuis une autre source, créez d'abord une classe qui implémente l'interface
         {
             $catalogue = new MessageCatalogue($locale);
 
-            // chargez des traductions depuis la « ressource » d'une manière ou d'une autre
-            // puis définissez les dans le catalogue
+            // some how load up some translations from the "resource"
+            // then set them into the catalogue
             $catalogue->set('hello.world', 'Hello World!', $domain);
 
             return $catalogue;
@@ -660,26 +940,28 @@ un :Class:`Symfony\\Component\\Translation\\MessageCatalogue`.
 Maintenant, vous pouvez enregistrer votre chargeur comme un service et le
 tagger avec ``translation.loader`` :
 
-.. code-block:: yaml
+.. configuration-block::
 
-    services:
-        main.translation.my_custom_loader:
-            class: Acme\MainBundle\Translation\MyCustomLoader
-            tags:
-                - { name: translation.loader, alias: bin }
+    .. code-block:: yaml
 
-.. code-block:: xml
+        services:
+            main.translation.my_custom_loader:
+                class: Acme\MainBundle\Translation\MyCustomLoader
+                tags:
+                    - { name: translation.loader, alias: bin }
 
-    <service id="main.translation.my_custom_loader" class="Acme\MainBundle\Translation\MyCustomLoader">
-        <tag name="translation.loader" alias="bin" />
-    </service>
+    .. code-block:: xml
 
-.. code-block:: php
+        <service id="main.translation.my_custom_loader" class="Acme\MainBundle\Translation\MyCustomLoader">
+            <tag name="translation.loader" alias="bin" />
+        </service>
 
-    $container
-        ->register('main.translation.my_custom_loader', 'Acme\MainBundle\Translation\MyCustomLoader')
-        ->addTag('translation.loader', array('alias' => 'bin'))
-    ;
+    .. code-block:: php
+
+        $container
+            ->register('main.translation.my_custom_loader', 'Acme\MainBundle\Translation\MyCustomLoader')
+            ->addTag('translation.loader', array('alias' => 'bin'))
+        ;
 
 L'option ``alias`` est requise et très importante : elle définit le « suffixe »
 du fichier qui sera utilisé pour les fichiers de ressource qui utilisent ce
@@ -766,6 +1048,39 @@ doivent aussi être ajoutées comme les autres services « normaux » :
             ->addTag('twig.extension')
         ;
 
+twig.loader
+-----------
+
+**But**: Enregistre un service personnalisé pour charger les modèles Twig
+
+Par défaut, Symfony utilise seulement `Twig Loader`_ -
+:class:`Symfony\\Bundle\\TwigBundle\\Loader\\FilesystemLoader`. Si vous avez
+besoin de charger les modèles Twig par une autre ressource, vous pouvez créer un
+service pour le nouveau chargeur avec le tag ``twig.loader``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            acme.demo_bundle.loader.some_twig_loader:
+                class: Acme\DemoBundle\Loader\SomeTwigLoader
+                tags:
+                    - { name: twig.loader }
+
+    .. code-block:: xml
+
+        <service id="acme.demo_bundle.loader.some_twig_loader" class="Acme\DemoBundle\Loader\SomeTwigLoader">
+            <tag name="twig.loader" />
+        </service>
+
+    .. code-block:: php
+
+        $container
+            ->register('acme.demo_bundle.loader.some_twig_loader', 'Acme\DemoBundle\Loader\SomeTwigLoader')
+            ->addTag('twig.loader')
+        ;
+
 validator.constraint_validator
 ------------------------------
 
@@ -801,4 +1116,4 @@ Pour un exemple, jetez un oeil à la classe ``EntityInitializer`` dans le
 .. _`dépôt officiel des extensions Twig`: https://github.com/fabpot/Twig-extensions
 .. _`KernelEvents`: https://github.com/symfony/symfony/blob/2.0/src/Symfony/Component/HttpKernel/KernelEvents.php
 .. _`Documentation du Système de Plugin de SwiftMailer`: http://swiftmailer.org/docs/plugins.html
-
+.. _`Twig Loader`: http://twig.sensiolabs.org/doc/api.html#loaders

@@ -13,33 +13,41 @@ par une méthode de votre objet.
 * :doc:`False </reference/constraints/False>`
 * :doc:`Type </reference/constraints/Type>`
 
-Constraintes sur les chaînes de caractères
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contraintes sur les chaînes de caractères
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Email </reference/constraints/Email>`
-* :doc:`MinLength </reference/constraints/MinLength>`
-* :doc:`MaxLength </reference/constraints/MaxLength>`
 * :doc:`Length </reference/constraints/Length>`
 * :doc:`Url </reference/constraints/Url>`
 * :doc:`Regex </reference/constraints/Regex>`
 * :doc:`Ip </reference/constraints/Ip>`
 
-Constraintes sur les nombres
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contraintes sur les nombres
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :doc:`Max </reference/constraints/Max>`
-* :doc:`Min </reference/constraints/Min>`
 * :doc:`Range </reference/constraints/Range>`
 
-Constraintes sur les dates
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contraintes comparatives
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* :doc:`EqualTo </reference/constraints/EqualTo>`
+* :doc:`NotEqualTo </reference/constraints/NotEqualTo>`
+* :doc:`IdenticalTo </reference/constraints/IdenticalTo>`
+* :doc:`NotIdenticalTo </reference/constraints/NotIdenticalTo>`
+* :doc:`LessThan </reference/constraints/LessThan>`
+* :doc:`LessThanOrEqual </reference/constraints/LessThanOrEqual>`
+* :doc:`GreaterThan </reference/constraints/GreaterThan>`
+* :doc:`GreaterThanOrEqual </reference/constraints/GreaterThanOrEqual>`
+
+Contraintes sur les dates
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Date </reference/constraints/Date>`
 * :doc:`DateTime </reference/constraints/DateTime>`
 * :doc:`Time </reference/constraints/Time>`
 
-Constraintes sur les collections
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contraintes sur les collections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`Choice </reference/constraints/Choice>`
 * :doc:`Collection </reference/constraints/Collection>`
@@ -49,19 +57,23 @@ Constraintes sur les collections
 * :doc:`Locale </reference/constraints/Locale>`
 * :doc:`Country </reference/constraints/Country>`
 
-Constraintes sur les fichiers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contraintes sur les fichiers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :doc:`File </reference/constraints/File>`
 * :doc:`Image </reference/constraints/Image>`
 
-Constraintes sur la finance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contraintes sur la finance et autres numéros
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* :doc:`CardScheme </reference/constraints/CardScheme>`
 * :doc:`Luhn </reference/constraints/Luhn>`
+* :doc:`Iban </reference/constraints/Iban>`
+* :doc:`Isbn </reference/constraints/Isbn>`
+* :doc:`Issn </reference/constraints/Issn>`
 
-Autres Constraintes
-~~~~~~~~~~~~~~~~~~~
+Autres Contraintes
+~~~~~~~~~~~~~~~~~~
 
 * :doc:`Callback </reference/constraints/Callback>`
 * :doc:`All </reference/constraints/All>`

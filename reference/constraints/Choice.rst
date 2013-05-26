@@ -43,56 +43,59 @@ via l'option `choices`_ :
             properties:
                 gender:
                     - Choice:
-                        choices:  [male, female]
-                        message:  Choisissez un sexe valide.
-
-    .. code-block:: xml
-
-        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
-        <class name="Acme\BlogBundle\EntityAuthor">
-            <property name="gender">
-                <constraint name="Choice">
-                    <option name="choices">
-                        <value>male</value>
-                        <value>female</value>
-                    </option>
-                    <option name="message">Choisissez un sexe valide.</option>
-                </constraint>
-            </property>
-        </class>
+                        choices:  [homme, femme]
+                        message:  Choisissez un genre valide.
 
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
         {
             /**
-             * @Assert\Choice(choices = {"male", "female"}, message = "Choisissez un sexe valide.")
+             * @Assert\Choice(choices = {"homme", "femme"}, message = "Choisissez un genre valide.")
              */
             protected $gender;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <property name="gender">
+                <constraint name="Choice">
+                    <option name="choices">
+                        <value>homme</value>
+                        <value>femme</value>
+                    </option>
+                    <option name="message">Choisissez un genre valide.</option>
+                </constraint>
+            </property>
+        </class>
+
     .. code-block:: php
 
         // src/Acme/BlogBundle/EntityAuthor.php
+        namespace Acme\BlogBundle\Entity;
+
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\Choice;
-        
+        use Symfony\Component\Validator\Constraints as Assert;
+
         class Author
         {
             protected $gender;
-            
+
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addPropertyConstraint('gender', new Choice(array(
-                    'choices' => array('male', 'female'),
-                    'message' => 'Choisissez un sexe valide.',
+                $metadata->addPropertyConstraint('gender', new Assert\Choice(array(
+                    'choices' => array('homme', 'femme'),
+                    'message' => 'Choisissez un genre valide.',
                 )));
             }
         }
-
 Fournir les choix par une fonction callback
 -------------------------------------------
 
@@ -108,7 +111,7 @@ déroulantes pour les formulaires.
     {
         public static function getGenders()
         {
-            return array('male', 'female');
+            return array('homme', 'femme');
         }
     }
 
@@ -128,6 +131,8 @@ Vous pouvez passer le nom de cette méthode à l'option `callback_` de la contra
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
@@ -149,6 +154,26 @@ Vous pouvez passer le nom de cette méthode à l'option `callback_` de la contra
             </property>
         </class>
 
+    .. code-block:: php
+
+        // src/Acme/BlogBundle/EntityAuthor.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            protected $gender;
+
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('gender', new Assert\Choice(array(
+                    'callback' => 'getGenders',
+                )));
+            }
+        }
+
 Si le callback statique est stocké dans une classe différente, par exemple
 ``Util``, vous pouvez passer le nom de la classe et la méthode dans un tableau.
 
@@ -161,6 +186,21 @@ Si le callback statique est stocké dans une classe différente, par exemple
             properties:
                 gender:
                     - Choice: { callback: [Util, getGenders] }
+
+    .. code-block:: php-annotations
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            /**
+             * @Assert\Choice(callback = {"Util", "getGenders"})
+             */
+            protected $gender;
+        }
 
     .. code-block:: xml
 
@@ -176,17 +216,24 @@ Si le callback statique est stocké dans une classe différente, par exemple
             </property>
         </class>
 
-    .. code-block:: php-annotations
+    .. code-block:: php
 
-        // src/Acme/BlogBundle/Entity/Author.php
+        // src/Acme/BlogBundle/EntityAuthor.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
         {
-            /**
-             * @Assert\Choice(callback = {"Util", "getGenders"})
-             */
             protected $gender;
+
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('gender', new Assert\Choice(array(
+                    'callback' => array('Util', 'getGenders'),
+                )));
+            }
         }
 
 Options disponibles
@@ -279,7 +326,5 @@ strict
 **type**: ``Boolean`` **default**: ``false``
 
 Si cette option est à true, le validateur vérifiera également le type de la donnée soumise.
-Spécifiquement, cette valeur est passée comme troisième argument de la méthode PHP `in_array`_
+Spécifiquement, cette valeur est passée comme troisième argument de la méthode PHP :phpfunction:`in_array`
 lorsque vous vérifiez qu'une valeur est bien dans le tableau de choix valides.
-
-.. _`in_array`: http://php.net/manual/en/function.in-array.php

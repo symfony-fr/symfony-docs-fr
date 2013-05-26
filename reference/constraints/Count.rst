@@ -1,14 +1,8 @@
 Count
 =====
 
-Validates that a given collection's (i.e. an array or an object that implements Countable)
-element count is *between* some minimum and maximum value.
-
 Valide que le nombre d'éléments d'une collection (c-a-d un tableau ou un objet qui implémente
 Countable) se situe *entre* une valeur minimum et une valeur maximum.
-
-.. versionadded:: 2.1
-    The Count constraint was added in Symfony 2.1.
 
 +----------------+---------------------------------------------------------------------+
 | S'applique à   | :ref:`propriété ou méthode<validation-property-target>`             |
@@ -41,12 +35,14 @@ pouvez procéder comme suit :
                     - Count:
                         min: 1
                         max: 5
-                        minMessage: Vous devez spécifier au moins un email
-                        maxMessage: Vous ne pouvez pas spécifier plus de 5 emails
+                        minMessage: "Vous devez spécifier au moins un email"
+                        maxMessage: "Vous ne pouvez pas spécifier plus de {{ limit }} emails"
 
     .. code-block:: php-annotations
 
         // src/Acme/EventBundle/Entity/Participant.php
+        namespace Acme\EventBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Participant
@@ -56,10 +52,45 @@ pouvez procéder comme suit :
              *      min = "1",
              *      max = "5",
              *      minMessage = "Vous devez spécifier au moins un email",
-             *      maxMessage = "Vous ne pouvez pas spécifier plus de 5 emails"
+             *      maxMessage = "Vous ne pouvez pas spécifier plus de {{ limit }} emails"
              * )
              */
              protected $emails = array();
+        }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/EventBundle/Resources/config/validation.xml -->
+        <class name="Acme\EventBundle\Entity\Participant">
+            <property name="emails">
+                <constraint name="Count">
+                    <option name="min">1</option>
+                    <option name="max">5</option>
+                    <option name="minMessage">Vous devez spécifier au moins un email</option>
+                    <option name="maxMessage">Vous ne pouvez pas spécifier plus de {{ limit }} emails</option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/EventBundle/Entity/Participant.php
+        namespace Acme\EventBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Participant
+        {
+            public static function loadValidatorMetadata(ClassMetadata $data)
+            {
+                $metadata->addPropertyConstraint('emails', new Assert\Count(array(
+                    'min'        => 1,
+                    'max'        => 5,
+                    'minMessage' => 'Vous devez spécifier au moins un email',
+                    'maxMessage' => 'Vous ne pouvez pas spécifier plus de {{ limit }} emails',
+                )));
+            }
         }
 
 Options

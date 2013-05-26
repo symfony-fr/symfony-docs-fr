@@ -51,17 +51,48 @@ retourne **false** :
     .. code-block:: php-annotations
 
         // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
         use Symfony\Component\Validator\Constraints as Assert;
 
         class Author
         {
             /**
-             * @Assert\False()
+             * @Assert\False(
+             *     message = "Vous avez saisi un état non valide."
+             * )
              */
-             public function isStateInvalid($message = "Vous avez saisi un état non valide.")
+             public function isStateInvalid()
              {
                 // ...
              }
+        }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <getter property="stateInvalid">
+                <constraint name="False">
+                    <option name="message">Vous avez saisi un état non valide.</option>
+                </constraint>
+            </getter>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addGetterConstraint('stateInvalid', new Assert\False());
+            }
         }
 
 .. caution::
@@ -77,4 +108,4 @@ message
 
 **type**: ``string`` **default**: ``This value should be false``
 
-Ce message s'affiche si la donnée n'est pas à false.
+Ce message s'affiche si la donnée n'est pas à ``False``.
