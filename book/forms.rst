@@ -695,15 +695,15 @@ En plus de pouvoir prédire le « type » d'un champ, Symfony peut aussi essayer
 de deviner les valeurs correctes d'un certain nombre d'options de champ.
 
 .. tip::
-    Lorsque ces options sont définies, le champ sera rendu avec des attributs HTML
+    Lorsque ces options sont définies, le champ sera affiché avec des attributs HTML
     spécifiques qui permettent la validation du champ côté client. Cependant, cela
     ne génère pas l'équivalent côté serveur (ex ``Assert\Length``). Et puisque
     vous aurez besoin d'ajouter la validation côté serveur manuellement, ces options
     peuvent être déduites de cette information.
 
 * ``required`` : L'option ``required`` peut être devinée grâce aux règles de
-  validation (c-a-d est-ce que le champ est ``NotBlank`` ou ``NotNull``) ou
-  grâce aux métadonnées de Doctrine (c-a-d est-ce que le champ est ``nullable``).
+  validation (est-ce que le champ est ``NotBlank`` ou ``NotNull``?) ou
+  grâce aux métadonnées de Doctrine (est-ce que le champ est ``nullable``?).
   Ceci est très utile car votre validation côté client va automatiquement
   correspondre à vos règles de validation.
 
@@ -719,20 +719,20 @@ de deviner les valeurs correctes d'un certain nombre d'options de champ.
   prédire le type des champs (c-a-d en omettant ou en passant ``null`` en tant
   que deuxième argument de la méthode ``add()``).
 
-Si vous voulez changer une des valeurs prédites, vous pouvez l'outrepasser en
+Si vous voulez changer une des valeurs prédites, vous pouvez la surcharger en
 passant l'option au tableau des options de champ ::
 
     ->add('task', null, array('max_length' => 4))
 
 .. index::
-   single: Formulaires; Rendu dans un template
+   single: Forms; Rendering in a template
 
 .. _form-rendering-template:
 
-Rendre un Formulaire dans un Template
--------------------------------------
+Afficher un Formulaire dans un Template
+---------------------------------------
 
-Jusqu'içi, vous avez vu comment un formulaire entier peut être rendu avec
+Jusqu'içi, vous avez vu comment un formulaire entier peut être affiché avec
 seulement une ligne de code. Bien sûr, vous aurez probablement besoin de
 bien plus de flexibilité :
 
@@ -741,51 +741,41 @@ bien plus de flexibilité :
     .. code-block:: html+jinja
 
         {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
-
-        <form action="{{ path('task_new') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_start(form) }}
             {{ form_errors(form) }}
 
             {{ form_row(form.task) }}
             {{ form_row(form.dueDate) }}
 
-            {{ form_rest(form) }}
-
             <input type="submit" />
-        </form>
+        {{ form_end(form) }}
 
     .. code-block:: html+php
 
-        <!-- // src/Acme/TaskBundle/Resources/views/Default/newAction.html.php -->
-
-        <form action="<?php echo $view['router']->generate('task_new') ?>" method="post" <?php echo $view['form']->enctype($form) ?>>
+        <!-- src/Acme/TaskBundle/Resources/views/Default/newAction.html.php -->
+        <?php echo $view['form']->start($form) ?>
             <?php echo $view['form']->errors($form) ?>
 
             <?php echo $view['form']->row($form['task']) ?>
             <?php echo $view['form']->row($form['dueDate']) ?>
 
-            <?php echo $view['form']->rest($form) ?>
-
             <input type="submit" />
-        </form>
+        <?php echo $view['form']->end($form) ?>
 
 Jetons un coup d'oeil à chaque partie :
 
-* ``form_enctype(form)`` - Si au moins un champ est un upload de fichier, ceci
-  se charge de rendre l'attribut obligatoire ``enctype="multipart/form-data"`` ;
+* ``form_start(form)`` - Affiche la balise d'ouverture form.
 
-* ``form_errors(form)`` - Rend toutes les erreurs globales du formulaire (les
-  erreurs spécifiques aux champs sont affichées à côté de chaque champ) ;
+* ``form_errors(form)`` - Affiche les erreurs globales du formulaire
+  (les erreurs spécifiques à chaque champ seront affichées à côté des champs);
 
-* ``form_row(form.dueDate)`` - Rend le label, toutes les erreurs, ainsi que le
-  widget HTML pour le champ donné (par exemple : ``dueDate``) qui, par défaut, est
-  dans une balise ``div`` ;
+* ``form_row(form.dueDate)`` - Affiche le label, les erreurs éventuelles et
+  le widget HTML  d'un champ donné (ex ``dueDate``) dans un élément ``div``
+  (par défaut);
 
-* ``form_rest(form)`` - Rend tous les champs qui n'ont pas encore été rendus.
-  C'est généralement une bonne idée de placer un appel à cette fonction d'aide
-  à la fin de chaque formulaire (au cas où vous auriez oublié d'afficher un
-  champ ou si vous ne souhaitez pas vous embêter à rendre manuellement les
-  champs cachés). Cette fonction d'aide est aussi utile pour profiter
-  de la :ref:`Protection CSRF<forms-csrf>` automatique.
+* ``form_end()`` - Affiche la balise de fermeture du formulaire ainsi que tous les champs
+  qui n'ont pas encore été affichés. C'est utile pour afficher les champs cachés et pour
+  profiter de la :ref:`protection CSRF<forms-csrf>` automatique.
 
 La plus grande partie du travail est effectuée par la fonction d'aide ``form_row``,
 qui rend le label, les erreurs et le widget HTML de chaque champ dans une balise
@@ -807,55 +797,62 @@ le rendu de ``form_row`` peut être personnalisé à différents niveaux.
             <?php echo $view['form']->get('value')->getTask() ?>
 
 .. index::
-   single: Formulaires; Rendre chaque champ à la main
+   single: Forms; Rendering each field by hand
 
-Rendre chaque Champ à la Main
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Afficher chaque Champ à la Main
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La fonction d'aide ``form_row`` est géniale, car, grâce à elle, vous pouvez
-rendre très rapidement chaque champ de votre formulaire (et les balises
+La fonction ``form_row`` est géniale, car, grâce à elle, vous pouvez
+afficher très rapidement chaque champ de votre formulaire (et les balises
 utilisées pour ce champ peuvent être personnalisées aussi). Mais comme la
-vie n'est pas toujours simple, vous pouvez aussi rendre chaque champ
-entièrement à la main. Le produit fini décrit dans la suite revient au même
-que lorsque vous avez utilisé la fonction d'aide ``form_row`` :
+vie n'est pas toujours simple, vous pouvez aussi afficher chaque champ
+entièrement à la main. Le résultat décrit ci-dessous revient au même
+que lorsque vous avez utilisé la fonction ``form_row`` :
 
 .. configuration-block::
 
     .. code-block:: html+jinja
 
-        {{ form_errors(form) }}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
 
-        <div>
-            {{ form_label(form.task) }}
-            {{ form_errors(form.task) }}
-            {{ form_widget(form.task) }}
-        </div>
+            <div>
+                {{ form_label(form.task) }}
+                {{ form_errors(form.task) }}
+                {{ form_widget(form.task) }}
+            </div>
 
-        <div>
-            {{ form_label(form.dueDate) }}
-            {{ form_errors(form.dueDate) }}
-            {{ form_widget(form.dueDate) }}
-        </div>
+            <div>
+                {{ form_label(form.dueDate) }}
+                {{ form_errors(form.dueDate) }}
+                {{ form_widget(form.dueDate) }}
+            </div>
 
-        {{ form_rest(form) }}
+        <input type="submit" />
+
+        {{ form_end(form) }}
 
     .. code-block:: html+php
 
-        <?php echo $view['form']->errors($form) ?>
+        <?php echo $view['form']->start($form) ?>
 
-        <div>
-            <?php echo $view['form']->label($form['task']) ?>
-            <?php echo $view['form']->errors($form['task']) ?>
-            <?php echo $view['form']->widget($form['task']) ?>
-        </div>
+            <?php echo $view['form']->errors($form) ?>
 
-        <div>
-            <?php echo $view['form']->label($form['dueDate']) ?>
-            <?php echo $view['form']->errors($form['dueDate']) ?>
-            <?php echo $view['form']->widget($form['dueDate']) ?>
-        </div>
+            <div>
+                <?php echo $view['form']->label($form['task']) ?>
+                <?php echo $view['form']->errors($form['task']) ?>
+                <?php echo $view['form']->widget($form['task']) ?>
+            </div>
 
-        <?php echo $view['form']->rest($form) ?>
+            <div>
+                <?php echo $view['form']->label($form['dueDate']) ?>
+                <?php echo $view['form']->errors($form['dueDate']) ?>
+                <?php echo $view['form']->widget($form['dueDate']) ?>
+            </div>
+
+            <input type="submit" />
+
+        <?php echo $view['form']->end($form) ?>
 
 Si le label autogénéré pour un champ n'est pas tout à fait correct, vous
 pouvez le spécifier explicitement :
@@ -870,9 +867,9 @@ pouvez le spécifier explicitement :
 
         <?php echo $view['form']->label($form['task'], 'Task Description') ?>
 
-Quelques types de champ ont des options d'affichage supplémentaires
+Certains types de champ ont des options d'affichage supplémentaires
 qui peuvent être passées au widget. Ces options sont documentées avec chaque
-type, mais une qui est commune est l'option ``attr``, qui vous permet de modifier
+type, mais l'option ``attr`` est commune à tous les type et vous permet de modifier
 les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
 ``task_field`` au champ texte affiché :
 
@@ -880,7 +877,7 @@ les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
 
     .. code-block:: html+jinja
 
-        {{ form_widget(form.task, { 'attr': {'class': 'task_field'} }) }}
+        {{ form_widget(form.task, {'attr': {'class': 'task_field'}}) }}
 
     .. code-block:: html+php
 
@@ -888,7 +885,7 @@ les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
             'attr' => array('class' => 'task_field'),
         )) ?>
 
-Si vous avez besoin de rendre des champs du formulaire « à la main » alors vous
+Si vous avez besoin d'afficher' des champs du formulaire « à la main » alors vous
 pouvez utiliser individuellement les valeurs des champs comme ``id``, ``name`` et ``label``.
 Par exemple, pour obtenir l'``id`` :
 
@@ -906,25 +903,98 @@ Pour obtenir la valeur utilisée pour l'attribut name du champ de formulaire,
 vous devez utiliser la valeur ``full_name`` :
 
 .. configuration-block::
-	
+
     .. code-block:: html+jinja
-	
+
         {{ form.task.vars.full_name }}
 
     .. code-block:: html+php
-	
+
         <?php echo $form['task']->get('full_name') ?>
 
 Fonctions de Référence des Templates Twig
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous utilisez Twig, un :doc:`manuel de référence</reference/forms/twig_reference>`
-complet des fonctions de rendu de formulaire est mis à votre disposition.
-Lisez-le afin de tout connaître sur des fonctions d'aide disponibles
-ainsi que les options qui peuvent être utilisées avec ces dernières.
+complet des fonctions d'affichage de formulaire est mis à votre disposition.
+Lisez-le afin de tout connaître sur les fonctions d'aide disponibles
+ainsi que les options qui peuvent être utilisées pour chacune d'elles.
 
 .. index::
-   single: Formulaires; Créer des classes de formulaire
+   single: Forms; Changing the action and method
+
+.. _book-forms-changing-action-and-method:
+
+Changer les attributs Action et Method d'un formulaire
+------------------------------------------------------
+
+Jusqu'ici, la fonction ``form_start()`` a été utilisée pour afficher la
+balise d'ouverture du formulaire et nous avons supposé que chaque formulaire
+était soumis à la même URL avec une requête de type POST. Dans certains cas, vous
+aurez besoin de changer ces paramètres. Vous pouvez le faire de différentes manières.
+Si vous construisez votre formulaire dans un contrôleur, vous pouvez utiliser
+``setAction()`` et ``setMethod()``::
+
+    $form = $this->createFormBuilder($task)
+        ->setAction($this->generateUrl('target_route'))
+        ->setMethod('GET')
+        ->add('task', 'text')
+        ->add('dueDate', 'date')
+        ->getForm();
+
+.. note::
+
+    Cet exemple suppose que vous avez créé une route appelée ``target_route``
+    qui pointe vers le contrôleur qui va traiter le formulaire.
+
+Dans :ref:`book-form-creating-form-classes`, vous apprendrez comment déporter
+le code qui construit votre formulaire dans des classes séparées. Lorsque
+vous utilisez une classe de formulaire externe dans votre contrôleur, vous
+pouvez passer les attributs ``action`` et ``method`` comme options de votre
+formulaire::
+
+    $form = $this->createForm(new TaskType(), $task, array(
+        'action' => $this->generateUrl('target_route'),
+        'method' => 'GET',
+    ));
+
+Enfin, vous pouvez surcharger ces attributs dans un template en les passant aux
+fonctions ``form()`` ou ``form_start()`` :
+
+.. configuration-block::
+
+    .. code-block:: html+jinja
+
+        {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+        {{ form(form, {'action': path('target_route'), 'method': 'GET'}) }}
+
+        {{ form_start(form, {'action': path('target_route'), 'method': 'GET'}) }}
+
+    .. code-block:: html+php
+
+        <!-- src/Acme/TaskBundle/Resources/views/Default/newAction.html.php -->
+        <?php echo $view['form']->form($form, array(
+            'action' => $view['router']->generate('target_route'),
+            'method' => 'GET',
+        )) ?>
+
+        <?php echo $view['form']->start($form, array(
+            'action' => $view['router']->generate('target_route'),
+            'method' => 'GET',
+        )) ?>
+
+.. note::
+
+    Si la méthode n'est pas GET ou POST, mais PUT, PATCH ou DELETE, Symfony2
+    insèrera un nouveau champ caché avec le nom ``_method`` qui stockera cette
+    méthode. Le formulaire sera soumis dans une requête POST classique mais
+    le routeur de Symfony2 sera capable de détecter le paramètre ``_method``
+    et interprètera la requête comme une requête PUT, PATCH ou DELETE. Lisez
+    le chapitre du Cookbook « :doc:`/cookbook/routing/method_parameters` »
+    pour obtenir plus d'informations à ce sujet.
+
+.. index::
+   single: Forms; Creating form classes
 
 .. _book-form-creating-form-classes:
 
@@ -990,9 +1060,7 @@ manière de créer des formulaires, mais le choix final vous revient.
     Plus tard, quand vous commencerez à imbriquer des formulaires les uns avec
     les autres, cela ne sera plus suffisant. Donc, bien que facultatif,
     c'est généralement une bonne idée de spécifier explicitement l'option
-    ``data_class`` en ajoutant ce qui suit à votre classe formulaire :
-    
-    .. code-block:: php
+    ``data_class`` en ajoutant ce qui suit à votre classe formulaire::
 
         use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -1012,8 +1080,8 @@ manière de créer des formulaires, mais le choix final vous revient.
   
     Dans le cas où vous avez besoin de champs supplémentaires dans le formulaire
     (par exemple une checkbox « Acceptez-vous les conditions d'utilisation ») qui
-    ne doit pas être mappé à l'objet sous-jacent, vous devez définir l'option
-    ``mapped`` setting à ``false``::
+    ne doit pas être mappée à l'objet sous-jacent, vous devez définir l'option
+    ``mapped`` à ``false``::
 
         use Symfony\Component\Form\FormBuilderInterface;
 
@@ -1031,7 +1099,7 @@ manière de créer des formulaires, mais le choix final vous revient.
         $form->get('dueDate')->getData();
 
 .. index::
-   pair: Formulaires; Doctrine
+   pair: Forms; Doctrine
 
 Formulaires et Doctrine
 -----------------------
