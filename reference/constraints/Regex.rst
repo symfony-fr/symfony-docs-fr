@@ -48,6 +48,35 @@ plusieurs caractères alphanumériques au début de votre chaîne :
             protected $description;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <property name="description">
+                <constraint name="Regex">
+                    <option name="pattern">/^\w+/</option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+        
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('description', new Assert\Regex(array(
+                    'pattern' => '/^\w+/',
+                )));
+            }
+        }
+
 Alternativement, vous pouvez définir l'option `match`_ à ``false`` pour
 vérifier qu'une chaîne donnée ne corresponde *pas*. Dans l'exemple suivant,
 vous vérifiez que le champ ``firstName`` ne contient pas de nombre et vous
@@ -85,6 +114,38 @@ personnalisez également le message :
             protected $firstName;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <property name="firstName">
+                <constraint name="Regex">
+                    <option name="pattern">/\d/</option>
+                    <option name="match">false</option>
+                    <option name="message">Votre nom ne peut pas contenir de nombre</option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('firstName', new Assert\Regex(array(
+                    'pattern' => '/\d/',
+                    'match'   => false,
+                    'message' => 'Votre nom ne peut pas contenir de nombre',
+                )));
+            }
+        }
 Options
 -------
 
@@ -96,7 +157,7 @@ pattern
 Cette option obligatoire est le masque (« pattern » en anglais) de l'expression
 régulière à laquelle doit correspondre la donnée. Par défaut, le validateur
 échouera si la chaîne de caractères *ne correspond pas* à cette expression
-régulière (via la fonction PHP `preg_match`_).
+régulière (via la fonction PHP :phpfunction:`preg_match`).
 Toutefois, si l'option `match`_ est définie à false, la validation échouera
 si la chaîne *correspond* à l'expression régulière.
 
@@ -116,5 +177,3 @@ message
 **type**: ``string`` **default**: ``This value is not valid``
 
 Le message qui sera affiché si la validation échoue.
-
-.. _`preg_match`: http://php.net/manual/fr/function.preg-match.php

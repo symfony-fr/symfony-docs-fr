@@ -43,6 +43,31 @@ Utilisation de base
              protected $createdAt;
         }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/UserBundle/Resources/config/validation.xml -->
+        <class name="Acme\BlogBundle\Entity\Author">
+            <property name="createdAt">
+                <constraint name="DateTime" />
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('createdAt', new Assert\DateTime());
+            }
+        }
+
 Options
 -------
 
@@ -51,4 +76,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not a valid datetime``
 
-Le message est affiché si la données finale c'est pas un datetime.
+Le message est affiché si la données finale n'est pas un datetime.

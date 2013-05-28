@@ -1,8 +1,12 @@
 UserPassword
 ============
 
-.. versionadded:: 2.1
-   Cette contrainte n'existe que depuis la version 2.1.
+.. note::
+
+    Avant Symfony 2.2, les classes ``UserPassword*`` sont dans le namespace
+    ``Symfony\\Component\\Security\\Core\\Validator\\Constraint``  sont
+    dépréciées et supprimées dans Symfony 2.3. Utilisez les classes 
+    ``UserPassword*`` dans le namespace ``Symfony\\Component\\Security\\Core\\Validator\\Constraints``.
 
 Cette contrainte valide qu'une valeur saisie est égale au mot de passe
 de l'utilisateur courant. C'est utile dans un formulaire où l'utilisateur
@@ -43,26 +47,53 @@ que l'ancien mot de passe est correct :
         Acme\UserBundle\Form\Model\ChangePassword:
             properties:
                 oldPassword:
-                    - Symfony\Component\Security\Core\Validator\Constraint\UserPassword:
+                    - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
                         message: "Votre mot de passe actuel est erroné"
 
     .. code-block:: php-annotations
 
-       // src/Acme/UserBundle/Form/Model/ChangePassword.php
-       namespace Acme\UserBundle\Form\Model;
-       
-       use Symfony\Component\Security\Core\Validator\Constraint as SecurityAssert;
+        // src/Acme/UserBundle/Form/Model/ChangePassword.php
+        namespace Acme\UserBundle\Form\Model;
 
-       class ChangePassword
-       {
-           /**
-            * @SecurityAssert\UserPassword(
-            *     message = "Votre mot de passe actuel est erroné"
-            * )
-            */
-            protected $oldPassword;
-       }
+        use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
+        class ChangePassword
+        {
+            /**
+             * @SecurityAssert\UserPassword(
+             *     message = "Votre mot de passe actuel est erroné"
+             * )
+             */
+             protected $oldPassword;
+        }
+
+    .. code-block:: xml
+
+        <!-- src/UserBundle/Resources/config/validation.xml -->
+        <class name="Acme\UserBundle\Form\Model\ChangePassword">
+            <property name="Symfony\Component\Security\Core\Validator\Constraints\UserPassword">
+                <option name="message">Votre mot de passe actuel est erroné</option>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/UserBundle/Form/Model/ChangePassword.php
+        namespace Acme\UserBundle\Form\Model;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+
+        class ChangePassword
+        {
+            public static function loadValidatorData(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('oldPassword', new SecurityAssert\UserPassword(array(
+                    'message' => 'Votre mot de passe actuel est erroné',
+                )));
+            }
+        }
+        
 Options
 -------
 

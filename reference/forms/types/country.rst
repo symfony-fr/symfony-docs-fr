@@ -30,11 +30,24 @@ vous devriez plutôt utiliser directement le type ``choice``.
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
+|             | - `disabled`_                                                          |
+|             | - `mapped`_                                                            |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`choice</reference/forms/types/choice>`                           |
 +-------------+------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType`  |
 +-------------+------------------------------------------------------------------------+
+
+Options surchargées
+-------------------
+
+choices
+~~~~~~~
+
+**default**: ``Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames()``
+
+La valeur par défaut de l'option ``choices`` est toutes les langues.
+Il utilise la langue par défaut pour déterminer la langue.
 
 Options héritées
 ----------------
@@ -51,7 +64,7 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -59,4 +72,6 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
-.. _`Locale::getDefault()`: http://php.net/manual/en/locale.getdefault.php
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc

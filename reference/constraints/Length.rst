@@ -4,9 +4,6 @@ Length
 Valide que la longueur d'une chaîne de caractères donnée se situe *entre* une
 valeur minimum et une valeur maximum.
 
-.. versionadded:: 2.1
-    La contrainte Length a été ajoutée dans Symfony 2.1.
-
 +----------------+----------------------------------------------------------------------+
 | S'applique à   | :ref:`propriété ou méthode<validation-property-target>`              |
 +----------------+----------------------------------------------------------------------+
@@ -58,6 +55,75 @@ Pour vérifier que la longueur du champ ``firstName`` d'une classe se situe entr
              * )
              */
              protected $firstName;
+        }
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # src/Acme/EventBundle/Resources/config/validation.yml
+        Acme\EventBundle\Entity\Participant:
+            properties:
+                firstName:
+                    - Length:
+                        min: 2
+                        max: 50
+                        minMessage: "Votre nom doit faire au moins {{ limit }} caractères"
+                        maxMessage: "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+
+    .. code-block:: php-annotations
+
+        // src/Acme/EventBundle/Entity/Participant.php
+        namespace Acme\EventBundle\Entity;
+
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Participant
+        {
+            /**
+             * @Assert\Length(
+             *      min = "2",
+             *      max = "50",
+             *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+             *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+             * )
+             */
+             protected $firstName;
+        }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/EventBundle/Resources/config/validation.xml -->
+        <class name="Acme\EventBundle\Entity\Participant">
+            <property name="firstName">
+                <constraint name="Length">
+                    <option name="min">2</option>
+                    <option name="max">50</option>
+                    <option name="minMessage">Votre nom doit faire au moins {{ limit }} caractères</option>
+                    <option name="maxMessage">Votre nom ne peut pas être plus long que {{ limit }} caractères</option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/EventBundle/Entity/Participant.php
+        namespace Acme\EventBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Participant
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('firstName', new Assert\Length(array(
+                    'min'        => 2,
+                    'max'        => 50,
+                    'minMessage' => 'Votre nom doit faire au moins {{ limit }} caractères',
+                    'maxMessage' => 'Votre nom ne peut pas être plus long que {{ limit }} caractères',
+                )));
+            }
         }
 
 Options

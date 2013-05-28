@@ -1,6 +1,96 @@
+web/bundles/
+app/bootstrap.php.cache
+app/cache/*
+app/logs/*
+build/
+vendor
+composer.phar
+# https://github.com/github/gitignore
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+##
+# composer
+##
+composer.phar
+composer.lock
+
+##
+# components, libraries, etc
+##
+vendor
+
+##
+# Symfon2 - https://github.com/github/gitignore/blob/master/Symfony2.gitignore
+##
+
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+
+
+##
+# PhpStorm
+##
+.idea
+
+##
+# Netbeans
+##
+nbproject
+
+
+##
+# Eclipse - https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
+##
+
+*.pydevproject
+.project
+.metadata
+bin/doctrine*
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+#Old configuration
 Makefile
 make.bat
 conf.py
 sphinx-php/
 _build/*
 _exts/*
+

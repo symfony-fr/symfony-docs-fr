@@ -76,7 +76,7 @@ Apprenez-en plus à propos d'eux :
 CMF
 ---
 
-Le Syfmony CMFProject facililite l'ajout de fonctionnalités liées aux CMS dans
+Le Symfony CMFProject facilite l'ajout de fonctionnalités liées aux CMS dans
 les applications construites avec le framework PHP Symfony2.
 
 .. toctree::

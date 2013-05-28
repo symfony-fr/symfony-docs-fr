@@ -51,6 +51,43 @@ vouliez valider chaque entrée du tableau :
             protected $favoriteColors = array();
        }
 
+    .. code-block:: xml
+
+        <!-- src/Acme/UserBundle/Resources/config/validation.xml -->
+        <class name="Acme\UserBundle\Entity\User">
+            <property name="favoriteColors">
+                <constraint name="All">
+                    <option name="constraints">
+                        <constraint name="NotBlank" />
+                        <constraint name="Length">
+                            <option name="min">5</option>
+                        </constraint>
+                    </option>
+                </constraint>
+            </property>
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/UserBundle/Entity/User.php
+        namespace Acme\UserBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class User
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addPropertyConstraint('favoriteColors', new Assert\All(array(
+                    'constraints' => array(
+                        new Assert\NotBlank(),
+                        new Assert\Length(array('min' => 5)),
+                    ),
+                )));
+            }
+        }
+
 Maintenant, chaque entrée du tableau ``favoriteColors`` sera validée
 pour ne pas être vide et faire au moins 5 caractères.
 

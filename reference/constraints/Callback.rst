@@ -14,8 +14,8 @@ sorte de choses, incluant la création et l'assignation d'erreurs de validation.
 .. note::
     
     Une méthode callback elle-même n'*échoue* pas et ne retourne aucune valeur.
-    Au lieu de cela, comme vous le verrez dans l'exemple, cette méthode a le
-    pouvoir d'ajouter directement des « violations » de validateur.
+    Au lieu de cela, comme vous le verrez dans l'exemple, cette méthode a la
+    possibilité d'ajouter directement des « violations » de validateur.
 
 +----------------+------------------------------------------------------------------------+
 | S'applique à   | :ref:`classe<validation-class-target>`                                 |
@@ -61,7 +61,25 @@ Configuration
                     <value>isAuthorValid</value>
                 </option>
             </constraint>
-        </class>        
+        </class>
+
+    .. code-block:: php
+
+        // src/Acme/BlogBundle/Entity/Author.php
+        namespace Acme\BlogBundle\Entity;
+
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
+        use Symfony\Component\Validator\Constraints as Assert;
+
+        class Author
+        {
+            public static function loadValidatorMetadata(ClassMetadata $metadata)
+            {
+                $metadata->addConstraint(new Assert\Callback(array(
+                    'methods' => array('isAuthorValid'),
+                )));
+            }
+        }
 
 La méthode Callback
 -------------------
@@ -71,29 +89,30 @@ pouvez définir des « violations » directement sur cet objet et déterminer à
 quel champ ces erreurs seront attribuées ::
 
     // ...
-    use Symfony\Component\Validator\ExecutionContext;
-    
+    use Symfony\Component\Validator\ExecutionContextInterface;
+
     class Author
     {
         // ...
         private $firstName;
-    
-        public function isAuthorValid(ExecutionContext $context)
+
+        public function isAuthorValid(ExecutionContextInterface $context)
         {
             // Vous avez un tableau de « faux noms »
             $fakeNames = array();
-        
+
             // vérifie si le nom est un faux
             if (in_array($this->getFirstName(), $fakeNames)) {
-                $context->addViolationAtSubPath('firstname', 'This name sounds totally fake!', array(), null);
+                $context->addViolationAt('firstname', 'This name sounds totally fake!', array(), null);
             }
         }
+    }
 
 Options
 -------
 
-methods
-~~~~~~~
+methodes
+~~~~~~~~
 
 **type**: ``array`` **default**: ``array()`` [:ref:`option par défaut<validation-default-option>`]
 
@@ -135,6 +154,18 @@ suivants :
             class Author
             {
             }
+
+        .. code-block:: xml
+
+            <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
+            <class name="Acme\BlogBundle\Entity\Author">
+                <constraint name="Callback">
+                    <option name="methods">
+                        <value>Acme\BlogBundle\MyStaticValidatorClass</value>
+                        <value>isAuthorValid</value>
+                    </option>
+                </constraint>
+            </class>
 
         .. code-block:: php
 
