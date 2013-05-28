@@ -1106,15 +1106,13 @@ Formulaires et Doctrine
 
 Le but d'un formulaire est de traduire les données d'un objet (par exemple :
 ``Task``) en un formulaire HTML et puis de transcrire en retour les données
-soumises par l'utilisateur à l'objet original. En tant que tel, le sujet de la
-persistance de l'objet ``Task`` dans la base de données n'a rien à voir avec
-le sujet des formulaires. Mais, si vous avez configuré la classe ``Task`` de
-telle sorte qu'elle soit persistée via Doctrine (c-a-d qye vous avez ajouté des
-:ref:`métadonnées de correspondance<book-doctrine-adding-mapping>` pour cela),
+soumises par l'utilisateur à l'objet original. En tant que tel, le fait de
+persister l'objet ``Task`` dans la base de données n'a rien à voir avec
+les formulaires. Mais, si vous avez configuré la classe ``Task`` de
+telle sorte qu'elle soit persistée via Doctrine (c-a-d que vous avez ajouté des
+:ref:`métadonnées de correspondance<book-doctrine-adding-mapping>`),
 alors sa persistance peut être effectuée après la soumission d'un formulaire
-lorsque ce dernier est valide :
-
-.. code-block:: php
+lorsque ce dernier est valide::
 
     if ($form->isValid()) {
         $em = $this->getDoctrine()->getManager();
@@ -1125,21 +1123,19 @@ lorsque ce dernier est valide :
     }
 
 Si, pour une quelconque raison, vous n'avez pas accès à votre objet ``$task``
-d'origine, vous pouvez le récupérer depuis le formulaire :
-
-.. code-block:: php
+d'origine, vous pouvez le récupérer depuis le formulaire::
 
     $task = $form->getData();
 
-Pour plus d'informations, voir le :doc:`chapitre Doctrine ORM</book/doctrine>`.
+Pour plus d'informations, voir le :doc:`chapitre sur l'ORM Doctrine</book/doctrine>`.
 
-La chose principale à comprendre est que lorsque le formulaire est lié (« bindé »),
+Le plus important est de comprendre que lorsque le formulaire est lié (« bindé »),
 les données soumises sont transférées à l'objet sous-jacent immédiatement. Si
 vous souhaitez persister ces données, vous avez simplement besoin de persister
 l'objet lui-même (qui contient déjà les données soumises).
 
 .. index::
-   single: Formulaires; Formulaires imbriqués
+   single: Forms; Embedded forms
 
 Formulaires imbriqués
 ---------------------
@@ -1154,9 +1150,7 @@ Imbriquer un objet unique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposez que chaque ``Task`` appartienne à un simple objet ``Category``.
-Commencez, bien sûr, par créer l'objet ``Category`` :
-
-.. code-block:: php
+Commencez, bien sûr, par créer l'objet ``Category``::
 
     // src/Acme/TaskBundle/Entity/Category.php
     namespace Acme\TaskBundle\Entity;
@@ -1171,9 +1165,7 @@ Commencez, bien sûr, par créer l'objet ``Category`` :
         public $name;
     }
 
-Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task`` :
-
-.. code-block:: php
+Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task``::
 
     // ...
 
@@ -1201,9 +1193,7 @@ Ensuite, ajoutez une nouvelle propriété ``category`` à la classe ``Task`` :
 
 Maintenant que votre application a été mise à jour pour refléter nos nouvelles
 conditions requises, créez une classe formulaire afin que l'objet ``Category``
-puisse être modifié par l'utilisateur :
-
-.. code-block:: php
+puisse être modifié par l'utilisateur::
 
     // src/Acme/TaskBundle/Form/Type/CategoryType.php
     namespace Acme\TaskBundle\Form\Type;
@@ -1233,7 +1223,7 @@ puisse être modifié par l'utilisateur :
     }
 
 Le but final est d'autoriser la ``Category`` d'une ``Task`` à être modifiée
-directement dans le formulaire de la tâche lui-même. Pour accomplir cela,
+directement dans le formulaire de la tâche. Pour accomplir cela,
 ajoutez un champ ``category`` à l'objet ``TaskType`` dont le type est une
 instance de la nouvelle classe ``CategoryType`` :
 
@@ -1274,7 +1264,6 @@ que les champs de la classe ``Task`` :
             {{ form_row(form.category.name) }}
         </div>
 
-        {{ form_rest(form) }}
         {# ... #}
 
     .. code-block:: html+php
@@ -1286,15 +1275,14 @@ que les champs de la classe ``Task`` :
             <?php echo $view['form']->row($form['category']['name']) ?>
         </div>
 
-        <?php echo $view['form']->rest($form) ?>
         <!-- ... -->
 
 Lorsque l'utilisateur soumet le formulaire, les données soumises pour les champs
-de ``Category`` sont utilisées pour construire une instance de ``Category``, qui
+de ``Category`` sont utilisées pour construire une instance de ``Category`` qui
 est ensuite affectée au champ ``category`` de l'instance de `Task``.
 
 L'instance ``Category`` est accessible naturellement via ``$task->getCategory()``
-et peut être persistée dans la base de données ou utilisée de quelconque manière
+et peut être persistée dans la base de données ou utilisée de toute autre manière
 que vous souhaitez.
 
 Imbriquer une Collection de Formulaires
@@ -1309,8 +1297,8 @@ Pour plus d'informations, lisez le chapitre du cookbook ":doc:`/cookbook/form/fo
 et le chapitre sur le type de champ :doc:`collection</reference/forms/types/collection>`.
 
 .. index::
-   single: Formulaires; Habillage
-   single: Formulaires; Personnaliser les champs
+   single: Forms; Theming
+   single: Forms; Customizing fields
 
 .. _form-theming:
 
@@ -1318,19 +1306,19 @@ Habillage de Formulaire (« Theming »)
 -------------------------------------
 
 Chaque partie de l'affichage d'un formulaire peut être personnalisée. Vous êtes
-libre de changer comment chaque ligne du formulaire est rendue, de changer les
-balises utilisées pour afficher les erreurs, ou même de personnaliser comment
-la balise ``textarea`` devrait être rendue. Rien n'est limité, et des différentes
-personnalisations peuvent être utilisées à différents endroits.
+libre de changer la manière dont chaque « partie » du formulaire est affichée,
+de changer les balises utilisées pour afficher les erreurs, ou même de personnaliser
+la manière dont la balise ``textarea`` doit être affichée. Tout est permis, et
+différentes personnalisations peuvent être utilisées à différents endroits.
 
-Symfony utilise des templates pour rendre chaque partie d'un formulaire, comme
+Symfony utilise des templates pour afficher chaque partie d'un formulaire, comme
 les balises ``tags``, les balises ``input``, les messages d'erreur et tout le reste.
 
 Dans Twig, chaque « fragment » de formulaire est représenté par un bloc Twig. Pour
 personnaliser n'importe quelle partie d'un formulaire, vous avez juste besoin de
 réécrire le bloc approprié.
 
-En PHP, chaque « fragment » de formulaire est rendu via un fichier de template
+En PHP, chaque « fragment » de formulaire est affiché via un fichier de template
 individuel. Pour personnaliser n'importe quelle partie d'un formulaire, vous avez
 juste besoin de réécrire le template existant en en créant un nouveau.
 
@@ -1344,7 +1332,6 @@ balise :
     .. code-block:: html+jinja
 
         {# src/Acme/TaskBundle/Resources/views/Form/fields.html.twig #}
-
         {% block form_row %}
         {% spaceless %}
             <div class="form_row">
@@ -1358,45 +1345,42 @@ balise :
     .. code-block:: html+php
 
         <!-- src/Acme/TaskBundle/Resources/views/Form/form_row.html.php -->
-
         <div class="form_row">
             <?php echo $view['form']->label($form, $label) ?>
             <?php echo $view['form']->errors($form) ?>
             <?php echo $view['form']->widget($form, $parameters) ?>
         </div>
 
-Le fragment de formulaire ``form_row`` est utilisé pour rendre la plupart
+Le fragment de formulaire ``form_row`` est utilisé pour afficher la plupart
 des champs via la fonction ``form_row``. Pour dire au composant formulaire
 d'utiliser votre nouveau fragment ``form_row`` défini ci-dessus, ajoutez
-ce qui suit en haut du template qui rend le formulaire :
+ce qui suit en haut du template qui affiche le formulaire :
 
 .. configuration-block::
 
     .. code-block:: html+jinja
 
         {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
-
         {% form_theme form 'AcmeTaskBundle:Form:fields.html.twig' %}
 
         {% form_theme form 'AcmeTaskBundle:Form:fields.html.twig' 'AcmeTaskBundle:Form:fields2.html.twig' %}
 
-        <form ...>
+        {{ form(form) }}
 
     .. code-block:: html+php
 
         <!-- src/Acme/TaskBundle/Resources/views/Default/new.html.php -->
-
         <?php $view['form']->setTheme($form, array('AcmeTaskBundle:Form')) ?>
 
         <?php $view['form']->setTheme($form, array('AcmeTaskBundle:Form', 'AcmeTaskBundle:Form')) ?>
 
-        <form ...>
+        <?php echo $view['form']->form($form) ?>
 
 La balise ``form_theme`` (dans Twig) « importe » les fragments définis dans le
-template donné et les utilise lorsqu'il rend le formulaire. En d'autres termes,
+template donné et les utilise lorsqu'il affiche le formulaire. En d'autres termes,
 quand la fonction ``form_row`` est appelée plus tard dans ce template, elle va
 utiliser le bloc ``form_row`` de votre thème personnalisé (à la place du bloc
-par défaut ``form_row`` qui est délivré avec Symfony).
+par défaut ``form_row`` qui est fourni avec Symfony).
 
 Votre thème personnalisé n'a pas besoin de surcharger tous les blocs. Lorsqu'il
 affiche un bloc qui n'est pas surchargé par votre thème personnalisé, le moteur de
@@ -1409,69 +1393,64 @@ Pour personnaliser n'importe quelle portion d'un formulaire, vous devez juste
 réécrire le fragment approprié. Connaître exactement quel bloc ou fichier
 réécrire est le sujet de la prochaine section.
 
-.. versionadded:: 2.1
-   Une syntaxe Twig alternative pour ``form_theme`` a été ajoutée dans la version 2.1
-   Elle accepte toute expression Twig valide (la différence la plus importante est
-   l'utilisation d'un tableau pour les thèmes multiples)
+.. code-block:: html+jinja
 
-   .. code-block:: html+jinja
+    {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
 
-       {# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+    {% form_theme form with 'AcmeTaskBundle:Form:fields.html.twig' %}
 
-       {% form_theme form with 'AcmeTaskBundle:Form:fields.html.twig' %}
-
-       {% form_theme form with ['AcmeTaskBundle:Form:fields.html.twig', 'AcmeTaskBundle:Form:fields2.html.twig'] %}
+    {% form_theme form with ['AcmeTaskBundle:Form:fields.html.twig', 'AcmeTaskBundle:Form:fields2.html.twig'] %}
 
 Pour plus de précisions, lisez :doc:`/cookbook/form/form_customization`.
 
 .. index::
-   single: Formulaires; Nommage de fragment de template
+   single: Forms; Template fragment naming
 
 .. _form-template-blocks:
 
 Nommage de Fragment de Formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dans Symfony, chaque partie d'un formulaire qui est rendu - éléments de formulaire
+Dans Symfony, chaque partie d'un formulaire qui est affiché - éléments de formulaire
 HTML, erreurs, labels, etc - est définie dans un thème de base, qui est une
 collection de blocs dans Twig et une collection de fichiers de template dans PHP.
 
 Dans Twig, chaque bloc nécessaire est défini dans un unique fichier de template
-(`form_div_layout.html.twig`_) qui réside dans le `Twig Bridge`_. Dans ce fichier,
-vous pouvez voir chaque bloc requis pour rendre un formulaire et chaque type
+(`form_div_layout.html.twig`_) qui se trouve dans le `Twig Bridge`_. Dans ce fichier,
+vous pouvez voir chaque bloc requis pour afficher un formulaire et chaque type
 de champ par défaut.
 
 En PHP, les fragments sont des fichiers de template individuels. Par défaut, ils
 sont situés dans le répertoire `Resources/views/Form` du bundle du framework
 (`voir sur GitHub`_).
 
-Chaque nom de fragment suit le même pattern de base et est divisé en deux parties,
-séparées par un unique underscore (``_``). Quelques exemples sont :
+Chaque nom de fragment suit le même schéma de base et est divisé en deux parties,
+séparées par un unique underscore (``_``). Voici quelques exemples :
 
-* ``form_row`` - utilisé par ``form_row`` pour rendre la plupart des champs ;
-* ``textarea_widget`` - utilisé par ``form_widget`` pour rendre un champ de
+* ``form_row`` - utilisé par ``form_row`` pour afficher la plupart des champs ;
+* ``textarea_widget`` - utilisé par ``form_widget`` pour afficher un champ de
   type ``textarea`` ;
-* ``form_errors`` - utilisé par ``form_errors`` pour rendre les erreurs d'un champ.
+* ``form_errors`` - utilisé par ``form_errors`` pour afficher les erreurs d'un champ.
 
-Chaque fragment suit le même pattern de base : ``type_part``. La partie ``type``
-correspond au *type* du champ qui doit être rendu (par exemple : ``textarea``,
+Chaque fragment suit le même schéma de base : ``type_part``. La partie ``type``
+correspond au *type* du champ qui doit être affiché (par exemple : ``textarea``,
 ``checkbox``, ``date``, etc) alors que la partie ``part`` correspond à *ce qui*
-va être rendu (par exemple : ``label``, ``widget``, ``errors``, etc). Par défaut,
-il y a 4 *parts* possibles d'un formulaire qui peuvent être rendues :
+va être affiché (par exemple : ``label``, ``widget``, ``errors``, etc). Par défaut,
+il y a 4 *parties* possibles d'un formulaire qui peuvent être affichées :
 
-+-------------+-----------------------------------+------------------------------------------------------------+
-| ``label``   | (par exemple : ``form_label``)   | rend le label du champ                                      |
-+-------------+-----------------------------------+------------------------------------------------------------+
-| ``widget``  | (par exemple : ``form_widget``)  | rend la représentation HTML du champ                        |
-+-------------+-----------------------------------+------------------------------------------------------------+
-| ``errors``  | (par exemple : ``form_errors``)  | rend les erreurs du champ                                   |
-+-------------+-----------------------------------+------------------------------------------------------------+
-| ``row``     | (par exemple : ``form_row``)     | rend la ligne entière du champ (label, widget, et erreurs)  |
-+-------------+-----------------------------------+------------------------------------------------------------+
++-------------+---------------------------------+---------------------------------------------------------------+
+| ``label``   | (par exemple : ``form_label``)  | affiche le label du champ                                     |
++-------------+---------------------------------+---------------------------------------------------------------+
+| ``widget``  | (par exemple : ``form_widget``) | affiche la représentation HTML du champ                       |
++-------------+---------------------------------+---------------------------------------------------------------+
+| ``errors``  | (par exemple : ``form_errors``) | affiche les erreurs du champ                                  |
++-------------+---------------------------------+---------------------------------------------------------------+
+| ``row``     | (par exemple : ``form_row``)    | affiche la ligne entière du champ (label, widget, et erreurs) |
++-------------+---------------------------------+---------------------------------------------------------------+
 
 .. note::
 
-    Il y a en fait 3 autres *parts* - ``rows``, ``rest``, et ``enctype`` - mais
+    Il y a en fait 2 autres *parties*, ``rows``et ``rest``, mais
     vous ne devriez que rarement, voire jamais, avoir besoin de les réécrire.
 
 En connaissant le type du champ (par exemple : ``textarea``) et quelle partie de
@@ -1479,16 +1458,17 @@ ce dernier vous souhaitez personnaliser (par exemple : ``widget``), vous pouvez
 construire le nom du fragment qui a besoin d'être réécrit (par exemple : ``textarea_widget``).
 
 .. index::
-   single: Formulaires; Héritage de fragment de template
+   single: Forms; Template fragment inheritance
 
 Héritage de Fragment de Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans certains cas, le fragment que vous voulez personnaliser sera absent.
 Par exemple, il n'y a pas de fragment ``textarea_errors`` dans les thèmes
-fournis par défaut par Symfony.
+fournis par défaut par Symfony. Alors comment les erreurs des textareas
+sont-elles affichées ?
 
-La réponse est : via le fragment ``form_errors``. Quand Symfony rend les erreurs
+La réponse est : via le fragment ``form_errors``. Quand Symfony affiche les erreurs
 d'un champ de type textarea, il recherche en premier un fragment ``textarea_errors``
 avant de se replier sur le fragment de secours ``form_errors``. Chaque type de
 champ a un type *parent* (le type parent de ``textarea`` est ``field``), et
@@ -1506,7 +1486,7 @@ le fragment ``form_errors`` directement.
     chaque type de champ.
 
 .. index::
-   single: Formulaires; Habillage global
+   single: Forms; Global Theming
 
 Habillage global de Formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1528,7 +1508,6 @@ d'application :
     .. code-block:: yaml
 
         # app/config/config.yml
-
         twig:
             form:
                 resources:
@@ -1538,7 +1517,6 @@ d'application :
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-
         <twig:config ...>
                 <twig:form>
                     <resource>AcmeTaskBundle:Form:fields.html.twig</resource>
@@ -1549,18 +1527,19 @@ d'application :
     .. code-block:: php
 
         // app/config/config.php
-
         $container->loadFromExtension('twig', array(
-            'form' => array('resources' => array(
-                'AcmeTaskBundle:Form:fields.html.twig',
-             ))
+            'form' => array(
+                'resources' => array(
+                    'AcmeTaskBundle:Form:fields.html.twig',
+                ),
+            ),
             // ...
         ));
 
 Tous les blocs se trouvant dans le template ``fields.html.twig`` sont
-maintenant utilisés globalement pour définir le rendu de formulaire en sortie.
+maintenant utilisés pour l'affichage de tous vos formulaires.
 
-.. sidebar::  Personnaliser le Rendu de Formulaire en Sortie dans un Fichier Unique avec Twig
+.. sidebar::  Personnaliser l'affichage de formulaire dans un fichier unique avec Twig
 
     Dans Twig, vous pouvez aussi personnaliser un bloc de formulaire directement
     à l'intérieur du template nécessitant une personnalisation :
@@ -1574,7 +1553,7 @@ maintenant utilisés globalement pour définir le rendu de formulaire en sortie.
 
         {# effectue la personnalisation du fragment de formulaire #}
         {% block form_row %}
-            {# personnalisez le rendu en sortie de la ligne du champ #}
+            {# personnalisez l'affichage de la ligne du champ #}
         {% endblock form_row %}
 
         {% block content %}
@@ -1606,7 +1585,6 @@ modifiez votre fichier de configuration d'application :
     .. code-block:: yaml
 
         # app/config/config.yml
-
         framework:
             templating:
                 form:
@@ -1618,7 +1596,6 @@ modifiez votre fichier de configuration d'application :
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-
         <framework:config ...>
             <framework:templating>
                 <framework:form>
@@ -1631,20 +1608,22 @@ modifiez votre fichier de configuration d'application :
     .. code-block:: php
 
         // app/config/config.php
-
         $container->loadFromExtension('framework', array(
-            'templating' => array('form' =>
-                array('resources' => array(
-                    'AcmeTaskBundle:Form',
-             )))
+            'templating' => array(
+                'form' => array(
+                    'resources' => array(
+                        'AcmeTaskBundle:Form',
+                    ),
+                ),
+            )
             // ...
         ));
 
 Tous les fragments à l'intérieur du répertoire ``Acme/TaskBundle/Resources/views/Form``
-sont maintenant utilisés globalement pour définir le rendu en sortie des formulaires.
+sont maintenant utilisés pour l'affichage de tous vos formulaires.
 
 .. index::
-   single: Formulaires; Protection CSRF
+   single: Forms; CSRF protection
 
 .. _forms-csrf:
 
@@ -1664,24 +1643,22 @@ a profité de la protection CSRF !
 
 La protection CSRF fonctionne en ajoutant un champ caché dans votre formulaire -
 appelé ``_token`` par défaut - qui contient une valeur que seuls vous et votre
-utilisateur connaissez. Cela garantit que l'utilisateur - et non pas une autre
-entité - soumet les informations données. Symfony valide automatiquement la
+utilisateur connaissez. Cela garantit que l'utilisateur - et lui seulement -
+soumet les informations données. Symfony valide automatiquement la
 présence et l'exactitude de ce jeton.
 
-Le champ ``_token`` est un champ caché et sera rendu automatiquement si vous
-incluez la fonction ``form_rest()`` dans votre template, qui garantit que
-tous les champs non rendus sont délivrés en sortie.
+Le champ ``_token`` est un champ caché et sera affiché automatiquement si vous
+incluez la fonction ``form_end()`` dans votre template, qui garantit que
+tous les champs non affichés sont délivrés en sortie.
 
-Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple :
-
-.. code-block:: php
+Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple::
 
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class TaskType extends AbstractType
     {
         // ...
-    
+
         public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
             $resolver->setDefaults(array(
@@ -1692,7 +1669,7 @@ Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple 
                 'intention'       => 'task_item',
             ));
         }
-        
+
         // ...
     }
 
@@ -1717,12 +1694,10 @@ formulaire affichent et stockent leurs données dans les propriétés d'un objet
 exactement ce que vous avez vu jusqu'ici dans ce chapitre avec la classe `Task`.
 
 Mais parfois, vous voudrez juste utiliser un formulaire sans une classe, et obtenir
-un tableau des données soumises. C'est en fait très facile :
+un tableau des données soumises. C'est en fait très facile::
 
-.. code-block:: php
-
-    // Assurez vous d'avoir importé le namespace Request namespace en haut de la classe
-    use Symfony\Component\HttpFoundation\Request
+    // Assurez vous d'importer le namespace Request namespace en haut de la classe
+    use Symfony\Component\HttpFoundation\Request;
     // ...
 
     public function contactAction(Request $request)
@@ -1733,20 +1708,20 @@ un tableau des données soumises. C'est en fait très facile :
             ->add('email', 'email')
             ->add('message', 'textarea')
             ->getForm();
-        
-            if ($request->isMethod('POST')) {
-                $form->bind($request);
 
-                // les données sont un tableau avec les clés "name", "email", et "message"
-                $data = $form->getData();
-            }
-        
-        // ... rend le formulaire
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            / les données sont un tableau avec les clés "name", "email", et "message"
+            $data = $form->getData();
+        }
+
+        // ... affiche le formulaire
     }
 
 Par défaut, en fait, un formulaire part du principe que vous voulez travailler avec
-un tableau de données plutôt qu'avec un objet.Il y a exactement deux façons de changer
-ce comportement et d'associer le formulaire avec un objet à la place:
+un tableau de données plutôt qu'avec un objet. Il y a exactement deux façons de changer
+ce comportement et d'associer le formulaire avec un objet à la place :
 
 #. Passez un objet lors de la création du formulaire (comme premier argument de ``createFormBuilder``
    ou deuxième argument de ``createForm``);
@@ -1775,65 +1750,45 @@ Ajouter la Validation
 
 La seule pièce manquante est la validation. D'habitude, quand vous appelez ``$form->isValid()``,
 l'objet est validé en parcourant les contraintes que vous appliquez à sa classe.
-Mais sans classe, comment ajouter des contraintes aux données de votre formulaire?
+Si le formulaire est associé à un objet (c-a-d si vous utilisez l'option ``data_class``
+ou si vous passez un object à votre formulaire), c'est l'approche que vous voudrez utiliser dans
+la plupart des cas. lisez :doc:`/book/validation` pour plus de détails.
 
-La réponse est de définir les contraintes vous-même, et les passer au formulaire.
+.. _form-option-constraints:
+
+Mais si le formulaire n'est pas associé à un objet et que vous voulez plutôt utiliser un simple
+tableau pour soumettre vos données, comment ajouter des contraintes aux données de votre formulaire ?
+
+La réponse est de définir les contraintes vous-même, et de les attacher à chacun des champs.
 L'approche globale est un peu plus expliquée dans le :ref:`chapitre validation<book-validation-raw-values>`,
-mais voici un petit exemple::
-
-    // importez les namespaces en haut de votre classe
-    use Symfony\Component\Validator\Constraints\Email;
-    use Symfony\Component\Validator\Constraints\Length;
-    use Symfony\Component\Validator\Constraints\Collection;
-
-    $collectionConstraint = new Collection(array(
-        'name' => new Length(array("min" => 5)),
-        'email' => new Email(array('message' => 'Invalid email address')),
-    ));
-
-    // créez un formulaire, sans valeurs par défaut, et passez les contraintes
-    $form = $this->createFormBuilder(null, array(
-        'constraints' => $collectionConstraint,
-    ))->add('email', 'email')
-        // ...
-    ;
-
-Maintenant, quand vous appelez `$form->bind($request)`, les contraintes configurées sont
-appliquées aux données de votre formulaire. Si vous utilisez une classe de formulaire,
-surchargez la méthode ``setDefaultOptions`` pour les spécifier :
+mais voici un petit exemple:
 
 .. code-block:: php
 
-    namespace Acme\TaskBundle\Form\Type;
+    use Symfony\Component\Validator\Constraints\Length;
+    use Symfony\Component\Validator\Constraints\NotBlank;
 
-    use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilder;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-    use Symfony\Component\Validator\Constraints\Email;
-    use Symfony\Component\Validator\Constraints\MinLength;
-    use Symfony\Component\Validator\Constraints\Collection;
+    $builder
+       ->add('firstName', 'text', array(
+           'constraints' => new Length(array('min' => 3)),
+       ))
+       ->add('lastName', 'text', array(
+           'constraints' => array(
+               new NotBlank(),
+               new Length(array('min' => 3)),
+           ),
+       ))
+    ;
 
-    class ContactType extends AbstractType
-    {
-        // ...
+.. tip::
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
-        {
-            $collectionConstraint = new Collection(array(
-                'name' => new MinLength(5),
-                'email' => new Email(array('message' => 'Invalid email address')),
-            ));
-        
-            $resolver->setDefaults(array(
-                'constraints' => $collectionConstraint
-            ));
-        }
-    }
+    Si vous utilisez les groupes de validation, vous devrez soit référencer
+    un groupe ``Default`` lorsque vous créez le formulaire, ou soit définir le
+    bon groupe à la contrainte que vous ajoutez.
+    
+.. code-block:: php
 
-Maintenant, vous avez la flexibilité de créer des formulaires - avec validation -
-qui retourne un tableau de données plutôt qu'un objet. Dans la plupart des cas, il
-est préférable - et certainement plus robuste - d'associer le formulaire à un objet.
-Mais pour les formulaires simples, cette approche est suffisante. 
+    new NotBlank(array('groups' => array('create', 'update'))
 
 Réflexions finales
 ------------------
@@ -1846,7 +1801,7 @@ HTML afin que l'utilisateur puisse modifier ces données. Le second objectif d'u
 formulaire est de prendre les données soumises par l'utilisateur et de les
 réappliquer à l'objet.
 
-Il y a beaucoup plus à apprendre à propos de la puissance du monde des
+Il y a beaucoup plus à apprendre à propos du puissant monde des
 formulaires, par exemple comment gérer les :doc:`uploads de fichier
 avec Doctrine</cookbook/doctrine/file_uploads>` ou comment créer un
 formulaire où un nombre dynamique de sous-formulaires peut être ajouté
@@ -1854,7 +1809,7 @@ formulaire où un nombre dynamique de sous-formulaires peut être ajouté
 des champs via Javascript avant de soumettre le formulaire).
 Voyez le cookbook pour ces sujets. Aussi, assurez-vous de vous appuyer sur la
 :doc:`documentation de référence des types de champ</reference/forms/types>`,
-qui inclut des exemples de comment utiliser chaque type de champ et ses options.
+qui inclut des exemples de comment utiliser chaque type de champ et leurs options.
 
 En savoir plus grâce au Cookbook
 --------------------------------
@@ -1863,12 +1818,12 @@ En savoir plus grâce au Cookbook
 * :doc:`Référence du Champ Fichier </reference/forms/types/file>`
 * :doc:`Créer des Types de Champ Personnalisés </cookbook/form/create_custom_field_type>`
 * :doc:`/cookbook/form/form_customization`
-* :doc:`/cookbook/form/dynamic_form_generation`
+* :doc:`/cookbook/form/dynamic_form_modification`
 * :doc:`/cookbook/form/data_transformers`
 
 .. _`Composant Formulaire Symfony2`: https://github.com/symfony/Form
 .. _`DateTime`: http://php.net/manual/en/class.datetime.php
-.. _`Twig Bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Twig
-.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/2.1/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
-.. _`Cross-site request forgery`: http://en.wikipedia.org/wiki/Cross-site_request_forgery
+.. _`Twig Bridge`: https://github.com/symfony/symfony/tree/2.2/src/Symfony/Bridge/Twig
+.. _`form_div_layout.html.twig`: https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
+.. _`Cross-site request forgery`: http://fr.wikipedia.org/wiki/Cross-site_request_forgery
 .. _`voir sur GitHub`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form
