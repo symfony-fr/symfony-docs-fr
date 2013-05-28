@@ -1,7 +1,7 @@
 label
 ~~~~~
 
-**type**: ``string`` **default**: Le label est "guessed" pour le champ name.
+**type**: ``string`` **default**: Le label est « déduit » du nom du champ.
 
 Définissez le label que vous souhaitez pour le bouton. Ce label peut aussi
 être défini directement dans le modèle.
