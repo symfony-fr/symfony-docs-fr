@@ -6,7 +6,7 @@ widget
 Désigne la manière dont le champ doit être affiché. Cette option accepte les
 cas suivants :
 
-* ``choice``: Affiche trois listes déroulantes. L'ordre des liste est défini
+* ``choice``: Affiche trois listes déroulantes. L'ordre des listes est défini
   par l'option `format`_.
 
 * ``text``: Affiche trois champs textes (mois, jour, année).

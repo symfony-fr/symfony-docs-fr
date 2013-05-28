@@ -6,8 +6,7 @@ empty_data
 Cette option détermine quelle valeur le champ affichera si le choix ``empty_value``
 est sélectionné.
 
-The true default value of this option depends on the field options:
-La valeur ``True`` par défaut de cette option dépends des options du champ !
+La valeur par défaut de cette option dépends des options du champ :
 
 * Si ``compound`` est à ``true`` et  ``data_class`` est défini, alors ``new $data_class()``;
 * Si ``compound`` est à ``true`` et ``data_class`` n'est pas défini, alors ``array()``;
@@ -15,8 +14,8 @@ La valeur ``True`` par défaut de cette option dépends des options du champ !
 
 .. tip::
 
-L'option ``compound`` est définie à ``true`` qaund le champ en cours est une collection
-de champs (exp. un formulaire de champs).
+L'option ``compound`` est définie à ``true`` quand le champ représente en fait une collection
+de champs (ex un formulaire de champs).
 
 Par exemple, si vous voulez que le champ ``gender`` soit défini comme ``null`` si
 aucune valeur n'est sélectionnée, vous pouvez le faire comme ceci :
