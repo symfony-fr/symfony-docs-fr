@@ -13,7 +13,6 @@ Types de formulaire de référence
    types/choice
    types/collection
    types/country
-   types/csrf
    types/date
    types/datetime
    types/email
@@ -31,7 +30,9 @@ Types de formulaire de référence
    types/percent
    types/radio
    types/repeated
+   types/reset
    types/search
+   types/submit
    types/text
    types/textarea
    types/time
