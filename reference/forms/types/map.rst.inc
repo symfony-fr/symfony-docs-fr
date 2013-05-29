@@ -49,6 +49,13 @@ Champs cachés
 * :doc:`hidden</reference/forms/types/hidden>`
 * :doc:`csrf</reference/forms/types/csrf>`
 
+Bouttons
+~~~~~~~~
+
+* :doc:`button</reference/forms/types/button>`
+* :doc:`reset</reference/forms/types/reset>`
+* :doc:`submit</reference/forms/types/submit>`
+
 Champs de base
 ~~~~~~~~~~~~~~
 
