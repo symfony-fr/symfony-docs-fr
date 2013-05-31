@@ -1,5 +1,5 @@
 Liste déroulante, cases à cocher ou boutons radio
----------------------------------------------
+-------------------------------------------------
 
 Ce champ peut être affichée comme un ou plusieurs différents champs HTML,
 selon la valeur des options ``expanded`` et ``multiple`` :

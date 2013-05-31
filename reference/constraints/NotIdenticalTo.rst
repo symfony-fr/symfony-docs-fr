@@ -1,5 +1,5 @@
 NotIdenticalTo
-===========
+==============
 
 .. versionadded:: 2.3
     C'est une nouvelle contrainte depuis la version 2.3.
@@ -18,7 +18,7 @@ Pour vérifier qu'une valeur est identique, voir :doc:`/reference/constraints/Id
 | Options        | - `value`_                                                                  |
 |                | - `message`_                                                                |
 +----------------+-----------------------------------------------------------------------------+
-| Classe          | :class:`Symfony\\Component\\Validator\\Constraints\\NotIdenticalTo`         |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\NotIdenticalTo`         |
 +----------------+-----------------------------------------------------------------------------+
 | Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\NotIdenticalToValidator`|
 +----------------+-----------------------------------------------------------------------------+

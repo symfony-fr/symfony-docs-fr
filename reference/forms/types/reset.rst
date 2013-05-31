@@ -2,7 +2,7 @@
    single: Forms; Fields; reset
 
 Type de champ reset
-================
+===================
 
 .. versionadded:: 2.3
     Le type ``reset`` a été ajouté à la version Symfony 2.3
@@ -19,7 +19,7 @@ Un bouton qui remets à zéro tous les champs à leurs valeurs d'origine.
 +----------------------+---------------------------------------------------------------------+
 | Type parent          | :doc:`button</reference/forms/types/button>`                        |
 +----------------------+---------------------------------------------------------------------+
-| Classe                | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType` |
+| Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType` |
 +----------------------+---------------------------------------------------------------------+
 
 Inherited options

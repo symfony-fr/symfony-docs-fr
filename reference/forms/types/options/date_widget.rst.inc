@@ -12,6 +12,6 @@ cas suivants :
 * ``text``: Affiche trois champs textes (mois, jour, année).
 
 * ``single_text``: Affiche un unique champ texte(text en version 2.0 ). La saisie
-de l'utilisateur sera validé en se basant sur l'option `format`_.
+  de l'utilisateur sera validé en se basant sur l'option `format`_.
 
 .. include:: /reference/forms/types/options/_date_limitation.rst.inc

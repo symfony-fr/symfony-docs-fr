@@ -16,7 +16,7 @@ des erreurs de transcription.
 +----------------+-----------------------------------------------------------------------+
 | Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Iban`             |
 +----------------+-----------------------------------------------------------------------+
-| Validateur      | :class:`Symfony\\Component\\Validator\\Constraints\\IbanValidator`    |
+| Validateur      | :class:`Symfony\\Component\\Validator\\Constraints\\IbanValidator`   |
 +----------------+-----------------------------------------------------------------------+
 
 Utilisation de base

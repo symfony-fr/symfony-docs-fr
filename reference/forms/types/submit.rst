@@ -22,7 +22,7 @@ Un bouton submit.
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType` |
 +----------------------+----------------------------------------------------------------------+
 
-Le bouton Submit est une :methode:`Symfony\\Component\\Form\\ClickableInterface::isClicked` supplémentaire qui permet.
+Le bouton Submit est une méthode :method:`Symfony\\Component\\Form\\ClickableInterface::isClicked` supplémentaire qui permet.
 de tester si ce bouton a été utilisé pour soumettre le formulaire. Ceci est particulièrement
 utile quand  :ref:`un formulaire a plusieurs boutons de soumission <book-form-submitting-multiple-buttons>`::
 
