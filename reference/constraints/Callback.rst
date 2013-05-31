@@ -20,7 +20,7 @@ sorte de choses, incluant la création et l'assignation d'erreurs de validation.
 +----------------+------------------------------------------------------------------------+
 | S'applique à   | :ref:`classe<validation-class-target>`                                 |
 +----------------+------------------------------------------------------------------------+
-| Options        | - `methods`_                                                           |
+| Options        | - `methodes`_                                                           |
 +----------------+------------------------------------------------------------------------+
 | Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Callback`          |
 +----------------+------------------------------------------------------------------------+

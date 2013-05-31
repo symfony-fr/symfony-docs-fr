@@ -55,6 +55,7 @@ Options héritées
 ----------------
 
 Ces options héritent du type :doc:`date</reference/forms/types/date>` :
+
 .. include:: /reference/forms/types/options/date_widget.rst.inc
 
 .. include:: /reference/forms/types/options/date_input.rst.inc

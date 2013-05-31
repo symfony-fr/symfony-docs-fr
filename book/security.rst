@@ -1570,6 +1570,8 @@ Une fois qu'un utilisateur s'est déconnecté, il sera redirigé à l'URL défin
 déconnexion, veuillez lire
 :doc:`Security Configuration Reference</reference/configuration/security>`.
 
+.. _book-security-template:
+
 Contrôle d'accès dans les templates
 -----------------------------------
 

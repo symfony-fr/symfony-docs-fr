@@ -96,6 +96,7 @@ via l'option `choices`_ :
                 )));
             }
         }
+
 Fournir les choix par une fonction callback
 -------------------------------------------
 

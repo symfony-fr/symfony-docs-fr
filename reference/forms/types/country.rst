@@ -12,7 +12,7 @@ La « valeur » de chaque pays est son code en 2 lettres.
 
 .. note::
 
-   La locale de l'utilisateur est retournée par la méthode `Locale::getDefault()`_
+   La locale de l'utilisateur est retournée par la méthode :phpmethod:`Locale::getDefault()`_
 
 Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options
 ``choices`` ou ``choice_list`` puisque le type retourne automatiquement la liste

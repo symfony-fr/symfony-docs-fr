@@ -18,9 +18,9 @@ Pour vérifier qu'une valeur n'est pas identique, voir :doc:`/reference/constrai
 | Options        | - `value`_                                                               |
 |                | - `message`_                                                             |
 +----------------+--------------------------------------------------------------------------+
-| Classe          | :class:`Symfony\\Component\\Validator\\Constraints\\IdenticalTo`         |
+| Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\IdenticalTo`         |
 +----------------+--------------------------------------------------------------------------+
-| Validateur      | :class:`Symfony\\Component\\Validator\\Constraints\\IdenticalToValidator`|
+| Validateur     | :class:`Symfony\\Component\\Validator\\Constraints\\IdenticalToValidator`|
 +----------------+--------------------------------------------------------------------------+
 
 Utilisation de base
