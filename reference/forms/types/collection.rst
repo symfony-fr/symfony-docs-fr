@@ -342,6 +342,8 @@ Toutes les options ne sont pas listées ici, seulement celles qui s'appliquent l
 
 .. include:: /reference/forms/types/options/label.rst.inc
 
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
 error_bubbling
 ~~~~~~~~~~~~~~
 

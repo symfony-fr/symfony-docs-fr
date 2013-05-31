@@ -840,6 +840,8 @@ faisons les liens vers les articles correctement :
 .. index::
    single: Templating; Linking to assets
 
+.. _book-templating-assets:
+
 Liens vers des Fichiers
 ~~~~~~~~~~~~~~~~~~~~~~~
 

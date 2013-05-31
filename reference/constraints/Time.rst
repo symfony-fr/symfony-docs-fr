@@ -70,6 +70,7 @@ l'heure à laquelle l'évènement commence :
                 $metadata->addPropertyConstraint('startsAt', new Assert\Time());
             }
         }
+
 Options
 -------
 

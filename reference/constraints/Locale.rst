@@ -69,6 +69,7 @@ Utilisation de base
                 $metadata->addPropertyConstraint('locale', new Assert\Locale());
             }
         }
+
 Options
 -------
 

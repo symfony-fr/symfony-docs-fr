@@ -8,8 +8,7 @@ Quand vous utilisez les formulaires dans un modèle Twig, il y a plusieurs chose
 puissantes à votre disposition:
 
 * :ref:`Functions<reference-form-twig-functions>` pour rendre chaque partie du formulaire
-* :ref:`Variables<twig-reference-form-variables>` pour récupérer *certaine* information
-à propos des champs
+* :ref:`Variables<twig-reference-form-variables>` pour récupérer *certaine* information à propos des champs
 
 Vous utilisez souvent des fonctions pour rendre vos champs. Par contre,
 les variables sont moins utilisées, mais infiniment plus puissantes

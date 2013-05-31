@@ -210,7 +210,7 @@ assetic.formula_loader
 **But**: Ajoute un chargeur au manager de ressources courant
 
 Un chargeur est une classe qui implémente l'interface
-``Assetic\\Factory\Loader\\FormulaLoaderInterface``. Cette classe est
+``Assetic\\Factory\Loader\\FormulaLoaderInterface`` . Cette classe est
 responsable du chargement des ressources pour un type de particulier de
 ressources (pour exemple, un modèle Twig).
 Chargeurs ``Assetic ships``pour php et les modèles Twig.
@@ -250,7 +250,7 @@ Pour plus de détails sur la création de vos propres collections de données, l
 l'article du Cookbook : :doc:`/cookbook/profiler/data_collector`.
 
 doctrine.event_listener
---------------
+-----------------------
 
 **But**: Ajoute un écouteur d'événements Doctrine
 
@@ -259,7 +259,7 @@ lisez l'article du Cookbook:
 :doc:`/cookbook/doctrine/event_listeners_subscribers`.
 
 doctrine.event_subscriber
---------------
+-------------------------
 
 **But**: Ajoute un souscripteur d'événements Doctrine
 
