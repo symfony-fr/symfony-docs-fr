@@ -1,66 +1,65 @@
 .. index::
-     single: reference de configuration : la classe de noyau
+    single: Configuration reference; Kernel class
+    
 Configurer dans le noyau (par ex: AppKernel)
 ============================================
 
-Quelques configuartions seront possibles sur le noyau lui-même (appellés souvent ``app/AppKernel.php``) . ceci s'effectue par
-surcharge de méthodes spécifiques au sein de la classe mère :class:`Symfony\\Component\\HttpKernel\\Kernel`
+Certaines configurations peuvent être faites dans la classe noyau elle-même (souvent appellée ``app/AppKernel.php``).
+Cela passe par la surcharge de méthodes spécifiques au sein de la classe mère
+:class:`Symfony\\Component\\HttpKernel\\Kernel`.
 
 Configuration
 -------------
 
 * `Charset`_
-* `Kernel Name`_
-* `Root Directory`_
-* `Cache Directory`_
-* `Log Directory`_
-
-.. versionadded:: 2.1
-    La méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getCharset` est nouvelle dans Symfony 2.1
+* `Nom du noyau`_
+* `Répertoire racine`_
+* `Répertoire Cache`_
+* `Répertoire Log`_
 
 Charset
 ~~~~~~~
 
 **type**: ``string`` **default**: ``UTF-8``
-ceci retourne le charset utilisé pour cette application. pour le changer il faut surcharger  `Symfony\\Component\\HttpKernel\\Kernel::getCharset`
-pour retourner un autre Charset; 
 
-par exemple:
+Ceci retourne le charset utilisé pour cette application. Pour le changer, surchargez
+la méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getCharset`
+pour retourner un autre Charset, par exemple::
 
     // app/AppKernel.php
 
     // ...
     class AppKernel extends Kernel
     {
-        // ...
-
         public function getCharset()
         {
             return 'ISO-8859-1';
         }
     }
-  
 
+Nom du noyau
+~~~~~~~~~~~~
 
-Kernel Name
-~~~~~~~~~~~
+**type**: ``string`` **default**: ``app`` (c-a-d le nom du répertoire contenant la classe du noyau)
 
-**type**: ``string`` **default**: ``app`` (i.e. le nom de la repertoire contenant la classe du noyau)
-pour changer ce paramètre, surcharger la méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getName`
-alternativement, deplacer  le noyau vers une differente repertoire.
-par exemple ,si vous deplacez le noyau vers une repertoire ``foo`` (au lieu de ``app``) , le nom de la repertoire serait ``foo``
-généralement, le nonm du noyau n'est pas trés important. Il est utilisé pour générer les fichiers cache.
-si l'application se présente avec plusieurs noyaux,la méthode la plus facile pour donner un nom different a chacun est
-de dupliquer  la répertoire ``app`` et lui donner un different nom   (exemple : ``foo``).
+Pour changer ce paramètre, surchargez la méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getName`
+Vous pouvez également deplacer le noyau vers un répertoire différent. Par exemple,
+si vous avez déplacé le noyau dans un répertoire ``foo`` (au lieu de ``app``), le  nom du noyau
+sera ``foo``.
 
-repertoire racine
+Le nom du répertoire n'est pas directement important. Il est utilisé lors de
+la génération des fichiers de cache. Si vous avez une application avec plusieurs
+noyaux, la méthode la plus simple pour que chacun ait un nom unique est de
+dupliquer le répertoire ``app`` et de le renommer autrement (ex ``foo``).
+
+Répertoire racine
 ~~~~~~~~~~~~~~~~~
-**type**: ``string`` **default**: la repertoire ``AppKernel``
-ceci retourne la répertoire racine du noyau. si on utilise l'édition standard de Symphony,la répertoire racine refère a
-lq répertoire ``app``
-pour changer ce paramètre , surcharger la methode 
 
-:method:`Symfony\\Component\\HttpKernel\\Kernel::getRootDir` ::
+**type**: ``string`` **default**: le répertoire de ``AppKernel``
+
+Ceci retourne le répertoire racine du noyau. Si vous utilisez l'Edition
+Standard de Symfony, le répertoire racine est ``app``. Pour changer cette
+valeur, surchargez la méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getRootDir`::
 
     // app/AppKernel.php
 
@@ -76,16 +75,20 @@ pour changer ce paramètre , surcharger la methode
     }
   
 
-repertoire cache:
+Répertoire Cache
 ~~~~~~~~~~~~~~~~
+
 **type**: ``string`` **default**: ``$this->rootDir/cache/$this->environment``
-ceci retourne le chemin vers la repertoire cache directement.pour la changer , surcharger la méthode
-:method:`Symfony\\Component\\HttpKernel\\Kernel::getCacheDir`
-pour plus d information , lire ":ref:`override-cache-dir`"
+
+Cceci retourne le chemin du répertoire Cache. Pour changer cette valeur,
+surchargez la méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getCacheDir`.
+Pour plus d'informations, lisez ":ref:`override-cache-dir`".
 	
-repertoire log :
-~~~~~~~~~~~~~~~~	
+Répertoire Log
+~~~~~~~~~~~~~~
+
 **type**: ``string`` **default**: ``$this->rootDir/logs``
-ceci retourne le chemin vers la repertoire log.
-pour la changer , surcharger la methode `Symfony\\Component\\HttpKernel\\Kernel::getLogDir`
-pour plus d information , lire ":ref:`override-logs-dir`"
+
+Ceci retourne le chemin du répertoire Log. Pour changer sa valeur,
+surchargez la methode :method:`Symfony\\Component\\HttpKernel\\Kernel::getLogDir`.
+Pour plus d'informations, lisez ":ref:`override-logs-dir`"
