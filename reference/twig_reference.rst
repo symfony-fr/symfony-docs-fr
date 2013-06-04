@@ -19,17 +19,43 @@ pas listés ici.
 Fonctions
 ---------
 
-.. versionadded:: 2.1
-    Les fonctions ``csrf_token``, ``logout_path`` et ``logout_url`` ont été ajoutées dans Symfony2.1
+.. versionadded:: 2.2
+    Les fonctions ``render`` et ``controller`` sont nouvelles depuis Symfony 2.2. avant,
+    le tag ``{% render %}`` était utilisé et avait une signature différente.
 
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 | Syntaxe de la fonction                             | Usage                                                                                      |
 +====================================================+============================================================================================+
+| ``render(uri, options = {})``                      | Rends le fragment de template pour un controller ou une URL donné.                         |
+| ``render(controller('B:C:a', {params}))``          | Pour plus d'information, lire :ref:`templating-embedding-controller`.                      |
+| ``render(path('route', {params}))``                |                                                                                            |
+| ``render(url('route', {params}))``                 |                                                                                            |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
+| ``render_esi(controller('B:C:a', {params}))``      | Génère un tag ESI quand cela est possible sinon le fragment de template                    |
+| ``render_esi(url('route', {params}))``             | Pour plus d'information, lire :ref:`templating-embedding-controller`.                      |
+| ``render_esi(path('route', {params}))``            |                                                                                            |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
+| ``render_hinclude(controller(...))``               | Génère un tag Hinclude pour un controller ou une URL donné.                                |
+| ``render_hinclude(url('route', {params}))``        | Pour plus d'information, lire  :ref:`templating-embedding-controller`.                     |
+| ``render_hinclude(path('route', {params}))``       |                                                                                            |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
+| ``controller(attributes = {}, query = {})``        | Utilisé avec le tag ``render`` pour référencer le controller que vous voulez rendre.       |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
 | ``asset(path, packageName = null)``                | Récupère le chemin public de la ressource. Plus d'infos sur                                |
 |                                                    | ":ref:`book-templating-assets`".                                                           |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 | ``asset_version(packageName = null)``              | Récupère la version actuelle du package. Plus d'infos sur                                  |
 |                                                    | ":ref:`book-templating-assets`".                                                           |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
+| ``form(view, variables = {})``                     | Affiche un formulaire HTML complet, plus d'informations                                    |
+|                                                    | ici :ref:`the Twig Form reference<reference-forms-twig-form>`.                             |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
+| ``form_start(view, variables = {})``               | Affiche le premier tag d'un formulaire HTML, plus d'informations                           |
+|                                                    | ici :ref:`the Twig Form reference<reference-forms-twig-start>`.                            |
++----------------------------------------------------+--------------------------------------------------------------------------------------------+
+| ``form_end(view, variables = {})``                 | Affiche le dernier tag d'un formulaire HTML avec l'ensemble des champs qui n'ont pas       |
+|                                                    | encore été rendu, plus d'informations                                                      |
+|                                                    | ici :ref:`the Twig Form reference<reference-forms-twig-end>`.                              |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 | ``form_enctype(view)``                             | Affiche l'attribut ``enctype="multipart/form-data"`` si le formulaire contient             |
 |                                                    | au moins un champ d'upload.Plus d'infos sur                                                |
@@ -69,9 +95,6 @@ Fonctions
 Filtres
 -------
 
-.. versionadded:: 2.1
-    Le filtre ``humanize`` a été ajouté dans Symfony 2.1
-
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | Syntaxe du filtre                                                               | Usage                                                             |
 +=================================================================================+===================================================================+
@@ -79,10 +102,10 @@ Filtres
 |                                                                                 | underscores par des espaces et ajoute une majuscule à la chaine). |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | ``text|trans(arguments = {}, domain = 'messages', locale = null)``              | Traduit le texte dans le langage actuel. Plus d'infos sur         |
-|                                                                                 | :ref:`book-translation-twig`.                                     |
+|                                                                                 | :ref:`Translation Filters<book-translation-filters>`.             |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | ``text|transchoice(count, arguments = {}, domain = 'messages', locale = null)`` | Traduit le texte en tenant compte de la pluralisation. Plus       |
-|                                                                                 | d'infos sur  :ref:`book-translation-twig`.                        |
+|                                                                                 | d'infos sur :ref:`Translation Filters<book-translation-filters>`. |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
 | ``variable|yaml_encode(inline = 0)``                                            | Transforme une variable texte en une syntaxe YAML.                |
 +---------------------------------------------------------------------------------+-------------------------------------------------------------------+
@@ -115,10 +138,6 @@ Tags
 +---------------------------------------------------+-------------------------------------------------------------------+
 | Syntaxe du tag                                    | Usage                                                             |
 +===================================================+===================================================================+
-| ``{% render url('route', {parameters}) %}``       | Affiche le contenu de la Réponse du contrôleur donné vers lequel  |
-|                                                   | pointe l'URL. Pour plus d'informations, lisez                     |
-|                                                   | :ref:`templating-embedding-controller`.                           |
-+---------------------------------------------------+-------------------------------------------------------------------+
 | ``{% form_theme form 'file' %}``                  | Permet de chercher, dans le fichier donné, le bloc de formulaire  |
 |                                                   | à surchager : :doc:`/cookbook/form/form_customization`.           |
 +---------------------------------------------------+-------------------------------------------------------------------+
@@ -129,12 +148,12 @@ Tags
 | ...                                               | Pour plus d'informations, lisez :ref:`book-translation-twig`      |
 | ``{% endtranschoice %}``                          |                                                                   |
 +---------------------------------------------------+-------------------------------------------------------------------+
+| ``{% trans_default_domain language %}``           | Défini le domaine par défaut pour le catalogue de messages dans   |
+|                                                   | modèle en cours                                                   |
++---------------------------------------------------+-------------------------------------------------------------------+
 
 Tests
 -----
-
-.. versionadded:: 2.1
-    Le test ``selectedchoice`` a été ajouté dans Symfony2.1
 
 +---------------------------------------------------+------------------------------------------------------------------------------+
 | Syntaxe du test                                   | Usage                                                                        |

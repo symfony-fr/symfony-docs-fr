@@ -9,6 +9,7 @@ Types de formulaire de référence
    :hidden:
 
    types/birthday
+   types/button
    types/checkbox
    types/choice
    types/collection
