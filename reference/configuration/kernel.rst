@@ -80,7 +80,7 @@ Répertoire Cache
 
 **type**: ``string`` **default**: ``$this->rootDir/cache/$this->environment``
 
-Cceci retourne le chemin du répertoire Cache. Pour changer cette valeur,
+Ceci retourne le chemin du répertoire Cache. Pour changer cette valeur,
 surchargez la méthode :method:`Symfony\\Component\\HttpKernel\\Kernel::getCacheDir`.
 Pour plus d'informations, lisez ":ref:`override-cache-dir`".
 	
