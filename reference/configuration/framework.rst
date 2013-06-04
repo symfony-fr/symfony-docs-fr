@@ -16,20 +16,35 @@ Configuration
 -------------
 
 * `secret`_
+* `http_method_override`_
 * `ide`_
 * `test`_
-* `trust_proxy_headers`_
+* `trusted_proxies`_
 * `form`_
     * enabled
 * `csrf_protection`_
     * enabled
     * field_name
 * `session`_
-    * `lifetime`_
+    * `name`_
+    * `cookie_lifetime`_
+    * `cookie_path`_
+    * `cookie_domain`_
+    * `cookie_secure`_
+    * `cookie_httponly`_
+    * `gc_divisor`_
+    * `gc_probability`_
+    * `gc_maxlifetime`_
+    * `save_path`_
+* `serializer`_
+    * :ref:`enabled<serializer.enabled>`
 * `templating`_
     * `assets_base_urls`_
     * `assets_version`_
     * `assets_version_format`_
+* `profiler`_
+    * `collect`_
+    * :ref:`enabled<profiler.enabled>`
 
 secret
 ~~~~~~
@@ -41,6 +56,24 @@ En pratique, elle est utilisée pour générer les jetons CSRF, mais elle pourra
 être utilisée dans un autre contexte où avoir une chaîne de caractères unique
 est utile. Ceci devient le paramètre du conteneur de service nommé
 ``kernel.secret``.
+
+.. _configuration-framework-http_method_override:
+
+http_method_override
+~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.3
+
+    L'option ``http_method_override`` est nouvelle depuis Symfony 2.3.
+
+**type**: ``Boolean`` **default**: ``true``
+
+Cela détermine quand le paramètre de la requète ``_method`` est utilisé comme la
+méthode HTTP attendu pour les requêtes POST. Si activer, la méthode
+:method:`Request::enableHttpMethodParameterOverride <Symfony\\Component\\HttpFoundation\\Request::enableHttpMethodParameterOverride>`
+est appelée automatiquement. Cela devient un service avec le nom
+``kernel.http_method_override``. Pour plus d'informations, lire
+:doc:`/cookbook/routing/method_parameters`.
 
 ide
 ~~~
@@ -87,18 +120,40 @@ alors les services liés au test de votre application (par exemple :
 environnement ``test`` (généralement via ``app/config/config_test.yml``).
 Pour plus d'informations, voir :doc:`/book/testing`.
 
-trust_proxy_headers
-~~~~~~~~~~~~~~~~~~~
+trusted_proxies
+~~~~~~~~~~~~~~~
 
-**type**: ``Boolean``
+**type**: ``array``
 
-Configure si les entêtes HTTP (comme ``HTTP_X_FORWARDED_FOR``, ``X_FORWARDED_PROTO``, et
-``X_FORWARDED_HOST``) sont conformes pour une connexion SSL. Par défaut, elle est définie
-à ``false`` et seules les connexions SSL_HTTPS sont considérées comme sécurisées.
+Définit les adresses IP qui seront considéré comme des proxies. Pour plus de détails,
+lire :doc:`/components/http_foundation/trusting_proxies`.
 
-Vous devriez activer cette configuration si votre application est derrière un reverse proxy.
+.. versionadded:: 2.3
+
+    le support de la notation CIDR a été ajouté, vous pouvez donc mettre en liste blanche,
+    un ensemble de sous réseaux (ex. ``10.0.0.0/8``, ``fc00::/7``).
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        framework:
+            trusted_proxies:  [192.0.0.1, 10.0.0.0/8]
+
+    .. code-block:: xml
+
+        <framework:config trusted-proxies="192.0.0.1, 10.0.0.0/8">
+            <!-- ... -->
+        </framework>
+
+    .. code-block:: php
+
+        $container->loadFromExtension('framework', array(
+            'trusted_proxies' => array('192.0.0.1', '10.0.0.0/8'),
+        ));
 
 .. _reference-framework-form:
+
 
 form
 ~~~~
@@ -109,14 +164,131 @@ csrf_protection
 session
 ~~~~~~~
 
-lifetime
-........
+name
+....
 
-**type**: ``integer`` **par défaut**: ``0``
+**type**: ``string`` **default**: ``null``
 
-Ceci détermine la durée de vie de la session - en secondes. Par défaut, cette
-valeur sera définie à ``0``, ce qui signifie que le cookie est valide pour la
-durée de la session du navigateur.
+Spécifie le nom du cookie de session. Par défaut, c'est celui qui dans définie
+dans le fichier ``php.ini`` avec la directive ``session.name`` .
+
+cookie_lifetime
+...............
+
+**type**: ``integer`` **default**: ``0``
+
+Détermine la durée de vie de la session en secondes. Par défaut, ``0``
+est utilisé, d'ou le cookie est valide le temps de la session du navigateur.
+
+cookie_path
+...........
+
+**type**: ``string`` **default**: ``/``
+
+Détermine le chemin où est définie le cookie de session. Par défaut, ``/ ``
+est utilisé.
+
+cookie_domain
+.............
+
+**type**: ``string`` **default**: ``''``
+
+Définie le domaine pour le cookie de session. Par défaut, il est vide,
+ce sera donc le nom d'hote qui a généré le cookie selon les spécifications.
+
+cookie_secure
+.............
+
+**type**: ``Boolean`` **default**: ``false``
+
+Détermine que les cookies soient envoyés seulement par des connexions sécurisée.
+
+cookie_httponly
+...............
+
+**type**: ``Boolean`` **default**: ``false``
+
+Détermine si les cookies doivent être seulement accessible par le protocole HTTP.
+Ce qui a pour effet, de ne pas permettre l'accès par les langages de script, tels
+que Javascript. Ce paramétrage a pour effet de réduire le vol d'identité à travers
+les attaques de type XSS.
+
+gc_probability
+..............
+
+**type**: ``integer`` **default**: ``1``
+
+Détermine les probabilités que le processus ``garbage collector (GC)`` est
+démarré à chaque initialisation de session. la probabilité est calculé en
+utilisant ``gc_probability`` / ``gc_divisor``, ex. 1/100 signifie qu'il y a
+1% de chance que le processus GC soit démarré à chaque requête.
+
+gc_divisor
+..........
+
+**type**: ``integer`` **default**: ``100``
+
+Lire `gc_probability`_.
+
+gc_maxlifetime
+..............
+
+**type**: ``integer`` **default**: ``14400``
+
+Détermine le nombre de secondes après lesquelles, la donnée est considérée comme
+"garbage" et peut être nettoyé. "Garbage collection" peut apparaître durant le démarrage
+de la session et dépend des paramètres `gc_divisor`_ et `gc_probability`_.
+
+save_path
+.........
+
+**type**: ``string`` **default**: ``%kernel.cache.dir%/sessions``
+
+Détermine l'argument à passer au gestionnaire de sauvegarde. Si vous choisissez
+le gestionnaire de fichier par défaut, ce sera le chemin où seront créés les fichiers.
+Vous pouvez définir cette valeur dans la directive ``save_path`` de votre ``php.ini``
+en mettant la valeur de l'option à ``null``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/config.yml
+        framework:
+            session:
+                save_path: null
+
+    .. code-block:: xml
+
+        <!-- app/config/config.xml -->
+        <framework:config>
+            <framework:session save-path="null" />
+        </framework:config>
+
+    .. code-block:: php
+
+        // app/config/config.php
+        $container->loadFromExtension('framework', array(
+            'session' => array(
+                'save_path' => null,
+            ),
+        ));
+
+.. _configuration-framework-serializer:
+
+serializer
+~~~~~~~~~~
+
+.. _serializer.enabled:
+
+enabled
+.......
+
+**type**: ``boolean`` **default**: ``false``
+
+Détermine si le service ``serializer`` est chargé dans le conteneur de service.
+
+Pour plus de détails, lire :doc:`/cookbook/serializer`.
 
 templating
 ~~~~~~~~~~
@@ -139,16 +311,6 @@ pour les requêtes ``http`` et ``https`. Si une URL commence par ``https://`` ou
 est `relative à un protocole`_ (par exemple : commence avec `//`) elle sera
 ajoutée aux deux collections. Les URLs commençant par ``http://`` seront
 ajoutées uniquement à la collection ``http``.
-
-.. versionadded:: 2.1
-    A la différence de la plupart des blocs de configuration, des valeurs
-    successives pour ``assets_base_urls`` vont s'outrepasser entre elles au
-    lieu d'être fusionnées. Ce comportement a été choisi car les développeurs
-    vont généralement définir une URL de base pour chaque environnement.
-    Sachant que la plupart des projets ont tendance à hériter les configurations
-    (par exemple : ``config_test.yml`` importe ``config_dev.yml``) et/ou à
-    partager une configuration de base (i.e. ``config.yml``), fusionner reviendrait
-    à avoir un ensemble d'URLs de base pour de multiples environnements.
 
 .. _ref-framework-assets-version:
 
@@ -218,7 +380,7 @@ assets_version_format
 
 **type**: ``string`` **par défaut**: ``%%s?%%s``
 
-Cela spécifie un « pattern » de `sprintf()`_ qui va être utilisé avec l'option
+Cela spécifie un « pattern » de :phpfunction:`sprintf` qui va être utilisé avec l'option
 `assets_version`_ pour construire un chemin vers un fichier. Par défaut, le
 « pattern » ajoute la version du fichier en tant que chaîne de caractères dans
 la requête. Par exemple, si ``assets_version_format`` est défini avec la valeur
@@ -255,6 +417,41 @@ du fichier serait ``/images/logo.png?version=5``.
     utile si vous souhaitez laisser les anciennes versions des fichiers
     accessibles depuis leur URL originale.
 
+profiler
+~~~~~~~~
+
+.. versionadded:: 2.2
+
+    L'option ``enabled`` a été ajouté dans Symfony 2.2. Avant, pour désactiver le  profiler
+    il fallait omettre complètement la clé de configuration ``framework.profiler``.
+
+.. _profiler.enabled:
+
+enabled
+.......
+
+**default**: ``true`` dans les environements ``dev`` et ``test``
+
+Le profiler peut être désactivé en passant la clé à ``false``.
+
+.. versionadded:: 2.3
+
+    L'option ``collect`` est nouvelle dans Symfony 2.3. Avant quand ``profiler.enabled``
+    était à ``false``, le profiler *était* activé, mais les collecteurs étaient
+    désactivés. Maintenant, le profiler et les collecteurs peuvent être contrôlés séparément.
+
+collect
+.......
+
+**default**: ``true``
+
+Cette option permet de configurer la façon dont le profiler se comporte quand il est activé.
+Si il est à ``true``, le profiler collecte toutes les données pour toutes les requêtes. Si vous
+souhaitez collecter les informations seulement à la demande, vous pouvez définir le flag ``collect``
+à ``false`` et activer le collecteur de données comme ceci::
+
+    $profiler->enable();
+
 Toutes les Options de Configuration par Défaut
 ----------------------------------------------
 
@@ -263,29 +460,35 @@ Toutes les Options de Configuration par Défaut
     .. code-block:: yaml
 
         framework:
-
-            # configuration générale
-            trust_proxy_headers:  false
-            secret:               ~ # Requis
+            secret:               ~
+            http_method_override: true
+            trusted_proxies:      []
             ide:                  ~
             test:                 ~
             default_locale:       en
 
-            # configuration des formulaires
+            # configuration du composant form
             form:
-                enabled:              true
+                enabled:              false
             csrf_protection:
-                enabled:              true
+                enabled:              false
                 field_name:           _token
 
-            # configuration esi 
+            # configuration esi
             esi:
-                enabled:              true
+                enabled:              false
 
-            # configuration du profileur
+            # configuration des fragments de modèle
+            fragments:
+                enabled:              false
+                path:                 /_fragment
+
+            # configuration du profiler
             profiler:
+                enabled:              false
+                collect:              true
                 only_exceptions:      false
-                only_master_requests:  false
+                only_master_requests: false
                 dsn:                  file:%kernel.cache_dir%/profiler
                 username:
                 password:
@@ -293,22 +496,26 @@ Toutes les Options de Configuration par Défaut
                 matcher:
                     ip:                   ~
 
-                    # utilise le format urldecoded
+                    # utiliser le format urldecoded
                     path:                 ~ # Exemple: ^/path to resource/
                     service:              ~
 
-            # configuration du routeur
+            # configuration du router
             router:
                 resource:             ~ # Required
                 type:                 ~
                 http_port:            80
                 https_port:           443
-                # si false, une URL vierge sera générée si une route a un paramètre obligatoire manquant
-                strict_requirements:  %kernel.debug%
 
-            # configuration de la session
+                # défini à true lève une exception quand le paramètre ne correspondant pas aux exigences
+                # défini à false désactive les exceptions lève quand le paramètre ne correspondant pas aux exigences (retourne null)
+                # défini à null désactive la vérification du paramètre par rapport aux exigences
+                # 'true est la configuration de préférence en développement, par contre 'false' ou 'null' est préférable en
+                # production
+                strict_requirements:  true
+
+            # session configuration
             session:
-                auto_start:           false
                 storage_id:           session.storage.native
                 handler_id:           session.handler.native_file
                 name:                 ~
@@ -322,22 +529,11 @@ Toutes les Options de Configuration par Défaut
                 gc_maxlifetime:       ~
                 save_path:            %kernel.cache_dir%/sessions
 
-                # DÉPRÉCIÉ ! utilisez : cookie_lifetime
-                lifetime:             ~
+            # configuration du composant serializer
+            serializer:
+               enabled: false
 
-                # DÉPRÉCIÉ ! utilisez : cookie_path
-                path:                 ~
-
-                # DÉPRÉCIÉ ! utilisez : cookie_domain
-                domain:               ~
-
-                # DÉPRÉCIÉ ! utilisez : cookie_secure
-                secure:               ~
-
-                # DÉPRÉCIÉ ! utilisez : cookie_httponly
-                httponly:             ~
-
-            # Configuration du moteur du templating
+            # configuration du composant templating
             templating:
                 assets_version:       ~
                 assets_version_format:  %%s?%%s
@@ -345,43 +541,43 @@ Toutes les Options de Configuration par Défaut
                 form:
                     resources:
 
-                        # Par défaut:
+                        # Défaut:
                         - FrameworkBundle:Form
                 assets_base_urls:
                     http:                 []
                     ssl:                  []
                 cache:                ~
-                engines:              # Requis
+                engines:              # Required
 
                     # Exemple:
                     - twig
                 loaders:              []
                 packages:
 
-                    # Une collection de noms de packages
-                    some_package_name:
+                    # Prototype
+                    name:
                         version:              ~
                         version_format:       %%s?%%s
                         base_urls:
                             http:                 []
                             ssl:                  []
 
-            # configuration du traducteur
+            # configuration du composant translator
             translator:
-                enabled:              true
+                enabled:              false
                 fallback:             en
 
-            # configuration de la validation
+            # configuration du composant validation
             validation:
-                enabled:              true
+                enabled:              false
                 cache:                ~
                 enable_annotations:   false
+                translation_domain:   validators
 
             # configuration des annotations
             annotations:
                 cache:                file
-                file_cache_dir:       "%kernel.cache_dir%/annotations"
-                debug:                true
+                file_cache_dir:       %kernel.cache_dir%/annotations
+                debug:                %kernel.debug%
 
 .. _`relative à un protocole`: http://tools.ietf.org/html/rfc3986#section-4.2
-.. _`sprintf()`: http://php.net/manual/en/function.sprintf.php
