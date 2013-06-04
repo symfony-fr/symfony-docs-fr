@@ -101,7 +101,7 @@ mode de transport. Les valeurs valides sont ``plain``, ``login``,
 spool
 ~~~~~
 
-Pour des détails sur l'envoi d'emails en mode « spool », voir
+Pour des détails sur l'envoi d'emails en mode « spool », lire
 :doc:`/cookbook/email/spool`.
 
 type
@@ -181,7 +181,7 @@ logging
 Si « true », le collecteur de données de Symfony sera activé pour Swiftmailer
 et les informations seront disponibles dans le profiler.
 
-Toutes les Options de Configuration par Défaut
+Toutes les options de configuration par défaut
 ----------------------------------------------
 
 .. configuration-block::
@@ -206,3 +206,29 @@ Toutes les Options de Configuration par Défaut
             delivery_address:     ~
             disable_delivery:     ~
             logging:              "%kernel.debug%"
+
+    .. code-block:: xml
+
+        <swiftmailer:config
+            transport="smtp"
+            username=""
+            password=""
+            host="localhost"
+            port="false"
+            encryption=""
+            auth_mode=""
+            sender_address=""
+            delivery_address=""
+            disable_delivery=""
+            logging="%kernel.debug%"
+        >
+            <swiftmailer:spool
+                path="%kernel.cache_dir%/swiftmailer/spool"
+                type="file"
+            />
+
+            <swiftmailer:antiflood
+                sleep="0"
+                threshold="99"
+            />
+        </swiftmailer:config>
