@@ -20,6 +20,7 @@ Contraintes de validation de référence
    constraints/Ip
 
    constraints/Range
+
    constraints/EqualTo
    constraints/NotEqualTo
    constraints/IdenticalTo
@@ -44,8 +45,8 @@ Contraintes de validation de référence
    constraints/File
    constraints/Image
 
-   constraints/Luhn
    constraints/CardScheme
+   constraints/Luhn
    constraints/Iban
    constraints/Isbn
    constraints/Issn

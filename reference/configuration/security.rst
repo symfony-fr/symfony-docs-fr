@@ -21,7 +21,7 @@ Chaque partie sera expliquée dans la section suivante.
         security:
             access_denied_url:    ~ # Exemple: /foo/error403
 
-            # strategy peut valoir : none, migrate, invalidate
+            # la stratégie peut être soit: none, migrate, invalidate
             session_fixation_strategy:  migrate
             hide_user_not_found:  true
             always_authenticate_before_granting:  false
@@ -32,7 +32,7 @@ Chaque partie sera expliquée dans la section suivante.
                 allow_if_equal_granted_denied:  true
             acl:
 
-                # N'importe quel nom configuré dans la section doctrine.dbal
+                # un nom défini dans la section doctrine.dbal
                 connection:           ~
                 cache:
                     id:                   ~
@@ -56,42 +56,42 @@ Chaque partie sera expliquée dans la section suivante.
                     iterations:          5000
 
                 # encodeur PBKDF2
-                # lisez la note en fin d'article sur la sécurité et les performances
+                # lire les notes à propos de PBKDF2 plus bas pour des détails sur la sécurité et la vitesse
                 Acme\Your\Class\Name:
                     algorithm:            pbkdf2
                     hash_algorithm:       sha512
                     encode_as_base64:     true
                     iterations:           1000
 
-                # Exemple d'options/valeurs pour voir à quoi ressemble un encodeur personnalisé
-                Acme\Your\Class\Name:
-                    algorithm:            ~
-                    ignore_case:          false
-                    encode_as_base64:     true
-                    iterations:           5000
-                    id:                   ~
+                # Exemple options/valeurs pour créer un encodeur personnalisé
+                Acme\DemoBundle\Entity\User3:
+                    id:                   my.encoder.id
 
             providers:            # Requis
                 # Exemples:
-                memory:
-                    name:                memory
-                    users:
-                        foo:
-                            password:            foo
-                            roles:               ROLE_USER
-                        bar:
-                            password:            bar
-                            roles:               [ROLE_USER, ROLE_ADMIN]
-                entity:
+                my_in_memory_provider:
+                    memory:
+                        users:
+                            foo:
+                                password:           foo
+                                roles:              ROLE_USER
+                            bar:
+                                password:           bar
+                                roles:              [ROLE_USER, ROLE_ADMIN]
+
+                my_entity_provider:
                     entity:
-                        class:               SecurityBundle:User
-                        property:            username
+                        class:              SecurityBundle:User
+                        property:           username
 
                 # Exemple d'un provider personnalisé
-                some_custom_provider:
+                my_some_custom_provider:
                     id:                   ~
+
+                # Enchainement de plusieurs providers
+                my_chain_provider:
                     chain:
-                        providers:            []
+                        providers:          [ my_in_memory_provider, my_entity_provider ]
 
             firewalls:            # Requis
                 # Exemples:
@@ -102,7 +102,9 @@ Chaque partie sera expliquée dans la section suivante.
                     access_denied_handler: some.service.id
                     entry_point: some.service.id
                     provider: some_key_from_above
-                    context: name
+                    # Gère comment chaque firewall stockent les informations en session
+                    # Lire "Contexte du Firewall" plus bas pour plus de détails
+                    context: context_key
                     stateless: false
                     x509:
                         provider: some_key_from_above
@@ -111,24 +113,46 @@ Chaque partie sera expliquée dans la section suivante.
                     http_digest:
                         provider: some_key_from_above
                     form_login:
+                        # Soumet le formulaire de connection ici
                         check_path: /login_check
+
+                        # l'utilisateur est redirigé ici si il/elle a besoin de se connecter
                         login_path: /login
+
+                        # si true, l'utilisateur est envoyé au formulaire de connexion et non redirigé
                         use_forward: false
+
+                        # Les options de redirection en cas de succès de connexion (lire plus bas)
                         always_use_default_target_path: false
-                        default_target_path: /
-                        target_path_parameter: _target_path
-                        use_referer: false
-                        failure_path: /foo
+                        default_target_path:            /
+                        target_path_parameter:          _target_path
+                        use_referer:                    false
+
+                        # Les options de redirection en cas d'échec de connexion (lire plus bas)
+                        failure_path:    /foo
                         failure_forward: false
+                        failure_path_parameter: _failure_path
                         failure_handler: some.service.id
                         success_handler: some.service.id
+
+                        # le nom des champs username et password
                         username_parameter: _username
                         password_parameter: _password
+
+                        # les options du token csrf
                         csrf_parameter: _csrf_token
-                        intention: authenticate
-                        csrf_provider: my.csrf_provider.id
-                        post_only: true
-                        remember_me: false
+                        intention:      authenticate
+                        csrf_provider:  my.csrf_provider.id
+
+                        # par défautt, le formulaire de connextion *doit* être de type POST et non GET
+                        post_only:      true
+                        remember_me:    false
+
+                        # par défaut, une session doit exister avant de soumettre une requête d'authentification
+                        # si false, alors Request::hasPreviousSession n'est pas appelé durant l'authentification
+                        # nouveau dans Symfony 2.3
+                        require_previous_session: true
+
                     remember_me:
                         token_provider: name
                         key: someS3cretKey
@@ -151,7 +175,7 @@ Chaque partie sera expliquée dans la section suivante.
                         success_handler: some.service.id
                     anonymous: ~
 
-                # Options et valeurs par défaut pour un firewall
+                # Valeurs par défaut pour tout type de firewall
                 some_firewall_listener:
                     pattern:              ~
                     security:             true
@@ -187,8 +211,8 @@ Chaque partie sera expliquée dans la section suivante.
             access_control:
                 requires_channel:     ~
 
-                # utilise le format « urldecoded »
-                path:                 ~ # Exemple: ^/chemin vers la ressource/
+                # use the urldecoded format
+                path:                 ~ # Exemple: ^/path to resource/
                 host:                 ~
                 ip:                   ~
                 methods:              []
@@ -205,6 +229,8 @@ Configuration du formulaire de login
 Lorsque vous utilisez l'écouteur d'authentification ``form_login`` derrière
 un firewall, il y a plusieurs options communes pour configurer l'utilisation
 du « formulaire de login ».
+
+Pour toujours plus de détails, lire :doc:`/cookbook/security/form_login`.
 
 Le formulaire d'authentification et son traitement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,16 +282,193 @@ Rediriger après authentification
 * ``target_path_parameter`` (type: ``string``, default: ``_target_path``)
 * ``use_referer`` (type: ``Boolean``, default: ``false``)
 
+.. _reference-security-pbkdf2:
+
 Utiliser l'encodeur PBKDF2 : performance et sécurité
 ----------------------------------------------------
+
+.. versionadded:: 2.2
+    L'encodeur de mot de passe PBKDF2 a été ajouté à Symfony 2.2.
 
 L'encodeur `PBKDF2`_ fournit un haut niveau de sécurité cryptographique,
 et est recommandé par le National Institute of Standards and Technology (NIST).
 
-Mais attention, utiliser PBKDF2 (avec un grand nombre d'itérations) ralentit
-le processus. PBHDF2 devrait être utilisé avec prudence.
+Vous pouvez voir une exemple complet d'encodeur ``pbkdf2`` dans le bloc de code
+YAML sur cette page.
 
-Une bonne configuration est constituée d'environ 1000 itération et utilise
+Mais attention, utiliser PBKDF2 (avec un grand nombre d'itérations) ralentit
+le processus. PBKDF2 devrait être utilisé avec prudence.
+
+Une bonne configuration est constituée d'environ 1000 itérations et utilise
 sha512 comme algorithme de hashage.
+
+.. _reference-security-bcrypt:
+
+Utiliser l'encodeur BCrypt
+--------------------------
+
+.. versionadded:: 2.2
+    L'encodeur de mot de passe BCrypt a été ajouté à Symfony 2.2.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/security.yml
+        security:
+            # ...
+
+            encoders:
+                Symfony\Component\Security\Core\User\User:
+                    algorithm: bcrypt
+                    cost:      15
+
+    .. code-block:: xml
+
+        <!-- app/config/security.xml -->
+        <config>
+            <!-- ... -->
+            <encoder
+                class="Symfony\Component\Security\Core\User\User"
+                algorithm="bcrypt"
+                cost="15"
+            />
+        </config>
+
+    .. code-block:: php
+
+        // app/config/security.php
+        $container->loadFromExtension('security', array(
+            // ...
+            'encoders' => array(
+                'Symfony\Component\Security\Core\User\User' => array(
+                    'algorithm' => 'bcrypt',
+                    'cost'      => 15,
+                ),
+            ),
+        ));
+
+l'option ``cost`` est compris en ``4-31`` et détermine la longueur du mot de passe
+qui sera encodé. Chaque unité de plus *double* le temps pour encoder le mot de passe.
+
+Si vous ne définissez pas l'option ``cost``, la valeur par est ``13``.
+
+.. note::
+
+    Vous pouvez changer le ``cost`` à tout moment — même si vous avez déjà
+    des mots encoder avec un ``cost`` différent. Les nouveaux mots de passe
+    utiliseront le nouveau ``cost``, alors que les mots de passe encodés
+    précédemment utiliseront le ``cost`` utilisé lors de leur encodage.
+
+Un grain de sel est généré automatiquement pour chaque nouveau mot de passe
+et n'a pas besoin d'être persisté. Le mot de passe encodé contient le grain de
+sel utilisé pour son encodage, persisté le mot de passe encodé seulement suffit.
+
+.. note::
+
+    Tous les mots de passe encodés ont une longeur de ``60`` caractères,
+    prévoyez suffisament d'espace pour qu'ils puissent être persisté
+
+    .. _reference-security-firewall-context:
+
+Contexte du Firewall
+--------------------
+
+La plupart des applications n'ont besoin que d'un seul :ref:`firewall<book-security-firewalls>`.
+Mais si votre application *doit* utiliser plusieurs firewalls, vous devez
+prendre en compte que si vous êtes authentifier dans un firewall, vous n'
+êtes automatiquement authentifier dans un autre. En d'autre termes, les
+systèmes ne se partagent pas un contexte commun: chaque firewall agit comme
+un système de sécurité distinct.
+
+Cependant, chaque firewall à une clé ``context``optionnel (qui prends par
+défaut le nom du firewall), qui est utilisé pour enregistrer et récupérer
+les données de sécurité depuis et vers la session. Si cette clé est définie
+avec la même valeur dans chaque firewall, alors le "contexte" peut être
+partagé:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/security.yml
+        security:
+            # ...
+
+            firewalls:
+                somename:
+                    # ...
+                    context: my_context
+                othername:
+                    # ...
+                    context: my_context
+
+    .. code-block:: xml
+
+       <!-- app/config/security.xml -->
+       <security:config>
+          <firewall name="somename" context="my_context">
+            <! ... ->
+          </firewall>
+          <firewall name="othername" context="my_context">
+            <! ... ->
+          </firewall>
+       </security:config>
+
+    .. code-block:: php
+
+       // app/config/security.php
+       $container->loadFromExtension('security', array(
+            'firewalls' => array(
+                'somename' => array(
+                    // ...
+                    'context' => 'my_context'
+                ),
+                'othername' => array(
+                    // ...
+                    'context' => 'my_context'
+                ),
+            ),
+       ));
+
+Authentification HTTP-Digest
+----------------------------
+
+Pour utiliser une authentification HTTP-Digest vous devez fournir un domaine et une clé:
+
+.. configuration-block::
+
+   .. code-block:: yaml
+
+      # app/config/security.yml
+      security:
+         firewalls:
+            somename:
+              http_digest:
+               key: "une_chaine_aleatoire"
+               realm: "api-securisee"
+
+   .. code-block:: xml
+
+      <!-- app/config/security.xml -->
+      <security:config>
+         <firewall name="somename">
+            <http-digest key="une_chaine_aleatoire" realm="api-securisee" />
+         </firewall>
+      </security:config>
+
+   .. code-block:: php
+
+      // app/config/security.php
+      $container->loadFromExtension('security', array(
+           'firewalls' => array(
+               'somename' => array(
+                   'http_digest' => array(
+                       'key'   => 'une_chaine_aleatoire',
+                       'realm' => 'api-securisee',
+                   ),
+               ),
+           ),
+      ));
 
 .. _`PBKDF2`: http://en.wikipedia.org/wiki/PBKDF2
