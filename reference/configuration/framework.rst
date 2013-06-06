@@ -185,7 +185,7 @@ cookie_path
 
 **type**: ``string`` **default**: ``/``
 
-Détermine le chemin où est définie le cookie de session. Par défaut, ``/ ``
+Détermine le chemin où est définie le cookie de session. Par défaut, ``/``
 est utilisé.
 
 cookie_domain

@@ -23,6 +23,8 @@ et créer la vôtre. La structure par défaut est la suivante :
         app.php
         ...
 
+.. _override-cache-dir:
+
 Surcharger le répertoire ``cache``
 ----------------------------------
 
@@ -53,6 +55,8 @@ devienne ``app/{environment}/cache``.
     sinon certains effets de bord pourraient survenir. Chaque environnement génère
     ses propres fichiers de configuration en cache, et donc, chacun a besoin de son
     propre répertoire pour stocker ces fichiers.
+
+.. _override-logs-dir:
 
 Surcharger le répertoire ``logs``
 ---------------------------------
