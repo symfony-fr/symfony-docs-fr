@@ -175,6 +175,8 @@ n'est nécessaire pour accéder l'URL ``/foo``(dans la section ``access_control`
 Si vous supprimez la clé ``anonymous``, le pare-feu va *toujours* demander à l'utilisateur 
 de s'authentifier immédiatement.
 
+.. _book-security-firewalls:
+
 Contrôle d'accès (autorisation)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

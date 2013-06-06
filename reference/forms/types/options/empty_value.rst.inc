@@ -3,9 +3,13 @@ empty_value
 
 **type**: ``string`` ou ``Boolean``
 
+.. versionadded:: 2.3
+    Depuis la version 2.3, les valeurs vides ne sont supportées que si l'option
+    ``expanded`` est définie à true.
+
 Cette option détermine si une option « vide » spéciale (ex : « Choisissez une option »)
-va apparaître en haut de la liste déroulante. Cette option ne s'applique que si les
-deux option ``expanded`` et ``multiple`` ont été définies à false.
+va apparaître en haut de la liste déroulante. Cette option ne s'applique que
+si l'option ``multiple`` est définie à false.
 
 * Ajoute une valeur vide avec « Choisissez une option » comme texte::
 
