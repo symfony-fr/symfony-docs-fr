@@ -264,9 +264,9 @@ et a trois scénarios possibles :
 
    .. note::
 
-       Vous pouvez utiliser la méthode :method:`Symfony\Component\Form\FormInterface::isSubmitted`
-       pour vérifier si un formulaire a été soumis ou non, indépendemment du fait
-       que les données soumises soient valides ou non.
+   Vous pouvez utiliser la méthode :method:`Symfony\Component\Form\FormInterface::isSubmitted`
+   pour vérifier si un formulaire a été soumis ou non, indépendemment du fait
+   que les données soumises soient valides ou non.
 
 #. Lorsque l'utilisateur soumet le formulaire avec des données valides, les
    données soumises sont toujours écrites dans l'objet, mais cette fois,

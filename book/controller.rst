@@ -766,7 +766,7 @@ du contenu qui est envoyé au client::
 
 .. tip::
 
-    Il existe des classes spéciales pour construire des réponses plus facilement :
+    Il existe des classes spéciales pour construire des réponses plus facilement:
 
     - Pour du  JSON, :class:`Symfony\\Component\\HttpFoundation\\JsonResponse`.
       Lisez :ref:`component-http-foundation-json-response`.
