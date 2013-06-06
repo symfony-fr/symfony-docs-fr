@@ -47,7 +47,6 @@ Champs cachés
 ~~~~~~~~~~~~~
 
 * :doc:`hidden</reference/forms/types/hidden>`
-* :doc:`csrf</reference/forms/types/csrf>`
 
 Bouttons
 ~~~~~~~~

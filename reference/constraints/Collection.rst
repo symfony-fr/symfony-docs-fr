@@ -224,10 +224,12 @@ mais doit être une adresse email valide s'il est fourni, vous pouvez faire ce q
             }
         }
 
-Même sans que ``allowMissingFields`` soit à ``true``, vous pouvez maintenant supprimer la propriété ``alternate_email``
-propriété complètement du tableau ``ProfileData``, car il est facultatif.
-Toutefois, si le champ ``personal_email``n'existe pas dans le tableau, la contrainte ``NotBlank``
-sera toujours appliqué (car il est enveloppé dans `` Required`` ) et vous recevrez une violation de contrainte.
+Même sans que ``allowMissingFields`` soit à ``true``, vous pouvez maintenant
+supprimer la propriété ``alternate_email`` propriété complètement du tableau
+``ProfileData``, car il est facultatif. Toutefois, si le champ ``personal_email``
+n'existe pas dans le tableau, la contrainte ``NotBlank`` sera toujours appliqué
+(car il est enveloppé dans `` Required`` ) et vous recevrez une violation de
+contrainte.
 
 Options
 -------
