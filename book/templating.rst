@@ -721,6 +721,8 @@ Le contenu par défaut (pendant le chargement ou si javascript n'est pas activé
 .. index::
    single: Templating; Linking to pages
 
+.. _book-templating-pages:
+
 Liens vers des Pages
 ~~~~~~~~~~~~~~~~~~~~
 

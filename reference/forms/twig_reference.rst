@@ -209,7 +209,7 @@ Peu importe où vous affichez une partie de formulaire, le block qui l'affiche
 utilise un certain nombre de variables. Par défaut, ces blocks se situent dans
 `form_div_layout.html.twig`_.
 
-Jetez un oeil à ``form_label`` à titre d'exemple :
+Jetez un oeil à ``form_label`` à titre d'exemple:
 
 .. code-block:: jinja
 

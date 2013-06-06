@@ -209,11 +209,10 @@ assetic.formula_loader
 
 **But**: Ajoute un chargeur au manager de ressources courant
 
-Un chargeur est une classe qui implémente l'interface
-``Assetic\\Factory\Loader\\FormulaLoaderInterface`` . Cette classe est
-responsable du chargement des ressources pour un type de particulier de
-ressources (pour exemple, un modèle Twig).
-Chargeurs ``Assetic ships``pour php et les modèles Twig.
+Un chargeur est une classe qui implémente l'interface ``Assetic\\Factory\Loader\\FormulaLoaderInterface`` .
+Cette classe est responsable du chargement des ressources pour un type particulier
+de ressources (par exemple, un modèle Twig). Assetic embarque des chargeurs
+pour php et les modèles Twig.
 
 Un attribut ``alias`` défini le nom du chargeur.
 
