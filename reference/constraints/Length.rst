@@ -36,8 +36,8 @@ Pour vérifier que la longueur du champ ``firstName`` d'une classe se situe entr
                     - Length:
                         min: 2
                         max: 50
-                        minMessage: Votre nom doit faire au moins 2 caractères
-                        maxMessage: Votre nom ne peut pas être plus long que 50 caractères
+                        minMessage: Votre nom doit faire au moins {{ limit }} caractères
+                        maxMessage: Votre nom ne peut pas être plus long que {{ limit }}  caractères
 
     .. code-block:: php-annotations
 
@@ -50,8 +50,8 @@ Pour vérifier que la longueur du champ ``firstName`` d'une classe se situe entr
              * @Assert\Length(
              *      min = "2",
              *      max = "50",
-             *      minMessage = "Votre nom doit faire au moins 2 caractères",
-             *      maxMessage = "Votre nom ne peut pas être plus long que 50 caractères"
+             *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+             *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
              * )
              */
              protected $firstName;
