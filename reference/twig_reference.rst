@@ -145,10 +145,10 @@ Tags
 |                                                   | à surchager : :doc:`/cookbook/form/form_customization`.           |
 +---------------------------------------------------+-------------------------------------------------------------------+
 | ``{% trans with {variables} %}...{% endtrans %}`` | Traduit et affiche le texte. Pour plus d'informations, lisez      |
-|                                                   | :ref:`book-translation-twig`                                      |
+|                                                   | :ref:`book-translation-tags`                                      |
 +---------------------------------------------------+-------------------------------------------------------------------+
 | ``{% transchoice count with {variables} %}``      | Traduit et affiche le texte en tenant compte de la pluralisation. |
-| ...                                               | Pour plus d'informations, lisez :ref:`book-translation-twig`      |
+| ...                                               | Pour plus d'informations, lisez :ref:`book-translation-tags`      |
 | ``{% endtranschoice %}``                          |                                                                   |
 +---------------------------------------------------+-------------------------------------------------------------------+
 | ``{% trans_default_domain language %}``           | Défini le domaine par défaut pour le catalogue de messages dans   |

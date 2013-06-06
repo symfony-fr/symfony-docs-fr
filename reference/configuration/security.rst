@@ -381,7 +381,7 @@ prendre en compte que si vous êtes authentifier dans un firewall, vous n'
 systèmes ne se partagent pas un contexte commun: chaque firewall agit comme
 un système de sécurité distinct.
 
-Cependant, chaque firewall à une clé ``context``optionnel (qui prends par
+Cependant, chaque firewall à une clé ``context`` optionnel (qui prends par
 défaut le nom du firewall), qui est utilisé pour enregistrer et récupérer
 les données de sécurité depuis et vers la session. Si cette clé est définie
 avec la même valeur dans chaque firewall, alors le "contexte" peut être

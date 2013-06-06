@@ -94,7 +94,7 @@ de code qui semblent familiers, vous devriez suivre ces règles :
   ``// ...`` (php), ``# ...`` (yaml/bash), ``{# ... #}`` (twig), 
   ``<!-- ... -->`` (xml/html), ``; ...`` (ini), ``...`` (text);
 * Lorsque vous cachez une partie d'une ligne, par exemple une variable, placez ``...`` 
- (sans commentaire) à l'endroit où elle est censée être;
+  (sans commentaire) à l'endroit où elle est censée être;
 * Description du code caché : (facultatif)
   Si vous cachez plusieurs lignes : la description peut être placée après les ``...``
   Si vous ne cachez qu'une partie de la ligne : la description peut être placée avant la ligne;
