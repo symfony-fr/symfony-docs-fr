@@ -69,9 +69,9 @@ Quand une ressource (par exemple un fichier XML) doit être chargée, le
 le chargeur qui supporte ce type de ressource en particulier.
 
 La classe :class:`Symfony\\Component\\Config\\Loader\\DelegatingLoader`
-utilise le :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`.
+utilise la classe :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`.
 Lorsqu'on lui demande de charger une ressource, elle délègue cette question
-au :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. Dans le
+à la classe :class:`Symfony\\Component\\Config\\Loader\\LoaderResolver`. Dans le
 cas où le résolveur trouve un chargeur approprié, ce dernier va être utilisé
 pour charger la ressource::
 

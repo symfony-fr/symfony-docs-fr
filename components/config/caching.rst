@@ -34,7 +34,8 @@ s'il contient toujours la dernière version ou si son contenu devrait
     $userMatcherCache = new ConfigCache($cachePath, true);
 
     if (!$userMatcherCache->isFresh()) {
-        // remplissez cela avec un tableau contenant les chemins des fichiers « users.yml »
+        // remplissez cela avec un tableau contenant les chemins des fichiers
+        // « users.yml »
         $yamlUserFiles = ...;
 
         $resources = array();
