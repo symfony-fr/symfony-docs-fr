@@ -4,7 +4,7 @@
 Le Cache HTTP
 =============
 
-Le propre d'une application web riche est d'être dynamique. Peu
+L'essence d'une application web riche est d'être dynamique. Peu
 importe l'efficacité de votre application, le traitement d'une requête
 sera toujours plus important que l'envoi d'une page statique.
 
@@ -25,51 +25,53 @@ Le moyen le plus efficace d'améliorer les performances d'une
 application est de mettre en cache l'intégralité d'une réponse pour ne
 plus avoir à rappeler l'application pour les requêtes suivantes. Bien
 sûr, ce n'est pas toujours possible pour les sites web fortement
-dynamiques. A travers ce chapitre, vous verrez comment
+dynamiques, ou peut être que si. A travers ce chapitre, vous verrez comment
 fonctionne le système de cache de Symfony2 et en quoi c'est la meilleure
 approche possible.
 
 Le système de cache de Symfony2 est différent, car il se base sur la
 simplicité et la puissance du cache HTTP tel qu'il est défini dans la
-:term:`spécification HTTP`. Au lieu de réinventer la méthodologie de
+:term:`spécification HTTP`. Au lieu de réinventer un processus de
 mise en cache, Symfony2 adopte la norme qui définit la
 communication de base sur le Web. Une fois que vous avez compris
 les fondamentaux de la validation HTTP et de l'expiration de la mise
 en cache, vous serez prêt à maîtriser le système de cache de
 Symfony2.
 
-Nous allons parcourir ce sujet en quatre étapes :
+Dans le but de comprendre comment mettre en cache avec Symfony,
+nous allons parcourir ce sujet en 4 étapes :
 
 #. Une :ref:`passerelle de cache <gateway-caches>`, ou
    reverse proxy, est une couche indépendante qui se trouve devant
    votre application. La passerelle met en cache les réponses telles
    qu'elles sont retournées par l'application et répond aux requêtes
-   dont les réponses sont en cache avant qu'elles n'atteignent
+   avec les réponses qui sont en cache avant qu'elles n'atteignent
    l'application. Symfony2 possède sa propre passerelle par défaut,
-   mais toute autre technologie peut être utilisée.
+   mais n'importe quelle autre peut être également utilisée.
 
 #. Les en-têtes du :ref:`cache HTTP<http-cache-introduction>`
-   sont utilisées pour communiquer avec la passerelle de cache et tout
+   sont utilisés pour communiquer avec la passerelle de cache et tout
    autre cache entre votre application et le client. Symfony2 en propose
-   par défaut et fournit une interface puissante pour interagir avec elles.
+   par défaut et fournit une interface puissante pour interagir avec eux.
 
-#. :ref:`L'expiration et la validation<http-expiration-validation>`
+#. :ref:`L'expiration et la validation<http-expiration-validation>` HTTP
    sont les deux modèles utilisés pour déterminer si le contenu d'un cache est
    *valide* (peut être réutilisé à partir du cache) ou *périmé* (doit être
    régénéré par l'application).
 
-#. :ref:`Edge Side Includes <edge-side-includes>` (ESI)
-   autorise le cache HTTP à mettre en cache des
+#. Les :ref:`Edge Side Includes <edge-side-includes>` (ESI)
+   autorisent le cache HTTP à mettre en cache des
    fragments de pages (voir des fragments imbriqués) de façon
-   indépendante. Avec l'ESI, vous pouvez même mettre en cache une
+   indépendante. Avec les ESI, vous pouvez même mettre en cache une
    page entière pendant 60 minutes, mais un bloc imbriqué dans cette
    page uniquement 5 minutes.
 
-La mise en cache via HTTP n'est pas réservée à Symfony, beaucoup
-d'articles existent à ce sujet. Si vous n'êtes pas familier avec la
-mise cache HTTP, lire l'article de Ryan Tomayko `Things Caches Do`_
-est *très* recommandé. Une autre ressource approfondie sur
-ce sujet est le tutoriel de Mark Nottingham, `Cache Tutorial`_.
+Puisque la mise en cache via HTTP n'est pas spécifique à Symfony, de
+nombreux articles existent à ce sujet. Si vous n'êtes pas familier avec la
+mise cache HTTP, nous vous recommandons *fortement* de lire l'article de
+Ryan Tomayko `Things Caches Do`_. Le tutoriel de Mark Nottingham,
+`Cache Tutorial`_, est également une ressource très complète sur
+ce sujet.
 
 .. index::
    single: Cache; Proxy
