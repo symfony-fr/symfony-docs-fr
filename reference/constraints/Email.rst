@@ -80,7 +80,7 @@ Utilisation de base
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('email', new Assert\Email(array(
-                    'message' => ''{{ value }}' n'est pas un email valide.',
+                    'message' => "'{{ value }}' n'est pas un email valide.",
                     'checkMX' => true,
                 )));
             }
