@@ -71,6 +71,7 @@ qui implémente :class:`Symfony\\Component\\Config\\Definition\\ConfigurationInt
         }
     }
 
+
 Ajouter des définitions de noeuds à l'arbre
 -------------------------------------------
 
@@ -107,7 +108,7 @@ définition de noeud appropriée. Les types de noeud disponibles sont :
 * scalar
 * boolean
 * array
-* enum (new in 2.1)
+* enum
 * integer (new in 2.2)
 * float (new in 2.2)
 * variable (pas de validation)
@@ -125,17 +126,15 @@ Contraintes de noeud numérique
 Les noeuds numériques (float et integer) fournissent deux contraintes supplémentaires
 :method:`Symfony\\Component\\Config\\Definition\\Builder::min` et
 :method:`Symfony\\Component\\Config\\Definition\\Builder::max` qui vous permettent de
-valider leur valeur :
- 
-.. code-block:: php
+valider leur valeur::
 
-    $rootNode 
+    $rootNode
         ->children()
             ->integerNode('positive_value')
-                ->min(0) 
+                ->min(0)
             ->end()
             ->floatNode('big_value')
-                ->max(5E45) 
+                ->max(5E45)
             ->end()
             ->integerNode('value_inside_a_range')
                 ->min(-50)->max(50)
@@ -148,9 +147,7 @@ Noeuds tableau
 
 Il est possible d'ajouter un niveau plus profond à la hiérarchie en ajoutant
 un noeud tableau. Le noeud tableau lui-même peut avoir un ensemble prédéfini
-de noeuds variable :
-
-.. code-block:: php
+de noeuds variable::
 
     $rootNode
         ->arrayNode('connection')
@@ -162,9 +159,7 @@ de noeuds variable :
     ;
 
 Ou vous pouvez définir un prototype pour chaque noeud à l'intérieur d'un
-noeud tableau :
-
-.. code-block:: php
+noeud tableau::
 
     $rootNode
         ->arrayNode('connections')
@@ -196,24 +191,39 @@ options comme :
 ``requiresAtLeastOneElement()``
     Il devrait y avoir au moins un élément dans le tableau (fonctionne
     seulement quand ``isRequired`` est aussi appelé).
+``addDefaultsIfNotSet()``
+    Si plusieurs noeuds enfants ont des valeurs par défaut, utilisez les si des
+    les valeurs n'ont pas été explicitement fournies.
 
-Un exemple de cela :
-
-.. code-block:: php
+Un exemple de cela::
 
     $rootNode
-        ->arrayNode('parameters')
-            ->isRequired()
-            ->requiresAtLeastOneElement()
-            ->useAttributeAsKey('name')
-            ->prototype('array')
-                ->children()
-                    ->scalarNode('name')->isRequired()->end()
-                    ->scalarNode('value')->isRequired()->end()
+        ->children()
+            ->arrayNode('parameters')
+                ->isRequired()
+                ->requiresAtLeastOneElement()
+                ->useAttributeAsKey('name')
+                ->prototype('array')
+                    ->children()
+                        ->scalarNode('value')->isRequired()->end()
+                    ->end()
                 ->end()
             ->end()
         ->end()
     ;
+
+En YAML, la configuration ressemblerait à ceci:
+
+.. code-block:: yaml
+
+    database:
+        parameters:
+            param1: { value: param1val }
+
+En XML, chaque noeud ``parameters`` doit avoir un attribut ``name`` ( suivi de
+``value``), qui devrait être supprimé et utilisé comme une clé pour cet élément
+dans le tableau final. L'option ``useAttributeAsKey`` est util pour normaliser
+comment les tableaux sont spécifiés dans chaque format comme le XML et le YAML
 
 Valeurs par défaut et valeurs requises
 --------------------------------------
@@ -237,19 +247,31 @@ certaine valeur :
 .. code-block:: php
 
     $rootNode
-        ->arrayNode('connection')
-            ->children()
-                ->scalarNode('driver')
-                    ->isRequired()
-                    ->cannotBeEmpty()
+        ->children()
+            ->arrayNode('connection')
+                ->children()
+                    ->scalarNode('driver')
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                    ->end()
+                    ->scalarNode('host')
+                        ->defaultValue('localhost')
+                    ->end()
+                    ->scalarNode('username')->end()
+                    ->scalarNode('password')->end()
+                    ->booleanNode('memory')
+                        ->defaultFalse()
+                    ->end()
                 ->end()
-                ->scalarNode('host')
-                    ->defaultValue('localhost')
-                ->end()
-                ->scalarNode('username')->end()
-                ->scalarNode('password')->end()
-                ->booleanNode('memory')
-                    ->defaultFalse()
+            ->end()
+            ->arrayNode('settings')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode('name')
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                        ->defaultValue('value')
+                    ->end()
                 ->end()
             ->end()
         ->end()
@@ -258,7 +280,7 @@ certaine valeur :
 Sections facultatives
 ---------------------
 
-.. versionadded:: 2.1
+.. versionadded:: 2.2
     Les méthodes ``canBeEnabled`` et ``canBeDisabled`` sont une nouveauté de Symfony 2.2
 
 Si vous avez des sections entières qui sont facultatives et qui peuvent être activées ou
@@ -308,28 +330,31 @@ très long et vous voudrez surement le découper en plusieurs sections. Vous
 pouvez faire cela en définissant une section dans un noeud séparé et en ajoutant
 ce noeud à l'arbre principal avec ``append()``::
 
+
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('database');
 
         $rootNode
-            ->arrayNode('connection')
-                ->children()
-                    ->scalarNode('driver')
-                        ->isRequired()
-                        ->cannotBeEmpty()
+            ->children()
+                ->arrayNode('connection')
+                    ->children()
+                        ->scalarNode('driver')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->scalarNode('host')
+                            ->defaultValue('localhost')
+                        ->end()
+                        ->scalarNode('username')->end()
+                        ->scalarNode('password')->end()
+                        ->booleanNode('memory')
+                            ->defaultFalse()
+                        ->end()
                     ->end()
-                    ->scalarNode('host')
-                        ->defaultValue('localhost')
-                    ->end()
-                    ->scalarNode('username')->end()
-                    ->scalarNode('password')->end()
-                    ->booleanNode('memory')
-                        ->defaultFalse()
-                    ->end()
+                    ->append($this->addParametersNode())
                 ->end()
-                ->append($this->addParametersNode())
             ->end()
         ;
 
@@ -347,7 +372,6 @@ ce noeud à l'arbre principal avec ``append()``::
             ->useAttributeAsKey('name')
             ->prototype('array')
                 ->children()
-                    ->scalarNode('name')->isRequired()->end()
                     ->scalarNode('value')->isRequired()->end()
                 ->end()
             ->end()
@@ -363,13 +387,19 @@ Normalisation
 -------------
 
 Lorsque les fichiers de configuration sont traités, ils sont d'abord normalisés.
-Ensuite, ils sont mergés puis l'arbre est utilisé pour valider le tableau qui a été
-généré. La normalisation consiste à supprimer certaines des différences issues des différents
-formats de configuration, principalement des différences entre Yaml et XML.
+Ensuite, ils sont fusionnés puis l'arbre est utilisé pour valider le tableau
+qui a été généré. La normalisation consiste à supprimer certaines des différences
+issues des différents formats de configuration, principalement des différences
+entre Yaml et XML.
 
 Typiquement, le séparateur de clés utilisé en Yaml est ``_`` et ``-`` en XML.
 Par exemple, ``auto_connect`` en Yaml deviendrait ``auto-connect`` en XML. La
 normalisation les transforme tout les deux en ``auto_connect``.
+
+.. caution::
+
+    La clé cible ne sera pas modifié si elle est mélangée
+    comme ceci ``foo-bar_moo`` ou si elle existe déjà.
 
 Une autre différence en Yaml et Xml est la manière dont les tableaux de valeurs
 sont représentés. En Yaml, cela ressemble à :
@@ -443,7 +473,7 @@ si tout est facultatif dans votre config sauf l'id:
         username: user
         password: pass
 
-vous pouvez agalement autoriser ce qui suit :
+vous pouvez également autoriser ce qui suit :
 
 .. code-block:: yaml
 
@@ -453,15 +483,19 @@ en changeant la valeur d'une chaine de caractère en tableau associatif avec
 ``name`` comme clé::
 
     $rootNode
-        ->arrayNode('connection')
-           ->beforeNormalization()
-               ->ifString()
-               ->then(function($v) { return array('name'=> $v); })
-           ->end()
-           ->scalarNode('name')->isRequired()
-           // ...
+        ->children()
+            ->arrayNode('connection')
+                ->beforeNormalization()
+                ->ifString()
+                    ->then(function($v) { return array('name'=> $v); })
+                ->end()
+                ->children()
+                    ->scalarNode('name')->isRequired()
+                    // ...
+                ->end()
+            ->end()
         ->end()
-    ;    
+    ;
 
 Règles de validation
 --------------------
@@ -474,13 +508,15 @@ est utilisé pour ajouter des règles de validation avancées aux définitions
 de noeud, comme::
 
     $rootNode
-        ->arrayNode('connection')
-            ->children()
-                ->scalarNode('driver')
-                    ->isRequired()
-                    ->validate()
+        ->children()
+            ->arrayNode('connection')
+                ->children()
+                    ->scalarNode('driver')
+                        ->isRequired()
+                        ->validate()
                         ->ifNotInArray(array('mysql', 'sqlite', 'mssql'))
-                        ->thenInvalid('Invalid database driver "%s"')
+                            ->thenInvalid('Invalid database driver "%s"')
+                        ->end()
                     ->end()
                 ->end()
             ->end()
@@ -535,3 +571,4 @@ les valeurs de configuration::
         $configuration,
         $configs)
     ;
+

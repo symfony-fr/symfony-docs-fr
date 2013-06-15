@@ -19,7 +19,7 @@ Installation
 Vous pouvez installer le composant de différentes manières :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Config) ;
-* Installez le via Composer (``symfony/config`` sur `Packagist`_).
+* :doc:`Installez le via Composer</components/using_components>` (``symfony/config`` on `Packagist`_).
 
 Sections
 --------
