@@ -90,6 +90,7 @@ problèmes pour les fichiers CSS contenant des chemins relatifs pour leurs
 images. Voir :ref:`cookbook-assetic-cssrewrite`.
 
 .. _cookbook-assetic-including-css:
+
 Inclure des fichiers CSS
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -128,7 +129,7 @@ le filtre :ref:`cssrewrite<cookbook-assetic-cssrewrite>`.
 .. _cookbook-assetic-cssrewrite:
 
 Corriger les chemins CSS avec le filtre ``cssrewrite``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vu que Assetic génère de nouvelles URLs pour vos ressource, tous les chemins relatifs 
 dans vos fichiers CSS vont être cassés. Pour corriger ça, assurez-vous d'utiliser le 

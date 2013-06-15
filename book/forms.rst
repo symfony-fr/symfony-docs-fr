@@ -252,21 +252,21 @@ et a trois scénarios possibles :
    est simplement créé et affiché. :method:`Symfony\Component\Form\FormInterface::handleRequest`
    détermine que le formulaire n'a pas été soumis et ne fait rien.
    :method:`Symfony\Component\Form\FormInterface::isValid` retourne ``false`` si le
-   formulaire n'a pas été soumis ;
+   formulaire n'a pas été soumis.
 
 #. Lorsque l'utilisateur soumet le formulaire, :method:`Symfony\Component\Form\FormInterface::handleRequest`
    s'en rend compte et écrit immédiatement les données soumises dans les
    propriétés ``task`` et ``dueDate`` de l'objet ``$task``. Ensuite, cet objet
    est validé. S'il est invalide (la validation est abordée dans la section
    suivante), :method:`Symfony\Component\Form\FormInterface::isValid` retourne
-   encore ``false`` et le formulaire est réaffiché avec toutes ses erreurs de
-   validation ;
+   encore ``false`` et le formulaire est affiché de nouveau avec toutes ses
+   erreurs de validation.
 
    .. note::
 
-   Vous pouvez utiliser la méthode :method:`Symfony\Component\Form\FormInterface::isSubmitted`
-   pour vérifier si un formulaire a été soumis ou non, indépendemment du fait
-   que les données soumises soient valides ou non.
+       Vous pouvez utiliser la méthode :method:`Symfony\Component\Form\FormInterface::isSubmitted`
+       pour vérifier si un formulaire a été soumis ou non, indépendemment du fait
+       que les données soumises soient valides ou non.
 
 #. Lorsque l'utilisateur soumet le formulaire avec des données valides, les
    données soumises sont toujours écrites dans l'objet, mais cette fois,
@@ -279,8 +279,8 @@ et a trois scénarios possibles :
 
 .. note::
 
-   Rediriger un utilisateur après une soumission de formulaire réussie empêche
-   l'utilisateur de pouvoir rafraichir la page et de resoumettre les données.
+       Rediriger un utilisateur après une soumission de formulaire réussie empêche
+       l'utilisateur de pouvoir rafraichir la page et de resoumettre les données.
 
 .. index::
    single: Forms; Multiple Submit Buttons
