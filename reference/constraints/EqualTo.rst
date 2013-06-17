@@ -10,8 +10,8 @@ Pour vérifier qu'une valeur n'est pas égale, voir :doc:`/reference/constraints
 
 .. caution::
     
-    Cette contrainte comparative utilise ``==``, donc ``3`` et ``"3"``sont considérés comme
-    égale. Utilisez :doc:`/reference/constraints/IdenticalTo` pour comparer avec ``===``.
+    Cette contrainte comparative utilise ``==``, donc ``3`` et ``"3"`` sont considérés comme
+    égaux. Utilisez :doc:`/reference/constraints/IdenticalTo` pour comparer avec ``===``.
 
 +----------------+-----------------------------------------------------------------------+
 | S'applique à   | :ref:`property or method<validation-property-target>`                 |
@@ -27,7 +27,7 @@ Pour vérifier qu'une valeur n'est pas égale, voir :doc:`/reference/constraints
 Utilisation de base
 -------------------
 
-Si vous voulez vous assurer que le champ ``age`` d'une classe ``Person`` est équal à
+Si vous voulez vous assurer que le champ ``age`` d'une classe ``Person`` est égal à
 ``20`` ,vous pouvez faire ceci :
 
 .. configuration-block::
