@@ -77,6 +77,14 @@ commande) avec :
     $ php app/console list --verbose
     $ php app/console list -v
 
+Le niveau de verbosité peut optionnellement prendre une valeur entre 1 (par défaut)
+et 3 pour afficher plus ou moins d'informations:
+
+    $ php app/console list --verbose=2
+    $ php app/console list -vv
+    $ php app/console list --verbose=3
+    $ php app/console list -vvv
+
 Si vous définissez des arguments facultatifs pour donner un nom et une version
 à votre application::
 
