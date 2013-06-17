@@ -36,7 +36,7 @@ Pour reproduire ce style, vous pouvez utilisez la méthode
         'Un message en rapport avec cette section'
     );
     $output->writeln($formattedLine);
-    
+
 Ecrire un message dans un bloc
 ------------------------------
 
@@ -45,13 +45,13 @@ Symfony l'utilise pour afficher des messages d'erreur.
 
 Si vous écrivez vos messages d'erreur sur plus d'une ligne, vous pouvez
 remarquerez que le fond est aussi long que chaque ligne. Pour générer un bloc
-utilisez ::
+utilisez la méthode :method:`Symfony\\Component\\Console\\Helper\\FormatterHelper::formatBlock`::
 
-    $errorMessages = array('Error!', 'Something went wrong');
+    $errorMessages = array('Erreur!', 'Quelque chose ne vas pas');
     $formattedBlock = $formatter->formatBlock($errorMessages, 'error');
     $output->writeln($formattedBlock);
     
-Comme vous pouvez le voir, on peux passer un tableau de messages à la méthode 
+Comme vous pouvez le voir, on peux passer un tableau de messages à la méthode
 :method:`Symfony\\Component\\Console\\Helper\\FormatterHelper::formatBlock`
 pour créer la sortie désirée. Si vous passez ``true`` en 3eme paramètre,
 le bloc est formaté avec plus de style (une ligne vide au dessus et en dessous des messages, 
