@@ -25,12 +25,12 @@ Utiliser le composant Finder
 
     {
         "require": {
-            "symfony/finder": "2.2.*"
+            "symfony/finder": "2.3.*"
         }
     }
 
 Si vous avez déjà un fichier ``composer.json``, ajoutez juste les lignes ci-dessus.
-Vous aurez peut-être besoin de modifié la version (exp. ``2.1.1`` ou ``2.2.*``).
+Vous aurez peut-être besoin de modifié la version (exp. ``2.2.2`` ou ``2.3.*``).
 
 Vous pouvez rechercher les noms et versions des composants à `packagist.org`_.
 
@@ -71,9 +71,9 @@ donc vous pouvez directement les utiliser::
 
             {
                 "require": {
-                    "symfony/finder": "2.2.*",
-                    "symfony/dom-crawler": "2.2.*",
-                    "symfony/css-selector": "2.2.*"
+                    "symfony/finder": "2.3.*",
+                    "symfony/dom-crawler": "2.3.*",
+                    "symfony/css-selector": "2.3.*"
                 }
             }
 
@@ -83,7 +83,7 @@ donc vous pouvez directement les utiliser::
 
             {
                 "require": {
-                    "symfony/symfony": "2.2.*"
+                    "symfony/symfony": "2.3.*"
                 }
             }
 

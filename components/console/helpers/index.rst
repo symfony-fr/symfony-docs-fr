@@ -9,6 +9,8 @@ Les Helpers de Console
 
     dialoghelper
     formatterhelper
+    progresshelper
+    tablehelper
 
 Le Composant Console est fournit avec des helpers très utiles. Ces helpers contiennent
 des fonctions qui facilitent certaines tâches communes

@@ -10,15 +10,25 @@ Le Composant Console
 
 Le composant Console vous permet de créer des commandes de ligne de commandes.
 Vos commandes de console peuvent être utilisées pour n'importe quelle tâche récurrente,
-comme des cronjobs, des imports, ou d'autres processus à exécuter par lots.
+comme des tache cron, des imports, ou d'autres processus à exécuter par lots.
 
 Installation
 ------------
 
-Vous pouvez installer le composant de différentes manières :
+Vous pouvez installer le composant de deux manières différentes :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Console) ;
-* Installez le via Composer (``symfony/console`` sur `Packagist`_).
+* :doc:`Installez le via Composer </components/using_components>` (``symfony/config`` à `Packagist`_).
+
+.. note::
+
+    Windows ne supporte pas les couleurs ANSI par défaut, donc le composant Console
+    le détecte et désactive les couleurs où Windows n'apporte pas de support.
+    Cependant, si Windows n'est pas configuré avec driver ANSI et que les commandes
+    console appelle d'autres scripts qui envoient des séquences de couleurs ANSI,
+    ils seront affichées en caractères bruts.
+
+    Pour activer les couleurs ANSI dans Windows, installez `ANSICON`_.
 
 Créer une Commande basique
 --------------------------
@@ -40,17 +50,17 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
         {
             $this
                 ->setName('demo:greet')
-                ->setDescription('Greet someone')
+                ->setDescription('Saluez quelqu'un')
                 ->addArgument(
                     'name',
                     InputArgument::OPTIONAL,
-                    'Who do you want to greet?'
+                    'Qui voulez vous saluez?'
                 )
                 ->addOption(
                    'yell',
                    null,
                    InputOption::VALUE_NONE,
-                   'If set, the task will yell in uppercase letters'
+                   'Si Défini, la réponse est rendue en majuscules'
                 )
             ;
         }
@@ -59,9 +69,9 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
         {
             $name = $input->getArgument('name');
             if ($name) {
-                $text = 'Hello '.$name;
+                $text = 'Salut, '.$name;
             } else {
-                $text = 'Hello';
+                $text = 'Salut';
             }
 
             if ($input->getOption('yell')) {
@@ -76,8 +86,8 @@ Vous devez aussi créer le fichier à exécuter en ligne de commandes qui crée
 une ``Application`` et lui ajoute les commandes::
 
     #!/usr/bin/env php
-    # app/console
-    <?php 
+    <?php
+    // app/console
 
     use Acme\DemoBundle\Command\GreetCommand;
     use Symfony\Component\Console\Application;
@@ -96,7 +106,7 @@ Cela va afficher ce qui suit sur votre ligne de commandes :
 
 .. code-block:: text
 
-    Hello Fabien
+    Salut, Fabien
 
 Vous pouvez aussi utiliser l'option ``--yell`` pour afficher tout en majuscules :
 
@@ -104,9 +114,11 @@ Vous pouvez aussi utiliser l'option ``--yell`` pour afficher tout en majuscules 
 
     $ app/console demo:greet Fabien --yell
 
-Cela affiche::
+Cela affiche:
 
-    HELLO FABIEN
+.. code-block:: bash
+
+    SALUT, FABIEN
 
 .. _components-console-coloring:
 
@@ -142,6 +154,58 @@ Les couleurs d'écriture et de fond disponibles sont : ``black`` (« noir »), `
 Et les options disponibles sont : ``bold`` (« gras »), ``underscore`` (« souligné »),
 ``blink`` (« clignotant »), ``reverse`` (« inversé ») et ``conceal`` (« masqué »).
 
+You can also set these colors and options inside the tagname::
+
+    // green text
+    $output->writeln('<fg=green>foo</fg=green>');
+
+    // black text on a cyan background
+    $output->writeln('<fg=black;bg=cyan>foo</fg=black;bg=cyan>');
+
+    // bold text on a yellow background
+    $output->writeln('<bg=yellow;options=bold>foo</bg=yellow;options=bold>');
+
+Niveau de verbosité
+~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.3
+    Les constantes ``VERBOSITY_VERY_VERBOSE`` et ``VERBOSITY_DEBUG`` ont été
+    introduites avec la version 2.3.
+
+la console a 5 niveau de verbosité. Ils sont définis dans la classe
+:class:`Symfony\\Component\\Console\\Output\\OutputInterface`:
+
+=======================================  =========================================
+Option                                   Valeur
+=======================================  =========================================
+OutputInterface::VERBOSITY_QUIET         N'affiche pas les messages
+OutputInterface::VERBOSITY_NORMAL        Le niveau par défaut
+OutputInterface::VERBOSITY_VERBOSE       Augmente la verbosité des messages
+OutputInterface::VERBOSITY_VERY_VERBOSE  Les messages d'information non essentiels
+OutputInterface::VERBOSITY_DEBUG         Les messages de de débuggage
+=======================================  =========================================
+
+Vous pouvez spécifié le niveau de verbosité silencieuse avec l'option ``--quiet``
+ou ``-q``. L'option ``--verbose`` ou ``-v`` est utilisé quand vous voulez
+augmenter le niveau de verbosité.
+
+.. tip::
+
+    La stacktrace de l'exception complète est affichée si le niveau
+    ``VERBOSITY_VERBOSE`` ou supérieur est utilisé.
+
+Il est possible d'afficher un message dans une commande pour un niveau spécifique
+de verbosité. Par exemple::
+
+    if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
+        $output->writeln(...);
+    }
+
+Quand le niveau ``quiet`` est utilisé, tous les affichages sont supprimés. la
+méthode
+:method:`Symfony\Component\Console\Output::write<Symfony\\Component\\Console\\Output::write>`
+ retourne sans l'affichage actuel.
+
 Utiliser des arguments de commande
 ----------------------------------
 
@@ -152,11 +216,18 @@ Ils sont ordonnés, et peuvent être optionnels ou obligatoires. Par exemple, aj
 un argument optionnel ``last_name`` à la commande et faites en sorte que l'argument
 ``name`` soit obligatoire::
 
-    $this
+     $this
         // ...
-        ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?')
-        ->addArgument('last_name', InputArgument::OPTIONAL, 'Your last name?')
-        // ...
+        ->addArgument(
+            'name',
+            InputArgument::REQUIRED,
+            'Qui voulez vous saluer ?'
+        )
+        ->addArgument(
+            'last_name',
+            InputArgument::OPTIONAL,
+            'Votre nom de famille ?'
+        );
 
 Vous avez maintenant accès à l'argument ``last_name`` depuis votre commande::
 
@@ -170,6 +241,50 @@ La commande peut maintenant être utilisée de l'une des façons suivantes :
 
     $ app/console demo:greet Fabien
     $ app/console demo:greet Fabien Potencier
+
+Il est aussi possible de passer une liste de valeur en argument (imaginez que
+vous vouliez saluer tous vos amis). Pour effectuer ceci, vous devez le spécifier
+à la finde la liste d'arguments::
+
+    $this
+        // ...
+        ->addArgument(
+            'names',
+            InputArgument::IS_ARRAY,
+            'Qui voulez vous saluez (séparer les noms par des espaces)?'
+        );
+
+Pour l'utiliser, spécifiez combien de noms vous voulez:
+
+.. code-block:: bash
+
+    $ app/console demo:greet Fabien Ryan Bernhard
+
+Vous accédez à l'argument ``names`` comme un tableau::
+
+    if ($names = $input->getArgument('names')) {
+        $text .= ' '.implode(', ', $names);
+    }
+
+Il y a 3 différents arguments que vous pouvez utiliser.:
+
+===========================  ======================================================================================================
+Option                       Valeur
+===========================  ======================================================================================================
+InputArgument::REQUIRED      L'argument est requis
+InputArgument::OPTIONAL      L'argument est optionnel et peut être omis
+InputArgument::IS_ARRAY      L'argument peut contenir une infinité d'arguments et doit être utilisé à la fin de liste des arguments
+===========================  ======================================================================================================
+
+Vous pouvez combiner ``IS_ARRAY`` avec ``REQUIRED`` et ``OPTIONAL`` comme ceci::
+
+    $this
+        // ...
+        ->addArgument(
+            'names',
+            InputArgument::IS_ARRAY | InputArgument::REQUIRED,
+            'Qui voulez vous saluez (séparer les noms par des espaces)?'
+        );
 
 Utiliser des options de commande
 --------------------------------
@@ -197,7 +312,7 @@ pour spécifier combien de fois le message devrait être affiché::
             'iterations',
             null,
             InputOption::VALUE_REQUIRED,
-            'How many times should the message be printed?',
+            'Combien de fois voulez vous afficher le message ?',
             1
         );
 
@@ -241,9 +356,7 @@ InputOption::VALUE_REQUIRED  Cette valeur est requise (par exemple : ``--iterati
 InputOption::VALUE_OPTIONAL  Cette option peut ou non avoir une valeur (par exemple : ``yell`` ou ``yell=loud``)
 ===========================  =================================================================================================
 
-Vous pouvez combiner VALUE_IS_ARRAY avec VALUE_REQUIRED ou VALUE_OPTIONAL de la manière suivante :
-
-.. code-block:: php
+Vous pouvez combiner ``VALUE_IS_ARRAY`` avec ``VALUE_REQUIRED`` ou ``VALUE_OPTIONAL`` de la manière suivante ::
 
     $this
         // ...
@@ -251,219 +364,19 @@ Vous pouvez combiner VALUE_IS_ARRAY avec VALUE_REQUIRED ou VALUE_OPTIONAL de la 
             'iterations',
             null,
             InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            'How many times should the message be printed?',
+            'Combien de fois voulez vous afficher le message ?',
             1
         );
 
-Demander de l'information à l'utilisateur
------------------------------------------
+Console Helpers
+---------------
 
-Lorsque vous créez des commandes, vous avez la possibilité de collecter plus
-d'informations de la part de l'utilisateur en lui posant des questions. Par exemple, supposons
-que vous souhaitiez confirmer une action avant de l'exécuter réellement. Ajoutez
-ce qui suit à votre commande::
+The console component also contains a set of "helpers" - different small
+tools capable of helping you with different tasks:
 
-    $dialog = $this->getHelperSet()->get('dialog');
-    if (!$dialog->askConfirmation(
-        $output,
-        '<question>Continue with this action?</question>',
-        false 
-    )) {
-        return;
-    }
-
-Dans ce cas, l'utilisateur va être interrogé par : « Continuer avec cette action » ;
-et à moins qu'il ne réponde par ``y``, la tâche va arrêter son exécution. Le
-troisième argument de ``askConfirmation`` est la valeur par défaut à retourner
-si l'utilisateur ne rentre aucune valeur.
-
-Vous pouvez aussi poser des questions nécessitant plus qu'une simple réponse telle oui/non.
-Par exemple, si vous aviez besoin de savoir le nom de quelque chose, vous pourriez
-faire la chose suivante::
-
-    $dialog = $this->getHelperSet()->get('dialog');
-    $name = $dialog->ask(
-        $output,
-        'Please enter the name of the widget',
-        'foo'  
-    );
-
-.. versionadded:: 2.2
-    La méthode ``askHiddenResponse`` a été ajouté à Symfony 2.2.
-
-Vous pouvez également poser une question et cacher la réponse. Ceci
-est particulièrement pratique pour les mots de passe::
-   
-    $dialog = $this->getHelperSet()->get('dialog');
-    $password = $dialog->askHiddenResponse(
-        $output,
-        'Quel le mot de passe de la base de données ?',
-        false
-    );
-
-.. caution::
-
-    Lorsque vous demandez une réponse cachée, Symfony utilisera soit un binaire,
-    soit il changera le mode stty, soit il utilisera autre chose pour cacher la
-    réponse. Si aucun n'est disponible, il se rabattra sur une question classique
-    à moins que vous n'ayez passé ``false`` comme troisième argument, comme dans
-    l'exemple ci-dessus. Dans ce cas, une RuntimeException sera levée.
-
-Poser une question et valider la réponse
-----------------------------------------
-
-Vous pouvez facilement poser des questions et valider les réponses avec 
-les méthodes intégrées::
-
-    $dialog = $this->getHelperSet()->get('dialog');
-
-    $validator = function ($value) {
-        if (trim($value) == '') {
-            throw new \Exception('La valeur ne peut être vide');
-        }
-    }
-
-    $password = $dialog->askAndValidate(
-        $output,
-        'Entrez le nom du widget, SVP',
-        $validator,
-        20,
-        'foo'
-    );
-
-Le callback de validation peut être n'importe quelle fonction callable PHP, le quatrième argument est
-le nombre maximal de tentatives, si il est mis à ``FALSE``, ce sera un nombre illimité de tentatives. le
-cinquième argument est la valeur par défaut.
-
-.. versionadded:: 2.2
-    La méthode ``askHiddenResponseAndValidate`` a été ajoutée dans Symfony 2.2.
-
-Vous pouvez poser une question et valider une réponse cachée::
-
-    $dialog = $this->getHelperSet()->get('dialog');
-
-    $validator = function ($value) {
-        if (trim($value) == '') {
-            throw new \Exception('Le mot de passe ne peut pas être vide');
-        }
-    };
-
-    $password = $dialog->askHiddenResponseAndValidate(
-        $output,
-        'Veuillez entrer le nom du widget',
-        $validator,
-        20,
-        false
-    );
-
-Si vous voulez permettre qu'une réponse soit visible si elle ne peut pas être
-cachée pour une raison quelconque, passez true comme cinquième argument.
-
-Afficher une barre de progression
----------------------------------
-
-.. versionadded:: 2.2
-    Le helper ``progress`` a été ajouté dans Symfony 2.2.
-
-Lorsque vous éxécutez des longues commandes, il peut être utile d'afficher
-une barre de progression qui se met à jour lorsque votre commande s'éxécute :
-
-.. image:: /images/components/console/progress.png
-
-Pour afficher les détails de la progression, utilisez le
-:class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`, passez lui un nombre
-total d'unités, et incrémentez la progression lorsque votre commande s'éxécute::
-
-    $progress = $app->getHelperSet()->get('progress');
-
-    $progress->start($output, 50);
-    $i = 0;
-    while ($i++ < 50) {
-        // fait quelque chose
-
-        // avance la progression d'1 unité
-        $progress->advance();
-    } 
-
-    $progress->finish();
-
-L'apparence de la progression peut également être personnalisé, avec certains
-niveaux de verbosité. Chacun de ces niveaux affiche différents items possibles,
-comme un pourcentage de complétion, une barre de progression ou une information
-du type actuel/total (ex 10/50)::
-
-    $progress->setFormat(ProgressHelper::FORMAT_QUIET);
-    $progress->setFormat(ProgressHelper::FORMAT_NORMAL);
-    $progress->setFormat(ProgressHelper::FORMAT_VERBOSE);
-    $progress->setFormat(ProgressHelper::FORMAT_QUIET_NOMAX);
-    // la valeur par défaut
-    $progress->setFormat(ProgressHelper::FORMAT_NORMAL_NOMAX);
-    $progress->setFormat(ProgressHelper::FORMAT_VERBOSE_NOMAX);
-
-Vous pouvez également contrôler différents caractères et la largeur
-utilisée pour la barre de progression::
-
-    // la partie finie de la barre
-    $progress->setBarCharacter('<comment>=</comment>');
-    // la partie infinie de la barre
-    $progress->setEmptyBarCharacter(' ');
-    $progress->setProgressChar('|');
-    $progress->setBarWidth(50);
-
-Pour voir les autres options disponibles, jetez un oeil à l'API
-de :class:`Symfony\\Component\\Console\\Helper\\ProgressHelper`.
-
-.. caution::
-
-    Pour des raisons de performance, attention de ne pas définir un pas
-    trop important. Par exemple, si vous itérez sur un nombre important
-    d'items, choisissez un nombre raisonable qui se met à jour sur plusieurs
-    itérations::
-    
-        $progress->start($output, 500);
-        $i = 0;
-        while ($i++ < 50000) {
-            // ... fait quelque chose
-
-            // avance toutes les 100 itérations
-            if ($i % 100 == 0) {
-                $progress->advance();
-            }
-        }
-
-
-Poser des questions et valider la réponse
------------------------------------------
-
-Vous pouvez facilement poser une question et valider une réponse grâce
-aux méthodes préconstruites::
-
-    $dialog = $this->getHelperSet()->get('dialog');
-
-    $validator = function ($value) {
-        if ('' === trim($value)) {
-            throw new \Exception('The value can not be empty');
-        }
-
-        return $value;
-    }
-
-    $password = $dialog->askAndValidate(
-        $output,
-        'Veuillez entrer le nom du widget',
-        $validator,
-        20,
-        'foo'
-    );
-
-Le callback de validation peut être n'importe quelle fonction PHP appelable. Le
-quatrième argument de la méthode :method:`Symfony\\Component\\Console\\Helper::askAndValidate`
-est le nombre maximum d'essais, définissez le à ``false`` pour
-un nombre illimité d'essais. Le cinquième argument est la valeur par défaut.
-
-Le callback doit lancer une exception si la valeur n'est pas acceptable. Veuillez
-noter que le callback **doit** retourner une valeur. La valeur peut être modifiée
-par le callback (elle sera retournée modifiée par le helper).
+* :doc:`/components/console/helpers/dialoghelper`: interactively ask the user for information
+* :doc:`/components/console/helpers/formatterhelper`: customize the output colorization
+* :doc:`/components/console/helpers/progresshelper`: shows a progress bar
 
 Tester les commandes
 --------------------
@@ -501,14 +414,21 @@ Vous pouvez tester l'envoi d'arguments et d'options à la commande en les passan
 en tant que tableau à la méthode
 :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`::
 
-    use Symfony\Component\Console\Tester\CommandTester;
+The :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
+method returns what would have been displayed during a normal call from the
+console.
+
+You can test sending arguments and options to the command by passing them
+as an array to the :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`
+method::
+
     use Symfony\Component\Console\Application;
+    use Symfony\Component\Console\Tester\CommandTester;
     use Acme\DemoBundle\Command\GreetCommand;
 
     class ListCommandTest extends \PHPUnit_Framework_TestCase
     {
-
-        //--
+        // ...
 
         public function testNameIsOutput()
         {
@@ -562,7 +482,7 @@ Appeler une commande depuis une autre est très simple::
 D'abord, vous :method:`Symfony\\Component\\Console\\Application::find` (« trouvez »
 en français) la commande que vous voulez exécuter en passant le nom de cette dernière.
 
-Ensuite, vous devez créer un nouvel :class:`Symfony\\Component\\Console\\Input\\ArrayInput`
+Ensuite, vous devez créer une nouvelle classe :class:`Symfony\\Component\\Console\\Input\\ArrayInput`
 avec les arguments et options que vous souhaitez passer à la commande.
 
 Éventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
@@ -585,3 +505,4 @@ En savoir plus !
 * :doc:`/components/console/single_command_tool`
 
 .. _Packagist: https://packagist.org/packages/symfony/console
+.. _ANSICON: http://adoxa.3eeweb.com/ansicon/
