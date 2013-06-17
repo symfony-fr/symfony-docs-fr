@@ -16,10 +16,10 @@ ou par exemple une base de données).
 Installation
 ------------
 
-Vous pouvez installer le composant de différentes manières :
+Vous pouvez installer le composant de deux manières différentes :
 
 * Utilisez le dépôt Git officiel (https://github.com/symfony/Config) ;
-* :doc:`Installez le via Composer</components/using_components>` (``symfony/config`` on `Packagist`_).
+* :doc:`Installez le via Composer </components/using_components>` (``symfony/config`` à `Packagist`_).
 
 Sections
 --------
