@@ -14,7 +14,7 @@ pour vos utilisateurs finaux.
 Utiliser Jpegoptim
 ------------------
 
-`Jpegoptim`_ est un utilitaire pour optimiser les fichiers JPEG.Pour l'utiliser avec
+`Jpegoptim`_ est un utilitaire pour optimiser les fichiers JPEG. Pour l'utiliser avec
 Assetic, ajoutez le bout de code suivant à votre configuration Assetic :
 
 .. configuration-block::
@@ -59,17 +59,17 @@ Il peut maintenant être utilisé dans un template :
     .. code-block:: html+jinja
 
         {% image '@AcmeFooBundle/Resources/public/images/example.jpg'
-            filter='jpegoptim' output='/images/example.jpg'
-        %}
-        <img src="{{ asset_url }}" alt="Example"/>
+            filter='jpegoptim' output='/images/example.jpg' %}
+            <img src="{{ asset_url }}" alt="Example"/>
         {% endimage %}
 
     .. code-block:: html+php
 
         <?php foreach ($view['assetic']->images(
             array('@AcmeFooBundle/Resources/public/images/example.jpg'),
-            array('jpegoptim')) as $url): ?>
-        <img src="<?php echo $view->escape($url) ?>" alt="Example"/>
+            array('jpegoptim')
+        ) as $url): ?>
+            <img src="<?php echo $view->escape($url) ?>" alt="Example"/>
         <?php endforeach; ?>
 
 Supprimer toutes les données EXIF
@@ -106,7 +106,7 @@ vous pouvez les supprimer en utilisant l'option ``strip_all`` :
         $container->loadFromExtension('assetic', array(
             'filters' => array(
                 'jpegoptim' => array(
-                    'bin' => 'path/to/jpegoptim',
+                    'bin'       => 'path/to/jpegoptim',
                     'strip_all' => 'true',
                 ),
             ),
@@ -157,7 +157,7 @@ Fonctions Twig : syntaxe courte
 -------------------------------
 
 Si vous utilisez Twig, il est possible de faire tout ceci avec une syntaxe
-raccourcie en activant et en utilisant les fonctions spéciales Twig.
+raccourcie en activant et en utilisant une fonction spéciale Twig.
 Commencez par ajouter la configuration suivante :
 
 .. configuration-block::
@@ -205,8 +205,7 @@ Le template Twig peut maintenant être modifié comme suit :
 
 .. code-block:: html+jinja
 
-    <img src="{{ jpegoptim('@AcmeFooBundle/Resources/public/images/example.jpg') }}"
-         alt="Example"/>
+    <img src="{{ jpegoptim('@AcmeFooBundle/Resources/public/images/example.jpg') }}" alt="Example"/>
 
 Vous pouvez spécifier le répertoire cible dans la configuration de la manière suivante :
 

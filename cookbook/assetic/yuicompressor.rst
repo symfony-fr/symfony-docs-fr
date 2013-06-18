@@ -83,15 +83,16 @@ partie de la couche Vue, ce travail doit être fait dans vos templates :
     .. code-block:: html+jinja
 
         {% javascripts '@AcmeFooBundle/Resources/public/js/*' filter='yui_js' %}
-        <script src="{{ asset_url }}"></script>
+            <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
     .. code-block:: html+php
 
         <?php foreach ($view['assetic']->javascripts(
             array('@AcmeFooBundle/Resources/public/js/*'),
-            array('yui_js')) as $url): ?>
-        <script src="<?php echo $view->escape($url) ?>"></script>
+            array('yui_js')
+        ) as $url): ?>
+            <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
 .. note::
@@ -110,15 +111,16 @@ utilisé pour minifier vos feuilles de style.
     .. code-block:: html+jinja
 
         {% stylesheets '@AcmeFooBundle/Resources/public/css/*' filter='yui_css' %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
         {% endstylesheets %}
 
     .. code-block:: html+php
 
         <?php foreach ($view['assetic']->stylesheets(
             array('@AcmeFooBundle/Resources/public/css/*'),
-            array('yui_css')) as $url): ?>
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $view->escape($url) ?>" />
+            array('yui_css')
+        ) as $url): ?>
+            <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
 Désactiver la minification en Mode Debug
@@ -136,20 +138,21 @@ n'est pas actif.
     .. code-block:: html+jinja
 
         {% javascripts '@AcmeFooBundle/Resources/public/js/*' filter='?yui_js' %}
-        <script src="{{ asset_url }}"></script>
+            <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
     .. code-block:: html+php
 
         <?php foreach ($view['assetic']->javascripts(
             array('@AcmeFooBundle/Resources/public/js/*'),
-            array('?yui_js')) as $url): ?>
-        <script src="<?php echo $view->escape($url) ?>"></script>
+            array('?yui_js')
+        ) as $url): ?>
+            <script src="<?php echo $view->escape($url) ?>"></script>
         <?php endforeach; ?>
 
 .. tip::
     
-    Plutôt que d'ajouter le filtre à la balise asset, vous pouvez aussi
+    Plutôt que d'ajouter le filtre à vos balises assets, vous pouvez aussi
     l'activer de façon globale en ajoutant l'attribut apply-to à la configuration
     du filtre, par exemple ``apply_to: "\.js$"`` pour le filtre yui_js.
     Pour que le filtre ne s'applique qu'en production, ajoutez le au fichier

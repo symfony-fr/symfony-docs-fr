@@ -53,6 +53,24 @@ La question « Veuillez entrer le nom du bundle » sera posée à l'utilisateur.
 pourra taper un nom qui sera retourné à la méthode ``ask``. S'il n'entre aucun nom,
 la valeur par défaut (``AcmeDemoBundle`` dans ce cas) sera retournée.
 
+Autocompletion
+~~~~~~~~~~~~~~
+
+.. versionadded:: 2.2
+Autocompletion for questions was added in Symfony 2.2.
+
+You can also specify an array of potential answers for a given question. These
+will be autocompleted as the user types::
+
+    $dialog = $this->getHelperSet()->get('dialog');
+    $bundleNames = array('AcmeDemoBundle', 'AcmeBlogBundle', 'AcmeStoreBundle');
+    $name = $dialog->ask(
+        $output,
+        'Please enter the name of a bundle',
+        'FooBundle',
+        $bundleNames
+    );
+
 Cacher la réponse de l'utilisateur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -61,7 +79,7 @@ Cacher la réponse de l'utilisateur
  
 Vous pouvez également poser une question et cacher la réponse. Ceci
 est particulièrement pratique pour les mots de passe::
-   
+
     $dialog = $this->getHelperSet()->get('dialog');
     $password = $dialog->askHiddenResponse(
         $output,
@@ -95,6 +113,7 @@ la méthode :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::askAndVa
                     'Le nom du bundle doit avoir \'Bundle\' comme suffixe.'
                 );
             }
+            return $answer;
         },
         false,
         'AcmeDemoBundle'
@@ -145,3 +164,115 @@ Vous pouvez poser une question et valider une réponse cachée::
 
 Si vous voulez permettre qu'une réponse soit visible si elle ne peut pas être
 cachée pour une raison quelconque, passez true comme cinquième argument.
+
+Laisser l'utilisateur choisir parmi une liste de réponse
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 2.2
+La méthode :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select`
+    a été ajouté depuis Symfony 2.2.
+
+Si vous déterminez une liste de réponse dans laquelle l'utilisateur peut choisir,
+vous pouvez utiliser la méthode ``ask`` citée précédemment, pour être sùr de la
+réponse de l'utilisateur, la méthode ``askAndValidate``.Les deux ont le même
+désavantage. Vous devez vous occuper de la gestion des valeurs incorrects.
+
+Au lieu de cela, vous pouvez utiliser la méthode
+:method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select` ,
+qui permet de restreindre la saisie à la liste prédéfinie::
+
+    $dialog = $app->getHelperSet()->get('dialog');
+    $colors = array('rouge', 'bleu', 'jaune');
+
+    $color = $dialog->select(
+        $output,
+        'Svp choisissez une couleur (par défaut rouge)',
+        $colors,
+        0
+    );
+    $output->writeln('Vous venez de sélectionner : '.$colors[$color]);
+
+    // ... Utilisez la variable $color
+
+L'option par défaut qui est utilisée, est fournie par le quatrième argument.
+Si cet argument est à  ``null``, Cela signifie qu'il n'y a pas de valeur par
+défaut.
+
+Si l'utilisateur propose une valeur incorrecte, un message d'erreur est affiché
+et il lui est demandé de faire à nouveau une proposition, jusqu'à ce que
+l'utilisateur entre une valeur correcte ou que le nombre d'essais soit atteint
+( que vous pouvez définir dans le cinquième argument). Le nombre d'essais est
+par défaut à ``false``, ce qui signifie qu'il n'y a pas de limite d'essais.
+Vous pouvez définir votre message d'erreur dans le sixième argument
+
+.. versionadded:: 2.3
+    le support de Multiselect a été ajouté à Symfony 2.3.
+
+Multiple Choices
+................
+
+Certaines fois, de multiple réponses pourraient être valides. Le DialogHelper
+permet cette fonctionnalité en utilisant des valeurs séparées par des virgules.
+Cette possibilité est désactivée par défaut. Pour l'activer, définissez le
+septième argument à ``true``::
+
+    // ...
+
+    $selected = $dialog->select(
+        $output,
+        'Sélectionnez votre couleur favorite (par défaut à rouge)',
+        $colors,
+        0,
+        false,
+        'La valeur "%s" est incorrecte',
+        true // active l'option multiselect
+    );
+
+    $selectedColors = array_map(function($c) use ($colors) {
+        return $colors[$c];
+    }, $selected)
+
+    $output->writeln('Vous venez de choisir: ' . implode(', ', $selectedColors));
+
+Maintenant, quand les utilisateurs saisissent ``1,2``, Le résultat obtenu est :
+ ``Vous venez de choisir: bleu, jaune``.
+
+Tester une commande nécessitant une entrée
+------------------------------------------
+
+Si vous écrivez un test unitaire pour une commande qui nécessite la saisie dans
+la ligne de commande, vous aurez besoin de surcharger le HelperSet utilisé par
+la commande::
+
+    use Symfony\Component\Console\Helper\DialogHelper;
+    use Symfony\Component\Console\Helper\HelperSet;
+
+    // ...
+    public function testExecute()
+    {
+        // ...
+        $commandTester = new CommandTester($command);
+
+        $dialog = $command->getHelper('dialog');
+        $dialog->setInputStream($this->getInputStream('Test\n'));
+        // Equivalent à l'entrée par l'utilisateur de "Test" et appuie sur ENTER
+        // Si vous avez d'une confirmation, "yes\n" fonctionne.
+
+        $commandTester->execute(array('command' => $command->getName()));
+
+        // $this->assertRegExp('/.../', $commandTester->getDisplay());
+    }
+
+    protected function getInputStream($input)
+    {
+        $stream = fopen('php://memory', 'r+', false);
+        fputs($stream, $input);
+        rewind($stream);
+
+        return $stream;
+    }
+
+En définissant le inputStream du ``DialogHelper``, vous imiter ce que fait la
+console en interne avec tous les utilisateurs qui entrent des données via la
+ligne de commande. De cette façon, vous pouvez tester toute interaction de
+l'utilisateur (même complexes) en passant les bonnes valeurs.
