@@ -1098,6 +1098,75 @@ manière de créer des formulaires, mais le choix final vous revient.
 
         $form->get('dueDate')->getData();
 
+Définir vos formulaire en tant que services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Définir votre formulaire en tant que service est une bonne pratique, et le
+rend très facilement utilisable dans votre application.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # src/Acme/TaskBundle/Resources/config/services.yml
+        services:
+            acme_demo.form.type.task:
+                class: Acme\TaskBundle\Form\Type\TaskType
+                tags:
+                    - { name: form.type, alias: task }
+
+    .. code-block:: xml
+
+        <!-- src/Acme/TaskBundle/Resources/config/services.xml -->
+        <service id="acme_demo.form.type.task" class="Acme\TaskBundle\Form\Type\TaskType">
+            <tag name="form.type" alias="task" />
+        </service>
+
+    .. code-block:: php
+
+        // src/Acme/TaskBundle/Resources/config/services.php
+        use Symfony\Component\DependencyInjection\Definition;
+
+        $container
+            ->register('acme_demo.form.type.task', 'Acme\TaskBundle\Form\Type\TaskType')
+            ->addTag('form.type', array(
+                'alias' => 'task',
+            ))
+        ;
+
+Et c'est tout! Maintenant, vous pouvez utiliser votre type de formulaire directement dans un
+contrôleur::
+
+    // src/Acme/TaskBundle/Controller/DefaultController.php
+    // ...
+
+    public function newAction()
+    {
+        $task = ...;
+        $form = $this->createForm('task', $task);
+
+        // ...
+    }
+
+ou même l'utiliser au sein d'un autre type de formulaire::
+
+    // src/Acme/TaskBundle/Form/Type/ListType.php
+    // ...
+
+    class ListType extends AbstractType
+    {
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            // ...
+
+            $builder->add('someTask', 'task');
+        }
+    }
+
+Lisez :ref:`form-cookbook-form-field-service` pour plus d'informations.
+
+
+
 .. index::
    pair: Forms; Doctrine
 
