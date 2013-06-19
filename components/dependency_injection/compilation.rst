@@ -128,7 +128,7 @@ traitées que lorsque le conteneur sera compilé et les Extensions chargées::
     // ...
     $container->compile();
 
-Les vameurs de ces parties de fichiers de configuration sont passées dans le
+Les valeurs de ces parties de fichiers de configuration sont passées dans le
 premier argument de la méthode ``load`` de l'extension::
 
     public function load(array $configs, ContainerBuilder $container)
