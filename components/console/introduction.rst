@@ -154,43 +154,6 @@ un argument optionnel ``last_name`` à la commande et faites en sorte que l'argu
 
     $this
         // ...
-        ->addArgument(
-            'name',
-            InputArgument::REQUIRED,
-            'Who do you want to greet?'
-        )
-        ->addArgument(
-            'last_name',
-            InputArgument::OPTIONAL,
-            'Your last name?'
-        );
-        // ...
-
-Vous avez maintenant accès à l'argument ``last_name`` depuis votre commande::
-
-    if ($lastName = $input->getArgument('last_name')) {
-        $text .= ' '.$lastName;
-    }
-
-La commande peut maintenant être utilisée de l'une des façons suivantes :
-
-.. code-block:: bash
-
-    $ app/console demo:greet Fabien
-    $ app/console demo:greet Fabien Potencier
-
-Utiliser des arguments de commande
-----------------------------------
-
-La partie la plus intéressante des commandes sont les arguments et options que
-vous pouvez rendre disponibles. Les arguments sont les chaînes de caractères -
-séparées par des espaces - qui viennent après le nom de la commande lui-même.
-Ils sont ordonnés, et peuvent être optionnels ou obligatoires. Par exemple, ajoutez
-un argument optionnel ``last_name`` à la commande et faites en sorte que l'argument
-``name`` soit obligatoire::
-
-    $this
-        // ...
         ->addArgument('name', InputArgument::REQUIRED, 'Who do you want to greet?')
         ->addArgument('last_name', InputArgument::OPTIONAL, 'Your last name?')
         // ...
