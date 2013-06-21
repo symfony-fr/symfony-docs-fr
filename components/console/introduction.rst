@@ -50,7 +50,7 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
         {
             $this
                 ->setName('demo:greet')
-                ->setDescription('Saluez quelqu'un')
+                ->setDescription('Saluez quelqu\'un')
                 ->addArgument(
                     'name',
                     InputArgument::OPTIONAL,
