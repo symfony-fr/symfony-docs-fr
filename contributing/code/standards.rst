@@ -53,7 +53,7 @@ ci-dessous :
          * @return string|null Transformed input
          */
         private function transformText($dummy, array $options = array())
-         {
+        {
             $mergedOptions = array_merge($options, array(
                 'some_default' => 'values',
             ));
