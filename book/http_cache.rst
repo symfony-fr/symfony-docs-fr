@@ -1011,22 +1011,13 @@ ESI est générée. Mais s'il y a aucune passerelle de cache, ou si elle ne
 supporte pas ESI, Symfony2 mergera le contenu de la page incluse dans
 la page principale, comme si vous aviez appelé ``render``.
 
-When using the default ``render`` function (or setting the renderer to
-``inline``), Symfony2 merges the included page content into the main one
-before sending the response to the client. But if you use the ``esi`` renderer
-(i.e. call ``render_esi``), *and* if Symfony2 detects that it's talking to a
-gateway cache that supports ESI, it generates an ESI include tag. But if there
-is no gateway cache or if it does not support ESI, Symfony2 will just merge
-the included page content within the main one as it would have done if you had
-used ``render``.
-
 .. note::
 
     Symfony2 détecte si la passerelle gère les marqueurs ESI grâce à
     une autre spécification de Akamaï qui est d'ores et déjà supporté
     par le reverse proxy de Symfony2.
 
-L'action embarquée peut maintenant spécifier ces propres règles de
+L'action incluse peut maintenant spécifier ces propres règles de
 gestion du cache, entièrement indépendamment du reste de la page.
 
 .. code-block:: php
