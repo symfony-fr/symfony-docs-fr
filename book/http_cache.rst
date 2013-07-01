@@ -948,7 +948,7 @@ configuration de l'application :
         ));
 
 Maintenant, prenons l'exemple d'une page statique, excepté pour
-l'espace « Actualités » qui se trouve en base de page. Avec ESI, il est
+l'espace « Actualités » qui se trouve en bas de page. Avec ESI, il est
 possible de mettre en cache la partie qui gère les actualités
 indépendamment du reste de la page.
 
