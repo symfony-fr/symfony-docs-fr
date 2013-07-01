@@ -996,9 +996,9 @@ configurer le marqueur ESI :
         ) ?>
 
 En utilisant le rendu ``esi`` (via la fonction Twig ``render_esi``), vous
-spécifiez à Symfony que l'action doit être retournée comme un tag ESI.
+spécifiez à Symfony que l'action doit être retournée dans une balise ESI.
 Vous vous demandez peut être pourquoi il est préférable d'utiliser un helper
-plutôt que d'afficher le tag ESI vous même. C'est parce qu'en utilisant un
+plutôt que d'afficher la balise ESI vous même. C'est parce qu'en utilisant un
 helper, vous êtes sur que votre application fonctionnera même si aucune
 passerelle de cache n'est installée.
 
