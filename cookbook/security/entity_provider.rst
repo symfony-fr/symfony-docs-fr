@@ -373,7 +373,7 @@ la classe ``UserRepository``::
                 // s'il n'y a pas d'entrée correspondante aux critères
                 $user = $q->getSingleResult();
             } catch (NoResultException $e) {
-                throw new UsernameNotFoundException(sprintf('Unable to find an active admin AcmeUserBundle:User object identified by "%s".', $username), null, 0, $e);
+                throw new UsernameNotFoundException(sprintf('Unable to find an active admin AcmeUserBundle:User object identified by "%s".', $username), 0, $e);
             }
 
             return $user;
