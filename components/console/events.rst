@@ -58,8 +58,9 @@ soit exécutée.
 Après que la commande soit terminée, l'événement ``ConsoleEvents::TERMINATE``
 est envoyé. Il peut être utiliser pour faire certaines actions à exécuter pour
 toutes les commandes ou pour nettoyer ce qui a été initié avec l'écouteur
-``ConsoleEvents::COMMAND``( comme envoyer des logs, fermer une connection à la base de données, envoyer
-des emails ...). Un écouteur peut aussi modifier le code de sortie.
+``ConsoleEvents::COMMAND``( comme envoyer des logs, fermer une connection à la
+base de données, envoyer des emails ...). Un écouteur peut aussi modifier le
+code de sortie.
 
 Les écouteurs reçoivent un événement de classe
 :class:`Symfony\\Component\\Console\\Event\\ConsoleTerminateEvent` ::

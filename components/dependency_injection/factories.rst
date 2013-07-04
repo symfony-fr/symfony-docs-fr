@@ -165,7 +165,7 @@ en tant qu'argument :
                 factory_service:  newsletter_factory
                 factory_method:   get
                 arguments:
-                    -             @templating
+                    - "@templating"
 
     .. code-block:: xml
 

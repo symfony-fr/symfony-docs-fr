@@ -176,7 +176,7 @@ la console a 5 niveau de verbosité. Ils sont définis dans la classe
 :class:`Symfony\\Component\\Console\\Output\\OutputInterface`:
 
 =======================================  =========================================
-Option                                   Valeur
+Mode                                     Valeur
 =======================================  =========================================
 OutputInterface::VERBOSITY_QUIET         N'affiche pas les messages
 OutputInterface::VERBOSITY_NORMAL        Le niveau par défaut
@@ -269,7 +269,7 @@ Vous accédez à l'argument ``names`` comme un tableau::
 Il y a 3 différents arguments que vous pouvez utiliser.:
 
 ===========================  ======================================================================================================
-Option                       Valeur
+Mode                         Valeur
 ===========================  ======================================================================================================
 InputArgument::REQUIRED      L'argument est requis
 InputArgument::OPTIONAL      L'argument est optionnel et peut être omis
@@ -407,20 +407,11 @@ faciliter le « testing » sans avoir de console réelle::
         }
     }
 
-La méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`
-retourne ce qui aurait été retourné durant un appel normal depuis la console.
+La méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
+retourne ce qui aurait été rendu dans l'appel normal de la commande via la console.
 
-Vous pouvez tester l'envoi d'arguments et d'options à la commande en les passant
-en tant que tableau à la méthode
-:method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`::
-
-The :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
-method returns what would have been displayed during a normal call from the
-console.
-
-You can test sending arguments and options to the command by passing them
-as an array to the :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute`
-method::
+Vous pouvez tester les arguments et options envoyés à la commande, en les passant
+dans un tableau à la méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute` ::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;

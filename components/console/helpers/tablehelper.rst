@@ -13,7 +13,7 @@ des tableaux de données:
 .. image:: /images/components/console/table.png
 
 Pour afficher un tableau, utilisez la classe :class:`Symfony\\Component\\Console\\Helper\\TableHelper`,
-définissez les entêtes, les lignes et  afficher::
+définissez les entêtes, les lignes et  affichez::
 
     $table = $app->getHelperSet()->get('table');
     $table
