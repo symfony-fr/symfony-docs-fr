@@ -24,7 +24,7 @@ de la classe. Pour effectuer cela, vous avez besoin d'ajouter un argument
     {
         protected $mailer;
 
-        public function __construct(Mailer $mailer)
+        public function __construct(\Mailer $mailer)
         {
             $this->mailer = $mailer;
         }
@@ -44,7 +44,7 @@ classe via la configuration du conteneur de service :
                 # ...
             newsletter_manager:
                 class:     NewsletterManager
-                arguments: [@my_mailer]
+                arguments: ["@my_mailer"]
 
     .. code-block:: xml
 
@@ -108,7 +108,7 @@ d'une méthode mutateur qui accepte la dépendance::
     {
         protected $mailer;
 
-        public function setMailer(Mailer $mailer)
+        public function setMailer(\Mailer $mailer)
         {
             $this->mailer = $mailer;
         }
@@ -126,7 +126,7 @@ d'une méthode mutateur qui accepte la dépendance::
             newsletter_manager:
                 class:     NewsletterManager
                 calls:
-                    - [ setMailer, [ @my_mailer ] ]
+                    - [setMailer, ["@my_mailer"]]
 
     .. code-block:: xml
 
@@ -197,7 +197,7 @@ la classe::
             newsletter_manager:
                 class:     NewsletterManager
                 properties:
-                    mailer: @my_mailer
+                    mailer: "@my_mailer"
 
     .. code-block:: xml
 
@@ -220,6 +220,7 @@ la classe::
         $container->setDefinition('newsletter_manager', new Definition(
             'NewsletterManager'
         ))->setProperty('mailer', new Reference('my_mailer')));
+
 
 Utiliser l'injection via une propriété n'apporte presque que des inconvénients,
 cette méthode est similaire à l'injection par mutateur mais avec d'autres

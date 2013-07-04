@@ -1,25 +1,8 @@
 ﻿.. index::
    single: Dependency Injection; Service definitions
 
-Travailler avec les paramètres et définitions du conteneur
-==========================================================
-
-Récupérer et Définir les Paramètres du Conteneur
-------------------------------------------------
-
-Travailler avec les paramètres du conteneur est très facile si vous utilisez
-les méthodes d'accès du conteneur pour les paramètres. Vous pouvez contrôler
-qu'un paramètre a été défini dans le conteneur avec::
-
-     $container->hasParameter($name);
-
-Vous pouvez récupérer des paramètres définis dans le conteneur avec::
-
-    $container->getParameter($name);
-
-et définir un paramètre dans le conteneur grâce à::
-
-    $container->setParameter($name, $value);
+Travailler avec les définitions du conteneur
+============================================
 
 Récupérer et définir les définitions de service
 -----------------------------------------------
@@ -138,3 +121,17 @@ de nouveaux appels grâce à la méthode::
 
     $definition->setMethodCalls($methodCalls);
 
+.. tip::
+
+    Il y  a plein d'exemples d'utilisation des définitions dans les blocs de code
+    PHP d'exemples de configuration dans les pages
+    :doc:`/components/dependency_injection/factories` et
+    :doc:`/components/dependency_injection/parentservices`.
+
+.. note::
+
+    Les méthodes présentées qui permettent de modifier les définitions des services
+    peuvent seulement être utilisées avant la compilation du conteneur, une fois
+    que le conteneur est compilé, vous ne pouvez plus manipuler les définitions
+    des services. Pour apprendre plus sur la compilation du conteneur, lisez
+    :doc:`/components/dependency_injection/compilation`.
