@@ -57,7 +57,7 @@ Autocompletion
 ~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-Autocompletion for questions was added in Symfony 2.2.
+    Autocompletion for questions was added in Symfony 2.2.
 
 You can also specify an array of potential answers for a given question. These
 will be autocompleted as the user types::
@@ -169,7 +169,7 @@ Laisser l'utilisateur choisir parmi une liste de réponse
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-La méthode :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select`
+    La méthode :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select`
     a été ajouté depuis Symfony 2.2.
 
 Si vous déterminez une liste de réponse dans laquelle l'utilisateur peut choisir,

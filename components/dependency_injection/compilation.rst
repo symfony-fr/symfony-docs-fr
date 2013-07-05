@@ -48,12 +48,12 @@ et peuvent être enregistrées dans le conteneur avec::
 Le principal travail de l'extension est accompli dans la méthode ``load``.
 Dans la méthode de chargement, vous pouvez charger la configuration depuis un
 ou plusieurs fichiers de configuration tout comme vous pouvez manipuler les définitions
-du conteneur en utilisant les méthodes montrées dans doc:`/components/dependency_injection/definitions`.
+du conteneur en utilisant les méthodes montrées dans :doc:`/components/dependency_injection/definitions`.
 
-La méthode ``load`` recoit en paramètre un conteneur neuf à configurer, qui
+La méthode ``load`` reçoit en paramètre un conteneur neuf à configurer, qui
 est ensuite fusionné dans le conteneur dans lequel il est enregistré. Cela
 vous permet d'avoir plusieurs extensions qui gèrent les définitions de conteneur
-indépendament. Les extensions ne s'ajoutent pas à la configuration des conteneurs
+indépendamment. Les extensions ne s'ajoutent pas à la configuration des conteneurs
 au moment de l'ajout, mais sont traitées lorsque la méthode ``compile`` du conteneur
 est appelée.
 
@@ -71,7 +71,7 @@ Une extension très simple peut charger des fichiers de configuration dans le co
             $loader = new XmlFileLoader(
                 $container,
                 new FileLocator(__DIR__.'/../Resources/config')
-            );            
+            );
             $loader->load('services.xml');
         }
 
@@ -121,14 +121,21 @@ traitées que lorsque le conteneur sera compilé et les Extensions chargées::
     use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
     $container = new ContainerBuilder();
+    $container->registerExtension(new AcmeDemoExtension);
+
     $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
     $loader->load('config.yml');
 
-    $container->registerExtension(new AcmeDemoExtension);
     // ...
     $container->compile();
 
-Les vameurs de ces parties de fichiers de configuration sont passées dans le
+.. note::
+
+    Quand vous chargez un fichier de configuration qui utilise un alias d'extension
+    comme clé, l'extension doit être déjà enregistrée par le constructeur du
+    conteneur ou une exception sera levée.
+
+Les valeurs de ces parties de fichiers de configuration sont passées dans le
 premier argument de la méthode ``load`` de l'extension::
 
     public function load(array $configs, ContainerBuilder $container)
@@ -223,12 +230,12 @@ ainsi que la validation de la configuration::
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $container->setParameter('acme_demo.FOO', $config['foo'])
+        $container->setParameter('acme_demo.FOO', $config['foo']);
 
         // ...
     }
 
-Des prérequis de configuration plus complexes peuvent être pris en charge
+Des pré-requis de configuration plus complexes peuvent être pris en charge
 dans les classes Extension. Par exemple, vous pouvez choisir de charger un
 fichier de configuration de service principal, mais aussi d'en charger un
 secondaire seulement si un paramètre spécifique est défini::
@@ -239,11 +246,10 @@ secondaire seulement si un paramètre spécifique est défini::
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader( 
+        $loader = new XmlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
-        ); 
-
+        );
         $loader->load('services.xml');
 
         if ($config['advanced']) {
@@ -253,12 +259,62 @@ secondaire seulement si un paramètre spécifique est défini::
 
 .. note::
 
+    Juste enregistrer une extension dans le conteneur n'est pas suffisant pour
+    pour qu'elle soit traité avec les autres extensions quand le conteneur est
+    compilé. Chargé le fichier de configuration comme ci-dessus en utilisant
+    l'alias de l'extension comme une clé vous assure que l'extension est chargée.
+    Le constructeur du conteneur peut aussi les charger avec sa méthode
+
+    :method:`Symfony\\Component\\DependencyInjection\\ContainerBuilder::loadFromExtension`
+    method::
+
+        use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+        $container = new ContainerBuilder();
+        $extension = new AcmeDemoExtension();
+        $container->registerExtension($extension);
+        $container->loadFromExtension($extension->getAlias());
+        $container->compile();
+
+
+.. note::
+
     Si vous devez manipuler la configuration chargée par une extension, alors
     vous ne pouvez pas le faire depuis une autre extension qui utilise un conteneur
     neuf. Vous devez plutôt utiliser une passe de compilateur qui fonctionne avec
     l'ensemble du conteneur après que les extensions ont été traitées.
 
 .. _components-dependency-injection-compiler-passes:
+
+Préfixer une configuration en passant par une extension
+-------------------------------------------------------
+
+.. versionadded:: 2.2
+La possibilité de préfixer la configuration d'un bundle est nouvelle dans Symfony 2.2.
+
+Une extension peut préfixer la configuration de n'importe quel bundle avant que
+la méthode ``load()`` soit appelée en implémentant la classe :class:`Symfony\\Component\\DependencyInjection\\Extension\\PrependExtensionInterface`::
+
+    use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+    // ...
+
+    class AcmeDemoExtension implements ExtensionInterface, PrependExtensionInterface
+    {
+        // ...
+
+        public function prepend()
+        {
+            // ...
+
+            $container->prependExtensionConfig($name, $config);
+
+            // ...
+        }
+    }
+
+Pour plus de détails, lisez :doc:`/cookbook/bundles/prepend_extension`, qui est
+spécifique au Framework Symfony2, mais contient beaucoup détail sur cette
+fonctionnalité.
 
 Créer une Passe de Compilateur
 ------------------------------
@@ -273,11 +329,14 @@ pas non plus quelque chose dont vous aurez besoin tous les jours.
 La passe de compilateur doit avoir la méthode ``process`` qui est passée au
 conteneur qui doit être compilé::
 
-    class CustomCompilerPass
+    use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+    class CustomCompilerPass implements CompilerPassInterface
     {
         public function process(ContainerBuilder $container)
         {
-           //--
+           // ...
         }
     }
 
@@ -338,39 +397,6 @@ par défaut ont été exécutées, vous pouvez faire comme cela::
         PassConfig::TYPE_AFTER_REMOVING
     );
 
-Gérer la Configuration avec des Extensions
-------------------------------------------
-
-Tout comme vous pouvez charger la configuration directement dans le conteneur,
-comme c'est expliqué dans l':doc:`/components/dependency_injection/introduction`, vous
-pouvez aussi la gérer en enregistrant des extensions dans le conteneur. Les
-extensions doivent implémenter l'interface
-:class:`Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface` et
-peuvent être enregistrées dans le conteneur avec::
-
-    $container->registerExtension($extension);
-
-Le travail principal d'une extension se déroule dans la méthode ``load``.
-Dans cette dernière, vous pouvez charger votre configuration depuis un ou
-plusieurs fichiers de configuration ainsi que manipuler les définitions du
-conteneur en utilisant les méthodes montrées dans
-:doc:`/components/dependency_injection/definitions`.
-
-Un nouveau conteneur à définir est passé à la méthode ``load``, qui est
-ensuite fusionné avec le conteneur avec lequel il est enregistré. Cela
-vous permet d'avoir plusieurs extensions qui gèrent les définitions du
-conteneur indépendemment. Les extensions n'ajoutent rien à la configuration
-des conteneurs lorsqu'elles sont ajoutées mais sont traitées quand la méthode
-``compile`` du conteneur est appelée.
-
-.. note::
-
-    Si vous devez manipuler la configuration chargée par une extension, alors
-    vous ne pouvez pas le faire depuis une autre extension comme elle utilise
-    un nouveau conteneur. Pour cela, vous devriez plutôt utiliser une passe de
-    compilateur à la place qui fonctionne avec le conteneur complet après que
-    les extensions ont été traitées.
-
 .. _components-dependency-injection-dumping:
 
 « Dumper » la Configuration pour plus de Performance
@@ -394,10 +420,10 @@ Le ``PhpDumper`` facilite le « dump » du conteneur compilé::
 
     if (file_exists($file)) {
         require_once $file;
-        $container = new ProjectServiceContiner();
+        $container = new ProjectServiceContainer();
     } else {
         $container = new ContainerBuilder();
-        //--
+        // ...
         $container->compile();
 
         $dumper = new PhpDumper($container);
@@ -416,14 +442,14 @@ la « dumpez »::
         $container = new MyCachedContainer();
     } else {
         $container = new ContainerBuilder();
-        //--
+        // ...
         $container->compile();
 
         $dumper = new PhpDumper($container);
         file_put_contents(
-            $file,  
+            $file,
             $dumper->dump(array('class' => 'MyCachedContainer'))
-        );  
+        );
     }
 
 Vous allez maintenant profiter de la rapidité du conteneur PHP configuré tout en
@@ -449,10 +475,10 @@ mis en cache en production mais aussi d'avoir une configuration toujours à jour
         $container = new MyCachedContainer();
     } else {
         $container = new ContainerBuilder();
-        //--
+        // ...
         $container->compile();
 
-        if (!$isDebug){
+        if (!$isDebug) {
             $dumper = new PhpDumper($container);
             file_put_contents(
                 $file,
@@ -467,11 +493,11 @@ chaque requête. Ceci peut être fait en cachant les fichiers utilisés pour con
 le conteneur de la manière décrite dans « :doc:`/components/config/caching` » dans
 la documentation du composant Config.
 
-Vous n'avez pas besoin de vous soucier des fichiers à mettre en cache car le contructeur
-du conteneur garde une trâce de toute les ressources utilisées pour le configurer, pas
+Vous n'avez pas besoin de vous soucier des fichiers à mettre en cache car le constructeur
+du conteneur garde une trace de toute les ressources utilisées pour le configurer, pas
 seulement les fichiers de configuration mais également les classes d'extension et les
 passes de compilateur. Cela signifie que tout changement dans l'un de ces fichiers
-invalidera le cache et déclenchera la regénération du conteneur. Vous avez juste besoin
+invalidera le cache et déclenchera la régénération du conteneur. Vous avez juste besoin
 de demander ces ressources au conteneur et les utiliser comme metadonnées pour le cache::
 
     // ...
@@ -484,7 +510,7 @@ de demander ces ressources au conteneur et les utiliser comme metadonnées pour 
 
     if (!$containerConfigCache->isFresh()) {
         $containerBuilder = new ContainerBuilder();
-        //--
+        // ...
         $containerBuilder->compile();
 
         $dumper = new PhpDumper($containerBuilder);
