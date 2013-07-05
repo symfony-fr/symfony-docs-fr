@@ -9,7 +9,7 @@ Marquer les services comme publics / privés
 
 Lorsque vous définissez des services, vous allez généralement vouloir avoir
 accès à ces définitions depuis le code de votre application. Ces services
-sont dits ``publics``. Par exemple, le service ``doctrine`` enregistré dans
+sont dits ``public``. Par exemple, le service ``doctrine`` enregistré dans
 le conteneur lorsque vous utilisez le DoctrineBundle est un service public
 auquel vous pouvez accéder via::
 

@@ -82,7 +82,7 @@ suivants en tant que services :
             acme_mailer.transport.smtp:
                 class: \Swift_SmtpTransport
                 arguments:
-                    - %mailer_host%
+                    - "%mailer_host%"
                 tags:
                     -  { name: acme_mailer.transport }
             acme_mailer.transport.sendmail:
@@ -140,8 +140,8 @@ n'importe quel service ayant le tag personnalisé::
             );
 
             $taggedServices = $container->findTaggedServiceIds(
-                'acme_mailer.transport' 
-            ); 
+                'acme_mailer.transport'
+            );
             foreach ($taggedServices as $id => $attributes) {
                 $definition->addMethodCall(
                     'addTransport',
@@ -203,7 +203,7 @@ Pour commencer, changez la classe ``TransportChain``::
                return $this->transports[$alias];
             }
             else {
-               return null;
+               return;
             }
         }
     }
@@ -223,7 +223,7 @@ Pour répondre à cette question, changez la déclaration du service comme suit 
             acme_mailer.transport.smtp:
                 class: \Swift_SmtpTransport
                 arguments:
-                    - %mailer_host%
+                    - "%mailer_host%"
                 tags:
                     -  { name: acme_mailer.transport, alias: foo }
             acme_mailer.transport.sendmail:
