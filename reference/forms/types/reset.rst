@@ -10,7 +10,7 @@ Type de champ reset
 Un bouton qui remets à zéro tous les champs à leurs valeurs d'origine.
 
 +----------------------+---------------------------------------------------------------------+
-| Rendu comme          | ``input`` ``reset`` tag                                             |
+| Rendu comme          | Balise ``input`` ``reset``                                          |
 +----------------------+---------------------------------------------------------------------+
 | Options              | - `attr`_                                                           |
 | héritées             | - `disabled`_                                                       |
@@ -22,8 +22,8 @@ Un bouton qui remets à zéro tous les champs à leurs valeurs d'origine.
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType` |
 +----------------------+---------------------------------------------------------------------+
 
-Inherited options
------------------
+Options héritées
+----------------
 
 .. include:: /reference/forms/types/options/button_attr.rst.inc
 

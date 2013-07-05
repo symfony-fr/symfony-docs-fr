@@ -14,74 +14,78 @@ Ci-dessous, vous avez des informations sur l'ensemble des tags disponibles dans 
 Il pourrait aussi y avoir des « tags » dans d'autres bundles que vous utilisez
 et qui ne sont pas listés ici.
 
-+-----------------------------------+---------------------------------------------------------------------------+
-| Nom du tag                        | Utilisation                                                               |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.asset`_                  | Enregistre une ressource au manager de ressources courant                 |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.factory_worker`_         | Ajoute un ``factory worker``                                              |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.filter`_                 | Enregistre un filtre                                                      |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.formula_loader`_         | Ajoute un chargeur au manager de ressources courant                       |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.formula_resource`_       | Ajoute une ressource au manager de ressources courant                     |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.templating.php`_         | Supprime le service si le moteur de rendu php est désactivé               |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `assetic.templating.twig`_        | Supprime le service si le moteur de rendu Twig est désactivé              |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `data_collector`_                 | Crée une classe qui collecte des données personnalisées pour le profileur |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `doctrine.event_listener`_        | Ajoute un écouteur d'événements Doctrine                                  |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `doctrine.event_subscriber`_      | Ajoute un souscripteur d'événements Doctrine                              |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `form.type`_                      | Crée un type de champ de formulaire personnalisé                          |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `form.type_extension`_            | Crée une « extension de formulaire » personnalisée                        |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `form.type_guesser`_              | Ajoute votre propre logique pour la « prédiction de type de formulaire »  |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.cache_clearer`_           | Enregistre votre service pour qu'il soit appelé durant la suppression     |
-|                                   | du cache                                                                  |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.cache_warmer`_            | Enregistre votre service pour qu'il soit appelé durant la mise en cache   |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.event_listener`_          | Écoute différents évènements/hooks de Symfony                             |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents évènements/hooks de Symfony    |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `kernel.fragment_renderer`_       | Ajoute de nouvelles stratégies de rendu de contenu HTTP                   |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `monolog.logger`_                 | Pour écrire des logs dans un canal de log personnalisé                    |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `monolog.processor`_              | Ajoute un processeur personnalisé pour les logs                           |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `routing.loader`_                 | Enregistre un service personnalisé qui charge les routes                  |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `security.voter`_                 | Ajoute un voteur personnalisé à la logique d'autorisation de Symfony      |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `security.remember_me_aware`_     | Pour permettre l'authentification avec « se souvenir de moi »             |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `serializer.encoder`_             | Enregistre un nouvel encodeur dans le service ``serializer``              |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `serializer.normalizer`_          | Enregistre un nouvel normalisateur dans le service ``serializer``         |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                             |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `templating.helper`_              | Rend votre service accessible dans les templates PHP                      |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `translation.loader`_             | Enregistre un service personnalisé qui charge les traductions             |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `twig.extension`_                 | Enregistre une extension Twig personnalisée                               |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `twig.loader`_                    | Enregistre un service personnalisé pour charger les modèles Twig          |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `validator.constraint_validator`_ | Crée votre propre contrainte de validation personnalisée                  |
-+-----------------------------------+---------------------------------------------------------------------------+
-| `validator.initializer`_          | Enregistre un service qui initialise les objets avant validation          |
-+-----------------------------------+---------------------------------------------------------------------------+
++-----------------------------------+----------------------------------------------------------------------------+
+| Nom du tag                        | Utilisation                                                                |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.asset`_                  | Enregistre une ressource au manager de ressources courant                  |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.factory_worker`_         | Ajoute un ``factory worker``                                               |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.filter`_                 | Enregistre un filtre                                                       |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.formula_loader`_         | Ajoute un chargeur au manager de ressources courant                        |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.formula_resource`_       | Ajoute une ressource au manager de ressources courant                      |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.templating.php`_         | Supprime le service si le moteur de rendu php est désactivé                |
++-----------------------------------+----------------------------------------------------------------------------+
+| `assetic.templating.twig`_        | Supprime le service si le moteur de rendu Twig est désactivé               |
++-----------------------------------+----------------------------------------------------------------------------+
+| `data_collector`_                 | Crée une classe qui collecte des données personnalisées pour le profileur  |
++-----------------------------------+----------------------------------------------------------------------------+
+| `doctrine.event_listener`_        | Ajoute un écouteur d'événements Doctrine                                   |
++-----------------------------------+----------------------------------------------------------------------------+
+| `doctrine.event_subscriber`_      | Ajoute un souscripteur d'événements Doctrine                               |
++-----------------------------------+----------------------------------------------------------------------------+
+| `form.type`_                      | Crée un type de champ de formulaire personnalisé                           |
++-----------------------------------+----------------------------------------------------------------------------+
+| `form.type_extension`_            | Crée une « extension de formulaire » personnalisée                         |
++-----------------------------------+----------------------------------------------------------------------------+
+| `form.type_guesser`_              | Ajoute votre propre logique pour la « prédiction de type de formulaire »   |
++-----------------------------------+----------------------------------------------------------------------------+
+| `kernel.cache_clearer`_           | Enregistre votre service pour qu'il soit appelé durant la suppression      |
+|                                   | du cache                                                                   |
++-----------------------------------+----------------------------------------------------------------------------+
+| `kernel.cache_warmer`_            | Enregistre votre service pour qu'il soit appelé durant la mise en cache    |
++-----------------------------------+----------------------------------------------------------------------------+
+| `kernel.event_listener`_          | Écoute différents évènements/hooks de Symfony                              |
++-----------------------------------+----------------------------------------------------------------------------+
+| `kernel.event_subscriber`_        | Pour s'abonner à un ensemble de différents évènements/hooks de Symfony     |
++-----------------------------------+----------------------------------------------------------------------------+
+| `kernel.fragment_renderer`_       | Ajoute de nouvelles stratégies de rendu de contenu HTTP                    |
++-----------------------------------+----------------------------------------------------------------------------+
+| `monolog.logger`_                 | Pour écrire des logs dans un canal de log personnalisé                     |
++-----------------------------------+----------------------------------------------------------------------------+
+| `monolog.processor`_              | Ajoute un processeur personnalisé pour les logs                            |
++-----------------------------------+----------------------------------------------------------------------------+
+| `routing.loader`_                 | Enregistre un service personnalisé qui charge les routes                   |
++-----------------------------------+----------------------------------------------------------------------------+
+| `security.voter`_                 | Ajoute un voteur personnalisé à la logique d'autorisation de Symfony       |
++-----------------------------------+----------------------------------------------------------------------------+
+| `security.remember_me_aware`_     | Pour permettre l'authentification avec « se souvenir de moi »              |
++-----------------------------------+----------------------------------------------------------------------------+
+| `serializer.encoder`_             | Enregistre un nouvel encodeur dans le service ``serializer``               |
++-----------------------------------+----------------------------------------------------------------------------+
+| `serializer.normalizer`_          | Enregistre un nouvel normalisateur dans le service ``serializer``          |
++-----------------------------------+----------------------------------------------------------------------------+
+| `swiftmailer.plugin`_             | Enregistre un plugin SwiftMailer personnalisé                              |
++-----------------------------------+----------------------------------------------------------------------------+
+| `templating.helper`_              | Rend votre service accessible dans les templates PHP                       |
++-----------------------------------+----------------------------------------------------------------------------+
+| `translation.loader`_             | Enregistre un service personnalisé qui charge les traductions              |
++-----------------------------------+----------------------------------------------------------------------------+
+| `translation.extractor`_          | Enregistre un service personnalisé qui extrait les traductions d'un fichier|
++-----------------------------------+----------------------------------------------------------------------------+
+| `translation.dumper`_             | Enregistre un service personnalisé qui exporte les messages de traduction  |
++-----------------------------------+----------------------------------------------------------------------------+
+| `twig.extension`_                 | Enregistre une extension Twig personnalisée                                |
++-----------------------------------+----------------------------------------------------------------------------+
+| `twig.loader`_                    | Enregistre un service personnalisé pour charger les modèles Twig           |
++-----------------------------------+----------------------------------------------------------------------------+
+| `validator.constraint_validator`_ | Crée votre propre contrainte de validation personnalisée                   |
++-----------------------------------+----------------------------------------------------------------------------+
+| `validator.initializer`_          | Enregistre un service qui initialise les objets avant validation           |
++-----------------------------------+----------------------------------------------------------------------------+
 
 assetic.asset
 -------------
@@ -201,7 +205,7 @@ En dernier, appliquez le filtre:
 Vous pouvez aussi appliquer un filtre à travers les options de configuration de
 ``assetic.filters.my_filter.apply_to`` décrites ici :doc:`/cookbook/assetic/apply_to_option`.
 Dans l'ordre pour faire ceci, vous devez définir votre service de filtre dans un fichier de
-configuration xml séparé puis pointer ce fichier via la clé de configuration
+configuration xml séparé puis pointer vers le chemine de ce fichier via la clé de configuration
 ``assetic.filters.my_filter.resource``
 
 assetic.formula_loader
@@ -979,6 +983,134 @@ besoin d'un fichier de ressource, mais il pourrait soit être vide ou soit
 contenir des informations sur le chargement de ces ressources depuis la
 base de données. Le fichier est essentiel pour déclencher la méthode ``load`` de votre
 chargeur personnalisé.
+
+translation.extractor
+---------------------
+
+**But**: Enregistrer un service personnalisé qui extrait  les messages depuis un fichier
+
+.. versionadded:: 2.1
+   La possibilité d'ajouter un extracteur de message est une nouveauté de Symfony 2.1
+
+Lorsque vous exécutez la commande ``translation:update``, elle utilise des extracteurs
+pour extraire les message d'un fichier. Par défaut, le framework Symfony2 possède une
+classe :class:`Symfony\\Bridge\\TwigBridge\\Translation\\TwigExtractor` et une classe
+:class:`Symfony\\Bundle\\FrameworkBundle\\Translation\\PhpExtractor` qui aident à
+répertorier  et à extraire les clés de traduction depuis les templates Twig ou les
+fichiers PHP.
+
+Vous pouvez créer votre propre extracteur en créant une classe qui implémente
+:class:`Symfony\\Component\\Translation\\Extractor\\ExtractorInterface` et
+en taggant le service avec ``translation.extractor``. Le tag a une option
+obligatoire : ``alias``, qui définit le nom de l'extracteur::
+
+    // src/Acme/DemoBundle/Translation/FooExtractor.php
+    namespace Acme\DemoBundle\Translation;
+
+    use Symfony\Component\Translation\Extractor\ExtractorInterface;
+    use Symfony\Component\Translation\MessageCatalogue;
+
+    class FooExtractor implements ExtractorInterface
+    {
+        protected $prefix;
+
+        /**
+         * Extrait des message de traduction depuis un répertoire de template vers le catalogue
+         */
+        public function extract($directory, MessageCatalogue $catalogue)
+        {
+            // ...
+        }
+
+        /**
+         * Définit le préfixe à utiliser pour les nouveaux messages trouvés
+         */
+        public function setPrefix($prefix)
+        {
+            $this->prefix = $prefix;
+        }
+    }
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            acme_demo.translation.extractor.foo:
+                class: Acme\DemoBundle\Translation\FooExtractor
+                tags:
+                    - { name: translation.extractor, alias: foo }
+
+    .. code-block:: xml
+
+        <service id="acme_demo.translation.extractor.foo"
+            class="Acme\DemoBundle\Translation\FooExtractor">
+            <tag name="translation.extractor" alias="foo" />
+        </service>
+
+    .. code-block:: php
+
+        $container->register(
+            'acme_demo.translation.extractor.foo',
+            'Acme\DemoBundle\Translation\FooExtractor'
+        )
+            ->addTag('translation.extractor', array('alias' => 'foo'));
+
+
+translation.dumper
+------------------
+
+**But**: Enregistrer un service personnalisé qui exporte les messages dans un fichier
+
+.. versionadded:: 2.1
+   La  possibilité d'exporter les messages est une nouveauté de Symfony 2.1
+
+Après qu'un `Extracteur <translation.extractor>`_ a extrait tous les messages des
+templates, les exportateurs sont exécutés pour exporter les messages dans un fichier
+de traduction dans un format spécifique.
+
+Symfony2 est fourni avec plusieurs exportateurs :
+
+* :class:`Symfony\\Component\\Translation\\Dumper\\CsvFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\IcuResFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\IniFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\MoFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\PoFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\QtFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\XliffFileDumper`
+* :class:`Symfony\\Component\\Translation\\Dumper\\YamlFileDumper`
+
+Vous pouvez créer votre propre exportateur en étendant 
+:class:`Symfony\\Component\\Translation\\Dumper\\FileDumper` ou en implémentant
+:class:`Symfony\\Component\\Translation\\Dumper\\DumperInterface` et en taggant
+le service avec ``translation.dumper``. Le tag a une option : ``alias``.
+C'est le nom utilisé pour déterminer quel exportateur doit être utilisé.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            acme_demo.translation.dumper.json:
+                class: Acme\DemoBundle\Translation\JsonFileDumper
+                tags:
+                    - { name: translation.dumper, alias: json }
+
+    .. code-block:: xml
+
+        <service id="acme_demo.translation.dumper.json"
+            class="Acme\DemoBundle\Translation\JsonFileDumper">
+            <tag name="translation.dumper" alias="json" />
+        </service>
+
+    .. code-block:: php
+
+        $container->register(
+            'acme_demo.translation.dumper.json',
+            'Acme\DemoBundle\Translation\JsonFileDumper'
+        )
+            ->addTag('translation.dumper', array('alias' => 'json'));
+
 
 .. _reference-dic-tags-twig-extension:
 

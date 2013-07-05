@@ -5,19 +5,19 @@ Type de champ button
 ====================
 
 .. versionadded:: 2.3
-    Le type button a été ajouté en Symfony 2.3
+    Le type button est une nouveauté de Symfony 2.3
 
 Un simple bouton non responsive.
 
 +----------------------+----------------------------------------------------------------------+
-| Rendu comme          | ``button`` tag                                                       |
+| Rendu comme          | balise ``button``                                                    |
 +----------------------+----------------------------------------------------------------------+
 | Options              | - `attr`_                                                            |
 |                      | - `disabled`_                                                        |
 |                      | - `label`_                                                           |
 |                      | - `translation_domain`_                                              |
 +----------------------+----------------------------------------------------------------------+
-| Type parent          | none                                                                 |
+| Type parent          | aucun                                                                |
 +----------------------+----------------------------------------------------------------------+
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\ButtonType` |
 +----------------------+----------------------------------------------------------------------+

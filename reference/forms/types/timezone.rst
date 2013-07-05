@@ -18,19 +18,37 @@ alors utiliser directement le type ``choice``.
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
+| Options     | - `choice_list`_                                                       |
+| surchargées |                                                                        |
++-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
 | héritées    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
-|             | - `error_bubbling`_                                                    |
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
+|             | - `disabled`_                                                          |
+|             | - `error_bubbling`_                                                    |
+|             | - `error_mapping`_                                                     |
+|             | - `mapped`_                                                            |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`choice</reference/forms/types/choice>`                           |
 +-------------+------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType` |
 +-------------+------------------------------------------------------------------------+
+
+Options surchargées
+-------------------
+
+choice_list
+~~~~~~~~~~~
+
+**default**: :class:`Symfony\\Component\\Form\\Extension\\Core\\ChoiceList\\TimezoneChoiceList`
+
+L'option ``choice_list`` du type Timezone contient par défaut la liste des
+fuseaux renvoyés par la méthode :phpmethod:`DateTimeZone::listIdentifiers`,
+triés par continent.
 
 Options héritées
 ----------------
@@ -45,7 +63,7 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -53,4 +71,10 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc

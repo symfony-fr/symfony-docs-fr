@@ -46,6 +46,7 @@ Contraintes de validation de référence
    constraints/Image
 
    constraints/CardScheme
+   constraints/Currency
    constraints/Luhn
    constraints/Iban
    constraints/Isbn

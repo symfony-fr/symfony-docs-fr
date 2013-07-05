@@ -20,11 +20,14 @@ Ce champ ajoute le signe pourcentage "``%``" après l'input.
 | Options     | - `required`_                                                         |
 | héritées    | - `label`_                                                            |
 |             | - `read_only`_                                                        |
+|             | - `disabled`_                                                         |
 |             | - `error_bubbling`_                                                   |
+|             | - `error_mapping`_                                                    |
 |             | - `invalid_message`_                                                  |
 |             | - `invalid_message_parameters`_                                       |
+|             | - `mapped`_                                                           |
 +-------------+-----------------------------------------------------------------------+
-| Type parent | :doc:`field</reference/forms/types/field>`                            |
+| Type parent | :doc:`form</reference/forms/types/form>`                              |
 +-------------+-----------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\PercentType` |
 +-------------+-----------------------------------------------------------------------+
@@ -62,7 +65,7 @@ Par défaut, les nombres sont arrondis. Pour autoriser les décimales, utilisez 
 Options héritées
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -70,8 +73,14 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
