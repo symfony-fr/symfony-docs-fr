@@ -993,7 +993,7 @@ translation.extractor
    La possibilité d'ajouter un extracteur de message est une nouveauté de Symfony 2.1
 
 Lorsque vous exécutez la commande ``translation:update``, elle utilise des extracteurs
-pour extraire les message d'un fichier. Par défaut, le framework Symfony2 possède une
+pour extraire les messages d'un fichier. Par défaut, le framework Symfony2 possède une
 classe :class:`Symfony\\Bridge\\TwigBridge\\Translation\\TwigExtractor` et une classe
 :class:`Symfony\\Bundle\\FrameworkBundle\\Translation\\PhpExtractor` qui aident à
 répertorier  et à extraire les clés de traduction depuis les templates Twig ou les
