@@ -407,6 +407,8 @@ elle-même.
 .. note::
 
     Vous pouvez aussi définir vos :doc:`Contrôleurs en tant que Services</cookbook/controller/service>`.
+    Ce n'est pas obligatoire mais cela vous permet de mieux contrôler les
+    dépendances qui sont effectivement injectées dans votre contrôleur.
 
 .. index::
    single: Controller; Common tasks
@@ -698,7 +700,10 @@ Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
         if ($form->isValid()) {
             // effectue le traitement du formulaire
 
-            $this->get('session')->getFlashBag()->add('notice', 'Vos changements ont été sauvegardés!');
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Vos changements ont été sauvegardés!'
+            );
 
             return $this->redirect($this->generateUrl(...));
         }

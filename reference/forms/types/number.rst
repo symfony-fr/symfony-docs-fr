@@ -18,11 +18,14 @@ que vous pouvez utiliser pour vos nombres.
 | Options     | - `required`_                                                        |
 | héritées    | - `label`_                                                           |
 |             | - `read_only`_                                                       |
+|             | - `disabled`_                                                        |
 |             | - `error_bubbling`_                                                  |
+|             | - `error_mapping`_                                                   |
 |             | - `invalid_message`_                                                 |
 |             | - `invalid_message_parameters`_                                      |
+|             | - `mapped`_                                                          |
 +-------------+----------------------------------------------------------------------+
-| Type parent | :doc:`field</reference/forms/types/field>`                           |
+| Type parent | :doc:`form</reference/forms/types/form>`                             |
 +-------------+----------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType` |
 +-------------+----------------------------------------------------------------------+
@@ -30,15 +33,7 @@ que vous pouvez utiliser pour vos nombres.
 Options du champ
 ----------------
 
-precision
-~~~~~~~~~
-
-**type**: ``integer`` **default**: Locale-specific (usually around ``3``)
-
-Cette option spécifie combien de décimales seront autorisées après que le champ
-aura arrondi la valeur soumise (via ``rounding_mode``). Par exemple, si ``precision``
-est définie à ``2``, une valeur soumise de ``20.123`` sera arrondie, par exemple,
-``20.12`` (cela dépendra de votre ``rounding_mode``).
+.. include:: /reference/forms/types/options/precision.rst.inc
 
 rounding_mode
 ~~~~~~~~~~~~~
@@ -78,7 +73,7 @@ une constante de la classe :class:`Symfony\\Component\\Form\\Extension\\Core\\Da
 Option héritées
 ---------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -86,8 +81,14 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc

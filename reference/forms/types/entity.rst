@@ -18,6 +18,9 @@ depuis la base de données.
 |             | - `query_builder`_                                                   |
 |             | - `em`_                                                              |
 +-------------+----------------------------------------------------------------------+
+| Options     | - `choices`                                                          |
+| surchargées | - `choice_list`                                                      |
++-------------+----------------------------------------------------------------------+
 | Options     | - `required`_                                                        |
 | héritées    | - `label`_                                                           |
 |             | - `multiple`_                                                        |
@@ -27,6 +30,7 @@ depuis la base de données.
 |             | - `read_only`_                                                       |
 |             | - `disabled`_                                                        |
 |             | - `error_bubbling`_                                                  |
+|             | - `error_mapping`_                                                   |
 |             | - `mapped`_                                                          |
 +-------------+----------------------------------------------------------------------+
 | Type parent | :doc:`choice</reference/forms/types/choice>`                         |
@@ -135,8 +139,8 @@ choice_list
 
 **default**: toutes les entités sélectionnées
 
-Le paramétrage par défait de ``choices`` sélectionne toutes les entités avec les
-options vue ci-dessus.
+Le paramétrage par défaut de ``choices`` sélectionne toutes les entités en utilisant
+l'une des options documentées ci-dessus.
 
 Options héritées
 ----------------
@@ -158,7 +162,7 @@ Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>`
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont héritées du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -169,5 +173,7 @@ Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 .. include:: /reference/forms/types/options/disabled.rst.inc
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 .. include:: /reference/forms/types/options/mapped.rst.inc
