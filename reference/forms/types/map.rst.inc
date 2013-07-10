@@ -21,6 +21,7 @@ Champs de type Choice
 * :doc:`language</reference/forms/types/language>`
 * :doc:`locale</reference/forms/types/locale>`
 * :doc:`timezone</reference/forms/types/timezone>`
+* :doc:`currency</reference/forms/types/currency>`
 
 Champs de type Date et Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,5 +59,4 @@ Bouttons
 Champs de base
 ~~~~~~~~~~~~~~
 
-* :doc:`field</reference/forms/types/field>`
 * :doc:`form</reference/forms/types/form>`

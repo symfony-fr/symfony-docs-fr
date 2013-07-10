@@ -22,11 +22,21 @@ secondes) ou une série de listes déroulantes. La donnée finale peut être sto
 |                      | - `hours`_                                                                  |
 |                      | - `minutes`_                                                                |
 |                      | - `seconds`_                                                                |
-|                      | - `data_timezone`_                                                          |
-|                      | - `user_timezone`_                                                          |
+|                      | - `model_timezone`_                                                         |
+|                      | - `view_timezone`_                                                          |
+|                      | - `empty_value`_                                                            |
++----------------------+-----------------------------------------------------------------------------+
+| Options              | - `by_reference`_                                                           |
+| surchargées          | - `error_bubbling`_                                                         |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `invalid_message`_                                                        |
 | héritées             | - `invalid_message_parameters`_                                             |
+|                      | - `read_only`_                                                              |
+|                      | - `disabled`_                                                               |
+|                      | - `mapped`_                                                                 |
+|                      | - `inherit_data`_                                                           |
+|                      | - `virtual`_                                                                |
+|                      | - `error_mapping`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | form                                                                        |
 +----------------------+-----------------------------------------------------------------------------+
@@ -104,15 +114,44 @@ la valeur qui provient du formulaire sera également normalisée selon ce format
 
 .. include:: /reference/forms/types/options/seconds.rst.inc
 
-.. include:: /reference/forms/types/options/data_timezone.rst.inc
+.. include:: /reference/forms/types/options/model_timezone.rst.inc
 
-.. include:: /reference/forms/types/options/user_timezone.rst.inc
+.. include:: /reference/forms/types/options/view_timezone.rst.inc
+
+.. include:: /reference/forms/types/options/empty_value.rst.inc
+
+Options surchargées
+-------------------
+
+by_reference
+~~~~~~~~~~~~
+
+**default**: ``false``
+
+Les classes ``DateTime`` sont traitées comme des objets immuables.
+
+error_bubbling
+~~~~~~~~~~~~~~
+
+**default**: ``false``
 
 Options héritées
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/read_only.rst.inc
+
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/inherit_data.rst.inc
+
+.. include:: /reference/forms/types/options/virtual.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc

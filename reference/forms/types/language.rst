@@ -12,7 +12,7 @@ La « valeur » de chaque langue est l'*identifiant de langue Unicode* (ex ``fr`
 
 .. note::
 
-   La locale de votre utilisateur est devinée en utilisant `Locale::getDefault()`_
+   La locale de votre utilisateur est devinée en utilisant :phpmethod:`Locale::getDefault`
 
 Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options
 ``choices`` ou ``choice_list`` puisque ce type de champ utilise automatiquement
@@ -22,19 +22,36 @@ mais alors vous devriez plutôt utiliser directement le type ``choice``.
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
+| Options     | - `choices`_                                                           |
+| surchargées |                                                                        |
++-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
 | héritées    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
+|             | - `error_mapping`_                                                     |
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
+|             | - `disabled`_                                                          |
+|             | - `mapped`_                                                            |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`choice</reference/forms/types/choice>`                           |
 +-------------+------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType` |
 +-------------+------------------------------------------------------------------------+
+
+Options surchargées
+-------------------
+
+choices
+~~~~~~~
+
+**default**: ``Symfony\Component\Intl\Intl::getLanguageBundle()->getLanguageNames()``.
+
+L'option ``choices`` est définie par défaut comme la liste de toutes les langues.
+Elle utilise la locale pour spécifier la langue.
 
 Options héritées
 ----------------
@@ -51,7 +68,9 @@ Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>`
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+Ces options sont héritées du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -59,4 +78,6 @@ Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
-.. _`Locale::getDefault()`: http://php.net/manual/en/locale.getdefault.php
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc

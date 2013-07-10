@@ -19,9 +19,13 @@ ou son email pour vérifier qu'ils sont justes.
 |             | - `first_name`_                                                        |
 |             | - `second_name`_                                                       |
 +-------------+------------------------------------------------------------------------+
+| Options     | - `error_bubbling`_                                                    |
+| surchargées |                                                                        |
++-------------+------------------------------------------------------------------------+
 | Options     | - `invalid_message`_                                                   |
 | héritées    | - `invalid_message_parameters`_                                        |
-|             | - `error_bubbling`_                                                    |
+|             | - `mapped`_                                                            |
+|             | - `error_mapping`_                                                     |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`field</reference/forms/types/form>`                              |
 +-------------+------------------------------------------------------------------------+
@@ -51,6 +55,41 @@ et qui détermine le réel type des deux champs sous-jacents. L'option ``options
 à chacun de ces deux champs ce qui signifie, dans cet exemple, que toute option
 supportée par le type ``password`` peut être passée dans ce tableau.
 
+Affichage
+~~~~~~~~~
+
+Le type de champ ``repeated`` est en fait composé de 2 champs, que vous pouvez afficher en
+une fois, ou individuellement. Pour les affichers en une seule fois, vous pouvez faire :
+
+.. configuration-block::
+
+    .. code-block:: jinja
+
+        {{ form_row(form.password) }}
+
+    .. code-block:: php
+
+        <?php echo $view['form']->row($form['password']) ?>
+
+Pour afficher chaque champ indivuellement, vous pouvez faire :
+
+.. configuration-block::
+
+    .. code-block:: jinja
+
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+
+    .. code-block:: php
+
+        <?php echo $view['form']->row($form['password']['first']) ?>
+        <?php echo $view['form']->row($form['password']['second']) ?>
+
+.. note::
+
+    Les noms des sous-champs sont ``first`` et ``second`` par défaut,
+    mais peuvent être modifiés via les options `first_name`_ et `second_name`_.
+
 Validation
 ~~~~~~~~~~
 
@@ -62,8 +101,8 @@ envoyée à l'utilisateur.
 L'option ``invalid_message`` est utilisée pour personnaliser l'erreur qui
 sera affichée si les deux valeurs ne correspondent pas.
 
-Field Options
--------------
+Options du champ
+----------------
 
 type
 ~~~~
@@ -131,13 +170,23 @@ second_name
 
 Le même que ``first_name``, mais pour le second champ.
 
+Options surchargées
+-------------------
+
+error_bubbling
+~~~~~~~~~~~~~~
+
+**default**: ``false``
+
 Options héritées
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
 
-.. include:: /reference/forms/types/options/error_bubbling.rst.inc
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc

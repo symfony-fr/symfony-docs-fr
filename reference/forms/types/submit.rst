@@ -10,7 +10,7 @@ Type de champ submit
 Un bouton submit.
 
 +----------------------+----------------------------------------------------------------------+
-| Rendu comme          | ``input`` ``submit`` tag                                             |
+| Rendu comme          | Baslite ``input`` ``submit``                                         |
 +----------------------+----------------------------------------------------------------------+
 | Options              | - `attr`_                                                            |
 | héritées             | - `disabled`_                                                        |
@@ -22,16 +22,16 @@ Un bouton submit.
 | Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType` |
 +----------------------+----------------------------------------------------------------------+
 
-Le bouton Submit est une méthode :method:`Symfony\\Component\\Form\\ClickableInterface::isClicked` supplémentaire qui permet.
-de tester si ce bouton a été utilisé pour soumettre le formulaire. Ceci est particulièrement
+Le bouton Submit possède une méthode :method:`Symfony\\Component\\Form\\ClickableInterface::isClicked`
+qui vous permet de tester si ce bouton a été utilisé pour soumettre le formulaire. Ceci est particulièrement
 utile quand  :ref:`un formulaire a plusieurs boutons de soumission <book-form-submitting-multiple-buttons>`::
 
     if ($form->get('sauvegardez')->isClicked()) {
         // ...
     }
 
-Inherited options
------------------
+Options héritées
+----------------
 
 .. include:: /reference/forms/types/options/button_attr.rst.inc
 

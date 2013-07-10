@@ -22,11 +22,15 @@ vous devriez plutôt utiliser directement le type ``choice``.
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
+| Options     | - `choices`_                                                           |
+| surchargées |                                                                        |
++-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
 | héritées    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
+|             | - `error_mapping`_                                                     |
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
@@ -46,8 +50,8 @@ choices
 
 **default**: ``Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames()``
 
-La valeur par défaut de l'option ``choices`` est toutes les langues.
-Il utilise la langue par défaut pour déterminer la langue.
+La valeur par défaut de l'option ``choices`` est la liste des pays.
+Il utilise la langue par défaut pour déterminer quelle langue utiliser.
 
 Options héritées
 ----------------
@@ -63,6 +67,8 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
