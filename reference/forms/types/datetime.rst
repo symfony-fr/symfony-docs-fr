@@ -27,8 +27,9 @@ réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau
 |                      | - `months`_                                                                 |
 |                      | - `days`_                                                                   |
 |                      | - `with_seconds`_                                                           |
-|                      | - `data_timezone`_                                                          |
-|                      | - `user_timezone`_                                                          |
+|                      | - `model_timezone`_                                                         |
+|                      | - `view_timezone`_                                                          |
+|                      | - `empty_value`_                                                            |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `invalid_message`_                                                        |
 | héritées             | - `invalid_message_parameters`_                                             |
@@ -74,6 +75,8 @@ est stockée dans l'objet. Les valeurs valides sont :
 
 La valeur provenant du formulaire sera aussi normalisée dans ce format.
 
+.. include:: /reference/forms/types/options/_date_limitation.rst.inc
+
 date_format
 ~~~~~~~~~~~
 
@@ -97,9 +100,11 @@ pour plus de détails.
 
 .. include:: /reference/forms/types/options/with_seconds.rst.inc
 
-.. include:: /reference/forms/types/options/data_timezone.rst.inc
+.. include:: /reference/forms/types/options/model_timezone.rst.inc
 
-.. include:: /reference/forms/types/options/user_timezone.rst.inc
+.. include:: /reference/forms/types/options/view_timezone.rst.inc
+
+.. include:: /reference/forms/types/options/empty_value.rst.inc
 
 Options héritées
 ----------------

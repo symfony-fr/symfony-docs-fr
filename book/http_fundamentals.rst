@@ -1,12 +1,12 @@
 .. index::
-   single: Les fondamentaux de Symfony2
+   single: Symfony2 Fundamentals
 
 Les fondamentaux de Symfony2 et HTTP
 ====================================
 
 Félicitations! Grâce à l'apprentissage de Symfony2, vous êtes sur la bonne voie pour
-devenir un développeur web plus *productif* et *populaire* (en fait vous serez livré
-à vous-même pour la dernière partie). Symfony2 est construit de manière à revenir à
+devenir un développeur web plus *productif* et *populaire* (en fait la popularité
+ne dépend que de vous). Symfony2 est construit de manière à revenir à
 l'essentiel : implémenter des outils qui vous aident à développer plus rapidement
 et à construire des applications plus robustes, sans pour autant vous gêner dans votre
 progression.
@@ -36,7 +36,7 @@ lorsque vous regardez la dernière BD de `xkcd`_, la conversation suivante
 
 Et alors que l'actuel langage utilisé est un peu plus formel, cela reste
 toujours très simple. HTTP est le terme utilisé pour décrire ce simple
-langage basé sur le texte. Et peu importe comment vous développez sur
+langage texte. Et peu importe comment vous développez sur
 le web, le but de votre serveur est *toujours* de comprendre de simples
 requêtes composées de texte, et de retourner de simples réponses composées
 elles aussi de texte.
@@ -46,14 +46,14 @@ réalisiez ou non, HTTP est quelque chose que vous utilisez tous les jours.
 Avec Symfony2, vous allez apprendre comment le maîtriser.
 
 .. index::
-   single: HTTP; Paradigme requête-réponse
+   single: HTTP; Request-response paradigm
 
 Étape 1: Le Client envoie une Requête
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Chaque conversation sur le web débute avec une *requête*. La requête est
 un message textuel créé par un client (par exemple: un navigateur, une
-application iPhone, etc...) dans un format spécial connu sous le nom d'HTTP.
+application smartphone, etc...) dans un format spécial connu sous le nom d'HTTP.
 Le client envoie cette requête à un serveur, et puis attend la réponse.
 
 Jetez un oeil à la première partie de l'interaction (la requête) entre un
@@ -80,7 +80,7 @@ L'URI (par exemple: ``/``, ``/contact``, etc...) est l'adresse unique ou
 la localisation qui identifie la ressource que le client veut. La méthode
 HTTP (par exemple: ``GET``) définit ce que vous voulez *faire* avec la
 ressource. Les méthodes HTTP sont les *verbes* de la requête et définissent
-les quelques moyens avec lesquels vous pouvez agir sur la ressource:
+les divers moyens par lesquels vous pouvez agir sur la ressource:
 
 +----------+-----------------------------------------+
 | *GET*    | Récupère la ressource depuis le serveur |
@@ -107,11 +107,11 @@ requête HTTP pour supprimer une entrée spécifique d'un blog, par exemple:
     ``PUT`` et ``DELETE``.
 
 En plus de la première ligne, une requête HTTP contient invariablement
-d'autres lignes d'informations appelées en-têtes de requête. Les en-têtes
-peuvent fournir un large éventail d'informations telles que l'en-tête ``Host``,
+d'autres lignes d'informations appelées entêtes de requête. Les entêtes
+peuvent fournir un large éventail d'informations telles que l'entête ``Host``,
 le format de réponse que le client accepte (``Accept``) et
 l'application que le client utilise pour effectuer la requête (``User-Agent``).
-Beaucoup d'autres en-têtes existent et peuvent être trouvées sur la page
+Beaucoup d'autres entêtes existent et peuvent être trouvés sur la page
 Wikipedia `List of HTTP header fields`_ (anglais).
 
 Étape 2: Le Serveur retourne une réponse
@@ -137,7 +137,7 @@ comme ça :
     Content-Type: text/html
 
     <html>
-      <!-- HTML for the xkcd comic -->
+      <!-- ... code HTML de la BD xkcd -->
     </html>
 
 La réponse HTTP contient la ressource demandée (le contenu HTML dans ce cas),
@@ -151,25 +151,25 @@ rediriger sur une autre page). Une liste complète peut être trouvée sur
 la page Wikipedia `Liste des codes HTTP`_ .
 
 Comme la requête, une réponse HTTP contient de l'information additionnelle
-appelée en-têtes HTTP. Par exemple, une importante en-tête de réponse HTTP
-est le ``Content-Type``. Le corps d'une même ressource peut être retournée
-dans de multiples formats incluant HTML, XML ou JSON et l'en-tête ``Content-Type``
-utilise les Internet Media Types comme ``text/html`` pour dire au client quel format
-doit être retourné. Une liste des médias types les plus commun peut être trouvée sur
+sous forme d'entêtes HTTP. Par exemple, ``Content-Type`` est un entête
+de réponse HTTP très important. Le corps d'une même ressource peut être retournée
+dans de multiples formats incluant HTML, XML ou JSON et l'entête ``Content-Type``
+utilise les Internet Media Types, comme ``text/html``, pour dire au client quel format
+doit être retourné. Une liste des médias types les plus communs peut être trouvée sur
 la page Wikipedia `Liste de media type usuels`_.
 
-De nombreuses autres en-têtes existent, dont quelques-unes sont très puissantes.
-Par exemple, certaines en-têtes peuvent être utilisées pour créer un puissant
+De nombreuses autres entêtes existent, dont quelques-uns sont très puissants.
+Par exemple, certains entêtes peuvent être utilisés pour créer un puissant
 système de cache.
 
 Requêtes, Réponses et Développement Web
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cette conversation requête-réponse est le procédé fondamental qui dirige
+Cette conversation requête-réponse est le procédé fondamental qui régit
 toute communication sur le web. Et tout aussi important et puissant que ce
 procédé soit, il est inéluctablement simple.
 
-Le plus important fait est : quel que soit le langage que vous utilisez, le
+Le plus important est que : quel que soit le langage que vous utilisez, le
 type d'application que vous construisez (web, mobile, API JSON), ou la
 philosophie de développement que vous suivez, l'objectif final d'une
 application est **toujours** de comprendre chaque requête et de créer et
@@ -179,14 +179,14 @@ Symfony est conçu pour correspondre à cette réalité.
 
 .. tip::
 
-    Pour en savoir plus à propos de la spécification HTTP, lisez l'original
+    Pour en savoir plus à propos de la spécification HTTP, lisez la RFC originale
     `HTTP 1.1 RFC`_ ou le `HTTP Bis`_, qui est un effort actif pour clarifier la
-    spécification originale. Un super outil pour inspecter/vérifier les en-têtes
+    spécification originale. Un super outil pour inspecter/vérifier les entêtes
     de la requête et de la réponse durant votre navigation est l'extension
     pour Firefox `Live HTTP Headers`_.
 
 .. index::
-   single: Fondamentaux Symfony2; Requêtes et réponses
+   single: Symfony2 Fundamentals; Requests and responses
 
 Requêtes et réponses en PHP
 ---------------------------
@@ -203,13 +203,13 @@ global::
     echo 'La valeur du paramètre "foo" est: '.$foo;
 
 Aussi étrange que cela puisse paraître, cette petite application utilise les
-informations de la requête HTTP afin de  créer une réponse.
+informations de la requête HTTP afin de créer une réponse.
 Plutôt que d'analyser le message texte de la requête HTTP directement,
 PHP prépare des variables superglobales telles que ``$_SERVER`` et ``$_GET``
-qui contiennent toute l'information de la requête. De même, au lieu de
+qui contiennent toute les informations de la requête. De même, au lieu de
 retourner la réponse texte HTTP formatée, vous pouvez utiliser la fonction
-``header()`` pour créer des en-têtes de réponse et simplement délivrer le
-contenu actuel qui sera la portion «contenu» du message de la réponse.
+``header()`` pour créer des entêtes de réponse et simplement délivrer le
+contenu actuel qui sera la partie contenu du message de la réponse.
 PHP va ainsi créer une véritable réponse HTTP et la retourner au client :
 
 .. code-block:: text
@@ -225,13 +225,11 @@ PHP va ainsi créer une véritable réponse HTTP et la retourner au client :
 Requêtes et Réponses dans Symfony
 ---------------------------------
 
-Symfony fournit une alternative à l'approche basique de PHP via deux classes
+Symfony fournit une alternative à l'approche brute de PHP via deux classes
 qui vous permettent d'interagir avec la requête et la réponse HTTP de manière
 plus facile. La classe :class:`Symfony\\Component\\HttpFoundation\\Request`
 est une simple représentation orientée objet du message de la requête HTTP.
-Avec elle, vous avez toute l'information de la requête à votre portée :
-
-.. code-block:: php
+Avec elle, vous avez toute l'information de la requête à votre portée::
 
     use Symfony\Component\HttpFoundation\Request;
 
@@ -242,15 +240,13 @@ Avec elle, vous avez toute l'information de la requête à votre portée :
 
     // obtenir respectivement des variables GET et POST
     $request->query->get('foo');
-
     $request->request->get('bar', 'valeur par défaut si bar est inexistant');
-  
+
     // obtenir les variables SERVER
     $request->server->get('HTTP_HOST');
 
     // obtenir une instance de UploadedFile identifiée par foo
     $request->files->get('foo');
-
 
     // obtenir la valeur d'un COOKIE value
     $request->cookies->get('PHPSESSID');
@@ -265,7 +261,7 @@ Avec elle, vous avez toute l'information de la requête à votre portée :
 En bonus, la classe ``Request`` effectue beaucoup de travail en arrière-plan
 dont vous n'aurez jamais à vous soucier. Par exemple, la méthode ``isSecure()``
 vérifie les *trois* valeurs PHP qui peuvent indiquer si oui ou non l'utilisateur
-est connecté via une connexion sécurisée (i.e. ``https``).
+est connecté via une connexion sécurisée (c-a-d ``https``).
 
 
 .. sidebar:: Attributs de ParameterBags et Request
@@ -276,14 +272,14 @@ est connecté via une connexion sécurisée (i.e. ``https``).
     qui a des méthodes comme :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::get`,
     :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::has`,
     :method:`Symfony\\Component\\HttpFoundation\\ParameterBag::all` et bien d'autres.
-    Dans les faits, chaque propriété publique utilisée dans l'exemple précédent est
+    En fait, chaque propriété publique utilisée dans l'exemple précédent est
     une instance de ParameterBag.
 
     .. _book-fundamentals-attributes:
 
     La classe Request a aussi une propriété publique ``attributes`` qui contient
     des données spéciales liées au fonctionnement interne de l'application. Pour
-    le framework Symfony2, la propriété ``attributes`` contient la valeur retournée
+    le framework Symfony2, la propriété ``attributes`` contient les valeurs retournées
     par la route identifiée, comme ``_controller``, ``id`` (si vous utilisez le joker ``{id}``),
     et même le nom de la route (``_route``). La propriété ``attributes`` existe pour
     vous permettre d'y stocker des informations spécifiques liées au contexte de
@@ -302,10 +298,10 @@ au client::
     $response->setStatusCode(200);
     $response->headers->set('Content-Type', 'text/html');
 
-    // affiche les en-têtes HTTP suivies du contenu
+    // affiche les entêtes HTTP suivies du contenu
     $response->send();
 
-Si Symfony n'offre rien d'autre, vous devriez néanmoins déjà avoir en votre
+Si Symfony n'offrait rien d'autre, vous devriez néanmoins déjà avoir en votre
 possession une boîte à outils pour accéder facilement aux informations de la
 requête et une interface orientée objet pour créer la réponse. Bien que vous
 appreniez les nombreuses et puissantes fonctions de Symfony, gardez à l'esprit
@@ -324,11 +320,11 @@ Le Parcours de la Requête à la Réponse
 
 Comme HTTP lui-même, les objets ``Request`` et ``Response`` sont assez simples.
 La partie difficile de la création d'une application est d'écrire ce qui vient
-entre les deux. En d'autres mots, le réel travail commence lors de l'écriture
+entre les deux. En d'autres termes, le réel travail commence lors de l'écriture
 du code qui interprète l'information de la requête et crée la réponse.
 
 Votre application fait probablement beaucoup de choses comme envoyer des emails,
-gérer des soumissions de formulaires, enregistrer des «trucs» dans votre base de données,
+gérer des soumissions de formulaires, enregistrer des choses dans une base de données,
 délivrer des pages HTML et protéger du contenu de façon sécurisée. Comment pouvez-vous
 vous occuper de tout cela tout en conservant votre code organisé et maintenable ?
 
@@ -339,7 +335,7 @@ Le Contrôleur Frontal
 ~~~~~~~~~~~~~~~~~~~~~
 
 Traditionnellement, les applications étaient construites de telle sorte que
-chaque «page» d'un site avait son propre fichier physique :
+chaque « page » d'un site avait son propre fichier physique:
 
 .. code-block:: text
 
@@ -347,12 +343,12 @@ chaque «page» d'un site avait son propre fichier physique :
     contact.php
     blog.php
 
-Il y a plusieurs problèmes avec cette approche, incluant la non-flexibilité
+Il y a plusieurs problèmes avec cette approche, ce qui inclut la non-flexibilité
 des URLs (que se passait-il si vous souhaitiez changer ``blog.php`` en
 ``news.php`` sans que tous vos liens existants ne cessent de fonctionner ?)
 et le fait que chaque fichier *doive* manuellement inclure tout un ensemble
 de fichiers coeurs pour que la sécurité, les connexions à la base de données
-et le «look» du site puissent rester consistants.
+et le « look » du site puissent rester cohérents.
 
 Une bien meilleure solution est d'utiliser un simple fichier PHP appelé
 :term:`contrôleur frontal`: qui s'occupe de chaque requête arrivant dans
@@ -374,7 +370,7 @@ votre application. Par exemple:
 
 Maintenant, chaque requête est gérée exactement de la même façon. Plutôt
 que d'avoir des URLs individuelles exécutant des fichiers PHP différents,
-le contrôleur frontal est *toujours* exécuté, et le routage («routing») des
+le contrôleur frontal est *toujours* exécuté, et le routage (« routing ») des
 différentes URLs vers différentes parties de votre application est effectué
 en interne. Cela résoud les deux problèmes de l'approche originale.
 Presque toutes les applications web modernes font ça - incluant les
@@ -383,22 +379,23 @@ applications comme WordPress.
 Rester Organisé
 ~~~~~~~~~~~~~~~
 
-Mais à l'intérieur de votre contrôleur frontal, comment savez-vous quelle page devrait
-être rendue et comment pouvez-vous délivrer chacune d'elles de façon «saine» ? D'une manière
-ou d'une autre, vous allez devoir inspecter l'URI entrante et exécuter les différentes
-parties de votre code dépendant de cette valeur. Cela peut rapidement devenir moche::
+Dans votre contrôleur frontal, vous devez déterminer quelle portion de code
+doit être exécuté et quel est le contenu qui doit être retourné. Vous le
+savoir, vous allez devoir inspecter l'URI entrante et exécuter les différentes
+parties de votre code selon cette valeur. Cela peut rapidement devenir moche::
 
     // index.php
-
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
     $request = Request::createFromGlobals();
-    $path = $request->getPathInfo(); // the URI path being requested
+    $path = $request->getPathInfo(); // Le chemin de l'URI demandée
 
-    if (in_array($path, array('', '/')) {
-        $response = new Response('Welcome to the homepage.');
+    if (in_array($path, array('', '/'))) {
+        $response = new Response('Bienvenue sur le site.');
     } elseif ($path == '/contact') {
-        $response = new Response('Contact us');
+        $response = new Response('Contactez nous');
     } else {
-        $response = new Response('Page not found.', 404);
+        $response = new Response('Page non trouvée.', 404);
     }
     $response->send();
 
@@ -409,7 +406,7 @@ Le Déroulement d'une Application Symfony
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quand vous laissez Symfony gérer chaque requête, la vie est beaucoup plus facile.
-Symfony suit un schéma simple et identique pour toutes les requêtes:
+Symfony suit un schéma simple et identique pour toutes les requêtes :
 
 .. _request-flow-figure:
 
@@ -420,12 +417,12 @@ Symfony suit un schéma simple et identique pour toutes les requêtes:
    Les requêtes entrantes sont interprétées par le routing et passées aux
    fonctions des contrôleurs qui retournent des objets ``Response``.
 
-Chaque «page» de votre site est définie dans un fichier de configuration du
+Chaque « page » de votre site est définie dans un fichier de configuration du
 routing qui relie différentes URLs à différentes fonctions PHP. Le travail de
 chaque fonction PHP, appelée :term:`contrôleur`, est de créer puis retourner 
 un objet ``Response``, construit à partir des informations de la requête, à l'aide 
 des outils mis à disposition par le framework. En d'autres termes, le contrôleur 
-est le lieu où *votre* code va : c'est là que vous interprétez la requête et 
+est le lieu où *votre* code se trouve : c'est là que vous interprétez la requête et 
 que vous créez une réponse.
 
 C'est si facile ! Revoyons cela :
@@ -433,7 +430,7 @@ C'est si facile ! Revoyons cela :
 * Chaque requête exécute un même et unique fichier ayant le rôle de contrôleur frontal;
 
 * Le système de routing détermine quelle fonction PHP doit être exécutée
-  basé sur les informations provenant de la requête et la configuration de
+  en se basant sur les informations provenant de la requête et la configuration de
   routage que vous avez créé;
 
 * La fonction PHP correcte est exécutée, là où votre code crée et retourne
@@ -442,37 +439,37 @@ C'est si facile ! Revoyons cela :
 Une Requête Symfony en Action
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sans aller trop loin dans les détails, voyons ce procédé en action. Supposez
+Sans aller trop loin dans les détails, voyons ce procédé en action. Supposons
 que vous vouliez ajouter une page ``/contact`` à votre application Symfony.
 Premièrement, commencez par ajouter une entrée pour ``/contact`` dans votre
-fichier de configuration du routing :
+fichier de configuration du routing:
 
 .. configuration-block::
- 
+
     .. code-block:: yaml
 
         # app/config/routing.yml
-        contact: 
-            pattern:  /contact
+        contact:
+            path:     /contact
             defaults: { _controller: AcmeDemoBundle:Main:contact }
 
     .. code-block:: xml
 
-        <route id="contact" pattern="/contact">
+        <route id="contact" path="/contact">
             <default key="_controller">AcmeBlogBundle:Main:contact</default>
         </route>
 
     .. code-block:: php
- 
+
         // app/config/routing.php
         use Symfony\Component\Routing\RouteCollection;
         use Symfony\Component\Routing\Route;
-  
+
         $collection = new RouteCollection();
         $collection->add('contact', new Route('/contact', array(
             '_controller' => 'AcmeBlogBundle:Main:contact',
         )));
- 
+
         return $collection;
 
 .. note::
@@ -488,30 +485,34 @@ est une syntaxe raccourcie qui pointe vers une méthode PHP spécifique ``contac
 classe appelée ``MainController``::
 
     // src/Acme/DemoBundle/Controller/MainController.php
+    namespace Acme\DemoBundle\Controller;
+
+    use Symfony\Component\HttpFoundation\Response;
+
     class MainController
     {
         public function contactAction()
         {
-            return new Response('<h1>Contact us!</h1>');
+            return new Response('<h1>Contactez nous!</h1>');
         }
     }
 
 Dans cet exemple très simple, le contrôleur crée simplement un objet
 :class:`Symfony\\Component\\HttpFoundation\\Response` contenant l'HTML
-"<h1>Contact us!</h1>". Dans le :doc:`chapitre du contrôleur</book/controller>`, vous allez
-apprendre comment un contrôleur peut fournir des templates, permettant à votre code de
-«présentation» (i.e. quoi que ce soit qui délivre du HTML) de se trouver dans un fichier de template
+"<h1>Contactez nous!</h1>". Dans le :doc:`chapitre Contrôleur</book/controller>`, vous allez
+apprendre comment un contrôleur peut retourner des templates, permettant à votre code de
+« présentation » (c-a-d du code qui retourne du HTML) de se trouver dans un fichier de template
 séparé. Cela libère le contrôleur et lui permet de s'occuper seulement des choses complexes :
 interagir avec la base de données, gérer les données soumises, ou envoyer des emails.
 
-Symfony2: Construisez votre application, pas vos outils.
---------------------------------------------------------
+Symfony2: Construisez votre application, pas vos outils
+-------------------------------------------------------
 
-Vous savez maintenant que le but d'une quelconque application est d'interpréter
+Vous savez maintenant que le but de toute application est d'interpréter
 chaque requête entrante et de créer une réponse appropriée. Avec le temps,
 une application grandit et il devient plus difficile de garder le code organisé
 et maintenable. Invariablement, les mêmes tâches complexes reviennent encore
-et toujours : persister des éléments dans la base de données, délivrer et
+et toujours : persister des éléments dans la base de données, afficher et
 réutiliser des templates, gérer des soumissions de formulaires, envoyer
 des emails, valider des entrées d'utilisateurs et gérer la sécurité.
 
@@ -519,10 +520,10 @@ La bonne nouvelle est qu'aucun de ces problèmes n'est unique. Symfony fournit
 un framework rempli d'outils qui vous permettent de construire votre
 application, mais pas vos outils. Avec Symfony2, rien ne vous est imposé :
 vous êtes libre d'utiliser le framework Symfony en entier, ou juste une partie
-de Symfony toute seule.
+de Symfony indépendamment.
 
 .. index::
-   single: Les Composants Symfony2
+   single: Symfony2 Components
 
 Outils Autonomes: Les *Composants* Symfony2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -530,7 +531,7 @@ Outils Autonomes: Les *Composants* Symfony2
 Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plus
 de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
 projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
-quelque chose d'utile pour presque n'importe quelle situation, quelle que soit
+des choses utiles en toute situation, quelle que soit
 la manière dont votre projet est développé. Pour en nommer quelques-unes :
 
 
@@ -550,8 +551,8 @@ la manière dont votre projet est développé. Pour en nommer quelques-unes :
   et de valider ou non les données utilisateurs soumises suivant ces règles;
 
 * :doc:`ClassLoader</components/class_loader>` Une bibliothèque pour le chargement
-  automatique («autoloading») qui permet aux classes PHP d'être utilisées sans avoir
-  besoin d'``inclure`` («require») manuellement les fichiers contenant ces dernières;
+  automatique (« autoloading ») qui permet aux classes PHP d'être utilisées sans avoir
+  besoin d'``inclure`` (« require ») manuellement les fichiers contenant ces dernières;
 
 * :doc:`Templating</components/templating>` Une boîte à outils pour afficher des
   templates, gérer leur héritage (c-a-d qu'un template est décoré par un layout)
@@ -574,15 +575,15 @@ La Solution Complète: Le *Framework* Symfony2
 Donc finalement, *qu'est-ce* que le *Framework* Symfony2 ? Le *Framework Symfony2*
 est une bibliothèque PHP qui accomplit deux tâches distinctes :
 
-#. Fournir une sélection de composants (i.e. les Composants Symfony2) et
-   des bibliothèques tiers (e.g. `Swiftmailer`_ pour envoyer des emails);
+#. Fournir une sélection de composants (les Composants Symfony2) et
+   des bibliothèques tierces (ex `Swiftmailer`_ pour envoyer des emails);
 
-#. Fournir une configuration et une bibliothèque «colle» qui lie toutes ces
-   pièces ensemble.
+#. Fournir une configuration et une bibliothèque « colle » qui lie toutes ces
+   pièces ensembles.
 
-Le but du framework est d'intégrer beaucoup d'outils indépendants afin de
-fournir une expérience consistante au développeur. Même le framework lui-même
-est un bundle Symfony2 (i.e. un plugin) qui peut être configuré ou remplacé
+Le but du framework est d'intégrer plein d'outils indépendants afin de
+fournir une expérience substantielle au développeur. Même le framework lui-même
+est un bundle Symfony2 (c-a-d un plugin) qui peut être configuré ou remplacé
 entièrement.
 
 Symfony2 fournit un puissant ensemble d'outils pour développer rapidement des

@@ -26,8 +26,8 @@ contient par défaut les 120 années précédant l'année courante.
 |                      | - `months`_                                                                                                            |
 |                      | - `days`_                                                                                                              |
 |                      | - `format`_                                                                                                            |
-|                      | - `data_timezone`_                                                                                                     |
-|                      | - `user_timezone`_                                                                                                     |
+|                      | - `model_timezone`_                                                                                                    |
+|                      | - `view_timezone`_                                                                                                     |
 |                      | - `invalid_message`_                                                                                                   |
 |                      | - `invalid_message_parameters`_                                                                                        |
 |                      | - `read_only`_                                                                                                         |
@@ -66,9 +66,9 @@ Ces options héritent du type :doc:`date</reference/forms/types/date>` :
 
 .. include:: /reference/forms/types/options/date_format.rst.inc
 
-.. include:: /reference/forms/types/options/data_timezone.rst.inc
+.. include:: /reference/forms/types/options/model_timezone.rst.inc
 
-.. include:: /reference/forms/types/options/user_timezone.rst.inc
+.. include:: /reference/forms/types/options/view_timezone.rst.inc
 
 Ces options héritent du type :doc:`date</reference/forms/types/form>` :
 

@@ -23,6 +23,7 @@ est très utile lorsque vous créerez des formulaires avec des relations one-to-
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `label`_                                                                  |
 | héritées    | - `error_bubbling`_                                                         |
+|             | - `error_mapping`_                                                          |
 |             | - `by_reference`_                                                           |
 |             | - `empty_data`_                                                             |
 |             | - `mapped`_                                                                 |
@@ -343,6 +344,8 @@ Toutes les options ne sont pas listées ici, seulement celles qui s'appliquent l
 .. include:: /reference/forms/types/options/label.rst.inc
 
 .. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 error_bubbling
 ~~~~~~~~~~~~~~

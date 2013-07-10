@@ -216,7 +216,9 @@ base de données - c'est juste une simple classe PHP.
 
     .. code-block:: bash
 
-        $ php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Product" --fields="name:string(255) price:float description:text"
+        $ php app/console doctrine:generate:entity \
+          --entity="AcmeStoreBundle:Product" \
+          --fields="name:string(255) price:float description:text"
 
 .. index::
     single: Doctrine; Adding mapping metadata
@@ -716,7 +718,10 @@ Imaginons que vous souhaitez récupérer tous les produits dont le prix est sup�
 
     $em = $this->getDoctrine()->getEntityManager();
     $query = $em->createQuery(
-        'SELECT p FROM AcmeStoreBundle:Product p WHERE p.price > :price ORDER BY p.price ASC'
+        'SELECT p
+        FROM AcmeStoreBundle:Product p
+        WHERE p.price > :price
+        ORDER BY p.price ASC'
     )->setParameter('price', '19.99');
     
     $products = $query->getResult();
@@ -881,7 +886,9 @@ ordre alphabétique.
         public function findAllOrderedByName()
         {
             return $this->getEntityManager()
-                ->createQuery('SELECT p FROM AcmeStoreBundle:Product p ORDER BY p.name ASC')
+                ->createQuery(
+                    'SELECT p FROM AcmeStoreBundle:Product p ORDER BY p.name ASC'
+                )
                 ->getResult();
         }
     }
@@ -915,7 +922,8 @@ classe, vous pouvez le laisser générer la classe pour vous.
 
 .. code-block:: bash
 
-    $ php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Category" --fields="name:string(255)"
+    $ php app/console doctrine:generate:entity --entity="AcmeStoreBundle:Category" \ 
+      --fields="name:string(255)"
 
 Cette commande génère l'entité ``Category`` pour vous, avec un champ ``id``,
 un champ ``name`` et les méthodes getter et setter associées.
@@ -977,7 +985,10 @@ propriété ``products`` dans la classe ``Category`` :
                     mapped-by="category"
                 />
 
-                <!-- n'oubliez pas d'initialiser la collection dans la méthode __construct() de l'entité -->
+                <!--
+                    n'oubliez pas d'initialiser la collection dans la
+                    méthode __construct() de l'entité
+                -->
             </entity>
         </doctrine-mapping>
 
@@ -1363,7 +1374,8 @@ est persistée pour la première fois (c-à-d insérée) :
             <entity name="Acme\StoreBundle\Entity\Product">
                     <!-- ... -->
                     <lifecycle-callbacks>
-                        <lifecycle-callback type="prePersist" method="setCreatedValue" />
+                        <lifecycle-callback type="prePersist"
+                            method="setCreatedValue" />
                     </lifecycle-callbacks>
             </entity>
         </doctrine-mapping>
