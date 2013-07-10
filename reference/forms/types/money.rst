@@ -21,11 +21,14 @@ dont les données en entrée et en sortie seront prises en charge.
 | Options     | - `required`_                                                       |
 | héritées    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
+|             | - `disabled`_                                                       |
 |             | - `error_bubbling`_                                                 |
+|             | - `error_mapping`_                                                  |
 |             | - `invalid_message`_                                                |
 |             | - `invalid_message_parameters`_                                     |
+|             | - `mapped`_                                                         |
 +-------------+---------------------------------------------------------------------+
-| Type parent | :doc:`field</reference/forms/types/field>`                          |
+| Type parent | :doc:`form</reference/forms/types/form>`                            |
 +-------------+---------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType` |
 +-------------+---------------------------------------------------------------------+
@@ -42,7 +45,8 @@ Définit la devise dans laquelle la somme est spécifiée. Cela détermine quel 
 monétaire sera affiché dans le champ texte. Selon la devise choisie, le symbole
 s'affichera avant ou après la donnée dans le champ texte.
 
-Cette option peut aussi être définie à false pour cacher le symbole monétaire.
+Elle peut être n'importe quel  `code ISO 4217`_. Cette option peut aussi
+être définie à false pour cacher le symbole monétaire.
 
 divisor
 ~~~~~~~
@@ -77,7 +81,7 @@ ce cas, définissez la précision à ``0``).
 Options héritées
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -85,8 +89,16 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. _`code ISO 4217`: http://fr.wikipedia.org/wiki/ISO_4217

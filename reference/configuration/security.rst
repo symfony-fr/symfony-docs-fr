@@ -83,6 +83,7 @@ Chaque partie sera expliquée dans la section suivante.
                     entity:
                         class:              SecurityBundle:User
                         property:           username
+                        manager_name:       ~
 
                 # Exemple d'un provider personnalisé
                 my_some_custom_provider:
@@ -307,6 +308,11 @@ sha512 comme algorithme de hashage.
 Utiliser l'encodeur BCrypt
 --------------------------
 
+.. caution::
+
+    Pour utiliser cet encodeur, vous devez soit utiliser PHP 5.5 ou supérieur,
+    ou alors installer la bibliothèque `ircmaxell/password-compat`_ via Composer.
+
 .. versionadded:: 2.2
     L'encodeur de mot de passe BCrypt a été ajouté à Symfony 2.2.
 
@@ -472,3 +478,4 @@ Pour utiliser une authentification HTTP-Digest vous devez fournir un domaine et 
       ));
 
 .. _`PBKDF2`: http://en.wikipedia.org/wiki/PBKDF2
+.. _`ircmaxell/password-compat`: https://packagist.org/packages/ircmaxell/password-compat

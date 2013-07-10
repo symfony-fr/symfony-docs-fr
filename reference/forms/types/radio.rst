@@ -20,9 +20,12 @@ Si vous voulez avoir un champ Booléen, utilisez :doc:`checkbox</reference/forms
 | Options     | - `required`_                                                       |
 | héritées    | - `label`_                                                          |
 |             | - `read_only`_                                                      |
+|             | - `disabled`_                                                       |
 |             | - `error_bubbling`_                                                 |
+|             | - `error_mapping`_                                                  |
+|             | - `mapped`_                                                         |
 +-------------+---------------------------------------------------------------------+
-| Type parent | :doc:`field</reference/forms/types/field>`                          |
+| Type parent | :doc:`form</reference/forms/types/form>`                            |
 +-------------+---------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\RadioType` |
 +-------------+---------------------------------------------------------------------+
@@ -41,7 +44,7 @@ n'affecte pas la valeur qui est définie dans votre objet.
 Options héritées
 -----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -49,4 +52,10 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
