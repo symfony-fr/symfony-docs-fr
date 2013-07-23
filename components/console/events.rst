@@ -43,7 +43,7 @@ envoyé. Les écouteurs reçoivent un événement de classe
         $command = $event->getCommand();
 
         // Ecrire à propos de la commande
-        $output->writeln(sprintf('Avant le début de l'exécution de la commande <info>%s</info>', $command->getName()));
+        $output->writeln(sprintf('Avant le début de l\'exécution de la commande <info>%s</info>', $command->getName()));
 
         // récupérer l'application
         $application = $command->getApplication();
@@ -76,7 +76,7 @@ Les écouteurs reçoivent un événement de classe
         $command = $event->getCommand();
 
         // afficher des informations
-        $output->writeln(sprintf('Après l'exécution de la commande <info>%s</info>', $command->getName()));
+        $output->writeln(sprintf('Après l\'exécution de la commande <info>%s</info>', $command->getName()));
 
         // Changer le code de sortie
         $event->setExitCode(128);
@@ -109,7 +109,7 @@ Les écouteurs reçoivent un événement de classe
 
         $command = $event->getCommand();
 
-        $output->writeln(sprintf('Oops, L'exception levée par la commande en cours <info>%s</info>', $command->getName()));
+        $output->writeln(sprintf('Oops, L\'exception levée par la commande en cours <info>%s</info>', $command->getName()));
 
         // Récupérer le code de sortie (Le code de l'exception ou de sortie défini par l'événement ConsoleEvents::TERMINATE)
         $exitCode = $event->getExitCode();
