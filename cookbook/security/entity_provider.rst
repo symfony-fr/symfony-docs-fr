@@ -183,9 +183,9 @@ Pour plus de détails sur chacune d'entre elles, voir
 
     L'interface :phpclass:`Serializable` ainsi que les méthodes ``serialize`` et ``unserialize``
     ont été ajouté pour permettre à la classe ``User`` d'être sérilisable
-    dans la session. Cela peu ou non être necessaire en fonction de votre configuration.
-    Cependant c'est certainement une bonne idée. Seule la propriété ``id`` à besoin d'être
-    sérialisée, car la méthode :method:`Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider::refreshUser`
+    dans la session. Cela peut ou non être necessaire en fonction de votre configuration.
+    Cependant c'est certainement une bonne idée. Seule la propriété ``id`` a besoin d'être
+    sérialisé, car la méthode :method:`Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider::refreshUser`
     recharge l'utilisateur à chaque requête en utilisant la propriété ``id``.
 
 .. code-block:: php
