@@ -172,20 +172,13 @@ force la classe à implémenter les cinq méthodes suivantes :
 Pour plus de détails sur chacune d'entre elles, voir
 :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 
-.. versionadded:: 2.1
-    Dans Symfony2.1, la méthode ``equals`` a été supprimée de ``UserInterface``.
-    Si vous avez besoin de surcharger l'implémentation par défaut de la logique
-    de comparaison, implémentez la nouvelle interface
-    :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface` et
-    implémentez la méthode ``isEqualTo``;
-
 .. note::
 
-    L'interface :phpclass:`Serializable` ainsi que les méthodes ``serialize`` et ``unserialize``
-    ont été ajouté pour permettre à la classe ``User`` d'être sérilisable
-    dans la session. Cela peut ou non être necessaire en fonction de votre configuration.
-    Cependant c'est certainement une bonne idée. Seule la propriété ``id`` a besoin d'être
-    sérialisé, car la méthode :method:`Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider::refreshUser`
+    L'interface :phpclass:`Serializable` ainsi que ses méthodes ``serialize`` et ``unserialize``
+    ont été ajoutées pour permettre à la classe ``User`` d'être sérialisable
+    dans la session. Cela peut ou non être nécessaire en fonction de votre configuration,
+    mais c'est certainement une bonne idée. Seule la propriété ``id`` a besoin d'être
+    sérialisée, car la méthode :method:`Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider::refreshUser`
     recharge l'utilisateur à chaque requête en utilisant la propriété ``id``.
 
 .. code-block:: php
