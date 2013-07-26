@@ -147,8 +147,9 @@ Sécuriser des méthodes en utilisant des annotations
 ---------------------------------------------------
 
 Vous pouvez aussi sécuriser des appels de méthodes dans n'importe quel service avec
-des annotations en utilisant le bundle optionnel `JMSSecurityExtraBundle`_. Ce
-bundle est inclus dans la Distribution Standard de Symfony2.
+des annotations en utilisant le bundle facultatif `JMSSecurityExtraBundle`_. Ce Bundle
+n'est pas inclus dans la Distribution Standard de Symfony2, mais vous pouvez
+choisir de l'installer.
 
 Pour activer la fonctionnalité des annotations, :ref:`taggez<book-service-container-tags>`
 le service que vous voulez sécuriser avec le tag ``security.secure_service``
