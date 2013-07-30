@@ -6,7 +6,7 @@ Introduction aux paramètres
 
 Vous pouvez définir des paramètres dans le conteneur de services qui peuvent être
 directement utilisé ou en partie dans les définitions des services. Cela peut
-aider à séparer les valeurs qui vous changez régulièrement.
+aider à séparer les valeurs que vous changez régulièrement.
 
 Récupérer et définir les paramètres du Conteneur
 ------------------------------------------------
