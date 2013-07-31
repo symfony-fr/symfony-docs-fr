@@ -23,17 +23,11 @@ Un autre cas d'utilisation intéressant, c'est lorsque vous avez plusieurs objet
 qui partagent une configuration commune ou qui doivent être configurés de
 manière similaire à l'exécution.
 
-For example, suppose you have an application where you send different types of
-emails to users. Emails are passed through different formatters that could be
-enabled or not depending on some dynamic application settings. You start
-defining a ``NewsletterManager`` class like this::
-
-
 Par exemple, supposons que vous ayez une application où vous envoyez différents
 types d'e-mails aux utilisateurs. Les e-mails sont transmis à travers différents
 formateurs qui pourraient être activée ou non en fonction de certains paramètres
 dynamiques de l'application.
-vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
+Vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
 
     class NewsletterManager implements EmailFormatterAwareInterface
     {
@@ -52,7 +46,6 @@ vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
 
         // ...
     }
-
 
 et ensuite, une classe ``GreetingCardManager``::
 
@@ -73,8 +66,6 @@ et ensuite, une classe ``GreetingCardManager``::
 
         // ...
     }
-
-
 
 Comme mentionné précédemment, l'objectif est de définir les formateurs lors de
 l'exécution en fonction des paramètres de l'application. Pour ce faire, vous avez
@@ -102,10 +93,6 @@ et de la validation du formatage permis par l'application::
         // ...
     }
 
-If your goal is to avoid having to couple ``NewsletterManager`` and
-``GreetingCardManager`` with ``EmailFormatterManager``, then you might want to
-create a configurator class to configure these instances::
-
 Si votre objectif est d'éviter d'avoir à coupler ``NewsletterManager`` et
 ``GreetingCardManager`` avec ``EmailFormatterManager``, alors vous voudrez
 peut-être créer une classe configurateur pour configurer ces instances::
@@ -128,12 +115,6 @@ peut-être créer une classe configurateur pour configurer ces instances::
 
         // ...
     }
-
-The ``EmailConfigurator``'s job is to inject the enabled filters into ``NewsletterManager``
-and ``GreetingCardManager`` because they are not aware of where the enabled
-filters come from. In the other hand, the ``EmailFormatterManager`` holds the
-knowledge about the enabled formatters and how to load them, keeping the single
-responsibility principle.
 
 Le travail de ``EmailConfigurator`` consiste à injecter les filtres activés dans
 ``NewsletterManager`` et ``GreetingCardManager``  parce qu'ils ne sont pas conscients
