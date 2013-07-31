@@ -261,7 +261,7 @@ Utilisation d'un formulaire de connexion traditionnel
 
 .. tip::
 
-    Dans cette section, vous apprendre comment créer un formulaire de connexion basique
+    Dans cette section, vous allez apprendre comment créer un formulaire de connexion basique
     qui continue d'utiliser les utilisateurs codés en dur que vous avez défini dans le
     fichier ``security.yml``.
 
