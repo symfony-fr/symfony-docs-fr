@@ -559,7 +559,7 @@ Groupes basés sur les clics de boutons
 Lorsque votre formulaire contient plusieurs boutons submit, vous pouvez changer
 de groupe de validation selon le bouton qui a été utilisé pour soumettre le formulaire.
 Par exemple, considérez un formulaire d'assistance qui vous permet d'aller à une
-étape suivante, ou de revenir à une étape précédente. Supposez égalemen que lorsque
+étape suivante, ou de revenir à une étape précédente. Supposez également que lorsque
 vous retournez à l'étape précédente, les données du formulaires doivent être
 enregistrées mais pas validées.
 
@@ -571,7 +571,7 @@ Premièrement, vous avez besoin d'ajouter les deux boutons au formulaire::
         ->add('previousStep', 'submit')
         ->getForm();
 
-Ensuite, configurez le bouton qui renvoit à l'étape précédente pour qu'il
+Ensuite, configurez le bouton qui renvoie à l'étape précédente pour qu'il
 exécute des groupes de validation spécifiques. Dans cet exemple, vous voulez
 qu'il supprime la validation, donc vous devez définir ses options ``validation_groups``
 à false::
@@ -584,9 +584,9 @@ qu'il supprime la validation, donc vous devez définir ses options ``validation_
         ->getForm();
 
 Maintenant, le formulaire ne vérifiera pas les contraintes de validation. Mais
-il effectuera toujours des vérifications d'intégrités de base, comme vérifier
+il effectuera toujours des vérifications d'intégrité de base, comme vérifier
 si un fichier est trop gros pour être uploadé ou si vous tentez de soumettre
-un texte dans un champ censé contenir un nombre
+un texte dans un champ censé contenir un nombre.
 
 .. index::
    single: Forms; Built-in field types
