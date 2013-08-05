@@ -492,7 +492,7 @@ de l'utilisateur.
 Gérer la Locale de l'Utilisateur
 --------------------------------
 
-La locale de l'utilisateur courant est stockée dans la session et est accessible
+La locale de l'utilisateur courant est stockée dans la requète et est accessible
 via l'objet ``request`` :
 
 .. code-block:: php
