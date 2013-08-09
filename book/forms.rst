@@ -1796,7 +1796,7 @@ un tableau des données soumises. C'est en fait très facile::
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            / les données sont un tableau avec les clés "name", "email", et "message"
+            // Les données sont un tableau avec les clés "name", "email", et "message"
             $data = $form->getData();
         }
 
