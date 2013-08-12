@@ -5,27 +5,27 @@ Les services paresseux (« lazy services » en anglais)
 =====================================================
 
 .. versionadded:: 2.3
-   les services ``lazy`` ont été ajouté depuis Symfony 2.3.
+   Les services ``lazy`` ont été ajoutés depuis Symfony 2.3.
 
 Pourquoi les services ``lazy`` ?
 --------------------------------
 
 Dans certains cas, vous souhaiteriez injecter un service qui est vraiment lourd
-à instancier mais il n'est pas toujours utiliser dans l'objet. Par exemple, imaginez
+à instancier mais il n'est pas toujours utilisé dans l'objet. Par exemple, imaginez
 que vous ayez un ``NewsletterManager`` et que vous injectiez le service ``mailer``.
-Seulement quelques méthodes de votre ``NewsletterManager`` utilise le service
+Seules quelques méthodes de votre ``NewsletterManager`` utilisent le service
 ``mailer``, mais même quand vous n'en avez pas besoin, le service ``mailer`` est
 toujours instancié à la construction de votre ``NewsletterManager``.
 
 Configurer les services comme ``lazy`` est une réponse à ce problème. Avec le
 service ``lazy``, un "proxy" du service ``mailer`` est injecté. Il ressemble et
-agit comme le service ``mailer``, à l'exception que le service ``mailer`` n'est
-pas instancié, et le sera qu'au moment où vous interagirez avec le proxy.
+agit comme le service ``mailer``, à l'exception près que le service ``mailer`` n'est
+pas instancié, et ne le sera qu'au moment où vous interagirez avec le proxy.
 
 Installation
 ------------
 
-En premier pour utilisez l'instantiation d'un service ``lazy``, vous aurez besoin
+Tout d'abord, pour utiliser l'instantiation d'un service ``lazy``, vous aurez besoin
 d'installer `ProxyManager bridge`_:
 
 .. code-block:: bash
@@ -35,8 +35,8 @@ d'installer `ProxyManager bridge`_:
 .. note::
 
     Si vous utilisez le framework full-stack, le paquet n'est pas inclus et vous
-    aurez besoin de l'ajouter à votre ``composer.json`` et l'installer ( ce que
-    produit la commande ci-dessus).
+    aurez besoin de l'ajouter à votre ``composer.json`` et l'installer (ce que
+    fait la commande ci-dessus).
 
 Configuration
 -------------
@@ -68,8 +68,8 @@ Vous pouvez récupérer le service depuis le conteneur::
 
 A ce moment, l'argument ``$service``récupéré doit être un `proxy`_ virtuel et
 a la même signature que la classe représentant le service. Vous pouvez aussi
-injecter ce service normalement à d'autres services. L'objet qui est réellement
-injecter est le service proxy.
+injecter ce service normalement dans d'autres services. L'objet qui est réellement
+injecté est le service proxy.
 
 .. note::
 
