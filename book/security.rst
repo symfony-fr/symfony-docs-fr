@@ -1256,7 +1256,8 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
         security:
             providers:
                 chain_provider:
-                    providers: [in_memory, user_db]
+                    chain : 
+                        providers: [in_memory, user_db]
                 in_memory:
                     memory:
                         users:
