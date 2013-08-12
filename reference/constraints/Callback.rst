@@ -20,7 +20,7 @@ sorte de choses, incluant la création et l'assignation d'erreurs de validation.
 +----------------+------------------------------------------------------------------------+
 | S'applique à   | :ref:`classe<validation-class-target>`                                 |
 +----------------+------------------------------------------------------------------------+
-| Options        | - `methodes`_                                                          |
+| Options        | - `methods`_                                                          |
 +----------------+------------------------------------------------------------------------+
 | Classe         | :class:`Symfony\\Component\\Validator\\Constraints\\Callback`          |
 +----------------+------------------------------------------------------------------------+
@@ -111,7 +111,7 @@ quel champ ces erreurs seront attribuées ::
 Options
 -------
 
-methodes
+methods
 ~~~~~~~~
 
 **type**: ``array`` **default**: ``array()`` [:ref:`option par défaut<validation-default-option>`]
