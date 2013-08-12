@@ -11,7 +11,7 @@ Pourquoi les services ``lazy`` ?
 --------------------------------
 
 Dans certains cas, vous souhaiteriez injecter un service qui est vraiment lourd
-à instancier mais il n'est pas toujours utiliser dans l'objet. Par exemple, imagez
+à instancier mais il n'est pas toujours utiliser dans l'objet. Par exemple, imaginez
 que vous ayez un ``NewsletterManager`` et que vous injectiez le service ``mailer``.
 Seulement quelques méthodes de votre ``NewsletterManager`` utilise le service
 ``mailer``, mais même quand vous n'en avez pas besoin, le service ``mailer`` est
@@ -41,7 +41,7 @@ d'installer `ProxyManager bridge`_:
 Configuration
 -------------
 
-Vous pouvez un service comme ``lazy`` en modifiant sa définition:
+Vous pouvez configurer un service comme ``lazy`` en modifiant sa définition:
 
 .. configuration-block::
 
@@ -76,14 +76,14 @@ injecter est le service proxy.
     Si vous n'installez pas le `ProxyManager bridge`_, le conteneur passera
     outre le drapeau ``lazy`` et instanciera normalement le service.
 
-Le proxy est initialisé et le service demandé sera instancié au moment vous interagirez
+Le proxy est initialisé et le service demandé sera instancié au moment où vous interagirez
 avec l'objet.
 
 Ressources additionnelles
 -------------------------
 
 Vous pouvez en apprendre plus sur les proxies, comment ils sont instanciés,
-générés et initialisés dans la `document du ProxyManager`_.
+générés et initialisés dans la `documentation du ProxyManager`_.
 
 .. _`ProxyManager bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/ProxyManager
 .. _`proxy`: http://en.wikipedia.org/wiki/Proxy_pattern
