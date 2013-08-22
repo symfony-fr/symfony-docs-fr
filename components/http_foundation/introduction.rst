@@ -381,7 +381,6 @@ Afin de rediriger le client vers une autre URL, vous pouvez utilisez la classe
 Session
 -------
 
-TBD -- Cette partie n'est actuellement pas écrite et sera certainement retravaillée
-dans Symfony en version 2.1.
+Les informations concernant la session se trouvent dans leur propre document : :doc:`/components/http_foundation/sessions`.
 
 .. _Packagist: https://packagist.org/packages/symfony/http-foundation
