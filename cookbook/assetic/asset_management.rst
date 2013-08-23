@@ -115,7 +115,7 @@ Si vous utilisez les block par défaut de la Distribution Standard, ce tag prend
         <?php endforeach; ?>
 
 Mais comme Assetic modifie les chemins de vos ressources, les images de fond (ou autres) 
-qui utilisent des chemins relatifs se retrouveront cassés, sauf si vous utilisé 
+qui utilisent des chemins relatifs se retrouveront cassés, sauf si vous utilisez 
 le filtre :ref:`cssrewrite<cookbook-assetic-cssrewrite>`.
 
 .. note::
