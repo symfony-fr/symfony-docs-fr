@@ -60,7 +60,7 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
                    'yell',
                    null,
                    InputOption::VALUE_NONE,
-                   'Si Défini, la réponse est rendue en majuscules'
+                   'Si défini, la réponse est rendue en majuscules'
                 )
             ;
         }
