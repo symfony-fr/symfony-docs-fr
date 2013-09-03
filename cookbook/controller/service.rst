@@ -62,6 +62,6 @@ défini comme service, vous devrez spécifier votre service comme suit::
     {
     }
 
-Dans cet exemple, ``my_bundle.annot_controller`` devrait l'id de l'instance
-du ``AnnotController`` définie dans le conteneur de services. Cette partie
+Dans cet exemple, ``my_bundle.annot_controller`` devrait être l'id de l'instance
+du ``AnnotController`` défini dans le conteneur de services. Cette partie
 est documentée dans le chapitre :doc:`/bundles/SensioFrameworkExtraBundle/annotations/routing`.
