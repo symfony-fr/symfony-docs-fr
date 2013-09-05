@@ -191,7 +191,7 @@ actuelle pour l'afficher dans la vue::
     use Symfony\Component\Form\FormBuilder;
     use Symfony\Component\Form\FormView;
     use Symfony\Component\Form\FormInterface;
-    use Symfony\Component\Form\Util\PropertyPath;
+    use Symfony\Component\PropertyAccess\PropertyAccess;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class ImageTypeExtension extends AbstractTypeExtension
@@ -228,10 +228,14 @@ actuelle pour l'afficher dans la vue::
             if (array_key_exists('image_path', $options)) {
                 $parentData = $form->getParent()->getData();
 
-                $propertyPath = new PropertyPath($options['image_path']);
-                $imageUrl = $propertyPath->getValue($parentData);
+                if (null !== $parentData) {
+                   $accessor = PropertyAccess::createPropertyAccessor();
+                   $imageUrl = $accessor->getValue($parentData, $options['image_path']);
+                } else {
+                    $imageUrl = null;
+                }
                 // définit une variable "image_url" qui sera disponible à l'affichage du champ
-                $view->set('image_url', $imageUrl);
+                $view->vars['image_url'] = $imageUrl;
             }
         }
 
