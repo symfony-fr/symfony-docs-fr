@@ -233,7 +233,7 @@ Lire `gc_probability`_.
 gc_maxlifetime
 ..............
 
-**type**: ``integer`` **default**: ``14400``
+**type**: ``integer`` **default**: ``1440``
 
 Détermine le nombre de secondes après lesquelles, la donnée est considérée comme
 "garbage" et peut être nettoyé. "Garbage collection" peut apparaître durant le démarrage
