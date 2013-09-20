@@ -114,7 +114,7 @@ très facilement comme ceci::
         public function onKernelRequest(GetResponseEvent $event)
         {
             if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
-                // ne rien faire si c'est la requête principale
+                // ne rien faire si ce n'est pas la requête principale
                 return;
              }
  
