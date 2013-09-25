@@ -115,6 +115,15 @@ Glossaire
         d'un langage de sérialisation de données léger et intuitif, utilisé abondamment
         dans les fichiers de configuration Symfony2. Lisez le chapitre :doc:`/components/yaml`.
 
+   Injection de Dépendance
+        L'Injection de Dépendance est un patron de conception (design pattern) très fortement 
+        utilisé dans le framework Symfony2. Il encourage la mise en place d'une architecture 
+        d'application moins couplée et plus maintenable. Le principe majeur de ce design pattern 
+        est de permettre aux développeurs d'injecter des objets (aussi connus sous le nom de services) 
+        dans d'autres objets, en les passant généralement en tant que paramètres d'un constructeur 
+        ou d'un mutateur. Différents niveaux de couplage peuvent être établis en fonction de 
+        la méthode utilisée pour injecter les objets entre eux. Le pattern d'Injection de Dépendance 
+        est très souvent associé à un autre type d'objet: le :doc:`/book/service_container` 
 
 .. _`architecture orientée services`: http://fr.wikipedia.org/wiki/Architecture_orient%C3%A9e_services
 .. _`Wikipedia sur HTTP`: http://fr.wikipedia.org/wiki/HTTP
