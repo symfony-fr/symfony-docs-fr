@@ -352,7 +352,7 @@ vous avez tapé cette commande, un éditeur vous affichera une liste de commits 
 
 Pour fusionner tous les commits dans le premier, supprimez le mot « pick »
 avant le second et les derniers commits, et remplacez le par le mot « squash »
-ou juste « s ». Quand vous enregistrez, fit commencera le rebase et, quand il aura
+ou juste « s ». Quand vous enregistrez, git commencera le rebase et, quand il aura
 terminé, vous demandera de modifier le message de commit qui est, par défaut, une
 liste des messages de chaque commit. Lorsque vous aurez terminé, lancez la commande push.
 
