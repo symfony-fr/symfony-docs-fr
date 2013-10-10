@@ -351,7 +351,7 @@ cela se fait en créant le fichier ``.gitignore`` et en y ajoutant la ligne suiv
 
 Maintenant, le répertoire vendor ne sera pas commité sur votre système de gestion
 de code. C'est plutôt bien (en fait c'est génial !) car lorsque quelqu'un clone ou
-récupère le projet, il lui suffit de lancer la commande ``php bin/vendors install``
+récupère le projet, il lui suffit de lancer la commande ``php composer.phar install``
 pour récupérer toutes les bibliothèques nécessaires.
 
 .. _`activer le support ACL`: https://help.ubuntu.com/community/FilePermissionsACLs
