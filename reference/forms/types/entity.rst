@@ -96,7 +96,7 @@ group_by
 **type**: ``string``
 
 C'est un nom de propriété (ex ``author.name``) utilisé pour organiser
-les choix disponibles dans les groupes. Ce ne fonctionne que lorsque vous
+les choix disponibles dans les groupes. Cette propriété ne fonctionne que lorsque vous
 affichez une balise select, et cela se fait par l'ajout de balises optgroup
 autour des balises option. Les choix qui ne retournent aucune valeur pour ce nom
 de propriété sont affichés directement dans la balise select, sans optgroup.
@@ -141,4 +141,10 @@ Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
