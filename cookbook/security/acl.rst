@@ -149,8 +149,8 @@ l'exemple, vous accordez à l'utilisateur connecté un accès propriétaire
 au Comment. Le ``MaskBuilder::MASK_OWNER`` est un masque binaire prédéfini ;
 ne vous inquiétez pas, le constructeur de masque va abstraire la plupart des
 détails techniques, mais en utilisant cette technique vous pouvez stocker
-plein de  permissions différentesdans une même ligne de base de données ;
-ce qui vous offre un avanatage considérable au niveau performance.
+plein de permissions différentes dans une même ligne de base de données ;
+ce qui vous offre un avantage considérable au niveau performance.
 
 .. tip::
 
