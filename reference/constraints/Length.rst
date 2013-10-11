@@ -36,38 +36,6 @@ Pour vérifier que la longueur du champ ``firstName`` d'une classe se situe entr
                     - Length:
                         min: 2
                         max: 50
-                        minMessage: Votre nom doit faire au moins {{ limit }} caractères
-                        maxMessage: Votre nom ne peut pas être plus long que {{ limit }}  caractères
-
-    .. code-block:: php-annotations
-
-        // src/Acme/EventBundle/Entity/Participant.php
-        use Symfony\Component\Validator\Constraints as Assert;
-
-        class Participant
-        {
-            /**
-             * @Assert\Length(
-             *      min = "2",
-             *      max = "50",
-             *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
-             *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
-             * )
-             */
-             protected $firstName;
-        }
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # src/Acme/EventBundle/Resources/config/validation.yml
-        Acme\EventBundle\Entity\Participant:
-            properties:
-                firstName:
-                    - Length:
-                        min: 2
-                        max: 50
                         minMessage: "Votre nom doit faire au moins {{ limit }} caractères"
                         maxMessage: "Votre nom ne peut pas être plus long que {{ limit }} caractères"
 
