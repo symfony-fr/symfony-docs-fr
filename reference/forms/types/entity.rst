@@ -102,7 +102,7 @@ group_by
 **type**: ``string``
 
 C'est un nom de propriété (ex ``author.name``) utilisé pour organiser
-les choix disponibles dans les groupes. Ce ne fonctionne que lorsque vous
+les choix disponibles dans les groupes. Cette propriété ne fonctionne que lorsque vous
 affichez une balise select, et cela se fait par l'ajout de balises optgroup
 autour des balises option. Les choix qui ne retournent aucune valeur pour ce nom
 de propriété sont affichés directement dans la balise select, sans optgroup.
