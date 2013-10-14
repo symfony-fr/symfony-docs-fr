@@ -4,7 +4,7 @@
 Comment tester les interactions de multiples clients
 ====================================================
 
-Si vous avez besoin de simuler des interaction entre différents clients (pour
+Si vous avez besoin de simuler des interactions entre différents clients (pour
 un « chat » par exemple), créez plusieurs clients::
 
     $harry = static::createClient();
@@ -31,9 +31,6 @@ des états globaux. Dans ces cas vous devrez isoler les clients::
 
     $this->assertEquals(201, $harry->getResponse()->getStatus());
     $this->assertRegExp('/Hello/', $sally->getResponse()->getContent());
-
-Insulated clients transparently execute their requests in a dedicated and
-clean PHP process, thus avoiding any side-effects.
 
 Les clients isolés exécute de manière transparente leur requête dans un processus
 PHP dédié et « sain », et évitent donc quelconque effet de bord.
