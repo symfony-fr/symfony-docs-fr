@@ -581,7 +581,7 @@ correctement à la route ``blog_show``.
     Tout cela signifie que l'ordre des routes est très important. Si la
     route ``blog_show`` était placée au-dessus de la route ``blog``, l'URL
     ``/blog/2`` correspondrait à ``blog_show`` au lieu de ``blog`` puisque
-    le paramètre {slug}`` de ``blog_show`` n'a pas de conditions requises.
+    le paramètre ``{slug}`` de ``blog_show`` n'a pas de conditions requises.
     En utilisant un ordre clair et intelligent, vous pouvez accomplir tout
     ce que vous voulez.
 
