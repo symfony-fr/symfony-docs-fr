@@ -176,8 +176,8 @@ un pattern d'URL spécifique à ce contrôleur :
         )));
 
 Aller à l'URL ``/hello/ryan`` va maintenant exécuter le contrôleur
-``HelloController::indexAction()`` et passer la valeur ``ryan``en tant
-que variable ``$name`` . Créer une « page » signifie simplement créer une
+``HelloController::indexAction()`` et passer la valeur ``ryan`` en tant
+que variable ``$name``. Créer une « page » signifie simplement créer une
 méthode contrôleur et une route associée.
 
 Notez la syntaxe utilisée pour faire référence au contrôleur : ``AcmeHelloBundle:Hello:index``.
