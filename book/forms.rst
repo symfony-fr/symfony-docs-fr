@@ -1534,7 +1534,7 @@ il y a 4 *parties* possibles d'un formulaire qui peuvent être affichées :
 
 .. note::
 
-    Il y a en fait 2 autres *parties*, ``rows``et ``rest``, mais
+    Il y a en fait 2 autres *parties*, ``rows`` et ``rest``, mais
     vous ne devriez que rarement, voire jamais, avoir besoin de les réécrire.
 
 En connaissant le type du champ (par exemple : ``textarea``) et quelle partie de
