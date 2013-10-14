@@ -120,7 +120,7 @@ Veuillez noter qu'il y a deux inconvénients à utiliser un fichier d'amorçage 
 
 Si vous utilisez l'édition Symfony2 standard, les fichiers d'amorçage sont automatiquement
 regénérés après avoir mis à jour les bibliothèques tierces (« vendors »)
-grâce à la commande ``php bin/vendors install``.
+grâce à la commande ``composer.phar install``.
 
 Fichiers d'amorçage et caches de byte code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
