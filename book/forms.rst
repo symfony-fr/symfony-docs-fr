@@ -198,7 +198,7 @@ un formulaire HTML.
    avoir une méthode « getter » et un « setter » afin que le composant formulaire
    puisse récupérer et assigner des données à cette propriété. Pour une propriété
    booléenne, vous pouvez utiliser une méthode « isser » ou « hasser » (par exemple :
-   ``isPublished()`` ou ``hasReminder()`) à la place d'un getter
+   ``isPublished()`` ou ``hasReminder()``) à la place d'un getter
    (par exemple : ``getPublished()`` ou ``getReminder()``).
 
 .. index::
@@ -272,7 +272,7 @@ et a trois scénarios possibles :
    données soumises sont toujours écrites dans l'objet, mais cette fois,
    :method:`Symfony\Component\Form\FormInterface::isValid` retourne ``true``.
    Vous avez alors la possibilité d'effectuer certaines actions qui utilisent
-   l'objet ``$task` (comme le persister en base de données) avant de rediriger
+   l'objet ``$task`` (comme le persister en base de données) avant de rediriger
    l'utilisateur vers une autre page (par exemple une page « merci » ou 
    « ça a marché ! »).
 
