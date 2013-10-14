@@ -81,7 +81,7 @@ Glossaire
         :ref:`L'Architecture: Utilisation de bibliothèques externes <using-vendors>`.
 
    Acme
-        *Acme* est un exemple d'entreprise utilisé dans Symofny pour les exemples et
+        *Acme* est un exemple d'entreprise utilisé dans Symfony2 pour les exemples et
         la documentation. Il est utilisé dans les namespaces où vous devriez normalement
         utiliser votre propre nom d'entreprise (ex ``Acme\BlogBundle``).
 
