@@ -10,7 +10,7 @@ désirerez peut-être écrire des tests sur les données provenant du profiler. 
 ce dernier fournit des méthodes efficaces, permettant de contrôler de nombreux
 comportements et d'appliquer certaines métriques.
 
-Le Profiler de Symfony2 :ref:`Profiler <internals-profiler>` collecte de nombreuses
+Le :ref:`Profiler <internals-profiler>` de Symfony2 collecte de nombreuses
 informations à chaque requête. Utilisez celle-ci pour vérifier le nombre d'appels
 à la base de données, le temps passé dans l'exécution du framework, ...
 
@@ -33,7 +33,7 @@ qu'il est disponible (il est activé par défaut dans l'environnement de ``test`
 
             // Vérifier que le profiler est activé
             if ($profile = $client->getProfile()) {
-                // vérifier le nombre de requêtes
+                // Vérifier le nombre de requêtes
                 $this->assertLessThan(10, $profile->getCollector('db')->getQueryCount());
 
                 // Vérifier le temps utilisé par le framework
@@ -56,7 +56,7 @@ dans les messages d'erreurs::
 .. caution::
 
      Le profiler conserve des données différentes suivant l'environnement utilisé
-     (particulièrement si vous utiliser SQLite, ce qui est la configuration par
+     (particulièrement si vous utilisez SQLite, ce qui est la configuration par
      défaut).
 
 .. note::
