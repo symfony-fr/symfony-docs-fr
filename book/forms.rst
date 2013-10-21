@@ -287,8 +287,8 @@ et a trois scénarios possibles :
 
 .. _book-form-submitting-multiple-buttons:
 
-Submitting Forms with Multiple Buttons
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Gérer la Soumission des Formulaires ayant Plusieurs Boutons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
     Le support des boutons dans les formulaires est une nouveauté de Symfony 2.3.
