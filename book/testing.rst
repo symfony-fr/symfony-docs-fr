@@ -603,7 +603,7 @@ très pratique ``selectLink()`` :
     $crawler->selectLink('Click here');
 
 Cela sélectionne tous les liens qui contiennent le texte donné, ou les images
-cliquables dont l'attribut ``alt``contient ce texte. Comme les autres méthodes
+cliquables dont l'attribut ``alt`` contient ce texte. Comme les autres méthodes
 de filtre, cela retourne un autre objet ``Crawler``.
 
 Une fois que vous avez sélectionné un lien, vous avez accès à l'objet spécial ``Link``,
