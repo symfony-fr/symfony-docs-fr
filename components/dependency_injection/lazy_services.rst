@@ -87,4 +87,4 @@ générés et initialisés dans la `documentation du ProxyManager`_.
 
 .. _`ProxyManager bridge`: https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/ProxyManager
 .. _`proxy`: http://en.wikipedia.org/wiki/Proxy_pattern
-.. _`document du ProxyManager`: https://github.com/Ocramius/ProxyManager/blob/master/docs/lazy-loading-value-holder.md
+.. _`documentation du ProxyManager`: https://github.com/Ocramius/ProxyManager/blob/master/docs/lazy-loading-value-holder.md
