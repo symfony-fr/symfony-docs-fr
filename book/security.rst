@@ -134,7 +134,7 @@ que l'on peut décrire de la manière suivante :
 
 * Il y a 2 utilisateurs dans le système (``ryan`` et ``admin``);
 * Les utilisateurs s'authentifient grâce à une authentification basique HTTP;
-* Toute URL correspondant au format `/admin/*`` est sécurisée, et seul l'utilisateur ``admin`` 
+* Toute URL correspondant au format ``/admin/*`` est sécurisée, et seul l'utilisateur ``admin`` 
   peut y accéder
 * Toutes les URLs qui ne correspondent pas au format ``/admin/*`` sont accessibles par 
   tous les utilisateurs (et l'utilisateur n'aura pas à s'authentifier).
@@ -169,7 +169,7 @@ Par exemple, tout utilisateur peut accéder ``/foo``  sans qu'on lui demande de 
 Cela fonctionne d'abord parce que le pare-feu autorise les *utilisateurs anonymes* grâce au
 paramètre de configuration ``anonymous``. En d'autres termes, un pare-feu ne nécessite pas 
 qu'un utilisateur soit totalement authentifié immédiatement. Et comme aucun ``role``
-n'est nécessaire pour accéder l'URL ``/foo``(dans la section ``access_control``), la requête peut
+n'est nécessaire pour accéder l'URL ``/foo`` (dans la section ``access_control``), la requête peut
 être satisfaite sans jamais demander à l'utilisateur de s'authentifier.
 
 Si vous supprimez la clé ``anonymous``, le pare-feu va *toujours* demander à l'utilisateur 
@@ -640,7 +640,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
                 ),
             ),
 
-    **3. Assurez-vous que ``/login_check`` est derrière un pare-feu**
+    **3. Assurez-vous que /login_check est derrière un pare-feu**
 
     Ensuite, assurez-vous que l'URL ``check_path`` (ici, ``/login_check``)
     est derrière le pare-feu que vous utilisez pour le formulaire de connexion 
@@ -971,7 +971,7 @@ Charger les utilisateurs de la base de données
 ..............................................
 
 Si vous voulez charger vos utilisateurs depuis l'ORM Doctrine, vous pouvez facilement le faire
-en créant une classe ``User``et en configurant le fournisseur d'entités (``entity`` provider).
+en créant une classe ``User`` et en configurant le fournisseur d'entités (``entity`` provider).
 
 .. tip::
 
@@ -1130,8 +1130,8 @@ en utilisant ``sha1``, suivez les instructions suivantes :
             ),
         ));
 
-En spécifiant les ``itérations`` à ``1``et le paramètre ``encode_as_base64`` à false,
-le mot de passe est simplement encrypté en utilisant l'algorithme ``sha1``une fois, et sans
+En spécifiant les ``itérations`` à ``1`` et le paramètre ``encode_as_base64`` à false,
+le mot de passe est simplement encrypté en utilisant l'algorithme ``sha1`` une fois, et sans
 aucun encodage additionnel. Vous pouvez maintenant calculer le mot de passe soit 
 programmatiquement (c'est-à-dire ``hash('sha1', 'ryanpass')``) ou soit avec des outils en ligne
 comme `functions-online.com`_
@@ -1415,7 +1415,7 @@ Ce rôle n'a pas besoin d'être défini quelque part - vous n'avez qu'à commenc
 .. note::
 
     Tous les rôles *doivent* commencer par le préfixe ``ROLE_`` afin d'être gérés par 
-    Symfony2. Si vous définissez vos propres rôles avec une classe ``Role``dédiée
+    Symfony2. Si vous définissez vos propres rôles avec une classe ``Role`` dédiée
     (plus avancé), n'utilisez pas le préfixe ``ROLE_``.
 
 Rôles hiérarchiques
@@ -1674,7 +1674,7 @@ Pour revenir à l'utilisateur initial, utilisez le nom d'utilisateur spécial ``
 Bien sûr, cette fonctionnalité ne doit être accessible qu'à un petit groupe d'utilisateurs.
 Par défaut, l'accès est limité aux utilisateurs ayant le rôle ``ROLE_ALLOWED_TO_SWITCH``.
 Le nom de ce rôle peut être modifié grâce au paramètre ``role``. Pour plus de sécurité,
-vous pouvez aussi changer le nom du paramètre de configuration grâce au paramètre``parameter``:
+vous pouvez aussi changer le nom du paramètre de configuration grâce au paramètre ``parameter``:
 
 .. configuration-block::
 
