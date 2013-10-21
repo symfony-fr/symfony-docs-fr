@@ -207,7 +207,7 @@ Chaque évènement capturé par le Kernel est une sous-classe de
 :class:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent`. Cela signifie que
 chaque évènement a accès aux mêmes informations de base :
 
-* :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getRequestType``
+* :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getRequestType`
   - retourne le *type* de la requête (``HttpKernelInterface::MASTER_REQUEST`` ou ``HttpKernelInterface::SUB_REQUEST``) ;
 
 * :method:`Symfony\\Component\\HttpKernel\\Event\\KernelEvent::getKernel`
