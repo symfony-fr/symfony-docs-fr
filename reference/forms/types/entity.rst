@@ -93,7 +93,7 @@ property
 **type**: ``string``
 
 C'est la propriété qui doit être utilisée pour afficher l'entité sous forme de
-texte dans l'élément HTML. Si vous le laissez vite, l'objet entité sera converti
+texte dans l'élément HTML. Si vous le laissez vide, l'objet entité sera converti
 en texte et devra alors implémenter la méthode ``__toString()``.
 
 group_by
