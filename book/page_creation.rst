@@ -313,7 +313,7 @@ A la place d'écrire le code HTML dans le contrôleur, retournez plutôt un temp
    Afin d'utiliser la méthode
    :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller::render`,
    votre contrôleur doit étendre la classe
-   `Symfony\Bundle\FrameworkBundle\Controller\Controller`` (API 
+   ``Symfony\Bundle\FrameworkBundle\Controller\Controller`` (API 
    docs: :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`), qui
    ajoute des raccourcis pour des tâches fréquemment utilisées dans les contrôleurs.
    Dans l'exemple ci-dessus, c'est ce qui est fait en ajoutant la ligne ``use``
