@@ -1125,7 +1125,7 @@ données du cache mais il faut l'éviter autant que possible. Le moyen
 le plus standard est de purger le cache pour une URL donnée en
 l'appelant avec la méthode HTTP spéciale ``PURGE``.
 
-Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HTTP ``PURGE`::
+Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HTTP ``PURGE``::
 
     // app/AppCache.php
 
