@@ -194,7 +194,7 @@ Symfony elle-même - dans le répertoire ``vendor/``.
     Au lieu de copier les ressources Symfony, vous pouvez créer des liens symboliques si
     votre système d'exploitation les supporte. Pour créer des liens symboliques, ajoutez
     une entrée dans le noeud ``extra`` de votre fichier composer.json avec la clé
-    `symfony-assets-install`` et la valeur ``symlink`` :
+    ``symfony-assets-install`` et la valeur ``symlink`` :
 
     .. code-block:: json
 
@@ -266,7 +266,7 @@ S'il y a des problèmes, corrigez-les maintenant avant de poursuivre.
 
     **2. Utiliser l'ACL sur un système qui ne supporte pas chmod +a**
 
-    Certains systèmes ne supportent pas la commande``chmod +a``, 
+    Certains systèmes ne supportent pas la commande ``chmod +a``, 
     mais supportent un autre utilitaire appelé ``setfacl``. Vous devrez sans doute
     `activer le support ACL`_ sur votre partition et installer setfacl avant de
     pouvoir l'utiliser (comme c'est le cas avec Ubuntu), de cette façon :
