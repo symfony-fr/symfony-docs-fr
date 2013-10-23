@@ -545,7 +545,10 @@ L'inclusion de ce template dans tout autre template est simple :
             <h1>Recent Articles<h1>
 
             {% for article in articles %}
-                {% include 'AcmeArticleBundle:Article:articleDetails.html.twig' with {'article': article} %}
+                {{ include(
+	            'AcmeArticleBundle:Article:articleDetails.html.twig',
+	            { 'article': article }
+	        ) }}
             {% endfor %}
         {% endblock %}
 
