@@ -516,7 +516,6 @@ comme un tableau callback::
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('Acme\\AcmeBundle\\Entity\\Client', 'determineValidationGroups'),
             'validation_groups' => array(
                 'Acme\AcmeBundle\Entity\Client',
                 'determineValidationGroups',
