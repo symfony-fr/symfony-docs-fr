@@ -524,7 +524,7 @@ comme un tableau callback::
     }
 
 Cela appellera la méthode statique  ``determineValidationGroups()`` de la classe
-``Client`` après que le formulaire soit soumis, mais avant que la validation ne soit faite.
+``Client`` après que le formulaire est soumis, mais avant que la validation ne soit faite.
 L'objet Form est passé comme argument à cette méthode (regardez l'exemple suivant).
 Vous pouvez aussi définir une logique entière en utilisant une Closure::
 
