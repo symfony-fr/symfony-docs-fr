@@ -8,7 +8,7 @@ Un champ :doc:`date</reference/forms/types/date>` qui est spécialisé dans la g
 des dates de naissance.
 
 Peut être rendu comme un champ texte unique, trois champs textes (mois, jour et année),
-ou trois listes déroulantesS.
+ou trois listes déroulantes.
 
 Ce type est très similaire au type :doc:`date</reference/forms/types/date>`, mais
 avec des valeurs par défaut de l'option `years`_ plus appropriées. L'option `years`_
