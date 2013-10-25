@@ -380,7 +380,7 @@ Rester Organisé
 ~~~~~~~~~~~~~~~
 
 Dans votre contrôleur frontal, vous devez déterminer quelle portion de code
-doit être exécuté et quel est le contenu qui doit être retourné. Vous le
+doit être exécuté et quel est le contenu qui doit être retourné. Pour le
 savoir, vous allez devoir inspecter l'URI entrante et exécuter les différentes
 parties de votre code selon cette valeur. Cela peut rapidement devenir moche::
 
