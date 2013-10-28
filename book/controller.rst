@@ -617,9 +617,7 @@ Gérer les Erreurs et les Pages 404
 Quand « quelque chose » n'est pas trouvé, vous devriez vous servir correctement
 du protocole HTTP et retourner une réponse 404. Pour ce faire, vous allez lancer
 un type spécial d'exception. Si vous étendez la classe contrôleur de base, faites
-comme ça::
-
-.. code-block:: php
+comme ç::
 
     public function indexAction()
     {
