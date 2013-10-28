@@ -898,9 +898,9 @@ de production, appelez le contrôleur frontal de ``prod`` :
 
 
 Puisque l'environnement de ``prod`` est optimisé pour la vitesse; la configuration,
-les routes et les templates Twig sont compilés en classes PHP et cachés.
+les routes et les templates Twig sont compilés en classes PHP et mis en cache.
 Quand vous voudrez voir des changements en environnement de ``prod``, vous aurez
-besoin de nettoyer ces fichiers cachés afin de permettre leur régénération :
+besoin de nettoyer ces fichiers de cache afin de permettre leur régénération :
 
 .. code-block:: bash
 
