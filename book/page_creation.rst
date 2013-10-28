@@ -576,8 +576,8 @@ mais en mieux. La différence clé est que *tout* est un bundle dans Symfony2, c
 inclut le coeur du framework et le code de votre application.
 Les bundles sont aux premières loges dans Symfony2. Ils vous offrent la flexibilité
 d'utiliser des fonctionnalités préconstruites packagées dans des `bundles tiers`_
-ou de distribuer vos propres bundles. Cela rend facile de sélectionner quelles
-fonctionnalités activer dans votre application et de les optimiser comme vous voulez.
+ou de distribuer vos propres bundles. Cela facilite la sélection des
+fonctionnalités à activer dans votre application et de les optimiser comme vous le voulez.
 
 .. note::
 
