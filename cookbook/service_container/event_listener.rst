@@ -116,10 +116,9 @@ très facilement comme ceci::
             if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
                 // ne rien faire si c'est la requête principale
                 return;
-             }
+            }
  
             // ...
-            }
         } 
     }
    
