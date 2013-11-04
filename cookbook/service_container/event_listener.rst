@@ -119,7 +119,6 @@ très facilement comme ceci::
              }
  
             // ...
-            }
         } 
     }
    
