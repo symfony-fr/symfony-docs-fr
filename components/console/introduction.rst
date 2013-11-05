@@ -244,7 +244,7 @@ La commande peut maintenant être utilisée de l'une des façons suivantes :
 
 Il est aussi possible de passer une liste de valeur en argument (imaginez que
 vous vouliez saluer tous vos amis). Pour effectuer ceci, vous devez le spécifier
-à la finde la liste d'arguments::
+à la fin de la liste d'arguments::
 
     $this
         // ...
