@@ -1112,7 +1112,7 @@ parce que l'invalidation est déjà prise en compte nativement par le
 modèle de gestion du cache HTTP. Si la validation est utilisée, vous
 ne devriez pas avoir besoin d'utiliser l'invalidation par définition ;
 si l'expiration est utilisée et que vous avez besoin d'invalider une
-ressource, c'est que date d'expiration a été définie trop loin dans le futur.
+ressource, c'est que la date d'expiration a été définie trop loin dans le futur.
 
 .. note::
 

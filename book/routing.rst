@@ -188,7 +188,7 @@ configuration de l'application :
     Bien que toutes les routes soient chargées depuis un fichier unique, c'est
     une pratique courante d'inclure des ressources de routage additionnelles.
     Pour faire cela, il vous suffit de spécifier quels fichiers externes doivent
-    être inclus dans le fichier de configuration de routage principal.Référez-vous
+    être inclus dans le fichier de configuration de routage principal. Référez-vous
     à la section :ref:`routing-include-external-resources` pour plus d'informations.
 
 Configuration Basique des Routes
