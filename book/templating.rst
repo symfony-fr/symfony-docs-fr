@@ -901,7 +901,7 @@ conservant les avantages du mécanisme d'héritage de templates de Symfony.
 
 Commencons par ajouter deux blocs à notre template de base qui incluront deux
 fichiers : l'un s'appelle ``stylesheet`` et est inclus dans la balise ``head``, et
-l'autre s'appelle ``javascript`` et est inclus juste avant que la base ``body`` ne se
+l'autre s'appelle ``javascript`` et est inclus juste avant que la balise ``body`` ne se
 referme. Ces blocs contiendront toutes les feuilles de style et tous les
 fichiers javascript dont vous aurez besoin pour votre site :
 
