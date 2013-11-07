@@ -72,49 +72,9 @@ votre dépôt local git :
 
         $ git commit -m "Initial commit"
 
-8. Finalement, téléchargez toutes les bibliothèques tierces :
+8. 8. Finalement, téléchargez toutes les bibliothèques tierces en utilisant composer.
+Vous pourrez trouver plus d'informations sur :doc:`/master/book/installation`.
 
-   .. code-block:: bash
-
-        $ php bin/vendors install
-
-A ce point, vous disposez d'un projet Symfony2 totalement fonctionnel qui est
-correctement committé sous git. Vous pouvez immédiatement commencer à
-développer, en committant les nouveaux changements dans votre dépôt git.
-
-.. tip::
-
-    Après exécution de la commande :
-
-    .. code-block:: bash
-
-        $ php bin/vendors install
-
-    votre projet va contenir l'historique git complet de tous les bundles
-    et de toutes les bibliothèques définies dans le fichier ``deps``. Cela
-    peut aller jusqu'à 100 Mo ! Vous pouvez sauvegarder la version actuelle
-    de chaque dépendance avec la commande :
-
-    .. code-block:: bash
-
-        $ php bin/vendors lock
-
-    puis vous pouvez supprimer les répertoires d'historique git avec la commande
-    suivante :
-
-    .. code-block:: bash
-
-        $ find vendor -name .git -type d | xargs rm -rf
-
-    La commande supprime tous les répertoires ``.git`` contenus dans le
-    dossier ``vendor``.
-
-    Si vous voulez mettre à jour les bundles définis dans le fichier ``deps``
-    après cela, vous allez devoir les réinstaller :
-
-    .. code-block:: bash
-
-        $ php bin/vendors install --reinstall
 
 Vous pouvez continuer en lisant le chapitre :doc:`/book/page_creation` pour en
 apprendre plus sur comment configurer et développer votre application en interne.
