@@ -553,7 +553,7 @@ Nous en apprendrons plus sur ces répertoires dans de prochains chapitres.
     Typiquement, le seul moment où vous devrez vous soucier du fichier ``app/autoload.php``	
     est quand vous inclurez des bibliothèques tierces dans le répertoire ``vendor/``.
     Pour plus d'informations sur le chargement automatique, voir 
-    :doc: `Comment charger automatiquement des classes</components/class_loader>`.
+    :doc:`Comment charger automatiquement des classes</components/class_loader>`.
 
 Le répertoire des sources (``src/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -575,8 +575,8 @@ mais en mieux. La différence clé est que *tout* est un bundle dans Symfony2, c
 inclut le coeur du framework et le code de votre application.
 Les bundles sont aux premières loges dans Symfony2. Ils vous offrent la flexibilité
 d'utiliser des fonctionnalités préconstruites packagées dans des `bundles tiers`_
-ou de distribuer vos propres bundles. Cela rend facile de sélectionner quelles
-fonctionnalités activer dans votre application et de les optimiser comme vous voulez.
+ou de distribuer vos propres bundles. Cela facilite la sélection des
+fonctionnalités à activer dans votre application et de les optimiser comme vous le voulez.
 
 .. note::
 
