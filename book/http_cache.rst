@@ -1122,7 +1122,7 @@ niveau de l'application parce que l'invalidation est déjà prise en
 compte nativement par le modèle de gestion du cache HTTP. Si la
 validation est utilisée, il ne devrait pas y avoir besoin d'utiliser
 l'invalidation par définition ; si l'expiration est utilisée et qu'il y
-a besoin d'invalider une ressource, c'est que date d'expiration a été
+a besoin d'invalider une ressource, c'est que la date d'expiration a été
 définie trop loin dans le futur.
 
 .. note::
