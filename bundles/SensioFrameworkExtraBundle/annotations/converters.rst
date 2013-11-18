@@ -194,13 +194,7 @@ Basée sur les attributs de la requête, elle définit un attribut nommé
 
 Pour enregistrer votre service convertisseur, vous devez y ajouter un tag :
 
-.. configuration-block::
-
-    .. code-block:: xml
-
-        <service id="my_converter" class="MyBundle/Request/ParamConverter/MyConverter">
-            <tag name="request.param_converter" priority="-2" converter="my_converter" />
-        </service>
+(attribute "converter")
 
 Vous pouvez enregistrer un convertisseur par priorité, par nom (attribut "converter") ou les deux. Si
 vous ne spécifiez pas de priorité ou de nom, le convertisseur sera ajouté à la pile
