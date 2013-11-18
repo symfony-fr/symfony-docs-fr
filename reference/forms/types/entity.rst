@@ -90,6 +90,24 @@ C'est la propriété qui doit être utilisée pour afficher l'entité sous forme
 texte dans l'élément HTML. Si vous le laissez vide, l'objet entité sera converti
 en texte et devra alors implémenter la méthode ``__toString()``.
 
+Note: ``property`` est le chainage (path) de propriété utilisé pour afficher l'option. Vous pouvez 
+utiliser tout ce qui est supporté par le :doc:`composant PropertyAccessor</components/property_access/introduction>`
+
+Exemple d'utilisation:
+
+$builder->add('gender', 'entity', array(
+    'class' => 'MyBundle:Gender',
+    'property' => 'translations["en"].name',
+    'query_builder' => function(EntityRepository $er) {
+        return $er->createQueryBuilder('g')
+           ->join('g.translations', 't')
+           ->where('t.locale = :locale')
+           ->orderBy('t.name', 'ASC')
+           ->setParameter('locale', 'en');
+    },
+));
+
+
 group_by
 ~~~~~~~~
 
