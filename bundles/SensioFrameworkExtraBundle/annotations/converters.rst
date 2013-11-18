@@ -199,10 +199,10 @@ Pour enregistrer votre service convertisseur, vous devez y ajouter un tag :
     .. code-block:: xml
 
         <service id="my_converter" class="MyBundle/Request/ParamConverter/MyConverter">
-            <tag name="request.param_converter" priority="-2" name="my_converter" />
+            <tag name="request.param_converter" priority="-2" converter="my_converter" />
         </service>
 
-Vous pouvez enregistrer un convertisseur par priorité, par nom ou les deux. Si
+Vous pouvez enregistrer un convertisseur par priorité, par nom (attribut "converter") ou les deux. Si
 vous ne spécifiez pas de priorité ou de nom, le convertisseur sera ajouté à la pile
 avec une priorité `0`. Pour explicitement désactiver l'enregistrement par priorité,
 vous devez définir `priority="false"` dans votre définition de tag.
