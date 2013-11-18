@@ -382,8 +382,8 @@ Contexte du Firewall
 
 La plupart des applications n'ont besoin que d'un seul :ref:`firewall<book-security-firewalls>`.
 Mais si votre application *doit* utiliser plusieurs firewalls, vous devez
-prendre en compte que si vous êtes authentifier dans un firewall, vous n'
-êtes automatiquement authentifier dans un autre. En d'autre termes, les
+prendre en compte que si vous êtes authentifié dans un firewall, vous n'
+êtes pas automatiquement authentifié dans un autre. En d'autre termes, les
 systèmes ne se partagent pas un contexte commun: chaque firewall agit comme
 un système de sécurité distinct.
 
