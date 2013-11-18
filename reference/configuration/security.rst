@@ -366,9 +366,9 @@ Si vous ne définissez pas l'option ``cost``, la valeur par est ``13``.
     utiliseront le nouveau ``cost``, alors que les mots de passe encodés
     précédemment utiliseront le ``cost`` utilisé lors de leur encodage.
 
-Un grain de sel est généré automatiquement pour chaque nouveau mot de passe
-et n'a pas besoin d'être persisté. Le mot de passe encodé contient le grain de
-sel utilisé pour son encodage, persisté le mot de passe encodé seulement suffit.
+Un salt est généré automatiquement pour chaque nouveau mot de passe
+et n'a pas besoin d'être persisté. Puisque le mot de passe encodé contient le salt
+utilisé pour son encodage, il suffit juste de persister le mot de passe encodé.
 
 .. note::
 
