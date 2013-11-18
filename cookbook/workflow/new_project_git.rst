@@ -72,11 +72,8 @@ votre dépôt local git :
 
         $ git commit -m "Initial commit"
 
-8. Finalement, téléchargez toutes les bibliothèques tierces :
-
-   .. code-block:: bash
-
-        $ php bin/vendors install
+8. Finalement, téléchargez toutes les bibliothèques tierces en utilisant composer.
+vous pourrez trouver plus d'informations sur :ref:`mettre-a-jour-les-vendors`.
 
 A ce point, vous disposez d'un projet Symfony2 totalement fonctionnel qui est
 correctement committé sous git. Vous pouvez immédiatement commencer à
