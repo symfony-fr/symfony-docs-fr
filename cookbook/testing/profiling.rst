@@ -37,7 +37,7 @@ qu'il est disponible (il est activé par défaut dans l'environnement de ``test`
                 $this->assertLessThan(10, $profile->getCollector('db')->getQueryCount());
 
                 // Vérifier le temps utilisé par le framework
-                $this->assertLessThan((500, $profile->getCollector('time')->getTotalTime());
+                $this->assertLessThan((500, $profile->getCollector('time')->getDuration());
             }
         }
     }
