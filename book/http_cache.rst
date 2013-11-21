@@ -1015,7 +1015,7 @@ ESI, Symfony2 fusionnera simplement les contenus comme si standalone
     une autre spécification de Akamaï qui est dores et déjà supporté
     par le reverse proxy de Symfony2.
 
-L'action embarquée peut maintenant spécifier ces propres règles de
+L'action embarquée peut maintenant spécifier ses propres règles de
 gestion du cache, entièrement indépendamment du reste de la page.
 
 .. code-block:: php
