@@ -443,7 +443,7 @@ dans un tableau à la méthode :method:`Symfony\\Component\\Console\\Tester\\Com
 
 Appeler une commande existante
 ------------------------------
-d
+
 Si une commande dépend d'une autre ayant été exécutée avant elle, plutôt que de
 demander à l'utilisateur de se rappeler de l'ordre d'exécution, vous pouvez
 l'appeler directement vous-même. Cela est aussi utile si vous souhaitez créer
