@@ -106,9 +106,15 @@ Ensuite, créez le formulaire pour le modèle ``User``::
             ));
         }
 
-        public function getDefaultOptions(array $options)
+        /**
+         * Set default
+         * @param OptionsResolverInterface $resolver
+         */
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array('data_class' => 'Acme\AccountBundle\Document\User');
+            $resolver->setDefaults(array(
+                'data_class' => 'Acme\AccountBundle\Document\User',
+            ));
         }
 
         public function getName()
