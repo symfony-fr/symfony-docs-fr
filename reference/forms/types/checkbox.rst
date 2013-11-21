@@ -12,7 +12,6 @@ défini à true. Si la case n'est pas cochée, le champ sera défini à false.
 | Rendu comme | Champ ``input`` ``checkbox``                                           |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `value`_                                                             |
-|             | - `checked`_                                                           |
 +-------------+------------------------------------------------------------------------+
 | Options     | - `required`_                                                          |
 | héritées    | - `label`_                                                             |
@@ -48,10 +47,6 @@ value
 La valeur qui est effectivement utilisée comme valeur de la checkbox. Cela n'affecte
 pas la valeur qui est définie sur votre objet.
 
-checked
-~~~~~~~
-
-**type**: ``mixed`` **default**: ``1``
 
 Options héritées
 ----------------
