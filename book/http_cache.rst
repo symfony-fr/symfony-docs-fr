@@ -1017,7 +1017,7 @@ la page principale, comme si vous aviez appelé ``render``.
     une autre spécification de Akamaï qui est d'ores et déjà supporté
     par le reverse proxy de Symfony2.
 
-L'action incluse peut maintenant spécifier ces propres règles de
+L'action incluse peut maintenant spécifier ses propres règles de
 gestion du cache, entièrement indépendamment du reste de la page.
 
 .. code-block:: php
