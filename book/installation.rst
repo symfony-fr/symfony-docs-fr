@@ -18,7 +18,7 @@ Télécharger une Distribution Symfony2
 
 .. tip::
     Premièrement, vérifiez que vous avez installé et configuré un serveur web
-    (comme Apache) avec PHP 5.3.3 ou supérieur. Pour plus d'informations sur les
+    (comme Apache) avec PHP. Pour plus d'informations sur les
     prérequis Symfony2, lisez le chapitre :doc:`prérequis</reference/requirements>`.
 
 Les « distributions » Symfony2 sont des applications entièrement fonctionnelles
