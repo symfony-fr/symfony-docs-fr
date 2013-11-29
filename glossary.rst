@@ -52,7 +52,7 @@ Glossaire
         *Conteneur d'Injection de Dépendances*, est un objet spécial qui gère
         l'instanciation des services au sein d'une application. Plutôt que de créer
         les services directement, le développeur *prépare* le conteneur de services
-        (via la configuration) sur la manière de créer les serrvices. Le conteneur
+        (via la configuration) sur la manière de créer les services. Le conteneur
         de services prend en charge l'instanciation et l'injection des services
         dépendants. Lisez le chapitre :doc:`/book/service_container`.
 
