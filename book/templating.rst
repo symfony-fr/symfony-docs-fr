@@ -672,7 +672,7 @@ Contenu asynchrone avec hinclude.js
 Les contrôleurs peuvent être imbriqués de façon asynchrone avec la bibliothèque
 javascript hinclude.js_.
 Comme le contenu imbriqué vient d'une autre page (un d'un autre contrôleur),
-Symfony2 utiliser le helper standard ``render`` pour configurer les tags ``hinclude``:
+Symfony2 utilise le helper standard ``render`` pour configurer les tags ``hinclude``:
  
 .. configuration-block::
 
