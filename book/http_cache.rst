@@ -91,8 +91,8 @@ réponses de votre application et les enverra au client. Le cache est au milieu
 (« middle-man ») dans ce jeu de communication requête-réponse
 entre le client et votre application.
 
-Lors d'une communication, le cache stockera toutes les réponses qu'ils
-estimes « stockable » (voir :ref:`http-cache-introduction`). Si la même
+Lors d'une communication, le cache stockera toutes les réponses qu'il
+estime « stockable » (voir :ref:`http-cache-introduction`). Si la même
 ressource est demandée, le cache renvoie le contenu mis en cache au
 client, en ignorant entièrement l'application.
 
