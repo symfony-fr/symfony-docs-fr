@@ -24,7 +24,11 @@ Obligatoires
 * JSON doit être activé
 * ctype doit être activé
 * Votre PHP.ini doit avoir le paramètre date.timezone défini
+.. caution::
 
+    Symfony2 est sujet à des bugs lorsqu'il est utilisé avec une version de PHP
+    inférieure à 5.3.8 ou égale à 5.3.16. Pour plus d'informations, veuillez consulte
+    `la section "Requirements" du README`_.
 Facultatives
 ------------
 
