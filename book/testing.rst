@@ -304,7 +304,7 @@ HTTP `Content-Type` et `Referer`, vous procéderiez comme suit (pensez au préfi
         // Vérifie que le status de la réponse est 404
         $this->assertTrue($client->getResponse()->isNotFound());
         // Vérifie un status spécifique
-        $this->assertEquals(200, $client->getResponse()->getStatus());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         // Vérifie que la réponse est redirigée vers /demo/contact
         $this->assertTrue($client->getResponse()->isRedirect('/demo/contact'));
