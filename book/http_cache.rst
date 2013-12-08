@@ -93,8 +93,8 @@ réponses de votre application et les enverra au client. Le cache est au milieu
 (« middle-man ») dans ce jeu de communication requête-réponse
 entre le client et votre application.
 
-Lors d'une communication, le cache stockera toutes les réponses qu'ils
-estiment « stockables » (voir :ref:`http-cache-introduction`). Si la même
+Lors d'une communication, le cache stockera toutes les réponses qu'il
+estime « stockables » (voir :ref:`http-cache-introduction`). Si la même
 ressource est demandée, le cache renvoie le contenu mis en cache au
 client, en ignorant entièrement l'application.
 
@@ -1017,7 +1017,7 @@ la page principale, comme si vous aviez appelé ``render``.
     une autre spécification de Akamaï qui est d'ores et déjà supporté
     par le reverse proxy de Symfony2.
 
-L'action incluse peut maintenant spécifier ces propres règles de
+L'action incluse peut maintenant spécifier ses propres règles de
 gestion du cache, entièrement indépendamment du reste de la page.
 
 .. code-block:: php

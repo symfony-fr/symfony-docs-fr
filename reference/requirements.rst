@@ -25,6 +25,12 @@ Obligatoires
 * ctype doit être activé
 * Votre PHP.ini doit avoir le paramètre date.timezone défini
 
+.. caution::
+
+    Symfony2 est sujet à des bugs lorsqu'il est utilisé avec une version de PHP
+    inférieure à 5.3.8 ou égale à 5.3.16. Pour plus d'informations, veuillez consulte
+    `la section "Requirements" du README`_.
+
 Facultatives
 ------------
 
@@ -48,3 +54,6 @@ Doctrine
 
 Si vous voulez utiliser Doctrine, vous devrez installer PDO. De plus, vous devrez
 installer le driver PDO pour le serveur de base de données que vous voulez utiliser.
+
+
+.. _`la section "Requirements" du README`: https://github.com/symfony/symfony#requirements

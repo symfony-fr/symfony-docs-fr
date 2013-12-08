@@ -562,7 +562,7 @@ L'inclusion de ce template dans tout autre template est simple :
             <?php endforeach; ?>
         <?php $view['slots']->stop() ?>
 
-Le template est inclu via l'utilisation de la balise ``{% include %}``. 
+Le template est inclus via l'utilisation de la balise ``{% include %}``. 
 Remarquons que le nom du template suit la même convention habituelle. Le
 template ``articleDetails.html.twig`` utilise une variable ``article``. Elle est
 passée au template ``list.html.twig`` en utilisant la commande ``with``.
@@ -672,7 +672,7 @@ Contenu asynchrone avec hinclude.js
 Les contrôleurs peuvent être imbriqués de façon asynchrone avec la bibliothèque
 javascript hinclude.js_.
 Comme le contenu imbriqué vient d'une autre page (un d'un autre contrôleur),
-Symfony2 utiliser le helper standard ``render`` pour configurer les tags ``hinclude``:
+Symfony2 utilise le helper standard ``render`` pour configurer les tags ``hinclude``:
  
 .. configuration-block::
 
