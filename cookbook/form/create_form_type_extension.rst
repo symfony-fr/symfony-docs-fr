@@ -17,7 +17,7 @@ Les extensions de type de formulaire ont deux utilisations principales :
 #. Vous voulez ajouter une **fonctionnalité générique sur plusieurs types**
    (comme ajouter un texte d'« aide » sur tout les types de champ);
 #. Vous voulez ajouter une **fonctionnalité spécifique sur un type** (comme
-   ajouter une fonctionnalité « téléchargement » sur un type de champ « file »). 
+   ajouter une fonctionnalité « téléchargement » sur un type de champ « file »).
 
 Dans ces deux cas, vous pourrez atteindre votre objectif en personnalisant
 l'affichage du formulaire, ou en personnalisant les types de champ. Mais
@@ -188,7 +188,6 @@ actuelle pour l'afficher dans la vue::
     namespace Acme\DemoBundle\Form\Extension;
 
     use Symfony\Component\Form\AbstractTypeExtension;
-    use Symfony\Component\Form\FormBuilder;
     use Symfony\Component\Form\FormView;
     use Symfony\Component\Form\FormInterface;
     use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -234,6 +233,7 @@ actuelle pour l'afficher dans la vue::
                 } else {
                     $imageUrl = null;
                 }
+
                 // définit une variable "image_url" qui sera disponible à l'affichage du champ
                 $view->vars['image_url'] = $imageUrl;
             }
@@ -289,7 +289,7 @@ Spécifiquement, vous devez surcharger le bloc ``file_widget`` pour le faire :
 Utiliser l'extension de type de formulaire
 ------------------------------------------
 
-A partir de maintenant, lorsque vous ajouterez un champ de type ``file`` 
+A partir de maintenant, lorsque vous ajouterez un champ de type ``file``
 dans un formulaire, vous pourrez spécifier l'option ``image_path`` qui sera
 utilisée pour afficher une image à côté du champ. Par exemple::
 
