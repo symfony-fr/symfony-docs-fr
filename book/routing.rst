@@ -42,7 +42,7 @@ La route est simple :
 
         # app/config/routing.yml
         blog_show:
-            pattern:   /blog/{slug}
+            path:   /blog/{slug}
             defaults:  { _controller: AcmeBlogBundle:Blog:show }
 
     .. code-block:: xml
@@ -53,7 +53,7 @@ La route est simple :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog_show" pattern="/blog/{slug}">
+            <route id="blog_show" path="/blog/{slug}">
                 <default key="_controller">AcmeBlogBundle:Blog:show</default>
             </route>
         </routes>
@@ -203,7 +203,7 @@ routes. Une route basique consiste simplement de deux parties : le ``pattern``
     .. code-block:: yaml
 
         _welcome:
-            pattern:   /
+            path:   /
             defaults:  { _controller: AcmeDemoBundle:Main:homepage }
 
     .. code-block:: xml
@@ -214,7 +214,7 @@ routes. Une route basique consiste simplement de deux parties : le ``pattern``
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="_welcome" pattern="/">
+            <route id="_welcome" path="/">
                 <default key="_controller">AcmeDemoBundle:Main:homepage</default>
             </route>
 
@@ -253,7 +253,7 @@ paramètres de substitution nommés « joker » :
     .. code-block:: yaml
 
         blog_show:
-            pattern:   /blog/{slug}
+            path:   /blog/{slug}
             defaults:  { _controller: AcmeBlogBundle:Blog:show }
 
     .. code-block:: xml
@@ -264,7 +264,7 @@ paramètres de substitution nommés « joker » :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog_show" pattern="/blog/{slug}">
+            <route id="blog_show" path="/blog/{slug}">
                 <default key="_controller">AcmeBlogBundle:Blog:show</default>
             </route>
         </routes>
@@ -306,7 +306,7 @@ application imaginaire :
     .. code-block:: yaml
 
         blog:
-            pattern:   /blog
+            path:   /blog
             defaults:  { _controller: AcmeBlogBundle:Blog:index }
 
     .. code-block:: xml
@@ -317,7 +317,7 @@ application imaginaire :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog" pattern="/blog">
+            <route id="blog" path="/blog">
                 <default key="_controller">AcmeBlogBundle:Blog:index</default>
             </route>
         </routes>
@@ -346,7 +346,7 @@ paramètre de substitution ``{page}`` :
     .. code-block:: yaml
 
         blog:
-            pattern:   /blog/{page}
+            path:   /blog/{page}
             defaults:  { _controller: AcmeBlogBundle:Blog:index }
 
     .. code-block:: xml
@@ -357,7 +357,7 @@ paramètre de substitution ``{page}`` :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog" pattern="/blog/{page}">
+            <route id="blog" path="/blog/{page}">
                 <default key="_controller">AcmeBlogBundle:Blog:index</default>
             </route>
         </routes>
@@ -392,7 +392,7 @@ l'incluant dans la collection des ``defaults`` :
     .. code-block:: yaml
 
         blog:
-            pattern:   /blog/{page}
+            path:   /blog/{page}
             defaults:  { _controller: AcmeBlogBundle:Blog:index, page: 1 }
 
     .. code-block:: xml
@@ -403,7 +403,7 @@ l'incluant dans la collection des ``defaults`` :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog" pattern="/blog/{page}">
+            <route id="blog" path="/blog/{page}">
                 <default key="_controller">AcmeBlogBundle:Blog:index</default>
                 <default key="page">1</default>
             </route>
@@ -455,11 +455,11 @@ Regardez rapidement les routes qui ont été créées jusqu'ici :
     .. code-block:: yaml
 
         blog:
-            pattern:   /blog/{page}
+            path:   /blog/{page}
             defaults:  { _controller: AcmeBlogBundle:Blog:index, page: 1 }
 
         blog_show:
-            pattern:   /blog/{slug}
+            path:   /blog/{slug}
             defaults:  { _controller: AcmeBlogBundle:Blog:show }
 
     .. code-block:: xml
@@ -470,12 +470,12 @@ Regardez rapidement les routes qui ont été créées jusqu'ici :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog" pattern="/blog/{page}">
+            <route id="blog" path="/blog/{page}">
                 <default key="_controller">AcmeBlogBundle:Blog:index</default>
                 <default key="page">1</default>
             </route>
 
-            <route id="blog_show" pattern="/blog/{slug}">
+            <route id="blog_show" path="/blog/{slug}">
                 <default key="_controller">AcmeBlogBundle:Blog:show</default>
             </route>
         </routes>
@@ -525,7 +525,7 @@ Par exemple :
     .. code-block:: yaml
 
         blog:
-            pattern:   /blog/{page}
+            path:   /blog/{page}
             defaults:  { _controller: AcmeBlogBundle:Blog:index, page: 1 }
             requirements:
                 page:  \d+
@@ -538,7 +538,7 @@ Par exemple :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="blog" pattern="/blog/{page}">
+            <route id="blog" path="/blog/{page}">
                 <default key="_controller">AcmeBlogBundle:Blog:index</default>
                 <default key="page">1</default>
                 <requirement key="page">\d+</requirement>
@@ -597,7 +597,7 @@ différentes, basée sur l'URL :
     .. code-block:: yaml
 
         homepage:
-            pattern:   /{culture}
+            path:   /{culture}
             defaults:  { _controller: AcmeDemoBundle:Main:homepage, culture: en }
             requirements:
                 culture:  en|fr
@@ -610,7 +610,7 @@ différentes, basée sur l'URL :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="homepage" pattern="/{culture}">
+            <route id="homepage" path="/{culture}">
                 <default key="_controller">AcmeDemoBundle:Main:homepage</default>
                 <default key="culture">en</default>
                 <requirement key="culture">en|fr</requirement>
@@ -664,13 +664,13 @@ de routage suivante :
     .. code-block:: yaml
 
         contact:
-            pattern:  /contact
+            path:  /contact
             defaults: { _controller: AcmeDemoBundle:Main:contact }
             requirements:
                 _method:  GET
 
         contact_process:
-            pattern:  /contact
+            path:  /contact
             defaults: { _controller: AcmeDemoBundle:Main:contactProcess }
             requirements:
                 _method:  POST
@@ -683,12 +683,12 @@ de routage suivante :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="contact" pattern="/contact">
+            <route id="contact" path="/contact">
                 <default key="_controller">AcmeDemoBundle:Main:contact</default>
                 <requirement key="_method">GET</requirement>
             </route>
 
-            <route id="contact_process" pattern="/contact">
+            <route id="contact_process" path="/contact">
                 <default key="_controller">AcmeDemoBundle:Main:contactProcess</default>
                 <requirement key="_method">POST</requirement>
             </route>
@@ -742,12 +742,12 @@ Vous pouvez aussi faire la correspondance avec le *hostname* (« nom d'hôte » 
     .. code-block:: yaml
 
         mobile_homepage:
-            pattern:  /
+            path:  /
             hostname_pattern: m.example.com
             defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
 
         homepage:
-            pattern:  /
+            path:  /
             defaults: { _controller: AcmeDemoBundle:Main:homepage }
 
     .. code-block:: xml
@@ -758,11 +758,11 @@ Vous pouvez aussi faire la correspondance avec le *hostname* (« nom d'hôte » 
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="mobile_homepage" pattern="/" hostname-pattern="m.example.com">
+            <route id="mobile_homepage" path="/" hostname-pattern="m.example.com">
                 <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
             </route>
 
-            <route id="homepage" pattern="/">
+            <route id="homepage" path="/">
                 <default key="_controller">AcmeDemoBundle:Main:homepage</default>
             </route>
         </routes>
@@ -803,14 +803,14 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
     .. code-block:: yaml
 
         mobile_homepage:
-            pattern:  /
+            path:  /
             hostname_pattern: m.{domain}
             defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
             requirements:
                 domain: %domain%
 
         homepage:
-            pattern:  /
+            path:  /
             defaults: { _controller: AcmeDemoBundle:Main:homepage }
 
     .. code-block:: xml
@@ -821,12 +821,12 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="mobile_homepage" pattern="/" hostname-pattern="m.example.com">
+            <route id="mobile_homepage" path="/" hostname-pattern="m.example.com">
                 <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
                 <requirement key="domain">%domain%</requirement>
             </route>
 
-            <route id="homepage" pattern="/">
+            <route id="homepage" path="/">
                 <default key="_controller">AcmeDemoBundle:Main:homepage</default>
             </route>
         </routes>
@@ -867,7 +867,7 @@ montrant simplement à quel point le système de routage peut être flexible :
     .. code-block:: yaml
 
         article_show:
-          pattern:  /articles/{culture}/{year}/{title}.{_format}
+          path:  /articles/{culture}/{year}/{title}.{_format}
           defaults: { _controller: AcmeDemoBundle:Article:show, _format: html }
           requirements:
               culture:  en|fr
@@ -882,7 +882,7 @@ montrant simplement à quel point le système de routage peut être flexible :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="article_show" pattern="/articles/{culture}/{year}/{title}.{_format}">
+            <route id="article_show" path="/articles/{culture}/{year}/{title}.{_format}">
                 <default key="_controller">AcmeDemoBundle:Article:show</default>
                 <default key="_format">html</default>
                 <requirement key="culture">en|fr</requirement>
@@ -1104,7 +1104,7 @@ Le fichier importé pourrait ressembler à quelque chose comme ça :
 
         # src/Acme/HelloBundle/Resources/config/routing.yml
        acme_hello:
-            pattern:  /hello/{name}
+            path:  /hello/{name}
             defaults: { _controller: AcmeHelloBundle:Hello:index }
 
     .. code-block:: xml
@@ -1116,7 +1116,7 @@ Le fichier importé pourrait ressembler à quelque chose comme ça :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="acme_hello" pattern="/hello/{name}">
+            <route id="acme_hello" path="/hello/{name}">
                 <default key="_controller">AcmeHelloBundle:Hello:index</default>
             </route>
         </routes>
