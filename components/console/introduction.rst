@@ -10,7 +10,7 @@ Le Composant Console
 
 Le composant Console vous permet de créer des commandes de ligne de commandes.
 Vos commandes de console peuvent être utilisées pour n'importe quelle tâche récurrente,
-comme des tache cron, des imports, ou d'autres processus à exécuter par lots.
+comme des tâches cron, des imports, ou d'autres processus à exécuter par lots.
 
 Installation
 ------------
