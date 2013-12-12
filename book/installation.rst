@@ -13,7 +13,7 @@ et qui vous permettent de développer immédiatement.
     Si vous cherchez des instructions sur la meilleure façon de créer un nouveau
     projet et de le stocker dans un gestionnaire de versions, lisez `Utiliser un Gestionnaire de Versions`_.
 
-Télécharger une Distribution Symfony2 
+Télécharger une Distribution Symfony2
 -------------------------------------
 
 .. tip::
@@ -61,12 +61,12 @@ la Distribution Standard :
 
     Pour une version exacte, remplacez `2.3.0` par la dernière version de
     Symfony. Pour plus de détails, lisez `Installation de Symfony`_
-	
+
 .. tip::
 
 	Pour télécharger les « vendor » plus rapidement, ajoutez l'option
     "--prefer-dist" à la fin de la commande « Composer ».
-	
+
 Cette commande peut prendre plusieurs minutes pour s'exécuter, car « Composer »
 télécharge la Distribution Standard ainsi que toutes les bibliothèques « vendor »
 dont elle a besoin. Lorsque la commande a terminé son exécution, vous devriez
@@ -203,7 +203,7 @@ Symfony elle-même - dans le répertoire ``vendor/``.
             "symfony-web-dir": "web",
             "symfony-assets-install": "symlink"
         }
-  
+
     Si vous passez ``relative`` au lieu de ``symlink`` à la commande « symfony-assets-install »,
     cette dernière génèrera des liens symboliques relatifs.
 
@@ -247,7 +247,7 @@ S'il y a des problèmes, corrigez-les maintenant avant de poursuivre.
 
     .. code-block:: bash
 
-        $ ps aux | grep apache    
+        $ ps aux | grep apache
 
     **1. Utiliser l'ACL sur un système qui supporte chmod +a**
 
@@ -266,7 +266,7 @@ S'il y a des problèmes, corrigez-les maintenant avant de poursuivre.
 
     **2. Utiliser l'ACL sur un système qui ne supporte pas chmod +a**
 
-    Certains systèmes ne supportent pas la commande ``chmod +a``, 
+    Certains systèmes ne supportent pas la commande ``chmod +a``,
     mais supportent un autre utilitaire appelé ``setfacl``. Vous devrez sans doute
     `activer le support ACL`_ sur votre partition et installer setfacl avant de
     pouvoir l'utiliser (comme c'est le cas avec Ubuntu), de cette façon :
@@ -335,13 +335,13 @@ Si vous utilisez un système de contrôle de version comme ``Git`` ou ``Subversi
 vous pouvez le configurer et commencer à commiter votre projet normalement. La
 Symfony Standard edition *est* le point de départ de votre nouveau projet.
 
-Pour des instructions spécifiques sur la meilleure façon de gérer votre projet avec git, 
+Pour des instructions spécifiques sur la meilleure façon de gérer votre projet avec git,
 lisez le chapitre :doc:`/cookbook/workflow/new_project_git`.
 
-Ignorer le répertoire ``vendor/`` 
+Ignorer le répertoire ``vendor/``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si vous avez téléchargé l'archive *sans vendors*, vous pouvez ignorer tout le 
+Si vous avez téléchargé l'archive *sans vendors*, vous pouvez ignorer tout le
 répertoire ``vendor/`` en toute sécurité et ne pas le commiter. Avec ``Git``,
 cela se fait en créant le fichier ``.gitignore`` et en y ajoutant la ligne suivante:
 
