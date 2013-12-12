@@ -521,7 +521,6 @@ comme un tableau callback::
                 'determineValidationGroups',
             ),
         ));
-
     }
 
 Cela appellera la méthode statique  ``determineValidationGroups()`` de la classe

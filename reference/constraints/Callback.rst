@@ -12,7 +12,7 @@ durant le processus de validation. Chacune de ces méthodes peut faire toute
 sorte de choses, incluant la création et l'assignation d'erreurs de validation.
 
 .. note::
-    
+
     Une méthode callback elle-même n'*échoue* pas et ne retourne aucune valeur.
     Au lieu de cela, comme vous le verrez dans l'exemple, cette méthode a la
     possibilité d'ajouter directement des « violations » de validateur.
@@ -112,7 +112,7 @@ Options
 -------
 
 methods
-~~~~~~~~
+~~~~~~~
 
 **type**: ``array`` **default**: ``array()`` [:ref:`option par défaut<validation-default-option>`]
 
@@ -185,16 +185,16 @@ suivants :
                     )));
                 }
             }
-    
+
     Dans ce cas, la méthode statique ``isAuthorValid`` sera appelée sur la classe
     ``Acme\BlogBundle\MyStaticValidatorClass``. Deux objets sont passés en paramètre,
     l'objet en cours de validation (par exemple : ``Author``) et le ``ExecutionContext``::
 
         namespace Acme\BlogBundle;
-    
+
         use Symfony\Component\Validator\ExecutionContext;
         use Acme\BlogBundle\Entity\Author;
-    
+
         class MyStaticValidatorClass
         {
             static public function isAuthorValid(Author $author, ExecutionContext $context)

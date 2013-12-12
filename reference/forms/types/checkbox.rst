@@ -47,7 +47,6 @@ value
 La valeur qui est effectivement utilisée comme valeur de la checkbox. Cela n'affecte
 pas la valeur qui est définie sur votre objet.
 
-
 Options héritées
 ----------------
 

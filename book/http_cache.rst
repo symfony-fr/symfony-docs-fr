@@ -140,7 +140,7 @@ interprétées par trois différents types de cache :
     utilisateur par exemple) sera abordée.
 
 Toutes les réponses de l'application iront communément dans un ou deux
-des deux premiers types de cache. Ces systèmes ne sont pas sous votre contrôle, 
+des deux premiers types de cache. Ces systèmes ne sont pas sous votre contrôle,
 mais suivent les directives du cache HTTP définies dans les réponses.
 
 .. index::
@@ -193,7 +193,7 @@ client.
 
 L'objet ``AppCache`` a une configuration par défaut, mais
 peut être reconfiguré finement grâce à une série d'options que vous
-pouvez paramétrer en surchargeant la méthode 
+pouvez paramétrer en surchargeant la méthode
 :method:`Symfony\\Bundle\\FrameworkBundle\\HttpCache\\HttpCache::getOptions`::
 
     // app/AppCache.php
@@ -469,7 +469,7 @@ la réponse valide.
     La spécification HTTP définit un langage simple, mais puissant dans
     lequel les clients et les serveurs peuvent communiquer. En tant
     que développeur web, le modèle requête-réponse est le plus
-    populaire. Malheureusement, le document de spécification - `RFC 2616`_ - 
+    populaire. Malheureusement, le document de spécification - `RFC 2616`_ -
     peut être difficile à lire.
 
     Il existe actuellement une tentative (`HTTP Bis`_) de réécriture
@@ -719,7 +719,7 @@ Optimiser son code avec le modèle de validation du cache
 
 Le but principal de toutes les stratégies de mise en cache est de
 diminuer la charge de l'application. Autrement dit, moins
-l'application aura à « travailler » pour renvoyer un status 304, 
+l'application aura à « travailler » pour renvoyer un status 304,
 mieux ce sera. La méthode ``Response::isNotModified()`` fait
 exactement ça en exposant un modèle simple et efficace::
 
@@ -770,7 +770,7 @@ status ``304`` (voir la
 .. index::
    single: Cache; Vary
    single: HTTP headers; Vary
-   
+
 Faire varier la Response
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -881,7 +881,7 @@ l'ensemble de la page.
 La spécification « ESI » décrit des marqueurs (« tags ») qui peuvent être
 embarqués dans la page pour communiquer avec la passerelle de
 cache. Un seul marqueur est implémenté dans Symfony2, ``include`` car
-c'est le seul qui est utile en dehors du contexte Akamaï : 
+c'est le seul qui est utile en dehors du contexte Akamaï :
 
 .. code-block:: html
 
@@ -1103,7 +1103,7 @@ Invalidation du cache
     « There are only two hard things in Computer Science: cache invalidation
     and naming things. » --Phil Karlton
 
-    Ceci peut être traduit comme : 
+    Ceci peut être traduit comme :
     « Il existe uniquement deux opérations délicates en Informatique :
     l'invalidation de cache et nommer les choses. »
 
