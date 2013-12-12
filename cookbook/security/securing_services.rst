@@ -9,7 +9,7 @@ Dans le chapitre sur la sécurité, vous pouvez voir comment
 :ref:`sécuriser un contrôleur<book-security-securing-controller>` en
 récupérant le service ``security.context`` depuis le Conteneur de
 Service et en vérifiant le rôle actuel de l'utilisateur::
-    
+
     // ...
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -147,8 +147,8 @@ Sécuriser des méthodes en utilisant des annotations
 ---------------------------------------------------
 
 Vous pouvez aussi sécuriser des appels de méthodes dans n'importe quel service avec
-des annotations en utilisant le bundle facultatif `JMSSecurityExtraBundle`_. Ce Bundle
-n'est pas inclus dans la Distribution Standard de Symfony2, mais vous pouvez
+des annotations en utilisant le bundle facultatif `JMSSecurityExtraBundle`_. Ce
+bundle n'est pas inclus dans la Distribution Standard de Symfony2, mais vous pouvez
 choisir de l'installer.
 
 Pour activer la fonctionnalité des annotations, :ref:`taggez<book-service-container-tags>`

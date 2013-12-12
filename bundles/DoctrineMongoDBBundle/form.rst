@@ -105,7 +105,7 @@ Ensuite, créez le formulaire pour le modèle ``User``::
                'type' => 'password'
             ));
         }
-        
+
         /**
          * Set default
          * @param OptionsResolverInterface $resolver

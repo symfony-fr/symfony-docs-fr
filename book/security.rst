@@ -1599,7 +1599,7 @@ la fonction helper intégrée :
 
     Si vous utilisez cette fonction et que vous ne vous trouvez pas à une URL pour laquelle
     un pare-feu est actif, une exception sera lancée. Encore une fois, c'est toujours une
-    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (comme c'e'st montré dans ce chapitre).
+    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (comme c'est montré dans ce chapitre).
 
 Contrôle d'accès dans les Contrôleurs
 -------------------------------------

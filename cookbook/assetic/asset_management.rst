@@ -4,7 +4,7 @@
 Comment utiliser Assetic pour gérer vos ressources
 ==================================================
 
-Assetic associe deux concepts majeurs : les :ref:`ressources<cookbook-assetic-assets>` et les 
+Assetic associe deux concepts majeurs : les :ref:`ressources<cookbook-assetic-assets>` et les
 :ref:`filtres<cookbook-assetic-filters>`. Les ressources
 sont des fichiers comme les feuilles de style, les JavaScript et les images. Les
 filtres peuvent être appliqués à ces fichiers avant qu'ils ne soient servis au
@@ -53,7 +53,7 @@ Inclure des fichiers Javascript
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour inclure des fichiers Javascript, utilisez le tag ``javascript`` dans n'importe quel template.
-On va en général s'en servir dans le block ``javascripts``, si vous utilisez 
+On va en général s'en servir dans le block ``javascripts``, si vous utilisez
 les noms de block par défaut de la Distribution Standard de Symfony :
 
 .. configuration-block::
@@ -76,7 +76,7 @@ les noms de block par défaut de la Distribution Standard de Symfony :
 
     Vous pouvez aussi inclure vos feuilles de style: voir :ref:`cookbook-assetic-including-css`.
 
-Dans cet exemple, tous les fichiers du dossier ``Resources/public/js/`` du 
+Dans cet exemple, tous les fichiers du dossier ``Resources/public/js/`` du
 bundle ``AcmeFooBundle`` vont être chargés et servis depuis un autre endroit.
 Le tag réellement affiché pourrait ressembler à:
 
@@ -84,9 +84,9 @@ Le tag réellement affiché pourrait ressembler à:
 
     <script src="/app_dev.php/js/abcd123.js"></script>
 
-C'est un point clé: Une fois que vous avez laissé Assetic gérer vos ressources, 
-les fichiers sont servis depuis un autre endroit. Ceci *pourra* provoquer des 
-problèmes pour les fichiers CSS contenant des chemins relatifs pour leurs 
+C'est un point clé: Une fois que vous avez laissé Assetic gérer vos ressources,
+les fichiers sont servis depuis un autre endroit. Ceci *pourra* provoquer des
+problèmes pour les fichiers CSS contenant des chemins relatifs pour leurs
 images. Voir :ref:`cookbook-assetic-cssrewrite`.
 
 .. _cookbook-assetic-including-css:
@@ -94,7 +94,7 @@ images. Voir :ref:`cookbook-assetic-cssrewrite`.
 Inclure des fichiers CSS
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Pour vos feuilles de styles CSS, vous pouvez utiliser la même méthodologie mais avec le tag ``stylesheets``. 
+Pour vos feuilles de styles CSS, vous pouvez utiliser la même méthodologie mais avec le tag ``stylesheets``.
 Si vous utilisez les block par défaut de la Distribution Standard, ce tag prendra place dans un block ``stylesheets`` :
 
 .. configuration-block::
@@ -114,16 +114,16 @@ Si vous utilisez les block par défaut de la Distribution Standard, ce tag prend
             <link rel="stylesheet" href="<?php echo $view->escape($url) ?>" />
         <?php endforeach; ?>
 
-Mais comme Assetic modifie les chemins de vos ressources, les images de fond (ou autres) 
-qui utilisent des chemins relatifs se retrouveront cassés, sauf si vous utilisez 
+Mais comme Assetic modifie les chemins de vos ressources, les images de fond (ou autres)
+qui utilisent des chemins relatifs se retrouveront cassés, sauf si vous utilisez
 le filtre :ref:`cssrewrite<cookbook-assetic-cssrewrite>`.
 
 .. note::
 
-    Remarquez que dans le premier exemple qui inclut les fichiers javascripts, vous faites 
+    Remarquez que dans le premier exemple qui inclut les fichiers javascripts, vous faites
     référence aux fichiers avec un chemin comme suit : ``@AcmeFooBundle/Resources/public/file.js``,
     mais dans celui-ci, vous faites référence aux fichiers CSS avec leur vrai chemin public : ``bundles/acme_foo/css``.
-    Vous pouvez utiliser l'un ou l'autre. Sachez juste qu'il existe un problème connu qui peut faire 
+    Vous pouvez utiliser l'un ou l'autre. Sachez juste qu'il existe un problème connu qui peut faire
     échouer le filtre ``cssrewrite`` avec la syntaxe ``@AcmeFooBundle``.
 
 .. _cookbook-assetic-cssrewrite:
@@ -131,17 +131,17 @@ le filtre :ref:`cssrewrite<cookbook-assetic-cssrewrite>`.
 Corriger les chemins CSS avec le filtre ``cssrewrite``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vu que Assetic génère de nouvelles URLs pour vos ressource, tous les chemins relatifs 
-dans vos fichiers CSS vont être cassés. Pour corriger ça, assurez-vous d'utiliser le 
-filtre ``cssrewrite`` avec votre tag ``stylesheets``. Il va parser votre CSS et corriger 
+Vu que Assetic génère de nouvelles URLs pour vos ressource, tous les chemins relatifs
+dans vos fichiers CSS vont être cassés. Pour corriger ça, assurez-vous d'utiliser le
+filtre ``cssrewrite`` avec votre tag ``stylesheets``. Il va parser votre CSS et corriger
 les chemins pour prendre en compte le nouvel emplacement.
 
 Vous pouvez voir un exemple dans la section précédente :
 
 .. caution::
 
-    Quand vous utilisez le filtre ``cssrewrite``, ne faites pas à appel à vos CSS avec 
-    la syntaxe ``@AcmeFooBundle``. Pour plus de détails, voir la note dans la section 
+    Quand vous utilisez le filtre ``cssrewrite``, ne faites pas à appel à vos CSS avec
+    la syntaxe ``@AcmeFooBundle``. Pour plus de détails, voir la note dans la section
     du dessus.
 
 Combiner des ressources
@@ -180,8 +180,8 @@ mais toujours les servir comme un fichier unique :
 
 En environnement de `dev`, chaque fichier est toujours servi individuellement
 pour que vous puissiez débugguer plus facilement. Cependant, en environnement de
-`prod` (ou plus précisément, quand l'option ``debug`` est à ``false``), ils seront 
-affichés dans une unique balise `script` qui contiendra le contenu de tous vos 
+`prod` (ou plus précisément, quand l'option ``debug`` est à ``false``), ils seront
+affichés dans une unique balise `script` qui contiendra le contenu de tous vos
 fichiers JavaScript.
 
 .. tip::

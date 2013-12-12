@@ -1,6 +1,6 @@
 .. index::
    single: Requirements
-   
+
 Pré-requis au bon fonctionnement de Symfony2
 ============================================
 
@@ -30,7 +30,7 @@ Obligatoires
     Symfony2 est sujet à des bugs lorsqu'il est utilisé avec une version de PHP
     inférieure à 5.3.8 ou égale à 5.3.16. Pour plus d'informations, veuillez consulte
     `la section "Requirements" du README`_.
-    
+
 Facultatives
 ------------
 
