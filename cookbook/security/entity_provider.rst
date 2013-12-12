@@ -156,7 +156,7 @@ qui proviennent de l'interface
             list (
                 $this->id,
             ) = unserialize($serialized);
-        }        
+        }
     }
 
 Afin d'utiliser une instance de la classe ``AcmeUserBundle:User`` dans la couche
@@ -313,7 +313,7 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
     // ...
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-    
+
     class User implements AdvancedUserInterface, \Serializable
     {
         // ...

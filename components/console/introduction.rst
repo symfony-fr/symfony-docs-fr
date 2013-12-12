@@ -60,7 +60,7 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
                    'yell',
                    null,
                    InputOption::VALUE_NONE,
-                   'Si défini, la réponse est affichée en majuscules'
+                   'Si défini, la réponse est rendue en majuscules'
                 )
             ;
         }
@@ -492,7 +492,7 @@ et retourner le code retourné par le commande (retourne la valeur de la méthod
 En savoir plus !
 ----------------
 
-* :doc:`/components/console/usage` 
+* :doc:`/components/console/usage`
 * :doc:`/components/console/single_command_tool`
 
 .. _Packagist: https://packagist.org/packages/symfony/console

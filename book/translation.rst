@@ -29,7 +29,7 @@ une fonction capable de traduire le texte (ou « message ») dans la langue de l
 Dans ce chapitre, vous apprendrez comment préparer une application à gérer de multiples
 locales et ensuite comment créer des traductions pour plusieurs locales. Dans l'ensemble,
 le processus a plusieurs étapes communes :
-    
+
 #. Activer et configurer le composant ``Translation`` de Symfony ;
 
 #. Faire abstraction des chaînes de caractères (i.e. « messages ») en les encadrant
@@ -48,7 +48,7 @@ le processus a plusieurs étapes communes :
 Configuration
 -------------
 
-Les traductions sont traitées par le :term:`service` ``Translator`` qui utilise la 
+Les traductions sont traitées par le :term:`service` ``Translator`` qui utilise la
 locale de l'utilisateur pour chercher et retourner les messages traduits. Avant de l'utiliser,
 activez le ``Translator`` dans votre configuration :
 
@@ -93,8 +93,8 @@ Vous pouvez la définir grâce à l'attribut ``_locale`` de vos routes (:ref:`bo
 Traduction basique
 ------------------
 
-La traduction du texte est faite à travers le service ``translator`` 
-(:class:`Symfony\\Component\\Translation\\Translator`). Pour traduire un bloc 
+La traduction du texte est faite à travers le service ``translator``
+(:class:`Symfony\\Component\\Translation\\Translator`). Pour traduire un bloc
 de texte (appelé un *message*), utilisez la méthode
 :method:`Symfony\\Component\\Translation\\Translator::trans`. Supposons,
 par exemple, que vous traduisez un simple message dans un contrôleur :
@@ -162,7 +162,7 @@ Pour traduire le message, Symfony2 utilise un processus simple :
 
 * Si le message est dans le catalogue, la traduction est retournée. Sinon, le traducteur
   retourne le message original.
-  
+
 Lorsque vous utilisez la méthode ``trans()``, Symfony2 cherche la chaîne de caractères
 exacte à l'intérieur du catalogue de messages approprié et la retourne (si elle existe).
 
@@ -237,13 +237,13 @@ se fait comme précédemment :
     puisque le message en entier est reconstruit en utilisant la `fonction strtr`_
     de PHP . Cependant, la notation ``%var%`` est requise pour les traductions
     dans les templates Twig, et c'est une convention générale à suivre.
-    
+
 Comme vous l'avez vu, créer une traduction est un processus en deux étapes :
 
-#. Faire abstraction du message qui a besoin d'être traduit en le passant à travers 
+#. Faire abstraction du message qui a besoin d'être traduit en le passant à travers
    le ``Translator``.
 
-#. Créer une traduction pour le message dans chaque locale que vous avez choisi de 
+#. Créer une traduction pour le message dans chaque locale que vous avez choisi de
    supporter.
 
 La deuxième étape est faite en créant des catalogues de messages qui définissent les traductions
@@ -257,7 +257,7 @@ Catalogues de Message
 
 Lorsqu'un message est traduit, Symfony2 compile un catalogue de messages pour la
 locale de l'utilisateur et cherche dedans une traduction du message. Un catalogue
-de messages est comme un dictionnaire de traductions pour une locale spécifique. 
+de messages est comme un dictionnaire de traductions pour une locale spécifique.
 Par exemple, le catalogue de la locale ``fr_FR`` pourrait contenir la traduction
 suivante :
 
@@ -266,7 +266,7 @@ suivante :
 C'est la responsabilité du développeur (ou du traducteur) d'une application
 internationalisée de créer ces traductions. Les traductions sont stockées sur le
 système de fichiers et reconnues par Symfony, grâce à certaines conventions.
-    
+
 .. tip::
 
     Chaque fois que vous créez une *nouvelle* ressource de traduction (ou installez un bundle
@@ -274,7 +274,7 @@ système de fichiers et reconnues par Symfony, grâce à certaines conventions.
     que Symfony puisse reconnaître les nouvelles traductions :
 
     .. code-block:: bash
-    
+
         $ php app/console cache:clear
 
 .. index::
@@ -332,7 +332,7 @@ Le choix du format à utiliser dépend de vous, c'est une question de goût.
 Créer les Traductions
 ~~~~~~~~~~~~~~~~~~~~~
 
-Le fait de créer des fichiers de traduction est une partie importante de la 
+Le fait de créer des fichiers de traduction est une partie importante de la
 « localisation » (souvent abrégée `L10n`_). Les fichiers de traduction consistent
 en une série de paires id-traduction pour un domaine et une locale donnés.
 La source est l'identifiant de la traduction individuelle, et peut
@@ -391,22 +391,22 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
     Dans la première méthode, les messages sont écrits dans la langue de la
     locale par défaut (anglais dans ce cas). Ce message est ensuite utilisé
     comme « id » lors de la création des traductions.
-    
+
     Dans la seconde méthode, les messages sont en fait des « mots-clés » qui évoquent
     l'idée du message. Le message mot-clé est ensuite utilisé comme « id » pour
     toutes les traductions. Dans ce cas, les traductions doivent (aussi) être faites pour la
     locale par défaut (i.e. pour traduire ``symfony2.great`` en ``Symfony2 is great``).
-    
+
     La deuxième méthode est très pratique, car la clé du message n'aura pas besoin d'être modifiée
     dans chaque fichier de traduction si vous décidez que le message devrait en fait
     être « Symfony2 is really great » dans la locale par défaut.
-    
+
     Le choix de la méthode à utiliser dépend entièrement de vous, mais le format « mot-clé »
     est souvent recommandé.
-    
+
     En outre, les formats de fichiers ``php`` et ``yaml`` prennent en charge les ids imbriqués pour
     éviter de vous répéter, si vous utilisez des mots-clés plutôt que du texte brut comme id :
-    
+
     .. configuration-block::
 
         .. code-block:: yaml
@@ -440,7 +440,7 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
     Les multiples niveaux sont convertis en paires uniques id / traduction par
     l'ajout d'un point (.) entre chaque niveau ; donc les exemples ci-dessus sont
     équivalents à ce qui suit :
-    
+
     .. configuration-block::
 
         .. code-block:: yaml
@@ -461,7 +461,7 @@ Symfony2 va reconnaître ces fichiers et les utiliser lors de la traduction de
 
 .. index::
    single: Traductions; Domaines de messages
-   
+
 Utiliser les Domaines de Message
 --------------------------------
 
@@ -617,7 +617,7 @@ pointant vers d'autres pages traduites de votre application.
 Pluralisation
 -------------
 
-La pluralisation des messages est un sujet difficile, car les règles peuvent être assez complexes. 
+La pluralisation des messages est un sujet difficile, car les règles peuvent être assez complexes.
 Par exemple, voici la représentation mathématique des règles de la pluralisation russe :
 
 .. code-block:: text
@@ -635,7 +635,7 @@ toutes les formes comme une chaîne de caractères séparée par un pipe (``|``)
 
     'There is one apple|There are %count% apples'
 
-Pour traduire des messages pluralisés, utilisez la méthode 
+Pour traduire des messages pluralisés, utilisez la méthode
 :method:`Symfony\\Component\\Translation\\Translator::transChoice` :
 
 .. code-block:: php
@@ -680,7 +680,7 @@ vous pouvez éventuellement « taguer » chaque chaîne :
     'none_or_one: Il y a %count% pomme|some: Il y a %count% pommes'
 
 Les tags sont seulement des indices pour les traducteurs et n'affectent pas la logique
-utilisée pour déterminer quelle forme de pluriel utiliser. Les tags peuvent être toute 
+utilisée pour déterminer quelle forme de pluriel utiliser. Les tags peuvent être toute
 chaîne descriptive qui se termine par un deux-points (``:``). Les tags n'ont pas besoin d'être les
 mêmes dans le message original que dans la traduction.
 
@@ -804,7 +804,7 @@ Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire l
     uniquement aux variables traduites via un filtre. En d'autres termes, si
     vous avez besoin d'être sûr que votre variable traduite n'est *pas* échappée
     en sortie, vous devez appliquer le filtre brut après le filtre de traduction :
-    
+
     .. code-block:: jinja
 
             {# le texte traduit entre les balises n'est jamais échappé #}
@@ -823,9 +823,9 @@ Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire l
 .. versionadded:: 2.1
      Vous pouvez maintenant définir un domaine de traduction pour un template
      Twig entier avec une seule balise :
-   
+
      .. code-block:: jinja
-  
+
             {% trans_default_domain "app" %}
 
     Notez que cela n'affecte que le template courant, pas les templates inclus
@@ -1006,7 +1006,7 @@ n'a plus besoin d'être un processus douloureux et se résume simplement à quel
 * Traduire chaque message dans de multiples locales en créant des fichiers de message
   de traduction. Symfony2 découvre et traite chaque fichier grâce à leur nom qui suit
   une convention spécifique ;
-  
+
 * Gérer la locale de l'utilisateur, qui est stockée dans la requête, ou une fois pour
   toutes en session.
 

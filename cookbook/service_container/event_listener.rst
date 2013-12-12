@@ -30,11 +30,11 @@ du coeur du noyau::
             // nous récupérons l'objet exception depuis l'évènement reçu
             $exception = $event->getException();
             $message = 'My Error says: ' . $exception->getMessage() . ' with code: ' . $exception->getCode();
-            
+
             // personnalise notre objet réponse pour afficher les détails de notre exception
             $response = new Response();
             $response->setContent($message);
- 
+
             // HttpExceptionInterface est un type d'exception spécial qui
             // contient le code statut et les détails de l'entête
             if ($exception instanceof HttpExceptionInterface) {
@@ -43,7 +43,7 @@ du coeur du noyau::
             } else {
                 $response->setStatusCode(500);
             }
-            
+
             // envoie notre objet réponse modifié à l'évènement
             $event->setResponse($response);
         }
@@ -85,7 +85,7 @@ service et notifier Symfony que c'est un « listener » de l'évènement
         $container
             ->register('kernel.listener.your_listener_name', 'Acme\DemoBundle\Listener\AcmeExceptionListener')
             ->addTag('kernel.event_listener', array('event' => 'kernel.exception', 'method' => 'onKernelException'));
-        
+
 .. note::
 
     Il y a une autre option ``priority`` pour le tag qui est optionnelle et qui
@@ -117,11 +117,11 @@ très facilement comme ceci::
                 // ne rien faire si ce n'est pas la requête principale
                 return;
             }
- 
+
             // ...
-        } 
+        }
     }
-   
+
 .. tip::
 
     Deux types de requête sont disponibles dans l'interface
