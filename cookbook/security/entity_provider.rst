@@ -313,7 +313,7 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
     // ...
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-    
+
     class User implements AdvancedUserInterface, \Serializable
     {
         // ...

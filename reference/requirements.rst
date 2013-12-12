@@ -1,6 +1,6 @@
 .. index::
    single: Requirements
-   
+
 Pré-requis au bon fonctionnement de Symfony2
 ============================================
 
@@ -54,6 +54,5 @@ Doctrine
 
 Si vous voulez utiliser Doctrine, vous devrez installer PDO. De plus, vous devrez
 installer le driver PDO pour le serveur de base de données que vous voulez utiliser.
-
 
 .. _`la section "Requirements" du README`: https://github.com/symfony/symfony#requirements

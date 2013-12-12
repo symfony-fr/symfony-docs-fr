@@ -27,7 +27,7 @@ Par exemple, supposons que vous ayez une application où vous envoyez différent
 types d'e-mails aux utilisateurs. Les e-mails sont transmis à travers différents
 formateurs qui pourraient être activée ou non en fonction de certains paramètres
 dynamiques de l'application.
-vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
+Vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
 
     class NewsletterManager implements EmailFormatterAwareInterface
     {
@@ -46,7 +46,6 @@ vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
 
         // ...
     }
-
 
 et ensuite, une classe ``GreetingCardManager``::
 
@@ -67,8 +66,6 @@ et ensuite, une classe ``GreetingCardManager``::
 
         // ...
     }
-
-
 
 Comme mentionné précédemment, l'objectif est de définir les formateurs lors de
 l'exécution en fonction des paramètres de l'application. Pour ce faire, vous avez
