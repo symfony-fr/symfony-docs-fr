@@ -72,14 +72,14 @@ ou avec :phpclass:`SimpleXMLElement` afin de trouver des éléments dans un docu
 Limitations du composant CssSelector
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tous les sélecteurs CSS ne peuvent pas être convertis en un équivalent XPath.
+Seulement certains sélecteurs CSS peuvent être convertis en un équivalent XPath.
 
 Il y a plusieurs sélecteurs CSS qui n'ont de sens que dans le contexte
 d'un navigateur web.
 
 * sélecteurs basés sur le statut d'un lien : ``:link``, ``:visited``, ``:target``
 * sélecteurs basés sur l'action d'un utilisateur : ``:hover``, ``:focus``, ``:active``
-* sélecteurs basés sur l'état de l'« UI » : ``:enabled``, ``:disabled``, ``:indeterminate``
+* sélecteurs basés sur l'état de l'interface utilisateur : ``:enabled``, ``:disabled``, ``:indeterminate``
   (cependant, ``:checked`` et ``:unchecked`` sont disponibles)
 
 Les pseudo-éléments (``:before``, ``:after``, ``:first-line``, ``:first-letter``)
