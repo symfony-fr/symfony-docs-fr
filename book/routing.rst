@@ -743,7 +743,7 @@ Vous pouvez aussi faire la correspondance avec le *hostname* (« nom d'hôte » 
 
         mobile_homepage:
             path:  /
-            hostname_pattern: m.example.com
+            host: m.example.com
             defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
 
         homepage:
@@ -804,7 +804,7 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
 
         mobile_homepage:
             path:  /
-            hostname_pattern: m.{domain}
+            host: m.{domain}
             defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
             requirements:
                 domain: %domain%
@@ -1194,7 +1194,7 @@ Vous pouvez définir un pattern de nom d'hôte pour les routes importées :
         # app/config/routing.yml
         acme_hello:
             resource: "@AcmeHelloBundle/Resources/config/routing.yml"
-            hostname_pattern: "hello.example.com"
+            host: "hello.example.com"
 
     .. code-block:: xml
 
