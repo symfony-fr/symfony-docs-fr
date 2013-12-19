@@ -159,7 +159,7 @@ pourriez créer un type de champ ``issue`` personnalisé pour éviter de devoir
 faire cela dans votre contrôleur::
 
     $taskForm = $this->createForm(new TaskType(), $task, array(
-        'em' => $this->getDoctrine()->getEntityManager(),
+        'em' => $this->getDoctrine()->getManager(),
     ));
 
 Cool, vous avez fini ! Votre utilisateur sera maintenant capable de saisir un numéro
