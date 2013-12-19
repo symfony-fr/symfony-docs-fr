@@ -805,9 +805,9 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
         mobile_homepage:
             path:  /
             host: m.{domain}
-            defaults: { _controller: AcmeDemoBundle:Main:mobileHomepage }
-            requirements:
-                domain: %domain%
+            defaults: 
+            	_controller: AcmeDemoBundle:Main:mobileHomepage
+            	domain: %domain%
 
         homepage:
             path:  /
@@ -823,7 +823,7 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
 
             <route id="mobile_homepage" path="/" host="m.example.com">
                 <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
-                <requirement key="domain">%domain%</requirement>
+                <default key="domain">%domain%</requirement>
             </route>
 
             <route id="homepage" path="/">
@@ -839,8 +839,8 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
         $collection = new RouteCollection();
         $collection->add('mobile_homepage', new Route('/', array(
             '_controller' => 'AcmeDemoBundle:Main:mobileHomepage',
-        ), array(
             'domain' => '%domain%',
+        ), array(
         ), array(), 'm.{domain}'));
 
         $collection->add('homepage', new Route('/', array(
