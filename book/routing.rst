@@ -758,7 +758,7 @@ Vous pouvez aussi faire la correspondance avec le *hostname* (« nom d'hôte » 
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="mobile_homepage" path="/" hostname-pattern="m.example.com">
+            <route id="mobile_homepage" path="/" host="m.example.com">
                 <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
             </route>
 
@@ -821,7 +821,7 @@ le nom de domaine en utilisant une valeur de substitution et une condition requi
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="mobile_homepage" path="/" hostname-pattern="m.example.com">
+            <route id="mobile_homepage" path="/" host="m.example.com">
                 <default key="_controller">AcmeDemoBundle:Main:mobileHomepage</default>
                 <requirement key="domain">%domain%</requirement>
             </route>
@@ -1205,7 +1205,7 @@ Vous pouvez définir un pattern de nom d'hôte pour les routes importées :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <import resource="@AcmeHelloBundle/Resources/config/routing.xml" hostname-pattern="hello.example.com" />
+            <import resource="@AcmeHelloBundle/Resources/config/routing.xml" host="hello.example.com" />
         </routes>
 
     .. code-block:: php
