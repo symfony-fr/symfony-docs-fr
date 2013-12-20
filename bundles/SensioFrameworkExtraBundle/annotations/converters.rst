@@ -46,7 +46,7 @@ Pour détecter quel convertisseur est exécuté sur un paramètre, le processus 
 * Si un choix de convertisseur explicite a été fait avec
   ``@ParamConverter(converter="name")`` le convertisseur avec le nom donné est utilisé.
 * Sinon tous les convertisseurs de paramètres enregistrés sont parcourus par priorité.
-  La méthode ``supports()`` est invoqué pour vérifier si un convertisseur peut
+  La méthode ``supports()`` est invoquée pour vérifier si un convertisseur peut
   convertir la requête dans le paramètre requis. Si elle retourne ``true``
   le convertisseur est utilisé.
 
