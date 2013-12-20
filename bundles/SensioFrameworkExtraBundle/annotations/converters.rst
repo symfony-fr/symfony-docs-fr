@@ -33,7 +33,7 @@ Plusieurs choses se passent dans l'envers du décor :
 * Comme pour tout autre attribut de requête, il est injecté dans le contrôleur lorsqu'il
   est présent dans la signature de la méthode.
 
-Si vous utilisez le « type hinting », comme dans notre exemple ci-dessus, vous pouvez
+Si vous utilisez le « typage objet », comme dans notre exemple ci-dessus, vous pouvez
 même complètement omettre l'annotation ``@ParamConverter``::
 
     // automatique, avec la signature de la méthode
