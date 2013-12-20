@@ -41,6 +41,15 @@ même complètement omettre l'annotation ``@ParamConverter``::
     {
     }
 
+Pour détecter quel convertisseur est exécuté sur un paramètre, le processus suivant est exécuté:
+
+* Si un choix de convertisseur explicite a été fait avec
+  ``@ParamConverter(converter="name")`` le convertisseur avec le nom donné est utilisé.
+* Sinon tous les convertisseurs de paramètres enregistrés sont parcourus par priorité.
+  La méthode ``supports()`` est invoqué pour vérifier si un convertisseur peut
+  convertir la requête dans le paramètre requis. Si elle retourne ``true``
+  le convertisseur est utilisé.
+
 Convertisseurs préconstruits
 ----------------------------
 
@@ -94,6 +103,11 @@ l'option ``id``::
     {
     }
 
+.. tip::
+
+   L'option ``id`` spécifie quel paramètre de la route est transmis à la méthode du repository. 
+   Si aucune méthode n'est définie, ``find()`` est utilisée par défaut.
+
 Cela vous permet également d'avoir plusieurs convertisseurs pour une action::
 
     /**
@@ -129,6 +143,17 @@ vous pouvez procéder comme suit::
      * @ParamConverter("post", options={"exclude": ["date"]})
      */
     public function showAction(Post $post, \DateTime $date)
+    {
+    }
+
+Si vous souhaitez spécifier la méthode du repository à utiliser pour trouver l'entité (par exemple,
+pour ajouter des jointures à la requête), vous pouvez ajouter l'option ``repository_method``::
+
+    /**
+     * @Route("/blog/{id}")
+     * @ParamConverter("post", class="SensioBlogBundle:Post", options={"repository_method" = "findWithJoins"})
+     */
+    public function showAction(Post $post)
     {
     }
 
