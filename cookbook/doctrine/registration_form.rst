@@ -257,7 +257,7 @@ se chargera de la validation, et enregistrera les donnÃ©es dans la base de donnÃ
 
         $form = $this->createForm(new RegistrationType(), new Registration());
 
-        $form->bind($this->getRequest());
+        $form->handleRequest($this->getRequest());
 
         if ($form->isValid()) {
             $registration = $form->getData();
