@@ -151,10 +151,12 @@ de noeuds variable::
 
     $rootNode
         ->arrayNode('connection')
-            ->scalarNode('driver')->end()
-            ->scalarNode('host')->end()
-            ->scalarNode('username')->end()
-            ->scalarNode('password')->end()
+            ->children()
+                ->scalarNode('driver')->end()
+                ->scalarNode('host')->end()
+                ->scalarNode('username')->end()
+                ->scalarNode('password')->end()
+            ->end()
         ->end()
     ;
 
