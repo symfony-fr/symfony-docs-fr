@@ -150,12 +150,14 @@ un noeud tableau. Le noeud tableau lui-même peut avoir un ensemble prédéfini
 de noeuds variable::
 
     $rootNode
-        ->arrayNode('connection')
-            ->children()
-                ->scalarNode('driver')->end()
-                ->scalarNode('host')->end()
-                ->scalarNode('username')->end()
-                ->scalarNode('password')->end()
+        ->children()
+            ->arrayNode('connection')
+                ->children()
+                    ->scalarNode('driver')->end()
+                    ->scalarNode('host')->end()
+                    ->scalarNode('username')->end()
+                    ->scalarNode('password')->end()
+                ->end()
             ->end()
         ->end()
     ;
@@ -164,13 +166,15 @@ Ou vous pouvez définir un prototype pour chaque noeud à l'intérieur d'un
 noeud tableau::
 
     $rootNode
-        ->arrayNode('connections')
-            ->prototype('array')
-                ->children()
-                    ->scalarNode('driver')->end()
-                    ->scalarNode('host')->end()
-                    ->scalarNode('username')->end()
-                    ->scalarNode('password')->end()
+        ->children()
+            ->arrayNode('connections')
+                ->prototype('array')
+                    ->children()
+                        ->scalarNode('driver')->end()
+                        ->scalarNode('host')->end()
+                        ->scalarNode('username')->end()
+                        ->scalarNode('password')->end()
+                    ->end()
                 ->end()
             ->end()
         ->end()

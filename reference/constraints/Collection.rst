@@ -166,8 +166,8 @@ propriété ``$personalData``, aucune erreur de validation ne se serait produite
     Les contraintes ``Required`` et ``Optional`` ont été déplacées dans le namespace
     ``Symfony\Component\Validator\Constraints\`` depuis Symfony 2.3.
 
-Champs requi ou optionnel
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Champs requis ou optionnel
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les contraintes pour les champs d'une collection peuvent être enveloppés dans la contraite
 ``Required`` ou ``Optional`` pour contrôler si elles doivent toujours être appliquées (``Required``)
