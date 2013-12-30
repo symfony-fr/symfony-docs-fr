@@ -125,7 +125,7 @@ La liste des formats supportés :
 Ajouter des liens
 ~~~~~~~~~~~~~~~~~
 
-POur ajouter des liens à d'autres pages dans les documents, utilisez la
+Pour ajouter des liens à d'autres pages dans les documents, utilisez la
 syntaxe suivante :
 
 .. code-block:: rst
