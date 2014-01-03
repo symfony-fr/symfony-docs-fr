@@ -589,8 +589,6 @@ Quand vous étendez la classe contrôleur de base, vous pouvez utiliser n'import
 quel service Symfony2 via la méthode ``get()``. Voici plusieurs services communs
 dont vous pourriez avoir besoin::
 
-    $request = $this->getRequest();
-
     $templating = $this->get('templating');
 
     $router = $this->get('router');
