@@ -660,16 +660,22 @@ natives de PHP.
 Stocker et récupérer des informations depuis la session peut être effectué
 facilement depuis n'importe quel contrôleur::
 
-    $session = $this->getRequest()->getSession();
+    use Symfony\Component\HttpFoundation\Request;
+    
+    public function indexAction(Request $request)
+    {
+      $session = $request->getSession();
+    
+      // stocke un attribut pour une réutilisation lors d'une future requête utilisateur
+      $session->set('foo', 'bar');
 
-    // stocke un attribut pour une réutilisation lors d'une future requête utilisateur
-    $session->set('foo', 'bar');
+      // dans un autre contrôleur pour une autre requête
+      $foo = $session->get('foo');
 
-    // dans un autre contrôleur pour une autre requête
-    $foo = $session->get('foo');
-
-    // utilise une valeur par défaut si la clé n'existe pas
-    $filters = $session->get('filters', array());
+      // utilise une valeur par défaut si la clé n'existe pas
+      $filters = $session->get('filters', array());
+    
+    }
 
 
 Ces attributs vont rester affectés à cet utilisateur pour le restant de son temps
@@ -689,11 +695,13 @@ messages « flash ».
 
 Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
 
-    public function updateAction()
+    use Symfony\Component\HttpFoundation\Request;
+    
+    public function updateAction(Request $request)
     {
         $form = $this->createForm(...);
 
-        $form->handleRequest($this->getRequest());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             // effectue le traitement du formulaire
@@ -786,16 +794,20 @@ L'Objet Request
 En plus des paramètres de routes, le contrôleur a aussi accès à
 l'objet ``Request`` quand il étend la classe ``Controller`` de base::
 
-    $request = $this->getRequest();
+    use Symfony\Component\HttpFoundation\Request;
 
-    $request->isXmlHttpRequest(); // est-ce une requête Ajax?
+    public function indexAction(Request $request)
+    {
+    
+      $request->isXmlHttpRequest(); // est-ce une requête Ajax?
 
-    $request->getPreferredLanguage(array('en', 'fr'));
+      $request->getPreferredLanguage(array('en', 'fr'));
 
-    $request->query->get('page'); // retourne un paramètre $_GET
+      $request->query->get('page'); // retourne un paramètre $_GET
 
-    $request->request->get('page'); // retourne un paramètre $_POST
-
+      $request->request->get('page'); // retourne un paramètre $_POST
+   
+    }
 
 Comme l'objet ``Response``, les en-têtes de la requête sont stockées dans un
 objet ``HeaderBag`` et sont facilement accessibles.
