@@ -9,24 +9,6 @@ Lorsque vous construisez un outil de ligne de commande, vous n'avez peut
 plusieurs noms de commande à chaque fois peut être fastidieux. Heureusement,
 il est possible de supprimer cette nécessité en étendant l'application::
 
-
-        /**
-         * Récupère les commandes par défaut qui sont toujours disponibles.
-         *
-         * @return array Un tableau d'instances de commandes par défaut
-         */
-        protected function getDefaultCommands()
-        {
-            // Conserve les commandes par défaut du noyau pour avoir la
-            // commande HelpCommand en utilisant l'option --help
-            $defaultCommands = parent::getDefaultCommands()
-
-            $defaultCommands[] = new MyCommand();
-
-            return $defaultCommands;
-        }
-    }
-
     namespace Acme\Tool;
 
     use Symfony\Component\Console\Application;
