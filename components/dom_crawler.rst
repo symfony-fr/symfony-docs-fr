@@ -134,7 +134,7 @@ Extrait les valeurs de l'attribut et/ou du noeud de la liste des noeuds::
 Appelez une fonction anonyme sur chaque noeud de la liste::
 
     $nodeValues = $crawler->filter('p')->each(function ($node, $i) {
-        return $node->nodeValue;
+        return $node->text();
     });
 
 La fonction anonyme reçoit la position et le noeud en tant qu'arguments.
