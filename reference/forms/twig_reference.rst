@@ -299,9 +299,9 @@ est possible en utilisant la propriété ``vars`` de l'objet :class:`Symfony\\Co
 | ``full_name``   | L'attribut HTML ``name`` qui est rendu                                                  |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``errors``      | Un tableau de toutes les erreurs attachées à *ce* champ (ex? ``form.title.errors``).    |
-|                 | Notez que vous pouvez utiliser ``form.errors`` pour déterminer si un champ est valide,  |
-|                 | il ne contient que les erreurs "globales": certains champs peuvent avoir des erreurs    |
-|                 | Sinon, utilisez la variable ``valid``                                                   |
+|                 | Notez que vous ne pouvez pas utiliser ``form.errors`` pour déterminer si un champ est   |
+|                 | valide, il ne contient que les erreurs "globales" : certains champs peuvent avoir des   |
+|                 | erreurs. Sinon, utilisez la variable ``valid``                                          |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``valid``       | Retourne ``true`` ou  ``false`` selon que le formulaire entier est valide               |
 +-----------------+-----------------------------------------------------------------------------------------+
