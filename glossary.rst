@@ -74,7 +74,7 @@ Glossaire
 
    Vendor
         Un *vendor* est un fournisseur de bibliothèques PHP et de bundles, incluant
-        Symfony2 lui-même. Malgré la connotation commercial du terme, les vendors
+        Symfony2 lui-même. Malgré la connotation commerciale du terme, les vendors
         de Symfony sont souvent (et même très souvent) des logiciels libres. Toute
         bibliothèque que vous ajoutez dans votre projet Symfony2 devrait se trouver
         dans le répertoire ``vendor``. Lisez
