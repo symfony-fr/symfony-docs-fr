@@ -66,8 +66,8 @@ Tester les commandes
 --------------------
 
 Pour tester les commandes utilisées dans le cadre du framework, la classe
-:class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application` devrait être
-utilisée au lieu de la classe :class:`Symfony\\Component\\Console\\Application`::
+:class:`Symfony\\Bundle\\FrameworkBundle\\Console\\Application <Symfony\\Bundle\\FrameworkBundle\\Console\\Application>` devrait être
+utilisée au lieu de la classe :class:`Symfony\\Component\\Console\\Application <Symfony\\Component\\Console\\Application>`::
 
     use Symfony\Component\Console\Tester\CommandTester;
     use Symfony\Bundle\FrameworkBundle\Console\Application;
