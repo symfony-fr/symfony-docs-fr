@@ -24,7 +24,7 @@ ou son équivalent :
  
 .. code-block:: bash
 
-    $ php app/console cache:clear -e=prod
+    $ php app/console cache:clear -e prod
 
 En plus de changer l'environnement, vous pouvez également choisir de
 désactiver le mode debug. Cela peut être utile lorsque vous voulez exécuter des
