@@ -1,7 +1,7 @@
 label
 ~~~~~
 
-**type**: ``string`` **default**: Le libellé est à deviné à partir du nom du champ.
+**type**: ``string`` **default**: Le libellé est deviné à partir du nom du champ.
 
 Définit le libellé qui sera utilisé à l'affichage du champ. Le libellé peut aussi
 être directement défini dans le template :
