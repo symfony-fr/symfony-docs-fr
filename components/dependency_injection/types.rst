@@ -10,7 +10,7 @@ plus réutilisable, testable, et découplée des autres.
 
 Il y a plusieurs manières d'injecter des dépendances. Chaque type d'injection
 a ses propres avantages et inconvénients à prendre en considération, ainsi
-que différentes façons de fonctionner lorsque vous les utiliser avec le
+que différentes façons de fonctionner lorsque vous les utilisez avec le
 conteneur de service.
 
 Injection via le Constructeur
