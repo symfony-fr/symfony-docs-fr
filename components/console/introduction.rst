@@ -368,15 +368,15 @@ Vous pouvez combiner ``VALUE_IS_ARRAY`` avec ``VALUE_REQUIRED`` ou ``VALUE_OPTIO
             1
         );
 
-Console Helpers
+Aides pour la Console
 ---------------
 
-The console component also contains a set of "helpers" - different small
-tools capable of helping you with different tasks:
+Le composant de console contient également un jeu d'outils ("helpers") de tailles différentes afin de vous aider dans différentes tâches:
 
-* :doc:`/components/console/helpers/dialoghelper`: interactively ask the user for information
-* :doc:`/components/console/helpers/formatterhelper`: customize the output colorization
-* :doc:`/components/console/helpers/progresshelper`: shows a progress bar
+* :doc:`/components/console/helpers/dialoghelper`: demande de question à l'utilisateur de manière interactif
+* :doc:`/components/console/helpers/formatterhelper`: personnalisation de la coloration de sortie
+* :doc:`/components/console/helpers/progresshelper`: affichage d'une barre de progression
+* :doc:`/components/console/helpers/tablehelper`: affichage de données tabulaires comme une table
 
 Tester les commandes
 --------------------
