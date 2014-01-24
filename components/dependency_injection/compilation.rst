@@ -214,7 +214,7 @@ La version XML de la configuration ressemblerait maintenant à ceci :
     </container>
 
 .. note::
-    
+
     Dans le framework full stack Symfony2, il existe une classe Extension de base
     qui implémente ces méthodes ainsi que des raccourcis de méthodes pour traiter
     la configuration. Lisez :doc:`/cookbook/bundles/extension` pour plus de détails.
@@ -260,11 +260,10 @@ secondaire seulement si un paramètre spécifique est défini::
 .. note::
 
     Juste enregistrer une extension dans le conteneur n'est pas suffisant pour
-    pour qu'elle soit traité avec les autres extensions quand le conteneur est
+    pour qu'elle soit traitée avec les autres extensions quand le conteneur est
     compilé. Chargé le fichier de configuration comme ci-dessus en utilisant
     l'alias de l'extension comme une clé vous assure que l'extension est chargée.
     Le constructeur du conteneur peut aussi les charger avec sa méthode
-
     :method:`Symfony\\Component\\DependencyInjection\\ContainerBuilder::loadFromExtension`
     method::
 
@@ -289,9 +288,6 @@ secondaire seulement si un paramètre spécifique est défini::
 Préfixer une configuration en passant par une extension
 -------------------------------------------------------
 
-.. versionadded:: 2.2
-La possibilité de préfixer la configuration d'un bundle est nouvelle dans Symfony 2.2.
-
 Une extension peut préfixer la configuration de n'importe quel bundle avant que
 la méthode ``load()`` soit appelée en implémentant la classe :class:`Symfony\\Component\\DependencyInjection\\Extension\\PrependExtensionInterface`::
 
@@ -312,7 +308,7 @@ la méthode ``load()`` soit appelée en implémentant la classe :class:`Symfony\
         }
     }
 
-Pour plus de détails, lisez :doc:`/cookbook/bundles/prepend_extension`, qui est
+Pour plus de détails, lisez :doc:`/cookbook/bundles/extension`, qui est
 spécifique au Framework Symfony2, mais contient beaucoup détail sur cette
 fonctionnalité.
 
