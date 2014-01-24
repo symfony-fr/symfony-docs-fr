@@ -61,6 +61,54 @@ créer un alias de ce dernier (voir ci-dessous) pour y accéder (via l'alias).
 
    Les services sont par défaut publics.
 
+Les services synthétiques
+-------------------------
+
+Les services synthétiques sont des services injectés au conteneur de services
+au lieu d'être créé par le conteneur.
+
+Par exemple, si vous utilisez le composant :doc:`HttpKernel </components/http_kernel/introduction>`
+avec le composant DependencyInjection, et bien le service ``request`` est injecté
+dans la méthode :method:`ContainerAwareHttpKernel::handle() <Symfony\\Component\\HttpKernel\\DependencyInjection\\ContainerAwareHttpKernel::handle>`
+lorsqu'on entre dans le :doc:`scope </cookbook/service_container/scopes>` de la request.
+La classe n'existe pas lorsqu'il n'y a pas de request, donc la request ne peut être incluse
+à la configuration du conteneur de services. Aussi, le service devrait être différent
+pour chaque sous-requête dans l'application.
+
+Pour créer un service synthétique, mettez ``synthetic`` à ``true`` :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        services:
+            request:
+                synthetic: true
+
+    .. code-block:: xml
+
+        <service id="request"
+            synthetic="true" />
+
+    .. code-block:: php
+
+        use Symfony\Component\DependencyInjection\Definition;
+
+        // ...
+        $container->setDefinition('request', new Definition())
+            ->setSynthetic(true);
+
+Comme vous pouvez le voir, seule l'option ``synthetic`` est déclarée. toutes
+les autres options sont uniquement utilisée pour configurer pour la création
+d'un service par le conteneur de services. Comme le service n'est pas créé par
+le conteneur, ces options sont ommises.
+
+Désormais, vous pouvez injecter la classe en utilisant
+:method:`Container::set <Symfony\\Component\\DependencyInjection\\Container::set>`::
+
+    // ...
+    $container->set('request', new MyRequest(...));
+
 Créer un alias
 --------------
 
