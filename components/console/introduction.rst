@@ -23,9 +23,9 @@ Vous pouvez installer le composant de deux manières différentes :
 .. note::
 
     Windows ne supporte pas les couleurs ANSI par défaut, donc le composant Console
-    le détecte et désactive les couleurs où Windows n'apporte pas de support.
-    Cependant, si Windows n'est pas configuré avec driver ANSI et que les commandes
-    console appelle d'autres scripts qui envoient des séquences de couleurs ANSI,
+    le détecte et désactive les couleurs pour lequelles Windows n'apporte pas de support.
+    Cependant, si Windows n'est pas configuré avec un driver ANSI et que les commandes
+    appellent d'autres scripts qui envoient des séquences de couleurs ANSI,
     ils seront affichées en caractères bruts.
 
     Pour activer les couleurs ANSI dans Windows, installez `ANSICON`_.
@@ -33,7 +33,7 @@ Vous pouvez installer le composant de deux manières différentes :
 Créer une Commande basique
 --------------------------
 
-Pour faire une commande de console qui vous accueille depuis la ligne de commandes, créez
+Pour faire une commande de console qui vous accueille depuis la ligne de commande, créez
 un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
 
     namespace Acme\DemoBundle\Command;
@@ -54,13 +54,13 @@ un fichier ``GreetCommand.php`` et ajoutez-lui ce qui suit::
                 ->addArgument(
                     'name',
                     InputArgument::OPTIONAL,
-                    'Qui voulez vous saluez?'
+                    'Qui voulez-vous saluez?'
                 )
                 ->addOption(
                    'yell',
                    null,
                    InputOption::VALUE_NONE,
-                   'Si défini, la réponse est rendue en majuscules'
+                   'Si défini, la réponse est affichée en majuscules'
                 )
             ;
         }
@@ -102,13 +102,13 @@ Testez la nouvelle commande de console en exécutant ce qui suit :
 
     $ app/console demo:greet Fabien
 
-Cela va afficher ce qui suit sur votre ligne de commandes :
+Cela devrait afficher le texte suivant sur votre ligne de commandes :
 
 .. code-block:: text
 
     Salut, Fabien
 
-Vous pouvez aussi utiliser l'option ``--yell`` pour afficher tout en majuscules :
+Vous pouvez aussi utiliser l'option ``--yell`` pour tout afficher en majuscules :
 
 .. code-block:: bash
 
@@ -154,15 +154,15 @@ Les couleurs d'écriture et de fond disponibles sont : ``black`` (« noir »), `
 Et les options disponibles sont : ``bold`` (« gras »), ``underscore`` (« souligné »),
 ``blink`` (« clignotant »), ``reverse`` (« inversé ») et ``conceal`` (« masqué »).
 
-You can also set these colors and options inside the tagname::
+Vous pouvez aussi définir ces couleurs et options directement dans les balises::
 
-    // green text
+    // texte vert
     $output->writeln('<fg=green>foo</fg=green>');
 
-    // black text on a cyan background
+    // texte noir sur fond cyan
     $output->writeln('<fg=black;bg=cyan>foo</fg=black;bg=cyan>');
 
-    // bold text on a yellow background
+    // texte gras sur fond jaune
     $output->writeln('<bg=yellow;options=bold>foo</bg=yellow;options=bold>');
 
 Niveau de verbosité
@@ -172,7 +172,7 @@ Niveau de verbosité
     Les constantes ``VERBOSITY_VERY_VERBOSE`` et ``VERBOSITY_DEBUG`` ont été
     introduites avec la version 2.3.
 
-la console a 5 niveau de verbosité. Ils sont définis dans la classe
+La console a 5 niveaux de verbosité. Ils sont définis dans la classe
 :class:`Symfony\\Component\\Console\\Output\\OutputInterface`:
 
 =======================================  =========================================
@@ -182,10 +182,10 @@ OutputInterface::VERBOSITY_QUIET         N'affiche pas les messages
 OutputInterface::VERBOSITY_NORMAL        Le niveau par défaut
 OutputInterface::VERBOSITY_VERBOSE       Augmente la verbosité des messages
 OutputInterface::VERBOSITY_VERY_VERBOSE  Les messages d'information non essentiels
-OutputInterface::VERBOSITY_DEBUG         Les messages de de débuggage
+OutputInterface::VERBOSITY_DEBUG         Les messages de débuggage
 =======================================  =========================================
 
-Vous pouvez spécifié le niveau de verbosité silencieuse avec l'option ``--quiet``
+Vous pouvez spécifier le niveau de verbosité silencieuse avec l'option ``--quiet``
 ou ``-q``. L'option ``--verbose`` ou ``-v`` est utilisé quand vous voulez
 augmenter le niveau de verbosité.
 
@@ -201,10 +201,10 @@ de verbosité. Par exemple::
         $output->writeln(...);
     }
 
-Quand le niveau ``quiet`` est utilisé, tous les affichages sont supprimés. la
+Quand le niveau ``quiet`` est utilisé, tous les affichages sont supprimés et la
 méthode
 :method:`Symfony\Component\Console\Output::write<Symfony\\Component\\Console\\Output::write>`
- retourne sans l'affichage actuel.
+retourne sans aucun affichage.
 
 Utiliser des arguments de commande
 ----------------------------------
@@ -221,7 +221,7 @@ un argument optionnel ``last_name`` à la commande et faites en sorte que l'argu
         ->addArgument(
             'name',
             InputArgument::REQUIRED,
-            'Qui voulez vous saluer ?'
+            'Qui voulez-vous saluer ?'
         )
         ->addArgument(
             'last_name',
@@ -242,7 +242,7 @@ La commande peut maintenant être utilisée de l'une des façons suivantes :
     $ app/console demo:greet Fabien
     $ app/console demo:greet Fabien Potencier
 
-Il est aussi possible de passer une liste de valeur en argument (imaginez que
+Il est aussi possible de passer une liste de valeurs en argument (imaginez que
 vous vouliez saluer tous vos amis). Pour effectuer ceci, vous devez le spécifier
 à la fin de la liste d'arguments::
 
@@ -251,7 +251,7 @@ vous vouliez saluer tous vos amis). Pour effectuer ceci, vous devez le spécifie
         ->addArgument(
             'names',
             InputArgument::IS_ARRAY,
-            'Qui voulez vous saluez (séparer les noms par des espaces)?'
+            'Qui voulez-vous saluez (séparer les noms par des espaces)?'
         );
 
 Pour l'utiliser, spécifiez combien de noms vous voulez:
@@ -294,8 +294,8 @@ que vous pouvez les spécifier dans n'importe quel ordre) et sont spécifiées a
 deux tirets (par exemple : ``--yell`` - vous pouvez aussi déclarer un raccourci
 d'une lettre que vous pouvez appeler avec un unique tiret comme ``-y``). Les
 options sont *toujours* optionnelles, et peuvent être déclarées de manière à
-accepter une valeur (par exemple : ``dir=src``) ou simplement en tant que
-drapeau booléen sans valeur (par exemple : ``yell``).
+accepter une valeur (par exemple : ``dir=src``) ou simplement en tant qu'indicateur
+booléen sans valeur (par exemple : ``yell``).
 
 .. tip::
 
@@ -325,7 +325,7 @@ Ensuite, utilisez cette commande pour afficher le message plusieurs fois :
     }
 
 Maintenant, lorsque vous exécutez la tâche, vous pouvez spécifier de manière
-optionnelle un drapeau ``--iterations`` :
+facultative une option ``--iterations`` :
 
 .. code-block:: bash
 
@@ -348,7 +348,7 @@ n'importe laquelle des deux commandes suivantes va fonctionner :
 Il y a 4 variantes d'options que vous pouvez utiliser :
 
 ===========================  =================================================================================================
-Option                       Value
+Option                       Valeur
 ===========================  =================================================================================================
 InputOption::VALUE_IS_ARRAY  Cette option accepte de multiples valeurs (par exemple : ``--dir=/foo --dir=/bar``)
 InputOption::VALUE_NONE      N'accepte pas de valeur en entrée pour cette option (par exemple : ``--yell``)
@@ -368,15 +368,16 @@ Vous pouvez combiner ``VALUE_IS_ARRAY`` avec ``VALUE_REQUIRED`` ou ``VALUE_OPTIO
             1
         );
 
-Aides pour la Console
----------------
+Helpers pour la Console
+-----------------------
 
-Le composant de console contient également un jeu d'outils ("helpers") de tailles différentes afin de vous aider dans différentes tâches:
+Le composant de console contient également un ensemble de « helpers »
+qui sont de petits outils qui peuvent vous aider dans différentes tâches:
 
-* :doc:`/components/console/helpers/dialoghelper`: demande de question à l'utilisateur de manière interactif
+* :doc:`/components/console/helpers/dialoghelper`: demande d'informations à l'utilisateur de manière interactive
 * :doc:`/components/console/helpers/formatterhelper`: personnalisation de la coloration de sortie
 * :doc:`/components/console/helpers/progresshelper`: affichage d'une barre de progression
-* :doc:`/components/console/helpers/tablehelper`: affichage de données tabulaires comme une table
+* :doc:`/components/console/helpers/tablehelper`: affichage de données tabulaires comme un tableau
 
 Tester les commandes
 --------------------
@@ -384,7 +385,7 @@ Tester les commandes
 Symfony2 fournit plusieurs outils pour vous aider à tester vos commandes. La
 plus utile est la classe :class:`Symfony\\Component\\Console\\Tester\\CommandTester`.
 Elle utilise des classes « d'entrée et de sortie » spécifiques permettant de
-faciliter le « testing » sans avoir de console réelle::
+faciliter les tests sans avoir de console réelle::
 
     use Symfony\Component\Console\Application;
     use Symfony\Component\Console\Tester\CommandTester;
@@ -408,7 +409,7 @@ faciliter le « testing » sans avoir de console réelle::
     }
 
 La méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::getDisplay`
-retourne ce qui aurait été rendu dans l'appel normal de la commande via la console.
+retourne ce qui aurait été affiché avec l'appel normal de la commande via la console.
 
 Vous pouvez tester les arguments et options envoyés à la commande, en les passant
 dans un tableau à la méthode :method:`Symfony\\Component\\Console\\Tester\\CommandTester::execute` ::
@@ -470,14 +471,14 @@ Appeler une commande depuis une autre est très simple::
         // ...
     }
 
-D'abord, vous :method:`Symfony\\Component\\Console\\Application::find` (« trouvez »
-en français) la commande que vous voulez exécuter en passant le nom de cette dernière.
+D'abord, vous trouvez, grâce à la méthode :method:`Symfony\\Component\\Console\\Application::find`,
+la commande que vous voulez exécuter en passant le nom de cette dernière.
 
 Ensuite, vous devez créer une nouvelle classe :class:`Symfony\\Component\\Console\\Input\\ArrayInput`
 avec les arguments et options que vous souhaitez passer à la commande.
 
 Éventuellement, vous pouvez appelez la méthode ``run()`` qui va exécuter la commande
-et retourner le code retourné par le commande (retourne la valeur de la méthode
+et retourner le code retourné par la commande (retourne la valeur de la méthode
 ``execute()`` de la commande).
 
 .. note::
@@ -485,7 +486,7 @@ et retourner le code retourné par le commande (retourne la valeur de la méthod
     La plupart du temps, appeler une commande depuis du code qui n'est pas
     exécuté depuis la ligne de commandes n'est pas une bonne idée pour plusieurs
     raisons. Mais le plus important, c'est que vous compreniez qu'il faut voir une
-    commande comme un contrôleur ; il devrait utiliser le modèle pour faire quelque
+    commande comme un contrôleur ; elle devrait utiliser le modèle pour faire quelque
     chose et afficher le retour à l'utilisateur. Donc, plutôt que d'appeler une commande
     depuis le Web, revoyez votre code et déplacez la logique dans une nouvelle classe.
 
