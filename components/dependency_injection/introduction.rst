@@ -189,9 +189,7 @@ de votre application.
 Initialiser le Conteneur avec des fichiers de configuration
 -----------------------------------------------------------
 
-Tout comme vous avez initialisé vos services en utilisant PHP ci-dessus,
-vous pouvez aussi utiliser des fichiers de configuration. Pour
-faire cela, vous devez installer :doc:`le composant « Config »</components/config/introduction>`.
+Tout comme vous avez initialisé vos services en utilisant PHP ci-dessus, vous pouvez aussi utiliser des fichiers de configuration. Cela vous permet d'écrire les définitions de services au format XML ou YAML au lieu de le faire en PHP comme montré dans les exemples ci-dessus. Dans le cadre de grosses applications, il est important d'organiser les définitions de services en les plaçant dans un ou plusieurs fichiers. Pour faire cela, vous devez installer :doc:`le composant « Config »</components/config/introduction>`.
 
 Chargement d'un fichier de configuration XML::
 
