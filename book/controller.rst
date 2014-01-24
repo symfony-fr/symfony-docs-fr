@@ -417,7 +417,7 @@ Les Tâches Communes du Contrôleur
 ---------------------------------
 
 Bien qu'un contrôleur puisse tout faire en théorie, la plupart
-d'entre-eux va accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
+d'entre-eux vont accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
 comme rediriger, forwarder, afficher des templates et accéder aux services
 sont très faciles à gérer dans Symfony2.
 
@@ -522,7 +522,7 @@ Symfony2 va toujours passer la valeur correcte à chaque variable.
 Afficher des Templates
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Bien que ce n'est pas obligatoire, la plupart des contrôleurs va finalement
+Bien que ce n'est pas obligatoire, la plupart des contrôleurs vont finalement
 retourner un template qui sera chargé de générer du HTML (ou un autre format)
 pour le contrôleur. La méthode ``renderView()`` retourne un template et affiche son contenu.
 Le contenu du template peut être utilisé pour créer un objet ``Response``::
@@ -809,7 +809,7 @@ l'objet ``Request`` quand il étend la classe ``Controller`` de base::
    
     }
 
-Comme l'objet ``Response``, les en-têtes de la requête sont stockées dans un
+Comme l'objet ``Response``, les en-têtes de la requête sont stockés dans un
 objet ``HeaderBag`` et sont facilement accessibles.
 
 Le mot de la fin
