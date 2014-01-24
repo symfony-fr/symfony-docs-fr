@@ -417,7 +417,7 @@ Les Tâches Communes du Contrôleur
 ---------------------------------
 
 Bien qu'un contrôleur puisse tout faire en théorie, la plupart
-d'entre-eux va accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
+d'entre-eux vont accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
 comme rediriger, forwarder, afficher des templates et accéder aux services
 sont très faciles à gérer dans Symfony2.
 
@@ -522,7 +522,7 @@ Symfony2 va toujours passer la valeur correcte à chaque variable.
 Afficher des Templates
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Bien que ce n'est pas obligatoire, la plupart des contrôleurs va finalement
+Bien que ce n'est pas obligatoire, la plupart des contrôleurs vont finalement
 retourner un template qui sera chargé de générer du HTML (ou un autre format)
 pour le contrôleur. La méthode ``renderView()`` retourne un template et affiche son contenu.
 Le contenu du template peut être utilisé pour créer un objet ``Response``::
@@ -588,8 +588,6 @@ Accéder à d'autres Services
 Quand vous étendez la classe contrôleur de base, vous pouvez utiliser n'importe
 quel service Symfony2 via la méthode ``get()``. Voici plusieurs services communs
 dont vous pourriez avoir besoin::
-
-    $request = $this->getRequest();
 
     $templating = $this->get('templating');
 
@@ -662,16 +660,22 @@ natives de PHP.
 Stocker et récupérer des informations depuis la session peut être effectué
 facilement depuis n'importe quel contrôleur::
 
-    $session = $this->getRequest()->getSession();
+    use Symfony\Component\HttpFoundation\Request;
+    
+    public function indexAction(Request $request)
+    {
+      $session = $request->getSession();
+    
+      // stocke un attribut pour une réutilisation lors d'une future requête utilisateur
+      $session->set('foo', 'bar');
 
-    // stocke un attribut pour une réutilisation lors d'une future requête utilisateur
-    $session->set('foo', 'bar');
+      // dans un autre contrôleur pour une autre requête
+      $foo = $session->get('foo');
 
-    // dans un autre contrôleur pour une autre requête
-    $foo = $session->get('foo');
-
-    // utilise une valeur par défaut si la clé n'existe pas
-    $filters = $session->get('filters', array());
+      // utilise une valeur par défaut si la clé n'existe pas
+      $filters = $session->get('filters', array());
+    
+    }
 
 
 Ces attributs vont rester affectés à cet utilisateur pour le restant de son temps
@@ -691,11 +695,13 @@ messages « flash ».
 
 Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
 
-    public function updateAction()
+    use Symfony\Component\HttpFoundation\Request;
+    
+    public function updateAction(Request $request)
     {
         $form = $this->createForm(...);
 
-        $form->handleRequest($this->getRequest());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             // effectue le traitement du formulaire
@@ -788,18 +794,22 @@ L'Objet Request
 En plus des paramètres de routes, le contrôleur a aussi accès à
 l'objet ``Request`` quand il étend la classe ``Controller`` de base::
 
-    $request = $this->getRequest();
+    use Symfony\Component\HttpFoundation\Request;
 
-    $request->isXmlHttpRequest(); // est-ce une requête Ajax?
+    public function indexAction(Request $request)
+    {
+    
+      $request->isXmlHttpRequest(); // est-ce une requête Ajax?
 
-    $request->getPreferredLanguage(array('en', 'fr'));
+      $request->getPreferredLanguage(array('en', 'fr'));
 
-    $request->query->get('page'); // retourne un paramètre $_GET
+      $request->query->get('page'); // retourne un paramètre $_GET
 
-    $request->request->get('page'); // retourne un paramètre $_POST
+      $request->request->get('page'); // retourne un paramètre $_POST
+   
+    }
 
-
-Comme l'objet ``Response``, les en-têtes de la requête sont stockées dans un
+Comme l'objet ``Response``, les en-têtes de la requête sont stockés dans un
 objet ``HeaderBag`` et sont facilement accessibles.
 
 Le mot de la fin

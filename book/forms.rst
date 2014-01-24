@@ -480,7 +480,7 @@ Désactiver la validation
     bien que la définir comme un tableau vide revient au même dans les versions
     précédentes.
 
-Parfois, il peut être utilise de supprimer complètement la validation d'un formulaire.
+Parfois, il peut être utile de supprimer complètement la validation d'un formulaire.
 Pour cela, vous pouvez éviter l'appel à la méthode :method:`Symfony\\Component\\Form\\FormInterface::isValid`
 dans votre contrôleur. Si cela n'est pas possible, vous pouvez également définir
 l'option ``validation_groups`` à ``false`` ou en tant que tableau vide::
