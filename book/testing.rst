@@ -67,7 +67,7 @@ votre bundle :
     }
 
 Pour tester cela, créez le fichier ``CalculatorTest`` dans le dossier ``Tests/Utility``
-de votre:
+de votre bundle :
 
 .. code-block:: php
 
