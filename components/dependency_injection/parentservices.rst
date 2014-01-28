@@ -290,9 +290,9 @@ uniquement en tant que service parent et ne peut pas être utilisée directement
 en tant que service à injecter et sera supprimée au moment de la compilation.
 
 .. note::
-  
+
    Pour que les dépendances parents puissent être résolues, le ``ContainerBuilder``
-   doit d'abord être compilé. Lisez :doc:`/components/dependency_injection/compilation` 
+   doit d'abord être compilé. Lisez :doc:`/components/dependency_injection/compilation`
    pour plus de détails.
 
 Surcharger des dépendances parentes
@@ -407,7 +407,7 @@ quelque chose comme ça :
 
 La classe ``GreetingCardManager`` va recevoir les mêmes dépendances qu'avant,
 mais la classe ``NewsletterManager`` quant à elle va avoir le service
-``my_alternative_mailer` à la place du service ``my_mailer``.
+``my_alternative_mailer`` à la place du service ``my_mailer`` .
 
 Collections de dépendances
 --------------------------
@@ -514,7 +514,7 @@ Si vous aviez la configuration suivante :
 
 Dans cet exemple, la méthode ``setFilter`` du service ``newsletter_manager``
 sera appelée deux fois, donnant comme résultat le tableau ``$filters``
-contenant les deux objets ``my_filter`` et ``another_filter``. Cela est
+contenant les deux objets ``my_filter`` et ``another_filter``. C'est
 parfait si vous voulez simplement ajouter des filtres additionnels aux
 sous-classes. Si vous souhaitez remplacer les filtres passés à la sous-classe,
 supprimer le paramètre ``parent`` de la configuration va éviter que la classe
