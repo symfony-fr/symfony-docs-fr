@@ -45,7 +45,7 @@
 * **Filesystem**
 
   * :doc:`/components/filesystem`
-  
+
 * **Finder**
 
   * :doc:`/components/finder`
@@ -56,6 +56,10 @@
   * :doc:`/components/http_foundation/sessions`
   * :doc:`/components/http_foundation/session_configuration`
   * :doc:`/components/http_foundation/session_testing`
+
+* **HttpKernel**
+
+  * :doc:`/components/http_kernel/introduction`
 
 * **Locale**
 

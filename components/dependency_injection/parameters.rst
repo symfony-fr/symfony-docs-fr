@@ -98,6 +98,31 @@ de ce paramètre plutôt que de les intégrer dans la définition du service.
             ->register('mailer', 'Mailer')
             ->addArgument('%mailer.transport%');
 
+.. caution::
+
+    The values between ``parameter`` tags in XML configuration files are not
+    trimmed.
+    Les valeurs entre les tags ``parameter`` dans votre configuration XML ne
+    sont pas "trimmée" (les espaces, les retours à la ligne, etc. ne sont pas retirées).
+
+    Cela signifie que la configuration ci-dessous aura comme valeur
+    ``\n    sendmail\n``:
+
+    .. code-block:: xml
+
+        <parameter key="mailer.transport">
+            sendmail
+        </parameter>
+
+    Dans certains cas (pour les constantes ou les noms de classes),
+    il se peut que cela génère des erreurs. Pour éviter cela, vous devez toujours
+    écrire la définition de vos paramètres sur une ligne :
+
+    .. code-block:: xml
+
+        <parameter key="mailer.transport">sendmail</parameter>
+
+
 Si vous l'utilisez ailleurs aussi, vous n'aurez besoin que de changer la valeur
 du paramètre à un seul endroit.
 
@@ -170,7 +195,7 @@ exemple, en ajoutant le paramètre dans la classe du service:
 Tableau de paramètres
 ---------------------
 
-Les paramètres ne sont pas nécessaires de simple chaîne de caractères, ils peuvent
+Les paramètres ne sont pas nécessairement de simple chaîne de caractères, ils peuvent
 être aussi des tableaux. Pour le format XML, vous aurez besoin d'utiliser l'attribut
 ``type="collection"`` pour tous les paramètres qui sont des tableaux.
 
@@ -230,11 +255,8 @@ Des constantes en paramètres
 ----------------------------
 
 Le conteneur supporte aussi la définition des constantes PHP comme paramètres.
-Pour tirer parti de cette fonctionnalité,
-
-The container also has support for setting PHP constants as parameters. To
-take advantage of this feature, mapper le nom de la constant à une clé de paramètre,
-et définissez son type comme ``constant``.
+Pour tirer parti de cette fonctionnalité, il faut mapper le nom de la constant
+à une clé de paramètre, et définissez son type comme ``constant``.
 
 .. configuration-block::
 
@@ -268,3 +290,80 @@ et définissez son type comme ``constant``.
             # app/config/config.yml
             imports:
                 - { resource: parameters.xml }
+
+Mots clés PHP en XML
+--------------------
+
+Par défaut, ``true``, ``false`` et ``null`` en XML sont transformés en mots clés PHP
+(respectivement ``true``, ``false`` et ``null``) :
+
+.. code-block:: xml
+
+    <parameters>
+        <parameter key="mailer.send_all_in_once">false</parameters>
+    </parameters>
+
+    <!-- après parsing
+    $container->getParameter('mailer.send_all_in_once'); // retourne false
+    -->
+
+To disable this behavior, use the ``string`` type:
+
+.. code-block:: xml
+
+    <parameters>
+        <parameter key="mailer.some_parameter" type="string">true</parameter>
+    </parameters>
+
+    <!-- après parsing
+    $container->getParameter('mailer.some_parameter'); // retourne "true"
+    -->
+
+.. note::
+
+    Ceci n'est pas disponible si vous le faites en YAML ou en PHP, parce que
+    ces langages supportent déjà les mots clés PHP.
+
+Syntaxe pour la référence de service
+------------------------------------
+
+Vous pouvez bien évidemment référencer vos services, la syntaxe sera un
+peu différente pour chacun des formats. Il vous est possible de configurer
+leur comportement si le service référencé n'existe pas. Par défaut, une
+exception sera levée quand un service référencé est inexistant.
+
+YAML
+~~~~
+
+Commencez la chaine de caractère avec ``@`` ou ``@?`` pour référencer un
+service en YAML.
+
+* ``@mailer`` référence le service ``mailer``. Si le service n'existe pas,
+une exception sera levée;
+* ``@?mailer`` références le service ``mailer``. Si le service n'existe pas,
+il sera ignoré;
+
+.. tip::
+
+    Utilisez ``@@`` pour échaper le symbole ``@`` en YAML. ``@@mailer`` sera
+    converti en la chaîne de caractères ``"@mailer"`` au lieu de référencer
+    le service ``mailer``.
+
+XML
+~~~
+
+En XML, utilisez le type ``service``. Le comportement peut être spécifié si
+le service n'existe pas en utilisant l'argument ``on-invalid``. Par défaut,
+une exception est levée. Les valeurs valides pour l'argument ``on-invalid``
+sont ``null`` (utilisez ``null`` au lieu d'un service manquant) ou ``ignored``
+(très similaire à ``null``, sauf dans le cas d'un appel de méthode, celui-ci
+est supprimé).
+
+PHP
+~~~
+
+En PHP, vous pouvez utiliser la classe
+:class:`Symfony\\Component\\DependencyInjection\\Reference` pour référencer
+un service. Le comportement dinvalidité est configuré en utilisant le second
+argument et constantes du constructeur de l'interface
+:class:`Symfony\\Component\\DependencyInjection\\ContainerInterface`.

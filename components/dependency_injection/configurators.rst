@@ -27,7 +27,7 @@ Par exemple, supposons que vous ayez une application où vous envoyez différent
 types d'e-mails aux utilisateurs. Les e-mails sont transmis à travers différents
 formateurs qui pourraient être activée ou non en fonction de certains paramètres
 dynamiques de l'application.
-Vous commencez la définition d'une classe ``NewsletterManager`` comme ceci ::
+Vous commencez la définition d'une classe ``NewsletterManager`` comme ceci::
 
     class NewsletterManager implements EmailFormatterAwareInterface
     {

@@ -10,7 +10,7 @@ Récupérer et définir les définitions de service
 Il existe aussi des méthodes utiles pour travailler avec les
 définitions de service.
 
-Pour savoir si il y a une définition pour un certain ID de service::
+Pour savoir s'il y a une définition pour un certain ID de service::
 
     $container->hasDefinition($serviceId);
 
@@ -70,7 +70,7 @@ définition, vous pouvez utiliser::
 
 ou pour récupérer un seul argument via sa position::
 
-    $definition->getArgument($index); 
+    $definition->getArgument($index);
     // par exemple : $definition->getArguments(0) pour le premier argument
 
 Vous pouvez ajouter un argument à la fin du tableau d'arguments en utilisant::
@@ -81,8 +81,8 @@ L'argument peut être une chaîne de caractères, un tableau, un paramètre de s
 utilisant ``%nom_de_paramètre%`` ou un ID de service en utilisant::
 
     use Symfony\Component\DependencyInjection\Reference;
-  
-    //--
+
+    // ...
 
     $definition->addArgument(new Reference('service_id'));
 
