@@ -202,9 +202,8 @@ Pour commencer, changez la classe ``TransportChain``::
             if (array_key_exists($alias, $this->transports)) {
                return $this->transports[$alias];
             }
-            else {
-               return;
-            }
+
+            return;
         }
     }
 
@@ -276,7 +275,7 @@ utiliser cette dernière, mettez à jour votre compilateur::
         }
     }
 
-Ici, la partie importante est la variable ``$attributes``. Comme vous pouvez
+Ici, la partie délicate est la variable ``$attributes``. Comme vous pouvez
 utiliser le même tag plusieurs fois avec le même service (par exemple : vous
 pourriez, en théorie, tagger le même service cinq fois avec le tag
 ``acme_mailer.transport``), ``$attributes`` est un tableau contenant l'information
