@@ -1,11 +1,11 @@
 .. index::
    single: Dependency Injection; Lazy Services
 
-Les services paresseux (« lazy services » en anglais)
-=====================================================
+Les services instanciés à la demande (« lazy services » en anglais)
+===================================================================
 
 .. versionadded:: 2.3
-   Les services ``lazy`` ont été ajoutés depuis Symfony 2.3.
+   Les services ``lazy`` (instancés à la demande) ont été ajoutés depuis Symfony 2.3.
 
 Pourquoi les services ``lazy`` ?
 --------------------------------
@@ -66,10 +66,20 @@ Vous pouvez récupérer le service depuis le conteneur::
 
     $service = $container->get('foo');
 
-A ce moment, l'argument ``$service``récupéré doit être un `proxy`_ virtuel et
+A ce moment, l'argument ``$service`` récupéré doit être un `proxy`_ virtuel et
 a la même signature que la classe représentant le service. Vous pouvez aussi
 injecter ce service normalement dans d'autres services. L'objet qui est réellement
 injecté est le service proxy.
+
+Pour vérifier si votre proxy fonctionne, vous pouvez simplement vérifier l'interface
+de l'objet reçu.
+
+.. code-block:: php
+
+    var_dump(class_implements($service));
+
+Si la classe implémente l'interface ``ProxyManager\Proxy\LazyLoadingInterface`` vos
+services instanciés à la demande (lazy) fonctionnent.
 
 .. note::
 
