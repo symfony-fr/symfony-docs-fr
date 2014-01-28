@@ -19,7 +19,7 @@ Vous pouvez installer le composant de 2 façons :
 * :doc:`Via Composer </components/using_components>` (``symfony/http-kernel`` sur Packagist_);
 * Via le dépôt Git officiel (https://github.com/symfony/HttpKernel).
 
-Le Workflow d'une Request
+Le Workflow d'une Requête
 -------------------------
 
 Chaque interaction HTTP démarre avec une requête et se termine par une réponse.
@@ -30,7 +30,7 @@ HTML ou une chaîne JSON).
 .. image:: /images/components/http_kernel/request-response-flow.png
    :align: center
 
-Habituellement, certaines sortes de frameworks ou systèmes sont conçus pour
+Habituellement, certains frameworks ou systèmes sont conçus pour
 gérer toutes les tâches répétitives (c.-à-d. routage, sécurité, etc.) afin qu'un
 développeur puisse facilement construire chaque *page* de l'application.
 La façon dont ces systèmes sont implémentés varie grandement. Le composant
@@ -59,7 +59,7 @@ de ce système soit-elle::
 
 En interne, :method:`HttpKernel::handle() <Symfony\\Component\\HttpKernel\\HttpKernel::handle>` (
 l'implémentation concrète de :method:`HttpKernelInterface::handle() <Symfony\\Component\\HttpKernel\\HttpKernelInterface::handle>` )
-définit un workflow qui commence par :class:`Symfony\\Component\\HttpFoundation\\Request`
+définit un workflow qui commence par une :class:`Symfony\\Component\\HttpFoundation\\Request`
 et se termine avec une :class:`Symfony\\Component\\HttpFoundation\\Response`.
 
 .. image:: /images/components/http_kernel/01-workflow.png
@@ -78,12 +78,12 @@ que tout le "travail" d'un(e) framework/application construit(e) est réalisé
 dans des écouteurs d'événements.
 
 Pour aider dans les explications de ce processus, ce document traite de toutes
-les étapes du processus et explique comment une implémentation spécifique de 
+les étapes du processus et explique comment une implémentation spécifique de
 HttpKernel (le Framework Symfony) fonctionne.
 
 Pour commencer, utiliser la classe :class:`Symfony\\Component\\HttpKernel\\HttpKernel`
 est très simple et nécessite la création d'un :doc:`EventDispatcher </components/event_dispatcher/introduction>`
-et un :ref:`controller resolver <component-http-kernel-resolve-controller>`
+et d'un :ref:`controller resolver <component-http-kernel-resolve-controller>`
 (expliqué plus bas). Pour terminer votre kernel fonctionnel, vous devrez ajouter
 plus d'écouteurs aux événements décrits ci-dessous::
 
@@ -129,7 +129,7 @@ consultez :ref:`http-kernel-creating-listener`.
 1) L'événement ``kernel.request``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Usage typique** : Ajouter plus d'information à la ``Request``, initialiser
+**Usage typique** : Ajouter plus d'informations à la ``Request``, initialiser
 des parties du système, ou encore retourner une ``Response`` si possible (par exemple une
 couche de sécurité qui refuse l'accès).
 
@@ -173,10 +173,10 @@ une ``Response`` directement, soit d'ajouter de l'information à la ``Request``
 
     L'écouteur le plus important de ``kernel.request`` dans le framework Symfony
     est le :class:`Symfony\\Component\\HttpKernel\\EventListener\\RouterListener`.
-    Cette classe exécute la couche de routing, qui renvoie un *array* d'informations
-    à propos de la requête qui correspond, ceci inclue le ``_controller`` et tous les
+    Cette classe exécute la couche de routing, qui renvoie un *tableau* d'informations
+    à propos de la requête qui correspond, ceci inclut le ``_controller`` et tous les
     placeholders qui sont dans le pattern de la route. (c.-à-d. ``{slug}``). Consultez
-    :doc:`Le Composant de Routage </components/routing/introduction>`.
+    :doc:`Le Composant de Routage </components/routing/introduction>` pour plus d'informations.
 
     Ce tableau d'informations est stocké dans la propriété ``attributes`` de l'objet
     :class:`Symfony\\Component\\HttpFoundation\\Request`. Ajouter les informations de routage
@@ -195,7 +195,7 @@ de l'application finale qui est responsable de la création et du renvoi de la
 PHP (c.-à-d. une fonction, une méthode, un objet implémentant la méthode ``__invoke`` 
 ou une closure).
 
-Mais *comment* le contrôleur exact pour une requête est déterminé dépend complètement
+Mais *la manière* dont le contrôleur exact est déterminé pour une requête dépend complètement
 de votre application. C'est le travail du "controller resolver" (une classe qui implémente
 :class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface` et qui est un
 des arguments du contructeur de ``HttpKernel``).
@@ -205,7 +205,7 @@ des arguments du contructeur de ``HttpKernel``).
 
 Votre travail est de créer une classe qui implémente l'interface et déclare ces deux
 méthodes : ``getController`` et ``getArguments``. En fait, une implémentation par défaut
-existe déjà, que vous pouvez utiliser directement ou étudier:
+existe déjà, et vous pouvez l'utiliser directement ou l'étudier:
 :class:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver`.
 Cette implémentation est expliquée dans l'encart un peu plus bas::
 
@@ -226,7 +226,7 @@ sur le controller resolver. Cette méthode reçoit l'objet ``Request`` et doit d
 puis retourner un callable PHP (le contrôleur) basé sur les informations de la requête.
 
 La seconde méthode, :method:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface::getArguments`,
-sera appelée après qu'un autre événement (``kernel.controller``) soit déclenché.
+sera appelée après qu'un autre événement (``kernel.controller``) est déclenché.
 
 .. sidebar:: Résolution du contrôleur dans le Framework Symfony
 
@@ -271,7 +271,7 @@ son exécution.
 
 :ref:`Table d'information des événements du kernel <component-http-kernel-event-table>`
 
-Après que le contrôleur callable aie été déterminé, ``HttpKernel::handle``
+Après que le contrôleur callable a été déterminé, ``HttpKernel::handle``
 déclenche l'événement ``kernel.controller``. Les écouteurs de cet événement
 pourraient initialiser certaines parties du systèmes ayant besoin que d'autres
 choses aient été déterminées (c.-à-d. le contrôleur, les informations de route),
@@ -292,7 +292,7 @@ sur l'objet événement qui est passé à l'écouteur.
     profiler quand celui ci est activé.
 
     Un écouteur intéressant provient de :doc:`SensioFrameworkExtraBundle </bundles/SensioFrameworkExtraBundle/index>`,
-    qui est empaqueté dans la Symfony Standard Edition. La fonctionnalité
+    qui est inclu dans la Symfony Standard Edition. La fonctionnalité
     :doc:`@ParamConverter </bundles/SensioFrameworkExtraBundle/annotations/converters>`
     de cet écouteur vous permet de passer un objet complet (c.-à-d. un objet ``Post``) à
     votre contrôleur à la place d'un scalaire (c.-à-d. un paramètre ``id`` déclaré
@@ -347,7 +347,7 @@ L'étape suivante est simple! ``HttpKernel::handle`` exécute le contrôleur.
    :align: center
 
 Le rôle du contrôleur est de construire la réponse pour une ressource donnée.
-Cela pourrait être une page HTML, une chaîne JSON ou n'importe quoi. Au contraire
+Cela pourrait être une page HTML, une chaîne JSON ou n'importe quoi. A l'inverse
 de toutes les autres étapes du processus jusqu'ici, cette étape est implémentée par
 le "développeur final", pour chaque page qui est construite.
 
@@ -426,7 +426,7 @@ ou retournée par un des écouteurs de l'événement :ref:`kernel.view <componen
 Quel que soit le créateur de la ``Response``, un autre événement (``kernel.response``)
 est déclenché juste après. Un écouteur typique de cet événement va modifier l'objet
 ``Response``, par exemple en modifiant un header, en ajoutant un cookie, voir
-même en changeant le contenu de la ``Response`` elle même (par exemple en injectant du
+même en changeant le contenu de la ``Response`` elle-même (par exemple en injectant du
 JavaScript avant la fin du tag ``</body>`` d'une réponse HTML).
 
 Après le déclenchement de cet événement, l'objet ``Response`` dans sa forme finale
@@ -451,13 +451,13 @@ et affiche le contenu de ``Response``.
 8) L'événement ``kernel.terminate``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Usage typique** : Effectuer des actions "longues" après que la réponse aie été
+**Usage typique** : Effectuer des actions "longues" après que la réponse a été
 envoyée à l'utilisateur.
 
-:ref:`Table d'information des événements du kernel <component-http-kernel-event-table>`
+:ref:`Table d'informations des événements du kernel <component-http-kernel-event-table>`
 
 L'événement final du processus HttpKernel est ``kernel.terminate`` et est unique
-car étant déclenché *après* l'appel à ``HttpKernel::handle``, et après que la réponse aie
+car étant déclenché *après* l'appel à ``HttpKernel::handle``, et après que la réponse a
 été envoyée à l'utilisateur. Souvenez vous, plus haut, le code utilisant le kernel se
 termine comme ceci::
 
