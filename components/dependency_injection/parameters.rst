@@ -338,10 +338,8 @@ YAML
 Commencez la chaine de caractère avec ``@`` ou ``@?`` pour référencer un
 service en YAML.
 
-* ``@mailer`` référence le service ``mailer``. Si le service n'existe pas,
-une exception sera levée;
-* ``@?mailer`` références le service ``mailer``. Si le service n'existe pas,
-il sera ignoré;
+* ``@mailer`` référence le service ``mailer``. Si le service n'existe pas, une exception sera levée;
+* ``@?mailer`` références le service ``mailer``. Si le service n'existe pas, il sera ignoré;
 
 .. tip::
 
