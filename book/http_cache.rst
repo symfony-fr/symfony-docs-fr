@@ -341,6 +341,8 @@ Cet entête est unique du fait qu'il contient non pas une, mais un
 ensemble varié d'informations sur la possibilité de mise en cache d'une
 réponse. Chaque information est séparée par une virgule :
 
+.. code-block:: text
+
      Cache-Control: private, max-age=0, must-revalidate
 
      Cache-Control: max-age=3600, must-revalidate
@@ -1152,6 +1154,9 @@ Voici comment configurer le reverse proxy de Symfony2 pour supporter méthode HT
             return $response;
         }
     }
+
+.. versionadded:: 2.4
+    Le support des constantes de code statut HTTP a été ajouté dans Symfony 2.4.
 
 .. caution::
 
