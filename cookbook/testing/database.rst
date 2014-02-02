@@ -1,16 +1,16 @@
 .. index::
    single: Tests; Database
 
-Comment tester du code interagisant avec une base de données
+Comment tester du code interagissant avec une base de données
 ============================================================
 
-Si votre code interagit avec une base de données, par exemple si elle lit ou
+Si votre code interagit avec une base de données, si par exemple il lit ou
 enregistre des données, vous devez ajuster vos tests pour prendre en compte
-ceci en compte. Il y a de nombreuses façons de gérer ce cas. Dans un test unitaire,
+ceci. Il y a de nombreuses façons de gérer ce cas. Dans un test unitaire,
 vous pouvez créer un bouchon (``mock`` en anglais) pour un ``Repository`` et l'utiliser
 pour retourner les objets attendus. Dans un test fonctionnel, vous devriez avoir
 besoin de préparer une base de données de test avec des valeurs prédéfinies pour
-assurer que votre test tfonctionne toujours avec les mêmes données.
+assurer que votre test fonctionne toujours avec les mêmes données.
 
 .. note::
 
@@ -33,7 +33,7 @@ vous avez besoin de mocker et l' ``EntityManager`` et votre classe de repository
     Cela demande un peu plus de travail pour le paramétrage, mais cela rend les tests plus faciles
     puisque vous n'aurez besoin de mocker que le repository.
 
-Supposons que la classe que vous voulez tester resemble à ceci::
+Supposons que la classe que vous voulez tester ressemble à ceci::
 
     namespace Acme\DemoBundle\Salary;
 
