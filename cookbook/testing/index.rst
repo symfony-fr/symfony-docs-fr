@@ -7,5 +7,6 @@ Tests
     http_authentication
     insulating_clients
     profiling
+    database
     doctrine
     bootstrap
