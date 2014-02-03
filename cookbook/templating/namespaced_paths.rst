@@ -72,7 +72,6 @@ namespace pour pour ce dossier :
         ));
 
 Le namespace enregistré est appelé ``foo_bar``, se référant au dossier
-The registered namespace is called ``foo_bar``, which refers to the
 ``vendor/acme/foo-bar/templates``. Supposant qu'il y est un fichier
 nommé ``sidebar.twig`` dans ce dossier, vous pouvez utiliser facilement :
 
