@@ -8,3 +8,4 @@ Templates
     namespaced_paths
     PHP
     twig_extension
+    render_without_controller

@@ -131,11 +131,12 @@
   * :doc:`/cookbook/templating/namespaced_paths`
   * :doc:`/cookbook/templating/PHP`
   * :doc:`/cookbook/templating/twig_extension`
-  * :doc:`/cookbook/templating/rend_without_controller`
+  * :doc:`/cookbook/templating/render_without_controller`
 
 * :doc:`/cookbook/testing/index`
 
   * :doc:`/cookbook/testing/http_authentication`
+  * :doc:`/cookbook/testing/simulating_authentication`
   * :doc:`/cookbook/testing/insulating_clients`
   * :doc:`/cookbook/testing/profiling`
   * :doc:`/cookbook/testing/doctrine`
