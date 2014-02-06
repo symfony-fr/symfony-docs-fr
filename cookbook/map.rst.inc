@@ -24,11 +24,12 @@
   * :doc:`/cookbook/configuration/pdo_session_storage`
   * :doc:`/cookbook/configuration/apache_router`
 
-* **Console Commands**
+* :doc:`/cookbook/console/index`
 
   * :doc:`/cookbook/console/console_command`
   * :doc:`/cookbook/console/usage`
-  * :doc:`/cookbook/console/generating_urls`
+  * :doc:`/cookbook/console/sending_emails`
+  * :doc:`/cookbook/console/logging`
 
 * :doc:`/cookbook/controller/index`
 
@@ -127,15 +128,19 @@
 * :doc:`/cookbook/templating/index`
 
   * :doc:`/cookbook/templating/global_variables`
+  * :doc:`/cookbook/templating/namespaced_paths`
   * :doc:`/cookbook/templating/PHP`
   * :doc:`/cookbook/templating/twig_extension`
+  * :doc:`/cookbook/templating/render_without_controller`
 
 * :doc:`/cookbook/testing/index`
 
   * :doc:`/cookbook/testing/http_authentication`
+  * :doc:`/cookbook/testing/simulating_authentication`
   * :doc:`/cookbook/testing/insulating_clients`
   * :doc:`/cookbook/testing/profiling`
   * :doc:`/cookbook/testing/doctrine`
+  * :doc:`/cookbook/testing/database`
   * :doc:`/cookbook/testing/bootstrap`
 
 * :doc:`/cookbook/validation/index`

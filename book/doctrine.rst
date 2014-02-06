@@ -188,7 +188,7 @@ Créer une classe entité
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Supposons que vous créiez une application affichant des produits.
-Sans même pensez à Doctrine ou à votre base de données, vous savez déjà que
+Sans même penser à Doctrine ou à votre base de données, vous savez déjà que
 vous aurez besoin d'un objet ``Product`` représentant ces derniers. Créez
 cette classe dans le répertoire ``Entity`` de votre bundle ``AcmeStoreBundle``::
 
