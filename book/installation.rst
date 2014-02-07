@@ -226,7 +226,7 @@ S'il y a des problèmes, corrigez-les maintenant avant de poursuivre.
 
 .. sidebar:: Définir les permissions
 
-    Un des problèmes les plus fréquents et que les répertoires ``app/cache`` et
+    Un des problèmes les plus fréquents est que les répertoires ``app/cache`` et
     ``app/logs`` ne sont pas accessibles en écriture par le serveur web et par
     l'utilisateur de ligne de commande. Sur un système UNIX, si votre utilisateur
     de ligne de commande est différent de celui du serveur web, vous pouvez lancer
