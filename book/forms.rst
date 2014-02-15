@@ -894,7 +894,7 @@ les attributs d'un élément de formulaire. Ce qui suit ajouterait la classe
             'attr' => array('class' => 'task_field'),
         )) ?>
 
-Si vous avez besoin d'afficher' des champs du formulaire « à la main » alors vous
+Si vous avez besoin d'afficher des champs du formulaire « à la main » alors vous
 pouvez utiliser individuellement les valeurs des champs comme ``id``, ``name`` et ``label``.
 Par exemple, pour obtenir l'``id`` :
 
