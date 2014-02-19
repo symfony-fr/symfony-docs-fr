@@ -25,7 +25,7 @@ de la vitesse et de l'extensibilité de Symfony2.
 Enfin, configurer et utiliser le conteneur de services est facile. A la fin
 de ce chapitre, vous serez à l'aise pour créer vos propres objets via le
 conteneur et pour personnaliser des objets provenant de bundles tiers. Vous allez commencer
-à écrire du code qui est plus réutilisable, testable et découplé, tout simplement parce
+à écrire du code qui est plus réutilisable, testable et découplé, tout simplement parce que
 le conteneur de services facilite l'écriture de code de qualité.
 
 .. tip::
