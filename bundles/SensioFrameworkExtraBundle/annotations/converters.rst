@@ -40,6 +40,15 @@ même complètement omettre l'annotation ``@ParamConverter``::
     public function showAction(Post $post)
     {
     }
+    
+
+Pour détecter quel convertisseur est utilisé sur un paramètre, le processus suivant est appliqué :
+
+* Si un convertisseur a été explicitement choisi via
+  ``@ParamConverter(converter="name")``, le convertisseur portant ce nom est utilisé.
+* Sinon, tous les convertisseurs enregistrés sont itérés par ordre de priorité.
+  La méthode ``supports()`` est appelée pour vérifier si un convertisseur peut convertir
+  les paramètres requis de la requête. Si cela retourne ``true``, le convertisseur est utilisé.
 
 Convertisseurs préconstruits
 ----------------------------

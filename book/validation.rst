@@ -375,7 +375,7 @@ ont plusieurs options de configuration disponibles. Supposons que la classe
 
         // src/Acme/BlogBundle/Entity/Author.php
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\NotBlank;
+        use Symfony\Component\Validator\Constraints\Choice;
 
         class Author
         {
