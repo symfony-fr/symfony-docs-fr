@@ -101,11 +101,11 @@ français)::
                 ->add('country', 'text');
         }
 
-        public function getDefaultOptions(array $options)
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            return array(
+            $resolver->setDefaults(array(
                 'virtual' => true,
-            );
+            ));
         }
 
         public function getName()
