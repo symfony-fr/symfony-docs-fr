@@ -347,8 +347,8 @@ frontal, les URIs de l'application changent un peu, mais elles sont plus flexibl
     /index.php/show     => page d'affichage d'un billet (exécution de index.php)
 
 .. tip::
-	La portion ``index.php`` de l'URI peut être enlevée en utilisant les règles
-	de réécriture d'URI d'Apache (ou équivalent). Dans ce cas, l'URI de la
+    La portion ``index.php`` de l'URI peut être enlevée en utilisant les règles
+    de réécriture d'URI d'Apache (ou équivalent). Dans ce cas, l'URI de la
     page de détail d'un billet serait simplement ``/show``.
 
 En utilisant un contrôleur frontal, un seul fichier PHP (``index.php`` dans notre cas)

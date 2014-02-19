@@ -445,8 +445,7 @@ la configuration de l'application.
 
         # app/config/config.yml
         imports:
-            hello_bundle:
-		 - { resource: "@AcmeHelloBundle/Resources/config/services.yml" }
+            - { resource: "@AcmeHelloBundle/Resources/config/services.yml" }
 
     .. code-block:: xml
 
@@ -1019,7 +1018,7 @@ Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comm
 .. tip::
 
     Si vous définissez un contrôleur comme service, vous pourrez récupérer l'objet ``Request``
-    sans l'avoir injecté dans le conteneur de service, mais en l'aillant passé comme argument
+    sans l'avoir injecté dans le conteneur de service, mais en l'ayant passé comme argument
     de votre méthode de contrôleur (action). Pour plus de détails, rendez-vous
     sur :ref:`book-controller-request-argument`.
 

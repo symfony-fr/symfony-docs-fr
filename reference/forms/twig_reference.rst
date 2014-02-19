@@ -247,11 +247,10 @@ disponibles.
     source du champ de formulaire (et ses parents) et regardez ces deux fonctions.
 
 .. note::
-
     Si vous affichez un formulaire entier en une seule fois
-    (ou un formulaire imbriqué), l'argument ``variables``ne s'appliquera qu'au
+    (ou un formulaire imbriqué), l'argument ``variables`` ne s'appliquera qu'au
     formulaire lui-même et pas à ses enfants. En d'autres termes, le code suivant
-    ne passera **pas** l'attribut classe « foo » à tout les enfants du champ de
+    ne passera **pas** l'attribut classe « foo » à tous les enfants du champ de
     formulaire :
 
     .. code-block:: jinja

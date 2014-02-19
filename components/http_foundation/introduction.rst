@@ -378,9 +378,150 @@ Afin de rediriger le client vers une autre URL, vous pouvez utilisez la classe
 
     $response = new RedirectResponse('http://example.com/');
 
+Créer un flux de réponse
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+La classe :class:`Symfony\\Component\\HttpFoundation\\StreamedResponse` permet
+de retourner un flux de réponse au client. Le contenu de la réponse est
+représenter par une fonction PHP au lieu d'une chaine de caractères::
+
+    use Symfony\Component\HttpFoundation\StreamedResponse;
+
+    $response = new StreamedResponse();
+    $response->setCallback(function () {
+        echo 'Hello World';
+        flush();
+        sleep(2);
+        echo 'Hello World';
+        flush();
+    });
+    $response->send();
+
+.. note::
+
+    La fonction ``flush()`` ne vide par le tampon. Si ``ob_start()`` a
+    été appelé avant ou si l'option ``output_buffering`` du ``php.ini``
+    est activée, vous devrez appeler ``ob_flush()`` avant ``flush()``.
+
+    De plus, PHP n'est pas la seule couche qui peut bufferiser la sortie.
+    Votre serveur web peut également le faire selon sa configuration. Surtout,
+    si vous utilisez fastcgi, le buffering ne peut pas être désactivé du tout.
+
+.. _component-http-foundation-serving-files:
+
+Retourner des fichiers
+~~~~~~~~~~~~~~~~~~~~~~
+
+Lorsque vous envoyez un fichier, vous devez ajouter l'entête ``Content-Disposition``
+à votre réponse. Alors que créer cet entête pour un téléchargement de fichier
+basique est très simple, utiliser des noms de fichier non ASCII est plus
+complexe. La méthode :method:`Symfony\\Component\\HttpFoundation\\Response::makeDisposition`
+permet de faire abstraction d'un dur labeur grâce à une simple API::
+
+    use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+
+    $d = $response->headers->makeDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        'foo.pdf'
+    );
+
+    $response->headers->set('Content-Disposition', $d);
+
+.. versionadded:: 2.2
+    La classe :class:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse`
+    a été ajoutée dans Symfony 2.2.
+
+Alternativement, si vous servez un fichier statique, vous pouvez utiliser
+une :class:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse`::
+
+    use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+    $file = 'path/to/file.txt';
+    $response = new BinaryFileResponse($file);
+
+La ``BinaryFileResponse`` va automatiquement gérer les entêtes ``Range``
+et ``If-Range`` de la requête. Elle supporte également ``X-Sendfile``
+(voir pour `Nginx`_ et `Apache`_). Pour en faire usage, vous devez déterminer
+si oui ou non l'entête ``X-Sendfile-Type`` peut être accepté et appeler
+:method:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse::trustXSendfileTypeHeader`
+si c'est le cas::
+
+    BinaryFileResponse::trustXSendfileTypeHeader();
+
+Vous pouvez toujours définir le ``Content-Type`` du fichier envoyé, ou changer
+son entête ``Content-Disposition``::
+
+    $response->headers->set('Content-Type', 'text/plain');
+    $response->setContentDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        'filename.txt'
+    );
+
+.. _component-http-foundation-json-response:
+
+Créer une réponse JSON
+~~~~~~~~~~~~~~~~~~~~~~
+
+Tous les types de réponse peuvent être créés via la classe
+:class:`Symfony\\Component\\HttpFoundation\\Response` en
+définissant les bons contenu et entêtes. Une réponse JSON
+ressemblerait à ceci::
+
+    use Symfony\Component\HttpFoundation\Response;
+
+    $response = new Response();
+    $response->setContent(json_encode(array(
+        'data' => 123,
+    )));
+    $response->headers->set('Content-Type', 'application/json');
+
+Il existe également une classe :class:`Symfony\\Component\\HttpFoundation\\JsonResponse`
+très utile qui rend sa création encore plus facile::
+
+    use Symfony\Component\HttpFoundation\JsonResponse;
+
+    $response = new JsonResponse();
+    $response->setData(array(
+        'data' => 123
+    ));
+
+Elle encode votre tableau de données en JSON et définit l'entête
+``Content-Type`` à ``application/json``.
+
+.. caution::
+
+    Pour éviter un `détournement JSON`_ par XSSI, vous devez passer un tableau
+    associatif à la méthode ``JsonResponse`` et non pas un tableau indexé.
+    Ainsi, le résultat final est un objet (ex ``{"objet": "pas dans un tableau"}``)
+    au lieu d'un tableau (e.g. ``[{"objet": "dans un tableau"}]``). Lisez les
+    `recommandations OWASP`_ pour plus d'informations.
+
+    Seules les méthodes qui répondent au requêtes de type GET sont vulnérables aux
+    détournements JSON par XSSI. Les méthodes qui répondent aux requêtes POST ne sont
+    pas affectées.
+
+Callback JSONP
+~~~~~~~~~~~~~~
+
+Si vous utilisez JSONP, vous pouvez définir une fonction de callback à laquelle
+les données doivent être passées::
+
+    $response->setCallback('handleResponse');
+
+Dans ce cas, l'entête ``Content-Type`` sera ``text/javascript`` et le
+contenu de la réponse ressemblera à ceci :
+
+.. code-block:: javascript
+
+    handleResponse({'data': 123});
+
 Session
 -------
 
 Les informations concernant la session se trouvent dans leur propre document : :doc:`/components/http_foundation/sessions`.
 
 .. _Packagist: https://packagist.org/packages/symfony/http-foundation
+.. _Nginx: http://wiki.nginx.org/XSendfile
+.. _Apache: https://tn123.org/mod_xsendfile/
+.. _`détournement JSON`: http://haacked.com/archive/2009/06/25/json-hijacking.aspx
+.. _recommandations OWASP: https://www.owasp.org/index.php/OWASP_AJAX_Security_Guidelines#Always_return_JSON_with_an_Object_on_the_outside
