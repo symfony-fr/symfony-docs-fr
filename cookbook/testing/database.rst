@@ -2,7 +2,7 @@
    single: Tests; Database
 
 Comment tester du code interagissant avec une base de données
-============================================================
+=============================================================
 
 Si votre code interagit avec une base de données, si par exemple il lit ou
 enregistre des données, vous devez ajuster vos tests pour prendre en compte

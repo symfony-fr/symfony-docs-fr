@@ -39,7 +39,6 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 |                      | - `disabled`_                                                               |
 |                      | - `mapped`_                                                                 |
 |                      | - `inherit_data`_                                                           |
-|                      | - `virtual`_                                                                |
 |                      | - `error_mapping`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | ``field`` (si texte), ``form`` sinon                                        |
@@ -152,7 +151,5 @@ Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 .. include:: /reference/forms/types/options/mapped.rst.inc
 
 .. include:: /reference/forms/types/options/inherit_data.rst.inc
-
-.. include:: /reference/forms/types/options/virtual.rst.inc
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
