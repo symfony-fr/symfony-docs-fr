@@ -64,7 +64,7 @@ la Distribution Standard :
 
 .. tip::
 
-	Pour télécharger les « vendor » plus rapidement, ajoutez l'option
+    Pour télécharger les « vendor » plus rapidement, ajoutez l'option
     "--prefer-dist" à la fin de la commande « Composer ».
 
 Cette commande peut prendre plusieurs minutes pour s'exécuter, car « Composer »

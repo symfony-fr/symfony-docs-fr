@@ -9,7 +9,8 @@
 
   * :doc:`/cookbook/bundles/best_practices`
   * :doc:`/cookbook/bundles/inheritance`
-  * :doc:`/cookbook/bundles/override`
+  * :doc:`/cookbook/bundles/override  
+  * :doc:`/cookbook/bundles/remove`
   * :doc:`/cookbook/bundles/extension`
 
 * :doc:`/cookbook/cache/index`
@@ -74,8 +75,8 @@
   * :doc:`/cookbook/form/form_collections`
   * :doc:`/cookbook/form/create_custom_field_type`
   * :doc:`/cookbook/form/create_form_type_extension`
+  * :doc:`/cookbook/form/inherit_data_option`
   * :doc:`/cookbook/form/use_empty_data`
-  * :doc:`/cookbook/form/use_virtuals_forms`
   * (validation) :doc:`/cookbook/validation/custom_constraint`
   * (doctrine) :doc:`/cookbook/doctrine/file_uploads`
 
