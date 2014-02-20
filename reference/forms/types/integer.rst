@@ -20,8 +20,11 @@ seront arrondies à l'entier inférieur (ex: 6).
 |             | - `precision`_                                                        |
 |             | - `grouping`_                                                         |
 +-------------+-----------------------------------------------------------------------+
-| Options     | - `required`_                                                         |
-| héritées    | - `label`_                                                            |
+| Options     | - `empty_data`_                                                       |
+| héritées    | - `required`_                                                         |
+|             | - `label`_                                                            |
+|             | - `label_attr`_                                                       |
+|             | - `data`_                                                             |
 |             | - `read_only`_                                                        |
 |             | - `disabled`_                                                         |
 |             | - `error_bubbling`_                                                   |
@@ -65,9 +68,13 @@ Options héritées
 
 Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
