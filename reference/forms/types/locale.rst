@@ -46,7 +46,7 @@ mais alors vous devriez plutôt utiliser directement le type ``choice``.
 +-------------+------------------------------------------------------------------------+
 
 Options surchargées
-------------------
+-------------------
 
 choices
 ~~~~~~~

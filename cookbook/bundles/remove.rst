@@ -60,10 +60,9 @@ Supprimez la notation ``_acme_demo`` en bas de ce fichier.
 
 Certains bundles contiennent des configurations dans l'un des fichiers 
 ``app/config/config*.yml``. Assurez-vous de supprimer la configuration associée
- à ces fichiers. Vous pouvez rapidement repérer la configuration d'un bundle 
- en cherchant la chaine ``acme_demo`` (ou n'importe quel autre nom de bundle, 
+à ces fichiers. Vous pouvez rapidement repérer la configuration d'un bundle 
+en cherchant la chaine ``acme_demo`` (ou n'importe quel autre nom de bundle, 
 i.e ``fos_user`` pour le le FOSUserBundle).
-
 
 Le AcmeDemoBundle n'a pas de configuration. Toutefois, le bundle est utilisé 
 dans la configuration de sécurité dans le fichier ``app/config/security.yml``.
@@ -87,7 +86,7 @@ supprimer ce dossier et vous pouvez aussi supprimer le dossier ``Acme``.
         echo $this->container->get('kernel')->getBundle('AcmeDemoBundle')->getPath();
 
 4. Supprimer l'integration dans d'autres bundles
------------------------------------------------
+------------------------------------------------
 
 .. note :: 
     Ceci ne concerne pas le bundle AcmeDemoBundle - aucun autre bundle ne dépend de lui,

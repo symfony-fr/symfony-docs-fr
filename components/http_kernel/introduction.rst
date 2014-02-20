@@ -303,7 +303,7 @@ sur l'objet événement qui est passé à l'écouteur.
     la section suivante pour savoir en quoi c'est important.
 
 4) Récupérer les arguments du contrôleur
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ensuite, ``HttpKernel::handle`` appelle
 :method:`Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface::getArguments`.
@@ -486,7 +486,7 @@ possible au client (comme envoyer des emails).
 .. _component-http-kernel-kernel-exception:
 
 Gérer les exceptions : l'événement ``kernel.exception``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Usage typique** : Gérer certains types d'exceptions et créer une ``Response`` pour
 ces exceptions.

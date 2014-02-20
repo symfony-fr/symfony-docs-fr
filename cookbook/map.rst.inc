@@ -10,6 +10,7 @@
   * :doc:`/cookbook/bundles/best_practices`
   * :doc:`/cookbook/bundles/inheritance`
   * :doc:`/cookbook/bundles/override`
+  * :doc:`/cookbook/bundles/remove`
   * :doc:`/cookbook/bundles/extension`
 
 * :doc:`/cookbook/cache/index`
@@ -74,8 +75,8 @@
   * :doc:`/cookbook/form/form_collections`
   * :doc:`/cookbook/form/create_custom_field_type`
   * :doc:`/cookbook/form/create_form_type_extension`
+  * :doc:`/cookbook/form/inherit_data_option`
   * :doc:`/cookbook/form/use_empty_data`
-  * :doc:`/cookbook/form/use_virtuals_forms`
   * (validation) :doc:`/cookbook/validation/custom_constraint`
   * (doctrine) :doc:`/cookbook/doctrine/file_uploads`
 
@@ -101,16 +102,6 @@
   * :doc:`/cookbook/routing/method_parameters`
   * :doc:`/cookbook/routing/service_container_parameters`
 
-* **symfony1**
-
-  * :doc:`/cookbook/symfony1`
-
-* :doc:`/cookbook/service_container/index`
-
-  * :doc:`/cookbook/service_container/event_listener`
-  * :doc:`/cookbook/service_container/scopes`
-  * :doc:`/cookbook/service_container/compiler_passes`
-
 * :doc:`/cookbook/security/index`
 
   * :doc:`/cookbook/security/entity_provider`
@@ -124,6 +115,20 @@
   * :doc:`/cookbook/security/custom_provider`
   * :doc:`/cookbook/security/custom_authentication_provider`
   * :doc:`/cookbook/security/target_path`
+
+* **Serializer**
+
+  * :doc:`/cookbook/serializer`
+
+* :doc:`/cookbook/service_container/index`
+
+  * :doc:`/cookbook/service_container/event_listener`
+  * :doc:`/cookbook/service_container/scopes`
+  * :doc:`/cookbook/service_container/compiler_passes`
+
+* **symfony1**
+
+  * :doc:`/cookbook/symfony1`
 
 * :doc:`/cookbook/templating/index`
 

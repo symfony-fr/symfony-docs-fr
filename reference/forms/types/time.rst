@@ -35,7 +35,6 @@ secondes) ou une série de listes déroulantes. La donnée finale peut être sto
 |                      | - `disabled`_                                                               |
 |                      | - `mapped`_                                                                 |
 |                      | - `inherit_data`_                                                           |
-|                      | - `virtual`_                                                                |
 |                      | - `error_mapping`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | form                                                                        |
@@ -151,7 +150,5 @@ Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 .. include:: /reference/forms/types/options/mapped.rst.inc
 
 .. include:: /reference/forms/types/options/inherit_data.rst.inc
-
-.. include:: /reference/forms/types/options/virtual.rst.inc
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc

@@ -19,7 +19,7 @@ Il y a fondamentalement deux cas de log dont vous auriez besoin :
  * Logguer les exceptions non catchées.
 
 Logguer manuellement depuis la commande console
-----------------------------------------------
+-----------------------------------------------
 
 Cette solution est vraiment simple. Lorsque vous créez une commande console
 dans le framework complet comme décrit dans ":doc:`/cookbook/console/console_command`",
