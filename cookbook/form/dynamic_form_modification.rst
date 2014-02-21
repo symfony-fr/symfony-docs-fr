@@ -26,8 +26,8 @@ que vous voulez alimenter selon la valeur du champ "pays".
 
 .. _cookbook-form-events-underlying-data:
 
-Customizing your Form based on the underlying Data
---------------------------------------------------
+Peronnaliser un formulaire en se basant sur les données
+-------------------------------------------------------
 
 Avant de se lancer directement dans la génération dynamique de formulaire,
 commençons par rappeler ce à quoi ressemble une classe de formulaire
@@ -167,12 +167,12 @@ de ce principe, l'écouteur d'évènement pourrait ressembler à quelque chose c
 
 .. _`cookbook-forms-event-subscriber`:
 
-Adding an Event Subscriber to a Form Class
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ajouter un souscripteur d'évènement sur un formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For better reusability or if there is some heavy logic in your event listener,
-you can also move the logic for creating the ``name`` field to an
-:ref:`event subscriber <event_dispatcher-using-event-subscribers>`::
+Pour une meilleur réutilisabilité ou s'il y a trop de logique dans votre
+écouteur d'évènement, vous pouvez également déplacer la logique qui crée
+le champ ``name`` dans un :ref:`souscripteur d'évènements <event_dispatcher-using-event-subscribers>`::
 
     // src/Acme/DemoBundle/Form/Type/ProductType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -192,8 +192,8 @@ you can also move the logic for creating the ``name`` field to an
         // ...
     }
 
-Now the logic for creating the ``name`` field resides in it own subscriber
-class::
+Maintenant, la logique qui crée le champ ``name`` est située dans sa propre
+classe de souscripteur::
 
     // src/Acme/DemoBundle/Form/EventListener/AddNameFieldSubscriber.php
     namespace Acme\DemoBundle\Form\EventListener;
@@ -206,8 +206,8 @@ class::
     {
         public static function getSubscribedEvents()
         {
-            // Tells the dispatcher that you want to listen on the form.pre_set_data
-            // event and that the preSetData method should be called.
+            // Dit au dispatcher que vous voulez écouter l'évènement
+            // form.pre_set_data et que la méthode preSetData doit être appelée
             return array(FormEvents::PRE_SET_DATA => 'preSetData');
         }
 
@@ -225,19 +225,22 @@ class::
 
 .. _cookbook-form-events-user-data:
 
-How to Dynamically Generate Forms based on user Data
-----------------------------------------------------
+Comment gérer des formulaires en se basant sur les données utilisateur
+----------------------------------------------------------------------
 
-Sometimes you want a form to be generated dynamically based not only on data
-from the form but also on something else - like some data from the current user.
-Suppose you have a social website where a user can only message people marked
-as friends on the website. In this case, a "choice list" of whom to message
-should only contain users that are the current user's friends.
+Parfois, vous voulez qu'un formulaire soit généré dynamiquement en se basant
+sur les données du formulaire mais aussi sur quelque chose d'autre - par exemple
+des données de l'utilisateur connecté.
+Supposons que vous travaillez sur un site social où un utilisateur ne peut envoyer
+des messages qu'à des personnes marquées comme amies sur ce site. Dans ce cas, la
+liste des personnes à qui l'utilisateur peut envoyer des messages ne doit contenir
+que des amis.
 
-Creating the Form Type
-~~~~~~~~~~~~~~~~~~~~~~
+Créer le type de formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Using an event listener, your form might look like this::
+En utilisant un écouteur d'évènements, votre formulaire
+pourrait ressembler à ceci::
 
     // src/Acme/DemoBundle/Form/Type/FriendMessageFormType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -258,7 +261,7 @@ Using an event listener, your form might look like this::
                 ->add('body', 'textarea')
             ;
             $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
-                // ... add a choice list of friends of the current application user
+                // ... Ajouter une liste de choix d'amis de l'utilisateur connecté
             });
         }
 
@@ -272,11 +275,11 @@ Using an event listener, your form might look like this::
         }
     }
 
-The problem is now to get the current user and create a choice field that
-contains only this user's friends.
+Le problèùe est maintenant de récupérer l'utilisateur actuel et de créer un
+champ select qui ne contient que des amis de l'utilisateur.
 
-Luckily it is pretty easy to inject a service inside of the form. This can be
-done in the constructor::
+Heureusmeent, il est assez facile d'injecter un service dans le formulaire.
+Cela peut être fait dans le constructeur::
 
     private $securityContext;
 
@@ -287,19 +290,20 @@ done in the constructor::
 
 .. note::
 
-    You might wonder, now that you have access to the User (through the security
-    context), why not just use it directly in ``buildForm`` and omit the
-    event listener? This is because doing so in the ``buildForm`` method
-    would result in the whole form type being modified and not just this
-    one form instance. This may not usually be a problem, but technically
-    a single form type could be used on a single request to create many forms
-    or fields.
+    Vous devez vous demander, maintenant que vous accès à l'utilisateur (au
+    travers du security context), pourquoi ne pas utiliser directement 
+    ``buildForm`` et éviter de passer par un écouteur d'évènement? C'est
+    parce que le faire dans la méthode ``buildForm`` signifierait que tout
+    le type de formulaire sera modifié et non pas juste l'instance de formulaire
+    que vous voulez. Ce n'est généralement pas très grave, mais techniquement,
+    un seul tupe de formulaire pourrait être utilisé dans une seule requête
+    pour créer plusieurs formulaires ou champs
 
-Customizing the Form Type
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Personnaliser le type de formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that you have all the basics in place you can take advantage of the ``SecurityContext``
-and fill in the listener logic::
+Maintenant que vous toutes les bases, vous pouvez tirer avantage du ``SecurityContext``
+et remplir votre écouteur::
 
     // src/Acme/DemoBundle/FormType/FriendMessageFormType.php
 
@@ -323,11 +327,11 @@ and fill in the listener logic::
                 ->add('body', 'textarea')
             ;
 
-            // grab the user, do a quick sanity check that one exists
+            // récupère le user et vérifie rapidement qu'il existe bien
             $user = $this->securityContext->getToken()->getUser();
             if (!$user) {
                 throw new \LogicException(
-                    'The FriendMessageFormType cannot be used without an authenticated user!'
+                    'Le FriendMessageFormType ne peut pas être utilisé sans utilisateur connecté!'
                 );
             }
 
@@ -340,17 +344,17 @@ and fill in the listener logic::
                         'class' => 'Acme\DemoBundle\Entity\User',
                         'property' => 'fullName',
                         'query_builder' => function(EntityRepository $er) use ($user) {
-                            // build a custom query
-                            // return $er->createQueryBuilder('u')->addOrderBy('fullName', 'DESC');
+                            // construit une requête personnalisée
+                            // retourne $er->createQueryBuilder('u')->addOrderBy('fullName', 'DESC');
 
-                            // or call a method on your repository that returns the query builder
-                            // the $er is an instance of your UserRepository
-                            // return $er->createOrderByFullNameQueryBuilder();
+                            // ou appelle une méthode d'un repository qui retourne un query builder
+                            // l'instance $er est une instance de UserRepository
+                            // retourne $er->createOrderByFullNameQueryBuilder();
                         },
                     );
 
-                    // create the field, this is similar the $builder->add()
-                    // field name, field type, data, options
+                    // crée le champ, cela équivaut à  $builder->add()
+                    // nom du champ, type de champ, donnée, options
                     $form->add('friend', 'entity', $formOptions);
                 }
             );
@@ -361,26 +365,27 @@ and fill in the listener logic::
 
 .. note::
 
-    The ``multiple`` and ``expanded`` form options will default to false
-    because the type of the friend field is ``entity``.
+    Les options ``multiple`` et ``expanded`` valent false par défaut
+    car le type de champ est ``entity``.
 
-Using the Form
-~~~~~~~~~~~~~~
+Utiliser le formulaire
+~~~~~~~~~~~~~~~~~~~~~~
 
-Our form is now ready to use and there are two possible ways to use it inside
-of a controller:
+Votre formulaire est maintenant prêt à être utilisé et il y a deux manières
+possibles de l'utiliser dans un contrôleur :
 
-a) create it manually and remember to pass the security context to it;
+a) le créer manuellement et y passer le security context;
 
-or
+ou
 
-b) define it as a service.
+b) le définir comme service.
 
-a) Creating the Form manually
-.............................
+a) Créer le formulaire manuellement
+...................................
 
-This is very simple, and is probably the better approach unless you're using
-your new form type in many places or embedding it into other forms::
+C'est très simple, et probablement la meilleur approche à moins que vous
+n'utilisiez votre nouveau type de champ à plusieurs endroits ou que
+vous l'imbriquez dans d'autres formulaires::
 
     class FriendMessageController extends Controller
     {
@@ -395,11 +400,11 @@ your new form type in many places or embedding it into other forms::
         }
     }
 
-b) Defining the Form as a Service
-.................................
+b) Definir le formulaire comme service
+......................................
 
-To define your form as a service, just create a normal service and then tag
-it with :ref:`dic-tags-form-type`.
+Pour définir votre formulaire comme service, créez simplement un service
+classique vous taggerez avec :ref:`dic-tags-form-type`.
 
 .. configuration-block::
 
@@ -434,8 +439,8 @@ it with :ref:`dic-tags-form-type`.
             array('security.context')
         );
 
-If you wish to create it from within a controller or any other service that has
-access to the form factory, you then use::
+Si vous désirez le créer dans un contrôleur ou dans n'importe quel autre
+service qui a accès la form factory, alors faites::
 
     use Symfony\Component\DependencyInjection\ContainerAware;
 
@@ -449,13 +454,13 @@ access to the form factory, you then use::
         }
     }
 
-If you extend the ``Symfony\Bundle\FrameworkBundle\Controller\Controller`` class, you can simply call::
+Si vous étendez la classe ``Symfony\Bundle\FrameworkBundle\Controller\Controller``, appelez simplement::
 
     $form = $this->createForm('acme_friend_message');
 
-You can also easily embed the form type into another form::
+Vous pouvez également l'imbriquer facilement dans un autre formulaire::
 
-    // inside some other "form type" class
+    // dans une classe "form type"
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('message', 'acme_friend_message');
@@ -463,19 +468,20 @@ You can also easily embed the form type into another form::
 
 .. _cookbook-form-events-submitted-data:
 
-Dynamic generation for submitted Forms
---------------------------------------
+Génération dynamique pour formulaire soumis
+-------------------------------------------
 
-Another case that can appear is that you want to customize the form specific to
-the data that was submitted by the user. For example, imagine you have a registration
-form for sports gatherings. Some events will allow you to specify your preferred
-position on the field. This would be a ``choice`` field for example. However the
-possible choices will depend on each sport. Football will have attack, defense,
-goalkeeper etc... Baseball will have a pitcher but will not have a goalkeeper. You
-will need the correct options in order for validation to pass.
+Un autre cas qui peut survenir est que vous voulez personnaliser votre formulaire
+selon des données soumises par l'utilisateur. Par exemple, imaginez que vous ayez
+un formulaire d'inscription pour des rassemblements sportifs. Certains évènements
+vous permettront de spécifier votre position préférée sur le terrain. Ce serait
+par exemple une liste de choix. Cependant, les choix possibles dépendront de chaque
+sport. Le football aura des attaquants, des défenseurs, un gardien, ... mais le
+baseball aura un lanceur et pas de gardien. Vous devrez corriger les options pour
+que la validation soit bonne.
 
-The meetup is passed as an entity field to the form. So we can access each
-sport like this::
+Le rassemblement est au formulaire comme une entité. Nous pouvons donc accéder
+à chaque sport comme ceci::
 
     // src/Acme/DemoBundle/Form/Type/SportMeetupType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -498,7 +504,7 @@ sport like this::
                 function(FormEvent $event) {
                     $form = $event->getForm();
 
-                    // this would be your entity, i.e. SportMeetup
+                    // ce sera votre entité, c-a-d SportMeetup
                     $data = $event->getData();
 
                     $positions = $data->getSport()->getAvailablePositions();
@@ -509,14 +515,15 @@ sport like this::
         }
     }
 
-When you're building this form to display to the user for the first time,
-then this example works perfectly.
+Lorsque vous construisez ce formulaire pour l'afficher à l'utilisateur la
+première fois, alors cet exemple fonctionne parfaitement.
 
-However, things get more difficult when you handle the form submission. This
-is because the ``PRE_SET_DATA`` event tells us the data that you're starting
-with (e.g. an empty ``SportMeetup`` object), *not* the submitted data.
+Cependant, les choses se compliqueront lorsque vous gèrerez la soumission.
+Ceci est dû au fait que l'évènement ``PRE_SET_DATA`` nous donne la donnée
+avec laquelle vous commencez (un objet ``SportMeetup`` vide), et *non pas*
+la données soumise.
 
-On a form, we can usually listen to the following events:
+Dans un formulaire, vous pouvez écouter les évènements suivants:
 
 * ``PRE_SET_DATA``
 * ``POST_SET_DATA``
