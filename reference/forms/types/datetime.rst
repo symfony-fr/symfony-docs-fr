@@ -18,21 +18,25 @@ réelle peut être un objet ``DateTime``, une string, un timestamp ou un tableau
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `date_widget`_                                                            |
 |                      | - `time_widget`_                                                            |
+|                      | - `widget`_                                                                 |
 |                      | - `input`_                                                                  |
 |                      | - `date_format`_                                                            |
+|                      | - `format`_                                                                 |
 |                      | - `hours`_                                                                  |
 |                      | - `minutes`_                                                                |
 |                      | - `seconds`_                                                                |
 |                      | - `years`_                                                                  |
 |                      | - `months`_                                                                 |
 |                      | - `days`_                                                                   |
+|                      | - `with_minutes`_                                                           |
 |                      | - `with_seconds`_                                                           |
 |                      | - `model_timezone`_                                                         |
 |                      | - `view_timezone`_                                                          |
 |                      | - `empty_value`_                                                            |
 +----------------------+-----------------------------------------------------------------------------+
-| Options              | - `invalid_message`_                                                        |
-| héritées             | - `invalid_message_parameters`_                                             |
+| Options              | - `data`_                                                                   |
+| héritées             | - `invalid_message`_                                                        |
+|                      | - `invalid_message_parameters`_                                             |
 |                      | - `read_only`_                                                              |
 |                      | - `disabled`_                                                               |
 |                      | - `mapped`_                                                                 |
@@ -86,6 +90,17 @@ Définit l'option ``format`` qui sera passée au champ date.
 Jetez un oeil à :ref:`l'option format du type date<reference-forms-type-date-format>`
 pour plus de détails.
 
+format
+~~~~~~
+
+**type**: ``string`` **default**: ``Symfony\Component\Form\Extension\Core\Type\DateTimeType::HTML5_FORMAT``
+
+Si l'option ``widget`` est définie à ``single_text``, cette option spécifie
+le format du champ, c-à-d la manière dont Symfony interprètera la date saisie
+sous forme de chaine de caractères. Par défaut, c'est le format `RFC 3339`_ qui
+est utilisé par le champ ``datetime`` HTML5. Garder la valeur par défaut fera
+que le champ sera affiché comme un champ ``input` avec l'attribut ``type="datetime"``.
+
 .. include:: /reference/forms/types/options/hours.rst.inc
 
 .. include:: /reference/forms/types/options/minutes.rst.inc
@@ -97,6 +112,8 @@ pour plus de détails.
 .. include:: /reference/forms/types/options/months.rst.inc
 
 .. include:: /reference/forms/types/options/days.rst.inc
+
+.. include:: /reference/forms/types/options/with_minutes.rst.inc
 
 .. include:: /reference/forms/types/options/with_seconds.rst.inc
 
@@ -111,6 +128,8 @@ Options héritées
 
 Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
+.. include:: /reference/forms/types/options/data.rst.inc
+
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
@@ -122,3 +141,5 @@ Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 .. include:: /reference/forms/types/options/mapped.rst.inc
 
 .. include:: /reference/forms/types/options/inherit_data.rst.inc
+
+.. _`RFC 3339`: http://tools.ietf.org/html/rfc3339

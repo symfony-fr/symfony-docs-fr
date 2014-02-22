@@ -14,31 +14,34 @@ Ce type est très similaire au type :doc:`date</reference/forms/types/date>`, ma
 avec des valeurs par défaut de l'option `years`_ plus appropriées. L'option `years`_
 contient par défaut les 120 années précédant l'année courante.
 
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
-| Type de données      | peut être ``DateTime``, ``string``, ``timestamp``, ou ``array`` (voir :ref:`option input <form-reference-date-input>`) |
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
-| Rendu comme          | soit trois select, soit 1 ou 3 champs texte, basé sur l'option `widget`_                                               |
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
-| Options              | - `years`_                                                                                                             |
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
-| Options              | - `widget`_                                                                                                            |
-| héritées             | - `input`_                                                                                                             |
-|                      | - `months`_                                                                                                            |
-|                      | - `days`_                                                                                                              |
-|                      | - `format`_                                                                                                            |
-|                      | - `model_timezone`_                                                                                                    |
-|                      | - `view_timezone`_                                                                                                     |
-|                      | - `invalid_message`_                                                                                                   |
-|                      | - `invalid_message_parameters`_                                                                                        |
-|                      | - `read_only`_                                                                                                         |
-|                      | - `disabled`_                                                                                                          |
-|                      | - `mapped`_                                                                                                            |
-|                      | - `inherit_data`_                                                                                                      |
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
-| Type parent          | :doc:`date</reference/forms/types/date>`                                                                               |
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
-| Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType`                                                 |
-+----------------------+------------------------------------------------------------------------------------------------------------------------+
++----------------------+-------------------------------------------------------------------------------+
+| Type de données      | peut être ``DateTime``, ``string``, ``timestamp``, ou ``array``               |
+|                      | (voir :ref:`option input <form-reference-date-input>`)                        |
++----------------------+-------------------------------------------------------------------------------+
+| Rendu comme          | soit trois select, soit 1 ou 3 champs texte, basé sur l'option `widget`_      |
++----------------------+-------------------------------------------------------------------------------+
+| Options              | - `years`_                                                                    |
++----------------------+-------------------------------------------------------------------------------+
+| Options              | - `widget`_                                                                   |
+| héritées             | - `input`_                                                                    |
+|                      | - `empty_value`_                                                              |
+|                      | - `months`_                                                                   |
+|                      | - `days`_                                                                     |
+|                      | - `format`_                                                                   |
+|                      | - `model_timezone`_                                                           |
+|                      | - `view_timezone`_                                                            |
+|                      | - `data`_                                                                     |
+|                      | - `invalid_message`_                                                          |
+|                      | - `invalid_message_parameters`_                                               |
+|                      | - `read_only`_                                                                |
+|                      | - `disabled`_                                                                 |
+|                      | - `mapped`_                                                                   |
+|                      | - `inherit_data`_                                                             |
++----------------------+-------------------------------------------------------------------------------+
+| Type parent          | :doc:`date</reference/forms/types/date>`                                      |
++----------------------+-------------------------------------------------------------------------------+
+| Classe               | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType`        |
++----------------------+-------------------------------------------------------------------------------+
 
 Options du champ
 ----------------
@@ -57,8 +60,10 @@ Options héritées
 Ces options héritent du type :doc:`date</reference/forms/types/date>` :
 
 .. include:: /reference/forms/types/options/date_widget.rst.inc
-
+    
 .. include:: /reference/forms/types/options/date_input.rst.inc
+
+.. include:: /reference/forms/types/options/empty_value.rst.inc
 
 .. include:: /reference/forms/types/options/months.rst.inc
 
@@ -71,6 +76,8 @@ Ces options héritent du type :doc:`date</reference/forms/types/date>` :
 .. include:: /reference/forms/types/options/view_timezone.rst.inc
 
 Ces options héritent du type :doc:`date</reference/forms/types/form>` :
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 

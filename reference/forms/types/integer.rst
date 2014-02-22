@@ -76,6 +76,8 @@ Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/label_attr.rst.inc
 
+.. include:: /reference/forms/types/options/data.rst.inc
+
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
 .. include:: /reference/forms/types/options/disabled.rst.inc

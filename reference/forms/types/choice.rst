@@ -109,6 +109,28 @@ Pour des cas plus avancés, une classe personnalisée qui implémente l'interfac
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
+Options surchargées
+-------------------
+
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
+compound
+~~~~~~~~
+
+**type**: ``boolean`` **default**: same value as ``expanded`` option
+
+Cette option spécifie si un formulaire est composé. Cette valeur
+est surchargée par défaut par la valeur de l'option ``expanded``.
+
+error_bubbling
+~~~~~~~~~~~~~~
+
+**type**: ``boolean`` **default**: ``false``
+
+Définit que l'erreur de ce champ doit être rattaché au champ plutôt
+qu'au parent du champ (le formulaire dans la plupart des cas).
+
+
 Options héritées
 ----------------
 
@@ -118,11 +140,13 @@ Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/label.rst.inc
 
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
+
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
 .. include:: /reference/forms/types/options/disabled.rst.inc
-
-.. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
 
@@ -131,5 +155,3 @@ Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 .. include:: /reference/forms/types/options/inherit_data.rst.inc
 
 .. include:: /reference/forms/types/options/by_reference.rst.inc
-
-.. include:: /reference/forms/types/options/empty_data.rst.inc

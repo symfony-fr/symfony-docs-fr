@@ -8,10 +8,9 @@ Le type ``locale`` est un sous-ensemble de ``ChoiceType`` qui permet à l'utilis
 de choisir une locale (langue + pays) dans une liste déroulante. En bonus, les noms des
 locales sont affichés dans la langue de l'utilisateur.
 
-
-La « valeur » de chaque locale est soit le code *langue* ISO639-1 en deux lettres
+La « valeur » de chaque locale est soit le code *langue* `ISO 639-1`_ en deux lettres
 (ex ``fr``), soit le code langue suivi d'un underscore  (``_``), puis le code
-*pays* ISO3166 (ex ``fr_FR`` pour Français/France).
+*pays* `ISO 3166-1 alpha-2`_ (ex ``fr_FR`` pour Français/France).
 
 .. note::
 
@@ -34,8 +33,11 @@ mais alors vous devriez plutôt utiliser directement le type ``choice``.
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
 |             | - `error_mapping`_                                                     |
+|             | - `empty_data`_                                                        |
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
+|             | - `label_attr`_                                                        |
+|             | - `data`_                                                              |
 |             | - `read_only`_                                                         |
 |             | - `disabled`_                                                          |
 |             | - `mapped`_                                                            |
@@ -75,12 +77,21 @@ Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>`
 
 Ces options sont héritées du type :doc:`form</reference/forms/types/form>` :
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
 .. include:: /reference/forms/types/options/disabled.rst.inc
 
 .. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. _`ISO 639-1`: http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+.. _`ISO 3166-1 alpha-2`: http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
