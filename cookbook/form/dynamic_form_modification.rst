@@ -532,19 +532,19 @@ Dans un formulaire, vous pouvez écouter les évènements suivants:
 * ``POST_SUBMIT``
 
 .. versionadded:: 2.3
-    The events ``PRE_SUBMIT``, ``SUBMIT`` and ``POST_SUBMIT`` were added in
-    Symfony 2.3. Before, they were named ``PRE_BIND``, ``BIND`` and ``POST_BIND``.
+    Les évènements ``PRE_SUBMIT``, ``SUBMIT`` et ``POST_SUBMIT`` ont été ajoutés
+    dans Symfony 2.3. Avant, ils étaient nommés ``PRE_BIND``, ``BIND`` et ``POST_BIND``.
 
 .. versionadded:: 2.2.6
-    The behavior of the ``POST_SUBMIT`` event changed slightly in 2.2.6, which the
-    below example uses.
+    Le comportement de l'évènement ``POST_SUBMIT`` a changé dans la version 2.2.6. Ci-dessous,
+    un exemple d'utilisation.
 
-The key is to add a ``POST_SUBMIT`` listener to the field that your new field
-depends on. If you add a ``POST_SUBMIT`` listener to a form child (e.g. ``sport``),
-and add new children to the parent form, the Form component will detect the
-new field automatically and map it to the submitted client data.
+La solution est d'éjouter un écouteur ``POST_SUBMIT`` sur le champ dont votre nouveau
+champ dépend. Si vous ajoutez un écouteur ``POST_SUBMIT`` sur un champ enfant (ex ``sport``),
+et ajoutez un nouvel enfant au formulaire parent, le composant Form détectera automatiquement le
+nouveau champ et lui associera les données soumises par le client.
 
-The type would now look like::
+Le type de formulaire ressemble maintenant à ceci::
 
     // src/Acme/DemoBundle/Form/Type/SportMeetupType.php
     namespace Acme\DemoBundle\Form\Type;
@@ -570,7 +570,7 @@ The type would now look like::
             $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 function(FormEvent $event) use ($formModifier) {
-                    // this would be your entity, i.e. SportMeetup
+                    // ce sera votre entité, c-a-d SportMeetup
                     $data = $event->getData();
 
                     $formModifier($event->getForm(), $data->getSport());
@@ -580,42 +580,44 @@ The type would now look like::
             $builder->get('sport')->addEventListener(
                 FormEvents::POST_SUBMIT,
                 function(FormEvent $event) use ($formModifier) {
-                    // It's important here to fetch $event->getForm()->getData(), as
-                    // $event->getData() will get you the client data (that is, the ID)
+                    // Il est important de récupérer ici $event->getForm()->getData(),
+                    // car $event->getData() vous renverra la données initiale (vide)
                     $sport = $event->getForm()->getData();
 
-                    // since we've added the listener to the child, we'll have to pass on
-                    // the parent to the callback functions!
+                    // puisque nous avons ajouté l'écouteur à l'enfant, il faudra passer
+                    // le parent aux fonctions de callback!
                     $formModifier($event->getForm()->getParent(), $sport);
                 }
             );
         }
     }
 
-You can see that you need to listen on these two events and have different callbacks
-only because in two different scenarios, the data that you can use is available in different events.
-Other than that, the listeners always perform exactly the same things on a given form.
+Vous pouvez constater que vous devez écouter ces deux évènements et avoir différentes
+fonctions de callback juste parce que dans deux scénarios différents, les données que
+vous pouvez utiliser sont disponibles dans différents évènements. A part cela, les
+écouteurs réalisent exactement la même chose dans un formulaire donné.
 
-One piece that may still be missing is the client-side updating of your form
-after the sport is selected. This should be handled by making an AJAX call
-back to your application. In that controller, you can submit your form, but
-instead of processing it, simply use the submitted form to render the updated
-fields. The response from the AJAX call can then be used to update the view.
+Mais il manque encore la mise à jour du formulaire côté client après que la
+sélection du sport a été faite. Cela devrait être fait grâce à un appel AJAX
+dans votre application. Dans ce controller, vous pourrez soumettre votre
+formulaire, mais au lieu de le traiter, simplement utiliser le formulaire
+soumis pour afficher les champs mises à jour. La réponse de l'appel AJAX
+pourra alors être utilisée pour mettre à jour la vue.
 
 .. _cookbook-dynamic-form-modification-suppressing-form-validation:
 
-Suppressing Form Validation
----------------------------
+Supprimer la validation de formulaire
+-------------------------------------
 
-To suppress form validation you can use the ``POST_SUBMIT`` event and prevent
-the :class:`Symfony\\Component\\Form\\Extension\\Validator\\EventListener\\ValidationListener`
-from being called.
+Pour suppriler la validation, vous pouvez utiliser l'évènement ``POST_SUBMIT`` et
+empêcher le :class:`Symfony\\Component\\Form\\Extension\\Validator\\EventListener\\ValidationListener`
+d'être appelé.
 
-The reason for needing to do this is that even if you set ``group_validation``
-to ``false`` there  are still some integrity checks executed. For example
-an uploaded file will still be checked to see if it is too large and the form
-will still check to see if non-existing fields were submitted. To disable
-all of this, use a listener::
+Vous pouvez être amené à faire cela si vous définissez ``group_validation`` à
+``false`` car, même dans ce cas, certaines vérifications sont tout de même
+faites. Par exemple, un fichier uploadé sera quand même vérifié porur voir s'il
+est trop volumineux, et un formulaire vérifiera également si des champs supplémentaires
+ont été soumis. Pour désactiver tout cela, utilisez un écouteur::
 
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Form\FormEvents;
@@ -624,12 +626,12 @@ all of this, use a listener::
     {
         $builder->addEventListener(FormEvents::POST_SUBMIT, function($event) {
             $event->stopPropagation();
-        }, 900); // Always set a higher priority than ValidationListener
+        }, 900); // Définissez toujours une priorité plus grande que le ValidationListener
 
         // ...
     }
 
 .. caution::
 
-    By doing this, you may accidentally disable something more than just form
-    validation, since the ``POST_SUBMIT`` event may have other listeners.
+    En faisant cela, vous risquez de désactiver plus que la validation du
+    formulaire, puisque ``POST_SUBMIT`` peut avoir d'autres écouteurs.
