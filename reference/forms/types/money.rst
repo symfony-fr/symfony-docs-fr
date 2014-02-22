@@ -18,8 +18,11 @@ dont les données en entrée et en sortie seront prises en charge.
 |             | - `precision`_                                                      |
 |             | - `grouping`_                                                       |
 +-------------+---------------------------------------------------------------------+
-| Options     | - `required`_                                                       |
-| héritées    | - `label`_                                                          |
+| Options     | - `empty_data`_                                                     |
+| héritées    | - `required`_                                                       |
+|             | - `label`_                                                          |
+|             | - `label_attr`_                                                     |
+|             | - `data`_                                                           |
 |             | - `read_only`_                                                      |
 |             | - `disabled`_                                                       |
 |             | - `error_bubbling`_                                                 |

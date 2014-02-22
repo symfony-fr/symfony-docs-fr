@@ -24,8 +24,11 @@ vous devriez plutôt utiliser directement le type ``choice``.
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
+|             | - `empty_data`_                                                        |
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
+|             | - `label_attr`_                                                        |
+|             | - `data`_                                                              |
 |             | - `read_only`_                                                         |
 |             | - `disabled`_                                                          |
 |             | - `mapped`_                                                            |
@@ -62,9 +65,15 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 

@@ -15,8 +15,11 @@ que vous pouvez utiliser pour vos nombres.
 |             | - `precision`_                                                       |
 |             | - `grouping`_                                                        |
 +-------------+----------------------------------------------------------------------+
-| Options     | - `required`_                                                        |
-| héritées    | - `label`_                                                           |
+| Options     | - `empty_data`_                                                      |
+| héritées    | - `required`_                                                        |
+|             | - `label`_                                                           |
+|             | - `label_attr`_                                                      |
+|             | - `data`_                                                            |
 |             | - `read_only`_                                                       |
 |             | - `disabled`_                                                        |
 |             | - `error_bubbling`_                                                  |
@@ -75,9 +78,15 @@ Option héritées
 
 Ces options héritent du type :doc:`form</reference/forms/types/form>` :
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 

@@ -13,8 +13,10 @@ défini à true. Si la case n'est pas cochée, le champ sera défini à false.
 +-------------+------------------------------------------------------------------------+
 | Options     | - `value`_                                                             |
 +-------------+------------------------------------------------------------------------+
-| Options     | - `required`_                                                          |
-| héritées    | - `label`_                                                             |
+| Options     | - `data`_                                                              |
+| héritées    | - `required`_                                                          |
+|             | - `label`_                                                             |
+|             | - `label_attr`_                                                        |
 |             | - `read_only`_                                                         |
 |             | - `disabled`_                                                          |
 |             | - `error_bubbling`_                                                    |
@@ -52,9 +54,13 @@ Options héritées
 
 Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
+.. include:: /reference/forms/types/options/data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 

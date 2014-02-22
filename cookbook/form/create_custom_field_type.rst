@@ -114,27 +114,45 @@ toujours l'afficher dans un élément ``ul``. Dans le template de votre thème d
 formulaire (voir le lien ci-dessus pour plus de détails), créez un bloc
 ``gender_widget`` pour le gérer :
 
-.. code-block:: html+jinja
+.. configuration-block::
 
-    {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
+    .. code-block:: html+jinja
 
-    {% block gender_widget %}
-        {% spaceless %}
-            {% if expanded %}
-                <ul {{ block('widget_container_attributes') }}>
-                {% for child in form %}
-                    <li>
-                        {{ form_widget(child) }}
-                        {{ form_label(child) }}
-                    </li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                {# laisse le widget choice afficher la balise select #}
-                {{ block('choice_widget') }}
-            {% endif %}
-        {% endspaceless %}
-    {% endblock %}
+        {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
+        {% block gender_widget %}
+            {% spaceless %}
+                {% if expanded %}
+                    <ul {{ block('widget_container_attributes') }}>
+                    {% for child in form %}
+                        <li>
+                            {{ form_widget(child) }}
+                            {{ form_label(child) }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    {# just let the choice widget render the select tag #}
+                    {{ block('choice_widget') }}
+                {% endif %}
+            {% endspaceless %}
+        {% endblock %}
+
+    .. code-block:: html+php
+
+        <!-- src/Acme/DemoBundle/Resources/views/Form/gender_widget.html.twig -->
+        <?php if ($expanded) : ?>
+            <ul <?php $view['form']->block($form, 'widget_container_attributes') ?>>
+            <?php foreach ($form as $child) : ?>
+                <li>
+                    <?php echo $view['form']->widget($child) ?>
+                    <?php echo $view['form']->label($child) ?>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        <?php else : ?>
+            <!-- just let the choice widget render the select tag -->
+            <?php echo $view['form']->renderBlock('choice_widget') ?>
+        <?php endif ?>
 
 .. note::
 
@@ -144,13 +162,35 @@ formulaire (voir le lien ci-dessus pour plus de détails), créez un bloc
     devrait pointer vers le template du formulaire personnalisé afin qu'il soit
     utilisé lors de l'affichage de tous les formulaires.
 
-    .. code-block:: yaml
+    .. configuration-block::
 
-        # app/config/config.yml
-        twig:
-            form:
-                resources:
-                    - 'AcmeDemoBundle:Form:fields.html.twig'
+        .. code-block:: yaml
+
+            # app/config/config.yml
+            twig:
+                form:
+                    resources:
+                        - 'AcmeDemoBundle:Form:fields.html.twig'
+
+        .. code-block:: xml
+
+            <!-- app/config/config.xml -->
+            <twig:config>
+                <twig:form>
+                    <twig:resource>AcmeDemoBundle:Form:fields.html.twig</twig:resource>
+                </twig:form>
+            </twig:config>
+
+        .. code-block:: php
+
+            // app/config/config.php
+            $container->loadFromExtension('twig', array(
+                'form' => array(
+                    'resources' => array(
+                        'AcmeDemoBundle:Form:fields.html.twig',
+                    ),
+                ),
+            ));
 
 Utiliser le Type de Champ
 -------------------------
@@ -163,7 +203,7 @@ tout simplement une nouvelle instance du type dans l'un de vos formulaires::
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    
+
     class AuthorType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
@@ -179,6 +219,8 @@ Que se passerait-il si les différents genres étaient stockés dans un fichier
 de configuration ou dans une base de données ? La prochaine section explique
 comment des types de champ plus complexes peuvent résoudre ce problème.
 
+.. _form-cookbook-form-field-service:
+
 Créer votre Type de Champ en tant que Service
 ---------------------------------------------
 
@@ -192,7 +234,7 @@ configuration :
 .. configuration-block::
 
     .. code-block:: yaml
-    
+
         # app/config/config.yml
         parameters:
             genders:
@@ -209,6 +251,12 @@ configuration :
             </parameter>
         </parameters>
 
+    .. code-block:: php
+
+        // app/config/config.php
+        $container->setParameter('genders.m', 'Male');
+        $container->setParameter('genders.f', 'Female');
+
 Pour utiliser ce paramètre, définissez votre type de champ personnalisé
 en tant que service, en injectant la valeur du paramètre ``genders`` en tant que
 premier argument de la fonction ``__construct`` (qui doit être créée) :
@@ -219,7 +267,7 @@ premier argument de la fonction ``__construct`` (qui doit être créée) :
 
         # src/Acme/DemoBundle/Resources/config/services.yml
         services:
-            form.type.gender:
+            acme_demo.form.type.gender:
                 class: Acme\DemoBundle\Form\Type\GenderType
                 arguments:
                     - "%genders%"
@@ -229,10 +277,25 @@ premier argument de la fonction ``__construct`` (qui doit être créée) :
     .. code-block:: xml
 
         <!-- src/Acme/DemoBundle/Resources/config/services.xml -->
-        <service id="form.type.gender" class="Acme\DemoBundle\Form\Type\GenderType">
+        <service id="acme_demo.form.type.gender" class="Acme\DemoBundle\Form\Type\GenderType">
             <argument>%genders%</argument>
             <tag name="form.type" alias="gender" />
         </service>
+
+    .. code-block:: php
+
+        // src/Acme/DemoBundle/Resources/config/services.php
+        use Symfony\Component\DependencyInjection\Definition;
+
+        $container
+            ->setDefinition('acme_demo.form.type.gender', new Definition(
+                'Acme\DemoBundle\Form\Type\GenderType',
+                array('%genders%')
+            ))
+            ->addTag('form.type', array(
+                'alias' => 'gender',
+            ))
+        ;
 
 .. tip::
 
@@ -247,27 +310,28 @@ qui reçoit la configuration du sexe/genre::
 
     // src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
-    
+
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-    //...
+    // ...
 
+    // ...
     class GenderType extends AbstractType
     {
         private $genderChoices;
-        
+
         public function __construct(array $genderChoices)
         {
             $this->genderChoices = $genderChoices;
         }
-    
+
         public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
             $resolver->setDefaults(array(
                 'choices' => $this->genderChoices,
             ));
         }
-        
+
         // ...
     }
 
@@ -278,9 +342,9 @@ maintenant beaucoup plus facile::
 
     // src/Acme/DemoBundle/Form/Type/AuthorType.php
     namespace Acme\DemoBundle\Form\Type;
-    
+
     use Symfony\Component\Form\FormBuilderInterface;
-    
+
     // ...
 
     class AuthorType extends AbstractType

@@ -9,9 +9,19 @@ Voir :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType`.
 Le type ``form`` prédéfinit un ensemble d'options qui sont disponibles
 pour tous les champs :
 
+.. include:: /reference/forms/types/options/compound.rst.inc
+
 .. include:: /reference/forms/types/options/data.rst.inc
 
+.. include:: /reference/forms/types/options/data_class.rst.inc
+
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
+
+.. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 .. include:: /reference/forms/types/options/constraints.rst.inc
 
@@ -31,7 +41,24 @@ pour tous les champs :
 
 .. include:: /reference/forms/types/options/translation_domain.rst.inc
 
-virtual
--------
+.. include:: /reference/forms/types/options/block_name.rst.inc
 
-Lisez :doc:`Comment utiliser l'option de champ de formulaire Virtual</cookbook/form/use_virtuals_forms>`
+.. include:: /reference/forms/types/options/max_length.rst.inc
+
+.. include:: /reference/forms/types/options/by_reference.rst.inc
+
+.. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/inherit_data.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message.rst.inc
+
+.. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/extra_fields_message.rst.inc
+
+.. include:: /reference/forms/types/options/post_max_size_message.rst.inc
+
+.. include:: /reference/forms/types/options/pattern.rst.inc

@@ -22,11 +22,14 @@ est très utile lorsque vous créerez des formulaires avec des relations one-to-
 |             | - `prototype_name`_                                                         |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `label`_                                                                  |
-| héritées    | - `error_bubbling`_                                                         |
+| héritées    | - `label_attr`_                                                             |
+|             | - `error_bubbling`_                                                         |
 |             | - `error_mapping`_                                                          |
 |             | - `by_reference`_                                                           |
 |             | - `empty_data`_                                                             |
+|             | - `required`_                                                               |
 |             | - `mapped`_                                                                 |
+|             | - `cascade_validation`_                                                     |
 +-------------+-----------------------------------------------------------------------------+
 | Type Parent | :doc:`form</reference/forms/types/form>`                                    |
 +-------------+-----------------------------------------------------------------------------+
@@ -343,9 +346,7 @@ Toutes les options ne sont pas listées ici, seulement celles qui s'appliquent l
 
 .. include:: /reference/forms/types/options/label.rst.inc
 
-.. include:: /reference/forms/types/options/mapped.rst.inc
-
-.. include:: /reference/forms/types/options/error_mapping.rst.inc
+.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 error_bubbling
 ~~~~~~~~~~~~~~
@@ -354,9 +355,17 @@ error_bubbling
 
 .. include:: /reference/forms/types/options/_error_bubbling_body.rst.inc
 
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
 .. _reference-form-types-by-reference:
 
 .. include:: /reference/forms/types/options/by_reference.rst.inc
 
 .. include:: /reference/forms/types/options/empty_data.rst.inc
+
+.. include:: /reference/forms/types/options/required.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/cascade_validation.rst.inc
 

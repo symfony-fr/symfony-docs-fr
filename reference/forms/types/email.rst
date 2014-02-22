@@ -11,8 +11,11 @@ Le champ ``email`` est un champ texte qui est rendu en utilisant la balise HTML5
 | Rendu comme | Champ ``input`` ``email`` (balise texte)                            |
 +-------------+---------------------------------------------------------------------+
 | Options     | - `max_length`_                                                     |
-| héritées    | - `required`_                                                       |
+| héritées    | - `empty_data`_                                                     |
+|             | - `required`_                                                       |
 |             | - `label`_                                                          |
+|             | - `label_attr`_                                                     |
+|             | - `data`_                                                           |
 |             | - `trim`_                                                           |
 |             | - `read_only`_                                                      |
 |             | - `disabled`_                                                       |
@@ -32,9 +35,15 @@ Ces options sont héritées du type :doc:`field</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/max_length.rst.inc
 
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+
 .. include:: /reference/forms/types/options/required.rst.inc
 
 .. include:: /reference/forms/types/options/label.rst.inc
+
+.. include:: /reference/forms/types/options/label_attr.rst.inc
+
+.. include:: /reference/forms/types/options/data.rst.inc
 
 .. include:: /reference/forms/types/options/trim.rst.inc
 

@@ -10,6 +10,9 @@ Le Composant Serializer
 
 Pour faire cela, le composant Serializer suit le schéma simple suivant.
 
+.. _component-serializer-encoders:
+.. _component-serializer-normalizers:
+
 .. image:: /images/components/serializer/serializer_workflow.png
 
 Comme vous pouvez le voir sur l'image ci-dessus, un tableau est utilisé
@@ -118,6 +121,39 @@ nécessite trois paramètres :
 1. L'information à décoder
 2. Le nom de la classe dans laquelle sera décodée l'information
 3. L'encodeur utilisé pour convertir l'information en tableau
+
+Changer les noms de méthode des attributs qui contiennent un underscore
+-----------------------------------------------------------------------
+
+.. versionadded:: 2.3
+    La méthode :method:`GetSetMethodNormalizer::setCamelizedAttributes<Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setCamelizedAttributes>`
+    a été ajoutée dans Symfony 2.3.
+
+Parfois, les noms de propriétés du contenu sérialisé contiennent un underscore
+(par exemple ``first_name``).  Normalement, ces attributs utiliseront des getters et
+setters comme ``getFirst_name``, alors que la bonne méthode est ``getFirstName``. Pour
+changer ce comportement, utilisez la méthode
+:method:`Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer::setCamelizedAttributes`
+dans la définition du normaliseur::
+
+    $encoder = new JsonEncoder();
+    $normalizer = new GetSetMethodNormalizer();
+    $normalizer->setCamelizedAttributes(array('first_name'));
+
+    $serializer = new Serializer(array($normalizer), array($encoder));
+
+    $json = <<<EOT
+    {
+        "name":       "foo",
+        "age":        "19",
+        "first_name": "bar"
+    }
+    EOT;
+
+    $person = $serializer->deserialize($json, 'Acme\Person', 'json');
+
+Comme résultat final, le désérialiseur utilise l'attribut ``first_name``
+comme s'il était ``firstName`` et utilise les méthodes ``getFirstName`` et ``setFirstName``.
 
 JMSSerializationBundle
 ----------------------
