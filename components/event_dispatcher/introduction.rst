@@ -328,6 +328,8 @@ l'objet ``Order`` via la méthode ``getOrder``::
 .. index::
    single: Event Dispatcher; Event subscribers
 
+.. _event_dispatcher-using-event-subscribers:
+
 Utiliser les souscripteurs d'évènement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
