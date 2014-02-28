@@ -41,6 +41,8 @@ seront arrondies à l'entier inférieur (ex: 6).
 Options du champ
 ----------------
 
+.. include:: /reference/forms/types/options/precision.rst.inc
+
 rounding_mode
 ~~~~~~~~~~~~~
 

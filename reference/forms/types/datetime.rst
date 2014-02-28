@@ -64,6 +64,15 @@ time_widget
 
 Définit l'option ``widget`` pour le type :doc:`time</reference/forms/types/time>`
 
+widget
+~~~~~~
+
+**type**: ``string`` **default**: ``null``
+
+Définit l'option ``widget`` pour les types :doc:`date </reference/forms/types/date>`
+et :doc:`time </reference/forms/types/time>`. Elle peut être surchargée par les options
+`date_widget`_ et `time_widget`_.
+
 input
 ~~~~~
 
