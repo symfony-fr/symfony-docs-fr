@@ -545,7 +545,7 @@ L'inclusion de ce template dans tout autre template est simple :
             <h1>Recent Articles<h1>
 
             {% for article in articles %}
-                {% include 'AcmeArticleBundle:Article:articleDetails.html.twig' with {'article': article} %}
+                {{ include('AcmeArticleBundle:Article:articleDetails.html.twig', {'article': article}) }}
             {% endfor %}
         {% endblock %}
 
@@ -562,7 +562,7 @@ L'inclusion de ce template dans tout autre template est simple :
             <?php endforeach; ?>
         <?php $view['slots']->stop() ?>
 
-Le template est inclus via l'utilisation de la balise ``{% include %}``. 
+Le template est inclus via l'utilisation de la balise ``{{ include() }}``.
 Remarquons que le nom du template suit la même convention habituelle. Le
 template ``articleDetails.html.twig`` utilise une variable ``article``. Elle est
 passée au template ``list.html.twig`` en utilisant la commande ``with``.
