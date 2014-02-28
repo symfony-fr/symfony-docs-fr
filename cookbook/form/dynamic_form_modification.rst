@@ -275,10 +275,10 @@ pourrait ressembler à ceci::
         }
     }
 
-Le problèùe est maintenant de récupérer l'utilisateur actuel et de créer un
+Le problème est maintenant de récupérer l'utilisateur actuel et de créer un
 champ select qui ne contient que des amis de l'utilisateur.
 
-Heureusmeent, il est assez facile d'injecter un service dans le formulaire.
+Heureusement, il est assez facile d'injecter un service dans le formulaire.
 Cela peut être fait dans le constructeur::
 
     private $securityContext;
@@ -290,7 +290,7 @@ Cela peut être fait dans le constructeur::
 
 .. note::
 
-    Vous devez vous demander, maintenant que vous accès à l'utilisateur (au
+    Vous devez vous demander, maintenant que vous avez accès à l'utilisateur (au
     travers du security context), pourquoi ne pas utiliser directement 
     ``buildForm`` et éviter de passer par un écouteur d'évènement? C'est
     parce que le faire dans la méthode ``buildForm`` signifierait que tout
@@ -302,7 +302,7 @@ Cela peut être fait dans le constructeur::
 Personnaliser le type de formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant que vous toutes les bases, vous pouvez tirer avantage du ``SecurityContext``
+Maintenant que vous avez toutes les bases, vous pouvez tirer avantage du ``SecurityContext``
 et remplir votre écouteur::
 
     // src/Acme/DemoBundle/FormType/FriendMessageFormType.php
@@ -609,13 +609,13 @@ pourra alors être utilisée pour mettre à jour la vue.
 Supprimer la validation de formulaire
 -------------------------------------
 
-Pour suppriler la validation, vous pouvez utiliser l'évènement ``POST_SUBMIT`` et
+Pour supprimer la validation, vous pouvez utiliser l'évènement ``POST_SUBMIT`` et
 empêcher le :class:`Symfony\\Component\\Form\\Extension\\Validator\\EventListener\\ValidationListener`
 d'être appelé.
 
 Vous pouvez être amené à faire cela si vous définissez ``group_validation`` à
 ``false`` car, même dans ce cas, certaines vérifications sont tout de même
-faites. Par exemple, un fichier uploadé sera quand même vérifié porur voir s'il
+faites. Par exemple, un fichier uploadé sera quand même vérifié pour voir s'il
 est trop volumineux, et un formulaire vérifiera également si des champs supplémentaires
 ont été soumis. Pour désactiver tout cela, utilisez un écouteur::
 

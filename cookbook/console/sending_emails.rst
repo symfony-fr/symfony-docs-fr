@@ -65,7 +65,7 @@ puisqu'elles remplaces celles par défauts.
 Configurer le Request Context via la Command
 --------------------------------------------
 
-Pour le changer uniquement en une commanden vous pouvez simplement récupérer
+Pour le changer uniquement en une commande vous pouvez simplement récupérer
 le Request Context depuis le service ``router`` et remplaçants ses réglages::
 
    // src/Acme/DemoBundle/Command/DemoCommand.php
