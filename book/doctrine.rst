@@ -1062,8 +1062,8 @@ il serait bon d'ajouter une propriété ``$category`` à la classe ``Product`` :
             <entity name="Acme\StoreBundle\Entity\Product">
                 <!-- ... -->
                 <many-to-one field="category"
-                    target-entity="products"
-                    join-column="category"
+                    target-entity="Category"
+                    inversed-by="products"
                 >
                     <join-column
                         name="category_id"
