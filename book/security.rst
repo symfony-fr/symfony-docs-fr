@@ -215,9 +215,9 @@ que l'accès lui est refusé.
 .. tip::
     Quand Symfony refuse à l'utilisateur l'accès, l'utilisateur voit une page d'erreur
     et recevra un code d'erreur HTTP 403 (``Forbidden``). Vous pouvez personnaliser 
-    la page d'erreur pour refus d'accès en suivant les instructions se trouvant dans la page 
-    du cookbook `Pages d'erreurs<cookbook-error-pages-by-status-code>` pour personnaliser
-    la page d'erreur 403.
+    la page d'erreur pour refus d'accès en suivant les instructions se trouvant dans la page
+    du cookbook :ref:`Comment personnaliser les pages d'erreur <cookbook-error-pages-by-status-code>` 
+    pour personnaliser la page d'erreur 403.
 
 Enfin, si l'utilisateur ``admin`` demande ``/admin/foo``, un processus similaire se déroule,
 sauf que maintenant, après s'être authentifié, la couche de contrôle d'accès va laisser la 
