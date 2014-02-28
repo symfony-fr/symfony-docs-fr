@@ -5,7 +5,7 @@
 Service Container
 =================
 
-Une application PHP moderne est plein d'objets. Un objet peut faciliter l'envoi
+Une application PHP moderne est pleine d'objets. Un objet peut faciliter l'envoi
 des messages e-mail, tandis qu'un autre peut vous permettre de persister les informations
 dans une base de données. Dans votre application, vous pouvez créer un objet qui gère
 votre inventaire de produits, ou tout autre objet qui traite des données via une API
