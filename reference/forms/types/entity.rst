@@ -91,6 +91,8 @@ La classe de votre entité (ex: ``AcmeStoreBundle:Category``). Cela peut être
 le nom complet de la classe (ex: ``Acme\StoreBundle\Entity\Category``) ou son alias
 (voir ci-dessus).
 
+.. include:: /reference/forms/types/options/data_class.rst.inc
+
 property
 ~~~~~~~~
 
