@@ -42,14 +42,14 @@ suivant à votre fichier `composer.json`::
 
     {
         "require": {
-            "doctrine/mongodb-odm-bundle": "3.0.*"
+            "doctrine/mongodb-odm": "1.0.*@dev",
+            "doctrine/mongodb-odm-bundle": "3.0.*@dev"
         },
-        "minimum-stability": "dev"
     }
 
-L'instruction ``minimum-stability`` est nécessaire tant qu'une version non-beta du bundle
-n'est pas disponible. Selon les besoins de votre projet, d'autres valeurs que ``dev``
-peuvent etre utilisée. Elle sont expliquées dans la `documentation de Composer`_ .
+L'instruction ``@dev`` est nécessaire tant qu'une version non-beta du bundle
+ou de ODM n'est pas disponible. Selon les besoins de votre projet, d'autres valeurs peuvent etre utilisée.
+Elle sont expliquées dans la `documentation de Composer`_ .
 
 Ensuite, vous pouvez installer les nouvelles dépendances en exécutant la commande
 ``update`` de Composer depuis le répertoire dans lequel est situé le fichier
