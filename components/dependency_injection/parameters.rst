@@ -307,7 +307,7 @@ Par défaut, ``true``, ``false`` et ``null`` en XML sont transformés en mots cl
     $container->getParameter('mailer.send_all_in_once'); // retourne false
     -->
 
-To disable this behavior, use the ``string`` type:
+Pour ne pas avoir cette transformation, utilisez le type ``string`` :
 
 .. code-block:: xml
 
