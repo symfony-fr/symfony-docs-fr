@@ -90,7 +90,7 @@ service et notifier Symfony que c'est un « listener » de l'évènement
 
     Il y a une autre option ``priority`` pour le tag qui est optionnelle et qui
     a pour valeur par défaut 0. Cette valeur peut aller de -255 à 255, et les
-    « listeners » seront exécutés dans cet ordre de priorité. Cela est utile
+    « listeners » seront exécutées dans l'ordre de leur priorité (par ordre décroissant). Cela est utile
     lorsque vous avez besoin de garantir qu'un « listener » est exécuté avant un
     autre.
 
