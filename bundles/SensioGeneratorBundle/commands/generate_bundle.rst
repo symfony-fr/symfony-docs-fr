@@ -59,11 +59,10 @@ Options disponibles
 
         php app/console generate:bundle --format=annotation
 
-* ``--structure``: (**no**) [valeurs: yes|no] Spécifie s'il faut génerer ou
-  non la structure de répertoire complète, incluant les répertoires publics
+* ``--structure``: Spécifie s'il faut génerer la structure de répertoire complète, incluant les répertoires publics
   pour la documentation et les ressources web ainsi que les dictionnaires de
   traductions :
 
     .. code-block:: bash
 
-        php app/console generate:bundle --structure=yes
+        php app/console generate:bundle --structure=
