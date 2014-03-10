@@ -19,6 +19,7 @@ Les Composants
     locale
     process
     routing
+    security/index
     serializer
     templating
     yaml

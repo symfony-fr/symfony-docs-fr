@@ -75,6 +75,13 @@
 
   * :doc:`/components/routing`
 
+* :doc:`/components/security/index`
+
+  * :doc:`/components/security/introduction`
+  * :doc:`/components/security/firewall`
+  * :doc:`/components/security/authentication`
+  * :doc:`/components/security/authorization`
+
 * **Serializer**
 
   * :doc:`/components/serializer`
