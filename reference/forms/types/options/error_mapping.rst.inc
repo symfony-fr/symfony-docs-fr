@@ -9,7 +9,7 @@ error_mapping
 Cette option permet de modifier la cible de l'erreur de validation.
 
 Imaginez une méthode personnalisée nommée ``matchingCityAndZipCode`` qui valide
-si le nom d'une ville et d'un code postal correspondent. Malheuresement, il n'
+si le nom d'une ville et d'un code postal correspondent. Malheureusement, il n'
 existe pas de champs "matchingCityAndZipCode" dans le formulaire, donc Symfony
 peux seulement afficher l'erreur en haut du formulaire.
 
