@@ -264,10 +264,10 @@ Variables de formulaires
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les variables suivantes sont communes à tous les types de champs. Certains
-types de champ peuvent plus de variables et certaines variables ne s'appliquent
+types de champ peuvent avoir plus de variables et certaines variables ne s'appliquent
 qu'à un certain type de champ.
 
-Supposons que vous une variable ``form`` dans votre modèle, et que vous
+Supposons que vous ayez une variable ``form`` dans votre modèle, et que vous
 souhaitiez référencer des variables sur le champ ``name``, accéder à ces variables
 est possible en utilisant la propriété ``vars`` de l'objet :class:`Symfony\\Component\\Form\\FormView`
 
