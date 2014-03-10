@@ -5,7 +5,7 @@ Authorisation
 =============
 
 Lorsque n'importe quel fournisseur d'authenfication
-(consultez :ref:`authentication_providers`) a vérifié  le jeton pas encore
+(consultez :ref:`authentication_providers`) a vérifié le jeton pas encore
 authentifié, un jeton authentifié sera retourné. L'écouteur d'authentification
 devrait initialiser le jeton directement dans
 :class:`Symfony\\Component\\Security\\Core\\SecurityContextInterface` en utilisant
@@ -14,14 +14,14 @@ sa méthode :method:`Symfony\\Component\\Security\\Core\\SecurityContextInterfac
 A partir de là, l'utilisateur est authentifié, i.e. identifié. Maintenant, les autres
 parties de l'application peuvent utiliser le jeton pour décider si oui ou non
 l'utilisateur peut demander une certaine URI, ou modifier un objet. Cette
-décision se prise par une instance de la classe
+décision sera prise par une instance de la classe
 :class:`Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManagerInterface`.
 
 Une décision d'authorisation sera toujours basée sur quelques éléments :
 
 * Le jeton courant
     Par exemple, le jeton de la méthode :method:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface::getRoles
-    devrait être utilisé pour retrouver les rôles de l'utilisateur courant
+    du jeton devrait être utilisée pour retrouver les rôles de l'utilisateur courant
     (par exemple ``ROLE_SUPER_ADMIN``), ou une décision pourrait être basée
     sur la classe du jeton.
 * Un ensemble d'attributs
@@ -37,11 +37,11 @@ Une décision d'authorisation sera toujours basée sur quelques éléments :
 Gestionnaire de décision d'accès
 --------------------------------
 
-La décision pour effectuer une action demandant à l'utilisateur d'être authorisé ou
-non peut être un processus compliqué. Le gestionnaire standard
+Le processus pour déterminer si oui ou non un utilisateur est autorisé à effectuer
+une certaine action pouvant être compliqué, le gestionnaire standard
 :class:`Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManager`
 dépend lui même de plusieurs voteurs ("voters" en anglais) et rend un verdict final
-basé sur tous les votes (soit positif, négatif ou neutre) il a reçu. Il reconnait
+basé sur tous les votes (soit positif, négatif ou neutre) qu'il a reçu. Il reconnait
 plusieurs stratégies :
 
 * ``affirmatif`` (par défaut)
@@ -157,7 +157,7 @@ La classe :class:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Role
 étend la classe :class:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\RoleVoter`
 et fournit quelques fonctionnalités supplémentaires : elle sait comment traiter la hierarchie
 des rôles. Par exemple, un rôle ``ROLE_SUPER_ADMIN`` peut avoir les sous-rôles ``ROLE_ADMIN``
-et ``ROLE_USER``, ainsi dans le cas ou un objet recquiert que l'utilisateur ait
+et ``ROLE_USER``, ainsi dans le cas ou un objet requiert que l'utilisateur ait
 le rôle ``ROLE_ADMIN``, l'accès est donné aux utilisateurs qui ont en fait le rôle ``ROLE_ADMIN``,
 mais également au utilisateurs aillant de le rôle ``ROLE_SUPER_ADMIN`` ::
 
@@ -181,8 +181,8 @@ mais également au utilisateurs aillant de le rôle ``ROLE_SUPER_ADMIN`` ::
 Les Roles
 ---------
 
-Les rôles dont des objets représentant uen expression des droits
-qu'un utilisateur possède.
+Les rôles sont des objets exprimant un certain droit qu'un utilisateur
+possède.
 Le seul prérequis est que l'objet implémente l'interface
 :class:`Symfony\\Component\\Security\\Core\\Role\\RoleInterface`, ce qui
 signifie qu'il doit avoir une méthode :method:`Symfony\\Component\\Security\\Core\\Role\\Role\\RoleInterface::getRole`

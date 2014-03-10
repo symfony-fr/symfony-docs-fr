@@ -7,7 +7,7 @@ Le Pare-Feu et le Contexte de Sécurité
 Au centre du composant sécurité il y a le contexte de sécurité, qui est une instance
 de :class:`Symfony\\Component\\Security\\Core\\SecurityContextInterface`. Lorsque 
 toutes les étapes du processus d'authentification de l'utilisateur ont été accomplies 
-avec succès, vous pouvez demander au contexte de sécurité is l'utilisateur authentifié 
+avec succès, vous pouvez demander au contexte de sécurité si l'utilisateur authentifié 
 a accès à une certaine action ou une resource de l'application ::
 
     use Symfony\Component\Security\Core\SecurityContext;
@@ -21,7 +21,7 @@ a accès à une certaine action ou une resource de l'application ::
 
     $securityContext = new SecurityContext($authenticationManager, $accessDecisionManager);
 
-    // ... authenticate the user
+    // ... authentifier l'utilisateur
 
     if (!$securityContext->isGranted('ROLE_ADMIN')) {
         throw new AccessDeniedException();
@@ -38,11 +38,11 @@ Un Pare-Feu pour les requêtes HTTP
 ----------------------------------
 
 L'authentification d'un utilisateur est faite par le pare-feu. Une application
-pourrait avoir de nombreuses zones sécurisée, ainsi le pare-feu est configuré en
+peut avoir de nombreuses zones sécurisée, ainsi le pare-feu est configuré en
 utilisant un plan de ces zones sécurisées. Pour chacune des ces zones, le plan
 contient un "request matcher" et une collection d'écouteurs. Le request matcher
-donne au pare-feu la possibilité de trouver si la requête pointe ver une zone
-sécurisée/
+donne au pare-feu la possibilité de déterminer si la requête pointe vers une zone
+sécurisée.
 Il est demandé aux écouteurs si la requête courante peut être utilisée pour
 authentifier l'utilisateur ::
 
@@ -85,15 +85,15 @@ Les écouteurs du pare-feu
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Lorsque le pare-feu est notifié par l'évènement ``kernel.request``, il
-demande au plan du pare-feu si une requête correspond à une l'une des
+demande au plan du pare-feu si une requête correspond à l'une des
 zones sécurisées. La première zone sécurisée correspondant à cette requête
 retournera un ensemble d'écouteurs correspondants aux écouteurs du pare-feu
 (ceux qui implémentent :class:`Symfony\\Component\\Security\\Http\\Firewall\\ListenerInterface`).
 
-Il est demandé à ces écouteur de gérer la requêt courante. Ceci signifie
+Il est demandé à ces écouteurs de gérer la requête courante. Ceci signifie
 que : il faut trouver si la requête courante pourrait contenir des informations
 permettant d'authentifier l'utilisateur (par exemple l'écouteur d'authentification
-HTTP basique vérifie si la requête contient l'entête HTPP ``PHP_AUTH_USER``);
+HTTP basique vérifie si la requête contient l'entête HTTP ``PHP_AUTH_USER``);
 
 L'écouteur d'Exception
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -115,11 +115,11 @@ Points d'entrés
 
 Lorsqu'un utilisateur n'est pas du tout authentifié (i.e. lorsque le contexte
 de sécurité n'a pas encore de jeton), le point d'entrée du pare-feu sera appelé
-pour "commencer" le processus d'authentification. Un point d'entrée devrait
+pour "commencer" le processus d'authentification. Un point d'entrée doit
 implémenter l'interface :class:`Symfony\\Component\\Security\\Http\\EntryPoint\\AuthenticationEntryPointInterface`,
 qui ne possède qu'une méthode :method:`Symfony\\Component\\Security\\Http\\EntryPoint\\AuthenticationEntryPointInterface::start`.
 Cette méthode reçoit l'objet :class:`Symfony\\Component\\HttpFoundation\\Request`
-courant et l'exception par laquelle l'écouteur celle-ci a été déclenchée.
+courant et l'exception par laquelle l'écouteur a été déclenchée.
 La méthode devrait retourner un objet de type :class:`Symfony\\Component\\HttpFoundation\\Request`.
 Cela pourait être, par exemple, la page contenant le formulaire de login ou,
 dans le cas d'une authentification HTTP basique, une réponse avec un en-tête
@@ -129,20 +129,20 @@ et son mot de passe.
 Flux : Pare-feu, Authentification, Authorisation
 ------------------------------------------------
 
-Heureusement vous pouvez maintenant voir un peu comment le "flux" du context
-de sécurité fonctionne :
+Vous devriez maintenant pouvoir cerner plus facilement le fonctionnement global
+du contexte de sécurité :
 
 #. Le pare-feu est enregistré comme écouteur de l'évènement ``kernel.request``;
-#. Au début de la requête, le pare-feu vérifie le plan du pare-feu afin de voir
-   si aucun autre pare-feu est actif pour cette URL;
-#. Si un pare-feu est est trouvé dans le plan pour cette URL, les écouteurs sont
+#. le pare-feu vérifie le plan du pare-feu afin de déterminer si un pare-feu
+   doit être activé pour cette URL;
+#. Si un pare-feu est trouvé dans le plan pour cette URL, les écouteurs sont
    notifiés;
 #. Chaque écouteur vérifie si la requête courante contient des informations
    d'authentification - un écouteur devra soit (a) authentifier un utilisateur,
    (b) jeter une ``AuthenticationException``, ou (c) ne rien faire (parce qu'il
    n'y a pas d'informatuon d'authentification dans la requête);
 #. Une fois l'utilisateur authentifié, vous utiliserez :doc:`/components/security/authorization`
-   pour refuser l'éccès à certaines ressources.
+   pour refuser l'accès à certaines ressources.
 
 Lisez les prochaines sections pour en savoir plus sur l':doc:`/components/security/authentication`
 et l':doc:`/components/security/authorization`.

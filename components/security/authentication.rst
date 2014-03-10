@@ -6,11 +6,11 @@ Authentification
 
 Lorsqu'une requête pointe sur une zone sécurisée, et qu'un des écouteurs du
 plan du pare-feu est capable d'extraire les identifiants d'un utilisateur depuis
-l'objet :class:`Symfony\\Component\\HttpFoundation\\Request` courant, il devrait
+l'objet :class:`Symfony\\Component\\HttpFoundation\\Request` courant, il doit
 créer un jeton, contenant ces identifiants.
 Ensuite, l'écouteur doit demander au gestionnaire d'authentification de valider le
-jeton donné, et retourner un jeton *authentifié* si les identifiants fournis se
-trouvent être valides.
+jeton donné, et retourner un jeton *authentifié* si les identifiants fournis ont
+pu être validés.
 L'écouteur devrait ensuite enregistrer le jeton authentifié dans le contexte de
 sécurité ::
 
@@ -115,12 +115,15 @@ Authentifier les utilisateurs par leur nom d'utilisateur et leur mot de passe
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Un fournisseur d'authentification tentera d'authentifier un utilisateur
-en se basant les identifiants fournis. Habituellement, ces derniers sont
+en se basant sur les identifiants fournis. Habituellement, ces derniers sont
 un nom d'utilisateur ainsi qu'un "hash" du mot de passe combiné à un sel
 généré aléatoirement. Cela signifie que l'authentification consiste en
-général à récupérer le grain de sel ainsi que le mot de passe "hashé" de l'utilisateur
-qu'il vient tout juste de fournir (en utilisant un formulaire de login par exemple)
+général à récupérer le grain de sel ainsi que le mot de passe "hashé" de
+l'utilisateur depuis le stockage de données, "hashe" le mot de passe qu'il 
+vient tout juste de fournir (en utilisant un formulaire de login par exemple)
 et de comparer les deux pour déterminer si le mot de passe donné est valide.
+
+fetching the salt and the hashed password from the user data storage, hash the password
 
 Cette fonctionnalité est offerte par la classe
 :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\DaoAuthenticationProvider`.
@@ -161,7 +164,7 @@ du mot de passe et retourne un jeton authentifié si le mot de passe est valide 
 
 .. note::
 
-    L'exemple ci-dessous explique l'utilisation du fournisseur d'utilisateur
+    L'exemple ci-dessus explique l'utilisation du fournisseur d'utilisateur
     "in-memory", mais vous pouvez utiliser n'importe quel fournisseur d'utilisateur,
     du moment qu'il implémente l'interface
     :class:`Symfony\\Component\\Security\\Core\\User\\UserProviderInterface`.
@@ -213,8 +216,8 @@ vous avez besoin du votre, vous devez simplement suivre ces règles :
 Utiliser les encodeurs de mots de passes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Lorsque la la méthode :method:`Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactory::getEncoder`
-de l'usine d'encodeur de mots de passes est appelé avec l'objet utilisateur comme
+Lorsque la méthode :method:`Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactory::getEncoder`
+de l'usine d'encodeur de mots de passes est appelée avec l'objet utilisateur comme
 premier argument, elle retournera un encodeur de type 
 :class:`Symfony\\Component\\Security\\Core\\Encoder\\PasswordEncoderInterface` qui devrait
 être utilisé pour encoder le mot de passe de cet utilisateur ::
