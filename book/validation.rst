@@ -227,14 +227,12 @@ au code suivant::
         $author = new Author();
         $form = $this->createForm(new AuthorType(), $author);
 
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                // the validation passed, do something with the $author object
+        if ($form->isValid()) {
+            // the validation passed, do something with the $author object
 
-                return $this->redirect($this->generateUrl(...));
-            }
+            return $this->redirect($this->generateUrl(...));
         }
 
         return $this->render('BlogBundle:Author:form.html.twig', array(
