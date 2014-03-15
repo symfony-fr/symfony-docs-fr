@@ -45,7 +45,7 @@ basé sur tous les votes (soit positif, négatif ou neutre) qu'il a reçu. Il re
 plusieurs stratégies :
 
 * ``affirmatif`` (par défaut)
-    donne accès dès que n'importe voteur retourne une réponse affirmative;
+    donne accès dès que n'importe quel voteur retourne une réponse affirmative;
 
 * ``consensus``
     donne accès s'il y a plus de voteurs donnant accès qu'il y a le refusant;
