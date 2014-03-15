@@ -693,153 +693,6 @@ de services indépendantes avec des dépendances bien définies. Dans cet exempl
 cette dépendance dans le conteneur de service, le conteneur prend soin de tout
 le travail de l'instanciation des objets.
 
-
-.. _book-services-expressions:
-
-Utiliser l'Expression Language
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 2.4
-    La fonctionnalité Expression Language a été intégré dans la version 2.4 de Symfony.
-
-Le conteneur de service supporte également une "expression" permettant d'injecter une
-valeur très spécifique dans un service.
-
-Par exemple, supposez que vous avez un service tiers (non présenté ici), appelé ``mailer_configuration``
-ayant une méthode ``getMailerMethod()``, cette méthode retournant une chaîne de caractères comme ``sendmail``
-basé sur une certaine configuration. Souvenez-vous que que le premier argument du service ``my_mailer``
-est la simple chaine de caractère ``sendmail`` :
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # app/config/config.yml
-        services:
-            my_mailer:
-                class:        Acme\HelloBundle\Mailer
-                arguments:    [sendmail]
-
-    .. code-block:: xml
-
-        <!-- app/config/config.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                http://symfony.com/schema/dic/services/services-1.0.xsd"
-            >
-
-            <services>
-                <service id="my_mailer" class="Acme\HelloBundle\Mailer">
-                    <argument>sendmail</argument>
-                </service>
-            </services>
-        </container>
-
-    .. code-block:: php
-
-        // app/config/config.php
-        use Symfony\Component\DependencyInjection\Definition;
-
-        $container->setDefinition('my_mailer', new Definition(
-            'Acme\HelloBundle\Mailer',
-            array('sendmail')
-        ));
-
-Mais au lieu de coder cela en dur, comment pourrions-nous récupérer cette valeur depuis
-``getMailerMethod()`` du nouveau service ``mailer_configuration`` ? Une des façon est
-d'utiliser une expression :
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # app/config/config.yml
-        services:
-            my_mailer:
-                class:        Acme\HelloBundle\Mailer
-                arguments:    ["@=service('mailer_configuration').getMailerMethod()"]
-
-    .. code-block:: xml
-
-        <!-- app/config/config.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                http://symfony.com/schema/dic/services/services-1.0.xsd"
-            >
-
-            <services>
-                <service id="my_mailer" class="Acme\HelloBundle\Mailer">
-                    <argument type="expression">service('mailer_configuration').getMailerMethod()</argument>
-                </service>
-            </services>
-        </container>
-
-    .. code-block:: php
-
-        // app/config/config.php
-        use Symfony\Component\DependencyInjection\Definition;
-        use Symfony\Component\ExpressionLanguage\Expression;
-
-        $container->setDefinition('my_mailer', new Definition(
-            'Acme\HelloBundle\Mailer',
-            array(new Expression('service("mailer_configuration").getMailerMethod()'))
-        ));
-
-Pour en apprendre plus sur l'expression language, jetez un coup d'oeil à :doc:`/components/expression_language/syntax`.
-
-Dans ce context, vous avez accès à deux fonctions :
-
-* ``service`` - retourne une service donné (confère l'exemple plus haut);
-* ``parameter`` - retourne une valeur de paramètre spécifique (la synthaxe est similaire à ``service``)
-
-Vous avez également accès à la classe :class:`Symfony\\Component\\DependencyInjection\\ContainerBuilder`
-via la variable ``container``. Voici un autre exemple :
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        services:
-            my_mailer:
-                class:     Acme\HelloBundle\Mailer
-                arguments: ["@=container.hasParameter('some_param') ? parameter('some_param') : 'default_value'"]
-
-    .. code-block:: xml
-
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/services
-                http://symfony.com/schema/dic/services/services-1.0.xsd"
-            >
-
-            <services>
-                <service id="my_mailer" class="Acme\HelloBundle\Mailer">
-                    <argument type="expression">@=container.hasParameter('some_param') ? parameter('some_param') : 'default_value'</argument>
-                </service>
-            </services>
-        </container>
-
-    .. code-block:: php
-
-        use Symfony\Component\DependencyInjection\Definition;
-        use Symfony\Component\ExpressionLanguage\Expression;
-
-        $container->setDefinition('my_mailer', new Definition(
-            'Acme\HelloBundle\Mailer',
-            array(new Expression(
-                "@=container.hasParameter('some_param') ? parameter('some_param') : 'default_value'"
-            ))
-        ));
-
-Les expression peuvent être utilisées dans ``arguments``, ``properties``, comme arguments avec
-``configurator``et comme les arguments ``calls`` (méthode d'appels).
-
-
 Dépendances optionnelles : Setter Injection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -884,94 +737,7 @@ L'injection de la dépendance par la méthode setter a juste besoin d'un changem
             newsletter_manager:
                 class:     "%newsletter_manager.class%"
                 calls:
-                    - [ setMailer, [ @my_mailer ] ]
-
-    .. code-block:: xml
-
-        <!-- src/Acme/HelloBundle/Resources/config/services.xml -->
-        <parameters>
-            <!-- ... -->
-            <parameter key="newsletter_manager.class">Acme\HelloBundle\Newsletter\NewsletterManager</parameter>
-        </parameters>
-
-        <services>
-            <service id="my_mailer" ... >
-              <!-- ... -->
-            </service>
-            <service id="newsletter_manager" class="%newsletter_manager.class%">
-                <call method="setMailer">
-                     <argument type="service" id="my_mailer" />
-                </call>
-            </service>
-        </services>
-
-    .. code-block:: php
-
-        // src/Acme/HelloBundle/Resources/config/services.php
-        use Symfony\Component\DependencyInjection\Definition;
-        use Symfony\Component\DependencyInjection\Reference;
-
-        // ...
-        $container->setParameter('newsletter_manager.class', 'Acme\HelloBundle\Newsletter\NewsletterManager');
-
-        $container->setDefinition('my_mailer', ... );
-        $container->setDefinition('newsletter_manager', new Definition(
-            '%newsletter_manager.class%'
-        ))->addMethodCall('setMailer', array(
-            new Reference('my_mailer')
-        ));
-
-.. note::
-
-    Les approches présentées dans cette section sont appelées « constructor injection »
-    et « setter injection« ». Le conteneur de service Symfony2 supporte aussi
-    « property injection« ».
-
-.. _book-container-request-stack:
-
-Injecter la request
-~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 2.4
-    Le service ``request_stack`` a été ajouté dans la version 2.4 de Symfony.
-
-Avec Symfony 2.4, au lieu d'injecter le service ``request``, vous devez injecter
-le service ``request_stack`` et accédez à la ``Request`` en appellant la méthode
-:method:`Symfony\\Component\\HttpFoundation\\RequestStack::getCurrentRequest`::
-
-    namespace Acme\HelloBundle\Newsletter;
-
-    use Symfony\Component\HttpFoundation\RequestStack;
-
-    class NewsletterManager
-    {
-        protected $requestStack;
-
-        public function __construct(RequestStack $requestStack)
-        {
-            $this->requestStack = $requestStack;
-        }
-
-        public function anyMethod()
-        {
-            $request = $this->requestStack->getCurrentRequest();
-            // ... faire quelque chose avec la request
-        }
-
-        // ...
-    }
-
-Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comme tout service :
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # src/Acme/HelloBundle/Resources/config/services.yml
-        services:
-            newsletter_manager:
-                class:     "Acme\HelloBundle\Newsletter\NewsletterManager"
-                arguments: ["@request_stack"]
+                    - [setMailer, ["@my_mailer"]]
 
     .. code-block:: xml
 
@@ -981,12 +747,19 @@ Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comm
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+            <parameters>
+                <!-- ... -->
+                <parameter key="newsletter_manager.class">Acme\HelloBundle\Newsletter\NewsletterManager</parameter>
+            </parameters>
+
             <services>
-                <service
-                    id="newsletter_manager"
-                    class="Acme\HelloBundle\Newsletter\NewsletterManager"
-                >
-                    <argument type="service" id="request_stack"/>
+                <service id="my_mailer" ...>
+                <!-- ... -->
+                </service>
+                <service id="newsletter_manager" class="%newsletter_manager.class%">
+                    <call method="setMailer">
+                        <argument type="service" id="my_mailer" />
+                    </call>
                 </service>
             </services>
         </container>
@@ -998,30 +771,23 @@ Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comm
         use Symfony\Component\DependencyInjection\Reference;
 
         // ...
+        $container->setParameter(
+            'newsletter_manager.class',
+            'Acme\HelloBundle\Newsletter\NewsletterManager'
+        );
+
+        $container->setDefinition('my_mailer', ...);
         $container->setDefinition('newsletter_manager', new Definition(
-            'Acme\HelloBundle\Newsletter\NewsletterManager',
-            array(new Reference('request_stack'))
+            '%newsletter_manager.class%'
+        ))->addMethodCall('setMailer', array(
+            new Reference('my_mailer'),
         ));
 
-.. sidebar:: Pourquoi ne pas injecter le service ``request`` ?
+.. note::
 
-    Presque tous les services internes à Symfony2 se comportent de la même façon: une
-    seule instance est créée par le conteneur qui le renvoie à chaque fois que vous le demander
-    ou quand il est injecté dans un autre service. Il a une exception dans une application
-    Symfony2 standard : le service ``request``.
-
-    Si vous essayez d'injecter la ``request`` vous allez probablement recevoir une exception
-    :class:`Symfony\\Component\\DependencyInjection\\Exception\\ScopeWideningInjectionException`.
-    Cela s'explique par le fait que la ``request``peut **changer** pendant le cycle de vie
-    du conteneur de service. (lorsque d'une sous-requête est créée par exemple).
-
-.. tip::
-
-    Si vous définissez un contrôleur comme service, vous pourrez récupérer l'objet ``Request``
-    sans l'avoir injecté dans le conteneur de service, mais en l'ayant passé comme argument
-    de votre méthode de contrôleur (action). Pour plus de détails, rendez-vous
-    sur :ref:`book-controller-request-argument`.
-
+    Les approches présentées dans cette section sont appelées « constructor injection »
+    et « setter injection« ». Le conteneur de service Symfony2 supporte aussi
+    « property injection« ».
 
 Rendre les Références Optionnelles
 ----------------------------------
