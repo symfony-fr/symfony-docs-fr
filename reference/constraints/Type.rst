@@ -105,7 +105,27 @@ déterminés par les fonctions PHP ``is_``.
   * `resource <http://php.net/is_resource>`_
   * `scalar <http://php.net/is_scalar>`_
   * `string <http://php.net/is_string>`_
-  
+
+
+Il est également possible d'utiliser le nom de l'une des fonctions de `l'extension
+PHP <http://php.net/book.ctype.php>`_ ``ctype_``.
+Voici `la liste des fonctions ctype <http://php.net/ref.ctype.php>`_:
+
+  * `alnum <http://php.net/function.ctype-alnum.php>`_
+  * `alpha <http://php.net/function.ctype-alpha.php>`_
+  * `cntrl <http://php.net/function.ctype-cntrl.php>`_
+  * `digit <http://php.net/function.ctype-digit.php>`_
+  * `graph <http://php.net/function.ctype-graph.php>`_
+  * `lower <http://php.net/function.ctype-lower.php>`_
+  * `print <http://php.net/function.ctype-print.php>`_
+  * `punct <http://php.net/function.ctype-punct.php>`_
+  * `space <http://php.net/function.ctype-space.php>`_
+  * `upper <http://php.net/function.ctype-upper.php>`_
+  * `xdigit <http://php.net/function.ctype-xdigit.php>`_
+
+Pour cela, assurez-vous que le paramètre `locale <http://php.net/function.setlocale.php>`_ 
+est bien défini avant d'utiliser une de ces fonctions.
+
 message
 ~~~~~~~
 
