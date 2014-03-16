@@ -8,7 +8,7 @@ Au centre du composant sécurité il y a le contexte de sécurité, qui est une 
 de :class:`Symfony\\Component\\Security\\Core\\SecurityContextInterface`. Lorsque 
 toutes les étapes du processus d'authentification de l'utilisateur ont été accomplies 
 avec succès, vous pouvez demander au contexte de sécurité si l'utilisateur authentifié 
-a accès à une certaine action ou une resource de l'application ::
+a accès à une certaine action ou une ressource de l'application ::
 
     use Symfony\Component\Security\Core\SecurityContext;
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -38,7 +38,7 @@ Un Pare-Feu pour les requêtes HTTP
 ----------------------------------
 
 L'authentification d'un utilisateur est faite par le pare-feu. Une application
-peut avoir de nombreuses zones sécurisée, ainsi le pare-feu est configuré en
+peut avoir de nombreuses zones sécurisées, ainsi le pare-feu est configuré en
 utilisant un plan de ces zones sécurisées. Pour chacune des ces zones, le plan
 contient un "request matcher" et une collection d'écouteurs. Le request matcher
 donne au pare-feu la possibilité de déterminer si la requête pointe vers une zone

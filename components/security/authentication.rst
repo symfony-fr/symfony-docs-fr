@@ -91,8 +91,8 @@ de jetons.
 
 .. note::
 
-    Vous pourriez bien sûr écrire votre propre gestionnaire d'authentification, celui-ci doit
-    seulement implémenter l'interface
+    Vous pouvez bien sûr écrire votre propre gestionnaire d'authentification, celui-ci doit
+    simplement implémenter l'interface
     :class:`Symfony\\Component\\Security\\Core\\Authentication\\AuthenticationManagerInterface`.
 
 
@@ -116,14 +116,12 @@ Authentifier les utilisateurs par leur nom d'utilisateur et leur mot de passe
 
 Un fournisseur d'authentification tentera d'authentifier un utilisateur
 en se basant sur les identifiants fournis. Habituellement, ces derniers sont
-un nom d'utilisateur ainsi qu'un "hash" du mot de passe combiné à un sel
+un nom d'utilisateur ainsi qu'un "hash" du mot de passe combiné à un salt
 généré aléatoirement. Cela signifie que l'authentification consiste en
-général à récupérer le grain de sel ainsi que le mot de passe "hashé" de
+général à récupérer le salt ainsi que le mot de passe "hashé" de
 l'utilisateur depuis le stockage de données, "hashe" le mot de passe qu'il 
 vient tout juste de fournir (en utilisant un formulaire de login par exemple)
 et de comparer les deux pour déterminer si le mot de passe donné est valide.
-
-fetching the salt and the hashed password from the user data storage, hash the password
 
 Cette fonctionnalité est offerte par la classe
 :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\DaoAuthenticationProvider`.
@@ -172,11 +170,11 @@ du mot de passe et retourne un jeton authentifié si le mot de passe est valide 
     essayer de trouver les informations de l'utilisateur, en employant le
     :class:`Symfony\\Component\\Security\\Core\\User\\ChainUserProvider`.
 
-L'usine d'encodeur de mots de passes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+La fabrique d'encodeur de mots de passes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La classe :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\DaoAuthenticationProvider`
-utilise une usine d'encodeur pour créer un encodeur de mots de passes pour un
+utilise une fabrique d'encodeur pour créer un encodeur de mots de passes pour un
 type donné d'utilisateur. Cela vous permet d'utiliser différentes stratégies
 d'encodage pour différents types d'utilisateurs. Par défaut, la classe
 :class:`Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactory` reçoit
