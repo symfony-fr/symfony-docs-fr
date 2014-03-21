@@ -296,7 +296,7 @@ Cela peut être fait dans le constructeur::
     parce que le faire dans la méthode ``buildForm`` signifierait que tout
     le type de formulaire sera modifié et non pas juste l'instance de formulaire
     que vous voulez. Ce n'est généralement pas très grave, mais techniquement,
-    un seul tupe de formulaire pourrait être utilisé dans une seule requête
+    un seul type de formulaire pourrait être utilisé dans une seule requête
     pour créer plusieurs formulaires ou champs
 
 Personnaliser le type de formulaire
