@@ -404,7 +404,7 @@ b) Definir le formulaire comme service
 ......................................
 
 Pour définir votre formulaire comme service, créez simplement un service
-classique vous taggerez avec :ref:`dic-tags-form-type`.
+classique que vous taggerez avec :ref:`dic-tags-form-type`.
 
 .. configuration-block::
 
