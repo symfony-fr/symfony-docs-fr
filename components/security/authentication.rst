@@ -65,8 +65,8 @@ sécurité ::
     Un jeton peut provenir de n'importe quelle classe, du moment qu'elle implémente
     l'interface :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface`.
 
-Le gestionnaire d'authenfication
---------------------------------
+Le gestionnaire d'authentification
+----------------------------------
 
 Le gestionnaire d'authentification par défaut est une instance de
 :class:`Symfony\\Component\\Security\\Core\\Authentication\\AuthenticationProviderManager`::
@@ -101,11 +101,11 @@ de jetons.
 Fournisseurs d'Authentification
 -------------------------------
 
-Chaque fournisseur (puisqu'il implémente l'interface 
+Chaque fournisseur (puisqu'il implémente l'interface
 :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface`)
 possède une méthode :method:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface::supports`
 par lequel le ``AuthenticationProviderManager`` peut déterminer si le jeton fournis est supporté.
-Si c'est le cas, le gestionnaire appelle ensuite la méthode 
+Si c'est le cas, le gestionnaire appelle ensuite la méthode
 :class:`Symfony\\Component\\Security\\Core\\Authentication\\Provider\\AuthenticationProviderInterface::authenticate`
 du fournisseur.
 Cette méthode devrait retourner un jeton authentifié ou jeter une :class:`Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException`
@@ -119,7 +119,7 @@ en se basant sur les identifiants fournis. Habituellement, ces derniers sont
 un nom d'utilisateur ainsi qu'un "hash" du mot de passe combiné à un salt
 généré aléatoirement. Cela signifie que l'authentification consiste en
 général à récupérer le salt ainsi que le mot de passe "hashé" de
-l'utilisateur depuis le stockage de données, "hashe" le mot de passe qu'il 
+l'utilisateur depuis le stockage de données, "hashe" le mot de passe qu'il
 vient tout juste de fournir (en utilisant un formulaire de login par exemple)
 et de comparer les deux pour déterminer si le mot de passe donné est valide.
 
@@ -195,7 +195,7 @@ un tableau d'encodeurs ::
 
     $encoderFactory = new EncoderFactory($encoders);
 
-Chaque encodeur devrait implémenter l'interface 
+Chaque encodeur devrait implémenter l'interface
 :class:`Symfony\\Component\\Security\\Core\\Encoder\\PasswordEncoderInterface` ou
 être un tableau avec une ``class`` et une clé ``arguments``, ce qui permet
 à l'usine d'encodeur de construire un encodeur seulement quand c'est nécessaire.
@@ -208,7 +208,7 @@ vous avez besoin du votre, vous devez simplement suivre ces règles :
 
 #. La classe doit implémenter l'interface :class:`Symfony\\Component\\Security\\Core\\Encoder\\PasswordEncoderInterface`;
 
-#. ``$this->checkPasswordLength($raw);`` doit être la première instruction 
+#. ``$this->checkPasswordLength($raw);`` doit être la première instruction
    executée dans les méthodes ``encodePassword()`` et ``isPasswordValid()`` (voir `CVE-2013-5750`_).
 
 Utiliser les encodeurs de mots de passes
@@ -216,7 +216,7 @@ Utiliser les encodeurs de mots de passes
 
 Lorsque la méthode :method:`Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactory::getEncoder`
 de l'usine d'encodeur de mots de passes est appelée avec l'objet utilisateur comme
-premier argument, elle retournera un encodeur de type 
+premier argument, elle retournera un encodeur de type
 :class:`Symfony\\Component\\Security\\Core\\Encoder\\PasswordEncoderInterface` qui devrait
 être utilisé pour encoder le mot de passe de cet utilisateur ::
 
