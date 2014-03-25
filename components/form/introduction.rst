@@ -8,12 +8,12 @@ Le composant Formulaire
     Le composant form vous permet de créer facilement, traiter et réutiliser
     des formulaires HTML.
 
-Le composant formulaire est un outil pour vous aider à résoudre le problème
+Le composant form est un outil pour vous aider à résoudre le problème
 de permettre aux utilisateurs finaux d'intéragir et modifier des données
 dans votre application. Et c'est pourtant via les fomulaires HTML que le
-composant se concentre pour traiter des données pour et depuis votre
-application et utilisateur, que la donnée provienne d'un formulaire posté
-normalement ou d'une API.
+composant se concentre pour traiter des données soumisent par l'utilisateur
+pour et depuis votre application, que la donnée provienne d'un formulaire
+posté normalement ou d'une API.
 
 Installation
 ------------
@@ -33,7 +33,7 @@ Configuration
     :ref:`component-form-intro-create-simple-form`.
 
 Dans Symfony2, les formulaires sont représentés par des objets et ceux-ci
-sont construit en utilisant une *form factory* (usine à formulaire). Il est simple de
+sont construits en utilisant une *form factory* (usine à formulaire). Il est simple de
 construire une form factory ::
 
     use Symfony\Component\Form\Forms;
@@ -49,7 +49,7 @@ mais il lui manque des fonctionnalités très importantes :
   Cross-Site-Request-Forgery (CSRF);
 * **Templating :** Intégration avec une couche templating vous permettant
   de réutiliser des fragments HTML lors du rendu du formulaire;
-* **Traduction :** Support des traduction des messages d'erreur, champs
+* **Traduction :** Support des traductions des messages d'erreur, champs
   labelisés et autre chaînes de caractères;
 * **Validation :** Intégration avec la librairie de validation pour
   générer les messages d'erreurs pour les données soumises.
@@ -60,7 +60,7 @@ les composants :doc:`HttpFoundation </components/http_foundation/introduction>`,
 Traduction et Validation. Ceci dit, vous pouvez remplacer chacune des ces
 librairies par celle(s) de votre choix.
 
-Les sections suivanyes vous explique comment brancher ces librairies avec la
+Les sections suivantes vous expliquent comment brancher ces librairies avec la
 form factory.
 
 .. tip::
@@ -80,7 +80,7 @@ Pour traiter les données d'un formulaire, vous aurez besoin de la méthode
 
 En coulisses, cette méthode utilise un objet de type
 :class:`Symfony\\Component\\Form\\NativeRequestHandler` pour lire les données
-provenants de les super globales PHP (i.e. ``$_POST``ou ``$_GET``) basées sur
+provenants de les supers globales PHP (i.e. ``$_POST``ou ``$_GET``) basées sur
 la méthode HTTP configurée sur le formulaire (POST par défaut).
 
 .. sidebar:: Intégration avec le composant HttpFoundation
