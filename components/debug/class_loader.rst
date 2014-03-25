@@ -2,20 +2,20 @@
     single: Class Loader; DebugClassLoader
     single: Debug; DebugClassLoader
 
-Debugging a Class Loader
+Débugger un Class Loader
 ========================
 
 .. versionadded:: 2.4
-    The ``DebugClassLoader`` of the Debug component is new in Symfony 2.4.
-    Previously, it was located in the Class Loader component.
+    Le ``DebugClassLoader`` du composant Debug est nouveau dans Symfony 2.4.
+    Précédemment, cette classe était située dans le composant Class Loader.
 
-The :class:`Symfony\\Component\\Debug\\DebugClassLoader` attempts to
-throw more helpful exceptions when a class isn't found by the registered
-autoloaders. All autoloaders that implement a ``findFile()`` method are replaced
-with a ``DebugClassLoader`` wrapper.
+La classe :class:`Symfony\\Component\\Debug\\DebugClassLoader` tente de
+jeter des exceptions plus explicites lorsqu'une classe n'est pas retrouvée
+par les autoladers enregistrés. Tous les autoloaders qui implémentent la
+méthode ``findFile()`` sont remplacé avec un wrapper ``DebugClassLoader``.
 
-Using the ``DebugClassLoader`` is as easy as calling its static
-:method:`Symfony\\Component\\Debug\\DebugClassLoader::enable` method::
+L'utilisation de ``DebugClassLoader`` est aussi facile que d'appeler
+la méthode statique :method:`Symfony\\Component\\Debug\\DebugClassLoader::enable` ::
 
     use Symfony\Component\ClassLoader\DebugClassLoader;
 

@@ -2,64 +2,65 @@
    single: Debug
    single: Components; Debug
 
-The Debug Component
-===================
+Le Composant Debug
+==================
 
-    The Debug component provides tools to ease debugging PHP code.
+    Le composant Debug founit des outils pour faciliter le deugging
+    du code PHP.
 
 .. versionadded:: 2.3
-    The Debug component is new to Symfony 2.3. Previously, the classes were
-    located in the HttpKernel component.
+    Le Composant Debug est nouveau en Symfony 2.3. Précédemment, les classes
+    étaient situées dans le composant HttpKernel.
 
 Installation
 ------------
 
-You can install the component in many different ways:
+Vous pouvez installer le composant de deux manières différentes :
 
-* Use the official Git repository (https://github.com/symfony/Debug);
-* :doc:`Install it via Composer </components/using_components>` (``symfony/debug`` on `Packagist`_).
+* Utilisez le repository Git officiel (https://github.com/symfony/Debug);
+* :doc:`Installez le via Composer </components/using_components>` (``symfony/debug`` sur `Packagist`_).
 
-Usage
------
+Utilisation
+-----------
 
-The Debug component provides several tools to help you debug PHP code.
-Enabling them all is as easy as it can get::
+Le composant Debug fournis quelques outils pour vous aider à débugger
+du code PHP. Activer ces outils est aussi simple que de faire ::
 
     use Symfony\Component\Debug\Debug;
 
     Debug::enable();
 
-The :method:`Symfony\\Component\\Debug\\Debug::enable` method registers an
-error handler, an exception handler and
-:doc:`a special class loader </components/debug/class_loader>`.
+La méthode :method:`Symfony\\Component\\Debug\\Debug::enable` enregistre
+un error handler (gestionnaire d'erreur), un exception handler (gestionnaire
+d'exception) et une :doc:`classe loader spéciale </components/debug/class_loader>`.
 
-Read the following sections for more information about the different available
-tools.
+Lisez les sections suivantes pour plus d'information à propos des différents
+outils disponibles.
 
 .. caution::
 
-    You should never enable the debug tools in a production environment as
-    they might disclose sensitive information to the user.
+    Vous ne devriez jamais activer les outils de debug en environnement de
+    production car ils divulgueraient des informations sensibles à l'utilisateur.
 
-Enabling the Error Handler
---------------------------
+Activer l'Error Handler
+-----------------------
 
-The :class:`Symfony\\Component\\Debug\\ErrorHandler` class catches PHP errors
-and converts them to exceptions (of class :phpclass:`ErrorException` or
-:class:`Symfony\\Component\\Debug\\Exception\\FatalErrorException` for PHP
-fatal errors)::
+La classe :class:`Symfony\\Component\\Debug\\ErrorHandler` attrape les erreurs
+PHP et les converties en exceptions (de la classe :phpclass:`ErrorException`
+ou :class:`Symfony\\Component\\Debug\\Exception\\FatalErrorException` pour les
+fatal erreurs PHP) ::
 
     use Symfony\Component\Debug\ErrorHandler;
 
     ErrorHandler::register();
 
-Enabling the Exception Handler
-------------------------------
+Activer l'Exception Handler
+---------------------------
 
-The :class:`Symfony\\Component\\Debug\\ExceptionHandler` class catches
-uncaught PHP exceptions and converts them to a nice PHP response. It is useful
-in debug mode to replace the default PHP/XDebug output with something prettier
-and more useful::
+La classe :class:`Symfony\\Component\\Debug\\ExceptionHandler` attrape les
+exceptions PHP non rattrapé et les converties en jolie réponse PHP. C'est
+utile en mode debug pour remplacer la sortie PHP/XDebug par défaut, par
+quelque chose de plus joli et plus utile ::
 
     use Symfony\Component\Debug\ExceptionHandler;
 
@@ -67,8 +68,8 @@ and more useful::
 
 .. note::
 
-    If the :doc:`HttpFoundation component </components/http_foundation/introduction>` is
-    available, the handler uses a Symfony Response object; if not, it falls
-    back to a regular PHP response.
+    Si le :doc:`composant HttpFoundation </components/http_foundation/introduction>` est
+    disponible, le handler (gestionnaire) utilise un objet Response de Symfony; le cas
+    échéant, il retourne une réponse PHP standard.
 
 .. _Packagist: https://packagist.org/packages/symfony/debug
