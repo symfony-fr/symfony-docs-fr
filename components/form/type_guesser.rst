@@ -77,7 +77,7 @@ Le constructeur ``TypeGuess`` requiert 3 options :
   vous voudrez également fixer l'option ``class``). Si aucun type n'est
   deviné, cela doit être fixé avec un tableau vide;
 * Le niveau de confiance (ou probabilité) indiquant que le type deviné
-  est correct. cela peut être l'une des constantes de la classe
+  est correct. Cela peut être l'une des constantes de la classe
   :class:`Symfony\\Component\\Form\\Guess\Guess` : ``LOW_CONFIDENCE``,
   ``MEDIUM_CONFIDENCE``, ``HIGH_CONFIDENCE``, ``VERY_HIGH_CONFIDENCE``. Après
   que tous les type guessers aient été exécutés, le type avec la confiance

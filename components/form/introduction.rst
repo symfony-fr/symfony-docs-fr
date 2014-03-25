@@ -235,8 +235,8 @@ Traduction
 
 Si vous utilisez une intégration avec Twig avec l'un des fichiers
 form theme par défaut (par exemple ``form_div_layout.html.twig``),
-il y a deux filtres twig (``trans``et ``transChoice``) qui sont
-faut utiliser la traduction des labels, erreurs, texte en option et
+il y a deux filtres twig (``trans``et ``transChoice``) qu'il faut
+utiliser pour la traduction des labels, erreurs, texte en option et
 autres chaînes de caractères d'un formulaire.
 
 Pour ajouter ces filtres Twig, vous pouvez soit utiliser ceux fournis
@@ -316,7 +316,7 @@ Si vous n'êtes pas familiez avec le composant Validation de Symfony, lisez-en
 plus à son propos : :doc:`/book/validation`. Le composant Form vient avec la
 classe :class:`Symfony\\Component\\Form\\Extension\\Validator\\ValidatorExtension`,
 qui applique automatiquement la validation lorsque vos données sont liées.
-Ces erreurs sont ensuite mappées au bon champs et rendu.
+Ces erreurs sont ensuite mappées au bon champs et rendues.
 
 Votre intégration avec le composant Validation ressemblera à ceci ::
 
@@ -358,7 +358,7 @@ Accéder à la Form Factory
 
 Votre application n'a besoin que d'une form factory (usine de formulaire),
 et cette unique factory d'objet devrait être utilisée pour créer tous les
-objets form dans votre application. Cela signifie que vous devriez le
+objets form dans votre application. Cela signifie que vous devriez la
 créer à un endroit central, au moment où votre application est bootstrappée
 puis y accéder lorsque vous souhaitez construire un formulaire.
 
@@ -437,7 +437,7 @@ les champs du formulaire. Le form builder est créé depuis la form factory.
         }
 
 Comme vous pouvez le voir, créer un formualaire c'est comme écrire une recette :
-vous appelez la méthode ``add`` pour chacun des champs vous souhaitez créer. Le
+vous appelez la méthode ``add`` pour chacun des champs que vous souhaitez créer. Le
 premier argument de la méthode ``add`` est le nom de votre champs, et le second
 est le "type" du champs. Le composant Form vient avec beaucoup de
 :doc:`types built-in </reference/forms/types>`.
@@ -450,7 +450,7 @@ Réglage des valeurs par défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous avez besoin que votre formulaire soit chargé avec quelques valeurs
-par défaut (ou que vous construisez une formulaire d'édition), passez
+par défaut (ou que vous construisez un formulaire d'édition), passez
 simplement les valeurs par défaut lorsque vous créez votre form builder :
 
 .. configuration-block::
@@ -589,7 +589,7 @@ maintenant les erreurs);
    l'utilisateur.
 
 Heureusement, vous n'avez pas besoin de décider si oui ou non un formulaire
-a été soumis. Passez simplement la rête courante à la méthode ``handleRequest()``.
+a été soumis. Passez simplement la requête courante à la méthode ``handleRequest()``.
 Puis, le composant formulaire fera tout ce qui est nécessaire de faire pour vous.
 
 .. _component-form-intro-validation:
