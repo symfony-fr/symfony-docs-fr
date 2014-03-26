@@ -49,7 +49,7 @@ Champs cachés
 
 * :doc:`hidden </reference/forms/types/hidden>`
 
-Bouttons
+Boutons
 ~~~~~~~~
 
 * :doc:`button</reference/forms/types/button>`
