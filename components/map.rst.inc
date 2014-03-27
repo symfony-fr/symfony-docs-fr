@@ -24,6 +24,11 @@
 
   * :doc:`/components/css_selector`
 
+* :doc:`/components/debug/index`
+
+  * :doc:`/components/debug/introduction`
+  * :doc:`/components/debug/class_loader`
+
 * :doc:`/components/dependency_injection/index`
 
   * :doc:`/components/dependency_injection/introduction`
