@@ -5,18 +5,18 @@ Créer un Type Guesser personnalisé
 ==================================
 
 Le composant Form peut deviner le type et quelques options d'un champ de
-formulaire en utilisant un type guesser (devin de type). Le composant
-inclus déjà un type guesser qui utilise les assertions du composant
+formulaire en utilisant un type guesser (déduction automatique du type). Le composant
+inclut déjà un type guesser qui utilise les assertions du composant
 Validation, mais vous pouvez également ajouter vos propres type guessers.
 
 .. sidebar:: Les Type Guessers dans les Bridges
 
     Symfony fournit également quelques type guessers de formulaire dans les bridges :
 
-    * :class:`Symfony\\Bridge\\Propel1\\Form\\PropelTypeGuesser` fournis par
+    * :class:`Symfony\\Bridge\\Propel1\\Form\\PropelTypeGuesser` fourni par
       le bridge Propel1;
     * :class:`Symfony\\Bridge\\Doctrine\\Form\\DoctrineOrmTypeGuesser`
-      fournis par le bridge Doctrine.
+      fourni par le bridge Doctrine.
 
 Créer une PHPDoc pour le Type Guesser
 -------------------------------------
@@ -72,7 +72,7 @@ déterminer que le type guesser ne peut pas deviner le type.
 
 Le constructeur ``TypeGuess`` requiert 3 options :
 
-* Le nom du type (l'un des :doc:`form types </reference/forms/types>`);
+* Le nom du type (l'un des :doc:`types de formulaire </reference/forms/types>`);
 * Des options additionnelles (par exemple, lorsque le type est ``entity``,
   vous voudrez également fixer l'option ``class``). Si aucun type n'est
   deviné, cela doit être fixé avec un tableau vide;
@@ -80,11 +80,11 @@ Le constructeur ``TypeGuess`` requiert 3 options :
   est correct. Cela peut être l'une des constantes de la classe
   :class:`Symfony\\Component\\Form\\Guess\Guess` : ``LOW_CONFIDENCE``,
   ``MEDIUM_CONFIDENCE``, ``HIGH_CONFIDENCE``, ``VERY_HIGH_CONFIDENCE``. Après
-  que tous les type guessers aient été exécutés, le type avec la confiance
+  que tous les type guessers ont été exécutés, le type avec la confiance
   la plus haute est executé.
 
 Avec ce que vous venez d'apprendre, vous pouvez facilement implémenter la méthode
-``guessType``de ``PHPDocTypeGuesser`` ::
+``guessType``de ``PHPDocTypeGuesser``::
 
     namespace Acme\Form;
 
@@ -149,7 +149,7 @@ Deviner les options d'un champs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les trois autres méthodes (``guessMaxLength``, ``guessRequired`` et
-``guessPattern``) retourne une instance de
+``guessPattern``) retournent une instance de
 :class:`Symfony\\Component\\Form\\Guess\\ValueGuess` avec la valeur de
 l'option. Ce constructeur possède 2 arguments :
 
@@ -176,7 +176,7 @@ Enregistrer un Type Guesser
 La dernière chose qu'il vous reste à faire est d'enregistrer votre type guesser
 personnalisé en utilisant la méthode
 :method:`Symfony\\Component\\Form\\FormFactoryBuilder::addTypeGuesser` ou la méthode
-:method:`Symfony\\Component\\Form\\FormFactoryBuilder::addTypeGuessers` ::
+:method:`Symfony\\Component\\Form\\FormFactoryBuilder::addTypeGuessers`::
 
     use Symfony\Component\Form\Forms;
     use Acme\Form\PHPDocTypeGuesser;

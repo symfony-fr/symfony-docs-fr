@@ -12,7 +12,7 @@ Débugger un Class Loader
 La classe :class:`Symfony\\Component\\Debug\\DebugClassLoader` tente de
 jeter des exceptions plus explicites lorsqu'une classe n'est pas retrouvée
 par les autoladers enregistrés. Tous les autoloaders qui implémentent la
-méthode ``findFile()`` sont remplacé avec un wrapper ``DebugClassLoader``.
+méthode ``findFile()`` sont remplacés avec un wrapper ``DebugClassLoader``.
 
 L'utilisation de ``DebugClassLoader`` est aussi facile que d'appeler
 la méthode statique :method:`Symfony\\Component\\Debug\\DebugClassLoader::enable` ::

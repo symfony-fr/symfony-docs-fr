@@ -5,7 +5,7 @@
 Le Composant Debug
 ==================
 
-    Le composant Debug founit des outils pour faciliter le deugging
+    Le composant Debug founit des outils pour faciliter le debugging
     du code PHP.
 
 .. versionadded:: 2.3
@@ -17,13 +17,13 @@ Installation
 
 Vous pouvez installer le composant de deux manières différentes :
 
-* Utilisez le repository Git officiel (https://github.com/symfony/Debug);
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Debug);
 * :doc:`Installez le via Composer </components/using_components>` (``symfony/debug`` sur `Packagist`_).
 
 Utilisation
 -----------
 
-Le composant Debug fournis quelques outils pour vous aider à débugger
+Le composant Debug fournit quelques outils pour vous aider à débugger
 du code PHP. Activer ces outils est aussi simple que de faire ::
 
     use Symfony\Component\Debug\Debug;
@@ -34,7 +34,7 @@ La méthode :method:`Symfony\\Component\\Debug\\Debug::enable` enregistre
 un error handler (gestionnaire d'erreur), un exception handler (gestionnaire
 d'exception) et une :doc:`classe loader spéciale </components/debug/class_loader>`.
 
-Lisez les sections suivantes pour plus d'information à propos des différents
+Lisez les sections suivantes pour plus d'informations sur les différents
 outils disponibles.
 
 .. caution::
@@ -46,7 +46,7 @@ Activer l'Error Handler
 -----------------------
 
 La classe :class:`Symfony\\Component\\Debug\\ErrorHandler` attrape les erreurs
-PHP et les converties en exceptions (de la classe :phpclass:`ErrorException`
+PHP et les convertit en exceptions (de la classe :phpclass:`ErrorException`
 ou :class:`Symfony\\Component\\Debug\\Exception\\FatalErrorException` pour les
 fatal erreurs PHP) ::
 
@@ -58,7 +58,7 @@ Activer l'Exception Handler
 ---------------------------
 
 La classe :class:`Symfony\\Component\\Debug\\ExceptionHandler` attrape les
-exceptions PHP non rattrapé et les converties en jolie réponse PHP. C'est
+exceptions PHP non rattrapées et les convertit en jolie réponses PHP. C'est
 utile en mode debug pour remplacer la sortie PHP/XDebug par défaut, par
 quelque chose de plus joli et plus utile ::
 

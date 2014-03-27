@@ -5,13 +5,13 @@
 Le composant Formulaire
 =======================
 
-    Le composant form vous permet de créer facilement, traiter et réutiliser
+    Le composant Form vous permet de créer facilement, traiter et réutiliser
     des formulaires HTML.
 
-Le composant form est un outil pour vous aider à résoudre le problème
+Le composant Form est un outil pour vous aider à résoudre le problème
 de permettre aux utilisateurs finaux d'intéragir et modifier des données
-dans votre application. Et c'est pourtant via les fomulaires HTML que le
-composant se concentre pour traiter des données soumisent par l'utilisateur
+dans votre application. Et c'est via les fomulaires HTML que le
+composant se concentre pour traiter des données soumises par l'utilisateur
 pour et depuis votre application, que la donnée provienne d'un formulaire
 posté normalement ou d'une API.
 
@@ -28,13 +28,13 @@ Configuration
 
 .. tip::
 
-    Si vous travaillez avec le framework Symfony full stack, le composant form est
+    Si vous travaillez avec le framework Symfony full stack, le composant Form est
     déjà configuré pour vous. Dans ce cas, passez directement à la section
     :ref:`component-form-intro-create-simple-form`.
 
 Dans Symfony2, les formulaires sont représentés par des objets et ceux-ci
 sont construits en utilisant une *form factory* (usine à formulaire). Il est simple de
-construire une form factory ::
+construire une form factory::
 
     use Symfony\Component\Form\Forms;
 
@@ -43,51 +43,51 @@ construire une form factory ::
 Cette factory peut déjà être utilisée pour créer des formulaires basiques,
 mais il lui manque des fonctionnalités très importantes :
 
-* **Manipulation de la request :** Support de la manipulation de request
+* **Manipulation de la requête :** Support de la manipulation de l'objet Request
   et de téléchargement de fichiers;
 * **Protection CSRF :** Support de la protection contre les attaques
   Cross-Site-Request-Forgery (CSRF);
 * **Templating :** Intégration avec une couche templating vous permettant
-  de réutiliser des fragments HTML lors du rendu du formulaire;
+  de réutiliser des fragments HTML lors de l'affichage du formulaire;
 * **Traduction :** Support des traductions des messages d'erreur, champs
   labelisés et autre chaînes de caractères;
-* **Validation :** Intégration avec la librairie de validation pour
+* **Validation :** Intégration avec la bibliothèque de validation pour
   générer les messages d'erreurs pour les données soumises.
 
-Le composant Form de Symfony2 est basé sur les autres librairies pour
+Le composant Form de Symfony2 est basé sur d'autres bibliothèques pour
 résoudre ces problèmes. La majorité du temps vous utiliserez Twig ainsi que
 les composants :doc:`HttpFoundation </components/http_foundation/introduction>`,
 Traduction et Validation. Ceci dit, vous pouvez remplacer chacune des ces
-librairies par celle(s) de votre choix.
+bibliothèques par celle(s) de votre choix.
 
-Les sections suivantes vous expliquent comment brancher ces librairies avec la
+Les sections suivantes vous expliquent comment brancher ces bibliothèques avec la
 form factory.
 
 .. tip::
 
     Pour un exemple fonctionnel, consultez https://github.com/bschussek/standalone-forms
 
-Manipulation de la Request
+Manipulation de la Requête
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 2.3
-    La méthode ``handleRequest()`` a été ajouté dans la version 2.3 de Symfony.
+    La méthode ``handleRequest()`` a été ajoutée dans la version 2.3 de Symfony.
 
 Pour traiter les données d'un formulaire, vous aurez besoin de la méthode
-:method:`Symfony\\Component\\Form\\Form::handleRequest` ::
+:method:`Symfony\\Component\\Form\\Form::handleRequest`::
 
     $form->handleRequest();
 
 En coulisses, cette méthode utilise un objet de type
 :class:`Symfony\\Component\\Form\\NativeRequestHandler` pour lire les données
-provenants de les supers globales PHP (i.e. ``$_POST``ou ``$_GET``) basées sur
+provenants des variables super-globales PHP (i.e. ``$_POST``ou ``$_GET``) basées sur
 la méthode HTTP configurée sur le formulaire (POST par défaut).
 
 .. sidebar:: Intégration avec le composant HttpFoundation
 
     Si vous utilisez le composant HttpFoundation, vous devriez alors
     ajouter la :class:`Symfony\\Component\\Form\\Extension\\HttpFoundation\\HttpFoundationExtension`
-    à votre form factory ::
+    à votre form factory::
 
         use Symfony\Component\Form\Forms;
         use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
@@ -98,13 +98,13 @@ la méthode HTTP configurée sur le formulaire (POST par défaut).
 
     Maintenant, lorsque vous traitez un formulaire, vous pouvez passer l'objet
     :class:`Symfony\\Component\\HttpFoundation\\Request` à la méthode
-    :method:`Symfony\\Component\\Form\\Form::handleRequest` ::
+    :method:`Symfony\\Component\\Form\\Form::handleRequest`::
 
         $form->handleRequest($request);
 
     .. note::
 
-        Pour plus d'information concernant le composant HttpFoundation ou
+        Pour plus d'informations concernant le composant HttpFoundation ou
         comment l'installer, consultez :doc:`/components/http_foundation/introduction`.
 
 Protection CRSF
@@ -112,7 +112,7 @@ Protection CRSF
 
 La protection contre les attaques CSRF est incluse dans le composant formulaire,
 mais vous devez explicitement l'activer ou la remplacer par une solution
-personnalisée ::
+personnalisée::
 
     use Symfony\Component\Form\Forms;
     use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
@@ -135,7 +135,7 @@ personnalisée ::
 Pour sécuriser votre application contre les attaques CSRF, vous devez définir
 un sercret CSRF. Générer une chaîne de caractères aléatoires avec au moins
 32 caractères, insérez-les dans le morceaux de code ci-dessus et assurez vous
-que personne hormis votre server web peut accéder à ce secret.
+que personne d'autre que votre server web ne peut accéder à ce secret.
 
 En interne, cette extension ajoutera automatiquement un champs caché à chacun
 des formulaires (appelé ``__token`` par défaut) dont la valeur est automatiquement
@@ -145,7 +145,7 @@ générée et validée lors du binding (liaison) du formulaire.
 
     Si vous n'utilisez pas le composant HttpFoundation, vous pouvez utiliser
     :class:`Symfony\\Component\\Form\\Extension\\Csrf\\CsrfProvider\\DefaultCsrfProvider`
-    à la place, qui se repose sur la manipulation de session native de PHP ::
+    à la place, qui se repose sur la manipulation de session native de PHP::
 
         use Symfony\Component\Form\Extension\Csrf\CsrfProvider\DefaultCsrfProvider;
 
@@ -155,9 +155,9 @@ Le Templating avec Twig
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous utilisez le composant formulaire pour traiter des formulaires HTML,
-vous aurez besoin d'une solution pour rendre facilement les champs de votre
-formulaire HTML (complété avec les champs value, erreurs et labels). Si vous
-utilisez `Twig`_ comme moteur de rendu, le composant form offre une intégration
+vous aurez besoin d'une solution pour afficher facilement les champs de votre
+formulaire HTML (compléter avec les valeurs des champs, les erreurs et les libellés). Si vous
+utilisez `Twig`_ comme moteur de rendu, le composant Form offre une intégration
 riche.
 
 Pour utiliser cette intégration, vous aurez besoin de ``TwigBridge``, fournissant
@@ -175,17 +175,17 @@ suivante dans votre fichier ``composer.json``:
 
 L'intégration de TwigBridge vous fournit un certain nombre de
 :doc:`fonctions Twig </reference/forms/twig_reference>` vous aidant à présenter
-chacun des widgets HTML, label et erreur pour chaque champs (ainsi quelques autres
+chacun des widgets HTML, libellés et erreurs pour chaque champs (ainsi quelques autres
 petites choses). Pour configurer cette intégration, vous aurez besoin de
 bootstrapper ou accéder à Twig et ajouter la classe
-:class:`Symfony\\Bridge\\Twig\\Extension\\FormExtension` ::
+:class:`Symfony\\Bridge\\Twig\\Extension\\FormExtension`::
 
     use Symfony\Component\Form\Forms;
     use Symfony\Bridge\Twig\Extension\FormExtension;
     use Symfony\Bridge\Twig\Form\TwigRenderer;
     use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 
-    // le fichier Twig contenant toutes les balises pour rendre les formulaires
+    // le fichier Twig contenant toutes les balises pour afficher les formulaires
     // ce fichier vient avoir le TwigBridge
     $defaultFormTheme = 'form_div_layout.html.twig';
 
@@ -213,20 +213,20 @@ bootstrapper ou accéder à Twig et ajouter la classe
         // ...
         ->getFormFactory();
 
-Les détails exacts pour votre `Configuration Twig`_ va varier, mais le but
+Votre `Configuration Twig`_ peut varier, mais le but
 est toujours d'ajouter l'extension :class:`Symfony\\Bridge\\Twig\\Extension\\FormExtension`
-à Twig, ce qui vous donne accès au fonctions twig pour rendre les formulaires.
+à Twig, ce qui vous donne accès au fonctions twig pour afficher les formulaires.
 Pour faire cela, il vous faut premièrement créer un
 :class:`Symfony\\Bridge\\Twig\\Form\\TwigRendererEngine`, où vous définissez vos
 :ref:`form themes <cookbook-form-customization-form-themes>` (i.e. resources/fichiers définissant
 votre balisage de formulaire HTML).
 
-Pour plus de détails concernant le rendu de formulaires, consultez :doc:`/cookbook/form/form_customization`.
+Pour plus de détails concernant l'affichage de formulaires, consultez :doc:`/cookbook/form/form_customization`.
 
 .. note::
 
     Si vous utilisez une intégration avec Twig, lisez ":ref:`component-form-intro-install-translation`"
-    ci-dessus pour les détails nécessaires aux filtres de traduction.
+    ci-dessous pour les détails nécessaires aux filtres de traduction.
 
 .. _component-form-intro-install-translation:
 
@@ -234,19 +234,19 @@ Traduction
 ~~~~~~~~~~
 
 Si vous utilisez une intégration avec Twig avec l'un des fichiers
-form theme par défaut (par exemple ``form_div_layout.html.twig``),
-il y a deux filtres twig (``trans``et ``transChoice``) qu'il faut
-utiliser pour la traduction des labels, erreurs, texte en option et
+de thème de formulaire par défaut (par exemple ``form_div_layout.html.twig``),
+il y a deux filtres Twig (``trans``et ``transChoice``) qu'il faut
+utiliser pour la traduction des libellés, erreurs, texte en option et
 autres chaînes de caractères d'un formulaire.
 
 Pour ajouter ces filtres Twig, vous pouvez soit utiliser ceux fournis
 par défaut dans la classe :class:`Symfony\\Bridge\\Twig\\Extension\\TranslationExtension`
-qui est intégré avec le composant Traduction de Symfony, ou ajouter
+qui est intégrée avec le composant Traduction de Symfony, ou ajouter
 ces deux filtres vous-même, via une extension Twig.
 
-Pour utiliser l'intégration built-in, assurez-vous que votre projet
+Pour utiliser l'intégration fournie par défaut, assurez-vous que votre projet
 dispose des composants de Symfony Traduction et doc:`Config </components/config/introduction>`
-installé. Si vous utilisez Composer, vous pouvez récupérer la dernière
+installés. Si vous utilisez Composer, vous pouvez récupérer la dernière
 version 2.4 de ces composants en ajoutant les lignes suivantes à votre
 fichier ``composer.json`` :
 
@@ -284,8 +284,8 @@ Ensuite, ajoutez la classe :class:`Symfony\\Bridge\\Twig\\Extension\\Translation
         // ...
         ->getFormFactory();
 
-En fonction de comment vos traductions sont chargées, vous pouvez maintenant
-ajouter des clés, comme des labels de champs, et leur traductions dans vos
+En fonction de la manière dont vos traductions sont chargées, vous pouvez maintenant
+ajouter des clés, comme des libellés de champs, et leur traductions dans vos
 fichiers de traductions.
 
 Pour plus de détails sur les traductions, consulter :doc:`/book/translation`.
@@ -299,7 +299,7 @@ pour la validation, pas de problème ! Prenez simplement les données
 soumises/liées de votre formulaire (qui sont contenues dans un tableau
 ou un objet) et passez les à votre propre système de validation.
 
-Pour utiliser l'intégartion avec le composant Validation, premièrement
+Pour utiliser l'intégration avec le composant Validation, premièrement
 assurez-vous qu'il est installé dans votre application. Si vous utilisez
 Composer et que vous souhaitez installer la dernière version 2.4, ajoutez
 ceci à votre ``composer.json`` :
@@ -316,9 +316,9 @@ Si vous n'êtes pas familiez avec le composant Validation de Symfony, lisez-en
 plus à son propos : :doc:`/book/validation`. Le composant Form vient avec la
 classe :class:`Symfony\\Component\\Form\\Extension\\Validator\\ValidatorExtension`,
 qui applique automatiquement la validation lorsque vos données sont liées.
-Ces erreurs sont ensuite mappées au bon champs et rendues.
+Ces erreurs sont ensuite mappées au bon champs et affichées.
 
-Votre intégration avec le composant Validation ressemblera à ceci ::
+Votre intégration avec le composant Validation ressemblera à ceci::
 
     use Symfony\Component\Form\Forms;
     use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
@@ -329,10 +329,10 @@ Votre intégration avec le composant Validation ressemblera à ceci ::
     $vendorValidatorDir =
         $vendorDir . '/symfony/validator/Symfony/Component/Validator';
 
-    // créez le validator - les détails variront
+    // créez le validator - les détails varieront
     $validator = Validation::createValidator();
 
-    // il y a des traductions fournis pour messages d'erreurs du coeur du composant
+    // il y a des traductions fournies pour les messages d'erreurs du coeur du composant
     $translator->addResource(
         'xlf',
         $vendorFormDir . '/Resources/translations/validators.en.xlf',
@@ -358,13 +358,13 @@ Accéder à la Form Factory
 
 Votre application n'a besoin que d'une form factory (usine de formulaire),
 et cette unique factory d'objet devrait être utilisée pour créer tous les
-objets form dans votre application. Cela signifie que vous devriez la
+objets Form dans votre application. Cela signifie que vous devriez la
 créer à un endroit central, au moment où votre application est bootstrappée
 puis y accéder lorsque vous souhaitez construire un formulaire.
 
 .. note::
 
-    Dans ce document, la form factory est toujours dans une varable locale
+    Dans ce document, la form factory est toujours dans une variable locale
     appelée ``$formFactory``. Le but ici est que vous aurez probablement
     besoin de créer cet objet de façon plus "globale" de manière à ce que
     vous puissiez y accéder depuis n'importe où.
@@ -372,12 +372,12 @@ puis y accéder lorsque vous souhaitez construire un formulaire.
 C'est à vous de déterminer la manière dont vous accéderez à cette form factory.
 Si utilisez un :term:`Service Container` (Conteneur de Services), vous devriez
 dont ajouter cette form factory à votre conteneur et le récupérer lorsque vous
-en aurez besoin.Si votre application utilise des variables globales ou statiques
+en aurez besoin. Si votre application utilise des variables globales ou statiques
 (pas une bonne idée en général), vous pouvez alors garder l'objet dans une classe
 statique ou une solution similaire.
 
-Sans prêter attention à comment vous avez architecturer votre application,
-souvenez-vous simplement que vous ne devez n'avoir une seule form factory
+Sans prêter attention à comment vous avez conçu votre application,
+souvenez-vous simplement que vous devriez n'avoir qu'une seule form factory
 et que vous aurez besoin d'y accéder partout dans votre application.
 
 .. _component-form-intro-create-simple-form:
@@ -388,10 +388,10 @@ Création d'un formulaire simple
 .. tip::
 
     Si vous utilisez le framework Symfony2, alors la form factory est disponible
-    automatiquement comme service appelé ``form.factory``. Aussi, la classe de
+    automatiquement comme service et est appelé ``form.factory``. Aussi, la classe de
     contrôleur de base par défaut possède la méthode
     :method:`Symfony\\Bundle\\FrameworkBundle\\Controller::createFormBuilder`,
-    qui est un raccourcis pour récupérer la form factory et appelle ``createBuilder``
+    qui est un raccourci pour récupérer la form factory et appelle ``createBuilder``
     dessus.
 
 La création d'un formulaire est faite via un objet
@@ -424,7 +424,7 @@ les champs du formulaire. Le form builder est créé depuis la form factory.
             public function newAction(Request $request)
             {
                 // createFormBuilder est un raccourci pour récupérer le "form factory"
-                // et appelle ensuita la méthode "createBuilder()" dessus
+                // et appellera ensuite la méthode "createBuilder()"
                 $form = $this->createFormBuilder()
                     ->add('task', 'text')
                     ->add('dueDate', 'date')
@@ -436,14 +436,14 @@ les champs du formulaire. Le form builder est créé depuis la form factory.
             }
         }
 
-Comme vous pouvez le voir, créer un formualaire c'est comme écrire une recette :
+Comme vous pouvez le voir, créer un formulaire est comme écrire une recette :
 vous appelez la méthode ``add`` pour chacun des champs que vous souhaitez créer. Le
-premier argument de la méthode ``add`` est le nom de votre champs, et le second
-est le "type" du champs. Le composant Form vient avec beaucoup de
-:doc:`types built-in </reference/forms/types>`.
+premier argument de la méthode ``add`` est le nom de votre champ, et le second
+est le "type" du champ. Le composant Form est fourni avec beaucoup de
+:doc:`types par défaut </reference/forms/types>`.
 
 Maintenant que vous avez construit votre formulaire, apprenez comment
-:ref:`le rendre <component-form-intro-rendering-form>` et effectuer
+:ref:`l'afficher <component-form-intro-rendering-form>` et effectuer
 :ref:`le traitement lors de la soumission de formulaire <component-form-intro-handling-submission>`.
 
 Réglage des valeurs par défaut
@@ -486,10 +486,10 @@ simplement les valeurs par défaut lorsque vous créez votre form builder :
 
 .. _component-form-intro-rendering-form:
 
-Le rendu du formulaire
-~~~~~~~~~~~~~~~~~~~~~~
+L'affichage du formulaire
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Maintenant que le formulaire a été créé, l'étape suivante est de le rendre.
+Maintenant que le formulaire a été créé, l'étape suivante est de l'afficher.
 C'est fait en passant l'objet spécial form "view" à votre template (notez
 le ``$form->createView()`` dans le contrôleur ci-dessus) et en utilisant
 une suite de fonctions helper du formulaire :
@@ -505,11 +505,11 @@ une suite de fonctions helper du formulaire :
 .. image:: /images/book/form-simple.png
     :align: center
 
-Et voilà ! En écrivant ``form_widget(form)``, chaque champs dans le
-formulaire est rendu, avec son label et le message d'erreur (s'il y
+Et voilà ! En écrivant ``form_widget(form)``, chaque champ du
+formulaire est affiché avec son label et le message d'erreur (s'il y
 en a un). C'est très facile, mais (pas encore) très flexible. Généralement,
-vous voudrez rendre chaque champs de votre formulaire individuellement
-ainsi vous pourrez controller le look de votre formulaire. Vous apprendrez
+vous voudrez afficher chaque champs de votre formulaire individuellement
+ainsi vous pourrez contrôler le look de votre formulaire. Vous apprendrez
 comment le faire dans la session ":ref:`form-rendering-template`".
 
 .. _component-form-intro-handling-submission:
@@ -575,22 +575,22 @@ la méthode :method:`Symfony\\Component\\Form\\Form::handleRequest` :
             // ...
         }
 
-Ceci définit le "workflow" commun, contennat 3 possibilités différentes :
+Ceci définit le "workflow" commun, contenant 3 possibilités différentes :
 
 1) Sur la requête en GET initiale (i.e. lorsque l'utilisateur "surfe" sur
-   votre page), il y a construction du formulaire et rendu de celui-ci;
+   votre page), il y a construction du formulaire et affichage de celui-ci;
 
 Si la requête est en POST, traitez les données soumises (via ``handleRequest()``).
 Puis :
 
-2) si le formulaire est invalide, rendez à nouveau le formulaire (qui contiendra
+2) si le formulaire est invalide, affichez à nouveau le formulaire (qui contiendra
 maintenant les erreurs);
 3) si le formulaire est valide, effectuez les actions nécessaires et redirigez
    l'utilisateur.
 
 Heureusement, vous n'avez pas besoin de décider si oui ou non un formulaire
 a été soumis. Passez simplement la requête courante à la méthode ``handleRequest()``.
-Puis, le composant formulaire fera tout ce qui est nécessaire de faire pour vous.
+Puis, le composant formulaire fera tout ce qui est nécessaire à votre place.
 
 .. _component-form-intro-validation:
 
@@ -598,7 +598,7 @@ Validation de formulaire
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 La façon la plus simple pour ajouter de la validation à votre formulaire
-est de la faire via l'option ``constraints`` lors de la construction de
+est de le faire via l'option ``constraints`` lors de la construction de
 chaque champ :
 
 .. configuration-block::
@@ -638,7 +638,7 @@ chaque champ :
             ->getForm();
 
 Lorsque le formulaire est bindé (lié), ces contraintes de validation seront
-automatiquement appliquées et les erreurs seront affichées près du champs
+automatiquement appliquées et les erreurs seront affichées près du champ
 concerné par l'erreur.
 
 .. note::
@@ -648,4 +648,4 @@ concerné par l'erreur.
 
 .. _Packagist: https://packagist.org/packages/symfony/form
 .. _Twig:      http://twig.sensiolabs.org
-.. _`Twig Configuration`: http://twig.sensiolabs.org/doc/intro.html
+.. _`Configuration Twig`: http://twig.sensiolabs.org/doc/intro.html
