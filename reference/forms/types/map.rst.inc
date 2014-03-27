@@ -50,7 +50,7 @@ Champs cachés
 * :doc:`hidden </reference/forms/types/hidden>`
 
 Boutons
-~~~~~~~~
+~~~~~~~
 
 * :doc:`button</reference/forms/types/button>`
 * :doc:`reset</reference/forms/types/reset>`
