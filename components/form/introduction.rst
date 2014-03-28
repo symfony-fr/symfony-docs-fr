@@ -370,7 +370,7 @@ puis y accéder lorsque vous souhaitez construire un formulaire.
     vous puissiez y accéder depuis n'importe où.
 
 C'est à vous de déterminer la manière dont vous accéderez à cette form factory.
-Si utilisez un :term:`Service Container` (Conteneur de Services), vous devriez
+Si utilisez un :term:`Conteneur de services`, vous devriez
 dont ajouter cette form factory à votre conteneur et le récupérer lorsque vous
 en aurez besoin. Si votre application utilise des variables globales ou statiques
 (pas une bonne idée en général), vous pouvez alors garder l'objet dans une classe
@@ -586,7 +586,7 @@ Puis :
 2) si le formulaire est invalide, affichez à nouveau le formulaire (qui contiendra
 maintenant les erreurs);
 3) si le formulaire est valide, effectuez les actions nécessaires et redirigez
-   l'utilisateur.
+l'utilisateur.
 
 Heureusement, vous n'avez pas besoin de décider si oui ou non un formulaire
 a été soumis. Passez simplement la requête courante à la méthode ``handleRequest()``.
