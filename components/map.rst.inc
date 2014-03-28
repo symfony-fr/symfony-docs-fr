@@ -16,11 +16,18 @@
   * :doc:`/components/console/introduction`
   * :doc:`/components/console/usage`
   * :doc:`/components/console/single_command_tool`
+  * :doc:`/components/console/changing_default_command`
+  * :doc:`/components/console/events`
   * :doc:`/components/console/helpers/index`
 
 * **CSS Selector**
 
   * :doc:`/components/css_selector`
+
+* :doc:`/components/debug/index`
+
+  * :doc:`/components/debug/introduction`
+  * :doc:`/components/debug/class_loader`
 
 * :doc:`/components/dependency_injection/index`
 
@@ -51,6 +58,11 @@
 * **Finder**
 
   * :doc:`/components/finder`
+
+* :doc:`/components/form/index`
+
+  * :doc:`/components/form/introduction`
+  * :doc:`/components/form/type_guesser`
 
 * :doc:`/components/http_foundation/index`
 

@@ -539,7 +539,7 @@ Dans un formulaire, vous pouvez écouter les évènements suivants:
     Le comportement de l'évènement ``POST_SUBMIT`` a changé dans la version 2.2.6. Ci-dessous,
     un exemple d'utilisation.
 
-La solution est d'éjouter un écouteur ``POST_SUBMIT`` sur le champ dont votre nouveau
+La solution est d'ajouter un écouteur ``POST_SUBMIT`` sur le champ dont votre nouveau
 champ dépend. Si vous ajoutez un écouteur ``POST_SUBMIT`` sur un champ enfant (ex ``sport``),
 et ajoutez un nouvel enfant au formulaire parent, le composant Form détectera automatiquement le
 nouveau champ et lui associera les données soumises par le client.
@@ -601,7 +601,7 @@ Mais il manque encore la mise à jour du formulaire côté client après que la
 sélection du sport a été faite. Cela devrait être fait grâce à un appel AJAX
 dans votre application. Dans ce controller, vous pourrez soumettre votre
 formulaire, mais au lieu de le traiter, simplement utiliser le formulaire
-soumis pour afficher les champs mises à jour. La réponse de l'appel AJAX
+soumis pour afficher les champs mis à jour. La réponse de l'appel AJAX
 pourra alors être utilisée pour mettre à jour la vue.
 
 .. _cookbook-dynamic-form-modification-suppressing-form-validation:

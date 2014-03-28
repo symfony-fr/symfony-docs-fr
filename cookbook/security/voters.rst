@@ -164,6 +164,8 @@ en tant que service, et le tagger comme un « security.voter » :
    concernant la définition de services en général, lisez le chapitre
    :doc:`/book/service_container`.
 
+.. _security-voters-change-strategy:
+
 Changer la stratégie de décision d'accès
 ----------------------------------------
 

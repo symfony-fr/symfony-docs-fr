@@ -339,6 +339,8 @@ The ``alias`` key of the tag is the type of field that this extension should
 be applied to. For example, to apply the extension to any form/field, use the
 "form" value.
 
+.. _reference-dic-type_guesser:
+
 form.type_guesser
 -----------------
 
