@@ -162,14 +162,14 @@ riche.
 
 Pour utiliser cette intégration, vous aurez besoin de ``TwigBridge``, fournissant
 une intégration entre Twig et quelques composants Symfony2. Si vous utilisez Composer,
-vous pouvez installer la dernière version 2.4 en ajoutant la ligne ``require``
+vous pouvez installer la dernière version 2.3 en ajoutant la ligne ``require``
 suivante dans votre fichier ``composer.json``:
 
 .. code-block:: json
 
     {
         "require": {
-            "symfony/twig-bridge": "2.4.*"
+            "symfony/twig-bridge": "2.3.*"
         }
     }
 
@@ -247,15 +247,15 @@ ces deux filtres vous-même, via une extension Twig.
 Pour utiliser l'intégration fournie par défaut, assurez-vous que votre projet
 dispose des composants de Symfony Traduction et doc:`Config </components/config/introduction>`
 installés. Si vous utilisez Composer, vous pouvez récupérer la dernière
-version 2.4 de ces composants en ajoutant les lignes suivantes à votre
+version 2.3 de ces composants en ajoutant les lignes suivantes à votre
 fichier ``composer.json`` :
 
 .. code-block:: json
 
     {
         "require": {
-            "symfony/translation": "2.4.*",
-            "symfony/config": "2.4.*"
+            "symfony/translation": "2.3.*",
+            "symfony/config": "2.3.*"
         }
     }
 
@@ -301,7 +301,7 @@ ou un objet) et passez les à votre propre système de validation.
 
 Pour utiliser l'intégration avec le composant Validation, premièrement
 assurez-vous qu'il est installé dans votre application. Si vous utilisez
-Composer et que vous souhaitez installer la dernière version 2.4, ajoutez
+Composer et que vous souhaitez installer la dernière version 2.3, ajoutez
 ceci à votre ``composer.json`` :
 
 .. code-block:: json
