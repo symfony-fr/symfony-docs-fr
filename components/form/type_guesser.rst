@@ -36,7 +36,7 @@ Cette interface requiert 4 méthodes :
 * :method:`Symfony\\Component\\Form\\FormTypeGuesserInterface::guessPattern` -
   esssaie de deviner la valeur de l'option :ref:`pattern <reference-form-option-pattern>`.
 
-Commencez par créer la classe et ces méthodes. Ensuite, vous apprendrez comment les implémenter.
+Commencez par créer la classe et ses méthodes. Ensuite, vous apprendrez comment les implémenter.
 
 .. code-block:: php
 
@@ -78,13 +78,13 @@ Le constructeur ``TypeGuess`` requiert 3 options :
   deviné, cela doit être fixé avec un tableau vide;
 * Le niveau de confiance (ou probabilité) indiquant que le type deviné
   est correct. Cela peut être l'une des constantes de la classe
-  :class:`Symfony\\Component\\Form\\Guess\Guess` : ``LOW_CONFIDENCE``,
+  :class:`Symfony\\Component\\Form\\Guess\\Guess` : ``LOW_CONFIDENCE``,
   ``MEDIUM_CONFIDENCE``, ``HIGH_CONFIDENCE``, ``VERY_HIGH_CONFIDENCE``. Après
-  que tous les type guessers ont été exécutés, le type avec la confiance
+  que tous les types guessers ont été exécutés, le type avec la confiance
   la plus haute est executé.
 
 Avec ce que vous venez d'apprendre, vous pouvez facilement implémenter la méthode
-``guessType``de ``PHPDocTypeGuesser``::
+``guessType`` de ``PHPDocTypeGuesser`` ::
 
     namespace Acme\Form;
 
@@ -98,13 +98,13 @@ Avec ce que vous venez d'apprendre, vous pouvez facilement implémenter la méth
             $annotations = $this->readPhpDocAnnotations($class, $property);
 
             if (!isset($annotations['var'])) {
-                return; // devine que rien n'est disponible dans l'annoration @var
+                return; // devine que rien n'est disponible dans l'annotation @var
             }
 
             // le cas échéant, basez le type sur l'annotation @var
             switch ($annotations['var']) {
                 case 'string':
-                    // il y a une haute probabilité que le type soit une string
+                    // il y a une forte probabilité que le type soit une string
                     // lorsque @var string est utilisé
                     return new TypeGuess('text', array(), Guess::HIGH_CONFIDENCE);
 
@@ -167,8 +167,8 @@ ne pas être fixée.
     une valeur minimum ou maximum de ce float (par exemple vous voulez qu'un
     float soit plus grand que ``5``, ``4.512313`` n'est pas valide alors que
     ``length(4.512314) > length(5)`` l'est, donc le motif reussira). Dans
-    ce cas, la valeur devrit être fixée à ``null``avec une confiance à
-    ``MEDIUM_CONFIDENCE``.
+    ce cas, la valeur devrit être fixée à ``null`` avec une confiance
+    à ``MEDIUM_CONFIDENCE``.
 
 Enregistrer un Type Guesser
 ---------------------------
@@ -192,4 +192,4 @@ personnalisé en utilisant la méthode
 
     Lorsque vous utilisez le framework Symfony, vous devez enregistrer votre type guesser
     en tant que service et le taguer avec ``form.type_guesser``. Pour plus d'informations,
-    consultez :ref:`les tags de l'Injection de Dépendances <reference-dic-type_guesser>`.
+    consultez :ref:`les tags supportés par le Conteneur d'Injection Dépendances <reference-dic-type_guesser>`.
