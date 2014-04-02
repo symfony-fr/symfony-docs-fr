@@ -33,7 +33,7 @@ afin de formatter un nombre donné en un prix::
         public function getFilters()
         {
             return array(
-                'price' => new \Twig_Filter_Method($this, 'priceFilter'),
+                new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
             );
         }
         
