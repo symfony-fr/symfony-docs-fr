@@ -103,7 +103,7 @@ Utiliser les accesseurs
 La méthode  ``getValue`` supporte également la lecture en utilisant les
 accesseurs. La méthode sera créée en utilisant les conventions de nommage
 communes pour les accesseurs. Elle "camelize" le nom de la propriété (
-``first_name``devient ``FirstName``) et le préfixe par ``get``. Donc la
+``first_name`` devient ``FirstName``) et le préfixe par ``get``. Donc la
 méthode devient ``getFirstName`` ::
 
     // ...
@@ -247,7 +247,7 @@ la méthode :method:`PropertyAccessor::setValue<Symfony\\Component\\PropertyAcce
 Ecrire dans des objets
 ----------------------
 
-La méthode ``setValue`` dispose des même fonctionnalités que la méthode
+La méthode ``setValue`` dispose des mêmes fonctionnalités que la méthode
 ``getValue``. Vous pouvez utiliser les setters (mutateurs), la méthode
 magique ``__set``ou les propriétés pour écrire des valeurs ::
 
