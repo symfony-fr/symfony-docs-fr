@@ -459,7 +459,7 @@ propriété ``tags`` de l'objet ``Task``.
             // ...
 
             /**
-             * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"})
+             * @ORM\OneToMany(targetEntity="Tag", cascade={"persist"})
              */
             protected $tags;
 
