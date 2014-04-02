@@ -643,7 +643,7 @@ ces détails dans la documentation de chaque type.
     En d'autres termes, l'option ``required`` est « cool », mais une réelle validation
     côté serveur devrait *toujours* être mise en place.
 
-.. sidebar:: The ``label`` option
+.. sidebar:: L'option ``label``
 
     Le label d'un champ de formulaire peut être défini grâce à l'option ``label``,
     qui s'applique à n'importe quel champ::
