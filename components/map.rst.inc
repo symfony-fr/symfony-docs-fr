@@ -83,6 +83,10 @@
 
   * :doc:`/components/process`
 
+* :doc:`/components/property_access/index`
+
+  * :doc:`/components/property_access/introduction`
+
 * **Routing**
 
   * :doc:`/components/routing`
