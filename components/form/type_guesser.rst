@@ -167,7 +167,7 @@ ne pas être fixée.
     une valeur minimum ou maximum de ce float (par exemple vous voulez qu'un
     float soit plus grand que ``5``, ``4.512313`` n'est pas valide alors que
     ``length(4.512314) > length(5)`` l'est, donc le motif reussira). Dans
-    ce cas, la valeur devrit être fixée à ``null`` avec une confiance
+    ce cas, la valeur devrait être fixée à ``null`` avec une confiance
     à ``MEDIUM_CONFIDENCE``.
 
 Enregistrer un Type Guesser
@@ -192,4 +192,4 @@ personnalisé en utilisant la méthode
 
     Lorsque vous utilisez le framework Symfony, vous devez enregistrer votre type guesser
     en tant que service et le taguer avec ``form.type_guesser``. Pour plus d'informations,
-    consultez :ref:`les tags supportés par le Conteneur d'Injection Dépendances <reference-dic-type_guesser>`.
+    consultez :ref:`les tags supportés par le Conteneur d'Injection de Dépendances <reference-dic-type_guesser>`.
