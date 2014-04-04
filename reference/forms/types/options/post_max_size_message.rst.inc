@@ -5,7 +5,7 @@ post_max_size_message
 
 Il s'agit du message de validation qui est utilisé si la taille des
 données soumises en POST excède la directive ``post_max_size`` du ``php.ini``.
-La variable ``{{ max }}``peut être utilisée pour afficher la taille autorisée.
+La variable ``{{ max }}`` peut être utilisée pour afficher la taille autorisée.
 
 .. note:
     

@@ -9,15 +9,18 @@ Les Composants
     config/index
     console/index
     css_selector
-    dom_crawler
+    debug/index
     dependency_injection/index
+    dom_crawler
     event_dispatcher/index
     filesystem
     finder
+    form/index
     http_foundation/index
     http_kernel/index
     locale
     process
+    property_access/index
     routing
     security/index
     serializer
