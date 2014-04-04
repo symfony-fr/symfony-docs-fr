@@ -38,7 +38,7 @@ le conteneur dans un contrôleur::
 
     $logger = $this->get('logger');
     $logger->info('Nous avons récupéré le logger');
-    $logger->err('Une erreur est survenue');
+    $logger->error('Une erreur est survenue');
 
 .. tip::
 
