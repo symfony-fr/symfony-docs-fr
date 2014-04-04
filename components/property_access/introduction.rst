@@ -48,7 +48,7 @@ Ceci est fait en utilisant la notation d'indice qui est utilisée dans PHP ::
     echo $accessor->getValue($person, '[first_name]'); // 'Wouter'
     echo $accessor->getValue($person, '[age]'); // null
 
-Comme vous pouvez le voir, la méthode va retourner ``null` si l'index
+Comme vous pouvez le voir, la méthode va retourner ``null`` si l'index
 n'existe pas.
 
 Vous pouvez également utiliser les tableaux multi dimensionnels ::
@@ -69,7 +69,7 @@ Vous pouvez également utiliser les tableaux multi dimensionnels ::
 Lire depuis des Objets
 ----------------------
 
-La méthode ``getValue``est une méthode très robuste, et vous pouvez voir
+La méthode ``getValue`` est une méthode très robuste, et vous pouvez voir
 toutes ses fonctionnalités lorsque vous travaillez avec des objets.
 
 Accéder aux propriétés publiques
@@ -158,7 +158,7 @@ chose comme ça ::
 Cela aura pour résultat : ``He is an author``
 
 La méthode magique ``__get()``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La méthode ``getValue` peut également utiliser la méthode
 magique ``__get`` ::
@@ -249,7 +249,7 @@ Ecrire dans des objets
 
 La méthode ``setValue`` dispose des mêmes fonctionnalités que la méthode
 ``getValue``. Vous pouvez utiliser les setters (mutateurs), la méthode
-magique ``__set``ou les propriétés pour écrire des valeurs ::
+magique ``__set`` ou les propriétés pour écrire des valeurs ::
 
     // ...
     class Person
@@ -281,7 +281,7 @@ magique ``__set``ou les propriétés pour écrire des valeurs ::
     echo $person->getLastName(); // 'de Jong'
     echo $person->children; // array(Person());
 
-Vous pouvez également utiliser ``__call``pour écrire des valeurs mais vous
+Vous pouvez également utiliser ``__call`` pour écrire des valeurs mais vous
 avez besoin d'activer la fonctionnalités. Consultez `Activer d'autres fonctionnalités`_.
 
 .. code-block:: php
