@@ -9,7 +9,6 @@ Les Composants
     config/index
     console/index
     css_selector
-    debug/index
     dependency_injection/index
     dom_crawler
     event_dispatcher/index
