@@ -290,7 +290,7 @@ via la méthode
 
     $response->setCharset('ISO-8859-1');
 
-Notez que par défaut, Symfony assume que vos réponses sont encodées en UTF-8.
+Notez que par défaut, Symfony présume que vos réponses sont encodées en UTF-8.
 
 Envoyer la réponse
 ~~~~~~~~~~~~~~~~~~
