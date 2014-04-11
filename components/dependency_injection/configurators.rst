@@ -13,7 +13,7 @@ méthode statique d'une classe. L'instance du service est passé à une fonction
 de rappel permettant au configurateur d'effectuer ce qui est nécessaire à la
 configuration du service après sa création.
 
-Le configurateur de service peut être utiliser, par exemple, quand vous avez
+Le configurateur de service peut être utilisé, par exemple, quand vous avez
 un service qui nécessite une configuration complexe basée sur des paramètres de
 configuration provenant de différentes sources/services. En utilisant un configurateur
 externe, vous pouvez maintenir l'implementation du service proprement et le garder

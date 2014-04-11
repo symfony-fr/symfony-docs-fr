@@ -87,6 +87,6 @@ Vous pouvez aussi définir la limite de temps en secondes :
 
     $ php app/console swiftmailer:spool:send --time-limit=10 --env=prod
 
-Bien sûr, vous ne voudrez pas exécuter ceci manuellement dans la réalité.
+Bien sûr, vous n'avez pas besoin de lancer cette tâche manuellement.
 A la place, la commande de la console devrait être lancée par une tâche cron
 ou une tâche planifiée et exécutée à intervalle régulier.

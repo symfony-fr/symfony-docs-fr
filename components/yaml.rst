@@ -15,9 +15,9 @@ convertir en tableaux PHP.
 Il est aussi capable de convertir des tableaux PHP en chaînes de caractères YAML.
 
 `YAML`_, *YAML Ain't Markup Language* (litéralement : « YAML n'est pas un langage
-de balises » en français), est un standard de sérialisation de données compréhensible
-facilement par l'humain pour tous les langages de programmation. YAML est un format
-génial pour vos fichiers de configuration. Les fichiers YAML sont aussi parlants que
+de balises » en français), est un standard de sérialisation de données facilement
+compréhensible par l'humain pour tous les langages de programmation. YAML est un format
+génial pour vos fichiers de configuration. Les fichiers YAML sont aussi parlant que
 des fichiers XML et aussi lisibles que des fichiers INI.
 
 Le Composant YAML de Symfony2 implémente la version 1.2 de la spécification YAML.

@@ -25,18 +25,17 @@ clonez votre dépot :
 
     $ git clone git://github.com/YOURUSERNAME/symfony-docs.git
 
-Conformément au code source de Symfony, le dépôt de la documentation est séparé en trois
-branches : ``2.0`` pour la dernière version de Symfony 2.0.x, ``2.1`` pour la
-dernière version de SYmfony 2.1.x et ``master`` qui est la branche de développement
-des versions à venir.
+Conformément au code source de Symfony, le dépôt de la documentation est séparé en
+ de multiples branches correspondant aux différentes versions de Symfony.
+ La branche ``master`` est la branche de développement des versions à venir.
 
 A moins que vous ne documentiez une fonctionnalité nouvelle, vos changements
-doivent toujours être basés sur la branche 2.0 plutôt que sur la branche master.
-Pour effectuer ceci faites un ``checkout`` la branche 2.0 :
+doivent toujours être basés sur la branche 2.3 plutôt que sur la branche master.
+Pour effectuer ceci faites un ``checkout`` la branche 2.3 :
 
 .. code-block:: bash
 
-    $ git checkout 2.0
+    $ git checkout 2.3
 
 
 Ensuite, créez une branche dédiée pour vos changements :
@@ -53,16 +52,16 @@ initiez une requête (pull request). Celle-ci devra être entre votre branche
 .. image:: /images/docs-pull-request.png
    :align: center
 
-Si vous avez basé vos changement sur la branche 2.0 vous devez changer la branche
-de base pour qu'elle soit 2.0 sur la page de prévisualisation :
+Si vous avez basé vos changement sur la branche 2.3 vous devez changer la branche
+de base pour qu'elle soit 2.3 sur la page de prévisualisation :
 
 .. image:: /images/docs-pull-request-change-base.png
    :align: center
 
 .. note::
   
-  Tout les changements faits sur la branche 2.0 seront mergés chaque semaine dans la
-  branche 2.1 qui sera ensuite mergée sur la branche master pour la prochaine version.
+  Tout les changements faits sur la branche 2.3 seront mergés chaque semaine dans la
+  branche 2.4 qui sera ensuite mergée sur la branche master pour la prochaine version.
 
 GitHub explique en détail les requêtes de mise à jour ou `pull requests`_ .
 
