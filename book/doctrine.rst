@@ -461,7 +461,7 @@ nécessaires aux entités connues dans votre application. Pour ce faire, exécut
     ``Product`` et relancez cette tâche, elle vous génèrera une requête « alter table »
     nécessaire pour ajouter cette nouvelle colonne à la table ``products`` existante.
 
-    Une façon encore meilleure de profiter de cette fonctionnalité est d'utiliser
+    Une meilleure façon de profiter de cette fonctionnalité est d'utiliser
     les :doc:`migrations</bundles/DoctrineMigrationsBundle/index>`, qui vous permettent de
     générer ces requêtes SQL et de les stocker dans des classes de migration
     qui peuvent être lancées systématiquement sur vos serveurs de production
@@ -586,7 +586,7 @@ d'entités avec::
 .. note::
 
     La chaîne ``AcmeStoreBundle:Product`` est un raccourci que vous pouvez utiliser
-    n'importe ou dans Doctrine au lieu du nom complet de la classe de l'entité
+    n'importe où dans Doctrine au lieu du nom complet de la classe de l'entité
     (c.à.d ``Acme\StoreBundle\Entity\Product``). Tant que vos entités sont disponibles
     sous l'espace de nom ``Entity`` de votre bundle, cela fonctionnera.
 
