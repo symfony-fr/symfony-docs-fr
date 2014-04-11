@@ -65,4 +65,4 @@ Options disponibles
 
     .. code-block:: bash
 
-        php app/console generate:bundle --structure=
+        php app/console generate:bundle --structure
