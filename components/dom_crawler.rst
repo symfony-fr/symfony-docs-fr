@@ -48,6 +48,16 @@ et :class:`Symfony\\Component\\DomCrawler\\Form` sont utiles pour interagir
 avec des liens et formulaires HTML lorsque vous naviguez au travers de
 l'arbre HTML.
 
+.. note::
+
+    Le DomCrawler va essayer de réparer automatiquement votre HTML 
+    pour correspondre à la spécification officielle. 
+    Par exemple, si vous insérez une balise <p> dans une autre <p>,
+    il sera déplacé pour être un frère de la balise parent.
+    Ceci est prévu et fait partie de la spécification HTML5.
+    Mais si vous obtenez un comportement inattendu,
+    alors ceci pourrait être la cause.
+
 Filtrage de Noeud
 ~~~~~~~~~~~~~~~~~
 
