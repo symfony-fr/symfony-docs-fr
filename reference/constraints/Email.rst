@@ -28,7 +28,7 @@ Utilisation de base
             properties:
                 email:
                     - Email:
-                        message: '{{ value }}' n'est pas un email valide.
+                        message: "'{{ value }}' n'est pas un email valide."
                         checkMX: true
 
     .. code-block:: php-annotations
