@@ -26,7 +26,7 @@ que vous voulez alimenter selon la valeur du champ "pays".
 
 .. _cookbook-form-events-underlying-data:
 
-Peronnaliser un formulaire en se basant sur les données
+Personnaliser un formulaire en se basant sur les données
 -------------------------------------------------------
 
 Avant de se lancer directement dans la génération dynamique de formulaire,
