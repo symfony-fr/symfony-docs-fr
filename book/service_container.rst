@@ -39,7 +39,7 @@ le conteneur de services facilite l'écriture de code de qualité.
 Qu'est-ce qu'un Service ?
 -------------------------
 
-Dis simplement, un :term:`Service` désigne tout objet PHP qui effectue une sorte de
+Dit simplement, un :term:`Service` désigne tout objet PHP qui effectue une sorte de
 tâche « globale ». C'est un nom générique utilisé en informatique
 pour décrire un objet qui est créé dans un but précis (par ex. l'envoi des
 emails). Chaque service est utilisé tout au long de votre application lorsque vous avez besoin
