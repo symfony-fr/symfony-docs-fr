@@ -631,12 +631,14 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
                 throw $this->createNotFoundException('Aucune tâche trouvée pour cet id : '.$id);
             }
 
-            $originalTags = array();
-
+            $originalTags = new ArrayCollection();
+            
             // Crée un tableau contenant les objets Tag courants de la
             // base de données
-            foreach ($task->getTags() as $tag) $originalTags[] = $tag;
-          
+            foreach ($task->getTags() as $tag) {
+                $originalTags->add($tag);
+            }          
+
             $editForm = $this->createForm(new TaskType(), $task);
 
             if ($request->isMethod('POST')) {
