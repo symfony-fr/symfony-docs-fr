@@ -688,8 +688,8 @@ ci-dessus), ces options sont appliquées au champ prédit.
 
 .. caution::
 
-    Si votre formulaire utilise un groupe de validation spéficique, le
-    prédicateur de type de champ continuera toujours à considérer *toutes*
+    Si votre formulaire utilise un groupe de validation spécifique, le
+    prédicteur de type de champ continuera toujours à considérer *toutes*
     les contraintes de validation lorsqu'il essaie de deviner les types
     de champ (incluant les contraintes qui ne font pas partie du ou des groupes
     qui sont utilisés).
