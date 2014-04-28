@@ -34,5 +34,5 @@ aucune valeur n'est sélectionnée, vous pouvez le faire comme ceci :
 
 .. note::
 
-    Si vous voulez définir l'otion ``empty_data`` pour l'intégralité de la
+    Si vous voulez définir l'option ``empty_data`` pour l'intégralité de la
     la classe du formulaire, allez à l'article suivant :doc:`/cookbook/form/use_empty_data`
