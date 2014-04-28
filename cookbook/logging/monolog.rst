@@ -23,7 +23,7 @@ gestionnaires peuvent être partagés).
 
 Le gestionnaire par défaut est le ``StreamHandler`` qui écrit les logs
 dans un « stream » (par défaut dans le fichier ``app/logs/prod.log`` dans
-l'environnement de production et dans ``app/logs/dev.log`` dans l'environnment
+l'environnement de production et dans ``app/logs/dev.log`` dans l'environnement
 de développement).
 
 Monolog est aussi livré avec un puissant gestionnaire intégré pour le « logging »
