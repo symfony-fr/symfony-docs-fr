@@ -66,16 +66,22 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
         $ rm -rf .git
 
     Pour une version exacte, remplacez `dev-master` par la dernière version de
-    Symfony (ex : 2.1.1). Pour plus de détails, lisez `Installation de Symfony`_
+    Symfony (ex : 2.4.4). Pour plus de détails, lisez `Installation de Symfony`_
+    
+Avant d'exécuter Symfony2, utilisez la commande ci-dessous pour vérifier si votre système
+remplit tous les prérequis.
+
+.. code-block:: bash
+
+    $ php ./app/check.php
+
+Corrigez les erreurs reportées par la commande vous pouvez ensuite utiliser Symfony.
 
 .. tip::
 
     Si vous avez PHP 5.4, vous pouvez utiliser le serveur web intégré :
 
     .. code-block:: bash
-
-        # vérifie votre configuration PHP pour la ligne de commandes (« CLI » en anglais)
-        $ php ./app/check.php
 
         # démarre le serveur web intégré
         $ php ./app/console server:run
@@ -166,28 +172,35 @@ Routing
 
 Symfony2 achemine la requête vers le code qui la gère en essayant d'associer l'URL
 demandée à des masques prédéfinis. Par défaut, ces masques (appelés routes) sont
-définis dans le fichier de configuration ``app/config/routing.yml`` :
+définis dans le fichier de configuration ``app/config/routing_dev.yml`` :
 
 .. code-block:: yaml
 
     # app/config/routing_dev.yml
-    _welcome:
-        pattern:  /
-        defaults: { _controller: AcmeDemoBundle:Welcome:index }
+    # ...
+    
+    # AcmeDemoBundle routes (to be removed)
+    _acme_demo:
+        resource: "@AcmeDemoBundle/Resources/config/routing.yml"
 
+Ce bout de code importe un fichier routing.yml qui défini les routes de la démo :
+
+.. code-block:: yaml
+    # src/Acme/DemoBundle/Resources/config/routing.yml
+    _welcome:
+        path:     /
+        defaults: { _controller: AcmeDemoBundle:Welcome:index }
+    
     _demo:
         resource: "@AcmeDemoBundle/Controller/DemoController.php"
         type:     annotation
         prefix:   /demo
-
-   # ...
 
 Les trois premières lignes (après le commentaire) définissent le code qui sera
 exécuté quand l'utilisateur demandera la ressource «``/``» (c'est-à-dire la page
 d'accueil que vous avez vu tout à l'heure). Suite à cette requête, le contrôleur
 ``AcmeDemoBundle:Welcome:index`` sera exécuté. Dans la section suivante, vous 
 comprendrez exactement ce que cela signifie vraiment.
-
 
 .. tip::
     
@@ -294,7 +307,7 @@ la clé ``_demo``:
 
 .. code-block:: yaml
 
-    # app/config/routing_dev.yml
+    # src/Acme/DemoBundle/Resources/config/routing.yml
     _demo:
         resource: "@AcmeDemoBundle/Controller/DemoController.php"
         type:     annotation
