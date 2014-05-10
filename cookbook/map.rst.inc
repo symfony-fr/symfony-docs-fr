@@ -128,6 +128,14 @@
   * :doc:`/cookbook/service_container/scopes`
   * :doc:`/cookbook/service_container/compiler_passes`
 
+* :doc:`/cookbook/session/index`
+
+  * :doc:`/cookbook/session/proxy_examples`
+  * :doc:`/cookbook/session/locale_sticky_session`
+  * :doc:`/cookbook/session/sessions_directory`
+  * :doc:`/cookbook/session/php_bridge`
+  * :doc:`/cookbook/session/limit_metadata_writes`
+
 * **symfony1**
 
   * :doc:`/cookbook/symfony1`

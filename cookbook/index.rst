@@ -23,6 +23,7 @@ Le Cookbook
     security/index
     serializer
     service_container/index
+    session/index
     symfony1
     templating/index
     testing/index
