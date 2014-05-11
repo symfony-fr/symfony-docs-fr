@@ -391,7 +391,7 @@ différents :
 
 * ``path/to/bundle/Resources/views/`` : Chaque bundle place ses
   templates dans son dossier ``Resources/views`` (et sous dossiers). La
-  plupart des templates résident au sein d'un bundle.
+  plupart des templates réside au sein d'un bundle.
 
 Symfony2 utilise une chaîne de caractères au format
 **bundle**:**controller**:**template** pour les templates. Cela permet plusieurs
