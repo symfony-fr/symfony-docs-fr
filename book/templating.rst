@@ -356,8 +356,8 @@ astuces à l'esprit :
 * Si vous vous retrouvez à dupliquer du contenu dans plusieurs templates, cela
   veut probablement dire que vous devriez déplacer ce contenu dans un 
   ``{% block  %}`` d'un template parent. Dans certain cas, la meilleure solution 
-  peut être de déplacer le contenu dans un nouveau template et de l'``include`` 
-  (voir :ref:`including-templates`).
+  peut être de déplacer le contenu dans un nouveau template et de l'inclure avec
+  la directive``include`` (voir :ref:`including-templates`).
 
 * Si vous avez besoin de récupérer le contenu d'un bloc d'un template parent,
   vous pouvez utiliser la fonction ``{{ parent() }}``. C'est utile si on
@@ -389,8 +389,8 @@ différents :
   l'application) ou les templates qui surchargent les templates des bundles
   (voir :ref:`overriding-bundle-templates`);
 
-* ``path/to/bundle/Resources/views/`` : Chaque bundle place leurs
-  templates dans leur dossier ``Resources/views`` (et sous dossiers). La
+* ``path/to/bundle/Resources/views/`` : Chaque bundle place ses
+  templates dans son dossier ``Resources/views`` (et sous dossiers). La
   plupart des templates résident au sein d'un bundle.
 
 Symfony2 utilise une chaîne de caractères au format
