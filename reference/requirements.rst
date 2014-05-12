@@ -28,7 +28,7 @@ Obligatoires
 .. caution::
 
     Symfony2 est sujet à des bugs lorsqu'il est utilisé avec une version de PHP
-    inférieure à 5.3.8 ou égale à 5.3.16. Pour plus d'informations, veuillez consulte
+    inférieure à 5.3.8 ou égale à 5.3.16. Pour plus d'informations, veuillez consulter
     `la section "Requirements" du README`_.
     
 Facultatives
