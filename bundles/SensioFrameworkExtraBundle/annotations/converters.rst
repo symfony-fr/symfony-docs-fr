@@ -146,7 +146,7 @@ Si vous voulez spécifier la méthode du repository à utiliser pour trouver l'e
 ``repository_method`` :
 
     /**
-     * @Route("/blog/{post_id}")
+     * @Route("/blog/{id}")
      * @ParamConverter("post", class="SensioBlogBundle:Post", options={"repository_method" = "findWithJoins"})
      */
     public function showAction(Post $post)
