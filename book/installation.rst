@@ -291,7 +291,7 @@ S'il y a des problèmes, corrigez-les maintenant avant de poursuivre.
 
         umask(0000); // Définit une permission 0777
 
-    Notez qu'utiliser l'ALC est recommandé si vous y avez accès sur votre serveur
+    Notez qu'utiliser l'ACL est recommandé si vous y avez accès sur votre serveur
     car changer le umask n'est pas sûr.
 
 Lorsque tout est bon, cliquez sur « Go to the Welcome page » pour afficher votre

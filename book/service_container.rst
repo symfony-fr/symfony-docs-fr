@@ -707,7 +707,7 @@ valeur très spécifique dans un service.
 
 Par exemple, supposez que vous avez un service tiers (non présenté ici), appelé ``mailer_configuration``
 ayant une méthode ``getMailerMethod()``, cette méthode retournant une chaîne de caractères comme ``sendmail``
-basé sur une certaine configuration. Souvenez-vous que que le premier argument du service ``my_mailer``
+basé sur une certaine configuration. Souvenez-vous que le premier argument du service ``my_mailer``
 est la simple chaine de caractère ``sendmail`` :
 
 .. configuration-block::
