@@ -134,7 +134,6 @@
   * :doc:`/cookbook/session/locale_sticky_session`
   * :doc:`/cookbook/session/sessions_directory`
   * :doc:`/cookbook/session/php_bridge`
-  * :doc:`/cookbook/session/limit_metadata_writes`
 
 * **symfony1**
 
