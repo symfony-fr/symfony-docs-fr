@@ -141,6 +141,18 @@ vous pouvez procéder comme suit::
     {
     }
 
+Si vous voulez spécifier la méthode du repository à utiliser pour trouver l'entité
+(par exemple, pour ajouter des jointures à la requête), vous pouvez ajouter l'option
+``repository_method`` :
+
+    /**
+     * @Route("/blog/{post_id}")
+     * @ParamConverter("post", class="SensioBlogBundle:Post", options={"repository_method" = "findWithJoins"})
+     */
+    public function showAction(Post $post)
+    {
+    }
+
 Convertisseur DateTime
 ~~~~~~~~~~~~~~~~~~~~~~
 
