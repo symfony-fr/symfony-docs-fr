@@ -1,7 +1,7 @@
 .. index::
    single: Sessions
 
-Combler une application lagacy avec les sessions de Symfony
+Combler une application legacy avec les sessions de Symfony
 ===========================================================
 
 .. versionadded:: 2.3
