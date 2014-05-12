@@ -13,8 +13,8 @@ Le Framework de Test PHPUnit
 ----------------------------
 
 Symfony2 intègre une bibliothèque indépendante - appelée PHPUnit - qui vous fournit
-un framework de tests complet. Ce chapitre ne couvre par PHPUnit elle-même, mais
-elle a sa propre `documentation`_.
+un framework de test complet. Notez que ce chapitre ne couvre pas PHPUnit, qui
+dispose de sa propre `documentation`_.
 
 .. note::
 
