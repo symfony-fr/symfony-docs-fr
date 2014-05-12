@@ -66,7 +66,7 @@ avoir un répertoire ``Symfony/`` qui ressemble à :
         $ rm -rf .git
 
     Pour une version exacte, remplacez `dev-master` par la dernière version de
-    Symfony (ex : 2.4.4). Pour plus de détails, lisez `Installation de Symfony`_
+    Symfony (ex : 2.3.13). Pour plus de détails, lisez `Installation de Symfony`_
     
 Avant d'exécuter Symfony2, utilisez la commande ci-dessous pour vérifier si votre système
 remplit tous les prérequis.
