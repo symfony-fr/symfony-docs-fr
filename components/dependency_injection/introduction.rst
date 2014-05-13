@@ -223,7 +223,7 @@ Chargement d'un fichier de configuration YAML ::
     besoin d'installer :doc:`Le composant YAML</components/yaml/introduction>`.
 
 Si vous *souhaitez* utiliser PHP pour créer des services, vous pouvez le déplacer
-dans un ficher de configuration séparé comme ceci::
+dans un fichier de configuration séparé comme ceci::
 
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\Config\FileLocator;
