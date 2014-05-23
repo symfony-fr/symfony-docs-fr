@@ -89,7 +89,7 @@ affichent juste une partie du formulaire - pour afficher chaque partie du
 formulaire : libellés de champs, erreurs, champs texte ``input``, balises
 ``select``, etc.
 
-Ces fragments sont définis par comme blocs dans Twig et comme fichiers de templates
+Ces fragments sont définis comme blocs dans Twig et comme fichiers de templates
 avec PHP.
 
 Un *thème* n'est rien de plus qu'un ensemble de fragments que vous pouvez utiliser
