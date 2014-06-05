@@ -28,7 +28,7 @@ Vous pouvez installer le composant de deux manières différentes :
     appellent d'autres scripts qui envoient des séquences de couleurs ANSI,
     ils seront affichées en caractères bruts.
 
-    Pour activer les couleurs ANSI dans Windows, installez `ANSICON`_.
+    Pour activer les couleurs ANSI dans Windows, installez [ANSICON](https://github.com/adoxa/ansicon).
 
 Créer une Commande basique
 --------------------------
