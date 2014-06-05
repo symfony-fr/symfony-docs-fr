@@ -63,8 +63,8 @@ les feuilles de style :
 
 .. note::
     
-    Les utilisateurs de Windows ne doivent pas oublier de mettre à jour la
-    location de Java. Dans Windows8 x64 bit, il s'agit de
+    Les utilisateurs de Windows ne doivent pas oublier de mettre à jour l'emplacement de Java.
+    Dans Windows8 x64 bit, il s'agit de
     ``C:\Program Files (x86)\Java\jre6\bin\java.exe`` par défaut
     
 Vous avez maintenant accès aux deux nouveaux filtres Assetic dans votre
