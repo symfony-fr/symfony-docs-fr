@@ -275,7 +275,6 @@ Configuration par défaut complète
                     server:               ~
                     options:
                         connect:              ~
-                        persist:              ~
                         timeout:              ~
                         replicaSet:           ~
                         username:             ~
