@@ -21,7 +21,7 @@ vous faudra alors penser à passer toutes les options obligatoires :
 
 .. code-block:: bash
 
-    php app/console generate:doctrine:entity --non-interaction --entity=AcmeBlogBundle:Post --fields="title:string(100) body:text" --format=xml
+    php app/console generate:doctrine:entity --no-interaction --entity=AcmeBlogBundle:Post --fields="title:string(100) body:text" --format=xml
 
 Options disponibles
 -------------------
