@@ -1,7 +1,7 @@
 .. index::
    single: Security, Authorization
 
-Authorisation
+Autorisation
 =============
 
 Lorsque n'importe quel fournisseur d'authenfication
@@ -17,7 +17,7 @@ l'utilisateur peut demander une certaine URI, ou modifier un objet. Cette
 décision sera prise par une instance de la classe
 :class:`Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManagerInterface`.
 
-Une décision d'authorisation sera toujours basée sur quelques éléments :
+Une décision d'autorisation sera toujours basée sur quelques éléments :
 
 * Le jeton courant
     Par exemple, le jeton de la méthode :method:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface::getRoles
