@@ -178,7 +178,7 @@ mais également au utilisateurs aillant de le rôle ``ROLE_SUPER_ADMIN`` ::
     injecter dans le constructeur de celui-ci toutes les dépendances nécessaire
     pour une prise de décision.
 
-Les Roles
+Les Rôles
 ---------
 
 Les rôles sont des objets exprimant un certain droit qu'un utilisateur
@@ -186,7 +186,7 @@ possède.
 Le seul prérequis est que l'objet implémente l'interface
 :class:`Symfony\\Component\\Security\\Core\\Role\\RoleInterface`, ce qui
 signifie qu'il doit avoir une méthode :method:`Symfony\\Component\\Security\\Core\\Role\\Role\\RoleInterface::getRole`
-qui retroune une string représentant le rôle lui-même. La classe par défaut
+qui retourne une chaîne de caractères représentant le rôle lui-même. La classe par défaut
 :class:`Symfony\\Component\\Security\\Core\\Role\\Role` retourne simplement son
 premier argument de constructeur ::
 
@@ -201,8 +201,8 @@ premier argument de constructeur ::
 
     La majorité des jetons d'authentification étendent la classe
     :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\AbstractToken`, ce qui
-    signifie que les rôles donnés à leur constructeur seront automatiquement convertit
-    d'une string à ces objects simples ``Role``.
+    signifie que les rôles donnés à leur constructeur seront automatiquement convertis
+    d'une chaîne de caractères à ces objets simples ``Role``.
 
 Utiliser le gestionnaire de décision
 ------------------------------------
