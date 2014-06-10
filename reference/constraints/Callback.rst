@@ -98,12 +98,17 @@ quel champ ces erreurs seront attribuées ::
 
         public function isAuthorValid(ExecutionContextInterface $context)
         {
-            // Vous avez un tableau de « faux noms »
+            // Vous avez un tableau de nom « bidons »
             $fakeNames = array();
 
-            // vérifie si le nom est un faux
+            // vérifie si le nom est bidon
             if (in_array($this->getFirstName(), $fakeNames)) {
-                $context->addViolationAt('firstname', 'This name sounds totally fake!', array(), null);
+                $context->addViolationAt(
+                    'firstname',
+                    'Ce nom est complètement bidon!',
+                    array(),
+                    null
+                );
             }
         }
     }
