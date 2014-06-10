@@ -2,7 +2,7 @@
    single: Security, Authorization
 
 Autorisation
-=============
+============
 
 Lorsque n'importe quel fournisseur d'authenfication
 (consultez :ref:`authentication_providers`) a vérifié le jeton pas encore
