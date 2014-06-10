@@ -8,7 +8,7 @@ Introduction
 ------------
 
 Le composant sécurité fournit un système de sécurité complet pour vos
-application web. Il est livré avec des méthodes d'authentification
+applications web. Il est livré avec des méthodes d'authentification
 utilisant HTTP basic ou l'authentification digest, ou encore un formulaire
 interactif de login ou via le certificat X.509, mais permet également
 d'implémenter vos propres stratégies d'authentification.
