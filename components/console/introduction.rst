@@ -268,13 +268,13 @@ Vous accédez à l'argument ``names`` comme un tableau::
 
 Il y a 3 différents arguments que vous pouvez utiliser.:
 
-===========================  ======================================================================================================
+===========================  =========================================================================================================
 Mode                         Valeur
-===========================  ======================================================================================================
+===========================  =========================================================================================================
 InputArgument::REQUIRED      L'argument est requis
 InputArgument::OPTIONAL      L'argument est optionnel et peut être omis
-InputArgument::IS_ARRAY      L'argument peut contenir une infinité d'arguments et doit être utilisé à la fin de liste des arguments
-===========================  ======================================================================================================
+InputArgument::IS_ARRAY      L'argument peut contenir une infinité d'arguments et doit être utilisé à la fin de la liste des arguments
+===========================  =========================================================================================================
 
 Vous pouvez combiner ``IS_ARRAY`` avec ``REQUIRED`` et ``OPTIONAL`` comme ceci::
 
