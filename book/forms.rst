@@ -240,7 +240,7 @@ fonctionnalité suivante à votre contrôleur::
     }
 
 .. versionadded:: 2.3
-    La méthode :method:`Symfony\Component\Form\FormInterface::handleRequest` a été
+    La méthode :method:`Symfony\\Component\\Form\\FormInterface::handleRequest` a été
     ajoutée dans Symfony 2.3. Avant cela, la ``$request`` était passée à la méthode
     ``submit``, une stratégie qui est dépréciée et qui sera supprimée dans Symfony 3.0.
     Pour plus de détails sur cette méthode, lisez :ref:`cookbook-form-submit-request`.
@@ -249,28 +249,28 @@ Ce contrôleur suit un pattern commun dans la manière de gérer les formulaires
 et a trois scénarios possibles :
 
 #. Lors du chargement initial de la page dans votre navigateur, le formulaire
-   est simplement créé et affiché. :method:`Symfony\Component\Form\FormInterface::handleRequest`
+   est simplement créé et affiché. :method:`Symfony\\Component\\Form\\FormInterface::handleRequest`
    détermine que le formulaire n'a pas été soumis et ne fait rien.
-   :method:`Symfony\Component\Form\FormInterface::isValid` retourne ``false`` si le
+   :method:`Symfony\\Component\\Form\\FormInterface::isValid` retourne ``false`` si le
    formulaire n'a pas été soumis.
 
-#. Lorsque l'utilisateur soumet le formulaire, :method:`Symfony\Component\Form\FormInterface::handleRequest`
+#. Lorsque l'utilisateur soumet le formulaire, :method:`Symfony\\Component\\Form\\FormInterface::handleRequest`
    s'en rend compte et écrit immédiatement les données soumises dans les
    propriétés ``task`` et ``dueDate`` de l'objet ``$task``. Ensuite, cet objet
    est validé. S'il est invalide (la validation est abordée dans la section
-   suivante), :method:`Symfony\Component\Form\FormInterface::isValid` retourne
+   suivante), :method:`Symfony\\Component\\Form\\FormInterface::isValid` retourne
    encore ``false`` et le formulaire est affiché de nouveau avec toutes ses
    erreurs de validation.
 
    .. note::
 
-       Vous pouvez utiliser la méthode :method:`Symfony\Component\Form\FormInterface::isSubmitted`
+       Vous pouvez utiliser la méthode :method:`Symfony\\Component\\Form\\FormInterface::isSubmitted`
        pour vérifier si un formulaire a été soumis ou non, indépendemment du fait
        que les données soumises soient valides ou non.
 
 #. Lorsque l'utilisateur soumet le formulaire avec des données valides, les
    données soumises sont toujours écrites dans l'objet, mais cette fois,
-   :method:`Symfony\Component\Form\FormInterface::isValid` retourne ``true``.
+   :method:`Symfony\\Component\\Form\\FormInterface::isValid` retourne ``true``.
    Vous avez alors la possibilité d'effectuer certaines actions qui utilisent
    l'objet ``$task`` (comme le persister en base de données) avant de rediriger
    l'utilisateur vers une autre page (par exemple une page « merci » ou 

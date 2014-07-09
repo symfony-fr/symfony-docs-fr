@@ -474,7 +474,7 @@ fichier de configuration du routing:
 
 .. note::
 
-   Cet exemple utilise :doc:`YAML</components/yaml>` pour définir la configuration de
+   Cet exemple utilise :doc:`YAML </components/yaml/yaml_format>` pour définir la configuration de
    routage. Cette dernière peut aussi être écrite dans d'autres formats comme XML ou
    PHP.
 
@@ -539,7 +539,7 @@ la manière dont votre projet est développé. Pour en nommer quelques-unes :
   ``Request`` et ``Response``, ainsi que d'autres classes pour la gestion des sessions
   et des uploads de fichiers;
 
-* :doc:`Routing</components/routing>`  - Un puissant et rapide système qui vous
+* :doc:`Routing</components/routing/introduction>`  - Un puissant et rapide système qui vous
   permet de lier une URI spécifique (par exemple: ``/contact``) à l'information
   lui permettant de savoir comment gérer cette requête (par exemple: exécute la méthode
   ``contactAction()``);

@@ -143,7 +143,7 @@ vous pouvez procéder comme suit::
 
 Si vous voulez spécifier la méthode du repository à utiliser pour trouver l'entité
 (par exemple, pour ajouter des jointures à la requête), vous pouvez ajouter l'option
-``repository_method`` :
+``repository_method``::
 
     /**
      * @Route("/blog/{id}")
