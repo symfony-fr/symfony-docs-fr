@@ -11,15 +11,15 @@ Le Composant de Routage
 Installation
 ------------
 
-Vous pouvez installer le composant de différentes manières :
+Vous pouvez l'installer de deux manières différentes:
 
-* Utilisez le dépôt Git officiel (https://github.com/symfony/Routing) ;
-* Installez le via Composer (``symfony/routing`` sur `Packagist`_).
+* :doc:`Installez le via Composer </components/using_components>` (``symfony/routing`` sur `Packagist`_);
+* Utilisez le dépôt Git officiel (https://github.com/symfony/Routing).
 
-Utilisation
------------
+Usage
+-----
 
-Afin d'installer un système de routage basique, vous avez besoin de trois blocs :
+Afin d'installer un système de routage basique, vous avez besoin de trois parties :
 
 * Une :class:`Symfony\\Component\\Routing\\RouteCollection`, qui contient les définitions des
   routes (instances de la classe :class:`Symfony\\Component\\Routing\\Route`)
@@ -36,7 +36,7 @@ configuré votre « autoloader » afin qu'il charge le composant de routage::
     use Symfony\Component\Routing\RouteCollection;
     use Symfony\Component\Routing\Route;
 
-    $route = new Route('/foo', array('controller' => 'MyController'))
+    $route = new Route('/foo', array('controller' => 'MyController'));
     $routes = new RouteCollection();
     $routes->add('route_name', $route);
 
@@ -44,7 +44,7 @@ configuré votre « autoloader » afin qu'il charge le composant de routage::
 
     $matcher = new UrlMatcher($routes, $context);
 
-    $parameters = $matcher->match( '/foo' );
+    $parameters = $matcher->match('/foo');
     // array('controller' => 'MyController', '_route' => 'route_name')
 
 .. note::
@@ -70,51 +70,52 @@ Si aucune correspondance de route ne peut être trouvée, une
 sera lancée.
 
 En plus de votre tableau de variables personnalisées, une clé ``_route``
-qui contient le nom de la route correspondante est ajoutée
+qui contient le nom de la route correspondante est ajoutée.
 
 Définition des routes
 ~~~~~~~~~~~~~~~~~~~~~
 
-Une définition du routage complète peut contenir jusqu'à cinq parties :
+Une définition du routage complète peut contenir jusqu'à sept parties :
 
 1. Le pattern de l'URL de la route. Une correspondance tente d'être effectuée entre la
-route et l'URL passée au `RequestContext`, et peut contenir des valeurs de substitution
-jokers nommées (par exemple : ``{placeholders}``) afin de faire correspondre les
-parties dynamiques de l'URL.
+   route et l'URL passée au `RequestContext`, et peut contenir des valeurs de substitution
+   jokers nommées (par exemple : ``{placeholders}``) afin de faire correspondre les
+   parties dynamiques de l'URL.
 
 2. Un tableau de valeurs par défaut. Ce dernier contient un tableau de
-valeurs arbitraires qui seront retournées lorsque la requête correspond à
-la route.
+   valeurs arbitraires qui seront retournées lorsque la requête correspond à
+   la route.
 
 3. Un tableau de conditions requises. Ce dernier définit les contraintes concernant
-le contenu des valeurs de substitution sous forme d'expressions régulières.
+   le contenu des valeurs de substitution sous forme d'expressions régulières.
 
 4. Un tableau d'options. Ce dernier contient des paramètres internes pour la
-route et sont généralement ceux qui sont le moins souvent nécessaires.
+   route et sont généralement ceux qui sont le moins souvent nécessaires.
 
-5. Un pattern de nom d'hôte. La correspondance est faite avec le nom d'hôte
-passé au `RequestContext`, et peut contenir des valeurs de substitution jokers
-nommées (par exemple : ``{placeholders}``) pour effectuer une correspondance
-dynamique dans le nom d'hôte.
+5. Un hôte. La correspondance est comparée avec l'hôte de la requête. Lisez
+   :doc:`/components/routing/hostname_pattern` pour plus de détails.
 
-.. versionadded:: 2.2
+6. Un tableau de schémas. Cela assure un certain schéma HTTP (``http``, ``https``).
 
-    Le support de la correspondance avec le « Hostname » a été ajouté dans Symfony 2.2
+7. Un tableau de méthodes. Cela assure une certaine méthode HTTP (``HEAD``,
+   ``GET``, ``POST``, ...).
 
 Prenez la route suivante, qui combine plusieurs de ces idées::
 
    $route = new Route(
        '/archive/{month}', // chemin
        array('controller' => 'showArchive'), // valeurs par défaut
-       array('month' => '[0-9]{4}-[0-9]{2}', 'subdomain' => 'www|m'), // conditions requises
+       array('month' => '[0-9]{4}-[0-9]{2}', 'subdomain' => 'www|m'), // prérequies
        array(), // options
-       '{subdomain}.example.com' // nom d'hôte
+       '{subdomain}.example.com', // hôte
+       array(), // schémas
+       array() // méthodes
    );
 
    // ...
 
    $parameters = $matcher->match('/archive/2012-01');
-   // array( 
+   // array(
    //     'controller' => 'showArchive',
    //     'month' => '2012-01',
    //     'subdomain' => 'www',
@@ -122,34 +123,20 @@ Prenez la route suivante, qui combine plusieurs de ces idées::
    //  )
 
    $parameters = $matcher->match('/archive/foo');
-   // lance une ResourceNotFoundException
+   // throws ResourceNotFoundException
 
 Dans ce cas, la route correspond avec l'URL ``/archive/2012-01``, car le joker
 ``{month}`` correspond à l'expression régulière donnée. Cependant, ``/archive/foo``
 *ne* correspond *pas*, car « foo » n'a pas de correspondance avec le joker « {month} ».
 
-En plus des contraintes dictées par les expressions régulières, il y a deux
-conditions requises spécifiques que vous pouvez définir :
-
-* ``_method`` impose une certaine méthode HTTP pour la requête (``HEAD``, ``GET``, ``POST``, ...)
-* ``_scheme`` impose un certain schème HTTP (``http``, ``https``)
-
-Par exemple, la route suivante ne va accepter que les requêtes vers « /foo »
-avec une méthode POST et une connexion sécurisée::
-    
-   $route = new Route(
-       '/foo',
-       array(),
-       array('_method' => 'post', '_scheme' => 'https' )
-   );
-
 .. tip::
+
 
     Si vous voulez avoir une correspondance pour toutes les URLs qui commencent
     par un certain chemin et qui se terminent par un suffixe déterminé, vous
     pouvez utiliser la définition de route suivante::
-    
-        $route = new Route(  
+
+        $route = new Route(
             '/start/{suffix}',
             array('suffix' => ''),
             array('suffix' => '.*')
@@ -161,23 +148,24 @@ Utiliser des préfixes
 Vous pouvez ajouter des routes ou d'autres instances de
 :class:`Symfony\\Component\\Routing\\RouteCollection` à une *autre* collection.
 De cette façon, vous pouvez construire un arbre de routes. De plus, vous pouvez
-définir un préfixe, des conditions requises par défaut, des options par
-défaut et un pattern de nom d'hôte pour toutes les routes d'un sous-arbre::
+définir un préfixe, des valeurs par défaut pour les paramètres, des prérequis,
+des options, des schémas et un hôte pour toutes les routes d'un sous-arbre
+en utilisant les méthodes fournies par la classe ``RouteCollection``::
 
     $rootCollection = new RouteCollection();
 
     $subCollection = new RouteCollection();
-    $subCollection->add( /*...*/ );
-    $subCollection->add( /*...*/ );
+    $subCollection->add(...);
+    $subCollection->add(...);
+    $subCollection->addPrefix('/prefix');
+    $subCollection->addDefaults(array(...));
+    $subCollection->addRequirements(array(...));
+    $subCollection->addOptions(array(...));
+    $subCollection->setHost('admin.example.com');
+    $subCollection->setMethods(array('POST'));
+    $subCollection->setSchemes(array('https'));
 
-    $rootCollection->addCollection( 
-        $subCollection,
-        '/prefix', // prefix
-        array('_scheme' => 'https'), // valeur par défaut
-        array(), // conditions requises
-        array(), // options
-        'admin.example.com', // nom d'hôte
-    );
+    $rootCollection->addCollection($subCollection);
 
 Définir les paramètres de requête
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -185,14 +173,16 @@ Définir les paramètres de requête
 La classe :class:`Symfony\\Component\\Routing\\RequestContext` fournit des
 informations à propos de la requête courante. Vous pouvez définir tous les
 paramètres d'une requête HTTP avec cette classe via son constructeur::
-    
+
     public function __construct(
         $baseUrl = '',
         $method = 'GET',
         $host = 'localhost',
         $scheme = 'http',
         $httpPort = 80,
-        $httpsPort = 443
+        $httpsPort = 443,
+        $path = '/',
+        $queryString = ''
     )
 
 .. _components-routing-http-foundation:
@@ -226,7 +216,7 @@ aussi construire une URL depuis une certaine route::
     $generator = new UrlGenerator($routes, $context);
 
     $url = $generator->generate('show_post', array(
-        'slug' => 'my-blog-post'
+        'slug' => 'my-blog-post',
     ));
     // /show/my-blog-post
 
@@ -259,12 +249,12 @@ Si vous utilisez le chargeur ``YamlFileLoader``, alors les définitions de route
 
     # routes.yml
     route1:
-        pattern: /foo
-        defaults: { controller: 'MyController::fooAction' }
+        path:     /foo
+        defaults: { _controller: 'MyController::fooAction' }
 
     route2:
-        pattern: /foo/bar
-        defaults: { controller: 'MyController::foobarAction' }
+        path:     /foo/bar
+        defaults: { _controller: 'MyController::foobarAction' }
 
 Pour charger ce fichier, vous pouvez utiliser le code suivant. Cela suppose
 que votre fichier ``routes.yml`` est dans le même répertoire que le code
@@ -273,7 +263,7 @@ ci-dessus::
     use Symfony\Component\Config\FileLocator;
     use Symfony\Component\Routing\Loader\YamlFileLoader;
 
-    // cherche dans *ce* répertoire
+    // look inside *this* directory
     $locator = new FileLocator(array(__DIR__));
     $loader = new YamlFileLoader($locator);
     $collection = $loader->load('routes.yml');
@@ -291,8 +281,8 @@ vous devez fournir le nom d'un fichier PHP qui retourne une :class:`Symfony\\Com
     use Symfony\Component\Routing\RouteCollection;
     use Symfony\Component\Routing\Route;
 
-    $collection = new RouteCollection();    
-    $collection->add(   
+    $collection = new RouteCollection();
+    $collection->add(
         'route_name',
         new Route('/foo', array('controller' => 'ExampleController'))
     );
@@ -303,8 +293,9 @@ vous devez fournir le nom d'un fichier PHP qui retourne une :class:`Symfony\\Com
 Des routes en tant que closures
 ...............................
 
-Il y a aussi le chargeur :class:`Symfony\\Component\\Routing\\Loader\\ClosureLoader`, qui
+Le chargeur :class:`Symfony\\Component\\Routing\\Loader\\ClosureLoader` existe également. Il
 appelle une closure et utilise son résultat en tant que :class:`Symfony\\Component\\Routing\\RouteCollection`::
+
 
     use Symfony\Component\Routing\Loader\ClosureLoader;
 
@@ -331,7 +322,7 @@ permettant d'utiliser rapidement le composant de Routage. Le constructeur s'atte
 à recevoir une instance de chargeur, un chemin vers la définition principale des
 routes et d'autres paramètres::
 
-    public function __construct( 
+    public function __construct(
         LoaderInterface $loader,
         $resource,
         array $options = array(),
@@ -350,9 +341,9 @@ souhaitez l'utiliser. Un exemple basique de la classe
 
     $router = new Router(
         new YamlFileLoader($locator),
-        "routes.yml",
+        'routes.yml',
         array('cache_dir' => __DIR__.'/cache'),
-        $requestContext,
+        $requestContext
     );
     $router->match('/foo/bar');
 

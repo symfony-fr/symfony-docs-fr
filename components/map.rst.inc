@@ -87,9 +87,10 @@
 
   * :doc:`/components/property_access/introduction`
 
-* **Routing**
+* :doc:`/components/routing/index`
 
-  * :doc:`/components/routing`
+  * :doc:`/components/routing/introduction`
+  * :doc:`/components/routing/hostname_pattern`
 
 * :doc:`/components/security/index`
 

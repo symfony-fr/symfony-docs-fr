@@ -21,7 +21,7 @@ Les Composants
     locale
     process
     property_access/index
-    routing
+    routing/index
     security/index
     serializer
     templating
