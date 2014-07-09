@@ -25,6 +25,6 @@ Les Composants
     security/index
     serializer
     templating
-    yaml
+    yaml/index
 
 .. include:: /components/map.rst.inc
