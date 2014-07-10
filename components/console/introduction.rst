@@ -203,7 +203,7 @@ de verbosité. Par exemple::
 
 Quand le niveau ``quiet`` est utilisé, tous les affichages sont supprimés et la
 méthode
-:method:`Symfony\Component\Console\Output::write<Symfony\\Component\\Console\\Output::write>`
+:method:`Symfony\\Component\\Console\\Output::write<Symfony\\Component\\Console\\Output::write>`
 retourne sans aucun affichage.
 
 Utiliser des arguments de commande
