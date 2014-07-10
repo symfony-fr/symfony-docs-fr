@@ -75,7 +75,7 @@ il est facile de passer un objet mock dans un test ::
                 ->method('getBonus')
                 ->will($this->returnValue(1100));
 
-            // Maintenant, mocker le repository pour qu'il retourne un mock de l'objet emloyee
+            // Maintenant, mockez le repository pour qu'il retourne un mock de l'objet emloyee
             $employeeRepository = $this->getMockBuilder('\Doctrine\ORM\EntityRepository')
                 ->disableOriginalConstructor()
                 ->getMock();
