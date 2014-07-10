@@ -113,7 +113,7 @@ Glossaire
    Yaml
         *YAML* est un acronyme récursif pour « YAML Ain't a Markup Language ». Il s'agit
         d'un langage de sérialisation de données léger et intuitif, utilisé abondamment
-        dans les fichiers de configuration Symfony2. Lisez le chapitre :doc:`/components/yaml`.
+        dans les fichiers de configuration Symfony2. Lisez le chapitre :doc:`YAML </components/yaml/introduction>`.
 
    Injection de Dépendance
         L'Injection de Dépendance est un patron de conception (design pattern) très fortement 
