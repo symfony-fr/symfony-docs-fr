@@ -72,7 +72,7 @@ Utilisation de base
             {
                 $metadata->addPropertyConstraint('age', new Assert\Type(array(
                     'type'    => 'integer',
-                    'message' => 'La valeur {{ value }} n'est pas un type {{ type }} valide.',
+                    'message' => "La valeur {{ value }} n'est pas un type {{ type }} valide.",
                 )));
             }
         }
