@@ -52,7 +52,7 @@ Le principe est identique entre les deux à l'exception d'une syntaxe qui diffé
 Inclure des fichiers Javascript
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Pour inclure des fichiers Javascript, utilisez le tag ``javascript`` dans n'importe quel template.
+Pour inclure des fichiers Javascript, utilisez le tag ``javascripts`` dans n'importe quel template.
 On va en général s'en servir dans le block ``javascripts``, si vous utilisez
 les noms de block par défaut de la Distribution Standard de Symfony :
 
