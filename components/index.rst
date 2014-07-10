@@ -12,6 +12,7 @@ Les Composants
     dependency_injection/index
     dom_crawler
     event_dispatcher/index
+    expression_language/index
     filesystem
     finder
     form/index
@@ -20,10 +21,10 @@ Les Composants
     locale
     process
     property_access/index
-    routing
+    routing/index
     security/index
     serializer
     templating
-    yaml
+    yaml/index
 
 .. include:: /components/map.rst.inc

@@ -612,7 +612,7 @@ comme vous le feriez pour un service « normal », et taggez-le avec
 .. note::
 
     Votre service doit implémenter l'interface
-    :class:`Symfony\Component\EventDispatcher\EventSubscriberInterface`.
+    :class:`Symfony\\Component\\EventDispatcher\\EventSubscriberInterface`.
 
 .. note::
 

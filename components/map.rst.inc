@@ -46,6 +46,13 @@
   * :doc:`/components/event_dispatcher/container_aware_dispatcher`
   * :doc:`/components/event_dispatcher/generic_event`
 
+* :doc:`/components/expression_language/index`
+
+  * :doc:`/components/expression_language/introduction`
+  * :doc:`/components/expression_language/syntax`
+  * :doc:`/components/expression_language/extending`
+  * :doc:`/components/expression_language/caching`
+
 * **Filesystem**
 
   * :doc:`/components/filesystem`
@@ -65,6 +72,8 @@
   * :doc:`/components/http_foundation/sessions`
   * :doc:`/components/http_foundation/session_configuration`
   * :doc:`/components/http_foundation/session_testing`
+  * :doc:`/components/http_foundation/session_php_bridge`
+  * :doc:`/components/http_foundation/trusting_proxies`
 
 * **HttpKernel**
 
@@ -82,9 +91,10 @@
 
   * :doc:`/components/property_access/introduction`
 
-* **Routing**
+* :doc:`/components/routing/index`
 
-  * :doc:`/components/routing`
+  * :doc:`/components/routing/introduction`
+  * :doc:`/components/routing/hostname_pattern`
 
 * :doc:`/components/security/index`
 
@@ -101,6 +111,7 @@
 
   * :doc:`/components/templating`
 
-* **YAML**
+* :doc:`/components/yaml/index`
 
-  * :doc:`/components/yaml`
+  * :doc:`/components/yaml/introduction`
+  * :doc:`/components/yaml/yaml_format`
