@@ -8,7 +8,7 @@ Le composant ExpressionLanguage fournit déjà une méthode
 :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::compile`
 pour mettre en cache des expressions en PHP. Mais, en interne, le composant
 met également en cache les expressions parsées/analysées donc les expressions
-dupliquées peuvnet être compilées/évaluées plus vite.
+dupliquées peuvent être compilées/évaluées plus vite.
 
 Le processus
 ------------
