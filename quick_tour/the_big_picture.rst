@@ -186,6 +186,7 @@ définis dans le fichier de configuration ``app/config/routing_dev.yml`` :
 Ce bout de code importe un fichier routing.yml qui défini les routes de la démo :
 
 .. code-block:: yaml
+
     # src/Acme/DemoBundle/Resources/config/routing.yml
     _welcome:
         path:     /
