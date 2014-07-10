@@ -17,11 +17,11 @@ Installation
 
 Vous pouvez l'installer de deux manières différentes:
 
-* :doc:`Installez-le via Composer </components/using_components>` (``symfony/expression-language`` on `Packagist`_);
+* :doc:`Installez-le via Composer </components/using_components>` (``symfony/expression-language`` sur `Packagist`_);
 * Utilisez le dépôt Git officiel (https://github.com/symfony/expression-language).
 
-Comment le moteur d'expression peut m'aider?
---------------------------------------------
+Comment le moteur d'expression peut-il m'aider?
+-----------------------------------------------
 
 Le but du composant est de permettre à ses utilisateurs d'utiliser des
 expression au sein d'une configuration qui contient une logique plus complexe.
@@ -38,7 +38,7 @@ de sécurité:
 
 .. code-block:: text
 
-    # récupère le prix spécial si
+    # Récupère le prix spécial si
     user.getGroup() in ['good_customers', 'collaborator']
 
     # Met en avant un article sur la home quand
@@ -47,8 +47,8 @@ de sécurité:
     # Envoie une alerte quand
     product.stock < 15
 
-Les expressions peuvent être vues comme une boite à sable PHP très limitée et
-immunisée contre les injections externes puisque vous déclarez explicitement
+Les expressions peuvent être vues comme un bac à sable PHP très limité et
+immunisé contre les injections externes puisque vous déclarez explicitement
 quelles variables sont disponibles dans une expression.
 
 Usage
@@ -85,7 +85,7 @@ la syntaxe du composant ExpressionLanguage.
 Passer des variables
 --------------------
 
-Vous pouvez également passer des variables, qui peut être de n'importe quel type
+Vous pouvez également passer des variables, qui peuvent être de n'importe quel type
 PHP valide (incluant les objets), dans une expression::
 
     use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

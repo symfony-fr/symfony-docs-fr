@@ -48,7 +48,7 @@ Utiliser les expressions parsées et sérialisées
 -----------------------------------------------
 
 Les méthodes ``evaluate()`` et ``compile()`` peuvent toutes les deux prendre en
-charque une ``ParsedExpression`` ou une ``SerializedParsedExpression``::
+charge une ``ParsedExpression`` ou une ``SerializedParsedExpression``::
 
     use Symfony\Component\ExpressionLanguage\ParsedExpression;
     // ...

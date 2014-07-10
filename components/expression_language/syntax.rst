@@ -128,8 +128,8 @@ Opérateurs supportés
 
 Le composant est fourni avec de nombreux opérateurs :
 
-Opérateur arithmétiques
-~~~~~~~~~~~~~~~~~~~~~~~
+Opérateurs arithmétiques
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ``+`` (addition)
 * ``-`` (soustraction)
@@ -181,7 +181,7 @@ Opérateurs de comparaison
     Vous devez utiliser les parenthèses car l'opérateur unaire ``not`` prévaut sur l'opérateur
     binaire ``matches``.
 
-Exmples::
+Exemples::
 
     $ret1 = $language->evaluate(
         'vie == tout',
@@ -223,8 +223,8 @@ Par exemple::
 
 Cette variable ``$ret`` sera définie à ``true``.
 
-Opérateur de chaines
-~~~~~~~~~~~~~~~~~~~~
+Opérateurs de chaines
+~~~~~~~~~~~~~~~~~~~~~
 
 * ``~`` (concaténation)
 
