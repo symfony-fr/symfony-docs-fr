@@ -84,7 +84,7 @@ Corrigez les erreurs reportées par la commande vous pouvez ensuite utiliser Sym
     .. code-block:: bash
 
         # démarre le serveur web intégré
-        $ php ./app/console server:run
+        $ php ./bin/console server:run
 
     Alors, l'URL de votre application sera « http://localhost:8000/app_dev.php ».
 
