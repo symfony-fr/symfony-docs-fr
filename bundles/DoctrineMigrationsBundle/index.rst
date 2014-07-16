@@ -23,6 +23,7 @@ Standard de Symfony. Ajoutez le code suivant à votre fichier ``composer.json`` 
 
     {
         "require": {
+            "doctrine/migrations": "dev-master",
             "doctrine/doctrine-migrations-bundle": "dev-master"
         }
     }
