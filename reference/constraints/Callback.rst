@@ -114,12 +114,10 @@ quel champ ces erreurs seront attribuées ::
 
             // Vérifie si le nom est bidon
             if (in_array($this->getFirstName(), $fakeNames)) {
-                $context->addViolationAt(
-                    'firstName',
-                    'Ce nom me semble complètement bidon !',
-                    array(),
-                    null
-                );
+                $context->buildViolation('Ce nom me semble complètement bidon !')
+                    ->atPath('firstName')
+                    ->addViolation()
+                ;
             }
         }
     }
@@ -138,12 +136,10 @@ elles reçoivent l'objet en premier argument::
 
         // Vérifie si le nom est bidon
         if (in_array($object->getFirstName(), $fakeNames)) {
-            $context->addViolationAt(
-                'firstName',
-                'Ce nom me semble complètement bidon !',
-                array(),
-                null
-            );
+            $context->buildViolation('Ce nom me semble complètement bidon !')
+                ->atPath('firstName')
+                ->addViolation()
+            ;
         }
     }
 
