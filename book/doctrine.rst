@@ -716,7 +716,7 @@ Imaginons que vous souhaitez récupérer tous les produits dont le prix est sup�
 
 .. code-block:: php
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $query = $em->createQuery(
         'SELECT p
         FROM AcmeStoreBundle:Product p
