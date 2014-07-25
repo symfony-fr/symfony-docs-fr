@@ -490,9 +490,6 @@ différents points.
 Pour un exemple complet de cet écouteur (« listener » en anglais), lisez l'article
 du cookbook :doc:`/cookbook/service_container/event_listener`.
 
-Pour un autre exemple pratique d'un écouteur du « kernel » (« noyau » en français),
-référez-vous à l'article du cookbook suivant : :doc:`/cookbook/request/mime_type`.
-
 Écouteurs d'évènements du noyau de référence
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
