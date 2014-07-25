@@ -150,7 +150,7 @@ La méthode ``addListener()`` prend jusqu'à trois arguments :
 * Un « callable » PHP qui sera notifié lorsqu'un évènement qu'il écoute est
   lancé ;
 
-* Une nombre entier optionnel faisant office de priorité (plus grand signifie
+* Un nombre entier optionnel faisant office de priorité (plus grand signifie
   plus important) qui détermine quand un « listener »  est exécuté par rapport
   à d'autres « listeners » (vaut par défaut ``0``). Si deux « listeners » ont
   la même priorité, ils sont exécutés dans l'ordre dans lequel ils ont été
