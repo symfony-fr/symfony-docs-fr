@@ -3,7 +3,7 @@ pattern
 
 **type**: ``string`` **default**: ``null``
 
-Cela ajouter un attribut HTML5 ``pattern`` pour restreindre la donnée d'un
+Cela ajoute un attribut HTML5 ``pattern`` pour restreindre la donnée d'un
 champ à une expression régulières.
 
 .. caution:
