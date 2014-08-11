@@ -152,6 +152,7 @@ Vous pouvez poser une question et valider une réponse cachée::
         if (trim($value) == '') {
             throw new \Exception('Le mot de passe ne peut pas être vide');
         }
+        return $value;
     };
 
     $password = $dialog->askHiddenResponseAndValidate(
