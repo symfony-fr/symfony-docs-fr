@@ -160,7 +160,7 @@ Cela aura pour résultat : ``He is an author``
 La méthode magique ``__get()``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La méthode ``getValue` peut également utiliser la méthode
+La méthode ``getValue`` peut également utiliser la méthode
 magique ``__get`` ::
 
     // ...
