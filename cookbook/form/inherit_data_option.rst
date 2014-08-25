@@ -8,7 +8,7 @@ Comment réduire la duplication de code avec "inherit_data"
     L'option ``inherit_data`` s'appelait ``virtual`` avant Symfony 2.3.
 
 L'option de champ de formulaire ``inherit_data`` peut être très utile si
-vous avez des champs dupliqués dans différentes entitées. Par exemple, imaginez
+vous avez des champs dupliqués dans différentes entités. Par exemple, imaginez
 que vous avez deux entités, une ``Company`` et un ``Customer``::
 
     // src/Acme/HelloBundle/Entity/Company.php
