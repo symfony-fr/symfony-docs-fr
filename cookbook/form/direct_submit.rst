@@ -74,7 +74,7 @@ passez directement les données soumises à :method:`Symfony\\Component\\Form\\F
 
 .. tip::
 
-    Les formulaires qui contient des champs imbriqués attendent un tableau
+    Les formulaires qui contiennent des champs imbriqués attendent un tableau
     en argument de :method:`Symfony\\Component\\Form\\FormInterface::submit`.
     Vous pouvez également soumettre des champs individuels en appelant
     :method:`Symfony\\Component\\Form\\FormInterface::submit` directement
