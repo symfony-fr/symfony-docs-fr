@@ -4,7 +4,7 @@ Luhn
 .. versionadded:: 2.2
     La validation Luhn validation est nouvelle depuis Symfony 2.2.
 
-Cette contrainte est utilisée poue vous assurer qu'un numéro de carte de crédit
+Cette contrainte est utilisée pour s'assurer qu'un numéro de carte de crédit
 vérifie l'`algorithme Luhn`_. Elle est utile pour la première étape de la validation
 d'une carte de crédit : avant de communiquer avec la plateforme de paiement.
 
