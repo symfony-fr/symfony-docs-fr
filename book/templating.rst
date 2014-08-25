@@ -564,8 +564,7 @@ L'inclusion de ce template dans tout autre template est simple :
 
 Le template est inclus via l'utilisation de la balise ``{{ include() }}``.
 Remarquons que le nom du template suit la même convention habituelle. Le
-template ``articleDetails.html.twig`` utilise une variable ``article``. Elle est
-passée au template ``list.html.twig`` en utilisant la commande ``with``.
+template ``articleDetails.html.twig`` utilise une variable ``article``. Elle est reçue par le template ``list.html.twig`` en second paramètre de la fonction ``include()``.
 
 .. tip::
 
