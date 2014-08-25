@@ -4,7 +4,7 @@
 Proxies de confiance
 ====================
 
-Si vous vous trouvez derrière un proxy, par exemple un load balancaer, alors
+Si vous vous trouvez derrière un proxy, par exemple un load balancer, alors
 certains entêtes vous sont peut être envoyés via l'entête spécial ``X-Forwarded-*``.
 Par exemple, l'entête HTTP ``Host`` est habituellement utilisé pour retourner
 l'hôte demandé. Mais lorsque vous êtes derrière un proxy, le véritable hôte peut
