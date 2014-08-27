@@ -79,7 +79,7 @@ Rend la fin du code HTML d'un formulaire.
     {{ form_end(form) }}
 
 Cette fonction ne rends pas la sortie de ``form_rest()`` seulement si vous
- définnissez ``render_rest`` à ``false``:
+ définissez ``render_rest`` à ``false``:
 
 .. code-block:: jinja
 
