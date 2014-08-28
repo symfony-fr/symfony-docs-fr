@@ -13,8 +13,7 @@ récent :
 
 .. code-block:: bash
     
-    $ pear config-set auto_discover 1
-    $ pear install pear.phpunit.de/PHPUnit
+    $ composer global require "phpunit/phpunit=4.2.*"
 
 Dépendances (facultatif)
 ------------------------
