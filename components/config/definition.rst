@@ -228,7 +228,7 @@ En YAML, la configuration ressemblerait à ceci:
 
 En XML, chaque noeud ``parameters`` doit avoir un attribut ``name`` ( suivi de
 ``value``), qui devrait être supprimé et utilisé comme une clé pour cet élément
-dans le tableau final. L'option ``useAttributeAsKey`` est util pour normaliser
+dans le tableau final. L'option ``useAttributeAsKey`` est utile pour normaliser
 comment les tableaux sont spécifiés dans chaque format comme le XML et le YAML
 
 Valeurs par défaut et valeurs requises
