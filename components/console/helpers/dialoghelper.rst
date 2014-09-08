@@ -57,10 +57,10 @@ Autocompletion
 ~~~~~~~~~~~~~~
 
 .. versionadded:: 2.2
-    Autocompletion for questions was added in Symfony 2.2.
+    L'autocomplétion pour les questions a été ajoutée dans Symfony 2.2.
 
-You can also specify an array of potential answers for a given question. These
-will be autocompleted as the user types::
+Vous pouvez aussi spécifier un tableau de réponses possibles pour une question
+donnée. La réponse de l'utiliateur sera auto-complétée à mesure qu'il tape::
 
     $dialog = $this->getHelperSet()->get('dialog');
     $bundleNames = array('AcmeDemoBundle', 'AcmeBlogBundle', 'AcmeStoreBundle');
@@ -176,7 +176,7 @@ Laisser l'utilisateur choisir parmi une liste de réponse
 Si vous déterminez une liste de réponse dans laquelle l'utilisateur peut choisir,
 vous pouvez utiliser la méthode ``ask`` citée précédemment, pour être sùr de la
 réponse de l'utilisateur, la méthode ``askAndValidate``.Les deux ont le même
-désavantage. Vous devez vous occuper de la gestion des valeurs incorrects.
+désavantage. Vous devez vous occuper de la gestion des valeurs incorrectes.
 
 Au lieu de cela, vous pouvez utiliser la méthode
 :method:`Symfony\\Component\\Console\\Helper\\DialogHelper::select` ,
@@ -255,9 +255,9 @@ la commande::
         $commandTester = new CommandTester($command);
 
         $dialog = $command->getHelper('dialog');
-        $dialog->setInputStream($this->getInputStream('Test\n'));
+        $dialog->setInputStream($this->getInputStream("Test\n"));
         // Equivalent à l'entrée par l'utilisateur de "Test" et appuie sur ENTER
-        // Si vous avez d'une confirmation, "yes\n" fonctionne.
+        // Si vous avez besoin d'une confirmation, "yes\n" fonctionne.
 
         $commandTester->execute(array('command' => $command->getName()));
 
@@ -273,7 +273,7 @@ la commande::
         return $stream;
     }
 
-En définissant le inputStream du ``DialogHelper``, vous imiter ce que fait la
+En définissant le inputStream du ``DialogHelper``, vous imitez ce que fait la
 console en interne avec tous les utilisateurs qui entrent des données via la
 ligne de commande. De cette façon, vous pouvez tester toute interaction de
 l'utilisateur (même complexes) en passant les bonnes valeurs.
