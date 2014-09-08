@@ -60,7 +60,7 @@ Autocompletion
     L'autocomplétion pour les questions a été ajoutée dans Symfony 2.2.
 
 Vous pouvez aussi spécifier un tableau de réponses possibles pour une question
-donnée. La réponse de l'utiliateur sera auto-complétée à mesure qu'il tape::
+donnée. La réponse de l'utilisateur sera auto-complétée à mesure qu'il tape::
 
     $dialog = $this->getHelperSet()->get('dialog');
     $bundleNames = array('AcmeDemoBundle', 'AcmeBlogBundle', 'AcmeStoreBundle');
