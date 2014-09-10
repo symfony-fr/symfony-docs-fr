@@ -1843,7 +1843,7 @@ Apprenez plus grâce au Cookbook
 -------------------------------
 
 * :doc:`Forcer HTTP/HTTPS </cookbook/security/force_https>`
-* :doc:`Blacklister des utilisateurs par adresse IP address grâce à un électeur personnalisé </cookbook/security/voters>`
+* :doc:`Blacklister des utilisateurs par adresse IP grâce à un électeur personnalisé </cookbook/security/voters>`
 * :doc:`Liste d'accès de contrôle (ACLs) </cookbook/security/acl>`
 * :doc:`/cookbook/security/remember_me`
 
