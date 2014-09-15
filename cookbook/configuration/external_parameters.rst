@@ -90,7 +90,7 @@ Vous pourrez ainsi faire référence à ces paramètres si nécessaire.
             'dbname'   => 'symfony2_project',
             'user'     => '%database.user%',
             'password' => '%database.password%',
-        ));
+        )));
 
 Constantes
 ----------
