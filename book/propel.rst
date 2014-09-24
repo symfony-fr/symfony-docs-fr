@@ -445,7 +445,7 @@ Commandes
 
 Vous devriez lire la section dédiée aux `commandes Propel dans Symfony2`_.
 
-.. _`Travailler Avec Symfony2`: http://www.propelorm.org/cookbook/symfony2/working-with-symfony2.html#installation
+.. _`Travailler Avec Symfony2`: http://propelorm.org/Propel/cookbook/symfony2/working-with-symfony2.html
 .. _`Travailler avec Symfony2 - Configuration`: http://www.propelorm.org/cookbook/symfony2/working-with-symfony2.html#configuration
 .. _`Relations`: http://www.propelorm.org/documentation/04-relationships.html
 .. _`Section de Référence des Comportements`: http://www.propelorm.org/documentation/#behaviors_reference
