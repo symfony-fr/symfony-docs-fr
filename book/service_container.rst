@@ -349,8 +349,6 @@ pour tous les paramètres qui sont des tableaux.
 Importer d'autres Ressources de Configuration de Conteneur
 ----------------------------------------------------------
 
-service configuration files are referred to as resources
-
 .. tip::
 
     Dans cette section, les fichiers de configuration de services font référence à des *ressources*.
