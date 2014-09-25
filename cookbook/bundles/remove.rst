@@ -4,7 +4,7 @@
 Comment supprimer le AcmeDemoBundle
 ====================================
 
-La Standard Edition de Symfony2 est livré avec une démo complète 
+La Standard Edition de Symfony2 est livrée avec une démo complète 
 qui vit à l'intérieur d'un bundle appelé AcmeDemoBundle. C'est un 
 bon repère pour tout démarrage d'un projet, mais vous aurez 
 probablement envie de finalement le retirer.
@@ -70,10 +70,10 @@ Vous pouvez l'utiliser pour votre configuration de sécurité mais vous pouvez
 aussi la supprimer.
 
 
-3. Supprimer le bundle depuis le système de fichier
----------------------------------------------------
+3. Supprimer le bundle depuis le système de fichiers
+----------------------------------------------------
 Maintenant que vous avez supprimé toutes les références du bundle dans votre 
-application, vous pouvez supprimer le bundle depuis le système de fichier. 
+application, vous pouvez supprimer le bundle depuis le système de fichiers. 
 Le bundle se trouve dans le répertoire ``src/Acme/DemoBundle``. Vous devez 
 supprimer ce dossier et vous pouvez aussi supprimer le dossier ``Acme``.
 
