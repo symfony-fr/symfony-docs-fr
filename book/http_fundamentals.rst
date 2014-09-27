@@ -566,7 +566,7 @@ la manière dont votre projet est développé. Pour en nommer quelques-unes :
 
 Chacun de ces composants est découplé et peut être utilisé dans *n'importe quel*
 projet PHP, que vous utilisiez le framework Symfony2 ou non.
-Chaque partie est faite pour être utilisée si besoin et remplacée quand cela
+Chaque partie est faite pour être utilisée en cas de besoin et remplacée quand cela
 est nécessaire.
 
 La Solution Complète: Le *Framework* Symfony2
