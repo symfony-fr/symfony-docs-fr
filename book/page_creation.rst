@@ -837,8 +837,7 @@ en apprendrez plus sur les options de configuration spécifiques à chaque fonct
 Dump de configuration par défaut
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-. versionadded:: 2.1
-    La commande ``config:dump-reference`` a été ajoutée dans la version 2.1 de Symfony
+La commande ``config:dump-reference`` a été ajoutée dans la version 2.1 de Symfony
 
 Vous pouvez dumper la configuration par défaut d'un bundle en yaml vers la console
 en utilisant la commande ``config:dump-reference``. Voici un exemple de dump de la
