@@ -71,7 +71,7 @@ La route est simple :
 
         return $collection;
 
-Le pattern défini par la route ``blog_show`` agit comme ``/blog/*`` où le
+Le ``path`` défini par la route ``blog_show`` agit comme ``/blog/*`` où le
 joker (l'étoile) possède le nom ``slug``. Pour l'URL ``/blog/my-blog-post``,
 la variable ``slug`` prend la valeur de ``my-blog-post``, qui est à votre
 disposition dans votre contrôleur (continuez à lire).
