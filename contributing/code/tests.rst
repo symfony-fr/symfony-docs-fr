@@ -8,13 +8,7 @@ fonctionnel.
 PHPUnit
 -------
 
-Afin de lancer la suite de tests Symfony2, `installez`_ PHPUnit 3.6.4 ou plus
-récent :
-
-.. code-block:: bash
-    
-    $ pear config-set auto_discover 1
-    $ pear install pear.phpunit.de/PHPUnit
+Pour lancer la suite de tests Symfony, commencez par `installer PHPUnit`_ 3.7 (ou plus).
 
 Dépendances (facultatif)
 ------------------------
@@ -118,5 +112,5 @@ un navigateur web.
     La couverture de code ne fonctionne que si vous avez activé XDebug et
     installé toutes les dépendances.
 
-.. _`installez`: http://www.phpunit.de/manual/current/fr/installation.html
+.. _`installer PHPUnit`: https://phpunit.de/manual/current/en/installation.html
 .. _`Composer`: http://getcomposer.org/
