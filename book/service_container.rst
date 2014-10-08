@@ -922,8 +922,8 @@ L'injection de la dépendance par la méthode setter a juste besoin d'un changem
 .. note::
 
     Les approches présentées dans cette section sont appelées « constructor injection »
-    et « setter injection« ». Le conteneur de service Symfony2 supporte aussi
-    « property injection« ».
+    et « setter injection ». Le conteneur de service Symfony2 supporte aussi
+    « property injection ».
 
 .. _book-container-request-stack:
 
@@ -1019,7 +1019,6 @@ Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comm
     sans l'avoir injecté dans le conteneur de service, mais en l'ayant passé comme argument
     de votre méthode de contrôleur (action). Pour plus de détails, rendez-vous
     sur :ref:`book-controller-request-argument`.
-
 
 Rendre les Références Optionnelles
 ----------------------------------
