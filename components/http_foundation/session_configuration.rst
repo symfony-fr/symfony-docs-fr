@@ -85,7 +85,7 @@ peuvent vous servir d'exemples si vous souhaitez écrire le(s) vôtre(s).
 Exemple d'utilisation::
 
     use Symfony\Component\HttpFoundation\Session\Session;
-    use Symfony\Component\HttpFoundation\Session\Storage\SessionStorage;
+    use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
     use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
 
     $storage = new NativeSessionStorage(array(), new PdoSessionHandler());
