@@ -45,10 +45,10 @@ Dans Symfony, vous pouvez définir vos fonctions DQL personnalisées comme suit 
                     <doctrine:entity-manager name="default">
                         <!-- ... -->
                         <doctrine:dql>
-                            <doctrine:string-function name="test_string>Acme\HelloBundle\DQL\StringFunction</doctrine:string-function>
-                            <doctrine:string-function name="second_string>Acme\HelloBundle\DQL\SecondStringFunction</doctrine:string-function>
-                            <doctrine:numeric-function name="test_numeric>Acme\HelloBundle\DQL\NumericFunction</doctrine:numeric-function>
-                            <doctrine:datetime-function name="test_datetime>Acme\HelloBundle\DQL\DatetimeFunction</doctrine:datetime-function>
+                            <doctrine:string-function name="test_string">Acme\HelloBundle\DQL\StringFunction</doctrine:string-function>
+                            <doctrine:string-function name="second_string">Acme\HelloBundle\DQL\SecondStringFunction</doctrine:string-function>
+                            <doctrine:numeric-function name="test_numeric">Acme\HelloBundle\DQL\NumericFunction</doctrine:numeric-function>
+                            <doctrine:datetime-function name="test_datetime">Acme\HelloBundle\DQL\DatetimeFunction</doctrine:datetime-function>
                         </doctrine:dql>
                     </doctrine:entity-manager>
                 </doctrine:orm>
