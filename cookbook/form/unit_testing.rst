@@ -126,7 +126,7 @@ services. Cela ressemblerait à ceci::
     $builder->add('acme_test_child_type');
 
 Pour créer correctement votre formulaire, vous devez rendre le type
-disponible à la Facotry dans votre test. La manière la plus simple est
+disponible à la Factory dans votre test. La manière la plus simple est
 de l'enregistrer manuellement avant de créer le formulaire parent en
 utilisant la classe ``PreloadedExtension``::
 
