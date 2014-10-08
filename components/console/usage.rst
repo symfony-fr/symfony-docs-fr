@@ -10,7 +10,7 @@ options ainsi que que des commandes préconstruites pour le composant Console.
 .. note::
 
     Ces exemples supposent que vous avez ajouté un fichier ``app/console``
-    pour exécutez l'interface de commande CLI::
+    pour exécuter l'interface de commande CLI::
 
         #!/usr/bin/env php
         # app/console

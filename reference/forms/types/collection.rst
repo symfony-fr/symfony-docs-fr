@@ -229,7 +229,7 @@ options
 
 C'est le tableau qui est passé au type formulaire spécifié dans l'option `type`_.
 Par exemple, si vous utilisez le type :doc:`choice</reference/forms/types/choice>`
-dans l'option `type`_ (pa exemple pour une collection de menus déroulants), alors
+dans l'option `type`_ (par exemple pour une collection de menus déroulants), alors
 vous devrez au moins passer l'option ``choices`` au type sous-jacent::
 
     $builder->add('favorite_cities', 'collection', array(
