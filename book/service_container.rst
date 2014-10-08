@@ -786,8 +786,8 @@ L'injection de la dépendance par la méthode setter a juste besoin d'un changem
 .. note::
 
     Les approches présentées dans cette section sont appelées « constructor injection »
-    et « setter injection« ». Le conteneur de service Symfony2 supporte aussi
-    « property injection« ».
+    et « setter injection ». Le conteneur de service Symfony2 supporte aussi
+    « property injection ».
 
 Rendre les Références Optionnelles
 ----------------------------------
