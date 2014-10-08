@@ -40,7 +40,6 @@ système de fichiers::
 .. note::
 
     Les méthodes :method:`Symfony\\Component\\Filesystem\\Filesystem::mkdir`,
-    :method:`Symfony\\Component\\Filesystem\\Filesystem::chown`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::chgrp`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::chown`,
     :method:`Symfony\\Component\\Filesystem\\Filesystem::remove` et
