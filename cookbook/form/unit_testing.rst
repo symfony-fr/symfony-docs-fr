@@ -103,7 +103,7 @@ ci-dessous vérifie que tous les champs sont correctement spécifiés::
 
     $this->assertEquals($object, $form->getData());
 
-Enfin, vérifiez la création du ``FormView``. Vous devriez véirifier que
+Enfin, vérifiez la création du ``FormView``. Vous devriez vérifier que
 tous les widgets que vous voulez afficher sont disponible dans la propriété
 ``children``::
 
