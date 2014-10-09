@@ -57,7 +57,7 @@ Ensuite, vous pouvez installer les nouvelles dépendances en exécutant la comma
 
 .. code-block :: bash
 
-    php composer.phar update
+    php composer.phar update doctrine/mongodb-odm doctrine/mongodb-odm-bundle 
 
 Maintenant, Composer téléchargera automatiquement tous les fichiers requis, et les
 installera pour vous.
