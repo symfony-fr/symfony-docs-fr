@@ -302,8 +302,7 @@ des fichiers::
     // sélectionne une option
     $form['registration[birthday][year]']->select(1984);
 
-    // sélectionne plusieurs options d'un champ « select » multiple ou
-    // plusieurs cases « checkbox »
+    // sélectionne plusieurs options d'un champ « select » multiple
     $form['registration[interests]']->select(array('symfony', 'cookies'));
 
     // peut même simuler un « upload » de fichier
