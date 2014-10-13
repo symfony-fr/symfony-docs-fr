@@ -24,6 +24,9 @@ Vous pouvez installer le composant de différentes façon :
 * En utilisant le dépôt officiel Git (https://github.com/symfony/HttpFoundation) ;
 * En l'installant à l'aide de Composer (``symfony/http-foundation`` sur `Packagist`_).
 
+.. _component-http-foundation-request:
+
+
 Requête
 -------
 
