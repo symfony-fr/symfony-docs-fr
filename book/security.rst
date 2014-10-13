@@ -2017,6 +2017,42 @@ utilisez la méthode ``isGranted`` du contexte de sécurité:
     ``isGranted``. Référez-vous aux notes ci-dessus par rapport aux templates pour plus de 
     détails.
 
+.. _book-security-expressions:
+
+Complex Access Controls with Expressions
+----------------------------------------
+
+.. versionadded:: 2.4
+    The expression functionality was introduced in Symfony 2.4.
+
+In addition to a role like ``ROLE_ADMIN``, the ``isGranted`` method also
+accepts an :class:`Symfony\\Component\\ExpressionLanguage\\Expression` object::
+
+    use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+    use Symfony\Component\ExpressionLanguage\Expression;
+    // ...
+
+    public function indexAction()
+    {
+        if (!$this->get('security.context')->isGranted(new Expression(
+            '"ROLE_ADMIN" in roles or (user and user.isSuperAdmin())'
+        ))) {
+            throw new AccessDeniedException();
+        }
+
+        // ...
+    }
+
+In this example, if the current user has ``ROLE_ADMIN`` or if the current
+user object's ``isSuperAdmin()`` method returns ``true``, then access will
+be granted (note: your User object may not have an ``isSuperAdmin`` method,
+that method is invented for this example).
+
+This uses an expression and you can learn more about the expression language
+syntax, see :doc:`/components/expression_language/syntax`.
+
+
+
 « Usurper l'identité » d'un utilisateur
 ---------------------------------------
 
