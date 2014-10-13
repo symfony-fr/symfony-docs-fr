@@ -15,4 +15,5 @@ Sécurité
     securing_services
     custom_provider
     custom_authentication_provider
+    csrf_in_login_form
     target_path
