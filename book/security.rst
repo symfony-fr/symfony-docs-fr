@@ -604,6 +604,7 @@ en général, veuillez vous reporter à :doc:`/cookbook/security/form_login`.
             </access-control>
 
         .. code-block:: php
+
             // app/config/security.php
 
             // ...
