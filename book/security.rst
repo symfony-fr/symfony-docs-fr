@@ -1226,7 +1226,7 @@ Grâce à SensioFrameworkExtraBundle, vous pouvez sécuriser un contrôleur en u
     }
 
 Pour plus d'informations, voir la documentation 
-de :doc:`FrameworkExtraBundle documentation </bundles/SensioFrameworkExtraBundle/annotations/security>`.
+de FrameworkExtraBundle.
 
 Sécuriser d'autres services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
