@@ -1797,6 +1797,8 @@ utilisé (car c'est celui par défaut du pare-feu).
 Pour plus d'informations à propos des fournisseurs d'utilisateurs et de la configuration
 des pare-feu, veuillez vous reporter à :doc:`/reference/configuration/security`.
 
+.. _book-security-roles:
+
 Les rôles
 ---------
 
@@ -1815,6 +1817,8 @@ Ce rôle n'a pas besoin d'être défini quelque part - vous n'avez qu'à commenc
     Tous les rôles *doivent* commencer par le préfixe ``ROLE_`` afin d'être gérés par 
     Symfony2. Si vous définissez vos propres rôles avec une classe ``Role`` dédiée
     (plus avancé), n'utilisez pas le préfixe ``ROLE_``.
+
+.. _book-security-role-hierarchy:
 
 Rôles hiérarchiques
 ~~~~~~~~~~~~~~~~~~~
