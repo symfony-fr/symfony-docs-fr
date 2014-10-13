@@ -9,6 +9,7 @@ Sécurité
     voters
     acl
     acl_advanced
+    firewall_restriction
     force_https
     form_login
     securing_services
