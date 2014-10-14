@@ -50,7 +50,7 @@ login/mot de passe) :
                         
             access_control:
                 - { path: ^/admin, roles: ROLE_ADMIN }
-                # Include the following line to also secure the /admin path itself
+                # ajouter la ligne suivante pour securiser /admin 
                 # - { path: ^/admin$, roles: ROLE_ADMIN }
                 
             providers:
@@ -80,7 +80,7 @@ login/mot de passe) :
             
             	<access-control>
                     <rule path="^/admin" role="ROLE_ADMIN" />
-                    <!-- Include the following line to also secure the /admin path itself -->
+                    <!-- Ajouter cette ligne pour aussi sécuriser  /admin  -->
                     <!-- <rule path="^/admin$" role="ROLE_ADMIN" /> -->                    
                 </access-control>
                 
@@ -110,7 +110,7 @@ login/mot de passe) :
             ),
             'access_control' => array(
                 array('path' => '^/admin', 'role' => 'ROLE_ADMIN'),
-                // Include the following line to also secure the /admin path itself
+                // ajouter cette ligne pour sécuriser aussi /admin 
                 // array('path' => '^/admin$', 'role' => 'ROLE_ADMIN'),
             ),
             'providers' => array(
@@ -810,9 +810,9 @@ Comme Symfony utilise la première règle d'accès de contrôle qui correspond, 
 ``ROLE_SUPER_ADMIN``.
 Tout URL comme ``/admin/blog`` correspondra à la seconde règle et nécessitera donc ``ROLE_ADMIN``.
 
-Chaque rêgle d'accès possède des options qui peuvent configurer :
+Chaque règle d'accès possède des options qui peuvent configurer :
 
-#. :ref:`est ce que la requête correspond à cette rêgle d'accès de contrôle <security-book-access-control-matching-options>`
+#. :ref:`est ce que la requête correspond à cette règle d'accès de contrôle <security-book-access-control-matching-options>`
 #. :ref:`si cela correspond, est ce que des restrictions d'accès doivent être appliquées <security-book-access-control-enforcement-options>`:
 
 .. _security-book-access-control-matching-options:
@@ -821,15 +821,15 @@ Chaque rêgle d'accès possède des options qui peuvent configurer :
 ............................
 
 Symfony créé une instance de :class:`Symfony\\Component\\HttpFoundation\\RequestMatcher`
-pour chaque ``access_control``. Elles déterminent si une rêgle d'accès doit être utilisée pour analyser 
-la requête. Les options suivantes sont disponible pour valider la correspondance :
+pour chaque ``access_control``. Elles déterminent si une règle d'accès doit être utilisée pour analyser 
+la requête. Les options suivantes sont disponibles pour valider la correspondance :
 
 * ``path``
 * ``ip`` or ``ips``
 * ``host``
 * ``methods``
 
-Exemple de rêgle d'accès :
+Exemple de règle d'accès :
 
 .. configuration-block::
 
@@ -893,11 +893,11 @@ Exemple de rêgle d'accès :
             ),
         ));
 
-Pour chaque requête entrante, Symfony va décider quelles rêgle utiliser
+Pour chaque requête entrante, Symfony va décider quelles règles utiliser
 en fonction de l'URI, de l'adresse IP du client, le nom du serveur
-et le type de requête. Rappelez vous bien que c'estla première rêgle qui valide est utilisé,
+et le type de requête. Rappelez-vous bien que c'est la première règle valide qui est utilisée,
 et que si ``ip``, ``host`` ou ``method`` ne sont pas définies, alors 
-la rêgle va accepter toutes les ``ip``, ``host`` ou ``method``:
+la règle va accepter toutes les ``ip``, ``host`` ou ``method``:
 
 +-----------------+-------------+-------------+------------+--------------------------------+-------------------------------------------------------------+
 | URI             | IP          | HOST        | METHOD     | ``access_control``             | Explications                                                |
@@ -908,10 +908,10 @@ la rêgle va accepter toutes les ``ip``, ``host`` ou ``method``:
 |                 |             |             |            |                                | the ``ROLE_USER_HOST`` entry, but *only* the **first**      |
 |                 |             |             |            |                                | ``access_control`` match is used.                           |
 +-----------------+-------------+-------------+------------+--------------------------------+-------------------------------------------------------------+
-| ``/admin/user`` | 168.0.0.1   | symfony.com | GET        | rule #2 (``ROLE_USER_HOST``)   | ``ip`` ne correspond pas à la première rêgle.               |
-|                 |             |             |            |                                | Donc la seconde rêgle - qui correspond - est utilisée.      |
+| ``/admin/user`` | 168.0.0.1   | symfony.com | GET        | rule #2 (``ROLE_USER_HOST``)   | ``ip`` ne correspond pas à la première règle.               |
+|                 |             |             |            |                                | Donc la seconde règle - qui correspond - est utilisée.      |
 +-----------------+-------------+-------------+------------+--------------------------------+-------------------------------------------------------------+
-| ``/admin/user`` | 168.0.0.1   | symfony.com | POST       | rule #2 (``ROLE_USER_HOST``)   | La seconde rêgle correspond. La troisième aussi             |
+| ``/admin/user`` | 168.0.0.1   | symfony.com | POST       | rule #2 (``ROLE_USER_HOST``)   | La seconde règle correspond. La troisième aussi             |
 |                 |             |             |            |                                | (``ROLE_USER_METHOD``), mais seulement la **première**      |
 |                 |             |             |            |                                | correspondante ``access_control`` est utilsiée.             |
 +-----------------+-------------+-------------+------------+--------------------------------+-------------------------------------------------------------+
@@ -931,7 +931,7 @@ la rêgle va accepter toutes les ``ip``, ``host`` ou ``method``:
 2. Access Enforcement
 .....................
 
-Une fois que Symfony a choisi la rêgle d'accès qui correspond - si elle existe -,
+Une fois que Symfony a choisi la règle d'accès qui correspond - si elle existe -,
 il controle les droits d'accès selon les options ``roles`` et ``requires_channel``:
 
 * ``role`` If the user does not have the given role(s), then access is denied
@@ -1143,7 +1143,7 @@ Sécuriser par canal (http, https)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On peut forcer l'utilisateur a utiliser SSL; Il suffit d'utiliser l'argument
-``requires_channel`` dans les ``access_control``. Si cette rêgle est appliquée
+``requires_channel`` dans les ``access_control``. Si cette règle est appliquée
 et que la requête utilise ``http``, alors l'utilisateur sera redirigé vers ``https``:
 
 .. configuration-block::
