@@ -45,7 +45,7 @@ que le champ ``email`` soit unique dans votre table d'utilisateurs :
         use Symfony\Component\Validator\Constraints as Assert;
         use Doctrine\ORM\Mapping as ORM;
 
-        //Ne pas oubliter ce ``use`` !
+        //Ne pas oublier ce "use" !
         use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
         /**
