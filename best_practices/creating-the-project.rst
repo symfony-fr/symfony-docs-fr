@@ -1,40 +1,42 @@
-Creating the Project
-====================
+Créer le projet
+===============
 
-Installing Symfony
-------------------
+Installer Symfony
+-----------------
 
-There is only one recommended way to install Symfony:
+Il n'y a qu'une seule voie recommandée pour installer Symfony :
 
 .. best-practice::
 
-    Always use `Composer`_ to install Symfony.
+    Utilisez toujours `Composer`_ pour installer Symfony.
 
-Composer is the dependency manager used by modern PHP applications. Adding or
-removing requirements for your project and updating the third-party libraries
-used by your code is a breeze thanks to Composer.
+Composer est le gestionnaire de dépendances utilisé par les applications PHP modernes.
+Ajoutez ou supprimez des prérequis à votre projet et mettez à jour les bibliothèques
+tierces utilisées par votre code est un vrai bonheur avec Composer.
 
-Dependency Management with Composer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Gestion des dépendances avec Composer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before installing Symfony, you need to make sure that you have Composer installed
-globally. Open your terminal (also called *command console*) and run the following
-command:
+Avant d'installer Symfony, vous devez être sûr que vous avez Composer d'installé
+globalement. Ouvrez votre terminal (aussi appelé *console de commandes*) et exécutez
+la commande suivante :
 
 .. code-block:: bash
 
     $ composer --version
     Composer version 1e27ff5e22df81e3cd0cd36e5fdd4a3c5a031f4a 2014-08-11 15:46:48
 
-You'll probably see a different version identifier. Never mind because Composer
-is updated on a continuous basis and its specific version doesn't matter.
+Vous verrez probablement un identifiant de version différent. Ce n'est pas grave 
+car Composer est mis à jour de manière continuelle et sa version spécifique n'a
+pas d'importance.
 
-Installing Composer Globally
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In case you don't have Composer installed globally, execute the following two
-commands if you use Linux or Mac OS X (the second command will ask for your
-user password):
+Installer Composer globalement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dans le cas où vous n'auriez pas Composer d'installer globalement, exécutez les
+deux commandes suivantes si vous utilisez Linux ou Max OS X (la seconde commande
+vous demandera votre mot de passe utilisateur) :
 
 .. code-block:: bash
 
@@ -43,32 +45,32 @@ user password):
 
 .. note::
 
-    Depending on your Linux distribution, you may need to execute ``su`` command
-    instead of ``sudo``.
+    En fonction de votre distribution Linux, vous devrez exécuter la commande ``su``
+    au lieu de ``sudo``.
 
-If you use a Windows system, download the executable installer from the
-`Composer download page`_ and follow the steps to install it.
+Si vous utilisez un système Windows, téléchargez l'installateur depuis la 
+`page de téléchargement de Composer`_ et suivez les étapes pour l'installer.
 
-Creating the Blog Application
------------------------------
+Créer l'application de blog
+---------------------------
 
-Now that everything is correctly set up, you can create a new project based on
-Symfony. In your command console, browse to a directory where you have permission
-to create files and execute the following commands:
+Maintenant que tout est correctement paramétré, vous pouvez créer un nouveau
+projet basé sur Symfony. Dans votre console, allez dans un répertoire où vous
+avez le droit de créer des fichiers et exécutez les commandes suivantes :
 
 .. code-block:: bash
 
     $ cd projects/
     $ composer create-project symfony/framework-standard-edition blog/
 
-This command will create a new directory called ``blog`` that will contain
-a fresh new project based on the most recent stable Symfony version available.
+Cette commande créera un nouveau répertoire appelé ``blog`` qui contiendra
+un nouveau projet basé sur la version stable la plus récente de Symfony disponible.
 
-Checking the Symfony Installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vérifier l'installation de Symfony
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once the installation is finished, enter the ``blog/`` directory and check that
-Symfony is correctly installed by executing the following command:
+Une fois l'installation terminée, allez dans le répertoire ``blog/`` et vérifiez
+que Symfony est correctement installé en exécutant la commande suivante :
 
 .. code-block:: bash
 
@@ -77,18 +79,19 @@ Symfony is correctly installed by executing the following command:
 
     Symfony version 2.6.* - app/dev/debug
 
-If you see the installed Symfony version, everything worked as expected. If not,
-you can execute the following *script* to check what does prevent your system
-from correctly executing Symfony applications:
+Si vous voyez la version de Symfony installée, tout fonctionne comme attendu. Sinon,
+vous pouvez exécuter le *script* suivant pour vérifier ce qui empêche votre système
+d'exécuter correctement des applications Symfony :
 
 .. code-block:: bash
 
     $ php app/check.php
 
-Depending on your system, you can see up to two different lists when executing the
-`check.php` script. The first one shows the mandatory requirements which your
-system must meet to execute Symfony applications. The second list shows the
-optional requirements suggested for an optimal execution of Symfony applications:
+En fonction de votre système, vous pouvez voir jusqu'à deux listes différentes 
+lors de l'exécution du script `check.php`. La première montre les prérequis 
+obligatoires que votre système doit avoir pour pouvoir exécuter des applications
+Symfony. La seconde liste montre les prérequis facultatifs suggérés pour une 
+exécution optimal des applications Symfony :
 
 .. code-block:: bash
 
@@ -119,16 +122,15 @@ optional requirements suggested for an optimal execution of Symfony applications
 
 .. tip::
 
-    Symfony releases are digitally signed for security reasons. If you want to
-    verify the integrity of your Symfony installation, take a look at the
-    `public checksums repository`_ and follow `these steps`_ to verify the
-    signatures.
+    Les distributions de Symfony sont signées numériquement pour des raisons de sécurité. 
+    Si vous souhaitez vérifier l'intégrité de votre installation Symfony, regardez le
+    `public checksums repository`_ et suivez `these steps`_ pour vérifier les signatures.
 
-Structuring the Application
----------------------------
+Structurer l'application
+------------------------
 
-After creating the application, enter the ``blog/`` directory and you'll see a
-number of files and directories generated automatically:
+Après avoir créé l'application, allez dans le répertoire ``blog/`` et vous verrez un
+certain nombre de fichiers et répertoires générés automatiquement :
 
 .. code-block:: text
 
@@ -144,51 +146,51 @@ number of files and directories generated automatically:
     ├─ vendor/
     └─ web/
 
-This file and directory hierarchy is the convention proposed by Symfony to
-structure your applications. The recommended purpose of each directory is the
-following:
+Cette architecture de fichers et de répertoires est une convention proposée par
+Symfony pour la structure de vos application. L'usage recommandé pour chaque
+répertoire est le suivant :
 
-* ``app/cache/``, stores all the cache files generated by the application;
-* ``app/config/``, stores all the configuration defined for any environment;
-* ``app/logs/``, stores all the log files generated by the application;
-* ``app/Resources/``, stores all the templates and the translation files for the
-  application;
-* ``src/AppBundle/``, stores the Symfony specific code (controllers and routes),
-  your domain code (e.g. Doctrine classes) and all your business logic;
-* ``vendor/``, this is the directory where Composer installs the application's
-  dependencies and you should never modify any of its contents;
-* ``web/``, stores all the front controller files and all the web assets, such
-  as stylesheets, JavaScript files and images.
+* ``app/cache/``, stocke tous les fichiers de cache générés par l'application;
+* ``app/config/``, stocke toute la configuration définie pour chaque environnement;
+* ``app/logs/``, stocke tous les fichiers de journaux (logs) générés par l'application;
+* ``app/Resources/``, stocke tous les fichiers de templates et de traduction pour l'application;
+* ``src/AppBundle/``, stocke tout le code Symfony spécifique (contrôleurs et routes),
+  ///your domain code/// (ex: classes Doctrine) et toute votre logique métier;
+* ``vendor/``, c'est le répertoire où Composer installe les dépendances de votre application
+  et vous ne devez jamais modifier son contenu;
+* ``web/``, stocke tous ///the front controller files/// et toutes les ressources web, telles que
+  les feuilles de style, les fichiers JavaScript et les images.
 
 Application Bundles
 ~~~~~~~~~~~~~~~~~~~
 
-When Symfony 2.0 was released, most developers naturally adopted the symfony
-1.x way of dividing applications into logical modules. That's why many Symfony
-apps use bundles to divide their code into logical features: ``UserBundle``,
-``ProductBundle``, ``InvoiceBundle``, etc.
+Quand Symfony 2.0 est sorti, beaucoup de développeurs ont naturellement adopté
+la voie de symfony 1.x en divisant leurs applications en modules logiques. C'est
+pourquoi beaucoup d'applications Symfony utilisent les bundles pour diviser leur 
+code en fonctionnalités logiques : ``UserBundle``, ``ProductBundle``, ``InvoiceBundle``, 
+etc.
 
-But a bundle is *meant* to be something that can be reused as a stand-alone
-piece of software. If ``UserBundle`` cannot be used *"as is"* in other Symfony
-apps, then it shouldn't be its own bundle. Moreover ``InvoiceBundle`` depends
-on ``ProductBundle``, then there's no advantage to having two separate bundles.
+Mais un bundle *entend* être quelque chose pouvant être réutilisé comme un élément
+de logiciel à part. Si ``UserBundle`` ne peut pas être réutilisé *"en l'état"* dans
+une autre application Symfony, alors il ne devrait pas être son propre bundle. Tout 
+comme si ``InvoiceBundle`` dépend de ``ProductBundle``, alors il n'y a pas d'avantage
+à avoir deux bundles spérarés.
 
 .. best-practice::
 
-    Create only one bundle called ``AppBundle`` for your application logic
+    Créez seulement un bundle appelé ``AppBundle`` pour votre application métier
 
-Implementing a single ``AppBundle`` bundle in your projects will make your code
-more concise and easier to understand. Starting in Symfony 2.6, the official
-Symfony documentation uses the ``AppBundle`` name.
+Implémenter un simple bundle ``AppBundle`` dans vos projet rendra votre code plus
+concis et plus simple à comprendre. À partir de Symfony 2.6, la documentation 
+officielle de Symfony utilisera le nom ``AppBundle``.
 
 .. note::
 
-    There is no need to prefix the ``AppBundle`` with your own vendor (e.g.
-    ``AcmeAppBundle``), because this application bundle is never going to be
-    shared.
+    Il n'est pas nécessaire de préfixer le ``AppBundle`` avec votre propre ///vendor///
+     (ex: ``AcmeAppBundle``), car ce bundle applicatif n'a aucune vocation à être partagé.
 
-All in all, this is the typical directory structure of a Symfony application
-that follows these best practices:
+Au final, ceci est la structure typique d'une application Symfony suivant ces bonnes 
+pratiques :
 
 .. code-block:: text
 
@@ -208,23 +210,25 @@ that follows these best practices:
 
 .. tip::
 
-    If you are using Symfony 2.6 or a newer version, the ``AppBundle`` bundle
-    is already generated for you. If you are using an older Symfony version,
-    you can generate it by hand executing this command:
+    Si vous utilisez Symfony 2.6 ou une version plus récente, le bundle ``AppBundle``
+    est déjà généré pour vous. Si vous utilisez une ancienne version de Symfony, vous
+    pouvez le générer à la main en exécutant cette commande :
 
     .. code-block:: bash
 
         $ php app/console generate:bundle --namespace=AppBundle --dir=src --format=annotation --no-interaction
 
-Extending the Directory Structure
----------------------------------
+Étendre la structure des répertoires
+------------------------------------
 
-If your project or infrastructure requires some changes to the default directory
-structure of Symfony, you can `override the location of the main directories`_:
+Si vos projets ou votre infrastructure requiert quelques changement dans les 
+répertoires par défaut de la structure de Symfony, vous pouvez 
+///`override the location of the main directories`_///
+`surcharger l'emplacement des répertoires principaux`_ :
 ``cache/``, ``logs/`` and ``web/``.
 
-In addition, Symfony3 will use a slightly different directory structure when
-it's released:
+En plus, Symfony3 utilisera une structure de répertoire légèrement différentes
+lorsqu'il sortira :
 
 .. code-block:: text
 
@@ -241,8 +245,8 @@ it's released:
     ├─ vendor/
     └─ web/
 
-The changes are pretty superficial, but for now, we recommend that you use
-the Symfony2 directory structure.
+Les changements sont vraiment superficiels, mais pour le moment, nous vous 
+recommandons d'utiliser la structure de répertoire de Symfony2.
 
 .. _`Composer`: https://getcomposer.org/
 .. _`Get Started`: https://getcomposer.org/doc/00-intro.md
