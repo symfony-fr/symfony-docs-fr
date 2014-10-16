@@ -1,98 +1,104 @@
 .. index::
-   single: Symfony Framework Best Practices
+   single: Les bonnes pratiques du framework Symfony
 
-The Symfony Framework Best Practices
-====================================
+Les bonnes pratiques du framework Symfony
+=========================================
 
-The Symfony framework is well-known for being *really* flexible and is used
-to build micro-sites, enterprise applications that handle billions of connections
-and even as the basis for *other* frameworks. Since its release in July 2011,
-the community has learned a lot about what's possible and how to do things *best*.
+Le framework Symfony est bien connu pour être *réellement* flexible et utilisé
+pour construire des micro-site, des applications d'entreprise permettant de tenir
+des milliard de connexions et être la base d'autres frameworks. Depuis qu'il est
+sorti en juillet 2011, la communauté a appris énormément sur ce qui est possible
+et comment faire les choses *de la meilleure manière*.
 
-These community resources - like blog posts or presentations - have created
-an unofficial set of recommendations for developing Symfony applications.
-Unfortunately, a lot of these recommendations are unneeded for web applications.
-Much of the time, they unnecessarily overcomplicate things and don't follow the
-original pragmatic philosophy of Symfony.
+Les ressources de la communauté - comme les blogs ou les présentations - ont créées
+un ensemble de recommandations non-officielles pour développer des applications 
+Symfony. Malheureusement, un certain nombre de ces recommandations ne sont pas 
+nécessaires pour les applications web. La plupart du temps, elles compliquent
+inutilement les choses et ne suivent pas la philosophie pragmatique de Symfony.
 
-What is this Guide About?
--------------------------
+Qu'apporte ce guide ?
+---------------------
 
-This guide aims to fix that by describing the **official best practices for
-developing web apps with the Symfony full-stack framework**. These are best-
-practices that fit the philosophy of the framework as envisioned by its original
-creator `Fabien Potencier`_.
+Ce guide entends définir ceci en décrivant les **bonnes pratiques officielles
+permettant de développer des applications web avec le framework Symfony**. Elles
+sont les bonnes pratiques qui collent à la philosophie du framework telle 
+qu'imaginée par le créateur original `Fabien Potencier`_.
 
 .. note::
 
-    **Best practice** is a noun that means *"a well defined procedure that is
-    known to produce near-optimum results"*. And that's exactly what this
-    guide aims to provide. Even if you don't agree with every recommendation,
-    we believe these will help you build great applications with less complexity.
+    **Bonnes pratiques** est une expression désignant *"un ensemble de procédures 
+    définies qui permettent de produire des résultats optimums"*. Et c'est exactement
+    ce que ce guide entend procurer. Sauf si vous n'êtes pas d'accord avec 
+    l'ensemble des recommandations, nous pensons qu'elles peuvent vous aider 
+    à construire de grosses application avec moins de complexité.
 
-This guide is **specially suited** for:
+Ce guide est *particulièrement adapté* pour :
 
-* Websites and web applications developed with the full-stack Symfony framework.
+* Les sites internet et les applications web développés avec le framework Symfony.
 
-For other situations, this guide might be a good **starting point** that you can
-then **extend and fit to your specific needs**:
+Pour les autres cas, ce guide devrait être un bon **point de départ** que vous 
+pouvez ensuite **amender et adapter à vos besoins**:
 
-* Bundles shared publicly to the Symfony community;
-* Advanced developers or teams who have created their own standards;
-* Some complex applications that have highly customized requirements;
-* Bundles that may be shared internally within a company.
+* Bundles partagés avec la communauté Symfony;
+* Développeurs avancés ou équipe créant leurs propres standards;
+* Quelques applications complexe ayant des pré-requis fortement personnalisés;
+* Bundles devant être partagés en interne dans une entreprise.
 
-We know that old habits die hard and some of you will be shocked by some
-of these best practices. But by following these, you'll be able to develop
-apps faster, with less complexity and with the same or even higher quality.
-It's also a moving target that will continue to improve.
+Nous savons que les vieilles habitudes ont la vie dure et que certains d'entre
+vous seront choqués par certaines de ces bonnes pratiques. Mais en suivant 
+celles-ci vous serez capable de développer des applications rapides, en 
+retirant de la complexité et avec le même niveau ou plus de qualité. C'est
+également un objet mouvant qui continuera à s'améliorer.
 
-Keep in mind that these are **optional recommendations** that you and your
-team may or may not follow to develop Symfony applications. If you want to
-continue using your own best practices and methodologies, you can of course
-do it. Symfony is flexible enough to adapt to your needs. That will never
-change.
+Gardez en tête que ce sont des **recommandations facultatives** que vous
+et votre équipe pouvait ou ne pouvait pas suivre pour développer des 
+applications Symfony. Si vous souhaitez continuer à suivre vos propres
+bonnes pratiques et méthodologies, vous pouvez bien entendu faire cela.
+Symfony est assez flexible pour s'adapter à vos besoins. Cela ne changera
+jamais.
 
-Who this Book Is for (Hint: It's not a Tutorial)
+À qui s'adresse ce livre (Indice : ce n'est pas un tutoriel)
+------------------------------------------------------------
+
+Chaque développeur Symfony, que vous soyez expert ou novice, peut lire ce
+guide. Mais, comme ce n'est pas un tutoriel, quelques connaissances de base
+sur Symfony sont requises pour pouvoir tout comprendre. Si vous êtes totalement
+novice avec Symfony, bienvenu ! Commencez par le premier tutoriel `The Quick Tour`_.
+
+Nous avons volontairement garder ce guide court. Nous ne voulons par répéter des
+explications que vous pouvez trouver dans la vaste documentation de Symfony, 
+comme les discussions autour de l'injection de dépendance ou des ///front controllers///.
+Nous allons uniquement mettre l'accent sur l'explication de la façon de faire de
+ce que vous connaissez déjà.
+
+L'application
+-------------
+
+En complément de ce guide, vous trouverez un exemple d'application développée 
+avec à l'esprit l'ensemble des bonnes pratiques. **L'application est un simple
+moteur de blog**, car cela permet de ne se concentrer que sur les concepts et 
+fonctionnalités de Symfony sans s'embarrasser de détails complexes.
+
+Au lieu de développer l'application étape par étape dans ce guide, vous trouverez
+une sélection d'extrait de code à travers les chapitres. Veuillez vous référer
+au dernier chapitre de ce guide pour trouver plus de détails au sujet de 
+l'application et des instructions pour l'installer.
+
+Ne mettez pas à jour vos applications existantes
 ------------------------------------------------
 
-Any Symfony developer, whether you are an expert or a newcomer, can read this
-guide. But since this isn't a tutorial, you'll need some basic knowledge of
-Symfony to follow everything. If you are totally new to Symfony, welcome!
-Start with `The Quick Tour`_ tutorial first.
+Après avoir lu ce manuel, certains d'entre vous pourrait vouloir refactoriser
+leurs applications Symfony existantes. Notre recommandation est simple et 
+claire : **vous ne devriez pas refactoriser vos applications existante pour 
+suivre ces bonnes pratiques**. Les raisons de ne pas le faire sont nombreuses :
 
-We've deliberately kept this guide short. We won't repeat explanations that
-you can find in the vast Symfony documentation, like discussions about dependency
-injection or front controllers. We'll solely focus on explaining how to do
-what you already know.
-
-The Application
----------------
-
-In addition to this guide, you'll find a sample application developed with
-all these best practices in mind. **The application is a simple blog engine**,
-because that will allow us to focus on the Symfony concepts and features without
-getting buried in difficult details.
-
-Instead of developing the application step by step in this guide, you'll find
-selected snippets of code through the chapters. Please refer to the last chapter
-of this guide to find more details about this application and the instructions
-to install it.
-
-Don't Update Your Existing Applications
----------------------------------------
-
-After reading this handbook, some of you may be considering refactoring your
-existing Symfony applications. Our recommendation is sound and clear: **you
-should not refactor your existing applications to comply with these best
-practices**. The reasons for not doing it are various:
-
-* Your existing applications are not wrong, they just follow another set of
-  guidelines;
-* A full codebase refactorization is prone to introduce errors in your
-  applications;
-* The amount of work spent on this could be better dedicated to improving
-  your tests or adding features that provide real value to the end users.
+* Vos applications existantes ne sont pas mauvaises, elles suivent simplement 
+  un ensemble d'autres lignes directrices;
+* Une refactorisation complète d'une base de code présente un risque d'introduire
+  des erreurs dans vos applications;
+* La somme de travail nécessaire à cela pourrait être mieux dépenser à 
+  améliorer vos tests ou à ajouter des fonctionnalités procurant une réelle
+  plus-value à vos utilisateurs finaux.
 
 .. _`Fabien Potencier`: https://connect.sensiolabs.com/profile/fabpot
 .. _`The Quick Tour`: http://symfony.com/doc/current/quick_tour/the_big_picture.html
