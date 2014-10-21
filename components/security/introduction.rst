@@ -12,7 +12,7 @@ applications web. Il est livré avec des méthodes d'authentification
 utilisant HTTP basic ou l'authentification digest, ou encore un formulaire
 interactif de login ou via le certificat X.509, mais permet également
 d'implémenter vos propres stratégies d'authentification.
-De plus, le composant offre la possibilité d'authoriser les utilisateurs
+De plus, le composant offre la possibilité d'autoriser les utilisateurs
 en se basant sur leurs rôles, et il contient un système avancé d'ACL.
 
 
