@@ -124,7 +124,7 @@ exécution optimal des applications Symfony :
 
     Les distributions de Symfony sont signées numériquement pour des raisons de sécurité. 
     Si vous souhaitez vérifier l'intégrité de votre installation Symfony, regardez le
-    `public checksums repository`_ et suivez `these steps`_ pour vérifier les signatures.
+    `dépôt public des sommes de contrôle`_ et suivez `ces étapes`_ pour vérifier les signatures.
 
 Structurer l'application
 ------------------------
@@ -223,7 +223,6 @@ pratiques :
 
 Si vos projets ou votre infrastructure requiert quelques changement dans les 
 répertoires par défaut de la structure de Symfony, vous pouvez 
-///`override the location of the main directories`_///
 `surcharger l'emplacement des répertoires principaux`_ :
 ``cache/``, ``logs/`` and ``web/``.
 
@@ -250,7 +249,7 @@ recommandons d'utiliser la structure de répertoire de Symfony2.
 
 .. _`Composer`: https://getcomposer.org/
 .. _`Get Started`: https://getcomposer.org/doc/00-intro.md
-.. _`Composer download page`: https://getcomposer.org/download/
-.. _`override the location of the main directories`: http://symfony.com/doc/current/cookbook/configuration/override_dir_structure.html
-.. _`public checksums repository`: https://github.com/sensiolabs/checksums
-.. _`these steps`: http://fabien.potencier.org/article/73/signing-project-releases
+.. _`page de téléchargement de Composer`: https://getcomposer.org/download/
+.. _`surcharger l'emplacement des répertoires principaux`: http://symfony.com/doc/current/cookbook/configuration/override_dir_structure.html
+.. _`dépôt public des sommes de contrôle`: https://github.com/sensiolabs/checksums
+.. _`ces étapes`: http://fabien.potencier.org/article/73/signing-project-releases
