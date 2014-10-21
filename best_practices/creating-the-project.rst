@@ -155,10 +155,10 @@ répertoire est le suivant :
 * ``app/logs/``, stocke tous les fichiers de journaux (logs) générés par l'application;
 * ``app/Resources/``, stocke tous les fichiers de templates et de traduction pour l'application;
 * ``src/AppBundle/``, stocke tout le code Symfony spécifique (contrôleurs et routes),
-  ///your domain code/// (ex: classes Doctrine) et toute votre logique métier;
+  votre code métier (ex: classes Doctrine) et toute votre logique métier;
 * ``vendor/``, c'est le répertoire où Composer installe les dépendances de votre application
   et vous ne devez jamais modifier son contenu;
-* ``web/``, stocke tous ///the front controller files/// et toutes les ressources web, telles que
+* ``web/``, stocke tous les fichiers des contrôleurs frontaux et toutes les ressources web, telles que
   les feuilles de style, les fichiers JavaScript et les images.
 
 Application Bundles
@@ -186,7 +186,7 @@ officielle de Symfony utilisera le nom ``AppBundle``.
 
 .. note::
 
-    Il n'est pas nécessaire de préfixer le ``AppBundle`` avec votre propre ///vendor///
+    Il n'est pas nécessaire de préfixer le ``AppBundle`` avec votre propre nom d'organisation
      (ex: ``AcmeAppBundle``), car ce bundle applicatif n'a aucune vocation à être partagé.
 
 Au final, ceci est la structure typique d'une application Symfony suivant ces bonnes 

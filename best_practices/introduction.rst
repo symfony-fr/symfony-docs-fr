@@ -67,7 +67,7 @@ novice avec Symfony, bienvenu ! Commencez par le premier tutoriel `The Quick Tou
 
 Nous avons volontairement garder ce guide court. Nous ne voulons par répéter des
 explications que vous pouvez trouver dans la vaste documentation de Symfony, 
-comme les discussions autour de l'injection de dépendance ou des ///front controllers///.
+comme les discussions autour de l'injection de dépendance ou des contrôleur frontaux.
 Nous allons uniquement mettre l'accent sur l'explication de la façon de faire de
 ce que vous connaissez déjà.
 
