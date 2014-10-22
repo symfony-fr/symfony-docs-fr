@@ -1,21 +1,21 @@
 Configuration
 =============
 
-Configuration usually involves different application parts (such as infrastructure
-and security credentials) and different environments (development, production).
-That's why Symfony recommends that you split the application configuration into
-three parts.
+La configuration implique généralement différentes parties de l'application (comme
+l'infrastructure et la sécurité) et différents environnements (développement, production).
+C'est pourquoi Symfony recommande de diviser la configuration de l'application en trois
+parties.
 
-Infrastructure-Related Configuration
-------------------------------------
+Configuration liée à l'infrastructure
+-------------------------------------
 
 .. best-practice::
 
-    Define the infrastructure-related configuration options in the
-    ``app/config/parameters.yml`` file.
+    Définissez les options de configuration liée à l'infrastructure dans
+    le fichier ``app/config/parameters.yml``.
 
-The default ``parameters.yml`` file follows this recommendation and defines the
-options related to the database and mail server infrastructure:
+Le fichier par défaut ``parameters.yml`` suit cette recommandation et défini les
+options relatives à la base de données et au serveur de mail :
 
 .. code-block:: yaml
 
@@ -35,63 +35,66 @@ options related to the database and mail server infrastructure:
 
         # ...
 
-These options aren't defined inside the ``app/config/config.yml`` file because
-they have nothing to do with the application's behavior. In other words, your
-application doesn't care about the location of your database or the credentials
-to access to it, as long as the database is correctly configured.
+Ces options ne sont pas définies dans le fichier ``app/config/config.yml`` car
+elles n'ont pas de rapport avec le comportement de l'application. En d'autres termes,
+votre application ne se soucie pas de l'emplacement de la base de données ou des
+droits permettant d'y avoir accès, tant que la base de données est bien configurée.
 
-Canonical Parameters
+Paramètres standards
 ~~~~~~~~~~~~~~~~~~~~
 
 .. best-practice::
 
-    Define all your application's parameters in the
-    ``app/config/parameters.yml.dist`` file.
+    Définissez tous les paramètres de votre application dans le fichier
+    ``app/config/parameters.yml.dist``.
 
-Since version 2.3, Symfony includes a configuration file called ``parameters.yml.dist``,
-which stores the canonical list of configuration parameters for the application.
+Depuis la version 2.3, Symfony inclus un fichier de configuration appelé
+``parameters.yml.dist``, qui stocke la liste des paramètres de configuration
+standard de votre application.
 
-Whenever a new configuration parameter is defined for the application, you
-should also add it to this file and submit the changes to your version control
-system. Then, whenever a developer updates the project or deploys it to a server,
-Symfony will check if there is any difference between the canonical
-``parameters.yml.dist`` file and your local ``parameters.yml`` file. If there
-is a difference, Symfony will ask you to provide a value for the new parameter
-and it will add it to your local ``parameters.yml`` file.
+Chaque fois qu'un nouveau paramètre de configuration est défini pour votre application,
+vous devriez également l'ajouter à ce fichier et envoyer cette modification à votre
+gestionnaire de source. Ensuite, à chaque fois qu'un développeur met à jour le projet
+ou le déploie sur un serveur, Symfony vérifiera s'il y a des différences entre le fichier 
+standard ``parameters.yml.dist`` et votre fichier local ``parameters.yml``. S'il existe 
+une différence, Symfony vous demandera d'indiquer une valeur pour le nouveau paramètre
+et l'ajoutera à votre fichier local ``parameters.yml``.
 
-Application-Related Configuration
----------------------------------
-
-.. best-practice::
-
-    Define the application behavior related configuration options in the
-    ``app/config/config.yml`` file.
-
-The ``config.yml`` file contains the options used by the application to modify
-its behavior, such as the sender of email notifications, or the enabled
-`feature toggles`_. Defining these values in ``parameters.yml`` file would
-add an extra layer of configuration that's not needed because you don't need
-or want these configuration values to change on each server.
-
-The configuration options defined in the ``config.yml`` file usually vary from
-one `execution environment`_ to another. That's why Symfony already includes
-``app/config/config_dev.yml`` and ``app/config/config_prod.yml`` files so
-that you can override specific values for each environment.
-
-Constants vs Configuration Options
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-One of the most common errors when defining application configuration is to
-create new options for values that never change, such as the number of items for
-paginated results.
+Configuration liée à l'application
+----------------------------------
 
 .. best-practice::
 
-    Use constants to define configuration options that rarely change.
+    Définissez les options de configuration liées au comportement de 
+    l'application dans le fichier ``app/config/config.yml``.
 
-The traditional approach for defining configuration options has caused many
-Symfony apps to include an option like the following, which would be used
-to control the number of posts to display on the blog homepage:
+Le fichier ``config.yml`` contient les options utilisées par l'application pour
+modifier son comportement, comme l'expéditeur des notifications par email ou 
+l'activation de `fonctionnalitées conditionnelles`_. Définir ces valeurs
+dans le fichier ``parameters.yml`` serait ajouter une couche supplémentaire de
+configuration qui ne serait pas nécessaire car vous ne voulez pas ou n'avez pas
+besoin de modifier ces valeurs de configuration sur chaque serveur.
+
+Les options de configuration définies dans le fichier ``config.yml`` varient 
+généralement d'un `environnement d'exécution`_ à l'autre. C'est pourquoi Symfony
+inclut déjà les fichiers ``app/config/config_dev.yml`` et ``app/config/config_prod.yml``
+de sorte que vous puissiez indiquer des valeurs spécifiques à chaque environnement.
+
+Constantes vs Options de Configuration 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+L'une des erreurs les plus commune lors de la définition de la configuration
+de l'application est de créer de nouvelles options pour les valeurs qui ne 
+change jamais, comme le nombre d'éléments pour des résultats paginés.
+
+.. best-practice::
+
+    Utilisez des constantes pour définir les options de configuration ne changeant que rarement.
+
+L'approche traditionnelle pour définir les options de configuration a impliqué
+que beaucoup d'application Symfony ont inclut une option comme ce qui suit, qui
+serait utilisée pour gérer le nombre de messages à afficher sur la page d'accueil
+d'un blog :
 
 .. code-block:: yaml
 
@@ -99,11 +102,12 @@ to control the number of posts to display on the blog homepage:
     parameters:
         homepage.num_items: 10
 
-If you ask yourself when the last time was that you changed the value of
-*any* option like this, odds are that you *never* have. Creating a configuration
-option for a value that you are never going to configure just isn't necessary.
-Our recommendation is to define these values as constants in your application.
-You could, for example, define a ``NUM_ITEMS`` constant in the ``Post`` entity:
+Si vous vous demandez quand est-ce la dernière fois que vous avez changé la valeur
+d'une option de ce type, il y a de fortes chances pour que ce soit *jamais*. Créer une
+option de configuration pour une valeur que vous ne configurerez jamais n'est pas 
+nécessaire. Notre recommandation est de définir ces valeurs en tant que constantes
+dans votre application. Vous pourriez, par exemple, définir une constante ``NUM_ITEMS``
+dans l'entité ``Post`` :
 
 .. code-block:: php
 
@@ -117,12 +121,12 @@ You could, for example, define a ``NUM_ITEMS`` constant in the ``Post`` entity:
         // ...
     }
 
-The main advantage of defining constants is that you can use their values
-everywhere in your application. When using parameters, they are only available
-from places wih access to the Symfony container.
+Le principal avantage à définir des constantes est que vous pouvez utiliser leur
+valeur partout dans votre application. Lorsque vous utilisez des paramètres, ils
+ne sont disponibles que lorsque vous avez accès au container Symfony.
 
-Constants can be used for example in your Twig templates thanks to the
-``constant()`` function:
+Les constantes peuvent être utilisées par exemple dans vos templates Twig grâce
+à la fonction ``constant()`` :
 
 .. code-block:: html+jinja
 
@@ -130,8 +134,8 @@ Constants can be used for example in your Twig templates thanks to the
         Displaying the {{ constant('NUM_ITEMS', post) }} most recent results.
     </p>
 
-And Doctrine entities and repositories can now easily access these values,
-whereas they cannot access the container parameters:
+Et les entités et repositories Doctrine peuvent accéder facilement à ces valeurs,
+alors qu'elles n'ont pas accès aux paramètres du container :
 
 .. code-block:: php
 
@@ -148,36 +152,36 @@ whereas they cannot access the container parameters:
         }
     }
 
-The only notable disadvantage of using constants for this kind of configuration
-values is that you cannot redefine them easily in your tests.
+Le seul inconvénient notable de l'utilisation des constantes pour ce type de 
+configuration est que vous ne pouvez pas les redéfinir facilement dans vos tests.
 
-Semantic Configuration: Don't Do It
------------------------------------
+Configuration Sémantique: Ne le faites pas
+------------------------------------------
 
 .. best-practice::
 
-    Don't define a semantic dependency injection configuration for your bundles.
+    Ne définissez pas une configuration sémantique d'injection de dépendance pour vos bundle.
 
-As explained in `How to Expose a semantic Configuration for a Bundle`_ article,
-Symfony bundles have two choices on how to handle configuration: normal service
-configuration through the ``services.yml`` file and semantic configuration
-through a special ``*Extension`` class.
+Comme expliqué dans l'article `Comment exposer une configuration sémantique pour un Bundle`_,
+les bundles Symfony ont deux possibilités concernant la gestion de la configuration : la
+configuration normale des serveur via le fichier ``services.yml`` et la configuration
+sémantique via une classe spécifique ``*Extension``.
 
-Although semantic configuration is much more powerful and provides nice features
-such as configuration validation, the amount of work needed to define that
-configuration isn't worth it for bundles that aren't meant to be shared as
-third-party bundles.
+Bien que la configuration sémantique soit beaucoup plus puissante et fournisse des
+fonctionnalités intéressante comme la validation, la charge de travail nécessaire
+pour définir cette configution n'est pas valable pour vos bundles qui ne sont pas 
+destinés à être partagés en tant que bundle réutilisable.
 
-Moving Sensitive Options Outside of Symfony Entirely
-----------------------------------------------------
+Déplacez les options sensibles entièrement en dehors de Symfony
+---------------------------------------------------------------
 
-When dealing with sensitive options, like database credentials, we also recommend
-that you store them outside the Symfony project and make them available
-through environment variables. Learn how to do it in the following article:
-`How to Set external Parameters in the Service Container`_
+Lorsque vous manipulez des options sensibles, comme des accès à une base de données, nous
+vous recommendons de les stocker en dehors du projet Symfony et de les rendre disponible
+au travers des variables d'environnement. Apprenez comme faire en suivant cet article :
+`Comment configurer les paramètres externes dans le conteneur de services`_
 
-.. _`feature toggles`: http://en.wikipedia.org/wiki/Feature_toggle
-.. _`execution environment`: http://symfony.com/doc/current/cookbook/configuration/environments.html
+.. _`fonctionnalitées conditionnelles`: http://en.wikipedia.org/wiki/Feature_toggle
+.. _`environnement d'exécution`: http://symfony.com/doc/current/cookbook/configuration/environments.html
 .. _`constant() function`: http://twig.sensiolabs.org/doc/functions/constant.html
-.. _`How to Expose a semantic Configuration for a Bundle`: http://symfony.com/doc/current/cookbook/bundles/extension.html
-.. _`How to Set external Parameters in the Service Container`: http://symfony.com/doc/current/cookbook/configuration/external_parameters.html
+.. _`Comment exposer une configuration sémantique pour un Bundle`: http://symfony.com/fr/doc/current/cookbook/bundles/extension.html
+.. _`Comment configurer les paramètres externes dans le conteneur de services`: http://symfony.com/fr/doc/current/cookbook/configuration/external_parameters.html
