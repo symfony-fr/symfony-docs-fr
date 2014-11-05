@@ -4,9 +4,9 @@
 Type de champ Radio
 ===================
 
-Crée un simple bouton radio. Il devrait toujours être utilisé pour un champ
-dont la valeur est booléenne. : si le bouton radio est sélectionné, le champ sera
-défini à true, sinon, la valeur sera définie à false.
+Créé un unique bouton radio. Si le bouton radio est sélectionné, le champ aura pour valeur 
+celle définie par l'option "value". Les boutons radio ne peuvent pas être désélectionnés - 
+La valeur ne peut changer que lorsqu'un autre bouton radio du même nom est séléctionné.
 
 Le type ``radio`` n'est généralement pas utilisé directement. Le plus souvent, il 
 est utilisé indirectement par d'autres types comme le type :doc:`Choice</reference/forms/types/choice>`.
