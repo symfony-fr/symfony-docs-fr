@@ -47,7 +47,9 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
                     dsn:      "mysql:dbname=mydatabase"
                     user:     myuser
                     password: mypassword
-
+                calls:
+                    - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
+                    
             session.handler.pdo:
                 class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
                 arguments: [@pdo, %pdo.db_options%]
@@ -73,6 +75,10 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
                 <argument>mysql:dbname=mydatabase</argument>
                 <argument>myuser</argument>
                 <argument>mypassword</argument>
+                <call method="setAttribute">
+                    <argument type="constant">PDO::ATTR_ERRMODE</argument>
+                    <argument type="constant">PDO::ERRMODE_EXCEPTION</argument>
+                </call>
             </service>
 
             <service id="session.handler.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
@@ -107,6 +113,7 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
             'myuser',
             'mypassword',
         ));
+        $pdoDefinition->addMethodCall('setAttribute', array(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION));
         $container->setDefinition('pdo', $pdoDefinition);
 
         $storageDefinition = new Definition('Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler', array(
