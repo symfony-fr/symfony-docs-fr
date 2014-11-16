@@ -5,10 +5,10 @@ Compiler le Conteneur
 =====================
 
 Le conteneur de service peut être compilé pour plusieurs raisons. Ces
-raisons incluent les vérifications de tout les problèmes potentiels
+raisons incluent les vérifications de tous les problèmes potentiels
 comme par exemple les références circulaires, ainsi que le fait de rendre le conteneur plus
 efficace en résolvant les paramètres et en supprimant les services qui ne sont pas
-utilisés.
+utilisées.
 
 Le conteneur est compilé en exécutant::
 
@@ -83,7 +83,7 @@ dans le conteneur global qui est construit. Cela permet juste aux fichiers d'êt
 séparés entre les modules/bundles. Être en mesure de travailler sur la configuration
 d'un module à partir de fichiers de configuration en dehors du module/bundle est
 nécessaire pour faire une application complexe et configurable. Cela peut être
-fait en spécifiant les parties des fichiers de configuration qui sont chargés
+fait en spécifiant les parties des fichiers de configuration qui sont chargées
 directement dans le conteneur comme appartement à une extension particulière.
 Ces parties de la configuration ne seront pas prises en charge directement par
 le conteneur mais par l'Extension concernée.
@@ -157,7 +157,7 @@ l'exemple ci-dessus mais il s'agit tout de même d'un tableau. Le tableau ressem
     )
 
 Alors que vous pouvez gérer manuellement la fusion des différents fichiers, il
-est cependant préférable d'utiliser :doc:`the Config Component</components/config/introduction>`
+est cependant préférable d'utiliser :doc:`le composant Config</components/config/introduction>`
 pour fusionner et valider les valeurs de la configuration. Au cours du processus,
 vous pouvez accéder aux valeurs de configuration de cette manière::
 
@@ -265,7 +265,7 @@ secondaire seulement si un paramètre spécifique est défini::
     l'alias de l'extension comme une clé vous assure que l'extension est chargée.
     Le constructeur du conteneur peut aussi les charger avec sa méthode
     :method:`Symfony\\Component\\DependencyInjection\\ContainerBuilder::loadFromExtension`
-    method::
+     ::
 
         use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -484,9 +484,9 @@ mis en cache en production mais aussi d'avoir une configuration toujours à jour
     }
 
 Cela pourrait être encore amélioré en recompilant seulement le conteneur en mode
-debug lorsque des changements ont été fait dans sa configuration plutôt qu'à
+debug lorsque des changements ont été faits dans sa configuration plutôt qu'à
 chaque requête. Ceci peut être fait en cachant les fichiers utilisés pour configurer
-le conteneur de la manière décrite dans « :doc:`/components/config/caching` » dans
+le conteneur de la manière décrite dans « :doc:`/components/config/caching` » de
 la documentation du composant Config.
 
 Vous n'avez pas besoin de vous soucier des fichiers à mettre en cache car le constructeur
@@ -524,7 +524,7 @@ que le mode debug est activé ou non. La différence est que le ``ConfigCache`` 
 définit comme le debug mode (la valeur du mode debug lui est passé comme second
 argument dans son constructeur). Lorsque le cache n'est pas en mode debug, le conteneur
 mis en cache sera toujours utilisé s'il existe. En mode debug, un fichier de métadonnées
-est écrit avec le timestamp de tout les fichiers de ressource. Ceci sont ensuite vérifiés
+est écrit avec le timestamp de tout les fichiers de ressource. Ceux-ci sont ensuite vérifiés
 pour voir si les fichiers ont changé, et si c'est le cas, le cache sera considéré comme
 périmé.
 
