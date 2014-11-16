@@ -8,7 +8,7 @@ Le conteneur de service peut être compilé pour plusieurs raisons. Ces
 raisons incluent les vérifications de tous les problèmes potentiels
 comme par exemple les références circulaires, ainsi que le fait de rendre le conteneur plus
 efficace en résolvant les paramètres et en supprimant les services qui ne sont pas
-utilisées.
+utilisés.
 
 Le conteneur est compilé en exécutant::
 
