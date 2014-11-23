@@ -56,7 +56,7 @@ Cela affichera ce qui suit dans votre ligne de commande :
 
 .. code-block:: text
 
-    Hello Fabien
+    Hello World
 
 .. tip::
 
