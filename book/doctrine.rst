@@ -520,7 +520,7 @@ Décortiquons cet exemple :
   Cela ne crée pas vraiment de requête dans la base de données (du moins pas encore).
 
 * **ligne 16** Quand la méthode ``flush()`` est appelée, Doctrine regarde dans tous 
-  les objets qu'il gère pour savoir si ils ont besoin d'être persistés dans la base
+  les objets qu'il gère pour savoir s'ils ont besoin d'être persistés dans la base
   de données. Dans cet exemple, l'objet ``$product`` n'a pas encore été persisté,
   le gestionnaire d'entités exécute donc une requête ``INSERT`` et une ligne est créée dans
   la table ``product``.
