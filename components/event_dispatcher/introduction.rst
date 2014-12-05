@@ -23,7 +23,7 @@ résoudre avec de l'héritage simple, et l'héritage multiple (s'il était
 possible avec PHP) possède ses propres inconvénients.
 
 Le composant Répartiteur d'Évènement de Symfony2 implémente le pattern
-`Observer`_ d'une manière simple et efficace pour rendre toutes ces
+`Mediator`_ d'une manière simple et efficace pour rendre toutes ces
 choses possibles et pour réaliser des projets vraiment extensibles.
 
 Prenez un exemple simple du `composant HttpKernel de Symfony2`_. Une fois
