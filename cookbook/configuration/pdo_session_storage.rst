@@ -37,8 +37,9 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
             pdo.db_options:
                 db_table:    session
                 db_id_col:   session_id
-                db_data_col: session_value
+                db_data_col: session_data
                 db_time_col: session_time
+                db_lifetime_col: session_lifetime
 
         services:
             pdo:
@@ -63,8 +64,9 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
             <parameter key="pdo.db_options" type="collection">
                 <parameter key="db_table">session</parameter>
                 <parameter key="db_id_col">session_id</parameter>
-                <parameter key="db_data_col">session_value</parameter>
+                <parameter key="db_data_col">session_data</parameter>
                 <parameter key="db_time_col">session_time</parameter>
+                <parameter key="db_lifetime_col">session_lifetime</parameter>
             </parameter>
         </parameters>
 
@@ -98,8 +100,9 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         $container->setParameter('pdo.db_options', array(
             'db_table'      => 'session',
             'db_id_col'     => 'session_id',
-            'db_data_col'   => 'session_value',
+            'db_data_col'   => 'session_data',
             'db_time_col'   => 'session_time',
+            'db_lifetime_col'   => 'session_lifetime',
         ));
 
         $pdoDefinition = new Definition('PDO', array(
@@ -116,9 +119,10 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         $container->setDefinition('session.handler.pdo', $storageDefinition);
 
 * ``db_table`` : Nom de la table des sessions dans votre base de données
-* ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (de type VARCHAR(255) ou plus)
-* ``db_data_col`` : Nom de la colonne des valeurs dans la table des sessions (de type TEXT ou CLOB)
+* ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (de type VARCHAR(128))
+* ``db_data_col`` : Nom de la colonne des valeurs dans la table des sessions (BLOB)
 * ``db_time_col`` : Nom de la colonne temps dans la table des sessions (INTEGER)
+* ``db_lifetime_col`` : Nom de la colonne durée dans la table des sessions (INTEGER)
 
 Partager les informations de connection à la base de données
 ------------------------------------------------------------
@@ -168,11 +172,11 @@ L'instruction SQL pour la création d'une table de sessions sera probablement pr
 .. code-block:: sql
 
     CREATE TABLE `session` (
-        `session_id` varchar(255) NOT NULL,
-        `session_value` text NOT NULL,
-        `session_time` int(11) NOT NULL,
-        PRIMARY KEY (`session_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+       `session_id` VARBINARY(128) NOT NULL PRIMARY KEY,
+       `session_data` BLOB NOT NULL,
+       `session_time` INTEGER UNSIGNED NOT NULL,
+       `session_lifetime` MEDIUMINT NOT NULL
+) COLLATE utf8_bin, ENGINE = InnoDB;
 
 PostgreSQL
 ~~~~~~~~~~
@@ -182,8 +186,31 @@ Pour PostgreSQL, ce sera plutôt :
 .. code-block:: sql
 
     CREATE TABLE session (
-        session_id character varying(255) NOT NULL,
-        session_value text NOT NULL,
-        session_time integer NOT NULL,
-        CONSTRAINT session_pkey PRIMARY KEY (session_id)
-    );
+       session_id VARCHAR(128) NOT NULL PRIMARY KEY,
+       session_data BYTEA NOT NULL,
+       session_time INTEGER NOT NULL,
+       session_lifetime INTEGER NOT NULL
+);
+
+Microsoft SQL Server
+~~~~~~~~~~
+
+Pour Microsoft SQL Server, ce sera plutôt :
+
+.. code-block:: sql
+
+    CREATE TABLE [dbo].[session](
+       [session_id] [nvarchar](255) NOT NULL,
+       [session_data] [ntext] NOT NULL,
+       [session_time] [int] NOT NULL,
+       [session_lifetime] [int] NOT NULL,
+       PRIMARY KEY CLUSTERED(
+           [session_id] ASC
+       ) WITH (
+           PAD_INDEX  = OFF,
+           STATISTICS_NORECOMPUTE  = OFF,
+           IGNORE_DUP_KEY = OFF,
+           ALLOW_ROW_LOCKS  = ON,
+           ALLOW_PAGE_LOCKS  = ON
+       ) ON [PRIMARY]
+   ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
