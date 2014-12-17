@@ -14,15 +14,6 @@ Symfony2 incorpore une solution de stockage de sessions dans la base de données
 Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.yml``
 (ou le format de configuration de votre choix):
 
-.. versionadded:: 2.1
-    Dans Symfony2.1 la classe et l'espace de noms ont évolué. Vous trouvez dorénavant
-    la classe de stockage de session dans l'espace de nom `Session\\Storage` :
-    ``Symfony\Component\HttpFoundation\Session\Storage``. Notez également que dans
-    Symfony 2.1, vous devrez configurer ``handler_id`` et non pas ``storage_id`` comme
-    en Symfony2.0.
-
-    Ci-dessous, vous verrez que ``%session.storage.options%`` n'est plus utilisé.
-
 .. configuration-block::
 
     .. code-block:: yaml
@@ -35,10 +26,11 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
 
         parameters:
             pdo.db_options:
-                db_table:    session
-                db_id_col:   session_id
-                db_data_col: session_value
-                db_time_col: session_time
+                db_table:        session
+                db_id_col:       session_id
+                db_data_col:     session_data
+                db_time_col:     session_time
+                db_lifetime_col: session_lifetime
 
         services:
             pdo:
@@ -47,6 +39,8 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
                     dsn:      "mysql:dbname=mydatabase"
                     user:     myuser
                     password: mypassword
+                calls:
+                    - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
 
             session.handler.pdo:
                 class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
@@ -63,8 +57,9 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
             <parameter key="pdo.db_options" type="collection">
                 <parameter key="db_table">session</parameter>
                 <parameter key="db_id_col">session_id</parameter>
-                <parameter key="db_data_col">session_value</parameter>
+                <parameter key="db_data_col">session_data</parameter>
                 <parameter key="db_time_col">session_time</parameter>
+                <parameter key="db_lifetime_col">session_lifetime</parameter>
             </parameter>
         </parameters>
 
@@ -73,6 +68,10 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
                 <argument>mysql:dbname=mydatabase</argument>
                 <argument>myuser</argument>
                 <argument>mypassword</argument>
+                <call method="setAttribute">
+                    <argument type="constant">PDO::ATTR_ERRMODE</argument>
+                    <argument type="constant">PDO::ERRMODE_EXCEPTION</argument>
+                </call>
             </service>
 
             <service id="session.handler.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
@@ -96,10 +95,11 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         ));
 
         $container->setParameter('pdo.db_options', array(
-            'db_table'      => 'session',
-            'db_id_col'     => 'session_id',
-            'db_data_col'   => 'session_value',
-            'db_time_col'   => 'session_time',
+            'db_table'        => 'session',
+            'db_id_col'       => 'session_id',
+            'db_data_col'     => 'session_data',
+            'db_time_col'     => 'session_time',
+            'db_lifetime_col' => 'session_lifetime',
         ));
 
         $pdoDefinition = new Definition('PDO', array(
@@ -107,6 +107,7 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
             'myuser',
             'mypassword',
         ));
+        $pdoDefinition->addMethodCall('setAttribute', array(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION));
         $container->setDefinition('pdo', $pdoDefinition);
 
         $storageDefinition = new Definition('Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler', array(
@@ -116,9 +117,10 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
         $container->setDefinition('session.handler.pdo', $storageDefinition);
 
 * ``db_table`` : Nom de la table des sessions dans votre base de données
-* ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (de type VARCHAR(255) ou plus)
-* ``db_data_col`` : Nom de la colonne des valeurs dans la table des sessions (de type TEXT ou CLOB)
+* ``db_id_col`` : Nom de la colonne identifiant dans la table des sessions (VARCHAR(128))
+* ``db_data_col`` : Nom de la colonne des valeurs dans la table des sessions (BLOB)
 * ``db_time_col`` : Nom de la colonne temps dans la table des sessions (INTEGER)
+* ``db_lifetime_col`` : Nom de la colonne durée de vie dans la table des sessions (INTEGER)
 
 Partager les informations de connection à la base de données
 ------------------------------------------------------------
@@ -137,14 +139,14 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
         pdo:
             class: PDO
             arguments:
-                - "mysql:dbname=%database_name%"
+                - "mysql:host=%database_host%;port=%database_port%;dbname=%database_name%"
                 - %database_user%
                 - %database_password%
 
     .. code-block:: xml
 
         <service id="pdo" class="PDO">
-            <argument>mysql:dbname=%database_name%</argument>
+            <argument>mysql:host=%database_host%;port=%database_port%;dbname=%database_name%</argument>
             <argument>%database_user%</argument>
             <argument>%database_password%</argument>
         </service>
@@ -152,7 +154,7 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
     .. code-block:: php
 
         $pdoDefinition = new Definition('PDO', array(
-            'mysql:dbname=%database_name%',
+            'mysql:host=%database_host%;port=%database_port%;dbname=%database_name%',
             '%database_user%',
             '%database_password%',
         ));
@@ -168,11 +170,11 @@ L'instruction SQL pour la création d'une table de sessions sera probablement pr
 .. code-block:: sql
 
     CREATE TABLE `session` (
-        `session_id` varchar(255) NOT NULL,
-        `session_value` text NOT NULL,
-        `session_time` int(11) NOT NULL,
-        PRIMARY KEY (`session_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        `session_id` VARBINARY(128) NOT NULL PRIMARY KEY,
+        `session_data` BLOB NOT NULL,
+        `session_time` INTEGER UNSIGNED NOT NULL,
+        `session_lifetime` MEDIUMINT NOT NULL
+    ) COLLATE utf8_bin, ENGINE = InnoDB;
 
 PostgreSQL
 ~~~~~~~~~~
@@ -182,8 +184,31 @@ Pour PostgreSQL, ce sera plutôt :
 .. code-block:: sql
 
     CREATE TABLE session (
-        session_id character varying(255) NOT NULL,
-        session_value text NOT NULL,
-        session_time integer NOT NULL,
-        CONSTRAINT session_pkey PRIMARY KEY (session_id)
+        session_id VARCHAR(128) NOT NULL PRIMARY KEY,
+        session_data BYTEA NOT NULL,
+        session_time INTEGER NOT NULL,
+        session_lifetime INTEGER NOT NULL
     );
+    
+Microsoft SQL Server
+~~~~~~~~~~~~~~~~~~~~
+
+Pour MSSQL, ce sera plutôt :
+
+.. code-block:: sql
+
+    CREATE TABLE [dbo].[session](
+        [session_id] [nvarchar](255) NOT NULL,
+        [session_data] [ntext] NOT NULL,
+        [session_time] [int] NOT NULL,
+        [session_lifetime] [int] NOT NULL,
+        PRIMARY KEY CLUSTERED(
+            [session_id] ASC
+        ) WITH (
+            PAD_INDEX  = OFF,
+            STATISTICS_NORECOMPUTE  = OFF,
+            IGNORE_DUP_KEY = OFF,
+            ALLOW_ROW_LOCKS  = ON,
+            ALLOW_PAGE_LOCKS  = ON
+        ) ON [PRIMARY]
+    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
