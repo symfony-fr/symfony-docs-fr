@@ -156,7 +156,7 @@ Cette approche diminue aussi la « pollution » de l'espace de noms dans
 la variable super-globale ``$_SESSION`` car chaque sac stocke toutes ses
 données sous un espace de noms unique. Cela permet à Symfony2 de co-exister
 en toute quiétude avec d'autres applications ou bibliothèques qui pourrait
-utiliser la varible super-globale ``$_SESSION`` et toutes ses données restent
+utiliser la variable super-globale ``$_SESSION`` et toutes ses données restent
 entièrement compatibles avec la gestion de session de Symfony2.
 
 Symfony2 fournit deux sortes de sacs de stockage, avec deux implémentations
