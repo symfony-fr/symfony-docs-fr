@@ -399,7 +399,7 @@ représenter par une fonction PHP au lieu d'une chaine de caractères::
 
 .. note::
 
-    La fonction ``flush()`` ne vide par le tampon. Si ``ob_start()`` a
+    La fonction ``flush()`` ne vide pas le tampon. Si ``ob_start()`` a
     été appelé avant ou si l'option ``output_buffering`` du ``php.ini``
     est activée, vous devrez appeler ``ob_flush()`` avant ``flush()``.
 
