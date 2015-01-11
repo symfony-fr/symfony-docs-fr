@@ -1185,47 +1185,7 @@ Ajouter un Pattern Hostname (« nom d'hôte » en français) aux Routes Importé
 
     Le support de la correspondance avec le « Hostname » a été ajouté dans Symfony 2.2
 
-Vous pouvez définir un pattern de nom d'hôte pour les routes importées :
-
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # app/config/routing.yml
-        acme_hello:
-            resource: "@AcmeHelloBundle/Resources/config/routing.yml"
-            host: "hello.example.com"
-
-    .. code-block:: xml
-
-        <!-- app/config/routing.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-
-        <routes xmlns="http://symfony.com/schema/routing"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-
-            <import resource="@AcmeHelloBundle/Resources/config/routing.xml" host="hello.example.com" />
-        </routes>
-
-    .. code-block:: php
-
-        // app/config/routing.php
-        use Symfony\Component\Routing\RouteCollection;
-
-        $collection = new RouteCollection();
-        $collection->addCollection($loader->import("@AcmeHelloBundle/Resources/config/routing.php"), '', array(), array(), array(), 'hello.example.com');
-
-        return $collection;
-
-Le pattern de nom d'hôte ``hello.example.com`` sera défini pour chaque route
-chargée depuis la nouvelle ressource de routage.
-
-.. tip::
-
-    Vous pouvez également définir les routes en utilisant les annotations.
-    Lisez la :doc:`documentation du FrameworkExtraBundle</bundles/SensioFrameworkExtraBundle/annotations/routing>`
-    pour savoir comment faire.
+Vous pouvez définir un pattern de nom d'hôte pour les routes importées. Pour plus d'information, voir :ref:`component-routing-host-imported`
     
 .. index::
    single: Routing; Debugging
