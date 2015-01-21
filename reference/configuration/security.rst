@@ -357,7 +357,7 @@ Utiliser l'encodeur BCrypt
 l'option ``cost`` est compris en ``4-31`` et détermine la longueur du mot de passe
 qui sera encodé. Chaque unité de plus *double* le temps pour encoder le mot de passe.
 
-Si vous ne définissez pas l'option ``cost``, la valeur par est ``13``.
+Si vous ne définissez pas l'option ``cost``, la valeur par défaut est ``13``.
 
 .. note::
 
