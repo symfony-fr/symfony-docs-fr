@@ -50,14 +50,16 @@ généralement configurées dans un fichier ``app/config/parameters.yml`` :
     paramètres définis dans ce fichier sont référencés par le fichier de la
     configuration principale lorsque vous définissez Propel :
 
-    .. code-block:: yaml
+   .. code-block:: yaml
 
-        propel:
-            dbal:
-                driver:     "%database_driver%"
-                user:       "%database_user%"
-                password:   "%database_password%"
-                dsn:        "%database_driver%:host=%database_host%;dbname=%database_name%;charset=%database_charset%"
+    # app/config/config.yml
+      propel:
+          dbal:
+             driver:     "%database_driver%"
+             user:       "%database_user%"
+             password:   "%database_password%"
+             dsn:        "%database_driver%:host=%database_host%;dbname=%database_name%;charset=%database_charset%"
+
 
 Maintenant que Propel connaît votre base de données, Symfony2 peut créer cette dernière
 pour vous :
