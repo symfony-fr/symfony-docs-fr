@@ -630,7 +630,7 @@ Maintenant, créez la méthode ``isPasswordLegal()``, et faites ce dont vous ave
 .. note::
 
     Les plus perspicaces d'entre vous auront remarqué que le préfixe du getter
-    (« get » ou « is ») est omis dans le mapping. Cela vous permet de déplacer la
+    (« get », « is » ou « has ») est omis dans le mapping. Cela vous permet de déplacer la
     contrainte sur une propriété du même nom plus tard (ou vice versa) sans
     changer votre logique de validation.
 	
