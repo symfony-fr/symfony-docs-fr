@@ -65,7 +65,7 @@ le conteneur de services et utilisez le pour logguer::
     }
 
 Selon l'environnement dans lequel vous lancez votre commande (et votre paramétrage de logging),
-vous devriez voir les entrées logguées dans le fichier ``app/logs/dev.log`` ou `app/logs/prod.log``.
+vous devriez voir les entrées logguées dans le fichier ``app/logs/dev.log`` ou ``app/logs/prod.log``.
 
 Activer le logging automatique des Exceptions
 ---------------------------------------------
