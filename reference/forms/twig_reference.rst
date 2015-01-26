@@ -319,8 +319,8 @@ est possible en utilisant la propriété ``vars`` de l'objet :class:`Symfony\\Co
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``label``       | La chaine de caractère libelée qui sera rendue                                          |
 +-----------------+-----------------------------------------------------------------------------------------+
-| ``multipart``   | If ``true``, ``form_enctype`` will render ``enctype="multipart/form-data"``.            |
-|                 | This only applies to the root form element.                                             |
+| ``multipart``   | Si ``true``, ``form_enctype`` affichera ``enctype="multipart/form-data"``.              |
+|                 | S'applique uniquement à l'élément racine du formulaire (form).                          |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``attr``        | Un tableau clé-valeur qui sera rendu pour les attributs HTML pour le champ              |
 +-----------------+-----------------------------------------------------------------------------------------+
