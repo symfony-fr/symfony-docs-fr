@@ -93,7 +93,7 @@ une ``Application`` et lui ajoute les commandes::
     use Symfony\Component\Console\Application;
 
     $application = new Application();
-    $application->add(new GreetCommand);
+    $application->add(new GreetCommand());
     $application->run();
 
 Testez la nouvelle commande de console en exécutant ce qui suit :
