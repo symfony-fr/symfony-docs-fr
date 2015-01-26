@@ -4,7 +4,7 @@
 Type de champ Radio
 ===================
 
-Créé un unique bouton radio. Si le bouton radio est sélectionné, le champ aura pour valeur 
+créé un unique bouton radio. Si le bouton radio est sélectionné, le champ aura pour valeur 
 celle définie par l'option "value". Les boutons radio ne peuvent pas être désélectionnés - 
 La valeur ne peut changer que lorsqu'un autre bouton radio du même nom est séléctionné.
 
