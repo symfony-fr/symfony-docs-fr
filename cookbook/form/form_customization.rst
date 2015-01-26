@@ -25,7 +25,7 @@ de formulaire peuvent être facilement affichés en utilisant la fonction Twig
 
     .. code-block:: php
 
-        <?php echo $view['form']->row($form['age']) }} ?>
+        <?php echo $view['form']->row($form['age']) ?>
 
 Vous pouvez également afficher chacune de ces trois parties d'un champ
 individuellement :
@@ -43,9 +43,9 @@ individuellement :
     .. code-block:: php
 
         <div>
-            <?php echo $view['form']->label($form['age']) }} ?>
-            <?php echo $view['form']->errors($form['age']) }} ?>
-            <?php echo $view['form']->widget($form['age']) }} ?>
+            <?php echo $view['form']->label($form['age']) ?>
+            <?php echo $view['form']->errors($form['age']) ?>
+            <?php echo $view['form']->widget($form['age']) ?>
         </div>
 
 Dans les deux cas, le libellé du formulaire, les erreurs et le widget HTML sont
@@ -73,7 +73,7 @@ en une seule ligne :
 
     .. code-block:: php
 
-        <?php echo $view['form']->widget($form) }} ?>
+        <?php echo $view['form']->widget($form) ?>
 
 La suite de ce document explique comment le rendu de chaque partie du formulaire
 peut être modifié à différents niveaux. Pour plus d'informations sur l'affichage
