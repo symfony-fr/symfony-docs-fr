@@ -154,4 +154,4 @@ Finalement, ajoutez le formulaire ``LocationType`` à vos deux formulaires origi
     }
 
 C'est tout! Vous avez extrait les définitions de champs dupliqués dans un
-formulaire séparé que vous pouvez réutilisé où vous le voulez.
+formulaire séparé que vous pouvez réutiliser où vous le voulez.
