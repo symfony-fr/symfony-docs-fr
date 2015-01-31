@@ -5,7 +5,7 @@ Type de champ submit
 ====================
 
 .. versionadded:: 2.3
-    Le type ``submit`` a été ajouté à la versionSymfony 2.3
+    Le type ``submit`` a été ajouté à la version Symfony 2.3
 
 Un bouton submit.
 
@@ -24,7 +24,7 @@ Un bouton submit.
 
 Le bouton Submit possède une méthode :method:`Symfony\\Component\\Form\\ClickableInterface::isClicked`
 qui vous permet de tester si ce bouton a été utilisé pour soumettre le formulaire. Ceci est particulièrement
-utile quand  :ref:`un formulaire a plusieurs boutons de soumission <book-form-submitting-multiple-buttons>`::
+utile quand  :ref:`un formulaire a plusieurs boutons de soumission <book-form-submitting-multiple-buttons>`: :
 
     if ($form->get('sauvegardez')->isClicked()) {
         // ...
