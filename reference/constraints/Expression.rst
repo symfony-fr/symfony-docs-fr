@@ -258,4 +258,4 @@ message
 
 **type**: ``string`` **default**: ``This value is not valid.``
 
-Le message par défaut quand l'expression revoit false.
+Le message par défaut quand l'expression renvoit false.
