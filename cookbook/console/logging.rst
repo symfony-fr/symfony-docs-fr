@@ -185,7 +185,7 @@ L'utilisation du logger de la console peut être poussé plus loin en logguant
 les statuts "non-0 exit". De cette façon, vous saurez si une commande comporte
 des erreurs, même si une aucune exception n'a été levée.
 
-Dans un premier temps, configurez un écouteur pour l'évènement console.termine dans
+Dans un premier temps, configurez un écouteur pour l'évènement console.terminate dans
 le conteneur de services :
 
 .. configuration-block::
