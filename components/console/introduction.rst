@@ -251,7 +251,7 @@ vous vouliez saluer tous vos amis). Pour effectuer ceci, vous devez le spécifie
         ->addArgument(
             'names',
             InputArgument::IS_ARRAY,
-            'Qui voulez-vous saluez (séparer les noms par des espaces)?'
+            'Qui voulez-vous saluer (séparez les noms par des espaces)?'
         );
 
 Pour l'utiliser, spécifiez combien de noms vous voulez:
@@ -283,7 +283,7 @@ Vous pouvez combiner ``IS_ARRAY`` avec ``REQUIRED`` et ``OPTIONAL`` comme ceci::
         ->addArgument(
             'names',
             InputArgument::IS_ARRAY | InputArgument::REQUIRED,
-            'Qui voulez vous saluez (séparer les noms par des espaces)?'
+            'Qui voulez vous saluer (séparez les noms par des espaces)?'
         );
 
 Utiliser des options de commande
@@ -299,7 +299,7 @@ booléen sans valeur (par exemple : ``yell``).
 
 .. tip::
 
-    Il est aussi possible de faire qu'une option accepte *optionnellement* une
+    Il est aussi possible de faire en sorte qu'une option accepte *optionnellement* une
     valeur (qui ferait que ``--yell`` ou ``yell=loud`` fonctionnerait). Les
     options peuvent être configurées pour accepter un tableau de valeurs.
 
@@ -312,7 +312,7 @@ pour spécifier combien de fois le message devrait être affiché::
             'iterations',
             null,
             InputOption::VALUE_REQUIRED,
-            'Combien de fois voulez vous afficher le message ?',
+            'Combien de fois voulez-vous afficher le message ?',
             1
         );
 
@@ -364,7 +364,7 @@ Vous pouvez combiner ``VALUE_IS_ARRAY`` avec ``VALUE_REQUIRED`` ou ``VALUE_OPTIO
             'iterations',
             null,
             InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            'Combien de fois voulez vous afficher le message ?',
+            'Combien de fois voulez-vous afficher le message ?',
             1
         );
 
@@ -372,7 +372,7 @@ Helpers pour la Console
 -----------------------
 
 Le composant de console contient également un ensemble de « helpers »
-qui sont de petits outils qui peuvent vous aider dans différentes tâches:
+qui sont de petits outils qui peuvent vous aider dans différentes tâches :
 
 * :doc:`/components/console/helpers/dialoghelper`: demande d'informations à l'utilisateur de manière interactive
 * :doc:`/components/console/helpers/formatterhelper`: personnalisation de la coloration de sortie
