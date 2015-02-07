@@ -174,7 +174,7 @@ L'idée est qu'un fragment détermine le code HTML généré pour chaque partie 
 Pour personnaliser l'affichage d'un formulaire, vous devez juste identifier et surcharger
 le bon fragment. Un ensemble de personnalisations de fragments d'un formulaire est appelé
 « thème » de formulaire. 
-Lorsque vous affichez un formulaire, pouvez choisir quel(s) thème(s) de formulaire appliquer.
+Lorsque vous affichez un formulaire, vous pouvez choisir quel(s) thème(s) de formulaire appliquer.
 
 Dans Twig, un thème est un unique fichier de template et les fragments sont des blocs définis
 dans ce fichier.
