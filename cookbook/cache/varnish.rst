@@ -16,8 +16,7 @@ capable de délivrer du contenu caché rapidement et incluant le support pour le
 Configuration
 -------------
 
-Comme vu précédemment, Symfony2 est suffisamment intelligent pour détecter si
-il parle à un « reverse proxy » qui comprend ESI ou non. Cela fonctionne
+Comme vu précédemment, Symfony2 est suffisamment intelligent pour détecter s'il parle à un « reverse proxy » qui comprend ESI ou non. Cela fonctionne
 automatiquement lorsque vous utilisez le « reverse proxy » de Symfony2, mais vous
 avez besoin d'une configuration spéciale pour que cela fonctionne avec Varnish.
 Heureusement, Symfony2 repose déjà sur un autre standard écrit par Akamaï
