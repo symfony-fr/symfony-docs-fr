@@ -1003,10 +1003,10 @@ Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comm
 
 .. sidebar:: Pourquoi ne pas injecter le service ``request`` ?
 
-    Presque tous les services internes à Symfony2 se comportent de la même façon: une
-    seule instance est créée par le conteneur qui le renvoie à chaque fois que vous le demander
-    ou quand il est injecté dans un autre service. Il a une exception dans une application
-    Symfony2 standard : le service ``request``.
+    Presque tous les services internes à Symfony2 se comportent de la même façon : une
+    seule instance est créée par le conteneur qui la renvoie à chaque fois que vous
+    demandez un service ou quand il est injecté dans un autre service. Il y a une exception
+    dans une application Symfony2 standard : le service ``request``.
 
     Si vous essayez d'injecter la ``request`` vous allez probablement recevoir une exception
     :class:`Symfony\\Component\\DependencyInjection\\Exception\\ScopeWideningInjectionException`.
