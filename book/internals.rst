@@ -299,7 +299,7 @@ La valeur retournée par le Contrôleur est accessible via la méthode ``getCont
 
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
-        $val = $event->getReturnValue();
+        $val = $event->getControllerResult();
         $response = new Response();
         // personnalisez d'une manière ou d'une autre la Réponse
         // en vous basant sur la valeur retournée
