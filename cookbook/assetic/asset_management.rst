@@ -41,11 +41,11 @@ Ressources
 ----------
 
 Utiliser Assetic plutôt que servir les fichiers directement offre de nombreux avantages.
-Les fichiers n'ont pas besoin d'être stockés là où il seront servis, et peuvent
+Les fichiers n'ont pas besoin d'être stockés là où ils seront servis, et peuvent
 provenir de plusieurs sources, notamment d'un bundle.
 
 Vous pouvez utiliser Assetic pour vos fichiers :ref:`CSS<cookbook-assetic-including-css>` ou :ref:`Javascript<cookbook-assetic-including-javascript>`
-Le principe est identique entre les deux à l'exception d'une syntaxe qui différe légèrement.
+Le principe est identique entre les deux à l'exception d'une syntaxe qui diffère légèrement.
 
 .. _cookbook-assetic-including-javascript:
 
@@ -131,7 +131,7 @@ le filtre :ref:`cssrewrite<cookbook-assetic-cssrewrite>`.
 Corriger les chemins CSS avec le filtre ``cssrewrite``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vu que Assetic génère de nouvelles URLs pour vos ressource, tous les chemins relatifs
+Vu que Assetic génère de nouvelles URLs pour vos ressources, tous les chemins relatifs
 dans vos fichiers CSS vont être cassés. Pour corriger ça, assurez-vous d'utiliser le
 filtre ``cssrewrite`` avec votre tag ``stylesheets``. Il va parser votre CSS et corriger
 les chemins pour prendre en compte le nouvel emplacement.
@@ -388,7 +388,7 @@ Par défaut, chaque chemin de ressource généré en environnement de ``dev``
 est pris en charge dynamiquement par Symfony. Cela n'a pas d'inconvénient
 (vous pouvez voir vos changements immédiatement), sauf que les ressources
 peuvent être lentes à charger. Si vous trouvez que vos ressources sont
-chargés trop lentement, suivez ce guide.
+chargées trop lentement, suivez ce guide.
 
 Premièrement, dites à Symfony de ne plus essayer de traiter ces fichiers
 dynamiquement. Apportez les modifications suivantes dans le fichier ``config_dev.yml`` :
