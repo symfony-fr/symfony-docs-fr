@@ -125,6 +125,6 @@ la classe dans le répertoire ``doctrine-common``, et il va ensuite rechercher d
 le répertoire ``Doctrine`` (le dernier configuré) s'il ne la trouve pas, avant
 d'abandonner. L'ordre des enregistrements est significatif dans ce cas.
 
-.. _standards: http://symfony.com/PSR0
+.. _standards: http://www.php-fig.org/psr/psr-0/fr/
 .. _PEAR:      http://pear.php.net/manual/en/standards.php
 .. _Packagist: https://packagist.org/packages/symfony/class-loader
