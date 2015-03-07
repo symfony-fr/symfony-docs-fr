@@ -817,7 +817,7 @@ via la variable ``container``. Voici un autre exemple :
 
             <services>
                 <service id="my_mailer" class="Acme\HelloBundle\Mailer">
-                    <argument type="expression">@=container.hasParameter('some_param') ? parameter('some_param') : 'default_value'</argument>
+                    <argument type="expression">container.hasParameter('some_param') ? parameter('some_param') : 'default_value'</argument>
                 </service>
             </services>
         </container>
@@ -830,7 +830,7 @@ via la variable ``container``. Voici un autre exemple :
         $container->setDefinition('my_mailer', new Definition(
             'Acme\HelloBundle\Mailer',
             array(new Expression(
-                "@=container.hasParameter('some_param') ? parameter('some_param') : 'default_value'"
+                "container.hasParameter('some_param') ? parameter('some_param') : 'default_value'"
             ))
         ));
 
