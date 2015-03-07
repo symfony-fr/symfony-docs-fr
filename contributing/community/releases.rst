@@ -24,7 +24,7 @@ La période de six mois est divisées en deux phases :
 
 * *Stabilisation*: *Deux mois* pour corriger les bugs, préparer la version et
   attendre que tout l'écosystème Symfony (bibliothèques tierces, bundles et
-  projets qui utilisent Symfony) se mettent à jour.
+  projets qui utilisent Symfony) se mette à jour.
 
 Durant la phase de développement, toute nouvelle fonctionnalité peut être mise
 de côté si elle n'est pas finalisée à temps, ou si elle n'est pas suffisamment

@@ -10,7 +10,7 @@ travaillez avec quelque chose qui est réellement sensé être testé avec une
 véritable connexion à une base de données.
 
 Heureusement, vous pouvez facilement tester vos requêtes avec une vraie
-base de données, comme décrit ci-dessous
+base de données, comme décrit ci-dessous.
 
 .. _cookbook-doctrine-repo-functional-test:
 
