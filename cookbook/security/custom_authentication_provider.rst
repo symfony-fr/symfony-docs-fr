@@ -21,7 +21,7 @@ Le chapitre suivant démontre comment créer un fournisseur d'authentification
 personnalisé pour une authentification WSSE. Le protocole de sécurité
 pour WSSE fournit plusieurs avantages concernant la sécurité :
 
-1. Encryptage du Nom d'utilisateur / Mot de passe
+1. Chiffrement du Nom d'utilisateur / Mot de passe
 2. Sécurité contre les attaques de type « replay »
 3. Aucune configuration de serveur web requise
 
