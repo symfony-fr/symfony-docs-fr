@@ -340,7 +340,7 @@ disponibles, reportez vous à la section :ref:`book-doctrine-field-types`.
 .. seealso::
 
     Vous pouvez aussi regarder la documentation sur les `Bases du Mapping`_ de Doctrine pour
-    avoir tout les détails à propos des informations de mapping. Si vous utilisez 
+    avoir tous les détails à propos des informations de mapping. Si vous utilisez 
     les annotations, vous devrez préfixer toutes les annotations avec ``ORM\`` 
     (ex: ``ORM\Column(..)``), ce qui n'est pas montré dans la documentation de
     Doctrine. Vous devez aussi inclure le morceau de code :
@@ -616,7 +616,7 @@ récupérer facilement des objets en vous basant sur des conditions multiples::
     // requête un seul produit correspondant à un nom et un prix
     $product = $repository->findOneBy(array('name' => 'foo', 'price' => 19.99));
 
-    // requête tout les produits correspondant à un nom, classés par prix
+    // requête tous les produits correspondant à un nom, classés par prix
     $products = $repository->findBy(
         array('name' => 'foo'),
         array('price' => 'ASC')
