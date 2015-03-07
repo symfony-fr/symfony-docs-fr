@@ -246,7 +246,7 @@ document XML/HTML :
 
 .. sidebar:: Plus d'infos sur la méthode ``request()``:
 
-    La signature complète de la méthdode ``request()`` est::
+    La signature complète de la méthode ``request()`` est::
 
         request(
             $method,
