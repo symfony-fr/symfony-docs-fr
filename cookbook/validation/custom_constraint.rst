@@ -65,24 +65,34 @@ La classe validatrice ne requiert qu'une méthode : ``validate``::
         public function validate($value, Constraint $constraint)
         {
             if (!preg_match('/^[a-zA-Za0-9]+$/', $value, $matches)) {
-                $this->context->addViolation($constraint->message, array('%string%' => $value));
+               //Si vous utilisez la nouvelle API de validation 2.5
+               $this->context->buildViolation($constraint->message)
+                    ->setParameter('%string%', $value)
+                    ->addViolation();
+               
+               //Si vous utilisez l'ancienne API de validation 2.4
+               /*
+                 $this->context->addViolation(
+                    $constraint->message,
+                    array('%string%' => $value)
+                );
+               */
             }
         }
     }
 
-.. note::
+La méthode ``validate`` ne retourne pas de valeur; à la place, elle ajoute
+des violations de contraintes à la propriété ``context`` du validateur
+dans le cas d'erreurs de validation. Par conséquent, une valeur peut
+être considérée comme validée si aucune violation de contrainte n'est
+ajoutée au contexte. La méthode ``buildViolation`` prend le message
+d'erreur en tant qu'argument, et retourne une instance de
+:class:`Symfony\\Component\\Validator\\Violation\\ConstraintViolationBuilderInterface`.
+L'appel à la méthode ``addViolation`` va terminer l'ajout de la validation
+au contexte.
 
-    La méthode ``validate`` ne retourne pas de valeur; à la place, elle ajoute
-    des violations de contraintes à la propriété ``context`` du validateur grâce
-    à l'appel à la méthode ``addViolation`` dans le cas d'erreurs de validation.
-    Par conséquent, une valeur peut être considérée comme validée si aucune
-    violation de contrainte n'est ajoutée au contexte. Le premier paramètre de l'appel
-    à ``addViolation`` est le message d'erreur utilisé pour la violation.
-
-.. versionadded:: 2.1 
-    La méthode ``isValid`` est dépréciée au profit de ``validate`` dans Symfony 2.1. La
-    méthode ``setMessage`` est également dépréciée, en faveur de l'appel à la méthode
-    ``addViolation`` du contexte.
+.. versionadded:: 2.5
+    La méthode ``buildViolation`` a été ajoutée à Symfony 2.5.
 
 Utiliser le nouveau validateur
 ------------------------------
@@ -223,10 +233,21 @@ Avec ceci, la méthode ``validate()`` du validateur prend un objet comme premier
     {
         public function validate($protocol, Constraint $constraint)
         {
-            if ($protocol->getFoo() != $protocol->getBar()) {
+             if ($protocol->getFoo() != $protocol->getBar()) {
+                //Si vous utilisez la nouvelle API de validation 2.5
+                $this->context->buildViolation($constraint->message)
+                    ->atPath('foo')
+                    ->addViolation();
 
-                $this->context->addViolationAt('foo', $constraint->message, array(), null);
-            }
+                //Si vous utilisez l'ancienne API de validation 2.4
+                /*
+                $this->context->addViolationAt(
+                    'foo',
+                    $constraint->message,
+                    array(),
+                    null
+                );
+                */
         }
     }
 
