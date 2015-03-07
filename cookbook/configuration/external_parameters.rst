@@ -4,7 +4,7 @@
 Comment configurer les paramètres externes dans le conteneur de services
 ========================================================================
 
-Dans le chapitre doc:`/cookbook/configuration/environments`, Vous avez vu
+Dans le chapitre :doc:`/cookbook/configuration/environments`, Vous avez vu
 comment gérer la configuration de votre application. Parfois on aura cependant besoin
 de stocker certaines données hors du code du projet, par exemple des mots de passe, ou des
 paramètres de configuration d'une base de données.
