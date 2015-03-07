@@ -118,6 +118,6 @@ de spooling.
 
 .. note::
 
-    S'occuper du spooling n'est uniquement nécessaie que si le memory spolling
+    S'occuper du spooling n'est uniquement nécessaire que si le memory spolling
     est utilisé. Si vous utilisez le ``file spooling`` (ou pas de spooling du tout),
     il n'est pas utile de nettoyer manuellement dans une commande.
