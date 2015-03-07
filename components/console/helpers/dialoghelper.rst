@@ -18,7 +18,7 @@ la question comme second argument et la valeur par défaut comme dernier argumen
 Demander une confirmation à l'utilisateur
 -----------------------------------------
 
-Supposons que vous voulez confirmer une action avant de l'exécuter. AJouter
+Supposons que vous voulez confirmer une action avant de l'exécuter. Ajouter
 le code suivant à votre commande::
 
     // ...
