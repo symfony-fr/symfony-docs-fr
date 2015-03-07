@@ -49,4 +49,17 @@ une classe qui simplifiera les processus de test::
 
             $this->assertCount(1, $products);
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        protected function tearDown()
+        {
+            parent::tearDown();
+            $this->em->close();
+        }
     }
+
+.. note::
+
+    En fonction de votre version de PHP, vous devrez peut-être appeler la fonction ``gc_collect_cycles()`` après avoir fermé la connection afin que celle-ci soit correctement fermée.
