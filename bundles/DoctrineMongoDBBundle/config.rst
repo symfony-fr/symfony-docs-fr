@@ -147,7 +147,7 @@ Connexions multiples
 Si vous avez besoin de plusieurs connexions et gestionnaires de document,
 vous pouvez utiliser la syntaxe suivante :
 
-.. configuration-block
+.. configuration-block::
 
     .. code-block:: yaml
 
