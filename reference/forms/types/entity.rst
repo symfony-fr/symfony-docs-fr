@@ -116,7 +116,7 @@ de propriété sont affichés directement dans la balise select, sans optgroup.
 query_builder
 ~~~~~~~~~~~~~
 
-**type**: ``Doctrine\ORM\QueryBuilder`` or a Closure
+**type**: ``Doctrine\ORM\QueryBuilder`` ou une Closure
 
 Si elle est spécifiée, cette option sera utilisée pour requêter un sous-ensemble
 d'objets (et leur classement) qui sera affiché dans le champ. La valeur de cette
