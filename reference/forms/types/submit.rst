@@ -5,12 +5,12 @@ Type de champ submit
 ====================
 
 .. versionadded:: 2.3
-    Le type ``submit`` a été ajouté à la versionSymfony 2.3
+    Le type ``submit`` a été ajouté à la version Symfony 2.3
 
 Un bouton submit.
 
 +----------------------+----------------------------------------------------------------------+
-| Rendu comme          | Baslite ``input`` ``submit``                                         |
+| Rendu comme          | Balise ``input`` ``submit``                                          |
 +----------------------+----------------------------------------------------------------------+
 | Options              | - `attr`_                                                            |
 | héritées             | - `disabled`_                                                        |
