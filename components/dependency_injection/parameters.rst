@@ -100,8 +100,6 @@ de ce paramètre plutôt que de les intégrer dans la définition du service.
 
 .. caution::
 
-    The values between ``parameter`` tags in XML configuration files are not
-    trimmed.
     Les valeurs entre les tags ``parameter`` dans votre configuration XML ne
     sont pas "trimmée" (les espaces, les retours à la ligne, etc. ne sont pas retirées).
 
