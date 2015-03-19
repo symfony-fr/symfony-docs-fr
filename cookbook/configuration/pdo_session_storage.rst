@@ -129,7 +129,7 @@ Avec cette configuration, les paramètres de connexion à la base de données ne
 que le stockage des sessions. Ceci peut fonctionner si vous dédiez une base de données aux sessions.
 
 Mais si vous désirez stocker les informations de session dans la même base de données
-que le reste des données du projet, vous pouvez réutiliser les paramètres de connexion définis dans
+que le reste des données du projet, vous pouvez réutiliser les paramètres de connexion définis
 dans ``parameter.ini`` en référençant lesdits paramètres :
 
 .. configuration-block::
