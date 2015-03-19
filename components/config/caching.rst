@@ -12,7 +12,7 @@ quand les ressources de configuration sont modifiées.
 
 Par exemple, le composant de Routage de Symfony vous permet de charger
 toutes les routes, et d'afficher une correspondance d'URL ou une URL générée
-basé sur ces routes. Dans ce cas, lorsqu'une des ressources est modifiée
+basée sur ces routes. Dans ce cas, lorsqu'une des ressources est modifiée
 (et que vous travaillez dans un environnement de développement), le fichier
 généré devrait être invalidé ou regénéré. Cela peut être effectué en utilisant
 la classe :class:`Symfony\\Component\\Config\\ConfigCache`.
