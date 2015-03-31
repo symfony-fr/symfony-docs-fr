@@ -321,7 +321,7 @@ HTTP définit quatre entêtes de cache que nous détaillons ici :
 * ``ETag``
 * ``Last-Modified``
 
-L'entête le plus important et le plus versatile est l'entête
+L'entête le plus important et le plus polyvalent est l'entête
 ``Cache-Control`` qui est en réalité une collection d'informations
 diverses sur le cache.
 
