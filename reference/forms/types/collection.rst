@@ -160,7 +160,7 @@ besoin que du JavaScript :
             {# ... #}
 
             {# stocke le prototype dans l'attribut data-prototype #}
-            <ul id="email-fields-list" data-prototype="{{ form_widget(form.emails.vars.prototype) | e }}">
+            <ul id="email-fields-list" data-prototype="{{ form_row(form.emails.vars.prototype) | e }}">
             {% for emailField in form.emails %}
                 <li>
                     {{ form_errors(emailField) }}
