@@ -236,7 +236,7 @@ l'en-tête ``PasswordDigest`` correspond au mot de passe de l'utilisateur.
             file_put_contents($this->cacheDir.'/'.$nonce, time());
 
             // Valide le Secret
-            $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
+            $expected = base64_encode(sha1($nonce.$created.$secret, true));
 
             return $digest === $expected;
         }
