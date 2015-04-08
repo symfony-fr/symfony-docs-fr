@@ -19,8 +19,8 @@ puisque vous pouvez accéder aux labels, aux attributs, aux erreurs et plus enco
 Fonctions de rendu des formulaires
 ----------------------------------
 
-Ce manuel couvre toutes les fonctions possibles de Twig disponible pour
-rendre des formulaires. Il ya plusieurs fonctions différentes disponibles,
+Ce manuel couvre toutes les fonctions possibles de Twig disponibles pour
+rendre des formulaires. Il y a plusieurs fonctions différentes disponibles,
 et chacune est responsable du rendu d'une partie différente du formulaire
 ( par exemple des labels, des erreurs, les widgets, etc.)
 
@@ -60,7 +60,7 @@ form_start(view, variables)
 Rend le début du code HTML d'un formulaire. Cette fonction prends en charge
 la configuration de la méthode ainsi que la cible de l'action du formulaire.
 Il inclura bien sur, la propriété ``enctype`` si le formulaire contient un
-champs upload.
+champ upload.
 
 .. code-block:: jinja
 
@@ -78,8 +78,7 @@ Rend la fin du code HTML d'un formulaire.
 
     {{ form_end(form) }}
 
-Cette fonction ne rends pas la sortie de ``form_rest()`` seulement si vous
- définissez ``render_rest`` à ``false``:
+Cette fonction rend la sortie de ``form_rest()`` par défaut. Pour annuler le rendu par défaut de ``form_rest()`` définissez ``render_rest`` à ``false``:
 
 .. code-block:: jinja
 
