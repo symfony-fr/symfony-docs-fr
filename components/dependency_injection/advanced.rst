@@ -175,3 +175,94 @@ pouvez utiliser la directive ``file``.
 
 Notez que Symfony va appeler en interne la fonction PHP require_once, ce
 qui veut dire que votre fichier va être inclus seulement une fois par requête.
+
+Décorer des services
+--------------------
+
+.. versionadded:: 2.5
+    La décoration de services a été ajoutée dans Symfony 2.5.
+
+Quand vous redéfinissez une définition existante, l'ancien service est perdu :
+
+.. code-block:: php
+
+    $container->register('foo', 'FooService');
+
+    // cela va remplacer l'ancienne définition avec la nouvelle
+    // l'ancienne est perdue
+    $container->register('foo', 'CustomFooService');
+
+La plupart du temps, c'est exactement le comportement que vous souhaitez. Cependant,
+parfois vous souhaitez décorer l'ancien service à la place. Dans ce cas, l'ancien service
+devrait être conservé pour être capable de le référencer dans le nouveau. Cette configuration
+remplace ``foo`` avec un nouveau, mais garde une référence à l'ancien sous le nom ``bar.inner``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+       bar:
+         public: false
+         class: stdClass
+         decorates: foo
+         arguments: ["@bar.inner"]
+
+    .. code-block:: xml
+
+        <service id="bar" class="stdClass" decorates="foo" public="false">
+            <argument type="service" id="bar.inner" />
+        </service>
+
+    .. code-block:: php
+
+        use Symfony\Component\DependencyInjection\Reference;
+
+        $container->register('bar', 'stdClass')
+            ->addArgument(new Reference('bar.inner'))
+            ->setPublic(false)
+            ->setDecoratedService('foo');
+
+Voici ce qui est réalisé ici : la méthode ``setDecoratedService()`` indique au
+conteneur que le service ``bar`` devrait remplacer le service ``foo``, en
+renommant ``foo`` en ``bar.inner``.
+Par convention, l'ancien service ``foo`` va être renommé ``bar.inner``, pour que
+vous puissiez l'injecter dans votre nouveau service.
+
+.. note::
+    L'id de service interne généré est basé sur l'id du service décorateur
+    (``bar`` dans ce cas), pas sur celui du service décoré (ici ``foo``). C'est
+    obligatoire pour permettre plusieurs décorateurs sur le même service (il faut
+    que le nom de service interne généré soit différent).
+
+    Dans la plupat des cas, le décorateur devrait être déclaré privée, puisque vous
+    n'avez pas besoin de le récupérer sous le nom ``bar`` depuis le conteneur. La
+    visibilité du service décoré ``foo`` (qui est un alias pour ``bar``) correspondra
+    à la visibilité initiale du service ``foo``.
+
+Vous pouvez changer le nom du service interne si vous le souhaitez :
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+       bar:
+         class: stdClass
+         public: false
+         decorates: foo
+         decoration_inner_name: bar.wooz
+         arguments: ["@bar.wooz"]
+
+    .. code-block:: xml
+
+        <service id="bar" class="stdClass" decorates="foo" decoration-inner-name="bar.wooz" public="false">
+            <argument type="service" id="bar.wooz" />
+        </service>
+
+    .. code-block:: php
+
+        use Symfony\Component\DependencyInjection\Reference;
+
+        $container->register('bar', 'stdClass')
+            ->addArgument(new Reference('bar.wooz'))
+            ->setPublic(false)
+            ->setDecoratedService('foo', 'bar.wooz');
