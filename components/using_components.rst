@@ -34,7 +34,7 @@ Vous aurez peut-être besoin de modifié la version (exp. ``2.2.2`` ou ``2.3.*``
 
 Vous pouvez rechercher les noms et versions des composants à `packagist.org`_.
 
-**3.** `Installez composer`_ si il n'est pas déjà présent sur votre système:
+**3.** `Installez composer`_ s'il n'est pas déjà présent sur votre système:
 
 **4.** Téléchargez les librairies tierces et générez fichier ``vendor/autoload.php``:
 
@@ -46,7 +46,7 @@ Vous pouvez rechercher les noms et versions des composants à `packagist.org`_.
 
 Une fois que Composer a téléchargé le ou les composants, tout ce dont vous avez
 besoin est inclut dans le fichier ``vendor/autoload.php`` qui a été généré par
-Composer. Ce fichier prends en compte l'autoloading pour toutes les librairies,
+Composer. Ce fichier prend en compte l'autoloading pour toutes les librairies,
 donc vous pouvez directement les utiliser::
 
         // Fichier: src/script.php
