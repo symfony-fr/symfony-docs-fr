@@ -34,7 +34,7 @@ Vous aurez peut-être besoin de modifié la version (exp. ``2.2.2`` ou ``2.3.*``
 
 Vous pouvez rechercher les noms et versions des composants à `packagist.org`_.
 
-**3.** `Installez composer`_ si il n'est pas déjà présent sur votre système:
+**3.** `Installez composer`_ s'il n'est pas déjà présent sur votre système:
 
 **4.** Téléchargez les librairies tierces et générez fichier ``vendor/autoload.php``:
 
