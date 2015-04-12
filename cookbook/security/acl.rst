@@ -123,8 +123,8 @@ Créer un ACL, et ajouter un ACE
                 $acl = $aclProvider->createAcl($objectIdentity);
 
                 // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-                $securityContext = $this->get('security.context');
-                $user = $securityContext->getToken()->getUser();
+                $tokenStorage = $this->get('security.token_storage');
+                $user = $tokenStorage->getToken()->getUser();
                 $securityIdentity = UserSecurityIdentity::fromAccount($user);
 
                 // donne accès au propriétaire
@@ -172,10 +172,10 @@ Vérification des Accès
 
         public function editCommentAction(Comment $comment)
         {
-            $securityContext = $this->get('security.context');
+            $authChecker = $this->get('security.authorization_checker');
 
             // check for edit access
-            if (false === $securityContext->isGranted('EDIT', $comment))
+            if (false === $authChecker->isGranted('EDIT', $comment))
             {
                 throw new AccessDeniedException();
             }
