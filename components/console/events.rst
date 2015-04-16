@@ -99,12 +99,12 @@ est envoyé. Un écouteur peut couvrir ou changer l'exception ou changer certain
 choses avant que l'exception soit lever par l'application.
 
 Les écouteurs reçoivent un événement de classe
-:class:`Symfony\\Component\\Console\\Event\\ConsoleForExceptionEvent` ::
+:class:`Symfony\\Component\\Console\\Event\\ConsoleExceptionEvent` ::
 
-    use Symfony\Component\Console\Event\ConsoleForExceptionEvent;
+    use Symfony\Component\Console\Event\ConsoleExceptionEvent;
     use Symfony\Component\Console\ConsoleEvents;
 
-    $dispatcher->addListener(ConsoleEvents::EXCEPTION, function (ConsoleForExceptionEvent $event) {
+    $dispatcher->addListener(ConsoleEvents::EXCEPTION, function (ConsoleExceptionEvent $event) {
         $output = $event->getOutput();
 
         $command = $event->getCommand();
