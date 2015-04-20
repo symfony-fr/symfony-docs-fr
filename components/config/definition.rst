@@ -322,7 +322,7 @@ fournies. Pour les tableaux :
     Lorsque la valeur est aussi définie dans un second tableau de configuration,
     n'essaye pas de fusionner un tableau, mais le surcharge entièrement
 
-Pour tout les noeuds :
+Pour tous les noeuds :
 
 ``cannotBeOverwritten()``
     Ne laisse pas les autres tableaux de configuration surcharger une
