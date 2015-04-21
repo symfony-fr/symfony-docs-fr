@@ -542,7 +542,7 @@ L'inclusion de ce template dans tout autre template est simple :
         {% extends 'AcmeArticleBundle::layout.html.twig' %}
 
         {% block body %}
-            <h1>Recent Articles<h1>
+            <h1>Recent Articles</h1>
 
             {% for article in articles %}
                 {{ include('AcmeArticleBundle:Article:articleDetails.html.twig', {'article': article}) }}
