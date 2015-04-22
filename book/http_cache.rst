@@ -628,7 +628,7 @@ md5 du contenu::
         $response = $this->render('MyBundle:Main:index.html.twig');
         $response->setETag(md5($response->getContent()));
         $response->setPublic(); // permet de s'assurer que la réponse est publique, et qu'elle peut donc être cachée
-        $response->isNotModified($this->getRequest());
+        $response->isNotModified($this->get('request'));
 
         return $response;
     }
@@ -688,7 +688,7 @@ nécessitant de calculer le rendu de la ressource comme valeur de l'entête
          // Définit la réponse comme publique. Sinon elle sera privée par défaut.
         $response->setPublic();
 
-        if ($response->isNotModified($this->getRequest())) {
+        if ($response->isNotModified($this->get('request'))) {
             return $response;
         }
 
@@ -747,7 +747,7 @@ exactement ça en exposant un modèle simple et efficace::
 
         // Vérifie que l'objet Response n'est pas modifié
         // pour un objet Request donné
-        if ($response->isNotModified($this->getRequest())) {
+        if ($response->isNotModified($this->get('request'))) {
             // Retourne immédiatement un objet 304 Response
             return $response;
         } else {
