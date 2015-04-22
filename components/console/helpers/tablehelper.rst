@@ -15,7 +15,7 @@ des tableaux de données:
 Pour afficher un tableau, utilisez la classe :class:`Symfony\\Component\\Console\\Helper\\TableHelper`,
 définissez les entêtes, les lignes et  affichez::
 
-    $table = $app->getHelperSet()->get('table');
+    $table = $this->getHelperSet()->get('table');
     $table
         ->setHeaders(array('ISBN-13', 'TITRE', 'AUTEUR'))
         ->setRows(array(
