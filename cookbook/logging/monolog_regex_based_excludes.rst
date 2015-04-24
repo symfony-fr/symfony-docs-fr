@@ -10,7 +10,7 @@ Quelquefois vos logs sont submergés d'erreurs HTTP 404 indésirables,
 par exemple, quand une personne malveillante teste certaines URLs bien 
 connues sur votre application (`/phpmyadmin` par exemple). Lorsque vous 
 utilisez le gestionnaire ``fingers_crossed``, vous pouvez exclure la mise 
-en log de ces erreurs 404 via une expression régulièredans la config du 
+en log de ces erreurs 404 via une expression régulière dans la config du 
 MonologBundle
 
 .. configuration-block::
