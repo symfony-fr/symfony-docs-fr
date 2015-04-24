@@ -4,7 +4,7 @@
    single: Monolog; Exclude 404 Errors
 
 Comment configurer Monolog pour exclure les erreurs 404 des logs
-===========================================================
+================================================================
 
 Quelquefois vos logs sont submergés d'erreurs HTTP 404 indésirables, 
 par exemple, quand une personne malveillante teste certaines URLs bien 
