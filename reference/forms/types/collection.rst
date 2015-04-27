@@ -20,6 +20,7 @@ est très utile lorsque vous créerez des formulaires avec des relations one-to-
 |             | - `allow_delete`_                                                           |
 |             | - `prototype`_                                                              |
 |             | - `prototype_name`_                                                         |
+|             | - `delete_empty`_                                                           |
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `label`_                                                                  |
 | héritées    | - `label_attr`_                                                             |
@@ -336,6 +337,18 @@ prototype_name
 Si vous avez plusieurs collections dans votre formulaire, ou pire encore,
 des collections imbriquées, vous voudrez peut être changer le joker (placeholder)
 pour que les jokers sous-jacents ne soient pas remplacés par la même valeur.
+
+delete_empty
+~~~~~~~~~~~~
+
+.. versionadded:: 2.5
+    L'option ``delete_empty`` a été introduite avec Symfony 2.5.
+
+**type**: ``Boolean`` **default**: ``false``
+
+Si vous voulez retirer complètement les entrées vides de la collection, vous devez définir cette option à ``true``.
+Cependant, les entrées existantes de la collection ne seront supprimées que si l'option allow_delete_ est activée. 
+Autrement, les entrées vides seront gardées.
 
 Options héritées
 ----------------
