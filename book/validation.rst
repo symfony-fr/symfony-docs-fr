@@ -485,6 +485,7 @@ de validation plus complexes.
 .. _validation-property-target:
 
 Propriétés
+~~~~~~~~~~
 
 Valider des propriétés de classe est la technique de validation la plus basique. Symfony2
 vous permet de valider des propriétés privées, protégées ou publiques. Le prochain
