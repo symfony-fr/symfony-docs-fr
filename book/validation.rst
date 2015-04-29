@@ -771,7 +771,7 @@ Avec cette configuration, il y a deux groupes de validation :
 
 * ``Default`` - contient les contraintes non affectées à tout autre groupe ;
 
-* ``registration`` - contient les contraintes sur les champs ``email`` and ``password``
+* ``registration`` - contient les contraintes sur les champs ``email`` et ``password``
   seulement.
 
 Pour dire au validateur d'utiliser un groupe spécifique, passer un ou plusieurs noms de groupe
