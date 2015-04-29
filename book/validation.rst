@@ -812,7 +812,7 @@ faire. Dans un contrôleur, ça ressemble à ceci::
             // c'est une adresse valide, faire quelque chose
         } else {
             // ce n'est *pas* une adresse valide
-            $errorMessage = $errorList[0]->getMessage()
+            $errorMessage = $errorList[0]->getMessage();
             
             // faire quelque chose avec l'erreur
         }
