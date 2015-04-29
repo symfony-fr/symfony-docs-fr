@@ -675,7 +675,7 @@ utilisateur s'enregistre et quand un utilisateur met à jour son profil plus tar
                     - Length: { min: 7, groups: [registration] }
                 city:
                     - Length:
-						min: 2
+			min: 2
 
     .. code-block:: php-annotations
 
