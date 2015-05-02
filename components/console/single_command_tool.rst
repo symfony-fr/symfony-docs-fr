@@ -1,12 +1,12 @@
 .. index::
    single: Console; Single command application
 
-Comment construire une application qui est une commande unique
-==============================================================
+Comment construire une application pour une commande unique
+===========================================================
 
-Lorsque vous construisez un outil de ligne de commande, vous n'avez peut
-être pas besoin de fournir plusieurs commandes. Dans ce cas, devoir passer
-plusieurs noms de commande à chaque fois peut être fastidieux. Heureusement,
+Lorsque vous construisez un outil de ligne de commande, vous n'avez peut-être
+pas besoin de mettre à disposition plusieurs commandes. Dans ce cas, devoir passer
+le nom de la commande à chaque fois peut être fastidieux. Heureusement,
 il est possible de supprimer cette nécessité en étendant l'application::
 
     namespace Acme\Tool;
@@ -60,7 +60,7 @@ il est possible de supprimer cette nécessité en étendant l'application::
     }
 
 
-Lorsque vous appelez votre script de console, la commande `MyCommand`
+Lorsque vous appelez votre script de console, la commande ``MyCommand``
 sera maintenant toujours utilisée, sans avoir à saisir son nom.
 
 Vous pouvez aussi simplifier l'éxécution de l'application::
