@@ -364,7 +364,7 @@ kernel.cache_clearer
 **But**: Enregistre votre service pour qu'il soit appelé durant la suppression du cache
 
 La suppression cache s'effectue lorsque vous exécutez la commande ``cache:clear``.
-Si voter bundle mets en cache des fichiers, vous devez ajouter un nettoyeur de cache
+Si votre bundle met en cache des fichiers, vous devez ajouter un nettoyeur de cache
 personnalisé pour supprimer vos fichiers durant le processus de nettoyage.
 
 Pour enregistrer votre propre système de mise en cache, créez tout d'abord un
