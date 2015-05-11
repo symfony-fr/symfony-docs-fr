@@ -44,13 +44,13 @@ dépend lui même de plusieurs voteurs ("voters" en anglais) et rend un verdict 
 basé sur tous les votes (soit positif, négatif ou neutre) qu'il a reçu. Il reconnait
 plusieurs stratégies :
 
-* ``affirmatif`` (par défaut)
+* ``affirmative`` (par défaut)
     donne accès dès que n'importe quel voteur retourne une réponse affirmative;
 
 * ``consensus``
     donne accès s'il y a plus de voteurs donnant accès qu'il y a le refusant;
 
-* ``unanime``
+* ``unanimous``
     ne donne accès que si aucun des voteurs n'a refusé l'accès;
 
 .. code-block:: php
@@ -60,7 +60,7 @@ plusieurs stratégies :
     // instances de Symfony\Component\Security\Core\Authorization\Voter\VoterInterface
     $voters = array(...);
 
-    // l'un des suivants : "affirmatif", "consensus", "unanime"
+    // l'un des suivants : "affirmative", "consensus", "unanimous"
     $strategy = ...;
 
     // donne accès ou non, si tous les voteurs s'abstiennent

@@ -35,7 +35,7 @@ est envoyé avec la requête. L'exemple suivant vous montre comment faire ::
         {
             $this->logIn();
 
-            $this->client->request('GET', '/demo/secured/hello/Fabien');
+            $crawler = $this->client->request('GET', '/demo/secured/hello/Fabien');
 
             $this->assertTrue($this->client->getResponse()->isSuccessful());
             $this->assertGreaterThan(0, $crawler->filter('html:contains("Hello Fabien")')->count());

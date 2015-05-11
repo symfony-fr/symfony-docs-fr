@@ -114,7 +114,7 @@ Chaque partie sera expliquée dans la section suivante.
                     http_digest:
                         provider: some_key_from_above
                     form_login:
-                        # Soumet le formulaire de connection ici
+                        # Soumet le formulaire de connexion ici
                         check_path: /login_check
 
                         # l'utilisateur est redirigé ici si il/elle a besoin de se connecter
@@ -145,7 +145,7 @@ Chaque partie sera expliquée dans la section suivante.
                         intention:      authenticate
                         csrf_provider:  my.csrf_provider.id
 
-                        # par défautt, le formulaire de connextion *doit* être de type POST et non GET
+                        # par défautt, le formulaire de connexion *doit* être de type POST et non GET
                         post_only:      true
                         remember_me:    false
 

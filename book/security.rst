@@ -934,9 +934,11 @@ fichier de configuration. En fait, vous avez déjà vu cet exemple dans ce chapi
             // ...
             'providers' => array(
                 'default_provider' => array(
-                    'users' => array(
-                        'ryan' => array('password' => 'ryanpass', 'roles' => 'ROLE_USER'),
-                        'admin' => array('password' => 'kitten', 'roles' => 'ROLE_ADMIN'),
+                    'memory' => array(
+                        'users' => array(
+                            'ryan' => array('password' => 'ryanpass', 'roles' => 'ROLE_USER'),
+                            'admin' => array('password' => 'kitten', 'roles' => 'ROLE_ADMIN'),
+                        ),
                     ),
                 ),
             ),
@@ -1116,9 +1118,11 @@ en utilisant ``sha1``, suivez les instructions suivantes :
             // ...
             'providers' => array(
                 'in_memory' => array(
-                    'users' => array(
-                        'ryan' => array('password' => 'bb87a29949f3a1ee0559f8a57357487151281386', 'roles' => 'ROLE_USER'),
-                        'admin' => array('password' => '74913f5cd5f61ec0bcfdb775414c2fb3d161b620', 'roles' => 'ROLE_ADMIN'),
+                    'memory' => array(
+                        'users' => array(
+                            'ryan' => array('password' => 'bb87a29949f3a1ee0559f8a57357487151281386', 'roles' => 'ROLE_USER'),
+                            'admin' => array('password' => '74913f5cd5f61ec0bcfdb775414c2fb3d161b620', 'roles' => 'ROLE_ADMIN'),
+                        ),
                     ),
                 ),
             ),

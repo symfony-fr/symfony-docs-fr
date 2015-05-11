@@ -4,7 +4,7 @@ Isbn
 .. versionadded:: 2.3
     C'est une nouvelle contrainte depuis la version 2.3.
 
-Cette contrtainte valide si un numéro IBSN( International Standard Book Numbers)
+Cette contrainte valide si un numéro ISBN( International Standard Book Numbers)
 est soit un nombre de type ISBN-10, de type ISBN-13 ou les deux.
 
 +----------------+----------------------------------------------------------------------+
@@ -117,7 +117,7 @@ isbn10Message
 **type**: ``string`` **default**: ``This value is not a valid ISBN-10.``
 
 Le message qui est présenté si l'option `isbn10`_ est à true et que la valeur
-n'est pas un IBSN-10.
+n'est pas un ISBN-10.
 
 isbn13Message
 ~~~~~~~~~~~~~
@@ -125,7 +125,7 @@ isbn13Message
 **type**: ``string`` **default**: ``This value is not a valid ISBN-13.``
 
 Le message qui est présenté si l'option `isbn13`_ est à true et que la valeur
-n'est pas un IBSN-13.
+n'est pas un ISBN-13.
 
 bothIsbnMessage
 ~~~~~~~~~~~~~~~
@@ -133,4 +133,4 @@ bothIsbnMessage
 **type**: ``string`` **default**: ``This value is neither a valid ISBN-10 nor a valid ISBN-13.``
 
 Le message qui est présenté si les options `isbn10`_ et `isbn13`_ sont à true et que la valeur
-n'est ni un IBSN-10, ni un ISBN-13.
+n'est ni un ISBN-10, ni un ISBN-13.
