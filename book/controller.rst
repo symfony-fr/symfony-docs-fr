@@ -706,7 +706,7 @@ Par exemple, imaginez que vous traitiez la soumission d'un formulaire::
         if ($form->isValid()) {
             // effectue le traitement du formulaire
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'Vos changements ont été sauvegardés!'
             );
@@ -737,7 +737,7 @@ pour afficher le message ``notice`` :
 
     .. code-block:: html+php
 
-        <?php foreach ($view['session']->getFlashBag()->get('notice') as $message): ?>
+        <?php foreach ($view['session']->getFlash('notice') as $message): ?>
             <div class="flash-notice">
                 <?php echo "<div class='flash-error'>$message</div>" ?>
             </div>
