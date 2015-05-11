@@ -501,8 +501,8 @@ pour avoir au moins 3 caractères.
             properties:
                 firstName:
                     - NotBlank: ~
-                    - MinLength:
-						min: 3
+                    - Length: 
+                    	min: 3
 
     .. code-block:: php-annotations
 
