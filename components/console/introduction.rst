@@ -91,6 +91,8 @@ une ``Application`` et lui ajoute les commandes::
 
     use Acme\DemoBundle\Command\GreetCommand;
     use Symfony\Component\Console\Application;
+    
+    include(__DIR__ . '/vendor/autoload.php');
 
     $application = new Application();
     $application->add(new GreetCommand());
