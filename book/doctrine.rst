@@ -750,7 +750,7 @@ la place::
 
         try {
             $product = $query->getSingleResult();
-        } catch (\Doctrine\Orm\NoResultException $e) {
+        } catch (\Doctrine\ORM\NoResultException $e) {
             $product = null;
         }
         // ...
