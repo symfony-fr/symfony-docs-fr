@@ -24,7 +24,7 @@ Configurer le Request Contexte globalement
 Pour configurer le Context Request - qui est utilisé par le générateur d'URL -
 vous pouvez redéfinir les paramètres qu'il utilise comme valeur par défaut pour
 changer l'host par défaut (localhost) et le scheme (http). Vous devez également
-configurer le chemain de base si Symfony ne tourne pas à la racine de votre
+configurer le chemin de base si Symfony ne tourne pas à la racine de votre
 serveur.
 
 Notez que ceci n'impacte pas les URLs générées via les requêtes web normales,
