@@ -15,7 +15,6 @@ Un simple bouton non responsive.
 | Options              | - `attr`_                                                            |
 |                      | - `disabled`_                                                        |
 |                      | - `label`_                                                           |
-|                      | - `label_attr`_                                                      |
 |                      | - `translation_domain`_                                              |
 +----------------------+----------------------------------------------------------------------+
 | Type parent          | aucun                                                                |
@@ -31,8 +30,6 @@ Options
 .. include:: /reference/forms/types/options/button_disabled.rst.inc
 
 .. include:: /reference/forms/types/options/button_label.rst.inc
-
-.. include:: /reference/forms/types/options/label_attr.rst.inc
 
 .. include:: /reference/forms/types/options/button_translation_domain.rst.inc
 
