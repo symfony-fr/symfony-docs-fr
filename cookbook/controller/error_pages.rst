@@ -8,7 +8,7 @@ Comment personnaliser les pages d'erreur
 Lorsqu'une exception quelconque est lancée dans Symfony2, cette dernière
 est « capturée » par la classe ``Kernel`` et éventuellement transmise à
 un contrôleur spécial, ``TwigBundle:Exception:show`` pour qu'il la gère.
-Ce contrôleur, qui fait partie du coeur de ``TwigBundle``, détermine quelle
+Ce contrôleur, qui fait partie du coeur de ``TwigBundle``, détermine quel
 template d'erreur afficher et le code de statut qui devrait être défini
 pour l'exception donnée.
 
