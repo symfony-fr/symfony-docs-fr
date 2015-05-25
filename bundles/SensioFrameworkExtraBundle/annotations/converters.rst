@@ -118,7 +118,7 @@ paramètre ``comment`` est configuré avec l'annotation car ils ne peuvent pas t
 les deux suivre la convention par défaut.
 
 Si vous voulez faire correspondre une entité en utilisant plusieurs champs,
-utilisez ``mapping``::
+utilisez ``mapping`` (le premier "date" correspond à celui de la route, le second correspond à l'attribut de l'entité) ::
 
     /**
      * @Route("/blog/{date}/{slug}/comments/{comment_slug}")
