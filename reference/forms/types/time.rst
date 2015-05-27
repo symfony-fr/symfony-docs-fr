@@ -60,7 +60,7 @@ de trois listes déroulantes :
     ));
 
 L'option ``input`` *doit* être changée pour correspondre au type de donnée date sous-jacent.
-Par exemple, si la données du champ ``startTime`` est un timestamp unix, vous devrez définir
+Par exemple, si la donnée du champ ``startTime`` est un timestamp unix, vous devrez définir
 l'option ``input`` à ``timestamp`` :
 
 .. code-block:: php
