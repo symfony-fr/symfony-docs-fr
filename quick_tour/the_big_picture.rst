@@ -183,7 +183,7 @@ définis dans le fichier de configuration ``app/config/routing_dev.yml`` :
     _acme_demo:
         resource: "@AcmeDemoBundle/Resources/config/routing.yml"
 
-Ce bout de code importe un fichier routing.yml qui défini les routes de la démo :
+Ce bout de code importe un fichier routing.yml qui définit les routes de la démo :
 
 .. code-block:: yaml
 
