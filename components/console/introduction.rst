@@ -88,6 +88,8 @@ une ``Application`` et lui ajoute les commandes::
     #!/usr/bin/env php
     <?php
     // app/console
+    
+    include("vendor/autoload.php");
 
     use Acme\DemoBundle\Command\GreetCommand;
     use Symfony\Component\Console\Application;
