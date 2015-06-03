@@ -84,6 +84,7 @@ que le champ ``email`` soit unique dans votre table d'utilisateurs :
         namespace Acme\UserBundle\Entity;
 
         use Symfony\Component\Validator\Constraints as Assert;
+        use Symfony\Component\Validator\Mapping\ClassMetadata;
 
         // DON'T forget this use statement!!!
         use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -97,7 +98,7 @@ que le champ ``email`` soit unique dans votre table d'utilisateurs :
                     'message' => 'Cette adresse email existe déja.',
                 )));
 
-                $metadata->addPropertyConstraint(new Assert\Email());
+                $metadata->addPropertyConstraint('email', new Assert\Email());
             }
         }
 
