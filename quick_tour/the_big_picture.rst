@@ -317,7 +317,7 @@ la clé ``_demo``:
 Symfony2 peut lire/importer les informations de routing écrites en YAML, XML, PHP
 ou même grâce aux annotations. Ici, le *nom logique* du fichier est 
 ``@AcmeDemoBundle/Controller/DemoController.php`` et fait référence au fichier
-``src/Acme/DemoBundle/Controller/DemoController.php``. Dans ce fichiers, les
+``src/Acme/DemoBundle/Controller/DemoController.php``. Dans ce fichier, les
 routes sont définies par des annotations des méthodes action :
 
 .. code-block:: php
