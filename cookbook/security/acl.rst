@@ -4,7 +4,7 @@
 Comment utiliser les Access Control Lists (ACLs) (« liste de contrôle d'accès » en français)
 ============================================================================================
 
-Dans les applications complexes, vous allez souvent rencontrer le problème
+Dans les applications complexes, il arrive régulièrement
 que les décisions d'accès ne peuvent pas uniquement se baser sur la personne
 (``Token``) qui demande l'accès, mais qu'elles impliquent aussi un objet domaine
 auquel l'accès est demandé. C'est là où le système des ACL intervient.
