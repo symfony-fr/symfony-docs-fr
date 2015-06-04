@@ -20,7 +20,7 @@ décision sera prise par une instance de la classe
 Une décision d'autorisation sera toujours basée sur quelques éléments :
 
 * Le jeton courant
-    Par exemple, le jeton de la méthode :method:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface::getRoles
+    Par exemple, la méthode :method:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface::getRoles`
     du jeton devrait être utilisée pour retrouver les rôles de l'utilisateur courant
     (par exemple ``ROLE_SUPER_ADMIN``), ou une décision pourrait être basée
     sur la classe du jeton.
