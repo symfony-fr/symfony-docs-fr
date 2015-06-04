@@ -182,7 +182,8 @@ YAML, XML ou PHP. Jetons un oeil à la configuration par défaut :
         form:            true
         csrf_protection: true        
         validation:      { enable_annotations: true }
-        templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme	
+        templating:      { engines: ['twig'] } 
+        #assets_version: SomeVersionScheme	
         session:       
             default_locale:  "%locale%"
             auto_start:     true
@@ -285,8 +286,7 @@ notation :
 ``@NOM_DU_BUNDLE/path/to/file``; Symfony2 remplacera ``@NOM_DU_BUNDLE`` par le chemin
 du bundle. A titre d'exemple, le chemin logique
 ``@AcmeDemoBundle/Controller/DemoController.php`` sera transformé en
-``src/Acme/DemoBundle/Controller/DemoController.php``, car Symfony connaît la
-la location du bundle ``AcmeDemoBundle``.
+``src/Acme/DemoBundle/Controller/DemoController.php``, car Symfony connaît la location du bundle ``AcmeDemoBundle``.
 	
 Noms logiques de contrôleurs	
 ............................
