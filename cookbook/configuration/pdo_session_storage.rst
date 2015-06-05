@@ -27,52 +27,58 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
 
     .. code-block:: yaml
 
-        # app/config/config.yml
-        framework:
+         # app/config/config.yml
+         framework:
             session:
-                # ...
-                handler_id:     session.handler.pdo
+               # ...
+               handler_id:     session.handler.pdo
 
-        parameters:
+         parameters:
             pdo.db_options:
-                db_table:    session
-                db_id_col:   session_id
-                db_data_col: session_value
-                db_time_col: session_time
+               db_table:    session
+               db_id_col:   session_id
+               db_data_col: session_value
+               db_time_col: session_time
 
-        services:
+         services:
             pdo:
-                class: PDO
-                arguments:
-                    dsn:      "mysql:dbname=mydatabase"
-                    user:     myuser
-                    password: mypassword
+               class: PDO
+               arguments:
+                  dsn:      "mysql:dbname=mydatabase"
+                  user:     myuser
+                  password: mypassword
+               calls:
+                  - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
 
             session.handler.pdo:
-                class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-                arguments: [@pdo, %pdo.db_options%]
+               class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+               arguments: [@pdo, %pdo.db_options%]
 
     .. code-block:: xml
 
-        <!-- app/config/config.xml -->
-        <framework:config>
+         <!-- app/config/config.xml -->
+         <framework:config>
             <framework:session handler-id="session.handler.pdo" lifetime="3600" auto-start="true"/>
-        </framework:config>
+         </framework:config>
 
-        <parameters>
+         <parameters>
             <parameter key="pdo.db_options" type="collection">
-                <parameter key="db_table">session</parameter>
-                <parameter key="db_id_col">session_id</parameter>
-                <parameter key="db_data_col">session_value</parameter>
-                <parameter key="db_time_col">session_time</parameter>
+               <parameter key="db_table">session</parameter>
+               <parameter key="db_id_col">session_id</parameter>
+               <parameter key="db_data_col">session_value</parameter>
+               <parameter key="db_time_col">session_time</parameter>
             </parameter>
-        </parameters>
+         </parameters>
 
-        <services>
+         <services>
             <service id="pdo" class="PDO">
-                <argument>mysql:dbname=mydatabase</argument>
-                <argument>myuser</argument>
-                <argument>mypassword</argument>
+               <argument>mysql:dbname=mydatabase</argument>
+               <argument>myuser</argument>
+               <argument>mypassword</argument>
+               <call method="setAttribute">
+                  <argument type="constant">PDO::ATTR_ERRMODE</argument>
+                  <argument type="constant">PDO::ERRMODE_EXCEPTION</argument>
+               </call>
             </service>
 
             <service id="session.handler.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
@@ -107,6 +113,8 @@ Pour l'utiliser, il vous suffit de changer quelques paramètres dans ``config.ym
             'myuser',
             'mypassword',
         ));
+        $pdoDefinition->addMethodCall('setAttribute', array(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION));
+        
         $container->setDefinition('pdo', $pdoDefinition);
 
         $storageDefinition = new Definition('Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler', array(
@@ -140,6 +148,8 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
                 - "mysql:dbname=%database_name%"
                 - %database_user%
                 - %database_password%
+            calls:
+                - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
 
     .. code-block:: xml
 
@@ -147,6 +157,10 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
             <argument>mysql:dbname=%database_name%</argument>
             <argument>%database_user%</argument>
             <argument>%database_password%</argument>
+            <call method="setAttribute">
+               <argument type="constant">PDO::ATTR_ERRMODE</argument>
+               <argument type="constant">PDO::ERRMODE_EXCEPTION</argument>
+            </call>
         </service>
 
     .. code-block:: php
@@ -156,6 +170,7 @@ dans ``parameter.ini`` en référençant lesdits paramètres :
             '%database_user%',
             '%database_password%',
         ));
+        $pdoDefinition->addMethodCall('setAttribute', array(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION));
 
 Exemple d'instruction SQL
 -------------------------
