@@ -61,7 +61,7 @@ nous allons parcourir ce sujet en 4 étapes :
 
 #. Les :ref:`Edge Side Includes <edge-side-includes>` (ESI)
    autorisent le cache HTTP à mettre en cache des
-   fragments de pages (voir des fragments imbriqués) de façon
+   fragments de pages (voire des fragments imbriqués) de façon
    indépendante. Avec les ESI, vous pouvez même mettre en cache une
    page entière pendant 60 minutes, mais un bloc imbriqué dans cette
    page uniquement 5 minutes.
