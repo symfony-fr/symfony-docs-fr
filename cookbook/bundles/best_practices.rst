@@ -302,4 +302,4 @@ En savoir plus grâce au Cookbook
 
 * :doc:`/cookbook/bundles/extension`
 
-.. _standards: http://symfony.com/PSR0
+.. _standards: http://symfony.com/fr/doc/current/contributing/code/standards.html
