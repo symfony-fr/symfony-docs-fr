@@ -6,7 +6,7 @@ Type de champ Collection
 
 Ce type de champ est utilisé pour rendre une « collection » de champs ou de formulaires.
 Plus simplement, ce pourrait être un tableau de champs ``text`` qui remplirait un tableau
-de champs``emails``. 
+de champs ``emails``. 
 Dans les cas les plus complexes, vous pourrez imbriquer des formulaires entiers, ce qui
 est très utile lorsque vous créerez des formulaires avec des relations one-to-many
 (par exemple un produit pour lequel vous pouvez gérer plusieurs photos de ce produit).
