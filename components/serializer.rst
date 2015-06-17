@@ -155,15 +155,15 @@ dans la définition du normaliseur::
 Comme résultat final, le désérialiseur utilise l'attribut ``first_name``
 comme s'il était ``firstName`` et utilise les méthodes ``getFirstName`` et ``setFirstName``.
 
-JMSSerializationBundle
+JMSSerializerBundle
 ----------------------
 
-Il existe un bundle tierce populaire, `JMSSerializationBundle`_, qui étend
+Il existe un bundle tierce populaire, `JMSSerializerBundle`_, qui étend
 (et parfois remplace) la fonctionnalité de sérialisation. Cela inclut la
 capacité de configurer la manière dont vos objets doivent être sérialisée et
 désérialisés via des annotations (ou YML, XML et PHP), l'intégration avec
 l'ORM Doctrine, et la prise en charge de cas de figure plus complexes (par
 exemple les références circulaires).
 
-.. _`JMSSerializationBundle`: https://github.com/schmittjoh/JMSSerializerBundle
+.. _`JMSSerializerBundle`: https://github.com/schmittjoh/JMSSerializerBundle
 .. _Packagist: https://packagist.org/packages/symfony/serializer
