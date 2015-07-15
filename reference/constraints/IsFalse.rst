@@ -1,5 +1,5 @@
 IsFalse
-=====
+=======
 
 Valide que la valeur est ``false``. Spécifiquement, cette contrainte vérifie que la
 valeur est exactement ``false``, exactement l'entier ``0``, ou exactement la chaîne
