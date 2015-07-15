@@ -1,5 +1,5 @@
 IsNull
-====
+======
 
 Valide qu'une valeur est exactement égale à ``null``. Pour vous assurer qu'une
 propriété soit simplement vide (une chaîne de caractères vide ou ``null``), lisez la
