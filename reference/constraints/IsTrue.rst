@@ -1,5 +1,5 @@
 IsTrue
-====
+======
 
 Valide qu'une valeur est ``vraie`` (« true » en anglais). Spécifiquement, cette contrainte
 vérifie que la valeur est exactement ``true``, exactement l'entier ``1``, ou exactement
