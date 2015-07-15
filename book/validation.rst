@@ -575,7 +575,7 @@ cette méthode doit retourner ``true`` :
         Acme\BlogBundle\Entity\Author:
             getters:
                 passwordLegal:
-                    - "True": { message: "Le mot de passe et le prénom doivent être différents" }
+                    - "IsTrue": { message: "Le mot de passe et le prénom doivent être différents" }
 
     .. code-block:: php-annotations
 
@@ -585,7 +585,7 @@ cette méthode doit retourner ``true`` :
         class Author
         {
             /**
-             * @Assert\True(message = "Le mot de passe et le prénom doivent être différents")
+             * @Assert\IsTrue(message = "Le mot de passe et le prénom doivent être différents")
              */
             public function isPasswordLegal()
             {
@@ -598,7 +598,7 @@ cette méthode doit retourner ``true`` :
         <!-- src/Acme/BlogBundle/Resources/config/validation.xml -->
         <class name="Acme\BlogBundle\Entity\Author">
             <getter property="passwordLegal">
-                <constraint name="True">
+                <constraint name="IsTrue">
                     <option name="message">Le mot de passe et le prénom doivent être différents</option>
                 </constraint>
             </getter>
@@ -608,13 +608,13 @@ cette méthode doit retourner ``true`` :
 
         // src/Acme/BlogBundle/Entity/Author.php
         use Symfony\Component\Validator\Mapping\ClassMetadata;
-        use Symfony\Component\Validator\Constraints\True;
+        use Symfony\Component\Validator\Constraints\IsTrue;
 
         class Author
         {
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addGetterConstraint('passwordLegal', new True(array(
+                $metadata->addGetterConstraint('passwordLegal', new IsTrue(array(
                     'message' => 'Le mot de passe et le prénom doivent être différents',
                 )));
             }
