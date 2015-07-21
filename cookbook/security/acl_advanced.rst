@@ -64,7 +64,7 @@ classique :
   un id unique qui peut être référencé depuis d'autres tables ;
 - *acl_object_identities* : Chaque ligne dans cette table représente une
   unique instance d'objet domaine ;
-- *acl_object_identity_ancestors* : Cette table nous autorise à déterminer
+- *acl_object_identity_ancestors* : Cette table nous permet de déterminer
   tous les ancêtres d'une ACL de manière très efficace ;
 - *acl_entries* : Cette table contient toutes les ACEs. C'est typiquement la
   table avec le plus de lignes. Elle peut en contenir des dizaines de millions
