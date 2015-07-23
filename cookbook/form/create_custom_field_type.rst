@@ -26,11 +26,11 @@ Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`
     namespace Acme\DemoBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class GenderType extends AbstractType
     {
-        public function configureOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'choices' => array(
@@ -311,7 +311,7 @@ qui reçoit la configuration du sexe/genre::
     // src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
 
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     // ...
 
@@ -325,7 +325,7 @@ qui reçoit la configuration du sexe/genre::
             $this->genderChoices = $genderChoices;
         }
 
-        public function configureOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'choices' => $this->genderChoices,
