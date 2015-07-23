@@ -26,11 +26,11 @@ Assurez-vous que le champ étend :class:`Symfony\\Component\\Form\\AbstractType`
     namespace Acme\DemoBundle\Form\Type;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class GenderType extends AbstractType
     {
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'choices' => array(
@@ -74,7 +74,7 @@ Il y a trois méthodes qui sont particulièrement importantes :
   ne pas définir) l'attribut ``multiple`` pour le champ ``select``. Voir
   `Créer un Template pour le Champ`_ pour plus de détails.
 
-* ``setDefaultOptions()`` - Cette méthode définit des options pour votre
+* ``configureOptions()`` - Cette méthode définit des options pour votre
   formulaire qui peuvent être utilisées dans ``buildForm()`` et
   ``buildView()``. Il y a beaucoup d'options communes à tous les champs
   (lisez :doc:`/reference/forms/types/form`), mais vous pouvez créer ici
@@ -311,7 +311,7 @@ qui reçoit la configuration du sexe/genre::
     // src/Acme/DemoBundle/Form/Type/GenderType.php
     namespace Acme\DemoBundle\Form\Type;
 
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     // ...
 
@@ -325,7 +325,7 @@ qui reçoit la configuration du sexe/genre::
             $this->genderChoices = $genderChoices;
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'choices' => $this->genderChoices,
