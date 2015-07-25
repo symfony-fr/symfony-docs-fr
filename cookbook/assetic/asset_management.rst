@@ -6,7 +6,7 @@ Comment utiliser Assetic pour gérer vos ressources
 
 Assetic associe deux concepts majeurs : les :ref:`ressources<cookbook-assetic-assets>` et les
 :ref:`filtres<cookbook-assetic-filters>`. Les ressources
-sont des fichiers comme les feuilles de style, les JavaScript et les images. Les
+sont des fichiers comme les feuilles de style, les fichiers JavaScript et les images. Les
 filtres peuvent être appliqués à ces fichiers avant qu'ils ne soient servis au
 navigateur. Cela permet de gérer séparément les fichiers ressources qui sont stockés
 par l'application des fichiers qui sont réellement présentés à l'utilisateur.
