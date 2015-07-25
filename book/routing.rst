@@ -1005,7 +1005,7 @@ concis et permet aussi plus de flexibilité.
    En plus d'utiliser le nom logique ou le nom complet de la classe, Symfony
    supporte une troisième manière de référer à un contrôleur. Cette méthode
    utilise un seul séparateur deux-points (par exemple : ``service_name:indexAction``)
-   et réfère au contrôleur en tant que service (see :doc:`/cookbook/controller/service`).
+   et réfère au contrôleur en tant que service (voir :doc:`/cookbook/controller/service`).
 
 Les Paramètres de la Route et les Arguments du Contrôleur
 ---------------------------------------------------------
