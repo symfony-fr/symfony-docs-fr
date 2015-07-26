@@ -107,7 +107,7 @@ un token authentifié dans le contexte de sécurité en cas de succès.
     use Symfony\Component\HttpKernel\Event\GetResponseEvent;
     use Symfony\Component\Security\Http\Firewall\ListenerInterface;
     use Symfony\Component\Security\Core\Exception\AuthenticationException;
-    use Symfony\Component\Security\Core\SecurityContextInterface;
+    use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
     use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
     use Acme\DemoBundle\Security\Authentication\Token\WsseUserToken;
 
@@ -116,7 +116,7 @@ un token authentifié dans le contexte de sécurité en cas de succès.
         protected $securityContext;
         protected $authenticationManager;
 
-        public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
+        public function __construct(TokenStorageInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
         {
             $this->securityContext = $securityContext;
             $this->authenticationManager = $authenticationManager;
