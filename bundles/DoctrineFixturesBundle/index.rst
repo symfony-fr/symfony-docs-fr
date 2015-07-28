@@ -335,11 +335,18 @@ est bien encodé de la manière utilisée par le composant de sécurité :
             $user->setUsername('admin');
             $user->setSalt(md5(uniqid()));
 
+            # Using Symfony < 2.6
             $encoder = $this->container
                 ->get('security.encoder_factory')
                 ->getEncoder($user)
             ;
             $user->setPassword($encoder->encodePassword('secret', $user->getSalt()));
+            
+            # Using Symfony >= 2.6
+            $encoder = $this->container
+                ->get('security.password_encoder')
+            ;
+            $user->setPassword($encoder->encodePassword($user, 'secret'));
 
             $manager->persist($user);
             $manager->flush();
