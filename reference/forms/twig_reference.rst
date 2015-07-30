@@ -311,20 +311,20 @@ est possible en utilisant la propriété ``vars`` de l'objet :class:`Symfony\\Co
 | ``disabled``    | Si ``true``, ``disabled="disabled"`` est ajouté au champ                                |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``required``    | Si ``true``, un attribut ``required`` est ajouté au champ pour activer la validation    |
-|                 | HTML5. De plus, une classe ``required`` est ajoutée au libelé.                          |
+|                 | HTML5. De plus, une classe ``required`` est ajoutée au libellé.                         |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``max_length``  | Ajoute un attribut HTML ``maxlength`` à l'élément                                       |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``pattern``     | Ajoute un attribut HTML ``pattern`` à l'élément                                         |
 +-----------------+-----------------------------------------------------------------------------------------+
-| ``label``       | La chaine de caractère libelée qui sera rendue                                          |
+| ``label``       | La chaine de caractère libellée qui sera rendue                                         |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``multipart``   | If ``true``, ``form_enctype`` will render ``enctype="multipart/form-data"``.            |
 |                 | This only applies to the root form element.                                             |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``attr``        | Un tableau clé-valeur qui sera rendu pour les attributs HTML pour le champ              |
 +-----------------+-----------------------------------------------------------------------------------------+
-| ``label_attr``  | Un tableau clé-valeur qui sera rendu pour les attributs HTML sur le libelé              |
+| ``label_attr``  | Un tableau clé-valeur qui sera rendu pour les attributs HTML sur le libellé             |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``compound``    | Détermine si l'emplacement est un groupe de champs                                      |
 |                 | (par exemple, un champ ``choice``, qui est un ensemble de case à cocher)                |
