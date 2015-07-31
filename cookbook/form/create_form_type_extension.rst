@@ -86,7 +86,7 @@ surcharger l'une des méthodes suivantes :
 
 * ``buildView()``
 
-* ``setDefaultOptions()``
+* ``configureOptions()``
 
 * ``finishView()``
 
@@ -175,7 +175,7 @@ et une propriété ``path`` (qui correspond au chemin de l'image dans la base de
 Votre classe d'extension de type de formulaire devra faire deux choses pour
 étendre le type de formulaire ``file`` :
 
-#. Surcharger la méthode ``setDefaultOptions`` pour ajouter une option image_path;
+#. Surcharger la méthode ``configureOptions`` pour ajouter une option image_path;
 #. Surcharger les méthodes ``buildForm`` et ``buildView`` pour passer l'url de l'image
    à la vue.
 
@@ -191,7 +191,7 @@ actuelle pour l'afficher dans la vue::
     use Symfony\Component\Form\FormView;
     use Symfony\Component\Form\FormInterface;
     use Symfony\Component\PropertyAccess\PropertyAccess;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class ImageTypeExtension extends AbstractTypeExtension
     {
@@ -208,11 +208,11 @@ actuelle pour l'afficher dans la vue::
         /**
          * Ajoute l'option image_path
          *
-         * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+         * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
          */
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
-            $resolver->setOptional(array('image_path'));
+            $resolver->setDefined(array('image_path'));
         }
 
         /**
