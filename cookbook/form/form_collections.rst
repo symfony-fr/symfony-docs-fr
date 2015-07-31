@@ -645,7 +645,7 @@ supprimer la relation entre le ``Tag`` supprimé et l'objet ``Task``.
             $editForm = $this->createForm(new TaskType(), $task);
 
             if ($request->isMethod('POST')) {
-                $editForm->handleRequest($this->getRequest());
+                $editForm->handleRequest($request);
 
                 if ($editForm->isValid()) {
         
