@@ -248,7 +248,7 @@ Avec elle, vous avez toute l'information de la requête à votre portée::
     // obtenir une instance de UploadedFile identifiée par foo
     $request->files->get('foo');
 
-    // obtenir la valeur d'un COOKIE value
+    // obtenir la valeur d'un COOKIE dont le nom est PHPSESSID
     $request->cookies->get('PHPSESSID');
 
     // obtenir un entête de requête HTTP request header, normalisé en minuscules
