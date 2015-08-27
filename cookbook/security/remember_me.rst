@@ -171,12 +171,7 @@ possède le rôle ``IS_AUTHENTICATED_FULLY``.
 
     public function editAction()
     {
-        if (false === $this->get('security.context')->isGranted(
-            'IS_AUTHENTICATED_FULLY'
-        )) {
-            throw new AccessDeniedException();
-        }
-
+         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         // ...
     }
 
