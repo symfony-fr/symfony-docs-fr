@@ -4,14 +4,17 @@
 Le Pare-Feu et le Contexte de Sécurité
 ======================================
 
-Au centre du composant sécurité il y a le contexte de sécurité, qui est une instance
-de :class:`Symfony\\Component\\Security\\Core\\SecurityContextInterface`. Lorsque 
+Au centre du composant sécurité il y a l'autorisation, qui est une instance
+de :class:`Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationCheckerInterface`. Lorsque 
 toutes les étapes du processus d'authentification de l'utilisateur ont été accomplies 
 avec succès, vous pouvez demander au contexte de sécurité si l'utilisateur authentifié 
 a accès à une certaine action ou une ressource de l'application ::
 
-    use Symfony\Component\Security\Core\SecurityContext;
+    use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+    
+    // instance de Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+    $tokenStorage = ...;
     
     // instance de Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface
     $authenticationManager = ...;
@@ -19,13 +22,20 @@ a accès à une certaine action ou une ressource de l'application ::
     // instance de Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
     $accessDecisionManager = ...;
 
-    $securityContext = new SecurityContext($authenticationManager, $accessDecisionManager);
+    $authorizationChecker = new AuthorizationChecker(
+        $tokenStorage,
+        $authenticationManager,
+        $accessDecisionManager
+    );
 
     // ... authentifier l'utilisateur
 
-    if (!$securityContext->isGranted('ROLE_ADMIN')) {
+    if (!$authorizationChecker->isGranted('ROLE_ADMIN')) {
         throw new AccessDeniedException();
     }
+
+.. versionadded:: 2.6
+    A partir de symfony 2.6, la :class:`Symfony\\Component\\Security\\Core\\SecurityContext` a été divisé dans les classes :class:`Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationChecker` et :class:`Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage\\TokenStorage`.
 
 .. note::
 
