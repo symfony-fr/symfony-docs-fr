@@ -666,14 +666,12 @@ de routage suivante :
         contact:
             path:  /contact
             defaults: { _controller: AcmeDemoBundle:Main:contact }
-            requirements:
-                _method:  GET
+            methods:  [GET]
 
         contact_process:
             path:  /contact
             defaults: { _controller: AcmeDemoBundle:Main:contactProcess }
-            requirements:
-                _method:  POST
+            methods:  [GET]
 
     .. code-block:: xml
 
@@ -683,14 +681,12 @@ de routage suivante :
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="contact" path="/contact">
+            <route id="contact" path="/contact" methods="GET">
                 <default key="_controller">AcmeDemoBundle:Main:contact</default>
-                <requirement key="_method">GET</requirement>
             </route>
 
-            <route id="contact_process" path="/contact">
+            <route id="contact_process" path="/contact" methods="POST">
                 <default key="_controller">AcmeDemoBundle:Main:contactProcess</default>
-                <requirement key="_method">POST</requirement>
             </route>
         </routes>
 
@@ -700,17 +696,13 @@ de routage suivante :
         use Symfony\Component\Routing\Route;
 
         $collection = new RouteCollection();
-        $collection->add('contact', new Route('/contact', array(
-            '_controller' => 'AcmeDemoBundle:Main:contact',
-        ), array(
-            '_method' => 'GET',
-        )));
+        $collection->add('news', new Route('/news', array(
+    		'_controller' => 'AppBundle:Main:contact',
+	), array(), array(), '', array(), array('GET')));
 
-        $collection->add('contact_process', new Route('/contact', array(
-            '_controller' => 'AcmeDemoBundle:Main:contactProcess',
-        ), array(
-            '_method' => 'POST',
-        )));
+	$collection->add('contact_form', new Route('/contact', array(
+    		'_controller' => 'AppBundle:Main:contactForm',
+	), array(), array(), '', array(), array('GET', 'POST')));
 
         return $collection;
 
@@ -721,12 +713,12 @@ afficher le formulaire et le soumettre via la même URL, tout en utilisant
 des contrôleurs distincts pour les deux actions.
 
 .. note::
-    Si aucune condition requise ``_method`` n'est spécifiée, la route
+    Si aucune condition requise ``methods`` n'est spécifiée, la route
     correspondra à *toutes* les méthodes.
 
-Comme les autres, la condition requise ``_method`` est analysée en tant
+Comme les autres, la condition requise ``methods`` est analysée en tant
 qu'expression régulière. Pour faire correspondre les requêtes à la méthode
-``GET`` *ou* à ``POST``, vous pouvez utiliser ``GET|POST``.
+``GET`` *ou* à ``POST``, vous pouvez utiliser ``[GET, POST]``.
 
 Ajouter un Pattern « Hostname » (« nom d'hôte » en français)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
