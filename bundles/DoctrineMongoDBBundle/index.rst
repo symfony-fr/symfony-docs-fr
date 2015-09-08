@@ -790,4 +790,4 @@ Apprenez en plus grâce au Cookbook
 .. _`Types de mapping Doctrine`: http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/reference/basic-mapping.html#doctrine-mapping-types
 .. _`Query Builder`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/query-builder-api.html
 .. _`Opérateurs Conditionnels`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/query-builder-api.html#conditional-operators
-.. _`Documentation sur les évènements`: http://www.doctrine-project.org/docs/mongodb_odm/1.0/en/reference/events.html
+.. _`Documentation sur les évènements`: http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/reference/events.html
