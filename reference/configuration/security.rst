@@ -103,7 +103,7 @@ Chaque partie sera expliquée dans la section suivante.
                     access_denied_handler: some.service.id
                     entry_point: some.service.id
                     provider: some_key_from_above
-                    # Gère comment chaque firewall stockent les informations en session
+                    # Gère comment chaque firewall stocke les informations en session
                     # Lire "Contexte du Firewall" plus bas pour plus de détails
                     context: context_key
                     stateless: false
