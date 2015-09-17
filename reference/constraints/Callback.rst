@@ -50,7 +50,7 @@ Configuration
         namespace Acme\BlogBundle\Entity;
 
         use Symfony\Component\Validator\Constraints as Assert;
-        use Symfony\Component\Validator\ExecutionContextInterface;
+        use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
         class Author
         {
@@ -100,7 +100,7 @@ pouvez définir des « violations » directement sur cet objet et déterminer à
 quel champ ces erreurs seront attribuées ::
 
     // ...
-    use Symfony\Component\Validator\ExecutionContextInterface;
+    use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
     class Author
     {
@@ -157,7 +157,7 @@ Supposez que votre fonction de validation est ``Vendor\Package\Validator::valida
 
     namespace Vendor\Package;
 
-    use Symfony\Component\Validator\ExecutionContextInterface;
+    use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
     class Validator
     {
@@ -276,9 +276,9 @@ de callback :
 
 * Une closure.
 
-Les callbacks concrètes reçoivent une instance de :class:`Symfony\\Component\\Validator\\ExecutionContextInterface`
+Les callbacks concrètes reçoivent une instance de :class:`Symfony\\Component\\Validator\\Context\\ExecutionContextInterface`
 pour seul argument.
 
 Les callbacks statiques ou de type closure reçoivent l'objet validé en premier
-argument, et l'instance de :class:`Symfony\\Component\\Validator\\ExecutionContextInterface`
+argument, et l'instance de :class:`Symfony\\Component\\Validator\\Context\\ExecutionContextInterface`
 en second argument.
