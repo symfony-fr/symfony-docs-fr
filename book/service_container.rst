@@ -1011,7 +1011,7 @@ Désormais, injecter seulement la ``request_stack``, celle-ci se comportant comm
     Si vous essayez d'injecter la ``request`` vous allez probablement recevoir une exception
     :class:`Symfony\\Component\\DependencyInjection\\Exception\\ScopeWideningInjectionException`.
     Cela s'explique par le fait que la ``request`` peut **changer** pendant le cycle de vie
-    du conteneur de service. (lorsque d'une sous-requête est créée par exemple).
+    du conteneur de service. (lorsqu'une sous-requête est créée par exemple).
 
 .. tip::
 
