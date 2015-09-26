@@ -103,8 +103,9 @@ requête HTTP pour supprimer une entrée spécifique d'un blog, par exemple:
 
     Il y a en fait neuf méthodes HTTP définies par la spécification HTTP,
     mais beaucoup d'entre elles ne sont pas largement utilisées ou supportées.
-    En réalité, beaucoup de navigateurs modernes ne supportent pas les méthodes
-    ``PUT`` et ``DELETE``.
+    En réalité, beaucoup de navigateurs modernes ne supportent que ``POST`` et
+    ``GET`` dans les formulaires HTML. Les autres méthodes sont en revanche
+    supportées dans les requêtes XMLHttpRequests et par le routeur de Symfony.
 
 En plus de la première ligne, une requête HTTP contient invariablement
 d'autres lignes d'informations appelées entêtes de requête. Les entêtes
@@ -112,7 +113,7 @@ peuvent fournir un large éventail d'informations telles que l'entête ``Host``,
 le format de réponse que le client accepte (``Accept``) et
 l'application que le client utilise pour effectuer la requête (``User-Agent``).
 Beaucoup d'autres entêtes existent et peuvent être trouvés sur la page
-Wikipedia `List of HTTP header fields`_ (anglais).
+Wikipedia `Liste des headers HTTP`_ (anglais).
 
 Étape 2: Le Serveur retourne une réponse
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,7 +157,7 @@ de réponse HTTP très important. Le corps d'une même ressource peut être reto
 dans de multiples formats incluant HTML, XML ou JSON et l'entête ``Content-Type``
 utilise les Internet Media Types, comme ``text/html``, pour dire au client quel format
 doit être retourné. Une liste des médias types les plus communs peut être trouvée sur
-la page Wikipedia `Liste de media type usuels`_.
+la page Wikipedia `Liste des types de media usuels`_.
 
 De nombreuses autres entêtes existent, dont quelques-uns sont très puissants.
 Par exemple, certains entêtes peuvent être utilisés pour créer un puissant
@@ -191,7 +192,7 @@ Symfony est conçu pour correspondre à cette réalité.
 Requêtes et réponses en PHP
 ---------------------------
 
-Alors comment interagissez-vous avec la «requête» et créez-vous la «réponse»
+Alors comment interagissez-vous avec la « requête » et créez-vous la « réponse »
 quand vous utilisez PHP ? En réalité, PHP vous abstrait une partie du processus
 global::
 
@@ -295,7 +296,7 @@ au client::
     $response = new Response();
 
     $response->setContent('<html><body><h1>Hello world!</h1></body></html>');
-    $response->setStatusCode(200);
+    $response->setStatusCode(Response::HTTP_OK);
     $response->headers->set('Content-Type', 'text/html');
 
     // affiche les entêtes HTTP suivies du contenu
@@ -373,7 +374,7 @@ que d'avoir des URLs individuelles exécutant des fichiers PHP différents,
 le contrôleur frontal est *toujours* exécuté, et le routage (« routing ») des
 différentes URLs vers différentes parties de votre application est effectué
 en interne. Cela résoud les deux problèmes de l'approche originale.
-Presque toutes les applications web modernes font ça - incluant les
+Presque toutes les applications web modernes font ça – incluant les
 applications comme WordPress.
 
 Rester Organisé
@@ -387,15 +388,16 @@ parties de votre code selon cette valeur. Cela peut rapidement devenir moche::
     // index.php
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
+
     $request = Request::createFromGlobals();
     $path = $request->getPathInfo(); // Le chemin de l'URI demandée
 
     if (in_array($path, array('', '/'))) {
         $response = new Response('Bienvenue sur le site.');
-    } elseif ($path == '/contact') {
+    } elseif ('/contact' === $path) {
         $response = new Response('Contactez nous');
     } else {
-        $response = new Response('Page non trouvée.', 404);
+        $response = new Response('Page non trouvée.', Response::HTTP_NOT_FOUND);
     }
     $response->send();
 
@@ -425,7 +427,7 @@ des outils mis à disposition par le framework. En d'autres termes, le contrôle
 est le lieu où *votre* code se trouve : c'est là que vous interprétez la requête et 
 que vous créez une réponse.
 
-C'est si facile ! Revoyons cela :
+C'est aussi simple que cela ! Revoyons cela :
 
 * Chaque requête exécute un même et unique fichier ayant le rôle de contrôleur frontal;
 
@@ -451,13 +453,21 @@ fichier de configuration du routing:
         # app/config/routing.yml
         contact:
             path:     /contact
-            defaults: { _controller: AcmeDemoBundle:Main:contact }
+            defaults: { _controller: AppBundle:Main:contact }
 
     .. code-block:: xml
 
-        <route id="contact" path="/contact">
-            <default key="_controller">AcmeBlogBundle:Main:contact</default>
-        </route>
+        <!-- app/config/routing.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing
+                http://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <route id="contact" path="/contact">
+                <default key="_controller">AppBundle:Main:contact</default>
+            </route>
+        </routes>
 
     .. code-block:: php
 
@@ -467,25 +477,20 @@ fichier de configuration du routing:
 
         $collection = new RouteCollection();
         $collection->add('contact', new Route('/contact', array(
-            '_controller' => 'AcmeBlogBundle:Main:contact',
+            '_controller' => 'AppBundle:Main:contact',
         )));
 
         return $collection;
 
-.. note::
-
-   Cet exemple utilise :doc:`YAML </components/yaml/yaml_format>` pour définir la configuration de
-   routage. Cette dernière peut aussi être écrite dans d'autres formats comme XML ou
-   PHP.
 
 Lorsque quelqu'un visite la page ``/contact``, il y a correspondance avec cette route,
 et le contrôleur spécifié est exécuté. Comme vous l'apprendrez dans le
-:doc:`chapitre sur le routage</book/routing>`, la chaîne de caractères ``AcmeDemoBundle:Main:contact``
+:doc:`chapitre sur le routage</book/routing>`, la chaîne de caractères ``AppBundle:Main:contact``
 est une syntaxe raccourcie qui pointe vers une méthode PHP spécifique ``contactAction`` dans la
 classe appelée ``MainController``::
 
-    // src/Acme/DemoBundle/Controller/MainController.php
-    namespace Acme\DemoBundle\Controller;
+    // src/AppBundle/Controller/MainController.php
+    namespace AppBundle\Controller;
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -498,12 +503,14 @@ classe appelée ``MainController``::
     }
 
 Dans cet exemple très simple, le contrôleur crée simplement un objet
-:class:`Symfony\\Component\\HttpFoundation\\Response` contenant l'HTML
-"<h1>Contactez nous!</h1>". Dans le :doc:`chapitre Contrôleur</book/controller>`, vous allez
+:class:`Symfony\\Component\\HttpFoundation\\Response` contenant le HTML
+``<h1>Contactez nous!</h1>``. Dans le :doc:`chapitre Contrôleur</book/controller>`, vous allez
 apprendre comment un contrôleur peut retourner des templates, permettant à votre code de
 « présentation » (c-a-d du code qui retourne du HTML) de se trouver dans un fichier de template
 séparé. Cela libère le contrôleur et lui permet de s'occuper seulement des choses complexes :
 interagir avec la base de données, gérer les données soumises, ou envoyer des emails.
+
+.. _symfony2-build-your-app-not-your-tools:
 
 Symfony2: Construisez votre application, pas vos outils
 -------------------------------------------------------
@@ -525,57 +532,62 @@ de Symfony indépendamment.
 .. index::
    single: Symfony2 Components
 
+.. _standalone-tools-the-symfony2-components:
+
 Outils Autonomes: Les *Composants* Symfony2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plus
+Donc *qu'est-ce* que Symfony2 ? Premièrement, Symfony2 est une collection de plus
 de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
 projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
 des choses utiles en toute situation, quelle que soit
 la manière dont votre projet est développé. Pour en nommer quelques-unes :
 
 
-* :doc:`HttpFoundation</components/http_foundation/introduction>` - Contient les classes
-  ``Request`` et ``Response``, ainsi que d'autres classes pour la gestion des sessions
-  et des uploads de fichiers;
+:doc:`HttpFoundation</components/http_foundation/introduction>`
+    Contient les classes ``Request`` et ``Response``, ainsi que
+    d'autres classes pour la gestion des sessions et des uploads
+    de fichiers.
 
-* :doc:`Routing</components/routing/introduction>`  - Un puissant et rapide système qui vous
-  permet de lier une URI spécifique (par exemple: ``/contact``) à l'information
-  lui permettant de savoir comment gérer cette requête (par exemple: exécute la méthode
-  ``contactAction()``);
+:doc:`Routing</components/routing/introduction>`
+    Un puissant et rapide système qui vous permet de lier une URI
+    spécifique (par exemple: ``/contact``) à l'information lui permettant
+    de savoir comment gérer cette requête (par exemple: exécute la
+    méthode ``contactAction()``).
 
-* `Form`_ - Un framework complet et flexible pour la création de formulaires
-  et la gestion de la soumission de ces derniers;
+:doc:`Form </components/form/introduction>`
+    Un framework complet et flexible pour la création de formulaires et
+    la gestion de la soumission de ces derniers.
 
-* `Validator`_ Un système permettant de créer des règles à propos de données
-  et de valider ou non les données utilisateurs soumises suivant ces règles;
+`Validator`_
+    Un système permettant de créer des règles à propos de données et de
+    valider ou non les données utilisateurs soumises suivant ces règles.
 
-* :doc:`ClassLoader</components/class_loader>` Une bibliothèque pour le chargement
-  automatique (« autoloading ») qui permet aux classes PHP d'être utilisées sans avoir
-  besoin d'``inclure`` (« require ») manuellement les fichiers contenant ces dernières;
+:doc:`Templating</components/templating>`
+    Une boîte à outils pour afficher des templates, gérer leur héritage
+    (c-a-d qu'un template est décoré par un layout) et effectuer
+    d'autres tâches communes aux templates.
 
-* :doc:`Templating</components/templating>` Une boîte à outils pour afficher des
-  templates, gérer leur héritage (c-a-d qu'un template est décoré par un layout)
-  et effectuer d'autres tâches communes aux templates;
+:doc:`Security </components/security/introduction>`
+    Une puissante bibliothèque pour gérer tous les types de sécurité
+    dans une application.
 
-* `Security`_ - Une puissante bibliothèque pour gérer tous les types de
-  sécurité dans une application;
-
-* `Translation`_ Un framework pour traduire les chaînes de caractères dans
-  votre application.
+:doc:`Translation </components/translation/introduction>`
+    Un framework pour traduire les chaînes de caractères dans votre
+    application.
 
 Chacun de ces composants est découplé et peut être utilisé dans *n'importe quel*
-projet PHP, que vous utilisiez le framework Symfony2 ou non.
+projet PHP, que vous utilisiez le framework Symfony ou pas.
 Chaque partie est faite pour être utilisée en cas de besoin et remplacée quand cela
 est nécessaire.
 
-La Solution Complète: Le *Framework* Symfony2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+La Solution Complète: Le *Framework* Symfony
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Donc finalement, *qu'est-ce* que le *Framework* Symfony2 ? Le *Framework Symfony2*
+Donc finalement, *qu'est-ce* que le *Framework* Symfony ? Le *Framework Symfony*
 est une bibliothèque PHP qui accomplit deux tâches distinctes :
 
-#. Fournir une sélection de composants (les Composants Symfony2) et
+#. Fournir une sélection de composants (les Composants Symfony) et
    des bibliothèques tierces (ex `Swiftmailer`_ pour envoyer des emails);
 
 #. Fournir une configuration et une bibliothèque « colle » qui lie toutes ces
@@ -583,7 +595,7 @@ est une bibliothèque PHP qui accomplit deux tâches distinctes :
 
 Le but du framework est d'intégrer plein d'outils indépendants afin de
 fournir une expérience substantielle au développeur. Même le framework lui-même
-est un bundle Symfony2 (c-a-d un plugin) qui peut être configuré ou remplacé
+est un bundle Symfony (c-a-d un plugin) qui peut être configuré ou remplacé
 entièrement.
 
 Symfony2 fournit un puissant ensemble d'outils pour développer rapidement des
@@ -595,12 +607,9 @@ Pour les utilisateurs avancés, le ciel est la seule limite.
 .. _`xkcd`: http://xkcd.com/
 .. _`HTTP 1.1 RFC`: http://www.w3.org/Protocols/rfc2616/rfc2616.html
 .. _`HTTP Bis`: http://datatracker.ietf.org/wg/httpbis/
-.. _`Live HTTP Headers`: https://addons.mozilla.org/fr/firefox/addon/live-http-headers/
+.. _`Live HTTP Headers`: https://addons.mozilla.org/en-US/firefox/addon/live-http-headers/
 .. _`Liste des codes HTTP`: http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
-.. _`List of HTTP header fields`: http://en.wikipedia.org/wiki/List_of_HTTP_header_fields
-.. _`Liste de media type usuels`: http://fr.wikipedia.org/wiki/Type_MIME#Liste_de_media_type_usuels
-.. _`Form`: https://github.com/symfony/Form
-.. _`Validator`: https://github.com/symfony/Validator
-.. _`Security`: https://github.com/symfony/Security
-.. _`Translation`: https://github.com/symfony/Translation
-.. _`Swiftmailer`: http://swiftmailer.org/
+.. _`Liste des headers HTTP`: https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+.. _`Liste des types de media usuels`: https://www.iana.org/assignments/media-types/media-types.xhtml
+.. _`Validator`: https://github.com/symfony/validator
+.. _`Swift Mailer`: http://swiftmailer.org/
