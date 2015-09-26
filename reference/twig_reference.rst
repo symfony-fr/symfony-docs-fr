@@ -5,7 +5,7 @@ Extensions Twig Symfony2
 ========================
 
 Twig est le moteur de template par défaut de Symfony2. De lui-même, il contient
-déjà plein de fonction pré-construites, des filtres, des tags et des tests
+déjà plein de fonctions pré-construites, des filtres, des tags et des tests
 (`http://twig.sensiolabs.org/documentation`_ puis allez en bas de la page).
 
 Symfony2 ajoute plus d'extensions personnalisées par dessus Twig pour intégrer
@@ -26,12 +26,12 @@ Fonctions
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
 | Syntaxe de la fonction                             | Usage                                                                                      |
 +====================================================+============================================================================================+
-| ``render(uri, options = {})``                      | Rends le fragment de template pour un controller ou une URL donné.                         |
+| ``render(uri, options = {})``                      | Rend le fragment de template pour un controller ou une URL donnée.                         |
 | ``render(controller('B:C:a', {params}))``          | Pour plus d'information, lire :ref:`templating-embedding-controller`.                      |
 | ``render(path('route', {params}))``                |                                                                                            |
 | ``render(url('route', {params}))``                 |                                                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
-| ``render_esi(controller('B:C:a', {params}))``      | Génère un tag ESI quand cela est possible sinon le fragment de template                    |
+| ``render_esi(controller('B:C:a', {params}))``      | Génère un tag ESI quand cela est possible sinon le fragment de template.                   |
 | ``render_esi(url('route', {params}))``             | Pour plus d'information, lire :ref:`templating-embedding-controller`.                      |
 | ``render_esi(path('route', {params}))``            |                                                                                            |
 +----------------------------------------------------+--------------------------------------------------------------------------------------------+
@@ -173,7 +173,7 @@ Variables globales
 +-------------------------------------------------------+------------------------------------------------------------------------------------+
 | Variable                                              | Usage                                                                              |
 +=======================================================+====================================================================================+
-| ``app`` *Attributes*: ``app.user``, ``app.request``   | La variable ``app`` est disponible partour, et vous donne un accès rapide à        |
+| ``app`` *Attributes*: ``app.user``, ``app.request``   | La variable ``app`` est disponible partout, et vous donne un accès rapide à        |
 | ``app.session``, ``app.environment``, ``app.debug``   | plusieurs objets souvent nécessaires. La variable ``app`` est une instance de la   |
 | ``app.security``                                      | classe :class:`Symfony\\Bundle\\FrameworkBundle\\Templating\\GlobalVariables`      |
 +-------------------------------------------------------+------------------------------------------------------------------------------------+
