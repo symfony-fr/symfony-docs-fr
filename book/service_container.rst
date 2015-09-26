@@ -1231,21 +1231,21 @@ Pour afficher tous les services et les classes de chacun d'entre eux, exécutez 
 
 .. code-block:: bash
 
-    $ php app/console container:debug
+    $ php app/console debug:container
 
 Par défaut, seuls les services publics sont affichés, mais vous pouvez également
 voir les services privés :
 
 .. code-block:: bash
 
-    $ php app/console container:debug --show-private
+    $ php app/console debug:container --show-private
 
 Vous pouvez obtenir des informations détaillées sur un service particulier en
 spécifiant son identifiant :
 
 .. code-block:: bash
 
-    $ php app/console container:debug my_mailer
+    $ php app/console debug:container my_mailer
 
 Apprenez en plus
 ----------------

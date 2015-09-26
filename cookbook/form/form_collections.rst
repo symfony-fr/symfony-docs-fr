@@ -92,7 +92,7 @@ qu'un objet ``Tag`` puisse être modifié par l'utilisateur::
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class TagType extends AbstractType
     {
@@ -101,7 +101,7 @@ qu'un objet ``Tag`` puisse être modifié par l'utilisateur::
             $builder->add('name');
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function setDefaultOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'data_class' => 'Acme\TaskBundle\Entity\Tag',
@@ -128,7 +128,7 @@ en utilisant le type de champ
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class TaskType extends AbstractType
     {
@@ -139,7 +139,7 @@ en utilisant le type de champ
             $builder->add('tags', 'collection', array('type' => new TagType()));
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function setDefaultOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'data_class' => 'Acme\TaskBundle\Entity\Task',

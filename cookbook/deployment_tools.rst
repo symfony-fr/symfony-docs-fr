@@ -78,7 +78,7 @@ Tâches communes après le déploiement
 Après avoir déployé votre code source, il y a un certain nombre de choses à
 faire :
 
-A) Configurer votre fichier ``app/config/parameters.ini``
+A) Configurer votre fichier ``app/config/parameters.yml``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ce fichier devrait être personnalisé sur chaque système. La méthode
