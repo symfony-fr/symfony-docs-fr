@@ -276,11 +276,11 @@ cache) et « misses » (page ou réponse non présente en cache).
    sur les serveurs de production si possible. La bonne nouvelle est
    qu'il est très simple de passer d'un proxy à un autre sans
    qu'aucune modification ne soit nécessaire dans le code. Vous pouvez
-   commencez avec le reverse proxy de Symfony2 puis le mettre à jour
+   commencer avec le reverse proxy de Symfony2 puis le mettre à jour
    plus tard vers Varnish quand votre trafic augmentera.
 
-   Pour plus d'informations concernant Varnish avec Symfony2, veuillez-
-   vous reportez au chapitre du cookbook :doc:`Comment utiliser Varnish
+   Pour plus d'informations concernant Varnish avec Symfony2, veuillez
+   vous reporter au chapitre du cookbook :doc:`Comment utiliser Varnish
    </cookbook/cache/varnish>`.
 
 .. note::
