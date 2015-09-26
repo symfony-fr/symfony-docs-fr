@@ -1,5 +1,8 @@
 Contribution
 ------------
 
-Nous adorons les contributeurs ! Pour plus d'informations sur ce que vous pouvez apporter
-à la documentation de Symfony, veuillez lire [Contribuer à la Documentation](http://symfony.com/fr/doc/current/contributing/documentation/overview.html) 
+**Nous adorons les contributeurs !**
+
+Pour contribuer, vous devez faire une Pull-Request sur la branche **master** qui est la seule maintenue (dans un soucis d'efficacité, nous ne pouvons pas maintenir les mirroirs de toutes les branches de la documentation officielle de Symfony).
+
+[Liste des contributeurs](https://github.com/symfony-fr/symfony-docs-fr/graphs/contributors)
