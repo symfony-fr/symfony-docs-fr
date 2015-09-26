@@ -10,7 +10,7 @@ Qu'est-ce qu'un chargeur de routes personnalisé ?
 Un chargeur de routes personnalisé vous permet de générer des
 routes basées sur des conventions ou modèles. Un bon exemple
 d'utilisation est le `FOSRestBundle`_ où les routes sont générées
-en utilisant les nom des actions dans les contrôleurs.
+en utilisant les noms des actions dans les contrôleurs.
 
 Un chargeur de routes ne permet pas à votre bundle d'injecter des
 routes sans modifier la configuration de routing (par exemple ``app/config/routing.yml``) manuellement.
@@ -39,7 +39,7 @@ et possède donc deux méthodes importantes :
 :method:`Symfony\\Component\\Config\\Loader\\LoaderInterface::supports`
 et :method:`Symfony\\Component\\Config\\Loader\\LoaderInterface::load`.
 
-Prennons ces lignes du fichier ``routing.yml`` de la
+Prenons ces lignes du fichier ``routing.yml`` de la
 Symfony Standard Edition :
 
 .. code-block:: yaml
@@ -49,20 +49,20 @@ Symfony Standard Edition :
         resource: @AppBundle/Controller/
         type:     annotation
 
-Lorsque le premier chargeur parse cela, il essaie tous les chargeur
+Lorsque le premier chargeurs parse cela, il essaie tous les chargeur
 enregistrés comme « déléguant » et appelle leur méthode
 :method:`Symfony\\Component\\Config\\Loader\\LoaderInterface::supports`
 avec la ressource (``@AppBundle/Controller/``) et le type (``annotation``)
 en argument. Lorsque l'un des chargeurs retourne ``true``, sa méthode
 :method:`Symfony\\Component\\Config\\Loader\\LoaderInterface::load` va 
-être appellée, celle-ci doit retourner une :class:`Symfony\\Component\\Routing\\RouteCollection`
+être appelée, celle-ci doit retourner une :class:`Symfony\\Component\\Routing\\RouteCollection`
 qui contient des objets :class:`Symfony\\Component\\Routing\\Route`.
 
 Créer un chargeur personnalisé
 ------------------------------
 
 Pour charger des routes depuis une source personnalisée (c-a-d
-depuis quelque chose d'autres qu'annotations, YAML, ou XML), vous
+depuis quelque chose d'autre qu'annotations, YAML, ou XML), vous
 devez créer un chargeur de routes personnalisé. Ce chargeur doit
 implémenter la classe
 :class:`Symfony\\Component\\Config\\Loader\\LoaderInterface`.
@@ -179,7 +179,7 @@ Définissez maintenant un service pour notre ``ExtraLoader`` :
         ;
 
 Remarquez le tag ``routing.loader``, tous les services qui possèdent
-ce *tag* vont être marqués comme potentiel chargeur de routes et ajouté
+ce *tag* vont être marqués comme potentiel chargeur de routes et ajoutés
 comme chargeur de routes spécifique au *service* ``routing.loader``, qui
 est une instance de
 :class:`Symfony\\Bundle\\FrameworkBundle\\Routing\\DelegatingLoader`.
