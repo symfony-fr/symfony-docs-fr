@@ -90,7 +90,7 @@ Utiliser des services
 ---------------------
 
 Au lieu d'utiliser des valeurs statiques, vous pouvez également assigner un
-service à une variable twig. Lorsque la variable globale est appellée dans le
+service à une variable twig. Lorsque la variable globale est appelée dans le
 template, le service va être récupéré depuis le conteneur de services et vous
 récupérerez un accès à cet objet.
 
@@ -98,7 +98,7 @@ récupérerez un accès à cet objet.
 
     Le service n'est pas chargé paresseusement (lazy loaded). En d'autres
     mots, dès que twig est chargé, votre service est instancié, même si
-    vous n'utilisez jamais la variable globale que vous avez défini.
+    vous n'utilisez jamais la variable globale que vous avez définie.
 
 Pour définir un service en tant que variable globale Twig, préfixez la
 chaîne de caractère que vous assignez avec  ``@``.
@@ -132,16 +132,6 @@ configuration des services.
                  'user_management' => '@acme_user.user_management',
              ),
         ));
-
-Using a Twig Extension
-----------------------
-
-If the global variable you want to set is more complicated - say an object -
-then you won't be able to use the above method. Instead, you'll need to create
-a :ref:`Twig Extension <reference-dic-tags-twig-extension>` and return the
-global variable as one of the entries in the ``getGlobals`` method.
-
-
 
 Utiliser une extension Twig
 ---------------------------
