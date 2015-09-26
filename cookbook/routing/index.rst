@@ -9,3 +9,4 @@ Routage
     redirect_in_config
     method_parameters
     service_container_parameters
+    redirect_trailing_slash
