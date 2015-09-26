@@ -10,7 +10,7 @@ Le composant Formulaire
 
 Le composant Form est un outil pour vous aider à résoudre le problème
 de permettre aux utilisateurs finaux d'intéragir et modifier des données
-dans votre application. Et c'est via les fomulaires HTML que le
+dans votre application. Et c'est via les formulaires HTML que le
 composant se concentre pour traiter des données soumises par l'utilisateur
 pour et depuis votre application, que la donnée provienne d'un formulaire
 posté normalement ou d'une API.
@@ -57,7 +57,7 @@ mais il lui manque des fonctionnalités très importantes :
 Le composant Form de Symfony2 est basé sur d'autres bibliothèques pour
 résoudre ces problèmes. La majorité du temps vous utiliserez Twig ainsi que
 les composants :doc:`HttpFoundation </components/http_foundation/introduction>`,
-Traduction et Validation. Ceci dit, vous pouvez remplacer chacune des ces
+Traduction et Validation. Ceci dit, vous pouvez remplacer chacune de ces
 bibliothèques par celle(s) de votre choix.
 
 Les sections suivantes vous expliquent comment brancher ces bibliothèques avec la
@@ -134,10 +134,10 @@ personnalisée::
 
 Pour sécuriser votre application contre les attaques CSRF, vous devez définir
 un sercret CSRF. Générer une chaîne de caractères aléatoires avec au moins
-32 caractères, insérez-les dans le morceaux de code ci-dessus et assurez vous
+32 caractères, insérez-les dans le morceau de code ci-dessus et assurez vous
 que personne d'autre que votre server web ne peut accéder à ce secret.
 
-En interne, cette extension ajoutera automatiquement un champs caché à chacun
+En interne, cette extension ajoutera automatiquement un champ caché à chacun
 des formulaires (appelé ``__token`` par défaut) dont la valeur est automatiquement
 générée et validée lors du binding (liaison) du formulaire.
 
@@ -285,7 +285,7 @@ Ensuite, ajoutez la classe :class:`Symfony\\Bridge\\Twig\\Extension\\Translation
         ->getFormFactory();
 
 En fonction de la manière dont vos traductions sont chargées, vous pouvez maintenant
-ajouter des clés, comme des libellés de champs, et leur traductions dans vos
+ajouter des clés, comme des libellés de champs, et leurs traductions dans vos
 fichiers de traductions.
 
 Pour plus de détails sur les traductions, consulter :doc:`/book/translation`.
