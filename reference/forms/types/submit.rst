@@ -10,7 +10,7 @@ Type de champ submit
 Un bouton submit.
 
 +----------------------+----------------------------------------------------------------------+
-| Rendu comme          | Baslite ``input`` ``submit``                                         |
+| Rendu comme          | Balise ``input`` ``submit``                                         |
 +----------------------+----------------------------------------------------------------------+
 | Options              | - `attr`_                                                            |
 | héritées             | - `disabled`_                                                        |
