@@ -454,6 +454,10 @@ vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire
         'validation_groups' => array('registration'),
     ))->add(...);
 
+.. versionadded:: 2.7
+    La méthode ``configureOptions()`` a été ajoutée dans Symfony 2.7.
+    Avant cela, la méthode était appelée ``setDefaultOptions()``.
+
 Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
 bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``configureOptions()``::
 
