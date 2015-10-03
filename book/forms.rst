@@ -455,8 +455,10 @@ vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire
     ))->add(...);
 
 .. versionadded:: 2.7
-    La méthode ``configureOptions()`` a été ajoutée dans Symfony 2.7.
-    Avant cela, la méthode était appelée ``setDefaultOptions()``.
+    La méthode ``configureOptions(OptionsResolver $resolver)`` a été ajoutée dans Symfony 2.7.
+    Avant cela, la méthode était appelée ``setDefaultOptions(OptionsResolverInterface $resolver)``.
+    Changez aussi ``use Symfony\Component\OptionsResolver\OptionsResolverInterface`` en
+    ``use Symfony\Component\OptionsResolver\OptionsResolver``.
 
 Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
 bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``configureOptions()``::
