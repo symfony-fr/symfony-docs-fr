@@ -104,8 +104,8 @@ requête HTTP pour supprimer une entrée spécifique d'un blog, par exemple:
     Il y a en fait neuf méthodes HTTP définies par la spécification HTTP,
     mais beaucoup d'entre elles ne sont pas largement utilisées ou supportées.
     En réalité, beaucoup de navigateurs modernes ne supportent que les méthodes
-    ``POST`` et ``GET`` dans les formulaires HTML. Diverses autres méthodes sont toutefois
-    prises en charge dans les XMLHttpRequests, ainsi que dans le routeur de Symfony.
+    ``POST`` et ``GET`` dans les formulaires HTML. Divers autres sont toutefois
+    pris en charge dans les XMLHttpRequests, ainsi que dans le routeur de Symfony.
 
 En plus de la première ligne, une requête HTTP contient invariablement
 d'autres lignes d'informations appelées entêtes de requête. Les entêtes
