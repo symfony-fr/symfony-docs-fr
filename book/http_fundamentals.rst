@@ -103,8 +103,9 @@ requête HTTP pour supprimer une entrée spécifique d'un blog, par exemple:
 
     Il y a en fait neuf méthodes HTTP définies par la spécification HTTP,
     mais beaucoup d'entre elles ne sont pas largement utilisées ou supportées.
-    En réalité, beaucoup de navigateurs modernes ne supportent pas les méthodes
-    ``PUT`` et ``DELETE``.
+    En réalité, beaucoup de navigateurs modernes ne supportent que les méthodes
+    ``POST`` et ``GET`` dans les formulaires HTML. Diverses autres méthodes sont toutefois
+    prises en charge dans les XMLHttpRequests, ainsi que dans le routeur de Symfony.
 
 En plus de la première ligne, une requête HTTP contient invariablement
 d'autres lignes d'informations appelées entêtes de requête. Les entêtes
@@ -153,9 +154,9 @@ la page Wikipedia `Liste des codes HTTP`_ .
 Comme la requête, une réponse HTTP contient de l'information additionnelle
 sous forme d'entêtes HTTP. Par exemple, ``Content-Type`` est un entête
 de réponse HTTP très important. Le corps d'une même ressource peut être retournée
-dans de multiples formats incluant HTML, XML ou JSON et l'entête ``Content-Type``
-utilise les Internet Media Types, comme ``text/html``, pour dire au client quel format
-doit être retourné. Une liste des médias types les plus communs peut être trouvée sur
+dans de multiples formats tels que HTML, XML ou JSON et l'entête ``Content-Type``
+utilise les Internet Media Types, comme ``text/html``, pour dire au client le format
+qui est retourné. Une liste des médias types les plus communs peut être trouvée sur
 la page Wikipedia `Liste de media type usuels`_.
 
 De nombreuses autres entêtes existent, dont quelques-uns sont très puissants.
@@ -292,16 +293,17 @@ interface orientée objet pour construire la réponse qui doit être retournée
 au client::
 
     use Symfony\Component\HttpFoundation\Response;
+
     $response = new Response();
 
     $response->setContent('<html><body><h1>Hello world!</h1></body></html>');
-    $response->setStatusCode(200);
+    $response->setStatusCode(Response::HTTP_OK);
     $response->headers->set('Content-Type', 'text/html');
 
     // affiche les entêtes HTTP suivies du contenu
     $response->send();
 
-Si Symfony n'offrait rien d'autre, vous devriez néanmoins déjà avoir en votre
+Si Symfony n'offrait rien d'autre, vous devriez déjà avoir en votre
 possession une boîte à outils pour accéder facilement aux informations de la
 requête et une interface orientée objet pour créer la réponse. Bien que vous
 appreniez les nombreuses et puissantes fonctions de Symfony, gardez à l'esprit
@@ -364,7 +366,7 @@ votre application. Par exemple:
 
 .. tip::
 
-    En utilisant la fonction ``mod_rewrite`` d'Apache (ou son équivalent
+    En utilisant le module ``mod_rewrite`` d'Apache (ou son équivalent
     avec d'autres serveurs web), les URLs peuvent être facilement réécrites
     afin de devenir simplement ``/``, ``/contact`` et ``/blog``.
 
@@ -387,15 +389,16 @@ parties de votre code selon cette valeur. Cela peut rapidement devenir moche::
     // index.php
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
+
     $request = Request::createFromGlobals();
     $path = $request->getPathInfo(); // Le chemin de l'URI demandée
 
     if (in_array($path, array('', '/'))) {
-        $response = new Response('Bienvenue sur le site.');
-    } elseif ($path == '/contact') {
+        $response = new Response('Bienvenue sur la page d'accueil.');
+    } elseif ('/contact' == $path) {
         $response = new Response('Contactez nous');
     } else {
-        $response = new Response('Page non trouvée.', 404);
+        $response = new Response('Page non trouvée.', Response::HTTP_NOT_FOUND);
     }
     $response->send();
 
@@ -419,10 +422,10 @@ Symfony suit un schéma simple et identique pour toutes les requêtes :
 
 Chaque « page » de votre site est définie dans un fichier de configuration du
 routing qui relie différentes URLs à différentes fonctions PHP. Le travail de
-chaque fonction PHP, appelée :term:`contrôleur`, est de créer puis retourner 
-un objet ``Response``, construit à partir des informations de la requête, à l'aide 
-des outils mis à disposition par le framework. En d'autres termes, le contrôleur 
-est le lieu où *votre* code se trouve : c'est là que vous interprétez la requête et 
+chaque fonction PHP, appelée :term:`contrôleur`, est de créer puis retourner
+un objet ``Response``, construit à partir des informations de la requête, à l'aide
+des outils mis à disposition par le framework. En d'autres termes, le contrôleur
+est le lieu où *votre* code se trouve : c'est là que vous interprétez la requête et
 que vous créez une réponse.
 
 C'est si facile ! Revoyons cela :
@@ -518,7 +521,7 @@ des emails, valider des entrées d'utilisateurs et gérer la sécurité.
 
 La bonne nouvelle est qu'aucun de ces problèmes n'est unique. Symfony fournit
 un framework rempli d'outils qui vous permettent de construire votre
-application, mais pas vos outils. Avec Symfony2, rien ne vous est imposé :
+application,  pas vos outils. Avec Symfony2, rien ne vous est imposé :
 vous êtes libre d'utiliser le framework Symfony en entier, ou juste une partie
 de Symfony indépendamment.
 
@@ -532,7 +535,7 @@ Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plu
 de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
 projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
 des choses utiles en toute situation, quelle que soit
-la manière dont votre projet est développé. Pour en nommer quelques-unes :
+la manière dont votre projet est développé. Pour en citer quelques-unes :
 
 
 * :doc:`HttpFoundation</components/http_foundation/introduction>` - Contient les classes
