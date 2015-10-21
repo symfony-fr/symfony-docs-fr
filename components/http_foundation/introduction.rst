@@ -233,7 +233,7 @@ en utilisant les méthodes suivantes:
   renvoie la liste des langues acceptées par ordre décroissant de qualité;
 
 * :method:`Symfony\\Component\\HttpFoundation\\Request::getCharsets`:
-  renvoie la liste des langues acceptées par ordre décroissant de qualité;
+  renvoie la liste des encodages acceptées par ordre décroissant de qualité;
 
 .. versionadded:: 2.2
 	La classe :class:`Symfony\\Component\\HttpFoundation\\AcceptHeader` est nouvelle en Symfony 2.2.
