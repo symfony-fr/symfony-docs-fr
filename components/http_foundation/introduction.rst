@@ -239,7 +239,7 @@ en utilisant les méthodes suivantes:
 	La classe :class:`Symfony\\Component\\HttpFoundation\\AcceptHeader` est nouvelle en Symfony 2.2.
   
 Si vous avez besoin d'avoir un accès complet aux données parsées de ``Accept``, ``Accept-Language``,
-``Accept-Charset`` or ``Accept-Encoding``, vous pouvez utilisé
+``Accept-Charset`` or ``Accept-Encoding``, vous pouvez utiliser
 :class:`Symfony\\Component\\HttpFoundation\\AcceptHeader` utility class::
 
 	use Symfony\Component\HttpFoundation\AcceptHeader;
