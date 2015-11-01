@@ -1,12 +1,12 @@
 .. index::
-   single: Symfony2 Fundamentals
+   single: Symfony Fundamentals
 
-Les fondamentaux de Symfony2 et HTTP
+Les fondamentaux de Symfony et HTTP
 ====================================
 
-Félicitations! Grâce à l'apprentissage de Symfony2, vous êtes sur la bonne voie pour
+Félicitations! Grâce à l'apprentissage de Symfony, vous êtes sur la bonne voie pour
 devenir un développeur web plus *productif* et *populaire* (en fait la popularité
-ne dépend que de vous). Symfony2 est construit de manière à revenir à
+ne dépend que de vous). Symfony est construit de manière à revenir à
 l'essentiel : implémenter des outils qui vous aident à développer plus rapidement
 et à construire des applications plus robustes, sans pour autant vous gêner dans votre
 progression.
@@ -15,10 +15,10 @@ et concepts que vous êtes sur le point d'apprendre représentent les efforts de
 milliers de personnes depuis de nombreuses années. En d'autres termes, vous
 n'apprenez pas juste "Symfony", vous apprenez les fondamentaux du web,
 les bonnes pratiques de développement, et comment utiliser de nombreuses
-nouvelles bibliothèques PHP, internes ou indépendantes de Symfony2. Alors,
+nouvelles bibliothèques PHP, internes ou indépendantes de Symfony. Alors,
 soyez prêt !
 
-Fidèle à la philosophie de Symfony2, ce chapitre débute par une explication du
+Fidèle à la philosophie de Symfony, ce chapitre débute par une explication du
 concept fondamental du développement web : HTTP. Quelles que soient vos
 connaissances ou votre langage de programmation préféré, ce chapitre **doit
 être lu** par tout un chacun.
@@ -41,9 +41,9 @@ le web, le but de votre serveur est *toujours* de comprendre de simples
 requêtes composées de texte, et de retourner de simples réponses composées
 elles aussi de texte.
 
-Symfony2 est construit sur les bases de cette réalité. Que vous le
+Symfony est construit sur les bases de cette réalité. Que vous le
 réalisiez ou non, HTTP est quelque chose que vous utilisez tous les jours.
-Avec Symfony2, vous allez apprendre comment le maîtriser.
+Avec Symfony, vous allez apprendre comment le maîtriser.
 
 .. index::
    single: HTTP; Request-response paradigm
@@ -187,7 +187,7 @@ Symfony est conçu pour correspondre à cette réalité.
     pour Firefox `Live HTTP Headers`_.
 
 .. index::
-   single: Symfony2 Fundamentals; Requests and responses
+   single: Symfony Fundamentals; Requests and responses
 
 Requêtes et réponses en PHP
 ---------------------------
@@ -280,7 +280,7 @@ est connecté via une connexion sécurisée (c-a-d ``https``).
 
     La classe Request a aussi une propriété publique ``attributes`` qui contient
     des données spéciales liées au fonctionnement interne de l'application. Pour
-    le framework Symfony2, la propriété ``attributes`` contient les valeurs retournées
+    le framework Symfony, la propriété ``attributes`` contient les valeurs retournées
     par la route identifiée, comme ``_controller``, ``id`` (si vous utilisez le joker ``{id}``),
     et même le nom de la route (``_route``). La propriété ``attributes`` existe pour
     vous permettre d'y stocker des informations spécifiques liées au contexte de
@@ -415,7 +415,7 @@ Symfony suit un schéma simple et identique pour toutes les requêtes :
 
 .. figure:: /images/request-flow.png
    :align: center
-   :alt: Le déroulement d'une requête Symfony2
+   :alt: Le déroulement d'une requête Symfony
 
    Les requêtes entrantes sont interprétées par le routing et passées aux
    fonctions des contrôleurs qui retournent des objets ``Response``.
@@ -508,7 +508,7 @@ apprendre comment un contrôleur peut retourner des templates, permettant à vot
 séparé. Cela libère le contrôleur et lui permet de s'occuper seulement des choses complexes :
 interagir avec la base de données, gérer les données soumises, ou envoyer des emails.
 
-Symfony2: Construisez votre application, pas vos outils
+Symfony: Construisez votre application, pas vos outils
 -------------------------------------------------------
 
 Vous savez maintenant que le but de toute application est d'interpréter
@@ -521,19 +521,19 @@ des emails, valider des entrées d'utilisateurs et gérer la sécurité.
 
 La bonne nouvelle est qu'aucun de ces problèmes n'est unique. Symfony fournit
 un framework rempli d'outils qui vous permettent de construire votre
-application,  pas vos outils. Avec Symfony2, rien ne vous est imposé :
+application, pas vos outils. Avec Symfony, rien ne vous est imposé :
 vous êtes libre d'utiliser le framework Symfony en entier, ou juste une partie
 de Symfony indépendamment.
 
 .. index::
-   single: Symfony2 Components
+   single: Symfony Components
 
-Outils Autonomes: Les *Composants* Symfony2
+Outils Autonomes: Les *Composants* Symfony
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Donc *qu'est-ce* que Symfony2? Premièrement, Symfony2 est une collection de plus
+Donc *qu'est-ce* que Symfony? Premièrement, Symfony est une collection de plus
 de vingt bibliothèques indépendantes qui peuvent être utilisées dans *n'importe quel*
-projet PHP. Ces bibliothèques, appelées les *Composants Symfony2*, contiennent
+projet PHP. Ces bibliothèques, appelées les *Composants Symfony*, contiennent
 des choses utiles en toute situation, quelle que soit
 la manière dont votre projet est développé. Pour en citer quelques-unes :
 
@@ -568,17 +568,17 @@ la manière dont votre projet est développé. Pour en citer quelques-unes :
   votre application.
 
 Chacun de ces composants est découplé et peut être utilisé dans *n'importe quel*
-projet PHP, que vous utilisiez le framework Symfony2 ou non.
+projet PHP, que vous utilisiez le framework Symfony ou non.
 Chaque partie est faite pour être utilisée en cas de besoin et remplacée quand cela
 est nécessaire.
 
-La Solution Complète: Le *Framework* Symfony2
+La Solution Complète: Le *Framework* Symfony
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Donc finalement, *qu'est-ce* que le *Framework* Symfony2 ? Le *Framework Symfony2*
+Donc finalement, *qu'est-ce* que le *Framework* Symfony ? Le *Framework Symfony*
 est une bibliothèque PHP qui accomplit deux tâches distinctes :
 
-#. Fournir une sélection de composants (les Composants Symfony2) et
+#. Fournir une sélection de composants (les Composants Symfony) et
    des bibliothèques tierces (ex `Swiftmailer`_ pour envoyer des emails);
 
 #. Fournir une configuration et une bibliothèque « colle » qui lie toutes ces
@@ -586,13 +586,13 @@ est une bibliothèque PHP qui accomplit deux tâches distinctes :
 
 Le but du framework est d'intégrer plein d'outils indépendants afin de
 fournir une expérience substantielle au développeur. Même le framework lui-même
-est un bundle Symfony2 (c-a-d un plugin) qui peut être configuré ou remplacé
+est un bundle Symfony (c-a-d un plugin) qui peut être configuré ou remplacé
 entièrement.
 
-Symfony2 fournit un puissant ensemble d'outils pour développer rapidement des
+Symfony fournit un puissant ensemble d'outils pour développer rapidement des
 applications web sans pour autant s'imposer à votre application. Les utilisateurs
 normaux peuvent commencer rapidement à développer en utilisant une distribution
-Symfony2, ce qui fournit un squelette de projet avec des paramètres par défaut.
+Symfony, ce qui fournit un squelette de projet avec des paramètres par défaut.
 Pour les utilisateurs avancés, le ciel est la seule limite.
 
 .. _`xkcd`: http://xkcd.com/
