@@ -80,6 +80,8 @@ méthode ``getLogDir``::
 
 Ici, vous avez changé l'emplacement du répertoire pour ``app/{environment}/logs``.
 
+.. _override-web-dir:
+
 Surcharger le répertoire ``web``
 --------------------------------
 

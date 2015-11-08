@@ -26,8 +26,9 @@ d'utiliser PHP :ref:`avec Nginx <web-server-nginx>`.
     lors de la configuration de votre serveur web. Dans les exemples ci-dessous, le répertoire ``web/``
     sera ce point d'entrée. Ce répertoire est ``/var/www/project/web/``.
 
-    Si votre hébergeur impose de changer le dossier ``web/`` pour un autre dossier (e.g. ``public_html/``),
-    assurez-vous :ref:`d'écraser le dossier <override-web-dir>`.
+    Si votre hébergeur impose de changer le dossier ``web/`` pour un autre
+    dossier (ex: ``public_html/``), assurez-vous
+    :ref:`d'écraser le dossier <override-web-dir>`.
 
 .. _web-server-apache-mod-php:
 
