@@ -34,7 +34,7 @@ d'utiliser PHP :ref:`avec Nginx <web-server-nginx>`.
 Apache avec mod_php/PHP-CGI
 ---------------------------
 
-La **configuration minimale`` pour faire fonctionner votre application sous Apache est la suivante:
+La **configuration minimale** pour faire fonctionner votre application sous Apache est la suivante:
 
 .. code-block:: apache
 
