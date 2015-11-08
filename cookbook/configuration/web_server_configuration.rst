@@ -110,7 +110,7 @@ Utilisez la **configuration optimisée** suivante pour désactiver le support du
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
 Utiliser mod_php/PHP-CGI avec Apache 2.4
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans Apache 2.4, ``Order Allow,Deny`` a été remplacé par ``Require all granted``.
 Ainsi, vous devez modifier les permissions associées à votre configuration
@@ -156,7 +156,7 @@ fonctionner avec différents UID et GID:
     listen = 127.0.0.1:9000
 
 Utiliser mod_proxy_fcgi avec Apache 2.4
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous utilisez Apache 2.4, vous pouvez facilement utiliser ``mod_proxy_fcgi``
 pour déléguer les requêtes entrantes à PHP-FPM. Dans ce cas, configurez PHP-FPM
