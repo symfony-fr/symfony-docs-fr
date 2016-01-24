@@ -261,7 +261,7 @@ secondaire seulement si un paramètre spécifique est défini::
 
     Juste enregistrer une extension dans le conteneur n'est pas suffisant pour
     pour qu'elle soit traitée avec les autres extensions quand le conteneur est
-    compilé. Chargé le fichier de configuration comme ci-dessus en utilisant
+    compilé. Charger le fichier de configuration comme ci-dessus en utilisant
     l'alias de l'extension comme une clé vous assure que l'extension est chargée.
     Le constructeur du conteneur peut aussi les charger avec sa méthode
     :method:`Symfony\\Component\\DependencyInjection\\ContainerBuilder::loadFromExtension`
