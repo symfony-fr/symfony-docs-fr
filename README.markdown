@@ -4,7 +4,7 @@ Documentation de Symfony
 Attention, cette documentation n'est plus à jour et le dépot n'est plus maintenu.
 La seule documentation officielle et à jour est celle en anglais, disponible sur symfony.com.
 
-Merci à celles et ceux qui ont contribuer à maintenir ce dépot à jour pendant plusieurs années.
+Merci à celles et ceux qui ont contribué à maintenir ce dépot à jour pendant plusieurs années.
 
 Contribuer
 ----------
