@@ -15,24 +15,24 @@ Le composant ExpressionLanguage
 Installation
 ------------
 
-Vous pouvez l'installer de deux manières différentes:
+Vous pouvez l'installer de deux manières différentes :
 
 * :doc:`Installez-le via Composer </components/using_components>` (``symfony/expression-language`` sur `Packagist`_);
 * Utilisez le dépôt Git officiel (https://github.com/symfony/expression-language).
 
-Comment le moteur d'expression peut-il m'aider?
------------------------------------------------
+Comment le moteur d'expression peut-il m'aider ?
+------------------------------------------------
 
 Le but du composant est de permettre à ses utilisateurs d'utiliser des
-expression au sein d'une configuration qui contient une logique plus complexe.
-Par exemple, le Framework Symfony2 utilise les expressions dans la sécurité, pour
+expressions au sein d'une configuration qui contient une logique plus complexe.
+Par exemple, le Framework Symfony utilise les expressions dans la sécurité, pour
 la validation de règles et dans la correspondance de routes.
 
 En plus d'utiliser le composant dans le framework lui-même, le composant
 ExpressionLanguage est le parfait candidat pour les fondations d'un
 *moteur de règles métier*. L'idée est de laisser le webmaster d'un site configurer
 des choses de manière dynamique en utilisant PHP mais sans introduire de failles
-de sécurité:
+de sécurité :
 
 .. _component-expression-language-examples:
 
@@ -60,7 +60,7 @@ peut être utilisé dans un ``if`` par le code qui exécute l'expression. Un
 exemple simple d'une expression est ``1 + 2``. Vous pouvez également utiliser
 des expressions plus complexes comme ``someArray[3].someMethod('bar')``.
 
-Le composant fournit deux méthodes pour travailler avec les expressions:
+Le composant fournit deux méthodes pour travailler avec les expressions :
 
 * **evaluation**: l'expression est évaluée sans être compilée en PHP;
 * **compile**: l'expression est compilée en PHP, elle peut donc être mise en cache et évaluée.
