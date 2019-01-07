@@ -75,7 +75,7 @@ route qui y fasse correspondre une URL (#2).
 
 .. note::
 
-    Bien que son nom est très similaire, un « contrôleur frontal » est différent
+    Bien que son nom soit très similaire, un « contrôleur frontal » est différent
     des « contrôleurs » abordés dans ce chapitre. Un contrôleur
     frontal est un petit fichier PHP qui se situe dans votre répertoire web et
     à travers lequel toutes les requêtes sont dirigées. Une application typique
@@ -181,8 +181,8 @@ que variable ``$name``. Créer une « page » signifie simplement créer une
 méthode contrôleur et une route associée.
 
 Notez la syntaxe utilisée pour faire référence au contrôleur : ``AcmeHelloBundle:Hello:index``.
-Symfony2 utilise une notation de chaîne de caractères flexible pour faire référence aux
-différents contrôleurs. C'est la syntaxe la plus commune qui spécifie à Symfony2 de
+Symfony utilise une notation de chaîne de caractères flexible pour faire référence aux
+différents contrôleurs. C'est la syntaxe la plus commune qui spécifie à Symfony de
 chercher une classe contrôleur appelée ``HelloController`` dans un bundle appelé
 ``AcmeHelloBundle``. La méthode ``indexAction()`` est alors exécutée.
 
@@ -229,7 +229,7 @@ plus intéressants::
 
 Le contrôleur possède un argument unique, ``$name``, qui correspond au
 paramètre ``{name}`` de la route associée (``ryan`` dans notre exemple).
-En fait, lorsque vous exécutez votre contrôleur, Symfony2 fait correspondre
+En fait, lorsque vous exécutez votre contrôleur, Symfony fait correspondre
 chaque argument du contrôleur avec un paramètre de la route correspondante.
 Prenez l'exemple suivant :
 
@@ -336,7 +336,7 @@ La ``Requête`` en tant qu'argument du Contrôleur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour plus de facilités, Symfony peut aussi vous passer l'objet ``Request``
-en tant qu'argument de votre contrôleur. Ceci est spécialement pratique
+en tant qu'argument de votre contrôleur. Ceci est particulièrement pratique
 lorsque vous travaillez avec les formulaires, par exemple::
 
     use Symfony\Component\HttpFoundation\Request;
@@ -364,7 +364,7 @@ N'hésitez pas à l'utiliser ! Rendez-vous sur la page de cookbook
 La Classe Contrôleur de Base
 ----------------------------
 
-Afin de vous faciliter le travail, Symfony2 est fourni avec une classe ``Controller``
+Afin de vous faciliter le travail, Symfony est fourni avec une classe ``Controller``
 de base qui vous assiste dans les tâches les plus communes et
 qui donne à votre classe contrôleur l'accès à n'importe quelle ressource
 dont elle pourrait avoir besoin. En étendant cette classe ``Controller``, vous
@@ -390,7 +390,7 @@ Ajoutez le mot-clé ``use`` au-dessus de la classe ``Controller`` et modifiez
 Cela ne change en fait rien au fonctionnement de votre contrôleur. Dans la
 prochaine section, vous en apprendrez plus sur les méthodes d'aide (« helper »)
 que la classe contrôleur de base met à votre disposition. Ces méthodes sont juste
-des raccourcis pour utiliser des fonctionnalités coeurs de Symfony2 qui sont
+des raccourcis pour utiliser des fonctionnalités coeurs de Symfony qui sont
 à votre disposition en utilisant ou non la classe ``Controller`` de base.
 Une bonne manière de se rendre compte de son efficacité est de regarder le code de
 la classe :class:`Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`
@@ -419,7 +419,7 @@ Les Tâches Communes du Contrôleur
 Bien qu'un contrôleur puisse tout faire en théorie, la plupart
 d'entre-eux vont accomplir les mêmes tâches basiques encore et toujours. Ces tâches,
 comme rediriger, forwarder, afficher des templates et accéder aux services
-sont très faciles à gérer dans Symfony2.
+sont très faciles à gérer dans Symfony.
 
 .. index::
    single: Controller; Redirecting
@@ -494,15 +494,15 @@ La méthode contrôleur cible devrait ressembler à quelque chose comme::
     }
 
 Et comme quand vous créez un contrôleur pour une route, l'ordre des arguments
-de ``fancyAction`` n'a pas d'importance. Symfony2 fait correspondre le nom
+de ``fancyAction`` n'a pas d'importance. Symfony fait correspondre le nom
 des clés d'index (par exemple: ``name``) avec le nom des arguments de la
 méthode (par exemple: ``$name``). Si vous changez l'ordre des arguments,
-Symfony2 va toujours passer la valeur correcte à chaque variable.
+Symfony va toujours passer la valeur correcte à chaque variable.
 
 .. tip::
 
     Comme d'autres méthodes de base de ``Controller``, la méthode ``forward``
-    est juste un raccourci vers une fonctionnalité coeur de Symfony2. Un
+    est juste un raccourci vers une fonctionnalité coeur de Symfony. Un
     forward peut être exécuté directement via le service ``http_kernel`` et
     retourne un objet ``Response`` :
     
@@ -522,7 +522,7 @@ Symfony2 va toujours passer la valeur correcte à chaque variable.
 Afficher des Templates
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Bien que ce n'est pas obligatoire, la plupart des contrôleurs vont finalement
+Bien que ce ne soit pas obligatoire, la plupart des contrôleurs vont finalement
 retourner un template qui sera chargé de générer du HTML (ou un autre format)
 pour le contrôleur. La méthode ``renderView()`` retourne un template et affiche son contenu.
 Le contenu du template peut être utilisé pour créer un objet ``Response``::
@@ -586,7 +586,7 @@ Accéder à d'autres Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Quand vous étendez la classe contrôleur de base, vous pouvez utiliser n'importe
-quel service Symfony2 via la méthode ``get()``. Voici plusieurs services communs
+quel service Symfony via la méthode ``get()``. Voici plusieurs services communs
 dont vous pourriez avoir besoin::
 
     $templating = $this->get('templating');
@@ -651,10 +651,10 @@ page d'erreur complète avec des infos de debugging est retournée au développe
 Gérer la Session
 ----------------
 
-Symfony2 fournit un objet session sympa que vous pouvez utiliser pour stocker
+Symfony fournit un objet session sympathique que vous pouvez utiliser pour stocker
 de l'information à propos de l'utilisateur (que ce soit une personne réelle
 utilisant un navigateur, un bot, ou un service web) entre les requêtes. Par
-défaut, Symfony2 stocke les attributs dans un cookie en utilisant les sessions
+défaut, Symfony stocke les attributs dans un cookie en utilisant les sessions
 natives de PHP.
 
 Stocker et récupérer des informations depuis la session peut être effectué
