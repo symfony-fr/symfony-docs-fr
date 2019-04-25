@@ -454,12 +454,16 @@ vous aurez besoin de spécifier quel(s) groupe(s) de validation votre formulaire
         'validation_groups' => array('registration'),
     ))->add(...);
 
+.. versionadded:: 2.7
+    La méthode ``configureOptions`` a été ajoutée dans Symfony 2.7.
+    Notez que le résolveur était typé ``OptionsResolverInterface`` au lieu de ``OptionsResolver`.
+
 Si vous créez :ref:`des classes de formulaire<book-form-creating-form-classes>` (une
-bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``setDefaultOptions()``::
+bonne pratique), alors vous devrez ajouter ce qui suit à la méthode ``configureOptions()``::
 
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'validation_groups' => array('registration'),
@@ -485,9 +489,9 @@ Pour cela, vous pouvez éviter l'appel à la méthode :method:`Symfony\\Componen
 dans votre contrôleur. Si cela n'est pas possible, vous pouvez également définir
 l'option ``validation_groups`` à ``false`` ou en tant que tableau vide::
 
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'validation_groups' => false,
@@ -511,9 +515,9 @@ Si vous avez besoin de plus de logique pour déterminer les groupes de validatio
 (c'est-à-dire en vous basant sur les données), vous pouvez définir l'option ``validation_groups``
 comme un tableau callback::
 
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'validation_groups' => array(
@@ -529,9 +533,9 @@ L'objet Form est passé comme argument à cette méthode (regardez l'exemple sui
 Vous pouvez aussi définir une logique entière en utilisant une Closure::
 
     use Symfony\Component\Form\FormInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'validation_groups' => function(FormInterface $form) {
@@ -1071,9 +1075,9 @@ manière de créer des formulaires, mais le choix final vous revient.
     c'est généralement une bonne idée de spécifier explicitement l'option
     ``data_class`` en ajoutant ce qui suit à votre classe formulaire::
 
-        use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+        use Symfony\Component\OptionsResolver\OptionsResolver;
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'data_class' => 'Acme\TaskBundle\Entity\Task',
@@ -1282,7 +1286,7 @@ puisse être modifié par l'utilisateur::
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class CategoryType extends AbstractType
     {
@@ -1291,7 +1295,7 @@ puisse être modifié par l'utilisateur::
             $builder->add('name');
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'data_class' => 'Acme\TaskBundle\Entity\Category',
@@ -1324,7 +1328,7 @@ Les champs de ``CategoryType`` peuvent maintenant être affichés à côté de c
 de la classe ``TaskType``. Pour activer la validation sur CategoryType, ajoutez
 l'option ``cascade_validation`` à ``TaskType``::
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Acme\TaskBundle\Entity\Task',
@@ -1735,13 +1739,13 @@ tous les champs non affichés sont délivrés en sortie.
 
 Le jeton CSRF peut être personnalisé pour chacun des formulaires. Par exemple::
 
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class TaskType extends AbstractType
     {
         // ...
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver->setDefaults(array(
                 'data_class'      => 'Acme\TaskBundle\Entity\Task',
