@@ -1,6 +1,8 @@
 Null
 ====
 
+Cette classe est dépréciée et sera retirée de symfony 3.0. Utilisez plutôt la classe :doc:`IsNull <IsNull>`.
+
 Valide qu'une valeur est exactement égale à ``null``. Pour vous assurer qu'une
 propriété soit simplement vide (une chaîne de caractères vide ou ``null``), lisez la
 documentation de la contrainte :doc:`/reference/constraints/Blank`.

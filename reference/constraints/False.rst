@@ -1,6 +1,8 @@
 False
 =====
 
+Cette classe est dépréciée et sera retirée de symfony 3.0. Utilisez plutôt la classe :doc:`IsFalse <IsFalse>`.
+
 Valide que la valeur est ``false``. Spécifiquement, cette contrainte vérifie que la
 valeur est exactement ``false``, exactement l'entier ``0``, ou exactement la chaîne
 de caractères « ``0`` ».

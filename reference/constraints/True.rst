@@ -1,6 +1,8 @@
 True
 ====
 
+Cette classe est dépréciée et sera retirée de symfony 3.0. Utilisez plutôt la classe :doc:`IsTrue <IsTrue>`.
+
 Valide qu'une valeur est ``vraie`` (« true » en anglais). Spécifiquement, cette contrainte
 vérifie que la valeur est exactement ``true``, exactement l'entier ``1``, ou exactement
 la chaîne de caractère « ``1`` ».

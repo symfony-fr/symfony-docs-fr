@@ -8,9 +8,9 @@ par une méthode de votre objet.
 * :doc:`NotBlank </reference/constraints/NotBlank>`
 * :doc:`Blank </reference/constraints/Blank>`
 * :doc:`NotNull </reference/constraints/NotNull>`
-* :doc:`Null </reference/constraints/Null>`
-* :doc:`True </reference/constraints/True>`
-* :doc:`False </reference/constraints/False>`
+* :doc:`IsNull </reference/constraints/IsNull>`
+* :doc:`IsTrue </reference/constraints/IsTrue>`
+* :doc:`IsFalse </reference/constraints/IsFalse>`
 * :doc:`Type </reference/constraints/Type>`
 
 Contraintes sur les chaînes de caractères
