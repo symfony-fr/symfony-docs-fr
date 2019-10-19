@@ -14,7 +14,7 @@ ne sont pas des entiers. Par défaut, toutes les valeurs non entières (ex: 6,78
 seront arrondies à l'entier inférieur (ex: 6).
 
 +-------------+-----------------------------------------------------------------------+
-| Rendu comme | Champ ``input`` ``text``                                              |
+| Rendu comme | Champ ``input`` ``number``                                            |
 +-------------+-----------------------------------------------------------------------+
 | Options     | - `rounding_mode`_                                                    |
 |             | - `precision`_                                                        |
